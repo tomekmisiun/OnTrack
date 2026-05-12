@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout kod
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Ustaw Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
@@ -32,23 +32,23 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout kod
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Zaloguj do Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Zbuduj i pushuj obraz backendu
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: .
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/meal-planner-backend:latest
 
       - name: Zbuduj i pushuj obraz frontendu
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: ./frontend
           push: true
