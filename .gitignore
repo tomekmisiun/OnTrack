@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# Node
+frontend/node_modules/
+frontend/build/
+
+# Docker
+postgres_data/
+
+# Migracje (generowane automatycznie)
+migrations/

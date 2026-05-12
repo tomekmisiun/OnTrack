@@ -1,0 +1,36 @@
+services:
+  app:
+    build: .
+    ports:
+      - "5001:5000"
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/mealplanner
+    depends_on:
+      - db
+    volumes:
+      - .:/app
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=mealplanner
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  frontend:
+    image: node:20
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "3000:3000"
+    command: npm start
+    environment:
+      - REACT_APP_API_URL=http://localhost:5001
+    depends_on:
+      - app
+
+volumes:
+  postgres_data:
