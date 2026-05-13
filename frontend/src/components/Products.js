@@ -173,6 +173,7 @@ export default function Products() {
   };
 
   const s = { padding: '5px 8px', fontSize: 13 };
+  const fl = { fontSize: 10, color: '#888', marginBottom: 3 };
 
   const UnitSelect = ({ value, onChange, style }) => (
     <select value={value} onChange={onChange} style={style}>
@@ -315,49 +316,72 @@ export default function Products() {
       <div className="card">
         <h2>Lista produktów</h2>
         <table>
-          <thead>
-            <tr><th>Nazwa</th><th>Kcal/100g</th><th>Makro / 100g</th><th>Cena</th><th></th></tr>
-          </thead>
+          {!editId && (
+            <thead>
+              <tr><th>Nazwa</th><th>Kcal/100g</th><th>Makro / 100g</th><th>Cena</th><th></th></tr>
+            </thead>
+          )}
           <tbody>
             {productList.map(p => editId === p.id ? (
               <React.Fragment key={p.id}>
-                <tr style={{ background: '#f8f9ff' }}>
-                  <td><input value={editForm.name}
-                    onChange={e => setEditForm({ ...editForm, name: e.target.value })} style={s} /></td>
+                <tr style={{ background: '#f8f9ff', verticalAlign: 'bottom' }}>
                   <td>
-                    <input type="number" step="0.1" placeholder="Kcal" value={editForm.kcal}
+                    <div style={fl}>Nazwa produktu</div>
+                    <input value={editForm.name}
+                      onChange={e => setEditForm({ ...editForm, name: e.target.value })} style={s} />
+                  </td>
+                  <td>
+                    <div style={fl}>Kalorie (kcal/100g)</div>
+                    <input type="number" step="0.1" value={editForm.kcal}
                       onChange={e => setEditForm({ ...editForm, kcal: e.target.value })} style={{ ...s, width: 72 }} />
                   </td>
                   <td>
-                    <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', alignItems: 'center' }}>
-                      <input type="number" step="0.1" placeholder="Białko" value={editForm.protein}
-                        onChange={e => setEditForm({ ...editForm, protein: e.target.value })} style={{ ...s, width: 68 }} />
-                      <input type="number" step="0.1" placeholder="Tłuszcze" value={editForm.fat}
-                        onChange={e => setEditForm({ ...editForm, fat: e.target.value })} style={{ ...s, width: 68 }} />
-                      <input type="number" step="0.1" placeholder="Węgle" value={editForm.carbs}
-                        onChange={e => setEditForm({ ...editForm, carbs: e.target.value })} style={{ ...s, width: 68 }} />
+                    <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', alignItems: 'flex-end' }}>
+                      <div>
+                        <div style={fl}>Białko (g/100g)</div>
+                        <input type="number" step="0.1" value={editForm.protein}
+                          onChange={e => setEditForm({ ...editForm, protein: e.target.value })} style={{ ...s, width: 80 }} />
+                      </div>
+                      <div>
+                        <div style={fl}>Tłuszcze (g/100g)</div>
+                        <input type="number" step="0.1" value={editForm.fat}
+                          onChange={e => setEditForm({ ...editForm, fat: e.target.value })} style={{ ...s, width: 88 }} />
+                      </div>
+                      <div>
+                        <div style={fl}>Węglowodany (g/100g)</div>
+                        <input type="number" step="0.1" value={editForm.carbs}
+                          onChange={e => setEditForm({ ...editForm, carbs: e.target.value })} style={{ ...s, width: 100 }} />
+                      </div>
                       <button
                         onClick={handleAutoFill}
                         disabled={lookingUp === editId}
-                        title="Uzupełnij automatycznie z Open Food Facts"
-                        style={{ padding: '4px 10px', fontSize: 11, background: '#667eea', color: 'white', border: 'none', borderRadius: 6, cursor: 'pointer', whiteSpace: 'nowrap' }}
+                        style={{ padding: '4px 10px', fontSize: 11, background: '#667eea', color: 'white', border: 'none', borderRadius: 6, cursor: 'pointer', whiteSpace: 'nowrap', marginBottom: 1 }}
                       >
-                        {lookingUp === editId ? '...' : '✨ Auto'}
+                        {lookingUp === editId ? '⏳...' : '✨ Auto Uzupełnij'}
                       </button>
                     </div>
                   </td>
                   <td>
-                    <div style={{ display: 'flex', gap: 4, alignItems: 'center', flexWrap: 'wrap' }}>
-                      <input type="number" value={editForm.package_weight}
-                        onChange={e => setEditForm({ ...editForm, package_weight: e.target.value })}
-                        style={{ ...s, width: 70 }} />
-                      <UnitSelect value={editForm.unit}
-                        onChange={e => setEditForm({ ...editForm, unit: e.target.value })}
-                        style={{ ...s, width: 58 }} />
-                      <input type="number" step="0.01" placeholder="Cena opak." value={editForm.package_price}
-                        onChange={e => setEditForm({ ...editForm, package_price: e.target.value })}
-                        style={{ ...s, width: 86 }} />
-                      <span style={{ fontSize: 11, color: '#667eea', whiteSpace: 'nowrap' }}>
+                    <div style={{ display: 'flex', gap: 4, alignItems: 'flex-end', flexWrap: 'wrap' }}>
+                      <div>
+                        <div style={fl}>Ilość w opakowaniu</div>
+                        <input type="number" value={editForm.package_weight}
+                          onChange={e => setEditForm({ ...editForm, package_weight: e.target.value })}
+                          style={{ ...s, width: 70 }} />
+                      </div>
+                      <div>
+                        <div style={fl}>Jednostka</div>
+                        <UnitSelect value={editForm.unit}
+                          onChange={e => setEditForm({ ...editForm, unit: e.target.value })}
+                          style={{ ...s, width: 58 }} />
+                      </div>
+                      <div>
+                        <div style={fl}>Cena opakowania (zł)</div>
+                        <input type="number" step="0.01" value={editForm.package_price}
+                          onChange={e => setEditForm({ ...editForm, package_price: e.target.value })}
+                          style={{ ...s, width: 86 }} />
+                      </div>
+                      <span style={{ fontSize: 11, color: '#667eea', whiteSpace: 'nowrap', paddingBottom: 7 }}>
                         {editForm.package_price && editForm.package_weight
                           ? `= ${toUnitPrice(editForm.package_price, editForm.package_weight, editForm.unit).toFixed(2)} ${priceLabel(editForm.unit)}`
                           : ''}
@@ -367,6 +391,12 @@ export default function Products() {
                   <td style={{ display: 'flex', gap: 6 }}>
                     <button className="btn btn-primary" style={{ padding: '5px 12px', fontSize: 13 }} onClick={handleSaveEdit}>Zapisz</button>
                     <button className="btn" style={{ padding: '5px 12px', fontSize: 13, background: '#eee', color: '#555' }} onClick={() => setEditId(null)}>Anuluj</button>
+                  </td>
+                </tr>
+                <tr style={{ background: '#f0f2ff' }}>
+                  <td colSpan={5} style={{ padding: '5px 12px', fontSize: 11, color: '#667eea' }}>
+                    💡 <b>Cena:</b> wpisz ilość w opakowaniu i cenę za całe opakowanie — system przeliczy na {priceLabel(editForm.unit || 'g')}.&nbsp;
+                    <b>✨ Auto Uzupełnij</b> — pobiera Kcal i Makro automatycznie z bazy Open Food Facts na podstawie nazwy produktu.
                   </td>
                 </tr>
               </React.Fragment>
