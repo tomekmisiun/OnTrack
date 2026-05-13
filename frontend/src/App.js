@@ -32,11 +32,65 @@ function AppInner() {
 
   if (!user) return <Login />;
 
+  const flagBtn = (code, flag) => ({
+    background: lang === code ? 'rgba(255,255,255,0.25)' : 'transparent',
+    border: lang === code ? '1.5px solid rgba(255,255,255,0.6)' : '1.5px solid transparent',
+    borderRadius: 5,
+    cursor: 'pointer',
+    fontSize: 18,
+    lineHeight: 1,
+    padding: '2px 4px',
+    transition: 'all 0.15s',
+  });
+
   return (
     <div className="app">
+      {/* Top gradient bar: title + user controls */}
       <header className="app-header">
         <h1>Meal Planner</h1>
-        <nav className="tabs">
+
+        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
+          {/* Language flags */}
+          <button onClick={() => switchLang('pl')} title="Polski" style={flagBtn('pl', '🇵🇱')}>🇵🇱</button>
+          <button onClick={() => switchLang('en')} title="English" style={flagBtn('en', '🇬🇧')}>🇬🇧</button>
+
+          <div style={{ width: 1, height: 18, background: 'rgba(255,255,255,0.3)', margin: '0 6px' }} />
+
+          <span style={{ color: 'rgba(255,255,255,0.75)', fontSize: 12, maxWidth: 200, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            {user.email}
+          </span>
+
+          <button
+            onClick={() => setShowProfile(true)}
+            style={{
+              background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.25)',
+              color: 'white', padding: '5px 13px', borderRadius: 6, cursor: 'pointer',
+              fontSize: 12, fontWeight: 500, transition: 'background 0.15s',
+            }}
+            onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.25)'}
+            onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.15)'}
+          >
+            {t('profile')}
+          </button>
+
+          <button
+            onClick={logout}
+            style={{
+              background: 'transparent', border: '1px solid rgba(255,255,255,0.25)',
+              color: 'rgba(255,255,255,0.85)', padding: '5px 13px', borderRadius: 6,
+              cursor: 'pointer', fontSize: 12, fontWeight: 500, transition: 'all 0.15s',
+            }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.12)'; e.currentTarget.style.color = 'white'; }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'rgba(255,255,255,0.85)'; }}
+          >
+            {t('logout')}
+          </button>
+        </div>
+      </header>
+
+      {/* White tab bar */}
+      <nav className="app-nav">
+        <div className="tabs">
           {tabs.map(tab => (
             <button
               key={tab.id}
@@ -46,58 +100,8 @@ function AppInner() {
               {tab.label}
             </button>
           ))}
-        </nav>
-        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>
-          {/* Language flags */}
-          <button
-            onClick={() => switchLang('pl')}
-            title="Polski"
-            style={{
-              background: lang === 'pl' ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.1)',
-              border: lang === 'pl' ? '2px solid rgba(255,255,255,0.7)' : '2px solid transparent',
-              borderRadius: 6, cursor: 'pointer', fontSize: 20, lineHeight: 1,
-              padding: '3px 5px', transition: 'all 0.15s',
-            }}
-          >
-            🇵🇱
-          </button>
-          <button
-            onClick={() => switchLang('en')}
-            title="English"
-            style={{
-              background: lang === 'en' ? 'rgba(255,255,255,0.3)' : 'rgba(255,255,255,0.1)',
-              border: lang === 'en' ? '2px solid rgba(255,255,255,0.7)' : '2px solid transparent',
-              borderRadius: 6, cursor: 'pointer', fontSize: 20, lineHeight: 1,
-              padding: '3px 5px', transition: 'all 0.15s',
-            }}
-          >
-            🇬🇧
-          </button>
-
-          <span style={{ color: 'rgba(255,255,255,0.7)', fontSize: 12 }}>{user.email}</span>
-
-          {/* Profile button */}
-          <button
-            onClick={() => setShowProfile(true)}
-            style={{
-              background: 'rgba(255,255,255,0.15)', border: 'none', color: 'white',
-              padding: '6px 14px', borderRadius: 20, cursor: 'pointer', fontSize: 13,
-            }}
-          >
-            {t('profile')}
-          </button>
-
-          <button
-            onClick={logout}
-            style={{
-              background: 'rgba(255,255,255,0.15)', border: 'none', color: 'white',
-              padding: '6px 14px', borderRadius: 20, cursor: 'pointer', fontSize: 13,
-            }}
-          >
-            {t('logout')}
-          </button>
         </div>
-      </header>
+      </nav>
 
       <main className="app-main">
         {activeTab === 'calendar'  && <Calendar />}
