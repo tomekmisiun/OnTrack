@@ -11,7 +11,7 @@ import './App.css';
 
 function AppInner() {
   const { user, loading, logout } = useAuth();
-  const { lang, switchLang, t } = useLanguage();
+  const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('calendar');
   const [showProfile, setShowProfile] = useState(false);
 
@@ -32,24 +32,11 @@ function AppInner() {
 
   if (!user) return <Login />;
 
-  const flagBtn = (code) => ({
-    background: lang === code ? 'rgba(255,255,255,0.25)' : 'transparent',
-    border: lang === code ? '1.5px solid rgba(255,255,255,0.6)' : '1.5px solid transparent',
-    borderRadius: 5, cursor: 'pointer', fontSize: 18, lineHeight: 1,
-    padding: '2px 4px', transition: 'all 0.15s',
-  });
-
   return (
     <div className="app">
       <header className="app-header">
         <h1>Meal Planner</h1>
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
-          {/* Language flags — UI only; account lang is changed in Profile */}
-          <button onClick={() => switchLang('pl')} title="Polski" style={flagBtn('pl')}>🇵🇱</button>
-          <button onClick={() => switchLang('en')} title="English" style={flagBtn('en')}>🇬🇧</button>
-
-          <div style={{ width: 1, height: 18, background: 'rgba(255,255,255,0.3)', margin: '0 6px' }} />
-
           <span style={{ color: 'rgba(255,255,255,0.75)', fontSize: 12, maxWidth: 200, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
             {user.email}
           </span>
