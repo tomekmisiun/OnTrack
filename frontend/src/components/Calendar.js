@@ -229,7 +229,10 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
       <button onClick={()=>setOpen(o=>!o)}
         style={{width:'100%',padding:'12px 18px',background:'none',border:'none',cursor:'pointer',display:'flex',justifyContent:'space-between',alignItems:'center',fontSize:14,fontWeight:600,color:'#667eea'}}>
         <span>Tworzenie szablonów posiłków na tydzień</span>
-        <span style={{fontSize:16,transition:'transform 0.2s',transform:open?'rotate(180deg)':'rotate(0deg)'}}>▾</span>
+        <span style={{display:'flex',alignItems:'center',gap:4,fontSize:12,color:'#667eea',fontWeight:400}}>
+          {open ? 'Zwiń' : 'Rozwiń'}
+          <span style={{fontSize:16,transition:'transform 0.2s',transform:open?'rotate(180deg)':'rotate(0deg)'}}>▾</span>
+        </span>
       </button>
       {open && (
       <div style={{padding:'0 16px 16px',borderTop:'1px solid #f0f0f0'}}>
@@ -581,7 +584,10 @@ export default function Calendar() {
         <button onClick={()=>setHowToOpen(o=>!o)}
           style={{width:'100%',padding:'12px 18px',background:'none',border:'none',cursor:'pointer',display:'flex',justifyContent:'space-between',alignItems:'center',fontSize:14,fontWeight:600,color:'#667eea'}}>
           <span>Jak korzystać z kalendarza?</span>
-          <span style={{fontSize:16,transition:'transform 0.2s',transform:howToOpen?'rotate(180deg)':'rotate(0deg)'}}>▾</span>
+          <span style={{display:'flex',alignItems:'center',gap:4,fontSize:12,color:'#667eea',fontWeight:400}}>
+            {howToOpen ? 'Zwiń' : 'Rozwiń'}
+            <span style={{fontSize:16,transition:'transform 0.2s',transform:howToOpen?'rotate(180deg)':'rotate(0deg)'}}>▾</span>
+          </span>
         </button>
         {howToOpen && (
           <div style={{padding:'0 18px 16px',fontSize:12,lineHeight:1.8,borderTop:'1px solid #f0f0f0'}}>
