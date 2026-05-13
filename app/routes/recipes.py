@@ -4,7 +4,7 @@ from app import db
 from app.models.recipe import Recipe, RecipeIngredient
 from app.models.product import Product
 from app.models.recipe_parse_log import RecipeParseLog
-import anthropic, json, re, os
+import json, re, os
 
 recipes_bp = Blueprint('recipes', __name__)
 
@@ -98,9 +98,9 @@ def parse_recipe_text():
     if not recipe_text:
         return jsonify({'error': 'Brak tekstu przepisu'}), 400
 
-    api_key = os.environ.get('ANTHROPIC_API_KEY')
+    api_key = os.environ.get('GEMINI_API_KEY')
     if not api_key:
-        return jsonify({'error': 'Brak klucza ANTHROPIC_API_KEY'}), 500
+        return jsonify({'error': 'Brak klucza GEMINI_API_KEY'}), 500
 
     products = Product.query.filter_by(user_id=uid).order_by(Product.name).all()
     product_lines = '\n'.join(f"{p.id} | {p.name} | {p.unit}" for p in products)
@@ -133,16 +133,15 @@ Rules:
 - If ingredient quantity is unclear, estimate a reasonable amount"""
 
     try:
-        client = anthropic.Anthropic(api_key=api_key)
-        msg = client.messages.create(
-            model='claude-haiku-4-5-20251001',
-            max_tokens=2048,
-            messages=[{'role': 'user', 'content': prompt}],
+        from google import genai
+        client = genai.Client(api_key=api_key)
+        response = client.models.generate_content(
+            model='gemini-2.5-flash',
+            contents=prompt,
         )
-    except anthropic.APIError as e:
-        return jsonify({'error': f'Błąd Claude API: {str(e)}'}), 502
-
-    raw = msg.content[0].text
+        raw = response.text
+    except Exception as e:
+        return jsonify({'error': f'Błąd Gemini API: {str(e)}'}), 502
     match = re.search(r'\{.*\}', raw, re.DOTALL)
     if not match:
         return jsonify({'error': 'AI nie zwróciło poprawnego JSON'}), 500

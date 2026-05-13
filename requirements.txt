@@ -6,5 +6,6 @@ flask-cors
 prometheus-flask-exporter
 anthropic
 flask-jwt-extended
+google-genai
 authlib
 requests
