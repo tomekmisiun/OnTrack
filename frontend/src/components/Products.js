@@ -202,6 +202,7 @@ export default function Products() {
 
   const s = { padding: '5px 8px', fontSize: 13 };
   const fl = { fontSize: 10, color: '#888', marginBottom: 3 };
+  const sec = { fontSize: 11, fontWeight: 700, color: '#667eea', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 10, marginTop: 4 };
 
   const UnitSelect = ({ value, onChange, style }) => (
     <select value={value} onChange={onChange} style={style}>
@@ -216,31 +217,78 @@ export default function Products() {
       <div className="card">
         <h2>Dodaj produkt</h2>
         {error && <p style={{ color: 'red', marginBottom: 12 }}>{error}</p>}
-        <div className="form-row">
-          <input placeholder="Nazwa produktu" value={form.name}
-            onChange={e => setForm({ ...form, name: e.target.value })} />
-          <input placeholder="Ilość w opakowaniu" type="number" value={form.package_weight}
-            onChange={e => setForm({ ...form, package_weight: e.target.value })} style={{ maxWidth: 150 }} />
-          <UnitSelect value={form.unit} onChange={e => setForm({ ...form, unit: e.target.value })} style={{ maxWidth: 80 }} />
-          <input placeholder="Cena opakowania (zł)" type="number" step="0.01" value={form.package_price}
-            onChange={e => setForm({ ...form, package_price: e.target.value })} style={{ maxWidth: 160 }} />
-          {form.package_weight && form.package_price && (
-            <span style={{ fontSize: 12, color: '#667eea', alignSelf: 'center', whiteSpace: 'nowrap' }}>
-              = {toUnitPrice(form.package_price, form.package_weight, form.unit).toFixed(2)} {priceLabel(form.unit)}
-            </span>
-          )}
-          <button className="btn btn-primary" onClick={handleSubmit}>Dodaj</button>
-        </div>
-        <div className="form-row" style={{ marginTop: 0 }}>
-          <input placeholder="Kcal/100g" type="number" step="0.1" value={form.kcal}
-            onChange={e => setForm({ ...form, kcal: e.target.value })} style={{ maxWidth: 110 }} />
-          <input placeholder="Białko (g)" type="number" step="0.1" value={form.protein}
-            onChange={e => setForm({ ...form, protein: e.target.value })} style={{ maxWidth: 110 }} />
-          <input placeholder="Tłuszcze (g)" type="number" step="0.1" value={form.fat}
-            onChange={e => setForm({ ...form, fat: e.target.value })} style={{ maxWidth: 110 }} />
-          <input placeholder="Węglowodany (g)" type="number" step="0.1" value={form.carbs}
-            onChange={e => setForm({ ...form, carbs: e.target.value })} style={{ maxWidth: 130 }} />
-          <span style={{ fontSize: 11, color: '#aaa', alignSelf: 'center' }}>opcjonalne — wartości na 100g</span>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
+          {/* Lewa kolumna: podstawowe info + cena */}
+          <div>
+            <div style={sec}>Podstawowe informacje</div>
+            <div style={{ marginBottom: 12 }}>
+              <div style={fl}>Nazwa produktu</div>
+              <input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
+                placeholder="np. Jogurt naturalny" style={{ width: '100%', boxSizing: 'border-box' }} />
+            </div>
+            <div style={{ display: 'flex', gap: 10, marginBottom: 12 }}>
+              <div style={{ flex: 1 }}>
+                <div style={fl}>Ilość w opakowaniu</div>
+                <input type="number" value={form.package_weight}
+                  onChange={e => setForm({ ...form, package_weight: e.target.value })}
+                  placeholder="np. 1000" style={{ width: '100%', boxSizing: 'border-box' }} />
+              </div>
+              <div>
+                <div style={fl}>Jednostka</div>
+                <UnitSelect value={form.unit} onChange={e => setForm({ ...form, unit: e.target.value })} style={{ width: 76 }} />
+              </div>
+            </div>
+
+            <div style={sec}>Cena</div>
+            <div style={{ display: 'flex', gap: 10, alignItems: 'flex-end' }}>
+              <div style={{ flex: 1 }}>
+                <div style={fl}>Cena opakowania (zł)</div>
+                <input type="number" step="0.01" value={form.package_price}
+                  onChange={e => setForm({ ...form, package_price: e.target.value })}
+                  placeholder="np. 3.49" style={{ width: '100%', boxSizing: 'border-box' }} />
+              </div>
+              <div style={{ paddingBottom: 8, color: '#667eea', fontSize: 13, whiteSpace: 'nowrap' }}>
+                {form.package_weight && form.package_price
+                  ? `= ${toUnitPrice(form.package_price, form.package_weight, form.unit).toFixed(2)} ${priceLabel(form.unit)}`
+                  : <span style={{ color: '#ccc' }}>= — {priceLabel(form.unit)}</span>}
+              </div>
+            </div>
+          </div>
+
+          {/* Prawa kolumna: makro */}
+          <div>
+            <div style={sec}>Makro <span style={{ fontSize: 11, color: '#aaa', fontWeight: 400 }}>— opcjonalne, wartości na 100g</span></div>
+            <div style={{ marginBottom: 12 }}>
+              <div style={fl}>Kalorie (kcal)</div>
+              <input type="number" step="0.1" value={form.kcal}
+                onChange={e => setForm({ ...form, kcal: e.target.value })}
+                placeholder="np. 61" style={{ width: '100%', boxSizing: 'border-box' }} />
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10, marginBottom: 20 }}>
+              <div>
+                <div style={fl}>Białko (g)</div>
+                <input type="number" step="0.1" value={form.protein}
+                  onChange={e => setForm({ ...form, protein: e.target.value })}
+                  placeholder="np. 5" style={{ width: '100%', boxSizing: 'border-box' }} />
+              </div>
+              <div>
+                <div style={fl}>Tłuszcze (g)</div>
+                <input type="number" step="0.1" value={form.fat}
+                  onChange={e => setForm({ ...form, fat: e.target.value })}
+                  placeholder="np. 3.1" style={{ width: '100%', boxSizing: 'border-box' }} />
+              </div>
+              <div>
+                <div style={fl}>Węglowodany (g)</div>
+                <input type="number" step="0.1" value={form.carbs}
+                  onChange={e => setForm({ ...form, carbs: e.target.value })}
+                  placeholder="np. 3.5" style={{ width: '100%', boxSizing: 'border-box' }} />
+              </div>
+            </div>
+            <button className="btn btn-primary" onClick={handleSubmit} style={{ width: '100%' }}>
+              Dodaj produkt
+            </button>
+          </div>
         </div>
       </div>
 
