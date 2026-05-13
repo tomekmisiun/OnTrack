@@ -32,27 +32,21 @@ function AppInner() {
 
   if (!user) return <Login />;
 
-  const flagBtn = (code, flag) => ({
+  const flagBtn = (code) => ({
     background: lang === code ? 'rgba(255,255,255,0.25)' : 'transparent',
     border: lang === code ? '1.5px solid rgba(255,255,255,0.6)' : '1.5px solid transparent',
-    borderRadius: 5,
-    cursor: 'pointer',
-    fontSize: 18,
-    lineHeight: 1,
-    padding: '2px 4px',
-    transition: 'all 0.15s',
+    borderRadius: 5, cursor: 'pointer', fontSize: 18, lineHeight: 1,
+    padding: '2px 4px', transition: 'all 0.15s',
   });
 
   return (
     <div className="app">
-      {/* Top gradient bar: title + user controls */}
       <header className="app-header">
         <h1>Meal Planner</h1>
-
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
-          {/* Language flags */}
-          <button onClick={() => switchLang('pl')} title="Polski" style={flagBtn('pl', '🇵🇱')}>🇵🇱</button>
-          <button onClick={() => switchLang('en')} title="English" style={flagBtn('en', '🇬🇧')}>🇬🇧</button>
+          {/* Language flags — UI only; account lang is changed in Profile */}
+          <button onClick={() => switchLang('pl')} title="Polski" style={flagBtn('pl')}>🇵🇱</button>
+          <button onClick={() => switchLang('en')} title="English" style={flagBtn('en')}>🇬🇧</button>
 
           <div style={{ width: 1, height: 18, background: 'rgba(255,255,255,0.3)', margin: '0 6px' }} />
 
@@ -62,11 +56,7 @@ function AppInner() {
 
           <button
             onClick={() => setShowProfile(true)}
-            style={{
-              background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.25)',
-              color: 'white', padding: '5px 13px', borderRadius: 6, cursor: 'pointer',
-              fontSize: 12, fontWeight: 500, transition: 'background 0.15s',
-            }}
+            style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.25)', color: 'white', padding: '5px 13px', borderRadius: 6, cursor: 'pointer', fontSize: 12, fontWeight: 500, transition: 'background 0.15s' }}
             onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.25)'}
             onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.15)'}
           >
@@ -75,11 +65,7 @@ function AppInner() {
 
           <button
             onClick={logout}
-            style={{
-              background: 'transparent', border: '1px solid rgba(255,255,255,0.25)',
-              color: 'rgba(255,255,255,0.85)', padding: '5px 13px', borderRadius: 6,
-              cursor: 'pointer', fontSize: 12, fontWeight: 500, transition: 'all 0.15s',
-            }}
+            style={{ background: 'transparent', border: '1px solid rgba(255,255,255,0.25)', color: 'rgba(255,255,255,0.85)', padding: '5px 13px', borderRadius: 6, cursor: 'pointer', fontSize: 12, fontWeight: 500, transition: 'all 0.15s' }}
             onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.12)'; e.currentTarget.style.color = 'white'; }}
             onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'rgba(255,255,255,0.85)'; }}
           >
@@ -88,7 +74,6 @@ function AppInner() {
         </div>
       </header>
 
-      {/* White tab bar */}
       <nav className="app-nav">
         <div className="tabs">
           {tabs.map(tab => (
@@ -115,12 +100,20 @@ function AppInner() {
   );
 }
 
+// Bridge: passes switchLang into AuthProvider so it can sync lang on login
+function AppWithAuth() {
+  const { switchLang } = useLanguage();
+  return (
+    <AuthProvider onLangChange={switchLang}>
+      <AppInner />
+    </AuthProvider>
+  );
+}
+
 export default function App() {
   return (
     <LanguageProvider>
-      <AuthProvider>
-        <AppInner />
-      </AuthProvider>
+      <AppWithAuth />
     </LanguageProvider>
   );
 }

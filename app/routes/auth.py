@@ -51,6 +51,7 @@ def register():
     data = request.get_json() or {}
     email = (data.get('email') or '').strip().lower()
     password = data.get('password') or ''
+    lang = data.get('lang', 'pl') if data.get('lang') in ('pl', 'en') else 'pl'
 
     err = _validate(email, password)
     if err:
@@ -58,13 +59,13 @@ def register():
     if User.query.filter_by(email=email).first():
         return jsonify({'error': 'Konto z tym adresem już istnieje'}), 409
 
-    user = User(email=email)
+    user = User(email=email, lang=lang)
     user.set_password(password)
     db.session.add(user)
     db.session.commit()
 
     from app.seeds import seed_user
-    seed_user(user.id)
+    seed_user(user.id, lang=lang)
 
     token = create_access_token(identity=str(user.id))
     return jsonify({'access_token': token, 'user': user.to_dict()}), 201
@@ -123,6 +124,22 @@ def google_callback():
         return redirect(f'{frontend_url}?token={jwt_token}')
     except Exception as e:
         return redirect(f'{frontend_url}?auth_error=Błąd+logowania')
+
+
+@auth_bp.route('/language', methods=['PATCH'])
+@jwt_required()
+def change_language():
+    uid = int(get_jwt_identity())
+    data = request.get_json() or {}
+    lang = data.get('lang')
+    if lang not in ('pl', 'en'):
+        return jsonify({'error': 'Nieprawidłowy język'}), 400
+    user = User.query.get(uid)
+    if not user:
+        return jsonify({'error': 'Nie znaleziono użytkownika'}), 404
+    user.lang = lang
+    db.session.commit()
+    return jsonify(user.to_dict())
 
 
 @auth_bp.route('/me', methods=['DELETE'])

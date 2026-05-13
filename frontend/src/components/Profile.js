@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useLanguage } from '../contexts/LanguageContext';
+import { auth as authApi } from '../api';
 
 export default function Profile({ onClose }) {
-  const { user, logout, deleteAccount } = useAuth();
-  const { t } = useLanguage();
+  const { user, logout, deleteAccount, updateUserLang } = useAuth();
+  const { t, lang, switchLang } = useLanguage();
   const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState('');
+  const [showLangWarning, setShowLangWarning] = useState(false);
+  const [pendingLang, setPendingLang] = useState(null);
+  const [changingLang, setChangingLang] = useState(false);
 
   const handleDelete = async () => {
     if (!window.confirm(t('delete_confirm'))) return;
@@ -21,19 +25,37 @@ export default function Profile({ onClose }) {
     }
   };
 
+  const requestLangChange = (newLang) => {
+    if (newLang === user.lang) return;
+    setPendingLang(newLang);
+    setShowLangWarning(true);
+  };
+
+  const confirmLangChange = async () => {
+    setChangingLang(true);
+    setError('');
+    try {
+      await authApi.changeLanguage(pendingLang);
+      updateUserLang(pendingLang);
+      switchLang(pendingLang);
+      setShowLangWarning(false);
+      setPendingLang(null);
+    } catch (e) {
+      setError(e.response?.data?.error || 'Error');
+    } finally {
+      setChangingLang(false);
+    }
+  };
+
+  const langName = (code) => code === 'pl' ? '🇵🇱 Polski' : '🇬🇧 English';
+
   return (
     <div
-      style={{
-        position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10000,
-      }}
+      style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10000 }}
       onClick={onClose}
     >
       <div
-        style={{
-          background: 'white', borderRadius: 16, padding: '32px 28px',
-          width: '100%', maxWidth: 400, boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
-        }}
+        style={{ background: 'white', borderRadius: 16, padding: '32px 28px', width: '100%', maxWidth: 420, boxShadow: '0 20px 60px rgba(0,0,0,0.3)' }}
         onClick={e => e.stopPropagation()}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
@@ -47,37 +69,104 @@ export default function Profile({ onClose }) {
           </div>
         )}
 
-        <div style={{ marginBottom: 28 }}>
+        {/* Email */}
+        <div style={{ marginBottom: 24 }}>
           <div style={{ fontSize: 11, color: '#667eea', fontWeight: 700, letterSpacing: '0.5px', marginBottom: 6 }}>EMAIL</div>
           <div style={{ fontSize: 15, color: '#1a1a2e', padding: '10px 14px', background: '#f8f9ff', borderRadius: 8, border: '1px solid #e0e4ff' }}>
             {user.email}
           </div>
         </div>
 
-        <div style={{ borderTop: '1px solid #f0f0f0', paddingTop: 20 }}>
-          <div style={{ fontSize: 12, color: '#888', marginBottom: 14, lineHeight: 1.6 }}>
-            {t('delete_confirm')}
+        {/* Language */}
+        <div style={{ marginBottom: 24 }}>
+          <div style={{ fontSize: 11, color: '#667eea', fontWeight: 700, letterSpacing: '0.5px', marginBottom: 10 }}>
+            {t('password_lbl') === 'HASŁO' ? 'JĘZYK KONTA' : 'ACCOUNT LANGUAGE'}
           </div>
+          <div style={{ display: 'flex', gap: 10 }}>
+            {['pl', 'en'].map(code => (
+              <button
+                key={code}
+                onClick={() => requestLangChange(code)}
+                style={{
+                  flex: 1, padding: '10px', borderRadius: 8, cursor: 'pointer',
+                  border: `2px solid ${user.lang === code ? '#667eea' : '#e0e0e0'}`,
+                  background: user.lang === code ? '#f0f2ff' : 'white',
+                  color: user.lang === code ? '#667eea' : '#555',
+                  fontWeight: user.lang === code ? 700 : 400,
+                  fontSize: 14, transition: 'all 0.15s',
+                }}
+              >
+                {langName(code)}
+              </button>
+            ))}
+          </div>
+          <div style={{ marginTop: 8, fontSize: 11, color: '#aaa', lineHeight: 1.5 }}>
+            {lang === 'en'
+              ? `Current account language: ${langName(user.lang)}. This determines the language of default products and recipes.`
+              : `Obecny język konta: ${langName(user.lang)}. Określa język domyślnych produktów i przepisów.`}
+          </div>
+        </div>
+
+        {/* Delete */}
+        <div style={{ borderTop: '1px solid #f0f0f0', paddingTop: 20 }}>
           <button
             onClick={handleDelete}
             disabled={deleting}
             style={{
               width: '100%', padding: '11px', border: 'none', borderRadius: 8,
-              background: deleting ? '#ffb3b3' : '#ff4757',
-              color: 'white', cursor: deleting ? 'not-allowed' : 'pointer',
-              fontSize: 14, fontWeight: 600, marginBottom: 10,
+              background: deleting ? '#ffb3b3' : '#ff4757', color: 'white',
+              cursor: deleting ? 'not-allowed' : 'pointer', fontSize: 14, fontWeight: 600, marginBottom: 10,
             }}
           >
             {deleting ? t('deleting') : t('delete_account')}
           </button>
-          <button
-            onClick={onClose}
-            style={{ width: '100%', padding: '10px', border: '1px solid #e0e0e0', borderRadius: 8, background: 'none', cursor: 'pointer', fontSize: 14, color: '#666' }}
-          >
+          <button onClick={onClose} style={{ width: '100%', padding: '10px', border: '1px solid #e0e0e0', borderRadius: 8, background: 'none', cursor: 'pointer', fontSize: 14, color: '#666' }}>
             {t('close')}
           </button>
         </div>
       </div>
+
+      {/* Language change warning modal */}
+      {showLangWarning && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10001 }}
+          onClick={() => setShowLangWarning(false)}>
+          <div style={{ background: 'white', borderRadius: 14, padding: '28px 24px', maxWidth: 380, width: '100%', boxShadow: '0 20px 60px rgba(0,0,0,0.35)' }}
+            onClick={e => e.stopPropagation()}>
+            <div style={{ fontSize: 32, textAlign: 'center', marginBottom: 12 }}>⚠️</div>
+            <h3 style={{ fontSize: 16, color: '#1a1a2e', marginBottom: 12, textAlign: 'center' }}>
+              {lang === 'en' ? 'Change account language?' : 'Zmienić język konta?'}
+            </h3>
+            <div style={{ fontSize: 13, color: '#555', lineHeight: 1.7, marginBottom: 20, background: '#fff9f0', border: '1px solid #ffd9a0', borderRadius: 8, padding: '12px 14px' }}>
+              {lang === 'en' ? (
+                <>
+                  <b>Important:</b> The data you have in <b>{langName(user.lang)}</b> (products, recipes, meal plan) <b>will not be available</b> after switching to <b>{langName(pendingLang)}</b>.<br /><br />
+                  Your existing data won't be deleted — but it was created in the other language version and won't match the new defaults.
+                </>
+              ) : (
+                <>
+                  <b>Uwaga:</b> Dane które masz w wersji <b>{langName(user.lang)}</b> (produkty, przepisy, plan posiłków) <b>nie będą dostępne</b> po przełączeniu na <b>{langName(pendingLang)}</b>.<br /><br />
+                  Twoje istniejące dane nie zostaną usunięte — ale zostały stworzone w innej wersji językowej i nie będą pasować do nowych domyślnych.
+                </>
+              )}
+            </div>
+            <div style={{ display: 'flex', gap: 10 }}>
+              <button
+                onClick={confirmLangChange}
+                disabled={changingLang}
+                style={{ flex: 1, padding: '11px', border: 'none', borderRadius: 8, background: '#667eea', color: 'white', fontWeight: 600, fontSize: 14, cursor: changingLang ? 'not-allowed' : 'pointer' }}
+              >
+                {changingLang ? '...' : (lang === 'en' ? 'Change anyway' : 'Zmień mimo to')}
+              </button>
+              <button
+                onClick={() => { setShowLangWarning(false); setPendingLang(null); }}
+                style={{ flex: 1, padding: '11px', border: '1px solid #e0e0e0', borderRadius: 8, background: 'none', color: '#555', fontSize: 14, cursor: 'pointer' }}
+              >
+                {t('cancel')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

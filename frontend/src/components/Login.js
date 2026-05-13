@@ -7,10 +7,11 @@ const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
 
 export default function Login() {
   const { login, register } = useAuth();
-  const { t } = useLanguage();
+  const { t, lang: uiLang, switchLang } = useLanguage();
   const [mode, setMode] = useState('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [regLang, setRegLang] = useState('pl');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [googleAvailable, setGoogleAvailable] = useState(false);
@@ -33,8 +34,11 @@ export default function Login() {
     setError('');
     setLoading(true);
     try {
-      if (mode === 'login') await login(email, password);
-      else await register(email, password);
+      if (mode === 'login') {
+        await login(email, password);
+      } else {
+        await register(email, password, regLang);
+      }
     } catch (err) {
       setError(err.response?.data?.error || t('auth_error'));
     } finally {
@@ -46,6 +50,24 @@ export default function Login() {
     window.location.href = `${API_URL}/api/auth/google`;
   };
 
+  const flagBtn = (code, flag, label) => (
+    <button
+      type="button"
+      onClick={() => setRegLang(code)}
+      style={{
+        display: 'flex', alignItems: 'center', gap: 8,
+        padding: '10px 16px', border: `2px solid ${regLang === code ? '#667eea' : '#e0e0e0'}`,
+        borderRadius: 8, background: regLang === code ? '#f0f2ff' : 'white',
+        cursor: 'pointer', fontSize: 14, fontWeight: regLang === code ? 600 : 400,
+        color: regLang === code ? '#667eea' : '#555',
+        flex: 1, justifyContent: 'center', transition: 'all 0.15s',
+      }}
+    >
+      <span style={{ fontSize: 20 }}>{flag}</span>
+      {label}
+    </button>
+  );
+
   return (
     <div style={{
       minHeight: '100vh',
@@ -54,7 +76,7 @@ export default function Login() {
     }}>
       <div style={{
         background: 'white', borderRadius: 16, padding: '40px 36px',
-        width: '100%', maxWidth: 380, boxShadow: '0 20px 60px rgba(0,0,0,0.2)',
+        width: '100%', maxWidth: 400, boxShadow: '0 20px 60px rgba(0,0,0,0.2)',
       }}>
         <div style={{ textAlign: 'center', marginBottom: 28 }}>
           <div style={{ fontSize: 36, marginBottom: 8 }}>🥗</div>
@@ -70,7 +92,7 @@ export default function Login() {
           </div>
         )}
 
-        {googleAvailable && (
+        {googleAvailable && mode === 'login' && (
           <>
             <button
               onClick={handleGoogle}
@@ -96,6 +118,24 @@ export default function Login() {
         )}
 
         <form onSubmit={handleSubmit}>
+          {/* Language picker — only shown at registration */}
+          {mode === 'register' && (
+            <div style={{ marginBottom: 20 }}>
+              <div style={{ fontSize: 12, color: '#667eea', fontWeight: 700, letterSpacing: '0.5px', marginBottom: 8 }}>
+                {uiLang === 'en' ? 'CHOOSE LANGUAGE / WYBIERZ JĘZYK' : 'WYBIERZ JĘZYK / CHOOSE LANGUAGE'}
+              </div>
+              <div style={{ display: 'flex', gap: 10 }}>
+                {flagBtn('pl', '🇵🇱', 'Polski')}
+                {flagBtn('en', '🇬🇧', 'English')}
+              </div>
+              <div style={{ marginTop: 8, fontSize: 11, color: '#aaa', lineHeight: 1.5 }}>
+                {uiLang === 'en'
+                  ? 'Default products and recipes will be in the chosen language.'
+                  : 'Domyślna lista produktów i przepisów będzie w wybranym języku.'}
+              </div>
+            </div>
+          )}
+
           <div style={{ marginBottom: 14 }}>
             <label style={{ fontSize: 12, color: '#667eea', fontWeight: 600, display: 'block', marginBottom: 5 }}>EMAIL</label>
             <input
@@ -132,6 +172,12 @@ export default function Login() {
               </button>
             </>
           )}
+        </div>
+
+        {/* UI language quick-switch */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 20 }}>
+          <button onClick={() => switchLang('pl')} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 18, opacity: uiLang === 'pl' ? 1 : 0.4 }}>🇵🇱</button>
+          <button onClick={() => switchLang('en')} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 18, opacity: uiLang === 'en' ? 1 : 0.4 }}>🇬🇧</button>
         </div>
       </div>
     </div>

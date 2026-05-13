@@ -52,6 +52,10 @@ export const nutrition = {
   lookup: (name) => API.get(`/api/nutrition/lookup?name=${encodeURIComponent(name)}`),
 };
 
+export const auth = {
+  changeLanguage: (lang) => API.patch('/api/auth/language', { lang }),
+};
+
 export const importPrices = {
   parse: (file) => {
     const fd = new FormData();

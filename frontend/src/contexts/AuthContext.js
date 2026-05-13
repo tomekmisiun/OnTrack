@@ -7,12 +7,16 @@ const API = axios.create({
   baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5001',
 });
 
-export function AuthProvider({ children }) {
+export function AuthProvider({ children, onLangChange }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const applyUser = (userData) => {
+    setUser(userData);
+    if (userData?.lang && onLangChange) onLangChange(userData.lang);
+  };
+
   useEffect(() => {
-    // Obsługa tokenu z OAuth redirect (?token=...)
     const params = new URLSearchParams(window.location.search);
     const oauthToken = params.get('token');
     if (oauthToken) {
@@ -24,7 +28,7 @@ export function AuthProvider({ children }) {
     if (token) {
       API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       API.get('/api/auth/me')
-        .then(r => setUser(r.data))
+        .then(r => applyUser(r.data))
         .catch(() => { localStorage.removeItem('token'); delete API.defaults.headers.common['Authorization']; })
         .finally(() => setLoading(false));
     } else {
@@ -37,15 +41,15 @@ export function AuthProvider({ children }) {
     const { access_token, user } = res.data;
     localStorage.setItem('token', access_token);
     API.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
-    setUser(user);
+    applyUser(user);
   };
 
-  const register = async (email, password) => {
-    const res = await API.post('/api/auth/register', { email, password });
+  const register = async (email, password, lang) => {
+    const res = await API.post('/api/auth/register', { email, password, lang });
     const { access_token, user } = res.data;
     localStorage.setItem('token', access_token);
     API.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
-    setUser(user);
+    applyUser(user);
   };
 
   const logout = () => {
@@ -59,8 +63,12 @@ export function AuthProvider({ children }) {
     logout();
   };
 
+  const updateUserLang = (lang) => {
+    setUser(u => u ? { ...u, lang } : u);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, deleteAccount }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, deleteAccount, updateUserLang }}>
       {children}
     </AuthContext.Provider>
   );
