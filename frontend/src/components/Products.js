@@ -309,10 +309,10 @@ export default function Products() {
           <div style={{ fontWeight: 600, color: '#667eea', marginBottom: 8 }}>Jak korzystać z importu?</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             <div>
-              <div style={{ fontWeight: 600, marginBottom: 4, color: '#444' }}>📸 Zdjęcie paragonu</div>
+              <div style={{ fontWeight: 600, marginBottom: 4, color: '#444' }}>Opcja 1: Zdjęcie paragonu</div>
               <ol style={{ margin: 0, paddingLeft: 16, color: '#555', fontSize: 12 }}>
                 <li>Wgraj zdjęcie <b>JPG, PNG lub WEBP</b></li>
-                <li>Kliknij <b>Parsuj przez AI</b> — Gemini wyciągnie produkty i ceny</li>
+                <li>Kliknij <b>Zastosuj przez AI</b> — Gemini wyciągnie produkty i ceny</li>
                 <li>Sprawdź dopasowania i kliknij <b>Zastosuj</b></li>
               </ol>
               <div style={{ marginTop: 6, fontSize: 11, color: '#856404' }}>
@@ -320,10 +320,10 @@ export default function Products() {
               </div>
             </div>
             <div>
-              <div style={{ fontWeight: 600, marginBottom: 4, color: '#444' }}>📄 Plik CSV / TXT</div>
+              <div style={{ fontWeight: 600, marginBottom: 4, color: '#444' }}>Opcja 2: Plik CSV / TXT</div>
               <ol style={{ margin: 0, paddingLeft: 16, color: '#555', fontSize: 12 }}>
                 <li>Format: <code style={{ background: '#eef', padding: '1px 4px', borderRadius: 3 }}>nazwa,gramatura,jednostka,cena</code><br/>lub prościej: <code style={{ background: '#eef', padding: '1px 4px', borderRadius: 3 }}>nazwa,cena</code></li>
-                <li>Wgraj plik i kliknij <b>Parsuj plik</b></li>
+                <li>Wgraj plik i kliknij <b>Zastosuj plik</b></li>
               </ol>
               <div style={{ marginTop: 6, fontSize: 11, color: '#2a9d5c' }}>✓ Bez limitu, bez AI.</div>
             </div>
@@ -347,15 +347,16 @@ export default function Products() {
                 style={{ display: 'none' }} onChange={e => handleFileSelect(e.target.files[0])} />
               {selectedFile ? (
                 <>
-                  <div style={{ fontSize: 28, marginBottom: 4 }}>{isImageFile(selectedFile) ? '📸' : '📄'}</div>
-                  <div style={{ fontWeight: 600, color: '#2a9d5c', marginBottom: 2 }}>{selectedFile.name}</div>
+                  <div style={{ fontWeight: 600, color: '#2a9d5c', marginBottom: 2 }}>
+                    {isImageFile(selectedFile) ? 'Opcja 1: ' : 'Opcja 2: '}{selectedFile.name}
+                  </div>
                   <div style={{ fontSize: 11, color: '#aaa' }}>Kliknij żeby wybrać inny plik</div>
                 </>
               ) : (
                 <>
                   <div style={{ fontSize: 32, marginBottom: 8 }}>📂</div>
                   <div style={{ fontWeight: 600, color: '#555', marginBottom: 4 }}>Kliknij lub przeciągnij plik</div>
-                  <div style={{ fontSize: 12, color: '#aaa' }}>📸 JPG, PNG, WEBP — paragon (AI) &nbsp;|&nbsp; 📄 TXT, CSV — cennik (darmowe)</div>
+                  <div style={{ fontSize: 12, color: '#aaa' }}>Opcja 1: JPG, PNG, WEBP — paragon (AI) &nbsp;|&nbsp; Opcja 2: TXT, CSV — cennik (darmowe)</div>
                 </>
               )}
             </div>
@@ -363,13 +364,13 @@ export default function Products() {
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                 {isImageFile(selectedFile) && (
                   <button className="btn btn-primary" onClick={handleParseAI} disabled={importing} style={{ minWidth: 200 }}>
-                    {importing ? '⏳ Gemini analizuje...' : '✨ Parsuj przez AI (Gemini)'}
+                    {importing ? '⏳ Gemini analizuje...' : '✨ Zastosuj przez AI (Gemini)'}
                   </button>
                 )}
                 {isTextFile(selectedFile) && (
                   <button className="btn btn-primary" onClick={handleParseFree} disabled={importing}
                     style={{ minWidth: 200, background: 'linear-gradient(135deg, #2a9d5c, #1d7a45)' }}>
-                    {importing ? '⏳ Parsowanie...' : '📄 Parsuj plik (darmowe)'}
+                    {importing ? '⏳ Przetwarzam...' : '📄 Zastosuj plik (darmowe)'}
                   </button>
                 )}
                 <button className="btn" style={{ background: '#eee', color: '#555' }}
