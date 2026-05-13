@@ -4,14 +4,31 @@ import { recipes as api, products as productsApi } from '../api';
 // ---- Parser ----
 
 const POLISH_UNITS = [
-  { re: /szklank[iaę]|szklanek/i,   g: 250 },
-  { re: /łyżk[iaę]|łyżek(?!czk)/i, g: 15  },
-  { re: /łyżeczk[iaę]|łyżeczek/i,  g: 5   },
-  { re: /szczypt[aę]|szczypty/i,     g: 1   },
-  { re: /garśc[i]?|garść/i,         g: 30  },
+  { re: /szklank[iaę]|szklanek/i,       g: 250 },
+  { re: /łyżk[iaę]|łyżek(?!czk)/i,     g: 15  },
+  { re: /łyżeczk[iaę]|łyżeczek/i,      g: 5   },
+  { re: /szczypt[aę]|szczypty/i,        g: 1   },
+  { re: /garśc[i]?|garść/i,            g: 30  },
+  { re: /pęczk[iaó]?|pęczków/i,        g: 50  },
 ];
 
-const PIECE_WORDS = /jajk[ao]|jajek|jaj(?=\s)|sztuk[ia]?|szt\.?/i;
+const PIECE_WORDS = /jajk[ao]|jajek|jaja?(?=\s)|jaj\b|sztuk[ia]?|szt\.?/i;
+
+// Ułamki słowne
+const FRACTION_WORDS = { 'pół': 0.5, 'ćwierć': 0.25, 'trzy czwarte': 0.75 };
+
+function parseNum(s) {
+  if (!s) return null;
+  s = s.trim();
+  // ułamki słowne
+  for (const [word, val] of Object.entries(FRACTION_WORDS)) {
+    if (s.toLowerCase().startsWith(word)) return val;
+  }
+  // ułamki liczbowe 1/4, 1/2, 3/4
+  const fracM = /^(\d+)\s*\/\s*(\d+)/.exec(s);
+  if (fracM) return parseInt(fracM[1]) / parseInt(fracM[2]);
+  return parseFloat(s.replace(',', '.')) || null;
+}
 
 function parseWeight(text) {
   // 1. Standardowe jednostki wagowe
@@ -23,43 +40,76 @@ function parseWeight(text) {
     const unit = first[2].toLowerCase();
     if (unit === 'kg') val *= 1000;
     if (unit.startsWith('litr') || unit === 'l') val *= 1000;
-    return { weight: Math.round(val), unit: (unit === 'ml' || unit.startsWith('litr') || unit === 'l') ? 'ml' : 'g', matchIndex: first.index };
+    return { weight: Math.round(val), unit: (unit === 'ml' || unit.startsWith('litr') || unit === 'l') ? 'ml' : 'g', matchIndex: first.index, matchEnd: first.index + first[0].length };
   }
 
-  // 2. Polskie jednostki kulinarne (łyżeczka, łyżka, szklanka, szczypta…)
+  // 2. Polskie jednostki kulinarne
   for (const { re, g } of POLISH_UNITS) {
     const unitM = re.exec(text);
     if (unitM) {
       const beforeUnit = text.slice(0, unitM.index).trim();
-      const numM = /(\d+(?:[.,]\d+)?)\s*$/.exec(beforeUnit);
-      const count = numM ? parseFloat(numM[1].replace(',', '.')) : 1;
-      // Jeśli nic sensownego przed jednostką — nazwa jest za nią
-      const nameBeforeUnit = beforeUnit.replace(/\d+([.,]\d+)?\s*$/, '').trim();
-      const forcedName = nameBeforeUnit.length < 2
-        ? text.slice(unitM.index + unitM[0].length).trim().split(/[\s,(-]/)[0].toLowerCase()
-        : undefined;
-      return { weight: Math.round(count * g), unit: 'g', matchIndex: numM ? numM.index : unitM.index, forcedName };
+      // pół łyżeczki → obsługa ułamka słownego
+      const fracM = /(pół|ćwierć|\d+(?:[.,]\d+)?|\d+\/\d+)\s*$/.exec(beforeUnit);
+      const count = fracM ? (parseNum(fracM[1]) ?? 1) : 1;
+      const nameBeforeUnit = beforeUnit.replace(/(pół|ćwierć|\d+(?:[.,]\d+)?|\d+\/\d+)\s*$/, '').trim();
+      const matchEnd = unitM.index + unitM[0].length;
+      const afterUnit = text.slice(matchEnd).trim().split(/\s*[,(-]/)[0].trim();
+      const forcedName = nameBeforeUnit.length < 2 ? afterUnit : undefined;
+      return { weight: Math.round(count * g), unit: 'g', matchIndex: fracM ? unitM.index - fracM[0].length : unitM.index, matchEnd, forcedName };
     }
   }
 
-  // 3. Sztuki — jajko, szt itp.
+  // 3. Sztuki — jajko, jaja, szt itp.
   const pieceM = PIECE_WORDS.exec(text);
   if (pieceM) {
     const beforePiece = text.slice(0, pieceM.index);
     const numM = /(\d+)/.exec(beforePiece);
     const count = numM ? parseInt(numM[1]) : 1;
-    // forcedName: użyj samego słowa "jajko" zamiast wszystkiego przed nim
-    return { weight: count, unit: 'szt', matchIndex: pieceM.index, forcedName: pieceM[0].toLowerCase() };
+    return { weight: count, unit: 'szt', matchIndex: pieceM.index, matchEnd: pieceM.index + pieceM[0].length, forcedName: pieceM[0].toLowerCase() };
+  }
+
+  // 4. Sama liczba na początku (np. "3 marchewki") — traktuj jako sztuki
+  const bareM = /^(\d+)\s+/.exec(text);
+  if (bareM) {
+    const count = parseInt(bareM[1]);
+    return { weight: count, unit: 'szt', matchIndex: 0, matchEnd: bareM[0].length, forcedName: null };
   }
 
   return null;
 }
 
-function extractIngredientName(raw, weightIndex) {
-  let before = raw.substring(0, weightIndex).trim();
+const JUNK_PREFIX = /^[\d/.,\s]*(pół|ćwierć|płaski?a?|duże?|małe?|duży|mały|świeże?|ugotowane?|młode?|klarowanego?)?\s*/i;
+const JUNK_SUFFIX = /\s*(duże?|małe?|duży|mały|świeże?|ugotowane?|na\s+twardo|można\s+pominąć|klarowanego?).*$/i;
+
+function extractName(content, parsed) {
+  if (parsed.forcedName) return parsed.forcedName;
+  const { matchIndex, matchEnd } = parsed;
+
+  // Tekst przed ilością
+  let before = content.substring(0, matchIndex).trim();
   const dashIdx = before.lastIndexOf(' - ');
   if (dashIdx > 0) before = before.substring(0, dashIdx).trim();
-  return before.trim();
+  before = before.replace(JUNK_PREFIX, '').replace(JUNK_SUFFIX, '').trim();
+  if (before.length >= 2) return before;
+
+  // Nic przed — bierz zza ilości
+  const after = content.substring(matchEnd || matchIndex).trim()
+    .replace(/\s*[-,(].*$/, '')   // odetnij " - opis" i "(opis)"
+    .replace(JUNK_PREFIX, '')
+    .replace(JUNK_SUFFIX, '')
+    .trim();
+  return after;
+}
+
+function parseSegment(content) {
+  // Parsuje jeden segment (pojedynczy składnik)
+  // Obsługuje "przyprawy: pół łyżeczki soli" → usuwa prefix do ":"
+  const cleanContent = content.replace(/^[^:]+:\s*/, '').trim();
+  const parsed = parseWeight(cleanContent);
+  if (!parsed) return null;
+  const ingName = extractName(cleanContent, parsed);
+  if (!ingName || ingName.length < 2) return null;
+  return { rawName: ingName, weight: parsed.weight, unit: parsed.unit };
 }
 
 function parseRecipeText(text) {
@@ -67,15 +117,20 @@ function parseRecipeText(text) {
   if (!lines.length) return null;
   const name = lines[0].replace(/^#+\s*/, '').trim();
   const ingredients = [];
+
   for (const line of lines.slice(1)) {
     if (line.includes('http')) continue;
-    // Usuń opcjonalny prefiks - lub •
     const content = line.replace(/^[-•*]\s*/, '').trim();
-    const parsed = parseWeight(content);
-    if (!parsed) continue; // linia bez ilości = nagłówek sekcji, pomijamy
-    const ingName = parsed.forcedName || extractIngredientName(content, parsed.matchIndex);
-    if (!ingName) continue;
-    ingredients.push({ rawName: ingName, weight: parsed.weight, unit: parsed.unit, product_id: null });
+
+    // Spróbuj podzielić po przecinku jeśli linia wygląda na wiele składników
+    const segments = content.includes(',')
+      ? content.split(/,\s+/)
+      : [content];
+
+    for (const seg of segments) {
+      const result = parseSegment(seg);
+      if (result) ingredients.push({ ...result, product_id: null });
+    }
   }
   return { name, ingredients };
 }
