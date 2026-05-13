@@ -50,17 +50,25 @@ function DraggableRecipe({ recipe }) {
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: `recipe-${recipe.id}`, data: { type: 'recipe', recipe },
   });
+  const hasKcal = recipe.total_kcal > 0;
   return (
     <div ref={setNodeRef} {...listeners} {...attributes} style={{
-      flexShrink:0, width:110, padding:'10px 10px 8px',
+      flexShrink:0, width:116, padding:'9px 10px 8px',
       background:'linear-gradient(145deg, #667eea, #764ba2)', color:'white',
       borderRadius:10, fontSize:12, cursor:'grab', opacity: isDragging ? 0.35 : 1,
       userSelect:'none', touchAction:'none', boxShadow:'0 2px 8px rgba(102,126,234,0.35)',
-      display:'flex', flexDirection:'column', gap:4,
+      display:'flex', flexDirection:'column', gap:3,
     }}>
-      <div style={{width:32,height:32,borderRadius:'50%',background:'rgba(255,255,255,0.2)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:16,marginBottom:2}}>🍽️</div>
-      <div style={{fontWeight:600,lineHeight:1.2,fontSize:11}}>{recipe.name}</div>
-      <div style={{fontSize:10,opacity:0.75}}>{recipe.total_cost.toFixed(2)} zł</div>
+      <div style={{fontWeight:700,lineHeight:1.3,fontSize:11,marginBottom:1}}>{recipe.name}</div>
+      {hasKcal && (
+        <>
+          <div style={{fontSize:12,fontWeight:700,opacity:0.95}}>{recipe.total_kcal} kcal</div>
+          <div style={{fontSize:9,opacity:0.8,letterSpacing:'0.2px'}}>
+            B:{recipe.total_protein}g&nbsp; T:{recipe.total_fat}g&nbsp; W:{recipe.total_carbs}g
+          </div>
+        </>
+      )}
+      <div style={{fontSize:10,opacity:0.7,marginTop:1}}>{recipe.total_cost.toFixed(2)} zł</div>
     </div>
   );
 }
@@ -136,6 +144,12 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
   const hasMeals = meals.length > 0;
   const canPaste = copiedDay && copiedDay !== dateStr;
 
+  const totalKcal    = meals.reduce((s, m) => s + (m.recipe.total_kcal    || 0), 0);
+  const totalProtein = meals.reduce((s, m) => s + (m.recipe.total_protein || 0), 0);
+  const totalFat     = meals.reduce((s, m) => s + (m.recipe.total_fat     || 0), 0);
+  const totalCarbs   = meals.reduce((s, m) => s + (m.recipe.total_carbs   || 0), 0);
+  const hasAnyMacro  = totalKcal > 0 || totalProtein > 0 || totalFat > 0 || totalCarbs > 0;
+
   return (
     <div style={{
       border:`1px solid ${isToday ? '#667eea' : '#e8e8e8'}`,
@@ -180,6 +194,19 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
             meal={mealsByPos[pos]} onDelete={onDelete} showLabel={isToday} />
         ))}
       </div>
+      {hasMeals && hasAnyMacro && (
+        <div style={{
+          borderTop:'1px solid #ede8f5', background: isPast ? '#f2f2f2' : '#faf8ff',
+          padding:'3px 4px', lineHeight:1.4,
+        }}>
+          <div style={{fontSize:9,fontWeight:700,color:'#764ba2',whiteSpace:'nowrap'}}>
+            {totalKcal} kcal
+          </div>
+          <div style={{fontSize:8,color:'#999',whiteSpace:'nowrap'}}>
+            B:{Math.round(totalProtein)}g T:{Math.round(totalFat)}g W:{Math.round(totalCarbs)}g
+          </div>
+        </div>
+      )}
     </div>
   );
 }

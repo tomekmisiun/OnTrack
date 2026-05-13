@@ -39,11 +39,29 @@ class Recipe(db.Model):
     def total_cost(self):
         return round(sum(i.to_dict()['cost'] for i in self.ingredients), 2)
 
+    def _calc_macros(self):
+        kcal = protein = fat = carbs = 0.0
+        for ing in self.ingredients:
+            p = ing.product
+            if not p or p.unit == 'szt':
+                continue
+            factor = ing.weight / 100.0
+            kcal    += (p.kcal    or 0) * factor
+            protein += (p.protein or 0) * factor
+            fat     += (p.fat     or 0) * factor
+            carbs   += (p.carbs   or 0) * factor
+        return round(kcal), round(protein, 1), round(fat, 1), round(carbs, 1)
+
     def to_dict(self):
+        kcal, protein, fat, carbs = self._calc_macros()
         return {
             'id': self.id,
             'name': self.name,
             'notes': self.notes,
             'ingredients': [i.to_dict() for i in self.ingredients],
             'total_cost': self.total_cost(),
+            'total_kcal': kcal,
+            'total_protein': protein,
+            'total_fat': fat,
+            'total_carbs': carbs,
         }
