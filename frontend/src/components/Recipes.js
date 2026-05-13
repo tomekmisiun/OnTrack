@@ -171,6 +171,7 @@ export default function Recipes() {
     const result = parseRecipeText(pasteText);
     if (!result || !result.ingredients.length) { setError('Nie udało się wyłapać składników — sprawdź format'); return; }
     result.ingredients = matchProducts(result.ingredients, productList);
+    result.sourceText = pasteText;
     setParsed(result);
   };
 
@@ -275,6 +276,22 @@ banan 120 g
               <button className="btn btn-primary" onClick={handleSave}>Zapisz przepis</button>
               <button className="btn" style={{ background: '#eee', color: '#555' }} onClick={() => { setParsed(null); setError(''); }}>← Wróć</button>
             </div>
+
+            {parsed.sourceText && (
+              <div style={{ marginTop: 20 }}>
+                <div style={{ fontSize: 12, color: '#888', marginBottom: 6, fontWeight: 600 }}>
+                  Oryginalny tekst przepisu — porównaj i ręcznie dołóż brakujące składniki
+                </div>
+                <pre style={{
+                  background: '#f8f9ff', border: '1px solid #e0e4ff', borderRadius: 8,
+                  padding: '12px 14px', fontSize: 12, color: '#444', lineHeight: 1.8,
+                  whiteSpace: 'pre-wrap', wordBreak: 'break-word', margin: 0,
+                  maxHeight: 300, overflowY: 'auto',
+                }}>
+                  {parsed.sourceText}
+                </pre>
+              </div>
+            )}
           </div>
         )}
       </div>
