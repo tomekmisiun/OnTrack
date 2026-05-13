@@ -193,7 +193,7 @@ export default function Recipes() {
             <div className="form-row">
               <select value={ingredient.product_id} onChange={e => setIngredient({ ...ingredient, product_id: e.target.value })}>
                 <option value="">Wybierz produkt</option>
-                {productList.map(p => <option key={p.id} value={p.id}>{p.name} ({p.package_weight}g)</option>)}
+                {productList.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
               </select>
               <input placeholder="Gramatura (g)" type="number" value={ingredient.weight} onChange={e => setIngredient({ ...ingredient, weight: e.target.value })} />
               <button className="btn btn-success" onClick={addIngredient}>+ Składnik</button>
