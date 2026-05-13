@@ -3,16 +3,50 @@ import { recipes as api, products as productsApi } from '../api';
 
 // ---- Parser ----
 
+const POLISH_UNITS = [
+  { re: /szklank[iaę]|szklanek/i,   g: 250 },
+  { re: /łyżk[iaę]|łyżek(?!czk)/i, g: 15  },
+  { re: /łyżeczk[iaę]|łyżeczek/i,  g: 5   },
+  { re: /szczyp[tę]|szczypty/i,     g: 1   },
+  { re: /garśc[i]?|garść/i,         g: 30  },
+];
+
+const PIECE_WORDS = /jajk[ao]|jajek|jaj(?=\s)|sztuk[ia]?|szt\.?/i;
+
 function parseWeight(text) {
-  const regex = /(\d+(?:[.,]\d+)?)\s*(kg|litr(?:[óo]w|a)?|ml|g|l\b)/gi;
-  let first = null, match;
-  while ((match = regex.exec(text)) !== null) { if (!first) first = match; }
-  if (!first) return null;
-  let val = parseFloat(first[1].replace(',', '.'));
-  const unit = first[2].toLowerCase();
-  if (unit === 'kg') val *= 1000;
-  if (unit.startsWith('litr') || unit === 'l') val *= 1000;
-  return { weight: Math.round(val), unit: (unit === 'ml' || unit.startsWith('litr') || unit === 'l') ? 'ml' : 'g', matchIndex: first.index };
+  // 1. Standardowe jednostki wagowe
+  const stdRe = /(\d+(?:[.,]\d+)?)\s*(kg|litr(?:[óo]w|a)?|ml|g|l\b)/gi;
+  let first = null, m;
+  while ((m = stdRe.exec(text)) !== null) { if (!first) first = m; }
+  if (first) {
+    let val = parseFloat(first[1].replace(',', '.'));
+    const unit = first[2].toLowerCase();
+    if (unit === 'kg') val *= 1000;
+    if (unit.startsWith('litr') || unit === 'l') val *= 1000;
+    return { weight: Math.round(val), unit: (unit === 'ml' || unit.startsWith('litr') || unit === 'l') ? 'ml' : 'g', matchIndex: first.index };
+  }
+
+  // 2. Polskie jednostki kulinarne (łyżeczka, łyżka, szklanka, szczypta…)
+  for (const { re, g } of POLISH_UNITS) {
+    const unitM = re.exec(text);
+    if (unitM) {
+      const beforeUnit = text.slice(0, unitM.index);
+      const numM = /(\d+(?:[.,]\d+)?)\s*$/.exec(beforeUnit);
+      const count = numM ? parseFloat(numM[1].replace(',', '.')) : 1;
+      return { weight: Math.round(count * g), unit: 'g', matchIndex: numM ? numM.index : unitM.index };
+    }
+  }
+
+  // 3. Sztuki — jajko, szt itp.
+  const pieceM = PIECE_WORDS.exec(text);
+  if (pieceM) {
+    const beforePiece = text.slice(0, pieceM.index);
+    const numM = /(\d+)\s*(?:\w+\s+){0,3}$/.exec(beforePiece);
+    const count = numM ? parseInt(numM[1]) : 1;
+    return { weight: count, unit: 'szt', matchIndex: numM ? numM.index : pieceM.index };
+  }
+
+  return null;
 }
 
 function extractIngredientName(raw, weightIndex) {
