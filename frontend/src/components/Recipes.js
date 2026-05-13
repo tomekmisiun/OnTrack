@@ -7,7 +7,7 @@ const POLISH_UNITS = [
   { re: /szklank[iaę]|szklanek/i,   g: 250 },
   { re: /łyżk[iaę]|łyżek(?!czk)/i, g: 15  },
   { re: /łyżeczk[iaę]|łyżeczek/i,  g: 5   },
-  { re: /szczyp[tę]|szczypty/i,     g: 1   },
+  { re: /szczypt[aę]|szczypty/i,     g: 1   },
   { re: /garśc[i]?|garść/i,         g: 30  },
 ];
 
