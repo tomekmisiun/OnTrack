@@ -35,8 +35,10 @@ def create_recipe():
     if not data or 'name' not in data:
         return jsonify({'error': 'Wymagane pole: name'}), 400
 
-    if Recipe.query.filter_by(name=data['name'], user_id=uid).first():
-        return jsonify({'error': 'Przepis o tej nazwie już istnieje'}), 409
+    existing = Recipe.query.filter_by(name=data['name'], user_id=uid).first()
+    if existing:
+        db.session.delete(existing)
+        db.session.flush()
 
     recipe = Recipe(name=data['name'], user_id=uid, notes=data.get('notes'))
     db.session.add(recipe)
