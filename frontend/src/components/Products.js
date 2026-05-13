@@ -266,7 +266,7 @@ export default function Products() {
             <li>Zrób zdjęcie paragonu ze sklepu <b>(JPG, PNG, WEBP)</b> lub przygotuj plik tekstowy/CSV z cenami.</li>
             <li>Wgraj plik — Claude AI automatycznie wyciągnie produkty i ceny.</li>
             <li>Sprawdź dopasowania, popraw ceny jeśli trzeba, zaznacz które chcesz zaktualizować.</li>
-            <li>Kliknij <b>Zastosuj</b> — ceny oraz Makro i Kalorie zostaną zaktualizowane automatycznie.</li>
+            <li>Kliknij <b>Zastosuj</b> — Ceny oraz Makro i Kalorie zostaną zaktualizowane automatycznie.</li>
           </ol>
           <div style={{ marginTop: 8, padding: '6px 10px', background: '#fff3cd', borderRadius: 6, color: '#856404', fontSize: 12 }}>
             ⚠️ <b>Limit dzienny: 2 importy na dobę.</b>
