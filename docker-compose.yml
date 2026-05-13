@@ -5,6 +5,12 @@ services:
       - "5001:5000"
     environment:
       - DATABASE_URL=postgresql://user:password@db:5432/mealplanner
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - FLASK_SECRET_KEY=${FLASK_SECRET_KEY:-change-me}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-change-me}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - FRONTEND_URL=http://localhost:3000
     depends_on:
       - db
     volumes:

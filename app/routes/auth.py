@@ -1,0 +1,134 @@
+from flask import Blueprint, request, jsonify, redirect, current_app
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from authlib.integrations.flask_client import OAuth
+from app import db
+from app.models.user import User
+import re
+import os
+
+auth_bp = Blueprint('auth', __name__)
+oauth = OAuth()
+
+EMAIL_RE = re.compile(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
+
+
+def init_oauth(app):
+    oauth.init_app(app)
+    if app.config.get('GOOGLE_CLIENT_ID'):
+        oauth.register(
+            name='google',
+            client_id=app.config['GOOGLE_CLIENT_ID'],
+            client_secret=app.config['GOOGLE_CLIENT_SECRET'],
+            server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
+            client_kwargs={'scope': 'openid email'},
+        )
+
+
+def _validate(email, password):
+    if not email or not password:
+        return 'Email i hasło są wymagane'
+    if not EMAIL_RE.match(email):
+        return 'Nieprawidłowy format email'
+    if len(password) < 8:
+        return 'Hasło musi mieć co najmniej 8 znaków'
+    return None
+
+
+def _find_or_create_oauth_user(email):
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        user = User(email=email)
+        user.set_password(os.urandom(32).hex())  # losowe hasło — tylko OAuth
+        db.session.add(user)
+        db.session.commit()
+    return user
+
+
+# ---- Email/password ----
+
+@auth_bp.route('/register', methods=['POST'])
+def register():
+    data = request.get_json() or {}
+    email = (data.get('email') or '').strip().lower()
+    password = data.get('password') or ''
+
+    err = _validate(email, password)
+    if err:
+        return jsonify({'error': err}), 400
+    if User.query.filter_by(email=email).first():
+        return jsonify({'error': 'Konto z tym adresem już istnieje'}), 409
+
+    user = User(email=email)
+    user.set_password(password)
+    db.session.add(user)
+    db.session.commit()
+
+    from app.seeds import seed_user
+    seed_user(user.id)
+
+    token = create_access_token(identity=str(user.id))
+    return jsonify({'access_token': token, 'user': user.to_dict()}), 201
+
+
+@auth_bp.route('/login', methods=['POST'])
+def login():
+    data = request.get_json() or {}
+    email = (data.get('email') or '').strip().lower()
+    password = data.get('password') or ''
+
+    user = User.query.filter_by(email=email).first()
+    if not user or not user.check_password(password):
+        return jsonify({'error': 'Nieprawidłowy email lub hasło'}), 401
+
+    token = create_access_token(identity=str(user.id))
+    return jsonify({'access_token': token, 'user': user.to_dict()})
+
+
+@auth_bp.route('/me', methods=['GET'])
+@jwt_required()
+def me():
+    user = User.query.get(int(get_jwt_identity()))
+    if not user:
+        return jsonify({'error': 'Nie znaleziono użytkownika'}), 404
+    return jsonify(user.to_dict())
+
+
+# ---- Google OAuth ----
+
+@auth_bp.route('/google')
+def google_login():
+    if not current_app.config.get('GOOGLE_CLIENT_ID'):
+        return jsonify({'error': 'Google OAuth nie jest skonfigurowane'}), 503
+    callback_url = current_app.config['FRONTEND_URL'].rstrip('/') + '/api/auth/google/callback'
+    redirect_uri = f"http://localhost:5001/api/auth/google/callback"
+    return oauth.google.authorize_redirect(redirect_uri)
+
+
+@auth_bp.route('/google/callback')
+def google_callback():
+    frontend_url = current_app.config.get('FRONTEND_URL', 'http://localhost:3000')
+    try:
+        token = oauth.google.authorize_access_token()
+        user_info = token.get('userinfo') or oauth.google.userinfo()
+        email = user_info.get('email', '').lower()
+        if not email:
+            return redirect(f'{frontend_url}?auth_error=Brak+adresu+email+od+Google')
+
+        is_new = not User.query.filter_by(email=email).first()
+        user = _find_or_create_oauth_user(email)
+        if is_new:
+            from app.seeds import seed_user
+            seed_user(user.id)
+        jwt_token = create_access_token(identity=str(user.id))
+        return redirect(f'{frontend_url}?token={jwt_token}')
+    except Exception as e:
+        return redirect(f'{frontend_url}?auth_error=Błąd+logowania')
+
+
+@auth_bp.route('/providers')
+def providers():
+    """Frontend pyta które providery są dostępne."""
+    available = []
+    if current_app.config.get('GOOGLE_CLIENT_ID'):
+        available.append('google')
+    return jsonify({'providers': available})
