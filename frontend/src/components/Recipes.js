@@ -78,7 +78,7 @@ function parseWeight(text) {
   return null;
 }
 
-const JUNK_PREFIX = /^[\d/.,\s]*(pół|ćwierć|płaski?a?|duże?|małe?|duży|mały|świeże?|ugotowane?|młode?|klarowanego?)?\s*/i;
+const JUNK_PREFIX = /^[\d/.,\s]*(pół|ćwierć|płask\w*|duż\w*|mał\w*|śwież\w*|ugotown\w*|młod\w*|klarowan\w*)?\s*/i;
 const JUNK_SUFFIX = /\s*(duże?|małe?|duży|mały|świeże?|ugotowane?|na\s+twardo|można\s+pominąć|klarowanego?).*$/i;
 
 function extractName(content, parsed) {
@@ -90,7 +90,7 @@ function extractName(content, parsed) {
   const dashIdx = before.lastIndexOf(' - ');
   if (dashIdx > 0) before = before.substring(0, dashIdx).trim();
   before = before.replace(JUNK_PREFIX, '').replace(JUNK_SUFFIX, '').trim();
-  if (before.length >= 2) return before;
+  if (before.length >= 3) return before;
 
   // Nic przed — bierz zza ilości
   const after = content.substring(matchEnd || matchIndex).trim()
