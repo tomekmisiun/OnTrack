@@ -53,58 +53,61 @@ function DraggableRecipe({ recipe }) {
   const hasKcal = recipe.total_kcal > 0;
   return (
     <div ref={setNodeRef} {...listeners} {...attributes} style={{
-      flexShrink:0, width:128,
+      flexShrink:0, width:128, height:148,
       background:'linear-gradient(160deg, #7b5ea7, #5548a0)',
       borderRadius:12, cursor:'grab', opacity: isDragging ? 0.3 : 1,
       userSelect:'none', touchAction:'none',
       boxShadow:'0 4px 12px rgba(85,72,160,0.45)',
       display:'flex', flexDirection:'column', overflow:'hidden',
     }}>
-      {/* Name */}
-      <div style={{padding:'10px 11px 7px', color:'white'}}>
+      {/* Name — fills available space, stays at top */}
+      <div style={{flex:1, padding:'10px 11px 6px'}}>
         <div style={{
-          fontWeight:700, fontSize:11.5, lineHeight:1.35, color:'white',
-          display:'-webkit-box', WebkitLineClamp:2,
+          fontWeight:700, fontSize:11.5, lineHeight:1.4, color:'white',
+          display:'-webkit-box', WebkitLineClamp:3,
           WebkitBoxOrient:'vertical', overflow:'hidden',
         }}>
           {recipe.name}
         </div>
       </div>
 
-      {/* kcal — hero number */}
-      {hasKcal && (
-        <div style={{padding:'0 11px 6px', display:'flex', alignItems:'baseline', gap:4}}>
-          <span style={{fontSize:22, fontWeight:800, color:'white', lineHeight:1}}>
-            {recipe.total_kcal}
-          </span>
-          <span style={{fontSize:10, fontWeight:500, color:'rgba(255,255,255,0.65)'}}>kcal</span>
-        </div>
-      )}
-
-      {/* Macro pills */}
-      {hasKcal && (
-        <div style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:3, padding:'0 8px 9px'}}>
-          {[['B', recipe.total_protein], ['T', recipe.total_fat], ['W', recipe.total_carbs]].map(([lbl, val]) => (
-            <div key={lbl} style={{
-              background:'rgba(255,255,255,0.14)', borderRadius:5,
-              padding:'3px 0', textAlign:'center',
-            }}>
-              <div style={{fontSize:8, fontWeight:700, color:'rgba(255,255,255,0.6)', letterSpacing:'0.3px'}}>{lbl}</div>
-              <div style={{fontSize:10, fontWeight:700, color:'white'}}>{Math.round(val)}g</div>
+      {/* kcal + macros — pinned just above price */}
+      <div style={{padding:'0 8px 7px'}}>
+        {hasKcal ? (
+          <>
+            <div style={{display:'flex', alignItems:'baseline', gap:3, padding:'0 3px', marginBottom:5}}>
+              <span style={{fontSize:18, fontWeight:800, color:'white', lineHeight:1}}>
+                {recipe.total_kcal}
+              </span>
+              <span style={{fontSize:9, fontWeight:500, color:'rgba(255,255,255,0.55)'}}>kcal</span>
             </div>
-          ))}
-        </div>
-      )}
+            <div style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:3}}>
+              {[['B', recipe.total_protein], ['T', recipe.total_fat], ['W', recipe.total_carbs]].map(([lbl, val]) => (
+                <div key={lbl} style={{
+                  background:'rgba(255,255,255,0.14)', borderRadius:5,
+                  padding:'3px 0', textAlign:'center',
+                }}>
+                  <div style={{fontSize:8, fontWeight:700, color:'rgba(255,255,255,0.55)', letterSpacing:'0.3px'}}>{lbl}</div>
+                  <div style={{fontSize:10, fontWeight:700, color:'white'}}>{Math.round(val)}g</div>
+                </div>
+              ))}
+            </div>
+          </>
+        ) : (
+          /* placeholder so price stays at the same position */
+          <div style={{height:52}} />
+        )}
+      </div>
 
       {/* Price footer */}
       <div style={{
-        marginTop:'auto',
         borderTop:'1px solid rgba(255,255,255,0.12)',
         background:'rgba(0,0,0,0.18)',
         padding:'4px 11px',
         fontSize:10.5, fontWeight:600,
         color:'rgba(255,255,255,0.75)',
         textAlign:'right',
+        flexShrink:0,
       }}>
         {recipe.total_cost.toFixed(2)} zł
       </div>
