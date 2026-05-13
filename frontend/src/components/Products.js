@@ -41,10 +41,12 @@ export default function Products() {
   const [editId, setEditId] = useState(null);
   const [editForm, setEditForm] = useState({});
   const [error, setError] = useState('');
-  const [lookingUp, setLookingUp] = useState(null); // id produktu którego szukamy
+  const [lookingUp, setLookingUp] = useState(null);
   const [importItems, setImportItems] = useState(null);
   const [importing, setImporting] = useState(false);
   const [importSuccess, setImportSuccess] = useState('');
+  const [remainingImports, setRemainingImports] = useState(null);
+  const [applyingMacro, setApplyingMacro] = useState(false);
   const [dragOver, setDragOver] = useState(false);
   const fileInputRef = useRef();
 
@@ -147,11 +149,32 @@ export default function Products() {
     catch { setError('Błąd usuwania produktu'); }
   };
 
+  const fetchMacroFromOFF = async (name) => {
+    try {
+      const url = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(name)}&search_simple=1&action=process&json=1&page_size=5&fields=product_name,nutriments`;
+      const r = await fetch(url);
+      const data = await r.json();
+      for (const p of (data.products || [])) {
+        const n = p.nutriments || {};
+        let kcal = n['energy-kcal_100g'] ?? n['energy-kcal'] ?? null;
+        if (!kcal && n['energy_100g']) kcal = Math.round(n['energy_100g'] / 4.184 * 10) / 10;
+        if (kcal) return {
+          kcal:    Math.round(kcal * 10) / 10,
+          protein: Math.round((n['proteins_100g'] ?? 0) * 10) / 10,
+          fat:     Math.round((n['fat_100g'] ?? 0) * 10) / 10,
+          carbs:   Math.round((n['carbohydrates_100g'] ?? 0) * 10) / 10,
+        };
+      }
+    } catch { /* OFF niedostępny */ }
+    return null;
+  };
+
   const handleFileUpload = async (file) => {
     if (!file) return;
     setImporting(true); setError(''); setImportSuccess('');
     try {
       const res = await importPrices.parse(file);
+      setRemainingImports(res.data.remaining_today);
       setImportItems(res.data.items.map(item => ({
         ...item, selected: !!item.matched_product, price: item.suggested_price ?? '',
       })));
@@ -160,16 +183,21 @@ export default function Products() {
   };
 
   const handleApplyImport = async () => {
-    const updates = importItems
-      .filter(i => i.selected && i.matched_product && i.price !== '' && i.price !== null)
-      .map(i => ({ product_id: i.matched_product.id, price: parseFloat(i.price) }));
-    if (!updates.length) { setError('Zaznacz przynajmniej jeden produkt'); return; }
+    const selected = importItems.filter(i => i.selected && i.matched_product && i.price !== '' && i.price !== null);
+    if (!selected.length) { setError('Zaznacz przynajmniej jeden produkt'); return; }
     try {
-      const res = await importPrices.apply(updates);
-      setImportSuccess(res.data.message);
+      const res = await importPrices.apply(selected.map(i => ({ product_id: i.matched_product.id, price: parseFloat(i.price) })));
       setImportItems(null);
+      setApplyingMacro(true);
+      // Auto-pobierz makro dla zaktualizowanych produktów
+      for (const item of selected) {
+        const macro = await fetchMacroFromOFF(item.matched_product.name);
+        if (macro) await api.update(item.matched_product.id, macro);
+      }
+      setApplyingMacro(false);
+      setImportSuccess(res.data.message + ' · Makro zaktualizowane automatycznie.');
       loadProducts();
-    } catch { setError('Błąd aktualizacji cen'); }
+    } catch { setError('Błąd aktualizacji'); setApplyingMacro(false); }
   };
 
   const s = { padding: '5px 8px', fontSize: 13 };
@@ -222,12 +250,31 @@ export default function Products() {
         </div>
       )}
 
+      {applyingMacro && (
+        <div style={{ background: '#fffbe6', border: '1px solid #ffe58f', color: '#7c5700', padding: 12, borderRadius: 8, marginBottom: 16, fontSize: 13 }}>
+          ⏳ Pobieranie Makro i Kalorii z Open Food Facts…
+        </div>
+      )}
+
       {/* Import paragonów */}
       <div className="card">
         <h2>Importuj ceny z paragonu</h2>
-        <p style={{ fontSize: 13, color: '#888', marginBottom: 14 }}>
-          Wgraj zdjęcie paragonu (JPG, PNG, WEBP) lub plik CSV/TXT.
-        </p>
+
+        <div style={{ background: '#f8f9ff', border: '1px solid #e0e4ff', borderRadius: 8, padding: '12px 16px', marginBottom: 16, fontSize: 13, lineHeight: 1.7 }}>
+          <div style={{ fontWeight: 600, color: '#667eea', marginBottom: 6 }}>Jak korzystać z importu?</div>
+          <ol style={{ margin: 0, paddingLeft: 18, color: '#555' }}>
+            <li>Zrób zdjęcie paragonu ze sklepu <b>(JPG, PNG, WEBP)</b> lub przygotuj plik tekstowy/CSV z cenami.</li>
+            <li>Wgraj plik — Claude AI automatycznie wyciągnie produkty i ceny.</li>
+            <li>Sprawdź dopasowania, popraw ceny jeśli trzeba, zaznacz które chcesz zaktualizować.</li>
+            <li>Kliknij <b>Zastosuj</b> — ceny oraz Makro i Kalorie zostaną zaktualizowane automatycznie.</li>
+          </ol>
+          <div style={{ marginTop: 8, padding: '6px 10px', background: '#fff3cd', borderRadius: 6, color: '#856404', fontSize: 12 }}>
+            ⚠️ <b>Limit dzienny: 2 importy na dobę.</b>
+            {remainingImports !== null && (
+              <span> Pozostało dziś: <b>{remainingImports}</b> {remainingImports === 1 ? 'import' : remainingImports === 0 ? 'importów' : 'importy'}.</span>
+            )}
+          </div>
+        </div>
         {!importItems ? (
           <div
             onDragOver={e => { e.preventDefault(); setDragOver(true); }}
