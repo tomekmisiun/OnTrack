@@ -78,8 +78,10 @@ function parseWeight(text) {
   return null;
 }
 
-const JUNK_PREFIX = /^[\d/.,\s]*(pół|ćwierć|płask\w*|duż\w*|mał\w*|śwież\w*|ugotown\w*|młod\w*|klarowan\w*)?\s*/i;
-const JUNK_SUFFIX = /\s*(duże?|małe?|duży|mały|świeże?|ugotowane?|na\s+twardo|można\s+pominąć|klarowanego?).*$/i;
+const JUNK_PREFIX = /^[\d/.,\s]*(po\s+)?(pół|ćwierć|płask\w*|duż\w*|mał\w*|śwież\w*|ugotown\w*|młod\w*|klarowan\w*|słodk\w*|ostr\w*)?\s*/i;
+const JUNK_SUFFIX = /\s*(duże?|małe?|duży|mały|świeże?|ugotowane?|na\s+twardo|można\s+pominąć|klarowanego?|i\s+\w.*)$/i;
+// Słowa-jednostki do usunięcia z nazwy
+const UNIT_WORDS = /\b(szklank\w+|łyżk\w+|łyżeczk\w+|pęczk\w+|garśc\w*)\b\s*/gi;
 
 function extractName(content, parsed) {
   if (parsed.forcedName) return parsed.forcedName;
@@ -89,27 +91,45 @@ function extractName(content, parsed) {
   let before = content.substring(0, matchIndex).trim();
   const dashIdx = before.lastIndexOf(' - ');
   if (dashIdx > 0) before = before.substring(0, dashIdx).trim();
-  before = before.replace(JUNK_PREFIX, '').replace(JUNK_SUFFIX, '').trim();
+  before = before.replace(JUNK_PREFIX, '').replace(UNIT_WORDS, '').replace(JUNK_SUFFIX, '').trim();
   if (before.length >= 3) return before;
 
-  // Nic przed — bierz zza ilości
+  // Nic przed — bierz zza ilości, zatrzymaj się na " i " (spójnik)
   const after = content.substring(matchEnd || matchIndex).trim()
-    .replace(/\s*[-,(].*$/, '')   // odetnij " - opis" i "(opis)"
+    .replace(/\s*[-,(].*$/, '')
+    .replace(/\s+i\s+.*$/i, '')   // zatrzymaj na spójniku "i"
     .replace(JUNK_PREFIX, '')
+    .replace(UNIT_WORDS, '')
     .replace(JUNK_SUFFIX, '')
     .trim();
   return after;
 }
 
-function parseSegment(content) {
-  // Parsuje jeden segment (pojedynczy składnik)
-  // Obsługuje "przyprawy: pół łyżeczki soli" → usuwa prefix do ":"
-  const cleanContent = content.replace(/^[^:]+:\s*/, '').trim();
-  const parsed = parseWeight(cleanContent);
-  if (!parsed) return null;
-  const ingName = extractName(cleanContent, parsed);
-  if (!ingName || ingName.length < 2) return null;
-  return { rawName: ingName, weight: parsed.weight, unit: parsed.unit };
+function parseSegments(content) {
+  // Usuwa prefix "słowo:" (np. "przyprawy:")
+  const clean = content.replace(/^[^:]+:\s*/, '').trim();
+  const results = [];
+
+  // Parsuj główny segment
+  const parsed = parseWeight(clean);
+  if (!parsed) return results;
+
+  const ingName = extractName(clean, parsed);
+  if (ingName && ingName.length >= 2) {
+    results.push({ rawName: ingName, weight: parsed.weight, unit: parsed.unit });
+  }
+
+  // Spróbuj wyłapać dodatkowy składnik po " i " (np. "soli i pieprzu")
+  const afterUnit = clean.substring(parsed.matchEnd || parsed.matchIndex).trim();
+  const andMatch = /\s+i\s+(\w+)/i.exec(afterUnit);
+  if (andMatch) {
+    const extra = andMatch[1];
+    if (extra.length >= 3) {
+      results.push({ rawName: extra, weight: parsed.weight, unit: parsed.unit });
+    }
+  }
+
+  return results;
 }
 
 function parseRecipeText(text) {
@@ -122,14 +142,13 @@ function parseRecipeText(text) {
     if (line.includes('http')) continue;
     const content = line.replace(/^[-•*]\s*/, '').trim();
 
-    // Spróbuj podzielić po przecinku jeśli linia wygląda na wiele składników
-    const segments = content.includes(',')
-      ? content.split(/,\s+/)
-      : [content];
+    // Podziel po przecinkach
+    const segments = content.includes(',') ? content.split(/,\s+/) : [content];
 
     for (const seg of segments) {
-      const result = parseSegment(seg);
-      if (result) ingredients.push({ ...result, product_id: null });
+      for (const result of parseSegments(seg)) {
+        ingredients.push({ ...result, product_id: null });
+      }
     }
   }
   return { name, ingredients };
