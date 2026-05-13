@@ -29,7 +29,7 @@ MACROS = {
     "Passata pomidorowa": (32,1.5,0.2,6.0), "Koncentrat pomidorowy": (90,4.5,0.5,17.0),
     "Sos sojowy": (60,8.0,0.0,6.0), "Ocet jabłkowy": (21,0.0,0.0,0.9),
     "Musztarda": (66,4.0,3.5,5.0), "Majonez": (680,1.5,75.0,2.0),
-    "Bulion warzywny": (10,0.5,0.1,2.0), "Sól": (0,0.0,0.0,0.0),
+    "Bulion warzywny": (10,0.5,0.1,2.0), "Sól": (0,0.0,0.0,0.0), "Soda oczyszczona": (0,0.0,0.0,0.0),
     "Pieprz czarny": (251,10.0,3.0,63.0), "Papryka słodka": (282,14.0,13.0,54.0),
     "Papryka ostra": (314,12.0,17.0,57.0), "Curry": (325,14.0,14.0,55.0),
     "Cynamon": (261,4.0,1.2,68.0), "Oregano": (265,11.0,4.0,64.0),
@@ -103,6 +103,7 @@ DEFAULT_PRODUCTS = [
     ("Bulion warzywny",          500, "ml"),
     # Przyprawy
     ("Sól",                     1000, "g"),
+    ("Soda oczyszczona",         100, "g"),
     ("Pieprz czarny",             50, "g"),
     ("Papryka słodka",            50, "g"),
     ("Papryka ostra",             50, "g"),
