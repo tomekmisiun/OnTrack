@@ -368,7 +368,8 @@ export default function Calendar() {
   const [error,setError]             = useState('');
   const [copiedDay,setCopiedDay]     = useState(null);
   const [copiedWeek,setCopiedWeek]   = useState(null);
-  const [toast,setToast]             = useState(null); // { msg, color }
+  const [toast,setToast]             = useState(null);
+  const [howToOpen,setHowToOpen]     = useState(false);
 
   const showToast = (msg, color='#0066cc')=>{
     setToast({msg,color});
@@ -565,6 +566,47 @@ export default function Calendar() {
         </div>
       )}
 
+      {/* Jak korzystać — zwijany panel */}
+      <div className="card" style={{padding:0,marginBottom:16,overflow:'hidden'}}>
+        <button onClick={()=>setHowToOpen(o=>!o)}
+          style={{width:'100%',padding:'12px 18px',background:'none',border:'none',cursor:'pointer',display:'flex',justifyContent:'space-between',alignItems:'center',fontSize:14,fontWeight:600,color:'#667eea'}}>
+          <span>Jak korzystać z kalendarza?</span>
+          <span style={{fontSize:16,transition:'transform 0.2s',transform:howToOpen?'rotate(180deg)':'rotate(0deg)'}}>▾</span>
+        </button>
+        {howToOpen && (
+          <div style={{padding:'0 18px 16px',fontSize:12,lineHeight:1.8,borderTop:'1px solid #f0f0f0'}}>
+            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:20,marginTop:14}}>
+              <div>
+                <div style={{fontWeight:700,color:'#667eea',marginBottom:6}}>🍽️ Planowanie posiłków</div>
+                <ul style={{margin:0,paddingLeft:16,color:'#555'}}>
+                  <li>Chwyć przepis z karuzeli i przeciągnij na <b>slot w dniu</b> (5 slotów: śniadanie–kolacja)</li>
+                  <li>Posiłek możesz <b>przesunąć</b> między dniami chwytając go za nazwę</li>
+                  <li>Kliknij <b>✕</b> przy posiłku żeby go usunąć, lub <b>🗑</b> w nagłówku dnia żeby wyczyścić cały dzień</li>
+                </ul>
+              </div>
+              <div>
+                <div style={{fontWeight:700,color:'#667eea',marginBottom:6}}>📋 Kopiowanie dni i tygodni</div>
+                <ul style={{margin:0,paddingLeft:16,color:'#555'}}>
+                  <li><b>⧉</b> w nagłówku dnia — kopiuje dzień do schowka</li>
+                  <li><b>⎘</b> — wkleja schowek na inny dzień</li>
+                  <li><b>⠿</b> przy numerze dnia — chwyć i przeciągnij dzień na inny dzień</li>
+                  <li><b>⧉ / ⎘ / 🗑</b> po lewej każdego wiersza — kopiuj, wklej lub usuń cały tydzień</li>
+                </ul>
+              </div>
+              <div>
+                <div style={{fontWeight:700,color:'#667eea',marginBottom:6}}>📁 Szablony tygodnia</div>
+                <ul style={{margin:0,paddingLeft:16,color:'#555'}}>
+                  <li>Kliknij <b>⧉</b> przy tygodniu — załaduje posiłki do edytora szablonu poniżej</li>
+                  <li>W edytorze przeciągaj przepisy z karuzeli na dni tygodnia</li>
+                  <li>Wpisz nazwę i kliknij <b>Zapisz szablon</b></li>
+                  <li>Szablon możesz zastosować na dowolny przyszły tydzień</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
       {/* Kalendarz */}
       <div className="card" style={{padding:16,marginBottom:16}}>
         <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:12}}>
@@ -610,39 +652,6 @@ export default function Calendar() {
             </div>
           );
         })}
-      </div>
-
-      {/* Jak korzystać z kalendarza */}
-      <div className="card" style={{padding:'14px 18px',marginBottom:16,fontSize:13,lineHeight:1.8}}>
-        <h2 style={{fontSize:15,marginBottom:12}}>Jak korzystać z kalendarza</h2>
-        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:20}}>
-          <div>
-            <div style={{fontWeight:700,color:'#667eea',marginBottom:6}}>🍽️ Planowanie posiłków</div>
-            <ul style={{margin:0,paddingLeft:16,color:'#555',fontSize:12}}>
-              <li>Chwyć przepis z karuzeli i przeciągnij go na wybrany <b>slot w dniu</b> (każdy dzień ma 5 slotów: śniadanie, drugie śniadanie, obiad, podwieczorek, kolacja)</li>
-              <li>Posiłek możesz <b>przesunąć</b> między dniami chwytając go za nazwę</li>
-              <li>Kliknij <b>✕</b> przy posiłku żeby go usunąć, lub <b>🗑</b> w nagłówku dnia żeby usunąć cały dzień</li>
-            </ul>
-          </div>
-          <div>
-            <div style={{fontWeight:700,color:'#667eea',marginBottom:6}}>📋 Kopiowanie dni i tygodni</div>
-            <ul style={{margin:0,paddingLeft:16,color:'#555',fontSize:12}}>
-              <li><b>⧉</b> w nagłówku dnia — kopiuje ten dzień do schowka</li>
-              <li><b>⎘</b> — wkleja skopiowany dzień; pojawia się na innych dniach gdy schowek jest zajęty</li>
-              <li><b>⠿</b> przy numerze dnia — chwyć i przeciągnij cały dzień na inny dzień</li>
-              <li><b>⧉ / ⎘ / 🗑</b> po lewej wiersza — kopiuj, wklej lub usuń cały tydzień</li>
-            </ul>
-          </div>
-          <div>
-            <div style={{fontWeight:700,color:'#667eea',marginBottom:6}}>📁 Szablony tygodnia</div>
-            <ul style={{margin:0,paddingLeft:16,color:'#555',fontSize:12}}>
-              <li>Kliknij <b>⧉</b> przy tygodniu — posiłki zostaną załadowane do <b>edytora szablonu</b> poniżej</li>
-              <li>W edytorze możesz też przeciągać przepisy z karuzeli na poszczególne dni tygodnia</li>
-              <li>Wpisz nazwę szablonu i kliknij <b>Zapisz szablon</b></li>
-              <li>Zapisany szablon możesz zastosować na dowolny przyszły tydzień wybierając datę i klikając <b>Zastosuj</b></li>
-            </ul>
-          </div>
-        </div>
       </div>
 
       {/* Karuzela przepisów */}
