@@ -28,11 +28,11 @@ function parseRecipeText(text) {
   const name = lines[0].replace(/^#+\s*/, '').trim();
   const ingredients = [];
   for (const line of lines.slice(1)) {
-    if (!line.match(/^[-•*]/)) continue;
     if (line.includes('http')) continue;
+    // Usuń opcjonalny prefiks - lub •
     const content = line.replace(/^[-•*]\s*/, '').trim();
     const parsed = parseWeight(content);
-    if (!parsed) continue;
+    if (!parsed) continue; // linia bez ilości = nagłówek sekcji, pomijamy
     const ingName = extractIngredientName(content, parsed.matchIndex);
     if (!ingName) continue;
     ingredients.push({ rawName: ingName, weight: parsed.weight, unit: parsed.unit, product_id: null });
@@ -125,7 +125,7 @@ export default function Recipes() {
                   <div style={{ fontWeight: 600, marginBottom: 4, color: '#444' }}>Format tekstu:</div>
                   <ol style={{ margin: 0, paddingLeft: 18, color: '#555' }}>
                     <li><b>Pierwsza linia</b> — nazwa przepisu</li>
-                    <li>Każdy składnik w osobnej linii, zaczynając od <b>-</b> lub <b>•</b></li>
+                    <li>Każdy składnik w osobnej linii</li>
                     <li>Podaj <b>nazwę składnika</b> i <b>ilość z jednostką</b> (g, ml, kg, l)</li>
                     <li>Możesz wkleić tekst prosto ze strony z przepisem</li>
                   </ol>
@@ -134,10 +134,10 @@ export default function Recipes() {
                   <div style={{ fontWeight: 600, marginBottom: 4, color: '#444' }}>Przykład:</div>
                   <pre style={{ margin: 0, background: '#fff', border: '1px solid #e0e4ff', borderRadius: 6, padding: '8px 12px', fontSize: 12, color: '#333', lineHeight: 1.7 }}>
 {`Owsianka
-- płatki owsiane 50 g
-- mleko 200 ml
-- banan 120 g
-- masło orzechowe 15 g`}
+płatki owsiane 50 g
+mleko 200 ml
+banan 120 g
+masło orzechowe 15 g`}
                   </pre>
                   <div style={{ fontSize: 11, color: '#999', marginTop: 6 }}>
                     System automatycznie dopasuje składniki do Twoich produktów.
@@ -149,7 +149,7 @@ export default function Recipes() {
             <textarea
               value={pasteText}
               onChange={e => setPasteText(e.target.value)}
-              placeholder={`Wklej lub wpisz przepis...\n\nNazwa przepisu\n- składnik 1  100 g\n- składnik 2  200 ml`}
+              placeholder={`Wklej lub wpisz przepis...\n\nNazwa przepisu\nskładnik 1  100 g\nskładnik 2  200 ml`}
               style={{
                 width: '100%', minHeight: 200, padding: 12,
                 border: '2px solid #e0e0e0', borderRadius: 8,
