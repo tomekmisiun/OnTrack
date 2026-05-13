@@ -324,7 +324,7 @@ export default function Products() {
           <tbody>
             {productList.map(p => editId === p.id ? (
               <React.Fragment key={p.id}>
-                <tr style={{ background: '#f8f9ff', verticalAlign: 'bottom' }}>
+                <tr style={{ background: '#f8f9ff', verticalAlign: 'top' }}>
                   <td>
                     <div style={fl}>Nazwa produktu</div>
                     <input value={editForm.name}
