@@ -14,6 +14,9 @@ def create_app():
     migrate.init_app(app, db)
     CORS(app)
 
+    from prometheus_flask_exporter import PrometheusMetrics
+    PrometheusMetrics(app)
+
     from app.routes.products import products_bp
     from app.routes.recipes import recipes_bp
     from app.routes.meal_plan import meal_plan_bp
