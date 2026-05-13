@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { useLanguage } from '../contexts/LanguageContext';
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
 
 export default function Login() {
   const { login, register } = useAuth();
+  const { t } = useLanguage();
   const [mode, setMode] = useState('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,12 +16,10 @@ export default function Login() {
   const [googleAvailable, setGoogleAvailable] = useState(false);
 
   useEffect(() => {
-    // Sprawdź czy Google OAuth jest skonfigurowane
     axios.get(`${API_URL}/api/auth/providers`)
       .then(r => setGoogleAvailable(r.data.providers.includes('google')))
       .catch(() => {});
 
-    // Obsłuż błąd OAuth z URL
     const params = new URLSearchParams(window.location.search);
     const authError = params.get('auth_error');
     if (authError) {
@@ -36,7 +36,7 @@ export default function Login() {
       if (mode === 'login') await login(email, password);
       else await register(email, password);
     } catch (err) {
-      setError(err.response?.data?.error || 'Wystąpił błąd — spróbuj ponownie');
+      setError(err.response?.data?.error || t('auth_error'));
     } finally {
       setLoading(false);
     }
@@ -50,23 +50,17 @@ export default function Login() {
     <div style={{
       minHeight: '100vh',
       background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
     }}>
       <div style={{
-        background: 'white',
-        borderRadius: 16,
-        padding: '40px 36px',
-        width: '100%',
-        maxWidth: 380,
-        boxShadow: '0 20px 60px rgba(0,0,0,0.2)',
+        background: 'white', borderRadius: 16, padding: '40px 36px',
+        width: '100%', maxWidth: 380, boxShadow: '0 20px 60px rgba(0,0,0,0.2)',
       }}>
         <div style={{ textAlign: 'center', marginBottom: 28 }}>
           <div style={{ fontSize: 36, marginBottom: 8 }}>🥗</div>
           <h1 style={{ fontSize: 22, color: '#1a1a2e', marginBottom: 4 }}>Meal Planner</h1>
           <p style={{ fontSize: 13, color: '#aaa' }}>
-            {mode === 'login' ? 'Zaloguj się do swojego konta' : 'Utwórz nowe konto'}
+            {mode === 'login' ? t('subtitle_login') : t('subtitle_register')}
           </p>
         </div>
 
@@ -76,90 +70,65 @@ export default function Login() {
           </div>
         )}
 
-        {/* Google OAuth */}
         {googleAvailable && (
           <>
             <button
               onClick={handleGoogle}
               style={{
-                width: '100%',
-                padding: '11px',
-                border: '2px solid #e0e0e0',
-                borderRadius: 8,
-                background: 'white',
-                cursor: 'pointer',
-                fontSize: 14,
-                fontWeight: 600,
-                color: '#444',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 10,
-                marginBottom: 20,
-                transition: 'border-color 0.15s',
+                width: '100%', padding: '11px', border: '2px solid #e0e0e0',
+                borderRadius: 8, background: 'white', cursor: 'pointer',
+                fontSize: 14, fontWeight: 600, color: '#444',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
+                marginBottom: 20, transition: 'border-color 0.15s',
               }}
               onMouseEnter={e => e.currentTarget.style.borderColor = '#667eea'}
               onMouseLeave={e => e.currentTarget.style.borderColor = '#e0e0e0'}
             >
               <GoogleIcon />
-              Kontynuuj przez Google
+              {t('google_btn')}
             </button>
-
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
               <div style={{ flex: 1, height: 1, background: '#e0e0e0' }} />
-              <span style={{ fontSize: 12, color: '#bbb' }}>lub</span>
+              <span style={{ fontSize: 12, color: '#bbb' }}>{t('or')}</span>
               <div style={{ flex: 1, height: 1, background: '#e0e0e0' }} />
             </div>
           </>
         )}
 
-        {/* Email/password form */}
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: 14 }}>
             <label style={{ fontSize: 12, color: '#667eea', fontWeight: 600, display: 'block', marginBottom: 5 }}>EMAIL</label>
             <input
-              type="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              placeholder="twój@email.com"
-              required
-              style={{ width: '100%', boxSizing: 'border-box' }}
-              autoComplete="email"
+              type="email" value={email} onChange={e => setEmail(e.target.value)}
+              placeholder={t('email_ph')} required
+              style={{ width: '100%', boxSizing: 'border-box' }} autoComplete="email"
             />
           </div>
           <div style={{ marginBottom: 22 }}>
-            <label style={{ fontSize: 12, color: '#667eea', fontWeight: 600, display: 'block', marginBottom: 5 }}>HASŁO</label>
+            <label style={{ fontSize: 12, color: '#667eea', fontWeight: 600, display: 'block', marginBottom: 5 }}>{t('password_lbl')}</label>
             <input
-              type="password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              placeholder={mode === 'register' ? 'Min. 8 znaków' : ''}
-              required
-              style={{ width: '100%', boxSizing: 'border-box' }}
+              type="password" value={password} onChange={e => setPassword(e.target.value)}
+              placeholder={mode === 'register' ? t('password_ph') : ''}
+              required style={{ width: '100%', boxSizing: 'border-box' }}
               autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
             />
           </div>
-          <button
-            type="submit"
-            className="btn btn-primary"
-            disabled={loading}
-            style={{ width: '100%', padding: '12px', fontSize: 15 }}
-          >
-            {loading ? '...' : mode === 'login' ? 'Zaloguj się' : 'Zarejestruj się'}
+          <button type="submit" className="btn btn-primary" disabled={loading} style={{ width: '100%', padding: '12px', fontSize: 15 }}>
+            {loading ? '...' : mode === 'login' ? t('login_btn') : t('register_btn')}
           </button>
         </form>
 
         <div style={{ textAlign: 'center', marginTop: 20, fontSize: 13, color: '#888' }}>
           {mode === 'login' ? (
-            <>Nie masz konta?{' '}
+            <>{t('no_account')}{' '}
               <button onClick={() => { setMode('register'); setError(''); }} style={{ background: 'none', border: 'none', color: '#667eea', cursor: 'pointer', fontWeight: 600 }}>
-                Zarejestruj się
+                {t('register_btn')}
               </button>
             </>
           ) : (
-            <>Masz już konto?{' '}
+            <>{t('have_account')}{' '}
               <button onClick={() => { setMode('login'); setError(''); }} style={{ background: 'none', border: 'none', color: '#667eea', cursor: 'pointer', fontWeight: 600 }}>
-                Zaloguj się
+                {t('login_btn')}
               </button>
             </>
           )}

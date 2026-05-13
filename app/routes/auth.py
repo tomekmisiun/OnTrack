@@ -125,6 +125,33 @@ def google_callback():
         return redirect(f'{frontend_url}?auth_error=Błąd+logowania')
 
 
+@auth_bp.route('/me', methods=['DELETE'])
+@jwt_required()
+def delete_me():
+    uid = int(get_jwt_identity())
+    user = User.query.get(uid)
+    if not user:
+        return jsonify({'error': 'Nie znaleziono użytkownika'}), 404
+
+    from app.models.meal_plan import MealPlan
+    from app.models.recipe import Recipe, RecipeIngredient
+    from app.models.product import Product
+    from app.models.import_log import ImportLog
+    from app.models.recipe_parse_log import RecipeParseLog
+
+    MealPlan.query.filter_by(user_id=uid).delete()
+    recipe_ids = [r.id for r in Recipe.query.filter_by(user_id=uid).all()]
+    if recipe_ids:
+        RecipeIngredient.query.filter(RecipeIngredient.recipe_id.in_(recipe_ids)).delete(synchronize_session=False)
+    Recipe.query.filter_by(user_id=uid).delete()
+    Product.query.filter_by(user_id=uid).delete()
+    ImportLog.query.filter_by(user_id=uid).delete()
+    RecipeParseLog.query.filter_by(user_id=uid).delete()
+    db.session.delete(user)
+    db.session.commit()
+    return jsonify({'message': 'Konto usunięte'}), 200
+
+
 @auth_bp.route('/providers')
 def providers():
     """Frontend pyta które providery są dostępne."""

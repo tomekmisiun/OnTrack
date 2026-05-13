@@ -4,13 +4,10 @@ import {
   useSensor, useSensors, useDraggable, useDroppable,
 } from '@dnd-kit/core';
 import { mealPlan as api, recipes as recipesApi } from '../api';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const COLORS = ['#667eea', '#f093fb', '#4facfe', '#43e97b', '#fa709a'];
 const getColor = (pos) => COLORS[(pos - 1) % 5];
-const SLOT_LABELS = ['Śniadanie', 'Drugie śniadanie', 'Obiad', 'Podwieczorek', 'Kolacja'];
-const MONTH_NAMES = ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'];
-const DAY_NAMES_SHORT = ['Pon','Wt','Śr','Czw','Pt','Sob','Niedz'];
-const DAY_NAMES_FULL  = ['Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota','Niedziela'];
 
 function dateToStr(d) {
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
@@ -19,14 +16,12 @@ function addDays(dateStr, n) {
   const d = new Date(dateStr); d.setDate(d.getDate() + n); return dateToStr(d);
 }
 function toEU(dateStr) {
-  // YYYY-MM-DD → DD.MM.YYYY
   const [y, m, d] = dateStr.split('-');
   return `${d}.${m}.${y}`;
 }
 function getUpcomingMondays(count = 16) {
   const mondays = [];
   const today = new Date(); today.setHours(0,0,0,0);
-  // Zacznij od poprzedniego poniedziałku żeby mieć też bieżący tydzień
   const start = new Date(today);
   start.setDate(start.getDate() - (today.getDay() + 6) % 7);
   for (let i = 0; i < count; i++) {
@@ -91,11 +86,12 @@ function DraggableMeal({ meal, onDelete }) {
 
 // ─── Drag handle for day ──────────────────────────────────────────────────────
 function DraggableDayHandle({ dateStr, meals }) {
+  const { t } = useLanguage();
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: `day-${dateStr}`, data: { type: 'day', dateStr, meals },
   });
   return (
-    <span ref={setNodeRef} {...listeners} {...attributes} title="Przeciągnij dzień"
+    <span ref={setNodeRef} {...listeners} {...attributes} title={t('drag_day_title')}
       style={{cursor:'grab',opacity:isDragging?0.4:1,fontSize:10,color:'#bbb',marginLeft:2,userSelect:'none',touchAction:'none'}}>⠿</span>
   );
 }
@@ -114,6 +110,7 @@ function DroppableDayHeader({ dateStr, children }) {
 
 // ─── Calendar meal slot ───────────────────────────────────────────────────────
 function MealSlot({ date, position, meal, onDelete, showLabel }) {
+  const { t } = useLanguage();
   const { setNodeRef, isOver } = useDroppable({
     id: `slot-${date}-${position}`, data: { date, position },
   });
@@ -125,7 +122,7 @@ function MealSlot({ date, position, meal, onDelete, showLabel }) {
     }}>
       {meal
         ? <DraggableMeal meal={meal} onDelete={onDelete} />
-        : showLabel && <span style={{fontSize:9,color:'#c0b8d4',userSelect:'none',whiteSpace:'nowrap',overflow:'hidden',width:'100%',textAlign:'center',display:'block'}}>{SLOT_LABELS[position-1]}</span>
+        : showLabel && <span style={{fontSize:9,color:'#c0b8d4',userSelect:'none',whiteSpace:'nowrap',overflow:'hidden',width:'100%',textAlign:'center',display:'block'}}>{t('slot_labels')[position-1]}</span>
       }
     </div>
   );
@@ -133,6 +130,7 @@ function MealSlot({ date, position, meal, onDelete, showLabel }) {
 
 // ─── Day cell ─────────────────────────────────────────────────────────────────
 function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDelete, onDeleteAll, onCopy, onPaste, copiedDay }) {
+  const { t } = useLanguage();
   const mealsByPos = {};
   meals.forEach(m => { mealsByPos[m.position] = m; });
   const hasMeals = meals.length > 0;
@@ -160,17 +158,17 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
           <span style={{display:'flex',gap:1}}>
             {hasMeals && (
               <button onPointerDown={e=>e.stopPropagation()} onClick={()=>onCopy(dateStr)}
-                title="Kopiuj dzień"
+                title={t('copy_day_title')}
                 style={{background: copiedDay===dateStr ? '#667eea' : 'none', color: copiedDay===dateStr ? 'white' : '#bbb', border:'none', cursor:'pointer', fontSize:9, padding:'0 2px', borderRadius:2}}>⧉</button>
             )}
             {canPaste && (
               <button onPointerDown={e=>e.stopPropagation()} onClick={()=>onPaste(dateStr)}
-                title="Wklej dzień"
+                title={t('paste_day_title')}
                 style={{background:'none',color:'#667eea',border:'none',cursor:'pointer',fontSize:9,padding:'0 2px',borderRadius:2}}>⎘</button>
             )}
             {hasMeals && (
               <button onPointerDown={e=>e.stopPropagation()} onClick={()=>onDeleteAll(dateStr)}
-                title="Usuń wszystkie posiłki tego dnia"
+                title={t('del_day_title')}
                 style={{background:'none',color:'#ff6b81',border:'none',cursor:'pointer',fontSize:9,padding:'0 2px',borderRadius:2}}>🗑</button>
             )}
           </span>
@@ -188,6 +186,7 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
 
 // ─── Template slot (droppable) ────────────────────────────────────────────────
 function TemplateSlot({ dayIndex, position, recipe, onRemove }) {
+  const { t } = useLanguage();
   const { setNodeRef, isOver } = useDroppable({
     id: `tpl-${dayIndex}-${position}`, data: { type: 'tpl-slot', dayIndex, position },
   });
@@ -204,7 +203,7 @@ function TemplateSlot({ dayIndex, position, recipe, onRemove }) {
             style={{background:'rgba(0,0,0,0.25)',border:'none',color:'white',borderRadius:2,cursor:'pointer',padding:'0 2px',fontSize:8,lineHeight:'13px',flexShrink:0}}>✕</button>
         </div>
       ) : (
-        <span style={{fontSize:8,color:'#d0cde8',width:'100%',textAlign:'center',display:'block',userSelect:'none'}}>{SLOT_LABELS[position-1]}</span>
+        <span style={{fontSize:8,color:'#d0cde8',width:'100%',textAlign:'center',display:'block',userSelect:'none'}}>{t('slot_labels')[position-1]}</span>
       )}
     </div>
   );
@@ -212,6 +211,7 @@ function TemplateSlot({ dayIndex, position, recipe, onRemove }) {
 
 // ─── Template editor/viewer ───────────────────────────────────────────────────
 function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditSlots, onSave, onApply, onDelete }) {
+  const { t } = useLanguage();
   const [editName, setEditName]   = useState('');
   const [applyWeek, setApplyWeek] = useState({});
   const [open, setOpen]           = useState(false);
@@ -223,32 +223,30 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
   };
 
   const filledCount = Object.keys(editSlots).length;
+  const dayShort = t('day_short');
+  const dayFull  = t('day_full');
 
   return (
     <div className="card" style={{padding:0,overflow:'hidden'}}>
       <button onClick={()=>setOpen(o=>!o)}
         style={{width:'100%',padding:'12px 18px',background:'none',border:'none',cursor:'pointer',display:'flex',justifyContent:'space-between',alignItems:'center',fontSize:14,fontWeight:600,color:'#667eea'}}>
-        <span>Tworzenie szablonów posiłków na tydzień</span>
+        <span>{t('tpl_title')}</span>
         <span style={{display:'flex',alignItems:'center',gap:4,fontSize:12,color:'#667eea',fontWeight:400}}>
-          {open ? 'Zwiń' : 'Rozwiń'}
+          {open ? t('collapse') : t('expand')}
           <span style={{fontSize:16,transition:'transform 0.2s',transform:open?'rotate(180deg)':'rotate(0deg)'}}>▾</span>
         </span>
       </button>
       {open && (
       <div style={{padding:'0 16px 16px',borderTop:'1px solid #f0f0f0'}}>
 
-      {/* Edytor nowego szablonu */}
       <div style={{marginBottom:20,marginTop:14}}>
-        <div style={{fontSize:12,color:'#888',marginBottom:8}}>
-          Przeciągnij przepisy z karuzeli na dni tygodnia, następnie zapisz jako szablon.
-        </div>
+        <div style={{fontSize:12,color:'#888',marginBottom:8}}>{t('tpl_drag_hint')}</div>
 
-        {/* 7-dniowy grid szablonu */}
         <div style={{display:'grid', gridTemplateColumns:'repeat(7,1fr)', gap:4, marginBottom:10}}>
-          {DAY_NAMES_FULL.map((name, di) => (
+          {dayFull.map((name, di) => (
             <div key={di} style={{border:'1px solid #e0e4ff',borderRadius:6,overflow:'hidden'}}>
               <div style={{background:'#f0f2ff',padding:'3px 6px',fontSize:10,fontWeight:600,color:'#667eea',textAlign:'center',borderBottom:'1px solid #e0e4ff'}}>
-                {DAY_NAMES_SHORT[di]}
+                {dayShort[di]}
               </div>
               {[1,2,3,4,5].map(pos => (
                 <TemplateSlot key={pos} dayIndex={di} position={pos}
@@ -261,7 +259,7 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
 
         <div style={{display:'flex',gap:8,alignItems:'center'}}>
           <input value={editName} onChange={e=>setEditName(e.target.value)}
-            placeholder="Nazwa szablonu (np. Tydzień fit)"
+            placeholder={t('tpl_name_ph')}
             style={{flex:1,padding:'7px 10px',border:'1px solid #ddd',borderRadius:6,fontSize:13}} />
           <button className="btn btn-primary" style={{padding:'7px 16px',fontSize:13}}
             disabled={!editName.trim() || !filledCount}
@@ -274,27 +272,25 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
               onSave(editName.trim(), meals);
               setEditSlots({}); setEditName('');
             }}>
-            Zapisz szablon
+            {t('save_tpl')}
           </button>
           {filledCount > 0 && (
             <button className="btn" style={{padding:'7px 12px',fontSize:13,background:'#eee',color:'#555'}}
               onClick={()=>setEditSlots({})}>
-              Wyczyść
+              {t('clear')}
             </button>
           )}
         </div>
       </div>
 
-      {/* Twoje szablony */}
-      <div style={{fontWeight:700,fontSize:13,color:'#444',marginBottom:10,paddingTop:4,borderTop:'1px solid #f0f0f0'}}>Twoje szablony</div>
+      <div style={{fontWeight:700,fontSize:13,color:'#444',marginBottom:10,paddingTop:4,borderTop:'1px solid #f0f0f0'}}>{t('your_tpls')}</div>
       {templates.length === 0 ? (
-        <p style={{color:'#bbb',fontSize:13,textAlign:'center',margin:0}}>Brak zapisanych szablonów — utwórz pierwszy powyżej.</p>
+        <p style={{color:'#bbb',fontSize:13,textAlign:'center',margin:0}}>{t('no_tpls')}</p>
       ) : (
         <div style={{display:'flex',flexDirection:'column',gap:16}}>
-          {templates.map((t, ti) => {
-            // Grupuj posiłki po dayOffset
+          {templates.map((tpl, ti) => {
             const byDay = {};
-            t.meals.forEach(m => {
+            tpl.meals.forEach(m => {
               if (!byDay[m.dayOffset]) byDay[m.dayOffset] = {};
               byDay[m.dayOffset][m.position] = m;
             });
@@ -302,11 +298,11 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
               <div key={ti} style={{border:'1px solid #e8e8e8',borderRadius:8,overflow:'hidden'}}>
                 <div style={{background:'#f8f9ff',padding:'8px 12px',display:'flex',justifyContent:'space-between',alignItems:'center',borderBottom:'1px solid #e8e8e8'}}>
                   <div>
-                    <strong style={{fontSize:13}}>{t.name}</strong>
-                    <span style={{fontSize:11,color:'#aaa',marginLeft:8}}>{t.meals.length} posiłków</span>
+                    <strong style={{fontSize:13}}>{tpl.name}</strong>
+                    <span style={{fontSize:11,color:'#aaa',marginLeft:8}}>{t('meals_count')(tpl.meals.length)}</span>
                   </div>
                   <div style={{display:'flex',gap:8,alignItems:'center'}}>
-                    <span style={{fontSize:12,color:'#666'}}>Zastosuj od poniedziałku:</span>
+                    <span style={{fontSize:12,color:'#666'}}>{t('apply_from_mon')}</span>
                     <select value={applyWeek[ti] || mondays[0]}
                       onChange={e=>setApplyWeek({...applyWeek,[ti]:e.target.value})}
                       style={{padding:'4px 8px',border:'1px solid #ddd',borderRadius:6,fontSize:12}}>
@@ -315,19 +311,18 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
                       ))}
                     </select>
                     <button className="btn btn-primary" style={{padding:'5px 12px',fontSize:12}}
-                      onClick={()=>onApply(t, applyWeek[ti] || mondays[0])}>
-                      Zastosuj
+                      onClick={()=>onApply(tpl, applyWeek[ti] || mondays[0])}>
+                      {t('apply')}
                     </button>
                     <button onClick={()=>onDelete(ti)}
                       style={{background:'none',border:'none',color:'#ff4757',cursor:'pointer',fontSize:14}}>✕</button>
                   </div>
                 </div>
-                {/* Podgląd 7-dniowy */}
                 <div style={{display:'grid',gridTemplateColumns:'repeat(7,1fr)',gap:2,padding:8}}>
                   {[0,1,2,3,4,5,6].map(di => (
                     <div key={di} style={{border:'1px solid #f0f0f0',borderRadius:4,overflow:'hidden'}}>
                       <div style={{background:'#f8f9ff',padding:'2px 4px',fontSize:9,fontWeight:600,color:'#667eea',textAlign:'center',borderBottom:'1px solid #f0f0f0'}}>
-                        {DAY_NAMES_SHORT[di]}
+                        {dayShort[di]}
                       </div>
                       {[1,2,3,4,5].map(pos => {
                         const meal = byDay[di]?.[pos];
@@ -353,10 +348,11 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
 
 // ─── Drag overlay ─────────────────────────────────────────────────────────────
 function OverlayContent({ dragData }) {
+  const { t } = useLanguage();
   if (!dragData) return null;
   const isDay = dragData.type === 'day';
   const label = isDay
-    ? `${dragData.dateStr} (${dragData.meals?.length||0} posiłków)`
+    ? `${dragData.dateStr} (${dragData.meals?.length||0} ${t('meals_count')(dragData.meals?.length||0).replace(/^\d+ /,'')})`
     : dragData.type==='recipe' ? dragData.recipe.name : dragData.meal.recipe.name;
   const bg = isDay ? 'linear-gradient(135deg,#43e97b,#38f9d7)'
     : dragData.type==='recipe' ? 'linear-gradient(135deg,#667eea,#764ba2)'
@@ -370,6 +366,7 @@ function OverlayContent({ dragData }) {
 
 // ─── Main Calendar ────────────────────────────────────────────────────────────
 export default function Calendar() {
+  const { t } = useLanguage();
   const todayMidnight = new Date(); todayMidnight.setHours(0,0,0,0);
   const todayStr = dateToStr(todayMidnight);
 
@@ -383,24 +380,22 @@ export default function Calendar() {
   const [copiedWeek,setCopiedWeek]   = useState(null);
   const [toast,setToast]             = useState(null);
   const [howToOpen,setHowToOpen]     = useState(false);
+  const [tplSlots,setTplSlots]       = useState({});
+
+  const [templates,setTemplates] = useState(()=>{
+    try { return JSON.parse(localStorage.getItem('weekTemplates')||'[]'); } catch { return []; }
+  });
 
   const showToast = (msg, color='#0066cc')=>{
     setToast({msg,color});
     setTimeout(()=>setToast(null), 3000);
   };
 
-  // Template state (shared with TemplateSection via onDrop)
-  const [tplSlots,setTplSlots] = useState({});
-
-  const [templates,setTemplates] = useState(()=>{
-    try { return JSON.parse(localStorage.getItem('weekTemplates')||'[]'); } catch { return []; }
-  });
-
   const sensors = useSensors(useSensor(PointerSensor,{activationConstraint:{distance:6}}));
   const days = getMonthGrid(year, month);
 
   useEffect(()=>{
-    recipesApi.getAll().then(r=>setRecipes(r.data)).catch(()=>setError('Błąd ładowania przepisów'));
+    recipesApi.getAll().then(r=>setRecipes(r.data)).catch(()=>setError(t('err_load_recipes')));
   },[]);
 
   const loadMonth = useCallback(async(y,m)=>{
@@ -408,7 +403,7 @@ export default function Calendar() {
     const start = dateToStr(grid[0]);
     const end   = dateToStr(grid[grid.length-1]);
     try { setMealsByDate((await api.getRange(start,end)).data); }
-    catch { setError('Błąd ładowania planu'); }
+    catch { setError(t('err_load_plan')); }
   },[]);
 
   useEffect(()=>{ loadMonth(year,month); },[year,month,loadMonth]);
@@ -418,29 +413,26 @@ export default function Calendar() {
 
   const handleDelete = async(mealId)=>{
     try { await api.deleteMeal(mealId); await loadMonth(year,month); }
-    catch { setError('Błąd usuwania posiłku'); }
+    catch { setError(t('err_del_meal')); }
   };
 
-  // Usuń wszystkie posiłki dnia
   const handleDeleteAll = async(dateStr)=>{
     const meals = mealsByDate[dateStr]||[];
     if (!meals.length) return;
-    if (!window.confirm(`Usunąć wszystkie ${meals.length} posiłki z ${dateStr}?`)) return;
+    if (!window.confirm(t('confirm_del_day')(meals.length, dateStr))) return;
     try {
       await Promise.all(meals.map(m=>api.deleteMeal(m.id)));
       await loadMonth(year,month);
-    } catch { setError('Błąd usuwania posiłków'); }
+    } catch { setError(t('err_del_meals')); }
   };
 
-  // Opcja A
-  const handleCopyDay  = (ds)=>{ setCopiedDay(ds); setError(''); showToast(`⧉ Skopiowano dzień ${toEU(ds)}`); };
+  const handleCopyDay  = (ds)=>{ setCopiedDay(ds); setError(''); showToast(t('toast_copy_day')(toEU(ds))); };
   const handlePasteDay = async(target)=>{
     if (!copiedDay) return;
     try { await api.copyRange({source_start:copiedDay,source_end:copiedDay,target_start:target}); await loadMonth(year,month); }
-    catch(e){ setError(e.response?.data?.error||'Błąd wklejania dnia'); }
+    catch(e){ setError(e.response?.data?.error||t('err_paste_day')); }
   };
 
-  // Usuń cały tydzień
   const handleDeleteWeek = async(mondayStr)=>{
     const allMeals = [];
     for (let i=0; i<7; i++) {
@@ -448,18 +440,16 @@ export default function Calendar() {
       (mealsByDate[ds]||[]).forEach(m=>allMeals.push(m));
     }
     if (!allMeals.length) return;
-    if (!window.confirm(`Usunąć wszystkie ${allMeals.length} posiłki z tego tygodnia?`)) return;
+    if (!window.confirm(t('confirm_del_week')(allMeals.length))) return;
     try {
       await Promise.all(allMeals.map(m=>api.deleteMeal(m.id)));
       await loadMonth(year, month);
-    } catch { setError('Błąd usuwania tygodnia'); }
+    } catch { setError(t('err_del_week')); }
   };
 
-  // Opcja C — kopiuj tydzień do schowka I do edytora szablonu
   const handleCopyWeek = (mon)=>{
     setCopiedWeek(mon);
     setError('');
-    // Wypełnij edytor szablonu posiłkami z tego tygodnia
     const newSlots = {};
     for (let i=0; i<7; i++) {
       const ds = addDays(mon, i);
@@ -468,15 +458,14 @@ export default function Calendar() {
       });
     }
     setTplSlots(newSlots);
-    showToast(`⧉ Tydzień skopiowany do schowka i edytora szablonu`);
+    showToast(t('toast_copy_week'));
   };
   const handlePasteWeek = async(mon)=>{
     if (!copiedWeek) return;
     try { await api.copyRange({source_start:copiedWeek,source_end:addDays(copiedWeek,6),target_start:mon}); await loadMonth(year,month); }
-    catch(e){ setError(e.response?.data?.error||'Błąd wklejania tygodnia'); }
+    catch(e){ setError(e.response?.data?.error||t('err_paste_week')); }
   };
 
-  // Opcja D: szablony
   const saveTemplate = (name, meals)=>{
     const updated = [...templates,{name,meals}];
     setTemplates(updated);
@@ -499,7 +488,6 @@ export default function Calendar() {
     await loadMonth(year,month);
   };
 
-  // Drag & Drop
   const handleDragStart = ({active})=>setActiveDrag(active.data.current);
   const handleDragCancel = ()=>setActiveDrag(null);
 
@@ -510,7 +498,6 @@ export default function Calendar() {
     const drop = over.data.current;
     if (!drop) return;
 
-    // Drop na slot szablonu
     if (drop.type==='tpl-slot') {
       if (drag.type!=='recipe') return;
       const k = `${drop.dayIndex}-${drop.position}`;
@@ -518,12 +505,11 @@ export default function Calendar() {
       return;
     }
 
-    // Opcja B: drag day → day
     if (drag.type==='day') {
       if (drop.type!=='day-target') return;
       if (drag.dateStr===drop.dateStr) return;
       try { await api.copyRange({source_start:drag.dateStr,source_end:drag.dateStr,target_start:drop.dateStr}); await loadMonth(year,month); }
-      catch(e){ setError(e.response?.data?.error||'Błąd kopiowania dnia'); }
+      catch(e){ setError(e.response?.data?.error||t('err_copy_day')); }
       return;
     }
 
@@ -535,7 +521,7 @@ export default function Calendar() {
     if (drag.type==='recipe') {
       if (slotOccupied) return;
       try { await api.addMeal({date:targetDate,position:targetPos,recipe_id:drag.recipe.id}); await loadMonth(year,month); }
-      catch { setError('Błąd dodawania posiłku'); }
+      catch { setError(t('err_add_meal')); }
     } else if (drag.type==='meal') {
       const {meal} = drag;
       const srcDate = Object.keys(mealsByDate).find(d=>(mealsByDate[d]||[]).some(m=>m.id===meal.id));
@@ -545,47 +531,48 @@ export default function Calendar() {
         await api.deleteMeal(meal.id);
         await api.addMeal({date:targetDate,position:targetPos,recipe_id:meal.recipe.id});
         await loadMonth(year,month);
-      } catch { setError('Błąd przenoszenia posiłku'); }
+      } catch { setError(t('err_move_meal')); }
     }
   };
 
   const weeks = [];
   for (let i=0; i<days.length; i+=7) weeks.push(days.slice(i,i+7));
 
+  const monthNames = t('month_names');
+  const dayShort   = t('day_short');
+
   return (
     <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd} onDragCancel={handleDragCancel}>
       {error && <div style={{background:'#ffe0e0',color:'#c00',padding:12,borderRadius:8,marginBottom:16}}>{error}</div>}
 
-      {/* Toast — wyśrodkowany na ekranie */}
       {toast && (
         <div style={{position:'fixed',top:'50%',left:'50%',transform:'translate(-50%,-50%)',
           background:toast.color,color:'white',padding:'16px 28px',borderRadius:12,
           fontSize:15,fontWeight:600,boxShadow:'0 8px 32px rgba(0,0,0,0.25)',
           zIndex:9999,pointerEvents:'none',whiteSpace:'nowrap',textAlign:'center'}}>
           {toast.msg}
-          {copiedDay && <div style={{fontSize:12,fontWeight:400,marginTop:4,opacity:0.85}}>kliknij ⎘ na innym dniu żeby wkleić</div>}
-          {copiedWeek && !copiedDay && <div style={{fontSize:12,fontWeight:400,marginTop:4,opacity:0.85}}>kliknij ⎘ przy innym tygodniu żeby wkleić</div>}
+          {copiedDay && <div style={{fontSize:12,fontWeight:400,marginTop:4,opacity:0.85}}>{t('paste_day_hint')}</div>}
+          {copiedWeek && !copiedDay && <div style={{fontSize:12,fontWeight:400,marginTop:4,opacity:0.85}}>{t('paste_week_hint')}</div>}
         </div>
       )}
 
-      {/* Pasek aktywnego schowka (dyskretny, pod kalendarzem) */}
       {(copiedDay||copiedWeek) && !toast && (
         <div style={{background:'#f0f9ff',border:'1px solid #bde0ff',borderRadius:8,padding:'6px 12px',marginBottom:10,fontSize:11,color:'#0066cc',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
           <span>
-            {copiedDay && `Schowek: dzień ${copiedDay}`}
-            {copiedWeek && `Schowek: tydzień od ${toEU(copiedWeek)}`}
+            {copiedDay && t('clipboard_day')(copiedDay)}
+            {copiedWeek && t('clipboard_week')(toEU(copiedWeek))}
           </span>
-          <button onClick={()=>{setCopiedDay(null);setCopiedWeek(null);}} style={{background:'none',border:'none',color:'#0066cc',cursor:'pointer',fontSize:12}}>✕ wyczyść</button>
+          <button onClick={()=>{setCopiedDay(null);setCopiedWeek(null);}} style={{background:'none',border:'none',color:'#0066cc',cursor:'pointer',fontSize:12}}>{t('clear_clipboard')}</button>
         </div>
       )}
 
-      {/* Jak korzystać — zwijany panel */}
+      {/* How to use — collapsible */}
       <div className="card" style={{padding:0,marginBottom:16,overflow:'hidden'}}>
         <button onClick={()=>setHowToOpen(o=>!o)}
           style={{width:'100%',padding:'12px 18px',background:'none',border:'none',cursor:'pointer',display:'flex',justifyContent:'space-between',alignItems:'center',fontSize:14,fontWeight:600,color:'#667eea'}}>
-          <span>Jak korzystać z kalendarza?</span>
+          <span>{t('how_to_title')}</span>
           <span style={{display:'flex',alignItems:'center',gap:4,fontSize:12,color:'#667eea',fontWeight:400}}>
-            {howToOpen ? 'Zwiń' : 'Rozwiń'}
+            {howToOpen ? t('collapse') : t('expand')}
             <span style={{fontSize:16,transition:'transform 0.2s',transform:howToOpen?'rotate(180deg)':'rotate(0deg)'}}>▾</span>
           </span>
         </button>
@@ -593,29 +580,29 @@ export default function Calendar() {
           <div style={{padding:'0 18px 16px',fontSize:12,lineHeight:1.8,borderTop:'1px solid #f0f0f0'}}>
             <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:20,marginTop:14}}>
               <div>
-                <div style={{fontWeight:700,color:'#667eea',marginBottom:6}}>🍽️ Planowanie posiłków</div>
+                <div style={{fontWeight:700,color:'#667eea',marginBottom:6}}>{t('ht_meals_title')}</div>
                 <ul style={{margin:0,paddingLeft:16,color:'#555'}}>
-                  <li>Chwyć przepis z karuzeli i przeciągnij na <b>slot w dniu</b> (5 slotów: śniadanie–kolacja)</li>
-                  <li>Posiłek możesz <b>przesunąć</b> między dniami chwytając go za nazwę</li>
-                  <li>Kliknij <b>✕</b> przy posiłku żeby go usunąć, lub <b>🗑</b> w nagłówku dnia żeby wyczyścić cały dzień</li>
+                  <li>{t('ht_meals_1')}</li>
+                  <li>{t('ht_meals_2')}</li>
+                  <li>{t('ht_meals_3')}</li>
                 </ul>
               </div>
               <div>
-                <div style={{fontWeight:700,color:'#667eea',marginBottom:6}}>📋 Kopiowanie dni i tygodni</div>
+                <div style={{fontWeight:700,color:'#667eea',marginBottom:6}}>{t('ht_copy_title')}</div>
                 <ul style={{margin:0,paddingLeft:16,color:'#555'}}>
-                  <li><b>⧉</b> w nagłówku dnia — kopiuje dzień do schowka</li>
-                  <li><b>⎘</b> — wkleja schowek na inny dzień</li>
-                  <li><b>⠿</b> przy numerze dnia — chwyć i przeciągnij dzień na inny dzień</li>
-                  <li><b>⧉ / ⎘ / 🗑</b> po lewej każdego wiersza — kopiuj, wklej lub usuń cały tydzień</li>
+                  <li>{t('ht_copy_1')}</li>
+                  <li>{t('ht_copy_2')}</li>
+                  <li>{t('ht_copy_3')}</li>
+                  <li>{t('ht_copy_4')}</li>
                 </ul>
               </div>
               <div>
-                <div style={{fontWeight:700,color:'#667eea',marginBottom:6}}>📁 Szablony tygodnia</div>
+                <div style={{fontWeight:700,color:'#667eea',marginBottom:6}}>{t('ht_tpl_title')}</div>
                 <ul style={{margin:0,paddingLeft:16,color:'#555'}}>
-                  <li>Kliknij <b>⧉</b> przy tygodniu — załaduje posiłki do edytora szablonu poniżej</li>
-                  <li>W edytorze przeciągaj przepisy z karuzeli na dni tygodnia</li>
-                  <li>Wpisz nazwę i kliknij <b>Zapisz szablon</b></li>
-                  <li>Szablon możesz zastosować na dowolny przyszły tydzień</li>
+                  <li>{t('ht_tpl_1')}</li>
+                  <li>{t('ht_tpl_2')}</li>
+                  <li>{t('ht_tpl_3')}</li>
+                  <li>{t('ht_tpl_4')}</li>
                 </ul>
               </div>
             </div>
@@ -623,17 +610,17 @@ export default function Calendar() {
         )}
       </div>
 
-      {/* Kalendarz */}
+      {/* Calendar */}
       <div className="card" style={{padding:16,marginBottom:16}}>
         <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:12}}>
           <button className="btn btn-primary" onClick={prevMonth} style={{padding:'5px 14px'}}>‹</button>
-          <h2 style={{margin:0,fontSize:17}}>{MONTH_NAMES[month]} {year}</h2>
+          <h2 style={{margin:0,fontSize:17}}>{monthNames[month]} {year}</h2>
           <button className="btn btn-primary" onClick={nextMonth} style={{padding:'5px 14px'}}>›</button>
         </div>
 
         <div style={{display:'grid',gridTemplateColumns:'44px repeat(7,1fr)',gap:3,marginBottom:3}}>
           <div/>
-          {DAY_NAMES_SHORT.map(d=>(
+          {dayShort.map(d=>(
             <div key={d} style={{textAlign:'center',fontSize:11,fontWeight:600,color:'#667eea',padding:'3px 0'}}>{d}</div>
           ))}
         </div>
@@ -645,13 +632,13 @@ export default function Calendar() {
           return (
             <div key={wi} style={{display:'grid',gridTemplateColumns:'44px repeat(7,1fr)',gap:3,marginBottom:3}}>
               <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:3}}>
-                <button onClick={()=>handleCopyWeek(mondayStr)} title="Kopiuj tydzień / załaduj do szablonu"
+                <button onClick={()=>handleCopyWeek(mondayStr)} title={t('copy_week_title')}
                   style={{...btnBase,background:isCopied?'#667eea':'#f0f2ff',border:'1px solid #c0caff',color:isCopied?'white':'#667eea'}}>⧉</button>
                 {copiedWeek && copiedWeek!==mondayStr && (
-                  <button onClick={()=>handlePasteWeek(mondayStr)} title="Wklej tydzień"
+                  <button onClick={()=>handlePasteWeek(mondayStr)} title={t('paste_week_title')}
                     style={{...btnBase,background:'#e8f4ff',border:'1px solid #90caff',color:'#0066cc'}}>⎘</button>
                 )}
-                <button onClick={()=>handleDeleteWeek(mondayStr)} title="Usuń cały tydzień"
+                <button onClick={()=>handleDeleteWeek(mondayStr)} title={t('del_week_title')}
                   style={{...btnBase,background:'none',border:'1px solid #ffc0cb',color:'#ff6b81'}}>🗑</button>
               </div>
               {weekDays.map(date=>{
@@ -670,21 +657,20 @@ export default function Calendar() {
         })}
       </div>
 
-      {/* Karuzela przepisów */}
+      {/* Recipe carousel */}
       <div className="card" style={{padding:'14px 16px',marginBottom:16}}>
         <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:12}}>
-          <h2 style={{margin:0,fontSize:15}}>Przepisy</h2>
-          <span style={{fontSize:11,color:'#aaa'}}>Przeciągnij na dzień w kalendarzu lub na szablon poniżej</span>
+          <h2 style={{margin:0,fontSize:15}}>{t('carousel_title')}</h2>
+          <span style={{fontSize:11,color:'#aaa'}}>{t('drag_to_cal')}</span>
         </div>
         {recipes.length===0
-          ? <p style={{fontSize:13,color:'#bbb',margin:0}}>Brak przepisów</p>
+          ? <p style={{fontSize:13,color:'#bbb',margin:0}}>{t('no_recipes_cal')}</p>
           : <div style={{display:'flex',gap:10,overflowX:'auto',paddingBottom:6,scrollbarWidth:'thin',scrollbarColor:'#ddd transparent'}}>
               {recipes.map(r=><DraggableRecipe key={r.id} recipe={r}/>)}
             </div>
         }
       </div>
 
-      {/* Szablony tygodnia */}
       <TemplateSection
         templates={templates}
         tplSlots={tplSlots}
