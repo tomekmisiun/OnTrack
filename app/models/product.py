@@ -9,6 +9,10 @@ class Product(db.Model):
     package_weight = db.Column(db.Float, nullable=False)
     price = db.Column(db.Float, nullable=False)
     unit = db.Column(db.String(10), nullable=False, default='g')
+    kcal = db.Column(db.Float, nullable=True)
+    protein = db.Column(db.Float, nullable=True)
+    fat = db.Column(db.Float, nullable=True)
+    carbs = db.Column(db.Float, nullable=True)
 
     def to_dict(self):
         return {
@@ -17,4 +21,8 @@ class Product(db.Model):
             'package_weight': self.package_weight,
             'price': self.price,
             'unit': self.unit,
+            'kcal': self.kcal,
+            'protein': self.protein,
+            'fat': self.fat,
+            'carbs': self.carbs,
         }

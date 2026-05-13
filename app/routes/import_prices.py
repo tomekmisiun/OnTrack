@@ -182,7 +182,11 @@ def parse_receipt():
 
         suggested = None
         if match and qty and price:
-            suggested = round((price / qty) * match.package_weight, 2)
+            unit = match.unit or 'g'
+            if unit == 'szt':
+                suggested = round(price / qty, 2)      # zł/szt
+            else:
+                suggested = round((price / qty) * 100, 2)  # zł/100g lub zł/100ml
         elif match and price and not qty:
             suggested = round(price, 2)
 

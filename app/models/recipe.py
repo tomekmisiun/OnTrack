@@ -11,16 +11,20 @@ class RecipeIngredient(db.Model):
     product = db.relationship('Product')
 
     def to_dict(self):
-        pkg = self.product.package_weight or 1
-        price = self.product.price or 0
+        price = self.product.price or 0  # per 100g / per 100ml / per szt
+        unit = self.product.unit or 'g'
+        if unit == 'szt':
+            cost = round(self.weight * price, 2)
+        else:
+            cost = round((self.weight / 100) * price, 2)
         return {
             'id': self.id,
             'product_id': self.product_id,
             'product_name': self.product.name,
-            'package_weight': pkg,
-            'price_per_gram': price / pkg,
+            'package_weight': self.product.package_weight,
+            'unit': unit,
             'weight': self.weight,
-            'cost': round((self.weight / pkg) * price, 2),
+            'cost': cost,
         }
 
 class Recipe(db.Model):

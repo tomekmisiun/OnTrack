@@ -2,6 +2,44 @@ from app import db
 from app.models.product import Product
 from app.models.recipe import Recipe, RecipeIngredient
 
+MACROS = {
+    "Mleko": (42,3.4,1.0,4.7), "Jogurt naturalny": (61,5.0,3.1,3.5),
+    "Twaróg": (98,12.0,4.5,2.7), "Ser żółty": (380,25.0,31.0,0.5),
+    "Masło": (748,0.5,82.0,0.5), "Śmietana 18%": (183,2.6,18.0,3.0),
+    "Śmietanka 30%": (297,2.1,30.0,3.2), "Kefir": (52,3.5,2.0,4.5),
+    "Skyr": (63,11.0,0.2,4.0), "Jajka": (155,13.0,11.0,0.7),
+    "Płatki owsiane": (368,13.0,7.0,59.0), "Ryż": (360,7.0,1.0,78.0),
+    "Makaron": (350,12.0,1.5,72.0), "Kasza gryczana": (343,13.0,3.0,65.0),
+    "Kasza jaglana": (378,11.0,4.0,72.0), "Kasza bulgur": (342,12.0,1.0,72.0),
+    "Quinoa": (368,14.0,6.0,64.0), "Mąka pszenna": (339,10.0,1.0,70.0),
+    "Chleb": (265,9.0,3.0,49.0), "Pierś z kurczaka": (110,23.0,1.5,0.0),
+    "Udka z kurczaka": (215,18.0,15.0,0.0), "Mięso mielone wieprzowe": (260,17.0,21.0,0.0),
+    "Wołowina mielona": (250,17.0,20.0,0.0), "Łosoś": (208,20.0,13.0,0.0),
+    "Tuńczyk w puszce": (116,26.0,1.0,0.0), "Szynka": (145,20.0,7.0,1.0),
+    "Pomidory": (18,0.9,0.2,3.5), "Ogórek": (15,0.7,0.1,2.5),
+    "Papryka czerwona": (31,1.0,0.3,6.0), "Cebula": (40,1.1,0.1,8.0),
+    "Czosnek": (149,6.0,0.5,30.0), "Marchew": (41,0.9,0.2,8.0),
+    "Ziemniaki": (77,2.0,0.1,17.0), "Brokuły": (34,2.8,0.4,5.0),
+    "Szpinak": (23,2.9,0.4,1.4), "Sałata": (15,1.4,0.2,1.8),
+    "Kapusta biała": (25,1.3,0.1,4.7), "Cukinia": (17,1.2,0.1,2.5),
+    "Banan": (89,1.1,0.3,23.0), "Jabłko": (52,0.3,0.2,14.0),
+    "Cytryna": (29,1.1,0.3,6.0), "Oliwa z oliwek": (884,0.0,100.0,0.0),
+    "Olej rzepakowy": (884,0.0,100.0,0.0), "Masło orzechowe": (588,25.0,50.0,20.0),
+    "Cukier": (400,0.0,0.0,100.0), "Miód": (304,0.3,0.0,82.0),
+    "Passata pomidorowa": (32,1.5,0.2,6.0), "Koncentrat pomidorowy": (90,4.5,0.5,17.0),
+    "Sos sojowy": (60,8.0,0.0,6.0), "Ocet jabłkowy": (21,0.0,0.0,0.9),
+    "Musztarda": (66,4.0,3.5,5.0), "Majonez": (680,1.5,75.0,2.0),
+    "Bulion warzywny": (10,0.5,0.1,2.0), "Sól": (0,0.0,0.0,0.0),
+    "Pieprz czarny": (251,10.0,3.0,63.0), "Papryka słodka": (282,14.0,13.0,54.0),
+    "Papryka ostra": (314,12.0,17.0,57.0), "Curry": (325,14.0,14.0,55.0),
+    "Cynamon": (261,4.0,1.2,68.0), "Oregano": (265,11.0,4.0,64.0),
+    "Bazylia": (251,23.0,4.0,48.0), "Tymianek": (101,6.0,1.7,14.0),
+    "Rozmaryn": (131,3.3,5.9,20.0), "Kurkuma": (354,8.0,10.0,65.0),
+    "Imbir mielony": (335,9.0,4.0,71.0), "Kminek": (375,18.0,22.0,44.0),
+    "Chili płatki": (282,14.0,13.0,54.0), "Zioła prowansalskie": (259,12.0,6.0,55.0),
+    "Gałka muszkatołowa": (525,6.0,36.0,49.0),
+}
+
 DEFAULT_PRODUCTS = [
     # Nabiał
     ("Mleko",              1000, "ml"), ("Jogurt naturalny",   400, "g"),
@@ -100,7 +138,9 @@ def seed_user(user_id):
     # Dodaj produkty
     name_to_product = {}
     for name, weight, unit in DEFAULT_PRODUCTS:
-        product = Product(user_id=user_id, name=name, package_weight=weight, price=0.0, unit=unit)
+        m = MACROS.get(name, (None, None, None, None))
+        product = Product(user_id=user_id, name=name, package_weight=weight, price=0.0, unit=unit,
+                          kcal=m[0], protein=m[1], fat=m[2], carbs=m[3])
         db.session.add(product)
         db.session.flush()  # pobierz ID przed commitem
         # Zapamiętaj pierwszy produkt o danej nazwie (do przepisów)

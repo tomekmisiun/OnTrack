@@ -123,26 +123,40 @@ def get_summary(start, end):
         for ingredient in meal.recipe.ingredients:
             pid = ingredient.product_id
             if pid not in products:
+                prod = ingredient.product
                 products[pid] = {
-                    'name': ingredient.product.name,
-                    'package_weight': ingredient.product.package_weight,
-                    'price': ingredient.product.price,
+                    'name': prod.name,
+                    'package_weight': prod.package_weight,
+                    'unit': prod.unit or 'g',
+                    'price': prod.price or 0,  # per 100g/100ml/szt
                     'total_weight': 0,
                 }
             products[pid]['total_weight'] += ingredient.weight
     result, total_cost = [], 0
     for pid, p in products.items():
-        packages_exact = p['total_weight'] / p['package_weight']
+        pkg = p['package_weight']
+        unit = p['unit']
+        total = p['total_weight']
+        price_per_unit = p['price']
+
+        # cena jednego opakowania
+        if unit == 'szt':
+            package_price = price_per_unit * pkg
+        else:
+            package_price = price_per_unit * pkg / 100
+
+        packages_exact = total / pkg
         packages_rounded = math.ceil(packages_exact)
-        cost = packages_rounded * p['price']
+        cost = packages_rounded * package_price
         total_cost += cost
         result.append({
             'product_name': p['name'],
-            'total_weight': round(p['total_weight'], 2),
-            'package_weight': p['package_weight'],
+            'total_weight': round(total, 2),
+            'unit': unit,
+            'package_weight': pkg,
             'packages_exact': round(packages_exact, 2),
             'packages_rounded': packages_rounded,
-            'price_per_package': p['price'],
+            'price_per_package': round(package_price, 2),
             'total_cost': round(cost, 2),
         })
     return jsonify({'items': sorted(result, key=lambda x: x['product_name']), 'total_cost': round(total_cost, 2)})
