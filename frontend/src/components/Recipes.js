@@ -41,9 +41,10 @@ function parseWeight(text) {
   const pieceM = PIECE_WORDS.exec(text);
   if (pieceM) {
     const beforePiece = text.slice(0, pieceM.index);
-    const numM = /(\d+)\s*(?:\w+\s+){0,3}$/.exec(beforePiece);
+    const numM = /(\d+)/.exec(beforePiece);
     const count = numM ? parseInt(numM[1]) : 1;
-    return { weight: count, unit: 'szt', matchIndex: numM ? numM.index : pieceM.index };
+    // forcedName: użyj samego słowa "jajko" zamiast wszystkiego przed nim
+    return { weight: count, unit: 'szt', matchIndex: pieceM.index, forcedName: pieceM[0].toLowerCase() };
   }
 
   return null;
@@ -67,7 +68,7 @@ function parseRecipeText(text) {
     const content = line.replace(/^[-•*]\s*/, '').trim();
     const parsed = parseWeight(content);
     if (!parsed) continue; // linia bez ilości = nagłówek sekcji, pomijamy
-    const ingName = extractIngredientName(content, parsed.matchIndex);
+    const ingName = parsed.forcedName || extractIngredientName(content, parsed.matchIndex);
     if (!ingName) continue;
     ingredients.push({ rawName: ingName, weight: parsed.weight, unit: parsed.unit, product_id: null });
   }
@@ -77,9 +78,12 @@ function parseRecipeText(text) {
 function matchProducts(ingredients, products) {
   return ingredients.map(ing => {
     const lower = ing.rawName.toLowerCase();
-    const match = products.find(p =>
-      lower.includes(p.name.toLowerCase()) || p.name.toLowerCase().includes(lower.split(' ')[0])
-    );
+    const firstWord = lower.split(' ')[0];
+    const validFirstWord = firstWord.length >= 3 && !/^\d/.test(firstWord);
+    const match = products.find(p => {
+      const pName = p.name.toLowerCase();
+      return lower.includes(pName) || (validFirstWord && pName.includes(firstWord));
+    });
     return { ...ing, product_id: match ? match.id : null };
   });
 }
