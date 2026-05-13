@@ -3,6 +3,8 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from app import db
 from app.models.recipe import Recipe, RecipeIngredient
 from app.models.product import Product
+from app.models.recipe_parse_log import RecipeParseLog
+import anthropic, json, re, os
 
 recipes_bp = Blueprint('recipes', __name__)
 
@@ -78,3 +80,94 @@ def delete_recipe(id):
     db.session.delete(recipe)
     db.session.commit()
     return jsonify({'message': 'Przepis usunięty'}), 200
+
+
+PARSE_DAILY_LIMIT = 2
+
+@recipes_bp.route('/parse-text', methods=['POST'])
+@jwt_required()
+def parse_recipe_text():
+    uid = current_uid()
+
+    today_count = RecipeParseLog.get_today_count(uid)
+    if today_count >= PARSE_DAILY_LIMIT:
+        return jsonify({'error': f'Dzienny limit {PARSE_DAILY_LIMIT} parsowań przepisów wyczerpany. Spróbuj jutro.'}), 429
+
+    data = request.get_json() or {}
+    recipe_text = (data.get('text') or '').strip()
+    if not recipe_text:
+        return jsonify({'error': 'Brak tekstu przepisu'}), 400
+
+    api_key = os.environ.get('ANTHROPIC_API_KEY')
+    if not api_key:
+        return jsonify({'error': 'Brak klucza ANTHROPIC_API_KEY'}), 500
+
+    products = Product.query.filter_by(user_id=uid).order_by(Product.name).all()
+    product_lines = '\n'.join(f"{p.id} | {p.name} | {p.unit}" for p in products)
+
+    prompt = f"""Parse this Polish recipe. Match each ingredient to the closest product from the list.
+
+Recipe text:
+{recipe_text}
+
+Available products (ID | Name | Unit):
+{product_lines}
+
+Return ONLY valid JSON (no markdown, no explanation):
+{{
+  "recipe_name": "recipe name from first line",
+  "ingredients": [
+    {{"ingredient_text": "original phrase", "product_id": 123, "weight": 50, "unit": "g"}},
+    ...
+  ]
+}}
+
+Rules:
+- ingredient_text: the original ingredient phrase from the recipe
+- product_id: best matching product ID, or null if no match
+- weight: numeric amount converted to product unit (g/ml/szt). Polish units: łyżeczka=5g, łyżka=15g, szklanka=250, szczypta=1g, pęczek=50g, pół=0.5x
+- unit: match the product's unit
+- Handle Polish grammar: mąki→mąka, masła→masło, cukru→cukier, soli→sól, wołowego→wołowina etc.
+- "X i warzyw z Y" means just X is the ingredient — ignore context after "i"
+- Lines like "przyprawy: sól, pieprz" → parse each as separate ingredient
+- If ingredient quantity is unclear, estimate a reasonable amount"""
+
+    try:
+        client = anthropic.Anthropic(api_key=api_key)
+        msg = client.messages.create(
+            model='claude-haiku-4-5-20251001',
+            max_tokens=2048,
+            messages=[{'role': 'user', 'content': prompt}],
+        )
+    except anthropic.APIError as e:
+        return jsonify({'error': f'Błąd Claude API: {str(e)}'}), 502
+
+    raw = msg.content[0].text
+    match = re.search(r'\{.*\}', raw, re.DOTALL)
+    if not match:
+        return jsonify({'error': 'AI nie zwróciło poprawnego JSON'}), 500
+
+    try:
+        result = json.loads(match.group())
+        ingredients = []
+        for ing in result.get('ingredients', []):
+            if not isinstance(ing, dict):
+                continue
+            pid = ing.get('product_id')
+            w = ing.get('weight', 0)
+            ingredients.append({
+                'ingredient_text': str(ing.get('ingredient_text', ''))[:200],
+                'product_id': int(pid) if pid is not None and str(pid).isdigit() else (int(pid) if isinstance(pid, (int, float)) and pid else None),
+                'weight': round(float(w), 1) if w else 0,
+                'unit': str(ing.get('unit', 'g'))[:5],
+            })
+    except (json.JSONDecodeError, ValueError, TypeError) as e:
+        return jsonify({'error': 'Błąd przetwarzania odpowiedzi AI'}), 500
+
+    RecipeParseLog.increment(uid)
+
+    return jsonify({
+        'recipe_name': str(result.get('recipe_name', ''))[:200],
+        'ingredients': ingredients,
+        'remaining_today': PARSE_DAILY_LIMIT - today_count - 1,
+    })
