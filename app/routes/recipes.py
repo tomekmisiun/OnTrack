@@ -38,7 +38,7 @@ def create_recipe():
     if Recipe.query.filter_by(name=data['name'], user_id=uid).first():
         return jsonify({'error': 'Przepis o tej nazwie już istnieje'}), 409
 
-    recipe = Recipe(name=data['name'], user_id=uid)
+    recipe = Recipe(name=data['name'], user_id=uid, notes=data.get('notes'))
     db.session.add(recipe)
     db.session.flush()
 
@@ -62,6 +62,8 @@ def update_recipe(id):
     data = request.get_json()
     if 'name' in data:
         recipe.name = data['name']
+    if 'notes' in data:
+        recipe.notes = data['notes'] or None
     if 'ingredients' in data:
         RecipeIngredient.query.filter_by(recipe_id=id).delete()
         for ingredient in data['ingredients']:
@@ -71,6 +73,16 @@ def update_recipe(id):
             db.session.add(RecipeIngredient(recipe_id=id, product_id=ingredient['product_id'], weight=ingredient['weight']))
     db.session.commit()
     return jsonify(recipe.to_dict())
+
+
+@recipes_bp.route('/<int:id>/notes', methods=['PATCH'])
+@jwt_required()
+def update_notes(id):
+    recipe = Recipe.query.filter_by(id=id, user_id=current_uid()).first_or_404()
+    data = request.get_json() or {}
+    recipe.notes = data.get('notes') or None
+    db.session.commit()
+    return jsonify({'notes': recipe.notes})
 
 
 @recipes_bp.route('/<int:id>', methods=['DELETE'])

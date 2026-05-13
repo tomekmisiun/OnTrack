@@ -35,6 +35,7 @@ export const recipes = {
   get: (id) => API.get(`/api/recipes/${id}`),
   create: (data) => API.post('/api/recipes/', data),
   update: (id, data) => API.put(`/api/recipes/${id}`, data),
+  updateNotes: (id, notes) => API.patch(`/api/recipes/${id}/notes`, { notes }),
   delete: (id) => API.delete(`/api/recipes/${id}`),
 };
 

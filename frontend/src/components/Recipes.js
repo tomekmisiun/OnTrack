@@ -143,6 +143,7 @@ export default function Recipes() {
   const [parsed, setParsed] = useState(null);
   const [parsing, setParsing] = useState(false);
   const [remaining, setRemaining] = useState(null);
+  const [editingNotes, setEditingNotes] = useState(null); // { id, text }
 
   useEffect(() => { loadRecipes(); loadProducts(); }, []);
 
@@ -183,9 +184,21 @@ export default function Recipes() {
     const valid = parsed.ingredients.filter(i => i.product_id && i.weight > 0);
     if (!valid.length) { setError('Żaden składnik nie ma dopasowanego produktu'); return; }
     try {
-      await api.create({ name: parsed.name, ingredients: valid.map(i => ({ product_id: parseInt(i.product_id), weight: i.weight })) });
+      await api.create({
+        name: parsed.name,
+        notes: parsed.sourceText || null,
+        ingredients: valid.map(i => ({ product_id: parseInt(i.product_id), weight: i.weight })),
+      });
       setParsed(null); setPasteText(''); setError(''); loadRecipes();
     } catch (e) { setError(e.response?.data?.error || 'Błąd zapisywania przepisu'); }
+  };
+
+  const handleSaveNotes = async (id) => {
+    try {
+      await api.updateNotes(id, editingNotes.text);
+      setEditingNotes(null);
+      loadRecipes();
+    } catch { setError('Błąd zapisywania notatki'); }
   };
 
   return (
@@ -315,14 +328,49 @@ banan 120 g
               </div>
             </div>
             {expanded === r.id && (
-              <table style={{ marginTop: 12 }}>
-                <thead><tr><th>Produkt</th><th>Gramatura</th><th>Koszt</th></tr></thead>
-                <tbody>
-                  {r.ingredients.map(ing => (
-                    <tr key={ing.id}><td>{ing.product_name}</td><td>{ing.weight} {ing.unit || 'g'}</td><td>{ing.cost.toFixed(2)} zł</td></tr>
-                  ))}
-                </tbody>
-              </table>
+              <div style={{ marginTop: 12 }}>
+                <table style={{ marginBottom: r.notes || editingNotes?.id === r.id ? 16 : 0 }}>
+                  <thead><tr><th>Produkt</th><th>Gramatura</th><th>Koszt</th></tr></thead>
+                  <tbody>
+                    {r.ingredients.map(ing => (
+                      <tr key={ing.id}><td>{ing.product_name}</td><td>{ing.weight} {ing.unit || 'g'}</td><td>{ing.cost.toFixed(2)} zł</td></tr>
+                    ))}
+                  </tbody>
+                </table>
+
+                {/* Sekcja Info */}
+                <div style={{ background: '#f8f9ff', border: '1px solid #e0e4ff', borderRadius: 8, padding: '12px 14px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                    <span style={{ fontSize: 12, fontWeight: 700, color: '#667eea' }}>ℹ️ Info</span>
+                    {editingNotes?.id !== r.id && (
+                      <button onClick={() => setEditingNotes({ id: r.id, text: r.notes || '' })}
+                        style={{ background: 'none', border: 'none', color: '#667eea', cursor: 'pointer', fontSize: 12, fontWeight: 600 }}>
+                        Edytuj
+                      </button>
+                    )}
+                  </div>
+
+                  {editingNotes?.id === r.id ? (
+                    <div>
+                      <textarea
+                        value={editingNotes.text}
+                        onChange={e => setEditingNotes({ ...editingNotes, text: e.target.value })}
+                        style={{ width: '100%', minHeight: 160, padding: 10, border: '1px solid #c0caff', borderRadius: 6, fontFamily: 'inherit', fontSize: 12, lineHeight: 1.7, resize: 'vertical', outline: 'none', boxSizing: 'border-box', marginBottom: 8 }}
+                      />
+                      <div style={{ display: 'flex', gap: 8 }}>
+                        <button className="btn btn-primary" style={{ padding: '5px 14px', fontSize: 12 }} onClick={() => handleSaveNotes(r.id)}>Zapisz</button>
+                        <button className="btn" style={{ padding: '5px 14px', fontSize: 12, background: '#eee', color: '#555' }} onClick={() => setEditingNotes(null)}>Anuluj</button>
+                      </div>
+                    </div>
+                  ) : r.notes ? (
+                    <pre style={{ margin: 0, fontSize: 12, color: '#444', lineHeight: 1.8, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+                      {r.notes}
+                    </pre>
+                  ) : (
+                    <p style={{ margin: 0, fontSize: 12, color: '#aaa', fontStyle: 'italic' }}>Brak notatek — kliknij Edytuj żeby dodać.</p>
+                  )}
+                </div>
+              </div>
             )}
           </div>
         ))}
