@@ -4,3 +4,7 @@ flask-migrate
 psycopg2-binary
 flask-cors
 prometheus-flask-exporter
+anthropic
+flask-jwt-extended
+authlib
+requests
