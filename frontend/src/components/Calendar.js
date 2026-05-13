@@ -368,6 +368,12 @@ export default function Calendar() {
   const [error,setError]             = useState('');
   const [copiedDay,setCopiedDay]     = useState(null);
   const [copiedWeek,setCopiedWeek]   = useState(null);
+  const [toast,setToast]             = useState(null); // { msg, color }
+
+  const showToast = (msg, color='#0066cc')=>{
+    setToast({msg,color});
+    setTimeout(()=>setToast(null), 3000);
+  };
 
   // Template state (shared with TemplateSection via onDrop)
   const [tplSlots,setTplSlots] = useState({});
@@ -413,7 +419,7 @@ export default function Calendar() {
   };
 
   // Opcja A
-  const handleCopyDay  = (ds)=>{ setCopiedDay(ds); setError(''); };
+  const handleCopyDay  = (ds)=>{ setCopiedDay(ds); setError(''); showToast(`⧉ Skopiowano dzień ${toEU(ds)}`); };
   const handlePasteDay = async(target)=>{
     if (!copiedDay) return;
     try { await api.copyRange({source_start:copiedDay,source_end:copiedDay,target_start:target}); await loadMonth(year,month); }
@@ -435,8 +441,21 @@ export default function Calendar() {
     } catch { setError('Błąd usuwania tygodnia'); }
   };
 
-  // Opcja C
-  const handleCopyWeek  = (mon)=>{ setCopiedWeek(mon); setError(''); };
+  // Opcja C — kopiuj tydzień do schowka I do edytora szablonu
+  const handleCopyWeek = (mon)=>{
+    setCopiedWeek(mon);
+    setError('');
+    // Wypełnij edytor szablonu posiłkami z tego tygodnia
+    const newSlots = {};
+    for (let i=0; i<7; i++) {
+      const ds = addDays(mon, i);
+      (mealsByDate[ds]||[]).forEach(m=>{
+        newSlots[`${i}-${m.position}`] = {id:m.recipe.id, name:m.recipe.name};
+      });
+    }
+    setTplSlots(newSlots);
+    showToast(`⧉ Tydzień skopiowany do schowka i edytora szablonu`);
+  };
   const handlePasteWeek = async(mon)=>{
     if (!copiedWeek) return;
     try { await api.copyRange({source_start:copiedWeek,source_end:addDays(copiedWeek,6),target_start:mon}); await loadMonth(year,month); }
@@ -523,13 +542,26 @@ export default function Calendar() {
     <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd} onDragCancel={handleDragCancel}>
       {error && <div style={{background:'#ffe0e0',color:'#c00',padding:12,borderRadius:8,marginBottom:16}}>{error}</div>}
 
-      {(copiedDay||copiedWeek) && (
-        <div style={{background:'#f0f9ff',border:'1px solid #bde0ff',borderRadius:8,padding:'8px 14px',marginBottom:12,fontSize:12,color:'#0066cc',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+      {/* Toast — wyśrodkowany na ekranie */}
+      {toast && (
+        <div style={{position:'fixed',top:'50%',left:'50%',transform:'translate(-50%,-50%)',
+          background:toast.color,color:'white',padding:'16px 28px',borderRadius:12,
+          fontSize:15,fontWeight:600,boxShadow:'0 8px 32px rgba(0,0,0,0.25)',
+          zIndex:9999,pointerEvents:'none',whiteSpace:'nowrap',textAlign:'center'}}>
+          {toast.msg}
+          {copiedDay && <div style={{fontSize:12,fontWeight:400,marginTop:4,opacity:0.85}}>kliknij ⎘ na innym dniu żeby wkleić</div>}
+          {copiedWeek && !copiedDay && <div style={{fontSize:12,fontWeight:400,marginTop:4,opacity:0.85}}>kliknij ⎘ przy innym tygodniu żeby wkleić</div>}
+        </div>
+      )}
+
+      {/* Pasek aktywnego schowka (dyskretny, pod kalendarzem) */}
+      {(copiedDay||copiedWeek) && !toast && (
+        <div style={{background:'#f0f9ff',border:'1px solid #bde0ff',borderRadius:8,padding:'6px 12px',marginBottom:10,fontSize:11,color:'#0066cc',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
           <span>
-            {copiedDay && `⧉ Skopiowano dzień ${copiedDay} — kliknij ⎘ na innym dniu`}
-            {copiedWeek && `⧉ Skopiowano tydzień od ${copiedWeek} — kliknij ⎘ przy innym tygodniu`}
+            {copiedDay && `Schowek: dzień ${copiedDay}`}
+            {copiedWeek && `Schowek: tydzień od ${toEU(copiedWeek)}`}
           </span>
-          <button onClick={()=>{setCopiedDay(null);setCopiedWeek(null);}} style={{background:'none',border:'none',color:'#0066cc',cursor:'pointer',fontSize:13}}>✕</button>
+          <button onClick={()=>{setCopiedDay(null);setCopiedWeek(null);}} style={{background:'none',border:'none',color:'#0066cc',cursor:'pointer',fontSize:12}}>✕ wyczyść</button>
         </div>
       )}
 
@@ -541,7 +573,7 @@ export default function Calendar() {
           <button className="btn btn-primary" onClick={nextMonth} style={{padding:'5px 14px'}}>›</button>
         </div>
 
-        <div style={{display:'grid',gridTemplateColumns:'28px repeat(7,1fr)',gap:3,marginBottom:3}}>
+        <div style={{display:'grid',gridTemplateColumns:'44px repeat(7,1fr)',gap:3,marginBottom:3}}>
           <div/>
           {DAY_NAMES_SHORT.map(d=>(
             <div key={d} style={{textAlign:'center',fontSize:11,fontWeight:600,color:'#667eea',padding:'3px 0'}}>{d}</div>
@@ -551,17 +583,18 @@ export default function Calendar() {
         {weeks.map((weekDays,wi)=>{
           const mondayStr = dateToStr(weekDays[0]);
           const isCopied  = copiedWeek===mondayStr;
+          const btnBase   = {borderRadius:5,cursor:'pointer',lineHeight:1.3,padding:'5px 0',width:38,fontSize:16,display:'block',textAlign:'center'};
           return (
-            <div key={wi} style={{display:'grid',gridTemplateColumns:'28px repeat(7,1fr)',gap:3,marginBottom:3}}>
-              <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:2}}>
-                <button onClick={()=>handleCopyWeek(mondayStr)} title="Kopiuj tydzień"
-                  style={{background:isCopied?'#667eea':'#f0f2ff',border:'1px solid #c0caff',color:isCopied?'white':'#667eea',borderRadius:4,padding:'2px 4px',fontSize:9,cursor:'pointer',lineHeight:1.2}}>⧉</button>
+            <div key={wi} style={{display:'grid',gridTemplateColumns:'44px repeat(7,1fr)',gap:3,marginBottom:3}}>
+              <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:3}}>
+                <button onClick={()=>handleCopyWeek(mondayStr)} title="Kopiuj tydzień / załaduj do szablonu"
+                  style={{...btnBase,background:isCopied?'#667eea':'#f0f2ff',border:'1px solid #c0caff',color:isCopied?'white':'#667eea'}}>⧉</button>
                 {copiedWeek && copiedWeek!==mondayStr && (
                   <button onClick={()=>handlePasteWeek(mondayStr)} title="Wklej tydzień"
-                    style={{background:'#e8f4ff',border:'1px solid #90caff',color:'#0066cc',borderRadius:4,padding:'2px 4px',fontSize:9,cursor:'pointer',lineHeight:1.2}}>⎘</button>
+                    style={{...btnBase,background:'#e8f4ff',border:'1px solid #90caff',color:'#0066cc'}}>⎘</button>
                 )}
                 <button onClick={()=>handleDeleteWeek(mondayStr)} title="Usuń cały tydzień"
-                  style={{background:'none',border:'1px solid #ffc0cb',color:'#ff6b81',borderRadius:4,padding:'2px 4px',fontSize:9,cursor:'pointer',lineHeight:1.2}}>🗑</button>
+                  style={{...btnBase,background:'none',border:'1px solid #ffc0cb',color:'#ff6b81'}}>🗑</button>
               </div>
               {weekDays.map(date=>{
                 const ds = dateToStr(date);
