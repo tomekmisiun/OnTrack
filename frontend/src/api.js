@@ -58,5 +58,10 @@ export const importPrices = {
     fd.append('file', file);
     return API.post('/api/import/parse', fd, { headers: { 'Content-Type': 'multipart/form-data' } });
   },
+  parseFree: (file) => {
+    const fd = new FormData();
+    fd.append('file', file);
+    return API.post('/api/import/parse-free', fd, { headers: { 'Content-Type': 'multipart/form-data' } });
+  },
   apply: (updates) => API.post('/api/import/apply', { updates }),
 };

@@ -48,7 +48,11 @@ export default function Products() {
   const [remainingImports, setRemainingImports] = useState(null);
   const [applyingMacro, setApplyingMacro] = useState(false);
   const [dragOver, setDragOver] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
   const fileInputRef = useRef();
+
+  const isImageFile = (file) => file && /\.(jpe?g|png|webp)$/i.test(file.name);
+  const isTextFile  = (file) => file && /\.(txt|csv)$/i.test(file.name);
 
   useEffect(() => { loadProducts(); }, []);
 
@@ -168,15 +172,29 @@ export default function Products() {
     return null;
   };
 
-  const handleFileUpload = async (file) => {
+  const handleFileSelect = (file) => {
     if (!file) return;
+    setSelectedFile(file);
+    setError('');
+  };
+
+  const handleParseAI = async () => {
+    if (!selectedFile) return;
     setImporting(true); setError(''); setImportSuccess('');
     try {
-      const res = await importPrices.parse(file);
+      const res = await importPrices.parse(selectedFile);
       setRemainingImports(res.data.remaining_today);
-      setImportItems(res.data.items.map(item => ({
-        ...item, selected: !!item.matched_product, price: item.suggested_price ?? '',
-      })));
+      setImportItems(res.data.items.map(item => ({ ...item, selected: !!item.matched_product, price: item.suggested_price ?? '' })));
+    } catch (e) { setError(e.response?.data?.error || 'Błąd parsowania AI'); }
+    finally { setImporting(false); }
+  };
+
+  const handleParseFree = async () => {
+    if (!selectedFile) return;
+    setImporting(true); setError(''); setImportSuccess('');
+    try {
+      const res = await importPrices.parseFree(selectedFile);
+      setImportItems(res.data.items.map(item => ({ ...item, selected: !!item.matched_product, price: item.suggested_price ?? '' })));
     } catch (e) { setError(e.response?.data?.error || 'Błąd parsowania pliku'); }
     finally { setImporting(false); }
   };
@@ -285,45 +303,81 @@ export default function Products() {
 
       {/* Import paragonów */}
       <div className="card">
-        <h2>Importuj ceny z paragonu</h2>
+        <h2>Importuj ceny z paragonu lub pliku CSV / TXT</h2>
 
         <div style={{ background: '#f8f9ff', border: '1px solid #e0e4ff', borderRadius: 8, padding: '12px 16px', marginBottom: 16, fontSize: 13, lineHeight: 1.7 }}>
-          <div style={{ fontWeight: 600, color: '#667eea', marginBottom: 6 }}>Jak korzystać z importu?</div>
-          <ol style={{ margin: 0, paddingLeft: 18, color: '#555' }}>
-            <li>Zrób zdjęcie paragonu ze sklepu <b>(JPG, PNG, WEBP)</b> lub przygotuj plik tekstowy/CSV z cenami.</li>
-            <li>Wgraj plik — Claude AI automatycznie wyciągnie produkty i ceny.</li>
-            <li>Sprawdź dopasowania, popraw ceny jeśli trzeba, zaznacz które chcesz zaktualizować.</li>
-            <li>Kliknij <b>Zastosuj</b> — Ceny oraz Makro i Kalorie zostaną zaktualizowane automatycznie.</li>
-          </ol>
-          <div style={{ marginTop: 8, padding: '6px 10px', background: '#fff3cd', borderRadius: 6, color: '#856404', fontSize: 12 }}>
-            ⚠️ <b>Limit dzienny: 2 importy na dobę.</b>
-            {remainingImports !== null && (
-              <span> Pozostało dziś: <b>{remainingImports}</b> {remainingImports === 1 ? 'import' : remainingImports === 0 ? 'importów' : 'importy'}.</span>
-            )}
+          <div style={{ fontWeight: 600, color: '#667eea', marginBottom: 8 }}>Jak korzystać z importu?</div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+            <div>
+              <div style={{ fontWeight: 600, marginBottom: 4, color: '#444' }}>📸 Zdjęcie paragonu</div>
+              <ol style={{ margin: 0, paddingLeft: 16, color: '#555', fontSize: 12 }}>
+                <li>Wgraj zdjęcie <b>JPG, PNG lub WEBP</b></li>
+                <li>Kliknij <b>Parsuj przez AI</b> — Gemini wyciągnie produkty i ceny</li>
+                <li>Sprawdź dopasowania i kliknij <b>Zastosuj</b></li>
+              </ol>
+              <div style={{ marginTop: 6, fontSize: 11, color: '#856404' }}>
+                ⚠️ Limit: 2 importy AI dziennie.{remainingImports !== null && <span> Pozostało: <b>{remainingImports}</b>.</span>}
+              </div>
+            </div>
+            <div>
+              <div style={{ fontWeight: 600, marginBottom: 4, color: '#444' }}>📄 Plik CSV / TXT</div>
+              <ol style={{ margin: 0, paddingLeft: 16, color: '#555', fontSize: 12 }}>
+                <li>Format: <code style={{ background: '#eef', padding: '1px 4px', borderRadius: 3 }}>nazwa,gramatura,jednostka,cena</code><br/>lub prościej: <code style={{ background: '#eef', padding: '1px 4px', borderRadius: 3 }}>nazwa,cena</code></li>
+                <li>Wgraj plik i kliknij <b>Parsuj plik</b></li>
+              </ol>
+              <div style={{ marginTop: 6, fontSize: 11, color: '#2a9d5c' }}>✓ Bez limitu, bez AI.</div>
+            </div>
           </div>
         </div>
+
         {!importItems ? (
-          <div
-            onDragOver={e => { e.preventDefault(); setDragOver(true); }}
-            onDragLeave={() => setDragOver(false)}
-            onDrop={e => { e.preventDefault(); setDragOver(false); handleFileUpload(e.dataTransfer.files[0]); }}
-            onClick={() => fileInputRef.current?.click()}
-            style={{
-              border: `2px dashed ${dragOver ? '#667eea' : '#ddd'}`, borderRadius: 10,
-              padding: '32px 24px', textAlign: 'center', cursor: 'pointer',
-              background: dragOver ? 'rgba(102,126,234,0.05)' : '#fafafa', transition: 'all 0.15s',
-            }}
-          >
-            <input ref={fileInputRef} type="file" accept=".jpg,.jpeg,.png,.webp,.txt,.csv"
-              style={{ display: 'none' }} onChange={e => handleFileUpload(e.target.files[0])} />
-            {importing
-              ? <div style={{ color: '#667eea', fontWeight: 600 }}>Przetwarzam przez Claude AI…</div>
-              : <>
-                  <div style={{ fontSize: 32, marginBottom: 8 }}>📄</div>
-                  <div style={{ fontWeight: 600, color: '#555', marginBottom: 4 }}>Kliknij lub przeciągnij plik</div>
-                  <div style={{ fontSize: 12, color: '#aaa' }}>JPG, PNG, WEBP, TXT, CSV</div>
+          <div>
+            <div
+              onDragOver={e => { e.preventDefault(); setDragOver(true); }}
+              onDragLeave={() => setDragOver(false)}
+              onDrop={e => { e.preventDefault(); setDragOver(false); handleFileSelect(e.dataTransfer.files[0]); }}
+              onClick={() => fileInputRef.current?.click()}
+              style={{
+                border: `2px dashed ${dragOver ? '#667eea' : selectedFile ? '#2a9d5c' : '#ddd'}`, borderRadius: 10,
+                padding: '24px', textAlign: 'center', cursor: 'pointer',
+                background: dragOver ? 'rgba(102,126,234,0.05)' : '#fafafa', transition: 'all 0.15s', marginBottom: 12,
+              }}
+            >
+              <input ref={fileInputRef} type="file" accept=".jpg,.jpeg,.png,.webp,.txt,.csv"
+                style={{ display: 'none' }} onChange={e => handleFileSelect(e.target.files[0])} />
+              {selectedFile ? (
+                <>
+                  <div style={{ fontSize: 28, marginBottom: 4 }}>{isImageFile(selectedFile) ? '📸' : '📄'}</div>
+                  <div style={{ fontWeight: 600, color: '#2a9d5c', marginBottom: 2 }}>{selectedFile.name}</div>
+                  <div style={{ fontSize: 11, color: '#aaa' }}>Kliknij żeby wybrać inny plik</div>
                 </>
-            }
+              ) : (
+                <>
+                  <div style={{ fontSize: 32, marginBottom: 8 }}>📂</div>
+                  <div style={{ fontWeight: 600, color: '#555', marginBottom: 4 }}>Kliknij lub przeciągnij plik</div>
+                  <div style={{ fontSize: 12, color: '#aaa' }}>📸 JPG, PNG, WEBP — paragon (AI) &nbsp;|&nbsp; 📄 TXT, CSV — cennik (darmowe)</div>
+                </>
+              )}
+            </div>
+            {selectedFile && (
+              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                {isImageFile(selectedFile) && (
+                  <button className="btn btn-primary" onClick={handleParseAI} disabled={importing} style={{ minWidth: 200 }}>
+                    {importing ? '⏳ Gemini analizuje...' : '✨ Parsuj przez AI (Gemini)'}
+                  </button>
+                )}
+                {isTextFile(selectedFile) && (
+                  <button className="btn btn-primary" onClick={handleParseFree} disabled={importing}
+                    style={{ minWidth: 200, background: 'linear-gradient(135deg, #2a9d5c, #1d7a45)' }}>
+                    {importing ? '⏳ Parsowanie...' : '📄 Parsuj plik (darmowe)'}
+                  </button>
+                )}
+                <button className="btn" style={{ background: '#eee', color: '#555' }}
+                  onClick={() => { setSelectedFile(null); setError(''); }}>
+                  Anuluj
+                </button>
+              </div>
+            )}
           </div>
         ) : (
           <div>

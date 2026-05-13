@@ -203,6 +203,106 @@ def parse_receipt():
     return jsonify({'items': results, 'remaining_today': remaining})
 
 
+@import_bp.route('/parse-free', methods=['POST'])
+@jwt_required()
+def parse_csv():
+    """Darmowe parsowanie plików CSV/TXT — bez AI, bez limitu."""
+    uid = int(get_jwt_identity())
+    if 'file' not in request.files:
+        return jsonify({'error': 'Brak pliku'}), 400
+
+    file = request.files['file']
+    ext = (file.filename or '').rsplit('.', 1)[-1].lower()
+    if ext not in ('txt', 'csv'):
+        return jsonify({'error': 'Ten endpoint obsługuje tylko pliki .txt i .csv'}), 400
+
+    file_data = file.read(MAX_FILE_SIZE + 1)
+    if len(file_data) > MAX_FILE_SIZE:
+        return jsonify({'error': 'Plik za duży (max 5 MB)'}), 400
+
+    try:
+        text = file_data.decode('utf-8', errors='replace')
+    except Exception:
+        return jsonify({'error': 'Nie można odczytać pliku'}), 400
+
+    db_products = Product.query.filter_by(user_id=uid).all()
+    results = []
+
+    for line in text.splitlines():
+        line = line.strip()
+        if not line or line.startswith('#'):
+            continue
+
+        # Próbuj CSV: sep , lub ; lub \t
+        parts = None
+        for sep in (',', ';', '\t'):
+            if sep in line:
+                parts = [p.strip() for p in line.split(sep)]
+                break
+
+        # Próbuj "nazwa - cena" lub "nazwa: cena"
+        if not parts:
+            m = re.search(r'^(.+?)\s*[-–:]\s*(\d+[.,]\d*|\d+)\s*(?:zł|pln|zl)?$', line, re.IGNORECASE)
+            if m:
+                parts = [m.group(1).strip(), m.group(2)]
+
+        if not parts or len(parts) < 2:
+            continue
+
+        name = parts[0].strip()
+
+        # Cena — ostatnia numeryczna kolumna
+        price = None
+        for part in reversed(parts):
+            pm = re.search(r'(\d+[.,]\d*|\d+)', part)
+            if pm:
+                try:
+                    price = float(pm.group(1).replace(',', '.'))
+                    break
+                except ValueError:
+                    pass
+
+        if not name or price is None:
+            continue
+
+        # Opcjonalne: waga i jednostka (format 4-kolumnowy: nazwa,waga,jednostka,cena)
+        qty, unit = None, None
+        if len(parts) >= 4:
+            try:
+                qty = float(parts[1].replace(',', '.'))
+                unit = parts[2].strip().lower()
+                if unit == 'kg':
+                    qty *= 1000
+                    unit = 'g'
+                elif unit in ('l', 'litr', 'litrów'):
+                    qty *= 1000
+                    unit = 'ml'
+            except (ValueError, IndexError):
+                pass
+
+        match = _match_product(name, db_products)
+
+        suggested = None
+        if match and qty and price:
+            if match.unit == 'szt':
+                suggested = round(price / qty, 2)
+            else:
+                suggested = round((price / qty) * 100, 2)
+        elif match and price and not qty:
+            suggested = round(price, 2)
+
+        results.append({
+            'receipt_name': name,
+            'receipt_quantity': qty,
+            'receipt_unit': unit,
+            'receipt_price': price,
+            'matched_product': match.to_dict() if match else None,
+            'suggested_price': suggested,
+        })
+
+    return jsonify({'items': results})
+
+
 @import_bp.route('/apply', methods=['POST'])
 @jwt_required()
 def apply_prices():
