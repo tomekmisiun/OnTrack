@@ -80,16 +80,52 @@ function parseRecipeText(text) {
   return { name, ingredients };
 }
 
+// Normalizacja polskich znaków do ASCII (dla porównań)
+function norm(s) {
+  return s.toLowerCase()
+    .replace(/ą/g,'a').replace(/ę/g,'e').replace(/ó/g,'o')
+    .replace(/ś/g,'s').replace(/ź/g,'z').replace(/ż/g,'z')
+    .replace(/ć/g,'c').replace(/ł/g,'l').replace(/ń/g,'n');
+}
+
+const STOP_WORDS = new Set(['oraz','lub','albo','duze','male','duzy','maly','okolo','bardzo','swieze','ugotowane','posiekane','uniwersalnej','naturalna','naturalny','pelne','pełne']);
+
+// Czy dwa słowa są podobne (obsługuje polskie odmiany przez prefix)
+function wordsSimilar(a, b) {
+  if (a === b) return true;
+  if (a.includes(b) || b.includes(a)) return true;
+  const minLen = Math.min(a.length, b.length);
+  if (minLen < 3) return a === b;
+  let p = 0;
+  while (p < minLen && a[p] === b[p]) p++;
+  return p >= Math.max(3, Math.ceil(minLen * 0.6));
+}
+
 function matchProducts(ingredients, products) {
   return ingredients.map(ing => {
-    const lower = ing.rawName.toLowerCase();
-    const firstWord = lower.split(' ')[0];
-    const validFirstWord = firstWord.length >= 3 && !/^\d/.test(firstWord);
-    const match = products.find(p => {
-      const pName = p.name.toLowerCase();
-      return lower.includes(pName) || (validFirstWord && pName.includes(firstWord));
-    });
-    return { ...ing, product_id: match ? match.id : null };
+    const rawNorm = norm(ing.rawName);
+
+    // Wyodrębnij sensowne słowa (≥3 znaki, nie cyfry, nie stop words)
+    const ingWords = rawNorm.split(/[\s,.()-]+/)
+      .filter(w => w.length >= 3 && !/^\d/.test(w) && !STOP_WORDS.has(w)); // eslint-disable-line no-useless-escape
+
+    if (!ingWords.length) return { ...ing, product_id: null };
+
+    let bestMatch = null;
+    let bestScore = 0;
+
+    for (const p of products) {
+      const prodWords = norm(p.name).split(/\s+/).filter(w => w.length >= 2);
+      let score = 0;
+      for (const iw of ingWords) {
+        for (const pw of prodWords) {
+          if (wordsSimilar(iw, pw)) score += Math.min(iw.length, pw.length);
+        }
+      }
+      if (score > bestScore) { bestScore = score; bestMatch = p; }
+    }
+
+    return { ...ing, product_id: bestScore >= 3 ? bestMatch.id : null };
   });
 }
 
