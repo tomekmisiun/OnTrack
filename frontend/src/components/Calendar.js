@@ -214,6 +214,7 @@ function TemplateSlot({ dayIndex, position, recipe, onRemove }) {
 function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditSlots, onSave, onApply, onDelete }) {
   const [editName, setEditName]   = useState('');
   const [applyWeek, setApplyWeek] = useState({});
+  const [open, setOpen]           = useState(false);
   const mondays = getUpcomingMondays(16);
 
   const handleRemove = (dayIndex, position) => {
@@ -224,11 +225,17 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
   const filledCount = Object.keys(editSlots).length;
 
   return (
-    <div className="card" style={{padding:16}}>
-      <h2 style={{fontSize:15,marginBottom:14}}>Szablony tygodnia</h2>
+    <div className="card" style={{padding:0,overflow:'hidden'}}>
+      <button onClick={()=>setOpen(o=>!o)}
+        style={{width:'100%',padding:'12px 18px',background:'none',border:'none',cursor:'pointer',display:'flex',justifyContent:'space-between',alignItems:'center',fontSize:14,fontWeight:600,color:'#667eea'}}>
+        <span>Tworzenie szablonów posiłków na tydzień</span>
+        <span style={{fontSize:16,transition:'transform 0.2s',transform:open?'rotate(180deg)':'rotate(0deg)'}}>▾</span>
+      </button>
+      {open && (
+      <div style={{padding:'0 16px 16px',borderTop:'1px solid #f0f0f0'}}>
 
       {/* Edytor nowego szablonu */}
-      <div style={{marginBottom:20}}>
+      <div style={{marginBottom:20,marginTop:14}}>
         <div style={{fontSize:12,color:'#888',marginBottom:8}}>
           Przeciągnij przepisy z karuzeli na dni tygodnia, następnie zapisz jako szablon.
         </div>
@@ -275,7 +282,8 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
         </div>
       </div>
 
-      {/* Zapisane szablony */}
+      {/* Twoje szablony */}
+      <div style={{fontWeight:700,fontSize:13,color:'#444',marginBottom:10,paddingTop:4,borderTop:'1px solid #f0f0f0'}}>Twoje szablony</div>
       {templates.length === 0 ? (
         <p style={{color:'#bbb',fontSize:13,textAlign:'center',margin:0}}>Brak zapisanych szablonów — utwórz pierwszy powyżej.</p>
       ) : (
@@ -333,6 +341,8 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
             );
           })}
         </div>
+      )}
+      </div>
       )}
     </div>
   );
