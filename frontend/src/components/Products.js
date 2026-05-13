@@ -21,7 +21,7 @@ const displayPrice = (p) =>
     ? `${p.price.toFixed(2)} ${priceLabel(p.unit || 'g')}`
     : '—';
 
-const EMPTY_FORM = { name: '', package_weight: '', package_price: '', unit: 'g', kcal: '', protein: '', fat: '', carbs: '' };
+const EMPTY_FORM = { name: '', package_weight: '', package_price: '', unit: 'g' };
 
 const MacroDisplay = ({ p }) => {
   if (!p.kcal && !p.protein && !p.fat && !p.carbs) return <span style={{ color: '#ccc' }}>—</span>;
@@ -62,18 +62,17 @@ export default function Products() {
       setError('Wypełnij wszystkie pola'); return;
     }
     try {
-      await api.create({
+      const created = await api.create({
         name: form.name,
         package_weight: parseFloat(form.package_weight),
         price: toUnitPrice(form.package_price, form.package_weight, form.unit),
         unit: form.unit,
-        kcal:    form.kcal    !== '' ? parseFloat(form.kcal)    : null,
-        protein: form.protein !== '' ? parseFloat(form.protein) : null,
-        fat:     form.fat     !== '' ? parseFloat(form.fat)     : null,
-        carbs:   form.carbs   !== '' ? parseFloat(form.carbs)   : null,
       });
       setForm(EMPTY_FORM);
       setError('');
+      // Auto-pobierz makro w tle
+      const macro = await fetchMacroFromOFF(form.name);
+      if (macro) await api.update(created.data.id, macro);
       loadProducts();
     } catch (e) { setError(e.response?.data?.error || 'Błąd dodawania produktu'); }
   };
@@ -256,36 +255,16 @@ export default function Products() {
             </div>
           </div>
 
-          {/* Prawa kolumna: makro */}
-          <div>
-            <div style={sec}>Makro <span style={{ fontSize: 11, color: '#aaa', fontWeight: 400 }}>— opcjonalne, wartości na 100g</span></div>
-            <div style={{ marginBottom: 12 }}>
-              <div style={fl}>Kalorie (kcal)</div>
-              <input type="number" step="0.1" value={form.kcal}
-                onChange={e => setForm({ ...form, kcal: e.target.value })}
-                placeholder="np. 61" style={{ width: '100%', boxSizing: 'border-box' }} />
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10, marginBottom: 20 }}>
-              <div>
-                <div style={fl}>Białko (g)</div>
-                <input type="number" step="0.1" value={form.protein}
-                  onChange={e => setForm({ ...form, protein: e.target.value })}
-                  placeholder="np. 5" style={{ width: '100%', boxSizing: 'border-box' }} />
-              </div>
-              <div>
-                <div style={fl}>Tłuszcze (g)</div>
-                <input type="number" step="0.1" value={form.fat}
-                  onChange={e => setForm({ ...form, fat: e.target.value })}
-                  placeholder="np. 3.1" style={{ width: '100%', boxSizing: 'border-box' }} />
-              </div>
-              <div>
-                <div style={fl}>Węglowodany (g)</div>
-                <input type="number" step="0.1" value={form.carbs}
-                  onChange={e => setForm({ ...form, carbs: e.target.value })}
-                  placeholder="np. 3.5" style={{ width: '100%', boxSizing: 'border-box' }} />
+          {/* Prawa kolumna: info + przycisk */}
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div style={{ background: '#f8f9ff', border: '1px solid #e0e4ff', borderRadius: 8, padding: '12px 14px', fontSize: 12, color: '#555', lineHeight: 1.6 }}>
+              <div style={{ fontWeight: 700, color: '#667eea', marginBottom: 4 }}>✨ Makro i Kalorie — automatycznie</div>
+              Po dodaniu produktu system pobierze wartości Kcal, Białka, Tłuszczów i Węglowodanów automatycznie z bazy Open Food Facts.
+              <div style={{ marginTop: 8, color: '#999' }}>
+                Chcesz je zmienić? Kliknij <b>Edytuj</b> przy produkcie na liście poniżej.
               </div>
             </div>
-            <button className="btn btn-primary" onClick={handleSubmit} style={{ width: '100%' }}>
+            <button className="btn btn-primary" onClick={handleSubmit} style={{ width: '100%', marginTop: 16 }}>
               Dodaj produkt
             </button>
           </div>
