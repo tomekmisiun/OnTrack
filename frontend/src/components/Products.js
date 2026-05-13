@@ -41,6 +41,7 @@ export default function Products() {
   const [editId, setEditId] = useState(null);
   const [editForm, setEditForm] = useState({});
   const [error, setError] = useState('');
+  const [lookingUp, setLookingUp] = useState(null); // id produktu którego szukamy
   const [importItems, setImportItems] = useState(null);
   const [importing, setImporting] = useState(false);
   const [importSuccess, setImportSuccess] = useState('');
@@ -104,6 +105,40 @@ export default function Products() {
       setEditId(null);
       loadProducts();
     } catch (e) { setError(e.response?.data?.error || 'Błąd zapisu'); }
+  };
+
+  const handleAutoFill = async () => {
+    if (!editForm.name) return;
+    setLookingUp(editId);
+    setError('');
+    try {
+      const url = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(editForm.name)}&search_simple=1&action=process&json=1&page_size=5&fields=product_name,nutriments`;
+      const res = await fetch(url);
+      const data = await res.json();
+      const products = data.products || [];
+      let found = false;
+      for (const p of products) {
+        const n = p.nutriments || {};
+        let kcal = n['energy-kcal_100g'] ?? n['energy-kcal'] ?? null;
+        if (!kcal && n['energy_100g']) kcal = Math.round(n['energy_100g'] / 4.184 * 10) / 10;
+        if (kcal) {
+          setEditForm(f => ({
+            ...f,
+            kcal:    Math.round(kcal * 10) / 10,
+            protein: Math.round((n['proteins_100g'] ?? 0) * 10) / 10,
+            fat:     Math.round((n['fat_100g'] ?? 0) * 10) / 10,
+            carbs:   Math.round((n['carbohydrates_100g'] ?? 0) * 10) / 10,
+          }));
+          found = true;
+          break;
+        }
+      }
+      if (!found) setError('Nie znaleziono danych dla "' + editForm.name + '" — uzupełnij ręcznie');
+    } catch {
+      setError('Błąd połączenia z Open Food Facts');
+    } finally {
+      setLookingUp(null);
+    }
   };
 
   const handleDelete = async (id) => {
@@ -281,7 +316,7 @@ export default function Products() {
         <h2>Lista produktów</h2>
         <table>
           <thead>
-            <tr><th>Nazwa</th><th>Makro / 100g</th><th>Cena</th><th></th></tr>
+            <tr><th>Nazwa</th><th>Kcal/100g</th><th>Makro / 100g</th><th>Cena</th><th></th></tr>
           </thead>
           <tbody>
             {productList.map(p => editId === p.id ? (
@@ -290,15 +325,25 @@ export default function Products() {
                   <td><input value={editForm.name}
                     onChange={e => setEditForm({ ...editForm, name: e.target.value })} style={s} /></td>
                   <td>
-                    <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
-                      <input type="number" step="0.1" placeholder="Kcal" value={editForm.kcal}
-                        onChange={e => setEditForm({ ...editForm, kcal: e.target.value })} style={{ ...s, width: 68 }} />
+                    <input type="number" step="0.1" placeholder="Kcal" value={editForm.kcal}
+                      onChange={e => setEditForm({ ...editForm, kcal: e.target.value })} style={{ ...s, width: 72 }} />
+                  </td>
+                  <td>
+                    <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', alignItems: 'center' }}>
                       <input type="number" step="0.1" placeholder="Białko" value={editForm.protein}
                         onChange={e => setEditForm({ ...editForm, protein: e.target.value })} style={{ ...s, width: 68 }} />
                       <input type="number" step="0.1" placeholder="Tłuszcze" value={editForm.fat}
                         onChange={e => setEditForm({ ...editForm, fat: e.target.value })} style={{ ...s, width: 68 }} />
                       <input type="number" step="0.1" placeholder="Węgle" value={editForm.carbs}
                         onChange={e => setEditForm({ ...editForm, carbs: e.target.value })} style={{ ...s, width: 68 }} />
+                      <button
+                        onClick={handleAutoFill}
+                        disabled={lookingUp === editId}
+                        title="Uzupełnij automatycznie z Open Food Facts"
+                        style={{ padding: '4px 10px', fontSize: 11, background: '#667eea', color: 'white', border: 'none', borderRadius: 6, cursor: 'pointer', whiteSpace: 'nowrap' }}
+                      >
+                        {lookingUp === editId ? '...' : '✨ Auto'}
+                      </button>
                     </div>
                   </td>
                   <td>
@@ -328,6 +373,9 @@ export default function Products() {
             ) : (
               <tr key={p.id}>
                 <td>{p.name}</td>
+                <td style={{ fontWeight: 600, color: p.kcal ? '#1a1a2e' : '#ccc' }}>
+                  {p.kcal != null ? `${p.kcal} kcal` : '—'}
+                </td>
                 <td><MacroDisplay p={p} /></td>
                 <td style={{ fontWeight: 600, color: p.price > 0 ? '#1a1a2e' : '#ccc' }}>{displayPrice(p)}</td>
                 <td style={{ display: 'flex', gap: 6 }}>

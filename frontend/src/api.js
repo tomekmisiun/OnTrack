@@ -47,6 +47,10 @@ export const mealPlan = {
   getSummary: (start, end) => API.get(`/api/meal-plan/summary/${start}/${end}`),
 };
 
+export const nutrition = {
+  lookup: (name) => API.get(`/api/nutrition/lookup?name=${encodeURIComponent(name)}`),
+};
+
 export const importPrices = {
   parse: (file) => {
     const fd = new FormData();

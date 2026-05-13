@@ -32,6 +32,9 @@ def create_app():
     from prometheus_flask_exporter import PrometheusMetrics
     PrometheusMetrics(app)
 
+    from app.routes.nutrition import nutrition_bp
+    app.register_blueprint(nutrition_bp, url_prefix='/api/nutrition')
+
     from app.routes.auth import auth_bp, init_oauth
     init_oauth(app)
     from app.routes.products import products_bp
