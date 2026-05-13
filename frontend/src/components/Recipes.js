@@ -30,10 +30,15 @@ function parseWeight(text) {
   for (const { re, g } of POLISH_UNITS) {
     const unitM = re.exec(text);
     if (unitM) {
-      const beforeUnit = text.slice(0, unitM.index);
+      const beforeUnit = text.slice(0, unitM.index).trim();
       const numM = /(\d+(?:[.,]\d+)?)\s*$/.exec(beforeUnit);
       const count = numM ? parseFloat(numM[1].replace(',', '.')) : 1;
-      return { weight: Math.round(count * g), unit: 'g', matchIndex: numM ? numM.index : unitM.index };
+      // Jeśli nic sensownego przed jednostką — nazwa jest za nią
+      const nameBeforeUnit = beforeUnit.replace(/\d+([.,]\d+)?\s*$/, '').trim();
+      const forcedName = nameBeforeUnit.length < 2
+        ? text.slice(unitM.index + unitM[0].length).trim().split(/[\s,(-]/)[0].toLowerCase()
+        : undefined;
+      return { weight: Math.round(count * g), unit: 'g', matchIndex: numM ? numM.index : unitM.index, forcedName };
     }
   }
 
