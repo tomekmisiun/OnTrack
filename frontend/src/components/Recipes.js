@@ -13,6 +13,7 @@ const POLISH_UNITS = [
   { re: /szczypt[aę]|szczypty/i,     g: 1   },
   { re: /garśc[i]?|garść/i,          g: 30  },
   { re: /pęczk[iaó]?|pęczków/i,      g: 50  },
+  { re: /kostek?|kostki|kostkę/i,    g: 200 },
 ];
 const PIECE_WORDS = /jajk[ao]|jajek|jaja?(?=\s)|jaj\b|sztuk[ia]?|szt\.?/i;
 const FRACTION_WORDS = { 'pół': 0.5, 'ćwierć': 0.25 };
@@ -62,7 +63,7 @@ function parseWeight(text) {
 
 const JUNK_PREFIX = /^[\d/.,\s]*(po\s+)?(pół|ćwierć|płask\w*|duż\w*|mał\w*|śwież\w*|ugotown\w*|młod\w*|klarowan\w*|słodk\w*|ostr\w*)?\s*/i;
 const JUNK_SUFFIX = /\s*(duże?|małe?|świeże?|ugotowane?|na\s+twardo|można\s+pominąć|klarowanego?|i\s+\w.*)$/i;
-const UNIT_WORDS = /\b(szklank\w+|łyżk\w+|łyżeczk\w+|pęczk\w+|garśc\w*)\b\s*/gi;
+const UNIT_WORDS = /\b(szklank\w+|łyżk\w+|łyżeczk\w+|pęczk\w+|garśc\w*|kostek?|kostki|kostkę)\b\s*/gi;
 
 function extractName(content, parsed) {
   if (parsed.forcedName) return parsed.forcedName;
