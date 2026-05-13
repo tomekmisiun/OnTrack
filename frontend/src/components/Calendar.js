@@ -18,10 +18,23 @@ function dateToStr(d) {
 function addDays(dateStr, n) {
   const d = new Date(dateStr); d.setDate(d.getDate() + n); return dateToStr(d);
 }
-function getMondayStr(dateStr) {
-  const d = new Date(dateStr);
-  d.setDate(d.getDate() - (d.getDay() + 6) % 7);
-  return dateToStr(d);
+function toEU(dateStr) {
+  // YYYY-MM-DD → DD.MM.YYYY
+  const [y, m, d] = dateStr.split('-');
+  return `${d}.${m}.${y}`;
+}
+function getUpcomingMondays(count = 16) {
+  const mondays = [];
+  const today = new Date(); today.setHours(0,0,0,0);
+  // Zacznij od poprzedniego poniedziałku żeby mieć też bieżący tydzień
+  const start = new Date(today);
+  start.setDate(start.getDate() - (today.getDay() + 6) % 7);
+  for (let i = 0; i < count; i++) {
+    const d = new Date(start);
+    d.setDate(d.getDate() + i * 7);
+    mondays.push(dateToStr(d));
+  }
+  return mondays;
 }
 function getMonthGrid(year, month) {
   const firstDay = new Date(year, month, 1);
@@ -201,6 +214,7 @@ function TemplateSlot({ dayIndex, position, recipe, onRemove }) {
 function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditSlots, onSave, onApply, onDelete }) {
   const [editName, setEditName]   = useState('');
   const [applyWeek, setApplyWeek] = useState({});
+  const mondays = getUpcomingMondays(16);
 
   const handleRemove = (dayIndex, position) => {
     const k = `${dayIndex}-${position}`;
@@ -282,11 +296,15 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
                   </div>
                   <div style={{display:'flex',gap:8,alignItems:'center'}}>
                     <span style={{fontSize:12,color:'#666'}}>Zastosuj od poniedziałku:</span>
-                    <input type="date" value={applyWeek[ti] || getMondayStr(dateToStr(new Date()))}
+                    <select value={applyWeek[ti] || mondays[0]}
                       onChange={e=>setApplyWeek({...applyWeek,[ti]:e.target.value})}
-                      style={{padding:'4px 8px',border:'1px solid #ddd',borderRadius:6,fontSize:12}} />
+                      style={{padding:'4px 8px',border:'1px solid #ddd',borderRadius:6,fontSize:12}}>
+                      {mondays.map(m=>(
+                        <option key={m} value={m}>{toEU(m)}</option>
+                      ))}
+                    </select>
                     <button className="btn btn-primary" style={{padding:'5px 12px',fontSize:12}}
-                      onClick={()=>onApply(t, getMondayStr(applyWeek[ti] || dateToStr(new Date())))}>
+                      onClick={()=>onApply(t, applyWeek[ti] || mondays[0])}>
                       Zastosuj
                     </button>
                     <button onClick={()=>onDelete(ti)}
@@ -400,6 +418,21 @@ export default function Calendar() {
     if (!copiedDay) return;
     try { await api.copyRange({source_start:copiedDay,source_end:copiedDay,target_start:target}); await loadMonth(year,month); }
     catch(e){ setError(e.response?.data?.error||'Błąd wklejania dnia'); }
+  };
+
+  // Usuń cały tydzień
+  const handleDeleteWeek = async(mondayStr)=>{
+    const allMeals = [];
+    for (let i=0; i<7; i++) {
+      const ds = addDays(mondayStr, i);
+      (mealsByDate[ds]||[]).forEach(m=>allMeals.push(m));
+    }
+    if (!allMeals.length) return;
+    if (!window.confirm(`Usunąć wszystkie ${allMeals.length} posiłki z tego tygodnia?`)) return;
+    try {
+      await Promise.all(allMeals.map(m=>api.deleteMeal(m.id)));
+      await loadMonth(year, month);
+    } catch { setError('Błąd usuwania tygodnia'); }
   };
 
   // Opcja C
@@ -527,6 +560,8 @@ export default function Calendar() {
                   <button onClick={()=>handlePasteWeek(mondayStr)} title="Wklej tydzień"
                     style={{background:'#e8f4ff',border:'1px solid #90caff',color:'#0066cc',borderRadius:4,padding:'2px 4px',fontSize:9,cursor:'pointer',lineHeight:1.2}}>⎘</button>
                 )}
+                <button onClick={()=>handleDeleteWeek(mondayStr)} title="Usuń cały tydzień"
+                  style={{background:'none',border:'1px solid #ffc0cb',color:'#ff6b81',borderRadius:4,padding:'2px 4px',fontSize:9,cursor:'pointer',lineHeight:1.2}}>🗑</button>
               </div>
               {weekDays.map(date=>{
                 const ds = dateToStr(date);
