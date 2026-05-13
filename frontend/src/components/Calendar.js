@@ -53,22 +53,61 @@ function DraggableRecipe({ recipe }) {
   const hasKcal = recipe.total_kcal > 0;
   return (
     <div ref={setNodeRef} {...listeners} {...attributes} style={{
-      flexShrink:0, width:116, padding:'9px 10px 8px',
-      background:'linear-gradient(145deg, #667eea, #764ba2)', color:'white',
-      borderRadius:10, fontSize:12, cursor:'grab', opacity: isDragging ? 0.35 : 1,
-      userSelect:'none', touchAction:'none', boxShadow:'0 2px 8px rgba(102,126,234,0.35)',
-      display:'flex', flexDirection:'column', gap:3,
+      flexShrink:0, width:128,
+      background:'linear-gradient(160deg, #7b5ea7, #5548a0)',
+      borderRadius:12, cursor:'grab', opacity: isDragging ? 0.3 : 1,
+      userSelect:'none', touchAction:'none',
+      boxShadow:'0 4px 12px rgba(85,72,160,0.45)',
+      display:'flex', flexDirection:'column', overflow:'hidden',
     }}>
-      <div style={{fontWeight:700,lineHeight:1.3,fontSize:11,marginBottom:1}}>{recipe.name}</div>
+      {/* Name */}
+      <div style={{padding:'10px 11px 7px', color:'white'}}>
+        <div style={{
+          fontWeight:700, fontSize:11.5, lineHeight:1.35, color:'white',
+          display:'-webkit-box', WebkitLineClamp:2,
+          WebkitBoxOrient:'vertical', overflow:'hidden',
+        }}>
+          {recipe.name}
+        </div>
+      </div>
+
+      {/* kcal — hero number */}
       {hasKcal && (
-        <>
-          <div style={{fontSize:12,fontWeight:700,opacity:0.95}}>{recipe.total_kcal} kcal</div>
-          <div style={{fontSize:9,opacity:0.8,letterSpacing:'0.2px'}}>
-            B:{recipe.total_protein}g&nbsp; T:{recipe.total_fat}g&nbsp; W:{recipe.total_carbs}g
-          </div>
-        </>
+        <div style={{padding:'0 11px 6px', display:'flex', alignItems:'baseline', gap:4}}>
+          <span style={{fontSize:22, fontWeight:800, color:'white', lineHeight:1}}>
+            {recipe.total_kcal}
+          </span>
+          <span style={{fontSize:10, fontWeight:500, color:'rgba(255,255,255,0.65)'}}>kcal</span>
+        </div>
       )}
-      <div style={{fontSize:10,opacity:0.7,marginTop:1}}>{recipe.total_cost.toFixed(2)} zł</div>
+
+      {/* Macro pills */}
+      {hasKcal && (
+        <div style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:3, padding:'0 8px 9px'}}>
+          {[['B', recipe.total_protein], ['T', recipe.total_fat], ['W', recipe.total_carbs]].map(([lbl, val]) => (
+            <div key={lbl} style={{
+              background:'rgba(255,255,255,0.14)', borderRadius:5,
+              padding:'3px 0', textAlign:'center',
+            }}>
+              <div style={{fontSize:8, fontWeight:700, color:'rgba(255,255,255,0.6)', letterSpacing:'0.3px'}}>{lbl}</div>
+              <div style={{fontSize:10, fontWeight:700, color:'white'}}>{Math.round(val)}g</div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Price footer */}
+      <div style={{
+        marginTop:'auto',
+        borderTop:'1px solid rgba(255,255,255,0.12)',
+        background:'rgba(0,0,0,0.18)',
+        padding:'4px 11px',
+        fontSize:10.5, fontWeight:600,
+        color:'rgba(255,255,255,0.75)',
+        textAlign:'right',
+      }}>
+        {recipe.total_cost.toFixed(2)} zł
+      </div>
     </div>
   );
 }
