@@ -612,6 +612,39 @@ export default function Calendar() {
         })}
       </div>
 
+      {/* Jak korzystać z kalendarza */}
+      <div className="card" style={{padding:'14px 18px',marginBottom:16,fontSize:13,lineHeight:1.8}}>
+        <h2 style={{fontSize:15,marginBottom:12}}>Jak korzystać z kalendarza</h2>
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:20}}>
+          <div>
+            <div style={{fontWeight:700,color:'#667eea',marginBottom:6}}>🍽️ Planowanie posiłków</div>
+            <ul style={{margin:0,paddingLeft:16,color:'#555',fontSize:12}}>
+              <li>Chwyć przepis z karuzeli i przeciągnij go na wybrany <b>slot w dniu</b> (każdy dzień ma 5 slotów: śniadanie, drugie śniadanie, obiad, podwieczorek, kolacja)</li>
+              <li>Posiłek możesz <b>przesunąć</b> między dniami chwytając go za nazwę</li>
+              <li>Kliknij <b>✕</b> przy posiłku żeby go usunąć, lub <b>🗑</b> w nagłówku dnia żeby usunąć cały dzień</li>
+            </ul>
+          </div>
+          <div>
+            <div style={{fontWeight:700,color:'#667eea',marginBottom:6}}>📋 Kopiowanie dni i tygodni</div>
+            <ul style={{margin:0,paddingLeft:16,color:'#555',fontSize:12}}>
+              <li><b>⧉</b> w nagłówku dnia — kopiuje ten dzień do schowka</li>
+              <li><b>⎘</b> — wkleja skopiowany dzień; pojawia się na innych dniach gdy schowek jest zajęty</li>
+              <li><b>⠿</b> przy numerze dnia — chwyć i przeciągnij cały dzień na inny dzień</li>
+              <li><b>⧉ / ⎘ / 🗑</b> po lewej wiersza — kopiuj, wklej lub usuń cały tydzień</li>
+            </ul>
+          </div>
+          <div>
+            <div style={{fontWeight:700,color:'#667eea',marginBottom:6}}>📁 Szablony tygodnia</div>
+            <ul style={{margin:0,paddingLeft:16,color:'#555',fontSize:12}}>
+              <li>Kliknij <b>⧉</b> przy tygodniu — posiłki zostaną załadowane do <b>edytora szablonu</b> poniżej</li>
+              <li>W edytorze możesz też przeciągać przepisy z karuzeli na poszczególne dni tygodnia</li>
+              <li>Wpisz nazwę szablonu i kliknij <b>Zapisz szablon</b></li>
+              <li>Zapisany szablon możesz zastosować na dowolny przyszły tydzień wybierając datę i klikając <b>Zastosuj</b></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
       {/* Karuzela przepisów */}
       <div className="card" style={{padding:'14px 16px',marginBottom:16}}>
         <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:12}}>
