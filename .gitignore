@@ -13,3 +13,5 @@ postgres_data/
 
 # Migracje (generowane automatycznie)
 migrations/
+# Claude
+CLAUDE.md
