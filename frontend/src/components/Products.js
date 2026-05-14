@@ -274,98 +274,87 @@ export default function Products() {
 
   return (
     <div>
-      <div className="card">
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
+      <div className="card" style={{ margin: 0 }}>
         <h2>{t('add_product_title')}</h2>
         {error && <p style={{ color: 'red', marginBottom: 12 }}>{error}</p>}
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
+        {/* Rząd 1: toggle pełna szerokość */}
+        <div style={{ display: 'flex', gap: 0, marginBottom: 20, borderRadius: 7, overflow: 'hidden', border: '1px solid #374151' }}>
+          <button type="button"
+            onClick={() => setForm(f => ({ ...f, sold_by_weight: false }))}
+            style={{ flex: 1, padding: '9px 14px', border: 'none', borderRight: '1px solid #374151', cursor: 'pointer', fontSize: 12, fontWeight: 600, transition: 'all 0.15s',
+              background: !form.sold_by_weight ? '#0d9488' : '#2d3748',
+              color: !form.sold_by_weight ? 'white' : '#9ca3af' }}>
+            W opakowaniu
+          </button>
+          <button type="button"
+            onClick={() => setForm(f => ({ ...f, sold_by_weight: true, unit: 'g', package_weight: '' }))}
+            style={{ flex: 1, padding: '9px 14px', border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 600, transition: 'all 0.15s',
+              background: !!form.sold_by_weight ? '#0d9488' : '#2d3748',
+              color: !!form.sold_by_weight ? 'white' : '#9ca3af' }}>
+            Na wagę
+          </button>
+        </div>
+
+        {/* Pola formularza — kolumna 320px */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           <div>
-            {/* Rodzaj produktu */}
-            <div style={{ display: 'flex', gap: 0, marginBottom: 14, borderRadius: 7, overflow: 'hidden', border: '1px solid #d0d4e8' }}>
-              <button type="button"
-                onClick={() => setForm(f => ({ ...f, sold_by_weight: false }))}
-                style={{ flex: 1, padding: '9px 14px', border: 'none', borderRight: '1px solid #d0d4e8', cursor: 'pointer', fontSize: 12, fontWeight: 600, transition: 'all 0.15s',
-                  background: !form.sold_by_weight ? 'linear-gradient(135deg, #0d9488, #0f766e)' : '#2d3748',
-                  color: !form.sold_by_weight ? '#1f2937' : '#666' }}>
-                W opakowaniu
-              </button>
-              <button type="button"
-                onClick={() => setForm(f => ({ ...f, sold_by_weight: true, unit: 'g', package_weight: '' }))}
-                style={{ flex: 1, padding: '9px 14px', border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 600, transition: 'all 0.15s',
-                  background: !!form.sold_by_weight ? 'linear-gradient(135deg, #0d9488, #0f766e)' : '#2d3748',
-                  color: !!form.sold_by_weight ? '#1f2937' : '#666' }}>
-                Na wagę
-              </button>
-            </div>
-
-            <div style={sec}>{t('basic_info')}</div>
-            <div style={{ marginBottom: 12 }}>
-              <div style={fl}>{t('product_name_lbl')}</div>
-              <input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
-                placeholder={t('product_name_ph')} style={{ width: '100%', boxSizing: 'border-box' }} />
-            </div>
-
-            {!form.sold_by_weight && (
-              <div style={{ display: 'flex', gap: 10, marginBottom: 12 }}>
-                <div style={{ flex: 1 }}>
-                  <div style={fl}>{t('pkg_qty_lbl')}</div>
-                  <input type="number" className="no-spin" value={form.package_weight} onChange={e => setForm({ ...form, package_weight: e.target.value })}
-                    placeholder="np. 1000" style={{ width: '100%', boxSizing: 'border-box' }} />
-                </div>
-                <div>
-                  <div style={fl}>{t('unit_lbl')}</div>
-                  <UnitSelect value={form.unit} onChange={e => setForm({ ...form, unit: e.target.value })} style={{ width: 76 }} />
-                </div>
-              </div>
-            )}
-
-            <div style={sec}>{t('price_section')}</div>
-            <div style={{ marginBottom: 12 }}>
-              <div style={fl}>Cena za opakowanie / kg (zł)</div>
-              <input type="number" className="no-spin" step="0.01" value={form.package_price} onChange={e => setForm({ ...form, package_price: e.target.value })}
-                placeholder={t('pkg_price_ph')} style={{ width: '100%', boxSizing: 'border-box' }} />
+            <div style={fl}>Szukasz produktów?</div>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+              {[
+                { label: 'Auchan',    url: 'https://zakupy.auchan.pl/' },
+                { label: 'Biedronka', url: 'https://zakupy.biedronka.pl/' },
+                { label: 'Carrefour', url: 'https://www.carrefour.pl/' },
+              ].map(({ label, url }) => (
+                <a key={label} href={url} target="_blank" rel="noreferrer"
+                  style={{ fontSize: 11, fontWeight: 700, color: '#0d9488', textDecoration: 'none', background: '#1c3534', padding: '3px 10px', borderRadius: 4, border: '1px solid #374151' }}>
+                  {label}
+                </a>
+              ))}
             </div>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-            <div style={{ marginBottom: 10 }}>
-              <div style={{ fontSize: 12, color: '#0d9488', fontWeight: 600, marginBottom: 5 }}>Szukasz produktów?</div>
-              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
-                {[
-                  { label: 'Auchan',    url: 'https://zakupy.auchan.pl/' },
-                  { label: 'Biedronka', url: 'https://zakupy.biedronka.pl/' },
-                  { label: 'Carrefour', url: 'https://www.carrefour.pl/' },
-                ].map(({ label, url }) => (
-                  <a key={label} href={url} target="_blank" rel="noreferrer"
-                    style={{ fontSize: 11, fontWeight: 700, color: '#0d9488', textDecoration: 'none', background: '#1c3534', padding: '3px 10px', borderRadius: 4, border: '1px solid #374151' }}>
-                    {label}
-                  </a>
-                ))}
+          <div>
+            <div style={fl}>{t('product_name_lbl')}</div>
+            <input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
+              placeholder={t('product_name_ph')} style={{ width: '100%', boxSizing: 'border-box' }} />
+          </div>
+
+          {!form.sold_by_weight && (
+            <div style={{ display: 'flex', gap: 10 }}>
+              <div style={{ flex: 1 }}>
+                <div style={fl}>{t('pkg_qty_lbl')}</div>
+                <input type="number" className="no-spin" value={form.package_weight} onChange={e => setForm({ ...form, package_weight: e.target.value })}
+                  placeholder="np. 1000" style={{ width: '100%', boxSizing: 'border-box' }} />
+              </div>
+              <div>
+                <div style={fl}>{t('unit_lbl')}</div>
+                <UnitSelect value={form.unit} onChange={e => setForm({ ...form, unit: e.target.value })} style={{ width: 76 }} />
               </div>
             </div>
-            <div style={{ background: '#1c3534', border: '1px solid #e2e8f0', borderRadius: 8, padding: '12px 14px', fontSize: 12, color: '#9ca3af', lineHeight: 1.6 }}>
-              <div style={{ fontWeight: 700, color: '#0d9488', marginBottom: 4 }}>{t('macro_auto_title')}</div>
-              {t('macro_auto_desc')}
-              <div style={{ marginTop: 8, color: '#6b7280' }}>{t('macro_edit_hint')}</div>
-            </div>
-            <button className="btn btn-primary" onClick={handleSubmit} style={{ width: '100%', marginTop: 16 }}>
-              {t('add_product_btn')}
-            </button>
+          )}
+
+          <div>
+            <div style={fl}>Cena za opakowanie / kg (zł)</div>
+            <input type="number" className="no-spin" step="0.01" value={form.package_price} onChange={e => setForm({ ...form, package_price: e.target.value })}
+              placeholder={t('pkg_price_ph')} style={{ width: '100%', boxSizing: 'border-box' }} />
           </div>
+
+          <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: '12px 14px', fontSize: 12, color: '#9ca3af', lineHeight: 1.6 }}>
+            <div style={{ fontWeight: 700, color: '#0d9488', marginBottom: 4 }}>{t('macro_auto_title')}</div>
+            {t('macro_auto_desc')}
+            <div style={{ marginTop: 6, color: '#6b7280' }}>{t('macro_edit_hint')}</div>
+          </div>
+
+          <button className="btn btn-primary" onClick={handleSubmit}>
+            {t('add_product_btn')}
+          </button>
         </div>
       </div>
 
-      {toast && (
-        <div style={{ position:'fixed', top:'50%', left:'50%', transform:'translate(-50%,-50%)',
-          background: toast.color, color:'#1f2937', padding:'16px 28px', borderRadius:12,
-          fontSize:15, fontWeight:600, boxShadow:'0 8px 32px rgba(0,0,0,0.25)',
-          zIndex:9999, pointerEvents:'none', textAlign:'center', whiteSpace:'nowrap' }}>
-          {toast.msg}
-        </div>
-      )}
-
       {/* Import section */}
-      <div className="card">
+      <div className="card" style={{ margin: 0 }}>
         <h2>{t('import_title')}</h2>
 
         <div style={{ background: '#1c3534', border: '1px solid #e2e8f0', borderRadius: 8, padding: '12px 16px', marginBottom: 16, fontSize: 13, lineHeight: 1.7 }}>
@@ -448,16 +437,17 @@ export default function Products() {
             <p style={{ fontSize: 13, color: '#9ca3af', marginBottom: 8 }}>
               Sprawdź dopasowania i uzupełnij dane. Zaznacz <strong>Na wagę</strong> dla warzyw, owoców i mięsa - podaj wtedy cenę za kg.
             </p>
-            <table style={{ marginBottom: 16 }}>
+            <div style={{ overflowX: 'auto', marginBottom: 16 }}>
+            <table className="compact-table" style={{ minWidth: 480, fontSize: 12 }}>
               <thead>
                 <tr>
-                  <th style={{ width: 30 }}></th>
-                  <th>Z pliku</th>
-                  <th>Dopasuj / utwórz</th>
-                  <th>Rodzaj</th>
-                  <th>Gramatura opak.</th>
-                  <th>Jedn.</th>
-                  <th>Cena</th>
+                  <th style={{ width: 20 }}></th>
+                  <th style={{ width: 80 }}>Z pliku</th>
+                  <th style={{ width: 140 }}>Dopasuj / utwórz</th>
+                  <th style={{ width: 105 }}>Rodzaj</th>
+                  <th style={{ width: 58 }}>Gram.</th>
+                  <th style={{ width: 48 }}>Jedn.</th>
+                  <th style={{ width: 62 }}>Cena</th>
                 </tr>
               </thead>
               <tbody>
@@ -479,7 +469,7 @@ export default function Products() {
                             const p = productList.find(p => String(p.id) === e.target.value) || null;
                             upd({ matched_product: p, selected: item.selected || !!p });
                           }}
-                          style={{ fontSize: 12, padding: '3px 6px', maxWidth: 180 }}
+                          style={{ fontSize: 12, padding: '3px 6px', maxWidth: 130 }}
                         >
                           <option value="">➕ utwórz nowy</option>
                           {productList.map(p => <option key={p.id} value={String(p.id)}>{p.name}</option>)}
@@ -488,7 +478,7 @@ export default function Products() {
                       </td>
                       {/* Rodzaj: w opakowaniu / na wagę */}
                       <td>
-                        <div style={{ display: 'flex', gap: 0, borderRadius: 6, overflow: 'hidden', border: '1px solid #d0d4e8', minWidth: 140 }}>
+                        <div style={{ display: 'flex', gap: 0, borderRadius: 6, overflow: 'hidden', border: '1px solid #374151', minWidth: 100 }}>
                           <button type="button"
                             onClick={() => upd({ sold_by_weight: false })}
                             style={{ flex: 1, padding: '5px 8px', border: 'none', borderRight: '1px solid #d0d4e8', cursor: 'pointer', fontSize: 11, fontWeight: 600, whiteSpace: 'nowrap', transition: 'all 0.15s',
@@ -511,7 +501,7 @@ export default function Products() {
                           ? <span style={{ fontSize: 11, color: '#6b7280' }}>1000 g (1 kg)</span>
                           : <input type="number" step="1" min="0" value={item.weight}
                               onChange={e => upd({ weight: e.target.value })}
-                              style={{ ...s, width: 65 }} placeholder="np. 500" />
+                              className="no-spin" style={{ ...s, width: 50 }} placeholder="500" />
                         }
                       </td>
                       {/* Jednostka */}
@@ -525,7 +515,7 @@ export default function Products() {
                       <td>
                         <input type="number" step="0.01" min="0" value={item.price}
                           onChange={e => upd({ price: e.target.value })}
-                          style={{ ...s, width: 75 }} />
+                          className="no-spin" style={{ ...s, width: 52 }} />
                         <div style={{ fontSize: 10, color: sbw ? '#0d9488' : '#bbb', marginTop: 2 }}>
                           {sbw ? 'zł za kg' : 'zł/opak.'}
                         </div>
@@ -535,6 +525,7 @@ export default function Products() {
                 })}
               </tbody>
             </table>
+            </div>{/* koniec overflow-x: auto */}
             <div style={{ display: 'flex', gap: 10 }}>
               <button className="btn btn-primary" onClick={handleApplyImport}>{t('apply_changes')}</button>
               <button className="btn" style={{ background: '#374151', color: '#9ca3af' }}
@@ -543,6 +534,16 @@ export default function Products() {
           </div>
         )}
       </div>
+      </div>{/* koniec gridu 50/50 */}
+
+      {toast && (
+        <div style={{ position:'fixed', top:'50%', left:'50%', transform:'translate(-50%,-50%)',
+          background: toast.color, color:'#1f2937', padding:'16px 28px', borderRadius:12,
+          fontSize:15, fontWeight:600, boxShadow:'0 8px 32px rgba(0,0,0,0.25)',
+          zIndex:9999, pointerEvents:'none', textAlign:'center', whiteSpace:'nowrap' }}>
+          {toast.msg}
+        </div>
+      )}
 
       {/* Product list — collapsible */}
       <div className="card" style={{ padding: 0, overflow: 'hidden' }}>

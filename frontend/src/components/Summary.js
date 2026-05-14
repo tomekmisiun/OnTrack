@@ -148,7 +148,7 @@ function ProductTable({ items }) {
                   </div>
                   <label style={{ display:'flex', alignItems:'center', gap:4, fontSize:11, cursor:'pointer' }}>
                     <input type="checkbox" checked={editSBW} onChange={e => setEditSBW(e.target.checked)} />
-                    Na wagę (bez zaokrąglania)
+                    Produkt sprzedawany na wagę
                   </label>
                   <div style={{ display:'flex', gap:3 }}>
                     <button style={btn('#0d9488','#1f2937')} onClick={() => handleSavePkg(item)}>✓ Zapisz</button>
@@ -192,32 +192,42 @@ function ProductTable({ items }) {
 
             {/* W zapasie */}
             <td>
-              <div style={{ display:'flex', gap:3 }}>
-                {[['all','Całość'],['part','Część']].map(([mode, label]) => (
-                  <button key={mode}
-                    onClick={() => updItem(item.product_id, { stockMode: item.stockMode === mode ? null : mode, stockAmt: '' })}
-                    style={{
-                      padding:'2px 7px', fontSize:10, borderRadius:3, cursor:'pointer',
-                      border:'1px solid #99f6e4',
-                      background: item.stockMode === mode ? '#0d9488' : '#1c3534',
-                      color: item.stockMode === mode ? '#1f2937' : '#0d9488',
-                      fontWeight: item.stockMode === mode ? 600 : 400,
-                    }}>
-                    {label}
-                  </button>
-                ))}
+              <div style={{ display:'flex', flexDirection:'column', gap:2 }}>
+                {/* Całość */}
+                <button
+                  onClick={() => updItem(item.product_id, { stockMode: item.stockMode === 'all' ? null : 'all', stockAmt: '' })}
+                  style={{
+                    padding:'4px 8px', fontSize:11, fontWeight:600, cursor:'pointer',
+                    border:'1px solid #374151', borderRadius:5, transition:'all 0.15s',
+                    background: item.stockMode === 'all' ? '#0d9488' : '#2d3748',
+                    color: item.stockMode === 'all' ? 'white' : '#9ca3af',
+                  }}>
+                  Całość
+                </button>
+                {/* Część + input */}
+                <button
+                  onClick={() => updItem(item.product_id, { stockMode: item.stockMode === 'part' ? null : 'part', stockAmt: '' })}
+                  style={{
+                    padding:'4px 8px', fontSize:11, fontWeight:600, cursor:'pointer',
+                    border:'1px solid #374151', borderRadius:5, transition:'all 0.15s',
+                    background: item.stockMode === 'part' ? '#0d9488' : '#2d3748',
+                    color: item.stockMode === 'part' ? 'white' : '#9ca3af',
+                  }}>
+                  Część
+                </button>
+                {item.stockMode === 'part' && (
+                  <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:3, marginTop:2 }}>
+                    <span style={{ fontSize:10, color:'#6b7280', whiteSpace:'nowrap' }}>Podaj ile</span>
+                    <input type="number" min="0" step={item.unit === 'szt' ? 1 : 0.5}
+                      value={item.stockAmt}
+                      onChange={e => updItem(item.product_id, { stockAmt: e.target.value })}
+                      className="no-spin"
+                      style={{ padding:'2px 4px', fontSize:11, width:44, boxSizing:'border-box', border:'1px solid #374151', borderRadius:4, background:'#111827', color:'#e2e8f0' }}
+                      placeholder="0" />
+                    <span style={{ fontSize:10, color:'#6b7280' }}>{item.unit || 'g'}</span>
+                  </div>
+                )}
               </div>
-              {item.stockMode === 'part' && (
-                <div style={{ display:'flex', alignItems:'center', gap:2, marginTop:4 }}>
-                  <input type="number" min="0" step={item.unit === 'szt' ? 1 : 0.5}
-                    value={item.stockAmt}
-                    onChange={e => updItem(item.product_id, { stockAmt: e.target.value })}
-                    className="no-spin"
-                    style={{ padding:'1px 3px', fontSize:11, width:48, maxWidth:48, boxSizing:'border-box', border:'1px solid #99f6e4', borderRadius:3 }}
-                    placeholder="0" />
-                  <span style={{ fontSize:10, color:'#6b7280' }}>{item.unit || 'g'}</span>
-                </div>
-              )}
             </td>
 
             {/* Koszt zakupy */}
