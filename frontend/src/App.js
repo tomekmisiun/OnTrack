@@ -3,10 +3,12 @@ import Products from './components/Products';
 import Recipes from './components/Recipes';
 import Calendar from './components/Calendar';
 import Summary from './components/Summary';
+import MacroCalculator from './components/MacroCalculator';
 import Login from './components/Login';
 import Profile from './components/Profile';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
+import { ToastProvider } from './contexts/ToastContext';
 import './App.css';
 
 function AppInner() {
@@ -16,6 +18,7 @@ function AppInner() {
   const [showProfile, setShowProfile] = useState(false);
 
   const tabs = [
+    { id: 'macro',    label: t('tab_macro') },
     { id: 'calendar', label: t('tab_calendar') },
     { id: 'recipes',  label: t('tab_recipes') },
     { id: 'products', label: t('tab_products') },
@@ -76,6 +79,7 @@ function AppInner() {
       </nav>
 
       <main className="app-main">
+        {activeTab === 'macro'     && <MacroCalculator />}
         {activeTab === 'calendar'  && <Calendar onGoToTab={setActiveTab} />}
         {activeTab === 'recipes'   && <Recipes />}
         {activeTab === 'products'  && <Products />}
@@ -100,7 +104,9 @@ function AppWithAuth() {
 export default function App() {
   return (
     <LanguageProvider>
-      <AppWithAuth />
+      <ToastProvider>
+        <AppWithAuth />
+      </ToastProvider>
     </LanguageProvider>
   );
 }

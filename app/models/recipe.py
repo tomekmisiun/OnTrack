@@ -34,6 +34,7 @@ class Recipe(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     notes = db.Column(db.Text, nullable=True)
+    is_favorite = db.Column(db.Boolean, nullable=False, default=False)
     ingredients = db.relationship('RecipeIngredient', backref='recipe', cascade='all, delete-orphan')
 
     def total_cost(self):
@@ -58,6 +59,7 @@ class Recipe(db.Model):
             'id': self.id,
             'name': self.name,
             'notes': self.notes,
+            'is_favorite': bool(self.is_favorite),
             'ingredients': [i.to_dict() for i in self.ingredients],
             'total_cost': self.total_cost(),
             'total_kcal': kcal,

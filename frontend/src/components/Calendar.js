@@ -6,6 +6,7 @@ import {
 import { Icon } from '@iconify/react';
 import { mealPlan as api, recipes as recipesApi } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useToast } from '../contexts/ToastContext';
 
 const COLORS = ['#0d9488', '#f093fb', '#4facfe', '#43e97b', '#fa709a'];
 const getColor = (pos) => COLORS[(pos - 1) % 5];
@@ -47,7 +48,7 @@ function getMonthGrid(year, month) {
 }
 
 // ─── Draggable recipe ─────────────────────────────────────────────────────────
-function DraggableRecipe({ recipe }) {
+function DraggableRecipe({ recipe, onToggleFavorite }) {
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: `recipe-${recipe.id}`, data: { type: 'recipe', recipe },
   });
@@ -61,14 +62,25 @@ function DraggableRecipe({ recipe }) {
       boxShadow:'0 4px 12px rgba(85,72,160,0.45)',
       display:'flex', flexDirection:'column', overflow:'hidden',
     }}>
-      {/* Name — fills available space, stays at top */}
-      <div style={{flex:1, padding:'10px 11px 6px'}}>
-        <div style={{
-          fontWeight:700, fontSize:11.5, lineHeight:1.4, color:'#1f2937',
-          display:'-webkit-box', WebkitLineClamp:3,
-          WebkitBoxOrient:'vertical', overflow:'hidden',
-        }}>
-          {recipe.name}
+      {/* Name + star */}
+      <div style={{flex:1, padding:'8px 11px 6px', display:'flex', flexDirection:'column'}}>
+        <div style={{display:'flex', justifyContent:'space-between', alignItems:'flex-start', gap:4}}>
+          <div style={{
+            fontWeight:700, fontSize:11.5, lineHeight:1.4, color:'#1f2937',
+            display:'-webkit-box', WebkitLineClamp:3,
+            WebkitBoxOrient:'vertical', overflow:'hidden', flex:1,
+          }}>
+            {recipe.name}
+          </div>
+          <button
+            onPointerDown={e => e.stopPropagation()}
+            onClick={e => { e.stopPropagation(); onToggleFavorite(recipe.id); }}
+            style={{
+              background:'none', border:'none', cursor:'pointer', padding:0,
+              fontSize:14, lineHeight:1, flexShrink:0, marginTop:1,
+              color: recipe.is_favorite ? '#facc15' : 'transparent',
+              WebkitTextStroke: recipe.is_favorite ? '0' : '1.2px rgba(255,255,255,0.5)',
+            }}>★</button>
         </div>
       </div>
 
@@ -210,7 +222,13 @@ function MealSlot({ date, position, meal, onDelete, showLabel }) {
 }
 
 // ─── Day cell ─────────────────────────────────────────────────────────────────
-function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDelete, onDeleteAll, onCopy, onPaste, copiedDay }) {
+function macroColor(actual, goal) {
+  if (!goal || goal <= 0) return null;
+  const pct = Math.abs((actual - goal) / goal * 100);
+  return pct <= 10 ? '#22c55e' : pct <= 25 ? '#eab308' : '#ef4444';
+}
+
+function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDelete, onDeleteAll, onCopy, onPaste, copiedDay, macroGoals }) {
   const { t } = useLanguage();
   const mealsByPos = {};
   meals.forEach(m => { mealsByPos[m.position] = m; });
@@ -297,11 +315,20 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
           borderTop:'1px solid #374151', background: isPast ? '#161d2d' : '#162626',
           padding:'2px 4px',
         }}>
-          <div style={{fontSize:10,fontWeight:700,color:'#2dd4bf',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>
-            {totalKcal} kcal
+          <div style={{fontSize:10,fontWeight:700,whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>
+            <span style={{color: macroGoals ? macroColor(totalKcal, macroGoals.kcal) : '#2dd4bf'}}>{totalKcal}</span>
+            {macroGoals && <span style={{color:'#4b5563',fontWeight:400}}>/{macroGoals.kcal}</span>}
+            <span style={{color:'#6b7280',fontWeight:400}}> kcal</span>
           </div>
-          <div style={{fontSize:9,color:'#6b7280',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>
-            B:{Math.round(totalProtein)}g T:{Math.round(totalFat)}g W:{Math.round(totalCarbs)}g
+          <div style={{fontSize:9,whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>
+            {[['B',Math.round(totalProtein),macroGoals?.protein],['T',Math.round(totalFat),macroGoals?.fat],['W',Math.round(totalCarbs),macroGoals?.carbs]].map(([lbl,val,tgt],i)=>(
+              <span key={lbl} style={{marginLeft:i>0?3:0}}>
+                <span style={{color:'#6b7280'}}>{lbl}:</span>
+                <span style={{color: tgt ? macroColor(val,tgt) : '#9ca3af'}}>{val}</span>
+                {tgt && <span style={{color:'#374151'}}>/{tgt}</span>}
+                <span style={{color:'#6b7280'}}>g</span>
+              </span>
+            ))}
           </div>
         </div>
       )}
@@ -531,6 +558,7 @@ function OverlayContent({ dragData }) {
 // ─── Main Calendar ────────────────────────────────────────────────────────────
 export default function Calendar({ onGoToTab }) {
   const { t } = useLanguage();
+  const { showError } = useToast();
   const todayMidnight = new Date(); todayMidnight.setHours(0,0,0,0);
   const todayStr = dateToStr(todayMidnight);
 
@@ -539,7 +567,6 @@ export default function Calendar({ onGoToTab }) {
   const [recipes,setRecipes]         = useState([]);
   const [mealsByDate,setMealsByDate] = useState({});
   const [activeDrag,setActiveDrag]   = useState(null);
-  const [error,setError]             = useState('');
   const [copiedDay,setCopiedDay]     = useState(null);
   const [copiedWeek,setCopiedWeek]   = useState(null);
   const [toast,setToast]             = useState(null);
@@ -569,6 +596,10 @@ export default function Calendar({ onGoToTab }) {
     try { return JSON.parse(localStorage.getItem('weekTemplates')||'[]'); } catch { return []; }
   });
 
+  const [macroGoals] = useState(()=>{
+    try { return JSON.parse(localStorage.getItem('macroGoals')||'null'); } catch { return null; }
+  });
+
   const showToast = (msg, color='#0066cc')=>{
     setToast({msg,color});
     setTimeout(()=>setToast(null), 3000);
@@ -578,7 +609,7 @@ export default function Calendar({ onGoToTab }) {
   const days = getMonthGrid(year, month);
 
   useEffect(()=>{
-    recipesApi.getAll().then(r=>setRecipes(r.data)).catch(()=>setError(t('err_load_recipes')));
+    recipesApi.getAll().then(r=>setRecipes(r.data)).catch(()=>showError(t('err_load_recipes')));
   },[]);
 
   const loadMonth = useCallback(async(y,m)=>{
@@ -586,7 +617,7 @@ export default function Calendar({ onGoToTab }) {
     const start = dateToStr(grid[0]);
     const end   = dateToStr(grid[grid.length-1]);
     try { setMealsByDate((await api.getRange(start,end)).data); }
-    catch { setError(t('err_load_plan')); }
+    catch { showError(t('err_load_plan')); }
   },[]);
 
   useEffect(()=>{ loadMonth(year,month); },[year,month,loadMonth]);
@@ -596,7 +627,7 @@ export default function Calendar({ onGoToTab }) {
 
   const handleDelete = async(mealId)=>{
     try { await api.deleteMeal(mealId); await loadMonth(year,month); }
-    catch { setError(t('err_del_meal')); }
+    catch { showError(t('err_del_meal')); }
   };
 
   const handleDeleteAll = async(dateStr)=>{
@@ -606,17 +637,17 @@ export default function Calendar({ onGoToTab }) {
     try {
       await Promise.all(meals.map(m=>api.deleteMeal(m.id)));
       await loadMonth(year,month);
-    } catch { setError(t('err_del_meals')); }
+    } catch { showError(t('err_del_meals')); }
   };
 
   const handleCopyDay  = (ds)=>{
     if (copiedDay === ds) { setCopiedDay(null); return; }
-    setCopiedDay(ds); setError(''); showToast(t('toast_copy_day')(toEU(ds)));
+    setCopiedDay(ds);  showToast(t('toast_copy_day')(toEU(ds)));
   };
   const handlePasteDay = async(target)=>{
     if (!copiedDay) return;
     try { await api.copyRange({source_start:copiedDay,source_end:copiedDay,target_start:target}); await loadMonth(year,month); }
-    catch(e){ setError(e.response?.data?.error||t('err_paste_day')); }
+    catch(e){ showError(e.response?.data?.error||t('err_paste_day')); }
   };
 
   const handleDeleteWeek = async(mondayStr)=>{
@@ -630,13 +661,13 @@ export default function Calendar({ onGoToTab }) {
     try {
       await Promise.all(allMeals.map(m=>api.deleteMeal(m.id)));
       await loadMonth(year, month);
-    } catch { setError(t('err_del_week')); }
+    } catch { showError(t('err_del_week')); }
   };
 
   const handleCopyWeek = (mon)=>{
     if (copiedWeek === mon) { setCopiedWeek(null); return; }
     setCopiedWeek(mon);
-    setError('');
+    
     const newSlots = {};
     for (let i=0; i<7; i++) {
       const ds = addDays(mon, i);
@@ -651,7 +682,7 @@ export default function Calendar({ onGoToTab }) {
   const handlePasteWeek = async(mon)=>{
     if (!copiedWeek) return;
     try { await api.copyRange({source_start:copiedWeek,source_end:addDays(copiedWeek,6),target_start:mon}); await loadMonth(year,month); }
-    catch(e){ setError(e.response?.data?.error||t('err_paste_week')); }
+    catch(e){ showError(e.response?.data?.error||t('err_paste_week')); }
   };
 
   const saveTemplate = (name, meals)=>{
@@ -715,7 +746,7 @@ export default function Calendar({ onGoToTab }) {
       if (drop.type!=='day-target') return;
       if (drag.dateStr===drop.dateStr) return;
       try { await api.copyRange({source_start:drag.dateStr,source_end:drag.dateStr,target_start:drop.dateStr}); await loadMonth(year,month); }
-      catch(e){ setError(e.response?.data?.error||t('err_copy_day')); }
+      catch(e){ showError(e.response?.data?.error||t('err_copy_day')); }
       return;
     }
 
@@ -727,7 +758,7 @@ export default function Calendar({ onGoToTab }) {
     if (drag.type==='recipe') {
       if (slotOccupied) return;
       try { await api.addMeal({date:targetDate,position:targetPos,recipe_id:drag.recipe.id}); await loadMonth(year,month); }
-      catch { setError(t('err_add_meal')); }
+      catch { showError(t('err_add_meal')); }
     } else if (drag.type==='meal') {
       const {meal} = drag;
       const srcDate = Object.keys(mealsByDate).find(d=>(mealsByDate[d]||[]).some(m=>m.id===meal.id));
@@ -737,7 +768,7 @@ export default function Calendar({ onGoToTab }) {
         await api.deleteMeal(meal.id);
         await api.addMeal({date:targetDate,position:targetPos,recipe_id:meal.recipe.id});
         await loadMonth(year,month);
-      } catch { setError(t('err_move_meal')); }
+      } catch { showError(t('err_move_meal')); }
     }
   };
 
@@ -750,7 +781,6 @@ export default function Calendar({ onGoToTab }) {
   return (
     <div ref={containerRef}>
     <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd} onDragCancel={handleDragCancel}>
-      {error && <div style={{background:'#ffe0e0',color:'#c00',padding:12,borderRadius:8,marginBottom:16}}>{error}</div>}
 
       {toast && (
         <div style={{position:'fixed',top:'50%',left:'50%',transform:'translate(-50%,-50%)',
@@ -862,7 +892,8 @@ export default function Calendar({ onGoToTab }) {
                     isToday={ds===todayStr} isPast={date<todayMidnight}
                     isCurrentMonth={date.getMonth()===month}
                     onDelete={handleDelete} onDeleteAll={handleDeleteAll}
-                    onCopy={handleCopyDay} onPaste={handlePasteDay} copiedDay={copiedDay} />
+                    onCopy={handleCopyDay} onPaste={handlePasteDay} copiedDay={copiedDay}
+                    macroGoals={macroGoals} />
                 );
               })}
             </div>
@@ -885,7 +916,7 @@ export default function Calendar({ onGoToTab }) {
         {recipes.length===0
           ? <p style={{fontSize:13,color:'#4b5563',margin:0}}>{t('no_recipes_cal')}</p>
           : <div style={{display:'flex',gap:10,overflowX:'auto',paddingBottom:6,scrollbarWidth:'thin',scrollbarColor:'#ddd transparent'}}>
-              {recipes.map(r=><DraggableRecipe key={r.id} recipe={r}/>)}
+              {[...recipes].sort((a,b)=>(b.is_favorite?1:0)-(a.is_favorite?1:0)).map(r=><DraggableRecipe key={r.id} recipe={r} onToggleFavorite={async (id)=>{ await recipesApi.toggleFavorite(id); recipesApi.getAll().then(res=>setRecipes(res.data)); }}/>)}
             </div>
         }
       </div>

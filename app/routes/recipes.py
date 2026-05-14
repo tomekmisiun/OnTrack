@@ -77,6 +77,15 @@ def update_recipe(id):
     return jsonify(recipe.to_dict())
 
 
+@recipes_bp.route('/<int:id>/favorite', methods=['PATCH'])
+@jwt_required()
+def toggle_favorite(id):
+    recipe = Recipe.query.filter_by(id=id, user_id=current_uid()).first_or_404()
+    recipe.is_favorite = not recipe.is_favorite
+    db.session.commit()
+    return jsonify({'is_favorite': recipe.is_favorite})
+
+
 @recipes_bp.route('/<int:id>/notes', methods=['PATCH'])
 @jwt_required()
 def update_notes(id):

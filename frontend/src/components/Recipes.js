@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { recipes as api, products as productsApi } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useToast } from '../contexts/ToastContext';
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
@@ -137,11 +138,11 @@ function matchProducts(ingredients, products) {
 
 export default function Recipes() {
   const { t } = useLanguage();
+  const { showError } = useToast();
   const [recipeList, setRecipeList] = useState([]);
   const [productList, setProductList] = useState([]);
   const [search, setSearch] = useState('');
   const [expanded, setExpanded] = useState(null);
-  const [error, setError] = useState('');
   const [pasteText, setPasteText] = useState('');
   const [parsed, setParsed] = useState(null);
   const [parsing, setParsing] = useState(false);
@@ -151,7 +152,7 @@ export default function Recipes() {
   useEffect(() => { loadRecipes(); loadProducts(); }, []);
 
   const loadRecipes = async () => {
-    try { setRecipeList((await api.getAll()).data); } catch { setError(t('err_load_recipes_list')); }
+    try { setRecipeList((await api.getAll()).data); } catch { showError(t('err_load_recipes_list')); }
   };
   const loadProducts = async () => {
     try { setProductList((await productsApi.getAll()).data); } catch {}
@@ -159,21 +160,21 @@ export default function Recipes() {
 
   const handleParseAI = async () => {
     if (!pasteText.trim()) return;
-    setParsing('ai'); setError('');
+    setParsing('ai'); 
     try {
       const token = localStorage.getItem('token');
       const res = await axios.post(`${API_URL}/api/recipes/parse-text`, { text: pasteText }, { headers: { Authorization: `Bearer ${token}` } });
       setRemaining(res.data.remaining_today);
       setParsed({ name: res.data.recipe_name, ingredients: res.data.ingredients.map(i => ({ rawName: i.ingredient_text, weight: i.weight, unit: i.unit, product_id: i.product_id })) });
-    } catch (e) { setError(e.response?.data?.error || t('err_save_recipe')); }
+    } catch (e) { showError(e.response?.data?.error || t('err_save_recipe')); }
     finally { setParsing(false); }
   };
 
   const handleParseRegex = () => {
     if (!pasteText.trim()) return;
-    setError('');
+    
     const result = parseRecipeText(pasteText);
-    if (!result || !result.ingredients.length) { setError(t('err_parse_regex')); return; }
+    if (!result || !result.ingredients.length) { showError(t('err_parse_regex')); return; }
     result.ingredients = matchProducts(result.ingredients, productList);
     result.sourceText = pasteText;
     setParsed(result);
@@ -183,89 +184,90 @@ export default function Recipes() {
   const removeIngredient = (i) => setParsed({ ...parsed, ingredients: parsed.ingredients.filter((_, idx) => idx !== i) });
 
   const handleSave = async () => {
-    if (!parsed?.name) { setError(t('err_no_name')); return; }
+    if (!parsed?.name) { showError(t('err_no_name')); return; }
     const valid = parsed.ingredients.filter(i => i.product_id && i.weight > 0);
-    if (!valid.length) { setError(t('err_no_ingredients')); return; }
+    if (!valid.length) { showError(t('err_no_ingredients')); return; }
     try {
       await api.create({
         name: parsed.name,
         notes: parsed.sourceText || null,
         ingredients: valid.map(i => ({ product_id: parseInt(i.product_id), weight: i.weight })),
       });
-      setParsed(null); setPasteText(''); setError(''); loadRecipes();
-    } catch (e) { setError(e.response?.data?.error || t('err_save_recipe')); }
+      setParsed(null); setPasteText('');  loadRecipes();
+    } catch (e) { showError(e.response?.data?.error || t('err_save_recipe')); }
   };
 
   const handleSaveNotes = async (id) => {
     try {
       await api.updateNotes(id, editingNotes.text);
       setEditingNotes(null); loadRecipes();
-    } catch { setError(t('err_save_notes')); }
+    } catch { showError(t('err_save_notes')); }
   };
 
   return (
     <div>
       <div className="card">
         <h2>{t('add_recipe_title')}</h2>
-        {error && <p style={{ color: '#c00', marginBottom: 12, fontSize: 13 }}>{error}</p>}
 
         {!parsed ? (
-          <div>
-            <div style={{ background: '#1c3534', border: '1px solid #e2e8f0', borderRadius: 8, padding: '14px 16px', marginBottom: 16, fontSize: 13, lineHeight: 1.7 }}>
-              <div style={{ fontWeight: 700, color: '#0d9488', marginBottom: 8 }}>{t('how_to_recipe')}</div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
-                <div>
-                  <div style={{ fontWeight: 600, marginBottom: 6, color: '#d1d5db' }}>{t('format_title')}</div>
-                  <ol style={{ margin: 0, paddingLeft: 18, color: '#9ca3af' }}>
-                    <li><b>{t('fmt_1')}</b></li>
-                    <li>{t('fmt_2')}</li>
-                    <li>{t('fmt_3')}</li>
-                    <li>{t('fmt_4')}</li>
-                  </ol>
-                  <div style={{ marginTop: 10, padding: '8px 12px', background: '#111827', border: '1px solid #374151', borderRadius: 6, fontSize: 12, color: '#9ca3af' }}>
-                    {t('ai_tip')} <span style={{ color: '#856404' }}>{t('daily_limit')}</span><br/>
-                    {t('regex_tip')}
-                  </div>
-                </div>
-                <div>
-                  <div style={{fontSize:17,fontWeight:600,color:'#f1f5f9',marginBottom:8}}>Szukasz inspiracji?</div>
-                  <a href="https://aniagotuje.pl/" target="_blank" rel="noreferrer"
-                    style={{display:'inline-flex',alignItems:'center',gap:5,fontSize:12,color:'#2dd4bf',fontWeight:600,marginBottom:10,textDecoration:'none',background:'#1c3534',padding:'5px 10px',borderRadius:6,border:'1px solid #374151'}}>
-                    aniagotuje.pl →
-                  </a>
-                  <div style={{ fontWeight: 600, marginBottom: 4, color: '#d1d5db' }}>{t('example')}</div>
-                  <pre style={{ margin: 0, background: '#111827', border: '1px solid #374151', borderRadius: 6, padding: '8px 12px', fontSize: 12, color: '#d1d5db', lineHeight: 1.8 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, alignItems: 'stretch' }}>
+            {/* Lewa: instrukcja */}
+            <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: '14px 16px', fontSize: 13, lineHeight: 1.7 }}>
+              <div style={{ fontWeight: 700, color: '#0d9488', marginBottom: 10 }}>{t('how_to_recipe')}</div>
+
+              <div style={{ fontWeight: 600, marginBottom: 4, color: '#d1d5db' }}>{t('example')}</div>
+              <pre style={{ margin: '0 0 14px', background: '#111827', border: '1px solid #374151', borderRadius: 6, padding: '8px 12px', fontSize: 12, color: '#d1d5db', lineHeight: 1.8 }}>
 {`Owsianka
 płatki owsiane 50 g
 mleko 200 ml
 banan 120 g
 łyżka masła orzechowego`}
-                  </pre>
-                  {remaining !== null && (
-                    <div style={{ marginTop: 6, fontSize: 11, color: '#856404' }}>
-                      {t('remaining_ai')(remaining)}
-                    </div>
-                  )}
-                </div>
+              </pre>
+
+              <div style={{ fontWeight: 600, marginBottom: 4, color: '#d1d5db' }}>{t('format_title')}</div>
+              <ol style={{ margin: '0 0 12px', paddingLeft: 18, color: '#9ca3af' }}>
+                <li><b>{t('fmt_1')}</b></li>
+                <li>{t('fmt_2')}</li>
+                <li>{t('fmt_3')}</li>
+                <li>{t('fmt_4')}</li>
+              </ol>
+
+              <div style={{ padding: '8px 12px', background: '#111827', border: '1px solid #374151', borderRadius: 6, fontSize: 12, color: '#9ca3af', marginBottom: 14 }}>
+                {t('ai_tip')} <span style={{ color: '#856404' }}>{t('daily_limit')}</span><br/>
+                {t('regex_tip')}
               </div>
+
+              <div style={{ fontSize: 17, fontWeight: 600, color: '#f1f5f9', marginBottom: 6 }}>Szukasz inspiracji?</div>
+              <a href="https://aniagotuje.pl/" target="_blank" rel="noreferrer"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, color: '#2dd4bf', fontWeight: 600, textDecoration: 'none', background: '#111827', padding: '5px 10px', borderRadius: 6, border: '1px solid #374151' }}>
+                <img src="https://www.google.com/s2/favicons?domain=aniagotuje.pl&sz=16" alt="" style={{ width: 16, height: 16, borderRadius: 3 }} />
+                aniagotuje.pl →
+              </a>
+              {remaining !== null && (
+                <div style={{ marginTop: 8, fontSize: 11, color: '#856404' }}>
+                  {t('remaining_ai')(remaining)}
+                </div>
+              )}
             </div>
 
-            <textarea
-              value={pasteText} onChange={e => setPasteText(e.target.value)}
-              placeholder={t('recipe_ph')}
-              style={{ width: '100%', maxWidth: 600, minHeight: 180, padding: 12, border: '1.5px solid #374151', borderRadius: 8, fontFamily: 'inherit', fontSize: 13, lineHeight: 1.6, resize: 'vertical', outline: 'none', marginBottom: 12, boxSizing: 'border-box', background: '#111827', color: '#e2e8f0' }}
-              onFocus={e => e.target.style.borderColor = '#0d9488'}
-              onBlur={e => e.target.style.borderColor = '#374151'}
-            />
-
-            <div style={{ display: 'flex', gap: 10 }}>
-              <button className="btn btn-primary" onClick={handleParseAI} disabled={!pasteText.trim() || parsing === 'ai'} style={{ minWidth: 180 }}>
-                {parsing === 'ai' ? t('parsing_ai') : t('parse_ai_btn')}
-              </button>
-              <button className="btn" onClick={handleParseRegex} disabled={!pasteText.trim() || parsing === 'ai'}
-                style={{ background: '#1c3534', color: '#0d9488', border: '1px solid #99f6e4', fontWeight: 600, minWidth: 160 }}>
-                {t('parse_regex_btn')}
-              </button>
+            {/* Prawa: textarea + przyciski */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <textarea
+                value={pasteText} onChange={e => setPasteText(e.target.value)}
+                placeholder={t('recipe_ph')}
+                style={{ width: '100%', flex: 1, padding: 12, border: '1.5px solid #374151', borderRadius: 8, fontFamily: 'inherit', fontSize: 13, lineHeight: 1.6, resize: 'none', outline: 'none', boxSizing: 'border-box', background: '#111827', color: '#e2e8f0' }}
+                onFocus={e => e.target.style.borderColor = '#0d9488'}
+                onBlur={e => e.target.style.borderColor = '#374151'}
+              />
+              <div style={{ display: 'flex', gap: 10 }}>
+                <button className="btn btn-primary" onClick={handleParseAI} disabled={!pasteText.trim() || parsing === 'ai'} style={{ flex: 1 }}>
+                  {parsing === 'ai' ? t('parsing_ai') : t('parse_ai_btn')}
+                </button>
+                <button className="btn" onClick={handleParseRegex} disabled={!pasteText.trim() || parsing === 'ai'}
+                  style={{ flex: 1, background: '#1c3534', color: '#0d9488', border: '1px solid #374151', fontWeight: 600 }}>
+                  {t('parse_regex_btn')}
+                </button>
+              </div>
             </div>
           </div>
         ) : (
@@ -274,13 +276,18 @@ banan 120 g
               <label style={{ fontSize: 12, color: '#6b7280', display: 'block', marginBottom: 4 }}>{t('recipe_name_lbl')}</label>
               <input value={parsed.name} onChange={e => setParsed({ ...parsed, name: e.target.value })} style={{ width: '100%' }} />
             </div>
-            <label style={{ fontSize: 12, color: '#6b7280', display: 'block', marginBottom: 8 }}>
-              {t('ingredients_lbl')(parsed.ingredients.filter(i => i.product_id).length, parsed.ingredients.length)}
-            </label>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 80px 1fr 36px', gap: 8, padding: '0 10px', marginBottom: 4 }}>
+              <span style={{ fontSize: 11, fontWeight: 600, color: '#0d9488', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                {t('ingredients_lbl')(parsed.ingredients.filter(i => i.product_id).length, parsed.ingredients.length)}
+              </span>
+              <span style={{ fontSize: 11, fontWeight: 600, color: '#0d9488', textTransform: 'uppercase', letterSpacing: '0.5px' }}>g / ml / szt</span>
+              <span style={{ fontSize: 11, fontWeight: 600, color: '#0d9488', textTransform: 'uppercase', letterSpacing: '0.5px', textAlign: 'right' }}>Dopasowany produkt</span>
+              <span></span>
+            </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
               {parsed.ingredients.map((ing, i) => (
                 <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 80px 1fr 36px', gap: 8, alignItems: 'center', padding: '8px 10px', background: ing.product_id ? '#162616' : '#2d1f0f', border: `1px solid ${ing.product_id ? '#1a4a1a' : '#4a3010'}`, borderRadius: 8 }}>
-                  <div style={{ fontSize: 13, color: '#9ca3af', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={ing.rawName}>{ing.rawName}</div>
+                  <div style={{ fontSize: 13, color: '#e2e8f0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={ing.rawName}>{ing.rawName}</div>
                   <input type="number" value={ing.weight} onChange={e => updateIngredient(i, 'weight', parseFloat(e.target.value))} style={{ padding: '6px 8px', fontSize: 13 }} />
                   <select value={ing.product_id || ''} onChange={e => updateIngredient(i, 'product_id', e.target.value || null)} style={{ padding: '6px 8px', fontSize: 13 }}>
                     <option value="">{t('no_match_opt')}</option>
@@ -292,7 +299,7 @@ banan 120 g
             </div>
             <div style={{ display: 'flex', gap: 10 }}>
               <button className="btn btn-primary" onClick={handleSave}>{t('save_recipe')}</button>
-              <button className="btn" style={{ background: '#374151', color: '#9ca3af' }} onClick={() => { setParsed(null); setError(''); }}>{t('back')}</button>
+              <button className="btn" style={{ background: '#374151', color: '#9ca3af' }} onClick={() => { setParsed(null);  }}>{t('back')}</button>
             </div>
 
             {parsed.sourceText && (
@@ -324,14 +331,20 @@ banan 120 g
         {recipeList.length > 0 && search.trim() && !recipeList.some(r => r.name.toLowerCase().includes(search.trim().toLowerCase())) && (
           <p style={{ textAlign: 'center', color: '#6b7280', fontStyle: 'italic' }}>Nie znaleziono przepisu „{search}"</p>
         )}
-        {recipeList.filter(r => !search.trim() || r.name.toLowerCase().includes(search.trim().toLowerCase())).map(r => (
+        {recipeList.filter(r => !search.trim() || r.name.toLowerCase().includes(search.trim().toLowerCase())).sort((a, b) => (b.is_favorite ? 1 : 0) - (a.is_favorite ? 1 : 0)).map(r => (
           <div key={r.id} style={{ borderBottom: '1px solid #374151', padding: '12px 0' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <button
+                  onClick={async () => { await api.toggleFavorite(r.id); loadRecipes(); }}
+                  title={r.is_favorite ? 'Usuń z ulubionych' : 'Dodaj do ulubionych'}
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 20, lineHeight: 1, padding: '2px 0', color: r.is_favorite ? '#facc15' : 'transparent', WebkitTextStroke: r.is_favorite ? '0' : '1.5px #6b7280', flexShrink: 0 }}>
+                  ★
+                </button>
                 <strong>{r.name}</strong>
-                <span style={{ marginLeft: 12, color: '#0d9488' }}>{r.total_cost.toFixed(2)} zł</span>
+                <span style={{ color: '#0d9488' }}>{r.total_cost.toFixed(2)} zł</span>
               </div>
-              <div style={{ display: 'flex', gap: 8 }}>
+              <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                 <button className="btn btn-primary" onClick={() => setExpanded(expanded === r.id ? null : r.id)}>
                   {expanded === r.id ? t('hide_ingredients') : t('show_ingredients')}
                 </button>

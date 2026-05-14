@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { mealPlan as api, recipes as recipesApi, products as productsApi } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useToast } from '../contexts/ToastContext';
 
 // ─── Date helpers ─────────────────────────────────────────────────────────────
 function dateToStr(d) {
@@ -339,6 +340,7 @@ function PeriodCard({ title, range, summary, loading, error, onGoToTab }) {
 // ─── Main Summary component ───────────────────────────────────────────────────
 function Summary({ onGoToTab }) {
   const { t } = useLanguage();
+  const { showError } = useToast();
 
   const week  = getCurrentWeek();
   const month = getCurrentMonth();
@@ -347,14 +349,12 @@ function Summary({ onGoToTab }) {
   const [monthSummary, setMonthSummary] = useState(null);
   const [weekLoading,  setWeekLoading]  = useState(true);
   const [monthLoading, setMonthLoading] = useState(true);
-  const [loadError,    setLoadError]    = useState('');
 
   // Custom period
   const [customOpen,    setCustomOpen]    = useState(false);
   const [customRange,   setCustomRange]   = useState({ start:'', end:'' });
   const [customSummary, setCustomSummary] = useState(null);
   const [customLoading, setCustomLoading] = useState(false);
-  const [customError,   setCustomError]   = useState('');
 
   // Templates
   const [templates] = useState(() => {
@@ -371,18 +371,18 @@ function Summary({ onGoToTab }) {
       setWeekSummary(wRes.data);
       setMonthSummary(mRes.data);
       setRecipeList(rRes.data);
-    }).catch(() => setLoadError(t('err_load_summary')))
+    }).catch(() => showError(t('err_load_summary')))
       .finally(() => { setWeekLoading(false); setMonthLoading(false); });
   }, []);
 
   const handleCustomLoad = async () => {
-    if (!customRange.start || !customRange.end) { setCustomError(t('err_select_range')); return; }
-    if (customRange.start > customRange.end)    { setCustomError(t('err_date_order'));   return; }
-    setCustomLoading(true); setCustomError('');
+    if (!customRange.start || !customRange.end) { showError(t('err_select_range')); return; }
+    if (customRange.start > customRange.end)    { showError(t('err_date_order'));   return; }
+    setCustomLoading(true); 
     try {
       const res = await api.getSummary(customRange.start, customRange.end);
       setCustomSummary(res.data);
-    } catch { setCustomError(t('err_load_summary')); }
+    } catch { showError(t('err_load_summary')); }
     finally { setCustomLoading(false); }
   };
 
@@ -404,7 +404,6 @@ function Summary({ onGoToTab }) {
 
   return (
     <div>
-      {loadError && <div style={{ background:'#ffe0e0', color:'#c00', padding:12, borderRadius:8, marginBottom:16 }}>{loadError}</div>}
 
       {/* ─── Current week ─── */}
       <PeriodCard
@@ -446,7 +445,7 @@ function Summary({ onGoToTab }) {
         </div>
         {customOpen && (
           <div style={{ padding:'0 20px 20px', borderTop:'1px solid #374151' }}>
-            {customError && <p style={{ color:'red', fontSize:13, marginTop:12 }}>{customError}</p>}
+            
             <div className="form-row" style={{ marginTop:12 }}>
               <div style={{ display:'flex', flexDirection:'column', gap:4 }}>
                 <label style={{ fontSize:13, color:'#6b7280' }}>{t('date_from')}</label>

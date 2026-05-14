@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { products as api, importPrices } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useToast } from '../contexts/ToastContext';
 
 const toUnitPrice = (packagePrice, packageWeight, unit) => {
   const pkg = parseFloat(packageWeight) || 1;
@@ -37,11 +38,11 @@ const MacroDisplay = ({ p }) => {
 
 export default function Products() {
   const { t } = useLanguage();
+  const { showError, showSuccess, showToast: globalToast } = useToast();
   const [productList, setProductList] = useState([]);
   const [form, setForm] = useState(EMPTY_FORM);
   const [editId, setEditId] = useState(null);
   const [editForm, setEditForm] = useState({});
-  const [error, setError] = useState('');
   const [lookingUp, setLookingUp] = useState(null);
   const [importItems, setImportItems] = useState(null);
   const [importing, setImporting] = useState(false);
@@ -50,13 +51,7 @@ export default function Products() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [listOpen, setListOpen] = useState(true);
   const [search, setSearch] = useState('');
-  const [toast, setToast] = useState(null);
   const fileInputRef = useRef();
-
-  const showToast = (msg, color = '#22c55e', ms = 4000) => {
-    setToast({ msg, color });
-    if (ms) setTimeout(() => setToast(null), ms);
-  };
 
   const mapImportItem = item => ({
     ...item,
@@ -75,12 +70,12 @@ export default function Products() {
 
   const loadProducts = async () => {
     try { setProductList((await api.getAll()).data); }
-    catch { setError(t('err_load_products')); }
+    catch { showError(t('err_load_products')); }
   };
 
   const handleSubmit = async () => {
-    if (!form.name || !form.package_price) { setError(t('err_fill_fields')); return; }
-    if (!form.sold_by_weight && !form.package_weight) { setError(t('err_fill_fields')); return; }
+    if (!form.name || !form.package_price) { showError(t('err_fill_fields')); return; }
+    if (!form.sold_by_weight && !form.package_weight) { showError(t('err_fill_fields')); return; }
     const sbw = !!form.sold_by_weight;
     const pkgW = sbw ? 1000 : parseFloat(form.package_weight);
     const unit = sbw ? 'g' : form.unit;
@@ -92,11 +87,11 @@ export default function Products() {
         unit,
         sold_by_weight: sbw,
       });
-      setForm(EMPTY_FORM); setError('');
+      setForm(EMPTY_FORM); 
       const macro = await fetchMacroFromOFF(form.name);
       if (macro) await api.update(created.data.id, macro);
       loadProducts();
-    } catch (e) { setError(e.response?.data?.error || t('err_fill_fields')); }
+    } catch (e) { showError(e.response?.data?.error || t('err_fill_fields')); }
   };
 
   const startEdit = (p) => {
@@ -131,12 +126,12 @@ export default function Products() {
         carbs:   editForm.carbs   !== '' ? parseFloat(editForm.carbs)   : null,
       });
       setEditId(null); loadProducts();
-    } catch (e) { setError(e.response?.data?.error || t('save_btn')); }
+    } catch (e) { showError(e.response?.data?.error || t('save_btn')); }
   };
 
   const handleAutoFill = async () => {
     if (!editForm.name) return;
-    setLookingUp(editId); setError('');
+    setLookingUp(editId); 
     try {
       const url = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(editForm.name)}&search_simple=1&action=process&json=1&page_size=5&fields=product_name,nutriments`;
       const res = await fetch(url);
@@ -151,15 +146,15 @@ export default function Products() {
           found = true; break;
         }
       }
-      if (!found) setError(t('err_not_found_off')(editForm.name));
-    } catch { setError(t('err_off')); }
+      if (!found) showError(t('err_not_found_off')(editForm.name));
+    } catch { showError(t('err_off')); }
     finally { setLookingUp(null); }
   };
 
   const handleDelete = async (id) => {
     if (!window.confirm(t('confirm_del_product'))) return;
     try { await api.delete(id); loadProducts(); }
-    catch { setError(t('del_btn')); }
+    catch { showError(t('del_btn')); }
   };
 
   const fetchMacroFromOFF = async (name) => {
@@ -177,34 +172,34 @@ export default function Products() {
     return null;
   };
 
-  const handleFileSelect = (file) => { if (!file) return; setSelectedFile(file); setError(''); };
+  const handleFileSelect = (file) => { if (!file) return; setSelectedFile(file);  };
 
   const handleParseAI = async () => {
     if (!selectedFile) return;
-    setImporting(true); setError('');
+    setImporting(true); 
     try {
       const res = await importPrices.parse(selectedFile);
       setRemainingImports(res.data.remaining_today);
       setImportItems(res.data.items.map(mapImportItem));
-    } catch (e) { setError(e.response?.data?.error || t('analyzing')); }
+    } catch (e) { showError(e.response?.data?.error || t('analyzing')); }
     finally { setImporting(false); }
   };
 
   const handleParseFree = async () => {
     if (!selectedFile) return;
-    setImporting(true); setError('');
+    setImporting(true); 
     try {
       const res = await importPrices.parseFree(selectedFile);
       setImportItems(res.data.items.map(mapImportItem));
-    } catch (e) { setError(e.response?.data?.error || t('processing')); }
+    } catch (e) { showError(e.response?.data?.error || t('processing')); }
     finally { setImporting(false); }
   };
 
   const handleApplyImport = async () => {
     const selected = importItems.filter(i => i.selected && i.price !== '' && i.price !== null);
-    if (!selected.length) { setError(t('at_least_one')); return; }
+    if (!selected.length) { showError(t('at_least_one')); return; }
     const invalid = selected.filter(i => isNaN(parseFloat(i.price)) || parseFloat(i.price) < 0);
-    if (invalid.length) { setError('Wprowadź prawidłową cenę dla zaznaczonych produktów'); return; }
+    if (invalid.length) { showError('Wprowadź prawidłową cenę dla zaznaczonych produktów'); return; }
 
     const toUpdate = selected.filter(i => i.matched_product);
     const toCreate = selected.filter(i => !i.matched_product && i.receipt_name?.trim());
@@ -244,7 +239,7 @@ export default function Products() {
       }
 
       setImportItems(null);
-      setToast({ msg: t('fetching_macro'), color: '#d97706' });
+      globalToast(t('fetching_macro'), '#d97706', 999999);
       for (const item of toUpdate) {
         const macro = await fetchMacroFromOFF(item.matched_product.name);
         if (macro) await api.update(item.matched_product.id, macro);
@@ -254,9 +249,9 @@ export default function Products() {
         toUpdate.length && `Zaktualizowano ${toUpdate.length}`,
         toCreate.length && `Dodano ${toCreate.length}`,
       ].filter(Boolean).join(', ') + ' produktów · Makro zaktualizowane';
-      showToast(msg);
+      showSuccess(msg);
       loadProducts();
-    } catch { setError('Błąd przy zapisywaniu produktów'); setToast(null); }
+    } catch { showError('Błąd przy zapisywaniu produktów');  }
   };
 
 
@@ -277,7 +272,6 @@ export default function Products() {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
       <div className="card" style={{ margin: 0 }}>
         <h2>{t('add_product_title')}</h2>
-        {error && <p style={{ color: 'red', marginBottom: 12 }}>{error}</p>}
 
         {/* Rząd 1: toggle pełna szerokość */}
         <div style={{ display: 'flex', gap: 0, marginBottom: 20, borderRadius: 7, overflow: 'hidden', border: '1px solid #374151' }}>
@@ -301,15 +295,17 @@ export default function Products() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           <div>
             <div style={fl}>Szukasz produktów?</div>
-            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
               {[
-                { label: 'Auchan',    url: 'https://zakupy.auchan.pl/' },
-                { label: 'Biedronka', url: 'https://zakupy.biedronka.pl/' },
-                { label: 'Carrefour', url: 'https://www.carrefour.pl/' },
-              ].map(({ label, url }) => (
-                <a key={label} href={url} target="_blank" rel="noreferrer"
-                  style={{ fontSize: 11, fontWeight: 700, color: '#0d9488', textDecoration: 'none', background: '#1c3534', padding: '3px 10px', borderRadius: 4, border: '1px solid #374151' }}>
-                  {label}
+                { logo: '/auchan.svg',    url: 'https://zakupy.auchan.pl/',    alt: 'Auchan',    h: 32 },
+                { logo: '/biedronka.svg', url: 'https://zakupy.biedronka.pl/', alt: 'Biedronka', h: 32 },
+                { logo: '/carrefour.svg', url: 'https://www.carrefour.pl/',    alt: 'Carrefour', h: 48 },
+              ].map(({ logo, url, alt, h }) => (
+                <a key={alt} href={url} target="_blank" rel="noreferrer" title={`Przejdź na ${alt}`}
+                  style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', opacity: 0.85, transition: 'opacity 0.15s' }}
+                  onMouseEnter={e => e.currentTarget.style.opacity = '1'}
+                  onMouseLeave={e => e.currentTarget.style.opacity = '0.85'}>
+                  <img src={logo} alt={alt} style={{ height: h, width: 'auto', display: 'block' }} />
                 </a>
               ))}
             </div>
@@ -426,7 +422,7 @@ export default function Products() {
                   </button>
                 )}
                 <button className="btn" style={{ background: '#374151', color: '#9ca3af' }}
-                  onClick={() => { setSelectedFile(null); setError(''); }}>
+                  onClick={() => { setSelectedFile(null);  }}>
                   {t('cancel')}
                 </button>
               </div>
@@ -529,21 +525,13 @@ export default function Products() {
             <div style={{ display: 'flex', gap: 10 }}>
               <button className="btn btn-primary" onClick={handleApplyImport}>{t('apply_changes')}</button>
               <button className="btn" style={{ background: '#374151', color: '#9ca3af' }}
-                onClick={() => { setImportItems(null); setError(''); }}>{t('cancel')}</button>
+                onClick={() => { setImportItems(null);  }}>{t('cancel')}</button>
             </div>
           </div>
         )}
       </div>
       </div>{/* koniec gridu 50/50 */}
 
-      {toast && (
-        <div style={{ position:'fixed', top:'50%', left:'50%', transform:'translate(-50%,-50%)',
-          background: toast.color, color:'#1f2937', padding:'16px 28px', borderRadius:12,
-          fontSize:15, fontWeight:600, boxShadow:'0 8px 32px rgba(0,0,0,0.25)',
-          zIndex:9999, pointerEvents:'none', textAlign:'center', whiteSpace:'nowrap' }}>
-          {toast.msg}
-        </div>
-      )}
 
       {/* Product list — collapsible */}
       <div className="card" style={{ padding: 0, overflow: 'hidden' }}>

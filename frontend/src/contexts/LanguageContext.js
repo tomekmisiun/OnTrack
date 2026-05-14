@@ -4,6 +4,7 @@ const T = {
   pl: {
     // App/Nav
     loading: 'Ładowanie…',
+    tab_macro: 'Kalkulator Makro',
     tab_calendar: 'Planer Posiłków',
     tab_recipes: 'Przepisy',
     tab_products: 'Produkty',
@@ -38,7 +39,7 @@ const T = {
     how_to_title: 'Jak korzystać z kalendarza?',
     expand: 'Rozwiń',
     collapse: 'Zwiń',
-    tpl_title: 'Zaplanuj Tydzień',
+    tpl_title: 'Stwórz szablon',
     your_tpls: 'Twoje szablony',
     tpl_drag_hint: 'Przeciągnij przepisy z Przepisów na dni tygodnia, następnie nazwij i zapisz swój szablon. Wyczyść resetuje szablon.',
     tpl_name_ph: 'Nazwa szablonu (np. Tydzień fit)',
@@ -238,6 +239,7 @@ const T = {
   en: {
     // App/Nav
     loading: 'Loading…',
+    tab_macro: 'Macro Calculator',
     tab_calendar: 'Meal Planner',
     tab_recipes: 'Recipes',
     tab_products: 'Products',
@@ -272,7 +274,7 @@ const T = {
     how_to_title: 'How to use the calendar?',
     expand: 'Expand',
     collapse: 'Collapse',
-    tpl_title: 'Plan Your Week',
+    tpl_title: 'Create template',
     your_tpls: 'Your templates',
     tpl_drag_hint: 'Drag recipes from Recipes to days of the week, then name and save your template. Clear resets the template.',
     tpl_name_ph: 'Template name (e.g. Fit Week)',
