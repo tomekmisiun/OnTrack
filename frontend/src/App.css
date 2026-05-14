@@ -147,16 +147,16 @@ select option {
 }
 
 .btn-danger {
-  background: #dc2626;
+  background: #ef4444;
   color: white;
 }
 
 .btn-danger:hover {
-  background: #b91c1c;
+  background: #dc2626;
 }
 
 .btn-success {
-  background: #16a34a;
+  background: #22c55e;
   color: white;
 }
 
@@ -186,7 +186,7 @@ td {
 }
 
 tr:hover td {
-  background: #1a2235;
+  background: #1f2937;
 }
 
 /* Tagi przepisów */

@@ -28,7 +28,7 @@ const EMPTY_FORM = { name: '', package_weight: '', package_price: '', unit: 'g',
 const MacroDisplay = ({ p }) => {
   if (!p.protein && !p.fat && !p.carbs) return <span style={{ color: '#4b5563' }}>-</span>;
   return (
-    <div style={{ fontSize: 13, color: '#94a3b8' }}>
+    <div style={{ fontSize: 13, color: '#9ca3af' }}>
       {p.protein != null && <span style={{ marginRight: 6 }}>B: {p.protein}g</span>}
       {p.fat     != null && <span style={{ marginRight: 6 }}>T: {p.fat}g</span>}
       {p.carbs   != null && <span>W: {p.carbs}g</span>}
@@ -239,7 +239,7 @@ export default function Products() {
       }
 
       setImportItems(null);
-      globalToast(t('fetching_macro'), '#d97706', 999999);
+      globalToast(t('fetching_macro'), '#eab308', 999999);
       for (const item of toUpdate) {
         const macro = await fetchMacroFromOFF(item.matched_product.name);
         if (macro) await api.update(item.matched_product.id, macro);
@@ -357,28 +357,28 @@ export default function Products() {
           <div style={{ fontWeight: 600, color: '#0d9488', marginBottom: 8 }}>{t('import_how_to')}</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             <div>
-              <div style={{ fontWeight: 600, marginBottom: 4, color: '#d1d5db' }}>{t('opt1_title')}</div>
+              <div style={{ fontWeight: 600, marginBottom: 4, color: '#e2e8f0' }}>{t('opt1_title')}</div>
               <ol style={{ margin: 0, paddingLeft: 16, color: '#9ca3af', fontSize: 12 }}>
                 <li>{t('opt1_s1')}</li>
                 <li>{t('opt1_s2')}</li>
                 <li>{t('opt1_s3')}</li>
               </ol>
-              <div style={{ marginTop: 6, fontSize: 11, color: '#93c5fd', background: '#1e3358', border: '1px solid #bfdbfe', borderRadius: 5, padding: '4px 8px' }}>
+              <div style={{ marginTop: 6, fontSize: 11, color: '#2dd4bf', background: '#1c3534', border: '1px solid #374151', borderRadius: 5, padding: '4px 8px' }}>
                 Zgubiłeś paragon? Otwórz paragon w aplikacji sklepu, zrób screenshot i wgraj
               </div>
-              <div style={{ marginTop: 5, fontSize: 11, color: '#856404' }}>
+              <div style={{ marginTop: 5, fontSize: 11, color: '#ca8a04' }}>
                 {t('ai_daily_lim')}{remainingImports !== null && <span>{t('ai_rem')(remainingImports)}</span>}
               </div>
             </div>
             <div>
-              <div style={{ fontWeight: 600, marginBottom: 4, color: '#d1d5db' }}>{t('opt2_title')}</div>
+              <div style={{ fontWeight: 600, marginBottom: 4, color: '#e2e8f0' }}>{t('opt2_title')}</div>
               <div style={{ color: '#9ca3af', fontSize: 12, lineHeight: 1.8 }}>
                 <div>Wymagany format pliku:</div>
                 <code style={{ background: '#1e293b', color: '#2dd4bf', padding: '1px 6px', borderRadius: 3, fontFamily: 'monospace' }}>nazwa,gramatura,jednostka,cena</code>
                 <div>lub: <code style={{ background: '#1e293b', color: '#2dd4bf', padding: '1px 6px', borderRadius: 3, fontFamily: 'monospace' }}>nazwa,cena</code> <span style={{ color: '#6b7280' }}>(ręcznie wprowadź gramaturę i jednostkę przed zapisaniem)</span></div>
                 <div style={{ marginTop: 4 }}>Wgraj plik i kliknij <strong>Zastosuj plik</strong></div>
               </div>
-              <div style={{ marginTop: 6, fontSize: 11, color: '#34d399' }}>{t('no_lim')}</div>
+              <div style={{ marginTop: 6, fontSize: 11, color: '#2dd4bf' }}>{t('no_lim')}</div>
             </div>
           </div>
         </div>
@@ -390,12 +390,12 @@ export default function Products() {
               onDragLeave={() => setDragOver(false)}
               onDrop={e => { e.preventDefault(); setDragOver(false); handleFileSelect(e.dataTransfer.files[0]); }}
               onClick={() => fileInputRef.current?.click()}
-              style={{ border: `2px dashed ${dragOver ? '#0d9488' : selectedFile ? '#2a9d5c' : '#374151'}`, borderRadius: 10, padding: '24px', textAlign: 'center', cursor: 'pointer', background: dragOver ? 'rgba(13,148,136,0.05)' : '#1a2030', transition: 'all 0.15s', marginBottom: 12 }}
+              style={{ border: `2px dashed ${dragOver ? '#0d9488' : selectedFile ? '#22c55e' : '#374151'}`, borderRadius: 10, padding: '24px', textAlign: 'center', cursor: 'pointer', background: dragOver ? 'rgba(13,148,136,0.05)' : '#111827', transition: 'all 0.15s', marginBottom: 12 }}
             >
               <input ref={fileInputRef} type="file" accept=".jpg,.jpeg,.png,.webp,.txt,.csv" style={{ display: 'none' }} onChange={e => handleFileSelect(e.target.files[0])} />
               {selectedFile ? (
                 <>
-                  <div style={{ fontWeight: 600, color: '#34d399', marginBottom: 2 }}>
+                  <div style={{ fontWeight: 600, color: '#2dd4bf', marginBottom: 2 }}>
                     {isImageFile(selectedFile) ? 'Opcja 1: ' : 'Opcja 2: '}{selectedFile.name}
                   </div>
                   <div style={{ fontSize: 11, color: '#6b7280' }}>{t('click_change')}</div>
@@ -417,7 +417,7 @@ export default function Products() {
                 )}
                 {isTextFile(selectedFile) && (
                   <button className="btn btn-primary" onClick={handleParseFree} disabled={importing}
-                    style={{ minWidth: 200, background: 'linear-gradient(135deg, #2a9d5c, #1d7a45)' }}>
+                    style={{ minWidth: 200, background: '#0d9488' }}>
                     {importing ? t('processing') : t('apply_file_btn')}
                   </button>
                 )}
@@ -478,14 +478,14 @@ export default function Products() {
                           <button type="button"
                             onClick={() => upd({ sold_by_weight: false })}
                             style={{ flex: 1, padding: '5px 8px', border: 'none', borderRight: '1px solid #d0d4e8', cursor: 'pointer', fontSize: 11, fontWeight: 600, whiteSpace: 'nowrap', transition: 'all 0.15s',
-                              background: !sbw ? 'linear-gradient(135deg, #0d9488, #0f766e)' : '#2d3748',
+                              background: !sbw ? '#0d9488' : '#2d3748',
                               color: !sbw ? '#1f2937' : '#666' }}>
                             W opak.
                           </button>
                           <button type="button"
                             onClick={() => upd({ sold_by_weight: true })}
                             style={{ flex: 1, padding: '5px 8px', border: 'none', cursor: 'pointer', fontSize: 11, fontWeight: 600, whiteSpace: 'nowrap', transition: 'all 0.15s',
-                              background: sbw ? 'linear-gradient(135deg, #0d9488, #0f766e)' : '#2d3748',
+                              background: sbw ? '#0d9488' : '#2d3748',
                               color: sbw ? '#1f2937' : '#666' }}>
                             Na wagę
                           </button>
@@ -604,14 +604,14 @@ export default function Products() {
                         <button type="button"
                           onClick={() => setEditForm(f => ({ ...f, sold_by_weight: false }))}
                           style={{ flex: 1, padding: '7px 10px', border: 'none', borderRight: '1px solid #d0d4e8', cursor: 'pointer', fontSize: 12, fontWeight: 600, transition: 'all 0.15s',
-                            background: !editForm.sold_by_weight ? 'linear-gradient(135deg, #0d9488, #0f766e)' : '#2d3748',
+                            background: !editForm.sold_by_weight ? '#0d9488' : '#2d3748',
                             color: !editForm.sold_by_weight ? '#1f2937' : '#666' }}>
                           W opakowaniu
                         </button>
                         <button type="button"
                           onClick={() => setEditForm(f => ({ ...f, sold_by_weight: true, unit: 'g', package_weight: 1000 }))}
                           style={{ flex: 1, padding: '7px 10px', border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 600, transition: 'all 0.15s',
-                            background: !!editForm.sold_by_weight ? 'linear-gradient(135deg, #0d9488, #0f766e)' : '#2d3748',
+                            background: !!editForm.sold_by_weight ? '#0d9488' : '#2d3748',
                             color: !!editForm.sold_by_weight ? '#1f2937' : '#666' }}>
                           Na wagę
                         </button>
@@ -661,12 +661,12 @@ export default function Products() {
             ) : (
               <tr key={p.id}>
                 <td style={{ fontSize: 13 }}>{p.name}</td>
-                <td style={{ fontSize: 13, color: p.kcal ? '#94a3b8' : '#4b5563' }}>{p.kcal != null ? `${p.kcal} kcal` : '-'}</td>
+                <td style={{ fontSize: 13, color: p.kcal ? '#9ca3af' : '#4b5563' }}>{p.kcal != null ? `${p.kcal} kcal` : '-'}</td>
                 <td><MacroDisplay p={p} /></td>
-                <td style={{ fontSize: 13, color: '#94a3b8' }}>
+                <td style={{ fontSize: 13, color: '#9ca3af' }}>
                   {p.sold_by_weight ? 'Na wagę' : p.package_weight ? `${p.package_weight} ${p.unit || 'g'}` : '-'}
                 </td>
-                <td style={{ fontSize: 13, color: p.price > 0 ? '#94a3b8' : '#4b5563' }}>{displayPrice(p)}</td>
+                <td style={{ fontSize: 13, color: p.price > 0 ? '#9ca3af' : '#4b5563' }}>{displayPrice(p)}</td>
                 <td style={{ display: 'flex', gap: 6 }}>
                   <button className="btn btn-primary" style={{ padding: '5px 12px', fontSize: 13 }} onClick={() => startEdit(p)}>{t('edit_btn')}</button>
                   <button className="btn btn-danger" style={{ padding: '5px 12px', fontSize: 13 }} onClick={() => handleDelete(p.id)}>{t('del_btn')}</button>

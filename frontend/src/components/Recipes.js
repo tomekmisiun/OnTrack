@@ -215,8 +215,8 @@ export default function Recipes() {
             <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: '14px 16px', fontSize: 13, lineHeight: 1.7 }}>
               <div style={{ fontWeight: 700, color: '#0d9488', marginBottom: 10 }}>{t('how_to_recipe')}</div>
 
-              <div style={{ fontWeight: 600, marginBottom: 4, color: '#d1d5db' }}>{t('example')}</div>
-              <pre style={{ margin: '0 0 14px', background: '#111827', border: '1px solid #374151', borderRadius: 6, padding: '8px 12px', fontSize: 12, color: '#d1d5db', lineHeight: 1.8 }}>
+              <div style={{ fontWeight: 600, marginBottom: 4, color: '#e2e8f0' }}>{t('example')}</div>
+              <pre style={{ margin: '0 0 14px', background: '#111827', border: '1px solid #374151', borderRadius: 6, padding: '8px 12px', fontSize: 12, color: '#e2e8f0', lineHeight: 1.8 }}>
 {`Owsianka
 płatki owsiane 50 g
 mleko 200 ml
@@ -224,7 +224,7 @@ banan 120 g
 łyżka masła orzechowego`}
               </pre>
 
-              <div style={{ fontWeight: 600, marginBottom: 4, color: '#d1d5db' }}>{t('format_title')}</div>
+              <div style={{ fontWeight: 600, marginBottom: 4, color: '#e2e8f0' }}>{t('format_title')}</div>
               <ol style={{ margin: '0 0 12px', paddingLeft: 18, color: '#9ca3af' }}>
                 <li><b>{t('fmt_1')}</b></li>
                 <li>{t('fmt_2')}</li>
@@ -233,7 +233,7 @@ banan 120 g
               </ol>
 
               <div style={{ padding: '8px 12px', background: '#111827', border: '1px solid #374151', borderRadius: 6, fontSize: 12, color: '#9ca3af', marginBottom: 14 }}>
-                {t('ai_tip')} <span style={{ color: '#856404' }}>{t('daily_limit')}</span><br/>
+                {t('ai_tip')} <span style={{ color: '#ca8a04' }}>{t('daily_limit')}</span><br/>
                 {t('regex_tip')}
               </div>
 
@@ -244,7 +244,7 @@ banan 120 g
                 aniagotuje.pl →
               </a>
               {remaining !== null && (
-                <div style={{ marginTop: 8, fontSize: 11, color: '#856404' }}>
+                <div style={{ marginTop: 8, fontSize: 11, color: '#ca8a04' }}>
                   {t('remaining_ai')(remaining)}
                 </div>
               )}
@@ -293,7 +293,7 @@ banan 120 g
                     <option value="">{t('no_match_opt')}</option>
                     {productList.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
                   </select>
-                  <button onClick={() => removeIngredient(i)} style={{ background: '#ff4757', border: 'none', color: '#1f2937', borderRadius: 6, cursor: 'pointer', fontSize: 14, height: 34 }}>✕</button>
+                  <button onClick={() => removeIngredient(i)} style={{ background: '#ef4444', border: 'none', color: '#1f2937', borderRadius: 6, cursor: 'pointer', fontSize: 14, height: 34 }}>✕</button>
                 </div>
               ))}
             </div>
@@ -305,7 +305,7 @@ banan 120 g
             {parsed.sourceText && (
               <div style={{ marginTop: 20 }}>
                 <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 6, fontWeight: 600 }}>{t('original_text_lbl')}</div>
-                <pre style={{ background: '#1c3534', border: '1px solid #e2e8f0', borderRadius: 8, padding: '12px 14px', fontSize: 12, color: '#d1d5db', lineHeight: 1.8, whiteSpace: 'pre-wrap', wordBreak: 'break-word', margin: 0, maxHeight: 300, overflowY: 'auto' }}>
+                <pre style={{ background: '#1c3534', border: '1px solid #e2e8f0', borderRadius: 8, padding: '12px 14px', fontSize: 12, color: '#e2e8f0', lineHeight: 1.8, whiteSpace: 'pre-wrap', wordBreak: 'break-word', margin: 0, maxHeight: 300, overflowY: 'auto' }}>
                   {parsed.sourceText}
                 </pre>
               </div>
@@ -386,7 +386,7 @@ banan 120 g
                       </div>
                     </div>
                   ) : r.notes ? (
-                    <pre style={{ margin: 0, fontSize: 12, color: '#d1d5db', lineHeight: 1.8, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+                    <pre style={{ margin: 0, fontSize: 12, color: '#e2e8f0', lineHeight: 1.8, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
                       {r.notes}
                     </pre>
                   ) : (

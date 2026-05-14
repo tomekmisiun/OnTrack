@@ -119,8 +119,8 @@ function MacroLegend({ goalOpt, weight, adjPW }) {
   const pw = adjPW?.pw ?? weight;
   const proteinG = pw > 0 ? Math.round(pw * goalOpt.proteinPerKg) : null;
   return (
-    <div className="card" style={{ padding: 20 }}>
-      <div style={{ fontSize: 12, color: '#6b7280', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: 14 }}>
+    <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: 20 }}>
+      <div style={{ fontWeight: 700, color: '#0d9488', marginBottom: 14 }}>
         Jak liczymy makro?
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>

@@ -56,7 +56,7 @@ function DraggableRecipe({ recipe, onToggleFavorite }) {
   return (
     <div ref={setNodeRef} {...listeners} {...attributes} style={{
       flexShrink:0, width:128, height:148,
-      background:'linear-gradient(160deg, #7b5ea7, #5548a0)',
+      background:'linear-gradient(135deg, #0d9488, #0f766e)',
       borderRadius:12, cursor:'grab', opacity: isDragging ? 0.3 : 1,
       userSelect:'none', touchAction:'none',
       boxShadow:'0 4px 12px rgba(85,72,160,0.45)',
@@ -215,7 +215,7 @@ function MealSlot({ date, position, meal, onDelete, showLabel }) {
     }}>
       {meal
         ? <DraggableMeal meal={meal} onDelete={onDelete} />
-        : showLabel && <span style={{fontSize:9,color:'#c0b8d4',userSelect:'none',whiteSpace:'nowrap',overflow:'hidden',width:'100%',textAlign:'center',display:'block'}}>{t('slot_labels')[position-1]}</span>
+        : showLabel && <span style={{fontSize:9,color:'#9ca3af',userSelect:'none',whiteSpace:'nowrap',overflow:'hidden',width:'100%',textAlign:'center',display:'block'}}>{t('slot_labels')[position-1]}</span>
       }
     </div>
   );
@@ -355,7 +355,7 @@ function TemplateSlot({ dayIndex, position, recipe, onRemove }) {
             style={{background:'rgba(0,0,0,0.25)',border:'none',color:'#1f2937',borderRadius:2,cursor:'pointer',padding:'0 2px',fontSize:8,lineHeight:'13px',flexShrink:0}}>✕</button>
         </div>
       ) : (
-        <span style={{fontSize:8,color:'#d0cde8',width:'100%',textAlign:'center',display:'block',userSelect:'none'}}>{t('slot_labels')[position-1]}</span>
+        <span style={{fontSize:8,color:'#9ca3af',width:'100%',textAlign:'center',display:'block',userSelect:'none'}}>{t('slot_labels')[position-1]}</span>
       )}
     </div>
   );
@@ -449,7 +449,7 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
         <div style={{display:'flex',gap:8,alignItems:'center'}}>
           <input value={editName} onChange={e=>setEditName(e.target.value)}
             placeholder={t('tpl_name_ph')}
-            style={{flex:1,padding:'7px 10px',border:'1px solid #ddd',borderRadius:6,fontSize:13}} />
+            style={{flex:1,padding:'7px 10px',border:'1px solid #374151',borderRadius:6,fontSize:13}} />
           <button className="btn btn-primary" style={{padding:'7px 16px',fontSize:13}}
             disabled={!editName.trim() || !filledCount}
             onClick={()=>{
@@ -494,7 +494,7 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
                     <span style={{fontSize:12,color:'#9ca3af'}}>{t('apply_from_mon')}</span>
                     <select value={applyWeek[ti] || mondays[0]}
                       onChange={e=>setApplyWeek({...applyWeek,[ti]:e.target.value})}
-                      style={{padding:'4px 8px',border:'1px solid #ddd',borderRadius:6,fontSize:12}}>
+                      style={{padding:'4px 8px',border:'1px solid #374151',borderRadius:6,fontSize:12}}>
                       {mondays.map(m=>(
                         <option key={m} value={m}>{toEU(m)}</option>
                       ))}
@@ -504,7 +504,7 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
                       {t('apply')}
                     </button>
                     <button onClick={()=>onDelete(ti)}
-                      style={{background:'none',border:'none',color:'#ff4757',cursor:'pointer',fontSize:14}}>✕</button>
+                      style={{background:'none',border:'none',color:'#ef4444',cursor:'pointer',fontSize:14}}>✕</button>
                   </div>
                 </div>
                 <div style={{display:'grid',gridTemplateColumns:'repeat(7,1fr)',gap:2,padding:8}}>
@@ -795,9 +795,9 @@ export default function Calendar({ onGoToTab }) {
 
 
       {/* How to use — collapsible */}
-      <div className="card" style={{padding:0,marginBottom:16,overflow:'hidden'}}>
+      <div style={{background:'#1c3534',border:'1px solid #374151',borderRadius:8,marginBottom:16,overflow:'hidden'}}>
         <button onClick={()=>setHowToOpen(o=>!o)}
-          style={{width:'100%',padding:'12px 18px',background:'none',border:'none',cursor:'pointer',display:'flex',justifyContent:'space-between',alignItems:'center',fontSize:14,fontWeight:600,color:'#0d9488'}}>
+          style={{width:'100%',padding:'12px 18px',background:'none',border:'none',cursor:'pointer',display:'flex',justifyContent:'space-between',alignItems:'center',fontSize:14,fontWeight:700,color:'#0d9488'}}>
           <span>{t('how_to_title')}</span>
           <span style={{display:'flex',alignItems:'center',gap:4,fontSize:12,color:'#0d9488',fontWeight:400}}>
             {howToOpen ? t('collapse') : t('expand')}
@@ -915,7 +915,7 @@ export default function Calendar({ onGoToTab }) {
         </div>
         {recipes.length===0
           ? <p style={{fontSize:13,color:'#4b5563',margin:0}}>{t('no_recipes_cal')}</p>
-          : <div style={{display:'flex',gap:10,overflowX:'auto',paddingBottom:6,scrollbarWidth:'thin',scrollbarColor:'#ddd transparent'}}>
+          : <div style={{display:'flex',gap:10,overflowX:'auto',paddingBottom:6,scrollbarWidth:'thin',scrollbarColor:'#374151 transparent'}}>
               {[...recipes].sort((a,b)=>(b.is_favorite?1:0)-(a.is_favorite?1:0)).map(r=><DraggableRecipe key={r.id} recipe={r} onToggleFavorite={async (id)=>{ await recipesApi.toggleFavorite(id); recipesApi.getAll().then(res=>setRecipes(res.data)); }}/>)}
             </div>
         }

@@ -109,7 +109,7 @@ function ProductTable({ items }) {
 
   const inp = { padding: '2px 6px', fontSize: 12, width: 68, border: '1px solid #374151', borderRadius: 4, background: '#111827', color: '#e2e8f0' };
   const btn = (bg, color) => ({ padding:'1px 6px', fontSize:11, background:bg, color, border:'none', borderRadius:3, cursor:'pointer' });
-  const hintStyle = { fontSize: 9, fontWeight: 400, color: '#99f6e4', display: 'block', marginTop: 1 };
+  const hintStyle = { fontSize: 9, fontWeight: 400, color: '#2dd4bf', display: 'block', marginTop: 1 };
 
   return (
     <table className="compact-table" style={{ marginTop: 4 }}>
@@ -122,7 +122,7 @@ function ProductTable({ items }) {
           <th><span>Cena/opak.</span><span style={hintStyle}>✎ kliknij aby edytować</span></th>
           <th style={{ whiteSpace:'nowrap' }}>
             <span>W zapasie</span>
-            <span style={{ fontSize:9, fontWeight:400, color:'#99f6e4', display:'block', marginTop:1 }}>zmniejsza koszt zakupy</span>
+            <span style={{ fontSize:9, fontWeight:400, color:'#2dd4bf', display:'block', marginTop:1 }}>zmniejsza koszt zakupy</span>
           </th>
           <th>zakupy</th>
           <th>koszt</th>
@@ -284,7 +284,7 @@ function PeriodCard({ title, range, summary, loading, error, onGoToTab }) {
           )}
           <button
             onClick={e => { e.stopPropagation(); onGoToTab?.('calendar'); }}
-            style={{ background:'none', border:'none', padding:0, cursor:'pointer', fontSize:11, color:'#99f6e4', marginTop:3, display:'block', textAlign:'left' }}
+            style={{ background:'none', border:'none', padding:0, cursor:'pointer', fontSize:11, color:'#2dd4bf', marginTop:3, display:'block', textAlign:'left' }}
           >
             przejdź do kalendarza →
           </button>
@@ -433,7 +433,7 @@ function Summary({ onGoToTab }) {
             <div style={{ fontSize:13, fontWeight:600, color:'#0d9488' }}>{t('custom_period')}</div>
             <button
               onClick={e => { e.stopPropagation(); onGoToTab?.('calendar'); }}
-              style={{ background:'none', border:'none', padding:0, cursor:'pointer', fontSize:11, color:'#99f6e4', marginTop:2, display:'block', textAlign:'left' }}
+              style={{ background:'none', border:'none', padding:0, cursor:'pointer', fontSize:11, color:'#2dd4bf', marginTop:2, display:'block', textAlign:'left' }}
             >
               przejdź do kalendarza →
             </button>
@@ -467,7 +467,7 @@ function Summary({ onGoToTab }) {
               <>
                 <div style={{
                   marginTop:16, padding:'14px 16px',
-                  background:'linear-gradient(135deg,#0d9488,#0f766e)', color:'#1f2937', borderRadius:10,
+                  background:'#0d9488', color:'#1f2937', borderRadius:10,
                   display:'flex', justifyContent:'space-between', alignItems:'center',
                 }}>
                   <div>
@@ -501,7 +501,7 @@ function Summary({ onGoToTab }) {
           <h2 style={{ margin:0, fontSize:17, color:'#0d9488' }}>{t('week_templates_sum')}</h2>
           <button
             onClick={() => onGoToTab?.('recipes')}
-            style={{ background:'none', border:'none', padding:0, cursor:'pointer', fontSize:11, color:'#99f6e4', marginTop:3, display:'block' }}
+            style={{ background:'none', border:'none', padding:0, cursor:'pointer', fontSize:11, color:'#2dd4bf', marginTop:3, display:'block' }}
           >
             przejdź do Przepisów →
           </button>
