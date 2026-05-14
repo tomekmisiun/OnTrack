@@ -838,12 +838,13 @@ export default function Calendar({ onGoToTab }) {
       {/* Recipe carousel */}
       <div className="card" style={{padding:'14px 16px',marginBottom:16}}>
         <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:12}}>
-          <h2
-            onClick={() => onGoToTab?.('recipes')}
-            style={{margin:0,fontSize:15,cursor:'pointer',color:'#667eea',textDecoration:'underline',textDecorationStyle:'dotted',textUnderlineOffset:3}}
-          >
-            {t('carousel_title')}
-          </h2>
+          <div>
+            <h2 style={{margin:0,fontSize:15,color:'#667eea'}}>{t('carousel_title')}</h2>
+            <button onClick={() => onGoToTab?.('recipes')}
+              style={{background:'none',border:'none',padding:0,cursor:'pointer',fontSize:11,color:'#c0caff',display:'block',marginTop:2}}>
+              przejdź do Przepisów →
+            </button>
+          </div>
           <span style={{fontSize:11,color:'#aaa'}}>{t('drag_to_cal')}</span>
         </div>
         {recipes.length===0

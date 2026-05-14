@@ -134,15 +134,17 @@ def get_summary(start, end):
                     'package_weight': prod.package_weight,
                     'unit': prod.unit or 'g',
                     'price': prod.price or 0,  # per 100g/100ml/szt
+                    'sold_by_weight': bool(prod.sold_by_weight),
                     'total_weight': 0,
                 }
             products[pid]['total_weight'] += ingredient.weight
     result, total_cost = [], 0
     for pid, p in products.items():
-        pkg = p['package_weight']
         unit = p['unit']
+        pkg = p['package_weight'] or (1 if unit == 'szt' else 1000)
         total = p['total_weight']
         price_per_unit = p['price']
+        sold_by_weight = p.get('sold_by_weight', False)
 
         # cena jednego opakowania
         if unit == 'szt':
@@ -151,17 +153,25 @@ def get_summary(start, end):
             package_price = price_per_unit * pkg / 100
 
         packages_exact = total / pkg
-        packages_rounded = math.ceil(packages_exact)
-        cost = packages_rounded * package_price
+        actual_cost = packages_exact * package_price
+        if sold_by_weight:
+            packages_rounded = packages_exact
+            cost = actual_cost
+        else:
+            packages_rounded = math.ceil(packages_exact)
+            cost = packages_rounded * package_price
         total_cost += cost
         result.append({
+            'product_id': pid,
             'product_name': p['name'],
             'total_weight': round(total, 2),
             'unit': unit,
             'package_weight': pkg,
             'packages_exact': round(packages_exact, 2),
-            'packages_rounded': packages_rounded,
+            'packages_rounded': round(packages_rounded, 2),
             'price_per_package': round(package_price, 2),
             'total_cost': round(cost, 2),
+            'actual_cost': round(actual_cost, 2),
+            'sold_by_weight': sold_by_weight,
         })
     return jsonify({'items': sorted(result, key=lambda x: x['product_name']), 'total_cost': round(total_cost, 2)})

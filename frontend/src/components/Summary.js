@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { mealPlan as api, recipes as recipesApi } from '../api';
+import { mealPlan as api, recipes as recipesApi, products as productsApi } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
 
 // ─── Date helpers ─────────────────────────────────────────────────────────────
@@ -26,29 +26,145 @@ function getCurrentMonth() {
 
 // ─── Reusable product table ───────────────────────────────────────────────────
 function ProductTable({ items }) {
+  const [localItems, setLocalItems] = useState(items);
+  const [editPkgId,    setEditPkgId]    = useState(null);
+  const [editPkg,      setEditPkg]      = useState('');
+  const [editSBW,      setEditSBW]      = useState(false);
+  const [editPriceId,  setEditPriceId]  = useState(null);
+  const [editPrice,    setEditPrice]    = useState('');
+
+  useEffect(() => { setLocalItems(items); }, [items]);
+
+  const recalcPkg = (item, newPkg, sbw) => {
+    const pricePerUnit = item.unit === 'szt'
+      ? item.price_per_package / item.package_weight
+      : item.price_per_package * 100 / item.package_weight;
+    const newPkgPrice = item.unit === 'szt' ? pricePerUnit * newPkg : pricePerUnit * newPkg / 100;
+    const pkgsExact   = item.total_weight / newPkg;
+    const pkgsRounded = sbw ? pkgsExact : Math.ceil(pkgsExact);
+    return {
+      ...item, package_weight: newPkg, sold_by_weight: sbw,
+      price_per_package: newPkgPrice, packages_exact: pkgsExact,
+      packages_rounded: pkgsRounded,
+      actual_cost: pkgsExact * newPkgPrice,
+      total_cost: pkgsRounded * newPkgPrice,
+    };
+  };
+
+  const recalcPrice = (item, newPkgPrice) => {
+    const pkgsRounded = item.sold_by_weight ? item.packages_exact : Math.ceil(item.packages_exact);
+    return {
+      ...item, price_per_package: newPkgPrice,
+      actual_cost: item.packages_exact * newPkgPrice,
+      total_cost: pkgsRounded * newPkgPrice,
+    };
+  };
+
+  const handleSavePkg = async (item) => {
+    const pkg = parseFloat(editPkg);
+    if (!pkg || pkg <= 0) { setEditPkgId(null); return; }
+    const updated = recalcPkg(item, pkg, editSBW);
+    setLocalItems(prev => prev.map(i => i.product_id === item.product_id ? updated : i));
+    setEditPkgId(null);
+    try { await productsApi.update(item.product_id, { package_weight: pkg, sold_by_weight: editSBW }); } catch {}
+  };
+
+  const handleSavePrice = async (item) => {
+    const newPkgPrice = parseFloat(editPrice);
+    if (isNaN(newPkgPrice) || newPkgPrice < 0) { setEditPriceId(null); return; }
+    const updated = recalcPrice(item, newPkgPrice);
+    setLocalItems(prev => prev.map(i => i.product_id === item.product_id ? updated : i));
+    setEditPriceId(null);
+    const unitPrice = item.unit === 'szt'
+      ? newPkgPrice / item.package_weight
+      : newPkgPrice * 100 / item.package_weight;
+    try { await productsApi.update(item.product_id, { price: parseFloat(unitPrice.toFixed(4)) }); } catch {}
+  };
+
+  const inp = { padding: '2px 5px', fontSize: 12, width: 68, border: '1px solid #c0caff', borderRadius: 3 };
+  const btn = (bg, color) => ({ padding:'1px 6px', fontSize:11, background:bg, color, border:'none', borderRadius:3, cursor:'pointer' });
+  const hintStyle = { fontSize: 9, fontWeight: 400, color: '#c0caff', display: 'block', marginTop: 1 };
+
   return (
     <table style={{ marginTop: 4 }}>
       <thead>
         <tr>
           <th>Produkt</th>
-          <th>Gramatura</th>
-          <th>Opakowania</th>
-          <th>Cena/opak.</th>
-          <th>Koszt</th>
+          <th>Gram. użyta</th>
+          <th><span>Pojemność opak.</span><span style={hintStyle}>✎ kliknij aby edytować</span></th>
+          <th>Szt.</th>
+          <th><span>Cena/opak.</span><span style={hintStyle}>✎ kliknij aby edytować</span></th>
+          <th>Koszt zakupy</th>
+          <th>Zużycie</th>
         </tr>
       </thead>
       <tbody>
-        {items.map((item, i) => (
+        {localItems.map((item, i) => (
           <tr key={i}>
             <td><strong>{item.product_name}</strong></td>
-            <td>{item.total_weight} {item.unit || 'g'}</td>
-            <td>
-              <span style={{ background:'#667eea', color:'white', padding:'2px 8px', borderRadius:10, fontWeight:600, fontSize:12 }}>
-                {item.packages_rounded} szt.
-              </span>
+            <td style={{ color: '#666' }}>{item.total_weight} {item.unit || 'g'}</td>
+
+            {/* Pojemność opak — editable */}
+            <td style={{ cursor: 'pointer' }} onClick={() => {
+              if (editPkgId === item.product_id) return;
+              setEditPkgId(item.product_id); setEditPkg(String(item.package_weight));
+              setEditSBW(!!item.sold_by_weight); setEditPriceId(null);
+            }}>
+              {editPkgId === item.product_id ? (
+                <div style={{ display:'flex', flexDirection:'column', gap:4 }} onClick={e => e.stopPropagation()}>
+                  <div style={{ display:'flex', gap:3, alignItems:'center' }}>
+                    <input type="number" min="0" value={editPkg} onChange={e => setEditPkg(e.target.value)}
+                      style={inp} autoFocus onKeyDown={e => { if (e.key==='Enter') handleSavePkg(item); if (e.key==='Escape') setEditPkgId(null); }} />
+                    <span style={{ fontSize:11, color:'#888' }}>{item.unit}</span>
+                  </div>
+                  <label style={{ display:'flex', alignItems:'center', gap:4, fontSize:11, cursor:'pointer' }}>
+                    <input type="checkbox" checked={editSBW} onChange={e => setEditSBW(e.target.checked)} />
+                    Na wagę (bez zaokrąglania)
+                  </label>
+                  <div style={{ display:'flex', gap:3 }}>
+                    <button style={btn('#667eea','white')} onClick={() => handleSavePkg(item)}>✓ Zapisz</button>
+                    <button style={btn('#eee','#555')} onClick={() => setEditPkgId(null)}>✗</button>
+                  </div>
+                </div>
+              ) : (
+                <span style={{ fontSize:12, color: item.sold_by_weight ? '#667eea' : '#444' }}>
+                  {item.sold_by_weight ? 'Na wagę' : `${item.package_weight} ${item.unit || 'g'}`}
+                </span>
+              )}
             </td>
-            <td>{item.price_per_package.toFixed(2)} zł</td>
+
+            {/* Szt */}
+            <td>
+              {item.sold_by_weight
+                ? <span style={{ fontSize:12, color:'#aaa' }}>wagowo</span>
+                : <span style={{ background:'#667eea', color:'white', padding:'2px 8px', borderRadius:10, fontWeight:600, fontSize:12 }}>
+                    {item.packages_rounded} szt.
+                  </span>}
+            </td>
+
+            {/* Cena/opak — editable */}
+            <td style={{ cursor: 'pointer' }} onClick={() => {
+              if (editPriceId === item.product_id) return;
+              setEditPriceId(item.product_id); setEditPrice(item.price_per_package.toFixed(2));
+              setEditPkgId(null);
+            }}>
+              {editPriceId === item.product_id ? (
+                <div style={{ display:'flex', gap:3, alignItems:'center' }} onClick={e => e.stopPropagation()}>
+                  <input type="number" step="0.01" min="0" value={editPrice} onChange={e => setEditPrice(e.target.value)}
+                    style={{ ...inp, width:72 }} autoFocus onKeyDown={e => { if (e.key==='Enter') handleSavePrice(item); if (e.key==='Escape') setEditPriceId(null); }} />
+                  <span style={{ fontSize:11, color:'#888' }}>zł</span>
+                  <button style={btn('#667eea','white')} onClick={() => handleSavePrice(item)}>✓</button>
+                  <button style={btn('#eee','#555')} onClick={() => setEditPriceId(null)}>✗</button>
+                </div>
+              ) : (
+                <span style={{ fontSize:12, color:'#444' }}>{item.price_per_package.toFixed(2)} zł</span>
+              )}
+            </td>
+
             <td><strong>{item.total_cost.toFixed(2)} zł</strong></td>
+            <td style={{ color: item.sold_by_weight ? '#667eea' : '#888', fontStyle: item.sold_by_weight ? 'normal' : 'italic' }}>
+              {item.actual_cost.toFixed(2)} zł
+            </td>
           </tr>
         ))}
       </tbody>
@@ -57,7 +173,7 @@ function ProductTable({ items }) {
 }
 
 // ─── Period card (week / month / custom) ──────────────────────────────────────
-function PeriodCard({ title, range, summary, loading, error }) {
+function PeriodCard({ title, range, summary, loading, error, onGoToTab }) {
   const { t } = useLanguage();
   const [productsOpen, setProductsOpen] = useState(false);
 
@@ -69,15 +185,24 @@ function PeriodCard({ title, range, summary, loading, error }) {
 
   return (
     <div className="card" style={{ padding:0, overflow:'hidden', marginBottom:16 }}>
-      {/* Always-visible header: title + total */}
-      <div style={{ padding:'16px 20px', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+      {/* Always-visible header: title + total — klik rozwija listę produktów */}
+      <div
+        onClick={() => setProductsOpen(o => !o)}
+        style={{ padding:'16px 20px', display:'flex', justifyContent:'space-between', alignItems:'center', cursor:'pointer' }}
+      >
         <div>
           <h2 style={{ margin:0, fontSize:17 }}>{title}</h2>
           {range && (
             <div style={{ fontSize:12, color:'#aaa', marginTop:3 }}>
-              {toEU(range.start)} — {toEU(range.end)}
+              {toEU(range.start)} - {toEU(range.end)}
             </div>
           )}
+          <button
+            onClick={e => { e.stopPropagation(); onGoToTab?.('calendar'); }}
+            style={{ background:'none', border:'none', padding:0, cursor:'pointer', fontSize:11, color:'#c0caff', marginTop:3, display:'block', textAlign:'left' }}
+          >
+            przejdź do kalendarza →
+          </button>
         </div>
         <div style={{ textAlign:'right' }}>
           <div style={{ fontSize:11, color:'#aaa', marginBottom:2 }}>{t('total_cost_lbl2')}</div>
@@ -93,7 +218,7 @@ function PeriodCard({ title, range, summary, loading, error }) {
               )}
             </>
           ) : (
-            <div style={{ fontSize:13, color:'#ccc' }}>—</div>
+            <div style={{ fontSize:13, color:'#ccc' }}>-</div>
           )}
         </div>
       </div>
@@ -203,6 +328,7 @@ function Summary({ onGoToTab }) {
         range={week}
         summary={weekSummary}
         loading={weekLoading}
+        onGoToTab={onGoToTab}
       />
 
       {/* ─── Current month ─── */}
@@ -211,17 +337,29 @@ function Summary({ onGoToTab }) {
         range={month}
         summary={monthSummary}
         loading={monthLoading}
+        onGoToTab={onGoToTab}
       />
 
       {/* ─── Custom period (collapsible) ─── */}
       <div className="card" style={{ padding:0, overflow:'hidden', marginBottom:16 }}>
-        <button onClick={() => setCustomOpen(o => !o)} style={toggleStyle}>
-          <span>{t('custom_period')}</span>
-          <span style={{ display:'flex', alignItems:'center', gap:4, fontWeight:400, fontSize:12 }}>
+        <div
+          onClick={() => setCustomOpen(o => !o)}
+          style={{ display:'flex', justifyContent:'space-between', alignItems:'center', cursor:'pointer' }}
+        >
+          <div style={{ padding:'10px 20px', flex:1 }}>
+            <div style={{ fontSize:13, fontWeight:600, color:'#667eea' }}>{t('custom_period')}</div>
+            <button
+              onClick={e => { e.stopPropagation(); onGoToTab?.('calendar'); }}
+              style={{ background:'none', border:'none', padding:0, cursor:'pointer', fontSize:11, color:'#c0caff', marginTop:2, display:'block', textAlign:'left' }}
+            >
+              przejdź do kalendarza →
+            </button>
+          </div>
+          <span style={{ display:'flex', alignItems:'center', gap:4, fontSize:12, color:'#667eea', fontWeight:400, padding:'10px 20px' }}>
             {customOpen ? 'Zwiń' : 'Rozwiń'}
             <span style={{ fontSize:16, transition:'transform 0.2s', transform: customOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>▾</span>
           </span>
-        </button>
+        </div>
         {customOpen && (
           <div style={{ padding:'0 20px 20px', borderTop:'1px solid #f0f0f0' }}>
             {customError && <p style={{ color:'red', fontSize:13, marginTop:12 }}>{customError}</p>}
@@ -250,7 +388,7 @@ function Summary({ onGoToTab }) {
                   display:'flex', justifyContent:'space-between', alignItems:'center',
                 }}>
                   <div>
-                    <div style={{ opacity:0.8, fontSize:12 }}>{toEU(customRange.start)} — {toEU(customRange.end)}</div>
+                    <div style={{ opacity:0.8, fontSize:12 }}>{toEU(customRange.start)} - {toEU(customRange.end)}</div>
                     <div style={{ opacity:0.8, fontSize:12, marginTop:2 }}>{customSummary.items.length} produktów</div>
                   </div>
                   <div style={{ textAlign:'right' }}>
@@ -276,17 +414,14 @@ function Summary({ onGoToTab }) {
 
       {/* ─── Templates summary ─── */}
       <div className="card" style={{ padding:0, overflow:'hidden', marginBottom:16 }}>
-        <div
-          onClick={() => onGoToTab?.('recipes')}
-          style={{ padding:'16px 20px', cursor:'pointer', display:'flex', justifyContent:'space-between', alignItems:'flex-start' }}
-        >
-          <div>
-            <h2 style={{ margin:0, fontSize:17, color:'#667eea' }}>{t('week_templates_sum')}</h2>
-            <div style={{ fontSize:12, color:'#bbb', marginTop:4 }}>
-              {t('go_edit_hint')} →
-            </div>
-          </div>
-          <span style={{ fontSize:20, color:'#c0caff', marginTop:2 }}>›</span>
+        <div style={{ padding:'16px 20px' }}>
+          <h2 style={{ margin:0, fontSize:17, color:'#667eea' }}>{t('week_templates_sum')}</h2>
+          <button
+            onClick={() => onGoToTab?.('recipes')}
+            style={{ background:'none', border:'none', padding:0, cursor:'pointer', fontSize:11, color:'#c0caff', marginTop:3, display:'block' }}
+          >
+            przejdź do Przepisów →
+          </button>
         </div>
 
         {templates.length === 0 ? (

@@ -45,7 +45,7 @@ def create_product():
 def update_product(id):
     product = Product.query.filter_by(id=id, user_id=current_uid()).first_or_404()
     data = request.get_json()
-    for field in ('name', 'package_weight', 'price', 'unit', 'kcal', 'protein', 'fat', 'carbs'):
+    for field in ('name', 'package_weight', 'price', 'unit', 'kcal', 'protein', 'fat', 'carbs', 'sold_by_weight'):
         if field in data:
             setattr(product, field, data[field])
     db.session.commit()

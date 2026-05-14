@@ -139,6 +139,7 @@ export default function Recipes() {
   const { t } = useLanguage();
   const [recipeList, setRecipeList] = useState([]);
   const [productList, setProductList] = useState([]);
+  const [search, setSearch] = useState('');
   const [expanded, setExpanded] = useState(null);
   const [error, setError] = useState('');
   const [pasteText, setPasteText] = useState('');
@@ -222,14 +223,14 @@ export default function Recipes() {
                     <li>{t('fmt_4')}</li>
                   </ol>
                   <div style={{ marginTop: 10, padding: '8px 12px', background: '#fff', border: '1px solid #e0e4ff', borderRadius: 6, fontSize: 12, color: '#555' }}>
-                    <b>{t('ai_tip').split('—')[0]}</b>{t('ai_tip').includes('—') ? '—' + t('ai_tip').split('—').slice(1).join('—') : ''} <span style={{ color: '#856404' }}>{t('daily_limit')}</span><br/>
-                    <b>{t('regex_tip').split('—')[0]}</b>{t('regex_tip').includes('—') ? '—' + t('regex_tip').split('—').slice(1).join('—') : ''}
+                    {t('ai_tip')} <span style={{ color: '#856404' }}>{t('daily_limit')}</span><br/>
+                    {t('regex_tip')}
                   </div>
                 </div>
                 <div>
                   <a href="https://aniagotuje.pl/" target="_blank" rel="noreferrer"
                     style={{display:'inline-flex',alignItems:'center',gap:5,fontSize:12,color:'#667eea',fontWeight:600,marginBottom:10,textDecoration:'none',background:'#f0f2ff',padding:'5px 10px',borderRadius:6,border:'1px solid #c0caff'}}>
-                    🍳 Szukasz inspiracji? → aniagotuje.pl
+                    Szukasz inspiracji? → aniagotuje.pl
                   </a>
                   <div style={{ fontWeight: 600, marginBottom: 4, color: '#444' }}>{t('example')}</div>
                   <pre style={{ margin: 0, background: '#fff', border: '1px solid #e0e4ff', borderRadius: 6, padding: '8px 12px', fontSize: 12, color: '#333', lineHeight: 1.8 }}>
@@ -306,9 +307,23 @@ banan 120 g
       </div>
 
       <div className="card">
-        <h2>{t('recipe_list_title')} <span style={{fontSize:12,fontWeight:400,color:'#aaa'}}>— dodaj lub edytuj swoje przepisy</span></h2>
+        <h2>{t('recipe_list_title')} <span style={{fontSize:12,fontWeight:400,color:'#aaa'}}>- edytuj swoje przepisy</span></h2>
+        <div style={{ margin: '10px 0' }}>
+          <input
+            type="text"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            placeholder="Szukaj przepisu..."
+            style={{ width: '100%', padding: '7px 12px', border: '1px solid #ddd', borderRadius: 6, fontSize: 13, boxSizing: 'border-box', outline: 'none' }}
+            onFocus={e => e.target.style.borderColor = '#667eea'}
+            onBlur={e => e.target.style.borderColor = '#ddd'}
+          />
+        </div>
         {recipeList.length === 0 && <p style={{ textAlign: 'center', color: '#999' }}>{t('no_recipes_add')}</p>}
-        {recipeList.map(r => (
+        {recipeList.length > 0 && search.trim() && !recipeList.some(r => r.name.toLowerCase().includes(search.trim().toLowerCase())) && (
+          <p style={{ textAlign: 'center', color: '#999', fontStyle: 'italic' }}>Nie znaleziono przepisu „{search}"</p>
+        )}
+        {recipeList.filter(r => !search.trim() || r.name.toLowerCase().includes(search.trim().toLowerCase())).map(r => (
           <div key={r.id} style={{ borderBottom: '1px solid #f0f0f0', padding: '12px 0' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>

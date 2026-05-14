@@ -389,16 +389,34 @@ DEFAULT_RECIPES_EN = [
 ]
 
 
+SOLD_BY_WEIGHT_PL = {
+    "Pierś z kurczaka", "Udka z kurczaka", "Mięso mielone wieprzowe",
+    "Wołowina mielona", "Łosoś",
+    "Pomidory", "Ogórek", "Papryka czerwona", "Cebula", "Czosnek",
+    "Marchew", "Ziemniaki", "Brokuły", "Szpinak", "Sałata",
+    "Kapusta biała", "Cukinia",
+    "Banan", "Jabłko", "Cytryna",
+}
+SOLD_BY_WEIGHT_EN = {
+    "Chicken breast", "Chicken thighs", "Ground pork", "Ground beef", "Salmon",
+    "Tomatoes", "Cucumber", "Red pepper", "Onion", "Garlic", "Carrot",
+    "Potatoes", "Broccoli", "Spinach", "Lettuce", "White cabbage", "Zucchini",
+    "Banana", "Apple", "Lemon",
+}
+
+
 def seed_user(user_id, lang='pl'):
     """Creates default products and recipes for a new user in the chosen language."""
     if lang == 'en':
         products_list = DEFAULT_PRODUCTS_EN
         recipes_list  = DEFAULT_RECIPES_EN
         macros_map    = MACROS_EN
+        sbw_set       = SOLD_BY_WEIGHT_EN
     else:
         products_list = DEFAULT_PRODUCTS_PL
         recipes_list  = DEFAULT_RECIPES_PL
         macros_map    = MACROS
+        sbw_set       = SOLD_BY_WEIGHT_PL
 
     name_to_product = {}
     for name, weight, unit in products_list:
@@ -407,6 +425,7 @@ def seed_user(user_id, lang='pl'):
             user_id=user_id, name=name,
             package_weight=weight, price=0.0, unit=unit,
             kcal=m[0], protein=m[1], fat=m[2], carbs=m[3],
+            sold_by_weight=(name in sbw_set),
         )
         db.session.add(product)
         db.session.flush()
