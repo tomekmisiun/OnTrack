@@ -7,7 +7,7 @@ const T = {
     tab_calendar: 'Planer Posiłków',
     tab_recipes: 'Przepisy',
     tab_products: 'Produkty',
-    tab_summary: 'Podsumowania Tygodnia/Miesiąca',
+    tab_summary: 'Wydatki',
     logout: 'Wyloguj',
     profile: 'Profil',
     // Profile modal
@@ -221,6 +221,19 @@ const T = {
     err_load_summary: 'Błąd ładowania podsumowania',
     err_select_range: 'Wybierz zakres dat',
     err_date_order: 'Data początkowa nie może być późniejsza niż końcowa',
+    // Summary new
+    this_week: 'Ten tydzień',
+    this_month: 'Ten miesiąc',
+    custom_period: 'Wybrany okres',
+    week_templates_sum: 'Szablony tygodniowe',
+    show_product_list: 'Rozwiń listę produktów',
+    hide_product_list: 'Zwiń listę produktów',
+    go_edit_hint: 'przejdź do Przepisów aby edytować',
+    est_weekly_cost: 'Szacowany koszt tygodnia',
+    no_tpl_summary: 'Brak szablonów. Utwórz je w Planerze Posiłków.',
+    no_meals_period: 'Brak zaplanowanych posiłków w tym okresie',
+    total_cost_lbl2: 'Łączny koszt',
+    meals_n: (n) => `${n} posiłków`,
   },
   en: {
     // App/Nav
@@ -228,7 +241,7 @@ const T = {
     tab_calendar: 'Meal Planner',
     tab_recipes: 'Recipes',
     tab_products: 'Products',
-    tab_summary: 'Weekly/Monthly Summaries',
+    tab_summary: 'Expenses',
     logout: 'Log out',
     profile: 'Profile',
     // Profile modal
@@ -442,6 +455,19 @@ const T = {
     err_load_summary: 'Error loading summary',
     err_select_range: 'Select a date range',
     err_date_order: 'Start date cannot be later than end date',
+    // Summary new
+    this_week: 'This week',
+    this_month: 'This month',
+    custom_period: 'Custom period',
+    week_templates_sum: 'Weekly templates',
+    show_product_list: 'Show product list',
+    hide_product_list: 'Hide product list',
+    go_edit_hint: 'go to Recipes to edit',
+    est_weekly_cost: 'Estimated weekly cost',
+    no_tpl_summary: 'No templates. Create them in the Meal Planner.',
+    no_meals_period: 'No meals planned in this period',
+    total_cost_lbl2: 'Total cost',
+    meals_n: (n) => `${n} meals`,
   },
 };
 

@@ -79,7 +79,7 @@ function AppInner() {
         {activeTab === 'calendar'  && <Calendar onGoToTab={setActiveTab} />}
         {activeTab === 'recipes'   && <Recipes />}
         {activeTab === 'products'  && <Products />}
-        {activeTab === 'summary'   && <Summary />}
+        {activeTab === 'summary'   && <Summary onGoToTab={setActiveTab} />}
       </main>
 
       {showProfile && <Profile onClose={() => setShowProfile(false)} />}
