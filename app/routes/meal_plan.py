@@ -85,14 +85,19 @@ def copy_range():
         MealPlan.date >= source_start,
         MealPlan.date <= source_end,
     ).all()
-    added = 0
+    span = (source_end - source_start).days
+    target_end = target_start + timedelta(days=span)
+    # Delete existing meals in target range before copying (overwrite behaviour)
+    MealPlan.query.filter(
+        MealPlan.user_id == uid,
+        MealPlan.date >= target_start,
+        MealPlan.date <= target_end,
+    ).delete()
     for meal in meals:
         new_date = target_start + (meal.date - source_start)
-        if not MealPlan.query.filter_by(user_id=uid, date=new_date, position=meal.position).first():
-            db.session.add(MealPlan(user_id=uid, date=new_date, position=meal.position, recipe_id=meal.recipe_id))
-            added += 1
+        db.session.add(MealPlan(user_id=uid, date=new_date, position=meal.position, recipe_id=meal.recipe_id))
     db.session.commit()
-    return jsonify({'message': f'Skopiowano {added} posiłków'}), 201
+    return jsonify({'message': f'Skopiowano {len(meals)} posiłków'}), 201
 
 
 @meal_plan_bp.route('/<int:id>', methods=['DELETE'])

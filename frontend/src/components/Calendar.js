@@ -281,14 +281,38 @@ function TemplateSlot({ dayIndex, position, recipe, onRemove }) {
 // ─── Template editor/viewer ───────────────────────────────────────────────────
 function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditSlots, onSave, onApply, onDelete }) {
   const { t } = useLanguage();
-  const [editName, setEditName]   = useState('');
-  const [applyWeek, setApplyWeek] = useState({});
-  const [open, setOpen]           = useState(false);
+  const [editName, setEditName]     = useState('');
+  const [applyWeek, setApplyWeek]   = useState({});
+  const [open, setOpen]             = useState(false);
+  const [copiedTplDay, setCopiedTplDay] = useState(null);
   const mondays = getUpcomingMondays(16);
 
   const handleRemove = (dayIndex, position) => {
     const k = `${dayIndex}-${position}`;
     setEditSlots(prev => { const n = {...prev}; delete n[k]; return n; });
+  };
+
+  const handleClearDay = (di) => {
+    setEditSlots(prev => {
+      const n = {...prev};
+      [1,2,3,4,5].forEach(pos => delete n[`${di}-${pos}`]);
+      return n;
+    });
+  };
+
+  const handleCopyTplDay = (di) => setCopiedTplDay(di);
+
+  const handlePasteTplDay = (di) => {
+    if (copiedTplDay === null) return;
+    setEditSlots(prev => {
+      const n = {...prev};
+      [1,2,3,4,5].forEach(pos => {
+        const src = prev[`${copiedTplDay}-${pos}`];
+        if (src) n[`${di}-${pos}`] = src;
+        else delete n[`${di}-${pos}`];
+      });
+      return n;
+    });
   };
 
   const filledCount = Object.keys(editSlots).length;
@@ -312,18 +336,37 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
         <div style={{fontSize:12,color:'#888',marginBottom:8}}>{t('tpl_drag_hint')}</div>
 
         <div style={{display:'grid', gridTemplateColumns:'repeat(7,1fr)', gap:4, marginBottom:10}}>
-          {dayFull.map((name, di) => (
-            <div key={di} style={{border:'1px solid #e0e4ff',borderRadius:6,overflow:'hidden'}}>
-              <div style={{background:'#f0f2ff',padding:'3px 6px',fontSize:10,fontWeight:600,color:'#667eea',textAlign:'center',borderBottom:'1px solid #e0e4ff'}}>
-                {dayShort[di]}
+          {dayFull.map((name, di) => {
+            const dayHasContent = [1,2,3,4,5].some(pos => editSlots[`${di}-${pos}`]);
+            const isCopied = copiedTplDay === di;
+            const btnStyle = {background:'none',border:'none',cursor:'pointer',padding:'0 2px',lineHeight:1,fontSize:11};
+            return (
+              <div key={di} style={{border:`1px solid ${isCopied?'#667eea':'#e0e4ff'}`,borderRadius:6,overflow:'hidden'}}>
+                <div style={{background: isCopied?'#e8eaff':'#f0f2ff',borderBottom:'1px solid #e0e4ff'}}>
+                  <div style={{padding:'3px 4px',fontSize:10,fontWeight:600,color:'#667eea',textAlign:'center'}}>
+                    {dayShort[di]}
+                  </div>
+                  <div style={{display:'flex',justifyContent:'center',gap:1,padding:'2px 3px',borderTop:'1px solid #e8ebff'}}>
+                    <button onClick={()=>handleCopyTplDay(di)} title={t('copy_day_title')}
+                      style={{...btnStyle,color:isCopied?'#667eea':'#aab'}}>⧉</button>
+                    {copiedTplDay!==null && copiedTplDay!==di && (
+                      <button onClick={()=>handlePasteTplDay(di)} title={t('paste_day_title')}
+                        style={{...btnStyle,color:'#667eea'}}>⎘</button>
+                    )}
+                    {dayHasContent && (
+                      <button onClick={()=>handleClearDay(di)} title={t('del_day_title')}
+                        style={{...btnStyle,color:'#ff6b81'}}>✕</button>
+                    )}
+                  </div>
+                </div>
+                {[1,2,3,4,5].map(pos => (
+                  <TemplateSlot key={pos} dayIndex={di} position={pos}
+                    recipe={editSlots[`${di}-${pos}`] || null}
+                    onRemove={handleRemove} />
+                ))}
               </div>
-              {[1,2,3,4,5].map(pos => (
-                <TemplateSlot key={pos} dayIndex={di} position={pos}
-                  recipe={editSlots[`${di}-${pos}`] || null}
-                  onRemove={handleRemove} />
-              ))}
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div style={{display:'flex',gap:8,alignItems:'center'}}>
@@ -546,13 +589,14 @@ export default function Calendar() {
     localStorage.setItem('weekTemplates',JSON.stringify(updated));
   };
   const applyTemplate = async(template, targetMon)=>{
+    // Delete existing meals in every day covered by the template (overwrite)
+    const offsets = [...new Set(template.meals.map(m => m.dayOffset))];
+    const deletes = offsets.flatMap(offset => mealsByDate[addDays(targetMon, offset)] || []);
+    await Promise.all(deletes.map(m => api.deleteMeal(m.id)));
+    // Add template meals
     for (const entry of template.meals) {
-      const date = addDays(targetMon, entry.dayOffset);
-      const existing = (mealsByDate[date]||[]).find(m=>m.position===entry.position);
-      if (!existing) {
-        try { await api.addMeal({date, position:entry.position, recipe_id:entry.recipe_id}); }
-        catch {}
-      }
+      try { await api.addMeal({date:addDays(targetMon,entry.dayOffset), position:entry.position, recipe_id:entry.recipe_id}); }
+      catch {}
     }
     await loadMonth(year,month);
   };
