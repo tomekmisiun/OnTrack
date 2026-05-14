@@ -791,8 +791,9 @@ export default function Calendar({ onGoToTab }) {
         </div>
 
         {weeks.map((weekDays,wi)=>{
-          const mondayStr = dateToStr(weekDays[0]);
-          const isCopied  = copiedWeek===mondayStr;
+          const mondayStr    = dateToStr(weekDays[0]);
+          const isCopied     = copiedWeek===mondayStr;
+          const weekHasMeals = weekDays.some(d=>(mealsByDate[dateToStr(d)]||[]).length>0);
           const wBtn = {
             display:'flex', alignItems:'center', justifyContent:'center', gap:4,
             width:'100%', padding:'5px 4px', borderRadius:6, cursor:'pointer',
@@ -801,20 +802,24 @@ export default function Calendar({ onGoToTab }) {
           return (
             <div key={wi} style={{display:'grid',gridTemplateColumns:'72px repeat(7,1fr)',gap:3,marginBottom:3}}>
               <div style={{display:'flex',flexDirection:'column',gap:3,padding:'2px 0'}}>
-                <button onClick={()=>handleCopyWeek(mondayStr)} title={t('copy_week_title')}
-                  style={{...wBtn, background:isCopied?'#667eea':'#eef2ff', color:isCopied?'white':'#667eea', border:'1px solid #c0caff'}}>
-                  {isCopied ? 'Skopiowano' : 'Kopiuj'}
-                </button>
+                {weekHasMeals && (
+                  <button onClick={()=>handleCopyWeek(mondayStr)} title={t('copy_week_title')}
+                    style={{...wBtn, background:isCopied?'#667eea':'#eef2ff', color:isCopied?'white':'#667eea', border:'1px solid #c0caff'}}>
+                    {isCopied ? 'Skopiowano' : 'Kopiuj'}
+                  </button>
+                )}
                 {copiedWeek && copiedWeek!==mondayStr && (
                   <button onClick={()=>handlePasteWeek(mondayStr)} title={t('paste_week_title')}
                     style={{...wBtn, background:'#dbeafe', color:'#1d4ed8', border:'1px solid #93c5fd'}}>
                     Wklej
                   </button>
                 )}
-                <button onClick={()=>handleDeleteWeek(mondayStr)} title={t('del_week_title')}
-                  style={{...wBtn, background:'#fff0f2', color:'#e03050', border:'1px solid #fca5a5'}}>
-                  Usuń
-                </button>
+                {weekHasMeals && (
+                  <button onClick={()=>handleDeleteWeek(mondayStr)} title={t('del_week_title')}
+                    style={{...wBtn, background:'#fff0f2', color:'#e03050', border:'1px solid #fca5a5'}}>
+                    Usuń
+                  </button>
+                )}
               </div>
               {weekDays.map(date=>{
                 const ds = dateToStr(date);
