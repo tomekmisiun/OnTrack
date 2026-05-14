@@ -3,6 +3,7 @@ import {
   DndContext, DragOverlay, PointerSensor,
   useSensor, useSensors, useDraggable, useDroppable,
 } from '@dnd-kit/core';
+import { Icon } from '@iconify/react';
 import { mealPlan as api, recipes as recipesApi } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -142,7 +143,13 @@ function DraggableDayHandle({ dateStr, meals }) {
   });
   return (
     <span ref={setNodeRef} {...listeners} {...attributes} title={t('drag_day_title')}
-      style={{cursor:'grab',opacity:isDragging?0.4:1,fontSize:10,color:'#bbb',marginLeft:2,userSelect:'none',touchAction:'none'}}>⠿</span>
+      style={{cursor:'grab',opacity:isDragging?0.4:1,marginLeft:3,userSelect:'none',touchAction:'none',
+        display:'inline-flex',flexDirection:'column',alignItems:'center',gap:0,verticalAlign:'middle'}}>
+      <Icon icon="streamline:one-finger-drag-horizontal-solid" width={13} height={13} style={{color:'#b0a8c8'}} />
+      <span style={{fontSize:6,color:'#bbb',lineHeight:1.15,textAlign:'center',display:'block',fontWeight:500}}>
+        przytrzymaj<br/>i przeciągnij
+      </span>
+    </span>
   );
 }
 
@@ -373,14 +380,20 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
                   </div>
                   <div style={{display:'flex',justifyContent:'center',gap:1,padding:'2px 3px',borderTop:'1px solid #e8ebff'}}>
                     <button onClick={()=>handleCopyTplDay(di)} title={t('copy_day_title')}
-                      style={{...btnStyle,color:isCopied?'#667eea':'#aab'}}>⧉</button>
+                      style={{...btnStyle,color:isCopied?'#667eea':'#aab'}}>
+                      <Icon icon="material-symbols:content-copy" width={11} height={11} />
+                    </button>
                     {copiedTplDay!==null && copiedTplDay!==di && (
                       <button onClick={()=>handlePasteTplDay(di)} title={t('paste_day_title')}
-                        style={{...btnStyle,color:'#667eea'}}>⎘</button>
+                        style={{...btnStyle,color:'#667eea'}}>
+                        <Icon icon="material-symbols:content-paste" width={11} height={11} />
+                      </button>
                     )}
                     {dayHasContent && (
                       <button onClick={()=>handleClearDay(di)} title={t('del_day_title')}
-                        style={{...btnStyle,color:'#ff6b81'}}>✕</button>
+                        style={{...btnStyle,color:'#ff6b81'}}>
+                        <Icon icon="material-symbols:delete-sharp" width={11} height={11} />
+                      </button>
                     )}
                   </div>
                 </div>
@@ -776,17 +789,20 @@ export default function Calendar() {
               <div style={{display:'flex',flexDirection:'column',gap:3,padding:'2px 0'}}>
                 <button onClick={()=>handleCopyWeek(mondayStr)} title={t('copy_week_title')}
                   style={{...wBtn, background:isCopied?'#667eea':'#eef2ff', color:isCopied?'white':'#667eea', border:'1px solid #c0caff'}}>
-                  <span style={{fontSize:11}}>📋</span> {isCopied ? 'Skopiowano' : 'Kopiuj tydz.'}
+                  <Icon icon="material-symbols:content-copy" width={12} height={12} />
+                  {isCopied ? 'Skopiowano' : 'Kopiuj tydz.'}
                 </button>
                 {copiedWeek && copiedWeek!==mondayStr && (
                   <button onClick={()=>handlePasteWeek(mondayStr)} title={t('paste_week_title')}
                     style={{...wBtn, background:'#dbeafe', color:'#1d4ed8', border:'1px solid #93c5fd'}}>
-                    <span style={{fontSize:11}}>⬇</span> Wklej tydz.
+                    <Icon icon="material-symbols:content-paste" width={12} height={12} />
+                    Wklej tydz.
                   </button>
                 )}
                 <button onClick={()=>handleDeleteWeek(mondayStr)} title={t('del_week_title')}
                   style={{...wBtn, background:'#fff0f2', color:'#e03050', border:'1px solid #fca5a5'}}>
-                  <span style={{fontSize:11}}>🗑</span> Usuń tydz.
+                  <Icon icon="material-symbols:delete-sharp" width={12} height={12} />
+                  Usuń tydz.
                 </button>
               </div>
               {weekDays.map(date=>{
