@@ -5,8 +5,8 @@ const T = {
     // App/Nav
     loading: 'Ładowanie…',
     tab_calendar: 'Planer Posiłków',
-    tab_recipes: 'Dodaj/Edytuj Listę przepisów',
-    tab_products: 'Dodaj/Edytuj Listę produktów',
+    tab_recipes: 'Przepisy',
+    tab_products: 'Produkty',
     tab_summary: 'Podsumowania Tygodnia/Miesiąca',
     logout: 'Wyloguj',
     profile: 'Profil',
@@ -226,8 +226,8 @@ const T = {
     // App/Nav
     loading: 'Loading…',
     tab_calendar: 'Meal Planner',
-    tab_recipes: 'Add/Edit Recipe List',
-    tab_products: 'Add/Edit Product List',
+    tab_recipes: 'Recipes',
+    tab_products: 'Products',
     tab_summary: 'Weekly/Monthly Summaries',
     logout: 'Log out',
     profile: 'Profile',

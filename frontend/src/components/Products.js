@@ -48,6 +48,7 @@ export default function Products() {
   const [applyingMacro, setApplyingMacro] = useState(false);
   const [dragOver, setDragOver] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [listOpen, setListOpen] = useState(true);
   const fileInputRef = useRef();
 
   const isImageFile = (file) => file && /\.(jpe?g|png|webp)$/i.test(file.name);
@@ -242,6 +243,10 @@ export default function Products() {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <a href="https://zakupy.auchan.pl/" target="_blank" rel="noreferrer"
+              style={{ display:'inline-flex', alignItems:'center', gap:5, fontSize:12, color:'#667eea', fontWeight:600, marginBottom:10, textDecoration:'none', background:'#f0f2ff', padding:'5px 10px', borderRadius:6, border:'1px solid #c0caff' }}>
+              🛒 Szukasz produktów? → zakupy.auchan.pl
+            </a>
             <div style={{ background: '#f8f9ff', border: '1px solid #e0e4ff', borderRadius: 8, padding: '12px 14px', fontSize: 12, color: '#555', lineHeight: 1.6 }}>
               <div style={{ fontWeight: 700, color: '#667eea', marginBottom: 4 }}>{t('macro_auto_title')}</div>
               {t('macro_auto_desc')}
@@ -282,6 +287,9 @@ export default function Products() {
               </ol>
               <div style={{ marginTop: 6, fontSize: 11, color: '#856404' }}>
                 {t('ai_daily_lim')}{remainingImports !== null && <span>{t('ai_rem')(remainingImports)}</span>}
+              </div>
+              <div style={{ marginTop: 5, fontSize: 11, color: '#1d4ed8', background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: 5, padding: '4px 8px' }}>
+                💡 Protip: paragon w apce sklepu? zrób screenshot i wgraj
               </div>
             </div>
             <div>
@@ -395,9 +403,22 @@ export default function Products() {
         )}
       </div>
 
-      {/* Product list */}
-      <div className="card">
-        <h2>{t('product_list_title')}</h2>
+      {/* Product list — collapsible */}
+      <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+        <button
+          onClick={() => setListOpen(o => !o)}
+          style={{ width: '100%', padding: '14px 20px', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 14, fontWeight: 600, color: '#667eea' }}
+        >
+          <span>
+            {t('product_list_title')}
+            <span style={{ fontSize: 12, fontWeight: 400, color: '#aaa', marginLeft: 8 }}>— dodaj lub edytuj swoje produkty</span>
+          </span>
+          <span style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 12, color: '#667eea', fontWeight: 400 }}>
+            {listOpen ? 'Zwiń' : 'Rozwiń'}
+            <span style={{ fontSize: 16, transition: 'transform 0.2s', transform: listOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>▾</span>
+          </span>
+        </button>
+        {listOpen && <div style={{ padding: '0 20px 20px', borderTop: '1px solid #f0f0f0' }}>
         <table>
           {!editId && (
             <thead>
@@ -486,6 +507,7 @@ export default function Products() {
             )}
           </tbody>
         </table>
+        </div>}
       </div>
     </div>
   );

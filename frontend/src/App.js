@@ -76,7 +76,7 @@ function AppInner() {
       </nav>
 
       <main className="app-main">
-        {activeTab === 'calendar'  && <Calendar />}
+        {activeTab === 'calendar'  && <Calendar onGoToTab={setActiveTab} />}
         {activeTab === 'recipes'   && <Recipes />}
         {activeTab === 'products'  && <Products />}
         {activeTab === 'summary'   && <Summary />}

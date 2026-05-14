@@ -515,7 +515,7 @@ function OverlayContent({ dragData }) {
 }
 
 // ─── Main Calendar ────────────────────────────────────────────────────────────
-export default function Calendar() {
+export default function Calendar({ onGoToTab }) {
   const { t } = useLanguage();
   const todayMidnight = new Date(); todayMidnight.setHours(0,0,0,0);
   const todayStr = dateToStr(todayMidnight);
@@ -824,7 +824,12 @@ export default function Calendar() {
       {/* Recipe carousel */}
       <div className="card" style={{padding:'14px 16px',marginBottom:16}}>
         <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:12}}>
-          <h2 style={{margin:0,fontSize:15}}>{t('carousel_title')}</h2>
+          <h2
+            onClick={() => onGoToTab?.('recipes')}
+            style={{margin:0,fontSize:15,cursor:'pointer',color:'#667eea',textDecoration:'underline',textDecorationStyle:'dotted',textUnderlineOffset:3}}
+          >
+            {t('carousel_title')}
+          </h2>
           <span style={{fontSize:11,color:'#aaa'}}>{t('drag_to_cal')}</span>
         </div>
         {recipes.length===0

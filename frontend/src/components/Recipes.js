@@ -227,6 +227,10 @@ export default function Recipes() {
                   </div>
                 </div>
                 <div>
+                  <a href="https://aniagotuje.pl/" target="_blank" rel="noreferrer"
+                    style={{display:'inline-flex',alignItems:'center',gap:5,fontSize:12,color:'#667eea',fontWeight:600,marginBottom:10,textDecoration:'none',background:'#f0f2ff',padding:'5px 10px',borderRadius:6,border:'1px solid #c0caff'}}>
+                    🍳 Szukasz inspiracji? → aniagotuje.pl
+                  </a>
                   <div style={{ fontWeight: 600, marginBottom: 4, color: '#444' }}>{t('example')}</div>
                   <pre style={{ margin: 0, background: '#fff', border: '1px solid #e0e4ff', borderRadius: 6, padding: '8px 12px', fontSize: 12, color: '#333', lineHeight: 1.8 }}>
 {`Owsianka
@@ -302,7 +306,7 @@ banan 120 g
       </div>
 
       <div className="card">
-        <h2>{t('recipe_list_title')}</h2>
+        <h2>{t('recipe_list_title')} <span style={{fontSize:12,fontWeight:400,color:'#aaa'}}>— dodaj lub edytuj swoje przepisy</span></h2>
         {recipeList.length === 0 && <p style={{ textAlign: 'center', color: '#999' }}>{t('no_recipes_add')}</p>}
         {recipeList.map(r => (
           <div key={r.id} style={{ borderBottom: '1px solid #f0f0f0', padding: '12px 0' }}>
