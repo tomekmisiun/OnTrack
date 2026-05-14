@@ -24,8 +24,8 @@ function AppInner() {
 
   if (loading) {
     return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
-        <div style={{ color: 'white', fontSize: 18 }}>{t('loading')}</div>
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #0d9488 0%, #0f766e 100%)' }}>
+        <div style={{ color: '#1f2937', fontSize: 18 }}>{t('loading')}</div>
       </div>
     );
   }
@@ -43,7 +43,7 @@ function AppInner() {
 
           <button
             onClick={() => setShowProfile(true)}
-            style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.25)', color: 'white', padding: '5px 13px', borderRadius: 6, cursor: 'pointer', fontSize: 12, fontWeight: 500, transition: 'background 0.15s' }}
+            style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.25)', color: '#1f2937', padding: '5px 13px', borderRadius: 6, cursor: 'pointer', fontSize: 12, fontWeight: 500, transition: 'background 0.15s' }}
             onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.25)'}
             onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.15)'}
           >
@@ -53,7 +53,7 @@ function AppInner() {
           <button
             onClick={logout}
             style={{ background: 'transparent', border: '1px solid rgba(255,255,255,0.25)', color: 'rgba(255,255,255,0.85)', padding: '5px 13px', borderRadius: 6, cursor: 'pointer', fontSize: 12, fontWeight: 500, transition: 'all 0.15s' }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.12)'; e.currentTarget.style.color = 'white'; }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.12)'; e.currentTarget.style.color = '#1f2937'; }}
             onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'rgba(255,255,255,0.85)'; }}
           >
             {t('logout')}

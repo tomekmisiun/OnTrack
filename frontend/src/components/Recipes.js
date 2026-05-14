@@ -211,29 +211,30 @@ export default function Recipes() {
 
         {!parsed ? (
           <div>
-            <div style={{ background: '#f8f9ff', border: '1px solid #e0e4ff', borderRadius: 8, padding: '14px 16px', marginBottom: 16, fontSize: 13, lineHeight: 1.7 }}>
-              <div style={{ fontWeight: 700, color: '#667eea', marginBottom: 8 }}>{t('how_to_recipe')}</div>
+            <div style={{ background: '#1c3534', border: '1px solid #e2e8f0', borderRadius: 8, padding: '14px 16px', marginBottom: 16, fontSize: 13, lineHeight: 1.7 }}>
+              <div style={{ fontWeight: 700, color: '#0d9488', marginBottom: 8 }}>{t('how_to_recipe')}</div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
                 <div>
-                  <div style={{ fontWeight: 600, marginBottom: 6, color: '#444' }}>{t('format_title')}</div>
-                  <ol style={{ margin: 0, paddingLeft: 18, color: '#555' }}>
+                  <div style={{ fontWeight: 600, marginBottom: 6, color: '#d1d5db' }}>{t('format_title')}</div>
+                  <ol style={{ margin: 0, paddingLeft: 18, color: '#9ca3af' }}>
                     <li><b>{t('fmt_1')}</b></li>
                     <li>{t('fmt_2')}</li>
                     <li>{t('fmt_3')}</li>
                     <li>{t('fmt_4')}</li>
                   </ol>
-                  <div style={{ marginTop: 10, padding: '8px 12px', background: '#fff', border: '1px solid #e0e4ff', borderRadius: 6, fontSize: 12, color: '#555' }}>
+                  <div style={{ marginTop: 10, padding: '8px 12px', background: '#111827', border: '1px solid #374151', borderRadius: 6, fontSize: 12, color: '#9ca3af' }}>
                     {t('ai_tip')} <span style={{ color: '#856404' }}>{t('daily_limit')}</span><br/>
                     {t('regex_tip')}
                   </div>
                 </div>
                 <div>
+                  <div style={{fontSize:17,fontWeight:600,color:'#f1f5f9',marginBottom:8}}>Szukasz inspiracji?</div>
                   <a href="https://aniagotuje.pl/" target="_blank" rel="noreferrer"
-                    style={{display:'inline-flex',alignItems:'center',gap:5,fontSize:12,color:'#667eea',fontWeight:600,marginBottom:10,textDecoration:'none',background:'#f0f2ff',padding:'5px 10px',borderRadius:6,border:'1px solid #c0caff'}}>
-                    Szukasz inspiracji? → aniagotuje.pl
+                    style={{display:'inline-flex',alignItems:'center',gap:5,fontSize:12,color:'#2dd4bf',fontWeight:600,marginBottom:10,textDecoration:'none',background:'#1c3534',padding:'5px 10px',borderRadius:6,border:'1px solid #374151'}}>
+                    aniagotuje.pl →
                   </a>
-                  <div style={{ fontWeight: 600, marginBottom: 4, color: '#444' }}>{t('example')}</div>
-                  <pre style={{ margin: 0, background: '#fff', border: '1px solid #e0e4ff', borderRadius: 6, padding: '8px 12px', fontSize: 12, color: '#333', lineHeight: 1.8 }}>
+                  <div style={{ fontWeight: 600, marginBottom: 4, color: '#d1d5db' }}>{t('example')}</div>
+                  <pre style={{ margin: 0, background: '#111827', border: '1px solid #374151', borderRadius: 6, padding: '8px 12px', fontSize: 12, color: '#d1d5db', lineHeight: 1.8 }}>
 {`Owsianka
 płatki owsiane 50 g
 mleko 200 ml
@@ -252,9 +253,9 @@ banan 120 g
             <textarea
               value={pasteText} onChange={e => setPasteText(e.target.value)}
               placeholder={t('recipe_ph')}
-              style={{ width: '100%', minHeight: 200, padding: 12, border: '2px solid #e0e0e0', borderRadius: 8, fontFamily: 'inherit', fontSize: 13, lineHeight: 1.6, resize: 'vertical', outline: 'none', marginBottom: 12, boxSizing: 'border-box' }}
-              onFocus={e => e.target.style.borderColor = '#667eea'}
-              onBlur={e => e.target.style.borderColor = '#e0e0e0'}
+              style={{ width: '100%', maxWidth: 600, minHeight: 180, padding: 12, border: '1.5px solid #374151', borderRadius: 8, fontFamily: 'inherit', fontSize: 13, lineHeight: 1.6, resize: 'vertical', outline: 'none', marginBottom: 12, boxSizing: 'border-box', background: '#111827', color: '#e2e8f0' }}
+              onFocus={e => e.target.style.borderColor = '#0d9488'}
+              onBlur={e => e.target.style.borderColor = '#374151'}
             />
 
             <div style={{ display: 'flex', gap: 10 }}>
@@ -262,7 +263,7 @@ banan 120 g
                 {parsing === 'ai' ? t('parsing_ai') : t('parse_ai_btn')}
               </button>
               <button className="btn" onClick={handleParseRegex} disabled={!pasteText.trim() || parsing === 'ai'}
-                style={{ background: '#f0f2ff', color: '#667eea', border: '1px solid #c0caff', fontWeight: 600, minWidth: 160 }}>
+                style={{ background: '#1c3534', color: '#0d9488', border: '1px solid #99f6e4', fontWeight: 600, minWidth: 160 }}>
                 {t('parse_regex_btn')}
               </button>
             </div>
@@ -270,34 +271,34 @@ banan 120 g
         ) : (
           <div>
             <div style={{ marginBottom: 16 }}>
-              <label style={{ fontSize: 12, color: '#888', display: 'block', marginBottom: 4 }}>{t('recipe_name_lbl')}</label>
+              <label style={{ fontSize: 12, color: '#6b7280', display: 'block', marginBottom: 4 }}>{t('recipe_name_lbl')}</label>
               <input value={parsed.name} onChange={e => setParsed({ ...parsed, name: e.target.value })} style={{ width: '100%' }} />
             </div>
-            <label style={{ fontSize: 12, color: '#888', display: 'block', marginBottom: 8 }}>
+            <label style={{ fontSize: 12, color: '#6b7280', display: 'block', marginBottom: 8 }}>
               {t('ingredients_lbl')(parsed.ingredients.filter(i => i.product_id).length, parsed.ingredients.length)}
             </label>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
               {parsed.ingredients.map((ing, i) => (
-                <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 80px 1fr 36px', gap: 8, alignItems: 'center', padding: '8px 10px', background: ing.product_id ? '#f6fff6' : '#fff9f0', border: `1px solid ${ing.product_id ? '#c3e6cb' : '#ffd9a0'}`, borderRadius: 8 }}>
-                  <div style={{ fontSize: 13, color: '#555', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={ing.rawName}>{ing.rawName}</div>
+                <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 80px 1fr 36px', gap: 8, alignItems: 'center', padding: '8px 10px', background: ing.product_id ? '#162616' : '#2d1f0f', border: `1px solid ${ing.product_id ? '#1a4a1a' : '#4a3010'}`, borderRadius: 8 }}>
+                  <div style={{ fontSize: 13, color: '#9ca3af', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={ing.rawName}>{ing.rawName}</div>
                   <input type="number" value={ing.weight} onChange={e => updateIngredient(i, 'weight', parseFloat(e.target.value))} style={{ padding: '6px 8px', fontSize: 13 }} />
                   <select value={ing.product_id || ''} onChange={e => updateIngredient(i, 'product_id', e.target.value || null)} style={{ padding: '6px 8px', fontSize: 13 }}>
                     <option value="">{t('no_match_opt')}</option>
                     {productList.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
                   </select>
-                  <button onClick={() => removeIngredient(i)} style={{ background: '#ff4757', border: 'none', color: 'white', borderRadius: 6, cursor: 'pointer', fontSize: 14, height: 34 }}>✕</button>
+                  <button onClick={() => removeIngredient(i)} style={{ background: '#ff4757', border: 'none', color: '#1f2937', borderRadius: 6, cursor: 'pointer', fontSize: 14, height: 34 }}>✕</button>
                 </div>
               ))}
             </div>
             <div style={{ display: 'flex', gap: 10 }}>
               <button className="btn btn-primary" onClick={handleSave}>{t('save_recipe')}</button>
-              <button className="btn" style={{ background: '#eee', color: '#555' }} onClick={() => { setParsed(null); setError(''); }}>{t('back')}</button>
+              <button className="btn" style={{ background: '#374151', color: '#9ca3af' }} onClick={() => { setParsed(null); setError(''); }}>{t('back')}</button>
             </div>
 
             {parsed.sourceText && (
               <div style={{ marginTop: 20 }}>
-                <div style={{ fontSize: 12, color: '#888', marginBottom: 6, fontWeight: 600 }}>{t('original_text_lbl')}</div>
-                <pre style={{ background: '#f8f9ff', border: '1px solid #e0e4ff', borderRadius: 8, padding: '12px 14px', fontSize: 12, color: '#444', lineHeight: 1.8, whiteSpace: 'pre-wrap', wordBreak: 'break-word', margin: 0, maxHeight: 300, overflowY: 'auto' }}>
+                <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 6, fontWeight: 600 }}>{t('original_text_lbl')}</div>
+                <pre style={{ background: '#1c3534', border: '1px solid #e2e8f0', borderRadius: 8, padding: '12px 14px', fontSize: 12, color: '#d1d5db', lineHeight: 1.8, whiteSpace: 'pre-wrap', wordBreak: 'break-word', margin: 0, maxHeight: 300, overflowY: 'auto' }}>
                   {parsed.sourceText}
                 </pre>
               </div>
@@ -307,28 +308,28 @@ banan 120 g
       </div>
 
       <div className="card">
-        <h2>{t('recipe_list_title')} <span style={{fontSize:12,fontWeight:400,color:'#aaa'}}>- edytuj swoje przepisy</span></h2>
+        <h2>{t('recipe_list_title')} <span style={{fontSize:12,fontWeight:400,color:'#6b7280'}}>- edytuj swoje przepisy</span></h2>
         <div style={{ margin: '10px 0' }}>
           <input
             type="text"
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder="Szukaj przepisu..."
-            style={{ width: '100%', padding: '7px 12px', border: '1px solid #ddd', borderRadius: 6, fontSize: 13, boxSizing: 'border-box', outline: 'none' }}
-            onFocus={e => e.target.style.borderColor = '#667eea'}
-            onBlur={e => e.target.style.borderColor = '#ddd'}
+            style={{ width: '100%', padding: '7px 12px', border: '1px solid #374151', borderRadius: 6, fontSize: 13, boxSizing: 'border-box', outline: 'none' }}
+            onFocus={e => e.target.style.borderColor = '#0d9488'}
+            onBlur={e => e.target.style.borderColor = '#374151'}
           />
         </div>
-        {recipeList.length === 0 && <p style={{ textAlign: 'center', color: '#999' }}>{t('no_recipes_add')}</p>}
+        {recipeList.length === 0 && <p style={{ textAlign: 'center', color: '#6b7280' }}>{t('no_recipes_add')}</p>}
         {recipeList.length > 0 && search.trim() && !recipeList.some(r => r.name.toLowerCase().includes(search.trim().toLowerCase())) && (
-          <p style={{ textAlign: 'center', color: '#999', fontStyle: 'italic' }}>Nie znaleziono przepisu „{search}"</p>
+          <p style={{ textAlign: 'center', color: '#6b7280', fontStyle: 'italic' }}>Nie znaleziono przepisu „{search}"</p>
         )}
         {recipeList.filter(r => !search.trim() || r.name.toLowerCase().includes(search.trim().toLowerCase())).map(r => (
-          <div key={r.id} style={{ borderBottom: '1px solid #f0f0f0', padding: '12px 0' }}>
+          <div key={r.id} style={{ borderBottom: '1px solid #374151', padding: '12px 0' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
                 <strong>{r.name}</strong>
-                <span style={{ marginLeft: 12, color: '#667eea' }}>{r.total_cost.toFixed(2)} zł</span>
+                <span style={{ marginLeft: 12, color: '#0d9488' }}>{r.total_cost.toFixed(2)} zł</span>
               </div>
               <div style={{ display: 'flex', gap: 8 }}>
                 <button className="btn btn-primary" onClick={() => setExpanded(expanded === r.id ? null : r.id)}>
@@ -348,12 +349,12 @@ banan 120 g
                   </tbody>
                 </table>
 
-                <div style={{ background: '#f8f9ff', border: '1px solid #e0e4ff', borderRadius: 8, padding: '12px 14px' }}>
+                <div style={{ background: '#1c3534', border: '1px solid #e2e8f0', borderRadius: 8, padding: '12px 14px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                    <span style={{ fontSize: 12, fontWeight: 700, color: '#667eea' }}>{t('info_section')}</span>
+                    <span style={{ fontSize: 12, fontWeight: 700, color: '#0d9488' }}>{t('info_section')}</span>
                     {editingNotes?.id !== r.id && (
                       <button onClick={() => setEditingNotes({ id: r.id, text: r.notes || '' })}
-                        style={{ background: 'none', border: 'none', color: '#667eea', cursor: 'pointer', fontSize: 12, fontWeight: 600 }}>
+                        style={{ background: 'none', border: 'none', color: '#0d9488', cursor: 'pointer', fontSize: 12, fontWeight: 600 }}>
                         {t('edit_notes')}
                       </button>
                     )}
@@ -364,19 +365,19 @@ banan 120 g
                       <textarea
                         value={editingNotes.text}
                         onChange={e => setEditingNotes({ ...editingNotes, text: e.target.value })}
-                        style={{ width: '100%', minHeight: 160, padding: 10, border: '1px solid #c0caff', borderRadius: 6, fontFamily: 'inherit', fontSize: 12, lineHeight: 1.7, resize: 'vertical', outline: 'none', boxSizing: 'border-box', marginBottom: 8 }}
+                        style={{ width: '100%', minHeight: 160, padding: 10, border: '1px solid #99f6e4', borderRadius: 6, fontFamily: 'inherit', fontSize: 12, lineHeight: 1.7, resize: 'vertical', outline: 'none', boxSizing: 'border-box', marginBottom: 8 }}
                       />
                       <div style={{ display: 'flex', gap: 8 }}>
                         <button className="btn btn-primary" style={{ padding: '5px 14px', fontSize: 12 }} onClick={() => handleSaveNotes(r.id)}>{t('save_notes')}</button>
-                        <button className="btn" style={{ padding: '5px 14px', fontSize: 12, background: '#eee', color: '#555' }} onClick={() => setEditingNotes(null)}>{t('cancel')}</button>
+                        <button className="btn" style={{ padding: '5px 14px', fontSize: 12, background: '#374151', color: '#9ca3af' }} onClick={() => setEditingNotes(null)}>{t('cancel')}</button>
                       </div>
                     </div>
                   ) : r.notes ? (
-                    <pre style={{ margin: 0, fontSize: 12, color: '#444', lineHeight: 1.8, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+                    <pre style={{ margin: 0, fontSize: 12, color: '#d1d5db', lineHeight: 1.8, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
                       {r.notes}
                     </pre>
                   ) : (
-                    <p style={{ margin: 0, fontSize: 12, color: '#aaa', fontStyle: 'italic' }}>{t('no_notes')}</p>
+                    <p style={{ margin: 0, fontSize: 12, color: '#6b7280', fontStyle: 'italic' }}>{t('no_notes')}</p>
                   )}
                 </div>
               </div>

@@ -56,10 +56,10 @@ export default function Login() {
       onClick={() => setRegLang(code)}
       style={{
         display: 'flex', alignItems: 'center', gap: 8,
-        padding: '10px 16px', border: `2px solid ${regLang === code ? '#667eea' : '#e0e0e0'}`,
-        borderRadius: 8, background: regLang === code ? '#f0f2ff' : 'white',
+        padding: '10px 16px', border: `2px solid ${regLang === code ? '#0d9488' : '#374151'}`,
+        borderRadius: 8, background: regLang === code ? '#1c3534' : '#1f2937',
         cursor: 'pointer', fontSize: 14, fontWeight: regLang === code ? 600 : 400,
-        color: regLang === code ? '#667eea' : '#555',
+        color: regLang === code ? '#0d9488' : '#555',
         flex: 1, justifyContent: 'center', transition: 'all 0.15s',
       }}
     >
@@ -71,17 +71,17 @@ export default function Login() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      background: 'linear-gradient(135deg, #0d9488 0%, #0f766e 100%)',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
     }}>
       <div style={{
-        background: 'white', borderRadius: 16, padding: '40px 36px',
+        background: '#1f2937', borderRadius: 16, padding: '40px 36px',
         width: '100%', maxWidth: 400, boxShadow: '0 20px 60px rgba(0,0,0,0.2)',
       }}>
         <div style={{ textAlign: 'center', marginBottom: 28 }}>
           <div style={{ fontSize: 36, marginBottom: 8 }}>🥗</div>
-          <h1 style={{ fontSize: 22, color: '#1a1a2e', marginBottom: 4 }}>Meal Planner</h1>
-          <p style={{ fontSize: 13, color: '#aaa' }}>
+          <h1 style={{ fontSize: 22, color: '#f1f5f9', marginBottom: 4 }}>Meal Planner</h1>
+          <p style={{ fontSize: 13, color: '#6b7280' }}>
             {mode === 'login' ? t('subtitle_login') : t('subtitle_register')}
           </p>
         </div>
@@ -98,21 +98,21 @@ export default function Login() {
               onClick={handleGoogle}
               style={{
                 width: '100%', padding: '11px', border: '2px solid #e0e0e0',
-                borderRadius: 8, background: 'white', cursor: 'pointer',
-                fontSize: 14, fontWeight: 600, color: '#444',
+                borderRadius: 8, background: '#1f2937', cursor: 'pointer',
+                fontSize: 14, fontWeight: 600, color: '#d1d5db',
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
                 marginBottom: 20, transition: 'border-color 0.15s',
               }}
-              onMouseEnter={e => e.currentTarget.style.borderColor = '#667eea'}
-              onMouseLeave={e => e.currentTarget.style.borderColor = '#e0e0e0'}
+              onMouseEnter={e => e.currentTarget.style.borderColor = '#0d9488'}
+              onMouseLeave={e => e.currentTarget.style.borderColor = '#374151'}
             >
               <GoogleIcon />
               {t('google_btn')}
             </button>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
-              <div style={{ flex: 1, height: 1, background: '#e0e0e0' }} />
-              <span style={{ fontSize: 12, color: '#bbb' }}>{t('or')}</span>
-              <div style={{ flex: 1, height: 1, background: '#e0e0e0' }} />
+              <div style={{ flex: 1, height: 1, background: '#374151' }} />
+              <span style={{ fontSize: 12, color: '#4b5563' }}>{t('or')}</span>
+              <div style={{ flex: 1, height: 1, background: '#374151' }} />
             </div>
           </>
         )}
@@ -121,14 +121,14 @@ export default function Login() {
           {/* Language picker — only shown at registration */}
           {mode === 'register' && (
             <div style={{ marginBottom: 20 }}>
-              <div style={{ fontSize: 12, color: '#667eea', fontWeight: 700, letterSpacing: '0.5px', marginBottom: 8 }}>
+              <div style={{ fontSize: 12, color: '#0d9488', fontWeight: 700, letterSpacing: '0.5px', marginBottom: 8 }}>
                 {uiLang === 'en' ? 'CHOOSE LANGUAGE / WYBIERZ JĘZYK' : 'WYBIERZ JĘZYK / CHOOSE LANGUAGE'}
               </div>
               <div style={{ display: 'flex', gap: 10 }}>
                 {flagBtn('pl', '🇵🇱', 'Polski')}
                 {flagBtn('en', '🇬🇧', 'English')}
               </div>
-              <div style={{ marginTop: 8, fontSize: 11, color: '#aaa', lineHeight: 1.5 }}>
+              <div style={{ marginTop: 8, fontSize: 11, color: '#6b7280', lineHeight: 1.5 }}>
                 {uiLang === 'en'
                   ? 'Default products and recipes will be in the chosen language.'
                   : 'Domyślna lista produktów i przepisów będzie w wybranym języku.'}
@@ -137,7 +137,7 @@ export default function Login() {
           )}
 
           <div style={{ marginBottom: 14 }}>
-            <label style={{ fontSize: 12, color: '#667eea', fontWeight: 600, display: 'block', marginBottom: 5 }}>EMAIL</label>
+            <label style={{ fontSize: 12, color: '#0d9488', fontWeight: 600, display: 'block', marginBottom: 5 }}>EMAIL</label>
             <input
               type="email" value={email} onChange={e => setEmail(e.target.value)}
               placeholder={t('email_ph')} required
@@ -145,7 +145,7 @@ export default function Login() {
             />
           </div>
           <div style={{ marginBottom: 22 }}>
-            <label style={{ fontSize: 12, color: '#667eea', fontWeight: 600, display: 'block', marginBottom: 5 }}>{t('password_lbl')}</label>
+            <label style={{ fontSize: 12, color: '#0d9488', fontWeight: 600, display: 'block', marginBottom: 5 }}>{t('password_lbl')}</label>
             <input
               type="password" value={password} onChange={e => setPassword(e.target.value)}
               placeholder={mode === 'register' ? t('password_ph') : ''}
@@ -158,16 +158,16 @@ export default function Login() {
           </button>
         </form>
 
-        <div style={{ textAlign: 'center', marginTop: 20, fontSize: 13, color: '#888' }}>
+        <div style={{ textAlign: 'center', marginTop: 20, fontSize: 13, color: '#6b7280' }}>
           {mode === 'login' ? (
             <>{t('no_account')}{' '}
-              <button onClick={() => { setMode('register'); setError(''); }} style={{ background: 'none', border: 'none', color: '#667eea', cursor: 'pointer', fontWeight: 600 }}>
+              <button onClick={() => { setMode('register'); setError(''); }} style={{ background: 'none', border: 'none', color: '#0d9488', cursor: 'pointer', fontWeight: 600 }}>
                 {t('register_btn')}
               </button>
             </>
           ) : (
             <>{t('have_account')}{' '}
-              <button onClick={() => { setMode('login'); setError(''); }} style={{ background: 'none', border: 'none', color: '#667eea', cursor: 'pointer', fontWeight: 600 }}>
+              <button onClick={() => { setMode('login'); setError(''); }} style={{ background: 'none', border: 'none', color: '#0d9488', cursor: 'pointer', fontWeight: 600 }}>
                 {t('login_btn')}
               </button>
             </>

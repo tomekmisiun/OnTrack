@@ -33,7 +33,32 @@ function ProductTable({ items }) {
   const [editPriceId,  setEditPriceId]  = useState(null);
   const [editPrice,    setEditPrice]    = useState('');
 
-  useEffect(() => { setLocalItems(items); }, [items]);
+  useEffect(() => {
+    setLocalItems(prev => {
+      const byId = Object.fromEntries(prev.map(i => [i.product_id, i]));
+      return items.map(item => ({
+        ...item,
+        stockMode: byId[item.product_id]?.stockMode || null,
+        stockAmt:  byId[item.product_id]?.stockAmt  || '',
+      }));
+    });
+  }, [items]);
+
+  const updItem = (product_id, patch) =>
+    setLocalItems(prev => prev.map(i => i.product_id === product_id ? { ...i, ...patch } : i));
+
+  const getAdjustedCost = (item) => {
+    if (item.stockMode === 'all') return 0;
+    if (item.stockMode === 'part') {
+      const stock = parseFloat(item.stockAmt) || 0;
+      if (stock <= 0) return item.total_cost;
+      const remaining = Math.max(0, item.total_weight - stock);
+      if (remaining === 0) return 0;
+      if (item.sold_by_weight) return remaining * item.price_per_package / item.package_weight;
+      return Math.ceil(remaining / item.package_weight) * item.price_per_package;
+    }
+    return item.total_cost;
+  };
 
   const recalcPkg = (item, newPkg, sbw) => {
     const pricePerUnit = item.unit === 'szt'
@@ -81,12 +106,12 @@ function ProductTable({ items }) {
     try { await productsApi.update(item.product_id, { price: parseFloat(unitPrice.toFixed(4)) }); } catch {}
   };
 
-  const inp = { padding: '2px 5px', fontSize: 12, width: 68, border: '1px solid #c0caff', borderRadius: 3 };
+  const inp = { padding: '2px 6px', fontSize: 12, width: 68, border: '1px solid #374151', borderRadius: 4, background: '#111827', color: '#e2e8f0' };
   const btn = (bg, color) => ({ padding:'1px 6px', fontSize:11, background:bg, color, border:'none', borderRadius:3, cursor:'pointer' });
-  const hintStyle = { fontSize: 9, fontWeight: 400, color: '#c0caff', display: 'block', marginTop: 1 };
+  const hintStyle = { fontSize: 9, fontWeight: 400, color: '#99f6e4', display: 'block', marginTop: 1 };
 
   return (
-    <table style={{ marginTop: 4 }}>
+    <table className="compact-table" style={{ marginTop: 4 }}>
       <thead>
         <tr>
           <th>Produkt</th>
@@ -94,15 +119,19 @@ function ProductTable({ items }) {
           <th><span>Pojemność opak.</span><span style={hintStyle}>✎ kliknij aby edytować</span></th>
           <th>Szt.</th>
           <th><span>Cena/opak.</span><span style={hintStyle}>✎ kliknij aby edytować</span></th>
-          <th>Koszt zakupy</th>
-          <th>Zużycie</th>
+          <th style={{ whiteSpace:'nowrap' }}>
+            <span>W zapasie</span>
+            <span style={{ fontSize:9, fontWeight:400, color:'#99f6e4', display:'block', marginTop:1 }}>zmniejsza koszt zakupy</span>
+          </th>
+          <th>zakupy</th>
+          <th>koszt</th>
         </tr>
       </thead>
       <tbody>
         {localItems.map((item, i) => (
           <tr key={i}>
-            <td><strong>{item.product_name}</strong></td>
-            <td style={{ color: '#666' }}>{item.total_weight} {item.unit || 'g'}</td>
+            <td style={{ fontSize:13, color:'#e2e8f0' }}>{item.product_name}</td>
+            <td style={{ fontSize:13, color: '#9ca3af' }}>{item.total_weight} {item.unit || 'g'}</td>
 
             {/* Pojemność opak — editable */}
             <td style={{ cursor: 'pointer' }} onClick={() => {
@@ -114,20 +143,20 @@ function ProductTable({ items }) {
                 <div style={{ display:'flex', flexDirection:'column', gap:4 }} onClick={e => e.stopPropagation()}>
                   <div style={{ display:'flex', gap:3, alignItems:'center' }}>
                     <input type="number" min="0" value={editPkg} onChange={e => setEditPkg(e.target.value)}
-                      style={inp} autoFocus onKeyDown={e => { if (e.key==='Enter') handleSavePkg(item); if (e.key==='Escape') setEditPkgId(null); }} />
-                    <span style={{ fontSize:11, color:'#888' }}>{item.unit}</span>
+                      className="no-spin" style={inp} autoFocus onKeyDown={e => { if (e.key==='Enter') handleSavePkg(item); if (e.key==='Escape') setEditPkgId(null); }} />
+                    <span style={{ fontSize:11, color:'#6b7280' }}>{item.unit}</span>
                   </div>
                   <label style={{ display:'flex', alignItems:'center', gap:4, fontSize:11, cursor:'pointer' }}>
                     <input type="checkbox" checked={editSBW} onChange={e => setEditSBW(e.target.checked)} />
                     Na wagę (bez zaokrąglania)
                   </label>
                   <div style={{ display:'flex', gap:3 }}>
-                    <button style={btn('#667eea','white')} onClick={() => handleSavePkg(item)}>✓ Zapisz</button>
-                    <button style={btn('#eee','#555')} onClick={() => setEditPkgId(null)}>✗</button>
+                    <button style={btn('#0d9488','#1f2937')} onClick={() => handleSavePkg(item)}>✓ Zapisz</button>
+                    <button style={btn('#374151','#9ca3af')} onClick={() => setEditPkgId(null)}>✗</button>
                   </div>
                 </div>
               ) : (
-                <span style={{ fontSize:12, color: item.sold_by_weight ? '#667eea' : '#444' }}>
+                <span style={{ fontSize:13, color: '#9ca3af' }}>
                   {item.sold_by_weight ? 'Na wagę' : `${item.package_weight} ${item.unit || 'g'}`}
                 </span>
               )}
@@ -136,8 +165,8 @@ function ProductTable({ items }) {
             {/* Szt */}
             <td>
               {item.sold_by_weight
-                ? <span style={{ fontSize:12, color:'#aaa' }}>wagowo</span>
-                : <span style={{ background:'#667eea', color:'white', padding:'2px 8px', borderRadius:10, fontWeight:600, fontSize:12 }}>
+                ? <span style={{ fontSize:13, color:'#9ca3af' }}>wagowo</span>
+                : <span style={{ background:'#0d9488', color:'white', padding:'2px 8px', borderRadius:10, fontWeight:600, fontSize:13 }}>
                     {item.packages_rounded} szt.
                   </span>}
             </td>
@@ -151,18 +180,63 @@ function ProductTable({ items }) {
               {editPriceId === item.product_id ? (
                 <div style={{ display:'flex', gap:3, alignItems:'center' }} onClick={e => e.stopPropagation()}>
                   <input type="number" step="0.01" min="0" value={editPrice} onChange={e => setEditPrice(e.target.value)}
-                    style={{ ...inp, width:72 }} autoFocus onKeyDown={e => { if (e.key==='Enter') handleSavePrice(item); if (e.key==='Escape') setEditPriceId(null); }} />
-                  <span style={{ fontSize:11, color:'#888' }}>zł</span>
-                  <button style={btn('#667eea','white')} onClick={() => handleSavePrice(item)}>✓</button>
-                  <button style={btn('#eee','#555')} onClick={() => setEditPriceId(null)}>✗</button>
+                    className="no-spin" style={{ ...inp, width:72 }} autoFocus onKeyDown={e => { if (e.key==='Enter') handleSavePrice(item); if (e.key==='Escape') setEditPriceId(null); }} />
+                  <span style={{ fontSize:11, color:'#6b7280' }}>zł</span>
+                  <button style={btn('#0d9488','#1f2937')} onClick={() => handleSavePrice(item)}>✓</button>
+                  <button style={btn('#374151','#9ca3af')} onClick={() => setEditPriceId(null)}>✗</button>
                 </div>
               ) : (
-                <span style={{ fontSize:12, color:'#444' }}>{item.price_per_package.toFixed(2)} zł</span>
+                <span style={{ fontSize:13, color:'#9ca3af' }}>{item.price_per_package.toFixed(2)} zł</span>
               )}
             </td>
 
-            <td><strong>{item.total_cost.toFixed(2)} zł</strong></td>
-            <td style={{ color: item.sold_by_weight ? '#667eea' : '#888', fontStyle: item.sold_by_weight ? 'normal' : 'italic' }}>
+            {/* W zapasie */}
+            <td>
+              <div style={{ display:'flex', gap:3 }}>
+                {[['all','Całość'],['part','Część']].map(([mode, label]) => (
+                  <button key={mode}
+                    onClick={() => updItem(item.product_id, { stockMode: item.stockMode === mode ? null : mode, stockAmt: '' })}
+                    style={{
+                      padding:'2px 7px', fontSize:10, borderRadius:3, cursor:'pointer',
+                      border:'1px solid #99f6e4',
+                      background: item.stockMode === mode ? '#0d9488' : '#1c3534',
+                      color: item.stockMode === mode ? '#1f2937' : '#0d9488',
+                      fontWeight: item.stockMode === mode ? 600 : 400,
+                    }}>
+                    {label}
+                  </button>
+                ))}
+              </div>
+              {item.stockMode === 'part' && (
+                <div style={{ display:'flex', alignItems:'center', gap:2, marginTop:4 }}>
+                  <input type="number" min="0" step={item.unit === 'szt' ? 1 : 0.5}
+                    value={item.stockAmt}
+                    onChange={e => updItem(item.product_id, { stockAmt: e.target.value })}
+                    className="no-spin"
+                    style={{ padding:'1px 3px', fontSize:11, width:48, maxWidth:48, boxSizing:'border-box', border:'1px solid #99f6e4', borderRadius:3 }}
+                    placeholder="0" />
+                  <span style={{ fontSize:10, color:'#6b7280' }}>{item.unit || 'g'}</span>
+                </div>
+              )}
+            </td>
+
+            {/* Koszt zakupy */}
+            <td>
+              {(() => {
+                const adj = getAdjustedCost(item);
+                const reduced = item.stockMode && adj < item.total_cost;
+                return (
+                  <div>
+                    <span style={{ fontSize:13, color: item.stockMode ? '#22c55e' : '#9ca3af' }}>{adj.toFixed(2)} zł</span>
+                    {reduced && (
+                      <div style={{ fontSize:11, color:'#4b5563', textDecoration:'line-through' }}>{item.total_cost.toFixed(2)} zł</div>
+                    )}
+                  </div>
+                );
+              })()}
+            </td>
+
+            <td style={{ fontSize:13, color: '#9ca3af' }}>
               {item.actual_cost.toFixed(2)} zł
             </td>
           </tr>
@@ -180,7 +254,7 @@ function PeriodCard({ title, range, summary, loading, error, onGoToTab }) {
   const toggleStyle = {
     width:'100%', padding:'10px 20px', background:'none', border:'none',
     cursor:'pointer', display:'flex', justifyContent:'space-between', alignItems:'center',
-    fontSize:13, fontWeight:600, color:'#667eea',
+    fontSize:13, fontWeight:600, color:'#0d9488',
   };
 
   return (
@@ -193,32 +267,32 @@ function PeriodCard({ title, range, summary, loading, error, onGoToTab }) {
         <div>
           <h2 style={{ margin:0, fontSize:17 }}>{title}</h2>
           {range && (
-            <div style={{ fontSize:12, color:'#aaa', marginTop:3 }}>
+            <div style={{ fontSize:12, color:'#6b7280', marginTop:3 }}>
               {toEU(range.start)} - {toEU(range.end)}
             </div>
           )}
           <button
             onClick={e => { e.stopPropagation(); onGoToTab?.('calendar'); }}
-            style={{ background:'none', border:'none', padding:0, cursor:'pointer', fontSize:11, color:'#c0caff', marginTop:3, display:'block', textAlign:'left' }}
+            style={{ background:'none', border:'none', padding:0, cursor:'pointer', fontSize:11, color:'#99f6e4', marginTop:3, display:'block', textAlign:'left' }}
           >
             przejdź do kalendarza →
           </button>
         </div>
         <div style={{ textAlign:'right' }}>
-          <div style={{ fontSize:11, color:'#aaa', marginBottom:2 }}>{t('total_cost_lbl2')}</div>
+          <div style={{ fontSize:11, color:'#6b7280', marginBottom:2 }}>{t('total_cost_lbl2')}</div>
           {loading ? (
-            <div style={{ fontSize:20, color:'#ddd', fontWeight:700 }}>…</div>
+            <div style={{ fontSize:20, color:'#374151', fontWeight:700 }}>…</div>
           ) : summary ? (
             <>
-              <div style={{ fontSize:28, fontWeight:800, color:'#667eea', lineHeight:1 }}>
+              <div style={{ fontSize:28, fontWeight:800, color:'#0d9488', lineHeight:1 }}>
                 {summary.total_cost.toFixed(2)}<span style={{ fontSize:16, marginLeft:3 }}>zł</span>
               </div>
               {summary.items.length > 0 && (
-                <div style={{ fontSize:11, color:'#aaa', marginTop:2 }}>{summary.items.length} produktów</div>
+                <div style={{ fontSize:11, color:'#6b7280', marginTop:2 }}>{summary.items.length} produktów</div>
               )}
             </>
           ) : (
-            <div style={{ fontSize:13, color:'#ccc' }}>-</div>
+            <div style={{ fontSize:13, color:'#4b5563' }}>-</div>
           )}
         </div>
       </div>
@@ -227,7 +301,7 @@ function PeriodCard({ title, range, summary, loading, error, onGoToTab }) {
 
       {/* Collapsible product list */}
       {!loading && summary && summary.items.length > 0 && (
-        <div style={{ borderTop:'1px solid #f0f0f0' }}>
+        <div style={{ borderTop:'1px solid #374151' }}>
           <button onClick={() => setProductsOpen(o => !o)} style={toggleStyle}>
             <span>{productsOpen ? t('hide_product_list') : t('show_product_list')}</span>
             <span style={{ display:'flex', alignItems:'center', gap:4, fontWeight:400, fontSize:12 }}>
@@ -244,7 +318,7 @@ function PeriodCard({ title, range, summary, loading, error, onGoToTab }) {
       )}
 
       {!loading && summary && summary.items.length === 0 && (
-        <div style={{ padding:'0 20px 16px', fontSize:13, color:'#bbb', fontStyle:'italic' }}>
+        <div style={{ padding:'0 20px 16px', fontSize:13, color:'#4b5563', fontStyle:'italic' }}>
           {t('no_meals_period')}
         </div>
       )}
@@ -315,7 +389,7 @@ function Summary({ onGoToTab }) {
   const toggleStyle = {
     width:'100%', padding:'10px 20px', background:'none', border:'none',
     cursor:'pointer', display:'flex', justifyContent:'space-between', alignItems:'center',
-    fontSize:13, fontWeight:600, color:'#667eea',
+    fontSize:13, fontWeight:600, color:'#0d9488',
   };
 
   return (
@@ -347,30 +421,30 @@ function Summary({ onGoToTab }) {
           style={{ display:'flex', justifyContent:'space-between', alignItems:'center', cursor:'pointer' }}
         >
           <div style={{ padding:'10px 20px', flex:1 }}>
-            <div style={{ fontSize:13, fontWeight:600, color:'#667eea' }}>{t('custom_period')}</div>
+            <div style={{ fontSize:13, fontWeight:600, color:'#0d9488' }}>{t('custom_period')}</div>
             <button
               onClick={e => { e.stopPropagation(); onGoToTab?.('calendar'); }}
-              style={{ background:'none', border:'none', padding:0, cursor:'pointer', fontSize:11, color:'#c0caff', marginTop:2, display:'block', textAlign:'left' }}
+              style={{ background:'none', border:'none', padding:0, cursor:'pointer', fontSize:11, color:'#99f6e4', marginTop:2, display:'block', textAlign:'left' }}
             >
               przejdź do kalendarza →
             </button>
           </div>
-          <span style={{ display:'flex', alignItems:'center', gap:4, fontSize:12, color:'#667eea', fontWeight:400, padding:'10px 20px' }}>
+          <span style={{ display:'flex', alignItems:'center', gap:4, fontSize:12, color:'#0d9488', fontWeight:400, padding:'10px 20px' }}>
             {customOpen ? 'Zwiń' : 'Rozwiń'}
             <span style={{ fontSize:16, transition:'transform 0.2s', transform: customOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>▾</span>
           </span>
         </div>
         {customOpen && (
-          <div style={{ padding:'0 20px 20px', borderTop:'1px solid #f0f0f0' }}>
+          <div style={{ padding:'0 20px 20px', borderTop:'1px solid #374151' }}>
             {customError && <p style={{ color:'red', fontSize:13, marginTop:12 }}>{customError}</p>}
             <div className="form-row" style={{ marginTop:12 }}>
               <div style={{ display:'flex', flexDirection:'column', gap:4 }}>
-                <label style={{ fontSize:13, color:'#999' }}>{t('date_from')}</label>
+                <label style={{ fontSize:13, color:'#6b7280' }}>{t('date_from')}</label>
                 <input type="date" value={customRange.start}
                   onChange={e => setCustomRange({ ...customRange, start: e.target.value })} />
               </div>
               <div style={{ display:'flex', flexDirection:'column', gap:4 }}>
-                <label style={{ fontSize:13, color:'#999' }}>{t('date_to')}</label>
+                <label style={{ fontSize:13, color:'#6b7280' }}>{t('date_to')}</label>
                 <input type="date" value={customRange.end}
                   onChange={e => setCustomRange({ ...customRange, end: e.target.value })} />
               </div>
@@ -384,7 +458,7 @@ function Summary({ onGoToTab }) {
               <>
                 <div style={{
                   marginTop:16, padding:'14px 16px',
-                  background:'linear-gradient(135deg,#667eea,#764ba2)', color:'white', borderRadius:10,
+                  background:'linear-gradient(135deg,#0d9488,#0f766e)', color:'#1f2937', borderRadius:10,
                   display:'flex', justifyContent:'space-between', alignItems:'center',
                 }}>
                   <div>
@@ -404,7 +478,7 @@ function Summary({ onGoToTab }) {
                   </div>
                 )}
                 {customSummary.items.length === 0 && (
-                  <p style={{ color:'#bbb', fontSize:13, marginTop:12, fontStyle:'italic' }}>{t('no_meals_period')}</p>
+                  <p style={{ color:'#4b5563', fontSize:13, marginTop:12, fontStyle:'italic' }}>{t('no_meals_period')}</p>
                 )}
               </>
             )}
@@ -415,37 +489,37 @@ function Summary({ onGoToTab }) {
       {/* ─── Templates summary ─── */}
       <div className="card" style={{ padding:0, overflow:'hidden', marginBottom:16 }}>
         <div style={{ padding:'16px 20px' }}>
-          <h2 style={{ margin:0, fontSize:17, color:'#667eea' }}>{t('week_templates_sum')}</h2>
+          <h2 style={{ margin:0, fontSize:17, color:'#0d9488' }}>{t('week_templates_sum')}</h2>
           <button
             onClick={() => onGoToTab?.('recipes')}
-            style={{ background:'none', border:'none', padding:0, cursor:'pointer', fontSize:11, color:'#c0caff', marginTop:3, display:'block' }}
+            style={{ background:'none', border:'none', padding:0, cursor:'pointer', fontSize:11, color:'#99f6e4', marginTop:3, display:'block' }}
           >
             przejdź do Przepisów →
           </button>
         </div>
 
         {templates.length === 0 ? (
-          <div style={{ padding:'0 20px 16px', fontSize:13, color:'#bbb', fontStyle:'italic', borderTop:'1px solid #f0f0f0' }}>
+          <div style={{ padding:'0 20px 16px', fontSize:13, color:'#4b5563', fontStyle:'italic', borderTop:'1px solid #374151' }}>
             {t('no_tpl_summary')}
           </div>
         ) : (
-          <div style={{ borderTop:'1px solid #f0f0f0' }}>
+          <div style={{ borderTop:'1px solid #374151' }}>
             {tplData.map((tpl, i) => (
               <div key={i} style={{
                 padding:'12px 20px',
-                borderBottom: i < tplData.length-1 ? '1px solid #f8f8f8' : 'none',
+                borderBottom: i < tplData.length-1 ? '1px solid #2d3748' : 'none',
                 display:'flex', justifyContent:'space-between', alignItems:'center',
               }}>
                 <div>
                   <div style={{ fontWeight:700, fontSize:14 }}>{tpl.name}</div>
-                  <div style={{ fontSize:12, color:'#aaa', marginTop:2 }}>
+                  <div style={{ fontSize:12, color:'#6b7280', marginTop:2 }}>
                     {t('meals_n')(tpl.meals.length)}
                     {tpl.estimatedKcal > 0 && <span> · ~{tpl.estimatedKcal} kcal/tydz.</span>}
                   </div>
                 </div>
                 <div style={{ textAlign:'right' }}>
-                  <div style={{ fontSize:11, color:'#aaa' }}>{t('est_weekly_cost')}</div>
-                  <div style={{ fontSize:18, fontWeight:700, color:'#667eea' }}>
+                  <div style={{ fontSize:11, color:'#6b7280' }}>{t('est_weekly_cost')}</div>
+                  <div style={{ fontSize:18, fontWeight:700, color:'#0d9488' }}>
                     ~{tpl.estimatedCost.toFixed(2)} zł
                   </div>
                 </div>

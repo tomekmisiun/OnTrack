@@ -7,7 +7,7 @@ import { Icon } from '@iconify/react';
 import { mealPlan as api, recipes as recipesApi } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
 
-const COLORS = ['#667eea', '#f093fb', '#4facfe', '#43e97b', '#fa709a'];
+const COLORS = ['#0d9488', '#f093fb', '#4facfe', '#43e97b', '#fa709a'];
 const getColor = (pos) => COLORS[(pos - 1) % 5];
 
 function dateToStr(d) {
@@ -64,7 +64,7 @@ function DraggableRecipe({ recipe }) {
       {/* Name — fills available space, stays at top */}
       <div style={{flex:1, padding:'10px 11px 6px'}}>
         <div style={{
-          fontWeight:700, fontSize:11.5, lineHeight:1.4, color:'white',
+          fontWeight:700, fontSize:11.5, lineHeight:1.4, color:'#1f2937',
           display:'-webkit-box', WebkitLineClamp:3,
           WebkitBoxOrient:'vertical', overflow:'hidden',
         }}>
@@ -77,7 +77,7 @@ function DraggableRecipe({ recipe }) {
         {hasKcal ? (
           <>
             <div style={{display:'flex', alignItems:'baseline', gap:3, padding:'0 3px', marginBottom:5}}>
-              <span style={{fontSize:18, fontWeight:800, color:'white', lineHeight:1}}>
+              <span style={{fontSize:18, fontWeight:800, color:'#1f2937', lineHeight:1}}>
                 {recipe.total_kcal}
               </span>
               <span style={{fontSize:9, fontWeight:500, color:'rgba(255,255,255,0.55)'}}>kcal</span>
@@ -89,7 +89,7 @@ function DraggableRecipe({ recipe }) {
                   padding:'3px 0', textAlign:'center',
                 }}>
                   <div style={{fontSize:8, fontWeight:700, color:'rgba(255,255,255,0.55)', letterSpacing:'0.3px'}}>{lbl}</div>
-                  <div style={{fontSize:10, fontWeight:700, color:'white'}}>{Math.round(val)}g</div>
+                  <div style={{fontSize:10, fontWeight:700, color:'#1f2937'}}>{Math.round(val)}g</div>
                 </div>
               ))}
             </div>
@@ -123,14 +123,40 @@ function DraggableMeal({ meal, onDelete }) {
   });
   return (
     <div ref={setNodeRef} {...listeners} {...attributes} style={{
-      background:getColor(meal.position), color:'white', borderRadius:3,
+      background:getColor(meal.position), color:'#1f2937', borderRadius:3,
       padding:'1px 4px', fontSize:11, cursor:'grab', opacity: isDragging ? 0.35 : 1,
       display:'flex', alignItems:'center', gap:2,
       userSelect:'none', touchAction:'none', width:'100%', minWidth:0,
     }}>
       <span style={{overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',flex:1,minWidth:0}}>{meal.recipe.name}</span>
       <button onPointerDown={e=>e.stopPropagation()} onClick={e=>{e.stopPropagation();onDelete(meal.id);}}
-        style={{background:'rgba(0,0,0,0.25)',border:'none',color:'white',borderRadius:2,cursor:'pointer',padding:'0 3px',fontSize:9,lineHeight:'14px',flexShrink:0}}>✕</button>
+        style={{background:'rgba(0,0,0,0.25)',border:'none',color:'#1f2937',borderRadius:2,cursor:'pointer',padding:'0 3px',fontSize:9,lineHeight:'14px',flexShrink:0}}>✕</button>
+    </div>
+  );
+}
+
+// ─── Drag handle for template day ─────────────────────────────────────────────
+function DraggableTplDayHandle({ dayIndex, slots }) {
+  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
+    id: `tpl-day-${dayIndex}`, data: { type: 'tpl-day', dayIndex, slots },
+  });
+  return (
+    <span ref={setNodeRef} {...listeners} {...attributes}
+      style={{cursor:'grab',opacity:isDragging?0.4:1,userSelect:'none',touchAction:'none',
+        background:'#374151',border:'none',borderRadius:3,padding:'1px 5px',
+        fontSize:8,fontWeight:600,color:'#9ca3af',lineHeight:1.4,display:'inline-flex',alignItems:'center'}}>
+      Przeciągnij
+    </span>
+  );
+}
+
+function DroppableTplDayHeader({ dayIndex, isOver, children }) {
+  const { setNodeRef, isOver: dndIsOver } = useDroppable({
+    id: `tpl-day-header-${dayIndex}`, data: { type: 'tpl-day-target', dayIndex },
+  });
+  return (
+    <div ref={setNodeRef} style={{background: dndIsOver ? 'rgba(45,212,191,0.12)' : 'transparent', transition:'background 0.1s'}}>
+      {children}
     </div>
   );
 }
@@ -144,8 +170,9 @@ function DraggableDayHandle({ dateStr, meals }) {
   return (
     <span ref={setNodeRef} {...listeners} {...attributes} title={t('drag_day_title')}
       style={{cursor:'grab',opacity:isDragging?0.4:1,marginLeft:3,userSelect:'none',touchAction:'none',
-        display:'inline-flex',alignItems:'center',verticalAlign:'middle'}}>
-      <span style={{fontSize:7,color:'#bbb',fontWeight:700,letterSpacing:'0.2px'}}>Przeciągnij</span>
+        background:'#374151',borderRadius:3,padding:'1px 4px',
+        fontSize:7,fontWeight:600,color:'#9ca3af',display:'inline-flex',alignItems:'center',verticalAlign:'middle'}}>
+      Przeciągnij
     </span>
   );
 }
@@ -156,7 +183,7 @@ function DroppableDayHeader({ dateStr, children }) {
     id: `day-header-${dateStr}`, data: { type: 'day-target', dateStr },
   });
   return (
-    <div ref={setNodeRef} style={{background: isOver ? 'rgba(102,126,234,0.18)' : 'transparent', transition:'background 0.1s'}}>
+    <div ref={setNodeRef} style={{background: isOver ? 'rgba(13,148,136,0.18)' : 'transparent', transition:'background 0.1s'}}>
       {children}
     </div>
   );
@@ -170,8 +197,8 @@ function MealSlot({ date, position, meal, onDelete, showLabel }) {
   });
   return (
     <div ref={setNodeRef} style={{
-      height:22, borderBottom: position<5 ? '1px solid #f0f0f0' : 'none',
-      background: isOver && !meal ? 'rgba(102,126,234,0.12)' : 'transparent',
+      height:22, borderBottom: position<5 ? '1px solid #2d3748' : 'none',
+      background: isOver && !meal ? 'rgba(45,212,191,0.1)' : 'transparent',
       display:'flex', alignItems:'center', padding:'1px 4px', transition:'background 0.1s',
     }}>
       {meal
@@ -198,23 +225,23 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
 
   return (
     <div style={{
-      border:`1px solid ${isToday ? '#667eea' : '#e8e8e8'}`,
+      border:`1px solid ${isToday ? '#2dd4bf' : '#374151'}`,
       borderRadius:4, overflow:'hidden',
-      background: isPast ? '#f7f7f7' : isToday ? '#faf9ff' : 'white',
+      background: isPast ? '#161d2d' : isToday ? '#162626' : '#1f2937',
       opacity: !isCurrentMonth ? 0.45 : 1,
     }}>
       <DroppableDayHeader dateStr={dateStr}>
         <div style={{
           padding:'3px 5px',
-          borderBottom:'1px solid #f0f0f0',
-          background: isToday ? 'rgba(102,126,234,0.08)' : 'transparent',
+          borderBottom:'1px solid #374151',
+          background: isToday ? 'rgba(45,212,191,0.08)' : 'transparent',
           display:'flex', alignItems:'center', justifyContent:'space-between', gap:2,
         }}>
           {/* Date number + drag handle */}
           <span style={{
             display:'flex', alignItems:'center', gap:3,
             fontSize:11, fontWeight: isToday ? 700 : 400,
-            color: isPast ? '#bbb' : isToday ? '#764ba2' : '#555',
+            color: isPast ? '#4b5563' : isToday ? '#2dd4bf' : '#94a3b8',
             flexShrink:0,
           }}>
             {date.getDate()}
@@ -226,8 +253,8 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
               <button onPointerDown={e=>e.stopPropagation()} onClick={()=>onCopy(dateStr)}
                 title={t('copy_day_title')}
                 style={{
-                  background: copiedDay===dateStr ? '#667eea' : '#eef2ff',
-                  color: copiedDay===dateStr ? 'white' : '#667eea',
+                  background: copiedDay===dateStr ? '#0d9488' : '#1e3a3a',
+                  color: copiedDay===dateStr ? 'white' : '#2dd4bf',
                   border:'none', borderRadius:3, cursor:'pointer',
                   fontSize:8, fontWeight:700, padding:'2px 5px', lineHeight:1.2,
                 }}>
@@ -238,7 +265,7 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
               <button onPointerDown={e=>e.stopPropagation()} onClick={()=>onPaste(dateStr)}
                 title={t('paste_day_title')}
                 style={{
-                  background:'#667eea', color:'white',
+                  background:'#0d9488', color:'#1f2937',
                   border:'none', borderRadius:3, cursor:'pointer',
                   fontSize:8, fontWeight:700, padding:'2px 5px', lineHeight:1.2,
                 }}>
@@ -249,7 +276,7 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
               <button onPointerDown={e=>e.stopPropagation()} onClick={()=>onDeleteAll(dateStr)}
                 title={t('del_day_title')}
                 style={{
-                  background:'#fff0f2', color:'#e03050',
+                  background:'#2d1515', color:'#f87171',
                   border:'none', borderRadius:3, cursor:'pointer',
                   fontSize:8, fontWeight:700, padding:'2px 5px', lineHeight:1.2,
                 }}>
@@ -267,13 +294,13 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
       </div>
       {hasMeals && hasAnyMacro && (
         <div style={{
-          borderTop:'1px solid #ede8f5', background: isPast ? '#f2f2f2' : '#faf8ff',
-          padding:'3px 4px', lineHeight:1.4,
+          borderTop:'1px solid #374151', background: isPast ? '#161d2d' : '#162626',
+          padding:'2px 4px',
         }}>
-          <div style={{fontSize:9,fontWeight:700,color:'#764ba2',whiteSpace:'nowrap'}}>
+          <div style={{fontSize:10,fontWeight:700,color:'#2dd4bf',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>
             {totalKcal} kcal
           </div>
-          <div style={{fontSize:8,color:'#999',whiteSpace:'nowrap'}}>
+          <div style={{fontSize:9,color:'#6b7280',whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>
             B:{Math.round(totalProtein)}g T:{Math.round(totalFat)}g W:{Math.round(totalCarbs)}g
           </div>
         </div>
@@ -290,15 +317,15 @@ function TemplateSlot({ dayIndex, position, recipe, onRemove }) {
   });
   return (
     <div ref={setNodeRef} style={{
-      height:22, borderBottom: position<5 ? '1px solid #f0f0f0' : 'none',
-      background: isOver && !recipe ? 'rgba(102,126,234,0.12)' : 'transparent',
+      height:22, borderBottom: position<5 ? '1px solid #2d3748' : 'none',
+      background: isOver && !recipe ? 'rgba(45,212,191,0.1)' : 'transparent',
       display:'flex', alignItems:'center', padding:'1px 3px', transition:'background 0.1s',
     }}>
       {recipe ? (
-        <div style={{background:getColor(position),color:'white',borderRadius:3,padding:'1px 4px',fontSize:10,display:'flex',alignItems:'center',gap:2,width:'100%',minWidth:0}}>
+        <div style={{background:getColor(position),color:'#1f2937',borderRadius:3,padding:'1px 4px',fontSize:10,display:'flex',alignItems:'center',gap:2,width:'100%',minWidth:0}}>
           <span style={{overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',flex:1,minWidth:0}}>{recipe.name}</span>
           <button onClick={()=>onRemove(dayIndex,position)}
-            style={{background:'rgba(0,0,0,0.25)',border:'none',color:'white',borderRadius:2,cursor:'pointer',padding:'0 2px',fontSize:8,lineHeight:'13px',flexShrink:0}}>✕</button>
+            style={{background:'rgba(0,0,0,0.25)',border:'none',color:'#1f2937',borderRadius:2,cursor:'pointer',padding:'0 2px',fontSize:8,lineHeight:'13px',flexShrink:0}}>✕</button>
         </div>
       ) : (
         <span style={{fontSize:8,color:'#d0cde8',width:'100%',textAlign:'center',display:'block',userSelect:'none'}}>{t('slot_labels')[position-1]}</span>
@@ -350,18 +377,18 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
   return (
     <div className="card" style={{padding:0,overflow:'hidden'}}>
       <button onClick={()=>setOpen(o=>!o)}
-        style={{width:'100%',padding:'12px 18px',background:'none',border:'none',cursor:'pointer',display:'flex',justifyContent:'space-between',alignItems:'center',fontSize:14,fontWeight:600,color:'#667eea'}}>
+        style={{width:'100%',padding:'12px 18px',background:'none',border:'none',cursor:'pointer',display:'flex',justifyContent:'space-between',alignItems:'center',fontSize:14,fontWeight:600,color:'#0d9488'}}>
         <span>{t('tpl_title')}</span>
-        <span style={{display:'flex',alignItems:'center',gap:4,fontSize:12,color:'#667eea',fontWeight:400}}>
+        <span style={{display:'flex',alignItems:'center',gap:4,fontSize:12,color:'#0d9488',fontWeight:400}}>
           {open ? t('collapse') : t('expand')}
           <span style={{fontSize:16,transition:'transform 0.2s',transform:open?'rotate(180deg)':'rotate(0deg)'}}>▾</span>
         </span>
       </button>
       {open && (
-      <div style={{padding:'0 16px 16px',borderTop:'1px solid #f0f0f0'}}>
+      <div style={{padding:'0 16px 16px',borderTop:'1px solid #374151'}}>
 
       <div style={{marginBottom:20,marginTop:14}}>
-        <div style={{fontSize:12,color:'#888',marginBottom:8}}>{t('tpl_drag_hint')}</div>
+        <div style={{fontSize:12,color:'#6b7280',marginBottom:8}}>{t('tpl_drag_hint')}</div>
 
         <div style={{display:'grid', gridTemplateColumns:'repeat(7,1fr)', gap:4, marginBottom:10}}>
           {dayFull.map((name, di) => {
@@ -369,30 +396,19 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
             const isCopied = copiedTplDay === di;
             const btnStyle = {background:'none',border:'none',cursor:'pointer',padding:'0 2px',lineHeight:1,fontSize:11};
             return (
-              <div key={di} style={{border:`1px solid ${isCopied?'#667eea':'#e0e4ff'}`,borderRadius:6,overflow:'hidden'}}>
-                <div style={{background: isCopied?'#e8eaff':'#f0f2ff',borderBottom:'1px solid #e0e4ff'}}>
-                  <div style={{padding:'3px 4px',fontSize:10,fontWeight:600,color:'#667eea',textAlign:'center'}}>
-                    {dayShort[di]}
-                  </div>
-                  <div style={{display:'flex',justifyContent:'center',gap:2,padding:'2px 3px',borderTop:'1px solid #e8ebff',flexWrap:'wrap'}}>
-                    <button onClick={()=>handleCopyTplDay(di)} title={t('copy_day_title')}
-                      style={{background:isCopied?'#667eea':'#eef2ff',color:isCopied?'white':'#667eea',border:'none',borderRadius:3,cursor:'pointer',fontSize:8,fontWeight:700,padding:'2px 5px',lineHeight:1.2}}>
-                      {isCopied ? 'Skopiowano' : 'Kopiuj'}
+              <div key={di} style={{border:'1px solid #374151',borderRadius:6,overflow:'hidden'}}>
+                <DroppableTplDayHeader dayIndex={di}>
+                <div style={{background:'#1c3534',borderBottom:'1px solid #374151',padding:'3px 4px',display:'flex',alignItems:'center',justifyContent:'space-between',gap:2}}>
+                  <span style={{fontSize:10,fontWeight:600,color:'#2dd4bf',flexShrink:0}}>{dayShort[di]}</span>
+                  {dayHasContent && <DraggableTplDayHandle dayIndex={di} slots={editSlots} />}
+                  {dayHasContent && (
+                    <button onClick={()=>handleClearDay(di)}
+                      style={{background:'#2d1515',color:'#f87171',border:'none',borderRadius:3,cursor:'pointer',fontSize:8,fontWeight:700,padding:'1px 4px',lineHeight:1.4,flexShrink:0}}>
+                      Usuń
                     </button>
-                    {copiedTplDay!==null && copiedTplDay!==di && (
-                      <button onClick={()=>handlePasteTplDay(di)} title={t('paste_day_title')}
-                        style={{background:'#667eea',color:'white',border:'none',borderRadius:3,cursor:'pointer',fontSize:8,fontWeight:700,padding:'2px 5px',lineHeight:1.2}}>
-                        Wklej
-                      </button>
-                    )}
-                    {dayHasContent && (
-                      <button onClick={()=>handleClearDay(di)} title={t('del_day_title')}
-                        style={{background:'#fff0f2',color:'#e03050',border:'none',borderRadius:3,cursor:'pointer',fontSize:8,fontWeight:700,padding:'2px 5px',lineHeight:1.2}}>
-                        Usuń
-                      </button>
-                    )}
-                  </div>
+                  )}
                 </div>
+                </DroppableTplDayHeader>
                 {[1,2,3,4,5].map(pos => (
                   <TemplateSlot key={pos} dayIndex={di} position={pos}
                     recipe={editSlots[`${di}-${pos}`] || null}
@@ -421,7 +437,7 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
             {t('save_tpl')}
           </button>
           {filledCount > 0 && (
-            <button className="btn" style={{padding:'7px 12px',fontSize:13,background:'#eee',color:'#555'}}
+            <button className="btn" style={{padding:'7px 12px',fontSize:13,background:'#374151',color:'#9ca3af'}}
               onClick={()=>setEditSlots({})}>
               {t('clear')}
             </button>
@@ -429,9 +445,9 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
         </div>
       </div>
 
-      <div style={{fontWeight:700,fontSize:13,color:'#444',marginBottom:10,paddingTop:4,borderTop:'1px solid #f0f0f0'}}>{t('your_tpls')}</div>
+      <div style={{fontWeight:700,fontSize:13,color:'#d1d5db',marginBottom:10,paddingTop:4,borderTop:'1px solid #374151'}}>{t('your_tpls')}</div>
       {templates.length === 0 ? (
-        <p style={{color:'#bbb',fontSize:13,textAlign:'center',margin:0}}>{t('no_tpls')}</p>
+        <p style={{color:'#4b5563',fontSize:13,textAlign:'center',margin:0}}>{t('no_tpls')}</p>
       ) : (
         <div style={{display:'flex',flexDirection:'column',gap:16}}>
           {templates.map((tpl, ti) => {
@@ -441,14 +457,14 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
               byDay[m.dayOffset][m.position] = m;
             });
             return (
-              <div key={ti} style={{border:'1px solid #e8e8e8',borderRadius:8,overflow:'hidden'}}>
-                <div style={{background:'#f8f9ff',padding:'8px 12px',display:'flex',justifyContent:'space-between',alignItems:'center',borderBottom:'1px solid #e8e8e8'}}>
+              <div key={ti} style={{border:'1px solid #374151',borderRadius:8,overflow:'hidden'}}>
+                <div style={{background:'#1c3534',padding:'8px 12px',display:'flex',justifyContent:'space-between',alignItems:'center',borderBottom:'1px solid #374151'}}>
                   <div>
                     <strong style={{fontSize:13}}>{tpl.name}</strong>
-                    <span style={{fontSize:11,color:'#aaa',marginLeft:8}}>{t('meals_count')(tpl.meals.length)}</span>
+                    <span style={{fontSize:11,color:'#6b7280',marginLeft:8}}>{t('meals_count')(tpl.meals.length)}</span>
                   </div>
                   <div style={{display:'flex',gap:8,alignItems:'center'}}>
-                    <span style={{fontSize:12,color:'#666'}}>{t('apply_from_mon')}</span>
+                    <span style={{fontSize:12,color:'#9ca3af'}}>{t('apply_from_mon')}</span>
                     <select value={applyWeek[ti] || mondays[0]}
                       onChange={e=>setApplyWeek({...applyWeek,[ti]:e.target.value})}
                       style={{padding:'4px 8px',border:'1px solid #ddd',borderRadius:6,fontSize:12}}>
@@ -466,15 +482,15 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
                 </div>
                 <div style={{display:'grid',gridTemplateColumns:'repeat(7,1fr)',gap:2,padding:8}}>
                   {[0,1,2,3,4,5,6].map(di => (
-                    <div key={di} style={{border:'1px solid #f0f0f0',borderRadius:4,overflow:'hidden'}}>
-                      <div style={{background:'#f8f9ff',padding:'2px 4px',fontSize:9,fontWeight:600,color:'#667eea',textAlign:'center',borderBottom:'1px solid #f0f0f0'}}>
+                    <div key={di} style={{border:'1px solid #374151',borderRadius:4,overflow:'hidden'}}>
+                      <div style={{background:'#1c3534',padding:'2px 4px',fontSize:9,fontWeight:600,color:'#0d9488',textAlign:'center',borderBottom:'1px solid #374151'}}>
                         {dayShort[di]}
                       </div>
                       {[1,2,3,4,5].map(pos => {
                         const meal = byDay[di]?.[pos];
                         return (
-                          <div key={pos} style={{height:16,borderBottom:pos<5?'1px solid #f8f8f8':'none',display:'flex',alignItems:'center',padding:'0 3px'}}>
-                            {meal && <div style={{background:getColor(pos),color:'white',borderRadius:2,padding:'0 3px',fontSize:8,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',width:'100%'}}>{meal.recipe_name}</div>}
+                          <div key={pos} style={{height:16,borderBottom:pos<5?'1px solid #2d3748':'none',display:'flex',alignItems:'center',padding:'0 3px'}}>
+                            {meal && <div style={{background:getColor(pos),color:'#1f2937',borderRadius:2,padding:'0 3px',fontSize:8,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',width:'100%'}}>{meal.recipe_name}</div>}
                           </div>
                         );
                       })}
@@ -496,15 +512,17 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
 function OverlayContent({ dragData }) {
   const { t } = useLanguage();
   if (!dragData) return null;
-  const isDay = dragData.type === 'day';
+  const isDay    = dragData.type === 'day';
+  const isTplDay = dragData.type === 'tpl-day';
   const label = isDay
     ? `${dragData.dateStr} (${dragData.meals?.length||0} ${t('meals_count')(dragData.meals?.length||0).replace(/^\d+ /,'')})`
+    : isTplDay ? 'Przeciągnij dzień szablonu'
     : dragData.type==='recipe' ? dragData.recipe.name : dragData.meal.recipe.name;
-  const bg = isDay ? 'linear-gradient(135deg,#43e97b,#38f9d7)'
-    : dragData.type==='recipe' ? 'linear-gradient(135deg,#667eea,#764ba2)'
+  const bg = isDay || isTplDay ? 'linear-gradient(135deg,#0d9488,#0f766e)'
+    : dragData.type==='recipe' ? 'linear-gradient(135deg,#0d9488,#0f766e)'
     : getColor(dragData.meal.position);
   return (
-    <div style={{background:bg,color:'white',padding:'6px 12px',borderRadius:8,fontSize:13,fontWeight:600,boxShadow:'0 4px 20px rgba(0,0,0,0.25)',whiteSpace:'nowrap',pointerEvents:'none'}}>
+    <div style={{background:bg,color:'#1f2937',padding:'6px 12px',borderRadius:8,fontSize:13,fontWeight:600,boxShadow:'0 4px 20px rgba(0,0,0,0.25)',whiteSpace:'nowrap',pointerEvents:'none'}}>
       {label}
     </div>
   );
@@ -669,6 +687,23 @@ export default function Calendar({ onGoToTab }) {
     const drop = over.data.current;
     if (!drop) return;
 
+    if (drag.type==='tpl-day') {
+      const srcDi = drag.dayIndex;
+      const tgtDi = drop.type==='tpl-day-target' ? drop.dayIndex
+                  : drop.type==='tpl-slot'        ? drop.dayIndex
+                  : null;
+      if (tgtDi===null || tgtDi===srcDi) return;
+      setTplSlots(prev=>{
+        const n={...prev};
+        [1,2,3,4,5].forEach(pos=>{
+          const src=prev[`${srcDi}-${pos}`];
+          if (src) n[`${tgtDi}-${pos}`]=src; else delete n[`${tgtDi}-${pos}`];
+        });
+        return n;
+      });
+      return;
+    }
+
     if (drop.type==='tpl-slot') {
       if (drag.type!=='recipe') return;
       const k = `${drop.dayIndex}-${drop.position}`;
@@ -719,7 +754,7 @@ export default function Calendar({ onGoToTab }) {
 
       {toast && (
         <div style={{position:'fixed',top:'50%',left:'50%',transform:'translate(-50%,-50%)',
-          background:toast.color,color:'white',padding:'16px 28px',borderRadius:12,
+          background:toast.color,color:'#1f2937',padding:'16px 28px',borderRadius:12,
           fontSize:15,fontWeight:600,boxShadow:'0 8px 32px rgba(0,0,0,0.25)',
           zIndex:9999,pointerEvents:'none',whiteSpace:'nowrap',textAlign:'center'}}>
           {toast.msg}
@@ -732,27 +767,27 @@ export default function Calendar({ onGoToTab }) {
       {/* How to use — collapsible */}
       <div className="card" style={{padding:0,marginBottom:16,overflow:'hidden'}}>
         <button onClick={()=>setHowToOpen(o=>!o)}
-          style={{width:'100%',padding:'12px 18px',background:'none',border:'none',cursor:'pointer',display:'flex',justifyContent:'space-between',alignItems:'center',fontSize:14,fontWeight:600,color:'#667eea'}}>
+          style={{width:'100%',padding:'12px 18px',background:'none',border:'none',cursor:'pointer',display:'flex',justifyContent:'space-between',alignItems:'center',fontSize:14,fontWeight:600,color:'#0d9488'}}>
           <span>{t('how_to_title')}</span>
-          <span style={{display:'flex',alignItems:'center',gap:4,fontSize:12,color:'#667eea',fontWeight:400}}>
+          <span style={{display:'flex',alignItems:'center',gap:4,fontSize:12,color:'#0d9488',fontWeight:400}}>
             {howToOpen ? t('collapse') : t('expand')}
             <span style={{fontSize:16,transition:'transform 0.2s',transform:howToOpen?'rotate(180deg)':'rotate(0deg)'}}>▾</span>
           </span>
         </button>
         {howToOpen && (
-          <div style={{padding:'0 18px 16px',fontSize:12,lineHeight:1.8,borderTop:'1px solid #f0f0f0'}}>
+          <div style={{padding:'0 18px 16px',fontSize:12,lineHeight:1.8,borderTop:'1px solid #374151'}}>
             <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:20,marginTop:14}}>
               <div>
-                <div style={{fontWeight:700,color:'#667eea',marginBottom:6}}>{t('ht_meals_title')}</div>
-                <ul style={{margin:0,paddingLeft:16,color:'#555'}}>
+                <div style={{fontWeight:700,color:'#0d9488',marginBottom:6}}>{t('ht_meals_title')}</div>
+                <ul style={{margin:0,paddingLeft:16,color:'#9ca3af'}}>
                   <li>{t('ht_meals_1')}</li>
                   <li>{t('ht_meals_2')}</li>
                   <li>{t('ht_meals_3')}</li>
                 </ul>
               </div>
               <div>
-                <div style={{fontWeight:700,color:'#667eea',marginBottom:6}}>{t('ht_copy_title')}</div>
-                <ul style={{margin:0,paddingLeft:16,color:'#555'}}>
+                <div style={{fontWeight:700,color:'#0d9488',marginBottom:6}}>{t('ht_copy_title')}</div>
+                <ul style={{margin:0,paddingLeft:16,color:'#9ca3af'}}>
                   <li>{t('ht_copy_1')}</li>
                   <li>{t('ht_copy_2')}</li>
                   <li>{t('ht_copy_3')}</li>
@@ -760,8 +795,8 @@ export default function Calendar({ onGoToTab }) {
                 </ul>
               </div>
               <div>
-                <div style={{fontWeight:700,color:'#667eea',marginBottom:6}}>{t('ht_tpl_title')}</div>
-                <ul style={{margin:0,paddingLeft:16,color:'#555'}}>
+                <div style={{fontWeight:700,color:'#0d9488',marginBottom:6}}>{t('ht_tpl_title')}</div>
+                <ul style={{margin:0,paddingLeft:16,color:'#9ca3af'}}>
                   <li>{t('ht_tpl_1')}</li>
                   <li>{t('ht_tpl_2')}</li>
                   <li>{t('ht_tpl_3')}</li>
@@ -784,7 +819,7 @@ export default function Calendar({ onGoToTab }) {
         <div style={{display:'grid',gridTemplateColumns:'72px repeat(7,1fr)',gap:3,marginBottom:3}}>
           <div/>
           {dayShort.map(d=>(
-            <div key={d} style={{textAlign:'center',fontSize:11,fontWeight:600,color:'#667eea',padding:'3px 0'}}>{d}</div>
+            <div key={d} style={{textAlign:'center',fontSize:11,fontWeight:600,color:'#0d9488',padding:'3px 0'}}>{d}</div>
           ))}
         </div>
 
@@ -802,19 +837,19 @@ export default function Calendar({ onGoToTab }) {
               <div style={{display:'flex',flexDirection:'column',gap:3,padding:'2px 0'}}>
                 {weekHasMeals && (
                   <button onClick={()=>handleCopyWeek(mondayStr)} title={t('copy_week_title')}
-                    style={{...wBtn, background:isCopied?'#667eea':'#eef2ff', color:isCopied?'white':'#667eea', border:'1px solid #c0caff'}}>
+                    style={{...wBtn, background:isCopied?'#0d9488':'#1e3a3a', color:isCopied?'white':'#2dd4bf', border:'1px solid #374151'}}>
                     {isCopied ? 'Skopiowano' : 'Kopiuj'}
                   </button>
                 )}
                 {copiedWeek && copiedWeek!==mondayStr && (
                   <button onClick={()=>handlePasteWeek(mondayStr)} title={t('paste_week_title')}
-                    style={{...wBtn, background:'#dbeafe', color:'#1d4ed8', border:'1px solid #93c5fd'}}>
+                    style={{...wBtn, background:'#1e3358', color:'#93c5fd', border:'1px solid #374151'}}>
                     Wklej
                   </button>
                 )}
                 {weekHasMeals && (
                   <button onClick={()=>handleDeleteWeek(mondayStr)} title={t('del_week_title')}
-                    style={{...wBtn, background:'#fff0f2', color:'#e03050', border:'1px solid #fca5a5'}}>
+                    style={{...wBtn, background:'#2d1515', color:'#f87171', border:'1px solid #4b1515'}}>
                     Usuń
                   </button>
                 )}
@@ -839,16 +874,16 @@ export default function Calendar({ onGoToTab }) {
       <div className="card" style={{padding:'14px 16px',marginBottom:16}}>
         <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:12}}>
           <div>
-            <h2 style={{margin:0,fontSize:15,color:'#667eea'}}>{t('carousel_title')}</h2>
+            <h2 style={{margin:0,fontSize:15,color:'#0d9488'}}>{t('carousel_title')}</h2>
             <button onClick={() => onGoToTab?.('recipes')}
-              style={{background:'none',border:'none',padding:0,cursor:'pointer',fontSize:11,color:'#c0caff',display:'block',marginTop:2}}>
+              style={{background:'none',border:'none',padding:0,cursor:'pointer',fontSize:11,color:'#99f6e4',display:'block',marginTop:2}}>
               przejdź do Przepisów →
             </button>
           </div>
-          <span style={{fontSize:11,color:'#aaa'}}>{t('drag_to_cal')}</span>
+          <span style={{fontSize:11,color:'#6b7280'}}>{t('drag_to_cal')}</span>
         </div>
         {recipes.length===0
-          ? <p style={{fontSize:13,color:'#bbb',margin:0}}>{t('no_recipes_cal')}</p>
+          ? <p style={{fontSize:13,color:'#4b5563',margin:0}}>{t('no_recipes_cal')}</p>
           : <div style={{display:'flex',gap:10,overflowX:'auto',paddingBottom:6,scrollbarWidth:'thin',scrollbarColor:'#ddd transparent'}}>
               {recipes.map(r=><DraggableRecipe key={r.id} recipe={r}/>)}
             </div>
