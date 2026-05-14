@@ -144,11 +144,8 @@ function DraggableDayHandle({ dateStr, meals }) {
   return (
     <span ref={setNodeRef} {...listeners} {...attributes} title={t('drag_day_title')}
       style={{cursor:'grab',opacity:isDragging?0.4:1,marginLeft:3,userSelect:'none',touchAction:'none',
-        display:'inline-flex',flexDirection:'column',alignItems:'center',gap:0,verticalAlign:'middle'}}>
-      <Icon icon="streamline:one-finger-drag-horizontal-solid" width={13} height={13} style={{color:'#b0a8c8'}} />
-      <span style={{fontSize:6,color:'#bbb',lineHeight:1.15,textAlign:'center',display:'block',fontWeight:500}}>
-        przytrzymaj<br/>i przeciągnij
-      </span>
+        display:'inline-flex',alignItems:'center',verticalAlign:'middle'}}>
+      <span style={{fontSize:7,color:'#bbb',fontWeight:700,letterSpacing:'0.2px'}}>Przeciągnij</span>
     </span>
   );
 }
@@ -619,6 +616,7 @@ export default function Calendar({ onGoToTab }) {
   };
 
   const handleCopyWeek = (mon)=>{
+    if (copiedWeek === mon) { setCopiedWeek(null); return; }
     setCopiedWeek(mon);
     setError('');
     const newSlots = {};
