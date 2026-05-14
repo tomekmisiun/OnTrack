@@ -201,31 +201,56 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
     }}>
       <DroppableDayHeader dateStr={dateStr}>
         <div style={{
-          padding:'2px 4px', fontSize:11, fontWeight: isToday ? 700 : 400,
-          color: isPast ? '#bbb' : isToday ? '#764ba2' : '#555',
+          padding:'3px 5px',
           borderBottom:'1px solid #f0f0f0',
           background: isToday ? 'rgba(102,126,234,0.08)' : 'transparent',
-          display:'flex', alignItems:'center', justifyContent:'space-between',
+          display:'flex', alignItems:'center', justifyContent:'space-between', gap:2,
         }}>
-          <span style={{display:'flex',alignItems:'center',gap:2}}>
+          {/* Date number + drag handle */}
+          <span style={{
+            display:'flex', alignItems:'center', gap:3,
+            fontSize:11, fontWeight: isToday ? 700 : 400,
+            color: isPast ? '#bbb' : isToday ? '#764ba2' : '#555',
+            flexShrink:0,
+          }}>
             {date.getDate()}
             {hasMeals && <DraggableDayHandle dateStr={dateStr} meals={meals} />}
           </span>
-          <span style={{display:'flex',gap:1}}>
+          {/* Action buttons — colored labeled pills */}
+          <span style={{display:'flex', gap:2, flexWrap:'nowrap'}}>
             {hasMeals && (
               <button onPointerDown={e=>e.stopPropagation()} onClick={()=>onCopy(dateStr)}
                 title={t('copy_day_title')}
-                style={{background: copiedDay===dateStr ? '#667eea' : 'none', color: copiedDay===dateStr ? 'white' : '#bbb', border:'none', cursor:'pointer', fontSize:9, padding:'0 2px', borderRadius:2}}>⧉</button>
+                style={{
+                  background: copiedDay===dateStr ? '#667eea' : '#eef2ff',
+                  color: copiedDay===dateStr ? 'white' : '#667eea',
+                  border:'none', borderRadius:3, cursor:'pointer',
+                  fontSize:8, fontWeight:700, padding:'2px 5px', lineHeight:1.2,
+                }}>
+                {copiedDay===dateStr ? '✓ Skopiuj' : 'Kopiuj'}
+              </button>
             )}
             {canPaste && (
               <button onPointerDown={e=>e.stopPropagation()} onClick={()=>onPaste(dateStr)}
                 title={t('paste_day_title')}
-                style={{background:'none',color:'#667eea',border:'none',cursor:'pointer',fontSize:9,padding:'0 2px',borderRadius:2}}>⎘</button>
+                style={{
+                  background:'#667eea', color:'white',
+                  border:'none', borderRadius:3, cursor:'pointer',
+                  fontSize:8, fontWeight:700, padding:'2px 5px', lineHeight:1.2,
+                }}>
+                Wklej
+              </button>
             )}
             {hasMeals && (
               <button onPointerDown={e=>e.stopPropagation()} onClick={()=>onDeleteAll(dateStr)}
                 title={t('del_day_title')}
-                style={{background:'none',color:'#ff6b81',border:'none',cursor:'pointer',fontSize:9,padding:'0 2px',borderRadius:2}}>🗑</button>
+                style={{
+                  background:'#fff0f2', color:'#e03050',
+                  border:'none', borderRadius:3, cursor:'pointer',
+                  fontSize:8, fontWeight:700, padding:'2px 5px', lineHeight:1.2,
+                }}>
+                Usuń
+              </button>
             )}
           </span>
         </div>
@@ -731,7 +756,7 @@ export default function Calendar() {
           <button className="btn btn-primary" onClick={nextMonth} style={{padding:'5px 14px'}}>›</button>
         </div>
 
-        <div style={{display:'grid',gridTemplateColumns:'44px repeat(7,1fr)',gap:3,marginBottom:3}}>
+        <div style={{display:'grid',gridTemplateColumns:'72px repeat(7,1fr)',gap:3,marginBottom:3}}>
           <div/>
           {dayShort.map(d=>(
             <div key={d} style={{textAlign:'center',fontSize:11,fontWeight:600,color:'#667eea',padding:'3px 0'}}>{d}</div>
@@ -741,18 +766,28 @@ export default function Calendar() {
         {weeks.map((weekDays,wi)=>{
           const mondayStr = dateToStr(weekDays[0]);
           const isCopied  = copiedWeek===mondayStr;
-          const btnBase   = {borderRadius:5,cursor:'pointer',lineHeight:1.3,padding:'5px 0',width:38,fontSize:16,display:'block',textAlign:'center'};
+          const wBtn = {
+            display:'flex', alignItems:'center', justifyContent:'center', gap:4,
+            width:'100%', padding:'5px 4px', borderRadius:6, cursor:'pointer',
+            fontSize:9, fontWeight:700, lineHeight:1.2, whiteSpace:'nowrap',
+          };
           return (
-            <div key={wi} style={{display:'grid',gridTemplateColumns:'44px repeat(7,1fr)',gap:3,marginBottom:3}}>
-              <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',gap:3}}>
+            <div key={wi} style={{display:'grid',gridTemplateColumns:'72px repeat(7,1fr)',gap:3,marginBottom:3}}>
+              <div style={{display:'flex',flexDirection:'column',gap:3,padding:'2px 0'}}>
                 <button onClick={()=>handleCopyWeek(mondayStr)} title={t('copy_week_title')}
-                  style={{...btnBase,background:isCopied?'#667eea':'#f0f2ff',border:'1px solid #c0caff',color:isCopied?'white':'#667eea'}}>⧉</button>
+                  style={{...wBtn, background:isCopied?'#667eea':'#eef2ff', color:isCopied?'white':'#667eea', border:'1px solid #c0caff'}}>
+                  <span style={{fontSize:11}}>📋</span> {isCopied ? 'Skopiowano' : 'Kopiuj tydz.'}
+                </button>
                 {copiedWeek && copiedWeek!==mondayStr && (
                   <button onClick={()=>handlePasteWeek(mondayStr)} title={t('paste_week_title')}
-                    style={{...btnBase,background:'#e8f4ff',border:'1px solid #90caff',color:'#0066cc'}}>⎘</button>
+                    style={{...wBtn, background:'#dbeafe', color:'#1d4ed8', border:'1px solid #93c5fd'}}>
+                    <span style={{fontSize:11}}>⬇</span> Wklej tydz.
+                  </button>
                 )}
                 <button onClick={()=>handleDeleteWeek(mondayStr)} title={t('del_week_title')}
-                  style={{...btnBase,background:'none',border:'1px solid #ffc0cb',color:'#ff6b81'}}>🗑</button>
+                  style={{...wBtn, background:'#fff0f2', color:'#e03050', border:'1px solid #fca5a5'}}>
+                  <span style={{fontSize:11}}>🗑</span> Usuń tydz.
+                </button>
               </div>
               {weekDays.map(date=>{
                 const ds = dateToStr(date);
