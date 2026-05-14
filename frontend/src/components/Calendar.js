@@ -377,21 +377,21 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
                   <div style={{padding:'3px 4px',fontSize:10,fontWeight:600,color:'#667eea',textAlign:'center'}}>
                     {dayShort[di]}
                   </div>
-                  <div style={{display:'flex',justifyContent:'center',gap:1,padding:'2px 3px',borderTop:'1px solid #e8ebff'}}>
+                  <div style={{display:'flex',justifyContent:'center',gap:2,padding:'2px 3px',borderTop:'1px solid #e8ebff',flexWrap:'wrap'}}>
                     <button onClick={()=>handleCopyTplDay(di)} title={t('copy_day_title')}
-                      style={{...btnStyle,color:isCopied?'#667eea':'#aab'}}>
-                      <Icon icon="material-symbols:content-copy" width={11} height={11} />
+                      style={{background:isCopied?'#667eea':'#eef2ff',color:isCopied?'white':'#667eea',border:'none',borderRadius:3,cursor:'pointer',fontSize:8,fontWeight:700,padding:'2px 5px',lineHeight:1.2}}>
+                      {isCopied ? 'Skopiowano' : 'Kopiuj'}
                     </button>
                     {copiedTplDay!==null && copiedTplDay!==di && (
                       <button onClick={()=>handlePasteTplDay(di)} title={t('paste_day_title')}
-                        style={{...btnStyle,color:'#667eea'}}>
-                        <Icon icon="material-symbols:content-paste" width={11} height={11} />
+                        style={{background:'#667eea',color:'white',border:'none',borderRadius:3,cursor:'pointer',fontSize:8,fontWeight:700,padding:'2px 5px',lineHeight:1.2}}>
+                        Wklej
                       </button>
                     )}
                     {dayHasContent && (
                       <button onClick={()=>handleClearDay(di)} title={t('del_day_title')}
-                        style={{...btnStyle,color:'#ff6b81'}}>
-                        <Icon icon="material-symbols:delete-sharp" width={11} height={11} />
+                        style={{background:'#fff0f2',color:'#e03050',border:'none',borderRadius:3,cursor:'pointer',fontSize:8,fontWeight:700,padding:'2px 5px',lineHeight:1.2}}>
+                        Usuń
                       </button>
                     )}
                   </div>
@@ -803,20 +803,17 @@ export default function Calendar({ onGoToTab }) {
               <div style={{display:'flex',flexDirection:'column',gap:3,padding:'2px 0'}}>
                 <button onClick={()=>handleCopyWeek(mondayStr)} title={t('copy_week_title')}
                   style={{...wBtn, background:isCopied?'#667eea':'#eef2ff', color:isCopied?'white':'#667eea', border:'1px solid #c0caff'}}>
-                  <Icon icon="material-symbols:content-copy" width={12} height={12} />
-                  {isCopied ? 'Skopiowano' : 'Kopiuj tydz.'}
+                  {isCopied ? 'Skopiowano' : 'Kopiuj'}
                 </button>
                 {copiedWeek && copiedWeek!==mondayStr && (
                   <button onClick={()=>handlePasteWeek(mondayStr)} title={t('paste_week_title')}
                     style={{...wBtn, background:'#dbeafe', color:'#1d4ed8', border:'1px solid #93c5fd'}}>
-                    <Icon icon="material-symbols:content-paste" width={12} height={12} />
-                    Wklej tydz.
+                    Wklej
                   </button>
                 )}
                 <button onClick={()=>handleDeleteWeek(mondayStr)} title={t('del_week_title')}
                   style={{...wBtn, background:'#fff0f2', color:'#e03050', border:'1px solid #fca5a5'}}>
-                  <Icon icon="material-symbols:delete-sharp" width={12} height={12} />
-                  Usuń tydz.
+                  Usuń
                 </button>
               </div>
               {weekDays.map(date=>{
