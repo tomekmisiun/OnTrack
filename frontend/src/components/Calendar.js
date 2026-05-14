@@ -311,11 +311,10 @@ function TemplateSlot({ dayIndex, position, recipe, onRemove }) {
 }
 
 // ─── Template editor/viewer ───────────────────────────────────────────────────
-function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditSlots, onSave, onApply, onDelete }) {
+function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditSlots, onSave, onApply, onDelete, open, setOpen }) {
   const { t } = useLanguage();
   const [editName, setEditName]     = useState('');
   const [applyWeek, setApplyWeek]   = useState({});
-  const [open, setOpen]             = useState(false);
   const [copiedTplDay, setCopiedTplDay] = useState(null);
   const mondays = getUpcomingMondays(16);
 
@@ -531,6 +530,7 @@ export default function Calendar({ onGoToTab }) {
   const [toast,setToast]             = useState(null);
   const [howToOpen,setHowToOpen]     = useState(false);
   const [tplSlots,setTplSlots]       = useState({});
+  const [tplOpen,setTplOpen]         = useState(false);
 
   const [templates,setTemplates] = useState(()=>{
     try { return JSON.parse(localStorage.getItem('weekTemplates')||'[]'); } catch { return []; }
@@ -608,6 +608,7 @@ export default function Calendar({ onGoToTab }) {
       });
     }
     setTplSlots(newSlots);
+    setTplOpen(true);
     showToast(t('toast_copy_week'));
   };
   const handlePasteWeek = async(mon)=>{
@@ -847,6 +848,8 @@ export default function Calendar({ onGoToTab }) {
         onSave={saveTemplate}
         onApply={applyTemplate}
         onDelete={deleteTemplate}
+        open={tplOpen}
+        setOpen={setTplOpen}
       />
 
       <DragOverlay dropAnimation={null}>
