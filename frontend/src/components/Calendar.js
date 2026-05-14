@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import {
   DndContext, DragOverlay, PointerSensor,
   useSensor, useSensors, useDraggable, useDroppable,
@@ -234,7 +234,7 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
                   border:'none', borderRadius:3, cursor:'pointer',
                   fontSize:8, fontWeight:700, padding:'2px 5px', lineHeight:1.2,
                 }}>
-                {copiedDay===dateStr ? '✓ Skopiuj' : 'Kopiuj'}
+                {copiedDay===dateStr ? 'Skopiowano' : 'Kopiuj'}
               </button>
             )}
             {canPaste && (
@@ -531,10 +531,24 @@ export default function Calendar({ onGoToTab }) {
   const [howToOpen,setHowToOpen]     = useState(false);
   const [tplSlots,setTplSlots]       = useState({});
   const [tplOpen,setTplOpen]         = useState(false);
+  const containerRef                 = useRef(null);
 
   useEffect(() => {
     if (Object.keys(tplSlots).length === 0) setCopiedWeek(null);
   }, [tplSlots]);
+
+  // Click outside calendar → cancel copy mode
+  useEffect(() => {
+    if (!copiedDay && !copiedWeek) return;
+    const handler = (e) => {
+      if (containerRef.current && !containerRef.current.contains(e.target)) {
+        setCopiedDay(null);
+        setCopiedWeek(null);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [copiedDay, copiedWeek]);
 
   const [templates,setTemplates] = useState(()=>{
     try { return JSON.parse(localStorage.getItem('weekTemplates')||'[]'); } catch { return []; }
@@ -698,6 +712,7 @@ export default function Calendar({ onGoToTab }) {
   const dayShort   = t('day_short');
 
   return (
+    <div ref={containerRef}>
     <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd} onDragCancel={handleDragCancel}>
       {error && <div style={{background:'#ffe0e0',color:'#c00',padding:12,borderRadius:8,marginBottom:16}}>{error}</div>}
 
@@ -712,15 +727,6 @@ export default function Calendar({ onGoToTab }) {
         </div>
       )}
 
-      {(copiedDay||copiedWeek) && !toast && (
-        <div style={{background:'#f0f9ff',border:'1px solid #bde0ff',borderRadius:8,padding:'6px 12px',marginBottom:10,fontSize:11,color:'#0066cc',display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-          <span>
-            {copiedDay && t('clipboard_day')(copiedDay)}
-            {copiedWeek && t('clipboard_week')(toEU(copiedWeek))}
-          </span>
-          <button onClick={()=>{setCopiedDay(null);setCopiedWeek(null);}} style={{background:'none',border:'none',color:'#0066cc',cursor:'pointer',fontSize:12}}>{t('clear_clipboard')}</button>
-        </div>
-      )}
 
       {/* How to use — collapsible */}
       <div className="card" style={{padding:0,marginBottom:16,overflow:'hidden'}}>
@@ -860,5 +866,6 @@ export default function Calendar({ onGoToTab }) {
         {activeDrag && <OverlayContent dragData={activeDrag}/>}
       </DragOverlay>
     </DndContext>
+    </div>
   );
 }
