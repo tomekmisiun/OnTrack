@@ -532,6 +532,10 @@ export default function Calendar({ onGoToTab }) {
   const [tplSlots,setTplSlots]       = useState({});
   const [tplOpen,setTplOpen]         = useState(false);
 
+  useEffect(() => {
+    if (Object.keys(tplSlots).length === 0) setCopiedWeek(null);
+  }, [tplSlots]);
+
   const [templates,setTemplates] = useState(()=>{
     try { return JSON.parse(localStorage.getItem('weekTemplates')||'[]'); } catch { return []; }
   });
