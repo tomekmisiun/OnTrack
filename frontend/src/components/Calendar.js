@@ -594,7 +594,10 @@ export default function Calendar({ onGoToTab }) {
     } catch { setError(t('err_del_meals')); }
   };
 
-  const handleCopyDay  = (ds)=>{ setCopiedDay(ds); setError(''); showToast(t('toast_copy_day')(toEU(ds))); };
+  const handleCopyDay  = (ds)=>{
+    if (copiedDay === ds) { setCopiedDay(null); return; }
+    setCopiedDay(ds); setError(''); showToast(t('toast_copy_day')(toEU(ds)));
+  };
   const handlePasteDay = async(target)=>{
     if (!copiedDay) return;
     try { await api.copyRange({source_start:copiedDay,source_end:copiedDay,target_start:target}); await loadMonth(year,month); }
