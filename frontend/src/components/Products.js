@@ -353,7 +353,7 @@ export default function Products() {
       <div className="card" style={{ margin: 0 }}>
         <h2>{t('import_title')}</h2>
 
-        <div style={{ background: '#1c3534', border: '1px solid #e2e8f0', borderRadius: 8, padding: '12px 16px', marginBottom: 16, fontSize: 13, lineHeight: 1.7 }}>
+        <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: '12px 16px', marginBottom: 16, fontSize: 13, lineHeight: 1.7 }}>
           <div style={{ fontWeight: 600, color: '#0d9488', marginBottom: 8 }}>{t('import_how_to')}</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             <div>

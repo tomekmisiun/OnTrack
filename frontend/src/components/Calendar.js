@@ -834,6 +834,24 @@ export default function Calendar({ onGoToTab }) {
                 </ul>
               </div>
             </div>
+            <div style={{marginTop:14,paddingTop:12,borderTop:'1px solid #374151'}}>
+              <div style={{fontWeight:700,color:'#0d9488',marginBottom:6}}>{t('ht_macro_title')}</div>
+              <ul style={{margin:0,paddingLeft:16,color:'#9ca3af'}}>
+                <li>{t('ht_macro_1')}</li>
+                <li>{t('ht_macro_2')}</li>
+                <li>
+                  {t('ht_macro_3').split('·').map((part, i, arr) => {
+                    const colors = ['#22c55e','#eab308','#ef4444'];
+                    return (
+                      <span key={i}>
+                        <span style={{color: colors[i], fontWeight:600}}>{part.trim()}</span>
+                        {i < arr.length - 1 && <span style={{color:'#6b7280'}}> · </span>}
+                      </span>
+                    );
+                  })}
+                </li>
+              </ul>
+            </div>
           </div>
         )}
       </div>

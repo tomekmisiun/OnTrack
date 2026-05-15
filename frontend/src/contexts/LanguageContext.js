@@ -92,6 +92,10 @@ const T = {
     ht_tpl_2: 'W edytorze przeciągaj przepisy z "Przepisy" na dni tygodnia',
     ht_tpl_3: 'Wpisz nazwę i kliknij Zapisz szablon',
     ht_tpl_4: 'Szablon możesz zastosować na dowolny przyszły tydzień',
+    ht_macro_title: ' Kolory makro w kalendarzu',
+    ht_macro_1: 'Zapisz cele makro w zakładce "Kalkulator Makro" (kcal, białko, tłuszcze, węgle)',
+    ht_macro_2: 'Pod każdym dniem z posiłkami pojawi się podsumowanie w formacie: aktualna / cel',
+    ht_macro_3: 'Zielony - w granicach 10% celu · Żółty - 10–25% · Czerwony - powyżej 25% odchylenia',
     // Recipes
     add_recipe_title: 'Dodaj przepis',
     how_to_recipe: 'Jak dodać przepis?',
@@ -327,6 +331,10 @@ const T = {
     ht_tpl_2: 'In the editor, drag recipes from the carousel to days of the week',
     ht_tpl_3: 'Enter a name and click Save template',
     ht_tpl_4: 'You can apply the template to any future week',
+    ht_macro_title: ' Macro colours in calendar',
+    ht_macro_1: 'Save your macro goals in the "Macro Calculator" tab (kcal, protein, fat, carbs)',
+    ht_macro_2: 'Each day with meals shows a summary: actual / goal',
+    ht_macro_3: 'Green — within 10% of goal · Yellow — 10–25% · Red — more than 25% off',
     // Recipes
     add_recipe_title: 'Add recipe',
     how_to_recipe: 'How to add a recipe?',
