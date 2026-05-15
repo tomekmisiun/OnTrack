@@ -1,0 +1,4 @@
+{
+  "_comment": "Klucz = product_id z bazy (sprawdź: python scrape_prices.py --list-products). Wejdź na zakupy.auchan.pl, znajdź produkt, skopiuj URL.",
+  "_workflow": "1. python scrape_prices.py --list-products  → znajdź ID produktu  |  2. Wejdź na zakupy.auchan.pl, wyszukaj produkt, skopiuj URL  |  3. python scrape_prices.py --inspect <URL>  → sprawdź czy cena się wykrywa  |  4. Dodaj wpis tutaj  |  5. python scrape_prices.py --dry-run  → podgląd zmian  |  6. python scrape_prices.py  → aktualizacja bazy"
+}
