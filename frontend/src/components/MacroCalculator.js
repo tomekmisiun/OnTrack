@@ -454,18 +454,18 @@ export default function MacroCalculator() {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px 12px', alignItems: 'start' }}>
 
         <div className="card" style={{ padding: 14 }}>
-          {savedGoals && (
+          {activeMember?.macro_goals && (
             <div style={{ marginBottom:12, paddingBottom:12, borderBottom:'1px solid #374151' }}>
               <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:8 }}>
                 <div style={{ fontSize:10, color:'#0d9488', fontWeight:600 }}>AKTYWNY CEL W KALENDARZU</div>
-                {savedGoals.goalLabel && (
+                {activeMember?.macro_goals.goalLabel && (
                   <span style={{ fontSize:10, fontWeight:700, color:'#2dd4bf', background:'#0d948822', borderRadius:5, padding:'2px 7px' }}>
-                    {savedGoals.goalLabel}
+                    {activeMember?.macro_goals.goalLabel}
                   </span>
                 )}
               </div>
               <div style={{ display:'flex', gap:14, flexWrap:'wrap' }}>
-                {[['Kcal', savedGoals.kcal, '#2dd4bf'],['Białko',`${savedGoals.protein}g`,'#0d9488'],['Tłuszcze',`${savedGoals.fat}g`,'#f59e0b'],['Węgle',`${savedGoals.carbs}g`,'#6366f1']].map(([lbl,val,color]) => (
+                {[['Kcal', activeMember?.macro_goals.kcal, '#2dd4bf'],['Białko',`${activeMember?.macro_goals.protein}g`,'#0d9488'],['Tłuszcze',`${activeMember?.macro_goals.fat}g`,'#f59e0b'],['Węgle',`${activeMember?.macro_goals.carbs}g`,'#6366f1']].map(([lbl,val,color]) => (
                   <div key={lbl}>
                     <div style={{ fontSize:10, color:'#6b7280' }}>{lbl}</div>
                     <div style={{ fontSize:14, fontWeight:700, color }}>{val}</div>

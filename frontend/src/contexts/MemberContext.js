@@ -1,9 +1,11 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { members as membersApi } from '../api';
+import { useAuth } from './AuthContext';
 
 const MemberContext = createContext(null);
 
 export function MemberProvider({ children }) {
+  const { user } = useAuth();
   const [members, setMembers] = useState([]);
   const [activeMemberId, setActiveMemberId] = useState(
     () => parseInt(localStorage.getItem('activeMemberId') || '0') || null
@@ -25,17 +27,28 @@ export function MemberProvider({ children }) {
     } catch {}
   }, []);
 
-  useEffect(() => { reload(); }, [reload]);
+  // Załaduj gdy user się zaloguje, wyczyść gdy wyloguje
+  useEffect(() => {
+    if (user) { reload(); }
+    else { setMembers([]); }
+  }, [user?.id, reload]);
 
   const setActiveMember = (id) => {
     setActiveMemberId(id);
     localStorage.setItem('activeMemberId', String(id));
+    const m = members.find(x => x.id === id);
+    if (m) localStorage.setItem('activeMemberName', m.name);
   };
 
   const activeMember = members.find(m => m.id === activeMemberId) || members[0] || null;
 
+  // Zapisz nazwę gdy się zmieni (po załadowaniu)
+  useEffect(() => {
+    if (activeMember) localStorage.setItem('activeMemberName', activeMember.name);
+  }, [activeMember?.id]);
+
   return (
-    <MemberContext.Provider value={{ members, activeMember, setActiveMember, reload }}>
+    <MemberContext.Provider value={{ members, activeMember, setActiveMember, reload, activeMemberName: activeMember?.name || localStorage.getItem('activeMemberName') || 'Ja' }}>
       {children}
     </MemberContext.Provider>
   );

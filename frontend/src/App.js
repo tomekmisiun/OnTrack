@@ -42,9 +42,8 @@ function AppInner() {
       <header className="app-header">
         <h1>Meal Planner</h1>
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ color: 'rgba(255,255,255,0.75)', fontSize: 12, maxWidth: 200, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-            {user.email}
-          </span>
+          <span style={{ color: 'rgba(255,255,255,0.55)', fontSize: 11 }}>Obecny profil:</span>
+          <MemberPicker />
 
           <button
             onClick={() => setShowProfile(true)}
@@ -52,7 +51,7 @@ function AppInner() {
             onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.25)'}
             onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.15)'}
           >
-            {t('profile')}
+            {t('account')}
           </button>
 
           <button
@@ -79,7 +78,6 @@ function AppInner() {
           ))}
         </div>
       </nav>
-      <MemberPicker />
 
       <main className="app-main">
         {activeTab === 'macro'     && <MacroCalculator />}

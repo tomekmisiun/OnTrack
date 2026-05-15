@@ -160,8 +160,10 @@ def delete_me():
     from app.models.product import Product
     from app.models.import_log import ImportLog
     from app.models.recipe_parse_log import RecipeParseLog
+    from app.models.household_member import HouseholdMember
 
     MealPlan.query.filter_by(user_id=uid).delete()
+    HouseholdMember.query.filter_by(user_id=uid).delete()
     recipe_ids = [r.id for r in Recipe.query.filter_by(user_id=uid).all()]
     if recipe_ids:
         RecipeIngredient.query.filter(RecipeIngredient.recipe_id.in_(recipe_ids)).delete(synchronize_session=False)

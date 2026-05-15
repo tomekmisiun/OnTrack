@@ -11,6 +11,7 @@ const T = {
     tab_summary: 'Wydatki',
     logout: 'Wyloguj',
     profile: 'Profil',
+    account: 'Konto',
     // Profile modal
     my_profile: 'Mój profil',
     delete_account: 'Usuń konto',
@@ -250,6 +251,7 @@ const T = {
     tab_summary: 'Expenses',
     logout: 'Log out',
     profile: 'Profile',
+    account: 'Account',
     // Profile modal
     my_profile: 'My Profile',
     delete_account: 'Delete account',

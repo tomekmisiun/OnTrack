@@ -51,7 +51,8 @@ function ProductTable({ items, onTotalChange }) {
     if (item.stockMode === 'part') {
       const stock = parseFloat(item.stockAmt) || 0;
       if (stock <= 0) return item.total_cost;
-      const remaining = Math.max(0, item.total_weight - stock);
+      const stockGrams = item.sold_by_weight ? stock : stock * item.package_weight;
+      const remaining = Math.max(0, item.total_weight - stockGrams);
       if (remaining === 0) return 0;
       if (item.sold_by_weight) return remaining * item.price_per_package / item.package_weight;
       return Math.ceil(remaining / item.package_weight) * item.price_per_package;
@@ -228,13 +229,13 @@ function ProductTable({ items, onTotalChange }) {
                 {item.stockMode === 'part' && (
                   <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:3, marginTop:2 }}>
                     <span style={{ fontSize:10, color:'#6b7280', whiteSpace:'nowrap' }}>Podaj ile</span>
-                    <input type="number" min="0" max="99999" step={item.unit === 'szt' ? 1 : 0.5}
+                    <input type="number" min="0" max="99999" step={item.sold_by_weight ? 0.5 : 1}
                       value={item.stockAmt}
                       onChange={e => { const v = e.target.value; if (parseFloat(v) > 99999) return; updItem(item.product_id, { stockAmt: v }); }}
                       className="no-spin"
                       style={{ padding:'2px 4px', fontSize:11, width:44, boxSizing:'border-box', border:'1px solid #374151', borderRadius:4, background:'#111827', color:'#e2e8f0' }}
                       placeholder="0" />
-                    <span style={{ fontSize:10, color:'#6b7280' }}>{item.unit || 'g'}</span>
+                    <span style={{ fontSize:10, color:'#6b7280' }}>{item.sold_by_weight ? (item.unit || 'g') : 'szt.'}</span>
                   </div>
                 )}
               </div>
@@ -369,14 +370,18 @@ function Summary({ onGoToTab }) {
 
   const [weekSummary,  setWeekSummary]  = useState(null);
   const [monthSummary, setMonthSummary] = useState(null);
-  const [weekLoading,  setWeekLoading]  = useState(true);
-  const [monthLoading, setMonthLoading] = useState(true);
+  const [weekLoading,  setWeekLoading]  = useState(false);
+  const [monthLoading, setMonthLoading] = useState(false);
 
-  // Member selection for summary (default: all members)
-  const [selectedMemberIds, setSelectedMemberIds] = useState([]);
+  // Które profile uwzględniać (domyślnie wszystkie, aktualizuje się gdy member lista załaduje)
+  const [selectedMemberIds, setSelectedMemberIds] = useState(
+    () => activeMember ? [activeMember.id] : []
+  );
   useEffect(() => {
-    if (members.length) setSelectedMemberIds(members.map(m => m.id));
-  }, [members.length]);
+    if (members.length > 0 && selectedMemberIds.length === 0) {
+      setSelectedMemberIds(members.map(m => m.id));
+    }
+  }, [members]); // eslint-disable-line
 
   const toggleMember = (id) => setSelectedMemberIds(prev =>
     prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
@@ -394,13 +399,25 @@ function Summary({ onGoToTab }) {
   });
   const [recipeList, setRecipeList] = useState([]);
 
-  const mids = selectedMemberIds.length ? selectedMemberIds : (activeMember ? [activeMember.id] : []);
+  // Ładuj dane gdy mamy activeMember lub zmieniono selectedMemberIds
+  // Gdy nikt nie zaznaczony → puste wyniki (0 zł)
+  const noMembersSelected = members.length > 1 && selectedMemberIds.length === 0;
+  const loadMids = noMembersSelected ? [] : selectedMemberIds.length > 0
+    ? selectedMemberIds
+    : activeMember ? [activeMember.id] : [];
 
   useEffect(() => {
-    if (!mids.length) return;
+    if (noMembersSelected) {
+      const empty = { items: [], total_cost: 0 };
+      setWeekSummary(empty); setMonthSummary(empty);
+      setWeekLoading(false); setMonthLoading(false);
+      return;
+    }
+    if (!loadMids.length) return;
+    setWeekLoading(true); setMonthLoading(true);
     Promise.all([
-      api.getSummary(week.start, week.end, mids),
-      api.getSummary(month.start, month.end, mids),
+      api.getSummary(week.start, week.end, loadMids),
+      api.getSummary(month.start, month.end, loadMids),
       recipesApi.getAll(),
     ]).then(([wRes, mRes, rRes]) => {
       setWeekSummary(wRes.data);
@@ -408,14 +425,14 @@ function Summary({ onGoToTab }) {
       setRecipeList(rRes.data);
     }).catch(() => showError(t('err_load_summary')))
       .finally(() => { setWeekLoading(false); setMonthLoading(false); });
-  }, [selectedMemberIds.join(',')]);
+  }, [loadMids.join(','), week.start, week.end]); // eslint-disable-line
 
   const handleCustomLoad = async () => {
     if (!customRange.start || !customRange.end) { showError(t('err_select_range')); return; }
     if (customRange.start > customRange.end)    { showError(t('err_date_order'));   return; }
     setCustomLoading(true);
     try {
-      const res = await api.getSummary(customRange.start, customRange.end, mids);
+      const res = await api.getSummary(customRange.start, customRange.end, loadMids);
       setCustomSummary(res.data);
     } catch { showError(t('err_load_summary')); }
     finally { setCustomLoading(false); }
@@ -436,16 +453,28 @@ function Summary({ onGoToTab }) {
 
       {/* ─── Member selector (tylko gdy > 1 osoba) ─── */}
       {members.length > 1 && (
-        <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:12, flexWrap:'wrap' }}>
-          <span style={{ fontSize:12, color:'#6b7280' }}>Uwzględnij:</span>
+        <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:12, flexWrap:'wrap' }}>
+          <span style={{ fontSize:12, color:'#6b7280', marginRight:2 }}>Uwzględnij:</span>
           {members.map((m, idx) => {
             const checked = selectedMemberIds.includes(m.id);
             const color = ['#0d9488','#6366f1','#f59e0b','#ec4899','#22c55e','#ef4444'][idx % 6];
             return (
-              <label key={m.id} style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color: checked ? color : '#6b7280', fontWeight: checked ? 600 : 400 }}>
-                <input type="checkbox" checked={checked} onChange={() => toggleMember(m.id)} style={{ accentColor: color }} />
+              <button
+                key={m.id}
+                onClick={() => toggleMember(m.id)}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 6,
+                  padding: '5px 14px', borderRadius: 20,
+                  border: `1px solid ${checked ? color : '#374151'}`,
+                  background: checked ? `${color}22` : '#1f2937',
+                  color: checked ? color : '#6b7280',
+                  fontSize: 12, fontWeight: checked ? 700 : 400,
+                  cursor: 'pointer', transition: 'all 0.15s',
+                }}
+              >
+                <span style={{ width:8, height:8, borderRadius:'50%', background: checked ? color : '#374151', flexShrink:0, transition:'background 0.15s' }} />
                 {m.name}
-              </label>
+              </button>
             );
           })}
         </div>
