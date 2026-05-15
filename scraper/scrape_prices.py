@@ -39,6 +39,9 @@ DB_CONFIG = {
     "password": "password",
 }
 
+# Twój user_id z tabeli users (sprawdź: python scrape_prices.py --list-users)
+DEFAULT_USER_ID = 2
+
 MAPPINGS_FILE = Path(__file__).parent / "mappings.json"
 
 # Selektory CSS do ceny — próbowane po kolei, pierwszy wynik wygrywa
@@ -67,19 +70,37 @@ def get_db():
     return psycopg2.connect(**DB_CONFIG)
 
 
-def list_products():
+def list_users():
     conn = get_db()
     cur = conn.cursor()
-    cur.execute("SELECT id, name, price FROM products ORDER BY name")
+    cur.execute("""
+        SELECT u.id, u.email, COUNT(p.id) as products
+        FROM users u LEFT JOIN products p ON p.user_id = u.id
+        GROUP BY u.id, u.email ORDER BY u.id
+    """)
     rows = cur.fetchall()
     conn.close()
-    print(f"\n{'ID':>6}  {'Cena':>8}  Nazwa")
+    print(f"\n{'ID':>4}  {'Produktów':>10}  Email")
+    print("-" * 50)
+    for uid, email, cnt in rows:
+        marker = " ← DEFAULT_USER_ID" if uid == DEFAULT_USER_ID else ""
+        print(f"{uid:>4}  {cnt:>10}  {email}{marker}")
+    print(f"\nZmień DEFAULT_USER_ID w scrape_prices.py jeśli potrzebujesz.")
+
+
+def list_products(user_id: int):
+    conn = get_db()
+    cur = conn.cursor()
+    cur.execute("SELECT id, name, price FROM products WHERE user_id = %s ORDER BY name", (user_id,))
+    rows = cur.fetchall()
+    conn.close()
+    print(f"\n{'ID':>6}  {'Cena':>8}  Nazwa  (user_id={user_id})")
     print("-" * 60)
     for pid, name, price in rows:
         print(f"{pid:>6}  {price:>7.2f}  {name}")
     print(f"\nŁącznie: {len(rows)} produktów")
     print(f"\nUzupełnij mappings.json wpisując ID jako klucz:")
-    print('  "42": { "auchan": "https://zakupy.auchan.pl/produkty/..." }')
+    print('  "42": { "auchan": "https://zakupy.auchan.pl/products/..." }')
 
 
 async def extract_price_from_page(page, url: str) -> float | None:
@@ -221,7 +242,7 @@ async def run_scraper(dry_run: bool):
             if not auchan_url:
                 continue
 
-            cur.execute("SELECT name, price FROM products WHERE id = %s", (product_id,))
+            cur.execute("SELECT name, price FROM products WHERE id = %s AND user_id = %s", (product_id, DEFAULT_USER_ID))
             row = cur.fetchone()
             if not row:
                 print(f"[WARN] Produkt ID={product_id} nie istnieje w bazie.")
@@ -270,13 +291,16 @@ async def run_scraper(dry_run: bool):
 
 def main():
     parser = argparse.ArgumentParser(description="Auchan price scraper")
-    parser.add_argument("--dry-run",  action="store_true", help="Nie zapisuj do bazy")
-    parser.add_argument("--inspect",  metavar="URL",       help="Debuguj konkretny URL")
+    parser.add_argument("--dry-run",       action="store_true", help="Nie zapisuj do bazy")
+    parser.add_argument("--inspect",       metavar="URL",       help="Debuguj konkretny URL")
     parser.add_argument("--list-products", action="store_true", help="Pokaż produkty z bazy z ID")
+    parser.add_argument("--list-users",    action="store_true", help="Pokaż użytkowników i ich ID")
     args = parser.parse_args()
 
-    if args.list_products:
-        list_products()
+    if args.list_users:
+        list_users()
+    elif args.list_products:
+        list_products(DEFAULT_USER_ID)
     elif args.inspect:
         asyncio.run(inspect_url(args.inspect))
     else:
