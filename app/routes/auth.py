@@ -67,6 +67,11 @@ def register():
     from app.seeds import seed_user
     seed_user(user.id, lang=lang)
 
+    from app.models.household_member import HouseholdMember
+    primary = HouseholdMember(user_id=user.id, name='Ja', is_primary=True)
+    db.session.add(primary)
+    db.session.commit()
+
     token = create_access_token(identity=str(user.id))
     return jsonify({'access_token': token, 'user': user.to_dict()}), 201
 

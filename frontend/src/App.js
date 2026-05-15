@@ -6,9 +6,11 @@ import Summary from './components/Summary';
 import MacroCalculator from './components/MacroCalculator';
 import Login from './components/Login';
 import Profile from './components/Profile';
+import MemberPicker from './components/MemberPicker';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { ToastProvider } from './contexts/ToastContext';
+import { MemberProvider } from './contexts/MemberContext';
 import './App.css';
 
 function AppInner() {
@@ -77,6 +79,7 @@ function AppInner() {
           ))}
         </div>
       </nav>
+      <MemberPicker />
 
       <main className="app-main">
         {activeTab === 'macro'     && <MacroCalculator />}
@@ -96,7 +99,9 @@ function AppWithAuth() {
   const { switchLang } = useLanguage();
   return (
     <AuthProvider onLangChange={switchLang}>
-      <AppInner />
+      <MemberProvider>
+        <AppInner />
+      </MemberProvider>
     </AuthProvider>
   );
 }

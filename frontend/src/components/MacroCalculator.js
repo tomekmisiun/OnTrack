@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useToast } from '../contexts/ToastContext';
+import { useMember } from '../contexts/MemberContext';
+import { members as membersApi } from '../api';
 
 const ACTIVITY = [
   { value: 1.2,   label: 'Siedzący (biurko, brak ćwiczeń)' },
@@ -230,8 +232,13 @@ function MacroRow({ label: lbl, value, unit, kcalVal, totalKcal, color }) {
 // ── Main component ────────────────────────────────────────────────────────────
 export default function MacroCalculator() {
   const { showSuccess } = useToast();
+  const { activeMember, reload: reloadMembers } = useMember();
 
-  const saved = loadForm();
+  // Init form from active member profile, fallback to localStorage
+  const saved = activeMember
+    ? { gender: activeMember.gender, age: activeMember.age, weight: activeMember.weight, height: activeMember.height, activity: activeMember.activity, goal: activeMember.goal }
+    : loadForm();
+
   const [gender,   setGender]   = useState(saved?.gender   ?? 'm');
   const [age,      setAge]      = useState(saved?.age      ?? '');
   const [weight,   setWeight]   = useState(saved?.weight   ?? '');
@@ -239,11 +246,18 @@ export default function MacroCalculator() {
   const [activity, setActivity] = useState(saved?.activity ?? 1.55);
   const [goal,     setGoal]     = useState(saved?.goal     ?? 'maintain');
 
-  const [savedGoals, setSavedGoals] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('macroGoals') || 'null'); } catch { return null; }
-  });
+  // When active member changes, repopulate form
+  useEffect(() => {
+    if (!activeMember) return;
+    if (activeMember.gender)   setGender(activeMember.gender);
+    if (activeMember.age)      setAge(String(activeMember.age));
+    if (activeMember.weight)   setWeight(String(activeMember.weight));
+    if (activeMember.height)   setHeight(String(activeMember.height));
+    if (activeMember.activity) setActivity(activeMember.activity);
+    if (activeMember.goal)     setGoal(activeMember.goal);
+  }, [activeMember?.id]);
 
-  // Persist form state
+  // Persist to localStorage as fallback
   useEffect(() => {
     localStorage.setItem(FORM_KEY, JSON.stringify({ gender, age, weight, height, activity, goal }));
   }, [gender, age, weight, height, activity, goal]);
@@ -259,11 +273,21 @@ export default function MacroCalculator() {
   const adjPW   = valid ? adjProteinWeight(w, h) : null;
   const macros  = valid ? calcMacros(w, h, tdeeVal, goalOpt) : null;
 
-  function saveGoals() {
+  async function saveGoals() {
     if (!macros) return;
-    const data = { ...macros, goalLabel: goalOpt.label };
-    localStorage.setItem('macroGoals', JSON.stringify(data));
-    setSavedGoals(data);
+    // Zapisz do bazy dla aktywnego członka
+    if (activeMember) {
+      await membersApi.saveProfile(activeMember.id, {
+        gender, age: parseInt(age), weight: parseFloat(weight),
+        height: parseFloat(height), activity: parseFloat(activity), goal,
+        macro_kcal: macros.kcal, macro_protein: macros.protein,
+        macro_fat: macros.fat, macro_carbs: macros.carbs,
+        macro_goal_label: goalOpt.label,
+      });
+      await reloadMembers();
+    }
+    // Fallback localStorage (dla backward compat z Calendar jeśli coś pójdzie nie tak)
+    localStorage.setItem('macroGoals', JSON.stringify({ ...macros, goalLabel: goalOpt.label }));
     showSuccess('Cele makro zapisane! Kolory pojawią się w kalendarzu.');
   }
 

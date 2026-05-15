@@ -7,6 +7,7 @@ import { Icon } from '@iconify/react';
 import { mealPlan as api, recipes as recipesApi } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useToast } from '../contexts/ToastContext';
+import { useMember } from '../contexts/MemberContext';
 
 const COLORS = ['#4a6fa5', '#93c5fd', '#fcd34d', '#c2410c', '#6366f1'];
 const getColor = (pos) => COLORS[(pos - 1) % 5];
@@ -599,6 +600,7 @@ function Btn({ children, danger, paste }) {
 export default function Calendar({ onGoToTab }) {
   const { t } = useLanguage();
   const { showError, showSuccess, showConfirm } = useToast();
+  const { activeMember } = useMember();
   const todayMidnight = new Date(); todayMidnight.setHours(0,0,0,0);
   const todayStr = dateToStr(todayMidnight);
 
@@ -636,9 +638,7 @@ export default function Calendar({ onGoToTab }) {
     try { return JSON.parse(localStorage.getItem('weekTemplates')||'[]'); } catch { return []; }
   });
 
-  const [macroGoals] = useState(()=>{
-    try { return JSON.parse(localStorage.getItem('macroGoals')||'null'); } catch { return null; }
-  });
+  const macroGoals = activeMember?.macro_goals || null;
 
   const showToast = (msg, color='#0066cc')=>{
     setToast({msg,color});
@@ -656,9 +656,10 @@ export default function Calendar({ onGoToTab }) {
     const grid = getMonthGrid(y,m);
     const start = dateToStr(grid[0]);
     const end   = dateToStr(grid[grid.length-1]);
-    try { setMealsByDate((await api.getRange(start,end)).data); }
+    const mid = activeMember?.id;
+    try { setMealsByDate((await api.getRange(start,end,mid?[mid]:[])).data); }
     catch { showError(t('err_load_plan')); }
-  },[]);
+  },[activeMember?.id]);
 
   useEffect(()=>{ loadMonth(year,month); },[year,month,loadMonth]);
 
@@ -690,7 +691,7 @@ export default function Calendar({ onGoToTab }) {
   };
   const handlePasteDay = async(target)=>{
     if (!copiedDay) return;
-    try { await api.copyRange({source_start:copiedDay,source_end:copiedDay,target_start:target}); await loadMonth(year,month); }
+    try { await api.copyRange({source_start:copiedDay,source_end:copiedDay,target_start:target,member_id:activeMember?.id}); await loadMonth(year,month); }
     catch(e){ showError(e.response?.data?.error||t('err_paste_day')); }
   };
 
@@ -729,7 +730,7 @@ export default function Calendar({ onGoToTab }) {
   };
   const handlePasteWeek = async(mon)=>{
     if (!copiedWeek) return;
-    try { await api.copyRange({source_start:copiedWeek,source_end:addDays(copiedWeek,6),target_start:mon}); await loadMonth(year,month); }
+    try { await api.copyRange({source_start:copiedWeek,source_end:addDays(copiedWeek,6),target_start:mon,member_id:activeMember?.id}); await loadMonth(year,month); }
     catch(e){ showError(e.response?.data?.error||t('err_paste_week')); }
   };
 
@@ -750,7 +751,7 @@ export default function Calendar({ onGoToTab }) {
     await Promise.all(deletes.map(m => api.deleteMeal(m.id)));
     // Add template meals
     for (const entry of template.meals) {
-      try { await api.addMeal({date:addDays(targetMon,entry.dayOffset), position:entry.position, recipe_id:entry.recipe_id}); }
+      try { await api.addMeal({date:addDays(targetMon,entry.dayOffset), position:entry.position, recipe_id:entry.recipe_id, member_id:activeMember?.id}); }
       catch {}
     }
     await loadMonth(year,month);
@@ -809,7 +810,7 @@ export default function Calendar({ onGoToTab }) {
           const existing = (mealsByDate[targetDate]||[]).find(m=>m.position===targetPos);
           if (existing) await api.deleteMeal(existing.id);
         }
-        await api.addMeal({date:targetDate,position:targetPos,recipe_id:drag.recipe.id});
+        await api.addMeal({date:targetDate,position:targetPos,recipe_id:drag.recipe.id,member_id:activeMember?.id});
         await loadMonth(year,month);
       } catch { showError(t('err_add_meal')); }
     } else if (drag.type==='meal') {
@@ -822,7 +823,7 @@ export default function Calendar({ onGoToTab }) {
           if (existing && existing.id!==meal.id) await api.deleteMeal(existing.id);
         }
         await api.deleteMeal(meal.id);
-        await api.addMeal({date:targetDate,position:targetPos,recipe_id:meal.recipe.id});
+        await api.addMeal({date:targetDate,position:targetPos,recipe_id:meal.recipe.id,member_id:activeMember?.id});
         await loadMonth(year,month);
       } catch { showError(t('err_move_meal')); }
     }

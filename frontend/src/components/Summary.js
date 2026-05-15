@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { mealPlan as api, recipes as recipesApi, products as productsApi } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useToast } from '../contexts/ToastContext';
+import { useMember } from '../contexts/MemberContext';
 
 // ─── Date helpers ─────────────────────────────────────────────────────────────
 function dateToStr(d) {
@@ -361,6 +362,7 @@ function PeriodCard({ title, range, summary, loading, error, onGoToTab }) {
 function Summary({ onGoToTab }) {
   const { t } = useLanguage();
   const { showError } = useToast();
+  const { members, activeMember } = useMember();
 
   const week  = getCurrentWeek();
   const month = getCurrentMonth();
@@ -369,6 +371,16 @@ function Summary({ onGoToTab }) {
   const [monthSummary, setMonthSummary] = useState(null);
   const [weekLoading,  setWeekLoading]  = useState(true);
   const [monthLoading, setMonthLoading] = useState(true);
+
+  // Member selection for summary (default: all members)
+  const [selectedMemberIds, setSelectedMemberIds] = useState([]);
+  useEffect(() => {
+    if (members.length) setSelectedMemberIds(members.map(m => m.id));
+  }, [members.length]);
+
+  const toggleMember = (id) => setSelectedMemberIds(prev =>
+    prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
+  );
 
   // Custom period
   const [customOpen,    setCustomOpen]    = useState(false);
@@ -382,10 +394,13 @@ function Summary({ onGoToTab }) {
   });
   const [recipeList, setRecipeList] = useState([]);
 
+  const mids = selectedMemberIds.length ? selectedMemberIds : (activeMember ? [activeMember.id] : []);
+
   useEffect(() => {
+    if (!mids.length) return;
     Promise.all([
-      api.getSummary(week.start, week.end),
-      api.getSummary(month.start, month.end),
+      api.getSummary(week.start, week.end, mids),
+      api.getSummary(month.start, month.end, mids),
       recipesApi.getAll(),
     ]).then(([wRes, mRes, rRes]) => {
       setWeekSummary(wRes.data);
@@ -393,14 +408,14 @@ function Summary({ onGoToTab }) {
       setRecipeList(rRes.data);
     }).catch(() => showError(t('err_load_summary')))
       .finally(() => { setWeekLoading(false); setMonthLoading(false); });
-  }, []);
+  }, [selectedMemberIds.join(',')]);
 
   const handleCustomLoad = async () => {
     if (!customRange.start || !customRange.end) { showError(t('err_select_range')); return; }
     if (customRange.start > customRange.end)    { showError(t('err_date_order'));   return; }
-    setCustomLoading(true); 
+    setCustomLoading(true);
     try {
-      const res = await api.getSummary(customRange.start, customRange.end);
+      const res = await api.getSummary(customRange.start, customRange.end, mids);
       setCustomSummary(res.data);
     } catch { showError(t('err_load_summary')); }
     finally { setCustomLoading(false); }
@@ -416,14 +431,25 @@ function Summary({ onGoToTab }) {
     return { ...tpl, estimatedCost: cost, estimatedKcal: Math.round(kcal) };
   });
 
-  const toggleStyle = {
-    width:'100%', padding:'10px 20px', background:'none', border:'none',
-    cursor:'pointer', display:'flex', justifyContent:'space-between', alignItems:'center',
-    fontSize:13, fontWeight:600, color:'#0d9488',
-  };
-
   return (
     <div>
+
+      {/* ─── Member selector (tylko gdy > 1 osoba) ─── */}
+      {members.length > 1 && (
+        <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:12, flexWrap:'wrap' }}>
+          <span style={{ fontSize:12, color:'#6b7280' }}>Uwzględnij:</span>
+          {members.map((m, idx) => {
+            const checked = selectedMemberIds.includes(m.id);
+            const color = ['#0d9488','#6366f1','#f59e0b','#ec4899','#22c55e','#ef4444'][idx % 6];
+            return (
+              <label key={m.id} style={{ display:'flex', alignItems:'center', gap:5, cursor:'pointer', fontSize:12, color: checked ? color : '#6b7280', fontWeight: checked ? 600 : 400 }}>
+                <input type="checkbox" checked={checked} onChange={() => toggleMember(m.id)} style={{ accentColor: color }} />
+                {m.name}
+              </label>
+            );
+          })}
+        </div>
+      )}
 
       {/* ─── Current week ─── */}
       <PeriodCard

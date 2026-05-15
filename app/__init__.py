@@ -41,11 +41,13 @@ def create_app():
     from app.routes.recipes import recipes_bp
     from app.routes.meal_plan import meal_plan_bp
     from app.routes.import_prices import import_bp
+    from app.routes.members import members_bp
 
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(products_bp, url_prefix='/api/products')
     app.register_blueprint(recipes_bp, url_prefix='/api/recipes')
     app.register_blueprint(meal_plan_bp, url_prefix='/api/meal-plan')
     app.register_blueprint(import_bp, url_prefix='/api/import')
+    app.register_blueprint(members_bp, url_prefix='/api/members')
 
     return app

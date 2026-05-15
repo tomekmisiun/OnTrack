@@ -41,12 +41,20 @@ export const recipes = {
 };
 
 export const mealPlan = {
-  getDay: (date) => API.get(`/api/meal-plan/${date}`),
-  getRange: (start, end) => API.get(`/api/meal-plan/range/${start}/${end}`),
-  addMeal: (data) => API.post('/api/meal-plan/', data),
-  deleteMeal: (id) => API.delete(`/api/meal-plan/${id}`),
-  copyRange: (data) => API.post('/api/meal-plan/copy', data),
-  getSummary: (start, end) => API.get(`/api/meal-plan/summary/${start}/${end}`),
+  getDay:    (date, memberId)          => API.get(`/api/meal-plan/${date}`, { params: memberId ? { member_id: memberId } : {} }),
+  getRange:  (start, end, memberIds)   => API.get(`/api/meal-plan/range/${start}/${end}`, { params: memberIds?.length ? { member_ids: memberIds.join(',') } : {} }),
+  addMeal:   (data)                    => API.post('/api/meal-plan/', data),
+  deleteMeal:(id)                      => API.delete(`/api/meal-plan/${id}`),
+  copyRange: (data)                    => API.post('/api/meal-plan/copy', data),
+  getSummary:(start, end, memberIds)   => API.get(`/api/meal-plan/summary/${start}/${end}`, { params: memberIds?.length ? { member_ids: memberIds.join(',') } : {} }),
+};
+
+export const members = {
+  getAll:      ()        => API.get('/api/members/'),
+  create:      (name)    => API.post('/api/members/', { name }),
+  rename:      (id, name)=> API.patch(`/api/members/${id}`, { name }),
+  delete:      (id)      => API.delete(`/api/members/${id}`),
+  saveProfile: (id, data)=> API.patch(`/api/members/${id}/profile`, data),
 };
 
 export const nutrition = {
