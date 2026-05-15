@@ -8,4 +8,4 @@ anthropic
 flask-jwt-extended
 google-genai
 authlib
-requests
+requestsPillow>=10.0.0

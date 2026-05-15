@@ -26,7 +26,7 @@ function getCurrentMonth() {
 }
 
 // ─── Reusable product table ───────────────────────────────────────────────────
-function ProductTable({ items }) {
+function ProductTable({ items, onTotalChange }) {
   const [localItems, setLocalItems] = useState(items);
   const [editPkgId,    setEditPkgId]    = useState(null);
   const [editPkg,      setEditPkg]      = useState('');
@@ -45,10 +45,7 @@ function ProductTable({ items }) {
     });
   }, [items]);
 
-  const updItem = (product_id, patch) =>
-    setLocalItems(prev => prev.map(i => i.product_id === product_id ? { ...i, ...patch } : i));
-
-  const getAdjustedCost = (item) => {
+  const getAdjustedCostFor = (item) => {
     if (item.stockMode === 'all') return 0;
     if (item.stockMode === 'part') {
       const stock = parseFloat(item.stockAmt) || 0;
@@ -60,6 +57,17 @@ function ProductTable({ items }) {
     }
     return item.total_cost;
   };
+
+  const updItem = (product_id, patch) =>
+    setLocalItems(prev => {
+      const next = prev.map(i => i.product_id === product_id ? { ...i, ...patch } : i);
+      if (onTotalChange) {
+        const total = next.reduce((s, i) => s + getAdjustedCostFor(i), 0);
+        onTotalChange(total);
+      }
+      return next;
+    });
+
 
   const recalcPkg = (item, newPkg, sbw) => {
     const pricePerUnit = item.unit === 'szt'
@@ -87,7 +95,7 @@ function ProductTable({ items }) {
   };
 
   const handleSavePkg = async (item) => {
-    const pkg = parseFloat(editPkg);
+    const pkg = Math.min(99999, parseFloat(editPkg));
     if (!pkg || pkg <= 0) { setEditPkgId(null); return; }
     const updated = recalcPkg(item, pkg, editSBW);
     setLocalItems(prev => prev.map(i => i.product_id === item.product_id ? updated : i));
@@ -96,7 +104,7 @@ function ProductTable({ items }) {
   };
 
   const handleSavePrice = async (item) => {
-    const newPkgPrice = parseFloat(editPrice);
+    const newPkgPrice = Math.min(99999, parseFloat(editPrice));
     if (isNaN(newPkgPrice) || newPkgPrice < 0) { setEditPriceId(null); return; }
     const updated = recalcPrice(item, newPkgPrice);
     setLocalItems(prev => prev.map(i => i.product_id === item.product_id ? updated : i));
@@ -143,7 +151,7 @@ function ProductTable({ items }) {
               {editPkgId === item.product_id ? (
                 <div style={{ display:'flex', flexDirection:'column', gap:4 }} onClick={e => e.stopPropagation()}>
                   <div style={{ display:'flex', gap:3, alignItems:'center' }}>
-                    <input type="number" min="0" value={editPkg} onChange={e => setEditPkg(e.target.value)}
+                    <input type="number" min="0" max="99999" value={editPkg} onChange={e => setEditPkg(e.target.value)}
                       className="no-spin" style={inp} autoFocus onKeyDown={e => { if (e.key==='Enter') handleSavePkg(item); if (e.key==='Escape') setEditPkgId(null); }} />
                     <span style={{ fontSize:11, color:'#6b7280' }}>{item.unit}</span>
                   </div>
@@ -180,7 +188,7 @@ function ProductTable({ items }) {
             }}>
               {editPriceId === item.product_id ? (
                 <div style={{ display:'flex', gap:3, alignItems:'center' }} onClick={e => e.stopPropagation()}>
-                  <input type="number" step="0.01" min="0" value={editPrice} onChange={e => setEditPrice(e.target.value)}
+                  <input type="number" step="0.01" min="0" max="99999" value={editPrice} onChange={e => setEditPrice(e.target.value)}
                     className="no-spin" style={{ ...inp, width:72 }} autoFocus onKeyDown={e => { if (e.key==='Enter') handleSavePrice(item); if (e.key==='Escape') setEditPriceId(null); }} />
                   <span style={{ fontSize:11, color:'#6b7280' }}>zł</span>
                   <button style={btn('#0d9488','#1f2937')} onClick={() => handleSavePrice(item)}>✓</button>
@@ -219,9 +227,9 @@ function ProductTable({ items }) {
                 {item.stockMode === 'part' && (
                   <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:3, marginTop:2 }}>
                     <span style={{ fontSize:10, color:'#6b7280', whiteSpace:'nowrap' }}>Podaj ile</span>
-                    <input type="number" min="0" step={item.unit === 'szt' ? 1 : 0.5}
+                    <input type="number" min="0" max="99999" step={item.unit === 'szt' ? 1 : 0.5}
                       value={item.stockAmt}
-                      onChange={e => updItem(item.product_id, { stockAmt: e.target.value })}
+                      onChange={e => { const v = e.target.value; if (parseFloat(v) > 99999) return; updItem(item.product_id, { stockAmt: v }); }}
                       className="no-spin"
                       style={{ padding:'2px 4px', fontSize:11, width:44, boxSizing:'border-box', border:'1px solid #374151', borderRadius:4, background:'#111827', color:'#e2e8f0' }}
                       placeholder="0" />
@@ -234,7 +242,7 @@ function ProductTable({ items }) {
             {/* Koszt zakupy */}
             <td>
               {(() => {
-                const adj = getAdjustedCost(item);
+                const adj = getAdjustedCostFor(item);
                 const reduced = item.stockMode && adj < item.total_cost;
                 return (
                   <div>
@@ -248,7 +256,18 @@ function ProductTable({ items }) {
             </td>
 
             <td style={{ fontSize:13, color: '#9ca3af' }}>
-              {item.actual_cost.toFixed(2)} zł
+              {(() => {
+                if (item.stockMode === 'all') return '0.00 zł';
+                if (item.stockMode === 'part') {
+                  const stock = parseFloat(item.stockAmt) || 0;
+                  if (stock <= 0) return item.actual_cost.toFixed(2) + ' zł';
+                  const remaining = Math.max(0, item.total_weight - stock);
+                  if (remaining === 0) return '0.00 zł';
+                  const adjActual = (remaining / item.total_weight) * item.actual_cost;
+                  return adjActual.toFixed(2) + ' zł';
+                }
+                return item.actual_cost.toFixed(2) + ' zł';
+              })()}
             </td>
           </tr>
         ))}
@@ -261,6 +280,7 @@ function ProductTable({ items }) {
 function PeriodCard({ title, range, summary, loading, error, onGoToTab }) {
   const { t } = useLanguage();
   const [productsOpen, setProductsOpen] = useState(false);
+  const [adjustedTotal, setAdjustedTotal] = useState(null);
 
   const toggleStyle = {
     width:'100%', padding:'10px 20px', background:'none', border:'none',
@@ -296,7 +316,7 @@ function PeriodCard({ title, range, summary, loading, error, onGoToTab }) {
           ) : summary ? (
             <>
               <div style={{ fontSize:28, fontWeight:800, color:'#0d9488', lineHeight:1 }}>
-                {summary.total_cost.toFixed(2)}<span style={{ fontSize:16, marginLeft:3 }}>zł</span>
+                {(adjustedTotal !== null ? adjustedTotal : summary.total_cost).toFixed(2)}<span style={{ fontSize:16, marginLeft:3 }}>zł</span>
               </div>
               {summary.items.length > 0 && (
                 <div style={{ fontSize:11, color:'#6b7280', marginTop:2 }}>{summary.items.length} produktów</div>
@@ -322,7 +342,7 @@ function PeriodCard({ title, range, summary, loading, error, onGoToTab }) {
           </button>
           {productsOpen && (
             <div style={{ padding:'0 16px 16px' }}>
-              <ProductTable items={summary.items} />
+              <ProductTable items={summary.items} onTotalChange={setAdjustedTotal} />
             </div>
           )}
         </div>

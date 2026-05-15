@@ -8,12 +8,16 @@ import base64
 import json
 import os
 import re
+import io
+from PIL import Image
 
 import_bp = Blueprint('import', __name__)
 
 DAILY_LIMIT = 2
 MAX_FILE_SIZE = 5 * 1024 * 1024  # 5 MB
 MAX_TEXT_CHARS = 8000
+MAX_IMAGE_PIXELS = 4096 * 4096   # odrzuć obrazy > ~16 Mpx
+MAX_IMAGE_SIDE = 8000            # odrzuć obrazy o boku > 8000 px
 
 IMAGE_MAGIC = {
     b'\xff\xd8\xff': 'image/jpeg',
@@ -50,6 +54,33 @@ def _detect_image_mime(data: bytes):
     return None
 
 
+def _sanitize_image(data: bytes):
+    """
+    Re-enkoduje obraz przez PIL:
+    - usuwa EXIF i wszystkie metadane (główna droga przemytu prompt injection)
+    - weryfikuje że plik faktycznie jest obrazem (nie przebranym skryptem)
+    - odrzuca obrazy podejrzanych rozmiarów (decompression bombs)
+    Zwraca (clean_bytes, mime) lub rzuca ValueError.
+    """
+    try:
+        img = Image.open(io.BytesIO(data))
+        img.verify()                        # sprawdza integralność bez dekodowania pikseli
+        img = Image.open(io.BytesIO(data))  # otwórz ponownie po verify (verify zamyka plik)
+    except Exception:
+        raise ValueError('Plik nie jest prawidłowym obrazem')
+
+    w, h = img.size
+    if w > MAX_IMAGE_SIDE or h > MAX_IMAGE_SIDE:
+        raise ValueError(f'Obraz zbyt duży ({w}x{h}). Max {MAX_IMAGE_SIDE}px na bok')
+    if w * h > MAX_IMAGE_PIXELS:
+        raise ValueError(f'Obraz ma zbyt wiele pikseli ({w*h}). Max {MAX_IMAGE_PIXELS}')
+
+    # Konwertuj do RGB (usuwa kanał alfa i inne tryby) i zapisz jako JPEG bez metadanych
+    out = io.BytesIO()
+    img.convert('RGB').save(out, format='JPEG', quality=85)
+    return out.getvalue(), 'image/jpeg'
+
+
 def _safe_text(raw: str) -> str:
     text = raw[:MAX_TEXT_CHARS]
     # Usuń potencjalnie szkodliwe wzorce
@@ -76,10 +107,10 @@ def _extract_json(text: str):
             if not name:
                 continue
             qty = item.get('quantity')
-            qty = float(qty) if isinstance(qty, (int, float)) else None
+            qty = min(99999, float(qty)) if isinstance(qty, (int, float)) and qty >= 0 else None
             unit = str(item.get('unit', 'g'))[:5]
             price = item.get('price')
-            price = float(price) if isinstance(price, (int, float)) else None
+            price = min(99999, float(price)) if isinstance(price, (int, float)) and price >= 0 else None
             validated.append({'name': name, 'quantity': qty, 'unit': unit, 'price': price})
         return {'products': validated}
     except (json.JSONDecodeError, ValueError):
@@ -91,10 +122,10 @@ def _normalize(qty, unit):
         return None, unit
     unit = (unit or 'g').lower()
     if unit == 'kg':
-        return qty * 1000, 'g'
+        return min(99999, qty * 1000), 'g'
     if unit in ('l', 'litr', 'litry', 'litrów'):
-        return qty * 1000, 'ml'
-    return qty, unit
+        return min(99999, qty * 1000), 'ml'
+    return min(99999, qty), unit
 
 
 def _match_product(name, db_products):
@@ -140,10 +171,15 @@ def parse_receipt():
     is_image = ext in ('png', 'jpg', 'jpeg', 'webp')
 
     if is_image:
-        mime = _detect_image_mime(file_data)
-        if not mime:
+        # Wstępna weryfikacja magic bytes
+        if not _detect_image_mime(file_data):
             return jsonify({'error': 'Plik nie jest prawidłowym obrazem'}), 400
-        b64 = base64.standard_b64encode(file_data).decode()
+        # Re-enkodowanie przez PIL: usuwa EXIF/metadane i waliduje wymiary
+        try:
+            clean_data, mime = _sanitize_image(file_data)
+        except ValueError as e:
+            return jsonify({'error': str(e)}), 400
+        b64 = base64.standard_b64encode(clean_data).decode()
         user_content = [
             {'type': 'image', 'source': {'type': 'base64', 'media_type': mime, 'data': b64}},
             {'type': 'text', 'text': 'Parse this receipt image and return the JSON.'},
@@ -257,7 +293,7 @@ def parse_csv():
             pm = re.search(r'(\d+[.,]\d*|\d+)', part)
             if pm:
                 try:
-                    price = float(pm.group(1).replace(',', '.'))
+                    price = min(99999, float(pm.group(1).replace(',', '.')))
                     break
                 except ValueError:
                     pass
@@ -272,11 +308,13 @@ def parse_csv():
                 qty = float(parts[1].replace(',', '.'))
                 unit = parts[2].strip().lower()
                 if unit == 'kg':
-                    qty *= 1000
+                    qty = min(99999, qty * 1000)
                     unit = 'g'
                 elif unit in ('l', 'litr', 'litrów'):
-                    qty *= 1000
+                    qty = min(99999, qty * 1000)
                     unit = 'ml'
+                else:
+                    qty = min(99999, qty)
             except (ValueError, IndexError):
                 pass
 
@@ -319,7 +357,7 @@ def apply_prices():
         price = u.get('price')
         if not isinstance(pid, int) or not isinstance(price, (int, float)):
             continue
-        if price < 0 or price > 100000:
+        if price < 0 or price > 99999:
             continue
         product = Product.query.get(pid)
         if product:
