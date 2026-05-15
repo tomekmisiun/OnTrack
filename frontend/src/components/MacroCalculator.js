@@ -122,7 +122,7 @@ function MacroLegend({ goalOpt, weight, adjPW }) {
   const proteinG = pw > 0 ? Math.round(pw * goalOpt.proteinPerKg) : null;
   return (
     <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: 20 }}>
-      <div style={{ fontWeight: 700, color: '#0d9488', marginBottom: 14 }}>
+      <div style={{ fontSize: 14, fontWeight: 700, color: '#0d9488', marginBottom: 14 }}>
         Jak liczymy makro?
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
@@ -270,77 +270,73 @@ export default function MacroCalculator() {
   const bmiInfo = bmiVal ? bmiCat(bmiVal) : null;
 
   return (
-    <div style={{ maxWidth: 900, margin: '0 auto' }}>
+    <div style={{ maxWidth: 900, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 20 }}>
+
+      {/* ── ROW 1: Twoje dane | BMI + BMR/TDEE + Czym jest BMR i TDEE ── */}
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, alignItems: 'start' }}>
 
-        {/* ── LEFT: inputs + macro goals ── */}
+        {/* LEFT: formularz + aktywny cel */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-          <div className="card" style={{ padding: 24 }}>
-            <h2 style={{ margin: '0 0 20px', fontSize: 16, color: '#f1f5f9' }}>Twoje dane</h2>
+        <div className="card" style={{ padding: 24 }}>
+          <h2 style={{ margin: '0 0 20px', fontSize: 16, color: '#f1f5f9' }}>Twoje dane</h2>
 
-            <div style={row}>
-              <span style={labelSt}>Płeć</span>
-              <div style={{ display: 'flex', gap: 8 }}>
-                {[['m','Mężczyzna'],['f','Kobieta']].map(([v,l]) => (
-                  <button key={v} onClick={() => setGender(v)}
-                    style={{ flex:1, padding:'8px 0', borderRadius:7, cursor:'pointer', fontSize:13, fontWeight:600, border:'none',
-                      background: gender===v ? '#0d9488' : '#2d3748', color: gender===v ? 'white' : '#9ca3af' }}>{l}</button>
-                ))}
-              </div>
+          <div style={row}>
+            <span style={labelSt}>Płeć</span>
+            <div style={{ display: 'flex', gap: 8 }}>
+              {[['m','Mężczyzna'],['f','Kobieta']].map(([v,l]) => (
+                <button key={v} onClick={() => setGender(v)}
+                  style={{ flex:1, padding:'8px 0', borderRadius:7, cursor:'pointer', fontSize:13, fontWeight:600, border:'none',
+                    background: gender===v ? '#0d9488' : '#2d3748', color: gender===v ? 'white' : '#9ca3af' }}>{l}</button>
+              ))}
             </div>
-
-            <div style={row}>
-              <label style={labelSt}>Wiek (lata)</label>
-              <input type="number" className="no-spin" style={inp} value={age} onChange={e=>setAge(e.target.value)} placeholder="np. 28" min={10} max={100} />
-            </div>
-            <div style={row}>
-              <label style={labelSt}>Masa ciała (kg)</label>
-              <input type="number" className="no-spin" style={inp} value={weight} onChange={e=>setWeight(e.target.value)} placeholder="np. 75" min={30} max={300} />
-            </div>
-            <div style={row}>
-              <label style={labelSt}>Wzrost (cm)</label>
-              <input type="number" className="no-spin" style={inp} value={height} onChange={e=>setHeight(e.target.value)} placeholder="np. 178" min={100} max={250} />
-            </div>
-
-            <div style={row}>
-              <label style={labelSt}>Poziom aktywności</label>
-              <select style={sel} value={activity} onChange={e=>setActivity(e.target.value)}>
-                {ACTIVITY.map(a => <option key={a.value} value={a.value}>{a.label}</option>)}
-              </select>
-            </div>
-
-            <div style={{ ...row, marginBottom: 0 }}>
-              <span style={labelSt}>Cel</span>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-                {GOALS.map(g => {
-                  const isActive  = goal === g.value;
-                  const activeBg  = g.warn ? '#7f1d1d' : '#0d9488';
-                  const inactiveFg = g.warn ? '#f87171' : '#9ca3af';
-                  return (
-                    <button key={g.value} onClick={() => setGoal(g.value)}
-                      style={{ padding:'8px 6px', borderRadius:7, cursor:'pointer', fontSize:12, fontWeight:600,
-                        border: g.warn && !isActive ? '1px solid #7f1d1d' : 'none',
-                        background: isActive ? activeBg : '#2d3748',
-                        color: isActive ? 'white' : inactiveFg }}>
-                      {g.label}
-                      {g.warn && <div style={{ fontSize:9, fontWeight:400, marginTop:1, opacity:0.8 }}>(niezalecane)</div>}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Save button inside Twoje dane */}
-            <button onClick={saveGoals} disabled={!macros}
-              style={{ marginTop:16, width:'100%', padding:'10px 0', borderRadius:8, border:'none',
-                background: macros ? '#0d9488' : '#2d3748',
-                color: macros ? 'white' : '#6b7280',
-                fontSize:14, fontWeight:700, cursor: macros ? 'pointer' : 'default' }}>
-              Zapisz jako cel i pokaż w kalendarzu
-            </button>
           </div>
+          <div style={row}>
+            <label style={labelSt}>Wiek (lata)</label>
+            <input type="number" className="no-spin" style={inp} value={age} onChange={e=>setAge(e.target.value)} placeholder="np. 28" min={10} max={100} />
+          </div>
+          <div style={row}>
+            <label style={labelSt}>Masa ciała (kg)</label>
+            <input type="number" className="no-spin" style={inp} value={weight} onChange={e=>setWeight(e.target.value)} placeholder="np. 75" min={30} max={300} />
+          </div>
+          <div style={row}>
+            <label style={labelSt}>Wzrost (cm)</label>
+            <input type="number" className="no-spin" style={inp} value={height} onChange={e=>setHeight(e.target.value)} placeholder="np. 178" min={100} max={250} />
+          </div>
+          <div style={row}>
+            <label style={labelSt}>Poziom aktywności</label>
+            <select style={sel} value={activity} onChange={e=>setActivity(e.target.value)}>
+              {ACTIVITY.map(a => <option key={a.value} value={a.value}>{a.label}</option>)}
+            </select>
+          </div>
+          <div style={{ ...row, marginBottom: 0 }}>
+            <span style={labelSt}>Cel</span>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+              {GOALS.map(g => {
+                const isActive   = goal === g.value;
+                const activeBg   = g.warn ? '#7f1d1d' : '#0d9488';
+                const inactiveFg = g.warn ? '#f87171' : '#9ca3af';
+                return (
+                  <button key={g.value} onClick={() => setGoal(g.value)}
+                    style={{ padding:'8px 6px', borderRadius:7, cursor:'pointer', fontSize:12, fontWeight:600,
+                      border: g.warn && !isActive ? '1px solid #7f1d1d' : 'none',
+                      background: isActive ? activeBg : '#2d3748',
+                      color: isActive ? 'white' : inactiveFg }}>
+                    {g.label}
+                    {g.warn && <div style={{ fontSize:9, fontWeight:400, marginTop:1, opacity:0.8 }}>(niezalecane)</div>}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+          <button onClick={saveGoals} disabled={!macros}
+            style={{ marginTop:16, width:'100%', padding:'10px 0', borderRadius:8, border:'none',
+              background: macros ? '#0d9488' : '#2d3748',
+              color: macros ? 'white' : '#6b7280',
+              fontSize:14, fontWeight:700, cursor: macros ? 'pointer' : 'default' }}>
+            Zapisz jako cel i pokaż w kalendarzu
+          </button>
+        </div>
 
-          {/* Active saved goals */}
           {savedGoals && (
             <div className="card" style={{ padding:16, borderColor:'#0d9488' }}>
               <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:8 }}>
@@ -361,44 +357,10 @@ export default function MacroCalculator() {
               </div>
             </div>
           )}
-
-          {/* Macro goals */}
-          <div className="card" style={{ padding: 20 }}>
-            <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:12 }}>
-              <div style={{ fontSize:12, color:'#6b7280', fontWeight:600, textTransform:'uppercase', letterSpacing:'0.05em' }}>Cel dzienny makro</div>
-              {macros && (
-                <div style={{ fontSize:11, color:'#6b7280' }}>
-                  {goalOpt.label}
-                  {goalOpt.adj !== 0 && (
-                    <span style={{ color: goalOpt.adj < 0 ? '#f87171' : '#4ade80', marginLeft:4 }}>
-                      {goalOpt.adj > 0 ? '+' : ''}{goalOpt.adj} kcal
-                    </span>
-                  )}
-                </div>
-              )}
-            </div>
-            {macros ? (
-              <>
-                <div style={{ fontSize:28, fontWeight:800, color:'#2dd4bf', marginBottom:4 }}>
-                  {macros.kcal} <span style={{ fontSize:14, color:'#6b7280', fontWeight:400 }}>kcal/dzień</span>
-                </div>
-                <MacroBar {...macros} />
-                <div style={{ marginTop:12 }}>
-                  <MacroRow label="Białko"       value={macros.protein} unit="g" kcalVal={macros.protein*4} totalKcal={macros.kcal} color="#0d9488" />
-                  <MacroRow label="Tłuszcze"     value={macros.fat}     unit="g" kcalVal={macros.fat*9}     totalKcal={macros.kcal} color="#f59e0b" />
-                  <MacroRow label="Węglowodany"  value={macros.carbs}   unit="g" kcalVal={macros.carbs*4}   totalKcal={macros.kcal} color="#6366f1" />
-                </div>
-              </>
-            ) : (
-              <span style={{ fontSize:13, color:'#4b5563' }}>Uzupełnij dane po lewej</span>
-            )}
-          </div>
         </div>
 
-        {/* ── RIGHT: BMI + BMR/TDEE + explanations ── */}
+        {/* RIGHT: BMI + BMR/TDEE + Czym jest BMR i TDEE */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-
-          {/* BMI */}
           <div className="card" style={{ padding: 20 }}>
             <div style={{ fontSize:12, color:'#6b7280', marginBottom:6, fontWeight:600, textTransform:'uppercase', letterSpacing:'0.05em' }}>BMI</div>
             {bmiVal ? (
@@ -417,7 +379,6 @@ export default function MacroCalculator() {
             )}
           </div>
 
-          {/* BMR / TDEE */}
           <div className="card" style={{ padding: 20 }}>
             <div style={{ fontSize:12, color:'#6b7280', marginBottom:12, fontWeight:600, textTransform:'uppercase', letterSpacing:'0.05em' }}>Zapotrzebowanie kaloryczne</div>
             {bmrVal ? (
@@ -437,9 +398,8 @@ export default function MacroCalculator() {
             )}
           </div>
 
-          {/* Czym jest BMR i TDEE */}
           <div style={{ background:'#1c3534', border:'1px solid #374151', borderRadius:8, padding:20 }}>
-            <div style={{ fontWeight:700, color:'#0d9488', marginBottom:12 }}>Czym jest BMR i TDEE?</div>
+            <div style={{ fontSize:14, fontWeight:700, color:'#0d9488', marginBottom:12 }}>Czym jest BMR i TDEE?</div>
             <div style={{ display:'flex', flexDirection:'column', gap:10 }}>
               <div style={{ fontSize:12, color:'#9ca3af', lineHeight:1.7 }}>
                 <strong style={{ color:'#e2e8f0' }}>BMR</strong> (Basic Metabolic Rate) — minimalna ilość kalorii,
@@ -461,10 +421,61 @@ export default function MacroCalculator() {
               )}
             </div>
           </div>
-
-          {/* Jak liczymy makro */}
-          <MacroLegend goalOpt={goalOpt} weight={w || 0} adjPW={adjPW} />
         </div>
+      </div>
+
+      {/* ── ROW 2: Cytaty — pełna szerokość ── */}
+      <div className="card" style={{ padding: '24px 32px', display: 'flex', gap: 32 }}>
+        {[
+          { quote: 'Perfekcjonizm jest wrogiem postępu.', author: 'Winston Churchill' },
+          { quote: 'Jesteśmy tym, co regularnie robimy. Doskonałość nie jest więc czynem, lecz nawykiem.', author: 'Arystoteles' },
+        ].map(({ quote, author }) => (
+          <div key={author} style={{ flex: 1, borderLeft: '3px solid #0d9488', paddingLeft: 16 }}>
+            <div style={{ fontSize: 14, color: '#e2e8f0', lineHeight: 1.7, fontStyle: 'italic' }}>„{quote}"</div>
+            <div style={{ fontSize: 12, color: '#6b7280', marginTop: 8 }}>— {author}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* ── ROW 3: Cel dzienny makro | Jak liczymy makro ── */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, alignItems: 'start' }}>
+
+        {/* LEFT: cel dzienny makro */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+          <div className="card" style={{ padding: 20 }}>
+            <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:12 }}>
+              <div style={{ fontSize:12, color:'#6b7280', fontWeight:600, textTransform:'uppercase', letterSpacing:'0.05em' }}>Cel dzienny makro</div>
+              {macros && (
+                <div style={{ fontSize:11, color:'#6b7280' }}>
+                  {goalOpt.label}
+                  {goalOpt.adj !== 0 && (
+                    <span style={{ color: goalOpt.adj < 0 ? '#f87171' : '#4ade80', marginLeft:4 }}>
+                      {goalOpt.adj > 0 ? '+' : ''}{goalOpt.adj} kcal
+                    </span>
+                  )}
+                </div>
+              )}
+            </div>
+            {macros ? (
+              <>
+                <div style={{ fontSize:28, fontWeight:800, color:'#2dd4bf', marginBottom:4 }}>
+                  {macros.kcal} <span style={{ fontSize:14, color:'#6b7280', fontWeight:400 }}>kcal/dzień</span>
+                </div>
+                <MacroBar {...macros} />
+                <div style={{ marginTop:12 }}>
+                  <MacroRow label="Białko"      value={macros.protein} unit="g" kcalVal={macros.protein*4} totalKcal={macros.kcal} color="#0d9488" />
+                  <MacroRow label="Tłuszcze"    value={macros.fat}     unit="g" kcalVal={macros.fat*9}     totalKcal={macros.kcal} color="#f59e0b" />
+                  <MacroRow label="Węglowodany" value={macros.carbs}   unit="g" kcalVal={macros.carbs*4}   totalKcal={macros.kcal} color="#6366f1" />
+                </div>
+              </>
+            ) : (
+              <span style={{ fontSize:13, color:'#4b5563' }}>Uzupełnij dane po lewej</span>
+            )}
+          </div>
+        </div>
+
+        {/* RIGHT: Jak liczymy makro */}
+        <MacroLegend goalOpt={goalOpt} weight={w || 0} adjPW={adjPW} />
       </div>
     </div>
   );

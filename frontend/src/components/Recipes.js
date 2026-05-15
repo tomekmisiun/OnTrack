@@ -213,7 +213,7 @@ export default function Recipes() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, alignItems: 'stretch' }}>
             {/* Lewa: instrukcja */}
             <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: '14px 16px', fontSize: 13, lineHeight: 1.7 }}>
-              <div style={{ fontWeight: 700, color: '#0d9488', marginBottom: 10 }}>{t('how_to_recipe')}</div>
+              <div style={{ fontSize: 14, fontWeight: 700, color: '#0d9488', marginBottom: 10 }}>{t('how_to_recipe')}</div>
 
               <div style={{ fontWeight: 600, marginBottom: 4, color: '#e2e8f0' }}>{t('example')}</div>
               <pre style={{ margin: '0 0 14px', background: '#111827', border: '1px solid #374151', borderRadius: 6, padding: '8px 12px', fontSize: 12, color: '#e2e8f0', lineHeight: 1.8 }}>

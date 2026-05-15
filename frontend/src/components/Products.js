@@ -338,7 +338,7 @@ export default function Products() {
           </div>
 
           <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: '12px 14px', fontSize: 12, color: '#9ca3af', lineHeight: 1.6 }}>
-            <div style={{ fontWeight: 700, color: '#0d9488', marginBottom: 4 }}>{t('macro_auto_title')}</div>
+            <div style={{ fontSize: 14, fontWeight: 700, color: '#0d9488', marginBottom: 4 }}>{t('macro_auto_title')}</div>
             {t('macro_auto_desc')}
             <div style={{ marginTop: 6, color: '#6b7280' }}>{t('macro_edit_hint')}</div>
           </div>
@@ -354,7 +354,7 @@ export default function Products() {
         <h2>{t('import_title')}</h2>
 
         <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: '12px 16px', marginBottom: 16, fontSize: 13, lineHeight: 1.7 }}>
-          <div style={{ fontWeight: 600, color: '#0d9488', marginBottom: 8 }}>{t('import_how_to')}</div>
+          <div style={{ fontSize: 14, fontWeight: 700, color: '#0d9488', marginBottom: 8 }}>{t('import_how_to')}</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
             <div>
               <div style={{ fontWeight: 600, marginBottom: 4, color: '#e2e8f0' }}>{t('opt1_title')}</div>
