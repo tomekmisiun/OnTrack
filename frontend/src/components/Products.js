@@ -452,40 +452,49 @@ export default function Products() {
         <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: '12px 16px', marginBottom: 16, fontSize: 13, lineHeight: 1.7 }}>
           <div style={{ fontSize: 14, fontWeight: 700, color: '#0d9488', marginBottom: 8 }}>{t('import_how_to')}</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+
+            {/* Opcja 1 */}
             <div>
-              <div style={{ fontWeight: 600, marginBottom: 4, color: '#e2e8f0' }}>{t('opt1_title')}</div>
-              <ol style={{ margin: 0, paddingLeft: 16, color: '#9ca3af', fontSize: 12 }}>
+              <div style={{ fontWeight: 700, fontSize: 12, color: '#e2e8f0', marginBottom: 8 }}>{t('opt1_title')}</div>
+              <ol style={{ margin: '0 0 8px', paddingLeft: 18, color: '#9ca3af', fontSize: 12, lineHeight: 1.8 }}>
                 <li>{t('opt1_s1')}</li>
                 <li>Kliknij{' '}
                   <span style={{ display:'inline-flex', alignItems:'center', background:'#0d9488', color:'white', borderRadius:4, padding:'2px 7px', fontSize:11, fontWeight:700, verticalAlign:'middle', margin:'0 2px' }}>Zastosuj przez AI</span>
                   {' '}-{' '}
-                  <a href="https://gemini.google.com/app" target="_blank" rel="noreferrer"
-                    style={{ color:'#2dd4bf', textDecoration:'underline' }}>Gemini</a>
+                  <a href="https://gemini.google.com/app" target="_blank" rel="noreferrer" style={{ color:'#2dd4bf', textDecoration:'underline' }}>Gemini</a>
                   {' '}wyciągnie produkty i ceny
                 </li>
                 <li>Sprawdź dopasowania i kliknij{' '}
                   <span style={{ display:'inline-flex', alignItems:'center', background:'#0d9488', color:'white', borderRadius:4, padding:'2px 7px', fontSize:11, fontWeight:700, verticalAlign:'middle', margin:'0 2px' }}>Zastosuj zmiany</span>
                 </li>
               </ol>
-              <div style={{ marginTop: 6, fontSize: 11, color: '#2dd4bf', background: '#111827', border: '1px solid #374151', borderRadius: 5, padding: '6px 10px' }}>
-                Zgubiłeś paragon? Otwórz paragon w aplikacji sklepu, zrób screenshot i wgraj
-              </div>
-              <div style={{ marginTop: 5, fontSize: 11, color: '#ca8a04' }}>
+              <div style={{ fontSize: 11, color: '#ca8a04', marginBottom: 6 }}>
                 {t('ai_daily_lim')}{remainingImports !== null && <span>{t('ai_rem')(remainingImports)}</span>}
               </div>
-            </div>
-            <div>
-              <div style={{ fontWeight: 600, marginBottom: 4, color: '#e2e8f0' }}>{t('opt2_title')}</div>
-              <div style={{ color: '#9ca3af', fontSize: 12, lineHeight: 1.8 }}>
-                <div>Wymagany format pliku:</div>
-                <code style={{ background: '#1e293b', color: '#2dd4bf', padding: '1px 6px', borderRadius: 3, fontFamily: 'monospace' }}>nazwa,gramatura,jednostka,cena</code>
-                <div>lub: <code style={{ background: '#1e293b', color: '#2dd4bf', padding: '1px 6px', borderRadius: 3, fontFamily: 'monospace' }}>nazwa,cena</code> <span style={{ color: '#6b7280' }}>(ręcznie wprowadź gramaturę i jednostkę przed zapisaniem)</span></div>
-                <div style={{ marginTop: 4 }}>Wgraj plik i kliknij{' '}
-                  <span style={{ display:'inline-flex', alignItems:'center', background:'#0d9488', color:'white', borderRadius:4, padding:'2px 7px', fontSize:11, fontWeight:700, verticalAlign:'middle', margin:'0 2px' }}>Zastosuj plik</span>
-                </div>
-                <div style={{ marginTop: 4, fontSize: 11, color: '#2dd4bf' }}>{t('no_lim')}</div>
+              <div style={{ fontSize: 11, color: '#2dd4bf', background: '#111827', border: '1px solid #374151', borderRadius: 5, padding: '6px 10px' }}>
+                Zgubiłeś paragon? Otwórz paragon w aplikacji sklepu, zrób screenshot i wgraj
               </div>
             </div>
+
+            {/* Opcja 2 */}
+            <div>
+              <div style={{ fontWeight: 700, fontSize: 12, color: '#e2e8f0', marginBottom: 8 }}>{t('opt2_title')}</div>
+              <ol style={{ margin: '0 0 8px', paddingLeft: 18, color: '#9ca3af', fontSize: 12, lineHeight: 1.8 }}>
+                <li>
+                  Wymagany format:{' '}
+                  <code style={{ background: '#1e293b', color: '#2dd4bf', padding: '1px 6px', borderRadius: 3, fontFamily: 'monospace' }}>nazwa,gramatura,jednostka,cena</code>
+                  <br />
+                  lub:{' '}
+                  <code style={{ background: '#1e293b', color: '#2dd4bf', padding: '1px 6px', borderRadius: 3, fontFamily: 'monospace' }}>nazwa,cena</code>
+                  {' '}<span style={{ color: '#6b7280', fontSize: 11 }}>(ręcznie wprowadź gramaturę i jednostkę)</span>
+                </li>
+                <li>Wgraj plik i kliknij{' '}
+                  <span style={{ display:'inline-flex', alignItems:'center', background:'#0d9488', color:'white', borderRadius:4, padding:'2px 7px', fontSize:11, fontWeight:700, verticalAlign:'middle', margin:'0 2px' }}>Zastosuj plik</span>
+                </li>
+              </ol>
+              <div style={{ fontSize: 11, color: '#2dd4bf' }}>{t('no_lim')}</div>
+            </div>
+
           </div>
 
           {/* Prompt box — pełna szerokość pod oboma opcjami */}
