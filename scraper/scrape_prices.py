@@ -307,13 +307,13 @@ async def run_scraper(dry_run: bool):
             active_url  = auchan_url or biedronka_url
             store_name  = "Auchan" if auchan_url else "Biedronka"
 
-            cur.execute("SELECT name, price FROM products WHERE id = %s AND user_id = %s", (product_id, DEFAULT_USER_ID))
+            cur.execute("SELECT name, price, package_weight, unit, sold_by_weight FROM products WHERE id = %s AND user_id = %s", (product_id, DEFAULT_USER_ID))
             row = cur.fetchone()
             if not row:
                 print(f"[WARN] Produkt ID={product_id} nie istnieje w bazie.")
                 continue
 
-            name, old_price = row
+            name, old_price, package_weight, unit, sold_by_weight = row
             print(f"Scraping: {name} (ID={product_id}) [{store_name}]...", end=" ", flush=True)
 
             try:
@@ -329,17 +329,26 @@ async def run_scraper(dry_run: bool):
                     results.append({"id": product_id, "name": name, "status": "not_found"})
                     continue
 
-                changed = abs(new_price - float(old_price)) > 0.001
-                arrow = f"{old_price:.2f} → {new_price:.2f} zł" if changed else f"{old_price:.2f} zł (bez zmian)"
+                # Konwertuj cenę opakowania/kg → cenę jednostkową (per 100g lub per szt)
+                pkg = float(package_weight) or 1
+                if per_kg or sold_by_weight:
+                    db_price = new_price / 10          # /kg → /100g
+                elif unit == 'szt':
+                    db_price = new_price / pkg         # cena opakowania → cena/szt
+                else:
+                    db_price = new_price / pkg * 100   # cena opakowania → cena/100g
+
+                changed = abs(db_price - float(old_price)) > 0.001
+                arrow = f"{old_price:.4f} → {db_price:.4f} (opak: {new_price:.2f} zł)" if changed else f"{old_price:.4f} (bez zmian)"
                 print(f"✓ {arrow}")
 
                 if changed and not dry_run:
-                    cur.execute("UPDATE products SET price = %s WHERE id = %s", (new_price, product_id))
+                    cur.execute("UPDATE products SET price = %s WHERE id = %s", (db_price, product_id))
                     conn.commit()
 
                 results.append({
                     "id": product_id, "name": name,
-                    "old": float(old_price), "new": new_price,
+                    "old": float(old_price), "new": db_price,
                     "changed": changed, "status": "ok",
                 })
             except Exception as e:
