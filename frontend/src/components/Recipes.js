@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { recipes as api, products as productsApi } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useToast } from '../contexts/ToastContext';
@@ -147,17 +147,70 @@ export default function Recipes() {
   const [parsed, setParsed] = useState(null);
   const [parsing, setParsing] = useState(false);
   const [remaining, setRemaining] = useState(null);
-  const [editingName, setEditingName] = useState(null); // {id, text}
-  const [editingIngredients, setEditingIngredients] = useState(null); // {id, rows:[...], notes:string}
+  const [editingName, setEditingName] = useState(null);
+  const [editingIngredients, setEditingIngredients] = useState(null);
   const [promptCopied, setPromptCopied] = useState(false);
+  const [addingProductFor, setAddingProductFor] = useState(null);
+  const [quickForm, setQuickForm] = useState({ name: '', package_weight: '100', package_price: '', unit: 'g', sold_by_weight: false });
+  const textareaRef = useRef(null);
 
-  useEffect(() => { loadRecipes(); loadProducts(); }, []);
+  const resizeTextarea = useCallback(() => {
+    const el = textareaRef.current;
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.height = el.scrollHeight + 'px';
+  }, []);
+
+  useEffect(() => { loadRecipes(); loadProducts(); loadParseLimit(); }, []);
 
   const loadRecipes = async () => {
     try { setRecipeList((await api.getAll()).data); } catch { showError(t('err_load_recipes_list')); }
   };
   const loadProducts = async () => {
     try { setProductList((await productsApi.getAll()).data); } catch {}
+  };
+  const loadParseLimit = async () => {
+    try { setRemaining((await api.getParseLimit()).data.remaining_today); } catch {}
+  };
+
+  const fetchMacroFromOFF = async (name) => {
+    try {
+      const url = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(name)}&search_simple=1&action=process&json=1&page_size=5&fields=product_name,nutriments`;
+      const r = await fetch(url);
+      const data = await r.json();
+      for (const p of (data.products || [])) {
+        const n = p.nutriments || {};
+        let kcal = n['energy-kcal_100g'] ?? n['energy-kcal'] ?? null;
+        if (!kcal && n['energy_100g']) kcal = Math.round(n['energy_100g'] / 4.184 * 10) / 10;
+        if (kcal) return { kcal: Math.round(kcal * 10) / 10, protein: Math.round((n['proteins_100g'] ?? 0) * 10) / 10, fat: Math.round((n['fat_100g'] ?? 0) * 10) / 10, carbs: Math.round((n['carbohydrates_100g'] ?? 0) * 10) / 10 };
+      }
+    } catch {}
+    return null;
+  };
+
+  const handleQuickAdd = async (ingIndex) => {
+    if (!quickForm.name.trim() || !quickForm.package_price) { showError('Podaj nazwę i cenę produktu'); return; }
+    const sbw = !!quickForm.sold_by_weight;
+    let unit = sbw ? 'g' : quickForm.unit;
+    let pkgW = sbw ? 1000 : (parseFloat(quickForm.package_weight) || 100);
+    if (!sbw && unit === 'kg') { unit = 'g';  pkgW = Math.min(99999, pkgW * 1000); }
+    if (!sbw && unit === 'l')  { unit = 'ml'; pkgW = Math.min(99999, pkgW * 1000); }
+    const pkgPrice = parseFloat(quickForm.package_price) || 0;
+    const unitPrice = unit === 'szt' ? pkgPrice / pkgW : (pkgPrice / pkgW) * 100;
+    const name = quickForm.name.trim();
+    const duplicate = productList.find(p => p.name.toLowerCase() === name.toLowerCase());
+    if (duplicate) { showError(`Produkt „${duplicate.name}" już istnieje na liście`); return; }
+    try {
+      const res = await productsApi.create({ name, package_weight: pkgW, price: unitPrice, unit, sold_by_weight: sbw });
+      const newId = res.data.id;
+      updateIngredient(ingIndex, 'product_id', newId);
+      setAddingProductFor(null);
+      showSuccess(`Produkt „${name}" dodany — pobieram makro...`);
+      const macro = await fetchMacroFromOFF(name);
+      if (macro) await productsApi.update(newId, macro);
+      await loadProducts();
+      showSuccess(`Produkt „${name}" dodany${macro ? ' z makro' : ''}`);
+    } catch { showError('Błąd przy dodawaniu produktu'); }
   };
 
   const handleParseAI = async () => {
@@ -190,12 +243,13 @@ export default function Recipes() {
     const valid = parsed.ingredients.filter(i => i.product_id && i.weight > 0);
     if (!valid.length) { showError(t('err_no_ingredients')); return; }
     try {
-      await api.create({
+      const res = await api.create({
         name: parsed.name,
-        notes: parsed.sourceText || null,
         ingredients: valid.map(i => ({ product_id: parseInt(i.product_id), weight: i.weight })),
       });
+      const newId = res.data.id;
       setParsed(null); setPasteText(''); showSuccess('Przepis dodany'); loadRecipes();
+      api.fetchImage(newId).then(() => loadRecipes()).catch(() => {});
     } catch (e) { showError(e.response?.data?.error || t('err_save_recipe')); }
   };
 
@@ -210,14 +264,13 @@ export default function Recipes() {
   };
 
   const handleSaveIngredients = async (id) => {
-    const { rows, notes } = editingIngredients;
+    const { rows } = editingIngredients;
     for (const row of rows) {
       if (!row.product_id) { showError('Wybierz produkt dla każdego składnika'); return; }
       if (!row.weight || row.weight <= 0 || row.weight > 99999) { showError('Gramatura musi być między 1 a 99999'); return; }
     }
     try {
       await api.update(id, { ingredients: rows.map(r => ({ product_id: parseInt(r.product_id), weight: parseFloat(r.weight) })) });
-      await api.updateNotes(id, notes);
       setEditingIngredients(null); showSuccess('Zmiany zapisane'); loadRecipes();
     } catch (e) { showError(e.response?.data?.error || 'Błąd zapisu'); }
   };
@@ -229,26 +282,18 @@ export default function Recipes() {
 
         {!parsed ? (
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, alignItems: 'stretch' }}>
-            {/* Lewa: instrukcja */}
-            <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: '14px 16px', fontSize: 13, lineHeight: 1.7 }}>
+            {/* Prawa: instrukcja */}
+            <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: '14px 16px', fontSize: 13, lineHeight: 1.7, order: 2 }}>
               <div style={{ fontSize: 14, fontWeight: 700, color: '#0d9488', marginBottom: 10 }}>{t('how_to_recipe')}</div>
-
-              <div style={{ fontWeight: 600, marginBottom: 4, color: '#e2e8f0' }}>{t('format_title')}</div>
-              <ol style={{ margin: '0 0 12px', paddingLeft: 18, color: '#9ca3af' }}>
-                <li><b>{t('fmt_1')}</b></li>
-                <li>{t('fmt_2')}</li>
-                <li>{t('fmt_3')}</li>
-                <li>{t('fmt_4')}</li>
-              </ol>
 
               <div style={{ padding: '8px 12px', background: '#111827', border: '1px solid #374151', borderRadius: 6, fontSize: 12, color: '#9ca3af', marginBottom: 14, display: 'flex', flexDirection: 'column', gap: 6 }}>
                 <div>
                   <span style={{ display:'inline-flex', alignItems:'center', background:'#0d9488', color:'white', borderRadius:5, padding:'2px 8px', fontSize:11, fontWeight:700, verticalAlign:'middle', marginRight:5 }}>Dodaj z AI</span>
-                  - AI wyciągnie składniki za Ciebie i dopasuje do produktów w bazie, rozumiejąc kontekst i niestandardowe formaty. <span style={{ color: '#ca8a04' }}>Limit: 2 dziennie.</span>
+                  - AI wyciągnie składniki za Ciebie i dopasuje do produktów w bazie, rozumiejąc kontekst i niestandardowe formaty.
                 </div>
                 <div>
                   <span style={{ display:'inline-flex', alignItems:'center', background:'#1c3534', color:'#0d9488', border:'1px solid #374151', borderRadius:5, padding:'2px 8px', fontSize:11, fontWeight:600, verticalAlign:'middle', marginRight:5 }}>Dodaj</span>
-                  - Nie wymaga działania przy standardowych formatach. Przy nietypowych wymaga sprawdzenia i poprawienia dopasowań, bez limitu.
+                  - Nie wymaga działania przy standardowych formatach. Przy nietypowych wymaga sprawdzenia i poprawienia dopasowań.
                 </div>
               </div>
 
@@ -260,7 +305,7 @@ export default function Recipes() {
                   <a href="https://gemini.google.com/app" target="_blank" rel="noreferrer" style={{ color: '#2dd4bf', textDecoration: 'underline' }}>Gemini</a>
                   {' / '}
                   <a href="https://chatgpt.com/" target="_blank" rel="noreferrer" style={{ color: '#2dd4bf', textDecoration: 'underline' }}>ChatGPT</a>
-                  , użyć prompta poniżej i tam wkleić swój przepis, a następnie odpowiedź wkleić po prawej i użyć{' '}
+                  , użyć prompta poniżej i tam wkleić swój przepis, a następnie odpowiedź wkleić do okna po lewej i użyć{' '}
                   <span style={{ display:'inline-flex', alignItems:'center', background:'#1c3534', color:'#0d9488', border:'1px solid #374151', borderRadius:5, padding:'1px 6px', fontSize:11, fontWeight:600, verticalAlign:'middle' }}>Dodaj</span>
                 </div>
                 <div style={{ position: 'relative' }}>
@@ -288,40 +333,59 @@ Zasady:
                 </div>
               </div>
 
-              <div style={{ fontSize: 17, fontWeight: 600, color: '#f1f5f9', marginBottom: 6 }}>Szukasz inspiracji?</div>
-              <a href="https://aniagotuje.pl/" target="_blank" rel="noreferrer"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, color: '#2dd4bf', fontWeight: 600, textDecoration: 'none', background: '#111827', padding: '5px 10px', borderRadius: 6, border: '1px solid #374151' }}>
-                <img src="https://www.google.com/s2/favicons?domain=aniagotuje.pl&sz=16" alt="" style={{ width: 16, height: 16, borderRadius: 3 }} />
-                aniagotuje.pl →
-              </a>
-              {remaining !== null && (
-                <div style={{ marginTop: 8, fontSize: 11, color: '#ca8a04' }}>
-                  {t('remaining_ai')(remaining)}
-                </div>
-              )}
             </div>
 
-            {/* Prawa: textarea + przyciski */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            {/* Lewa: inspiracje + textarea + przyciski */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, order: 1 }}>
+              <div>
+                <div style={{ fontSize: 11, fontWeight: 600, color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.7px', marginBottom: 8 }}>Szukasz inspiracji?</div>
+                <div style={{ display: 'flex', gap: 8 }}>
+                  {[
+                    { href: 'https://aniagotuje.pl/', domain: 'aniagotuje.pl', label: 'aniagotuje.pl' },
+                    { href: 'https://www.przepisy.pl/', domain: 'przepisy.pl', label: 'przepisy.pl' },
+                    { href: 'https://www.kwestiasmaku.com/', domain: 'kwestiasmaku.com', label: 'kwestiasmaku.com' },
+                  ].map(({ href, domain, label }) => (
+                    <a key={domain} href={href} target="_blank" rel="noreferrer"
+                      style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 6, textDecoration: 'none', background: '#111827', border: '1px solid #374151', borderRadius: 8, padding: '10px 8px', transition: 'border-color 0.15s', minWidth: 0 }}
+                      onMouseEnter={e => e.currentTarget.style.borderColor = '#0d9488'}
+                      onMouseLeave={e => e.currentTarget.style.borderColor = '#374151'}>
+                      <img src={`https://www.google.com/s2/favicons?domain=${domain}&sz=32`} alt="" style={{ width: 22, height: 22, borderRadius: 4 }} />
+                      <span style={{ fontSize: 11, fontWeight: 600, color: '#e2e8f0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100%', textAlign: 'center' }}>{label}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
               <textarea
-                value={pasteText} onChange={e => setPasteText(e.target.value.slice(0, 5000))}
+                ref={textareaRef}
+                value={pasteText}
+                onChange={e => { setPasteText(e.target.value.slice(0, 5000)); resizeTextarea(); }}
                 maxLength={5000}
-                placeholder={"wpisz lub wklej przepis...\n\nOwsianka\npłatki owsiane 50 g\nmleko 200 ml\nbanan 120 g\nłyżka masła orzechowego"}
-                style={{ width: '100%', flex: 1, padding: 12, border: '1.5px solid #374151', borderRadius: 8, fontFamily: 'inherit', fontSize: 13, lineHeight: 1.6, resize: 'none', outline: 'none', boxSizing: 'border-box', background: '#111827', color: '#e2e8f0' }}
+                placeholder={"wpisz lub wklej przepis...\n\nFormat tekstu:\nPierwsza linia - nazwa przepisu\nKażdy składnik w osobnej linii\nPodaj nazwę składnika i ilość z jednostką (g, ml, kg, l, łyżka, łyżeczka, szklanka…)\nMożesz wkleić tekst ze strony z przepisem\n\nPrzykład:\nOwsianka\npłatki owsiane 50 g\nmleko 200 ml\nbanan 120 g\nłyżka masła orzechowego"}
+                style={{ width: '100%', minHeight: 330, padding: 12, border: '1.5px solid #374151', borderRadius: 8, fontFamily: 'inherit', fontSize: 13, lineHeight: 1.6, resize: 'none', overflowY: 'hidden', outline: 'none', boxSizing: 'border-box', background: '#111827', color: '#e2e8f0' }}
                 onFocus={e => e.target.style.borderColor = '#0d9488'}
                 onBlur={e => e.target.style.borderColor = '#374151'}
               />
               <div style={{ fontSize: 10, color: pasteText.length > 4500 ? '#f87171' : '#6b7280', textAlign: 'right', marginTop: -8 }}>
                 {pasteText.length} / 5000
               </div>
-              <div style={{ display: 'flex', gap: 10 }}>
-                <button className="btn btn-primary" onClick={handleParseAI} disabled={!pasteText.trim() || parsing === 'ai'} style={{ flex: 1 }}>
-                  {parsing === 'ai' ? t('parsing_ai') : t('parse_ai_btn')}
-                </button>
-                <button className="btn" onClick={handleParseRegex} disabled={!pasteText.trim() || parsing === 'ai'}
-                  style={{ flex: 1, background: '#1c3534', color: '#0d9488', border: '1px solid #374151', fontWeight: 600 }}>
-                  {t('parse_regex_btn')}
-                </button>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+                <div>
+                  <button className="btn btn-primary" onClick={handleParseAI} disabled={!pasteText.trim() || parsing === 'ai'} style={{ width: '100%' }}>
+                    {parsing === 'ai' ? t('parsing_ai') : t('parse_ai_btn')}
+                  </button>
+                  <div style={{ fontSize: 11, marginTop: 4, color: remaining === 0 ? '#f87171' : '#ca8a04' }}>
+                    Limit: 2 dziennie.{remaining !== null && ` Pozostało: ${remaining}`}
+                  </div>
+                </div>
+                <div>
+                  <button className="btn" onClick={handleParseRegex} disabled={!pasteText.trim() || parsing === 'ai'}
+                    style={{ width: '100%', background: '#1c3534', color: '#0d9488', border: '1px solid #374151', fontWeight: 600 }}>
+                    {t('parse_regex_btn')}
+                  </button>
+                  <div style={{ fontSize: 11, marginTop: 4, color: '#6b7280' }}>
+                    Bez limitu
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -331,26 +395,105 @@ Zasady:
               <label style={{ fontSize: 12, color: '#6b7280', display: 'block', marginBottom: 4 }}>{t('recipe_name_lbl')}</label>
               <input value={parsed.name} onChange={e => setParsed({ ...parsed, name: e.target.value })} style={{ width: '100%' }} />
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 80px 1fr 36px', gap: 8, padding: '0 10px', marginBottom: 4 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 80px 1fr 36px', gap: 8, padding: '0 10px', marginBottom: 4 }}>
               <span style={{ fontSize: 11, fontWeight: 600, color: '#0d9488', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 {t('ingredients_lbl')(parsed.ingredients.filter(i => i.product_id).length, parsed.ingredients.length)}
               </span>
+              <span></span>
               <span style={{ fontSize: 11, fontWeight: 600, color: '#0d9488', textTransform: 'uppercase', letterSpacing: '0.5px' }}>g / ml / szt</span>
-              <span style={{ fontSize: 11, fontWeight: 600, color: '#0d9488', textTransform: 'uppercase', letterSpacing: '0.5px', textAlign: 'right' }}>Dopasowany produkt</span>
+              <span style={{ fontSize: 11, fontWeight: 600, color: '#0d9488', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Dopasowany produkt</span>
               <span></span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
               {parsed.ingredients.map((ing, i) => (
-                <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr 80px 1fr 36px', gap: 8, alignItems: 'center', padding: '8px 10px', background: ing.product_id ? '#162616' : '#2d1f0f', border: `1px solid ${ing.product_id ? '#1a4a1a' : '#4a3010'}`, borderRadius: 8 }}>
-                  <div style={{ fontSize: 13, color: '#e2e8f0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={ing.rawName}>{ing.rawName}</div>
-                  <input type="number" value={ing.weight} min="0" max="99999" onChange={e => updateIngredient(i, 'weight', Math.min(99999, parseFloat(e.target.value) || 0))} style={{ padding: '6px 8px', fontSize: 13 }} />
-                  <select value={ing.product_id || ''} onChange={e => updateIngredient(i, 'product_id', e.target.value || null)} style={{ padding: '6px 8px', fontSize: 13 }}>
-                    <option value="">{t('no_match_opt')}</option>
-                    {productList.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
-                  </select>
-                  <button onClick={() => removeIngredient(i)} style={{ background: '#ef4444', border: 'none', color: '#1f2937', borderRadius: 6, cursor: 'pointer', fontSize: 14, height: 34 }}>✕</button>
-                </div>
+                <React.Fragment key={i}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 80px 1fr 36px', gap: 8, alignItems: 'center', padding: '8px 10px', background: ing.product_id ? '#162616' : '#2d1f0f', border: `1px solid ${addingProductFor === i ? '#0d9488' : ing.product_id ? '#1a4a1a' : '#4a3010'}`, borderRadius: addingProductFor === i ? '8px 8px 0 0' : 8 }}>
+                    <div style={{ fontSize: 13, color: '#e2e8f0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={ing.rawName}>{ing.rawName}</div>
+                    <button
+                      onClick={() => {
+                        if (addingProductFor === i) { setAddingProductFor(null); return; }
+                        setAddingProductFor(i);
+                        setQuickForm({ name: ing.rawName, package_weight: '100', package_price: '', unit: 'g', sold_by_weight: false });
+                      }}
+                      style={{ padding: '5px 10px', border: `1px solid ${addingProductFor === i ? '#0d9488' : '#374151'}`, borderRadius: 6, cursor: 'pointer', fontSize: 11, fontWeight: 600, whiteSpace: 'nowrap', background: addingProductFor === i ? '#0d9488' : '#111827', color: addingProductFor === i ? '#fff' : '#6b7280' }}>
+                      Dodaj do listy Produkty
+                    </button>
+                    <input type="number" value={ing.weight} min="0" max="99999" onChange={e => updateIngredient(i, 'weight', Math.min(99999, parseFloat(e.target.value) || 0))} style={{ padding: '6px 8px', fontSize: 13 }} />
+                    <select value={ing.product_id || ''} onChange={e => updateIngredient(i, 'product_id', e.target.value || null)} style={{ padding: '6px 8px', fontSize: 13, width: '100%', minWidth: 0 }}>
+                      <option value="">{t('no_match_opt')}</option>
+                      {productList.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
+                    </select>
+                    <button onClick={() => removeIngredient(i)} style={{ background: '#ef4444', border: 'none', color: '#1f2937', borderRadius: 6, cursor: 'pointer', fontSize: 14, height: 34 }}>✕</button>
+                  </div>
+                  {addingProductFor === i && (
+                    <div style={{ background: '#111827', border: '1px solid #0d9488', borderTop: 'none', borderRadius: '0 0 8px 8px', padding: '10px 12px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                      <div style={{ fontSize: 11, fontWeight: 700, color: '#0d9488', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Dodaj nowy produkt</div>
+                      <div style={{ display: 'flex', gap: 8, alignItems: 'flex-end' }}>
+                        <div style={{ flex: 2, minWidth: 0 }}>
+                          <div style={{ fontSize: 10, color: '#6b7280', marginBottom: 3 }}>Nazwa produktu</div>
+                          <input value={quickForm.name} maxLength={50} onChange={e => setQuickForm(f => ({ ...f, name: e.target.value.slice(0, 50) }))}
+                            placeholder="np. Brokuły" style={{ width: '100%', boxSizing: 'border-box', padding: '6px 8px', fontSize: 13 }} />
+                        </div>
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ fontSize: 10, color: '#6b7280', marginBottom: 3 }}>Cena za opakowanie / kg (zł)</div>
+                          <input type="number" className="no-spin" min="0" max="99999" step="0.01" value={quickForm.package_price}
+                            onChange={e => setQuickForm(f => ({ ...f, package_price: e.target.value === '' ? '' : String(Math.min(99999, parseFloat(e.target.value) || 0)) }))}
+                            placeholder="np. 4.99" style={{ width: '100%', boxSizing: 'border-box', padding: '6px 8px', fontSize: 13 }} />
+                        </div>
+                        <div style={{ display: 'flex', borderRadius: 6, overflow: 'hidden', border: '1px solid #374151', flexShrink: 0 }}>
+                          <button type="button" onClick={() => setQuickForm(f => ({ ...f, sold_by_weight: false }))}
+                            style={{ padding: '6px 10px', border: 'none', borderRight: '1px solid #374151', cursor: 'pointer', fontSize: 11, fontWeight: 600, whiteSpace: 'nowrap', transition: 'all 0.15s',
+                              background: !quickForm.sold_by_weight ? '#0d9488' : '#2d3748', color: !quickForm.sold_by_weight ? 'white' : '#9ca3af' }}>
+                            W opakowaniu
+                          </button>
+                          <button type="button" onClick={() => setQuickForm(f => ({ ...f, sold_by_weight: true, unit: 'g', package_weight: '' }))}
+                            style={{ padding: '6px 10px', border: 'none', cursor: 'pointer', fontSize: 11, fontWeight: 600, whiteSpace: 'nowrap', transition: 'all 0.15s',
+                              background: quickForm.sold_by_weight ? '#0d9488' : '#2d3748', color: quickForm.sold_by_weight ? 'white' : '#9ca3af' }}>
+                            Na wagę
+                          </button>
+                        </div>
+                      </div>
+                      {!quickForm.sold_by_weight && (
+                        <div>
+                          <div style={{ fontSize: 10, color: '#6b7280', marginBottom: 3 }}>Ilość w opakowaniu</div>
+                          <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 6, alignItems: 'stretch' }}>
+                            <input type="number" className="no-spin" min="0" max="99999" value={quickForm.package_weight}
+                              onChange={e => setQuickForm(f => ({ ...f, package_weight: e.target.value === '' ? '' : String(Math.min(99999, parseFloat(e.target.value) || 0)) }))}
+                              placeholder="np. 100" style={{ width: '100%', boxSizing: 'border-box', padding: '6px 8px', fontSize: 13 }} />
+                            <div style={{ display: 'flex', gap: 3, alignItems: 'stretch' }}>
+                              {['g', 'kg', 'ml', 'l', 'szt'].map(u => (
+                                <button key={u} type="button" onClick={() => setQuickForm(f => ({ ...f, unit: u }))}
+                                  style={{ padding: '0 7px', border: '1px solid', borderRadius: 5, fontSize: 11, fontWeight: 700, cursor: 'pointer', flexShrink: 0,
+                                    background: quickForm.unit === u ? '#0d9488' : '#1c3534',
+                                    borderColor: quickForm.unit === u ? '#0d9488' : '#374151',
+                                    color: quickForm.unit === u ? '#fff' : '#6b7280' }}>
+                                  {u}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                      <div style={{ display: 'flex', gap: 6, justifyContent: 'flex-end' }}>
+                        <button className="btn btn-primary" style={{ padding: '6px 16px', fontSize: 13, whiteSpace: 'nowrap' }} onClick={() => handleQuickAdd(i)}>
+                          Dodaj produkt
+                        </button>
+                        <button className="btn" style={{ padding: '6px 10px', fontSize: 13, background: '#374151', color: '#9ca3af' }} onClick={() => setAddingProductFor(null)}>
+                          Anuluj
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </React.Fragment>
               ))}
+            </div>
+            <div style={{ background: '#1c2433', border: '1px solid #374151', borderRadius: 8, padding: '10px 14px', marginBottom: 12, fontSize: 12, color: '#9ca3af', lineHeight: 1.6 }}>
+              Brakuje produktu na liście lub dopasowanie jest błędne? Kliknij{' '}
+              <span style={{ display: 'inline', background: '#111827', color: '#6b7280', border: '1px solid #374151', borderRadius: 4, padding: '1px 6px', fontSize: 11, fontWeight: 600 }}>Dodaj do listy Produkty</span>
+              {' '}przy danym składniku, wypełnij pola i kliknij{' '}
+              <span style={{ display: 'inline-flex', alignItems: 'center', background: '#0d9488', color: '#fff', borderRadius: 4, padding: '1px 8px', fontSize: 11, fontWeight: 700, verticalAlign: 'middle' }}>Dodaj produkt</span>
+              {' '}nie martw się, szczegóły możesz edytować później w zakładce{' '}
+              <span style={{ color: '#0d9488', fontWeight: 600 }}>Produkty</span>.
             </div>
             <div style={{ display: 'flex', gap: 10 }}>
               <button className="btn btn-primary" onClick={handleSave}>{t('save_recipe')}</button>
@@ -370,7 +513,7 @@ Zasady:
       </div>
 
       <div className="card">
-        <h2>{t('recipe_list_title')} <span style={{fontSize:12,fontWeight:400,color:'#6b7280'}}>- edytuj swoje przepisy</span></h2>
+        <h2>{t('recipe_list_title')}</h2>
         <div style={{ margin: '10px 0' }}>
           <input
             type="text"
@@ -427,8 +570,8 @@ Zasady:
                     <button className="btn" style={{ background: '#374151', color: '#9ca3af' }} onClick={() => setEditingIngredients(null)}>Anuluj</button>
                   </>
                 ) : (
-                  <button className="btn btn-primary" style={{ background: '#1c3534', color: '#0d9488', border: '1px solid #374151' }}
-                    onClick={() => setEditingIngredients({ id: r.id, rows: r.ingredients.map(ing => ({ product_id: ing.product_id, weight: ing.weight, unit: ing.unit || 'g' })), notes: r.notes || '' })}>
+                  <button className="btn btn-primary"
+                    onClick={() => setEditingIngredients({ id: r.id, rows: r.ingredients.map(ing => ({ product_id: ing.product_id, weight: ing.weight, unit: ing.unit || 'g' })) })}>
                     Edytuj składniki
                   </button>
                 ))}
@@ -511,29 +654,6 @@ Zasady:
                     )}
                   </div>
 
-                  {/* Sekcja Info */}
-                  <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: '12px 14px' }}>
-                    <div style={{ fontSize: 12, fontWeight: 700, color: '#0d9488', marginBottom: 8 }}>{t('info_section')}</div>
-                    {isEditing ? (
-                      <>
-                        <textarea
-                          value={editingIngredients.notes}
-                          maxLength={5000}
-                          onChange={e => setEditingIngredients({ ...editingIngredients, notes: e.target.value })}
-                          style={{ width: '100%', minHeight: 120, padding: 10, border: '1px solid #374151', borderRadius: 6, fontFamily: 'inherit', fontSize: 12, lineHeight: 1.7, resize: 'vertical', outline: 'none', boxSizing: 'border-box', marginBottom: 4, background: '#111827', color: '#e2e8f0' }}
-                        />
-                        <div style={{ fontSize: 10, color: editingIngredients.notes.length > 4500 ? '#f87171' : '#6b7280', textAlign: 'right', marginBottom: 4 }}>
-                          {editingIngredients.notes.length} / 5000
-                        </div>
-                      </>
-                    ) : r.notes ? (
-                      <pre style={{ margin: 0, fontSize: 12, color: '#e2e8f0', lineHeight: 1.8, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
-                        {r.notes}
-                      </pre>
-                    ) : (
-                      <p style={{ margin: 0, fontSize: 12, color: '#6b7280', fontStyle: 'italic' }}>{t('no_notes')}</p>
-                    )}
-                  </div>
                 </div>
               );
             })()}
