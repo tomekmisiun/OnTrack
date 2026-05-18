@@ -122,3 +122,12 @@ def delete_product(id):
     db.session.delete(product)
     db.session.commit()
     return jsonify({'message': 'Produkt usunięty'}), 200
+
+
+@products_bp.route('/all', methods=['DELETE'])
+@jwt_required()
+def delete_all_products():
+    uid = current_uid()
+    count = Product.query.filter_by(user_id=uid).delete()
+    db.session.commit()
+    return jsonify({'message': f'Usunięto {count} produktów'}), 200

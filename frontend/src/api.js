@@ -24,20 +24,23 @@ API.interceptors.response.use(
 );
 
 export const products = {
-  getAll: () => API.get('/api/products/'),
-  create: (data) => API.post('/api/products/', data),
-  update: (id, data) => API.put(`/api/products/${id}`, data),
-  delete: (id) => API.delete(`/api/products/${id}`),
+  getAll:    ()         => API.get('/api/products/'),
+  create:    (data)     => API.post('/api/products/', data),
+  update:    (id, data) => API.put(`/api/products/${id}`, data),
+  delete:    (id)       => API.delete(`/api/products/${id}`),
+  deleteAll: ()         => API.delete('/api/products/all'),
 };
 
 export const recipes = {
-  getAll: () => API.get('/api/recipes/'),
-  get: (id) => API.get(`/api/recipes/${id}`),
-  create: (data) => API.post('/api/recipes/', data),
-  update: (id, data) => API.put(`/api/recipes/${id}`, data),
-  updateNotes: (id, notes) => API.patch(`/api/recipes/${id}/notes`, { notes }),
-  toggleFavorite: (id) => API.patch(`/api/recipes/${id}/favorite`),
-  delete: (id) => API.delete(`/api/recipes/${id}`),
+  getAll:        ()         => API.get('/api/recipes/'),
+  get:           (id)       => API.get(`/api/recipes/${id}`),
+  create:        (data)     => API.post('/api/recipes/', data),
+  update:        (id, data) => API.put(`/api/recipes/${id}`, data),
+  toggleFavorite:(id)       => API.patch(`/api/recipes/${id}/favorite`),
+  fetchImage:    (id)       => API.post(`/api/recipes/${id}/fetch-image`),
+  delete:        (id)       => API.delete(`/api/recipes/${id}`),
+  deleteAll:     ()         => API.delete('/api/recipes/all'),
+  getParseLimit: ()         => API.get('/api/recipes/parse-limit'),
 };
 
 export const mealPlan = {
@@ -77,4 +80,8 @@ export const importPrices = {
     return API.post('/api/import/parse-free', fd, { headers: { 'Content-Type': 'multipart/form-data' } });
   },
   apply: (updates) => API.post('/api/import/apply', { updates }),
+};
+
+export const fuel = {
+  getPrices: () => API.get('/api/fuel/prices'),
 };

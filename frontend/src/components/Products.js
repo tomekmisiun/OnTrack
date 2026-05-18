@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Icon } from '@iconify/react';
 import { products as api, importPrices } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useToast } from '../contexts/ToastContext';
@@ -40,6 +41,7 @@ export default function Products() {
   const { t } = useLanguage();
   const { showError, showSuccess, showToast: globalToast, showConfirm } = useToast();
   const [productList, setProductList] = useState([]);
+  const [pasteText, setPasteText] = useState('');
   const [form, setForm] = useState(EMPTY_FORM);
   const [editId, setEditId] = useState(null);
   const [editForm, setEditForm] = useState({});
@@ -52,7 +54,33 @@ export default function Products() {
   const [listOpen, setListOpen] = useState(true);
   const [search, setSearch] = useState('');
   const [promptCopied, setPromptCopied] = useState(false);
+  const [selectionMode, setSelectionMode] = useState(false);
+  const [selectedIds, setSelectedIds] = useState(new Set());
   const fileInputRef = useRef();
+
+  const toggleSelect = (id) => setSelectedIds(prev => {
+    const next = new Set(prev);
+    next.has(id) ? next.delete(id) : next.add(id);
+    return next;
+  });
+
+  const exitSelection = () => { setSelectionMode(false); setSelectedIds(new Set()); };
+
+  const handleDeleteSelected = () => {
+    showConfirm({
+      title: 'Usuń zaznaczone produkty',
+      message: `Czy na pewno chcesz usunąć ${selectedIds.size} zaznaczonych produktów?`,
+      confirmLabel: 'Usuń',
+      onConfirm: async () => {
+        try {
+          await Promise.all([...selectedIds].map(id => api.delete(id)));
+          showSuccess(`Usunięto ${selectedIds.size} produktów`);
+          exitSelection();
+          loadProducts();
+        } catch { showError('Błąd podczas usuwania'); }
+      },
+    });
+  };
 
   const mapImportItem = item => ({
     ...item,
@@ -85,9 +113,11 @@ export default function Products() {
     if (!form.name || !form.package_price) { showError(t('err_fill_fields')); return; }
     if (!form.sold_by_weight && !form.package_weight) { showError(t('err_fill_fields')); return; }
     const sbw = !!form.sold_by_weight;
-    const pkgW = sbw ? 1000 : clamp(form.package_weight, 0.001, 99999);
+    let unit = sbw ? 'g' : form.unit;
+    let pkgW = sbw ? 1000 : clamp(form.package_weight, 0.001, 99999);
+    if (unit === 'kg') { unit = 'g';  pkgW = Math.min(99999, pkgW * 1000); }
+    if (unit === 'l')  { unit = 'ml'; pkgW = Math.min(99999, pkgW * 1000); }
     const pkgPrice = clamp(form.package_price, 0, 99999);
-    const unit = sbw ? 'g' : form.unit;
     try {
       const created = await api.create({
         name: form.name,
@@ -97,6 +127,7 @@ export default function Products() {
         sold_by_weight: sbw,
       });
       setForm(EMPTY_FORM);
+      setPasteText('');
       showSuccess('Produkt dodany');
       const macro = await fetchMacroFromOFF(form.name);
       if (macro) await api.update(created.data.id, macro);
@@ -121,9 +152,11 @@ export default function Products() {
 
   const handleSaveEdit = async () => {
     const sbw = !!editForm.sold_by_weight;
-    const pkgW = sbw ? 1000 : clamp(editForm.package_weight, 0.001, 99999);
+    let unit = sbw ? 'g' : editForm.unit;
+    let pkgW = sbw ? 1000 : clamp(editForm.package_weight, 0.001, 99999);
+    if (unit === 'kg') { unit = 'g';  pkgW = Math.min(99999, pkgW * 1000); }
+    if (unit === 'l')  { unit = 'ml'; pkgW = Math.min(99999, pkgW * 1000); }
     const pkgPrice = clamp(editForm.package_price, 0, 99999);
-    const unit = sbw ? 'g' : editForm.unit;
     try {
       await api.update(editId, {
         name: editForm.name,
@@ -292,110 +325,190 @@ export default function Products() {
     </select>
   );
 
+  const parseProductText = (text) => {
+    if (!text.trim()) return null;
+    const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+    if (!lines.length) return null;
+
+    const toG = (val, u) => {
+      const v = parseFloat(String(val).replace(',', '.'));
+      if (u === 'kg') return { w: Math.round(v * 1000), unit: 'g' };
+      if (u === 'l')  return { w: Math.round(v * 1000), unit: 'ml' };
+      return { w: Math.round(v), unit: u };
+    };
+    const stripWeight = (s) => s.replace(/\d+(?:[,.]?\d+)?\s*(kg|g|ml|l|szt)\b/gi, '').replace(/\s+/g, ' ').trim().slice(0, 50);
+    const num = (s) => parseFloat(String(s).replace(',', '.'));
+
+    // ── Auchan ────────────────────────────────────────────────────
+    if (/sprzedawcą jest auchan/i.test(text)) {
+      const firstLine = lines[0];
+      const byWeight = /na\s+wagę/i.test(firstLine);
+      const wm = firstLine.match(/(\d+(?:[,.]?\d+)?)\s*(kg|g|ml|l)\s*$/i);
+      let weight = '', unit = 'g', sold_by_weight = byWeight;
+      if (wm) {
+        const { w, unit: u } = toG(wm[1], wm[2].toLowerCase());
+        weight = String(w); unit = u;
+        if (wm[2].toLowerCase() === 'kg' && !byWeight) sold_by_weight = false;
+      }
+      const name = stripWeight(firstLine.replace(/na\s+wagę/gi, ''));
+      // Ostatnia samodzielna cena w zł (nie zł/kg)
+      const allPrices = [...text.matchAll(/(\d+[,.]?\d+)\s*zł(?!\/|\s*\/)/gi)];
+      const price = allPrices.length ? String(num(allPrices[allPrices.length - 1][1]).toFixed(2)) : '';
+      return { name, package_price: price, package_weight: weight, unit, sold_by_weight };
+    }
+
+    // ── Carrefour (nazwa powtórzona w 2 pierwszych liniach) ───────
+    if (lines.length >= 2 && lines[0] === lines[1]) {
+      const firstLine = lines[0];
+      const wm = firstLine.match(/(\d+(?:[,.]?\d+)?)\s*(kg|g|ml|l)\s*$/i);
+      let weight = '', unit = 'g';
+      if (wm) { const r = toG(wm[1], wm[2].toLowerCase()); weight = String(r.w); unit = r.unit; }
+      const name = stripWeight(firstLine);
+      // Cena z fragmentów "7\n65\nzł" LUB obliczona z zł/kg
+      let price = '';
+      const pkgKgM = text.match(/(\d+[,.]?\d+)\s*zł\/1?\s*kg/i);
+      if (pkgKgM && weight) {
+        price = (num(pkgKgM[1]) * parseFloat(weight) / 1000).toFixed(2);
+      } else {
+        const zlIdx = lines.findIndex(l => /^zł$/i.test(l));
+        if (zlIdx >= 2 && /^\d+$/.test(lines[zlIdx - 2]) && /^\d+$/.test(lines[zlIdx - 1])) {
+          price = `${lines[zlIdx - 2]}.${lines[zlIdx - 1]}`;
+        }
+      }
+      return { name, package_price: price, package_weight: weight, unit, sold_by_weight: false };
+    }
+
+    // ── Biedronka (Nazwa Weight\nWeight - Price zł / kg) ─────────
+    {
+      const firstLine = lines[0];
+      const wm = firstLine.match(/(\d+(?:[,.]?\d+)?)\s*(kg|g|ml|l)\s*$/i);
+      const pkgKgM = text.match(/(\d+[,.]?\d+)\s*zł\s*\/\s*kg/i);
+      if (wm && pkgKgM) {
+        const { w, unit } = toG(wm[1], wm[2].toLowerCase());
+        const pricePerKg = num(pkgKgM[1]);
+        const price = (pricePerKg * w / 1000).toFixed(2);
+        const name = stripWeight(firstLine);
+        return { name, package_price: price, package_weight: String(w), unit, sold_by_weight: false };
+      }
+    }
+
+    // ── Fallback ──────────────────────────────────────────────────
+    const isByWeight = /na\s+wagę/i.test(text) || /zł\/kg/i.test(text);
+    let price = '', weight = '', unit = 'g';
+    if (isByWeight) {
+      const m = text.match(/(\d+[,.]?\d*)\s*zł\/kg/i);
+      if (m) price = String(num(m[1]).toFixed(2));
+    } else {
+      const m = text.match(/(\d+[,.]?\d+)\s*zł(?!\/)/i);
+      if (m) price = String(num(m[1]).toFixed(2));
+      const wm = text.match(/(\d+(?:[,.]?\d+)?)\s*(kg|g|ml|l)\b/i);
+      if (wm) { const r = toG(wm[1], wm[2].toLowerCase()); weight = String(r.w); unit = r.unit; }
+    }
+    const name = stripWeight((lines[0] || '').replace(/na\s+wagę/gi, '').replace(/kiść/gi, ''));
+    return { name, package_price: price, package_weight: weight, unit, sold_by_weight: isByWeight };
+  };
+
   return (
     <div>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
-      <div className="card" style={{ margin: 0 }}>
+      <div className="card" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0, marginBottom: 20, padding: 0, overflow: 'hidden' }}>
+      <div style={{ padding: '20px 24px' }}>
         <h2>{t('add_product_title')}</h2>
 
-        {/* Rząd 1: toggle pełna szerokość */}
-        <div style={{ display: 'flex', gap: 0, marginBottom: 20, borderRadius: 7, overflow: 'hidden', border: '1px solid #374151' }}>
-          <button type="button"
-            onClick={() => setForm(f => ({ ...f, sold_by_weight: false }))}
-            style={{ flex: 1, padding: '9px 14px', border: 'none', borderRight: '1px solid #374151', cursor: 'pointer', fontSize: 12, fontWeight: 600, transition: 'all 0.15s',
-              background: !form.sold_by_weight ? '#0d9488' : '#2d3748',
-              color: !form.sold_by_weight ? 'white' : '#9ca3af' }}>
-            W opakowaniu
-          </button>
-          <button type="button"
-            onClick={() => setForm(f => ({ ...f, sold_by_weight: true, unit: 'g', package_weight: '' }))}
-            style={{ flex: 1, padding: '9px 14px', border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 600, transition: 'all 0.15s',
-              background: !!form.sold_by_weight ? '#0d9488' : '#2d3748',
-              color: !!form.sold_by_weight ? 'white' : '#9ca3af' }}>
-            Na wagę
-          </button>
+        {/* Szukasz produktów */}
+        <div style={{ marginBottom: 16 }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.7px', marginBottom: 8 }}>Szukasz produktów?</div>
+          <div style={{ display: 'flex', gap: 8 }}>
+            {[
+              { domain: 'zakupy.auchan.pl',    url: 'https://zakupy.auchan.pl/',    label: 'Auchan' },
+              { domain: 'zakupy.biedronka.pl', url: 'https://zakupy.biedronka.pl/', label: 'Biedronka' },
+              { domain: 'carrefour.pl',        url: 'https://www.carrefour.pl/',    label: 'Carrefour' },
+            ].map(({ domain, url, label }) => (
+              <a key={label} href={url} target="_blank" rel="noreferrer"
+                style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 6, textDecoration: 'none', background: '#111827', border: '1px solid #374151', borderRadius: 8, padding: '10px 8px', transition: 'border-color 0.15s', minWidth: 0 }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = '#0d9488'}
+                onMouseLeave={e => e.currentTarget.style.borderColor = '#374151'}>
+                <img src={`https://www.google.com/s2/favicons?domain=${domain}&sz=32`} alt="" style={{ width: 22, height: 22, borderRadius: 4 }} />
+                <span style={{ fontSize: 11, fontWeight: 600, color: '#e2e8f0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100%', textAlign: 'center' }}>{label}</span>
+              </a>
+            ))}
+          </div>
         </div>
 
-        {/* Pola formularza — kolumna 320px */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div>
-            <div style={fl}>Szukasz produktów?</div>
-            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
-              {[
-                { logo: '/auchan.svg',    url: 'https://zakupy.auchan.pl/',    alt: 'Auchan',    h: 32 },
-                { logo: '/biedronka.svg', url: 'https://zakupy.biedronka.pl/', alt: 'Biedronka', h: 32 },
-                { logo: '/carrefour.svg', url: 'https://www.carrefour.pl/',    alt: 'Carrefour', h: 48 },
-              ].map(({ logo, url, alt, h }) => (
-                <a key={alt} href={url} target="_blank" rel="noreferrer" title={`Przejdź na ${alt}`}
-                  style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', opacity: 0.85, transition: 'opacity 0.15s' }}
-                  onMouseEnter={e => e.currentTarget.style.opacity = '1'}
-                  onMouseLeave={e => e.currentTarget.style.opacity = '0.85'}>
-                  <img src={logo} alt={alt} style={{ height: h, width: 'auto', display: 'block' }} />
-                </a>
-              ))}
-            </div>
-          </div>
+        {/* Textarea + formularz obok siebie */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
+          <textarea
+            value={pasteText}
+            maxLength={500}
+            onChange={e => {
+              const txt = e.target.value.slice(0, 500);
+              setPasteText(txt);
+              const parsed = parseProductText(txt);
+              if (parsed) setForm(f => ({ ...f, ...parsed }));
+              else if (!txt.trim()) setForm(EMPTY_FORM);
+            }}
+            placeholder={'Wklej produkt ze strony sklepu lub sam wpisz np:\n\nBanany Premium Owoce Auchan na wagę kiść 4-6 szt ok. 1 kg\nSprzedawcą jest Auchan Polska Sp. z o.o.\n1kg ~szacunkowa porcja 6,98 zł/kg\n1kg\n~szacunkowa porcja\n(6,98 zł/kg)\n6,98 zł\n~szacunkowa porcja\n\nBanan 1kg 7zł'}
+            style={{ width: '100%', boxSizing: 'border-box', minHeight: 250, padding: '8px 10px', fontSize: 12, fontFamily: 'inherit', lineHeight: 1.6, resize: 'none', background: '#111827', border: '1px solid #374151', color: '#e2e8f0', borderRadius: 7, outline: 'none' }}
+            onFocus={e => e.target.style.borderColor = '#0d9488'}
+            onBlur={e => e.target.style.borderColor = '#374151'}
+          />
 
-          <div>
-            <div style={fl}>{t('product_name_lbl')}</div>
-            <input value={form.name} maxLength={50} onChange={e => setForm({ ...form, name: e.target.value.slice(0, 50) })}
-              placeholder={t('product_name_ph')} style={{ width: '100%', boxSizing: 'border-box' }} />
-          </div>
-
-          {!form.sold_by_weight && (
-            <div style={{ display: 'flex', gap: 10 }}>
-              <div style={{ flex: 1 }}>
-                <div style={fl}>{t('pkg_qty_lbl')}</div>
-                <input type="number" className="no-spin" min="0" max="99999" value={form.package_weight} onChange={e => setForm({ ...form, package_weight: numClamp(e.target.value) })}
-                  placeholder="np. 1000" style={{ width: '100%', boxSizing: 'border-box' }} />
-              </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <div style={{ fontSize: 13, color: '#e2e8f0', fontWeight: 600 }}>Sprawdź czy dane są poprawne:</div>
               <div>
-                <div style={fl}>{t('unit_lbl')}</div>
-                <select value={form.unit} style={{ width: 76 }} onChange={e => {
-                  const u = e.target.value;
-                  if (u === 'kg') {
-                    const w = parseFloat(form.package_weight) || 1;
-                    setForm(f => ({ ...f, unit: 'g', package_weight: String(Math.min(99999, w * 1000)) }));
-                  } else if (u === 'l') {
-                    const w = parseFloat(form.package_weight) || 1;
-                    setForm(f => ({ ...f, unit: 'ml', package_weight: String(Math.min(99999, w * 1000)) }));
-                  } else {
-                    setForm(f => ({ ...f, unit: u }));
-                  }
-                }}>
-                  <option value="g">g</option>
-                  <option value="kg">kg → g</option>
-                  <option value="ml">ml</option>
-                  <option value="l">l → ml</option>
-                  <option value="szt">szt</option>
-                </select>
+                <div style={fl}>Nazwa produktu</div>
+                <input value={form.name} maxLength={50} onChange={e => setForm({ ...form, name: e.target.value.slice(0, 50) })}
+                  style={{ width: '100%', boxSizing: 'border-box' }} />
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 8, alignItems: 'end' }}>
+                <div>
+                  <div style={fl}>Cena / kg (zł)</div>
+                  <input type="number" className="no-spin" step="0.01" min="0" max="9999" value={form.package_price}
+                    onChange={e => setForm({ ...form, package_price: numClamp(e.target.value, 9999) })}
+                    placeholder="np. 3.49" style={{ width: '100%', boxSizing: 'border-box' }} />
+                </div>
+                <div style={{ display: 'flex', borderRadius: 7, overflow: 'hidden', border: '1px solid #374151' }}>
+                  <button type="button" onClick={() => setForm(f => ({ ...f, sold_by_weight: false }))}
+                    style={{ padding: '9px 10px', border: 'none', borderRight: '1px solid #374151', cursor: 'pointer', fontSize: 11, fontWeight: 600, transition: 'all 0.15s', whiteSpace: 'nowrap',
+                      background: !form.sold_by_weight ? '#1e3a3a' : 'transparent', color: !form.sold_by_weight ? '#2dd4bf' : '#6b7280' }}>
+                    W opak.
+                  </button>
+                  <button type="button" onClick={() => setForm(f => ({ ...f, sold_by_weight: true, unit: 'g', package_weight: '' }))}
+                    style={{ padding: '9px 10px', border: 'none', cursor: 'pointer', fontSize: 11, fontWeight: 600, transition: 'all 0.15s', whiteSpace: 'nowrap',
+                      background: !!form.sold_by_weight ? '#1e3a3a' : 'transparent', color: !!form.sold_by_weight ? '#2dd4bf' : '#6b7280' }}>
+                    Na wagę
+                  </button>
+                </div>
+              </div>
+              {!form.sold_by_weight && (
+                <div>
+                  <div style={fl}>Pojemność opakowania</div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 8, alignItems: 'stretch' }}>
+                    <input type="number" className="no-spin" min="0" max="99999" value={form.package_weight}
+                      onChange={e => setForm({ ...form, package_weight: numClamp(e.target.value) })}
+                      placeholder="np. 1000" style={{ width: '100%', boxSizing: 'border-box' }} />
+                    <div style={{ display: 'flex', gap: 4, alignItems: 'stretch' }}>
+                      {['g', 'kg', 'ml', 'l', 'szt'].map(u => (
+                        <button key={u} type="button" onClick={() => setForm(f => ({ ...f, unit: u }))}
+                          style={{ padding: '0 7px', border: '1px solid #374151', borderRadius: 6, fontSize: 11, fontWeight: 700, cursor: 'pointer', flexShrink: 0,
+                            background: form.unit === u ? '#1e3a3a' : '#111827',
+                            color: form.unit === u ? '#2dd4bf' : '#6b7280' }}>
+                          {u}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+              <div style={{ display: 'flex', gap: 8, marginTop: 'auto' }}>
+                <button className="btn btn-primary" onClick={handleSubmit} style={{ flex: 1 }}>Zapisz</button>
+                <button className="btn" onClick={() => { setPasteText(''); setForm(EMPTY_FORM); }}
+                  style={{ background: '#374151', color: '#9ca3af' }}>Anuluj</button>
               </div>
             </div>
-          )}
+        </div>
 
-          <div>
-            <div style={fl}>Cena za opakowanie / kg (zł)</div>
-            <input type="number" className="no-spin" step="0.01" min="0" max="99999" value={form.package_price} onChange={e => setForm({ ...form, package_price: numClamp(e.target.value) })}
-              placeholder={t('pkg_price_ph')} style={{ width: '100%', boxSizing: 'border-box' }} />
-          </div>
-
-          <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: '12px 14px', fontSize: 12, color: '#9ca3af', lineHeight: 1.6 }}>
-            <div style={{ fontSize: 14, fontWeight: 700, color: '#0d9488', marginBottom: 4 }}>{t('macro_auto_title')}</div>
-            Po dodaniu produktu system pobierze wartości Kcal, Białka, Tłuszczów i Węglowodanów automatycznie z bazy{' '}
-            <a href="https://world.openfoodfacts.org/" target="_blank" rel="noreferrer"
-              style={{ color: '#2dd4bf', textDecoration: 'underline', cursor: 'pointer' }}>Open Food Facts</a>.
-            <div style={{ marginTop: 6, color: '#6b7280' }}>
-              Chcesz je zmienić? Kliknij{' '}
-              <span style={{ display:'inline-flex', alignItems:'center', background:'#0d9488', color:'white', borderRadius:4, padding:'2px 8px', fontSize:11, fontWeight:700, verticalAlign:'middle', margin:'0 2px' }}>Edytuj</span>
-              {' '}przy produkcie na liście poniżej.
-            </div>
-          </div>
-
-          <button className="btn btn-primary" onClick={handleSubmit}>
-            {t('add_product_btn')}
-          </button>
-
-          {/* Drop zone + import — pod przyciskiem w lewej karcie */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          {/* Drop zone + import */}
           <div style={{ borderTop: '1px solid #374151', marginTop: 16, paddingTop: 16 }}>
             <h2 style={{ margin: '0 0 10px' }}>{t('import_title')}</h2>
             {!importItems ? (
@@ -431,7 +544,7 @@ export default function Products() {
                       </button>
                     )}
                     {isTextFile(selectedFile) && (
-                      <button className="btn btn-primary" onClick={handleParseFree} disabled={importing} style={{ background: '#0d9488' }}>
+                      <button className="btn btn-primary" onClick={handleParseFree} disabled={importing}>
                         {importing ? t('processing') : t('apply_file_btn')}
                       </button>
                     )}
@@ -443,11 +556,21 @@ export default function Products() {
               </>
             ) : null}
           </div>
+
+          <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: '12px 14px', fontSize: 12, color: '#9ca3af', lineHeight: 1.6 }}>
+            <div style={{ fontSize: 14, fontWeight: 700, color: '#0d9488', marginBottom: 4 }}>{t('macro_auto_title')}</div>
+            Po dodaniu produktu wartości Kcal, Białka, Tłuszczów i Węglowodanów automatycznie zostaną pobrane z bazy{' '}
+            <a href="https://world.openfoodfacts.org/" target="_blank" rel="noreferrer"
+              style={{ color: '#2dd4bf', textDecoration: 'underline', cursor: 'pointer' }}>Open Food Facts</a>.
+            <div style={{ marginTop: 6, color: '#6b7280' }}>
+              Chcesz je zmienić? Kliknij w produkt na liście poniżej, żeby otworzyć edycję.
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Import section — how-to only */}
-      <div className="card" style={{ margin: 0 }}>
+      {!importItems && <div style={{ padding: '20px 24px' }}>
 
         <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: '12px 16px', marginBottom: 16, fontSize: 13, lineHeight: 1.7 }}>
           <div style={{ fontSize: 14, fontWeight: 700, color: '#0d9488', marginBottom: 8 }}>{t('import_how_to')}</div>
@@ -459,13 +582,13 @@ export default function Products() {
               <ol style={{ margin: '0 0 8px', paddingLeft: 18, color: '#9ca3af', fontSize: 12, lineHeight: 1.8 }}>
                 <li>{t('opt1_s1')}</li>
                 <li>Kliknij{' '}
-                  <span style={{ display:'inline-flex', alignItems:'center', background:'#0d9488', color:'white', borderRadius:4, padding:'2px 7px', fontSize:11, fontWeight:700, verticalAlign:'middle', margin:'0 2px' }}>Zastosuj przez AI</span>
+                  <span style={{ display:'inline-flex', alignItems:'center', background:'#1e3a3a', color:'#2dd4bf', border:'1px solid #374151', borderRadius:4, padding:'2px 7px', fontSize:11, fontWeight:700, verticalAlign:'middle', margin:'0 2px' }}>Zastosuj przez AI</span>
                   {' '}-{' '}
                   <a href="https://gemini.google.com/app" target="_blank" rel="noreferrer" style={{ color:'#2dd4bf', textDecoration:'underline' }}>Gemini</a>
                   {' '}wyciągnie produkty i ceny
                 </li>
                 <li>Sprawdź dopasowania i kliknij{' '}
-                  <span style={{ display:'inline-flex', alignItems:'center', background:'#0d9488', color:'white', borderRadius:4, padding:'2px 7px', fontSize:11, fontWeight:700, verticalAlign:'middle', margin:'0 2px' }}>Zastosuj zmiany</span>
+                  <span style={{ display:'inline-flex', alignItems:'center', background:'#1e3a3a', color:'#2dd4bf', border:'1px solid #374151', borderRadius:4, padding:'2px 7px', fontSize:11, fontWeight:700, verticalAlign:'middle', margin:'0 2px' }}>Zastosuj zmiany</span>
                 </li>
               </ol>
               <div style={{ fontSize: 11, color: '#ca8a04', marginBottom: 6 }}>
@@ -489,7 +612,7 @@ export default function Products() {
                   {' '}<span style={{ color: '#6b7280', fontSize: 11 }}>(ręcznie wprowadź gramaturę i jednostkę)</span>
                 </li>
                 <li>Wgraj plik i kliknij{' '}
-                  <span style={{ display:'inline-flex', alignItems:'center', background:'#0d9488', color:'white', borderRadius:4, padding:'2px 7px', fontSize:11, fontWeight:700, verticalAlign:'middle', margin:'0 2px' }}>Zastosuj plik</span>
+                  <span style={{ display:'inline-flex', alignItems:'center', background:'#1e3a3a', color:'#2dd4bf', border:'1px solid #374151', borderRadius:4, padding:'2px 7px', fontSize:11, fontWeight:700, verticalAlign:'middle', margin:'0 2px' }}>Zastosuj plik</span>
                 </li>
               </ol>
               <div style={{ fontSize: 11, color: '#2dd4bf' }}>{t('no_lim')}</div>
@@ -541,127 +664,148 @@ Czekam na moją listę.`}</pre>
             <div style={{ marginTop: 4, color: '#9ca3af', fontSize: 12 }}><strong style={{ color: '#e2e8f0' }}>6.</strong> Zapisany dokument następnie przeciągnij w okno <strong>Kliknij lub przeciągnij plik</strong></div>
           </div>
         </div>
+      </div>}
 
-        {importItems && (
-          <div>
-            <p style={{ fontSize: 13, color: '#9ca3af', marginBottom: 8 }}>
-              Sprawdź dopasowania i uzupełnij dane. Zaznacz <strong>Na wagę</strong> dla warzyw, owoców i mięsa - podaj wtedy cenę za kg.
+      {importItems && (
+          <div style={{ padding: '20px 24px' }}>
+            <p style={{ fontSize: 13, color: '#9ca3af', marginBottom: 12 }}>
+              Sprawdź dopasowania i uzupełnij dane. Zaznacz{' '}
+              <strong style={{ color: '#e2e8f0' }}>Na wagę</strong> dla warzyw, owoców i mięsa, podaj wtedy cenę za kg.
             </p>
-            <div style={{ overflowX: 'auto', marginBottom: 16 }}>
-            <table className="compact-table" style={{ minWidth: 480, fontSize: 12 }}>
-              <thead>
-                <tr>
-                  <th style={{ width: 20 }}></th>
-                  <th style={{ width: 80 }}>Z pliku</th>
-                  <th style={{ width: 140 }}>Dopasuj / utwórz</th>
-                  <th style={{ width: 105 }}>Rodzaj</th>
-                  <th style={{ width: 58 }}>Gram.</th>
-                  <th style={{ width: 48 }}>Jedn.</th>
-                  <th style={{ width: 62 }}>Cena</th>
-                </tr>
-              </thead>
-              <tbody>
-                {importItems.map((item, i) => {
-                  const upd = u => { const a = [...importItems]; a[i] = { ...a[i], ...u }; setImportItems(a); };
-                  const isNew = !item.matched_product;
-                  const sbw = !!item.sold_by_weight;
-                  return (
-                    <tr key={i} style={{ opacity: item.selected ? 1 : 0.45, verticalAlign: 'top' }}>
-                      <td style={{ paddingTop: 6 }}>
-                        <input type="checkbox" checked={item.selected}
-                          onChange={e => upd({ selected: e.target.checked })} />
-                      </td>
-                      <td style={{ fontSize: 12 }}>{item.receipt_name}</td>
-                      <td>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
+              {importItems.map((item, i) => {
+                const upd = u => { const a = [...importItems]; a[i] = { ...a[i], ...u }; setImportItems(a); };
+                const isNew = !item.matched_product;
+                const sbw = !!item.sold_by_weight;
+                const inputSt = { padding: '5px 8px', fontSize: 12, background: '#111827', border: '1px solid #374151', color: '#e2e8f0', borderRadius: 6 };
+                return (
+                  <div key={i} style={{
+                    background: '#1f2937', border: '1px solid #374151', borderRadius: 10,
+                    padding: '10px 14px', opacity: item.selected ? 1 : 0.5,
+                    transition: 'opacity 0.15s',
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      {/* Toggle ✓ */}
+                      <button type="button" onClick={() => upd({ selected: !item.selected })}
+                        style={{ flexShrink: 0, width: 28, height: 28, borderRadius: 6, border: '1px solid #374151', cursor: 'pointer', fontSize: 14, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.15s',
+                          background: item.selected ? '#1e3a3a' : 'transparent',
+                          color: item.selected ? '#2dd4bf' : '#4b5563' }}>
+                        ✓
+                      </button>
+                      {/* Nazwa z pliku */}
+                      <span style={{ fontSize: 13, color: '#e2e8f0', fontWeight: 600, flexShrink: 0 }}>{item.receipt_name}</span>
+                      <span style={{ color: '#4b5563', flexShrink: 0 }}>→</span>
+                      {/* Dopasowanie */}
+                      <div style={{ flex: 1, minWidth: 80 }}>
                         <select
                           value={String(item.matched_product?.id || '')}
                           onChange={e => {
                             const p = productList.find(p => String(p.id) === e.target.value) || null;
                             upd({ matched_product: p, selected: item.selected || !!p });
                           }}
-                          style={{ fontSize: 12, padding: '3px 6px', maxWidth: 130 }}
+                          style={{ ...inputSt, width: '100%' }}
                         >
-                          <option value="">➕ utwórz nowy</option>
+                          <option value="">➕ Utwórz nowy produkt</option>
                           {productList.map(p => <option key={p.id} value={String(p.id)}>{p.name}</option>)}
                         </select>
-                        {isNew && <div style={{ fontSize: 10, color: '#0d9488', marginTop: 2 }}>zostanie dodany do listy</div>}
-                      </td>
-                      {/* Rodzaj: w opakowaniu / na wagę */}
-                      <td>
-                        <div style={{ display: 'flex', gap: 0, borderRadius: 6, overflow: 'hidden', border: '1px solid #374151', minWidth: 100 }}>
-                          <button type="button"
-                            onClick={() => upd({ sold_by_weight: false })}
-                            style={{ flex: 1, padding: '5px 8px', border: 'none', borderRight: '1px solid #d0d4e8', cursor: 'pointer', fontSize: 11, fontWeight: 600, whiteSpace: 'nowrap', transition: 'all 0.15s',
-                              background: !sbw ? '#0d9488' : '#2d3748',
-                              color: !sbw ? '#1f2937' : '#666' }}>
-                            W opak.
+                      </div>
+                      {/* W opak. / Na wagę */}
+                      <div style={{ display: 'flex', borderRadius: 6, overflow: 'hidden', border: '1px solid #374151', flexShrink: 0 }}>
+                        {[['W opak.', false], ['Na wagę', true]].map(([label, val]) => (
+                          <button key={label} type="button" onClick={() => upd({ sold_by_weight: val })}
+                            style={{ padding: '4px 10px', border: 'none', borderRight: !val ? '1px solid #374151' : 'none', cursor: 'pointer', fontSize: 11, fontWeight: 600, whiteSpace: 'nowrap', transition: 'all 0.15s',
+                              background: sbw === val ? '#1e3a3a' : 'transparent',
+                              color: sbw === val ? '#2dd4bf' : '#6b7280' }}>
+                            {label}
                           </button>
-                          <button type="button"
-                            onClick={() => upd({ sold_by_weight: true })}
-                            style={{ flex: 1, padding: '5px 8px', border: 'none', cursor: 'pointer', fontSize: 11, fontWeight: 600, whiteSpace: 'nowrap', transition: 'all 0.15s',
-                              background: sbw ? '#0d9488' : '#2d3748',
-                              color: sbw ? '#1f2937' : '#666' }}>
-                            Na wagę
-                          </button>
+                        ))}
+                      </div>
+                      {/* Pojemność + jednostka (tylko W opak.) */}
+                      {!sbw && <>
+                        <input type="number" step="1" min="0" max="99999" value={item.weight}
+                          onChange={e => upd({ weight: Math.min(99999, parseFloat(e.target.value) || 0) })}
+                          className="no-spin" style={{ ...inputSt, width: 44, flex: '0 0 44px', boxSizing: 'border-box' }} placeholder="500" />
+                        <div style={{ display: 'flex', borderRadius: 6, overflow: 'hidden', border: '1px solid #374151', flexShrink: 0 }}>
+                          {['g', 'ml', 'szt'].map((u, idx) => (
+                            <button key={u} type="button" onClick={() => upd({ unit: u })}
+                              style={{ padding: '4px 8px', border: 'none', borderRight: idx < 2 ? '1px solid #374151' : 'none', cursor: 'pointer', fontSize: 11, fontWeight: 600, transition: 'all 0.15s',
+                                background: item.unit === u ? '#1e3a3a' : 'transparent',
+                                color: item.unit === u ? '#2dd4bf' : '#6b7280' }}>
+                              {u}
+                            </button>
+                          ))}
                         </div>
-                      </td>
-                      {/* Gramatura */}
-                      <td>
-                        {sbw
-                          ? <span style={{ fontSize: 11, color: '#6b7280' }}>1000 g (1 kg)</span>
-                          : <input type="number" step="1" min="0" max="99999" value={item.weight}
-                              onChange={e => upd({ weight: Math.min(99999, parseFloat(e.target.value) || 0) })}
-                              className="no-spin" style={{ ...s, width: 50 }} placeholder="500" />
-                        }
-                      </td>
-                      {/* Jednostka */}
-                      <td>
-                        {sbw
-                          ? <span style={{ fontSize: 11, color: '#6b7280' }}>g</span>
-                          : <UnitSelect value={item.unit} onChange={e => upd({ unit: e.target.value })} style={{ ...s, width: 55 }} />
-                        }
-                      </td>
+                      </>}
                       {/* Cena */}
-                      <td>
-                        <input type="number" step="0.01" min="0" max="99999" value={item.price}
-                          onChange={e => upd({ price: Math.min(99999, parseFloat(e.target.value) || 0) })}
-                          className="no-spin" style={{ ...s, width: 52 }} />
-                        <div style={{ fontSize: 10, color: sbw ? '#0d9488' : '#bbb', marginTop: 2 }}>
-                          {sbw ? 'zł za kg' : 'zł/opak.'}
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-            </div>{/* koniec overflow-x: auto */}
+                      <input type="number" step="0.01" min="0" max="99999" value={item.price}
+                        onChange={e => upd({ price: Math.min(99999, parseFloat(e.target.value) || 0) })}
+                        className="no-spin" style={{ ...inputSt, width: 50, flex: '0 0 50px', boxSizing: 'border-box' }} />
+                      <span style={{ fontSize: 11, color: sbw ? '#2dd4bf' : '#6b7280', whiteSpace: 'nowrap', flexShrink: 0 }}>
+                        {sbw ? 'zł / kg' : 'zł / opak.'}
+                      </span>
+                    </div>
+                    {isNew && <div style={{ fontSize: 10, color: '#6b7280', marginTop: 5 }}>Brak przypisania — przypisz do podobnego produktu lub zostaw <span style={{ color: '#2dd4bf' }}>Utwórz nowy produkt</span>, a zostanie on dodany do listy Produkty.</div>}
+                  </div>
+                );
+              })}
+            </div>
             <div style={{ display: 'flex', gap: 10 }}>
               <button className="btn btn-primary" onClick={handleApplyImport}>{t('apply_changes')}</button>
               <button className="btn" style={{ background: '#374151', color: '#9ca3af' }}
-                onClick={() => { setImportItems(null);  }}>{t('cancel')}</button>
+                onClick={() => { setImportItems(null); }}>{t('cancel')}</button>
             </div>
           </div>
         )}
       </div>
-      </div>{/* koniec gridu 50/50 */}
-
 
       {/* Product list — collapsible */}
       <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
-        <button
-          onClick={() => setListOpen(o => !o)}
-          style={{ width: '100%', padding: '14px 20px', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 14, fontWeight: 600, color: '#0d9488' }}
-        >
-          <span>
+        <div style={{ display: 'flex', alignItems: 'center', padding: '0 12px 0 20px', gap: 6 }}>
+          {/* Tytuł — klik zwija/rozwija */}
+          <button onClick={() => setListOpen(o => !o)}
+            style={{ flex: 1, padding: '14px 0', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', fontSize: 14, fontWeight: 600, color: '#0d9488' }}>
             {t('product_list_title')}
-            <span style={{ fontSize: 12, fontWeight: 400, color: '#6b7280', marginLeft: 8 }}>- tu możesz edytować swoje produkty</span>
-          </span>
-          <span style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: 12, color: '#0d9488', fontWeight: 400 }}>
-            {listOpen ? 'Zwiń' : 'Rozwiń'}
-            <span style={{ fontSize: 16, transition: 'transform 0.2s', transform: listOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>▾</span>
-          </span>
-        </button>
+          </button>
+
+          {/* Zaznacz / Odznacz */}
+          <button
+            onClick={() => selectionMode ? exitSelection() : (setSelectionMode(true), setEditId(null))}
+            style={{ padding: '5px 11px', background: selectionMode ? '#1e3a3a' : 'transparent', border: `1px solid ${selectionMode ? '#0d9488' : '#374151'}`, borderRadius: 6, cursor: 'pointer', fontSize: 12, fontWeight: 600, color: selectionMode ? '#2dd4bf' : '#6b7280', transition: 'all 0.15s', whiteSpace: 'nowrap' }}
+          >
+            {selectionMode ? 'Odznacz' : 'Zaznacz'}
+          </button>
+
+          {/* Usuń wszystkie / Usuń wybrane */}
+          <button
+            onClick={() => {
+              if (selectionMode) {
+                if (selectedIds.size > 0) handleDeleteSelected();
+              } else {
+                showConfirm({
+                  title: 'Usuń wszystkie produkty',
+                  message: `Czy na pewno chcesz usunąć wszystkie ${productList.length} produktów? Tej operacji nie można cofnąć.`,
+                  confirmLabel: 'Usuń wszystkie',
+                  onConfirm: async () => {
+                    try { await api.deleteAll(); showSuccess('Wszystkie produkty usunięte'); loadProducts(); }
+                    catch { showError('Błąd podczas usuwania produktów'); }
+                  },
+                });
+              }
+            }}
+            disabled={selectionMode && selectedIds.size === 0}
+            style={{ padding: '5px 11px', background: 'transparent', border: '1px solid #374151', borderRadius: 6, cursor: selectionMode && selectedIds.size === 0 ? 'default' : 'pointer', fontSize: 12, color: selectionMode && selectedIds.size === 0 ? '#374151' : '#6b7280', transition: 'all 0.15s', whiteSpace: 'nowrap', opacity: selectionMode && selectedIds.size === 0 ? 0.4 : 1 }}
+            onMouseEnter={e => { if (!(selectionMode && selectedIds.size === 0)) { e.currentTarget.style.borderColor = '#ef4444'; e.currentTarget.style.color = '#ef4444'; } }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = '#374151'; e.currentTarget.style.color = selectionMode && selectedIds.size === 0 ? '#374151' : '#6b7280'; }}
+          >
+            {selectionMode && selectedIds.size > 0 ? `Usuń wybrane (${selectedIds.size})` : 'Usuń wszystkie'}
+          </button>
+
+          {/* Chevron */}
+          <button onClick={() => setListOpen(o => !o)}
+            style={{ padding: '5px 4px', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+            <Icon icon="heroicons:chevron-down" style={{ width: 20, height: 20, transition: 'transform 0.25s', transform: listOpen ? 'rotate(180deg)' : 'rotate(0deg)', color: '#0d9488' }} />
+          </button>
+        </div>
         {listOpen && <div style={{ padding: '0 20px 20px', borderTop: '1px solid #374151' }}>
         <div style={{ margin: '12px 0 10px' }}>
           <input
@@ -674,120 +818,126 @@ Czekam na moją listę.`}</pre>
             onBlur={e => e.target.style.borderColor = '#374151'}
           />
         </div>
-        <table>
-          {!editId && (
-            <thead>
-              <tr><th>{t('col_name')}</th><th>{t('col_kcal')}</th><th>{t('col_macro')}</th><th>Pojemność Opakowania</th><th>Cena (opak/kg)</th><th></th></tr>
-            </thead>
-          )}
+        <table style={{ borderCollapse: 'separate', borderSpacing: '0 3px' }}>
+          <thead>
+            <tr><th>{t('col_name')}</th><th>{t('col_kcal')}</th><th>{t('col_macro')}</th><th>Pojemność Opakowania</th><th>Cena (opak/kg)</th><th></th></tr>
+          </thead>
           <tbody>
-            {productList.filter(p => !search.trim() || p.name.toLowerCase().includes(search.trim().toLowerCase())).map(p => editId === p.id ? (
-              <tr key={p.id}>
-                <td colSpan={5} style={{ padding: '2px 0 8px', paddingRight: 0 }}>
-                  <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: '12px 16px', display: 'flex', gap: 12, alignItems: 'flex-start', flexWrap: 'wrap' }}>
-
-                    {/* Nazwa + Pobierz makra */}
-                    <div style={{ width: 160, flexShrink: 0, display: 'flex', flexDirection: 'column', gap: 4 }}>
-                      <div>
-                        <div style={fl}>Nazwa (max 50)</div>
+            {productList.filter(p => !search.trim() || p.name.toLowerCase().includes(search.trim().toLowerCase())).map(p => {
+              const isEditing = editId === p.id;
+              return (
+                <React.Fragment key={p.id}>
+                  <tr
+                    className={`product-row${isEditing ? ' product-row-selected' : ''}${selectionMode && selectedIds.has(p.id) ? ' product-row-checked' : ''}`}
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      if (selectionMode) { toggleSelect(p.id); return; }
+                      isEditing ? setEditId(null) : startEdit(p);
+                    }}
+                  >
+                    <td style={{ fontSize: 13 }}>
+                      {selectionMode && (
+                        <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 16, height: 16, borderRadius: 4, border: `1.5px solid ${selectedIds.has(p.id) ? '#6366f1' : '#374151'}`, background: selectedIds.has(p.id) ? '#6366f1' : 'transparent', marginRight: 8, flexShrink: 0, verticalAlign: 'middle', transition: 'all 0.12s' }}>
+                          {selectedIds.has(p.id) && <Icon icon="heroicons:check" style={{ width: 10, height: 10, color: '#fff' }} />}
+                        </span>
+                      )}
+                      {p.name}
+                    </td>
+                    <td style={{ fontSize: 13, color: p.kcal ? '#9ca3af' : '#4b5563' }}>{p.kcal != null ? `${p.kcal} kcal` : '-'}</td>
+                    <td><MacroDisplay p={p} /></td>
+                    <td style={{ fontSize: 13, color: '#9ca3af' }}>
+                      {p.sold_by_weight ? 'Na wagę' : p.package_weight ? `${p.package_weight} ${p.unit || 'g'}` : '-'}
+                    </td>
+                    <td style={{ fontSize: 13, color: p.price > 0 ? '#9ca3af' : '#4b5563' }}>{displayPrice(p)}</td>
+                    <td style={{ display: 'flex', gap: 6, justifyContent: 'flex-end' }} onClick={e => e.stopPropagation()}>
+                      <button className="btn btn-danger" style={{ padding: '5px 12px', fontSize: 13 }} onClick={() => handleDelete(p.id, p.name)}>{t('del_btn')}</button>
+                    </td>
+                  </tr>
+                  {isEditing && (
+                    <tr className="edit-body-row">
+                      {/* Nazwa */}
+                      <td style={{ verticalAlign: 'top', padding: '8px 6px 8px 12px', borderLeft: '3px solid #0d9488' }}>
+                        <div style={fl}>Nazwa</div>
                         <input value={editForm.name} maxLength={50}
                           onChange={e => setEditForm({ ...editForm, name: e.target.value.slice(0, 50) })}
                           style={{ width: '100%', boxSizing: 'border-box', ...s }} />
-                      </div>
-                      <button onClick={handleAutoFill} disabled={lookingUp === editId}
-                        style={{ padding: '4px 8px', fontSize: 11, background: '#0d9488', color: '#1f2937', border: 'none', borderRadius: 6, cursor: 'pointer', whiteSpace: 'nowrap', alignSelf: 'flex-start' }}>
-                        {lookingUp === editId ? '⏳...' : 'Pobierz makra dla produktu'}
-                      </button>
-                    </div>
-
-                    {/* Kcal + Białko */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                      <div>
+                      </td>
+                      {/* Kcal */}
+                      <td style={{ verticalAlign: 'top', padding: '8px 6px' }}>
                         <div style={fl}>Kcal/100g</div>
                         <input type="number" className="no-spin" step="0.1" min="0" max="9999" value={editForm.kcal}
                           onChange={e => setEditForm({ ...editForm, kcal: numClamp(e.target.value, 9999) })}
-                          style={{ ...s, width: 72 }} />
-                      </div>
-                      <div>
-                        <div style={fl}>Białko/100g</div>
-                        <input type="number" className="no-spin" step="0.1" min="0" max="100" value={editForm.protein}
-                          onChange={e => setEditForm({ ...editForm, protein: numClamp(e.target.value, 100) })}
-                          style={{ ...s, width: 72 }} />
-                      </div>
-                    </div>
-
-                    {/* Tłuszcze + Węgle */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                      <div>
-                        <div style={fl}>Tłuszcze/100g</div>
-                        <input type="number" className="no-spin" step="0.1" min="0" max="100" value={editForm.fat}
-                          onChange={e => setEditForm({ ...editForm, fat: numClamp(e.target.value, 100) })}
-                          style={{ ...s, width: 72 }} />
-                      </div>
-                      <div>
-                        <div style={fl}>Węgle/100g</div>
-                        <input type="number" className="no-spin" step="0.1" min="0" max="100" value={editForm.carbs}
-                          onChange={e => setEditForm({ ...editForm, carbs: numClamp(e.target.value, 100) })}
-                          style={{ ...s, width: 72 }} />
-                      </div>
-                    </div>
-
-                    {/* W opakowaniu / Na wagę + pojemność */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                      <div style={{ display: 'flex', borderRadius: 6, border: '1px solid #374151', overflow: 'hidden', width: 'fit-content' }}>
-                        <button type="button" onClick={() => setEditForm(f => ({ ...f, sold_by_weight: false }))}
-                          style={{ padding: '5px 10px', border: 'none', borderRight: '1px solid #374151', cursor: 'pointer', fontSize: 11, fontWeight: 600, whiteSpace: 'nowrap',
-                            background: !editForm.sold_by_weight ? '#0d9488' : '#2d3748', color: !editForm.sold_by_weight ? '#1f2937' : '#9ca3af' }}>
-                          W opakowaniu
-                        </button>
-                        <button type="button" onClick={() => setEditForm(f => ({ ...f, sold_by_weight: true, unit: 'g', package_weight: 1000 }))}
-                          style={{ padding: '5px 10px', border: 'none', cursor: 'pointer', fontSize: 11, fontWeight: 600, whiteSpace: 'nowrap',
-                            background: !!editForm.sold_by_weight ? '#0d9488' : '#2d3748', color: !!editForm.sold_by_weight ? '#1f2937' : '#9ca3af' }}>
-                          Na wagę
-                        </button>
-                      </div>
-                      {!editForm.sold_by_weight && (
-                        <div style={{ display: 'flex', gap: 4 }}>
-                          <input type="number" className="no-spin" min="0" max="99999" value={editForm.package_weight}
-                            onChange={e => setEditForm({ ...editForm, package_weight: numClamp(e.target.value) })}
-                            style={{ ...s, width: 64 }} placeholder="500" />
-                          <UnitSelect value={editForm.unit} onChange={e => setEditForm({ ...editForm, unit: e.target.value })} style={{ ...s, width: 40, padding: '3px 2px' }} />
+                          style={{ ...s, width: '100%', boxSizing: 'border-box' }} />
+                      </td>
+                      {/* Makro B/T/W */}
+                      <td style={{ verticalAlign: 'top', padding: '8px 6px' }}>
+                        <div style={{ display: 'flex', gap: 4, marginBottom: 4 }}>
+                          <div>
+                            <div style={fl}>B</div>
+                            <input type="number" className="no-spin" step="0.1" min="0" max="100" value={editForm.protein}
+                              onChange={e => setEditForm({ ...editForm, protein: numClamp(e.target.value, 100) })}
+                              style={{ ...s, width: 52 }} />
+                          </div>
+                          <div>
+                            <div style={fl}>T</div>
+                            <input type="number" className="no-spin" step="0.1" min="0" max="100" value={editForm.fat}
+                              onChange={e => setEditForm({ ...editForm, fat: numClamp(e.target.value, 100) })}
+                              style={{ ...s, width: 52 }} />
+                          </div>
+                          <div>
+                            <div style={fl}>W</div>
+                            <input type="number" className="no-spin" step="0.1" min="0" max="100" value={editForm.carbs}
+                              onChange={e => setEditForm({ ...editForm, carbs: numClamp(e.target.value, 100) })}
+                              style={{ ...s, width: 52 }} />
+                          </div>
                         </div>
-                      )}
-                    </div>
-
-                    {/* Cena */}
-                    <div>
-                      <div style={fl}>{editForm.sold_by_weight ? 'Cena/kg (zł)' : 'Cena/opak (zł)'}</div>
-                      <input type="number" className="no-spin" step="0.01" min="0" max="9999" value={editForm.package_price}
-                        onChange={e => setEditForm({ ...editForm, package_price: numClamp(e.target.value, 9999) })}
-                        style={{ ...s, width: 80 }} />
-                    </div>
-
-                  </div>
-                </td>
-                <td style={{ verticalAlign: 'middle', paddingLeft: 8, paddingBottom: 8 }}>
-                  <div style={{ display: 'flex', gap: 6 }}>
-                    <button className="btn btn-primary" style={{ padding: '5px 12px', fontSize: 13 }} onClick={handleSaveEdit}>{t('save_btn')}</button>
-                    <button className="btn" style={{ padding: '5px 12px', fontSize: 13, background: '#374151', color: '#9ca3af' }} onClick={() => setEditId(null)}>{t('cancel')}</button>
-                  </div>
-                </td>
-              </tr>
-            ) : (
-              <tr key={p.id}>
-                <td style={{ fontSize: 13 }}>{p.name}</td>
-                <td style={{ fontSize: 13, color: p.kcal ? '#9ca3af' : '#4b5563' }}>{p.kcal != null ? `${p.kcal} kcal` : '-'}</td>
-                <td><MacroDisplay p={p} /></td>
-                <td style={{ fontSize: 13, color: '#9ca3af' }}>
-                  {p.sold_by_weight ? 'Na wagę' : p.package_weight ? `${p.package_weight} ${p.unit || 'g'}` : '-'}
-                </td>
-                <td style={{ fontSize: 13, color: p.price > 0 ? '#9ca3af' : '#4b5563' }}>{displayPrice(p)}</td>
-                <td style={{ display: 'flex', gap: 6 }}>
-                  <button className="btn btn-primary" style={{ padding: '5px 12px', fontSize: 13 }} onClick={() => startEdit(p)}>{t('edit_btn')}</button>
-                  <button className="btn btn-danger" style={{ padding: '5px 12px', fontSize: 13 }} onClick={() => handleDelete(p.id, p.name)}>{t('del_btn')}</button>
-                </td>
-              </tr>
-            ))}
+                        <button onClick={handleAutoFill} disabled={lookingUp === editId}
+                          style={{ padding: '3px 7px', fontSize: 10, background: '#0d9488', color: '#1f2937', border: 'none', borderRadius: 5, cursor: 'pointer', whiteSpace: 'nowrap' }}>
+                          {lookingUp === editId ? '⏳...' : 'Pobierz makra'}
+                        </button>
+                      </td>
+                      {/* Pojemność / typ */}
+                      <td style={{ verticalAlign: 'top', padding: '8px 6px' }}>
+                        <div style={{ display: 'flex', borderRadius: 5, border: '1px solid #374151', overflow: 'hidden', marginBottom: 4, width: 'fit-content' }}>
+                          <button type="button" onClick={() => setEditForm(f => ({ ...f, sold_by_weight: false }))}
+                            style={{ padding: '4px 8px', border: 'none', borderRight: '1px solid #374151', cursor: 'pointer', fontSize: 10, fontWeight: 600,
+                              background: !editForm.sold_by_weight ? '#0d9488' : '#2d3748', color: !editForm.sold_by_weight ? '#1f2937' : '#9ca3af' }}>
+                            W op.
+                          </button>
+                          <button type="button" onClick={() => setEditForm(f => ({ ...f, sold_by_weight: true, unit: 'g', package_weight: 1000 }))}
+                            style={{ padding: '4px 8px', border: 'none', cursor: 'pointer', fontSize: 10, fontWeight: 600,
+                              background: !!editForm.sold_by_weight ? '#0d9488' : '#2d3748', color: !!editForm.sold_by_weight ? '#1f2937' : '#9ca3af' }}>
+                            Na wagę
+                          </button>
+                        </div>
+                        {!editForm.sold_by_weight && (
+                          <div style={{ display: 'flex', gap: 3 }}>
+                            <input type="number" className="no-spin" min="0" max="99999" value={editForm.package_weight}
+                              onChange={e => setEditForm({ ...editForm, package_weight: numClamp(e.target.value) })}
+                              style={{ ...s, width: 60 }} placeholder="500" />
+                            <UnitSelect value={editForm.unit} onChange={e => setEditForm({ ...editForm, unit: e.target.value })} style={{ ...s, width: 40, padding: '3px 2px' }} />
+                          </div>
+                        )}
+                      </td>
+                      {/* Cena */}
+                      <td style={{ verticalAlign: 'top', padding: '8px 6px' }}>
+                        <div style={fl}>{editForm.sold_by_weight ? 'Cena/kg' : 'Cena/op.'}</div>
+                        <input type="number" className="no-spin" step="0.01" min="0" max="9999" value={editForm.package_price}
+                          onChange={e => setEditForm({ ...editForm, package_price: numClamp(e.target.value, 9999) })}
+                          style={{ ...s, width: '100%', boxSizing: 'border-box' }} />
+                      </td>
+                      {/* Zapisz / Anuluj */}
+                      <td style={{ verticalAlign: 'middle', padding: '8px 6px', borderBottom: '1px solid #0d948860' }}>
+                        <div style={{ display: 'flex', gap: 6, flexDirection: 'column' }}>
+                          <button className="btn btn-primary" style={{ padding: '5px 10px', fontSize: 12 }} onClick={handleSaveEdit}>{t('save_btn')}</button>
+                          <button className="btn" style={{ padding: '5px 10px', fontSize: 12, background: '#374151', color: '#9ca3af' }} onClick={() => setEditId(null)}>{t('cancel')}</button>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </React.Fragment>
+              );
+            })}
             {productList.length === 0 && (
               <tr><td colSpan={6} style={{ textAlign: 'center', color: '#6b7280' }}>{t('no_products')}</td></tr>
             )}
