@@ -3,6 +3,7 @@ import Products from './components/Products';
 import Recipes from './components/Recipes';
 import Calendar from './components/Calendar';
 import Summary from './components/Summary';
+import Export from './components/Export';
 import MacroCalculator from './components/MacroCalculator';
 import Login from './components/Login';
 import Profile from './components/Profile';
@@ -11,7 +12,17 @@ import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { ToastProvider } from './contexts/ToastContext';
 import { MemberProvider } from './contexts/MemberContext';
+import { Icon } from '@iconify/react';
 import './App.css';
+
+const TAB_ICONS = {
+  macro:    'heroicons:calculator',
+  calendar: 'heroicons:calendar-days',
+  recipes:  'heroicons:book-open',
+  products: 'heroicons:shopping-cart',
+  summary:  'heroicons:banknotes',
+  export:   'heroicons:arrow-down-tray',
+};
 
 function AppInner() {
   const { user, loading, logout } = useAuth();
@@ -19,12 +30,15 @@ function AppInner() {
   const [activeTab, setActiveTab] = useState('calendar');
   const [showProfile, setShowProfile] = useState(false);
 
+  const goToTab = (tab) => { setActiveTab(tab); window.scrollTo({ top: 0 }); };
+
   const tabs = [
     { id: 'macro',    label: t('tab_macro') },
     { id: 'calendar', label: t('tab_calendar') },
     { id: 'recipes',  label: t('tab_recipes') },
     { id: 'products', label: t('tab_products') },
     { id: 'summary',  label: t('tab_summary') },
+    { id: 'export',   label: t('tab_export') },
   ];
 
   if (loading) {
@@ -39,52 +53,53 @@ function AppInner() {
 
   return (
     <div className="app">
-      <header className="app-header">
-        <h1>Meal Planner</h1>
-        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ color: 'rgba(255,255,255,0.55)', fontSize: 11 }}>Obecny profil:</span>
-          <MemberPicker />
-
-          <button
-            onClick={() => setShowProfile(true)}
-            style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.25)', color: '#1f2937', padding: '5px 13px', borderRadius: 6, cursor: 'pointer', fontSize: 12, fontWeight: 500, transition: 'background 0.15s' }}
-            onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.25)'}
-            onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.15)'}
-          >
-            {t('account')}
-          </button>
-
-          <button
-            onClick={logout}
-            style={{ background: 'transparent', border: '1px solid rgba(255,255,255,0.25)', color: 'rgba(255,255,255,0.85)', padding: '5px 13px', borderRadius: 6, cursor: 'pointer', fontSize: 12, fontWeight: 500, transition: 'all 0.15s' }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.12)'; e.currentTarget.style.color = '#1f2937'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'rgba(255,255,255,0.85)'; }}
-          >
-            {t('logout')}
-          </button>
+      {/* ── Lewa kolumna ── */}
+      <aside className="app-sidebar">
+        {/* Logo */}
+        <div className="sidebar-logo">
+          <Icon icon="heroicons:sparkles" className="sidebar-logo-icon" />
+          <span className="sidebar-logo-text">Meal Planner</span>
         </div>
-      </header>
 
-      <nav className="app-nav">
-        <div className="tabs">
+        {/* Profil */}
+        <div className="sidebar-profile">
+          <span className="sidebar-profile-label">Obecny profil</span>
+          <MemberPicker />
+        </div>
+
+        {/* Nawigacja */}
+        <nav className="sidebar-nav">
           {tabs.map(tab => (
             <button
               key={tab.id}
-              className={`tab ${activeTab === tab.id ? 'active' : ''}`}
-              onClick={() => setActiveTab(tab.id)}
+              className={`sidebar-tab ${activeTab === tab.id ? 'active' : ''}`}
+              onClick={() => goToTab(tab.id)}
             >
+              <Icon icon={TAB_ICONS[tab.id]} className="sidebar-tab-icon" />
               {tab.label}
             </button>
           ))}
-        </div>
-      </nav>
+        </nav>
 
+        {/* Dół — konto + wyloguj */}
+        <div className="sidebar-footer">
+          <button className="sidebar-btn" onClick={() => setShowProfile(true)}>
+            <Icon icon="heroicons:cog-6-tooth" width={15} /> {t('account')}
+          </button>
+          <button className="sidebar-btn sidebar-btn-logout" onClick={logout}>
+            <Icon icon="heroicons:arrow-left-start-on-rectangle" width={15} /> {t('logout')}
+          </button>
+        </div>
+      </aside>
+
+      {/* ── Treść główna ── */}
       <main className="app-main">
         {activeTab === 'macro'     && <MacroCalculator />}
-        {activeTab === 'calendar'  && <Calendar onGoToTab={setActiveTab} />}
+        {activeTab === 'calendar'  && <Calendar onGoToTab={goToTab} />}
         {activeTab === 'recipes'   && <Recipes />}
         {activeTab === 'products'  && <Products />}
-        {activeTab === 'summary'   && <Summary onGoToTab={setActiveTab} />}
+        {activeTab === 'summary'   && <Summary onGoToTab={goToTab} />}
+        {activeTab === 'export'    && <Export />}
       </main>
 
       {showProfile && <Profile onClose={() => setShowProfile(false)} />}
@@ -92,7 +107,6 @@ function AppInner() {
   );
 }
 
-// Bridge: passes switchLang into AuthProvider so it can sync lang on login
 function AppWithAuth() {
   const { switchLang } = useLanguage();
   return (

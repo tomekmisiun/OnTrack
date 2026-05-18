@@ -331,7 +331,10 @@ async def run_scraper(dry_run: bool):
 
                 # Konwertuj cenę opakowania/kg → cenę jednostkową (per 100g lub per szt)
                 pkg = float(package_weight) or 1
-                if per_kg or sold_by_weight:
+                biedronka_pkg_g = stores.get("biedronka_pkg_g")  # gdy Biedronka zwraca cenę paczki (nie /kg)
+                if biedronka_pkg_g and biedronka_url and per_kg:
+                    db_price = new_price / (biedronka_pkg_g / 100)  # cena_paczki / (g/100) → /100g
+                elif per_kg or sold_by_weight:
                     db_price = new_price / 10          # /kg → /100g
                 elif unit == 'szt':
                     db_price = new_price / pkg         # cena opakowania → cena/szt

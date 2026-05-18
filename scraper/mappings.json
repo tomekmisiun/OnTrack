@@ -70,9 +70,9 @@
   "292": { "biedronka": "https://zakupy.biedronka.pl/graal-graal-tunczyk-kawalki-w-sosie-wlasnym-3x140-g-0000003478.html" },
   "263": { "auchan": "https://zakupy.auchan.pl/products/twar%C3%B3g-p%C3%B3%C5%82t%C5%82usty-auchan-250-g/00535325" },
   "337": { "auchan": "https://zakupy.auchan.pl/products/tymianek-prymat-10-g/00192085" },
-  "288": { "biedronka": "https://zakupy.biedronka.pl/kraina-mies-kraina-mies-mieso-z-uda-kurczaka-swieze-klasa-a-500-g-0000004237.html" },
-  "290": { "auchan": "https://zakupy.auchan.pl/products/mi%C4%99so-mielone-wo%C5%82owe-map-auchan-500-g/00571087" },
-  "304": { "auchan": "https://zakupy.auchan.pl/products/ziemniaki-auchan-2-kg/00294561" },
+  "288": { "biedronka": "https://zakupy.biedronka.pl/kraina-mies-kraina-mies-mieso-z-uda-kurczaka-swieze-klasa-a-500-g-0000004237.html", "per_kg": true, "biedronka_pkg_g": 500 },
+  "290": { "auchan": "https://zakupy.auchan.pl/products/mi%C4%99so-mielone-wo%C5%82owe-map-auchan-500-g/00571087", "per_kg": true },
+  "304": { "auchan": "https://zakupy.auchan.pl/products/ziemniaki-auchan-2-kg/00294561", "per_kg": true },
   "343": { "auchan": "https://zakupy.auchan.pl/products/zio%C5%82a-prowansalskie-prymat-10-g/00192084" },
   "308": { "auchan": "https://zakupy.auchan.pl/products/kapusta-g%C5%82%C3%B3wka-warzywa-auchan-na-wag%C4%99-ok-2kg/00027891", "per_kg": true }
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Icon } from '@iconify/react';
 import { useToast } from '../contexts/ToastContext';
 import { useMember } from '../contexts/MemberContext';
 import { members as membersApi } from '../api';
@@ -120,14 +121,18 @@ function BmiGauge({ bmiVal }) {
 
 // ── Macro legend card ────────────────────────────────────────────────────────
 function MacroLegend({ goalOpt, weight, adjPW }) {
+  const [open, setOpen] = React.useState(false);
   const pw = adjPW?.pw ?? weight;
   const proteinG = pw > 0 ? Math.round(pw * goalOpt.proteinPerKg) : null;
   return (
-    <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: 16 }}>
-      <div style={{ fontSize: 14, fontWeight: 700, color: '#0d9488', marginBottom: 14 }}>
-        Jak liczymy makro?
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+    <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8 }}>
+      <button onClick={() => setOpen(o => !o)}
+        style={{ width:'100%', padding:'12px 16px', background:'none', border:'none', cursor:'pointer', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+        <span style={{ fontSize: 14, fontWeight: 700, color: '#0d9488' }}>Jak liczymy makro?</span>
+        <Icon icon="heroicons:chevron-down" style={{ width:18, height:18, color:'#0d9488', transition:'transform 0.25s', transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+      </button>
+      {open && (
+      <div style={{ padding: '0 16px 16px', display: 'flex', flexDirection: 'column', gap: 14 }}>
 
         {/* Obesity adjustment notice */}
         {adjPW?.adjusted && (
@@ -183,12 +188,13 @@ function MacroLegend({ goalOpt, weight, adjPW }) {
           </div>
         </div>
 
-        <div style={{ borderTop: '1px solid #374151', paddingTop: 12, fontSize: 11, color: '#4b5563', lineHeight: 1.6 }}>
-          <strong style={{ color: '#6b7280' }}>BMR</strong> (podstawowa przemiana materii) - Mifflin-St Jeor:{' '}
-          <span style={{ color: '#6b7280' }}>10×waga + 6,25×wzrost − 5×wiek + 5 (M) / −161 (K)</span>.{' '}
-          <strong style={{ color: '#6b7280' }}>TDEE</strong> = BMR × współczynnik aktywności.
+        <div style={{ borderTop: '1px solid #374151', paddingTop: 12, fontSize: 11, color: '#9ca3af', lineHeight: 1.6 }}>
+          <strong style={{ color: '#e2e8f0' }}>BMR</strong> (podstawowa przemiana materii) - Mifflin-St Jeor:{' '}
+          <span style={{ color: '#9ca3af' }}>10×waga + 6,25×wzrost − 5×wiek + 5 (M) / −161 (K)</span>.{' '}
+          <strong style={{ color: '#e2e8f0' }}>TDEE</strong> = BMR × współczynnik aktywności.
         </div>
       </div>
+      )}
     </div>
   );
 }
@@ -294,14 +300,13 @@ export default function MacroCalculator() {
   const bmiInfo = bmiVal ? bmiCat(bmiVal) : null;
 
   return (
-    <div style={{ maxWidth: 900, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 6 }}>
+    <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 12 }}>
 
-      {/* ── ROW 1: Twoje dane | BMI + BMR/TDEE + Czym jest BMR i TDEE ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px 12px' }}>
+      {/* ── ROW 1: 3 karty ── */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12 }}>
 
-        {/* LEFT: formularz + aktywny cel - jedna karta */}
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <div className="card" style={{ padding: 14, flex: 1 }}>
+        {/* Karta 1: Twoje dane */}
+        <div className="card" style={{ padding: 14 }}>
           <h2 style={{ margin: '0 0 12px', fontSize: 15, color: '#f1f5f9' }}>Twoje dane</h2>
 
           <div style={row}>
@@ -309,8 +314,8 @@ export default function MacroCalculator() {
             <div style={{ display: 'flex', gap: 6 }}>
               {[['m','Mężczyzna'],['f','Kobieta']].map(([v,l]) => (
                 <button key={v} onClick={() => setGender(v)}
-                  style={{ flex:1, padding:'6px 0', borderRadius:6, cursor:'pointer', fontSize:12, fontWeight:600, border:'none',
-                    background: gender===v ? '#0d9488' : '#2d3748', color: gender===v ? 'white' : '#9ca3af' }}>{l}</button>
+                  style={{ flex:1, padding:'6px 0', borderRadius:6, cursor:'pointer', fontSize:12, fontWeight:600, border:'1px solid #374151', transition:'all 0.15s',
+                    background: gender===v ? '#1e3a3a' : 'transparent', color: gender===v ? '#2dd4bf' : '#6b7280' }}>{l}</button>
               ))}
             </div>
           </div>
@@ -340,15 +345,16 @@ export default function MacroCalculator() {
             <span style={labelSt}>Cel</span>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
               {GOALS.map(g => {
-                const isActive   = goal === g.value;
-                const activeBg   = g.warn ? '#7f1d1d' : '#0d9488';
-                const inactiveFg = g.warn ? '#f87171' : '#9ca3af';
+                const isActive = goal === g.value;
+                const activeBg   = g.warn ? '#2d1515' : '#1e3a3a';
+                const activeFg   = g.warn ? '#f87171' : '#2dd4bf';
+                const borderClr  = g.warn ? '#4b1515' : '#374151';
                 return (
                   <button key={g.value} onClick={() => setGoal(g.value)}
-                    style={{ padding:'6px 4px', borderRadius:6, cursor:'pointer', fontSize:11, fontWeight:600,
-                      border: g.warn && !isActive ? '1px solid #7f1d1d' : 'none',
-                      background: isActive ? activeBg : '#2d3748',
-                      color: isActive ? 'white' : inactiveFg }}>
+                    style={{ padding:'6px 4px', borderRadius:6, cursor:'pointer', fontSize:11, fontWeight:600, transition:'all 0.15s',
+                      border: `1px solid ${borderClr}`,
+                      background: isActive ? activeBg : 'transparent',
+                      color: isActive ? activeFg : g.warn ? '#f87171' : '#6b7280' }}>
                     {g.label}
                     {g.warn && <div style={{ fontSize:9, fontWeight:400, marginTop:1, opacity:0.8 }}>(niezalecane)</div>}
                   </button>
@@ -357,87 +363,122 @@ export default function MacroCalculator() {
             </div>
           </div>
           <button onClick={saveGoals} disabled={!macros}
-            style={{ marginTop:10, width:'100%', padding:'8px 0', borderRadius:7, border:'none',
-              background: macros ? '#0d9488' : '#2d3748',
-              color: macros ? 'white' : '#6b7280',
+            style={{ marginTop:10, width:'100%', padding:'8px 0', borderRadius:7, transition:'all 0.15s',
+              border: macros ? '1px solid #374151' : '1px solid #374151',
+              background: macros ? '#1e3a3a' : 'transparent',
+              color: macros ? '#2dd4bf' : '#4b5563',
               fontSize:13, fontWeight:700, cursor: macros ? 'pointer' : 'default' }}>
             Zapisz jako cel i pokaż w kalendarzu
           </button>
-
-        </div>
         </div>
 
-        {/* RIGHT: jedna karta ze wszystkim */}
-        <div className="card" style={{ padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+        {/* Karta 2: Cel dzienny makro */}
+        <div className="card" style={{ padding: 14, display:'flex', flexDirection:'column' }}>
+          <h2 style={{ margin:'0 0 10px', fontSize:15, color:'#f1f5f9' }}>Cel dzienny makro</h2>
+          {macros ? (
+            <>
+              <div style={{ fontSize:28, fontWeight:800, color:'#2dd4bf', marginBottom:4 }}>
+                {macros.kcal} <span style={{ fontSize:13, color:'#6b7280', fontWeight:400 }}>kcal/dzień</span>
+              </div>
+              <MacroBar {...macros} />
+              <div style={{ marginTop:10 }}>
+                <MacroRow label="Białko"      value={macros.protein} unit="g" kcalVal={macros.protein*4} totalKcal={macros.kcal} color="#0d9488" />
+                <MacroRow label="Tłuszcze"    value={macros.fat}     unit="g" kcalVal={macros.fat*9}     totalKcal={macros.kcal} color="#f59e0b" />
+                <MacroRow label="Węglowodany" value={macros.carbs}   unit="g" kcalVal={macros.carbs*4}   totalKcal={macros.kcal} color="#6366f1" />
+              </div>
+              <div style={{ marginTop:'auto', paddingTop:14, display:'flex', alignItems:'baseline', gap:5 }}>
+                {goalOpt.adj === 0 ? (
+                  <>
+                    <span style={{ fontSize:20, fontWeight:800, color:'#9ca3af' }}>Utrzymanie</span>
+                    <span style={{ fontSize:13, color:'#6b7280', marginLeft:4 }}>spożywaj TDEE</span>
+                  </>
+                ) : (
+                  <>
+                    <span style={{ fontSize:20, fontWeight:800, color:'#9ca3af', marginRight:2 }}>{goalOpt.label}</span>
+                    <span style={{ fontSize:28, fontWeight:800, color: goalOpt.adj < 0 ? '#f87171' : '#4ade80' }}>
+                      {goalOpt.adj > 0 ? '+' : ''}{goalOpt.adj}
+                    </span>
+                    <span style={{ fontSize:13, color:'#6b7280' }}>kcal / dzień</span>
+                  </>
+                )}
+              </div>
+            </>
+          ) : (
+            <span style={{ fontSize:12, color:'#4b5563' }}>Uzupełnij dane po lewej</span>
+          )}
 
-          {/* BMI */}
-          <div>
-            <div style={{ fontSize:11, color:'#6b7280', marginBottom:4, fontWeight:600, textTransform:'uppercase', letterSpacing:'0.05em' }}>BMI</div>
-            {bmiVal ? (
-              <>
-                <div style={{ display:'flex', alignItems:'center', gap:10 }}>
-                  <span style={{ fontSize:28, fontWeight:800, color:bmiInfo.color, lineHeight:1 }}>{bmiVal.toFixed(1)}</span>
-                  <div>
-                    <span style={{ display:'inline-block', background:bmiInfo.color+'22', color:bmiInfo.color, borderRadius:6, padding:'2px 7px', fontSize:11, fontWeight:700 }}>{bmiInfo.label}</span>
-                    <div style={{ fontSize:10, color:'#6b7280', marginTop:2 }}>Norma: 18,5 – 24,9</div>
-                  </div>
-                </div>
-                <BmiGauge bmiVal={bmiVal} />
-              </>
-            ) : (
-              <span style={{ fontSize:12, color:'#4b5563' }}>Uzupełnij dane po lewej</span>
-            )}
-          </div>
-
-          <div style={{ borderTop:'1px solid #374151' }} />
-
-          {/* BMR / TDEE */}
-          <div>
-            <div style={{ fontSize:11, color:'#6b7280', marginBottom:6, fontWeight:600, textTransform:'uppercase', letterSpacing:'0.05em' }}>Zapotrzebowanie kaloryczne</div>
-            {bmrVal ? (
-              <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
-                {[
-                  { label: 'BMR', sub: 'podstawowe',    val: bmrVal,  color: '#e2e8f0' },
-                  { label: 'TDEE', sub: 'z aktywnością', val: tdeeVal, color: '#2dd4bf' },
-                ].map(({ label, sub, val, color }) => (
-                  <div key={label}>
-                    <div style={{ display:'flex', alignItems:'baseline', gap:5, whiteSpace:'nowrap' }}>
-                      <span style={{ fontSize:12, fontWeight:700, color:'#9ca3af' }}>{label}</span>
-                      <span style={{ fontSize:18, fontWeight:700, color }}>{val}</span>
-                      <span style={{ fontSize:11, color:'#6b7280' }}>kcal</span>
-                      <span style={{ fontSize:10, color:'#6b7280', marginLeft:2 }}>/ {sub}</span>
-                    </div>
+          {/* Aktywny cel — przypięty na dole */}
+          {activeMember?.macro_goals && (
+            <div style={{ marginTop:'auto', paddingTop:12, borderTop:'1px solid #374151' }}>
+              <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:8 }}>
+                <div style={{ fontSize:10, color:'#0d9488', fontWeight:600, letterSpacing:'0.05em' }}>AKTYWNY CEL W KALENDARZU</div>
+                {activeMember.macro_goals.goalLabel && (
+                  <span style={{ fontSize:10, fontWeight:700, color:'#2dd4bf', background:'#0d948822', borderRadius:5, padding:'2px 7px' }}>
+                    {activeMember.macro_goals.goalLabel}
+                  </span>
+                )}
+              </div>
+              <div style={{ display:'flex', gap:14, flexWrap:'wrap' }}>
+                {[['Kcal', activeMember.macro_goals.kcal, '#2dd4bf'],['Białko',`${activeMember.macro_goals.protein}g`,'#0d9488'],['Tłuszcze',`${activeMember.macro_goals.fat}g`,'#f59e0b'],['Węgle',`${activeMember.macro_goals.carbs}g`,'#6366f1']].map(([lbl,val,color]) => (
+                  <div key={lbl}>
+                    <div style={{ fontSize:10, color:'#6b7280' }}>{lbl}</div>
+                    <div style={{ fontSize:14, fontWeight:700, color }}>{val}</div>
                   </div>
                 ))}
               </div>
-            ) : (
-              <span style={{ fontSize:12, color:'#4b5563' }}>Uzupełnij dane po lewej</span>
-            )}
-          </div>
+            </div>
+          )}
+        </div>
+
+        {/* Karta 3: BMI */}
+        <div className="card" style={{ padding: 14, display:'flex', flexDirection:'column', gap:10 }}>
+          <h2 style={{ margin:0, fontSize:15, color:'#f1f5f9' }}>BMI</h2>
+          {bmiVal ? (
+            <>
+              <div style={{ display:'flex', alignItems:'center', gap:10 }}>
+                <span style={{ fontSize:32, fontWeight:800, color:bmiInfo.color, lineHeight:1 }}>{bmiVal.toFixed(1)}</span>
+                <div>
+                  <span style={{ display:'inline-block', background:bmiInfo.color+'22', color:bmiInfo.color, borderRadius:6, padding:'2px 8px', fontSize:12, fontWeight:700 }}>{bmiInfo.label}</span>
+                  <div style={{ fontSize:10, color:'#6b7280', marginTop:2 }}>Norma: 18,5 – 24,9</div>
+                </div>
+              </div>
+              <BmiGauge bmiVal={bmiVal} />
+            </>
+          ) : (
+            <span style={{ fontSize:12, color:'#4b5563' }}>Uzupełnij dane po lewej</span>
+          )}
 
           <div style={{ borderTop:'1px solid #374151' }} />
 
-          {/* Czym jest BMR i TDEE */}
-          <div style={{ flex:1, background:'#162620', border:'1px solid #374151', borderRadius:6, padding:'8px 10px' }}>
-            <div style={{ fontSize:12, fontWeight:700, color:'#0d9488', marginBottom:6 }}>Czym jest BMR i TDEE?</div>
+          <div style={{ fontSize:11, color:'#6b7280', fontWeight:600, textTransform:'uppercase', letterSpacing:'0.05em' }}>Zapotrzebowanie kaloryczne</div>
+          {bmrVal ? (
             <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
-              <div style={{ fontSize:11, color:'#9ca3af', lineHeight:1.5 }}>
-                <strong style={{ color:'#e2e8f0' }}>BMR</strong> - minimalna ilość kalorii potrzebna do podtrzymania funkcji życiowych w spoczynku (oddychanie, praca serca, temperatura ciała).
-              </div>
-              <div style={{ fontSize:11, color:'#9ca3af', lineHeight:1.5 }}>
-                <strong style={{ color:'#2dd4bf' }}>TDEE</strong> - BMR pomnożone przez współczynnik aktywności. Rzeczywista ilość kalorii spalanych każdego dnia.
-              </div>
+              {[
+                { label: 'BMR', sub: 'podstawowe',     val: bmrVal,  color: '#e2e8f0' },
+                { label: 'TDEE', sub: 'z aktywnością', val: tdeeVal, color: '#2dd4bf' },
+              ].map(({ label, sub, val, color }) => (
+                <div key={label} style={{ display:'flex', alignItems:'baseline', gap:5 }}>
+                  <span style={{ fontSize:12, fontWeight:700, color:'#9ca3af', width:36 }}>{label}</span>
+                  <span style={{ fontSize:20, fontWeight:700, color }}>{val}</span>
+                  <span style={{ fontSize:11, color:'#6b7280' }}>kcal / {sub}</span>
+                </div>
+              ))}
               {bmrVal && (
-                <div style={{ background:'#2d1515', border:'1px solid #7f1d1d', borderRadius:6, padding:'6px 8px', fontSize:11, color:'#fca5a5', lineHeight:1.5 }}>
-                  <strong>⚠ Nie schodź poniżej BMR ({bmrVal} kcal)!</strong> Jedzenie poniżej BMR spowalnia metabolizm i powoduje utratę mięśni.
+                <div style={{ background:'#2d1515', border:'1px solid #7f1d1d', borderRadius:6, padding:'6px 8px', fontSize:11, color:'#fca5a5', lineHeight:1.5, marginTop:2 }}>
+                  ⚠ Nie schodź poniżej BMR ({bmrVal} kcal)
                 </div>
               )}
             </div>
-          </div>
+          ) : (
+            <span style={{ fontSize:12, color:'#4b5563' }}>Uzupełnij dane po lewej</span>
+          )}
         </div>
       </div>
 
-      {/* ── ROW 2: Cytaty - pełna szerokość ── */}
+      {/* ── ROW 2: Jak liczymy makro — pełna szerokość ── */}
+      <MacroLegend goalOpt={goalOpt} weight={w || 0} adjPW={adjPW} />
+
+      {/* ── ROW 3: Cytaty — pełna szerokość ── */}
       <div className="card" style={{ padding: '12px 16px', display: 'flex', gap: 16 }}>
         {[
           { quote: 'Perfekcjonizm jest wrogiem postępu.', author: 'Winston Churchill' },
@@ -448,63 +489,6 @@ export default function MacroCalculator() {
             <div style={{ fontSize: 11, color: '#6b7280', marginTop: 4 }}>- {author}</div>
           </div>
         ))}
-      </div>
-
-      {/* ── ROW 3: Cel dzienny makro | Jak liczymy makro ── */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px 12px', alignItems: 'start' }}>
-
-        <div className="card" style={{ padding: 14 }}>
-          {activeMember?.macro_goals && (
-            <div style={{ marginBottom:12, paddingBottom:12, borderBottom:'1px solid #374151' }}>
-              <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:8 }}>
-                <div style={{ fontSize:10, color:'#0d9488', fontWeight:600 }}>AKTYWNY CEL W KALENDARZU</div>
-                {activeMember?.macro_goals.goalLabel && (
-                  <span style={{ fontSize:10, fontWeight:700, color:'#2dd4bf', background:'#0d948822', borderRadius:5, padding:'2px 7px' }}>
-                    {activeMember?.macro_goals.goalLabel}
-                  </span>
-                )}
-              </div>
-              <div style={{ display:'flex', gap:14, flexWrap:'wrap' }}>
-                {[['Kcal', activeMember?.macro_goals.kcal, '#2dd4bf'],['Białko',`${activeMember?.macro_goals.protein}g`,'#0d9488'],['Tłuszcze',`${activeMember?.macro_goals.fat}g`,'#f59e0b'],['Węgle',`${activeMember?.macro_goals.carbs}g`,'#6366f1']].map(([lbl,val,color]) => (
-                  <div key={lbl}>
-                    <div style={{ fontSize:10, color:'#6b7280' }}>{lbl}</div>
-                    <div style={{ fontSize:14, fontWeight:700, color }}>{val}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-          <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:10 }}>
-            <div style={{ fontSize:11, color:'#6b7280', fontWeight:600, textTransform:'uppercase', letterSpacing:'0.05em' }}>Cel dzienny makro</div>
-            {macros && (
-              <div style={{ fontSize:10, color:'#6b7280' }}>
-                {goalOpt.label}
-                {goalOpt.adj !== 0 && (
-                  <span style={{ color: goalOpt.adj < 0 ? '#f87171' : '#4ade80', marginLeft:4 }}>
-                    {goalOpt.adj > 0 ? '+' : ''}{goalOpt.adj} kcal
-                  </span>
-                )}
-              </div>
-            )}
-          </div>
-          {macros ? (
-            <>
-              <div style={{ fontSize:24, fontWeight:800, color:'#2dd4bf', marginBottom:4 }}>
-                {macros.kcal} <span style={{ fontSize:13, color:'#6b7280', fontWeight:400 }}>kcal/dzień</span>
-              </div>
-              <MacroBar {...macros} />
-              <div style={{ marginTop:10 }}>
-                <MacroRow label="Białko"      value={macros.protein} unit="g" kcalVal={macros.protein*4} totalKcal={macros.kcal} color="#0d9488" />
-                <MacroRow label="Tłuszcze"    value={macros.fat}     unit="g" kcalVal={macros.fat*9}     totalKcal={macros.kcal} color="#f59e0b" />
-                <MacroRow label="Węglowodany" value={macros.carbs}   unit="g" kcalVal={macros.carbs*4}   totalKcal={macros.kcal} color="#6366f1" />
-              </div>
-            </>
-          ) : (
-            <span style={{ fontSize:12, color:'#4b5563' }}>Uzupełnij dane po lewej</span>
-          )}
-        </div>
-
-        <MacroLegend goalOpt={goalOpt} weight={w || 0} adjPW={adjPW} />
       </div>
     </div>
   );

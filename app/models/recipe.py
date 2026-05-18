@@ -35,6 +35,7 @@ class Recipe(db.Model):
     name = db.Column(db.String(100), nullable=False)
     notes = db.Column(db.Text, nullable=True)
     is_favorite = db.Column(db.Boolean, nullable=False, default=False)
+    image_url = db.Column(db.Text, nullable=True)
     ingredients = db.relationship('RecipeIngredient', backref='recipe', cascade='all, delete-orphan')
 
     def total_cost(self):
@@ -66,4 +67,5 @@ class Recipe(db.Model):
             'total_protein': protein,
             'total_fat': fat,
             'total_carbs': carbs,
+            'image_url': self.image_url,
         }
