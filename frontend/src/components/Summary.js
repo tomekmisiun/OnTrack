@@ -492,6 +492,8 @@ const OTHER_TYPES = [
   { key:'higiena',  label:'Higiena',        emoji:'🪥', gradient:'linear-gradient(135deg,#1a0a2a,#3a1a5a)' },
   { key:'biurowe',    label:'Art. biurowe',   emoji:'📎', gradient:'linear-gradient(135deg,#0a1a2a,#1a3a4a)' },
 ];
+// Klucze wydatków domowych — współdzielone między profilami (jeden budżet na gospodarstwodo domowe)
+const SHARED_KEYS = new Set(['czynsz','prad','gaz_oplata','media','ogrzewanie','zwierze','pranie','zmywanie','sprzatan']);
 const OTHER_DEFAULTS = {
   papier:   { enabled:false, monthlyAmount:'', dailyRolls:'0.5', pkgPrice:'', rollsPerPkg:'8' },
   pranie:   { enabled:false, monthlyAmount:'', washesPerWeek:'5', detergentType:'proszek',
@@ -788,6 +790,7 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
   const renderTile = ({ key, label, emoji, gradient }) => {
   const enabled = otherExpenses[key].enabled;
   const expanded = otherExpanded === key;
+  const isShared = SHARED_KEYS.has(key);
   return (
     <div key={key} style={{ display:'flex', flexDirection:'column' }}>
       <div onClick={() => handleOtherClick(key)}
@@ -801,6 +804,17 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
           transition:'all 0.2s', userSelect:'none', position:'relative', overflow:'hidden',
         }}>
         <div style={{ position:'absolute', inset:0, background: enabled ? 'transparent' : 'rgba(0,0,0,0.2)' }} />
+        {isShared && (
+          <div style={{
+            position:'absolute', top:3, right:3, zIndex:3,
+            display:'flex', alignItems:'center', gap:2,
+            background:'rgba(45,212,191,0.12)', border:'1px solid rgba(45,212,191,0.25)',
+            borderRadius:4, padding:'2px 4px',
+          }}>
+            <Icon icon="heroicons:users-solid" style={{ width:8, height:8, color:'#2dd4bf', flexShrink:0 }} />
+            <span style={{ fontSize:7, fontWeight:700, color:'#2dd4bf', letterSpacing:'0.2px', lineHeight:1 }}>wspólne</span>
+          </div>
+        )}
         <span style={{ fontSize:16, lineHeight:1, position:'relative', zIndex:1 }}>{emoji}</span>
         <span style={{ fontSize:9, fontWeight:700, color:'#fff', textAlign:'center', position:'relative', zIndex:1, textShadow:'0 1px 3px rgba(0,0,0,0.8)', padding:'0 3px', lineHeight:1.3 }}>{label}</span>
         {(() => { const t = otherTilePreview(key); return t>0 ? <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'rgba(0,0,0,0.6)', padding:'3px 4px', textAlign:'center', fontSize:10, fontWeight:800, color:'#2dd4bf', zIndex:2, opacity: enabled?1:0.7 }}>{t.toFixed(2)} zł</div> : null; })()}

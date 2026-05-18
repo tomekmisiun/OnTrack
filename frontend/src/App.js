@@ -99,7 +99,7 @@ function AppInner() {
         {activeTab === 'recipes'   && <Recipes />}
         {activeTab === 'products'  && <Products />}
         {activeTab === 'summary'   && <Summary onGoToTab={goToTab} />}
-        {activeTab === 'export'    && <Export />}
+        {activeTab === 'export'    && <Export onGoToTab={goToTab} />}
       </main>
 
       {showProfile && <Profile onClose={() => setShowProfile(false)} />}

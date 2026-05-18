@@ -25,6 +25,20 @@ function getCurrentMonth() {
   const last  = new Date(now.getFullYear(), now.getMonth()+1, 0);
   return { start: dateToStr(first), end: dateToStr(last) };
 }
+function getCalGrid(year, month) {
+  const firstDay = new Date(year, month, 1);
+  const lastDay  = new Date(year, month + 1, 0);
+  const start = new Date(firstDay);
+  start.setDate(start.getDate() - (firstDay.getDay() + 6) % 7);
+  const end = new Date(lastDay);
+  const endDow = (lastDay.getDay() + 6) % 7;
+  if (endDow < 6) end.setDate(end.getDate() + (6 - endDow));
+  const days = [];
+  const c = new Date(start);
+  while (c <= end) { days.push(new Date(c)); c.setDate(c.getDate() + 1); }
+  return days;
+}
+const MONTH_NAMES_PL = ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'];
 
 // ─── Drinks recalc from localStorage ─────────────────────────────────────────
 function calcDrinks(days) {
@@ -59,48 +73,28 @@ function calcDrinks(days) {
   } catch { return []; }
 }
 
-// ─── Export logic ─────────────────────────────────────────────────────────────
-function generateCSV(sections) {
-  const s = ';';
-  const rows = [];
-  sections.forEach(sec => {
-    rows.push(sec.title);
-    if (sec.subtitle) rows.push(sec.subtitle);
-    rows.push('');
-    if (sec.headers) rows.push(sec.headers.join(s));
-    sec.rows.forEach(r => rows.push(r.map(c => String(c ?? '')).join(s)));
-    if (sec.footer) rows.push(sec.footer.join(s));
-    rows.push('');
-  });
-  const blob = new Blob(['﻿' + rows.join('\r\n')], { type: 'text/csv;charset=utf-8' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `eksport_${dateToStr(new Date())}.csv`;
-  a.click();
-  URL.revokeObjectURL(a.href);
+// ─── Other expenses summary (reads from localStorage, monthly→daily) ──────────
+function calcOtherSummary(days) {
+  try {
+    const n = v => parseFloat(v) || 0;
+    const saved = JSON.parse(localStorage.getItem('otherExpenses') || '{}');
+    const ORDER = [
+      ['czynsz','Czynsz'],['prad','Prąd'],['gaz_oplata','Gaz'],['media','Media'],
+      ['ogrzewanie','Ogrzewanie'],['kredyt','Kredyt'],['dziecko','Dziecko'],
+      ['zwierze','Zwierzę'],['lekarze','Lekarze i leki'],['paliwo','Paliwo'],
+      ['pranie','Pranie'],['zmywanie','Zmywanie'],['sprzatan','Sprzątanie'],
+      ['higiena','Higiena'],['biurowe','Art. biurowe'],
+    ];
+    return ORDER.map(([key, label]) => {
+      const o = saved[key];
+      if (!o || !o.enabled) return null;
+      const daily = n(o.monthlyAmount) / 30;
+      return daily > 0 ? { label, total: daily * days } : null;
+    }).filter(Boolean);
+  } catch { return []; }
 }
 
 // ─── UI helpers ───────────────────────────────────────────────────────────────
-function Section({ title, children }) {
-  return (
-    <div className="card" style={{ padding:'16px 20px', marginBottom:12 }}>
-      <h2 style={{ marginBottom:14 }}>{title}</h2>
-      {children}
-    </div>
-  );
-}
-function CheckRow({ checked, onChange, label, sub }) {
-  return (
-    <label style={{ display:'flex', alignItems:'flex-start', gap:10, cursor:'pointer', padding:'6px 0', userSelect:'none' }}>
-      <input type="checkbox" checked={checked} onChange={e => onChange(e.target.checked)}
-        style={{ width:15, height:15, marginTop:2, flexShrink:0 }} />
-      <div>
-        <div style={{ fontSize:13, color:'#e2e8f0', fontWeight:500 }}>{label}</div>
-        {sub && <div style={{ fontSize:11, color:'#6b7280', marginTop:1 }}>{sub}</div>}
-      </div>
-    </label>
-  );
-}
 function ToggleChip({ active, onClick, children }) {
   return (
     <button type="button" onClick={onClick}
@@ -248,8 +242,338 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#fff;color:#111827;p
 </body></html>`;
 }
 
+// ─── Wydatki HTML generator (podsumowanie kategorii) ─────────────────────────
+function generateWydatkiHTML({ categories, total, periodLabel, memberLabel }) {
+  const now = new Date();
+  const dateStr = `${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
+  const rows = categories.map((cat, i) =>
+    `<div class="cat-row ${i % 2 === 1 ? 'cat-alt' : ''}">
+      <span class="cat-label">${cat.label}</span>
+      <span class="cat-value">${cat.value.toFixed(2)} zł</span>
+    </div>`
+  ).join('');
+  return `<!DOCTYPE html>
+<html lang="pl"><head><meta charset="UTF-8">
+<title>Podsumowanie wydatków</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#fff;color:#111827;padding:32px 40px;max-width:600px;margin:0 auto}
+.print-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 auto 24px;padding:10px 32px;background:#0d9488;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer}
+.hdr{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:22px;padding-bottom:12px;border-bottom:2px solid #0d9488}
+h1{font-size:22px;font-weight:800;color:#0d9488}
+.period{font-size:13px;color:#374151;margin-top:4px}
+.member{font-size:12px;color:#6b7280;margin-top:2px}
+.meta{font-size:11px;color:#9ca3af;text-align:right;line-height:1.7}
+.cat-row{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-radius:6px}
+.cat-alt{background:#f9fafb}
+.cat-label{font-size:15px;color:#374151}
+.cat-value{font-size:16px;font-weight:600;color:#111827}
+.cat-total{display:flex;justify-content:space-between;align-items:center;padding:13px 14px;margin-top:8px;border-top:2px solid #0d9488;background:#f0fdf4;border-radius:6px}
+.cat-total-label{font-size:15px;font-weight:700;color:#0d9488}
+.cat-total-value{font-size:22px;font-weight:800;color:#0d9488}
+.footer{margin-top:24px;padding-top:10px;border-top:1px solid #f3f4f6;font-size:10px;color:#d1d5db;text-align:center}
+@media print{.print-btn{display:none!important}body{padding:12px}}
+</style></head><body>
+<button class="print-btn" onclick="window.print()">Drukuj / Zapisz PDF</button>
+<div class="hdr">
+  <div>
+    <h1>Podsumowanie wydatków</h1>
+    <div class="period">${periodLabel}</div>
+    ${memberLabel ? `<div class="member">${memberLabel}</div>` : ''}
+  </div>
+  <div class="meta">Wygenerowano: ${dateStr}</div>
+</div>
+${rows}
+<div class="cat-total">
+  <span class="cat-total-label">Łącznie</span>
+  <span class="cat-total-value">${total.toFixed(2)} zł</span>
+</div>
+<div class="footer">Wygenerowano przez aplikację Meal Planner · ${dateStr}</div>
+</body></html>`;
+}
+
+// ─── Karta Kalendarza HTML generator ─────────────────────────────────────────
+function generateKalendarzHTML({ mealsByDate, start, end, periodLabel, memberName }) {
+  const now = new Date();
+  const dateStr = `${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
+  const todayStr = dateToStr(now);
+
+  const startD = new Date(start);
+  const endD   = new Date(end);
+  const sDow   = (startD.getDay() + 6) % 7;
+  const gridStart = new Date(startD); gridStart.setDate(gridStart.getDate() - sDow);
+  const eDow   = (endD.getDay() + 6) % 7;
+  const gridEnd   = new Date(endD); if (eDow < 6) gridEnd.setDate(gridEnd.getDate() + (6 - eDow));
+
+  const days = [];
+  const cur = new Date(gridStart);
+  while (cur <= gridEnd) { days.push(new Date(cur)); cur.setDate(cur.getDate() + 1); }
+
+  const SLOT_NAMES  = ['Śniadanie','II śniadanie','Obiad','Podwieczorek','Kolacja'];
+  const SLOT_COLORS = ['#4a6fa5','#93c5fd','#fcd34d','#c2410c','#6366f1'];
+  const DAY_SHORT   = ['Pn','Wt','Śr','Cz','Pt','So','Nd'];
+  const DAY_FULL    = ['Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota','Niedziela'];
+
+  const weeks = [];
+  for (let i = 0; i < days.length; i += 7) weeks.push(days.slice(i, i + 7));
+
+  const weeksHTML = weeks.map(week => {
+    const cellsHTML = week.map(day => {
+      const ds      = dateToStr(day);
+      const isToday = ds === todayStr;
+      const inRange = ds >= start && ds <= end;
+      const meals   = (mealsByDate[ds] || []).slice().sort((a, b) => a.position - b.position);
+      const dow     = (day.getDay() + 6) % 7;
+
+      const mealsHTML = meals.map(m => {
+        const col  = SLOT_COLORS[(m.position - 1) % 5];
+        const name = m.recipe?.name || '';
+        return `<div style="background:${col}22;border-left:3px solid ${col};border-radius:4px;padding:3px 6px;margin-bottom:3px">
+          <div style="font-size:8px;font-weight:700;color:${col};text-transform:uppercase;letter-spacing:.4px">${SLOT_NAMES[m.position-1]}</div>
+          <div style="font-size:10px;font-weight:600;color:#111827;line-height:1.3">${name}</div>
+        </div>`;
+      }).join('');
+
+      const totalKcal    = meals.reduce((s, m) => s + (m.recipe?.total_kcal    || 0), 0);
+      const totalProtein = meals.reduce((s, m) => s + (m.recipe?.total_protein || 0), 0);
+      const totalFat     = meals.reduce((s, m) => s + (m.recipe?.total_fat     || 0), 0);
+      const totalCarbs   = meals.reduce((s, m) => s + (m.recipe?.total_carbs   || 0), 0);
+      const hasMacro     = totalKcal > 0 || totalProtein > 0;
+
+      const dayFooter = hasMacro ? `<div class="day-footer">
+        <div class="kcal-row">${totalKcal} kcal</div>
+        <div class="macro-row">B:${Math.round(totalProtein)}g · T:${Math.round(totalFat)}g · W:${Math.round(totalCarbs)}g</div>
+      </div>` : '';
+
+      return `<div style="border:${isToday ? '2px solid #0d9488' : '1px solid #e5e7eb'};border-radius:7px;padding:7px;background:${isToday ? '#f0fdf4' : '#fff'};opacity:${inRange ? 1 : 0.45};min-height:72px;display:flex;flex-direction:column">
+        <div style="font-size:11px;font-weight:${isToday ? 700 : 600};color:${isToday ? '#0d9488' : '#374151'};margin-bottom:5px;padding-bottom:4px;border-bottom:1px solid #f3f4f6">
+          ${DAY_SHORT[dow]} ${day.getDate()}${isToday ? ' (dziś)' : ''}
+        </div>
+        <div style="flex:1">
+          ${mealsHTML || '<div style="font-size:10px;color:#e5e7eb;text-align:center;padding:5px 0">—</div>'}
+        </div>
+        ${dayFooter}
+      </div>`;
+    }).join('');
+    return `<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:5px">${cellsHTML}</div>`;
+  }).join('');
+
+  const legendHTML = SLOT_NAMES.map((n, i) =>
+    `<div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#6b7280">
+      <div style="width:10px;height:10px;border-radius:2px;background:${SLOT_COLORS[i]};flex-shrink:0"></div>${n}
+    </div>`
+  ).join('');
+
+  const headerRowHTML = DAY_FULL.map(d =>
+    `<div style="font-size:10px;font-weight:700;color:#9ca3af;text-align:center;padding:4px;text-transform:uppercase;letter-spacing:.5px">${d}</div>`
+  ).join('');
+
+  return `<!DOCTYPE html>
+<html lang="pl"><head><meta charset="UTF-8">
+<title>Karta Kalendarza</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#fff;color:#111827;padding:24px 32px;max-width:1100px;margin:0 auto}
+.print-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 auto 16px;padding:10px 32px;background:#0d9488;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer}
+.options-bar{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:16px;padding:10px 16px;background:#f0fdf4;border:1px solid #a7f3d0;border-radius:8px;align-items:center}
+.opt-title{font-size:12px;font-weight:700;color:#0d9488;margin-right:4px}
+.opt-label{display:flex;align-items:center;gap:7px;font-size:13px;color:#374151;cursor:pointer;font-weight:500;user-select:none}
+.opt-label input[type="checkbox"]{width:15px;height:15px;accent-color:#0d9488;cursor:pointer}
+.footer{margin-top:20px;padding-top:10px;border-top:1px solid #f3f4f6;font-size:10px;color:#d1d5db;text-align:center}
+.day-footer{border-top:1px solid #f0f0f0;margin-top:5px;padding-top:4px}
+.kcal-row{font-size:11px;font-weight:700;color:#0d9488;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.macro-row{font-size:9px;color:#6b7280;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body.hide-kcal .kcal-row{display:none}
+body.hide-macro .macro-row{display:none}
+body.hide-kcal.hide-macro .day-footer{display:none}
+@media print{
+  .print-btn,.no-print{display:none!important}
+  body{padding:8px}
+}
+</style></head><body>
+<button class="print-btn" onclick="window.print()">Drukuj / Zapisz PDF</button>
+<div class="options-bar no-print">
+  <span class="opt-title">Opcje widoku:</span>
+  <label class="opt-label">
+    <input type="checkbox" id="show-kcal" checked onchange="document.body.classList.toggle('hide-kcal',!this.checked)">
+    kcal w dniach
+  </label>
+  <label class="opt-label">
+    <input type="checkbox" id="show-macro" checked onchange="document.body.classList.toggle('hide-macro',!this.checked)">
+    Makro B/T/W w dniach
+  </label>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid #0d9488">
+  <div>
+    <div style="font-size:22px;font-weight:800;color:#0d9488">Karta Kalendarza</div>
+    <div style="font-size:13px;color:#374151;margin-top:4px">${periodLabel}</div>
+    ${memberName ? `<div style="font-size:12px;color:#6b7280;margin-top:2px">${memberName}</div>` : ''}
+  </div>
+  <div style="font-size:11px;color:#9ca3af;text-align:right;line-height:1.7">Wygenerowano: ${dateStr}</div>
+</div>
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px">${legendHTML}</div>
+<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:5px">${headerRowHTML}</div>
+${weeksHTML}
+<div class="footer">Wygenerowano przez aplikację Meal Planner · ${dateStr}</div>
+</body></html>`;
+}
+
+// ─── Składniki przepisu HTML generator ───────────────────────────────────────
+function generateSkladnikiHTML(recipe) {
+  const now = new Date();
+  const dateStr = `${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
+  const rows = (recipe.ingredients || []).map(ing =>
+    `<tr>
+      <td>${ing.product_name}</td>
+      <td class="num">${ing.weight}</td>
+      <td>${ing.unit || 'g'}</td>
+      <td class="cost">${ing.cost != null ? ing.cost.toFixed(2) + ' zł' : '—'}</td>
+    </tr>`
+  ).join('');
+
+  const hasKcal = recipe.total_kcal > 0;
+  const macroHTML = hasKcal ? `<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px">
+    ${[['Kalorie', recipe.total_kcal, 'kcal', '#0d9488'],
+       ['Białko',  Math.round(recipe.total_protein), 'g', '#0d9488'],
+       ['Tłuszcze',Math.round(recipe.total_fat),     'g', '#f59e0b'],
+       ['Węglowodany',Math.round(recipe.total_carbs),'g', '#6366f1']].map(([l,v,u,c]) =>
+      `<div style="border:1px solid #e5e7eb;border-radius:8px;padding:10px 16px;text-align:center">
+        <div style="font-size:10px;color:#9ca3af;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">${l}</div>
+        <div style="font-size:20px;font-weight:800;color:${c}">${v}</div>
+        <div style="font-size:11px;color:#9ca3af">${u}</div>
+      </div>`).join('')}
+  </div>` : '';
+
+  return `<!DOCTYPE html>
+<html lang="pl"><head><meta charset="UTF-8">
+<title>Składniki: ${recipe.name}</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#fff;color:#111827;padding:32px 40px;max-width:700px;margin:0 auto}
+.print-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 auto 24px;padding:10px 32px;background:#0d9488;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer}
+.hdr{margin-bottom:22px;padding-bottom:12px;border-bottom:2px solid #0d9488}
+h1{font-size:24px;font-weight:800;color:#0d9488}
+.sub{font-size:12px;color:#9ca3af;margin-top:4px}
+table{width:100%;border-collapse:collapse;margin-top:4px}
+th{font-size:11px;font-weight:700;color:#0d9488;text-transform:uppercase;letter-spacing:.5px;padding:8px 10px;text-align:left;border-bottom:2px solid #e5e7eb}
+th.num,th.cost{text-align:right}
+td{padding:9px 10px;border-bottom:1px solid #f3f4f6;font-size:13px;color:#374151}
+tr:nth-child(even) td{background:#fafafa}
+td.num{text-align:right}
+td.cost{text-align:right;font-weight:700;color:#111827}
+tfoot td{font-weight:700;border-top:2px solid #0d9488;background:#f0fdf4;padding:10px}
+.tlabel{font-size:14px;color:#0d9488}
+.tval{text-align:right;font-size:16px;color:#0d9488}
+.footer{margin-top:24px;padding-top:10px;border-top:1px solid #f3f4f6;font-size:10px;color:#d1d5db;text-align:center}
+@media print{.print-btn{display:none!important}body{padding:12px}}
+</style></head><body>
+<button class="print-btn" onclick="window.print()">Drukuj / Zapisz PDF</button>
+<div class="hdr">
+  <h1>${recipe.name}</h1>
+  <div class="sub">Wygenerowano: ${dateStr} · ${recipe.ingredients?.length || 0} składników</div>
+</div>
+<table>
+<thead><tr>
+  <th>Składnik</th><th class="num">Ilość</th><th>Jednostka</th><th class="cost">Koszt</th>
+</tr></thead>
+<tbody>${rows}</tbody>
+${recipe.total_cost != null ? `<tfoot><tr>
+  <td colspan="3" class="tlabel">Łączny koszt przepisu</td>
+  <td class="tval">${recipe.total_cost.toFixed(2)} zł</td>
+</tr></tfoot>` : ''}
+</table>
+${macroHTML}
+<div class="footer">Wygenerowano przez aplikację Meal Planner · ${dateStr}</div>
+</body></html>`;
+}
+
+// ─── Lista zakupów HTML generator ────────────────────────────────────────────
+function generateShopListHTML({ items, total, selectedDays, memberLabel }) {
+  const now = new Date();
+  const dateStr = `${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
+  const daysStr = selectedDays.map(d => toEU(d)).join(', ');
+
+  const rows = items.map(item => {
+    const pkgStr = item.sold_by_weight
+      ? 'na wagę'
+      : `${item.packages_rounded} szt.`;
+    return `<tr>
+      <td class="no-print del-cell">
+        <button class="del-btn" onclick="this.closest('tr').remove()">Usuń</button>
+      </td>
+      <td>${item.product_name}</td>
+      <td class="num">${item.total_weight} ${item.unit || 'g'}</td>
+      <td>${pkgStr}</td>
+      <td class="num">${item.price_per_package?.toFixed(2)} zł</td>
+      <td class="check"><input type="checkbox" /></td>
+    </tr>`;
+  }).join('');
+
+  return `<!DOCTYPE html>
+<html lang="pl"><head><meta charset="UTF-8">
+<title>Lista zakupów</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#fff;color:#111827;padding:32px 40px;max-width:900px;margin:0 auto}
+.print-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 auto 24px;padding:10px 32px;background:#0d9488;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer}
+.hdr{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:22px;padding-bottom:12px;border-bottom:2px solid #0d9488}
+h1{font-size:22px;font-weight:800;color:#0d9488}
+.days-label{font-size:12px;color:#374151;margin-top:5px;line-height:1.5}
+.member{font-size:11px;color:#6b7280;margin-top:2px}
+.meta{font-size:11px;color:#9ca3af;text-align:right;line-height:1.7}
+.badges{display:flex;gap:8px;margin-top:7px;flex-wrap:wrap;align-items:center}
+.badge{background:#f0fdf4;border:1px solid #a7f3d0;border-radius:4px;padding:2px 8px;font-size:11px;color:#0d9488;font-weight:600}
+.cost-badge{background:#f0fdf4;border:1px solid #0d9488;border-radius:4px;padding:2px 10px;font-size:12px;color:#0d9488;font-weight:700}
+table{width:100%;border-collapse:collapse;margin-top:4px}
+th{font-size:11px;font-weight:700;color:#0d9488;text-transform:uppercase;letter-spacing:.5px;padding:8px 10px;text-align:left;border-bottom:2px solid #e5e7eb}
+th.num{text-align:right}
+th.check-col{text-align:center;width:80px}
+td{padding:9px 10px;border-bottom:1px solid #f3f4f6;font-size:13px;color:#374151;vertical-align:middle}
+tr:nth-child(even) td{background:#fafafa}
+td.num{text-align:right}
+td.check{text-align:center}
+td.del-cell{width:56px;padding:6px 6px}
+input[type="checkbox"]{width:16px;height:16px;cursor:pointer;accent-color:#0d9488;vertical-align:middle}
+.del-btn{background:#fef2f2;border:1px solid #fca5a5;border-radius:4px;color:#ef4444;font-size:11px;font-weight:600;padding:3px 8px;cursor:pointer;white-space:nowrap}
+.del-btn:hover{background:#fee2e2}
+.footer{margin-top:24px;padding-top:10px;border-top:1px solid #f3f4f6;font-size:10px;color:#d1d5db;text-align:center}
+@media print{
+  .print-btn,.no-print{display:none!important}
+  body{padding:12px}
+  tr{break-inside:avoid}
+  input[type="checkbox"]{appearance:none;-webkit-appearance:none;width:14px;height:14px;border:1.5px solid #9ca3af;border-radius:3px;display:inline-block;vertical-align:middle}
+}
+</style></head><body>
+<button class="print-btn" onclick="window.print()">Drukuj / Zapisz PDF</button>
+<div class="hdr">
+  <div>
+    <h1>Lista zakupów</h1>
+    <div class="days-label">Dni: ${daysStr}</div>
+    ${memberLabel ? `<div class="member">${memberLabel}</div>` : ''}
+    <div class="badges">
+      <span class="badge">${items.length} produktów</span>
+      <span class="cost-badge">Szac. koszt: ${total.toFixed(2)} zł</span>
+    </div>
+  </div>
+  <div class="meta">Wygenerowano: ${dateStr}</div>
+</div>
+<table>
+<thead><tr>
+  <th class="no-print"></th>
+  <th>Produkt</th>
+  <th class="num">Potrzebne</th>
+  <th>Opakowania</th>
+  <th class="num">Szac. cena/opak.</th>
+  <th class="check-col">W koszyku?</th>
+</tr></thead>
+<tbody>${rows}</tbody>
+</table>
+<div class="footer">Wygenerowano przez aplikację Meal Planner · ${dateStr}</div>
+</body></html>`;
+}
+
 // ─── Main component ───────────────────────────────────────────────────────────
-export default function Export() {
+export default function Export({ onGoToTab }) {
   const { members, activeMember } = useMember();
   const { showError } = useToast();
 
@@ -288,226 +612,439 @@ export default function Export() {
   }, [members]); // eslint-disable-line
   const toggleMember = id => setSelectedMemberIds(prev => prev.includes(id) ? prev.filter(x=>x!==id) : [...prev, id]);
 
-  // Co eksportujemy
-  const [expWeek,   setExpWeek]   = useState(true);
-  const [expMonth,  setExpMonth]  = useState(false);
-  const [expCustom, setExpCustom] = useState(false);
-  const [expDrinks, setExpDrinks] = useState(false);
-  const [expTpl,    setExpTpl]    = useState(false);
-  const [expRecipe, setExpRecipe] = useState(false);
-  const [customRange, setCustomRange] = useState({ start:'', end:'' });
-  const [selectedRecipeId, setSelectedRecipeId] = useState('');
+  // Składniki przepisu — collapsible + search
+  const [skladnikiOpen,   setSkladnikiOpen]   = useState(false);
+  const [skladnikiSearch, setSkladnikiSearch] = useState('');
 
-  // Pola produktów
-  const [fldGram,    setFldGram]    = useState(true);
-  const [fldPkg,     setFldPkg]     = useState(true);
-  const [fldSzt,     setFldSzt]     = useState(true);
-  const [fldPrice,   setFldPrice]   = useState(true);
-  const [fldShop,    setFldShop]    = useState(true);
-  const [fldCost,    setFldCost]    = useState(true);
+  // Generuj dokumenty HTML
+  const [htmlPeriod,   setHtmlPeriod]   = useState('week');
+  const [htmlCustom,   setHtmlCustom]   = useState({ start:'', end:'' });
+  const [htmlRecipeId, setHtmlRecipeId] = useState('');
+  const [htmlWLoading, setHtmlWLoading] = useState(false);
+  const [htmlKLoading, setHtmlKLoading] = useState(false);
+
+  // Lista zakupów — kalendarz z zaznaczaniem dni
+  const [shopYear,  setShopYear]  = useState(() => new Date().getFullYear());
+  const [shopMonth, setShopMonth] = useState(() => new Date().getMonth());
+  const [shopDays,  setShopDays]  = useState(() => new Set());
+  const [shopLoading, setShopLoading] = useState(false);
+  const [shopMemberIds, setShopMemberIds] = useState(() => activeMember ? [activeMember.id] : []);
+  useEffect(() => {
+    if (shopMemberIds.length === 0 && activeMember) setShopMemberIds([activeMember.id]);
+  }, [activeMember?.id]); // eslint-disable-line
 
   const [recipes, setRecipes] = useState([]);
-  const [templates] = useState(() => { try { return JSON.parse(localStorage.getItem('weekTemplates')||'[]'); } catch { return []; } });
-  const [loading, setLoading] = useState(false);
-
   useEffect(() => { recipesApi.getAll().then(r => setRecipes(r.data)).catch(()=>{}); }, []);
+
+  const [previewMeals, setPreviewMeals] = useState({});
+  const [previewLoading, setPreviewLoading] = useState(false);
+  const midsKey = (selectedMemberIds.length > 0 ? selectedMemberIds : activeMember ? [activeMember.id] : []).join(',');
+  useEffect(() => {
+    const { start, end } = getCurrentWeek();
+    setPreviewLoading(true);
+    const ids = selectedMemberIds.length > 0 ? selectedMemberIds : activeMember ? [activeMember.id] : [];
+    api.getRange(start, end, ids).then(r => { setPreviewMeals(r.data || {}); setPreviewLoading(false); }).catch(() => setPreviewLoading(false));
+  }, [midsKey]); // eslint-disable-line
 
   const week  = getCurrentWeek();
   const month = getCurrentMonth();
   const memberLabel = members.filter(m => selectedMemberIds.includes(m.id)).map(m => m.name).join(', ');
   const mids = selectedMemberIds.length > 0 ? selectedMemberIds : activeMember ? [activeMember.id] : [];
 
-  const handleExport = async () => {
-    setLoading(true);
-    const sections = [];
-    const sep = ';';
-
-    const productHeaders = ['Produkt', fldGram&&'Gram. użyta', fldPkg&&'Pojemność opak.', fldSzt&&'Szt.', fldPrice&&'Cena/opak. (zł)', fldShop&&'Zakupy (zł)', fldCost&&'Koszt (zł)'].filter(Boolean);
-
-    const buildProductRows = (items) => items.map(item => {
-      const szt = item.sold_by_weight ? item.packages_exact?.toFixed(3) : item.packages_rounded;
-      return [
-        item.product_name,
-        fldGram  && `${item.total_weight} ${item.unit||'g'}`,
-        fldPkg   && `${item.package_weight} ${item.unit||'g'}`,
-        fldSzt   && szt,
-        fldPrice && item.price_per_package?.toFixed(2),
-        fldShop  && item.actual_cost?.toFixed(2),
-        fldCost  && item.total_cost?.toFixed(2),
-      ].filter((v,i) => productHeaders[i] !== undefined ? true : false).filter((_,i) => i < productHeaders.length);
-    });
-
-    const addPeriodSection = async (label, range) => {
-      try {
-        const res = await api.getSummary(range.start, range.end, mids);
-        const d = res.data;
-        const days = Math.round((new Date(range.end)-new Date(range.start))/86400000)+1;
-        const drinks = expDrinks ? calcDrinks(days) : [];
-        const total = d.total_cost + drinks.reduce((s,i)=>s+i.total,0);
-        const sec = {
-          title: `${label};${toEU(range.start)} – ${toEU(range.end)}`,
-          subtitle: memberLabel ? `Uwzględnieni;${memberLabel}` : '',
-          headers: productHeaders,
-          rows: buildProductRows(d.items),
-          footer: null,
-        };
-        if (drinks.length > 0) {
-          sec.rows.push(['']);
-          sec.rows.push(['Napoje i wydatki regularne', ...Array(productHeaders.length-1).fill('')]);
-          drinks.forEach(dr => {
-            const row = Array(productHeaders.length).fill('');
-            row[0] = dr.name;
-            if (fldShop) row[productHeaders.indexOf('Zakupy (zł)')] = dr.daily.toFixed(2)+' zł/dzień';
-            if (fldCost) row[productHeaders.indexOf('Koszt (zł)')] = dr.total.toFixed(2);
-            sec.rows.push(row);
-          });
-        }
-        const totalRow = Array(productHeaders.length).fill('');
-        totalRow[0] = 'Łączny koszt';
-        totalRow[productHeaders.length-1] = total.toFixed(2);
-        sec.rows.push(['']);
-        sec.rows.push(totalRow);
-        sections.push(sec);
-      } catch {}
-    };
-
-    if (expWeek)   await addPeriodSection('Bieżący tydzień', week);
-    if (expMonth)  await addPeriodSection('Bieżący miesiąc', month);
-    if (expCustom && customRange.start && customRange.end) await addPeriodSection('Wybrany okres', customRange);
-
-    if (expDrinks && !expWeek && !expMonth && !expCustom) {
-      const days = 7;
-      const drinks = calcDrinks(days);
-      if (drinks.length > 0) {
-        sections.push({
-          title: 'Napoje i wydatki regularne (tydzień)',
-          headers: ['Napój', 'zł/dzień', 'Łącznie (zł)'],
-          rows: drinks.map(d => [d.name, d.daily.toFixed(2), d.total.toFixed(2)]),
-          footer: ['Łącznie', '', drinks.reduce((s,i)=>s+i.total,0).toFixed(2)],
-        });
-      }
-    }
-
-    if (expTpl && templates.length > 0) {
-      sections.push({
-        title: 'Szablony tygodniowe',
-        headers: ['Szablon', 'Liczba posiłków'],
-        rows: templates.map(t => [t.name, t.meals?.length ?? 0]),
-      });
-    }
-
-    if (expRecipe && selectedRecipeId) {
-      const recipe = recipes.find(r => String(r.id) === selectedRecipeId);
-      if (recipe) {
-        sections.push({
-          title: `Przepis: ${recipe.name}`,
-          headers: ['Składnik', 'Ilość', 'Jednostka', 'Koszt (zł)'],
-          rows: (recipe.ingredients || []).map(ing => [ing.product_name, ing.weight, ing.unit||'g', ing.cost?.toFixed(2)]),
-          footer: ['Łączny koszt przepisu', '', '', recipe.total_cost?.toFixed(2)],
-        });
-      }
-    }
-
-    if (sections.length === 0) { setLoading(false); return; }
-    generateCSV(sections);
-    setLoading(false);
+  // Shop list helpers
+  const shopMids = shopMemberIds.length > 0 ? shopMemberIds : activeMember ? [activeMember.id] : [];
+  const shopMemberLabel = members.filter(m => shopMemberIds.includes(m.id)).map(m => m.name).join(', ');
+  const toggleShopMember = id => setShopMemberIds(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
+  const toggleShopDay = ds => setShopDays(prev => { const n = new Set(prev); n.has(ds) ? n.delete(ds) : n.add(ds); return n; });
+  const prevShopMonth = () => { if (shopMonth === 0) { setShopYear(y => y-1); setShopMonth(11); } else setShopMonth(m => m-1); };
+  const nextShopMonth = () => { if (shopMonth === 11) { setShopYear(y => y+1); setShopMonth(0); } else setShopMonth(m => m+1); };
+  const selectShopWeek = () => {
+    const { start, end } = getCurrentWeek();
+    const s = new Set(); let d = new Date(start); const e = new Date(end);
+    while (d <= e) { s.add(dateToStr(d)); d.setDate(d.getDate()+1); }
+    setShopDays(s);
   };
+  const selectShopMonth = () => {
+    const s = new Set(getCalGrid(shopYear, shopMonth).filter(d => d.getMonth() === shopMonth).map(dateToStr));
+    setShopDays(s);
+  };
+  const handleGenShopList = async () => {
+    if (shopDays.size === 0) { showError('Zaznacz co najmniej jeden dzień'); return; }
+    setShopLoading(true);
+    try {
+      const days = [...shopDays].sort();
+      const results = await Promise.all(days.map(d => api.getSummary(d, d, shopMids)));
+      const merged = {};
+      for (const res of results) {
+        for (const item of res.data.items) {
+          if (!merged[item.product_id]) merged[item.product_id] = { ...item, total_weight: 0 };
+          merged[item.product_id].total_weight += item.total_weight;
+        }
+      }
+      const mergedItems = Object.values(merged).map(item => {
+        const exact   = item.total_weight / item.package_weight;
+        const rounded = item.sold_by_weight ? exact : Math.ceil(exact);
+        const cost    = Math.round(rounded * item.price_per_package * 100) / 100;
+        return { ...item, packages_exact: exact, packages_rounded: rounded, total_cost: cost, actual_cost: Math.round(exact * item.price_per_package * 100) / 100 };
+      }).sort((a, b) => a.product_name.localeCompare(b.product_name, 'pl'));
+      const total = mergedItems.reduce((s, i) => s + i.total_cost, 0);
+      const html = generateShopListHTML({ items: mergedItems, total, selectedDays: days, memberLabel: shopMemberLabel });
+      const win = window.open('', '_blank'); win.document.write(html); win.document.close();
+    } catch { showError('Nie udało się wygenerować listy zakupów'); }
+    finally { setShopLoading(false); }
+  };
+
+  const getHtmlRange = () => {
+    if (htmlPeriod === 'week')   return week;
+    if (htmlPeriod === 'month')  return month;
+    return htmlCustom;
+  };
+  const getHtmlPeriodLabel = () => {
+    if (htmlPeriod === 'week')  return `Bieżący tydzień (${toEU(week.start)} – ${toEU(week.end)})`;
+    if (htmlPeriod === 'month') return `Bieżący miesiąc (${toEU(month.start)} – ${toEU(month.end)})`;
+    const r = htmlCustom;
+    return r.start && r.end ? `${toEU(r.start)} – ${toEU(r.end)}` : '';
+  };
+
+  const handleGenWydatki = async () => {
+    const range = getHtmlRange();
+    if (!range.start || !range.end) { showError('Wybierz okres'); return; }
+    setHtmlWLoading(true);
+    try {
+      const res = await api.getSummary(range.start, range.end, mids);
+      const d = res.data;
+      const days = Math.round((new Date(range.end) - new Date(range.start)) / 86400000) + 1;
+      const categories = [{ label: 'Jedzenie', value: d.total_cost }];
+      const drinkItems = calcDrinks(days);
+      const drinkTotal = drinkItems.reduce((s, i) => s + i.total, 0);
+      if (drinkTotal > 0) categories.push({ label: 'Napoje', value: drinkTotal });
+      calcOtherSummary(days).forEach(item => categories.push({ label: item.label, value: item.total }));
+      const total = categories.reduce((s, c) => s + c.value, 0);
+      const html = generateWydatkiHTML({ categories, total, periodLabel: getHtmlPeriodLabel(), memberLabel });
+      const win = window.open('', '_blank');
+      win.document.write(html);
+      win.document.close();
+    } catch { showError('Nie udało się pobrać danych wydatków'); }
+    finally { setHtmlWLoading(false); }
+  };
+
+  const handleGenKalendar = async () => {
+    const range = getHtmlRange();
+    if (!range.start || !range.end) { showError('Wybierz okres'); return; }
+    setHtmlKLoading(true);
+    try {
+      const res = await api.getRange(range.start, range.end, mids);
+      const html = generateKalendarzHTML({ mealsByDate: res.data, start: range.start, end: range.end, periodLabel: getHtmlPeriodLabel(), memberName: memberLabel });
+      const win = window.open('', '_blank');
+      win.document.write(html);
+      win.document.close();
+    } catch { showError('Nie udało się pobrać kalendarza'); }
+    finally { setHtmlKLoading(false); }
+  };
+
+  const handleGenSkladniki = () => {
+    const recipe = recipes.find(r => String(r.id) === htmlRecipeId);
+    if (!recipe) { showError('Wybierz przepis'); return; }
+    const html = generateSkladnikiHTML(recipe);
+    const win = window.open('', '_blank');
+    win.document.write(html);
+    win.document.close();
+  };
+
+  const DIV = <div style={{ borderTop:'1px solid #374151', margin:'18px 0' }} />;
+  const LBL = { fontSize:11, color:'#6b7280', marginBottom:8, textTransform:'uppercase', letterSpacing:'0.5px', fontWeight:700 };
 
   return (
     <div>
       <div className="card" style={{ padding:'16px 20px', marginBottom:12 }}>
-        <h1 style={{ marginBottom:4 }}>Eksport danych</h1>
-        <p style={{ fontSize:13, color:'#6b7280', margin:0 }}>Wybierz co chcesz wyeksportować i jakie pola uwzględnić, następnie wygeneruj plik CSV.</p>
+        <h1 style={{ marginBottom:0 }}>Eksport danych</h1>
       </div>
 
-      <Section title="Karta Makro dla klienta">
-        <p style={{ fontSize:13, color:'#9ca3af', marginBottom:14, lineHeight:1.6 }}>
-          Generuje gotowy dokument do wydruku lub zapisu jako PDF — z danymi osobowymi, BMI, TDEE i celami makro.
-          Dane są pobierane z <strong style={{ color:'#e2e8f0' }}>Kalkulatora Makro</strong>.
-        </p>
-        <button className="btn btn-primary" onClick={handleExportMacro}
-          style={{ padding:'9px 22px', fontSize:14, fontWeight:700, display:'flex', alignItems:'center', gap:8 }}>
-          <span style={{ fontSize:16 }}>🖨️</span> Generuj kartę makro
-        </button>
-      </Section>
+      <div className="card" style={{ padding:'16px 20px', marginBottom:12 }}>
+        <div style={{ display:'flex', gap:20, alignItems:'flex-start' }}>
+        <div style={{ flex:1, minWidth:0 }}>
 
-      {members.length > 1 && (
-        <Section title="Kogo uwzględniamy">
+        {/* ── Generuj dokumenty ─────────────────────────── */}
+        <h2 style={{ marginBottom:12 }}>Generuj dokumenty</h2>
+
+        <div style={{ marginBottom:12 }}>
+          <div style={LBL}>Okres (wydatki i kalendarz)</div>
           <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
-            {members.map((m, idx) => {
-              const checked = selectedMemberIds.includes(m.id);
-              const color = ['#0d9488','#6366f1','#f59e0b','#ec4899','#22c55e','#ef4444'][idx%6];
+            <ToggleChip active={htmlPeriod==='week'}   onClick={()=>setHtmlPeriod('week')}>Bieżący tydzień</ToggleChip>
+            <ToggleChip active={htmlPeriod==='month'}  onClick={()=>setHtmlPeriod('month')}>Bieżący miesiąc</ToggleChip>
+            <ToggleChip active={htmlPeriod==='custom'} onClick={()=>setHtmlPeriod('custom')}>Własny</ToggleChip>
+          </div>
+          {htmlPeriod === 'custom' && (
+            <div style={{ marginTop:10, display:'flex', gap:12, flexWrap:'wrap' }}>
+              {[{key:'start',label:'Od'},{key:'end',label:'Do'}].map(({key,label}) => (
+                <div key={key}>
+                  <div style={{ fontSize:11, color:'#6b7280', marginBottom:3 }}>{label}</div>
+                  <div style={{ position:'relative' }}>
+                    <input type="text" readOnly placeholder="dd.mm.rrrr"
+                      value={htmlCustom[key] ? toEU(htmlCustom[key]) : ''}
+                      style={{ padding:'6px 10px', border:'1px solid #374151', borderRadius:6, fontSize:13, color:'#f1f5f9', background:'#111827', width:130, cursor:'pointer' }} />
+                    <input type="date" value={htmlCustom[key]||''}
+                      onChange={e => setHtmlCustom(r=>({...r,[key]:e.target.value}))}
+                      style={{ position:'absolute', inset:0, opacity:0, width:'100%', height:'100%', cursor:'pointer' }} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {members.length > 1 && (
+          <div style={{ marginBottom:14 }}>
+            <div style={LBL}>Kogo uwzględniamy</div>
+            <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
+              {members.map((m, idx) => {
+                const checked = selectedMemberIds.includes(m.id);
+                const color = ['#0d9488','#6366f1','#f59e0b','#ec4899','#22c55e','#ef4444'][idx%6];
+                return (
+                  <button key={m.id} onClick={() => toggleMember(m.id)}
+                    style={{ display:'flex', alignItems:'center', gap:6, padding:'5px 14px', borderRadius:20, cursor:'pointer', fontSize:12, fontWeight: checked?700:400, transition:'all 0.15s',
+                      border:`1px solid ${checked?color:'#374151'}`, background: checked?`${color}22`:'#1f2937', color: checked?color:'#6b7280' }}>
+                    <span style={{ width:8, height:8, borderRadius:'50%', background: checked?color:'#374151', flexShrink:0 }} />
+                    {m.name}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        <div style={{ display:'flex', flexDirection:'column', gap:6, alignItems:'stretch', width:'fit-content' }}>
+          <button className="btn btn-primary" onClick={handleGenWydatki} disabled={htmlWLoading}
+            style={{ padding:'9px 22px', fontSize:14, fontWeight:700 }}>
+            {htmlWLoading ? 'Generuję...' : 'Podsumowanie wydatków'}
+          </button>
+          <button className="btn btn-primary" onClick={handleExportMacro}
+            style={{ padding:'9px 22px', fontSize:14, fontWeight:700 }}>
+            Karta Makro
+          </button>
+          <button className="btn btn-primary" onClick={handleGenKalendar} disabled={htmlKLoading}
+            style={{ padding:'9px 22px', fontSize:14, fontWeight:700 }}>
+            {htmlKLoading ? 'Generuję...' : 'Karta Kalendarza'}
+          </button>
+          <div style={{ position:'relative' }}>
+            <button type="button" className="btn btn-primary"
+              onClick={() => { setSkladnikiOpen(v => !v); setSkladnikiSearch(''); setHtmlRecipeId(''); }}
+              style={{ padding:'9px 22px', fontSize:14, fontWeight:700, display:'flex', alignItems:'center', gap:8, width:'100%', justifyContent:'space-between' }}>
+              Składniki przepisu
+              <span style={{ fontSize:11, opacity:0.7 }}>{skladnikiOpen ? '▲' : '▼'}</span>
+            </button>
+            {skladnikiOpen && (
+              <div style={{
+                position:'absolute', top:'calc(100% + 6px)', left:0,
+                width:'100%',
+                background:'#1c2433', border:'1px solid #374151', borderRadius:10,
+                padding:'12px', zIndex:100, boxShadow:'0 8px 24px rgba(0,0,0,0.5)',
+              }}>
+                <input type="text" placeholder="Wyszukaj przepis..." autoFocus
+                  value={skladnikiSearch} onChange={e => { setSkladnikiSearch(e.target.value); setHtmlRecipeId(''); }}
+                  style={{ width:'100%', padding:'8px 12px', fontSize:13, border:'1px solid #374151', borderRadius:8, background:'#111827', color:'#e2e8f0', marginBottom:8, boxSizing:'border-box' }} />
+                {skladnikiSearch.trim() && (
+                  <div style={{ maxHeight:200, overflowY:'auto', border:'1px solid #374151', borderRadius:8, marginBottom:10 }}>
+                    {recipes.filter(r => r.name.toLowerCase().includes(skladnikiSearch.toLowerCase())).slice(0, 20).map(r => (
+                      <div key={r.id} onClick={() => { setHtmlRecipeId(String(r.id)); setSkladnikiSearch(''); }}
+                        style={{ padding:'8px 12px', cursor:'pointer', fontSize:13, transition:'background 0.1s',
+                          color:'#e2e8f0', borderBottom:'1px solid #1f2937' }}
+                        onMouseEnter={e => e.currentTarget.style.background='#0d948822'}
+                        onMouseLeave={e => e.currentTarget.style.background='transparent'}>
+                        {r.name}
+                      </div>
+                    ))}
+                    {recipes.filter(r => r.name.toLowerCase().includes(skladnikiSearch.toLowerCase())).length === 0 && (
+                      <div style={{ padding:'12px', fontSize:12, color:'#6b7280', textAlign:'center' }}>Brak wyników</div>
+                    )}
+                  </div>
+                )}
+                {htmlRecipeId && !skladnikiSearch.trim() && (
+                  <div>
+                    <div style={{ fontSize:12, color:'#2dd4bf', fontWeight:600, marginBottom:10, padding:'2px 0' }}>
+                      {recipes.find(r => String(r.id) === htmlRecipeId)?.name}
+                    </div>
+                    <button className="btn btn-primary" onClick={handleGenSkladniki}
+                      style={{ width:'100%', padding:'9px', fontSize:14, fontWeight:700 }}>
+                      Eksportuj składniki
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+
+        </div>{/* end left column */}
+
+        <div style={{ width:1, background:'#374151', alignSelf:'stretch', flexShrink:0 }} />
+
+        {/* ── Środek: Podgląd bieżącego tygodnia ────────── */}
+        {(() => {
+          const SLOT_COLORS = ['#4a6fa5','#93c5fd','#fcd34d','#c2410c','#6366f1'];
+          const todayStr = dateToStr(new Date());
+          const w = getCurrentWeek();
+          const daysArr = Array.from({length:7}, (_, i) => {
+            const d = new Date(w.start); d.setDate(d.getDate() + i); return d;
+          });
+          const totalMeals = daysArr.reduce((s, d) => s + (previewMeals[dateToStr(d)]||[]).length, 0);
+          const daysWithMeals = daysArr.filter(d => (previewMeals[dateToStr(d)]||[]).length > 0).length;
+          return (
+            <div style={{ flex:1, minWidth:0 }}>
+              <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:10 }}>
+                <span style={{ fontSize:13, fontWeight:700, color:'#e2e8f0' }}>Podgląd tygodnia</span>
+                <span style={{ fontSize:11, color:'#6b7280' }}>{toEU(w.start)} – {toEU(w.end)}</span>
+              </div>
+              {previewLoading ? (
+                <div style={{ fontSize:12, color:'#6b7280', textAlign:'center', padding:'20px 0' }}>Ładowanie...</div>
+              ) : (
+                <>
+                  <div style={{ display:'grid', gridTemplateColumns:'repeat(7,1fr)', gap:3, marginBottom:6 }}>
+                    {['Pn','Wt','Śr','Cz','Pt','So','Nd'].map(d => (
+                      <div key={d} style={{ textAlign:'center', fontSize:10, fontWeight:700, color:'#6b7280', paddingBottom:3 }}>{d}</div>
+                    ))}
+                    {daysArr.map(day => {
+                      const ds = dateToStr(day);
+                      const isToday = ds === todayStr;
+                      const meals = (previewMeals[ds] || []).slice().sort((a,b) => a.position - b.position);
+                      return (
+                        <div key={ds} style={{
+                          background: isToday ? '#162626' : '#1f2937',
+                          border: `1px solid ${isToday ? '#0d9488' : '#374151'}`,
+                          borderRadius:6, padding:'5px 4px', minHeight:64,
+                        }}>
+                          <div style={{ textAlign:'center', fontSize:11, fontWeight: isToday?700:500, color: isToday?'#2dd4bf':'#94a3b8', marginBottom:3 }}>
+                            {day.getDate()}
+                          </div>
+                          {meals.length === 0
+                            ? <div style={{ textAlign:'center', fontSize:10, color:'#374151', marginTop:6 }}>—</div>
+                            : meals.map(m => {
+                                const col = SLOT_COLORS[(m.position-1)%5];
+                                return (
+                                  <div key={m.id} style={{
+                                    background:`${col}22`, borderLeft:`2px solid ${col}`, borderRadius:2,
+                                    padding:'1px 4px', marginBottom:2, fontSize:9, color:'#e2e8f0',
+                                    overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap',
+                                  }} title={m.recipe?.name}>
+                                    {m.recipe?.name || ''}
+                                  </div>
+                                );
+                              })
+                          }
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <div style={{ fontSize:11, color: totalMeals > 0 ? '#6b7280' : '#374151', textAlign:'center' }}>
+                    {totalMeals === 0
+                      ? 'Brak zaplanowanych posiłków'
+                      : `${daysWithMeals} ${daysWithMeals === 1 ? 'dzień' : 'dni'} z posiłkami · ${totalMeals} ${totalMeals === 1 ? 'posiłek' : totalMeals < 5 ? 'posiłki' : 'posiłków'}`}
+                  </div>
+                </>
+              )}
+            </div>
+          );
+        })()}
+
+        {/* ── Prawa strona: Lista zakupów ────────────────── */}
+        <div style={{ width:1, background:'#374151', alignSelf:'stretch', flexShrink:0 }} />
+
+        <div style={{ flexShrink:0, width:300 }}>
+          <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:6 }}>
+            <h2 style={{ margin:0, fontSize:15 }}>Lista zakupów</h2>
+            {onGoToTab && (
+              <button onClick={() => onGoToTab('calendar')}
+                style={{ background:'none', border:'1px solid #374151', borderRadius:6, color:'#6b7280', fontSize:11, fontWeight:600, padding:'2px 8px', cursor:'pointer', whiteSpace:'nowrap', flexShrink:0 }}>
+                Idź do kalendarza
+              </button>
+            )}
+          </div>
+          <p style={{ fontSize:12, color:'#6b7280', margin:'0 0 10px', lineHeight:1.4 }}>
+            Zaznacz dni — lista produktów z przepisów przeliczona na opakowania.
+          </p>
+
+          <div style={{ display:'flex', alignItems:'center', gap:6, marginBottom:8 }}>
+            <button onClick={prevShopMonth}
+              style={{ background:'#1f2937', border:'1px solid #374151', borderRadius:6, color:'#9ca3af', width:26, height:26, cursor:'pointer', fontSize:15, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
+              ‹
+            </button>
+            <span style={{ flex:1, textAlign:'center', fontWeight:700, fontSize:13, color:'#e2e8f0' }}>
+              {MONTH_NAMES_PL[shopMonth]} {shopYear}
+            </span>
+            <button onClick={nextShopMonth}
+              style={{ background:'#1f2937', border:'1px solid #374151', borderRadius:6, color:'#9ca3af', width:26, height:26, cursor:'pointer', fontSize:15, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
+              ›
+            </button>
+          </div>
+
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(7,1fr)', gap:2, marginBottom:2 }}>
+            {['Pn','Wt','Śr','Cz','Pt','So','Nd'].map(d => (
+              <div key={d} style={{ textAlign:'center', fontSize:9, fontWeight:700, color:'#6b7280', padding:'2px 0' }}>{d}</div>
+            ))}
+          </div>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(7,1fr)', gap:2, marginBottom:8 }}>
+            {getCalGrid(shopYear, shopMonth).map(day => {
+              const ds = dateToStr(day);
+              const isCurrentMonth = day.getMonth() === shopMonth;
+              const isToday = ds === dateToStr(new Date());
+              const isSel = shopDays.has(ds);
               return (
-                <button key={m.id} onClick={() => toggleMember(m.id)}
-                  style={{ display:'flex', alignItems:'center', gap:6, padding:'5px 14px', borderRadius:20, cursor:'pointer', fontSize:12, fontWeight: checked?700:400, transition:'all 0.15s',
-                    border:`1px solid ${checked?color:'#374151'}`, background: checked?`${color}22`:'#1f2937', color: checked?color:'#6b7280' }}>
-                  <span style={{ width:8, height:8, borderRadius:'50%', background: checked?color:'#374151', flexShrink:0 }} />
-                  {m.name}
-                </button>
+                <div key={ds} onClick={() => toggleShopDay(ds)}
+                  style={{
+                    height:30, borderRadius:5, cursor:'pointer', fontSize:11,
+                    display:'flex', alignItems:'center', justifyContent:'center',
+                    fontWeight: isSel ? 700 : 400, userSelect:'none', transition:'all 0.1s',
+                    background: isSel ? '#0d9488' : 'transparent',
+                    color: isSel ? '#fff' : isCurrentMonth ? '#e2e8f0' : '#374151',
+                    border: isToday && !isSel ? '1px solid #0d9488' : '1px solid transparent',
+                    opacity: isCurrentMonth ? 1 : 0.2,
+                  }}>
+                  {day.getDate()}
+                </div>
               );
             })}
           </div>
-        </Section>
-      )}
 
-      <Section title="Co eksportować">
-        <CheckRow checked={expWeek} onChange={setExpWeek} label="Bieżący tydzień" sub={`${toEU(week.start)} – ${toEU(week.end)}`} />
-        <CheckRow checked={expMonth} onChange={setExpMonth} label="Bieżący miesiąc" sub={`${toEU(month.start)} – ${toEU(month.end)}`} />
-        <CheckRow checked={expCustom} onChange={setExpCustom} label="Wybrany okres" />
-        {expCustom && (
-          <div style={{ marginLeft:25, display:'flex', gap:12, marginBottom:4, flexWrap:'wrap' }}>
-            {[{key:'start',label:'Od'},{key:'end',label:'Do'}].map(({key,label}) => (
-              <div key={key}>
-                <div style={{ fontSize:11, color:'#6b7280', marginBottom:3 }}>{label}</div>
-                <div style={{ position:'relative' }}>
-                  <input type="text" readOnly placeholder="dd.mm.rrrr"
-                    value={customRange[key] ? toEU(customRange[key]) : ''}
-                    style={{ padding:'6px 10px', border:'1px solid #374151', borderRadius:6, fontSize:13, color:'#f1f5f9', background:'#111827', width:130, cursor:'pointer' }} />
-                  <input type="date" value={customRange[key]||''}
-                    onChange={e => setCustomRange(r=>({...r,[key]:e.target.value}))}
-                    style={{ position:'absolute', inset:0, opacity:0, width:'100%', height:'100%', cursor:'pointer' }} />
-                </div>
+          <div style={{ display:'flex', gap:5, flexWrap:'wrap', marginBottom:8 }}>
+            <ToggleChip active={false} onClick={selectShopWeek}>Bieżący tydzień</ToggleChip>
+            <ToggleChip active={false} onClick={selectShopMonth}>Ten miesiąc</ToggleChip>
+            {shopDays.size > 0 && <ToggleChip active={false} onClick={() => setShopDays(new Set())}>Wyczyść</ToggleChip>}
+          </div>
+
+          {shopDays.size > 0 && (
+            <div style={{ fontSize:11, color:'#0d9488', fontWeight:600, marginBottom:8 }}>
+              Zaznaczono: {shopDays.size} {shopDays.size === 1 ? 'dzień' : 'dni'}
+            </div>
+          )}
+
+          {members.length > 1 && (
+            <div style={{ marginBottom:10 }}>
+              <div style={{ ...LBL, fontSize:10, marginBottom:6 }}>Uwzględnij profile</div>
+              <div style={{ display:'flex', gap:6, flexWrap:'wrap' }}>
+                {members.map((m, idx) => {
+                  const checked = shopMemberIds.includes(m.id);
+                  const color = ['#0d9488','#6366f1','#f59e0b','#ec4899','#22c55e','#ef4444'][idx%6];
+                  return (
+                    <button key={m.id} onClick={() => toggleShopMember(m.id)}
+                      style={{ display:'flex', alignItems:'center', gap:5, padding:'3px 10px', borderRadius:20, cursor:'pointer', fontSize:11, fontWeight: checked?700:400, transition:'all 0.15s',
+                        border:`1px solid ${checked?color:'#374151'}`, background: checked?`${color}22`:'#1f2937', color: checked?color:'#6b7280' }}>
+                      <span style={{ width:7, height:7, borderRadius:'50%', background: checked?color:'#374151', flexShrink:0 }} />
+                      {m.name}
+                    </button>
+                  );
+                })}
               </div>
-            ))}
-          </div>
-        )}
-        <CheckRow checked={expDrinks} onChange={setExpDrinks} label="Napoje i wydatki regularne" sub="Dołącz koszty napojów z ustawień w Wydatkach" />
-        <CheckRow checked={expTpl} onChange={setExpTpl} label="Szablony tygodniowe" sub={`${templates.length} szablonów`} />
-        <CheckRow checked={expRecipe} onChange={setExpRecipe} label="Wybrany przepis" />
-        {expRecipe && (
-          <div style={{ marginLeft:25, marginBottom:4 }}>
-            <select value={selectedRecipeId} onChange={e => setSelectedRecipeId(e.target.value)}
-              style={{ padding:'6px 10px', fontSize:13, borderRadius:6, border:'1px solid #374151', background:'#111827', color:'#e2e8f0', minWidth:220 }}>
-              <option value="">— wybierz przepis —</option>
-              {recipes.map(r => <option key={r.id} value={String(r.id)}>{r.name}</option>)}
-            </select>
-          </div>
-        )}
-      </Section>
+            </div>
+          )}
 
-      {(expWeek || expMonth || expCustom) && (
-        <Section title="Pola produktów">
-          <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
-            {[
-              [fldGram,  setFldGram,  'Gram. użyta'],
-              [fldPkg,   setFldPkg,   'Pojemność opak.'],
-              [fldSzt,   setFldSzt,   'Szt.'],
-              [fldPrice, setFldPrice, 'Cena/opak.'],
-              [fldShop,  setFldShop,  'Zakupy'],
-              [fldCost,  setFldCost,  'Koszt'],
-            ].map(([val, set, lbl]) => (
-              <ToggleChip key={lbl} active={val} onClick={() => set(v=>!v)}>{lbl}</ToggleChip>
-            ))}
-          </div>
-        </Section>
-      )}
-
-      <div style={{ display:'flex', justifyContent:'flex-end', marginTop:8 }}>
-        <button className="btn btn-primary" onClick={handleExport} disabled={loading}
-          style={{ padding:'10px 28px', fontSize:15, fontWeight:700 }}>
-          {loading ? 'Generuję...' : '↓ Generuj CSV'}
-        </button>
-      </div>
+          <button className="btn btn-primary" onClick={handleGenShopList}
+            disabled={shopLoading || shopDays.size === 0}
+            style={{ width:'100%', padding:'8px', fontSize:13, fontWeight:700 }}>
+            {shopLoading ? 'Generuję...' : `Generuj listę zakupów${shopDays.size > 0 ? ` (${shopDays.size} ${shopDays.size === 1 ? 'dzień' : 'dni'})` : ''}`}
+          </button>
+        </div>{/* end right column */}
+        </div>{/* end flex row */}
+      </div>{/* end card */}
     </div>
   );
 }
