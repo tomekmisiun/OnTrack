@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { Icon } from '@iconify/react';
 import { recipes as api, products as productsApi } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useToast } from '../contexts/ToastContext';
@@ -152,7 +153,35 @@ export default function Recipes() {
   const [promptCopied, setPromptCopied] = useState(false);
   const [addingProductFor, setAddingProductFor] = useState(null);
   const [quickForm, setQuickForm] = useState({ name: '', package_weight: '100', package_price: '', unit: 'g', sold_by_weight: false });
+  const [listOpen, setListOpen] = useState(true);
+  const [hoveredId, setHoveredId] = useState(null);
+  const [selectionMode, setSelectionMode] = useState(false);
+  const [selectedIds, setSelectedIds] = useState(new Set());
   const textareaRef = useRef(null);
+
+  const toggleSelect = (id) => setSelectedIds(prev => {
+    const next = new Set(prev);
+    next.has(id) ? next.delete(id) : next.add(id);
+    return next;
+  });
+
+  const exitSelection = () => { setSelectionMode(false); setSelectedIds(new Set()); };
+
+  const handleDeleteSelected = () => {
+    showConfirm({
+      title: 'Usuń zaznaczone przepisy',
+      message: `Czy na pewno chcesz usunąć ${selectedIds.size} zaznaczonych przepisów?`,
+      confirmLabel: 'Usuń',
+      onConfirm: async () => {
+        try {
+          await Promise.all([...selectedIds].map(id => api.delete(id)));
+          showSuccess(`Usunięto ${selectedIds.size} przepisów`);
+          exitSelection();
+          loadRecipes();
+        } catch { showError('Błąd podczas usuwania'); }
+      },
+    });
+  };
 
   const resizeTextarea = useCallback(() => {
     const el = textareaRef.current;
@@ -288,11 +317,11 @@ export default function Recipes() {
 
               <div style={{ padding: '8px 12px', background: '#111827', border: '1px solid #374151', borderRadius: 6, fontSize: 12, color: '#9ca3af', marginBottom: 14, display: 'flex', flexDirection: 'column', gap: 6 }}>
                 <div>
-                  <span style={{ display:'inline-flex', alignItems:'center', background:'#0d9488', color:'white', borderRadius:5, padding:'2px 8px', fontSize:11, fontWeight:700, verticalAlign:'middle', marginRight:5 }}>Dodaj z AI</span>
+                  <span style={{ display:'inline-flex', alignItems:'center', background:'#1e3a3a', color:'#2dd4bf', border:'1px solid #374151', borderRadius:5, padding:'2px 8px', fontSize:11, fontWeight:700, verticalAlign:'middle', marginRight:5 }}>Dodaj z AI</span>
                   - AI wyciągnie składniki za Ciebie i dopasuje do produktów w bazie, rozumiejąc kontekst i niestandardowe formaty.
                 </div>
                 <div>
-                  <span style={{ display:'inline-flex', alignItems:'center', background:'#1c3534', color:'#0d9488', border:'1px solid #374151', borderRadius:5, padding:'2px 8px', fontSize:11, fontWeight:600, verticalAlign:'middle', marginRight:5 }}>Dodaj</span>
+                  <span style={{ display:'inline-flex', alignItems:'center', background:'#1e3a3a', color:'#2dd4bf', border:'1px solid #374151', borderRadius:5, padding:'2px 8px', fontSize:11, fontWeight:600, verticalAlign:'middle', marginRight:5 }}>Dodaj</span>
                   - Nie wymaga działania przy standardowych formatach. Przy nietypowych wymaga sprawdzenia i poprawienia dopasowań.
                 </div>
               </div>
@@ -306,7 +335,7 @@ export default function Recipes() {
                   {' / '}
                   <a href="https://chatgpt.com/" target="_blank" rel="noreferrer" style={{ color: '#2dd4bf', textDecoration: 'underline' }}>ChatGPT</a>
                   , użyć prompta poniżej i tam wkleić swój przepis, a następnie odpowiedź wkleić do okna po lewej i użyć{' '}
-                  <span style={{ display:'inline-flex', alignItems:'center', background:'#1c3534', color:'#0d9488', border:'1px solid #374151', borderRadius:5, padding:'1px 6px', fontSize:11, fontWeight:600, verticalAlign:'middle' }}>Dodaj</span>
+                  <span style={{ display:'inline-flex', alignItems:'center', background:'#1e3a3a', color:'#2dd4bf', border:'1px solid #374151', borderRadius:5, padding:'1px 6px', fontSize:11, fontWeight:600, verticalAlign:'middle' }}>Dodaj</span>
                 </div>
                 <div style={{ position: 'relative' }}>
                   <pre style={{ background: '#1e293b', color: '#e2e8f0', borderRadius: 5, padding: '8px 10px', fontSize: 10, lineHeight: 1.6, whiteSpace: 'pre-wrap', wordBreak: 'break-word', margin: 0, paddingBottom: 32 }}>{`Jesteś asystentem do wyodrębniania składników z przepisów. Gdy wkleję przepis, zwróć:
@@ -378,11 +407,11 @@ Zasady:
                   </div>
                 </div>
                 <div>
-                  <button className="btn" onClick={handleParseRegex} disabled={!pasteText.trim() || parsing === 'ai'}
-                    style={{ width: '100%', background: '#1c3534', color: '#0d9488', border: '1px solid #374151', fontWeight: 600 }}>
+                  <button className="btn btn-primary" onClick={handleParseRegex} disabled={!pasteText.trim() || parsing === 'ai'}
+                    style={{ width: '100%' }}>
                     {t('parse_regex_btn')}
                   </button>
-                  <div style={{ fontSize: 11, marginTop: 4, color: '#6b7280' }}>
+                  <div style={{ fontSize: 11, marginTop: 4, color: '#2dd4bf' }}>
                     Bez limitu
                   </div>
                 </div>
@@ -415,7 +444,8 @@ Zasady:
                         setAddingProductFor(i);
                         setQuickForm({ name: ing.rawName, package_weight: '100', package_price: '', unit: 'g', sold_by_weight: false });
                       }}
-                      style={{ padding: '5px 10px', border: `1px solid ${addingProductFor === i ? '#0d9488' : '#374151'}`, borderRadius: 6, cursor: 'pointer', fontSize: 11, fontWeight: 600, whiteSpace: 'nowrap', background: addingProductFor === i ? '#0d9488' : '#111827', color: addingProductFor === i ? '#fff' : '#6b7280' }}>
+                      className="btn btn-primary"
+                      style={{ padding: '5px 10px', fontSize: 11, whiteSpace: 'nowrap', ...(addingProductFor === i ? { background: '#0d9488', color: '#fff', borderColor: '#0d9488' } : {}) }}>
                       Dodaj do listy Produkty
                     </button>
                     <input type="number" value={ing.weight} min="0" max="99999" onChange={e => updateIngredient(i, 'weight', Math.min(99999, parseFloat(e.target.value) || 0))} style={{ padding: '6px 8px', fontSize: 13 }} />
@@ -489,9 +519,9 @@ Zasady:
             </div>
             <div style={{ background: '#1c2433', border: '1px solid #374151', borderRadius: 8, padding: '10px 14px', marginBottom: 12, fontSize: 12, color: '#9ca3af', lineHeight: 1.6 }}>
               Brakuje produktu na liście lub dopasowanie jest błędne? Kliknij{' '}
-              <span style={{ display: 'inline', background: '#111827', color: '#6b7280', border: '1px solid #374151', borderRadius: 4, padding: '1px 6px', fontSize: 11, fontWeight: 600 }}>Dodaj do listy Produkty</span>
+              <span style={{ display: 'inline', background: '#1e3a3a', color: '#2dd4bf', border: '1px solid #374151', borderRadius: 4, padding: '1px 6px', fontSize: 11, fontWeight: 600 }}>Dodaj do listy Produkty</span>
               {' '}przy danym składniku, wypełnij pola i kliknij{' '}
-              <span style={{ display: 'inline-flex', alignItems: 'center', background: '#0d9488', color: '#fff', borderRadius: 4, padding: '1px 8px', fontSize: 11, fontWeight: 700, verticalAlign: 'middle' }}>Dodaj produkt</span>
+              <span style={{ display: 'inline-flex', alignItems: 'center', background: '#1e3a3a', color: '#2dd4bf', border: '1px solid #374151', borderRadius: 4, padding: '1px 8px', fontSize: 11, fontWeight: 700, verticalAlign: 'middle' }}>Dodaj produkt</span>
               {' '}nie martw się, szczegóły możesz edytować później w zakładce{' '}
               <span style={{ color: '#0d9488', fontWeight: 600 }}>Produkty</span>.
             </div>
@@ -512,9 +542,51 @@ Zasady:
         )}
       </div>
 
-      <div className="card">
-        <h2>{t('recipe_list_title')}</h2>
-        <div style={{ margin: '10px 0' }}>
+      <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
+        <div style={{ display: 'flex', alignItems: 'center', padding: '0 12px 0 20px', gap: 6 }}>
+          <button onClick={() => setListOpen(o => !o)}
+            style={{ flex: 1, padding: '14px 0', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', fontSize: 14, fontWeight: 600, color: '#0d9488' }}>
+            {t('recipe_list_title')}
+          </button>
+
+          <button
+            onClick={() => selectionMode ? exitSelection() : (setSelectionMode(true), setExpanded(null))}
+            style={{ padding: '5px 11px', background: selectionMode ? '#1e3a3a' : 'transparent', border: `1px solid ${selectionMode ? '#0d9488' : '#374151'}`, borderRadius: 6, cursor: 'pointer', fontSize: 12, fontWeight: 600, color: selectionMode ? '#2dd4bf' : '#6b7280', transition: 'all 0.15s', whiteSpace: 'nowrap' }}
+          >
+            {selectionMode ? 'Odznacz' : 'Zaznacz'}
+          </button>
+
+          <button
+            onClick={() => {
+              if (selectionMode) {
+                if (selectedIds.size > 0) handleDeleteSelected();
+              } else {
+                showConfirm({
+                  title: 'Usuń wszystkie przepisy',
+                  message: `Czy na pewno chcesz usunąć wszystkie ${recipeList.length} przepisów?`,
+                  confirmLabel: 'Usuń wszystkie',
+                  onConfirm: async () => {
+                    try { await api.deleteAll(); showSuccess('Wszystkie przepisy usunięte'); loadRecipes(); }
+                    catch { showError('Błąd podczas usuwania przepisów'); }
+                  },
+                });
+              }
+            }}
+            disabled={selectionMode && selectedIds.size === 0}
+            style={{ padding: '5px 11px', background: 'transparent', border: '1px solid #374151', borderRadius: 6, cursor: selectionMode && selectedIds.size === 0 ? 'default' : 'pointer', fontSize: 12, color: selectionMode && selectedIds.size === 0 ? '#374151' : '#6b7280', transition: 'all 0.15s', whiteSpace: 'nowrap', opacity: selectionMode && selectedIds.size === 0 ? 0.4 : 1 }}
+            onMouseEnter={e => { if (!(selectionMode && selectedIds.size === 0)) { e.currentTarget.style.borderColor = '#ef4444'; e.currentTarget.style.color = '#ef4444'; } }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = '#374151'; e.currentTarget.style.color = selectionMode && selectedIds.size === 0 ? '#374151' : '#6b7280'; }}
+          >
+            {selectionMode && selectedIds.size > 0 ? `Usuń wybrane (${selectedIds.size})` : 'Usuń wszystkie'}
+          </button>
+
+          <button onClick={() => setListOpen(o => !o)}
+            style={{ padding: '5px 4px', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+            <Icon icon="heroicons:chevron-down" style={{ width: 20, height: 20, transition: 'transform 0.25s', transform: listOpen ? 'rotate(180deg)' : 'rotate(0deg)', color: '#0d9488' }} />
+          </button>
+        </div>
+        {listOpen && <div style={{ padding: '0 20px 16px', borderTop: '1px solid #374151' }}>
+        <div style={{ margin: '12px 0 10px' }}>
           <input
             type="text"
             value={search}
@@ -529,12 +601,30 @@ Zasady:
         {recipeList.length > 0 && search.trim() && !recipeList.some(r => r.name.toLowerCase().includes(search.trim().toLowerCase())) && (
           <p style={{ textAlign: 'center', color: '#6b7280', fontStyle: 'italic' }}>Nie znaleziono przepisu „{search}"</p>
         )}
+        <table style={{ borderCollapse: 'separate', borderSpacing: '0 4px' }}>
+          <thead>
+            <tr><th style={{ width: '55%' }}>Nazwa</th><th style={{ textAlign: 'center' }}>Cena</th><th style={{ textAlign: 'right' }}></th></tr>
+          </thead>
+          <tbody>
         {recipeList.filter(r => !search.trim() || r.name.toLowerCase().includes(search.trim().toLowerCase())).sort((a, b) => (b.is_favorite ? 1 : 0) - (a.is_favorite ? 1 : 0)).map(r => (
-          <div key={r.id} style={{ borderBottom: '1px solid #374151', padding: '12px 0' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <>
+          <tr key={r.id}
+            className={`recipe-row${selectedIds.has(r.id) ? ' recipe-row-checked' : ''}`}
+            onClick={() => {
+              if (selectionMode) { toggleSelect(r.id); return; }
+              setExpanded(expanded === r.id ? null : r.id);
+              setEditingIngredients(null);
+            }}
+            style={{ cursor: 'pointer' }}>
+            <td style={!selectionMode && expanded === r.id ? { background: '#0d948818', borderLeft: '3px solid #0d9488', borderTop: '1px solid #0d948860', borderBottom: '1px solid #0d948860' } : {}}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                {selectionMode && (
+                  <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 16, height: 16, borderRadius: 4, border: `1.5px solid ${selectedIds.has(r.id) ? '#6366f1' : '#374151'}`, background: selectedIds.has(r.id) ? '#6366f1' : 'transparent', flexShrink: 0, transition: 'all 0.12s' }}>
+                    {selectedIds.has(r.id) && <Icon icon="heroicons:check" style={{ width: 10, height: 10, color: '#fff' }} />}
+                  </span>
+                )}
                 <button
-                  onClick={async () => { await api.toggleFavorite(r.id); loadRecipes(); }}
+                  onClick={async (e) => { e.stopPropagation(); await api.toggleFavorite(r.id); loadRecipes(); }}
                   title={r.is_favorite ? 'Usuń z ulubionych' : 'Dodaj do ulubionych'}
                   style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 20, lineHeight: 1, padding: '2px 0', color: r.is_favorite ? '#facc15' : 'transparent', WebkitTextStroke: r.is_favorite ? '0' : '1.5px #6b7280', flexShrink: 0 }}>
                   ★
@@ -558,12 +648,11 @@ Zasady:
                     {r.name}
                   </strong>
                 )}
-                <span style={{ color: '#0d9488' }}>{r.total_cost.toFixed(2)} zł</span>
               </div>
-              <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                <button className="btn btn-primary" onClick={() => { setExpanded(expanded === r.id ? null : r.id); setEditingIngredients(null); }}>
-                  {expanded === r.id ? t('hide_ingredients') : t('show_ingredients')}
-                </button>
+            </td>
+            <td style={{ whiteSpace: 'nowrap', color: '#0d9488', fontWeight: 600, textAlign: 'center', ...(expanded === r.id ? { background: '#0d948818', borderTop: '1px solid #0d948860', borderBottom: '1px solid #0d948860' } : {}) }}>{r.total_cost.toFixed(2)} zł</td>
+            <td style={{ textAlign: 'right', ...(expanded === r.id ? { background: '#0d948818', borderTop: '1px solid #0d948860', borderBottom: '1px solid #0d948860', borderRight: '1px solid #0d948860' } : {}) }} onClick={e => e.stopPropagation()}>
+              <div style={{ display: 'flex', gap: 8, alignItems: 'center', justifyContent: 'flex-end' }}>
                 {expanded === r.id && (editingIngredients?.id === r.id ? (
                   <>
                     <button className="btn btn-primary" onClick={() => handleSaveIngredients(r.id)}>Zapisz</button>
@@ -575,90 +664,85 @@ Zasady:
                     Edytuj składniki
                   </button>
                 ))}
-                <button className="btn btn-danger" onClick={() => showConfirm({
+                <button className="btn btn-danger" onClick={(e) => { e.stopPropagation(); showConfirm({
                     title: 'Usuń przepis',
                     message: `Czy na pewno chcesz usunąć „${r.name}"?`,
                     confirmLabel: 'Usuń',
                     onConfirm: async () => { try { await api.delete(r.id); showSuccess('Przepis usunięty'); loadRecipes(); } catch { showError(t('err_save_recipe')); } },
-                  })}>{t('delete')}</button>
+                  }); }}>{t('delete')}</button>
               </div>
-            </div>
-            {expanded === r.id && (() => {
-              const isEditing = editingIngredients?.id === r.id;
-              return (
-                <div style={{ marginTop: 12 }}>
-                  {/* Tabela składników */}
-                  <div style={{ marginBottom: 16 }}>
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>{t('col_product')}</th>
-                          <th>{t('col_weight')}</th>
-                          {!isEditing && <th>{t('col_cost')}</th>}
-                          {isEditing && <th></th>}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {isEditing ? editingIngredients.rows.map((row, i) => {
-                          const prod = productList.find(p => p.id === parseInt(row.product_id));
-                          return (
-                            <tr key={i}>
-                              <td style={{ width: '25%' }}>
-                                <select value={row.product_id} onChange={e => {
-                                  const rows = [...editingIngredients.rows];
-                                  const p = productList.find(p => p.id === parseInt(e.target.value));
-                                  rows[i] = { ...rows[i], product_id: parseInt(e.target.value), weight: '', unit: p?.unit || 'g' };
-                                  setEditingIngredients({ ...editingIngredients, rows });
-                                }} style={{ fontSize: 12, background: '#111827', border: '1px solid #374151', color: '#f1f5f9', borderRadius: 4, padding: '3px 6px', width: '100%' }}>
-                                  <option value="">-- wybierz składnik --</option>
-                                  {productList.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
-                                </select>
-                              </td>
-                              <td style={{ width: 80, maxWidth: 80 }}>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
-                                  <input type="number" className="no-spin" min="0.1" max="99999" step="0.1"
-                                    value={row.weight}
-                                    placeholder="0"
-                                    onChange={e => {
-                                      const rows = [...editingIngredients.rows];
-                                      rows[i] = { ...rows[i], weight: e.target.value === '' ? '' : Math.min(99999, parseFloat(e.target.value) || 0) };
-                                      setEditingIngredients({ ...editingIngredients, rows });
-                                    }}
-                                    style={{ width: 48, minWidth: 0, padding: '3px 4px', fontSize: 12, background: '#111827', border: '1px solid #374151', color: '#f1f5f9', borderRadius: 4, boxSizing: 'border-box' }} />
-                                  <span style={{ fontSize: 11, color: '#6b7280' }}>{prod?.unit || row.unit || 'g'}</span>
-                                </div>
-                              </td>
-                              <td style={{ whiteSpace: 'nowrap' }}>
-                                <button onClick={() => {
-                                  const rows = editingIngredients.rows.filter((_, j) => j !== i);
-                                  setEditingIngredients({ ...editingIngredients, rows });
-                                }} style={{ background: '#2d1515', border: '1px solid #4b1515', color: '#f87171', borderRadius: 4, cursor: 'pointer', padding: '3px 8px', fontSize: 11, fontWeight: 600 }}>Usuń produkt</button>
-                              </td>
-                            </tr>
-                          );
-                        }) : r.ingredients.map(ing => (
-                          <tr key={ing.id}>
-                            <td>{ing.product_name}</td>
-                            <td>{ing.weight} {ing.unit || 'g'}</td>
-                            <td>{ing.cost.toFixed(2)} zł</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                    {isEditing && (
-                      <div style={{ marginTop: 10 }}>
-                        <button className="btn" onClick={() => {
-                          setEditingIngredients({ ...editingIngredients, rows: [...editingIngredients.rows, { product_id: '', weight: '', unit: 'g' }] });
-                        }} style={{ background: '#1c3534', color: '#0d9488', border: '1px solid #374151', marginBottom: 16 }}>+ Dodaj składnik</button>
+            </td>
+          </tr>
+          {expanded === r.id && (() => {
+            const isEditing = editingIngredients?.id === r.id;
+            const ingStyle = { background: '#0d94880d', borderLeft: '1px solid #0d948860', borderRight: '1px solid #0d948860' };
+            const blStyle = { borderLeft: '3px solid #0d9488' };
+            return (<>
+              <tr style={ingStyle}>
+                <th style={{ ...blStyle, fontSize: 11, color: '#6b7280', fontWeight: 700, letterSpacing: '0.5px', padding: '6px 8px' }}>{t('col_product')}</th>
+                <th style={{ textAlign: 'center', fontSize: 11, color: '#6b7280', fontWeight: 700, letterSpacing: '0.5px' }}>{!isEditing ? t('col_cost') : t('col_weight')}</th>
+                <th style={{ textAlign: 'right', fontSize: 11, color: '#6b7280', fontWeight: 700, letterSpacing: '0.5px' }}>{!isEditing ? t('col_weight') : ''}</th>
+              </tr>
+              {isEditing ? editingIngredients.rows.map((row, i) => {
+                const prod = productList.find(p => p.id === parseInt(row.product_id));
+                return (
+                  <tr key={i} style={ingStyle}>
+                    <td style={blStyle}>
+                      <select value={row.product_id} onChange={e => {
+                        const rows = [...editingIngredients.rows];
+                        const p = productList.find(p => p.id === parseInt(e.target.value));
+                        rows[i] = { ...rows[i], product_id: parseInt(e.target.value), weight: '', unit: p?.unit || 'g' };
+                        setEditingIngredients({ ...editingIngredients, rows });
+                      }} style={{ fontSize: 12, background: '#111827', border: '1px solid #374151', color: '#f1f5f9', borderRadius: 4, padding: '3px 6px', width: '100%' }}>
+                        <option value="">-- wybierz składnik --</option>
+                        {productList.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
+                      </select>
+                    </td>
+                    <td>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+                        <input type="number" className="no-spin" min="0.1" max="99999" step="0.1"
+                          value={row.weight} placeholder="0"
+                          onChange={e => {
+                            const rows = [...editingIngredients.rows];
+                            rows[i] = { ...rows[i], weight: e.target.value === '' ? '' : Math.min(99999, parseFloat(e.target.value) || 0) };
+                            setEditingIngredients({ ...editingIngredients, rows });
+                          }}
+                          style={{ width: 48, padding: '3px 4px', fontSize: 12, background: '#111827', border: '1px solid #374151', color: '#f1f5f9', borderRadius: 4, boxSizing: 'border-box' }} />
+                        <span style={{ fontSize: 11, color: '#6b7280' }}>{prod?.unit || row.unit || 'g'}</span>
                       </div>
-                    )}
-                  </div>
-
-                </div>
-              );
-            })()}
-          </div>
+                    </td>
+                    <td style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+                      <button onClick={() => {
+                        const rows = editingIngredients.rows.filter((_, j) => j !== i);
+                        setEditingIngredients({ ...editingIngredients, rows });
+                      }} style={{ background: '#2d1515', border: '1px solid #4b1515', color: '#f87171', borderRadius: 4, cursor: 'pointer', padding: '3px 8px', fontSize: 11, fontWeight: 600 }}>Usuń</button>
+                    </td>
+                  </tr>
+                );
+              }) : r.ingredients.map(ing => (
+                <tr key={ing.id} style={ingStyle}>
+                  <td style={blStyle}>{ing.product_name}</td>
+                  <td style={{ textAlign: 'center' }}>{ing.cost.toFixed(2)} zł</td>
+                  <td style={{ textAlign: 'right' }}>{ing.weight} {ing.unit || 'g'}</td>
+                </tr>
+              ))}
+              {isEditing && (
+                <tr style={{ ...ingStyle, borderBottom: '1px solid #0d948840' }}>
+                  <td style={blStyle} colSpan={3}>
+                    <button className="btn" onClick={() => {
+                      setEditingIngredients({ ...editingIngredients, rows: [...editingIngredients.rows, { product_id: '', weight: '', unit: 'g' }] });
+                    }} style={{ background: '#1c3534', color: '#0d9488', border: '1px solid #374151', margin: '4px 0' }}>+ Dodaj składnik</button>
+                  </td>
+                </tr>
+              )}
+              {!isEditing && <tr style={{ background: '#0d94880d', borderLeft: '1px solid #0d948860', borderRight: '1px solid #0d948860', borderBottom: '1px solid #0d948860', borderRadius: '0 0 6px 6px' }}><td colSpan={3} style={{ borderLeft: '3px solid #0d9488', height: 6, borderRadius: '0 0 0 6px' }} /></tr>}
+            </>);
+          })()}
+          </>
         ))}
+          </tbody>
+        </table>
+        </div>}
       </div>
     </div>
   );

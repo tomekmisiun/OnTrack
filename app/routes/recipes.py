@@ -103,18 +103,6 @@ def toggle_favorite(id):
     return jsonify({'is_favorite': recipe.is_favorite})
 
 
-@recipes_bp.route('/<int:id>/notes', methods=['PATCH'])
-@jwt_required()
-def update_notes(id):
-    recipe = Recipe.query.filter_by(id=id, user_id=current_uid()).first_or_404()
-    data = request.get_json() or {}
-    notes = data.get('notes') or ''
-    if len(notes) > 5000:
-        return jsonify({'error': 'Notatki max 5000 znaków'}), 400
-    recipe.notes = notes or None
-    db.session.commit()
-    return jsonify({'notes': recipe.notes})
-
 
 @recipes_bp.route('/<int:id>', methods=['DELETE'])
 @jwt_required()
@@ -125,7 +113,29 @@ def delete_recipe(id):
     return jsonify({'message': 'Przepis usunięty'}), 200
 
 
+@recipes_bp.route('/all', methods=['DELETE'])
+@jwt_required()
+def delete_all_recipes():
+    uid = current_uid()
+    recipe_ids = [r.id for r in Recipe.query.filter_by(user_id=uid).all()]
+    if recipe_ids:
+        RecipeIngredient.query.filter(RecipeIngredient.recipe_id.in_(recipe_ids)).delete(synchronize_session=False)
+    count = Recipe.query.filter_by(user_id=uid).delete()
+    db.session.commit()
+    return jsonify({'message': f'Usunięto {count} przepisów'}), 200
+
+
 PARSE_DAILY_LIMIT = 2
+
+@recipes_bp.route('/parse-limit', methods=['GET'])
+@jwt_required()
+def get_parse_limit():
+    uid = current_uid()
+    today_count = RecipeParseLog.get_today_count(uid)
+    return jsonify({
+        'remaining_today': max(0, PARSE_DAILY_LIMIT - today_count),
+        'daily_limit': PARSE_DAILY_LIMIT,
+    })
 
 @recipes_bp.route('/parse-text', methods=['POST'])
 @jwt_required()
@@ -233,3 +243,50 @@ Rules:
         'ingredients': ingredients,
         'remaining_today': PARSE_DAILY_LIMIT - today_count - 1,
     })
+
+
+@recipes_bp.route('/<int:recipe_id>/fetch-image', methods=['POST'])
+@jwt_required()
+def fetch_recipe_image(recipe_id):
+    uid = current_uid()
+    recipe = Recipe.query.filter_by(id=recipe_id, user_id=uid).first_or_404()
+
+    import requests as req
+
+    # Przetłumacz nazwę przepisu na angielski za pomocą Gemini
+    search_term = recipe.name
+    gemini_key = os.environ.get('GEMINI_API_KEY')
+    if gemini_key:
+        try:
+            from google import genai
+            client = genai.Client(api_key=gemini_key)
+            resp = client.models.generate_content(
+                model='gemini-2.5-flash',
+                contents=f"Translate this Polish dish name to 1-3 English words suitable for image search: '{recipe.name}'. Reply with English words only, no punctuation, no explanation.",
+            )
+            search_term = resp.text.strip()
+        except Exception:
+            pass
+
+    # Szukaj zdjęcia w Pexels
+    image_url = None
+    pexels_key = os.environ.get('PEXELS_API_KEY')
+    if pexels_key:
+        try:
+            r = req.get(
+                'https://api.pexels.com/v1/search',
+                params={'query': search_term, 'per_page': 5, 'orientation': 'landscape'},
+                headers={'Authorization': pexels_key},
+                timeout=5,
+            )
+            photos = r.json().get('photos') or []
+            if photos:
+                image_url = photos[0]['src']['medium']
+        except Exception:
+            pass
+
+    if image_url:
+        recipe.image_url = image_url
+        db.session.commit()
+
+    return jsonify({'image_url': recipe.image_url})
