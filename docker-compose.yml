@@ -11,7 +11,9 @@ services:
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
       - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
       - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - PEXELS_API_KEY=${PEXELS_API_KEY}
       - FRONTEND_URL=http://localhost:3000
+      - SEED_FROM_USER_ID=2
     depends_on:
       - db
     volumes:
