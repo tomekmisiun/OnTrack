@@ -1,16 +1,13 @@
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required
 from app import db
 from app.models.household_member import HouseholdMember
+from app.utils import current_uid
 
 members_bp = Blueprint('members', __name__)
 
 MAX_MEMBERS = 10
 MAX_NAME = 80
-
-
-def current_uid():
-    return int(get_jwt_identity())
 
 
 def _own_member(member_id, uid):

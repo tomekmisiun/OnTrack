@@ -1,7 +1,8 @@
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required
 from app import db
 from app.models.product import Product
+from app.utils import current_uid
 
 products_bp = Blueprint('products', __name__)
 
@@ -10,10 +11,6 @@ MAX_NAME = 50
 MAX_KCAL = 9999
 MAX_MACRO = 100
 MAX_PRICE = 9999
-
-
-def current_uid():
-    return int(get_jwt_identity())
 
 
 def validate_product_data(data, require_all=True):

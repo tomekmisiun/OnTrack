@@ -2,43 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { mealPlan as api, recipes as recipesApi } from '../api';
 import { useMember } from '../contexts/MemberContext';
 import { useToast } from '../contexts/ToastContext';
-
-// ─── helpers ─────────────────────────────────────────────────────────────────
-function dateToStr(d) {
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-}
-function toEU(s) {
-  if (!s) return '';
-  const [y,m,d] = s.split('-');
-  return `${d}.${m}.${y}`;
-}
-function getCurrentWeek() {
-  const now = new Date(); now.setHours(0,0,0,0);
-  const dow = (now.getDay()+6)%7;
-  const mon = new Date(now); mon.setDate(now.getDate()-dow);
-  const sun = new Date(mon); sun.setDate(mon.getDate()+6);
-  return { start: dateToStr(mon), end: dateToStr(sun) };
-}
-function getCurrentMonth() {
-  const now = new Date();
-  const first = new Date(now.getFullYear(), now.getMonth(), 1);
-  const last  = new Date(now.getFullYear(), now.getMonth()+1, 0);
-  return { start: dateToStr(first), end: dateToStr(last) };
-}
-function getCalGrid(year, month) {
-  const firstDay = new Date(year, month, 1);
-  const lastDay  = new Date(year, month + 1, 0);
-  const start = new Date(firstDay);
-  start.setDate(start.getDate() - (firstDay.getDay() + 6) % 7);
-  const end = new Date(lastDay);
-  const endDow = (lastDay.getDay() + 6) % 7;
-  if (endDow < 6) end.setDate(end.getDate() + (6 - endDow));
-  const days = [];
-  const c = new Date(start);
-  while (c <= end) { days.push(new Date(c)); c.setDate(c.getDate() + 1); }
-  return days;
-}
-const MONTH_NAMES_PL = ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'];
+import { dateToStr, toEU, getCurrentWeek, getCurrentMonth, getCalGrid, MONTH_NAMES_PL } from '../utils/dates';
 
 // ─── Drinks recalc from localStorage ─────────────────────────────────────────
 function calcDrinks(days) {

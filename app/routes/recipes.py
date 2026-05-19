@@ -1,16 +1,13 @@
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required
 from app import db
 from app.models.recipe import Recipe, RecipeIngredient
 from app.models.product import Product
 from app.models.recipe_parse_log import RecipeParseLog
+from app.utils import current_uid
 import json, re, os
 
 recipes_bp = Blueprint('recipes', __name__)
-
-
-def current_uid():
-    return int(get_jwt_identity())
 
 
 @recipes_bp.route('/', methods=['GET'])

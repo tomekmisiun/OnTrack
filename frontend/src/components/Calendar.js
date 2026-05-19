@@ -8,45 +8,10 @@ import { mealPlan as api, recipes as recipesApi, products as productsApi } from 
 import { useLanguage } from '../contexts/LanguageContext';
 import { useToast } from '../contexts/ToastContext';
 import { useMember } from '../contexts/MemberContext';
+import { dateToStr, addDays, toEU, getUpcomingMondays, getCalGrid as getMonthGrid } from '../utils/dates';
 
 const COLORS = ['#4a6fa5', '#93c5fd', '#fcd34d', '#c2410c', '#6366f1'];
 const getColor = (pos) => COLORS[(pos - 1) % 5];
-
-function dateToStr(d) {
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-}
-function addDays(dateStr, n) {
-  const d = new Date(dateStr); d.setDate(d.getDate() + n); return dateToStr(d);
-}
-function toEU(dateStr) {
-  const [y, m, d] = dateStr.split('-');
-  return `${d}.${m}.${y}`;
-}
-function getUpcomingMondays(count = 16) {
-  const mondays = [];
-  const today = new Date(); today.setHours(0,0,0,0);
-  const start = new Date(today);
-  start.setDate(start.getDate() - (today.getDay() + 6) % 7);
-  for (let i = 0; i < count; i++) {
-    const d = new Date(start);
-    d.setDate(d.getDate() + i * 7);
-    mondays.push(dateToStr(d));
-  }
-  return mondays;
-}
-function getMonthGrid(year, month) {
-  const firstDay = new Date(year, month, 1);
-  const lastDay  = new Date(year, month + 1, 0);
-  const start = new Date(firstDay);
-  start.setDate(start.getDate() - (firstDay.getDay() + 6) % 7);
-  const end = new Date(lastDay);
-  const endDow = (lastDay.getDay() + 6) % 7;
-  if (endDow < 6) end.setDate(end.getDate() + (6 - endDow));
-  const days = [];
-  const c = new Date(start);
-  while (c <= end) { days.push(new Date(c)); c.setDate(c.getDate() + 1); }
-  return days;
-}
 
 function plPrzepis(n) {
   if (n === 1) return '1 przepis';

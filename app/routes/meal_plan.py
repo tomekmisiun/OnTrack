@@ -1,17 +1,14 @@
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required
 from app import db
 from app.models.meal_plan import MealPlan
 from app.models.recipe import Recipe
 from app.models.household_member import HouseholdMember
+from app.utils import current_uid
 from datetime import date, timedelta
 import math
 
 meal_plan_bp = Blueprint('meal_plan', __name__)
-
-
-def current_uid():
-    return int(get_jwt_identity())
 
 
 def resolve_member_id(uid, member_id=None):
