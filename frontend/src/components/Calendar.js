@@ -200,7 +200,15 @@ function RecipePreviewModal({ recipe, onClose }) {
             })}
           </div>
           <div style={{ marginTop: 12, fontSize: 12, color: '#6b7280' }}>
-            Koszt przepisu: <span style={{ color: '#0d9488', fontWeight: 700 }}>{recipe.total_cost?.toFixed(2)} zł</span>
+            <span>Szac. koszt przepisu: <span style={{ color: '#0d9488', fontWeight: 700 }}>{recipe.total_cost?.toFixed(2)} zł</span></span>
+            {recipe.source_url && (
+              <div style={{ marginTop: 4 }}>
+                <a href={recipe.source_url} target="_blank" rel="noreferrer"
+                   style={{ color: '#9ca3af', textDecoration: 'none', fontSize: 12, fontWeight: 600 }}>
+                  Zobacz przepis na: aniagotuje.pl ↗
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -822,6 +830,7 @@ export default function Calendar({ onGoToTab }) {
   const [toast,setToast]             = useState(null);
   const [howToOpen,setHowToOpen]     = useState(false);
   const [carouselOpen,setCarouselOpen] = useState(true);
+  const [recipeSearch, setRecipeSearch] = useState('');
   const [tplSlots,setTplSlots]       = useState({});
   const [tplOpen,setTplOpen]         = useState(false);
   const [previewRecipe,setPreviewRecipe] = useState(null);
@@ -1096,15 +1105,27 @@ export default function Calendar({ onGoToTab }) {
         </div>
         {carouselOpen && (
           <div style={{padding:'0 16px 14px',borderTop:'1px solid #374151'}}>
-            <div style={{display:'flex',alignItems:'center',marginBottom:10,marginTop:10}}>
-              <span style={{fontSize:11,color:'#6b7280'}}>{t('drag_to_cal')}</span>
+            <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:10,marginTop:10}}>
+              <input
+                value={recipeSearch}
+                onChange={e => setRecipeSearch(e.target.value)}
+                placeholder="Szukaj przepisu..."
+                style={{flex:1,maxWidth:240,padding:'4px 10px',fontSize:12,background:'#111827',border:'1px solid #374151',borderRadius:6,color:'#f1f5f9',outline:'none'}}
+                onFocus={e => e.target.style.borderColor='#0d9488'}
+                onBlur={e => e.target.style.borderColor='#374151'}
+              />
+              <span style={{fontSize:11,color:'#6b7280',flexShrink:0}}>{t('drag_to_cal')}</span>
             </div>
-            {recipes.length===0
-              ? <p style={{fontSize:13,color:'#4b5563',margin:0}}>{t('no_recipes_cal')}</p>
-              : <div style={{display:'flex',gap:10,overflowX:'auto',paddingBottom:6,scrollbarWidth:'thin',scrollbarColor:'#374151 transparent'}}>
-                  {[...recipes].sort((a,b)=>(b.is_favorite?1:0)-(a.is_favorite?1:0)).map(r=><DraggableRecipe key={r.id} recipe={r} onToggleFavorite={async (id)=>{ await recipesApi.toggleFavorite(id); recipesApi.getAll().then(res=>setRecipes(res.data)); }} onPreview={setPreviewRecipe}/>)}
-                </div>
-            }
+            {(() => {
+              const filtered = [...recipes]
+                .sort((a,b)=>(b.is_favorite?1:0)-(a.is_favorite?1:0))
+                .filter(r => !recipeSearch.trim() || r.name.toLowerCase().includes(recipeSearch.trim().toLowerCase()));
+              return filtered.length === 0
+                ? <p style={{fontSize:13,color:'#4b5563',margin:0}}>{recipeSearch.trim() ? `Brak przepisów pasujących do "${recipeSearch}"` : t('no_recipes_cal')}</p>
+                : <div style={{display:'flex',gap:10,overflowX:'auto',paddingBottom:6,scrollbarWidth:'thin',scrollbarColor:'#374151 transparent'}}>
+                    {filtered.map(r=><DraggableRecipe key={r.id} recipe={r} onToggleFavorite={async (id)=>{ await recipesApi.toggleFavorite(id); recipesApi.getAll().then(res=>setRecipes(res.data)); }} onPreview={setPreviewRecipe}/>)}
+                  </div>;
+            })()}
           </div>
         )}
       </div>

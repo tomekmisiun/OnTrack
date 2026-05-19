@@ -665,7 +665,18 @@ Zasady:
                 </span>
               ) : <span style={{ fontSize: 11, color: '#374151' }}>—</span>}
             </td>
-            <td style={{ whiteSpace: 'nowrap', color: '#0d9488', fontWeight: 600, textAlign: 'right', ...(expanded === r.id ? { background: '#0d948818', borderTop: '1px solid #0d948860', borderBottom: '1px solid #0d948860' } : {}) }}>{r.total_cost.toFixed(2)} zł</td>
+            <td style={{ whiteSpace: 'nowrap', textAlign: 'right', ...(expanded === r.id ? { background: '#0d948818', borderTop: '1px solid #0d948860', borderBottom: '1px solid #0d948860' } : {}) }}>
+              <span style={{ color: '#0d9488', fontWeight: 600 }}>{r.total_cost.toFixed(2)} zł</span>
+              {r.source_url && (
+                <div style={{ marginTop: 2 }}>
+                  <a href={r.source_url} target="_blank" rel="noreferrer"
+                     style={{ fontSize: 11, color: '#e2e8f0', textDecoration: 'none', fontWeight: 600 }}
+                     onClick={e => e.stopPropagation()}>
+                    Zobacz przepis ↗
+                  </a>
+                </div>
+              )}
+            </td>
             <td style={{ textAlign: 'right', ...(expanded === r.id ? { background: '#0d948818', borderTop: '1px solid #0d948860', borderBottom: '1px solid #0d948860', borderRight: '1px solid #0d948860' } : {}) }} onClick={e => e.stopPropagation()}>
               <button className="btn btn-danger" onClick={(e) => { e.stopPropagation(); showConfirm({
                   title: 'Usuń przepis',

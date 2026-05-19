@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Joyride, STATUS, EVENTS } from 'react-joyride';
 import Products from './components/Products';
 import Recipes from './components/Recipes';
 import Calendar from './components/Calendar';
@@ -13,6 +14,7 @@ import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { ToastProvider } from './contexts/ToastContext';
 import { MemberProvider } from './contexts/MemberContext';
 import { Icon } from '@iconify/react';
+import { TOUR_STEPS, TOUR_LOCALE, TOUR_STYLES } from './tour-steps';
 import './App.css';
 
 const TAB_ICONS = {
@@ -24,13 +26,21 @@ const TAB_ICONS = {
   export:   'heroicons:arrow-down-tray',
 };
 
-function AppInner() {
+const TOUR_KEY = 'mealplanner_tour_done';
+
+function AppInner({ onStartTour }) {
   const { user, loading, logout } = useAuth();
   const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('calendar');
   const [showProfile, setShowProfile] = useState(false);
 
-  const goToTab = (tab) => { setActiveTab(tab); window.scrollTo({ top: 0 }); };
+  const goToTab = useCallback((tab) => { setActiveTab(tab); window.scrollTo({ top: 0 }); }, []);
+
+  useEffect(() => {
+    const handler = (e) => goToTab(e.detail.tab);
+    window.addEventListener('tour-goto-tab', handler);
+    return () => window.removeEventListener('tour-goto-tab', handler);
+  }, [goToTab]);
 
   const tabs = [
     { id: 'macro',    label: t('tab_macro') },
@@ -53,25 +63,22 @@ function AppInner() {
 
   return (
     <div className="app">
-      {/* ── Lewa kolumna ── */}
       <aside className="app-sidebar">
-        {/* Logo */}
         <div className="sidebar-logo">
           <Icon icon="heroicons:sparkles" className="sidebar-logo-icon" />
           <span className="sidebar-logo-text">Meal Planner</span>
         </div>
 
-        {/* Profil */}
         <div className="sidebar-profile">
           <span className="sidebar-profile-label">Obecny profil</span>
           <MemberPicker />
         </div>
 
-        {/* Nawigacja */}
         <nav className="sidebar-nav">
           {tabs.map(tab => (
             <button
               key={tab.id}
+              data-tour={`tab-${tab.id}`}
               className={`sidebar-tab ${activeTab === tab.id ? 'active' : ''}`}
               onClick={() => goToTab(tab.id)}
             >
@@ -81,7 +88,6 @@ function AppInner() {
           ))}
         </nav>
 
-        {/* Dół — konto + wyloguj */}
         <div className="sidebar-footer">
           <button className="sidebar-btn" onClick={() => setShowProfile(true)}>
             <Icon icon="heroicons:cog-6-tooth" width={15} /> {t('account')}
@@ -92,7 +98,6 @@ function AppInner() {
         </div>
       </aside>
 
-      {/* ── Treść główna ── */}
       <main className="app-main">
         {activeTab === 'macro'     && <MacroCalculator />}
         {activeTab === 'calendar'  && <Calendar onGoToTab={goToTab} />}
@@ -102,17 +107,62 @@ function AppInner() {
         {activeTab === 'export'    && <Export onGoToTab={goToTab} />}
       </main>
 
-      {showProfile && <Profile onClose={() => setShowProfile(false)} />}
+      {showProfile && (
+        <Profile
+          onClose={() => setShowProfile(false)}
+          onStartTour={() => { setShowProfile(false); onStartTour(); }}
+        />
+      )}
     </div>
   );
 }
 
-function AppWithAuth() {
+function AppWithTour() {
   const { switchLang } = useLanguage();
+  const [tourRun, setTourRun] = useState(false);
+
+  useEffect(() => {
+    if (!localStorage.getItem(TOUR_KEY)) {
+      const t = setTimeout(() => setTourRun(true), 800);
+      return () => clearTimeout(t);
+    }
+  }, []);
+
+  const handleTourCallback = useCallback((data) => {
+    const { status, type, index } = data;
+    if (type === EVENTS.STEP_BEFORE) {
+      const step = TOUR_STEPS[index];
+      if (step?.gotoTab) {
+        window.dispatchEvent(new CustomEvent('tour-goto-tab', { detail: { tab: step.gotoTab } }));
+      }
+    }
+    if (status === STATUS.FINISHED || status === STATUS.SKIPPED) {
+      localStorage.setItem(TOUR_KEY, '1');
+      setTourRun(false);
+    }
+  }, []);
+
+  const startTour = useCallback(() => {
+    setTourRun(false);
+    setTimeout(() => setTourRun(true), 100);
+  }, []);
+
   return (
     <AuthProvider onLangChange={switchLang}>
       <MemberProvider>
-        <AppInner />
+        <Joyride
+          steps={TOUR_STEPS}
+          run={tourRun}
+          continuous
+          showSkipButton
+          showProgress
+          scrollToFirstStep
+          disableScrolling={false}
+          locale={TOUR_LOCALE}
+          styles={TOUR_STYLES}
+          callback={handleTourCallback}
+        />
+        <AppInner onStartTour={startTour} />
       </MemberProvider>
     </AuthProvider>
   );
@@ -122,7 +172,7 @@ export default function App() {
   return (
     <LanguageProvider>
       <ToastProvider>
-        <AppWithAuth />
+        <AppWithTour />
       </ToastProvider>
     </LanguageProvider>
   );

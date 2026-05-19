@@ -40,12 +40,34 @@ class Recipe(db.Model):
     notes = db.Column(db.Text, nullable=True)
     is_favorite = db.Column(db.Boolean, nullable=False, default=False)
     image_url = db.Column(db.Text, nullable=True)
+    source_url = db.Column(db.Text, nullable=True)
+    kcal_100g = db.Column(db.Float, nullable=True)
+    protein_100g = db.Column(db.Float, nullable=True)
+    fat_100g = db.Column(db.Float, nullable=True)
+    carbs_100g = db.Column(db.Float, nullable=True)
     ingredients = db.relationship('RecipeIngredient', backref='recipe', cascade='all, delete-orphan')
 
     def total_cost(self):
         return round(sum(i.to_dict()['cost'] for i in self.ingredients), 2)
 
+    def _total_weight(self):
+        return sum(
+            i.weight for i in self.ingredients
+            if i.product and i.product.unit != 'szt'
+        )
+
     def _calc_macros(self):
+        # Jeśli mamy makra per 100g z przepisu (aniagotuje), użyj ich × łączna waga
+        if self.kcal_100g is not None:
+            total = self._total_weight()
+            factor = total / 100.0
+            return (
+                round(self.kcal_100g    * factor),
+                round((self.protein_100g or 0) * factor, 1),
+                round((self.fat_100g    or 0) * factor, 1),
+                round((self.carbs_100g  or 0) * factor, 1),
+            )
+        # Fallback: suma makr ze składników
         kcal = protein = fat = carbs = 0.0
         for ing in self.ingredients:
             p = ing.product
@@ -72,4 +94,5 @@ class Recipe(db.Model):
             'total_fat': fat,
             'total_carbs': carbs,
             'image_url': self.image_url,
+            'source_url': self.source_url,
         }

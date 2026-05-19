@@ -148,9 +148,12 @@ NON_FOOD_RE = re.compile(
     r"wózek|nosidełko|fotelik|łóżeczko|wanienka|nocnik|laktator|"
     r"termometr|monitor oddechu|zabawk[ai]|grzechotk[ai]|"
     # higiena ogólna
-    r"żel pod prysznic|szampon|odżywka do włosów|płyn do kąpieli|"
-    r"podpask[ai]|tampon|wkładki higieniczne"
-    r")\b",
+    r"żel pod prysznic|żel do ciała|żel do włosów|żel 2 w 1|"
+    r"szampon|odżywka do włosów|płyn do kąpieli|"
+    r"talk w proszku|talk kosmetyczny|puder dla dzieci|"
+    r"podpask[ai]|tampon|wkładki higieniczne|"
+    r"patyczki higieniczne|patyczki kosmetyczne|patyczki do uszu"
+    r")",
     re.IGNORECASE | re.UNICODE,
 )
 
@@ -338,38 +341,79 @@ def _search_json(data, depth: int = 0) -> list[dict]:
 # ─── Fallback: parsowanie DOM gdy API nic nie zwróciło ────────────────────────
 
 DOM_EXTRACT_JS = """() => {
-    // Próbuje znaleźć karty produktów na stronie
-    const SELECTORS = [
-        '[data-testid*="product-card"]',
+    // Pasuje do "X,XX zł" ale NIE do "X,XX zł/kg" (cena jednostkowa)
+    const pkgPriceRe = /(\\d+)[,.]?(\\d{2})\\s*z[łl](?!\\s*\\/)/;
+    // Słowa-etykiety UI które nie są nazwami produktów
+    const UI_LABELS = /^(polecany|nowości|nowość|promocja|okazja|bestseller|ulubione|dodaj|kup|zobacz)$/i;
+    const results = [];
+    const seen = new Set();
+
+    function extractPrice(text) {
+        // Znajdź cenę opakowania (nie per-jednostkę: zł/kg, zł/szt, itp.)
+        // Usuń fragmenty "X,XX zł/..." przed szukaniem
+        const cleaned = text.replace(/(\\d+[,.]\\d+)\\s*z[łl]\\s*\\/[^\\n]*/g, '');
+        const pm = cleaned.match(/(\\d+)[,.]?(\\d{2})\\s*z[łl]/);
+        if (!pm) return null;
+        const price = parseFloat(pm[1] + '.' + (pm[2] || '00'));
+        return (price >= 0.3 && price <= 2000) ? price : null;
+    }
+
+    function extractFromCard(card) {
+        const price = extractPrice(card.innerText || '');
+        if (!price) return;
+
+        // Szukamy nazwy — preferuj link do produktu, potem nagłówki i spany
+        const candidates = [...card.querySelectorAll('a[href], h2, h3, h4, span, p')];
+        let name = null;
+        for (const el of candidates) {
+            const t = (el.innerText || '').trim().split('\\n')[0].trim();
+            if (t.length < 5 || t.length > 200) continue;
+            if (/^[\\d,. zł]+$/.test(t)) continue;      // sama liczba/cena
+            if (UI_LABELS.test(t)) continue;             // etykieta UI
+            if (/zł\\/|\\bkg\\b|\\bml\\b|torebek|sztuk/i.test(t) && t.length < 20) continue;
+            name = t;
+            break;
+        }
+        if (!name || seen.has(name.toLowerCase())) return;
+        seen.add(name.toLowerCase());
+        results.push({ name, package_price: price });
+    }
+
+    // Metoda 1: znane selektory kart produktów
+    const CARD_SELS = [
+        '[data-testid*="product-card"]', '[data-testid*="productCard"]',
         '[class*="ProductCard"]', '[class*="product-card"]', '[class*="product_card"]',
         '[class*="ProductTile"]', '[class*="product-tile"]', '[class*="product_tile"]',
         '[class*="ProductItem"]', '[class*="product-item"]', '[class*="product_item"]',
+        '[class*="tile--product"]', '[class*="product--tile"]',
         'article[class*="product"]', 'li[class*="product"]',
     ];
-    let cards = [];
-    for (const sel of SELECTORS) {
+    for (const sel of CARD_SELS) {
         const els = [...document.querySelectorAll(sel)];
-        if (els.length > 2) { cards = els; break; }
+        if (els.length > 2) {
+            els.forEach(extractFromCard);
+            if (results.length > 2) return results;
+        }
     }
 
-    const priceRe = /(\\d+)[,.]?(\\d{2})\\s*z/;
-    const results = [];
-    for (const card of cards) {
-        const nameEl = card.querySelector(
-            '[class*="name" i], [class*="title" i], [data-testid*="name" i], h2, h3, h4'
-        );
-        const priceEl = card.querySelector(
-            '[class*="price" i]:not([class*="per" i]):not([class*="unit" i]), [data-testid*="price" i]'
-        );
-        if (!nameEl || !priceEl) continue;
-        const name = nameEl.innerText.trim();
-        if (!name || name.length < 3) continue;
-        const pm = priceEl.innerText.match(priceRe);
-        if (!pm) continue;
-        const price = parseFloat(pm[1] + '.' + pm[2]);
-        if (price <= 0 || price > 5000) continue;
-        results.push({ name, package_price: price });
+    // Metoda 2 (fallback): kotwica na przycisku "Dodaj" — Auchan, Carrefour
+    const dodajBtns = [...document.querySelectorAll('button')].filter(
+        b => /^dodaj$/i.test((b.innerText || '').trim())
+    );
+    for (const btn of dodajBtns) {
+        let el = btn.parentElement;
+        for (let i = 0; i < 10; i++) {
+            if (!el) break;
+            const t = el.innerText || '';
+            const price = extractPrice(t);
+            if (price && t.length > 20 && t.length < 2000) {
+                extractFromCard(el);
+                break;
+            }
+            el = el.parentElement;
+        }
     }
+
     return results;
 }"""
 
@@ -410,6 +454,55 @@ async def scroll_down(page: Page, steps: int = 4):
     for _ in range(steps):
         await page.evaluate("window.scrollBy(0, window.innerHeight * 1.5)")
         await page.wait_for_timeout(600)
+
+
+async def scroll_and_extract(page: Page, max_scrolls: int = 60, delay_ms: int = 1200) -> list[dict]:
+    """
+    Scrolluje stronę do dołu, ekstraukując produkty na każdym etapie.
+    Działa poprawnie z virtual scroll (Auchan unładuje DOM przy powrocie na górę).
+    """
+    all_raw: list[dict] = []
+    seen_names: set[str] = set()
+    prev_height = 0
+    stable = 0
+
+    for _ in range(max_scrolls):
+        # Wyciągnij widoczne produkty w obecnej pozycji
+        try:
+            batch = await page.evaluate(DOM_EXTRACT_JS) or []
+            for p in batch:
+                n = (p.get("name") or "").strip().lower()
+                if n and n not in seen_names:
+                    seen_names.add(n)
+                    all_raw.append(p)
+        except Exception:
+            pass
+
+        # Scrolluj do dołu
+        await page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+        await page.wait_for_timeout(delay_ms)
+
+        height = await page.evaluate("document.body.scrollHeight")
+        if height == prev_height:
+            stable += 1
+            if stable >= 3:
+                break
+        else:
+            stable = 0
+        prev_height = height
+
+    # Ostatni extract na samym dole
+    try:
+        batch = await page.evaluate(DOM_EXTRACT_JS) or []
+        for p in batch:
+            n = (p.get("name") or "").strip().lower()
+            if n and n not in seen_names:
+                seen_names.add(n)
+                all_raw.append(p)
+    except Exception:
+        pass
+
+    return all_raw
 
 
 # ─── Scraping kategorii ────────────────────────────────────────────────────────
@@ -454,37 +547,38 @@ async def scrape_category(
             return []
 
     await page.wait_for_timeout(2000)
-    await scroll_down(page)
 
-    # Paginacja
-    prev_count = -1
-    for pg_num in range(MAX_PAGES):
-        if limit and len(intercepted) >= limit:
-            break
-        cur_count = len(intercepted)
-        if cur_count == prev_count and pg_num > 1:
-            break   # brak nowych produktów
-        prev_count = cur_count
+    # Sprawdź po chwili czy API coś zwróciło
+    await scroll_down(page, steps=2)
+    await page.wait_for_timeout(1000)
 
-        clicked = await try_load_more(page)
-        if not clicked:
-            await scroll_down(page, steps=3)
-            await page.wait_for_timeout(PAGE_DELAY_MS)
+    if intercepted:
+        # API działa — użyj paginacji przycisk/scroll API-based
+        prev_count = -1
+        for pg_num in range(MAX_PAGES):
+            if limit and len(intercepted) >= limit:
+                break
+            cur_count = len(intercepted)
+            if cur_count == prev_count and pg_num > 1:
+                break
+            prev_count = cur_count
+            clicked = await try_load_more(page)
+            if not clicked:
+                await scroll_down(page, steps=3)
+                await page.wait_for_timeout(PAGE_DELAY_MS)
+    else:
+        # Brak danych z API — infinite scroll z ekstrakcją na bieżąco
+        print(" [scroll]", end="", flush=True)
+        dom_raw = await scroll_and_extract(page, max_scrolls=60, delay_ms=1200)
+        if dom_raw:
+            print(" [DOM]", end="", flush=True)
+        intercepted.extend(dom_raw)
 
     # Deduplikacja + normalizacja
     seen: set[str] = set()
     products: list[dict] = []
 
     source = intercepted
-    if not source:
-        # DOM fallback
-        try:
-            dom_res = await page.evaluate(DOM_EXTRACT_JS)
-            source = dom_res or []
-            if source:
-                print(" [DOM]", end="", flush=True)
-        except Exception:
-            source = []
 
     for raw in source:
         name = (raw.get("name") or "").strip()
@@ -520,6 +614,74 @@ async def scrape_category(
     page.remove_listener("response", on_response)
     print(f" → {len(products)} produktów")
     return products
+
+
+# ─── Odkrywanie podkategorii Auchan ───────────────────────────────────────────
+
+AUCHAN_SUBCAT_JS = """() => {
+    // Wyciąga linki podkategorii z lewego sidebara kategorii Auchan
+    const links = new Map();
+    for (const a of document.querySelectorAll('a[href*="/categories/"]')) {
+        const href = a.href.split('?')[0];  // bez query string
+        const text = (a.innerText || '').trim().split('\\n')[0].trim();
+        if (text && text.length > 2 && text.length < 80 && !links.has(href)) {
+            links.set(href, text);
+        }
+    }
+    return [...links.entries()].map(([url, name]) => ({ name, url }));
+}"""
+
+NON_FOOD_CAT_RE = re.compile(
+    r"\b(alkohol|wino|piwo|wódka|whisky|chemia|środki czystoś|kosmetyk|higiena|"
+    r"dla zwierząt|zwierzęta|karma dla|biurow|szkoln|papiernicze|"
+    r"artykuły dla domu|dom i ogród|auto.moto|automoto|motoryzacja|"
+    r"elektronika|rtv|agd|odzież|sport|turystyk|zabawki|gry)\b",
+    re.IGNORECASE | re.UNICODE,
+)
+
+async def expand_auchan_cats(page: Page, top_cats: list) -> list[tuple[str, str]]:
+    """
+    Dla każdej kategorii głównej Auchan odwiedza stronę i wyciąga linki
+    podkategorii z sidebara. Zwraca płaską listę (name, url) do scrapowania.
+    """
+    all_cats: list[tuple[str, str]] = []
+    visited_urls: set[str] = set()
+    visited_names: set[str] = set()
+
+    for cat_name, cat_url in top_cats:
+        try:
+            await page.goto(cat_url, wait_until="load", timeout=40000)
+            await page.wait_for_timeout(2000)
+            subcats = await page.evaluate(AUCHAN_SUBCAT_JS)
+        except Exception:
+            subcats = []
+
+        # Odfiltruj: sam URL kategorii głównej, nieżywnościowe, już odwiedzone
+        base = cat_url.split('?')[0]
+        food_subcats = []
+        for s in subcats:
+            if s["url"] == base:
+                continue
+            if s["url"] in visited_urls:
+                continue
+            if s["name"].lower() in visited_names:
+                continue
+            if NON_FOOD_CAT_RE.search(s["name"]):
+                continue
+            food_subcats.append(s)
+
+        if food_subcats:
+            print(f"    → {cat_name}: {len(food_subcats)} podkategorii spożywczych")
+            for s in food_subcats:
+                visited_urls.add(s["url"])
+                visited_names.add(s["name"].lower())
+                all_cats.append((s["name"], s["url"]))
+        else:
+            if cat_url not in visited_urls:
+                visited_urls.add(cat_url)
+                all_cats.append((cat_name, cat_url))
+
+    return all_cats
 
 
 # ─── Scraping sklepu ───────────────────────────────────────────────────────────
@@ -558,7 +720,14 @@ async def scrape_store(store_key: str, cats: list, limit: int = 0) -> list[dict]
         except Exception:
             pass
 
-        for cat_name, cat_url in cats:
+        # Auchan: odkryj podkategorie z sidebara przed scrapowaniem
+        scrape_cats = cats
+        if store_key == "auchan":
+            print("  Odkrywam podkategorie Auchan...")
+            scrape_cats = await expand_auchan_cats(page, cats)
+            print(f"  Łącznie kategorii do scrapowania: {len(scrape_cats)}")
+
+        for cat_name, cat_url in scrape_cats:
             try:
                 products = await scrape_category(page, cat_name, cat_url, store_key, limit)
                 all_products.extend(products)
@@ -674,6 +843,39 @@ def import_to_db(products: list[dict], user_id: int, dry_run: bool,
     print()  # newline po \r
     conn.close()
     return {"added": added, "skipped": skipped, "errors": errors, "macro_ok": macro_ok}
+
+
+def fix_macro_for_user(user_id: int):
+    """Uzupełnia makro (z Open Food Facts) dla produktów użytkownika które mają NULL kcal."""
+    conn = psycopg2.connect(**DB_CONFIG)
+    cur = conn.cursor()
+    cur.execute(
+        "SELECT id, name FROM products WHERE user_id = %s AND kcal IS NULL ORDER BY id",
+        (user_id,),
+    )
+    rows = cur.fetchall()
+    total = len(rows)
+    print(f"  Produktów bez makro: {total}")
+    ok = errors = 0
+    for i, (product_id, name) in enumerate(rows, 1):
+        macro = fetch_macro_off(name)
+        if macro:
+            try:
+                cur.execute(
+                    "UPDATE products SET kcal=%s, protein=%s, fat=%s, carbs=%s WHERE id=%s",
+                    (macro["kcal"], macro["protein"], macro["fat"], macro["carbs"], product_id),
+                )
+                conn.commit()
+                ok += 1
+            except Exception:
+                conn.rollback()
+                errors += 1
+        time.sleep(0.25)
+        if i % 10 == 0 or i == total:
+            print(f"  [{i}/{total}] uzupełniono={ok} błędy={errors}", end="\r")
+    print()
+    conn.close()
+    print(f"Gotowe: uzupełniono makro dla {ok}/{total} produktów.")
 
 
 # ─── Tryb inspect (debugowanie) ────────────────────────────────────────────────
@@ -882,7 +1084,7 @@ def main():
         epilog="""
 Przykłady:
   python catalog_scraper.py --scrape auchan --dry-run --limit 10
-  python catalog_scraper.py --scrape all
+  python catalog_scraper.py --scrape all --json-only
   python catalog_scraper.py --import catalog_products.json
   python catalog_scraper.py --inspect https://zakupy.auchan.pl/produkty/warzywa-i-owoce
         """,
@@ -892,12 +1094,19 @@ Przykłady:
     ap.add_argument("--inspect",    metavar="URL",    help="Debuguj kategorię (widoczna przeglądarka)")
     ap.add_argument("--limit",      type=int, default=0, help="Max produktów na kategorię (0=bez limitu)")
     ap.add_argument("--dry-run",    action="store_true", help="Nie zapisuj do bazy, tylko pokaż co by dodało")
+    ap.add_argument("--json-only",  action="store_true", help="Tylko zapisz do JSON, nie importuj do bazy")
     ap.add_argument("--output",     default=str(OUTPUT_FILE), help=f"Plik wyjściowy (domyślnie: {OUTPUT_FILE.name})")
     ap.add_argument("--user-id",    type=int, default=DEFAULT_USER_ID, help=f"user_id w bazie (domyślnie: {DEFAULT_USER_ID})")
     ap.add_argument("--no-macro",   action="store_true", help="Pomiń pobieranie makr z Open Food Facts (szybszy import)")
+    ap.add_argument("--fix-macro",  action="store_true", help="Uzupełnij makro dla produktów z NULL kcal (bez ponownego scrapowania)")
     ap.add_argument("--discover",   metavar="SKLEP",  help="Wyciągnij linki kategorii ze strony (auchan|biedronka|carrefour)")
     ap.add_argument("--list-users", action="store_true", help="Wyświetl użytkowników z bazy")
     args = ap.parse_args()
+
+    if args.fix_macro:
+        print(f"Uzupełnianie makro dla user_id={args.user_id}...")
+        fix_macro_for_user(args.user_id)
+        return
 
     if args.discover:
         asyncio.run(discover_categories(args.discover))
@@ -964,7 +1173,11 @@ Przykłady:
     print(f"\n{'='*70}")
     print(f"Zapisano {total} produktów → {output_path}")
 
-    # Importuj do bazy (chyba że dry-run)
+    # Importuj do bazy (chyba że dry-run lub json-only)
+    if args.json_only:
+        print("Gotowe! Użyj export_seeds.py żeby zamienić ten plik na seed dla nowych użytkowników.")
+        return
+
     if args.dry_run:
         print("\n[DRY RUN — podgląd importu, żadne zmiany nie zostaną zapisane]\n")
         flat = [p for lst in all_results.values() for p in lst]
