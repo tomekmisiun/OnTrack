@@ -150,6 +150,8 @@ export default function Recipes() {
   const [remaining, setRemaining] = useState(null);
   const [editingName, setEditingName] = useState(null);
   const [editingIngredients, setEditingIngredients] = useState(null);
+  const [editingIngCell, setEditingIngCell] = useState(null); // { key, field: 'weight'|'macro'|'name', val/vals }
+  const [addingIng, setAddingIng] = useState(null); // { recipeId, search, product, weight, showDrop }
   const [promptCopied, setPromptCopied] = useState(false);
   const [addingProductFor, setAddingProductFor] = useState(null);
   const [quickForm, setQuickForm] = useState({ name: '', package_weight: '100', package_price: '', unit: 'g', sold_by_weight: false });
@@ -601,9 +603,15 @@ Zasady:
         {recipeList.length > 0 && search.trim() && !recipeList.some(r => r.name.toLowerCase().includes(search.trim().toLowerCase())) && (
           <p style={{ textAlign: 'center', color: '#6b7280', fontStyle: 'italic' }}>Nie znaleziono przepisu „{search}"</p>
         )}
-        <table style={{ borderCollapse: 'separate', borderSpacing: '0 4px' }}>
+        <div style={{ overflowX: 'auto' }}>
+        <table style={{ borderCollapse: 'separate', borderSpacing: '0 4px', width: '100%', minWidth: 600 }}>
           <thead>
-            <tr><th style={{ width: '55%' }}>Nazwa</th><th style={{ textAlign: 'center' }}>Cena</th><th style={{ textAlign: 'right' }}></th></tr>
+            <tr>
+              <th colSpan={2} style={{ width: '40%' }}>Nazwa</th>
+              <th style={{ textAlign: 'center' }}>Kcal / Makro</th>
+              <th style={{ textAlign: 'right' }}>Cena</th>
+              <th style={{ textAlign: 'center', width: 60 }}></th>
+            </tr>
           </thead>
           <tbody>
         {recipeList.filter(r => !search.trim() || r.name.toLowerCase().includes(search.trim().toLowerCase())).sort((a, b) => (b.is_favorite ? 1 : 0) - (a.is_favorite ? 1 : 0)).map(r => (
@@ -616,7 +624,7 @@ Zasady:
               setEditingIngredients(null);
             }}
             style={{ cursor: 'pointer' }}>
-            <td style={!selectionMode && expanded === r.id ? { background: '#0d948818', borderLeft: '3px solid #0d9488', borderTop: '1px solid #0d948860', borderBottom: '1px solid #0d948860' } : {}}>
+            <td colSpan={2} style={!selectionMode && expanded === r.id ? { background: '#0d948818', borderLeft: '3px solid #0d9488', borderTop: '1px solid #0d948860', borderBottom: '1px solid #0d948860' } : {}}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 {selectionMode && (
                   <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 16, height: 16, borderRadius: 4, border: `1.5px solid ${selectedIds.has(r.id) ? '#6366f1' : '#374151'}`, background: selectedIds.has(r.id) ? '#6366f1' : 'transparent', flexShrink: 0, transition: 'all 0.12s' }}>
@@ -650,98 +658,290 @@ Zasady:
                 )}
               </div>
             </td>
-            <td style={{ whiteSpace: 'nowrap', color: '#0d9488', fontWeight: 600, textAlign: 'center', ...(expanded === r.id ? { background: '#0d948818', borderTop: '1px solid #0d948860', borderBottom: '1px solid #0d948860' } : {}) }}>{r.total_cost.toFixed(2)} zł</td>
+            <td style={{ whiteSpace: 'nowrap', textAlign: 'center', ...(expanded === r.id ? { background: '#0d948818', borderTop: '1px solid #0d948860', borderBottom: '1px solid #0d948860' } : {}) }}>
+              {r.total_kcal > 0 ? (
+                <span style={{ fontSize: 12, color: '#9ca3af' }}>
+                  <span style={{ color: '#e2e8f0', fontWeight: 600 }}>{r.total_kcal}</span> kcal · B{r.total_protein} T{r.total_fat} W{r.total_carbs}
+                </span>
+              ) : <span style={{ fontSize: 11, color: '#374151' }}>—</span>}
+            </td>
+            <td style={{ whiteSpace: 'nowrap', color: '#0d9488', fontWeight: 600, textAlign: 'right', ...(expanded === r.id ? { background: '#0d948818', borderTop: '1px solid #0d948860', borderBottom: '1px solid #0d948860' } : {}) }}>{r.total_cost.toFixed(2)} zł</td>
             <td style={{ textAlign: 'right', ...(expanded === r.id ? { background: '#0d948818', borderTop: '1px solid #0d948860', borderBottom: '1px solid #0d948860', borderRight: '1px solid #0d948860' } : {}) }} onClick={e => e.stopPropagation()}>
-              <div style={{ display: 'flex', gap: 8, alignItems: 'center', justifyContent: 'flex-end' }}>
-                {expanded === r.id && (editingIngredients?.id === r.id ? (
-                  <>
-                    <button className="btn btn-primary" onClick={() => handleSaveIngredients(r.id)}>Zapisz</button>
-                    <button className="btn" style={{ background: '#374151', color: '#9ca3af' }} onClick={() => setEditingIngredients(null)}>Anuluj</button>
-                  </>
-                ) : (
-                  <button className="btn btn-primary"
-                    onClick={() => setEditingIngredients({ id: r.id, rows: r.ingredients.map(ing => ({ product_id: ing.product_id, weight: ing.weight, unit: ing.unit || 'g' })) })}>
-                    Edytuj składniki
-                  </button>
-                ))}
-                <button className="btn btn-danger" onClick={(e) => { e.stopPropagation(); showConfirm({
-                    title: 'Usuń przepis',
-                    message: `Czy na pewno chcesz usunąć „${r.name}"?`,
-                    confirmLabel: 'Usuń',
-                    onConfirm: async () => { try { await api.delete(r.id); showSuccess('Przepis usunięty'); loadRecipes(); } catch { showError(t('err_save_recipe')); } },
-                  }); }}>{t('delete')}</button>
-              </div>
+              <button className="btn btn-danger" onClick={(e) => { e.stopPropagation(); showConfirm({
+                  title: 'Usuń przepis',
+                  message: `Czy na pewno chcesz usunąć „${r.name}"?`,
+                  confirmLabel: 'Usuń',
+                  onConfirm: async () => { try { await api.delete(r.id); showSuccess('Przepis usunięty'); loadRecipes(); } catch { showError(t('err_save_recipe')); } },
+                }); }}>{t('delete')}</button>
             </td>
           </tr>
           {expanded === r.id && (() => {
-            const isEditing = editingIngredients?.id === r.id;
             const ingStyle = { background: '#0d94880d', borderLeft: '1px solid #0d948860', borderRight: '1px solid #0d948860' };
-            const blStyle = { borderLeft: '3px solid #0d9488' };
+            const blStyle  = { borderLeft: '3px solid #0d9488' };
+            const inpS     = { width: 38, padding: '1px 3px', fontSize: 11, background: '#1f2937', border: '1px solid #0d9488', borderRadius: 4, color: '#e2e8f0', textAlign: 'center', minWidth: 0 };
+
+            const saveIngMacro = async (ing, vals) => {
+              const toN = v => v === '' ? null : parseFloat(v) || 0;
+              try { await productsApi.update(ing.product_id, { kcal: toN(vals.kcal), protein: toN(vals.protein), fat: toN(vals.fat), carbs: toN(vals.carbs) }); await loadRecipes(); }
+              catch { showError('Błąd zapisu makro'); }
+              setEditingIngCell(null);
+            };
+            const saveIngWeight = async (ing, weight) => {
+              if (!weight || isNaN(parseFloat(weight))) { setEditingIngCell(null); return; }
+              try { await api.update(r.id, { ingredients: r.ingredients.map(x => ({ product_id: x.product_id, weight: x.id === ing.id ? parseFloat(weight) : x.weight })) }); await loadRecipes(); }
+              catch { showError('Błąd zapisu'); }
+              setEditingIngCell(null);
+            };
+            const saveIngName = async (ing, name) => {
+              if (!name.trim()) { setEditingIngCell(null); return; }
+              try { await productsApi.update(ing.product_id, { name: name.trim() }); await loadRecipes(); }
+              catch { showError('Błąd zapisu nazwy'); }
+              setEditingIngCell(null);
+            };
+            const deleteIng = async (ing) => {
+              try { await api.update(r.id, { ingredients: r.ingredients.filter(x => x.id !== ing.id).map(x => ({ product_id: x.product_id, weight: x.weight })) }); await loadRecipes(); }
+              catch { showError('Błąd usuwania składnika'); }
+            };
+            const initAdding = () => setAddingIng({ recipeId: r.id, search: '', product: null, weight: '', showDrop: false, kcal: '', protein: '', fat: '', carbs: '', unit: 'g', soldByWeight: false, priceOpak: '', pkgWeight: '', priceKg: '', priceSzt: '' });
+
+            const confirmAddIng = async () => {
+              const a = addingIng;
+              if (!a || !a.weight || isNaN(parseFloat(a.weight))) return;
+              let pid = a.product?.id;
+              try {
+                if (!pid) {
+                  const toN = v => v === '' ? null : parseFloat(v) || 0;
+                  let price = 0;
+                  const pkgW = parseFloat(a.pkgWeight) || 100;
+                  if (a.unit === 'szt') price = parseFloat(a.priceSzt) || 0;
+                  else if (a.soldByWeight) price = (parseFloat(a.priceKg) || 0) / 10;
+                  else price = pkgW > 0 ? (parseFloat(a.priceOpak) || 0) / (pkgW / 100) : 0;
+                  const res = await productsApi.create({ name: a.search.trim(), package_weight: pkgW, price, unit: a.unit, sold_by_weight: a.soldByWeight, kcal: toN(a.kcal), protein: toN(a.protein), fat: toN(a.fat), carbs: toN(a.carbs) });
+                  pid = res.data.id;
+                } else if (a.kcal !== '' || a.protein !== '' || a.fat !== '' || a.carbs !== '') {
+                  const toN = v => v === '' ? null : parseFloat(v) || 0;
+                  await productsApi.update(pid, { kcal: toN(a.kcal), protein: toN(a.protein), fat: toN(a.fat), carbs: toN(a.carbs) });
+                }
+                await api.update(r.id, { ingredients: [...r.ingredients.map(x => ({ product_id: x.product_id, weight: x.weight })), { product_id: pid, weight: parseFloat(a.weight) }] });
+                await loadRecipes();
+                setAddingIng(null);
+              } catch { showError('Błąd dodawania składnika'); }
+            };
+
+            const isAdding = addingIng?.recipeId === r.id;
+            const dropResults = isAdding && addingIng.search.length >= 2
+              ? productList.filter(p => p.name.toLowerCase().includes(addingIng.search.toLowerCase())).slice(0, 8)
+              : [];
+            const exactMatch = isAdding && productList.find(p => p.name.toLowerCase() === addingIng.search.toLowerCase());
+            const addUnit = addingIng?.product?.unit || addingIng?.unit || 'g';
+
             return (<>
               <tr style={ingStyle}>
-                <th style={{ ...blStyle, fontSize: 11, color: '#6b7280', fontWeight: 700, letterSpacing: '0.5px', padding: '6px 8px' }}>{t('col_product')}</th>
-                <th style={{ textAlign: 'center', fontSize: 11, color: '#6b7280', fontWeight: 700, letterSpacing: '0.5px' }}>{!isEditing ? t('col_cost') : t('col_weight')}</th>
-                <th style={{ textAlign: 'right', fontSize: 11, color: '#6b7280', fontWeight: 700, letterSpacing: '0.5px' }}>{!isEditing ? t('col_weight') : ''}</th>
+                <th style={{ ...blStyle, fontSize: 11, color: '#6b7280', fontWeight: 700, letterSpacing: '0.5px', padding: '6px 8px' }}>Nazwa produktu</th>
+                <th style={{ textAlign: 'left', fontSize: 11, color: '#6b7280', fontWeight: 700, letterSpacing: '0.5px', width: 100 }}>Potrzebuje</th>
+                <th style={{ textAlign: 'center', fontSize: 11, color: '#6b7280', fontWeight: 700, letterSpacing: '0.5px' }}>Kcal / Makro</th>
+                <th style={{ textAlign: 'right', fontSize: 11, color: '#6b7280', fontWeight: 700, letterSpacing: '0.5px', whiteSpace: 'nowrap' }}>Koszt</th>
+                <th style={{ textAlign: 'center', fontSize: 11, color: '#6b7280', fontWeight: 700, letterSpacing: '0.5px', width: 60 }}>Usuń</th>
               </tr>
-              {isEditing ? editingIngredients.rows.map((row, i) => {
-                const prod = productList.find(p => p.id === parseInt(row.product_id));
+              {r.ingredients.map(ing => {
+                const factor  = ing.unit === 'szt' ? ing.weight : ing.weight / 100;
+                const kcal    = ing.kcal    != null ? Math.round(ing.kcal    * factor) : null;
+                const protein = ing.protein != null ? Math.round(ing.protein * factor * 10) / 10 : null;
+                const fat     = ing.fat     != null ? Math.round(ing.fat     * factor * 10) / 10 : null;
+                const carbs   = ing.carbs   != null ? Math.round(ing.carbs   * factor * 10) / 10 : null;
+                const cellKey = `${r.id}-${ing.id}`;
+                const isEditN = editingIngCell?.key === cellKey && editingIngCell.field === 'name';
+                const isEditW = editingIngCell?.key === cellKey && editingIngCell.field === 'weight';
+                const isEditM = editingIngCell?.key === cellKey && editingIngCell.field === 'macro';
+                const noEdit  = !isEditN && !isEditW && !isEditM;
                 return (
-                  <tr key={i} style={ingStyle}>
-                    <td style={blStyle}>
-                      <select value={row.product_id} onChange={e => {
-                        const rows = [...editingIngredients.rows];
-                        const p = productList.find(p => p.id === parseInt(e.target.value));
-                        rows[i] = { ...rows[i], product_id: parseInt(e.target.value), weight: '', unit: p?.unit || 'g' };
-                        setEditingIngredients({ ...editingIngredients, rows });
-                      }} style={{ fontSize: 12, background: '#111827', border: '1px solid #374151', color: '#f1f5f9', borderRadius: 4, padding: '3px 6px', width: '100%' }}>
-                        <option value="">-- wybierz składnik --</option>
-                        {productList.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
-                      </select>
+                  <tr key={ing.id} style={ingStyle}>
+                    {/* Nazwa — klik = edycja */}
+                    <td style={{ ...blStyle, cursor: 'pointer' }} onClick={() => noEdit && setEditingIngCell({ key: cellKey, field: 'name', val: ing.product_name })}>
+                      {isEditN ? (
+                        <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}
+                             onKeyDown={e => { if (e.key === 'Enter') saveIngName(ing, editingIngCell.val); if (e.key === 'Escape') setEditingIngCell(null); }}>
+                          <input autoFocus value={editingIngCell.val} onChange={e => setEditingIngCell(c => ({ ...c, val: e.target.value }))}
+                            style={{ flex: 1, padding: '2px 6px', fontSize: 13, background: '#1f2937', border: '1px solid #0d9488', borderRadius: 4, color: '#e2e8f0' }} />
+                          <button onClick={() => saveIngName(ing, editingIngCell.val)} style={{ padding: '1px 5px', fontSize: 11, background: '#0d9488', color: '#fff', border: 'none', borderRadius: 3, cursor: 'pointer' }}>✓</button>
+                          <button onClick={() => setEditingIngCell(null)} style={{ padding: '1px 5px', fontSize: 11, background: '#374151', color: '#9ca3af', border: 'none', borderRadius: 3, cursor: 'pointer' }}>✕</button>
+                        </div>
+                      ) : ing.product_name}
                     </td>
-                    <td>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
-                        <input type="number" className="no-spin" min="0.1" max="99999" step="0.1"
-                          value={row.weight} placeholder="0"
-                          onChange={e => {
-                            const rows = [...editingIngredients.rows];
-                            rows[i] = { ...rows[i], weight: e.target.value === '' ? '' : Math.min(99999, parseFloat(e.target.value) || 0) };
-                            setEditingIngredients({ ...editingIngredients, rows });
-                          }}
-                          style={{ width: 48, padding: '3px 4px', fontSize: 12, background: '#111827', border: '1px solid #374151', color: '#f1f5f9', borderRadius: 4, boxSizing: 'border-box' }} />
-                        <span style={{ fontSize: 11, color: '#6b7280' }}>{prod?.unit || row.unit || 'g'}</span>
-                      </div>
+                    {/* Potrzebuje — klik = edycja wagi */}
+                    <td style={{ textAlign: 'left', cursor: 'pointer', width: 100 }} onClick={() => noEdit && setEditingIngCell({ key: cellKey, field: 'weight', val: String(ing.weight) })}>
+                      {isEditW ? (
+                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 3 }}
+                             onKeyDown={e => { if (e.key === 'Enter') saveIngWeight(ing, editingIngCell.val); if (e.key === 'Escape') setEditingIngCell(null); }}>
+                          <input autoFocus style={{ ...inpS, width: 55 }} value={editingIngCell.val}
+                            onChange={e => setEditingIngCell(c => ({ ...c, val: e.target.value }))} />
+                          <span style={{ fontSize: 11, color: '#6b7280' }}>{ing.unit}</span>
+                          <button onClick={() => saveIngWeight(ing, editingIngCell.val)} style={{ padding: '1px 5px', fontSize: 11, background: '#0d9488', color: '#fff', border: 'none', borderRadius: 3, cursor: 'pointer' }}>✓</button>
+                          <button onClick={() => setEditingIngCell(null)} style={{ padding: '1px 5px', fontSize: 11, background: '#374151', color: '#9ca3af', border: 'none', borderRadius: 3, cursor: 'pointer' }}>✕</button>
+                        </div>
+                      ) : <span style={{ fontSize: 12, color: '#e2e8f0' }}>{ing.weight} {ing.unit}</span>}
                     </td>
-                    <td style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
-                      <button onClick={() => {
-                        const rows = editingIngredients.rows.filter((_, j) => j !== i);
-                        setEditingIngredients({ ...editingIngredients, rows });
-                      }} style={{ background: '#2d1515', border: '1px solid #4b1515', color: '#f87171', borderRadius: 4, cursor: 'pointer', padding: '3px 8px', fontSize: 11, fontWeight: 600 }}>Usuń</button>
+                    {/* Kcal/Makro — klik = edycja makro */}
+                    <td style={{ textAlign: 'center', cursor: 'pointer' }} onClick={() => noEdit && setEditingIngCell({ key: cellKey, field: 'macro', vals: { kcal: ing.kcal != null ? String(ing.kcal) : '', protein: ing.protein != null ? String(ing.protein) : '', fat: ing.fat != null ? String(ing.fat) : '', carbs: ing.carbs != null ? String(ing.carbs) : '' } })}>
+                      {isEditM ? (
+                        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 2 }}
+                             onKeyDown={e => { if (e.key === 'Enter') saveIngMacro(ing, editingIngCell.vals); if (e.key === 'Escape') setEditingIngCell(null); }}>
+                          <span style={{ fontSize: 10, color: '#6b7280' }}>kcal</span>
+                          <input autoFocus style={inpS} value={editingIngCell.vals.kcal}    onChange={e => setEditingIngCell(c => ({ ...c, vals: { ...c.vals, kcal:    e.target.value } }))} placeholder="—" />
+                          <span style={{ fontSize: 10, color: '#6b7280' }}>B</span>
+                          <input style={inpS} value={editingIngCell.vals.protein} onChange={e => setEditingIngCell(c => ({ ...c, vals: { ...c.vals, protein: e.target.value } }))} placeholder="—" />
+                          <span style={{ fontSize: 10, color: '#6b7280' }}>T</span>
+                          <input style={inpS} value={editingIngCell.vals.fat}     onChange={e => setEditingIngCell(c => ({ ...c, vals: { ...c.vals, fat:     e.target.value } }))} placeholder="—" />
+                          <span style={{ fontSize: 10, color: '#6b7280' }}>W</span>
+                          <input style={inpS} value={editingIngCell.vals.carbs}   onChange={e => setEditingIngCell(c => ({ ...c, vals: { ...c.vals, carbs:   e.target.value } }))} placeholder="—" />
+                          <button onClick={() => saveIngMacro(ing, editingIngCell.vals)} style={{ padding: '1px 5px', fontSize: 11, background: '#0d9488', color: '#fff', border: 'none', borderRadius: 3, cursor: 'pointer', marginLeft: 2 }}>✓</button>
+                          <button onClick={() => setEditingIngCell(null)} style={{ padding: '1px 5px', fontSize: 11, background: '#374151', color: '#9ca3af', border: 'none', borderRadius: 3, cursor: 'pointer' }}>✕</button>
+                        </div>
+                      ) : kcal != null
+                        ? <span style={{ fontSize: 11, color: '#9ca3af' }}>{kcal} kcal · B{protein} T{fat} W{carbs}</span>
+                        : <span style={{ fontSize: 11, color: '#9ca3af' }}>+ makro</span>}
+                    </td>
+                    <td style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>{ing.cost.toFixed(2)} zł</td>
+                    <td style={{ textAlign: 'center' }}>
+                      <button onClick={() => showConfirm({ title: 'Usuń składnik', message: `Usunąć „${ing.product_name}" z przepisu?`, confirmLabel: 'Usuń', onConfirm: () => deleteIng(ing) })}
+                        style={{ background: '#2d1515', border: '1px solid #4b1515', color: '#f87171', borderRadius: 4, cursor: 'pointer', padding: '2px 8px', fontSize: 11, fontWeight: 600 }}>Usuń</button>
                     </td>
                   </tr>
                 );
-              }) : r.ingredients.map(ing => (
-                <tr key={ing.id} style={ingStyle}>
-                  <td style={blStyle}>{ing.product_name}</td>
-                  <td style={{ textAlign: 'center' }}>{ing.cost.toFixed(2)} zł</td>
-                  <td style={{ textAlign: 'right' }}>{ing.weight} {ing.unit || 'g'}</td>
-                </tr>
-              ))}
-              {isEditing && (
+              })}
+
+              {/* Dodaj składnik */}
+              {isAdding ? (
                 <tr style={{ ...ingStyle, borderBottom: '1px solid #0d948840' }}>
-                  <td style={blStyle} colSpan={3}>
-                    <button className="btn" onClick={() => {
-                      setEditingIngredients({ ...editingIngredients, rows: [...editingIngredients.rows, { product_id: '', weight: '', unit: 'g' }] });
-                    }} style={{ background: '#1c3534', color: '#0d9488', border: '1px solid #374151', margin: '4px 0' }}>+ Dodaj składnik</button>
+                  {/* Nazwa: wyszukiwarka */}
+                  <td style={blStyle}>
+                    <div style={{ position: 'relative' }}>
+                      <input autoFocus placeholder="Szukaj produktu..." value={addingIng.search} maxLength={200}
+                        onChange={e => setAddingIng(a => ({ ...a, search: e.target.value, product: null, showDrop: true, kcal: '', protein: '', fat: '', carbs: '' }))}
+                        onKeyDown={e => { if (e.key === 'Escape') setAddingIng(null); }}
+                        style={{ width: '100%', maxWidth: 320, boxSizing: 'border-box', padding: '3px 7px', fontSize: 12, background: '#111827', border: '1px solid #0d9488', borderRadius: 5, color: '#f1f5f9' }} />
+                      {addingIng.showDrop && dropResults.length > 0 && (
+                        <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, background: '#1f2937', border: '1px solid #374151', borderRadius: 6, zIndex: 200, maxHeight: 180, overflowY: 'auto', boxShadow: '0 4px 16px rgba(0,0,0,0.4)' }}>
+                          {dropResults.map(p => (
+                            <div key={p.id} onClick={() => setAddingIng(a => ({ ...a, search: p.name, product: p, showDrop: false, unit: p.unit, kcal: p.kcal != null ? String(p.kcal) : '', protein: p.protein != null ? String(p.protein) : '', fat: p.fat != null ? String(p.fat) : '', carbs: p.carbs != null ? String(p.carbs) : '' }))}
+                              style={{ padding: '5px 10px', fontSize: 12, color: '#e2e8f0', cursor: 'pointer' }}
+                              onMouseEnter={e => e.currentTarget.style.background = '#374151'}
+                              onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+                              {p.name} <span style={{ color: '#6b7280', fontSize: 11 }}>({p.unit})</span>
+                            </div>
+                          ))}
+                          {!exactMatch && addingIng.search.trim().length >= 2 && (
+                            <div onClick={() => setAddingIng(a => ({ ...a, product: null, showDrop: false }))}
+                              style={{ padding: '5px 10px', fontSize: 12, color: '#0d9488', cursor: 'pointer', borderTop: '1px solid #374151' }}
+                              onMouseEnter={e => e.currentTarget.style.background = '#374151'}
+                              onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
+                              + Utwórz nowy: „{addingIng.search.trim()}"
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </td>
+                  {/* Potrzebuje */}
+                  <td style={{ textAlign: 'left', width: 100 }}>
+                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: 3 }}>
+                      <input type="number" className="no-spin" min="0.1" max="99999" placeholder="ilość" value={addingIng.weight}
+                        onChange={e => setAddingIng(a => ({ ...a, weight: e.target.value }))}
+                        onKeyDown={e => { if (e.key === 'Enter') confirmAddIng(); if (e.key === 'Escape') setAddingIng(null); }}
+                        style={{ width: 55, padding: '3px 4px', fontSize: 12, background: '#111827', border: '1px solid #374151', borderRadius: 4, color: '#f1f5f9', textAlign: 'center' }} />
+                      <span style={{ fontSize: 11, color: '#6b7280' }}>{addUnit}</span>
+                    </div>
+                  </td>
+                  {/* Kcal/Makro — auto-fill z produktu lub puste */}
+                  <td style={{ textAlign: 'center' }}>
+                    <div style={{ display: 'inline-flex', alignItems: 'center', gap: 2 }}>
+                      <span style={{ fontSize: 10, color: '#6b7280' }}>kcal</span>
+                      <input style={inpS} value={addingIng.kcal}    onChange={e => setAddingIng(a => ({ ...a, kcal:    e.target.value }))} placeholder="—" />
+                      <span style={{ fontSize: 10, color: '#6b7280' }}>B</span>
+                      <input style={inpS} value={addingIng.protein} onChange={e => setAddingIng(a => ({ ...a, protein: e.target.value }))} placeholder="—" />
+                      <span style={{ fontSize: 10, color: '#6b7280' }}>T</span>
+                      <input style={inpS} value={addingIng.fat}     onChange={e => setAddingIng(a => ({ ...a, fat:     e.target.value }))} placeholder="—" />
+                      <span style={{ fontSize: 10, color: '#6b7280' }}>W</span>
+                      <input style={inpS} value={addingIng.carbs}   onChange={e => setAddingIng(a => ({ ...a, carbs:   e.target.value }))} placeholder="—" />
+                    </div>
+                  </td>
+                  {/* Cena — dla nowego produktu: pola ceny; dla istniejącego: info */}
+                  <td style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+                    {addingIng.product ? (
+                      <span style={{ fontSize: 11, color: '#6b7280' }}>istn. produkt</span>
+                    ) : (() => {
+                      const btnRow = (
+                        <div style={{ display: 'flex', gap: 3, alignItems: 'center' }}>
+                          {['g','ml','szt'].map(u => (
+                            <button key={u} onClick={() => setAddingIng(a => ({ ...a, unit: u, soldByWeight: false }))}
+                              style={{ padding: '1px 6px', fontSize: 11, borderRadius: 3, cursor: 'pointer', border: '1px solid', fontWeight: addingIng.unit === u ? 700 : 400,
+                                background: addingIng.unit === u ? '#0d9488' : '#1f2937', color: addingIng.unit === u ? '#fff' : '#9ca3af', borderColor: addingIng.unit === u ? '#0d9488' : '#374151' }}>
+                              {u}
+                            </button>
+                          ))}
+                          {addingIng.unit !== 'szt' && (
+                            <button onClick={() => setAddingIng(a => ({ ...a, soldByWeight: !a.soldByWeight }))}
+                              style={{ padding: '1px 6px', fontSize: 11, borderRadius: 3, cursor: 'pointer', border: '1px solid', fontWeight: addingIng.soldByWeight ? 700 : 400,
+                                background: addingIng.soldByWeight ? '#6366f1' : '#1f2937', color: addingIng.soldByWeight ? '#fff' : '#9ca3af', borderColor: addingIng.soldByWeight ? '#6366f1' : '#374151' }}>
+                              na wagę
+                            </button>
+                          )}
+                        </div>
+                      );
+                      const priceRow = addingIng.unit === 'szt' ? (
+                        <div style={{ display: 'flex', gap: 3, alignItems: 'center', justifyContent: 'flex-end' }}>
+                          <input placeholder="cena" type="number" className="no-spin" min="0" max="99999" value={addingIng.priceSzt} onChange={e => setAddingIng(a => ({ ...a, priceSzt: e.target.value }))}
+                            style={{ flex: 1, minWidth: 0, padding: '2px 4px', fontSize: 11, background: '#111827', border: '1px solid #374151', borderRadius: 3, color: '#e2e8f0' }} />
+                          <span style={{ fontSize: 10, color: '#6b7280', flexShrink: 0 }}>zł/szt</span>
+                        </div>
+                      ) : addingIng.soldByWeight ? (
+                        <div style={{ display: 'flex', gap: 3, alignItems: 'center', justifyContent: 'flex-end' }}>
+                          <input placeholder="cena" type="number" className="no-spin" min="0" max="99999" value={addingIng.priceKg} onChange={e => setAddingIng(a => ({ ...a, priceKg: e.target.value }))}
+                            style={{ flex: 1, minWidth: 0, padding: '2px 4px', fontSize: 11, background: '#111827', border: '1px solid #374151', borderRadius: 3, color: '#e2e8f0' }} />
+                          <span style={{ fontSize: 10, color: '#6b7280', flexShrink: 0 }}>zł/kg</span>
+                        </div>
+                      ) : (
+                        <div style={{ display: 'flex', gap: 3, alignItems: 'center', justifyContent: 'flex-end' }}>
+                          <input placeholder="cena" type="number" className="no-spin" min="0" max="99999" value={addingIng.priceOpak} onChange={e => setAddingIng(a => ({ ...a, priceOpak: e.target.value }))}
+                            style={{ flex: 1, minWidth: 0, padding: '2px 4px', fontSize: 11, background: '#111827', border: '1px solid #374151', borderRadius: 3, color: '#e2e8f0' }} />
+                          <span style={{ fontSize: 10, color: '#6b7280', flexShrink: 0 }}>zł /</span>
+                          <input placeholder="opak." type="number" className="no-spin" min="0" max="99999" value={addingIng.pkgWeight} onChange={e => setAddingIng(a => ({ ...a, pkgWeight: e.target.value }))}
+                            style={{ flex: 1, minWidth: 0, padding: '2px 4px', fontSize: 11, background: '#111827', border: '1px solid #374151', borderRadius: 3, color: '#e2e8f0' }} />
+                          <span style={{ fontSize: 10, color: '#6b7280', flexShrink: 0 }}>{addingIng.unit}</span>
+                        </div>
+                      );
+                      return (
+                        <div style={{ display: 'inline-flex', flexDirection: 'column', gap: 3, alignItems: 'stretch' }}>
+                          {btnRow}
+                          {priceRow}
+                        </div>
+                      );
+                    })()}
+                  </td>
+                  {/* Przyciski */}
+                  <td style={{ textAlign: 'center', whiteSpace: 'nowrap', width: 60 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 3, alignItems: 'center' }}>
+                      <button onClick={confirmAddIng} disabled={!addingIng.search.trim() || !addingIng.weight}
+                        style={{ padding: '3px 8px', fontSize: 12, background: '#0d9488', color: '#fff', border: 'none', borderRadius: 5, cursor: 'pointer', fontWeight: 600 }}>Dodaj</button>
+                      <button onClick={() => setAddingIng(null)}
+                        style={{ padding: '3px 8px', fontSize: 12, background: '#374151', color: '#9ca3af', border: 'none', borderRadius: 5, cursor: 'pointer' }}>Anuluj</button>
+                    </div>
+                  </td>
+                </tr>
+              ) : (
+                <tr style={{ ...ingStyle, cursor: 'pointer' }} onClick={() => { initAdding(); setEditingIngCell(null); }}>
+                  <td style={blStyle} colSpan={5}>
+                    <span style={{ color: '#0d9488', fontSize: 12, fontWeight: 600 }}>+ Dodaj składnik</span>
                   </td>
                 </tr>
               )}
-              {!isEditing && <tr style={{ background: '#0d94880d', borderLeft: '1px solid #0d948860', borderRight: '1px solid #0d948860', borderBottom: '1px solid #0d948860', borderRadius: '0 0 6px 6px' }}><td colSpan={3} style={{ borderLeft: '3px solid #0d9488', height: 6, borderRadius: '0 0 0 6px' }} /></tr>}
             </>);
           })()}
           </>
         ))}
           </tbody>
         </table>
+        </div>
         </div>}
       </div>
     </div>

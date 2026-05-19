@@ -4,7 +4,7 @@ import {
   useSensor, useSensors, useDraggable, useDroppable,
 } from '@dnd-kit/core';
 import { Icon } from '@iconify/react';
-import { mealPlan as api, recipes as recipesApi } from '../api';
+import { mealPlan as api, recipes as recipesApi, products as productsApi } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useToast } from '../contexts/ToastContext';
 import { useMember } from '../contexts/MemberContext';
@@ -56,6 +56,42 @@ function plPrzepis(n) {
 
 // ─── Recipe preview modal ─────────────────────────────────────────────────────
 function RecipePreviewModal({ recipe, onClose }) {
+  const { showError } = useToast();
+  const [localIngredients, setLocalIngredients] = useState(recipe?.ingredients || []);
+  const [editingIdx, setEditingIdx] = useState(null);
+  const [editVals, setEditVals] = useState({ kcal: '', protein: '', fat: '', carbs: '' });
+
+  useEffect(() => { setLocalIngredients(recipe?.ingredients || []); }, [recipe]);
+
+  const startEdit = (i, ing) => {
+    setEditingIdx(i);
+    setEditVals({
+      kcal:    ing.kcal    != null ? String(ing.kcal)    : '',
+      protein: ing.protein != null ? String(ing.protein) : '',
+      fat:     ing.fat     != null ? String(ing.fat)     : '',
+      carbs:   ing.carbs   != null ? String(ing.carbs)   : '',
+    });
+  };
+
+  const saveEdit = async (ing) => {
+    const toNum = v => v === '' ? null : parseFloat(v) || 0;
+    const payload = {
+      kcal:    toNum(editVals.kcal),
+      protein: toNum(editVals.protein),
+      fat:     toNum(editVals.fat),
+      carbs:   toNum(editVals.carbs),
+    };
+    try {
+      await productsApi.update(ing.product_id, payload);
+      setLocalIngredients(prev => prev.map((x, j) =>
+        j === editingIdx ? { ...x, ...payload } : x
+      ));
+    } catch (e) {
+      showError('Błąd zapisu makro');
+    }
+    setEditingIdx(null);
+  };
+
   if (!recipe) return null;
   return (
     <div onClick={onClose} style={{
@@ -108,18 +144,60 @@ function RecipePreviewModal({ recipe, onClose }) {
         </div>
         {/* Składniki */}
         <div style={{ background: '#1c2433', overflowY: 'auto', padding: '16px 20px' }}>
-          <div style={{ fontSize: 11, fontWeight: 700, color: '#0d9488', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 10 }}>
-            Składniki
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: '#0d9488', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              Składniki
+            </div>
+            <div style={{ fontSize: 10, color: '#9ca3af', textAlign: 'right' }}>
+              Uzupełnij / Edytuj
+            </div>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-            {(recipe.ingredients || []).map((ing, i) => (
-              <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '6px 10px', background: '#111827', borderRadius: 7 }}>
-                <span style={{ fontSize: 13, color: '#e2e8f0' }}>{ing.product_name}</span>
-                <span style={{ fontSize: 12, color: '#9ca3af', flexShrink: 0, marginLeft: 8 }}>
-                  {ing.weight} {ing.unit}
-                </span>
-              </div>
-            ))}
+            {localIngredients.map((ing, i) => {
+              const factor  = (ing.unit === 'szt') ? ing.weight : (ing.weight / 100);
+              const kcal    = ing.kcal    != null ? Math.round(ing.kcal    * factor) : null;
+              const protein = ing.protein != null ? Math.round(ing.protein * factor * 10) / 10 : null;
+              const fat     = ing.fat     != null ? Math.round(ing.fat     * factor * 10) / 10 : null;
+              const carbs   = ing.carbs   != null ? Math.round(ing.carbs   * factor * 10) / 10 : null;
+              const isEditing = editingIdx === i;
+              const inpStyle = { width: 36, padding: '1px 3px', fontSize: 11, background: '#1f2937', border: '1px solid #0d9488', borderRadius: 4, color: '#e2e8f0', textAlign: 'center', minWidth: 0 };
+              return (
+                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 10px', background: '#111827', borderRadius: 7, minWidth: 0 }}>
+                  {/* Ilość */}
+                  <span style={{ fontSize: 12, color: '#9ca3af', flexShrink: 0, minWidth: 50, textAlign: 'right' }}>
+                    {ing.weight} {ing.unit}
+                  </span>
+                  {/* Nazwa */}
+                  <span style={{ fontSize: 13, color: '#e2e8f0', flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{ing.product_name}</span>
+                  {/* Makro — klik otwiera edycję */}
+                  {isEditing ? (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 2, flexShrink: 0 }}
+                         onKeyDown={e => { if (e.key === 'Enter') saveEdit(ing); if (e.key === 'Escape') setEditingIdx(null); }}>
+                      <span style={{ fontSize: 10, color: '#6b7280' }}>kcal</span>
+                      <input autoFocus style={inpStyle} value={editVals.kcal}    onChange={e => setEditVals(v => ({ ...v, kcal:    e.target.value }))} placeholder="—" />
+                      <span style={{ fontSize: 10, color: '#6b7280' }}>B</span>
+                      <input style={inpStyle} value={editVals.protein} onChange={e => setEditVals(v => ({ ...v, protein: e.target.value }))} placeholder="—" />
+                      <span style={{ fontSize: 10, color: '#6b7280' }}>T</span>
+                      <input style={inpStyle} value={editVals.fat}     onChange={e => setEditVals(v => ({ ...v, fat:     e.target.value }))} placeholder="—" />
+                      <span style={{ fontSize: 10, color: '#6b7280' }}>W</span>
+                      <input style={inpStyle} value={editVals.carbs}   onChange={e => setEditVals(v => ({ ...v, carbs:   e.target.value }))} placeholder="—" />
+                      <button onClick={() => saveEdit(ing)} style={{ padding: '2px 5px', fontSize: 11, background: '#0d9488', color: '#fff', border: 'none', borderRadius: 4, cursor: 'pointer', marginLeft: 2, flexShrink: 0 }}>✓</button>
+                      <button onClick={() => setEditingIdx(null)} style={{ padding: '2px 5px', fontSize: 11, background: '#374151', color: '#9ca3af', border: 'none', borderRadius: 4, cursor: 'pointer', flexShrink: 0 }}>✕</button>
+                    </div>
+                  ) : (
+                    <span
+                      onClick={() => startEdit(i, ing)}
+                      title="Kliknij aby edytować makro (wartości na 100g)"
+                      style={{ fontSize: 11, color: kcal != null ? '#6b7280' : '#9ca3af', flexShrink: 0, textAlign: 'right', whiteSpace: 'nowrap', cursor: 'pointer', borderRadius: 4, padding: '1px 4px' }}
+                      onMouseEnter={e => e.currentTarget.style.background = '#1f2937'}
+                      onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                    >
+                      {kcal != null ? `${kcal} kcal · B${protein} T${fat} W${carbs}` : '+ makro'}
+                    </span>
+                  )}
+                </div>
+              );
+            })}
           </div>
           <div style={{ marginTop: 12, fontSize: 12, color: '#6b7280' }}>
             Koszt przepisu: <span style={{ color: '#0d9488', fontWeight: 700 }}>{recipe.total_cost?.toFixed(2)} zł</span>

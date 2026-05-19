@@ -23,6 +23,10 @@ class RecipeIngredient(db.Model):
             'product_name': self.product.name,
             'package_weight': self.product.package_weight,
             'unit': unit,
+            'kcal': self.product.kcal,
+            'protein': self.product.protein,
+            'fat': self.product.fat,
+            'carbs': self.product.carbs,
             'weight': self.weight,
             'cost': cost,
         }

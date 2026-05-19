@@ -608,9 +608,12 @@ export default function Export({ onGoToTab }) {
   };
   const [selectedMemberIds, setSelectedMemberIds] = useState(() => activeMember ? [activeMember.id] : []);
   useEffect(() => {
-    if (members.length > 0 && selectedMemberIds.length === 0) setSelectedMemberIds(members.map(m => m.id));
-  }, [members]); // eslint-disable-line
-  const toggleMember = id => setSelectedMemberIds(prev => prev.includes(id) ? prev.filter(x=>x!==id) : [...prev, id]);
+    if (activeMember) setSelectedMemberIds([activeMember.id]);
+  }, [activeMember?.id]); // eslint-disable-line
+  const toggleMember = id => {
+    if (id === activeMember?.id) return;
+    setSelectedMemberIds(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
+  };
 
   // Składniki przepisu — collapsible + search
   const [skladnikiOpen,   setSkladnikiOpen]   = useState(false);
@@ -630,7 +633,7 @@ export default function Export({ onGoToTab }) {
   const [shopLoading, setShopLoading] = useState(false);
   const [shopMemberIds, setShopMemberIds] = useState(() => activeMember ? [activeMember.id] : []);
   useEffect(() => {
-    if (shopMemberIds.length === 0 && activeMember) setShopMemberIds([activeMember.id]);
+    if (activeMember) setShopMemberIds([activeMember.id]);
   }, [activeMember?.id]); // eslint-disable-line
 
   const [recipes, setRecipes] = useState([]);
@@ -638,7 +641,7 @@ export default function Export({ onGoToTab }) {
 
   const [previewMeals, setPreviewMeals] = useState({});
   const [previewLoading, setPreviewLoading] = useState(false);
-  const midsKey = (selectedMemberIds.length > 0 ? selectedMemberIds : activeMember ? [activeMember.id] : []).join(',');
+  const midsKey = selectedMemberIds.join(',');
   useEffect(() => {
     const w = getCurrentWeek(), mo = getCurrentMonth();
     const range = htmlPeriod === 'week' ? w
@@ -646,19 +649,22 @@ export default function Export({ onGoToTab }) {
       : (htmlCustom.start && htmlCustom.end) ? htmlCustom : w;
     if (!range.start || !range.end) return;
     setPreviewLoading(true);
-    const ids = selectedMemberIds.length > 0 ? selectedMemberIds : activeMember ? [activeMember.id] : [];
+    const ids = selectedMemberIds;
     api.getRange(range.start, range.end, ids).then(r => { setPreviewMeals(r.data || {}); setPreviewLoading(false); }).catch(() => setPreviewLoading(false));
   }, [midsKey, htmlPeriod, htmlCustom.start, htmlCustom.end]); // eslint-disable-line
 
   const week  = getCurrentWeek();
   const month = getCurrentMonth();
   const memberLabel = members.filter(m => selectedMemberIds.includes(m.id)).map(m => m.name).join(', ');
-  const mids = selectedMemberIds.length > 0 ? selectedMemberIds : activeMember ? [activeMember.id] : [];
+  const mids = selectedMemberIds;
 
   // Shop list helpers
-  const shopMids = shopMemberIds.length > 0 ? shopMemberIds : activeMember ? [activeMember.id] : [];
+  const shopMids = shopMemberIds;
   const shopMemberLabel = members.filter(m => shopMemberIds.includes(m.id)).map(m => m.name).join(', ');
-  const toggleShopMember = id => setShopMemberIds(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
+  const toggleShopMember = id => {
+    if (id === activeMember?.id) return;
+    setShopMemberIds(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
+  };
   const toggleShopDay = ds => setShopDays(prev => { const n = new Set(prev); n.has(ds) ? n.delete(ds) : n.add(ds); return n; });
   const prevShopMonth = () => { if (shopMonth === 0) { setShopYear(y => y-1); setShopMonth(11); } else setShopMonth(m => m-1); };
   const nextShopMonth = () => { if (shopMonth === 11) { setShopYear(y => y+1); setShopMonth(0); } else setShopMonth(m => m+1); };
@@ -761,10 +767,6 @@ export default function Export({ onGoToTab }) {
   return (
     <div>
       <div className="card" style={{ padding:'16px 20px', marginBottom:12 }}>
-        <h1 style={{ marginBottom:0 }}>Eksport danych</h1>
-      </div>
-
-      <div className="card" style={{ padding:'16px 20px', marginBottom:12 }}>
         <div style={{ display:'flex', gap:20, alignItems:'flex-start' }}>
         <div style={{ flexShrink:0 }}>
 
@@ -806,7 +808,7 @@ export default function Export({ onGoToTab }) {
                 const color = ['#0d9488','#6366f1','#f59e0b','#ec4899','#22c55e','#ef4444'][idx%6];
                 return (
                   <button key={m.id} onClick={() => toggleMember(m.id)}
-                    style={{ display:'flex', alignItems:'center', gap:6, padding:'5px 14px', borderRadius:20, cursor:'pointer', fontSize:12, fontWeight: checked?700:400, transition:'all 0.15s',
+                    style={{ display:'flex', alignItems:'center', gap:6, padding:'5px 14px', borderRadius:20, cursor: m.id===activeMember?.id?'default':'pointer', fontSize:12, fontWeight: checked?700:400, transition:'all 0.15s',
                       border:`1px solid ${checked?color:'#374151'}`, background: checked?`${color}22`:'#1f2937', color: checked?color:'#6b7280' }}>
                     <span style={{ width:8, height:8, borderRadius:'50%', background: checked?color:'#374151', flexShrink:0 }} />
                     {m.name}
@@ -960,7 +962,7 @@ export default function Export({ onGoToTab }) {
                   const color = ['#0d9488','#6366f1','#f59e0b','#ec4899','#22c55e','#ef4444'][idx%6];
                   return (
                     <button key={m.id} onClick={() => toggleShopMember(m.id)}
-                      style={{ display:'flex', alignItems:'center', gap:5, padding:'3px 10px', borderRadius:20, cursor:'pointer', fontSize:11, fontWeight: checked?700:400, transition:'all 0.15s',
+                      style={{ display:'flex', alignItems:'center', gap:5, padding:'3px 10px', borderRadius:20, cursor: m.id===activeMember?.id?'default':'pointer', fontSize:11, fontWeight: checked?700:400, transition:'all 0.15s',
                         border:`1px solid ${checked?color:'#374151'}`, background: checked?`${color}22`:'#1f2937', color: checked?color:'#6b7280' }}>
                       <span style={{ width:7, height:7, borderRadius:'50%', background: checked?color:'#374151', flexShrink:0 }} />
                       {m.name}
@@ -1012,7 +1014,7 @@ export default function Export({ onGoToTab }) {
 
           return (
             <div style={{ flex:1, minWidth:0 }}>
-              <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:8 }}>
+              <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:8 }}>
                 <span style={{ fontSize:13, fontWeight:700, color:'#e2e8f0' }}>Podgląd</span>
                 <span style={{ fontSize:11, color:'#6b7280' }}>{previewLabel}</span>
               </div>
@@ -1075,6 +1077,46 @@ export default function Export({ onGoToTab }) {
 
         </div>{/* end flex row */}
       </div>{/* end card */}
+
+      {/* ── Karta pomocy ── */}
+      <div className="card" style={{ marginTop: 12, background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: '14px 16px', fontSize: 13, lineHeight: 1.7 }}>
+        <div style={{ fontSize: 14, fontWeight: 700, color: '#0d9488', marginBottom: 12 }}>Jak działa eksport?</div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+
+          {[
+            {
+              label: 'Podsumowanie wydatków',
+              desc: 'Wydatki na jedzenie + koszty stałe zaznaczone w zakładce Wydatki (czynsz, prąd, gaz…), przeliczone proporcjonalnie na liczbę dni.',
+            },
+            {
+              label: 'Karta Makro',
+              desc: 'Eksport danych z Kalkulatora Makro — dane osobowe, BMI, zapotrzebowanie kaloryczne i docelowe makroskładniki.',
+            },
+            {
+              label: 'Karta Kalendarza',
+              desc: 'Wydruk planu posiłków. Przed wydrukiem możesz włączyć lub wyłączyć widoczność kcal i makro przy każdym dniu.',
+            },
+            {
+              label: 'Składniki przepisu',
+              desc: 'Wyszukaj przepis wpisując jego nazwę, a następnie wyeksportuj listę składników z ilościami i cenami gotową do wydruku.',
+            },
+            {
+              label: 'Lista zakupów',
+              desc: 'Zaznacz dni, lista produktów z przepisów przeliczona na opakowania. Przed wydrukiem możesz usunąć pozycje z listy zakupów.',
+            },
+            {
+              label: 'Podgląd tygodnia',
+              desc: 'Miniaturowy widok kalendarza reagujący na wybrany okres (bieżący tydzień / miesiąc / zakres własny). Pokazuje jakie posiłki są zaplanowane w danym dniu.',
+            },
+          ].map(({ label, desc }) => (
+            <div key={label} style={{ background: '#111827', border: '1px solid #374151', borderRadius: 6, padding: '8px 12px', display: 'flex', flexDirection: 'column', gap: 4 }}>
+              <span style={{ display: 'inline-flex', alignItems: 'center', background: '#1e3a3a', color: '#2dd4bf', border: '1px solid #374151', borderRadius: 5, padding: '2px 8px', fontSize: 11, fontWeight: 700, alignSelf: 'flex-start' }}>{label}</span>
+              <span style={{ fontSize: 12, color: '#9ca3af' }}>{desc}</span>
+            </div>
+          ))}
+
+        </div>
+      </div>
     </div>
   );
 }
