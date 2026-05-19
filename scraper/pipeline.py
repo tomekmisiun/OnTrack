@@ -5,12 +5,13 @@ Kroki:
   1. build_catalogue.py   — grupuje produkty z JSONów → catalogue.json
   2. import_catalogue.py  — wgrywa catalogue.json do bazy
   3. fill_macros.py       — uzupełnia makra z OpenFoodFacts
-  4. dump_seed.py         — eksportuje bazę → app/data/products_seed_pl.json
+  4. aniagotuje_import.py — importuje przepisy z aniagotuje_recipes.json do bazy
+  5. dump_seed.py         — eksportuje bazę → products_seed_pl.json + recipes_seed_pl.json
 
 Użycie:
     python pipeline.py               # wszystkie kroki
-    python pipeline.py --steps 1 2   # tylko build + import (bez fill_macros i seed)
-    python pipeline.py --steps 3 4   # tylko fill_macros + seed
+    python pipeline.py --steps 1 2   # tylko build + import produktów
+    python pipeline.py --steps 3 4 5 # fill_macros + przepisy + seed
 """
 
 import argparse
@@ -23,7 +24,8 @@ STEPS = [
     (1, "Build catalogue",  ["python3", "build_catalogue.py"]),
     (2, "Import to DB",     ["python3", "import_catalogue.py", "--apply"]),
     (3, "Fill macros",      ["python3", "fill_macros.py"]),
-    (4, "Dump seed",        ["python3", "dump_seed.py"]),
+    (4, "Import recipes",   ["python3", "aniagotuje_import.py"]),
+    (5, "Dump seed",        ["python3", "dump_seed.py"]),
 ]
 
 

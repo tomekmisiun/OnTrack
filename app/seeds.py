@@ -1,16 +1,10 @@
 """
-Seeding domyślnych produktów dla nowych użytkowników.
+Seeding domyślnych produktów i przepisów dla nowych użytkowników.
 
-Produkty są wczytywane z pliku JSON:
-  app/data/products_seed_pl.json  — dla języka polskiego
-  app/data/products_seed_en.json  — dla języka angielskiego (jeśli istnieje)
+Pliki seed generujesz po scrapowaniu:
+  cd scraper && python dump_seed.py
 
-Plik seed generujesz po scrapowaniu:
-  cd scraper
-  python catalog_scraper.py --scrape all --user-id 2
-  python export_seeds.py catalog_products.json
-
-Jeśli plik seed nie istnieje — nowy użytkownik dostaje pustą listę produktów.
+Jeśli plik seed nie istnieje — nowy użytkownik zaczyna z pustą listą.
 """
 
 import json
@@ -18,18 +12,18 @@ from pathlib import Path
 
 from app import db
 from app.models.product import Product
+from app.models.recipe import Recipe, RecipeIngredient
 
 DATA_DIR = Path(__file__).parent / "data"
 
 
-def _load_seed_file(lang: str) -> list[dict]:
-    """Wczytuje plik seed dla danego języka. Fallback do PL jeśli EN nie istnieje."""
-    for fname in (f"products_seed_{lang}.json", "products_seed_pl.json"):
-        path = DATA_DIR / fname
+def _load_json(fname: str, lang: str) -> list[dict]:
+    """Wczytuje plik seed dla języka, fallback do PL."""
+    for name in (fname.replace("_pl.", f"_{lang}."), fname):
+        path = DATA_DIR / name
         if path.exists():
             try:
-                with open(path, encoding="utf-8") as f:
-                    data = json.load(f)
+                data = json.loads(path.read_text(encoding="utf-8"))
                 if isinstance(data, list) and data:
                     return data
             except Exception:
@@ -38,11 +32,13 @@ def _load_seed_file(lang: str) -> list[dict]:
 
 
 def seed_user(user_id: int, lang: str = "pl"):
-    """
-    Tworzy domyślne produkty dla nowego użytkownika z pliku seed.
-    Jeśli plik nie istnieje — użytkownik zaczyna z pustą listą.
-    """
-    products = _load_seed_file(lang)
+    """Tworzy domyślne produkty i przepisy dla nowego użytkownika."""
+    _seed_products(user_id, lang)
+    _seed_recipes(user_id, lang)
+
+
+def _seed_products(user_id: int, lang: str):
+    products = _load_json("products_seed_pl.json", lang)
     if not products:
         return
 
@@ -62,5 +58,59 @@ def seed_user(user_id: int, lang: str = "pl"):
             fat=p.get("fat"),
             carbs=p.get("carbs"),
         ))
+    db.session.commit()
+
+
+def _seed_recipes(user_id: int, lang: str):
+    recipes = _load_json("recipes_seed_pl.json", lang)
+    if not recipes:
+        return
+
+    # Buduj mapę nazwa→id dla właśnie dodanych produktów
+    product_map: dict[str, int] = {
+        p.name.lower(): p.id
+        for p in Product.query.filter_by(user_id=user_id).all()
+    }
+
+    for r in recipes:
+        name = (r.get("name") or "").strip()
+        if not name:
+            continue
+
+        recipe = Recipe(
+            user_id=user_id,
+            name=name,
+            notes=r.get("notes"),
+            image_url=r.get("image_url"),
+            source_url=r.get("source_url"),
+            kcal_100g=r.get("kcal_100g"),
+            protein_100g=r.get("protein_100g"),
+            fat_100g=r.get("fat_100g"),
+            carbs_100g=r.get("carbs_100g"),
+        )
+        db.session.add(recipe)
+        db.session.flush()  # żeby dostać recipe.id
+
+        for ing in r.get("ingredients", []):
+            pname = (ing.get("product_name") or "").strip().lower()
+            weight = float(ing.get("weight") or 1)
+            product_id = product_map.get(pname)
+            if not product_id:
+                # Stwórz placeholder jeśli brak w katalogu
+                placeholder = Product(
+                    user_id=user_id,
+                    name=ing["product_name"].strip()[:200],
+                    price=0, package_weight=100, unit="g", sold_by_weight=False,
+                )
+                db.session.add(placeholder)
+                db.session.flush()
+                product_id = placeholder.id
+                product_map[pname] = product_id
+
+            db.session.add(RecipeIngredient(
+                recipe_id=recipe.id,
+                product_id=product_id,
+                weight=weight,
+            ))
 
     db.session.commit()
