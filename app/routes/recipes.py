@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
 from app import db
 from app.models.recipe import Recipe, RecipeIngredient
+from app.models.meal_plan import MealPlan
 from app.models.product import Product
 from app.models.recipe_parse_log import RecipeParseLog
 from app.utils import current_uid
@@ -105,6 +106,7 @@ def toggle_favorite(id):
 @jwt_required()
 def delete_recipe(id):
     recipe = Recipe.query.filter_by(id=id, user_id=current_uid()).first_or_404()
+    MealPlan.query.filter_by(recipe_id=id).delete()
     db.session.delete(recipe)
     db.session.commit()
     return jsonify({'message': 'Przepis usunięty'}), 200
@@ -116,6 +118,7 @@ def delete_all_recipes():
     uid = current_uid()
     recipe_ids = [r.id for r in Recipe.query.filter_by(user_id=uid).all()]
     if recipe_ids:
+        MealPlan.query.filter(MealPlan.recipe_id.in_(recipe_ids)).delete(synchronize_session=False)
         RecipeIngredient.query.filter(RecipeIngredient.recipe_id.in_(recipe_ids)).delete(synchronize_session=False)
     count = Recipe.query.filter_by(user_id=uid).delete()
     db.session.commit()
