@@ -640,11 +640,15 @@ export default function Export({ onGoToTab }) {
   const [previewLoading, setPreviewLoading] = useState(false);
   const midsKey = (selectedMemberIds.length > 0 ? selectedMemberIds : activeMember ? [activeMember.id] : []).join(',');
   useEffect(() => {
-    const { start, end } = getCurrentWeek();
+    const w = getCurrentWeek(), mo = getCurrentMonth();
+    const range = htmlPeriod === 'week' ? w
+      : htmlPeriod === 'month' ? mo
+      : (htmlCustom.start && htmlCustom.end) ? htmlCustom : w;
+    if (!range.start || !range.end) return;
     setPreviewLoading(true);
     const ids = selectedMemberIds.length > 0 ? selectedMemberIds : activeMember ? [activeMember.id] : [];
-    api.getRange(start, end, ids).then(r => { setPreviewMeals(r.data || {}); setPreviewLoading(false); }).catch(() => setPreviewLoading(false));
-  }, [midsKey]); // eslint-disable-line
+    api.getRange(range.start, range.end, ids).then(r => { setPreviewMeals(r.data || {}); setPreviewLoading(false); }).catch(() => setPreviewLoading(false));
+  }, [midsKey, htmlPeriod, htmlCustom.start, htmlCustom.end]); // eslint-disable-line
 
   const week  = getCurrentWeek();
   const month = getCurrentMonth();
@@ -762,7 +766,7 @@ export default function Export({ onGoToTab }) {
 
       <div className="card" style={{ padding:'16px 20px', marginBottom:12 }}>
         <div style={{ display:'flex', gap:20, alignItems:'flex-start' }}>
-        <div style={{ flex:1, minWidth:0 }}>
+        <div style={{ flexShrink:0 }}>
 
         {/* ── Generuj dokumenty ─────────────────────────── */}
         <h2 style={{ marginBottom:12 }}>Generuj dokumenty</h2>
@@ -796,7 +800,7 @@ export default function Export({ onGoToTab }) {
         {members.length > 1 && (
           <div style={{ marginBottom:14 }}>
             <div style={LBL}>Kogo uwzględniamy</div>
-            <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
+            <div style={{ display:'flex', gap:8, flexWrap:'wrap', width:0, minWidth:'100%' }}>
               {members.map((m, idx) => {
                 const checked = selectedMemberIds.includes(m.id);
                 const color = ['#0d9488','#6366f1','#f59e0b','#ec4899','#22c55e','#ef4444'][idx%6];
@@ -813,25 +817,24 @@ export default function Export({ onGoToTab }) {
           </div>
         )}
 
-        <div style={{ display:'flex', flexDirection:'column', gap:6, alignItems:'stretch', width:'fit-content' }}>
+        <div style={{ display:'flex', flexDirection:'column', gap:6, alignItems:'stretch', width:'100%' }}>
           <button className="btn btn-primary" onClick={handleGenWydatki} disabled={htmlWLoading}
-            style={{ padding:'9px 22px', fontSize:14, fontWeight:700 }}>
+            style={{ padding:'8px 12px', fontSize:13, fontWeight:700 }}>
             {htmlWLoading ? 'Generuję...' : 'Podsumowanie wydatków'}
           </button>
           <button className="btn btn-primary" onClick={handleExportMacro}
-            style={{ padding:'9px 22px', fontSize:14, fontWeight:700 }}>
+            style={{ padding:'8px 12px', fontSize:13, fontWeight:700 }}>
             Karta Makro
           </button>
           <button className="btn btn-primary" onClick={handleGenKalendar} disabled={htmlKLoading}
-            style={{ padding:'9px 22px', fontSize:14, fontWeight:700 }}>
+            style={{ padding:'8px 12px', fontSize:13, fontWeight:700 }}>
             {htmlKLoading ? 'Generuję...' : 'Karta Kalendarza'}
           </button>
           <div style={{ position:'relative' }}>
             <button type="button" className="btn btn-primary"
               onClick={() => { setSkladnikiOpen(v => !v); setSkladnikiSearch(''); setHtmlRecipeId(''); }}
-              style={{ padding:'9px 22px', fontSize:14, fontWeight:700, display:'flex', alignItems:'center', gap:8, width:'100%', justifyContent:'space-between' }}>
+              style={{ padding:'8px 12px', fontSize:13, fontWeight:700, width:'100%' }}>
               Składniki przepisu
-              <span style={{ fontSize:11, opacity:0.7 }}>{skladnikiOpen ? '▲' : '▼'}</span>
             </button>
             {skladnikiOpen && (
               <div style={{
@@ -879,82 +882,13 @@ export default function Export({ onGoToTab }) {
 
         <div style={{ width:1, background:'#374151', alignSelf:'stretch', flexShrink:0 }} />
 
-        {/* ── Środek: Podgląd bieżącego tygodnia ────────── */}
-        {(() => {
-          const SLOT_COLORS = ['#4a6fa5','#93c5fd','#fcd34d','#c2410c','#6366f1'];
-          const todayStr = dateToStr(new Date());
-          const w = getCurrentWeek();
-          const daysArr = Array.from({length:7}, (_, i) => {
-            const d = new Date(w.start); d.setDate(d.getDate() + i); return d;
-          });
-          const totalMeals = daysArr.reduce((s, d) => s + (previewMeals[dateToStr(d)]||[]).length, 0);
-          const daysWithMeals = daysArr.filter(d => (previewMeals[dateToStr(d)]||[]).length > 0).length;
-          return (
-            <div style={{ flex:1, minWidth:0 }}>
-              <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:10 }}>
-                <span style={{ fontSize:13, fontWeight:700, color:'#e2e8f0' }}>Podgląd tygodnia</span>
-                <span style={{ fontSize:11, color:'#6b7280' }}>{toEU(w.start)} – {toEU(w.end)}</span>
-              </div>
-              {previewLoading ? (
-                <div style={{ fontSize:12, color:'#6b7280', textAlign:'center', padding:'20px 0' }}>Ładowanie...</div>
-              ) : (
-                <>
-                  <div style={{ display:'grid', gridTemplateColumns:'repeat(7,1fr)', gap:3, marginBottom:6 }}>
-                    {['Pn','Wt','Śr','Cz','Pt','So','Nd'].map(d => (
-                      <div key={d} style={{ textAlign:'center', fontSize:10, fontWeight:700, color:'#6b7280', paddingBottom:3 }}>{d}</div>
-                    ))}
-                    {daysArr.map(day => {
-                      const ds = dateToStr(day);
-                      const isToday = ds === todayStr;
-                      const meals = (previewMeals[ds] || []).slice().sort((a,b) => a.position - b.position);
-                      return (
-                        <div key={ds} style={{
-                          background: isToday ? '#162626' : '#1f2937',
-                          border: `1px solid ${isToday ? '#0d9488' : '#374151'}`,
-                          borderRadius:6, padding:'5px 4px', minHeight:64,
-                        }}>
-                          <div style={{ textAlign:'center', fontSize:11, fontWeight: isToday?700:500, color: isToday?'#2dd4bf':'#94a3b8', marginBottom:3 }}>
-                            {day.getDate()}
-                          </div>
-                          {meals.length === 0
-                            ? <div style={{ textAlign:'center', fontSize:10, color:'#374151', marginTop:6 }}>—</div>
-                            : meals.map(m => {
-                                const col = SLOT_COLORS[(m.position-1)%5];
-                                return (
-                                  <div key={m.id} style={{
-                                    background:`${col}22`, borderLeft:`2px solid ${col}`, borderRadius:2,
-                                    padding:'1px 4px', marginBottom:2, fontSize:9, color:'#e2e8f0',
-                                    overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap',
-                                  }} title={m.recipe?.name}>
-                                    {m.recipe?.name || ''}
-                                  </div>
-                                );
-                              })
-                          }
-                        </div>
-                      );
-                    })}
-                  </div>
-                  <div style={{ fontSize:11, color: totalMeals > 0 ? '#6b7280' : '#374151', textAlign:'center' }}>
-                    {totalMeals === 0
-                      ? 'Brak zaplanowanych posiłków'
-                      : `${daysWithMeals} ${daysWithMeals === 1 ? 'dzień' : 'dni'} z posiłkami · ${totalMeals} ${totalMeals === 1 ? 'posiłek' : totalMeals < 5 ? 'posiłki' : 'posiłków'}`}
-                  </div>
-                </>
-              )}
-            </div>
-          );
-        })()}
-
-        {/* ── Prawa strona: Lista zakupów ────────────────── */}
-        <div style={{ width:1, background:'#374151', alignSelf:'stretch', flexShrink:0 }} />
-
-        <div style={{ flexShrink:0, width:300 }}>
+        {/* ── Lista zakupów (obok przycisków) ──────────────  */}
+        <div style={{ flexShrink:0, width:280 }}>
           <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:6 }}>
             <h2 style={{ margin:0, fontSize:15 }}>Lista zakupów</h2>
             {onGoToTab && (
               <button onClick={() => onGoToTab('calendar')}
-                style={{ background:'none', border:'1px solid #374151', borderRadius:6, color:'#6b7280', fontSize:11, fontWeight:600, padding:'2px 8px', cursor:'pointer', whiteSpace:'nowrap', flexShrink:0 }}>
+                style={{ background:'#0d948820', border:'1px solid #0d9488', borderRadius:6, color:'#2dd4bf', fontSize:11, fontWeight:600, padding:'3px 10px', cursor:'pointer', whiteSpace:'nowrap', flexShrink:0 }}>
                 Idź do kalendarza
               </button>
             )}
@@ -1042,7 +976,103 @@ export default function Export({ onGoToTab }) {
             style={{ width:'100%', padding:'8px', fontSize:13, fontWeight:700 }}>
             {shopLoading ? 'Generuję...' : `Generuj listę zakupów${shopDays.size > 0 ? ` (${shopDays.size} ${shopDays.size === 1 ? 'dzień' : 'dni'})` : ''}`}
           </button>
-        </div>{/* end right column */}
+        </div>
+
+        <div style={{ width:1, background:'#374151', alignSelf:'stretch', flexShrink:0 }} />
+
+        {/* ── Podgląd (wypełnia resztę, reaguje na wybrany okres) ─ */}
+        {(() => {
+          const SLOT_COLORS = ['#4a6fa5','#93c5fd','#fcd34d','#c2410c','#6366f1'];
+          const todayStr = dateToStr(new Date());
+          const previewRange = htmlPeriod === 'week' ? week
+            : htmlPeriod === 'month' ? month
+            : (htmlCustom.start && htmlCustom.end) ? htmlCustom : week;
+          const previewLabel = htmlPeriod === 'week'
+            ? `${toEU(week.start)} – ${toEU(week.end)}`
+            : htmlPeriod === 'month'
+            ? `${toEU(month.start)} – ${toEU(month.end)}`
+            : (htmlCustom.start && htmlCustom.end) ? `${toEU(htmlCustom.start)} – ${toEU(htmlCustom.end)}`
+            : `${toEU(week.start)} – ${toEU(week.end)}`;
+
+          const startD = new Date(previewRange.start || week.start);
+          const endD   = new Date(previewRange.end   || week.end);
+          const sDow   = (startD.getDay() + 6) % 7;
+          const gridS  = new Date(startD); gridS.setDate(gridS.getDate() - sDow);
+          const eDow   = (endD.getDay() + 6) % 7;
+          const gridE  = new Date(endD); if (eDow < 6) gridE.setDate(gridE.getDate() + (6 - eDow));
+          const allDays = [];
+          const cur = new Date(gridS);
+          while (cur <= gridE) { allDays.push(new Date(cur)); cur.setDate(cur.getDate() + 1); }
+          const weeksArr = [];
+          for (let i = 0; i < allDays.length; i += 7) weeksArr.push(allDays.slice(i, i + 7));
+          const rStart = previewRange.start || week.start;
+          const rEnd   = previewRange.end   || week.end;
+          const totalMeals    = allDays.reduce((s, d) => s + (previewMeals[dateToStr(d)]||[]).length, 0);
+          const daysWithMeals = allDays.filter(d => ds => (previewMeals[ds]||[]).length > 0);
+
+          return (
+            <div style={{ flex:1, minWidth:0 }}>
+              <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:8 }}>
+                <span style={{ fontSize:13, fontWeight:700, color:'#e2e8f0' }}>Podgląd</span>
+                <span style={{ fontSize:11, color:'#6b7280' }}>{previewLabel}</span>
+              </div>
+              {previewLoading ? (
+                <div style={{ fontSize:12, color:'#6b7280', textAlign:'center', padding:'20px 0' }}>Ładowanie...</div>
+              ) : (
+                <>
+                  <div style={{ display:'grid', gridTemplateColumns:'repeat(7,1fr)', gap:3, marginBottom:3 }}>
+                    {['Pn','Wt','Śr','Cz','Pt','So','Nd'].map(d => (
+                      <div key={d} style={{ textAlign:'center', fontSize:10, fontWeight:700, color:'#6b7280', paddingBottom:3 }}>{d}</div>
+                    ))}
+                  </div>
+                  {weeksArr.map((wk, wi) => (
+                    <div key={wi} style={{ display:'grid', gridTemplateColumns:'repeat(7,1fr)', gap:3, marginBottom:3 }}>
+                      {wk.map(day => {
+                        const ds = dateToStr(day);
+                        const isToday = ds === todayStr;
+                        const inRange = ds >= rStart && ds <= rEnd;
+                        const meals = (previewMeals[ds] || []).slice().sort((a,b) => a.position - b.position);
+                        return (
+                          <div key={ds} style={{
+                            background: isToday ? '#162626' : '#1f2937',
+                            border: `1px solid ${isToday ? '#0d9488' : '#374151'}`,
+                            borderRadius:6, padding:'4px 3px', minHeight:54,
+                            opacity: inRange ? 1 : 0.3,
+                          }}>
+                            <div style={{ textAlign:'center', fontSize:10, fontWeight: isToday?700:500, color: isToday?'#2dd4bf':'#94a3b8', marginBottom:2 }}>
+                              {day.getDate()}
+                            </div>
+                            {meals.length === 0
+                              ? <div style={{ textAlign:'center', fontSize:9, color:'#374151', marginTop:4 }}>—</div>
+                              : meals.map(m => {
+                                  const col = SLOT_COLORS[(m.position-1)%5];
+                                  return (
+                                    <div key={m.id} style={{
+                                      background:`${col}22`, borderLeft:`2px solid ${col}`, borderRadius:2,
+                                      padding:'1px 3px', marginBottom:2, fontSize:8, color:'#e2e8f0',
+                                      overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap',
+                                    }} title={m.recipe?.name}>
+                                      {m.recipe?.name || ''}
+                                    </div>
+                                  );
+                                })
+                            }
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ))}
+                  <div style={{ fontSize:11, color: totalMeals > 0 ? '#6b7280' : '#374151', textAlign:'center', marginTop:2 }}>
+                    {totalMeals === 0
+                      ? 'Brak zaplanowanych posiłków'
+                      : `${daysWithMeals.length} ${daysWithMeals.length === 1 ? 'dzień' : 'dni'} z posiłkami · ${totalMeals} ${totalMeals === 1 ? 'posiłek' : totalMeals < 5 ? 'posiłki' : 'posiłków'}`}
+                  </div>
+                </>
+              )}
+            </div>
+          );
+        })()}
+
         </div>{/* end flex row */}
       </div>{/* end card */}
     </div>

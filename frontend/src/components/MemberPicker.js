@@ -63,7 +63,7 @@ export default function MemberPicker() {
   };
 
   return (
-    <div ref={ref} style={{ position: 'relative' }}>
+    <div ref={ref} style={{ position: 'relative', width: '100%' }}>
       {/* Przycisk główny */}
       <button
         onClick={() => setOpen(o => !o)}
@@ -84,9 +84,9 @@ export default function MemberPicker() {
       {/* Dropdown */}
       {open && (
         <div style={{
-          position: 'absolute', top: 'calc(100% + 6px)', right: 0, zIndex: 10000,
+          position: 'absolute', top: 'calc(100% + 6px)', left: 0, right: 0, zIndex: 10000,
           background: '#1f2937', border: '1px solid #374151', borderRadius: 10,
-          boxShadow: '0 8px 32px rgba(0,0,0,0.4)', minWidth: 200, padding: '8px 0',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.4)', padding: '8px 0',
           animation: 'fadeInScaleModal 0.15s ease',
         }}>
           {/* Lista członków */}
@@ -137,7 +137,7 @@ export default function MemberPicker() {
 
           {/* Dodaj osobę */}
           {adding ? (
-            <div style={{ padding: '4px 12px', display: 'flex', gap: 6 }}>
+            <div style={{ padding: '4px 12px', display: 'flex', flexDirection: 'column', gap: 5 }}>
               <input
                 autoFocus
                 value={newName}
@@ -145,10 +145,10 @@ export default function MemberPicker() {
                 onChange={e => setNewName(e.target.value)}
                 onKeyDown={e => { if (e.key === 'Enter') handleAdd(); if (e.key === 'Escape') { setAdding(false); setNewName(''); } }}
                 placeholder="Imię..."
-                style={{ flex: 1, padding: '3px 8px', fontSize: 12, border: '1px solid #374151', borderRadius: 5, background: '#111827', color: '#f1f5f9' }}
+                style={{ width: '100%', boxSizing: 'border-box', padding: '4px 8px', fontSize: 12, border: '1px solid #374151', borderRadius: 5, background: '#111827', color: '#f1f5f9' }}
               />
               <button onClick={handleAdd} disabled={!newName.trim()}
-                style={{ padding: '3px 10px', fontSize: 12, background: '#0d9488', color: '#fff', border: 'none', borderRadius: 5, cursor: 'pointer' }}>
+                style={{ width: '100%', padding: '5px 0', fontSize: 12, background: '#0d9488', color: '#fff', border: 'none', borderRadius: 5, cursor: 'pointer', fontWeight: 600 }}>
                 Dodaj
               </button>
             </div>

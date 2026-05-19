@@ -381,7 +381,7 @@ function PeriodContent({ range, summary, loading, scrollToWeek, onGoToTab, drink
               onClick={() => { onGoToTab?.('calendar'); if (scrollToWeek) setTimeout(() => document.getElementById('calendar-today')?.scrollIntoView({ behavior:'smooth', block:'center' }), 200); }}
               style={{ background:'#0d948820', border:'1px solid #0d9488', borderRadius:6, padding:'3px 10px', cursor:'pointer', fontSize:11, fontWeight:600, color:'#2dd4bf', display:'inline-flex', alignItems:'center' }}
             >
-              Przejdź do kalendarza
+              Idź do kalendarza
             </button>
           </div>
         </div>
@@ -2035,13 +2035,13 @@ function Summary({ onGoToTab }) {
               onClick={() => { onGoToTab?.('calendar'); setTimeout(() => window.dispatchEvent(new Event('open-template')), 250); }}
               style={{ background:'#0d948820', border:'1px solid #0d9488', borderRadius:6, padding:'3px 10px', cursor:'pointer', fontSize:11, fontWeight:600, color:'#2dd4bf', display:'inline-flex', alignItems:'center' }}
             >
-              Stwórz szablon
+              + Stwórz szablon
             </button>
             <button
               onClick={() => onGoToTab?.('calendar')}
               style={{ background:'#0d948820', border:'1px solid #0d9488', borderRadius:6, padding:'3px 10px', cursor:'pointer', fontSize:11, fontWeight:600, color:'#2dd4bf', display:'inline-flex', alignItems:'center' }}
             >
-              Przejdź do kalendarza
+              Idź do kalendarza
             </button>
           </div>
         </div>
