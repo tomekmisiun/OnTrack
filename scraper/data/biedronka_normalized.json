@@ -1339,19 +1339,6 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
-    "original_name": "Mini pizza z salami 125 g",
-    "generic_name": "mini pizza z salami",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 130.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.19,
-    "price_per_unit": null,
-    "price_per_100": 3.2231,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Pano Mini burgery z sezamem 224 g",
     "generic_name": "pano mini burgery z sezamem",
     "shop": "biedronka",
@@ -3341,19 +3328,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Vici Paluszki surimi 250 g",
-    "generic_name": "vici paluszki surimi",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 250.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.69,
-    "price_per_unit": null,
-    "price_per_100": 2.276,
-    "standard_category": "Przekąski i produkty gotowe"
-  },
-  {
     "original_name": "Kraina Wędlin Polędwica sopocka 250 g",
     "generic_name": "kraina wędlin polędwica sopocka",
     "shop": "biedronka",
@@ -4329,19 +4303,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Knorr Nudle Zupa danie ser w ziołach 61 g",
-    "generic_name": "knorr nudle zupa danie ser w ziołach",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 61.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.99,
-    "price_per_unit": null,
-    "price_per_100": 4.9016,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Nussbeisser Czekolada mleczna z całymi orzechami laskowymi 100 g",
     "generic_name": "nussbeisser czekolada mleczna z całymi orzechami laskowymi",
     "shop": "biedronka",
@@ -4472,19 +4433,6 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
-    "original_name": "Marinero Sushi 9 kawałków (2x California Roll, 3x Hoso Maki, 4x Foto Maki) 230 g",
-    "generic_name": "marinero sushi 9 kawałków (2x",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 230.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 10.49,
-    "price_per_unit": null,
-    "price_per_100": 4.5609,
-    "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
     "original_name": "Kujawski Olej rzepakowy z pierwszego tłoczenia 1 l",
     "generic_name": "kujawski olej rzepakowy z pierwszego tłoczenia",
     "shop": "biedronka",
@@ -4496,19 +4444,6 @@
     "price_per_unit": null,
     "price_per_100": 0.699,
     "standard_category": "Tłuszcze, oleje i sosy"
-  },
-  {
-    "original_name": "Lajkonik Junior Paluszki 200 g",
-    "generic_name": "lajkonik",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.99,
-    "price_per_unit": null,
-    "price_per_100": 2.495,
-    "standard_category": "Przekąski i produkty gotowe"
   },
   {
     "original_name": "Rapsodia 100 % Owoców Czarna porzeczka 220 g",
@@ -4691,19 +4626,6 @@
     "price_per_unit": null,
     "price_per_100": 6.4592,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Lay's Oven Baked Pieczone formowane chipsy ziemniaczane o smaku grillowanej papryki 110 g",
-    "generic_name": "lay's oven baked pieczone formowane chipsy ziemniaczane o smaku grillowanej papryki",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 110.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.29,
-    "price_per_unit": null,
-    "price_per_100": 7.5364,
-    "standard_category": "Przekąski i produkty gotowe"
   },
   {
     "original_name": "Bonitki Herbatniki Petit Beurre 400 g",
@@ -4966,19 +4888,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Lajkonik Paluszki klasyczne 200 g",
-    "generic_name": "lajkonik paluszki",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.99,
-    "price_per_unit": null,
-    "price_per_100": 2.495,
-    "standard_category": "Przekąski i produkty gotowe"
-  },
-  {
     "original_name": "Go Vege Napój owsiany 1 l",
     "generic_name": "go vege napój owsiany",
     "shop": "biedronka",
@@ -5055,19 +4964,6 @@
     "price_per_unit": null,
     "price_per_100": 1.9967,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Crunchips X-Cut Chipsy ziemniaczane o smaku paprykowym 130 g",
-    "generic_name": "crunchips x-cut chipsy ziemniaczane o smaku paprykowym",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 130.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.99,
-    "price_per_unit": null,
-    "price_per_100": 6.1462,
-    "standard_category": "Przekąski i produkty gotowe"
   },
   {
     "original_name": "Plony Natury Kasza bulgur z pszenicy twardej 400 g",
@@ -5393,19 +5289,6 @@
     "price_per_unit": null,
     "price_per_100": 2.8808,
     "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
-    "original_name": "Lajkonik Krakersy super 180 g",
-    "generic_name": "lajkonik krakersy super",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 180.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.99,
-    "price_per_unit": null,
-    "price_per_100": 2.7722,
-    "standard_category": "Przekąski i produkty gotowe"
   },
   {
     "original_name": "Snickers Czekolada mleczna z nugatem i nadzieniem karmelowym z orzeszkami ziemnymi 75 g (2 x 37,5 g)",
@@ -6084,19 +5967,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Pringles Crab Chipsy 165 g",
-    "generic_name": "pringles",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 165.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.99,
-    "price_per_unit": null,
-    "price_per_100": 6.0545,
-    "standard_category": "Przekąski i produkty gotowe"
-  },
-  {
     "original_name": "Kamis Sól morska jodowana Specialite młynek 90 g",
     "generic_name": "kamis sól morska jodowana",
     "shop": "biedronka",
@@ -6290,19 +6160,6 @@
     "price_per_unit": null,
     "price_per_100": 8.6136,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "7 Days Bake Rolls Pizza 150 g",
-    "generic_name": "7",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 6.49,
-    "price_per_unit": null,
-    "price_per_100": 4.3267,
-    "standard_category": "Produkty zbożowe i mąki"
   },
   {
     "original_name": "Patak's Tikka Masala Kremowy sos pomidorowy z nutą kolendry 450 g",
@@ -6877,19 +6734,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Crunchips X-Cut Chipsy ziemniaczane o smaku słodko-pikantnym 130 g",
-    "generic_name": "crunchips x-cut chipsy ziemniaczane o smaku słodko-pikantnym",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 130.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.99,
-    "price_per_unit": null,
-    "price_per_100": 6.1462,
-    "standard_category": "Przekąski i produkty gotowe"
-  },
-  {
     "original_name": "Top Tortilla Chipsy kukurydziane smak ser 150 g",
     "generic_name": "top tortilla chipsy kukurydziane smak ser",
     "shop": "biedronka",
@@ -7098,19 +6942,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "E. Wedel Baton Pawełek Toffi 45 g",
-    "generic_name": "e",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 45.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.49,
-    "price_per_unit": null,
-    "price_per_100": 7.7556,
-    "standard_category": "Przekąski i produkty gotowe"
-  },
-  {
     "original_name": "Marinero sardynki w oleju roślinnym 110 g",
     "generic_name": "marinero sardynki w oleju roślinnym",
     "shop": "biedronka",
@@ -7122,19 +6953,6 @@
     "price_per_unit": null,
     "price_per_100": 4.8545,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Lay's Chipsy ziemniaczane o smaku papryki 130 g",
-    "generic_name": "lay's chipsy ziemniaczane o smaku papryki",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 130.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.29,
-    "price_per_unit": null,
-    "price_per_100": 6.3769,
-    "standard_category": "Przekąski i produkty gotowe"
   },
   {
     "original_name": "Teekanne Herbatka owocowa \"LOVE\" Pomegranate 20 torebek x 2,25 g",
@@ -7499,19 +7317,6 @@
     "price_per_unit": null,
     "price_per_100": 3.3267,
     "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Asia Flavours Ryż do sushi 500 g",
-    "generic_name": "asia flavours ryż do sushi",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.99,
-    "price_per_unit": null,
-    "price_per_100": 0.998,
-    "standard_category": "Produkty zbożowe i mąki"
   },
   {
     "original_name": "Vegeta Podravka 400 g",
@@ -8359,19 +8164,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Winiary Pomysł na... Zapiekanka makaronowa z szynką 35 g",
-    "generic_name": "winiary pomysł na",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 35.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.55,
-    "price_per_unit": null,
-    "price_per_100": 10.1429,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Vitanella Smoothie Baton rabarbar, truskawka 40 g",
     "generic_name": "vitanella smoothie baton rabarbar, truskawka",
     "shop": "biedronka",
@@ -9022,19 +8814,6 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
-    "original_name": "Knorr Nudle Zupa danie pieczony kurczak 61 g",
-    "generic_name": "kurczak",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 61.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.99,
-    "price_per_unit": null,
-    "price_per_100": 4.9016,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Vitanella RAW Baton kakao 40 g",
     "generic_name": "vitanella raw baton kakao",
     "shop": "biedronka",
@@ -9540,19 +9319,6 @@
     "price_per_unit": null,
     "price_per_100": 12.2821,
     "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Baitz Baton choco cocos 50 g",
-    "generic_name": "baitz baton choco cocos",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 50.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.89,
-    "price_per_unit": null,
-    "price_per_100": 3.78,
-    "standard_category": "Przekąski i produkty gotowe"
   },
   {
     "original_name": "Elios Tahini klasyczne 300 g",

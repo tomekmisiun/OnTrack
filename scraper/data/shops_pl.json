@@ -3445,19 +3445,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Kraina Mięs Select Kurczak farmerski porcja rosołowa z kurczaka kg",
-    "generic_name": "kurczak",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 600.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.99,
-    "price_per_unit": null,
-    "price_per_100": 0.9983,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Jeżyny Owoce  Auchan 125 g",
     "generic_name": "jeżyny",
     "shop": "auchan",
@@ -4173,19 +4160,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Zapiekanka z szynką i pieczarkami Proste Historie 200 g",
-    "generic_name": "zapiekanka z szynką i pieczarkami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.98,
-    "price_per_unit": null,
-    "price_per_100": 2.99,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Zupa pieczarkowa Auchan 450 g",
     "generic_name": "zupa pieczarkowa",
     "shop": "auchan",
@@ -4199,32 +4173,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Paluszki rybne z fileta w panierce FRoSTA 300 g",
-    "generic_name": "paluszki rybne z fileta w panierce",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 300.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 15.78,
-    "price_per_unit": null,
-    "price_per_100": 5.26,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Pierogi z truskawkami Proste Historie 450 g",
-    "generic_name": "pierogi z truskawkami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.38,
-    "price_per_unit": null,
-    "price_per_100": 2.0844,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Szpinak rozdrobniony Hortex 450 g",
     "generic_name": "szpinak rozdrobniony",
     "shop": "auchan",
@@ -4236,19 +4184,6 @@
     "price_per_unit": null,
     "price_per_100": 1.4178,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Tortellini w sosie pomidorowym z warzywami FRoSTA 450 g",
-    "generic_name": "tortellini w sosie pomidorowym z warzywami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 12.98,
-    "price_per_unit": null,
-    "price_per_100": 2.8844,
-    "standard_category": "Warzywa"
   },
   {
     "original_name": "Frytki stekowe McCain 650 g",
@@ -4342,32 +4277,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Ryba z pieca z brokułami FRoSTA 330 g",
-    "generic_name": "ryba z pieca z brokułami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 330.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 15.78,
-    "price_per_unit": null,
-    "price_per_100": 4.7818,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Pizza Salami Auchan 340 g",
-    "generic_name": "pizza",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 340.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.49,
-    "price_per_unit": null,
-    "price_per_100": 2.7912,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Lody wodne owocowe ze strzelającym cukrem Zozole 52 ml",
     "generic_name": "lody wodne owocowe ze strzelającym cukrem",
     "shop": "auchan",
@@ -4379,19 +4288,6 @@
     "price_per_unit": null,
     "price_per_100": 5.5577,
     "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Paella danie z krewetkami FRoSTA 400 g",
-    "generic_name": "paella danie z krewetkami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 13.98,
-    "price_per_unit": null,
-    "price_per_100": 3.495,
-    "standard_category": "Mięso, drób i ryby"
   },
   {
     "original_name": "Warzywa na patelnię z ziołami i papryką Hortex 450 g",
@@ -4446,32 +4342,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Warzywa na patelnię po Niderlandzku  Auchan 450 g",
-    "generic_name": "warzywa na patelnię",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.99,
-    "price_per_unit": null,
-    "price_per_100": 1.3311,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Makaron tagliatell z sosem szpinakowym FRoSTA 450 g",
-    "generic_name": "makaron tagliatell z sosem szpinakowym",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 12.98,
-    "price_per_unit": null,
-    "price_per_100": 2.8844,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Mix fasolek mieszanka warzywna Hortex 450 g",
     "generic_name": "mix fasolek mieszanka warzywna",
     "shop": "auchan",
@@ -4483,19 +4353,6 @@
     "price_per_unit": null,
     "price_per_100": 1.6844,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Ryba z pieca ze szpinakiem FRoSTA 360 g",
-    "generic_name": "ryba z pieca ze szpinakiem",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 360.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 15.78,
-    "price_per_unit": null,
-    "price_per_100": 4.3833,
-    "standard_category": "Mięso, drób i ryby"
   },
   {
     "original_name": "Warzywa na patelnię z przyprawą orielntalną Hortex 450 g",
@@ -4641,6 +4498,19 @@
     "standard_category": "Nabiał i jaja"
   },
   {
+    "original_name": "Warzywa na patelnię po Niderlandzku  Auchan 450 g",
+    "generic_name": "warzywa na patelnię",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": 450.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 5.99,
+    "price_per_unit": null,
+    "price_per_100": 1.3311,
+    "standard_category": "Warzywa"
+  },
+  {
     "original_name": "Frytki z batatów, kalarepy, fasolki szparagowej Hortex 450 g",
     "generic_name": "frytki z batatów, kalarepy, fasolki szparagowej",
     "shop": "auchan",
@@ -4680,19 +4550,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Pizza grube ciasto pepperoni Auchan 390 g",
-    "generic_name": "pizza grube ciasto pepperoni",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 390.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.29,
-    "price_per_unit": null,
-    "price_per_100": 2.3821,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Marchewka mini Hortex 450 g",
     "generic_name": "marchewka mini",
     "shop": "auchan",
@@ -4703,19 +4560,6 @@
     "price_package": 8.19,
     "price_per_unit": null,
     "price_per_100": 1.82,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Zapiekanka z pieczarkami Proste Historie 200 g",
-    "generic_name": "zapiekanka z pieczarkami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.98,
-    "price_per_unit": null,
-    "price_per_100": 2.99,
     "standard_category": "Warzywa"
   },
   {
@@ -4745,19 +4589,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Kluski z warzywami i pieczarkami z sosem FRoSTA 450 g",
-    "generic_name": "kluski z warzywami i pieczarkami z sosem",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 12.98,
-    "price_per_unit": null,
-    "price_per_100": 2.8844,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Rożek o smaku śmietankowym z sosem porzeczkowym Koral 110 ml",
     "generic_name": "rożek o smaku śmietankowym z sosem porzeczkowym",
     "shop": "auchan",
@@ -4781,19 +4612,6 @@
     "price_package": 18.68,
     "price_per_unit": null,
     "price_per_100": 5.6606,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Pizza grube ciasto 4 sery Auchan 380 g",
-    "generic_name": "pizza grube ciasto 4 sery",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 380.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.29,
-    "price_per_unit": null,
-    "price_per_100": 2.4447,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -4992,19 +4810,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Vegan Pizza warzywna Proste Historie 345 g",
-    "generic_name": "vegan pizza warzywna",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 345.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.49,
-    "price_per_unit": null,
-    "price_per_100": 3.3304,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Lody o smaku śmietankowo waniliowym Big Milk 900 ml",
     "generic_name": "lody o smaku śmietankowo waniliowym",
     "shop": "auchan",
@@ -5031,32 +4836,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Pizza z szynką i pieczarkami Auchan 300 g",
-    "generic_name": "pizza z szynką i pieczarkami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 300.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.69,
-    "price_per_unit": null,
-    "price_per_100": 1.5633,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Pizza grube ciasto szynka i pieczarki Auchan 425 g",
-    "generic_name": "pizza grube ciasto szynka i pieczarki",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 425.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.29,
-    "price_per_unit": null,
-    "price_per_100": 2.1859,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Polędwiczki z dorsza atlantyckiego 10% glazury MyFood 500g",
     "generic_name": "polędwiczki z dorsza atlantyckiego 10% glazury",
     "shop": "auchan",
@@ -5067,19 +4846,6 @@
     "price_package": 42.98,
     "price_per_unit": null,
     "price_per_100": 8.596,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Paella z owocami morza  Family Fish 400 g",
-    "generic_name": "paella z owocami morza",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.49,
-    "price_per_unit": null,
-    "price_per_100": 2.8725,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -5094,32 +4860,6 @@
     "price_per_unit": null,
     "price_per_100": 1.199,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Warzywa na patelnię po meksykańsku Proste Historie 450 g",
-    "generic_name": "warzywa na patelnię po meksykańsku",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.99,
-    "price_per_unit": null,
-    "price_per_100": 1.9978,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Pad Thai z krewetkami Family Fish 500 g",
-    "generic_name": "pad thai z krewetkami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 13.78,
-    "price_per_unit": null,
-    "price_per_100": 2.756,
-    "standard_category": "Mięso, drób i ryby"
   },
   {
     "original_name": "Fasolka szparagowa zielona cięta Auchan 450 g",
@@ -5146,19 +4886,6 @@
     "price_per_unit": null,
     "price_per_100": 1.499,
     "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Baton lodowy Snickers 66 g",
-    "generic_name": "baton lodowy",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 66.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 8.18,
-    "price_per_unit": null,
-    "price_per_100": 12.3939,
-    "standard_category": "Przekąski i produkty gotowe"
   },
   {
     "original_name": "Top Milker strawberry Koral 110 ml",
@@ -5252,19 +4979,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Pierogi z jagodami Proste Historie 450 g",
-    "generic_name": "pierogi z jagodami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 12.98,
-    "price_per_unit": null,
-    "price_per_100": 2.8844,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Rożek ciasteczkowo-czekoladowy Big Milk 140 ml",
     "generic_name": "rożek ciasteczkowo-czekoladowy",
     "shop": "auchan",
@@ -5276,32 +4990,6 @@
     "price_per_unit": null,
     "price_per_100": 4.9214,
     "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Pizza Chorizo i pepperoni  Hortex 370 g",
-    "generic_name": "pizza chorizo i pepperoni",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 370.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 12.78,
-    "price_per_unit": null,
-    "price_per_100": 3.4541,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Ryba z pieca po włosku FRoSTA 345 g",
-    "generic_name": "ryba z pieca po włosku",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 345.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 15.78,
-    "price_per_unit": null,
-    "price_per_100": 4.5739,
-    "standard_category": "Mięso, drób i ryby"
   },
   {
     "original_name": "Lody śmietankowe Auchan 1 l",
@@ -5317,19 +5005,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Warzywa na patelnię orientalne  Proste Historie 750 g",
-    "generic_name": "warzywa na patelnię orientalne",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 750.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.99,
-    "price_per_unit": null,
-    "price_per_100": 1.5987,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Lody kakaowo waniliowe Nesquik 9 x 43 ml",
     "generic_name": "lody kakaowo waniliowe",
     "shop": "auchan",
@@ -5341,19 +5016,6 @@
     "price_per_unit": null,
     "price_per_100": 4.7752,
     "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
-    "original_name": "Filety z mintaja glauzra poniżej 5% FRoSTA 300 g",
-    "generic_name": "filety z mintaja glauzra poniżej 5%",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 300.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 28.58,
-    "price_per_unit": null,
-    "price_per_100": 9.5267,
-    "standard_category": "Mięso, drób i ryby"
   },
   {
     "original_name": "Lody o smaku waniliowym i truskawkowym Auchan 1 l",
@@ -5499,19 +5161,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Fish Nuggets Spicy   FRoSTA 240 g",
-    "generic_name": "fish",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 240.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 17.79,
-    "price_per_unit": null,
-    "price_per_100": 7.4125,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Maliny mrożone new one 400 g",
     "generic_name": "maliny mrożone new one",
     "shop": "auchan",
@@ -5574,45 +5223,6 @@
     "price_package": 13.79,
     "price_per_unit": null,
     "price_per_100": 4.5967,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Pizza salami Hortex 330 g",
-    "generic_name": "pizza salami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 330.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 12.78,
-    "price_per_unit": null,
-    "price_per_100": 3.8727,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Paluszki rybne z fileta dorsza Family Fish 300 g",
-    "generic_name": "paluszki rybne z fileta dorsza",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 300.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 19.59,
-    "price_per_unit": null,
-    "price_per_100": 6.53,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Curry z krewetkami  Family Fish 500 g",
-    "generic_name": "curry z krewetkami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 13.79,
-    "price_per_unit": null,
-    "price_per_100": 2.758,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -5694,32 +5304,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Pierogi z kaszą gryczaną i boczniakami Auchan Collection  450 g",
-    "generic_name": "pierogi z kaszą gryczaną i boczniakami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.95,
-    "price_per_unit": null,
-    "price_per_100": 1.7667,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Mieszanka warzywna z mieszanką przyprawową Proste Historie 450 g",
-    "generic_name": "mieszanka warzywna z mieszanką przyprawową",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.99,
-    "price_per_unit": null,
-    "price_per_100": 1.9978,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Przekąski z ciasta francuskiego z warzywami Auchan 400 g",
     "generic_name": "przekąski z ciasta francuskiego z warzywami",
     "shop": "auchan",
@@ -5730,32 +5314,6 @@
     "price_package": 15.99,
     "price_per_unit": null,
     "price_per_100": 3.9975,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Pizza cztery sery Hortex 325 g",
-    "generic_name": "pizza cztery sery",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 325.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 12.78,
-    "price_per_unit": null,
-    "price_per_100": 3.9323,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Pierogi ze szpinakiem i brokułami Proste Historie 450 g",
-    "generic_name": "pierogi ze szpinakiem i brokułami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.98,
-    "price_per_unit": null,
-    "price_per_100": 1.9956,
     "standard_category": "Warzywa"
   },
   {
@@ -5798,19 +5356,6 @@
     "standard_category": "Przyprawy, zioła i proszki"
   },
   {
-    "original_name": "Paluszki serowe FRoSTA 270 g",
-    "generic_name": "paluszki serowe",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 270.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 16.98,
-    "price_per_unit": null,
-    "price_per_100": 6.2889,
-    "standard_category": "Przekąski i produkty gotowe"
-  },
-  {
     "original_name": "Lody Mango bez dodatku cukru Mancuso 400 ml",
     "generic_name": "lody mango bez dodatku cukru",
     "shop": "auchan",
@@ -5822,19 +5367,6 @@
     "price_per_unit": null,
     "price_per_100": 4.5975,
     "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Warzywa na patelnię po hiszpańsku Proste Historie 450 g",
-    "generic_name": "warzywa na patelnię po hiszpańsku",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.99,
-    "price_per_unit": null,
-    "price_per_100": 1.9978,
-    "standard_category": "Warzywa"
   },
   {
     "original_name": "Ziemniaki plastry sarladais Auchan 600 g",
@@ -5874,19 +5406,6 @@
     "price_per_unit": null,
     "price_per_100": 4.59,
     "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Danie z makaronem rurki w sosie z wędzonym boczkiem Proste Historie 450 g",
-    "generic_name": "danie z makaronem rurki w sosie z boczkiem",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 14.39,
-    "price_per_unit": null,
-    "price_per_100": 3.1978,
-    "standard_category": "Produkty zbożowe i mąki"
   },
   {
     "original_name": "Mięso z małży omułki chilijskie Auchan 450 g",
@@ -5941,32 +5460,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Pierogi po wiejsku z pieczarkami i mięsem Proste Historie 450 g",
-    "generic_name": "pierogi po z pieczarkami i mięsem",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.98,
-    "price_per_unit": null,
-    "price_per_100": 1.9956,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Pizza 4 sery Auchan 340 g",
-    "generic_name": "pizza 4 sery",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 340.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.49,
-    "price_per_unit": null,
-    "price_per_100": 2.7912,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Filet z mintaja bez skóry glazura 10% Seacon 750 g",
     "generic_name": "filet z mintaja glazura 10%",
     "shop": "auchan",
@@ -6004,32 +5497,6 @@
     "price_per_unit": null,
     "price_per_100": 1.86,
     "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Warzywa do piekarnika ziemniaki, cukinia, marchew FRoSTA 400 g",
-    "generic_name": "warzywa do piekarnika ziemniaki, cukinia, marchew",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.79,
-    "price_per_unit": null,
-    "price_per_100": 1.4475,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Paluszki rybne cornflakes FRoSTA 360 g",
-    "generic_name": "paluszki rybne cornflakes",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 360.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 22.49,
-    "price_per_unit": null,
-    "price_per_100": 6.2472,
-    "standard_category": "Mięso, drób i ryby"
   },
   {
     "original_name": "Lody waniliowe z mleczną czekoladą  i migdałami Magnum 440 ml",
@@ -6084,19 +5551,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Baton lodowy z ciasteczkiem Twix 47 g",
-    "generic_name": "baton lodowy z ciasteczkiem",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 47.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 8.29,
-    "price_per_unit": null,
-    "price_per_100": 17.6383,
-    "standard_category": "Przekąski i produkty gotowe"
-  },
-  {
     "original_name": "Lody o smaku miętowym z płatkami czekolady Zielona Budka 1 l",
     "generic_name": "lody o smaku miętowym z płatkami czekolady",
     "shop": "auchan",
@@ -6121,19 +5575,6 @@
     "price_per_unit": null,
     "price_per_100": 14.9975,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Gotowe danie ala Gyros Hortex 450 g",
-    "generic_name": "gotowe danie ala",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 13.79,
-    "price_per_unit": null,
-    "price_per_100": 3.0644,
-    "standard_category": "Przekąski i produkty gotowe"
   },
   {
     "original_name": "Lody waniliowe z kawałkami orzechów pekan Auchan 490 g",
@@ -6292,19 +5733,6 @@
     "standard_category": "Słodziki i dodatki smakowe"
   },
   {
-    "original_name": "Rybne Nuggetsy z fileta  FRoSTA 240 g",
-    "generic_name": "rybne nuggetsy z fileta",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 240.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 17.18,
-    "price_per_unit": null,
-    "price_per_100": 7.1583,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Krewetki surowe obrane z ogonkiem 16-20 Auchan 180 g",
     "generic_name": "krewetki surowe obrane z ogonkiem 16-20",
     "shop": "auchan",
@@ -6342,19 +5770,6 @@
     "price_per_unit": null,
     "price_per_100": 4.59,
     "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Warzywa na patelnę klasyczne FRoSTA 400 g",
-    "generic_name": "warzywa na patelnę",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.88,
-    "price_per_unit": null,
-    "price_per_100": 1.97,
-    "standard_category": "Warzywa"
   },
   {
     "original_name": "Lody Lemon Pie z kawałkami ciasteczek i sosem cytrynowym  CARTE D'OR 825 ml",
@@ -6539,19 +5954,6 @@
     "standard_category": "Przyprawy, zioła i proszki"
   },
   {
-    "original_name": "Paluszki warzywne FRoSTA 300 g",
-    "generic_name": "paluszki warzywne",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 300.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.98,
-    "price_per_unit": null,
-    "price_per_100": 3.3267,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Sorbet migdałowy Mancuso 450 ml",
     "generic_name": "sorbet migdałowy",
     "shop": "auchan",
@@ -6578,19 +5980,6 @@
     "standard_category": "Orzechy, nasiona i masła orzechowe"
   },
   {
-    "original_name": "Chrupiąca rybka z frytkami    Family Fish 400 g",
-    "generic_name": "chrupiąca rybka z frytkami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.39,
-    "price_per_unit": null,
-    "price_per_100": 2.8475,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Top Milker choco Koral 110 ml",
     "generic_name": "top milker choco",
     "shop": "auchan",
@@ -6615,19 +6004,6 @@
     "price_per_unit": null,
     "price_per_100": 16.7212,
     "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Krewetki pikantne na makaronie Family Fish 400 g",
-    "generic_name": "krewetki pikantne na makaronie",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.49,
-    "price_per_unit": null,
-    "price_per_100": 2.8725,
-    "standard_category": "Mięso, drób i ryby"
   },
   {
     "original_name": "Lody bananowo czekoladowe Manhattan 1.4 l",
@@ -6864,19 +6240,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Pierogi z kapustą i grzybami Fami 900 g",
-    "generic_name": "pierogi z kapustą i grzybami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 900.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 17.79,
-    "price_per_unit": null,
-    "price_per_100": 1.9767,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Lody Tort Królewski z sosem z wiśni Zielona Budka 1 l",
     "generic_name": "lody tort królewski z sosem z wiśni",
     "shop": "auchan",
@@ -6929,19 +6292,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Ryż orientalny z łososiem i warzywami  Family Fish 400 g",
-    "generic_name": "ryż orientalny z łososiem i warzywami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.49,
-    "price_per_unit": null,
-    "price_per_100": 2.8725,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Mini Croissant czekoladowe    Schulstad 360 g",
     "generic_name": "mini croissant czekoladowe",
     "shop": "auchan",
@@ -6953,19 +6303,6 @@
     "price_per_unit": null,
     "price_per_100": 5.7194,
     "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
-    "original_name": "Paella hiszpańska Family Fish 400 g",
-    "generic_name": "paella hiszpańska",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.49,
-    "price_per_unit": null,
-    "price_per_100": 2.8725,
-    "standard_category": "Mięso, drób i ryby"
   },
   {
     "original_name": "Makaron na patelnię z kurkami Hortex 450 g",
@@ -7059,19 +6396,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Naleśniki z pieczarkami Auchan 300 g",
-    "generic_name": "naleśniki z pieczarkami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 300.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.99,
-    "price_per_unit": null,
-    "price_per_100": 2.6633,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Paluszki rybne z fileta mintaja panierowane Auchan 500 g",
     "generic_name": "paluszki rybne z fileta mintaja panierowane",
     "shop": "auchan",
@@ -7109,19 +6433,6 @@
     "price_per_unit": null,
     "price_per_100": 12.2605,
     "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Krewetki czosnkowe na makaronie  Family Fish 400 g",
-    "generic_name": "krewetki czosnkowe na makaronie",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.49,
-    "price_per_unit": null,
-    "price_per_100": 2.8725,
-    "standard_category": "Mięso, drób i ryby"
   },
   {
     "original_name": "Makaron pappardelle z sosem kurkowym Auchan Collection  500 g",
@@ -13949,19 +13260,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Pudding ryżowy z mango i marakują    Sushi Tokyo 135 g",
-    "generic_name": "pudding ryżowy z mango i marakują",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 135.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 6.89,
-    "price_per_unit": null,
-    "price_per_100": 5.1037,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Super body active wpc 80 czekolada Mlekovita 30 g",
     "generic_name": "body active wpc 80 czekolada",
     "shop": "auchan",
@@ -14662,6 +13960,19 @@
     "price_per_unit": null,
     "price_per_100": 3.4628,
     "standard_category": "Nabiał i jaja"
+  },
+  {
+    "original_name": "Kraina Mięs Select Kurczak farmerski porcja rosołowa z kurczaka kg",
+    "generic_name": "kurczak",
+    "shop": "biedronka",
+    "currency": "PLN",
+    "package_size_value": 600.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 5.99,
+    "price_per_unit": null,
+    "price_per_100": 0.9983,
+    "standard_category": "Mięso, drób i ryby"
   },
   {
     "original_name": "Kraina Mięs Skrzydła z kurczaka",
@@ -22022,19 +21333,6 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
-    "original_name": "Ryż do sushi Oishii 1 kg",
-    "generic_name": "ryż do sushi",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.98,
-    "price_per_unit": null,
-    "price_per_100": 0.998,
-    "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
     "original_name": "Mieszanka do wypieku chleb pszenno-żytni Auchan 500 g",
     "generic_name": "mieszanka do wypieku chleb pszenno-żytni",
     "shop": "auchan",
@@ -26572,19 +25870,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Pizza Catari mieszanka do pizzy bezglutenowa + sos Bonomelli 456 g",
-    "generic_name": "pizza catari mieszanka do pizzy bezglutenowa + sos",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 22.49,
-    "price_per_unit": null,
-    "price_per_100": 4.9978,
-    "standard_category": "Białka i zamienniki"
-  },
-  {
     "original_name": "Makaron dwujajeczny nitki z kurkumą Makaron Śląskiej babci 252 g",
     "generic_name": "makaron dwujajeczny nitki z kurkumą",
     "shop": "auchan",
@@ -27115,19 +26400,6 @@
     "price_package": 1.58,
     "price_per_unit": null,
     "price_per_100": 15.8,
-    "standard_category": "Przyprawy, zioła i proszki"
-  },
-  {
-    "original_name": "Przyprawa Uniwersalna Auchan 1 kg",
-    "generic_name": "przyprawa",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 6.99,
-    "price_per_unit": null,
-    "price_per_100": 0.699,
     "standard_category": "Przyprawy, zioła i proszki"
   },
   {
@@ -27701,19 +26973,6 @@
     "price_per_unit": null,
     "price_per_100": 4.8258,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Gotowe danie z warzyw i tuńczyka Rio Mare 160 g",
-    "generic_name": "gotowe danie z warzyw i tuńczyka",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 160.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.38,
-    "price_per_unit": null,
-    "price_per_100": 7.1125,
-    "standard_category": "Mięso, drób i ryby"
   },
   {
     "original_name": "Bulion warzywny kostka Winiary 60 g",
@@ -28600,19 +27859,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Gotowe danie z kuskus. warzyw i tuńczyka Rio Mare 160 g",
-    "generic_name": "gotowe danie z kuskus. warzyw i tuńczyka",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 160.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.38,
-    "price_per_unit": null,
-    "price_per_100": 7.1125,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Pieprz ziołowy mielony Auchan 20 g",
     "generic_name": "pieprz ziołowy mielony",
     "shop": "auchan",
@@ -28988,6 +28234,19 @@
     "price_per_unit": null,
     "price_per_100": 1.1417,
     "standard_category": "Warzywa"
+  },
+  {
+    "original_name": "Przyprawa Uniwersalna Auchan 1 kg",
+    "generic_name": "przyprawa",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": 1000.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 6.99,
+    "price_per_unit": null,
+    "price_per_100": 0.699,
+    "standard_category": "Przyprawy, zioła i proszki"
   },
   {
     "original_name": "Pomidory suszone z ziołami Auchan 270 g",
@@ -30290,19 +29549,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Gotowe danie tuńczyk z soczewicą Rio Mare 160 g",
-    "generic_name": "gotowe danie tuńczyk z soczewicą",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 160.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.38,
-    "price_per_unit": null,
-    "price_per_100": 7.1125,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Konfitura extra z wiśni o obniżonej zawartości cukru Herbapol 240 g",
     "generic_name": "konfitura z wiśni o obniżonej zawartości cukru",
     "shop": "auchan",
@@ -30431,19 +29677,6 @@
     "price_per_unit": null,
     "price_per_100": 3.6187,
     "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
-    "original_name": "Pasta Pad Thai Kanokwan 72 g",
-    "generic_name": "pasta",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 72.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.69,
-    "price_per_unit": null,
-    "price_per_100": 7.9028,
-    "standard_category": "Produkty zbożowe i mąki"
   },
   {
     "original_name": "Przyprawa warzywna do potraw uniwersalna Warzywko 500 g",
@@ -31135,19 +30368,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Pomysł na …zapiekanka ziemniaczana z kiełbasą i cebulką Winiary 41 g",
-    "generic_name": "pomysł na …zapiekanka ziemniaczana z kiełbasą i cebulką",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 41.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.98,
-    "price_per_unit": null,
-    "price_per_100": 9.7073,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Oryginalna Przyprawa warzywna do potraw Vegeta 400 g",
     "generic_name": "oryginalna przyprawa warzywna do potraw",
     "shop": "auchan",
@@ -31302,19 +30522,6 @@
     "price_per_unit": null,
     "price_per_100": 3.7348,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Pomysł na …zapiekanka ziemniaczana z mięsem mielonym Winiary 42 g",
-    "generic_name": "pomysł na …zapiekanka ziemniaczana z mięsem mielonym",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 42.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.98,
-    "price_per_unit": null,
-    "price_per_100": 9.4762,
-    "standard_category": "Mięso, drób i ryby"
   },
   {
     "original_name": "Kukurydza złocista z papryką i oliwkami Bonduelle 170 g",
@@ -33358,19 +32565,6 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
-    "original_name": "Mini pizza z salami 125 g",
-    "generic_name": "mini pizza z salami",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 130.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.19,
-    "price_per_unit": null,
-    "price_per_100": 3.2231,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Pano Mini burgery z sezamem 224 g",
     "generic_name": "pano mini burgery z sezamem",
     "shop": "biedronka",
@@ -35100,19 +34294,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Vici Paluszki surimi 250 g",
-    "generic_name": "vici paluszki surimi",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 250.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.69,
-    "price_per_unit": null,
-    "price_per_100": 2.276,
-    "standard_category": "Przekąski i produkty gotowe"
-  },
-  {
     "original_name": "Kraina Wędlin Polędwica sopocka 250 g",
     "generic_name": "kraina wędlin polędwica sopocka",
     "shop": "biedronka",
@@ -35672,19 +34853,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Knorr Nudle Zupa danie ser w ziołach 61 g",
-    "generic_name": "knorr nudle zupa danie ser w ziołach",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 61.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.99,
-    "price_per_unit": null,
-    "price_per_100": 4.9016,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Nussbeisser Czekolada mleczna z całymi orzechami laskowymi 100 g",
     "generic_name": "nussbeisser czekolada mleczna z całymi orzechami laskowymi",
     "shop": "biedronka",
@@ -35815,19 +34983,6 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
-    "original_name": "Marinero Sushi 9 kawałków (2x California Roll, 3x Hoso Maki, 4x Foto Maki) 230 g",
-    "generic_name": "marinero sushi 9 kawałków (2x",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 230.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 10.49,
-    "price_per_unit": null,
-    "price_per_100": 4.5609,
-    "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
     "original_name": "Kujawski Olej rzepakowy z pierwszego tłoczenia 1 l",
     "generic_name": "kujawski olej rzepakowy z pierwszego tłoczenia",
     "shop": "biedronka",
@@ -35839,19 +34994,6 @@
     "price_per_unit": null,
     "price_per_100": 0.699,
     "standard_category": "Tłuszcze, oleje i sosy"
-  },
-  {
-    "original_name": "Lajkonik Junior Paluszki 200 g",
-    "generic_name": "lajkonik",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.99,
-    "price_per_unit": null,
-    "price_per_100": 2.495,
-    "standard_category": "Przekąski i produkty gotowe"
   },
   {
     "original_name": "Rapsodia 100 % Owoców Czarna porzeczka 220 g",
@@ -36021,19 +35163,6 @@
     "price_per_unit": null,
     "price_per_100": 6.4592,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Lay's Oven Baked Pieczone formowane chipsy ziemniaczane o smaku grillowanej papryki 110 g",
-    "generic_name": "lay's oven baked pieczone formowane chipsy ziemniaczane o smaku grillowanej papryki",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 110.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.29,
-    "price_per_unit": null,
-    "price_per_100": 7.5364,
-    "standard_category": "Przekąski i produkty gotowe"
   },
   {
     "original_name": "Bonitki Herbatniki Petit Beurre 400 g",
@@ -36283,19 +35412,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Lajkonik Paluszki klasyczne 200 g",
-    "generic_name": "lajkonik paluszki",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.99,
-    "price_per_unit": null,
-    "price_per_100": 2.495,
-    "standard_category": "Przekąski i produkty gotowe"
-  },
-  {
     "original_name": "Go Vege Napój owsiany 1 l",
     "generic_name": "go vege napój owsiany",
     "shop": "biedronka",
@@ -36372,19 +35488,6 @@
     "price_per_unit": null,
     "price_per_100": 1.9967,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Crunchips X-Cut Chipsy ziemniaczane o smaku paprykowym 130 g",
-    "generic_name": "crunchips x-cut chipsy ziemniaczane o smaku paprykowym",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 130.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.99,
-    "price_per_unit": null,
-    "price_per_100": 6.1462,
-    "standard_category": "Przekąski i produkty gotowe"
   },
   {
     "original_name": "Plony Natury Kasza bulgur z pszenicy twardej 400 g",
@@ -36697,19 +35800,6 @@
     "price_per_unit": null,
     "price_per_100": 2.8808,
     "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
-    "original_name": "Lajkonik Krakersy super 180 g",
-    "generic_name": "lajkonik krakersy super",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 180.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.99,
-    "price_per_unit": null,
-    "price_per_100": 2.7722,
-    "standard_category": "Przekąski i produkty gotowe"
   },
   {
     "original_name": "Snickers Czekolada mleczna z nugatem i nadzieniem karmelowym z orzeszkami ziemnymi 75 g (2 x 37,5 g)",
@@ -37388,19 +36478,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Pringles Crab Chipsy 165 g",
-    "generic_name": "pringles",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 165.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.99,
-    "price_per_unit": null,
-    "price_per_100": 6.0545,
-    "standard_category": "Przekąski i produkty gotowe"
-  },
-  {
     "original_name": "Kamis Sól morska jodowana Specialite młynek 90 g",
     "generic_name": "kamis sól morska jodowana",
     "shop": "biedronka",
@@ -37568,19 +36645,6 @@
     "price_per_unit": null,
     "price_per_100": 8.6136,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "7 Days Bake Rolls Pizza 150 g",
-    "generic_name": "7",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 6.49,
-    "price_per_unit": null,
-    "price_per_100": 4.3267,
-    "standard_category": "Produkty zbożowe i mąki"
   },
   {
     "original_name": "Patak's Tikka Masala Kremowy sos pomidorowy z nutą kolendry 450 g",
@@ -38090,19 +37154,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Crunchips X-Cut Chipsy ziemniaczane o smaku słodko-pikantnym 130 g",
-    "generic_name": "crunchips x-cut chipsy ziemniaczane o smaku słodko-pikantnym",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 130.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.99,
-    "price_per_unit": null,
-    "price_per_100": 6.1462,
-    "standard_category": "Przekąski i produkty gotowe"
-  },
-  {
     "original_name": "Top Tortilla Chipsy kukurydziane smak ser 150 g",
     "generic_name": "top tortilla chipsy kukurydziane smak ser",
     "shop": "biedronka",
@@ -38142,17 +37193,17 @@
     "standard_category": "Słodziki i dodatki smakowe"
   },
   {
-    "original_name": "Winiary Pomysł na... Zapiekanka makaronowa z szynką 35 g",
+    "original_name": "Winiary Pomysł na... Kurczak w sosie śmietanowo-ziołowym 30 g",
     "generic_name": "winiary pomysł na",
     "shop": "biedronka",
     "currency": "PLN",
-    "package_size_value": 35.0,
+    "package_size_value": 30.0,
     "unit": "g",
     "sold_by_weight": false,
     "price_package": 3.55,
     "price_per_unit": null,
-    "price_per_100": 10.1429,
-    "standard_category": "Mięso, drób i ryby"
+    "price_per_100": 11.8333,
+    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Łowicz Konfitura extra z wiśni obniżonej zawartości cukrów 240 g",
@@ -38272,19 +37323,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "E. Wedel Baton Pawełek Toffi 45 g",
-    "generic_name": "e",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 45.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.49,
-    "price_per_unit": null,
-    "price_per_100": 7.7556,
-    "standard_category": "Przekąski i produkty gotowe"
-  },
-  {
     "original_name": "Marinero sardynki w oleju roślinnym 110 g",
     "generic_name": "marinero sardynki w oleju roślinnym",
     "shop": "biedronka",
@@ -38296,19 +37334,6 @@
     "price_per_unit": null,
     "price_per_100": 4.8545,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Lay's Chipsy ziemniaczane o smaku papryki 130 g",
-    "generic_name": "lay's chipsy ziemniaczane o smaku papryki",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 130.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.29,
-    "price_per_unit": null,
-    "price_per_100": 6.3769,
-    "standard_category": "Przekąski i produkty gotowe"
   },
   {
     "original_name": "Teekanne Herbatka owocowa \"PASSION\" Passionfruit 20 torebek x 2,25 g",
@@ -38584,6 +37609,19 @@
     "standard_category": "Słodziki i dodatki smakowe"
   },
   {
+    "original_name": "Pringles Chipsy Sour Cream & Onion 165 g",
+    "generic_name": "pringles",
+    "shop": "biedronka",
+    "currency": "PLN",
+    "package_size_value": 165.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 10.99,
+    "price_per_unit": null,
+    "price_per_100": 6.6606,
+    "standard_category": "Nabiał i jaja"
+  },
+  {
     "original_name": "Profi Pasztet firmowy 131 g",
     "generic_name": "profi pasztet firmowy",
     "shop": "biedronka",
@@ -38608,19 +37646,6 @@
     "price_per_unit": null,
     "price_per_100": 9.7941,
     "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
-    "original_name": "Asia Flavours Ryż do sushi 500 g",
-    "generic_name": "asia flavours ryż do sushi",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.99,
-    "price_per_unit": null,
-    "price_per_100": 0.998,
-    "standard_category": "Produkty zbożowe i mąki"
   },
   {
     "original_name": "Vegeta Podravka 400 g",
@@ -40415,19 +39440,6 @@
     "price_per_unit": null,
     "price_per_100": 12.2821,
     "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Baitz Baton choco cocos 50 g",
-    "generic_name": "baitz baton choco cocos",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 50.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.89,
-    "price_per_unit": null,
-    "price_per_100": 3.78,
-    "standard_category": "Przekąski i produkty gotowe"
   },
   {
     "original_name": "Elios Tahini klasyczne 300 g",
