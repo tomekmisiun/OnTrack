@@ -865,7 +865,7 @@ Zasady:
                         onKeyDown={e => { if (e.key === 'Escape') setAddingIng(null); }}
                         style={{ width: '100%', maxWidth: 320, boxSizing: 'border-box', padding: '3px 7px', fontSize: 12, background: '#111827', border: '1px solid #0d9488', borderRadius: 5, color: '#f1f5f9' }} />
                       {addingIng.showDrop && dropResults.length > 0 && (
-                        <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, background: '#1f2937', border: '1px solid #374151', borderRadius: 6, zIndex: 200, maxHeight: 180, overflowY: 'auto', boxShadow: '0 4px 16px rgba(0,0,0,0.4)' }}>
+                        <div className="dark-scroll" style={{ position: 'absolute', top: '100%', left: 0, right: 0, background: '#1f2937', border: '1px solid #374151', borderRadius: 6, zIndex: 200, maxHeight: 180, overflowY: 'auto', boxShadow: '0 4px 16px rgba(0,0,0,0.4)' }}>
                           {dropResults.map(p => (
                             <div key={p.id} onClick={() => setAddingIng(a => ({ ...a, search: p.name, product: p, showDrop: false, unit: p.unit, kcal: p.kcal != null ? String(p.kcal) : '', protein: p.protein != null ? String(p.protein) : '', fat: p.fat != null ? String(p.fat) : '', carbs: p.carbs != null ? String(p.carbs) : '' }))}
                               style={{ padding: '5px 10px', fontSize: 12, color: '#e2e8f0', cursor: 'pointer' }}

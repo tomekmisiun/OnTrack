@@ -123,7 +123,7 @@ function RecipePreviewModal({ recipe, onClose }) {
           </div>
         </div>
         {/* Składniki */}
-        <div style={{ background: '#1c2433', overflowY: 'auto', padding: '16px 20px' }}>
+        <div className="dark-scroll" style={{ background: '#1c2433', overflowY: 'auto', padding: '16px 20px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
             <div style={{ fontSize: 11, fontWeight: 700, color: '#0d9488', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
               Składniki
