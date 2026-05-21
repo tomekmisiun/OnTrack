@@ -132,16 +132,43 @@ Seasonings that always get 1g default when no amount given:
 Output units MUST be one of: g, ml, pcs — NEVER output "cups", "tbsp", "tsp", "oz", "lb".
 Always convert volumetric/imperial units to g or ml before returning.
 
+CRITICAL — juice/liquid ingredients MUST use ml, NEVER pcs:
+  "lime juice / lemon juice / orange juice" → unit: ml  (NOT limes/lemons in pcs!)
+  "2 tbsp lime juice" → amount: 30, unit: ml
+  "juice of 1 lemon" → amount: 30, unit: ml
+
 Conversions (use these exactly):
   1 cup  = 236ml (liquids, broths, juices, milk, oil, yogurt, sour cream)
   1 cup  = 120g  (flour) | 200g (sugar, brown sugar) | 90g (oats, rolled oats)
   1 cup  = 185g  (rice, quinoa) | 120g (nuts, seeds) | 30g (leafy greens, spinach)
   1 cup  = 160g  (shredded cheese) | 170g (ricotta, cream cheese) | 240g (Greek yogurt)
   1 cup  = 150g  (blueberries, raspberries) | 180g (strawberries) | 16g (fresh cilantro/parsley)
+  1 cup  = 320g  (celery, chopped) | 200g (sweet potato, cubed) | 180g (kale)
   1 oz   = 28g   | 1 lb = 454g
   1 tbsp = 15ml  (liquids) | 15g (solid ingredients, spices, sauces, nut butters)
   1 tsp  = 5ml   (liquids) | 5g  (solid ingredients, spices, extracts)
   1 can  = 400g  (standard 14oz can: tomatoes, beans, coconut milk, chickpeas)
+
+When ingredient is counted in pcs, convert to grams using these AVERAGE WEIGHTS:
+  sweet potato / batat: 200g each
+  potato / ziemniak: 150g each
+  carrot / marchew: 80g each
+  celery stalk / łodyga selera: 40g each | celery (whole): 320g
+  onion / cebula: 100g each
+  garlic clove / ząbek czosnku: 5g each
+  tomato / pomidor: 120g each
+  bell pepper / papryka: 150g each
+  cucumber / ogórek: 250g each
+  zucchini / cukinia: 300g each
+  eggplant / bakłażan: 250g each
+  avocado / awokado: 200g each
+  banana / banan: 120g each
+  apple / jabłko: 150g each
+  lemon / cytryna: 80g each
+  lime / limonka: 70g each
+  egg / jajko: 60g each
+  jalapeño / jalapeño: 15g each
+  mango: 300g each | pineapple / ananas: 900g each
 
 amount must be a number or null, never a string.
 

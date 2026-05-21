@@ -197,18 +197,61 @@ def unit_to_app(unit: str | None) -> str:
     return unit or "g"
 
 
-# Średnie wagi składników sprzedawanych na sztuki (pcs → g)
+# Średnie wagi składników sprzedawanych na sztuki (pcs/szt → g)
+# Źródło: średnie wagi warzyw i owoców dostępnych w polskich sklepach
 _PCS_WEIGHT = {
-    "batat": 200, "bataty": 200, "słodki ziemniak": 200,
-    "jajko": 60,  "jajka": 60,  "egg": 60,
-    "cebula": 100, "cebula biała": 100, "cebula czerwona": 100, "cebula dymka": 15,
-    "czosnek": 3,  # ząbek
-    "pomidor": 120, "avocado": 200, "awokado": 200,
-    "cytryna": 80, "limonka": 70, "pomarańcza": 200,
-    "ziemniak": 150, "marchew": 80, "marchewka": 80,
-    "papryka": 150, "ogórek": 250, "cukinia": 300,
-    "bakłażan": 250, "banan": 100, "jabłko": 150,
-    "gruszka": 150, "mango": 300, "ananas": 900,
+    # Warzywa
+    "batat": 200,        "bataty": 200,       "słodki ziemniak": 200,
+    "ziemniak": 150,     "ziemniaki": 150,
+    "cebula": 100,       "cebula biała": 100, "cebula czerwona": 100,
+    "cebula dymka": 15,  "szalotka": 20,
+    "czosnek": 5,        # cały główka ~40g, ale w przepisach "1 ząbek" = 5g
+    "por": 150,
+    "marchew": 80,       "marchewka": 80,
+    "seler": 320,        "seler naciowy": 320, "łodyga selera": 40,  # 1 łodyga ≈ 40g
+    "pietruszka": 80,    "korzeń pietruszki": 80,
+    "burak": 150,        "buraki": 150,
+    "pomidor": 120,      "pomidory": 120,
+    "papryka": 150,      "papryka czerwona": 150, "papryka zielona": 150, "papryka żółta": 150,
+    "ogórek": 250,       "ogórek świeży": 250,
+    "cukinia": 300,      "kabaczek": 300,
+    "bakłażan": 250,
+    "dynia": 1500,       # kawałek dyni
+    "kapusta": 1000,     "kapusta głowiasta": 1000,
+    "brokuł": 400,       "kalafior": 600,
+    "brukselka": 20,     # 1 różyczka
+    "szpinak": 30,       # garść liści ≈ 30g
+    "jarmuż": 30,
+    "sałata": 200,       "mix sałat": 50,     # garść
+    "kukurydza": 300,    # kolba
+    "jalapeño": 15,      "jalapeno": 15,      "chili": 10,
+    "awokado": 200,      "avocado": 200,
+    # Owoce
+    "banan": 120,
+    "jabłko": 150,       "jabłka": 150,
+    "gruszka": 150,
+    "cytryna": 80,
+    "limonka": 70,
+    "pomarańcza": 150,   "mandarynka": 70,    "klementynka": 70,
+    "grejpfrut": 300,
+    "mango": 300,
+    "ananas": 900,
+    "arbuz": 4500,
+    "melon": 1000,
+    "kiwi": 80,
+    "granat": 250,
+    "figa": 50,
+    "daktyl": 10,        "daktyle": 10,
+    "śliwka": 40,
+    "wiśnia": 8,         "czereśnia": 8,
+    "morela": 40,
+    "brzoskwinia": 150,
+    "truskawka": 15,
+    # Inne
+    "jajko": 60,         "jajka": 60,         "egg": 60, "eggs": 60,
+    "liść laurowy": 1,   "bay leaf": 1,
+    "puszka": 400,       "can": 400,          # standardowa puszka
+    "ziarnko pieprzu": 0.05,
 }
 
 

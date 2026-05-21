@@ -63,6 +63,9 @@ READY_TO_EAT_PL = [
     "ready to cook",
     "ready-to-eat",
     "deser ",          # "deser mleczno ryżowy" itp.
+    "baton ",          # batoniki energetyczne
+    "batonik",
+    "vitanella",
 ]
 
 # Marki wyłącznie gotowych dań (PL)
