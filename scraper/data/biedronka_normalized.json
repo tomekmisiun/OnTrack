@@ -378,7 +378,7 @@
   },
   {
     "original_name": "Kapusta biała",
-    "generic_name": "kapusta",
+    "generic_name": "kapusta biała",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 3000.0,
@@ -495,7 +495,7 @@
   },
   {
     "original_name": "Pietruszka biała korzeń",
-    "generic_name": "pietruszka",
+    "generic_name": "pietruszka biała",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -1483,7 +1483,7 @@
   },
   {
     "original_name": "Fruvita Skyr naturalny 150 g",
-    "generic_name": "fruvita skyr naturalny",
+    "generic_name": "fruvita skyr",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -1535,7 +1535,7 @@
   },
   {
     "original_name": "Piątnica Serek wiejski naturalny 200 g",
-    "generic_name": "piątnica serek naturalny",
+    "generic_name": "piątnica serek",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -2211,7 +2211,7 @@
   },
   {
     "original_name": "Danio Serek homogenizowany z kawałkami czekolady 130 g",
-    "generic_name": "danio serek homogenizowany z kawałkami czekolady",
+    "generic_name": "danio serek z kawałkami czekolady",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 130.0,
@@ -2250,7 +2250,7 @@
   },
   {
     "original_name": "Fruvita Skyr naturalny bez laktozy 150 g",
-    "generic_name": "fruvita skyr naturalny bez laktozy",
+    "generic_name": "fruvita skyr bez laktozy",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -2276,7 +2276,7 @@
   },
   {
     "original_name": "Fruvita Jogurt naturalny Low Carb 150 g",
-    "generic_name": "fruvita jogurt naturalny",
+    "generic_name": "fruvita jogurt",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -2367,7 +2367,7 @@
   },
   {
     "original_name": "Turek Camembert naturalny 120 g",
-    "generic_name": "turek camembert naturalny",
+    "generic_name": "turek camembert",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 120.0,
@@ -2458,7 +2458,7 @@
   },
   {
     "original_name": "Danio Serek homogenizowany o smaku waniliowym 120 g",
-    "generic_name": "danio serek homogenizowany o smaku waniliowym",
+    "generic_name": "danio serek o smaku waniliowym",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 120.0,
@@ -2991,7 +2991,7 @@
   },
   {
     "original_name": "Łaciaty Serek puszysty naturalny 150 g",
-    "generic_name": "łaciaty serek puszysty naturalny",
+    "generic_name": "łaciaty serek puszysty",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -3030,7 +3030,7 @@
   },
   {
     "original_name": "Danio Serek homogenizowany truskawkowy 130 g",
-    "generic_name": "danio serek homogenizowany truskawkowy",
+    "generic_name": "danio serek truskawkowy",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 130.0,
@@ -3095,7 +3095,7 @@
   },
   {
     "original_name": "Danio Serek homogenizowany o smaku waniliowym 130 g",
-    "generic_name": "danio serek homogenizowany o smaku waniliowym",
+    "generic_name": "danio serek o smaku waniliowym",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 130.0,
@@ -4213,7 +4213,7 @@
   },
   {
     "original_name": "Plony Natury Ryż biały długoziarnisty z europejskich upraw 4 x 125 g",
-    "generic_name": "plony natury ryż długoziarnisty z europejskich upraw 4 x",
+    "generic_name": "plony natury ryż biały długoziarnisty z europejskich upraw 4 x",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -4369,7 +4369,7 @@
   },
   {
     "original_name": "Diamant Cukier biały 1 kg",
-    "generic_name": "diamant cukier",
+    "generic_name": "diamant cukier biały",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -4850,7 +4850,7 @@
   },
   {
     "original_name": "Lajkonik Junior Safari Drobne pieczywo o smaku waniliowym 180 g",
-    "generic_name": "lajkonik junior safari drobne pieczywo o smaku waniliowym",
+    "generic_name": "lajkonik junior safari pieczywo o smaku waniliowym",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -5214,7 +5214,7 @@
   },
   {
     "original_name": "Vitanella Baton Protein bez dodatku cukrów 27 % białka 49 g",
-    "generic_name": "vitanella baton protein bez dodatku cukrów 27 %",
+    "generic_name": "vitanella baton protein bez dodatku cukrów 27 % białka",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 49.0,
@@ -7918,7 +7918,7 @@
   },
   {
     "original_name": "Plony Natury Kasza gryczana biała (4 x 100 g) 400 g",
-    "generic_name": "plony natury kasza gryczana (4 x )",
+    "generic_name": "plony natury kasza gryczana biała (4 x )",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -8490,7 +8490,7 @@
   },
   {
     "original_name": "Dr. Oetker Ekstrakt naturalny pomarańcza z Brazylii 30 ml",
-    "generic_name": "dr. oetker ekstrakt naturalny pomarańcza",
+    "generic_name": "dr. oetker ekstrakt pomarańcza",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 30.0,
@@ -8854,7 +8854,7 @@
   },
   {
     "original_name": "Orbit Spearmint XXL Bezcukrowa guma do żucia 50 g (36 sztuk)",
-    "generic_name": "orbit spearmint xxl bezcukrowa guma do żucia ( )",
+    "generic_name": "orbit spearmint bezcukrowa guma do żucia ( )",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 58.0,
@@ -9452,7 +9452,7 @@
   },
   {
     "original_name": "Dr. Oetker Ekstrakt naturalny wanilia bourbon z Madagaskaru 30 ml",
-    "generic_name": "dr. oetker ekstrakt naturalny wanilia bourbon",
+    "generic_name": "dr. oetker ekstrakt wanilia bourbon",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 30.0,
@@ -9686,7 +9686,7 @@
   },
   {
     "original_name": "Orbit White XXL Freshmint Bezcukrowa guma do żucia 50 g (36 sztuk)",
-    "generic_name": "orbit white xxl freshmint bezcukrowa guma do żucia ( )",
+    "generic_name": "orbit white freshmint bezcukrowa guma do żucia ( )",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 58.0,

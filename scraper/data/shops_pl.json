@@ -404,7 +404,7 @@
   },
   {
     "original_name": "Jogurt naturalny     Auchan 400 g",
-    "generic_name": "jogurt naturalny",
+    "generic_name": "jogurt",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -417,7 +417,7 @@
   },
   {
     "original_name": "Kiełbasa biała parzona  Pewni Dobrego 400 g",
-    "generic_name": "kiełbasa parzona",
+    "generic_name": "kiełbasa biała parzona",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -430,7 +430,7 @@
   },
   {
     "original_name": "Kiełbasa biała surowa Pewni Dobrego 400 g",
-    "generic_name": "kiełbasa surowa",
+    "generic_name": "kiełbasa biała surowa",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -481,16 +481,16 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Serek truskawkowy Pewni Dobrego 140 g",
+    "original_name": "Serek homogenizowany truskawkowy Rolmlecz 150 g",
     "generic_name": "serek truskawkowy",
     "shop": "auchan",
     "currency": "PLN",
-    "package_size_value": 140.0,
+    "package_size_value": 150.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 3.45,
+    "price_package": 2.78,
     "price_per_unit": null,
-    "price_per_100": 2.4643,
+    "price_per_100": 1.8533,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -975,16 +975,16 @@
     "standard_category": "Produkty konserwowe i słoikowe"
   },
   {
-    "original_name": "Serek waniliowy Pewni Dobrego 140 g",
+    "original_name": "Serek homogenizowany waniliowy OSM GARWOLIN 200 g",
     "generic_name": "serek waniliowy",
     "shop": "auchan",
     "currency": "PLN",
-    "package_size_value": 140.0,
+    "package_size_value": 200.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 3.45,
+    "price_package": 3.18,
     "price_per_unit": null,
-    "price_per_100": 2.4643,
+    "price_per_100": 1.59,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -1157,16 +1157,16 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Pietruszka biała korzeń",
+    "original_name": "Pietruszka korzeń Warzywa Auchan na wagę ok. 300 g",
     "generic_name": "pietruszka",
-    "shop": "biedronka",
+    "shop": "auchan",
     "currency": "PLN",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.05,
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 2.4,
     "price_per_unit": null,
-    "price_per_100": 0.7,
+    "price_per_100": 0.799,
     "standard_category": "Warzywa"
   },
   {
@@ -1352,19 +1352,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Awokado Ready to Eat kaliber 12 Owoce  Auchan sztuka",
-    "generic_name": "awokado ready to",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 100.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.99,
-    "price_per_unit": null,
-    "price_per_100": 5.99,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "BIO Ogórek długi Warzywa Auchan sztuka",
     "generic_name": "ogórek długi",
     "shop": "auchan",
@@ -1470,7 +1457,7 @@
   },
   {
     "original_name": "Winogrona białe bezpestkowe Owoce  Auchan 500 g",
-    "generic_name": "winogrona bezpestkowe",
+    "generic_name": "winogrona białe bezpestkowe",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -1912,7 +1899,7 @@
   },
   {
     "original_name": "Awokado siatka kaliber 24-30 Owoce  Auchan 700 g",
-    "generic_name": "awokado siatka kaliber 24-30",
+    "generic_name": "awokado siatka -30",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 700.0,
@@ -2003,7 +1990,7 @@
   },
   {
     "original_name": "Granat kaliber średni Owoce  Auchan sztuka",
-    "generic_name": "granat kaliber średni",
+    "generic_name": "granat kaliber",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -2094,7 +2081,7 @@
   },
   {
     "original_name": "Jabłka Red Prince XXL  Owoce  Auchan na wagę ok.1 kg",
-    "generic_name": "jabłka red prince xxl owoce auchan kg",
+    "generic_name": "jabłka red prince owoce auchan kg",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -2184,17 +2171,17 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Ananas średni  kaliber 12 Owoce  Auchan sztuka",
-    "generic_name": "ananas średni kaliber 12",
-    "shop": "auchan",
+    "original_name": "Ananas",
+    "generic_name": "ananas",
+    "shop": "biedronka",
     "currency": "PLN",
-    "package_size_value": 100.0,
+    "package_size_value": 1500.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 11.49,
+    "price_package": 11.98,
     "price_per_unit": null,
-    "price_per_100": 11.49,
-    "standard_category": "Warzywa"
+    "price_per_100": 0.7987,
+    "standard_category": "Owoce"
   },
   {
     "original_name": "Limonka tacka 4 szt Owoce  Auchan opakowanie",
@@ -2419,7 +2406,7 @@
   },
   {
     "original_name": "BIO Awokado Hass kaliber 24 - 26 Owoce  Auchan 2 sztuki",
-    "generic_name": "awokado hass kaliber 24 - 26",
+    "generic_name": "awokado hass - 26",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -2471,7 +2458,7 @@
   },
   {
     "original_name": "BIO Awokado Hass kaliber 16 Owoce  Auchan sztuka",
-    "generic_name": "awokado hass kaliber 16",
+    "generic_name": "awokado hass",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -2493,6 +2480,19 @@
     "price_package": 5.99,
     "price_per_unit": null,
     "price_per_100": 5.99,
+    "standard_category": "Warzywa"
+  },
+  {
+    "original_name": "Cebula biała Warzywa Auchan na wagę ok. 500 g",
+    "generic_name": "cebula biała",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 4.0,
+    "price_per_unit": null,
+    "price_per_100": 0.799,
     "standard_category": "Warzywa"
   },
   {
@@ -2861,7 +2861,7 @@
   },
   {
     "original_name": "Surówka z białej kapusty z porem Auchan 300 g",
-    "generic_name": "surówka z kapusty z porem",
+    "generic_name": "surówka z białej kapusty z porem",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -3017,7 +3017,7 @@
   },
   {
     "original_name": "Cebula biała tuba Warzywa Auchan 350 g",
-    "generic_name": "cebula tuba",
+    "generic_name": "cebula biała tuba",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 350.0,
@@ -3329,7 +3329,7 @@
   },
   {
     "original_name": "Szparagi białe Warzywa Auchan 500 g",
-    "generic_name": "szparagi",
+    "generic_name": "szparagi białe",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -3377,6 +3377,19 @@
     "price_package": 9.38,
     "price_per_unit": null,
     "price_per_100": 1.876,
+    "standard_category": "Warzywa"
+  },
+  {
+    "original_name": "Szparagi Pewni Dobrego 300 g",
+    "generic_name": "szparagi",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": 300.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 14.99,
+    "price_per_unit": null,
+    "price_per_100": 4.9967,
     "standard_category": "Warzywa"
   },
   {
@@ -3498,7 +3511,7 @@
   },
   {
     "original_name": "Grzyby Shimeji białe Warzywa Auchan 150 g",
-    "generic_name": "grzyby shimeji",
+    "generic_name": "grzyby shimeji białe",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -3849,7 +3862,7 @@
   },
   {
     "original_name": "Grapefruit Biały Owoce  Auchan na wagę od 500 g",
-    "generic_name": "grapefruit owoce auchan",
+    "generic_name": "grapefruit biały owoce auchan",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -4083,7 +4096,7 @@
   },
   {
     "original_name": "Soja blanszowana Edamame Seacon 500 g",
-    "generic_name": "soja blanszowana",
+    "generic_name": "soja blanszowana edamame",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -4746,7 +4759,7 @@
   },
   {
     "original_name": "Krewetki białe gotowane 31-40   Auchan 400 g",
-    "generic_name": "krewetki gotowane 31-40",
+    "generic_name": "krewetki białe gotowane 31-40",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -5136,7 +5149,7 @@
   },
   {
     "original_name": "Krewetki białe blanszowane (bez glazury 750 g) Owoce morza na wagę ok. 1 kg",
-    "generic_name": "krewetki blanszowane (bez glazury )",
+    "generic_name": "krewetki białe blanszowane (bez glazury )",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -6410,7 +6423,7 @@
   },
   {
     "original_name": "Lody waniliowe z nadzieniem o smaku słony karmel, orzechami pekan i kawałkami ciastek z białą czekoladą  Ben&Jerry's 465 ml",
-    "generic_name": "lody waniliowe z nadzieniem o smaku słony karmel, orzechami pekan i kawałkami ciastek z czekoladą",
+    "generic_name": "lody waniliowe z nadzieniem o smaku słony karmel, orzechami pekan i kawałkami ciastek z białą czekoladą",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 465.0,
@@ -6617,19 +6630,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Serek homogenizowany waniliowy OSM GARWOLIN 200 g",
-    "generic_name": "serek homogenizowany waniliowy",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.18,
-    "price_per_unit": null,
-    "price_per_100": 1.59,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Jaja z wolnego wybiegu rozmiar M Auchan 20 sztuk",
     "generic_name": "jaja z wolnego wybiegu rozmiar m",
     "shop": "auchan",
@@ -6683,7 +6683,7 @@
   },
   {
     "original_name": "Twarożek Domowy naturalny Piątnica 150 g",
-    "generic_name": "twarożek domowy naturalny",
+    "generic_name": "twarożek domowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -6696,7 +6696,7 @@
   },
   {
     "original_name": "Jogurt naturalny typu greckiego Auchan 400 g",
-    "generic_name": "jogurt naturalny typu greckiego",
+    "generic_name": "jogurt typu greckiego",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -6709,7 +6709,7 @@
   },
   {
     "original_name": "Skyr jogurt typu islandzkiego naturalny   Piątnica 330 g",
-    "generic_name": "skyr jogurt typu islandzkiego naturalny",
+    "generic_name": "skyr jogurt typu islandzkiego",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 330.0,
@@ -6761,7 +6761,7 @@
   },
   {
     "original_name": "Jogurt Skyr naturalny   Bakoma 300 g",
-    "generic_name": "jogurt skyr naturalny",
+    "generic_name": "jogurt skyr",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -6787,7 +6787,7 @@
   },
   {
     "original_name": "Jogurt naturalny kremowy bez laktozy Auchan 180 g",
-    "generic_name": "jogurt naturalny kremowy bez laktozy",
+    "generic_name": "jogurt kremowy bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -6826,7 +6826,7 @@
   },
   {
     "original_name": "Jogurt naturalny typ grecki Bakoma 370 g",
-    "generic_name": "jogurt naturalny typ grecki",
+    "generic_name": "jogurt typ grecki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -6839,7 +6839,7 @@
   },
   {
     "original_name": "Serek homogenizowany stracciatella Piątnica 150 g",
-    "generic_name": "serek homogenizowany stracciatella",
+    "generic_name": "serek stracciatella",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -6982,7 +6982,7 @@
   },
   {
     "original_name": "Jogurt naturalny kremowy 3%  Auchan 180 g",
-    "generic_name": "jogurt naturalny kremowy 3%",
+    "generic_name": "jogurt kremowy 3%",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -7008,7 +7008,7 @@
   },
   {
     "original_name": "Jogurt naturalny typu greckiego 0% tłuszczu Piątnica 150 g",
-    "generic_name": "jogurt naturalny typu greckiego 0% tłuszczu",
+    "generic_name": "jogurt typu greckiego 0% tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -7085,16 +7085,16 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Kefir polski naturalny Mlekovita 1 l",
-    "generic_name": "kefir naturalny",
+    "original_name": "Kefir             Auchan 1 kg",
+    "generic_name": "kefir",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 5.59,
+    "price_package": 3.85,
     "price_per_unit": null,
-    "price_per_100": 0.559,
+    "price_per_100": 0.385,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -7124,21 +7124,8 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Serek homogenizowany truskawkowy Rolmlecz 150 g",
-    "generic_name": "serek homogenizowany truskawkowy",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.78,
-    "price_per_unit": null,
-    "price_per_100": 1.8533,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Jogurt naturalny z probiotykami Activia 165 g",
-    "generic_name": "jogurt naturalny z probiotykami",
+    "generic_name": "jogurt z probiotykami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 165.0,
@@ -7203,7 +7190,7 @@
   },
   {
     "original_name": "Jogurt naturalny bez laktozy Pewni Dobrego 200 g",
-    "generic_name": "jogurt naturalny bez laktozy",
+    "generic_name": "jogurt bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -7281,7 +7268,7 @@
   },
   {
     "original_name": "Jogurt naturalny gęsty 2.8% tłuszczu Bakoma 390 g",
-    "generic_name": "jogurt naturalny gęsty 2.8% tłuszczu",
+    "generic_name": "jogurt gęsty 2.8% tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 390.0,
@@ -7294,7 +7281,7 @@
   },
   {
     "original_name": "Serek homogenizowany o smaku waniliowym Auchan 150 g",
-    "generic_name": "serek homogenizowany o smaku waniliowym",
+    "generic_name": "serek o smaku waniliowym",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -7358,19 +7345,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Kefir             Auchan 1 kg",
-    "generic_name": "kefir",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.85,
-    "price_per_unit": null,
-    "price_per_100": 0.385,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Jaja ściółkowe klasa A, rozmiar L Auchan 20 sztuk",
     "generic_name": "jaja ściółkowe klasa",
     "shop": "auchan",
@@ -7410,21 +7384,21 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Danio serek o smaku waniliowym Danone 120 g",
+    "original_name": "Danio Serek homogenizowany o smaku waniliowym 130 g",
     "generic_name": "danio serek o smaku waniliowym",
-    "shop": "auchan",
+    "shop": "biedronka",
     "currency": "PLN",
-    "package_size_value": 120.0,
+    "package_size_value": 130.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 3.78,
+    "price_package": 2.49,
     "price_per_unit": null,
-    "price_per_100": 3.15,
+    "price_per_100": 1.9154,
     "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Serek homogenizowany ciasteczkowy Piątnica 150 g",
-    "generic_name": "serek homogenizowany ciasteczkowy",
+    "generic_name": "serek ciasteczkowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -7541,7 +7515,7 @@
   },
   {
     "original_name": "Jogurt naturalny typu greckiego bez laktozy Auchan 400 g",
-    "generic_name": "jogurt naturalny typu greckiego bez laktozy",
+    "generic_name": "jogurt typu greckiego bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -7684,7 +7658,7 @@
   },
   {
     "original_name": "Serek homogenizowany waniliowy z laską wanilii Rolmlecz 150 g",
-    "generic_name": "serek homogenizowany waniliowy z laską wanilii",
+    "generic_name": "serek waniliowy z laską wanilii",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -7788,7 +7762,7 @@
   },
   {
     "original_name": "Jogurt naturalny 0% tłuszczu lekki Bieluch 180 g",
-    "generic_name": "jogurt naturalny 0% tłuszczu lekki",
+    "generic_name": "jogurt 0% tłuszczu lekki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -7801,7 +7775,7 @@
   },
   {
     "original_name": "Serek homogenizowany waniliowy bez laktozy Maluta 220 g",
-    "generic_name": "serek homogenizowany waniliowy bez laktozy",
+    "generic_name": "serek waniliowy bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 220.0,
@@ -7840,7 +7814,7 @@
   },
   {
     "original_name": "Serek homogenizowany straciatella z kawałkami czekolady Auchan 150 g",
-    "generic_name": "serek homogenizowany straciatella z kawałkami czekolady",
+    "generic_name": "serek straciatella z kawałkami czekolady",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -7879,7 +7853,7 @@
   },
   {
     "original_name": "Jogurt Skyr naturalny 0% Mlekovita 500 g",
-    "generic_name": "jogurt skyr naturalny 0%",
+    "generic_name": "jogurt skyr 0%",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -7944,7 +7918,7 @@
   },
   {
     "original_name": "20 ekologicznych jaj różnej wielkości Pewni Dobrego 20 sztuk",
-    "generic_name": "20 jaj różnej wielkości",
+    "generic_name": "20 jaj różnej",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 20.0,
@@ -7970,7 +7944,7 @@
   },
   {
     "original_name": "Serek homogenizowany czekoladowy Rolmlecz 150 g",
-    "generic_name": "serek homogenizowany czekoladowy",
+    "generic_name": "serek czekoladowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -7983,7 +7957,7 @@
   },
   {
     "original_name": "Jogurt pitny naturalny Auchan 400 g",
-    "generic_name": "jogurt pitny naturalny",
+    "generic_name": "jogurt pitny",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -8112,19 +8086,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Serek homogenizowany naturalny Piątnica 150 g",
-    "generic_name": "serek homogenizowany naturalny",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.14,
-    "price_per_unit": null,
-    "price_per_100": 2.0933,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Jaja z chowu na wolnym wybiegu M Auchan 20 sztuk",
     "generic_name": "jaja z chowu na wolnym wybiegu m",
     "shop": "auchan",
@@ -8217,7 +8178,7 @@
   },
   {
     "original_name": "Maślanka naturalna            Pewni Dobrego 1 kg",
-    "generic_name": "maślanka naturalna",
+    "generic_name": "maślanka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -8230,7 +8191,7 @@
   },
   {
     "original_name": "Kefir naturalny wysokobiałkowy Auchan 420 g",
-    "generic_name": "kefir naturalny wysokobiałkowy",
+    "generic_name": "kefir wysokobiałkowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 420.0,
@@ -8412,7 +8373,7 @@
   },
   {
     "original_name": "Jogurt naturalny 2%   Auchan 1 kg",
-    "generic_name": "jogurt naturalny 2%",
+    "generic_name": "jogurt 2%",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -8607,7 +8568,7 @@
   },
   {
     "original_name": "Jogurt naturalny typu grecki wysokobiałkowy Auchan 330 g",
-    "generic_name": "jogurt naturalny typu grecki wysokobiałkowy",
+    "generic_name": "jogurt typu grecki wysokobiałkowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 330.0,
@@ -8698,7 +8659,7 @@
   },
   {
     "original_name": "Jogurt kokosowy naturalny bez glutenu Planton 400 g",
-    "generic_name": "jogurt kokosowy naturalny bez glutenu",
+    "generic_name": "jogurt kokosowy bez glutenu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -8724,7 +8685,7 @@
   },
   {
     "original_name": "Serek homogenizowany brzoskwiniowy   Piątnica 150 g",
-    "generic_name": "serek homogenizowany brzoskwiniowy",
+    "generic_name": "serek brzoskwiniowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -8750,7 +8711,7 @@
   },
   {
     "original_name": "Danio serek homogenizowany waniliowy Danone 130 g",
-    "generic_name": "danio serek homogenizowany waniliowy",
+    "generic_name": "danio serek waniliowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 130.0,
@@ -8893,7 +8854,7 @@
   },
   {
     "original_name": "Jogurt naturalny gęsty Pewni Dobrego 200 g",
-    "generic_name": "jogurt naturalny gęsty",
+    "generic_name": "jogurt gęsty",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -8945,7 +8906,7 @@
   },
   {
     "original_name": "Jogurt naturalny wysokobiałkowy bez laktozy Maluta 200 g",
-    "generic_name": "jogurt naturalny wysokobiałkowy bez laktozy",
+    "generic_name": "jogurt wysokobiałkowy bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -9153,7 +9114,7 @@
   },
   {
     "original_name": "Danio serek homogenizowany o smaku ciasteczkowym Danone 120 g",
-    "generic_name": "danio serek homogenizowany o smaku ciasteczkowym",
+    "generic_name": "danio serek o smaku ciasteczkowym",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 120.0,
@@ -9491,7 +9452,7 @@
   },
   {
     "original_name": "Danio serek homogenizowany o smaku bananowym Danone 120 g",
-    "generic_name": "danio serek homogenizowany o smaku bananowym",
+    "generic_name": "danio serek o smaku bananowym",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 120.0,
@@ -9933,7 +9894,7 @@
   },
   {
     "original_name": "Jaja od kury zielononóżki kl.A różnej wielkości Mizgier 10 sztuk",
-    "generic_name": "jaja od kury zielononóżki kl.a różnej wielkości",
+    "generic_name": "jaja od kury zielononóżki kl.a różnej",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 10.0,
@@ -9946,7 +9907,7 @@
   },
   {
     "original_name": "Müllermilch o smaku białej czekolady i orzechów makadamia   Müller 400 g",
-    "generic_name": "müllermilch o smaku czekolady i orzechów makadamia",
+    "generic_name": "müllermilch o smaku białej czekolady i orzechów makadamia",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -10232,7 +10193,7 @@
   },
   {
     "original_name": "Jogurt owczy naturalny Rians 115 g",
-    "generic_name": "jogurt owczy naturalny",
+    "generic_name": "jogurt owczy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 115.0,
@@ -10531,7 +10492,7 @@
   },
   {
     "original_name": "Serek wiejski wysokobiałkowy 70g białka Mlekovita 500 g",
-    "generic_name": "serek wysokobiałkowy",
+    "generic_name": "serek wysokobiałkowy białka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -10726,7 +10687,7 @@
   },
   {
     "original_name": "Danio Serek homogenizowany z kawałkami czekolady 130 g",
-    "generic_name": "danio serek homogenizowany z kawałkami czekolady",
+    "generic_name": "danio serek z kawałkami czekolady",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 130.0,
@@ -10813,19 +10774,6 @@
     "price_package": 3.19,
     "price_per_unit": null,
     "price_per_100": 2.1267,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Serek homogenizowany naturalny bez laktozy  Mlekovita 150 g",
-    "generic_name": "serek homogenizowany naturalny bez laktozy",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.48,
-    "price_per_unit": null,
-    "price_per_100": 2.32,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -10917,19 +10865,6 @@
     "price_package": 5.18,
     "price_per_unit": null,
     "price_per_100": 1.295,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Jogurt typu greckiego z inuliną   Pewni Dobrego 200 g",
-    "generic_name": "jogurt typu greckiego z inuliną",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.39,
-    "price_per_unit": null,
-    "price_per_100": 1.195,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -11089,19 +11024,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "JOGURT GRECKI LIGHT  340g Greek Style 340 g",
-    "generic_name": "jogurt",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 340.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.98,
-    "price_per_unit": null,
-    "price_per_100": 1.4647,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Cardio o smaku masła Optima 400 g",
     "generic_name": "cardio o smaku masła",
     "shop": "auchan",
@@ -11181,7 +11103,7 @@
   },
   {
     "original_name": "Jogurt skyr proteinowy biała czekolada kokos Auchan 330 g",
-    "generic_name": "jogurt skyr proteinowy czekolada kokos",
+    "generic_name": "jogurt skyr proteinowy biała czekolada kokos",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 330.0,
@@ -11207,7 +11129,7 @@
   },
   {
     "original_name": "Serek naturalny wysokobiałkowy Auchan 150 g",
-    "generic_name": "serek naturalny wysokobiałkowy",
+    "generic_name": "serek wysokobiałkowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -11311,7 +11233,7 @@
   },
   {
     "original_name": "Monte deser mleczny z czekoladą, orzechami wafelkami lub płatkami w czekoladzie mix Zott 125 g",
-    "generic_name": "monte deser mleczny z czekoladą, orzechami wafelkami lub płatkami w czekoladzie mix",
+    "generic_name": "monte deser mleczny z czekoladą, orzechami wafelkami w czekoladzie mix",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 125.0,
@@ -11466,19 +11388,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Danio XXL serek z kawałkami czekolady Danone 200 g",
-    "generic_name": "danio xxl serek z kawałkami czekolady",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.64,
-    "price_per_unit": null,
-    "price_per_100": 2.32,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Jogobella Jogurt ziarna i nasiona brzoskwinia, truskawka mix smaków Zott 200 g",
     "generic_name": "jogobella jogurt ziarna i nasiona brzoskwinia, truskawka mix smaków",
     "shop": "auchan",
@@ -11532,7 +11441,7 @@
   },
   {
     "original_name": "Jogurt naturalny light 3.5%  Greek Style 180 g",
-    "generic_name": "jogurt naturalny 3.5%",
+    "generic_name": "jogurt 3.5%",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -11727,7 +11636,7 @@
   },
   {
     "original_name": "Koktajl z białkiem serwatkowym malina granat  Piątnica 250 ml",
-    "generic_name": "koktajl z serwatkowym malina granat",
+    "generic_name": "koktajl z białkiem serwatkowym malina granat",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -11792,7 +11701,7 @@
   },
   {
     "original_name": "Kefir naturalny 1.5% Pewni Dobrego 250 g",
-    "generic_name": "kefir naturalny 1.5%",
+    "generic_name": "kefir 1.5%",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -11805,7 +11714,7 @@
   },
   {
     "original_name": "ekoJogurt naturalny typu greckiego EkoŁukta 200 g",
-    "generic_name": "ekojogurt naturalny typu greckiego",
+    "generic_name": "ekojogurt typu greckiego",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -12026,7 +11935,7 @@
   },
   {
     "original_name": "High Protein Deser mleczny o smaku białej czekolady z dodatkiem kreatyny Ehrmann 230 g",
-    "generic_name": "high protein deser mleczny o smaku czekolady z dodatkiem kreatyny",
+    "generic_name": "high protein deser mleczny o smaku białej czekolady z dodatkiem kreatyny",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 230.0,
@@ -12338,7 +12247,7 @@
   },
   {
     "original_name": "Jogurt naturalny typ bałkański lekki Maluta 340 g",
-    "generic_name": "jogurt naturalny typ bałkański lekki",
+    "generic_name": "jogurt typ bałkański lekki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 340.0,
@@ -12494,7 +12403,7 @@
   },
   {
     "original_name": "Whey Protein Complex 100% odżywka białkowa wanilia Olimp 2,27 kg",
-    "generic_name": "whey protein complex 100% odżywka wanilia",
+    "generic_name": "whey protein complex 100% odżywka białkowa wanilia",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 2270.0,
@@ -12780,7 +12689,7 @@
   },
   {
     "original_name": "Monte deser mleczny z czekoladą, orzechami i serduszkami lub kulkami zbożowymi w polewie mix Zott 125 g",
-    "generic_name": "monte deser mleczny z czekoladą, orzechami i serduszkami lub kulkami zbożowymi w polewie mix",
+    "generic_name": "monte deser mleczny z czekoladą, orzechami i serduszkami zbożowymi w polewie mix",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 125.0,
@@ -12806,7 +12715,7 @@
   },
   {
     "original_name": "Odżywka białkowa Mass Up wanilia ACTIVLAB 1,2 kg",
-    "generic_name": "odżywka",
+    "generic_name": "odżywka białkowa",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1200.0,
@@ -12819,7 +12728,7 @@
   },
   {
     "original_name": "Protein 80 Białko lody waniliowe Proactive 700 g",
-    "generic_name": "protein 80 lody waniliowe",
+    "generic_name": "protein 80 białko lody waniliowe",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 700.0,
@@ -12962,7 +12871,7 @@
   },
   {
     "original_name": "Koktajl z białkiem serwatkowym mango marakuja i owies  Piątnica 250 ml",
-    "generic_name": "koktajl z serwatkowym mango marakuja i owies",
+    "generic_name": "koktajl z białkiem serwatkowym mango marakuja i owies",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -12974,16 +12883,16 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Whey Protein Complex 100% białko Olimp 600 g",
-    "generic_name": "whey protein complex 100%",
+    "original_name": "Whey Protein Complex 100% - 700g białko Olimp 700 g",
+    "generic_name": "whey protein complex 100% - białko",
     "shop": "auchan",
     "currency": "PLN",
-    "package_size_value": 600.0,
+    "package_size_value": 700.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 68.99,
+    "price_package": 90.28,
     "price_per_unit": null,
-    "price_per_100": 11.4983,
+    "price_per_100": 12.8971,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -13040,7 +12949,7 @@
   },
   {
     "original_name": "Odżywka białkowa sojowa Sojavit 85 wanilia Olimp 35 g",
-    "generic_name": "odżywka sojowa",
+    "generic_name": "odżywka białkowa sojowa",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 35.0,
@@ -13062,19 +12971,6 @@
     "price_package": 3.49,
     "price_per_unit": null,
     "price_per_100": 1.396,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Jogurt proteinowy naturalny Auchan 150 g",
-    "generic_name": "jogurt proteinowy naturalny",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.19,
-    "price_per_unit": null,
-    "price_per_100": 2.1267,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -13183,7 +13079,7 @@
   },
   {
     "original_name": "Whey Protein Complex białko WPC Banan Olimp 35 g",
-    "generic_name": "whey protein complex",
+    "generic_name": "whey protein complex białko",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 35.0,
@@ -13218,6 +13114,19 @@
     "price_package": 11.49,
     "price_per_unit": null,
     "price_per_100": 6.0474,
+    "standard_category": "Nabiał i jaja"
+  },
+  {
+    "original_name": "Whey Protein Complex 100% białko Olimp 600 g",
+    "generic_name": "whey protein complex 100% białko",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": 600.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 68.99,
+    "price_per_unit": null,
+    "price_per_100": 11.4983,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -13274,7 +13183,7 @@
   },
   {
     "original_name": "Whey Protein Complex 100% odżywka białkowa ciastko z kremem Olimp 2,27 kg",
-    "generic_name": "whey protein complex 100% odżywka ciastko z kremem",
+    "generic_name": "whey protein complex 100% odżywka białkowa ciastko z kremem",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 2270.0,
@@ -13417,7 +13326,7 @@
   },
   {
     "original_name": "Ser Koryciński swojski naturalny Zarzeccy na wagę ok 240 g",
-    "generic_name": "ser koryciński swojski naturalny",
+    "generic_name": "ser koryciński swojski",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -13690,7 +13599,7 @@
   },
   {
     "original_name": "Whey Protein Complex 100% odżywka białkowa czekolada Olimp 2,27 kg",
-    "generic_name": "whey protein complex 100% odżywka czekolada",
+    "generic_name": "whey protein complex 100% odżywka białkowa czekolada",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 2270.0,
@@ -14171,7 +14080,7 @@
   },
   {
     "original_name": "Kiełbasa biała z czosnkiem niedźwiedzim Auchan na wagę ok. 600 g",
-    "generic_name": "kiełbasa z czosnkiem niedźwiedzim",
+    "generic_name": "kiełbasa biała z czosnkiem niedźwiedzim",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -14184,7 +14093,7 @@
   },
   {
     "original_name": "Kiełbasa biała Auchan na wagę ok. 500 g",
-    "generic_name": "kiełbasa",
+    "generic_name": "kiełbasa biała",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -14834,7 +14743,7 @@
   },
   {
     "original_name": "Twój Smak Serek śmietankowy naturalny Piątnica 150 g",
-    "generic_name": "twój smak serek śmietankowy naturalny",
+    "generic_name": "twój smak serek śmietankowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -14960,19 +14869,6 @@
     "price_package": 3.48,
     "price_per_unit": null,
     "price_per_100": 2.32,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Serek o smaku waniliowym Bieluch 150 g",
-    "generic_name": "serek o smaku waniliowym",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.28,
-    "price_per_unit": null,
-    "price_per_100": 2.1867,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -15120,7 +15016,7 @@
   },
   {
     "original_name": "Ser Camembert naturalny Auchan 100 g",
-    "generic_name": "ser camembert naturalny",
+    "generic_name": "ser camembert",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -15146,7 +15042,7 @@
   },
   {
     "original_name": "Lekki serek naturalny o 30% mniej tłuszczu Bieluch 150 g",
-    "generic_name": "lekki serek naturalny o 30% mniej tłuszczu",
+    "generic_name": "lekki serek o 30% mniej tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -15198,7 +15094,7 @@
   },
   {
     "original_name": "Kortos ser sałatkowy naturalny Turek 160 g",
-    "generic_name": "kortos ser naturalny",
+    "generic_name": "kortos ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 160.0,
@@ -15233,19 +15129,6 @@
     "price_package": 6.48,
     "price_per_unit": null,
     "price_per_100": 4.8,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Serek waniliowy bez laktozy  Bieluch 150 g",
-    "generic_name": "serek waniliowy bez laktozy",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.28,
-    "price_per_unit": null,
-    "price_per_100": 2.1867,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -15380,7 +15263,7 @@
   },
   {
     "original_name": "Serek twarogowy lekki naturalny Almette 150 g",
-    "generic_name": "serek twarogowy lekki naturalny",
+    "generic_name": "serek twarogowy lekki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -15532,19 +15415,6 @@
     "price_package": 6.48,
     "price_per_unit": null,
     "price_per_100": 4.32,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Serek naturalny bez laktozy Bieluch 150 g",
-    "generic_name": "serek naturalny bez laktozy",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.64,
-    "price_per_unit": null,
-    "price_per_100": 2.4267,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -15705,7 +15575,7 @@
   },
   {
     "original_name": "Ser biały w kostkach do sałatek Arla 200 g",
-    "generic_name": "ser w kostkach do sałatek",
+    "generic_name": "ser biały w kostkach do sałatek",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -16225,7 +16095,7 @@
   },
   {
     "original_name": "Serek kremowy naturalny Arla 200 g",
-    "generic_name": "serek kremowy naturalny",
+    "generic_name": "serek kremowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -16277,7 +16147,7 @@
   },
   {
     "original_name": "Ser brie naturalny Auchan 125 g",
-    "generic_name": "ser brie naturalny",
+    "generic_name": "ser brie",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 125.0,
@@ -16289,16 +16159,16 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Ser pleśniowy brie naturalny Turek 125 g",
-    "generic_name": "ser pleśniowy brie naturalny",
+    "original_name": "Ser pleśniowy brie Valbon 200 g",
+    "generic_name": "ser pleśniowy brie",
     "shop": "auchan",
     "currency": "PLN",
-    "package_size_value": 125.0,
+    "package_size_value": 200.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 7.28,
+    "price_package": 11.49,
     "price_per_unit": null,
-    "price_per_100": 5.824,
+    "price_per_100": 5.745,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -16429,19 +16299,6 @@
     "price_package": 11.88,
     "price_per_unit": null,
     "price_per_100": 11.88,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Ser Brie pełnotłusty President 125 g",
-    "generic_name": "ser brie",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 125.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 6.98,
-    "price_per_unit": null,
-    "price_per_100": 5.584,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -16641,7 +16498,7 @@
   },
   {
     "original_name": "Warkoczyk naturalny ser półtwardy  Milkeffekt 50 g",
-    "generic_name": "warkoczyk naturalny ser półtwardy",
+    "generic_name": "warkoczyk ser półtwardy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 50.0,
@@ -16849,7 +16706,7 @@
   },
   {
     "original_name": "Ser biały w kostkach z ziołami w oleju Arla 100 g",
-    "generic_name": "ser w kostkach z ziołami w oleju",
+    "generic_name": "ser biały w kostkach z ziołami w oleju",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -16875,7 +16732,7 @@
   },
   {
     "original_name": "Serek kremowy naturalny bez laktozy  Arla 200 g",
-    "generic_name": "serek kremowy naturalny bez laktozy",
+    "generic_name": "serek kremowy bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -16962,19 +16819,6 @@
     "price_package": 20.99,
     "price_per_unit": null,
     "price_per_100": 13.9933,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Ser pleśniowy brie Valbon 200 g",
-    "generic_name": "ser pleśniowy brie",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.49,
-    "price_per_unit": null,
-    "price_per_100": 5.745,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -17070,7 +16914,7 @@
   },
   {
     "original_name": "Ser biały sałatkowy w kostkach z czosnkiem i pietruszką Apetina 200 g",
-    "generic_name": "ser w kostkach z czosnkiem i pietruszką",
+    "generic_name": "ser biały w kostkach z czosnkiem i pietruszką",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -17252,7 +17096,7 @@
   },
   {
     "original_name": "Ser biały w kostkach z zielonymi oliwkami w oleju Arla 100 g",
-    "generic_name": "ser w kostkach z zielonymi oliwkami w oleju",
+    "generic_name": "ser biały w kostkach z zielonymi oliwkami w oleju",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -17369,7 +17213,7 @@
   },
   {
     "original_name": "Ser biały w kostkach z bazylią i oregano Arla 200 g",
-    "generic_name": "ser w kostkach z bazylią i oregano",
+    "generic_name": "ser biały w kostkach z bazylią i oregano",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -17394,16 +17238,16 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Hajduki wędzone  Auchan 100 g",
+    "original_name": "Hajduki naturalne Auchan 100 g",
     "generic_name": "hajduki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 7.49,
+    "price_package": 6.99,
     "price_per_unit": null,
-    "price_per_100": 7.49,
+    "price_per_100": 6.99,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -17720,7 +17564,7 @@
   },
   {
     "original_name": "Ser na grilla lub patelnię z dodatkiem ziół Sirtakis 100 g",
-    "generic_name": "ser na grilla lub patelnię z dodatkiem ziół",
+    "generic_name": "ser na grilla z dodatkiem ziół",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -18239,19 +18083,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Hajduki naturalne Auchan 100 g",
-    "generic_name": "hajduki naturalne",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 100.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 6.99,
-    "price_per_unit": null,
-    "price_per_100": 6.99,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Mascarpone i Gorgonzola Dolcetto 150 g",
     "generic_name": "mascarpone",
     "shop": "auchan",
@@ -18383,7 +18214,7 @@
   },
   {
     "original_name": "Serecek ręcznie wyrobiony biały Smrek 200 g",
-    "generic_name": "serecek ręcznie wyrobiony",
+    "generic_name": "serecek ręcznie wyrobiony biały",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -18483,19 +18314,6 @@
     "price_package": 6.98,
     "price_per_unit": null,
     "price_per_100": 3.49,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Ser camembert pełnotłusty Président 120 g",
-    "generic_name": "ser camembert",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 120.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 6.98,
-    "price_per_unit": null,
-    "price_per_100": 5.8167,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -18916,7 +18734,7 @@
   },
   {
     "original_name": "Camembert naturalny z posypką paprykową BBQ Turek 205 g",
-    "generic_name": "camembert naturalny z posypką paprykową",
+    "generic_name": "camembert z posypką paprykową",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -19111,7 +18929,7 @@
   },
   {
     "original_name": "Ser Brie naturalny porcja President na wagę ok. 200 g",
-    "generic_name": "ser brie naturalny porcja",
+    "generic_name": "ser brie porcja",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -19436,7 +19254,7 @@
   },
   {
     "original_name": "Camembert naturalny z sosem mango chutney Turek 230 g",
-    "generic_name": "camembert naturalny z sosem mango chutney",
+    "generic_name": "camembert z sosem mango chutney",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -20112,7 +19930,7 @@
   },
   {
     "original_name": "Płatki kukurydziane wzbogacone w 7 witamin Auchan 500 g",
-    "generic_name": "płatki kukurydziane wzbogacone w 7 witamin",
+    "generic_name": "płatki kukurydziane w 7 witamin",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -20138,7 +19956,7 @@
   },
   {
     "original_name": "Ryż biały średnioziarnisty Auchan 4 x 100 g",
-    "generic_name": "ryż średnioziarnisty",
+    "generic_name": "ryż biały średnioziarnisty",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -20242,7 +20060,7 @@
   },
   {
     "original_name": "Cukier biały Diamant 2 kg",
-    "generic_name": "cukier",
+    "generic_name": "cukier biały",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 2000.0,
@@ -20268,7 +20086,7 @@
   },
   {
     "original_name": "Ryż biały długoziarnisty Auchan 500 g",
-    "generic_name": "ryż długoziarnisty",
+    "generic_name": "ryż biały długoziarnisty",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -20463,7 +20281,7 @@
   },
   {
     "original_name": "Granola z białą czekoladą i truskawkami liofilizowanymi Sante 350 g",
-    "generic_name": "granola z czekoladą i truskawkami liofilizowanymi",
+    "generic_name": "granola z białą czekoladą i truskawkami liofilizowanymi",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 350.0,
@@ -20658,7 +20476,7 @@
   },
   {
     "original_name": "Cukier biały w saszetkach Diamant 200 sztuk",
-    "generic_name": "cukier w saszetkach",
+    "generic_name": "cukier biały w saszetkach",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -20683,16 +20501,16 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
-    "original_name": "Erytrytol słodzik stołowy Auchan 500 g",
-    "generic_name": "erytrytol słodzik stołowy",
+    "original_name": "Erytrytol Big Nature 1 kg",
+    "generic_name": "erytrytol",
     "shop": "auchan",
     "currency": "PLN",
-    "package_size_value": 500.0,
+    "package_size_value": 1000.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 19.99,
+    "price_package": 28.8,
     "price_per_unit": null,
-    "price_per_100": 3.998,
+    "price_per_100": 2.88,
     "standard_category": "Słodziki i dodatki smakowe"
   },
   {
@@ -20762,7 +20580,7 @@
   },
   {
     "original_name": "Nasiona sezamu białego Thai Pride 100 g",
-    "generic_name": "nasiona sezamu",
+    "generic_name": "nasiona sezamu białego",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -20957,7 +20775,7 @@
   },
   {
     "original_name": "Ryż biały Parboiled Auchan 4 x 100 g",
-    "generic_name": "ryż",
+    "generic_name": "ryż biały",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -21009,7 +20827,7 @@
   },
   {
     "original_name": "Kasza gryczana biała Auchan 400 g",
-    "generic_name": "kasza gryczana",
+    "generic_name": "kasza gryczana biała",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -21139,7 +20957,7 @@
   },
   {
     "original_name": "Ryż biały długoziarnisty basmati  Lestello 500 g",
-    "generic_name": "ryż długoziarnisty basmati",
+    "generic_name": "ryż biały długoziarnisty basmati",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -21243,7 +21061,7 @@
   },
   {
     "original_name": "Quinoa Komosa Ryżowa Intenson 250 g",
-    "generic_name": "quinoa",
+    "generic_name": "komosa ryżowa",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -21451,7 +21269,7 @@
   },
   {
     "original_name": "Cenos Kasza gryczana biała Cenos 4 x 100 g",
-    "generic_name": "cenos kasza gryczana",
+    "generic_name": "cenos kasza gryczana biała",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -21658,8 +21476,21 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
+    "original_name": "Kasza gryczana Cenos 500 g",
+    "generic_name": "kasza gryczana",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 8.28,
+    "price_per_unit": null,
+    "price_per_100": 1.656,
+    "standard_category": "Produkty zbożowe i mąki"
+  },
+  {
     "original_name": "Stevia słodzik naturalnego pochodzenia Zielony listek 250 drażetek",
-    "generic_name": "stevia słodzik naturalnego pochodzenia",
+    "generic_name": "stewia naturalnego pochodzenia",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 13.0,
@@ -21906,7 +21737,7 @@
   },
   {
     "original_name": "BIO Ekologiczna długoziarnisty ryż biały NaturaVena 500 g",
-    "generic_name": "długoziarnisty ryż",
+    "generic_name": "długoziarnisty ryż biały",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -22126,19 +21957,6 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
-    "original_name": "Erytrytol Big Nature 1 kg",
-    "generic_name": "erytrytol",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 28.8,
-    "price_per_unit": null,
-    "price_per_100": 2.88,
-    "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
     "original_name": "Makaron Fusilli tricolore bez glutenu Incola 250 g",
     "generic_name": "makaron fusilli tricolore bez glutenu",
     "shop": "auchan",
@@ -22335,7 +22153,7 @@
   },
   {
     "original_name": "Cukier biały kostka Polski Cukier 500 g",
-    "generic_name": "cukier kostka",
+    "generic_name": "cukier biały kostka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -22490,19 +22308,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "BIO Groszek zielony konserwowy  EkoWital 350 g",
-    "generic_name": "groszek zielony konserwowy",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 350.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.38,
-    "price_per_unit": null,
-    "price_per_100": 2.68,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Makaron Orecchiette z semoliny z pszenicy durum   Barilla 500 g",
     "generic_name": "makaron orecchiette z semoliny z pszenicy durum",
     "shop": "auchan",
@@ -22543,7 +22348,7 @@
   },
   {
     "original_name": "Cukier biały w kostkach Diamant 1 kg",
-    "generic_name": "cukier w kostkach",
+    "generic_name": "cukier biały w kostkach",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -22556,7 +22361,7 @@
   },
   {
     "original_name": "BIO Ekologiczna Quinoa trójkolorowa (komosa ryżowa) Ekologiko 250 g",
-    "generic_name": "quinoa trójkolorowa (komosa ryżowa)",
+    "generic_name": "komosa ryżowa trójkolorowa (komosa ryżowa)",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -23544,7 +23349,7 @@
   },
   {
     "original_name": "Muszelki zbożowe o smaku czekoladowym wzbogacone w 7 witamin Auchan 250 g",
-    "generic_name": "muszelki zbożowe o smaku czekoladowym wzbogacone w 7 witamin",
+    "generic_name": "muszelki zbożowe o smaku czekoladowym w 7 witamin",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -23817,7 +23622,7 @@
   },
   {
     "original_name": "Granulat otrębowy zawiera błonnik i jabłko Granex 350 g",
-    "generic_name": "granulat otrębowy zawiera błonnik i jabłko",
+    "generic_name": "otrębowy zawiera błonnik i jabłko",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 350.0,
@@ -23999,7 +23804,7 @@
   },
   {
     "original_name": "Granola biała czekolada z ciastkami One Day More 350 g",
-    "generic_name": "granola czekolada z ciastkami",
+    "generic_name": "granola biała czekolada z ciastkami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 350.0,
@@ -24103,7 +23908,7 @@
   },
   {
     "original_name": "Stevia słodzik pochodzenia naturalnego z inuliną Zielony listek 140 g",
-    "generic_name": "stevia słodzik pochodzenia naturalnego z inuliną",
+    "generic_name": "stewia",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 140.0,
@@ -24324,7 +24129,7 @@
   },
   {
     "original_name": "BIO Quinoa czarna   Bio Planet 250 g",
-    "generic_name": "quinoa czarna",
+    "generic_name": "komosa ryżowa czarna",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -24350,7 +24155,7 @@
   },
   {
     "original_name": "Musli z białą czekoladą i owocami One Day More 400 g",
-    "generic_name": "musli z czekoladą i owocami",
+    "generic_name": "musli z białą czekoladą i owocami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -24427,6 +24232,19 @@
     "standard_category": "Owoce"
   },
   {
+    "original_name": "Ryż Basmati Kupiec 400 g",
+    "generic_name": "ryż",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": 400.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 10.39,
+    "price_per_unit": null,
+    "price_per_100": 2.5975,
+    "standard_category": "Produkty zbożowe i mąki"
+  },
+  {
     "original_name": "Makaron ryżowy 10mm BANH 400 g",
     "generic_name": "makaron ryżowy 10mm",
     "shop": "auchan",
@@ -24480,7 +24298,7 @@
   },
   {
     "original_name": "BIO Ekologiczna fasola biała duża NaturaVena 400 g",
-    "generic_name": "fasola duża",
+    "generic_name": "fasola biała duża",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -24740,7 +24558,7 @@
   },
   {
     "original_name": "Ryż biały długi Cenos 8 x 100 g",
-    "generic_name": "ryż długi",
+    "generic_name": "ryż biały długi",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 800.0,
@@ -24947,6 +24765,19 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
+    "original_name": "Ryż długoziarnisty Sollana 1 kg",
+    "generic_name": "ryż długoziarnisty",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": 1000.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 9.99,
+    "price_per_unit": null,
+    "price_per_100": 0.999,
+    "standard_category": "Przyprawy, zioła i proszki"
+  },
+  {
     "original_name": "BIO Ekologiczne musli śniadaniowe NaturaVena 300 g",
     "generic_name": "musli śniadaniowe",
     "shop": "auchan",
@@ -25090,19 +24921,6 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
-    "original_name": "Stewia w kryształkach Natu sweet 200 g",
-    "generic_name": "stewia w kryształkach",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 30.49,
-    "price_per_unit": null,
-    "price_per_100": 15.245,
-    "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
     "original_name": "Tradycyjny włoski makaron maccheroni Di Carlo 500 g",
     "generic_name": "tradycyjny włoski makaron maccheroni",
     "shop": "auchan",
@@ -25156,7 +24974,7 @@
   },
   {
     "original_name": "Stewia w tabletkach - słodzik Natusweet 300 tabletek",
-    "generic_name": "stewia w tabletkach - słodzik",
+    "generic_name": "stewia w tabletkach",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 18.0,
@@ -25832,7 +25650,7 @@
   },
   {
     "original_name": "Cukier drobny Auchan 750 g",
-    "generic_name": "cukier drobny",
+    "generic_name": "cukier",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 750.0,
@@ -26365,7 +26183,7 @@
   },
   {
     "original_name": "Groszek konserwowy Auchan 400 g",
-    "generic_name": "groszek konserwowy",
+    "generic_name": "groszek",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 240.0,
@@ -26391,7 +26209,7 @@
   },
   {
     "original_name": "Sól stołowa jodowana o'Sole 1 kg",
-    "generic_name": "sól stołowa jodowana o'sole",
+    "generic_name": "sól jodowana o'sole",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -26768,7 +26586,7 @@
   },
   {
     "original_name": "Fasola biała konserwowa Auchan 400 g",
-    "generic_name": "fasola konserwowa",
+    "generic_name": "fasola biała konserwowa",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 240.0,
@@ -29147,7 +28965,7 @@
   },
   {
     "original_name": "Pieprz biały mielony Prymat 15 g",
-    "generic_name": "pieprz mielony",
+    "generic_name": "pieprz biały mielony",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 15.0,
@@ -30746,7 +30564,7 @@
   },
   {
     "original_name": "Ocet winny biały Monini 500 ml",
-    "generic_name": "ocet winny",
+    "generic_name": "ocet winny biały",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -30963,6 +30781,19 @@
     "price_package": 2.74,
     "price_per_unit": null,
     "price_per_100": 13.7,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
+    "original_name": "Kiełbasa Krakowska Spichlerz Rusiecki 280 g",
+    "generic_name": "kiełbasa",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": 280.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 9.79,
+    "price_per_unit": null,
+    "price_per_100": 3.4964,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -31370,7 +31201,7 @@
   },
   {
     "original_name": "Ocet winny z białego wina. 6% kwasowości Kamis 250 ml",
-    "generic_name": "ocet winny z wina. 6% kwasowości",
+    "generic_name": "ocet winny z białego wina. 6% kwasowości",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -31500,7 +31331,7 @@
   },
   {
     "original_name": "Sól różowa naturalna kamienna niejodowana Kotányi 900 g",
-    "generic_name": "sól różowa naturalna kamienna niejodowana",
+    "generic_name": "sól różowa kamienna niejodowana",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 900.0,
@@ -31539,7 +31370,7 @@
   },
   {
     "original_name": "Oliwa z oliwek extra virgin o smaku białej trufli Monini 250 ml",
-    "generic_name": "oliwa z oliwek virgin o smaku trufli",
+    "generic_name": "oliwa z oliwek virgin o smaku białej trufli",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -32072,7 +31903,7 @@
   },
   {
     "original_name": "Kapusta biała",
-    "generic_name": "kapusta",
+    "generic_name": "kapusta biała",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 3000.0,
@@ -32120,6 +31951,19 @@
     "price_package": 6.99,
     "price_per_unit": null,
     "price_per_100": 3.495,
+    "standard_category": "Warzywa"
+  },
+  {
+    "original_name": "Pietruszka biała korzeń",
+    "generic_name": "pietruszka biała",
+    "shop": "biedronka",
+    "currency": "PLN",
+    "package_size_value": 150.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.05,
+    "price_per_unit": null,
+    "price_per_100": 0.7,
     "standard_category": "Warzywa"
   },
   {
@@ -32328,19 +32172,6 @@
     "price_package": 15.98,
     "price_per_unit": null,
     "price_per_100": 0.799,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Ananas",
-    "generic_name": "ananas",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 1500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.98,
-    "price_per_unit": null,
-    "price_per_100": 0.7987,
     "standard_category": "Owoce"
   },
   {
@@ -32917,7 +32748,7 @@
   },
   {
     "original_name": "Fruvita Skyr naturalny 150 g",
-    "generic_name": "fruvita skyr naturalny",
+    "generic_name": "fruvita skyr",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -32969,7 +32800,7 @@
   },
   {
     "original_name": "Piątnica Serek wiejski naturalny 200 g",
-    "generic_name": "piątnica serek naturalny",
+    "generic_name": "piątnica serek",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -33632,7 +33463,7 @@
   },
   {
     "original_name": "Fruvita Skyr naturalny bez laktozy 150 g",
-    "generic_name": "fruvita skyr naturalny bez laktozy",
+    "generic_name": "fruvita skyr bez laktozy",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -33658,7 +33489,7 @@
   },
   {
     "original_name": "Fruvita Jogurt naturalny Low Carb 150 g",
-    "generic_name": "fruvita jogurt naturalny",
+    "generic_name": "fruvita jogurt",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -33723,7 +33554,7 @@
   },
   {
     "original_name": "Turek Camembert naturalny 120 g",
-    "generic_name": "turek camembert naturalny",
+    "generic_name": "turek camembert",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 120.0,
@@ -33810,19 +33641,6 @@
     "price_package": 2.29,
     "price_per_unit": null,
     "price_per_100": 8.1786,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Danio Serek homogenizowany o smaku waniliowym 130 g",
-    "generic_name": "danio serek homogenizowany o smaku waniliowym",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 130.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.49,
-    "price_per_unit": null,
-    "price_per_100": 1.9154,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -34282,7 +34100,7 @@
   },
   {
     "original_name": "Łaciaty Serek puszysty naturalny 150 g",
-    "generic_name": "łaciaty serek puszysty naturalny",
+    "generic_name": "łaciaty serek puszysty",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -34317,19 +34135,6 @@
     "price_package": 6.49,
     "price_per_unit": null,
     "price_per_100": 4.3267,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Danio Serek homogenizowany truskawkowy 130 g",
-    "generic_name": "danio serek homogenizowany truskawkowy",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 130.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.49,
-    "price_per_unit": null,
-    "price_per_100": 1.9154,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -34971,7 +34776,7 @@
   },
   {
     "original_name": "Plony Natury Ryż biały długoziarnisty z europejskich upraw 4 x 125 g",
-    "generic_name": "plony natury ryż długoziarnisty z europejskich upraw 4 x",
+    "generic_name": "plony natury ryż biały długoziarnisty z europejskich upraw 4 x",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -35127,7 +34932,7 @@
   },
   {
     "original_name": "Diamant Cukier biały 1 kg",
-    "generic_name": "diamant cukier",
+    "generic_name": "diamant cukier biały",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -35582,7 +35387,7 @@
   },
   {
     "original_name": "Lajkonik Junior Safari Drobne pieczywo o smaku waniliowym 180 g",
-    "generic_name": "lajkonik junior safari drobne pieczywo o smaku waniliowym",
+    "generic_name": "lajkonik junior safari pieczywo o smaku waniliowym",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -35933,7 +35738,7 @@
   },
   {
     "original_name": "Vitanella Baton Protein bez dodatku cukrów 27 % białka 49 g",
-    "generic_name": "vitanella baton protein bez dodatku cukrów 27 %",
+    "generic_name": "vitanella baton protein bez dodatku cukrów 27 % białka",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 49.0,
@@ -38390,7 +38195,7 @@
   },
   {
     "original_name": "Plony Natury Kasza gryczana biała (4 x 100 g) 400 g",
-    "generic_name": "plony natury kasza gryczana (4 x )",
+    "generic_name": "plony natury kasza gryczana biała (4 x )",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -38923,7 +38728,7 @@
   },
   {
     "original_name": "Dr. Oetker Ekstrakt naturalny pomarańcza z Brazylii 30 ml",
-    "generic_name": "dr. oetker ekstrakt naturalny pomarańcza",
+    "generic_name": "dr. oetker ekstrakt pomarańcza",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 30.0,
@@ -39235,7 +39040,7 @@
   },
   {
     "original_name": "Orbit Spearmint XXL Bezcukrowa guma do żucia 50 g (36 sztuk)",
-    "generic_name": "orbit spearmint xxl bezcukrowa guma do żucia ( )",
+    "generic_name": "orbit spearmint bezcukrowa guma do żucia ( )",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 58.0,
@@ -39728,19 +39533,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Orbit Spearmint Bezcukrowa guma do żucia (21 sztuk) 29 g",
-    "generic_name": "orbit spearmint bezcukrowa guma do żucia ( )",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 29.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.99,
-    "price_per_unit": null,
-    "price_per_100": 17.2069,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Go On Vitamin Baton kokosowy z l-karnityną magnezem i witaminami oblany mleczną czekoladą 45 g",
     "generic_name": "go on vitamin baton kokosowy z l-karnityną magnezem i witaminami oblany mleczną czekoladą",
     "shop": "biedronka",
@@ -39755,7 +39547,7 @@
   },
   {
     "original_name": "Dr. Oetker Ekstrakt naturalny wanilia bourbon z Madagaskaru 30 ml",
-    "generic_name": "dr. oetker ekstrakt naturalny wanilia bourbon",
+    "generic_name": "dr. oetker ekstrakt wanilia bourbon",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 30.0,
@@ -39924,7 +39716,7 @@
   },
   {
     "original_name": "Orbit White XXL Freshmint Bezcukrowa guma do żucia 50 g (36 sztuk)",
-    "generic_name": "orbit white xxl freshmint bezcukrowa guma do żucia ( )",
+    "generic_name": "orbit white freshmint bezcukrowa guma do żucia ( )",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 58.0,

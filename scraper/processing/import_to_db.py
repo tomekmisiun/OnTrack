@@ -63,22 +63,50 @@ def is_english_name(name: str) -> bool:
 
 
 # Kolaps rodzin produktów — wiele wariantów → jedna prosta nazwa
-# Format: (prefix_lub_regex, canonical_name)
 _FAMILY_RULES: list[tuple[re.Pattern, str]] = [
-    (re.compile(r"^makaron\b"),                          "makaron"),
-    (re.compile(r"^ryż\b"),                              "ryż"),
-    (re.compile(r"^płatki owsiane\b|^owsian"),           "płatki owsiane"),
-    (re.compile(r"^cebula\b(?! dymka)"),                 "cebula"),
-    (re.compile(r"^czosnek\b"),                          "czosnek"),
-    (re.compile(r"^pomidor\b(?! suszony)"),              "pomidor"),
-    (re.compile(r"^ziemniak"),                           "ziemniaki"),
-    (re.compile(r"^papryka\b(?! chili| ostra| cayenne)"), "papryka"),
-    (re.compile(r"^marchew\b|^marchewka\b"),             "marchew"),
-    (re.compile(r"^szpinak\b"),                          "szpinak"),
-    (re.compile(r"^jogurt\b(?! grecki)"),                "jogurt naturalny"),
-    (re.compile(r"^ser\b(?! feta| parmezan| cheddar| mozzarella| twaróg| kozi)"), "ser żółty"),
-    (re.compile(r"^fasola\b(?! czerwona| edamame)"),     "fasola biała"),
-    (re.compile(r"^kurczak\b(?! mielony)"),              "kurczak"),
+    # Makarony — wszystko to "makaron"
+    (re.compile(r"^makaron\b"),                "makaron"),
+    # Ryż
+    (re.compile(r"^ryż\b"),                    "ryż"),
+    # Płatki
+    (re.compile(r"^płatki owsiane|^owsian"),   "płatki owsiane"),
+    # Warzywa
+    (re.compile(r"^cebula\b(?! dymka)"),       "cebula"),
+    (re.compile(r"^czosnek\b"),                "czosnek"),
+    (re.compile(r"^pomidor\b(?! suszony)"),    "pomidor"),
+    (re.compile(r"^ziemniak"),                 "ziemniaki"),
+    (re.compile(r"^papryka\b(?! chili|ostra|cayenne|w proszku)"), "papryka"),
+    (re.compile(r"^marchew\b|^marchewka\b"),   "marchew"),
+    (re.compile(r"^szpinak\b"),                "szpinak"),
+    (re.compile(r"^ananas\b"),                 "ananas"),
+    (re.compile(r"^awokado\b"),                "awokado"),
+    (re.compile(r"^banan\b"),                  "banan"),
+    (re.compile(r"^jabłko\b|^jabłka\b"),       "jabłko"),
+    (re.compile(r"^dynia\b"),                  "dynia"),
+    (re.compile(r"^cukinia\b"),                "cukinia"),
+    (re.compile(r"^bakłażan\b"),               "bakłażan"),
+    # Nabiał
+    (re.compile(r"^jogurt\b(?! grecki)"),      "jogurt naturalny"),
+    (re.compile(r"^ser\b(?! feta|parmezan|cheddar|mozzarella|twaróg|kozi|ricotta)"), "ser żółty"),
+    (re.compile(r"^śmietana\b"),               "śmietana"),
+    (re.compile(r"^twaróg\b(?! kremowy)"),     "twaróg"),
+    # Mięso i drób
+    (re.compile(r"^kurczak\b(?! mielony)"),    "kurczak"),
+    (re.compile(r"^wieprzowina\b"),            "wieprzowina"),
+    (re.compile(r"^wołowina\b"),               "wołowina"),
+    # Rośliny strączkowe
+    (re.compile(r"^fasola\b(?! czerwona|edamame)"), "fasola biała"),
+    (re.compile(r"^soczewica\b"),              "soczewica"),
+    # Słodziki — każdy to jedna nazwa
+    (re.compile(r"^stewia\b|^stevia\b"),       "stewia"),
+    (re.compile(r"^erytrytol\b|^erytrol\b"),   "erytrytol"),
+    (re.compile(r"^ksylitol\b|^xylitol\b"),    "ksylitol"),
+    # Oleje — rozróżniamy typy (oliwa ≠ olej sezamowy)
+    (re.compile(r"^olej roślinny\b|^olej rzepakowy\b|^olej słonecznikowy\b"), "olej roślinny"),
+    # Buliony
+    (re.compile(r"^bulion drobiowy\b|^rosół\b(?! wołowy)"), "bulion drobiowy"),
+    (re.compile(r"^bulion wołowy\b"),          "bulion wołowy"),
+    (re.compile(r"^bulion warzywny\b"),        "bulion warzywny"),
 ]
 
 
@@ -103,8 +131,23 @@ def build_macro_map(macros: list, key: str) -> dict:
             "carbs":   m.get("carbs_g"),
         }
         result[m[key]] = val
-        result[dedup_key(m[key])] = val  # wersja bez akcentów jako fallback
+        result[dedup_key(m[key])] = val
     return result
+
+
+def fuzzy_macro(name: str, macro_map: dict) -> dict:
+    """Szuka makro po fuzzy match (rapidfuzz) jeśli nie ma dokładnego trafienia."""
+    try:
+        from rapidfuzz import process, fuzz
+    except ImportError:
+        return {}
+    best = process.extractOne(
+        name, macro_map.keys(),
+        scorer=fuzz.token_sort_ratio, score_cutoff=75
+    )
+    if best:
+        return macro_map[best[0]]
+    return {}
 
 
 def unit_to_app(unit: str | None) -> str:
@@ -160,6 +203,12 @@ def import_products(user_id: int, lang: str) -> dict[str, int]:
     macro_key = "name_en"               if lang == "en" else "name_pl"
 
     ingredients = load(db_file)
+    # Sortuj: produkty z price_per_100 najpierw (najtańsze), potem bez ceny
+    # Dzięki temu kolaps rodzin bierze najtańszy produkt, nie pierwszy
+    ingredients.sort(key=lambda x: (
+        x.get("price_per_100") is None,   # None idzie na koniec
+        x.get("price_per_100") or 9999,
+    ))
     macro_map   = build_macro_map(load("ingredients_macros.json"), macro_key)
 
     # Grupuj po generic_name (nazwa produktu sklepowego) — to jest właściwy klucz
@@ -203,11 +252,12 @@ def import_products(user_id: int, lang: str) -> dict[str, int]:
         unit          = unit_to_app(item.get("unit"))
         sold_by_wt    = bool(item.get("sold_by_weight", False))
 
-        # Makro: szukaj po generic_name, potem ingredient_name, potem bez akcentów
+        # Makro: szukaj po generic_name, ingredient_name, bez akcentów, potem fuzzy
         macro = (macro_map.get(prod_name)
               or macro_map.get(dedup_key(prod_name))
               or macro_map.get(ing_name)
               or macro_map.get(dedup_key(ing_name))
+              or fuzzy_macro(prod_name, macro_map)
               or {})
 
         prod = Product(

@@ -38,28 +38,30 @@ READY_TO_EAT_EN = [
 
 # PL keywords (Auchan / Biedronka) — kompletne dania gotowe do spożycia
 READY_TO_EAT_PL = [
-    "danie ",          # "Danie w stylu...", "Danie z kurczakiem..." (spacja — nie "danie" na końcu)
+    "danie ",
     "lunchbox",
-    "zapiekanka",      # zapiekanka z szynką itp. — gotowe danie
-    "pielmieni",       # pierogi ruskie odmiana
-    "sajgonk",         # mini sajgonki
+    "zapiekanka",
+    "pielmieni",
+    "sajgonk",
     "pad thai",
     "paella",
     "bigos",
-    "pierogi",         # gotowe pierogi (nie surowiec)
+    "pierogi",
     "naleśnik",
     "kopytka",
     "gołąbki",
     "gyros",
     "sushi",
     "wrap ",
-    "tortilla z",      # gotowa tortilla nadziewana
+    "tortilla z",
     "pizza",
-    "z kluseczkami",   # "Kurczak z kluseczkami FRoSTA"
+    "z kluseczkami",
     "po azjatycku",
     "słodko-kwaśny",
-    "curry z",         # "Curry z kurczakiem" (gotowe danie; nie "curry" jako przyprawa)
-    "pad thai",
+    "curry z",
+    "ready to eat",
+    "ready to cook",
+    "ready-to-eat",
 ]
 
 # Marki wyłącznie gotowych dań (PL)
@@ -234,6 +236,9 @@ def extract_package_pl(product: dict) -> dict:
         m = re.search(r"(\d+[.,]\d+)", ppu_raw)
         if m:
             per_100 = round(float(m.group(1).replace(",", ".")) / 10, 4)
+    elif unit == "pcs" and pkg_val and price:
+        # Sprzedawane na sztuki — price_per_100 = None (nie porównujemy per 100g)
+        per_100 = None
     elif pkg_val and price and unit != "pcs":
         per_100 = round(price / pkg_val * 100, 4)
 
@@ -353,14 +358,20 @@ _MARKETING_PL_CASED = [
     r"\bPremium\b", r"\bExtra\b", r"\bSuper\b",
     r"\bKlasyczn\w*\b", r"\bNaturalny\b", r"\bNaturalna\b", r"\bNaturalne\b",
     r"\bLight\b", r"\bMAP\b",
-    r"\bVital\b", r"\bFresh\b",   # marka ziół (Vital Fresh Bazylia)
-    r"\bXL\b",                    # rozmiar opakownia
+    r"\bVital\b", r"\bFresh\b",
+    r"\bXL\b", r"\bXXL\b",
+    r"\bReady\b", r"\bTo\b", r"\bEat\b",  # "Ready To Eat" angielskie
 ]
 
-# Substytucje przed normalizacją (diminutywy, błędy, synonimy)
+# Substytucje i kanonizacja (przed normalizacją, case-insensitive)
 _SUBSTITUTIONS_PL = [
-    (r"\bpomidork\w+\b",   "pomidor"),    # pomidorki → pomidor
-    (r"\bbatatat\w*\b",    ""),           # batatat → (usuń, zostaje "słodki ziemniak")
+    (r"\bpomidork\w+\b",            "pomidor"),
+    (r"\bbatatat\w*\b",             ""),
+    (r"\bstevia\b",                 "stewia"),   # EN spelling → PL
+    (r"\berytrol\b",                "erytrytol"),
+    (r"\bxylitol\b|\bksylitol\b",   "ksylitol"),
+    (r"\bquinoa\b",                 "komosa ryżowa"),
+    (r"\bedamame\b",                "edamame"),
 ]
 
 # Wzorce usuwające opis kulinarny i geograficzny (po lowercase)
@@ -370,30 +381,44 @@ _CULINARY_PATTERNS_PL = [
     r"\bz\s+kością\b",
     r"\bbez\s+skóry\b",
     r"\bbez\s+kości\b",
-    r"\brasy\b",              # "rasy Puławskiej" — po break zostaje samo "rasy"
-    r"\bze?\s+ściółki\b",     # "ze ściółki" — opis chowu, nie nazwa składnika
-    r"\bze?\s+sadu\b.*",      # "z sadu/sadów..." — origin description
-    r"\bz\s+sadów\b.*",       # "z sadów z regionu..." — usuń do końca
-    r"\bz\s+regionu\b.*",     # "z regionu..." — usuń do końca
+    r"\brasy\b",
+    r"\bze?\s+ściółki\b",
+    r"\bze?\s+sadu\b.*",
+    r"\bz\s+sadów\b.*",
+    r"\bz\s+regionu\b.*",
     r"\bpicante\b",
     r"\bextra\b",
-    r"\bwędzon\w*\b",         # wędzony/wędzona (przy mięsie)
+    r"\bwędzon\w*\b",
+    r"\bready\s+to\b.*",            # "ready to eat/cook..."
+    r"\bpochodzenia\s+\w+\b",       # "naturalnego pochodzenia"
+    r"\bz\s+inuliną\b",             # "z inuliną" — dodatek funkcjonalny
+    r"\bsłodzik\w*\b",              # "słodzik stołowy" → usuń "słodzik", zostaje "erytrytol"
+    r"\bstołow\w*\b",               # "stołowy" (słodzik stołowy)
+    r"\bkaliber\s*\d+\b",           # "kaliber 12" — rozmiar owocu
+    r"\bśredni\b(?!\s+tłust)",      # "średni" jako rozmiar, nie tłustość
+    r"\bw\s+kryształkach\b",        # "w kryształkach" — forma
+    r"\bkrystaliczn\w*\b",
+    r"\bgranulat\w*\b",             # "granulowany"
+    r"\bsypk\w*\b",                 # "sypki"
 ]
 
 # Kwalifikatory odmianowe/opisowe warzyw i owoców (po lowercase)
 _PRODUCE_QUALIFIERS_PL = [
-    r"\bmalinow\w*\b",        # malinowy (odmiana pomidora)
-    r"\bcherry\b",            # pomidor cherry
-    r"\bdaktylowy\b",         # pomidor daktylowy
-    r"\bgałązk\w*\b",         # na gałązce
-    r"\bpęczek\b",            # rzodkiewka pęczek
-    r"\bsałatkow\w*\b",       # sałatkowe (ziemniaki)
-    r"\bpolsk\w*\b",          # polskie (origin)
+    r"\bmalinow\w*\b",
+    r"\bcherry\b",
+    r"\bdaktylowy\b",
+    r"\bgałązk\w*\b",
+    r"\bpęczek\b",
+    r"\bsałatkow\w*\b",
+    r"\bpolsk\w*\b",
     r"\bkorzeń\b", r"\bkorzeni\b",
-    r"\bbiał\w*\b",           # biała (odmiana — pietruszka biała)
-    r"\bpiżmow\w*\b",         # dynia piżmowa → dynia
-    r"\bpapryczkow\w*\b",     # pomidorki papryczkowe → pomidor
-    r"\bszt\.\b",             # pozostałość po "1 szt."
+    r"\bpiżmow\w*\b",
+    r"\bpapryczkow\w*\b",
+    r"\bszt\.\b",
+    r"\blub\s+\w+\b",              # "lub X" (alternatywa)
+    r"\bśredni\b",                 # rozmiar owocu
+    r"\bdrobny\b", r"\bdrobne\b",
+    r"\bwielk\w*\b",               # "wielkości"
 ]
 
 _REMOVE_WORDS_PL = [
@@ -403,11 +428,16 @@ _REMOVE_WORDS_PL = [
     r"\bchud\w*\b",
     r"\bwiejsk\w*\b",
     r"\bnaturalnie\b",
+    r"\bnaturalny\b", r"\bnaturalna\b", r"\bnaturalne\b",  # "naturalny" gdy zbędny
     r"\bśwież\w*\b",
+    r"\bpasteryzowany\w*\b",
+    r"\bhomogenizowany\w*\b",
+    r"\bwzbogacon\w*\b",           # "wzbogacony w..."
+    r"\bkonserwowy\b",
 ]
 
 # Trailing prepositions/connectors
-_TRAILING_PL = re.compile(r"\s+\b(z|ze|i|oraz|do|na|w|od|po|przy|dla)\s*$", re.I)
+_TRAILING_PL = re.compile(r"\s+\b(z|ze|i|oraz|do|na|w|od|po|przy|dla|lub)\s*$", re.I)
 
 # ── Meat canonicalization (PL) ────────────────────────────────────────────────
 
