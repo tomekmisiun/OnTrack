@@ -1002,20 +1002,20 @@ export default function Export({ onGoToTab }) {
                           <div key={ds} style={{
                             background: isToday ? '#162626' : '#1f2937',
                             border: `1px solid ${isToday ? '#0d9488' : '#374151'}`,
-                            borderRadius:6, padding:'4px 3px', minHeight:54,
+                            borderRadius:6, padding:'4px 3px', minHeight:64,
                             opacity: inRange ? 1 : 0.3,
                           }}>
-                            <div style={{ textAlign:'center', fontSize:10, fontWeight: isToday?700:500, color: isToday?'#2dd4bf':'#94a3b8', marginBottom:2 }}>
+                            <div style={{ textAlign:'center', fontSize:11, fontWeight: isToday?700:500, color: isToday?'#2dd4bf':'#94a3b8', marginBottom:2 }}>
                               {day.getDate()}
                             </div>
                             {meals.length === 0
-                              ? <div style={{ textAlign:'center', fontSize:9, color:'#374151', marginTop:4 }}>—</div>
+                              ? <div style={{ textAlign:'center', fontSize:10, color:'#374151', marginTop:4 }}>—</div>
                               : meals.map(m => {
                                   const col = SLOT_COLORS[(m.position-1)%5];
                                   return (
                                     <div key={m.id} style={{
                                       background:`${col}22`, borderLeft:`2px solid ${col}`, borderRadius:2,
-                                      padding:'1px 3px', marginBottom:2, fontSize:8, color:'#e2e8f0',
+                                      padding:'2px 4px', marginBottom:2, fontSize:11, color:'#e2e8f0',
                                       overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap',
                                     }} title={m.recipe?.name}>
                                       {m.recipe?.name || ''}
