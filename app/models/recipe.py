@@ -80,15 +80,29 @@ class Recipe(db.Model):
             carbs   += (p.carbs   or 0) * factor
         return round(kcal), round(protein, 1), round(fat, 1), round(carbs, 1)
 
+    def _quick_cost(self) -> float:
+        """Koszt bez pełnego to_dict() — używane w liście przepisów."""
+        total = 0.0
+        for ing in self.ingredients:
+            p = ing.product
+            if not p or not p.price:
+                continue
+            unit = p.unit or "g"
+            if unit == "szt":
+                total += ing.weight * p.price
+            else:
+                total += (ing.weight / 100) * p.price
+        return round(total, 2)
+
     def to_dict_summary(self):
-        """Tylko nagłówek przepisu — bez składników. Używany w liście."""
+        """Nagłówek przepisu z kosztem — bez pełnych danych składników."""
         return {
             'id': self.id,
             'name': self.name,
             'notes': self.notes,
             'is_favorite': bool(self.is_favorite),
             'ingredients': [],
-            'total_cost': 0,
+            'total_cost': self._quick_cost(),
             'total_kcal': 0,
             'total_protein': 0,
             'total_fat': 0,
