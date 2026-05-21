@@ -1,4 +1,6 @@
 // Każdy krok może mieć pole `gotoTab` — App.js przełączy zakładkę przed wyświetleniem
+const CLOSE_AS_SKIP = { closeButtonAction: 'skip' };
+
 export const TOUR_STEPS = [
   {
     target: '.sidebar-logo',
@@ -6,18 +8,21 @@ export const TOUR_STEPS = [
     content: 'Ten krótki samouczek pokaże Ci jak korzystać z aplikacji. Możesz go pominąć lub wrócić do niego z ustawień konta.',
     placement: 'right',
     disableBeacon: true,
+    ...CLOSE_AS_SKIP,
   },
   {
     target: '.sidebar-profile',
     title: 'Profile',
     content: 'Tu wybierasz aktywny profil. Możesz dodać osoby z domowników, każdy ma swój plan posiłków, ale mogą dzielić te same produkty i przepisy.',
     placement: 'right',
+    ...CLOSE_AS_SKIP,
   },
   {
     target: '[data-tour="tab-macro"]',
     title: 'Kalkulator Makro',
     content: 'Wpisz swoje dane (wzrost, waga, wiek, aktywność) aby obliczyć dzienne zapotrzebowanie kaloryczne i makroskładniki. Wyniki zapisują się do profilu i możesz je wyeksportować jako Kartę Makro.',
     placement: 'right',
+    ...CLOSE_AS_SKIP,
     gotoTab: 'macro',
   },
   {
@@ -25,6 +30,7 @@ export const TOUR_STEPS = [
     title: 'Planer posiłków',
     content: 'Główny widok, kalendarz tygodniowy. Przeciągnij przepis z listy po prawej na wybrany dzień, aby zaplanować posiłek.',
     placement: 'right',
+    ...CLOSE_AS_SKIP,
     gotoTab: 'calendar',
   },
   {
@@ -32,6 +38,7 @@ export const TOUR_STEPS = [
     title: 'Przepisy',
     content: 'Lista Twoich przepisów z kosztami i makro. Kliknij przepis aby rozwinąć składniki, kliknięcie w nazwę, ilość lub makro otwiera edycję.',
     placement: 'right',
+    ...CLOSE_AS_SKIP,
     gotoTab: 'recipes',
   },
   {
@@ -39,6 +46,7 @@ export const TOUR_STEPS = [
     title: 'Produkty',
     content: 'Baza produktów z cenami i wartościami odżywczymi. Kliknij dowolny produkt na liście aby edytować jego dane - nazwę, cenę, gramaturę czy makro.',
     placement: 'right',
+    ...CLOSE_AS_SKIP,
     gotoTab: 'products',
   },
   {
@@ -46,6 +54,7 @@ export const TOUR_STEPS = [
     title: 'Wydatki',
     content: 'Podsumowanie kosztów jedzenia z zaplanowanych posiłków i wydatków stałych. Zaznacz kategorie które chcesz śledzić (czynsz, prąd, gaz...) i uzupełnij je raz, aplikacja będzie automatycznie wyliczać ich udział w każdym okresie.',
     placement: 'right',
+    ...CLOSE_AS_SKIP,
     gotoTab: 'summary',
   },
   {
@@ -53,6 +62,7 @@ export const TOUR_STEPS = [
     title: 'Eksport',
     content: 'Generuj gotowe dokumenty do wydruku: podsumowanie wydatków, kartę makro, kalendarz posiłków, składniki przepisu lub listę zakupów z zaznaczonych dni.',
     placement: 'right',
+    ...CLOSE_AS_SKIP,
     gotoTab: 'export',
   },
   {
@@ -60,6 +70,7 @@ export const TOUR_STEPS = [
     title: 'Konto i ustawienia',
     content: 'Z poziomu ustawień konta możesz wrócić do tego samouczka w dowolnym momencie. Powodzenia!',
     placement: 'right',
+    ...CLOSE_AS_SKIP,
   },
 ];
 
@@ -124,5 +135,12 @@ export const TOUR_STYLES = {
   },
   buttonClose: {
     color: '#6b7280',
+  },
+  beaconInner: {
+    backgroundColor: '#0d9488',
+  },
+  beaconOuter: {
+    borderColor: '#0d9488',
+    backgroundColor: 'rgba(13,148,136,0.2)',
   },
 };

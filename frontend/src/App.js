@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Joyride, STATUS, EVENTS } from 'react-joyride';
+import { Joyride, STATUS, EVENTS, ACTIONS } from 'react-joyride';
 import Products from './components/Products';
 import Recipes from './components/Recipes';
 import Calendar from './components/Calendar';
@@ -65,8 +65,14 @@ function AppInner({ onStartTour }) {
     <div className="app">
       <aside className="app-sidebar">
         <div className="sidebar-logo">
-          <Icon icon="heroicons:sparkles" className="sidebar-logo-icon" />
-          <span className="sidebar-logo-text">Meal Planner</span>
+          <svg className="sidebar-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="9.5"/>
+            <path d="M8.5 15.5 L11.8 11.8 L15.5 8.5 L12.2 12.2 Z" fill="currentColor" stroke="none"/>
+          </svg>
+          <div className="sidebar-logo-text">
+            <span className="sidebar-logo-name">ONTRACK</span>
+            <span className="sidebar-logo-sub">BE IN CONTROL</span>
+          </div>
         </div>
 
         <div className="sidebar-profile">
@@ -123,22 +129,25 @@ function AppWithTour() {
 
   useEffect(() => {
     if (!localStorage.getItem(TOUR_KEY)) {
-      const t = setTimeout(() => setTourRun(true), 800);
+      const t = setTimeout(() => {
+        localStorage.setItem(TOUR_KEY, '1');
+        setTourRun(true);
+      }, 800);
       return () => clearTimeout(t);
     }
   }, []);
 
   const handleTourCallback = useCallback((data) => {
-    const { status, type, index } = data;
+    const { status, type, action, index } = data;
+    if (status === STATUS.FINISHED || status === STATUS.SKIPPED || action === ACTIONS.CLOSE) {
+      setTourRun(false);
+      return;
+    }
     if (type === EVENTS.STEP_BEFORE) {
       const step = TOUR_STEPS[index];
       if (step?.gotoTab) {
         window.dispatchEvent(new CustomEvent('tour-goto-tab', { detail: { tab: step.gotoTab } }));
       }
-    }
-    if (status === STATUS.FINISHED || status === STATUS.SKIPPED) {
-      localStorage.setItem(TOUR_KEY, '1');
-      setTourRun(false);
     }
   }, []);
 

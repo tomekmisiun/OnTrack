@@ -23,6 +23,7 @@ const T = {
     subtitle_login: 'Zaloguj się do swojego konta',
     subtitle_register: 'Utwórz nowe konto',
     google_btn: 'Kontynuuj przez Google',
+    privacy_notice: 'Zakładając konto akceptujesz Politykę Prywatności Ontrack.',
     or: 'lub',
     password_lbl: 'HASŁO',
     password_ph: 'Min. 8 znaków',
@@ -264,6 +265,7 @@ const T = {
     subtitle_login: 'Sign in to your account',
     subtitle_register: 'Create a new account',
     google_btn: 'Continue with Google',
+    privacy_notice: 'By creating an account you agree to the Ontrack Privacy Policy.',
     or: 'or',
     password_lbl: 'PASSWORD',
     password_ph: 'Min. 8 characters',
@@ -488,7 +490,7 @@ const T = {
 const LanguageContext = createContext(null);
 
 export function LanguageProvider({ children }) {
-  const [lang, setLang] = useState(() => localStorage.getItem('lang') || 'pl');
+  const [lang, setLang] = useState(() => localStorage.getItem('lang') || 'en');
 
   const switchLang = (l) => {
     setLang(l);

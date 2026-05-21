@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import PrivacyPolicy from './PrivacyPolicy';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
 
 export default function Login() {
   const { t, lang: uiLang, switchLang } = useLanguage();
   const [error, setError] = useState('');
+  const [showPrivacy, setShowPrivacy] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -27,8 +29,13 @@ export default function Login() {
         width: '100%', maxWidth: 400, boxShadow: '0 20px 60px rgba(0,0,0,0.2)',
       }}>
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <div style={{ fontSize: 36, marginBottom: 8 }}>🥗</div>
-          <h1 style={{ fontSize: 22, color: '#f1f5f9', marginBottom: 4 }}>Meal Planner</h1>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+            style={{ width: 56, height: 56, margin: '0 auto 12px' }}>
+            <circle cx="12" cy="12" r="9.5"/>
+            <path d="M8.5 15.5 L11.8 11.8 L15.5 8.5 L12.2 12.2 Z" fill="#2dd4bf" stroke="none"/>
+          </svg>
+          <h1 style={{ fontSize: 28, fontWeight: 800, color: '#2dd4bf', letterSpacing: 4, margin: '0 0 4px' }}>ONTRACK</h1>
+          <p style={{ fontSize: 9, fontWeight: 600, color: '#6b7280', letterSpacing: 3, marginBottom: 12 }}>BE IN CONTROL</p>
           <p style={{ fontSize: 13, color: '#6b7280' }}>{t('subtitle_login')}</p>
         </div>
 
@@ -54,9 +61,21 @@ export default function Login() {
           {t('google_btn')}
         </button>
 
+        <p style={{ fontSize: 11, color: '#9ca3af', textAlign: 'center', marginTop: 16, lineHeight: 1.6 }}>
+          {uiLang === 'pl' ? 'Zakładając konto akceptujesz ' : 'By creating an account you agree to the '}
+          <button
+            onClick={() => setShowPrivacy(true)}
+            style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', color: '#2dd4bf', fontSize: 11, textDecoration: 'underline' }}
+          >
+            {uiLang === 'pl' ? 'Politykę Prywatności' : 'Privacy Policy'}
+          </button>
+          {uiLang === 'pl' ? ' Ontrack.' : ' of Ontrack.'}
+        </p>
+        {showPrivacy && <PrivacyPolicy lang={uiLang} onClose={() => setShowPrivacy(false)} />}
+
         <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 28 }}>
-          <button onClick={() => switchLang('pl')} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 18, opacity: uiLang === 'pl' ? 1 : 0.4 }}>🇵🇱</button>
           <button onClick={() => switchLang('en')} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 18, opacity: uiLang === 'en' ? 1 : 0.4 }}>🇬🇧</button>
+          <button onClick={() => switchLang('pl')} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 18, opacity: uiLang === 'pl' ? 1 : 0.4 }}>🇵🇱</button>
         </div>
       </div>
     </div>

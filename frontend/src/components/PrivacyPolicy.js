@@ -1,0 +1,200 @@
+import React from 'react';
+
+const CONTENT = {
+  en: {
+    title: 'Privacy Policy',
+    updated: 'Last updated: May 2026',
+    sections: [
+      {
+        heading: '1. Who we are',
+        text: 'Ontrack ("we", "our", "the app") is a personal meal planning and budgeting application. We are committed to protecting your personal data and being transparent about how we use it.',
+      },
+      {
+        heading: '2. Data we collect',
+        text: 'When you sign in with Google, we receive and store the following information from your Google account:',
+        list: [
+          'Your name',
+          'Your email address',
+          'Your profile picture URL',
+        ],
+        text2: 'We do not collect passwords, payment information, or any data beyond what is listed above.',
+      },
+      {
+        heading: '3. How we use your data',
+        text: 'We use your data solely to:',
+        list: [
+          'Create and maintain your Ontrack account',
+          'Display your name and profile picture within the app',
+          'Associate your meal plans, recipes, and products with your account',
+        ],
+        text2: 'We do not use your data for advertising, profiling, or any automated decision-making.',
+      },
+      {
+        heading: '4. Data sharing',
+        text: 'We do not sell, rent, or share your personal data with any third parties. Your data is stored on our servers and is only accessible to you.',
+      },
+      {
+        heading: '5. Data retention',
+        text: 'Your data is stored for as long as your account is active. You can delete your account at any time from the account settings — this permanently deletes all your personal data, meal plans, recipes and products.',
+      },
+      {
+        heading: '6. Cookies',
+        text: 'We use a single authentication token stored in your browser\'s local storage to keep you logged in. We do not use tracking or advertising cookies.',
+      },
+      {
+        heading: '7. Your rights',
+        text: 'You have the right to:',
+        list: [
+          'Access your personal data',
+          'Correct inaccurate data',
+          'Delete your account and all associated data',
+          'Object to processing of your data',
+        ],
+        text2: 'To exercise any of these rights, please contact us.',
+      },
+      {
+        heading: '8. Contact',
+        text: 'If you have any questions about this Privacy Policy or how we handle your data, please contact us at: hello@ontrack.app',
+      },
+    ],
+  },
+  pl: {
+    title: 'Polityka Prywatności',
+    updated: 'Ostatnia aktualizacja: maj 2026',
+    sections: [
+      {
+        heading: '1. Kim jesteśmy',
+        text: 'Ontrack („my", „aplikacja") to aplikacja do planowania posiłków i zarządzania budżetem. Zobowiązujemy się do ochrony Twoich danych osobowych i przejrzystości w zakresie ich używania.',
+      },
+      {
+        heading: '2. Jakie dane zbieramy',
+        text: 'Podczas logowania przez Google otrzymujemy i przechowujemy następujące informacje z Twojego konta Google:',
+        list: [
+          'Twoje imię i nazwisko',
+          'Twój adres e-mail',
+          'URL Twojego zdjęcia profilowego',
+        ],
+        text2: 'Nie zbieramy haseł, danych płatniczych ani żadnych innych danych poza wymienionymi powyżej.',
+      },
+      {
+        heading: '3. Jak używamy Twoich danych',
+        text: 'Twoje dane wykorzystujemy wyłącznie w celu:',
+        list: [
+          'Utworzenia i utrzymania Twojego konta Ontrack',
+          'Wyświetlania Twojego imienia i zdjęcia profilowego w aplikacji',
+          'Powiązania Twoich planów posiłków, przepisów i produktów z kontem',
+        ],
+        text2: 'Nie wykorzystujemy Twoich danych do celów reklamowych, profilowania ani żadnego zautomatyzowanego podejmowania decyzji.',
+      },
+      {
+        heading: '4. Udostępnianie danych',
+        text: 'Nie sprzedajemy, nie wynajmujemy ani nie udostępniamy Twoich danych osobowych żadnym podmiotom trzecim. Twoje dane są przechowywane na naszych serwerach i dostępne wyłącznie dla Ciebie.',
+      },
+      {
+        heading: '5. Czas przechowywania danych',
+        text: 'Twoje dane są przechowywane przez cały czas aktywności konta. Możesz usunąć swoje konto w dowolnym momencie z poziomu ustawień — spowoduje to trwałe usunięcie wszystkich Twoich danych osobowych, planów posiłków, przepisów i produktów.',
+      },
+      {
+        heading: '6. Pliki cookie',
+        text: 'Używamy jednego tokenu uwierzytelniającego zapisywanego w lokalnym magazynie Twojej przeglądarki, który utrzymuje Cię zalogowanym. Nie używamy plików cookie śledzących ani reklamowych.',
+      },
+      {
+        heading: '7. Twoje prawa',
+        text: 'Masz prawo do:',
+        list: [
+          'Dostępu do swoich danych osobowych',
+          'Poprawiania nieprawidłowych danych',
+          'Usunięcia konta i wszystkich powiązanych danych',
+          'Sprzeciwu wobec przetwarzania Twoich danych',
+        ],
+        text2: 'Aby skorzystać z któregokolwiek z tych praw, skontaktuj się z nami.',
+      },
+      {
+        heading: '8. Kontakt',
+        text: 'Jeśli masz pytania dotyczące niniejszej Polityki Prywatności lub sposobu przetwarzania Twoich danych, skontaktuj się z nami: hello@ontrack.app',
+      },
+    ],
+  },
+};
+
+export default function PrivacyPolicy({ lang = 'en', onClose }) {
+  const c = CONTENT[lang] || CONTENT.en;
+
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 9999,
+        background: 'rgba(0,0,0,0.7)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        padding: '20px',
+      }}
+    >
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{
+          background: '#1f2937',
+          borderRadius: 16,
+          width: '100%',
+          maxWidth: 640,
+          maxHeight: '85vh',
+          display: 'flex',
+          flexDirection: 'column',
+          boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
+        }}
+      >
+        {/* Header */}
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          padding: '20px 24px 16px',
+          borderBottom: '1px solid #374151',
+          flexShrink: 0,
+        }}>
+          <div>
+            <h2 style={{ margin: 0, fontSize: 18, fontWeight: 700, color: '#f1f5f9' }}>
+              {c.title}
+            </h2>
+            <p style={{ margin: '2px 0 0', fontSize: 11, color: '#6b7280' }}>{c.updated}</p>
+          </div>
+          <button
+            onClick={onClose}
+            style={{
+              background: 'none', border: 'none', cursor: 'pointer',
+              color: '#6b7280', fontSize: 22, lineHeight: 1, padding: '4px 8px',
+            }}
+          >
+            ×
+          </button>
+        </div>
+
+        {/* Content */}
+        <div style={{ overflowY: 'auto', padding: '20px 24px 24px' }}>
+          {c.sections.map((s, i) => (
+            <div key={i} style={{ marginBottom: 20 }}>
+              <h3 style={{ margin: '0 0 6px', fontSize: 13, fontWeight: 700, color: '#2dd4bf' }}>
+                {s.heading}
+              </h3>
+              <p style={{ margin: '0 0 6px', fontSize: 13, color: '#d1d5db', lineHeight: 1.6 }}>
+                {s.text}
+              </p>
+              {s.list && (
+                <ul style={{ margin: '4px 0 6px 18px', padding: 0 }}>
+                  {s.list.map((item, j) => (
+                    <li key={j} style={{ fontSize: 13, color: '#d1d5db', lineHeight: 1.6, marginBottom: 2 }}>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {s.text2 && (
+                <p style={{ margin: 0, fontSize: 13, color: '#d1d5db', lineHeight: 1.6 }}>
+                  {s.text2}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
