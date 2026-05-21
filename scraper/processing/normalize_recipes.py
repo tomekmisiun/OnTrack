@@ -46,6 +46,20 @@ to how shop products are normalized — symmetry is critical for matching later.
 
 Return ONLY a valid JSON array, no markdown, no explanation.
 
+═══ SERVING SIZE NORMALIZATION (CRITICAL — do this FIRST) ═══
+
+The input JSON includes "servings": N — the number of portions the recipe makes.
+You MUST divide ALL ingredient amounts by this number to get per-person (1 serving) amounts.
+
+If "servings" is null or missing, infer from countable whole-food items:
+  - "4 large eggs" → 4 servings | "5 medium wraps" → 5 | "4 chicken breasts" → 4
+  - "8 slices bacon" → 4 servings (2 per person) | "4 cups vegetable stock" → 4
+  - Default to 4 if unclear
+
+Example (servings=4): ingredient "4 cups vegetable stock" → 1 cup → 236 ml per serving.
+
+Include "servings": N in the output (use the provided value or your inferred value).
+
 For each recipe return:
 {
   "name_en": "Generic English name, title case, no brand",
@@ -53,6 +67,7 @@ For each recipe return:
   "url": "unchanged",
   "image_url": "unchanged",
   "category": "unchanged",
+  "servings": number,
   "ingredients_en": [{"name": string, "amount": number|null, "unit": string|null}],
   "ingredients_pl": [{"name": string, "amount": number|null, "unit": string|null}]
 }

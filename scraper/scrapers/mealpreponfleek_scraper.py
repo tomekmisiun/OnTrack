@@ -147,13 +147,26 @@ def get_category_cards(base_url: str, category: str) -> list[dict]:
 
 # ── Pobieranie składników z przepisu ─────────────────────────────────────────
 
-def scrape_ingredients(url: str) -> list[str]:
+def _parse_servings(yield_val) -> int | None:
+    """Parsuje recipeYield → liczba porcji."""
+    if yield_val is None:
+        return None
+    if isinstance(yield_val, (int, float)):
+        return int(yield_val)
+    if isinstance(yield_val, list):
+        yield_val = yield_val[0] if yield_val else ""
+    m = re.search(r'\d+', str(yield_val))
+    return int(m.group()) if m else None
+
+
+def scrape_recipe(url: str) -> dict:
     """
-    Pobiera stronę przepisu i wyciąga składniki z JSON-LD (schema.org Recipe).
+    Pobiera stronę przepisu i wyciąga składniki + liczbę porcji z JSON-LD.
+    Zwraca {"ingredients": [...], "servings": int|None}.
     """
     html = fetch(url)
     if not html:
-        return []
+        return {"ingredients": [], "servings": None}
 
     jsonld_blocks = re.findall(
         r'<script[^>]*type="application/ld\+json"[^>]*>(.*?)</script>',
@@ -166,14 +179,16 @@ def scrape_ingredients(url: str) -> list[str]:
         except Exception:
             continue
 
-        # JSON-LD może być listą lub obiektem z @graph
         items = data if isinstance(data, list) else data.get("@graph", [data])
         for item in items:
             if item.get("@type") == "Recipe":
-                ings = item.get("recipeIngredient", [])
-                return [i.strip() for i in ings if i.strip()]
+                ings     = [i.strip() for i in item.get("recipeIngredient", []) if i.strip()]
+                servings = _parse_servings(
+                    item.get("recipeYield") or item.get("recipeServings")
+                )
+                return {"ingredients": ings, "servings": servings}
 
-    return []
+    return {"ingredients": [], "servings": None}
 
 
 # ── Zapis / odczyt ────────────────────────────────────────────────────────────
@@ -301,13 +316,16 @@ def main() -> None:
         name = card["name"]
         cat  = card["category"]
 
-        if url in existing and existing[url].get("ingredients"):
+        # Re-scrape jeśli brak servings (nowe pole)
+        if url in existing and existing[url].get("ingredients") and existing[url].get("servings") is not None:
             skip_count += 1
             print(f"[{i}/{len(all_cards)}] [{cat}] Pominięto: {name}")
             continue
 
         print(f"[{i}/{len(all_cards)}] [{cat}] {name}", end=" ", flush=True)
-        ingredients = scrape_ingredients(url)
+        result = scrape_recipe(url)
+        ingredients = result["ingredients"]
+        servings    = result["servings"]
 
         if ingredients:
             existing[url] = {
@@ -316,9 +334,11 @@ def main() -> None:
                 "image_url":   card["image_url"],
                 "category":    cat,
                 "ingredients": ingredients,
+                "servings":    servings,
             }
             new_count += 1
-            print(f"→ {len(ingredients)} skł.")
+            srv = f" ({servings} porcji)" if servings else ""
+            print(f"→ {len(ingredients)} skł.{srv}")
         else:
             fail_count += 1
             print("→ brak składników, pomijam")
