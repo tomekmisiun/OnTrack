@@ -21,9 +21,10 @@ DATA = HERE.parent / "data"
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s", datefmt="%H:%M:%S")
 log = logging.getLogger(__name__)
 
-# ── 2a. Filtr gotowych dań (ALDI) ─────────────────────────────────────────────
+# ── 2a. Filtr gotowych dań (ALDI + Auchan + Biedronka) ───────────────────────
 
-READY_TO_EAT = [
+# EN keywords (ALDI)
+READY_TO_EAT_EN = [
     "kabanos", "sandwich", "toastie", "soup", "goujon", "nugget", "kiev",
     "fishcake", "fish cake", "croqueta", "croquette", "koftas", "spring roll",
     "scotch egg", "munch box", "pudding", "cheesecake", "ice cream",
@@ -35,7 +36,36 @@ READY_TO_EAT = [
     "spaghetti & meatballs",
 ]
 
-WHITELIST_PATTERNS = [
+# PL keywords (Auchan / Biedronka) — kompletne dania gotowe do spożycia
+READY_TO_EAT_PL = [
+    "danie ",          # "Danie w stylu...", "Danie z kurczakiem..." (spacja — nie "danie" na końcu)
+    "lunchbox",
+    "zapiekanka",      # zapiekanka z szynką itp. — gotowe danie
+    "pielmieni",       # pierogi ruskie odmiana
+    "sajgonk",         # mini sajgonki
+    "pad thai",
+    "paella",
+    "bigos",
+    "pierogi",         # gotowe pierogi (nie surowiec)
+    "naleśnik",
+    "kopytka",
+    "gołąbki",
+    "gyros",
+    "sushi",
+    "wrap ",
+    "tortilla z",      # gotowa tortilla nadziewana
+    "pizza",
+    "z kluseczkami",   # "Kurczak z kluseczkami FRoSTA"
+    "po azjatycku",
+    "słodko-kwaśny",
+    "curry z",         # "Curry z kurczakiem" (gotowe danie; nie "curry" jako przyprawa)
+    "pad thai",
+]
+
+# Marki wyłącznie gotowych dań (PL)
+READY_BRANDS_PL = ["froста", "frosta", "proste historie", "bistro ", "family fish"]
+
+WHITELIST_PATTERNS_EN = [
     r"smoked salmon",
     r"mozzarella.*slic",
     r"cheddar.*slic",
@@ -45,17 +75,47 @@ WHITELIST_PATTERNS = [
     r"bacon\s*&\s*sausage",
 ]
 
+# EN składniki które NIE są gotowymi daniami mimo podejrzanych słów
+WHITELIST_PATTERNS_PL = [
+    r"^wątroba\b",       # wątroba = liver (składnik)
+    r"^szynka\b",        # szynka = ham (składnik)
+    r"curry\s*\d",       # "curry 50g" = przyprawa
+    r"\bproszek curry\b",
+    r"\bpasta curry\b",
+]
 
-def is_whitelisted(name: str) -> bool:
+
+def is_whitelisted_en(name: str) -> bool:
     n = name.lower()
-    return any(re.search(p, n) for p in WHITELIST_PATTERNS)
+    return any(re.search(p, n) for p in WHITELIST_PATTERNS_EN)
 
 
-def is_ready_to_eat(name: str, standard_category: str) -> bool:
+def is_whitelisted_pl(name: str) -> bool:
+    n = name.lower()
+    return any(re.search(p, n) for p in WHITELIST_PATTERNS_PL)
+
+
+def is_ready_to_eat_en(name: str, standard_category: str) -> bool:
     n = name.lower()
     if standard_category == "Przekąski i produkty gotowe":
         return True
-    return any(kw in n for kw in READY_TO_EAT)
+    return any(kw in n for kw in READY_TO_EAT_EN)
+
+
+def is_ready_to_eat_pl(name: str, standard_category: str) -> bool:
+    n = name.lower()
+    if standard_category == "Przekąski i produkty gotowe":
+        return True
+    if any(kw in n for kw in READY_TO_EAT_PL):
+        return True
+    if any(brand in n for brand in READY_BRANDS_PL):
+        return True
+    return False
+
+
+# Backwards compat alias
+def is_whitelisted(name):   return is_whitelisted_en(name)
+def is_ready_to_eat(name, cat): return is_ready_to_eat_en(name, cat)
 
 
 # ── Liquid detection ──────────────────────────────────────────────────────────
@@ -523,10 +583,12 @@ def deduplicate(products: list[dict]) -> list[dict]:
 
 def build_aldi_records(products: list[dict]) -> list[dict]:
     records = []
+    filtered = 0
     for p in products:
-        if is_whitelisted(p["name"]):
+        if is_whitelisted_en(p["name"]):
             pass  # keep
-        elif is_ready_to_eat(p["name"], p.get("standard_category", "")):
+        elif is_ready_to_eat_en(p["name"], p.get("standard_category", "")):
+            filtered += 1
             continue
 
         pkg = extract_package_aldi(p)
@@ -548,12 +610,21 @@ def build_aldi_records(products: list[dict]) -> list[dict]:
                 "price_per_100":     pkg["price_per_100"],
                 "standard_category": p.get("standard_category"),
             })
+    if filtered:
+        log.info(f"ALDI: odfiltrowano {filtered} gotowych dań")
     return records
 
 
 def build_pl_records(products: list[dict], shop: str) -> list[dict]:
     records = []
+    filtered = 0
     for p in products:
+        if is_whitelisted_pl(p["name"]):
+            pass  # keep even if looks suspicious
+        elif is_ready_to_eat_pl(p["name"], p.get("standard_category", "")):
+            filtered += 1
+            continue
+
         pkg     = extract_package_pl(p)
         generic = normalize_name_pl(p.get("name", ""))
         if not generic:
@@ -571,6 +642,8 @@ def build_pl_records(products: list[dict], shop: str) -> list[dict]:
             "price_per_100":     pkg["price_per_100"],
             "standard_category": p.get("standard_category"),
         })
+    if filtered:
+        log.info(f"{shop}: odfiltrowano {filtered} gotowych dań")
     return records
 
 
