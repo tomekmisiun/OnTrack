@@ -91,7 +91,8 @@ _FAMILY_RULES: list[tuple[re.Pattern, str]] = [
     (re.compile(r"^malina|^maliny"),           "maliny"),
     (re.compile(r"^borówka|^borówki"),         "borówki"),
     (re.compile(r"^winogrona|^winogrono"),     "winogrona"),
-    # Nabiał
+    # Nabiał — upraszczamy
+    (re.compile(r"^mleko\b(?! kokosowe| migdałowe| owsiane)"), "mleko"),
     (re.compile(r"^jogurt\b(?! grecki)"),      "jogurt naturalny"),
     (re.compile(r"^ser\b(?! feta|parmezan|cheddar|mozzarella|twaróg|kozi|ricotta)"), "ser żółty"),
     (re.compile(r"^śmietana\b"),               "śmietana"),
@@ -107,8 +108,12 @@ _FAMILY_RULES: list[tuple[re.Pattern, str]] = [
     (re.compile(r"^stewia\b|^stevia\b"),       "stewia"),
     (re.compile(r"^erytrytol\b|^erytrol\b"),   "erytrytol"),
     (re.compile(r"^ksylitol\b|^xylitol\b"),    "ksylitol"),
-    # Oleje — rozróżniamy typy (oliwa ≠ olej sezamowy)
-    (re.compile(r"^olej roślinny\b|^olej rzepakowy\b|^olej słonecznikowy\b"), "olej roślinny"),
+    # Oleje — upraszczamy DO podstawowej nazwy
+    (re.compile(r"^olej z awokado"),               "olej z awokado"),
+    (re.compile(r"^olej sezamowy"),                "olej sezamowy"),
+    (re.compile(r"^olej kokosowy"),                "olej kokosowy"),
+    (re.compile(r"^oliwa"),                        "oliwa z oliwek"),
+    (re.compile(r"^olej roślinny|^olej rzepakowy|^olej słonecznikowy"), "olej roślinny"),
     # Buliony
     (re.compile(r"^bulion drobiowy\b|^rosół\b(?! wołowy)"), "bulion drobiowy"),
     (re.compile(r"^bulion wołowy\b"),          "bulion wołowy"),
@@ -130,6 +135,14 @@ _FAMILY_RULES: list[tuple[re.Pattern, str]] = [
     (re.compile(r"^mascarpone"),               "mascarpone"),
     # Czekolada
     (re.compile(r"^czekolada"),                "czekolada"),
+    # Miód — wszystkie typy (wielokwiatowy, gryczany itp.) to "miód"
+    (re.compile(r"^miód"),                     "miód"),
+    # Ryby — upraszczamy do gatunku
+    (re.compile(r"^łosoś(?! wędzony)"),        "łosoś"),
+    (re.compile(r"^filet z łososia"),           "łosoś"),
+    (re.compile(r"^dorsz"),                    "dorsz"),
+    (re.compile(r"^tuńczyk"),                  "tuńczyk"),
+    (re.compile(r"^krewetki"),                 "krewetki"),
     # Superfoods / pseudozboża
     (re.compile(r"^maca\b"),                   "maca"),
     (re.compile(r"^spirulina\b"),              "spirulina"),

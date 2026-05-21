@@ -62,7 +62,7 @@ For each recipe return:
 ALWAYS REMOVE from ingredient name:
 - Prep notes: boneless, skinless, bone-in, skin-on, diced, minced, chopped, shredded,
   sliced, finely, roughly, thinly, peeled, deveined, halved, quartered, cubed, trimmed,
-  at room temperature, softened, melted
+  at room temperature, softened, melted, cooked (+ anything after: "cooked according to...")
 - Fat/lean %: full fat, reduced fat, low fat, non-fat, nonfat, fat-free, lowfat,
   light, X% fat, X% lean, X/Y lean (e.g. 93/7, 80/20)
 - Quality/origin: wild-caught, grass-fed, grain-fed, corn-fed, organic, free range,
@@ -70,8 +70,21 @@ ALWAYS REMOVE from ingredient name:
   iberico, sockeye (salmon species), black (cod)
 - Size qualifiers on produce/eggs: large, small, medium, jumbo, baby, mini, giant
 - Packaging context: canned, tinned, jarred, in juice, in brine, in water, in syrup,
-  in oil, drained, ready to eat
+  in oil, drained, ready to eat, pasteurized, micro-filtered, microfiltered, ultra-pasteurized
+- Processing descriptors: toasted, roasted (when applied to oils — "toasted sesame oil" → "sesame oil"),
+  cold-pressed, extra virgin (oils → just the base oil name),
+  creamy (for nut butters — "creamy peanut butter" → "peanut butter"),
+  grated (for parmesan), shredded (for cheese)
+- Origin/variety descriptors for oils: "cold pressed", "extra virgin", "refined",
+  "toasted" → drop and keep just "olive oil", "sesame oil", "avocado oil" etc.
 - Filler words: fresh (when redundant), raw (when redundant), pure
+- Instructions appended to ingredients: everything after comma that is an instruction
+  ("cooked according to package directions", "for greasing", "for topping", "to taste")
+
+COCONUT AMINOS — important:
+  "coconut aminos" is NOT coconut milk. It is a soy sauce substitute made from coconut sap.
+  → name_en: "coconut aminos", name_pl: "amino kokosowe"
+  → Do NOT map to coconut milk, coconut oil, or any other coconut product
 
 KEEP when it defines the ingredient:
 - ground / mince (always normalize "mince" to "ground"):
@@ -152,6 +165,11 @@ Conversions (use these exactly):
 When ingredient is counted in pcs, convert to grams using these AVERAGE WEIGHTS:
   sweet potato / batat: 200g each
   potato / ziemniak: 150g each
+  salmon fillet / filet z łososia: 150g each
+  chicken breast / pierś z kurczaka: 180g each
+  chicken thigh / udko z kurczaka: 130g each
+  pork chop / kotlet wieprzowy: 150g each
+  shrimp (large) / krewetka: 15g each
   carrot / marchew: 80g each
   celery stalk / łodyga selera: 40g each | celery (whole): 320g
   onion / cebula: 100g each
