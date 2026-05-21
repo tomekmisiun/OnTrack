@@ -112,17 +112,32 @@ REMOVE everything in parentheses that is a tip/suggestion/brand
   KEEP parentheses content if it's a valid ingredient alternative: "(or vegetable broth)"
   -> use the first option only
 
-"to taste" / "as desired" / "as needed" / "optional" -> amount: null, unit: null
+"to taste" / "as desired" / "as needed" / "optional":
+  - If the ingredient is a SEASONING (salt, pepper, sugar, any spice, herb, or generic
+    "seasoning") -> amount: 1, unit: "g"
+  - For ALL other ingredients without a specified amount -> amount: null, unit: null
+
+Seasonings that always get 1g default when no amount given:
+  salt, sea salt, pepper, black pepper, white pepper, red pepper flakes,
+  sugar, brown sugar, cinnamon, cumin, paprika, smoked paprika, turmeric,
+  garlic powder, onion powder, cayenne, chili powder, chili flakes,
+  oregano, thyme, basil, rosemary, bay leaf, dill, parsley, cilantro,
+  ginger (ground), nutmeg, allspice, coriander, mustard powder,
+  seasoning, spice, spices, Italian seasoning, taco seasoning,
+  everything bagel seasoning, Cajun seasoning, curry powder,
+  baking powder, baking soda, cream of tartar, salt & pepper
 
 ═══ AMOUNT & UNIT RULES ═══
 
-Units: g for solids, ml for liquids, pcs for countable items (eggs, cloves, cans, limes)
+Output units MUST be one of: g, ml, pcs — never "cups", "tbsp", "tsp", "oz", "lb", "can".
+Always convert to g / ml / pcs.
+
 Conversions:
   1 cup liquid = 240ml | 1 cup flour = 120g | 1 cup sugar = 200g | 1 cup oats = 90g
-  1 cup rice = 185g | 1 cup nuts = 120g | 1 cup leafy greens = 30g
+  1 cup rice = 185g | 1 cup nuts = 120g | 1 cup leafy greens = 30g | 1 cup cilantro = 16g
   1 oz = 28g | 1 lb = 454g
-  1 tbsp liquid = 15ml | 1 tbsp solid = 12g
-  1 tsp liquid = 5ml | 1 tsp solid = 4g
+  1 tbsp liquid = 15ml | 1 tbsp solid = 12g | 1 tbsp spice/herb = 8g
+  1 tsp liquid = 5ml  | 1 tsp solid = 4g   | 1 tsp spice/herb = 3g
   1 can (standard) = 400g
 
 amount must be a number or null, never a string.
