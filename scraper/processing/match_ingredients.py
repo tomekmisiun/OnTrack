@@ -32,7 +32,7 @@ OUT_EN       = DATA / "matches_en.json"
 OUT_PL       = DATA / "matches_pl.json"
 
 SCORE_AUTO      = 85
-SCORE_UNCERTAIN = 55
+SCORE_UNCERTAIN = 70   # było 55 — zbyt luźne, AI dostaje bzdury i kreatywnie dopasowuje
 UNCERTAIN_BATCH = 15
 MAX_CANDIDATES  = 10
 MAX_RETRIES     = 2
@@ -63,14 +63,22 @@ You are a culinary product matcher. For each ingredient decide which shop produc
 are a valid match — meaning a cook COULD substitute this shop product for this
 ingredient in the recipe.
 
-Matching rules:
+STRICT CATEGORY RULES — these violations are NEVER acceptable:
+- A MEAT product NEVER matches a spice/seasoning/sauce ingredient
+- A DAIRY product NEVER matches a vegetable/fruit/grain ingredient
+- A PREPARED/PROCESSED product NEVER matches a raw ingredient
+- A FLAVORED/BRANDED SNACK never matches a plain ingredient
+  (e.g. "carmelove orzeszki" != "orzeszki ziemne", "serek z jalapeno" != "jalapeño")
+
+IF IN DOUBT → return empty array []. Better to have no match than a wrong match.
+
+Other matching rules:
 - Flavor variants NEVER match plain: "strawberry yogurt" != "plain yogurt"
 - Dairy-free is separate: "dairy free yogurt" != "plain yogurt"
 - Fat% never matters: "2% greek yogurt" matches "greek yogurt"
 - Meat form matters: "chicken breast" != "chicken thighs" != "ground chicken"
-- Smoked salmon IS a valid match for "salmon" (smoked is just a preparation)
+- Smoked salmon IS a valid match for "salmon"
 - Frozen version matches fresh: "frozen blueberries" matches "blueberries"
-- Ground beef (any %) matches "ground beef"
 - Ready-to-eat products never match raw ingredients
 - Spice variants ok if base ingredient matches: "hot paprika" matches "paprika"
 

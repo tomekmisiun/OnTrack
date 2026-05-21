@@ -230,7 +230,7 @@ Examples:
   garlic -> "czosnek"
   red onion -> "cebula czerwona"
   onion -> "cebula"
-  sweet potato -> "batat"
+  sweet potato / sweet potato cubed / sweet potato chunks → "batat"  (NEVER "frytki z batatów")
   bell pepper -> "papryka"
   feta cheese -> "ser feta"
   mozzarella -> "mozzarella"

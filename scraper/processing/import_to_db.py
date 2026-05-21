@@ -125,6 +125,31 @@ _FAMILY_RULES: list[tuple[re.Pattern, str]] = [
     (re.compile(r"^bekon\b|^boczek\s+boczek"), "bekon"),
     # Sól — wszystkie typy to "sól"
     (re.compile(r"^sól\b|^sol\b"),             "sól"),
+    # Pieczywo — wszystko to "chleb" (bez rozróżniania rodzaju)
+    (re.compile(r"^chleb"),                    "chleb"),
+    (re.compile(r"^bułka|^bułki"),             "bułka"),
+    (re.compile(r"^tortilla"),                 "tortilla"),
+    (re.compile(r"^wrap"),                     "wrap"),
+    # Pasty i sosy — usuń markę, zostaw bazowy składnik
+    (re.compile(r"^tahini"),                   "tahini"),
+    (re.compile(r"^hummus"),                   "hummus"),
+    (re.compile(r"^harissa"),                  "harissa"),
+    (re.compile(r"^orzeszki ziemne|^orzechy ziemne"), "orzeszki ziemne"),
+    (re.compile(r"^sok z limonki|^limonka"),   "sok z limonki"),
+    (re.compile(r"^sok z cytryny|^cytryna"),   "sok z cytryny"),
+    # Nasiona i ziarna — tylko bazowa nazwa
+    (re.compile(r"^nasiona chia"),             "nasiona chia"),
+    (re.compile(r"^siemię lniane"),            "siemię lniane"),
+    (re.compile(r"^nasiona konopi"),           "nasiona konopi"),
+    (re.compile(r"^pestki dyni"),              "pestki dyni"),
+    (re.compile(r"^pestki słonecznika"),       "pestki słonecznika"),
+    (re.compile(r"^sezam"),                    "sezam"),
+    # Płatki i wafle
+    (re.compile(r"^wafle kukurydziane"),       "wafle kukurydziane"),
+    (re.compile(r"^wafle ryżowe"),             "wafle ryżowe"),
+    (re.compile(r"^granola"),                  "granola"),
+    # Owoce mieszane
+    (re.compile(r"^świeże owoce|^owoce mieszan|^mix owoc"),  "owoce mieszane"),
     # Sery
     (re.compile(r"^parmezan|^ser\s+parmezan|^parmigiano"),    "parmezan"),
     (re.compile(r"^mozzarella"),               "mozzarella"),
