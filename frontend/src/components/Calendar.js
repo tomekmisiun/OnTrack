@@ -212,34 +212,27 @@ const DraggableRecipe = React.memo(function DraggableRecipe({ recipe, onToggleFa
   return (
     <div
       ref={setNodeRef}
+      {...listeners}
       {...attributes}
-      onClick={() => onPreview(recipe)}
+      onPointerDown={e => { pointerStart.current = { x: e.clientX, y: e.clientY }; listeners?.onPointerDown?.(e); }}
+      onClick={e => {
+        if (!pointerStart.current) return;
+        const dx = e.clientX - pointerStart.current.x;
+        const dy = e.clientY - pointerStart.current.y;
+        if (Math.sqrt(dx*dx + dy*dy) < 8) onPreview(recipe);
+      }}
       style={{
         flexShrink:0, width:128, height:148,
         background: recipe.image_url
           ? `url(${recipe.image_url}) center/cover`
           : 'linear-gradient(135deg, #0d9488, #0f766e)',
-        borderRadius:12, cursor:'pointer', opacity: isDragging ? 0.3 : 1,
-        userSelect:'none',
+        borderRadius:12, cursor:'grab', opacity: isDragging ? 0.3 : 1,
+        userSelect:'none', touchAction:'none',
         boxShadow:'0 4px 12px rgba(0,0,0,0.4)',
         display:'flex', flexDirection:'column', overflow:'hidden',
         position:'relative',
       }}
     >
-      {/* Uchwyt do drag-and-drop — tylko stąd można przeciągnąć przepis na kalendarz */}
-      <div
-        {...listeners}
-        onPointerDown={e => e.stopPropagation()}
-        onClick={e => e.stopPropagation()}
-        title="Przeciągnij na kalendarz"
-        style={{
-          position:'absolute', top:6, right:6, zIndex:10,
-          background:'rgba(0,0,0,0.55)', borderRadius:4,
-          padding:'3px 4px', cursor:'grab', lineHeight:1,
-          fontSize:11, color:'rgba(255,255,255,0.8)',
-          touchAction:'none', userSelect:'none',
-        }}
-      >⠿</div>
       {recipe.image_url && <div style={{ position:'absolute', inset:0, background:'rgba(0,0,0,0.45)', borderRadius:12 }} />}
       {/* Name + star */}
       <div style={{flex:1, padding:'8px 11px 6px', display:'flex', flexDirection:'column', position:'relative', zIndex:1}}>
@@ -840,11 +833,8 @@ function CarouselList({ recipes, search, visible, setVisible, scrollRef, dragRef
   return (
     <div
       ref={scrollRef}
-      style={{
-        display:'flex', gap:10, overflowX:'auto', paddingBottom:6,
-        scrollbarWidth:'thin', scrollbarColor:'#374151 transparent',
-        // Natywny scroll — działa bo VerticalDragSensor nie przechwytuje poziomego ruchu
-      }}
+      className="recipe-carousel"
+      style={{ display:'flex', gap:10, overflowX:'auto', paddingBottom:10 }}
       onScroll={e => {
         const el = e.currentTarget;
         if (hasMore && el.scrollLeft + el.clientWidth >= el.scrollWidth - CARD_W * 3) {
