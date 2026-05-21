@@ -828,20 +828,42 @@ function CarouselList({ recipes, search, visible, setVisible, scrollRef, dragRef
   return (
     <div
       ref={scrollRef}
-      style={{display:'flex',gap:10,overflowX:'auto',paddingBottom:6,scrollbarWidth:'thin',scrollbarColor:'#374151 transparent'}}
+      style={{display:'flex',gap:10,overflowX:'auto',paddingBottom:6,cursor:'grab',scrollbarWidth:'thin',scrollbarColor:'#374151 transparent'}}
       onMouseDown={e => {
         if (e.button !== 0) return;
         const el = scrollRef.current; if (!el) return;
-        dragRef.current = { active: true, startX: e.pageX - el.offsetLeft, scrollLeft: el.scrollLeft };
-        el.style.cursor = 'grabbing'; e.preventDefault();
+        dragRef.current = {
+          active: true,
+          startX: e.pageX - el.offsetLeft,
+          scrollLeft: el.scrollLeft,
+          startPageX: e.pageX,
+          hasDragged: false,
+        };
+        el.style.cursor = 'grabbing';
+        e.preventDefault();
       }}
       onMouseMove={e => {
         const d = dragRef.current; if (!d.active) return;
         const el = scrollRef.current; if (!el) return;
+        // Próg 6px — poniżej tego traktujemy jako klik, nie drag
+        if (Math.abs(e.pageX - d.startPageX) > 6) d.hasDragged = true;
         el.scrollLeft = d.scrollLeft - (e.pageX - el.offsetLeft - d.startX);
       }}
-      onMouseUp={() => { dragRef.current.active = false; if (scrollRef.current) scrollRef.current.style.cursor = 'default'; }}
-      onMouseLeave={() => { dragRef.current.active = false; if (scrollRef.current) scrollRef.current.style.cursor = 'default'; }}
+      onMouseUp={() => {
+        dragRef.current.active = false;
+        if (scrollRef.current) scrollRef.current.style.cursor = 'grab';
+      }}
+      onMouseLeave={() => {
+        dragRef.current.active = false;
+        if (scrollRef.current) scrollRef.current.style.cursor = 'grab';
+      }}
+      onClickCapture={e => {
+        // Jeśli użytkownik przeciągał (>6px) — zablokuj klik na karcie przepisu
+        if (dragRef.current.hasDragged) {
+          e.stopPropagation();
+          dragRef.current.hasDragged = false;
+        }
+      }}
       onScroll={e => {
         const el = e.currentTarget;
         if (hasMore && el.scrollLeft + el.clientWidth >= el.scrollWidth - CARD_W * 3) {
