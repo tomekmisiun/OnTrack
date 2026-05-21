@@ -1,65 +1,5 @@
 [
   {
-    "ingredient_name": "AIP seasoning",
-    "match_type": "auto",
-    "fuzzy_score": 87.0,
-    "shop": "aldi",
-    "original_name": "Mediterranean Chicken Seasoning",
-    "generic_name": "mediterranean chicken seasoning",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.59,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "Chinese 5-spice seasoning",
-    "match_type": "auto",
-    "fuzzy_score": 88.0,
-    "shop": "aldi",
-    "original_name": "Garlic & Herb Seasoning",
-    "generic_name": "herb seasoning",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.59,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "Italian seasoning",
-    "match_type": "auto",
-    "fuzzy_score": 88.9,
-    "shop": "aldi",
-    "original_name": "Cajun Seasoning",
-    "generic_name": "cajun seasoning",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.69,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "Napa cabbage",
-    "match_type": "auto",
-    "fuzzy_score": 85.7,
-    "shop": "aldi",
-    "original_name": "Sage & Onion Stuffing Mix",
-    "generic_name": "sage",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.45,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "active dry yeast",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -87,6 +27,21 @@
     "price_package": 0.55,
     "price_per_unit": null,
     "price_per_100": null,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "aip seasoning",
+    "match_type": "auto",
+    "fuzzy_score": 91.7,
+    "shop": "aldi",
+    "original_name": "Peri Peri Seasoning",
+    "generic_name": "peri peri seasoning",
+    "package_size_value": 35.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 0.55,
+    "price_per_unit": null,
+    "price_per_100": 1.5714,
     "currency": "GBP"
   },
   {
@@ -120,6 +75,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "almond",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "UHT Unsweetened Almond Drink",
+    "generic_name": "uht unsweetened almond drink",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": false,
+    "price_package": 0.99,
+    "price_per_unit": null,
+    "price_per_100": null,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "almond butter",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -132,21 +102,6 @@
     "price_package": 2.19,
     "price_per_unit": null,
     "price_per_100": 0.4867,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "almond flax coating",
-    "match_type": "auto",
-    "fuzzy_score": 90.9,
-    "shop": "aldi",
-    "original_name": "Salmon & Watercress Topped with Crunchy Breadcrumbs",
-    "generic_name": "salmon",
-    "package_size_value": 380.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 3.99,
-    "price_per_unit": null,
-    "price_per_100": 1.05,
     "currency": "GBP"
   },
   {
@@ -190,21 +145,6 @@
     "unit": null,
     "sold_by_weight": false,
     "price_package": 0.69,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "almond milk yogurt",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Yogurt & Forest Fruit Bars 6 Pack",
-    "generic_name": "yogurt",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.39,
     "price_per_unit": null,
     "price_per_100": null,
     "currency": "GBP"
@@ -270,21 +210,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "apple chicken sausage",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Chicken & Vegetable Pies 4 Pack",
-    "generic_name": "chicken",
-    "package_size_value": 569.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": 0.3497,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "apple cider",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -315,6 +240,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "apple sauce",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Apple & Berry No Added Sugar Granola",
+    "generic_name": "apple",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.19,
+    "price_per_unit": null,
+    "price_per_100": 0.238,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "apples",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -326,21 +266,6 @@
     "sold_by_weight": false,
     "price_package": 1.99,
     "price_per_unit": 0.33,
-    "price_per_100": null,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "applesauce",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "British Mini Apples",
-    "generic_name": "apples",
-    "package_size_value": 6,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": 0.17,
     "price_per_100": null,
     "currency": "GBP"
   },
@@ -420,21 +345,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "avocados",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Ripe & Ready Hass Avocados",
-    "generic_name": "hass avocados",
-    "package_size_value": 2,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 1.39,
-    "price_per_unit": 0.7,
-    "price_per_100": null,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "baby bell cheese",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -462,21 +372,6 @@
     "price_package": 0.99,
     "price_per_unit": null,
     "price_per_100": 0.198,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "baby broccoli",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "British Broccoli",
-    "generic_name": "broccoli",
-    "package_size_value": 361.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.79,
-    "price_per_unit": null,
-    "price_per_100": 0.2188,
     "currency": "GBP"
   },
   {
@@ -522,6 +417,21 @@
     "price_package": 1.05,
     "price_per_unit": null,
     "price_per_100": 0.105,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "baby portobello mushrooms",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Sliced Mushrooms",
+    "generic_name": "mushrooms",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 0.99,
+    "price_per_unit": null,
+    "price_per_100": 0.198,
     "currency": "GBP"
   },
   {
@@ -840,7 +750,7 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "beef filet",
+    "ingredient_name": "beef ribs",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "aldi",
@@ -855,7 +765,7 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "beef ribs",
+    "ingredient_name": "beef sirloin",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "aldi",
@@ -915,6 +825,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "beet",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Cooked Beetroot",
+    "generic_name": "beetroot",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 0.66,
+    "price_per_unit": null,
+    "price_per_100": 0.132,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "beet hummus",
     "match_type": "auto",
     "fuzzy_score": 85.7,
@@ -960,21 +885,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "bell peppers",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Cream Cheese Stuffed Cherry Bell Peppers",
-    "generic_name": "cream cheese stuffed cherry bell peppers",
-    "package_size_value": 150.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 2.19,
-    "price_per_unit": null,
-    "price_per_100": 1.46,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "berries",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -990,14 +900,14 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "beyond meat spicy italian sausage",
+    "ingredient_name": "black bean",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "aldi",
-    "original_name": "Sausage & Mash",
-    "generic_name": "sausage",
+    "original_name": "Beef in Black Bean Sauce with Egg Fried Rice",
+    "generic_name": "beef in black bean sauce with egg fried rice",
     "package_size_value": 400.0,
-    "unit": "g",
+    "unit": "ml",
     "sold_by_weight": false,
     "price_package": 2.79,
     "price_per_unit": null,
@@ -1017,6 +927,21 @@
     "price_package": 0.49,
     "price_per_unit": null,
     "price_per_100": 0.1231,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "black olive",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Pitted Green & Black Olives With Feta",
+    "generic_name": "black olives with feta",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": false,
+    "price_package": 1.99,
+    "price_per_unit": null,
+    "price_per_100": null,
     "currency": "GBP"
   },
   {
@@ -1047,6 +972,21 @@
     "price_package": 1.49,
     "price_per_unit": null,
     "price_per_100": 1.49,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "black sesame seed",
+    "match_type": "auto",
+    "fuzzy_score": 95.7,
+    "shop": "aldi",
+    "original_name": "Sesame Seeds",
+    "generic_name": "sesame seeds",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": false,
+    "price_package": 0.85,
+    "price_per_unit": null,
+    "price_per_100": null,
     "currency": "GBP"
   },
   {
@@ -1170,6 +1110,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "blueberry",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Blueberry Yogurt Granola",
+    "generic_name": "blueberry yogurt granola",
+    "package_size_value": 150.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.09,
+    "price_per_unit": null,
+    "price_per_100": 0.7267,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "bowtie pasta",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -1227,6 +1182,21 @@
     "price_package": 3.99,
     "price_per_unit": null,
     "price_per_100": 1.05,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "breakfast sausage",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Sausage & Mash",
+    "generic_name": "sausage",
+    "package_size_value": 400.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 2.79,
+    "price_per_unit": null,
+    "price_per_100": 0.6975,
     "currency": "GBP"
   },
   {
@@ -1395,6 +1365,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "brussels sprout",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Brussel & Shallot Pâté",
+    "generic_name": "brussel",
+    "package_size_value": 150.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.49,
+    "price_per_unit": null,
+    "price_per_100": 0.9933,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "brussels sprouts",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -1422,21 +1407,6 @@
     "price_package": 2.89,
     "price_per_unit": null,
     "price_per_100": 0.4129,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "burger buns",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Sliced Brioche Burger Buns",
-    "generic_name": "brioche burger buns",
-    "package_size_value": 4,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 1.09,
-    "price_per_unit": 0.27,
-    "price_per_100": null,
     "currency": "GBP"
   },
   {
@@ -1470,6 +1440,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "buttermilk powder",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Cooked Mussels with Garlic & Butter",
+    "generic_name": "butter",
+    "package_size_value": 450.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 2.19,
+    "price_per_unit": null,
+    "price_per_100": 0.4867,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "butternut squash",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -1482,21 +1467,6 @@
     "price_package": 1.09,
     "price_per_unit": 1.09,
     "price_per_100": null,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "button mushrooms",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "British Baby Button Mushrooms",
-    "generic_name": "button mushrooms",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.95,
-    "price_per_unit": null,
-    "price_per_100": 0.475,
     "currency": "GBP"
   },
   {
@@ -1515,18 +1485,18 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "cabbage and carrots",
+    "ingredient_name": "cabbage carrot mix",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "aldi",
-    "original_name": "British Wonky Carrots",
-    "generic_name": "carrots",
-    "package_size_value": 1491.0,
+    "original_name": "Carrot & Swede Mash",
+    "generic_name": "carrot",
+    "package_size_value": 450.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 0.79,
+    "price_package": 1.35,
     "price_per_unit": null,
-    "price_per_100": 0.053,
+    "price_per_100": 0.3,
     "currency": "GBP"
   },
   {
@@ -1576,21 +1546,6 @@
   },
   {
     "ingredient_name": "canned diced tomatoes",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Tomato & Herb Pasta Sauce",
-    "generic_name": "tomato",
-    "package_size_value": 441.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 0.49,
-    "price_per_unit": null,
-    "price_per_100": 0.1111,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "canned tomato sauce",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "aldi",
@@ -1677,6 +1632,21 @@
     "price_package": 0.99,
     "price_per_unit": null,
     "price_per_100": 0.792,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "cassava breadcrumbs",
+    "match_type": "auto",
+    "fuzzy_score": 86.7,
+    "shop": "aldi",
+    "original_name": "Panko Breadcrumbs",
+    "generic_name": "panko breadcrumbs",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": false,
+    "price_package": 1.19,
+    "price_per_unit": null,
+    "price_per_100": null,
     "currency": "GBP"
   },
   {
@@ -1827,6 +1797,21 @@
     "price_package": 2.89,
     "price_per_unit": null,
     "price_per_100": 0.85,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "cheddar cheese",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Cheese & Tomato Pasta Bake",
+    "generic_name": "cheese",
+    "package_size_value": 399.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 0.99,
+    "price_per_unit": null,
+    "price_per_100": 0.2481,
     "currency": "GBP"
   },
   {
@@ -2100,21 +2085,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "chicken tenders",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Chicken & Vegetable Pies 4 Pack",
-    "generic_name": "chicken",
-    "package_size_value": 569.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": 0.3497,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "chicken thighs",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -2160,18 +2130,18 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "chickpea fusilli pasta",
+    "ingredient_name": "chickpea mac and cheese",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "aldi",
-    "original_name": "Fusilli Pasta 1kg",
-    "generic_name": "fusilli pasta",
-    "package_size_value": 1000,
+    "original_name": "Cheese & Tomato Pasta Bake",
+    "generic_name": "cheese",
+    "package_size_value": 399.0,
     "unit": "g",
-    "sold_by_weight": true,
-    "price_package": 1.19,
+    "sold_by_weight": false,
+    "price_package": 0.99,
     "price_per_unit": null,
-    "price_per_100": 0.119,
+    "price_per_100": 0.2481,
     "currency": "GBP"
   },
   {
@@ -2337,6 +2307,21 @@
     "price_package": 0.89,
     "price_per_unit": null,
     "price_per_100": 1.1125,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "chinese 5-spice seasoning",
+    "match_type": "auto",
+    "fuzzy_score": 93.3,
+    "shop": "aldi",
+    "original_name": "Chinese 5 Spice",
+    "generic_name": "chinese 5 spice",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": false,
+    "price_package": 0.59,
+    "price_per_unit": null,
+    "price_per_100": null,
     "currency": "GBP"
   },
   {
@@ -2805,21 +2790,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "coconut palm sugar",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Coconut & Vanilla Greek Style Yogurt 4 Pack",
-    "generic_name": "coconut",
-    "package_size_value": 460.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": null,
-    "price_per_100": 0.2152,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "coconut sugar",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -2940,7 +2910,7 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "coleslaw veggie mix",
+    "ingredient_name": "coleslaw mixed veggies",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "aldi",
@@ -3105,6 +3075,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "corn kernels",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Baby Corn",
+    "generic_name": "corn",
+    "package_size_value": 145.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.09,
+    "price_per_unit": null,
+    "price_per_100": 0.7517,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "corn on the cob",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -3210,21 +3195,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "cracked black pepper",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Black Pepper & Paprika Mini Roule Cheese",
-    "generic_name": "black pepper",
-    "package_size_value": 100.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.49,
-    "price_per_unit": null,
-    "price_per_100": 1.49,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "crackers",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -3252,6 +3222,21 @@
     "price_package": 1.35,
     "price_per_unit": null,
     "price_per_100": 0.45,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "cranberry",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "British Wensleydale & Cranberry Cheese",
+    "generic_name": "cranberry cheese",
+    "package_size_value": 200.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.99,
+    "price_per_unit": null,
+    "price_per_100": 0.995,
     "currency": "GBP"
   },
   {
@@ -3285,18 +3270,18 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "creamy peanut butter",
+    "ingredient_name": "cremini mushroom",
     "match_type": "auto",
-    "fuzzy_score": 100.0,
+    "fuzzy_score": 94.1,
     "shop": "aldi",
-    "original_name": "Cooked Mussels with Garlic & Butter",
-    "generic_name": "butter",
-    "package_size_value": 450.0,
+    "original_name": "Sliced Mushrooms",
+    "generic_name": "mushrooms",
+    "package_size_value": 500.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 2.19,
+    "price_package": 0.99,
     "price_per_unit": null,
-    "price_per_100": 0.4867,
+    "price_per_100": 0.198,
     "currency": "GBP"
   },
   {
@@ -3387,6 +3372,21 @@
     "price_package": 1.19,
     "price_per_unit": null,
     "price_per_100": 0.952,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "crushed tomato",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Tomato & Herb Pasta Sauce",
+    "generic_name": "tomato",
+    "package_size_value": 441.0,
+    "unit": "ml",
+    "sold_by_weight": false,
+    "price_package": 0.49,
+    "price_per_unit": null,
+    "price_per_100": 0.1111,
     "currency": "GBP"
   },
   {
@@ -3495,21 +3495,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "dairy free sour cream",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Sour Cream & Chive Dip",
-    "generic_name": "sour cream",
-    "package_size_value": 150.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": null,
-    "price_per_100": 0.66,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "dairy free yogurt",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -3537,6 +3522,21 @@
     "price_package": 0.99,
     "price_per_unit": null,
     "price_per_100": 0.5211,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "dairy-free sour cream",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Sour Cream & Chive Dip",
+    "generic_name": "sour cream",
+    "package_size_value": 150.0,
+    "unit": "ml",
+    "sold_by_weight": false,
+    "price_package": 0.99,
+    "price_per_unit": null,
+    "price_per_100": 0.66,
     "currency": "GBP"
   },
   {
@@ -3600,18 +3600,18 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "deli turkey breast",
+    "ingredient_name": "diced tomato",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "aldi",
-    "original_name": "British Turkey Breast Steaks 2% Fat",
-    "generic_name": "turkey breast",
-    "package_size_value": 375.0,
-    "unit": "g",
+    "original_name": "Tomato & Herb Pasta Sauce",
+    "generic_name": "tomato",
+    "package_size_value": 441.0,
+    "unit": "ml",
     "sold_by_weight": false,
-    "price_package": 3.59,
+    "price_package": 0.49,
     "price_per_unit": null,
-    "price_per_100": 0.9573,
+    "price_per_100": 0.1111,
     "currency": "GBP"
   },
   {
@@ -3810,21 +3810,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "dried pitted dates",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Pitted Dates",
-    "generic_name": "pitted dates",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.79,
-    "price_per_unit": null,
-    "price_per_100": 0.558,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "dried red chiles",
     "match_type": "auto",
     "fuzzy_score": 90.9,
@@ -3900,36 +3885,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "dry lentils",
-    "match_type": "auto",
-    "fuzzy_score": 90.0,
-    "shop": "aldi",
-    "original_name": "Red Lentils",
-    "generic_name": "red lentils",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": null,
-    "price_per_100": 0.198,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "dry rubbed sage",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Sage & Onion Stuffing Mix",
-    "generic_name": "sage",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.45,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "duck fat",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -3945,9 +3900,9 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "dutch yellow potatoes",
+    "ingredient_name": "dutch yellow potato",
     "match_type": "auto",
-    "fuzzy_score": 100.0,
+    "fuzzy_score": 85.7,
     "shop": "aldi",
     "original_name": "British Baby Potatoes",
     "generic_name": "potatoes",
@@ -4065,6 +4020,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "erythritol sweetener",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Sweet & Sour Cooking Sauce",
+    "generic_name": "sweet",
+    "package_size_value": 500.0,
+    "unit": "ml",
+    "sold_by_weight": false,
+    "price_package": 0.99,
+    "price_per_unit": null,
+    "price_per_100": 0.198,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "extra firm tofu",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -4080,33 +4050,18 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "extra virgin olive oil",
+    "ingredient_name": "extra-firm tofu",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "aldi",
-    "original_name": "Anchovies in Extra Virgin Olive Oil",
-    "generic_name": "anchovies in extra virgin olive oil",
-    "package_size_value": null,
-    "unit": null,
+    "original_name": "Organic Smoked Tofu",
+    "generic_name": "tofu",
+    "package_size_value": 180.0,
+    "unit": "g",
     "sold_by_weight": false,
-    "price_package": 0.79,
+    "price_package": 0.95,
     "price_per_unit": null,
-    "price_per_100": null,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "extra-virgin olive oil",
-    "match_type": "auto",
-    "fuzzy_score": 95.5,
-    "shop": "aldi",
-    "original_name": "Anchovies in Extra Virgin Olive Oil",
-    "generic_name": "anchovies in extra virgin olive oil",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.79,
-    "price_per_unit": null,
-    "price_per_100": null,
+    "price_per_100": 0.5278,
     "currency": "GBP"
   },
   {
@@ -4155,21 +4110,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "fire roasted corn",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Baby Corn",
-    "generic_name": "corn",
-    "package_size_value": 145.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.09,
-    "price_per_unit": null,
-    "price_per_100": 0.7517,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "fire roasted tomatoes",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -4197,21 +4137,6 @@
     "price_package": 0.49,
     "price_per_unit": null,
     "price_per_100": 0.1111,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "fire-roasted corn",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Baby Corn",
-    "generic_name": "corn",
-    "package_size_value": 145.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.09,
-    "price_per_unit": null,
-    "price_per_100": 0.7517,
     "currency": "GBP"
   },
   {
@@ -4257,21 +4182,6 @@
     "price_package": 0.65,
     "price_per_unit": null,
     "price_per_100": 0.3714,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "flaxseed",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Flaxseed",
-    "generic_name": "flaxseed",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.79,
-    "price_per_unit": null,
-    "price_per_100": 0.895,
     "currency": "GBP"
   },
   {
@@ -4380,18 +4290,18 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "fresh flat leaf parsley",
+    "ingredient_name": "fresh chives",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "aldi",
-    "original_name": "Parsley",
-    "generic_name": "parsley",
-    "package_size_value": null,
-    "unit": null,
+    "original_name": "British Double Gloucester Cheese with Onion & Chive 5 Slices",
+    "generic_name": "chive",
+    "package_size_value": 140.0,
+    "unit": "g",
     "sold_by_weight": false,
-    "price_package": 0.65,
+    "price_package": 1.75,
     "price_per_unit": null,
-    "price_per_100": null,
+    "price_per_100": 1.25,
     "currency": "GBP"
   },
   {
@@ -4425,21 +4335,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "fresh parsley",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Parsley",
-    "generic_name": "parsley",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.65,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "fresh rosemary",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -4467,6 +4362,21 @@
     "price_package": 0.45,
     "price_per_unit": null,
     "price_per_100": null,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "fresh thai basil",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Basil & Oregano Passata Rustica",
+    "generic_name": "basil",
+    "package_size_value": 689.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.95,
+    "price_per_unit": null,
+    "price_per_100": 0.283,
     "currency": "GBP"
   },
   {
@@ -4512,21 +4422,6 @@
     "price_package": 1.09,
     "price_per_unit": null,
     "price_per_100": 0.7517,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "frozen green peas",
-    "match_type": "auto",
-    "fuzzy_score": 90.3,
-    "shop": "aldi",
-    "original_name": "Frozen Green Smoothie Mix",
-    "generic_name": "frozen green smoothie mix",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.49,
-    "price_per_unit": null,
-    "price_per_100": 0.298,
     "currency": "GBP"
   },
   {
@@ -4695,21 +4590,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "garlic risotto",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Garlic & Rosemary Focaccia Mix",
-    "generic_name": "garlic",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.89,
-    "price_per_unit": null,
-    "price_per_100": 0.178,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "ghee",
     "match_type": "auto",
     "fuzzy_score": 85.7,
@@ -4815,6 +4695,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "gluten free pita",
+    "match_type": "auto",
+    "fuzzy_score": 90.3,
+    "shop": "aldi",
+    "original_name": "Gluten Free Spaghetti",
+    "generic_name": "gluten free spaghetti",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 0.29,
+    "price_per_unit": null,
+    "price_per_100": 0.058,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "gluten free spaghetti",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -4905,6 +4800,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "gluten-free quinoa penne",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Quinoa & Grains",
+    "generic_name": "quinoa",
+    "package_size_value": 250.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 0.99,
+    "price_per_unit": null,
+    "price_per_100": 0.396,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "gluten-free rotini pasta",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -4977,21 +4887,6 @@
     "price_package": 1.05,
     "price_per_unit": null,
     "price_per_100": 0.105,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "graham cracker",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "British Cooked Ham 10 Slices",
-    "generic_name": "ham",
-    "package_size_value": 115.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.75,
-    "price_per_unit": null,
-    "price_per_100": 0.6522,
     "currency": "GBP"
   },
   {
@@ -5145,6 +5040,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "green bean",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Green Beans",
+    "generic_name": "green beans",
+    "package_size_value": 220.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 0.85,
+    "price_per_unit": null,
+    "price_per_100": 0.3864,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "green beans",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -5262,6 +5172,21 @@
     "price_package": 0.69,
     "price_per_unit": null,
     "price_per_100": 0.138,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "green peas",
+    "match_type": "auto",
+    "fuzzy_score": 85.7,
+    "shop": "aldi",
+    "original_name": "Garden Peas",
+    "generic_name": "garden peas",
+    "package_size_value": 898.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.15,
+    "price_per_unit": null,
+    "price_per_100": 0.1281,
     "currency": "GBP"
   },
   {
@@ -5580,21 +5505,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "halloumi",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Slow Roasted Tomato & Halloumi Vegetable Burgers 2 Pack",
-    "generic_name": "halloumi vegetable burgers 2 pack",
-    "package_size_value": 227.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": 0.8767,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "halloumi cheese",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -5682,6 +5592,21 @@
     "price_package": 0.99,
     "price_per_unit": null,
     "price_per_100": 0.5351,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "herb seasoning",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Garlic & Herb Seasoning",
+    "generic_name": "herb seasoning",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": false,
+    "price_package": 0.59,
+    "price_per_unit": null,
+    "price_per_100": null,
     "currency": "GBP"
   },
   {
@@ -5832,21 +5757,6 @@
     "price_package": 0.65,
     "price_per_unit": null,
     "price_per_100": 1.5476,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "italian flat leaf parsley",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Parsley",
-    "generic_name": "parsley",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.65,
-    "price_per_unit": null,
-    "price_per_100": null,
     "currency": "GBP"
   },
   {
@@ -6300,21 +6210,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "lemon-herb dressing",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Lemon & Lime Flavoured Still Water 4 Pack",
-    "generic_name": "lemon",
-    "package_size_value": 500.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 1.59,
-    "price_per_unit": null,
-    "price_per_100": 0.318,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "lemongrass",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -6450,18 +6345,18 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "mac and cheese",
+    "ingredient_name": "low sodium soy sauce",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "aldi",
-    "original_name": "Cheese & Tomato Pasta Bake",
-    "generic_name": "cheese",
-    "package_size_value": 399.0,
+    "original_name": "Soy & Ginger Fusions Tuna",
+    "generic_name": "soy",
+    "package_size_value": 80.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 0.99,
+    "price_package": 0.89,
     "price_per_unit": null,
-    "price_per_100": 0.2481,
+    "price_per_100": 1.1125,
     "currency": "GBP"
   },
   {
@@ -6510,21 +6405,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "mandarin orange segments",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Orange & Peach Flavoured Still Water",
-    "generic_name": "orange",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.49,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "mango",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -6537,6 +6417,21 @@
     "price_package": 2.09,
     "price_per_unit": null,
     "price_per_100": 0.8708,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "maple roasted kabocha squash",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Roasted & Salted Pistachios",
+    "generic_name": "roasted",
+    "package_size_value": 200.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.99,
+    "price_per_unit": null,
+    "price_per_100": 0.995,
     "currency": "GBP"
   },
   {
@@ -6558,6 +6453,21 @@
     "ingredient_name": "marinara sauce",
     "match_type": "auto",
     "fuzzy_score": 85.7,
+    "shop": "aldi",
+    "original_name": "Medium Peri Peri Sauce & Marinade",
+    "generic_name": "marinade",
+    "package_size_value": 265.0,
+    "unit": "ml",
+    "sold_by_weight": false,
+    "price_package": 1.49,
+    "price_per_unit": null,
+    "price_per_100": 0.5623,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "marinated artichoke heart",
+    "match_type": "auto",
+    "fuzzy_score": 87.5,
     "shop": "aldi",
     "original_name": "Medium Peri Peri Sauce & Marinade",
     "generic_name": "marinade",
@@ -6660,6 +6570,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "mexican style shredded cheese",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Cheese & Tomato Pasta Bake",
+    "generic_name": "cheese",
+    "package_size_value": 399.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 0.99,
+    "price_per_unit": null,
+    "price_per_100": 0.2481,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "milk",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -6672,6 +6597,21 @@
     "price_package": 2.59,
     "price_per_unit": null,
     "price_per_100": 0.8492,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "minced garlic",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Garlic & Rosemary Focaccia Mix",
+    "generic_name": "garlic",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 0.89,
+    "price_per_unit": null,
+    "price_per_100": 0.178,
     "currency": "GBP"
   },
   {
@@ -6750,6 +6690,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "mixed fresh berries",
+    "match_type": "auto",
+    "fuzzy_score": 85.7,
+    "shop": "aldi",
+    "original_name": "Cherries",
+    "generic_name": "cherries",
+    "package_size_value": 200.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 2.29,
+    "price_per_unit": null,
+    "price_per_100": 1.145,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "mixed fresh fruit",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -6762,21 +6717,6 @@
     "price_package": 0.59,
     "price_per_unit": null,
     "price_per_100": 0.295,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "mixed frozen berries",
-    "match_type": "auto",
-    "fuzzy_score": 87.5,
-    "shop": "aldi",
-    "original_name": "Frozen Blueberries",
-    "generic_name": "frozen blueberries",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": 0.4975,
     "currency": "GBP"
   },
   {
@@ -6885,6 +6825,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "mushroom",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "British Baby Button Mushrooms",
+    "generic_name": "button mushrooms",
+    "package_size_value": 200.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 0.95,
+    "price_per_unit": null,
+    "price_per_100": 0.475,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "mushroom q-cups",
     "match_type": "auto",
     "fuzzy_score": 94.1,
@@ -6927,6 +6882,21 @@
     "price_package": 4.69,
     "price_per_unit": null,
     "price_per_100": 0.8527,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "napa cabbage",
+    "match_type": "auto",
+    "fuzzy_score": 85.7,
+    "shop": "aldi",
+    "original_name": "Sage & Onion Stuffing Mix",
+    "generic_name": "sage",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": false,
+    "price_package": 0.45,
+    "price_per_unit": null,
+    "price_per_100": null,
     "currency": "GBP"
   },
   {
@@ -7500,6 +7470,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "pears",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Ripe & Ready Conference Pears",
+    "generic_name": "conference pears",
+    "package_size_value": 4,
+    "unit": "pcs",
+    "sold_by_weight": false,
+    "price_package": 1.85,
+    "price_per_unit": 0.46,
+    "price_per_100": null,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "peas",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -7527,6 +7512,21 @@
     "price_package": 1.79,
     "price_per_unit": null,
     "price_per_100": null,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "pecan flaxseed paleo powder",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Flaxseed",
+    "generic_name": "flaxseed",
+    "package_size_value": 200.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.79,
+    "price_per_unit": null,
+    "price_per_100": 0.895,
     "currency": "GBP"
   },
   {
@@ -7740,21 +7740,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "pineapple rings",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Pineapple Chunks",
-    "generic_name": "pineapple",
-    "package_size_value": 300.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.39,
-    "price_per_unit": null,
-    "price_per_100": 0.4633,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "pistachios",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -7770,36 +7755,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "pita",
-    "match_type": "auto",
-    "fuzzy_score": 85.7,
-    "shop": "aldi",
-    "original_name": "Italian Style Salad",
-    "generic_name": "italian style salad",
-    "package_size_value": 100.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.69,
-    "price_per_unit": null,
-    "price_per_100": 0.69,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "pitted dates",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Pitted Dates",
-    "generic_name": "pitted dates",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.79,
-    "price_per_unit": null,
-    "price_per_100": 0.558,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "pizza dough",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -7812,6 +7767,21 @@
     "price_package": 1.09,
     "price_per_unit": null,
     "price_per_100": 0.2732,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "plain greek yogurt",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Yogurt & Forest Fruit Bars 6 Pack",
+    "generic_name": "yogurt",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": false,
+    "price_package": 1.39,
+    "price_per_unit": null,
+    "price_per_100": null,
     "currency": "GBP"
   },
   {
@@ -7872,21 +7842,6 @@
     "price_package": 0.69,
     "price_per_unit": null,
     "price_per_100": null,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "plant-based shredded cheese",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Cheese & Tomato Pasta Bake",
-    "generic_name": "cheese",
-    "package_size_value": 399.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": null,
-    "price_per_100": 0.2481,
     "currency": "GBP"
   },
   {
@@ -8115,21 +8070,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "powdered buttermilk",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Cooked Mussels with Garlic & Butter",
-    "generic_name": "butter",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.19,
-    "price_per_unit": null,
-    "price_per_100": 0.4867,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "powdered coconut sugar",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -8142,6 +8082,21 @@
     "price_package": 0.99,
     "price_per_unit": null,
     "price_per_100": 0.2152,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "pre cooked chicken fajita",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Chicken & Vegetable Pies 4 Pack",
+    "generic_name": "chicken",
+    "package_size_value": 569.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.99,
+    "price_per_unit": null,
+    "price_per_100": 0.3497,
     "currency": "GBP"
   },
   {
@@ -8310,6 +8265,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "pumpkin spice monkfruit sweetener",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Sweet & Sour Cooking Sauce",
+    "generic_name": "sweet",
+    "package_size_value": 500.0,
+    "unit": "ml",
+    "sold_by_weight": false,
+    "price_package": 0.99,
+    "price_per_unit": null,
+    "price_per_100": 0.198,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "purple cabbage",
     "match_type": "auto",
     "fuzzy_score": 90.0,
@@ -8340,9 +8310,9 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "purple potatoes",
+    "ingredient_name": "purple potato",
     "match_type": "auto",
-    "fuzzy_score": 100.0,
+    "fuzzy_score": 85.7,
     "shop": "aldi",
     "original_name": "British Baby Potatoes",
     "generic_name": "potatoes",
@@ -8367,21 +8337,6 @@
     "price_package": 0.85,
     "price_per_unit": null,
     "price_per_100": 0.34,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "quinoa pasta",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Quinoa & Grains",
-    "generic_name": "quinoa",
-    "package_size_value": 250.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": null,
-    "price_per_100": 0.396,
     "currency": "GBP"
   },
   {
@@ -8475,36 +8430,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "raw pecans",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Pecans",
-    "generic_name": "pecans",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.99,
-    "price_per_unit": null,
-    "price_per_100": 1.9933,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "raw walnuts",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Sweet Pockets Multipack Chocolate Fruit & Nut",
-    "generic_name": "nut",
-    "package_size_value": 125.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.49,
-    "price_per_unit": null,
-    "price_per_100": 1.192,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "red bell pepper",
     "match_type": "auto",
     "fuzzy_score": 86.7,
@@ -8566,6 +8491,21 @@
   },
   {
     "ingredient_name": "red chili flakes",
+    "match_type": "auto",
+    "fuzzy_score": 85.7,
+    "shop": "aldi",
+    "original_name": "Red Chillies",
+    "generic_name": "red chillies",
+    "package_size_value": 65.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 0.55,
+    "price_per_unit": null,
+    "price_per_100": 0.8462,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "red chili pepper flakes",
     "match_type": "auto",
     "fuzzy_score": 85.7,
     "shop": "aldi",
@@ -8652,21 +8592,6 @@
     "price_package": 0.95,
     "price_per_unit": null,
     "price_per_100": 0.095,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "red pears",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "SUN QUENCH, Fruit and Barley Drink, Apple & Pear",
-    "generic_name": "pear",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.09,
-    "price_per_unit": null,
-    "price_per_100": null,
     "currency": "GBP"
   },
   {
@@ -8760,6 +8685,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "red seedless grapes",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Seedless Red Grapes",
+    "generic_name": "seedless red grapes",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.89,
+    "price_per_unit": null,
+    "price_per_100": 0.378,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "red wine",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -8832,21 +8772,6 @@
     "price_package": 2.89,
     "price_per_unit": null,
     "price_per_100": 0.7605,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "rice cauliflower",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "British Cauliflower",
-    "generic_name": "cauliflower",
-    "package_size_value": 1,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 1.19,
-    "price_per_unit": 1.19,
-    "price_per_100": null,
     "currency": "GBP"
   },
   {
@@ -9075,18 +9000,18 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "roasted salted peanuts",
+    "ingredient_name": "rolls",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "aldi",
-    "original_name": "Salt & Pepper Fries",
-    "generic_name": "salt",
-    "package_size_value": 799.0,
-    "unit": "g",
+    "original_name": "Sausage Rolls 6 Pack",
+    "generic_name": "sausage rolls 6 pack",
+    "package_size_value": null,
+    "unit": null,
     "sold_by_weight": false,
-    "price_package": 1.95,
+    "price_package": 1.55,
     "price_per_unit": null,
-    "price_per_100": 0.2441,
+    "price_per_100": null,
     "currency": "GBP"
   },
   {
@@ -9120,21 +9045,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "romaine",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "British Romaine Lettuce",
-    "generic_name": "romaine lettuce",
-    "package_size_value": 2,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 1.15,
-    "price_per_unit": 0.58,
-    "price_per_100": null,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "romaine lettuce",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -9165,32 +9075,17 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "rotisserie chicken",
+    "ingredient_name": "rubbed sage",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "aldi",
-    "original_name": "Chicken & Vegetable Pies 4 Pack",
-    "generic_name": "chicken",
-    "package_size_value": 569.0,
-    "unit": "g",
+    "original_name": "Sage & Onion Stuffing Mix",
+    "generic_name": "sage",
+    "package_size_value": null,
+    "unit": null,
     "sold_by_weight": false,
-    "price_package": 1.99,
+    "price_package": 0.45,
     "price_per_unit": null,
-    "price_per_100": 0.3497,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "russet potato",
-    "match_type": "auto",
-    "fuzzy_score": 90.9,
-    "shop": "aldi",
-    "original_name": "Sweet Potato",
-    "generic_name": "sweet potato",
-    "package_size_value": 1,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 0.69,
-    "price_per_unit": 0.69,
     "price_per_100": null,
     "currency": "GBP"
   },
@@ -9420,6 +9315,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "sesame seed",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Sesame Seeds",
+    "generic_name": "sesame seeds",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": false,
+    "price_package": 0.85,
+    "price_per_unit": null,
+    "price_per_100": null,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "sesame seeds",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -9462,6 +9372,21 @@
     "price_package": 1.15,
     "price_per_unit": null,
     "price_per_100": 0.2882,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "sharp cheddar",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Grated Cheddar & Mozzarella Cheese Mix",
+    "generic_name": "cheddar",
+    "package_size_value": 250.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.99,
+    "price_per_unit": null,
+    "price_per_100": 0.796,
     "currency": "GBP"
   },
   {
@@ -9510,6 +9435,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "shredded chicken",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Chicken & Vegetable Pies 4 Pack",
+    "generic_name": "chicken",
+    "package_size_value": 569.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.99,
+    "price_per_unit": null,
+    "price_per_100": 0.3497,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "shredded coconut",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -9537,21 +9477,6 @@
     "price_package": 0.69,
     "price_per_unit": null,
     "price_per_100": 0.552,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "shredded potatoes",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "British Baby Potatoes",
-    "generic_name": "potatoes",
-    "package_size_value": 1000,
-    "unit": "g",
-    "sold_by_weight": true,
-    "price_package": 1.05,
-    "price_per_unit": null,
-    "price_per_100": 0.105,
     "currency": "GBP"
   },
   {
@@ -9642,21 +9567,6 @@
     "price_package": 4.49,
     "price_per_unit": null,
     "price_per_100": 2.3026,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "sliced strawberries",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Strawberries",
-    "generic_name": "strawberries",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.35,
-    "price_per_unit": null,
-    "price_per_100": 0.5875,
     "currency": "GBP"
   },
   {
@@ -9840,6 +9750,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "spicy italian sausage",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Sausage & Mash",
+    "generic_name": "sausage",
+    "package_size_value": 400.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 2.79,
+    "price_per_unit": null,
+    "price_per_100": 0.6975,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "spicy jalapeno sausage",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -9870,7 +9795,7 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "spinach tortillas",
+    "ingredient_name": "spinach tortilla",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "aldi",
@@ -9897,21 +9822,6 @@
     "price_package": 1.59,
     "price_per_unit": null,
     "price_per_100": 0.3533,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "spray oil",
-    "match_type": "auto",
-    "fuzzy_score": 94.1,
-    "shop": "aldi",
-    "original_name": "Spray Light Olive Oil",
-    "generic_name": "spray olive oil",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.29,
-    "price_per_unit": null,
-    "price_per_100": null,
     "currency": "GBP"
   },
   {
@@ -9945,33 +9855,18 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "stevia",
+    "ingredient_name": "steak",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "aldi",
-    "original_name": "Stevia Sweetener Tablets",
-    "generic_name": "stevia sweetener tablets",
-    "package_size_value": 1,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 0.59,
-    "price_per_unit": 0.59,
-    "price_per_100": null,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "stew beef",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "British Beef & Pork Mince",
-    "generic_name": "beef",
-    "package_size_value": 750.0,
+    "original_name": "XXL Rump Steaks",
+    "generic_name": "rump steaks",
+    "package_size_value": 800.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 4.49,
+    "price_package": 12.99,
     "price_per_unit": null,
-    "price_per_100": 0.5987,
+    "price_per_100": 1.6238,
     "currency": "GBP"
   },
   {
@@ -9987,6 +9882,21 @@
     "price_package": 2.35,
     "price_per_unit": null,
     "price_per_100": 0.5875,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "strawberry",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Little Delights Strawberry, Apricot and Raspberry Fromage Frais 6 Pack",
+    "generic_name": "little delights strawberry, apricot and raspberry fromage frais 6 pack",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": false,
+    "price_package": 0.75,
+    "price_per_unit": null,
+    "price_per_100": null,
     "currency": "GBP"
   },
   {
@@ -10065,7 +9975,7 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "sun dried tomato",
+    "ingredient_name": "sun dried tomatoes",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "aldi",
@@ -10080,7 +9990,7 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "sun dried tomatoes",
+    "ingredient_name": "sun-dried tomato",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "aldi",
@@ -10140,6 +10050,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "sushi grade tuna",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Tuna & Sweetcorn Topped Pasta",
+    "generic_name": "tuna",
+    "package_size_value": 300.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.99,
+    "price_per_unit": null,
+    "price_per_100": 0.6633,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "sweet corn",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -10170,7 +10095,7 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "sweet peppers",
+    "ingredient_name": "sweet pepper",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "aldi",
@@ -10320,21 +10245,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "thai basil",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Basil & Oregano Passata Rustica",
-    "generic_name": "basil",
-    "package_size_value": 689.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.95,
-    "price_per_unit": null,
-    "price_per_100": 0.283,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "thai bird chilis",
     "match_type": "auto",
     "fuzzy_score": 85.7,
@@ -10347,6 +10257,21 @@
     "price_package": 0.55,
     "price_per_unit": null,
     "price_per_100": 0.8462,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "thai shallots",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "British Shallots 400g",
+    "generic_name": "shallots",
+    "package_size_value": 399.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.15,
+    "price_per_unit": null,
+    "price_per_100": 0.2882,
     "currency": "GBP"
   },
   {
@@ -10380,51 +10305,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "toasted hemp seeds",
-    "match_type": "auto",
-    "fuzzy_score": 85.7,
-    "shop": "aldi",
-    "original_name": "Roasted & Salted Pistachios",
-    "generic_name": "roasted",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": 0.995,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "toasted sesame oil",
-    "match_type": "auto",
-    "fuzzy_score": 85.7,
-    "shop": "aldi",
-    "original_name": "Roasted & Salted Pistachios",
-    "generic_name": "roasted",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": 0.995,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "toasted sesame seeds",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Sesame Seeds",
-    "generic_name": "sesame seeds",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.85,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "tofu",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -10440,7 +10320,7 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "tomatillos",
+    "ingredient_name": "tomatillo",
     "match_type": "auto",
     "fuzzy_score": 90.9,
     "shop": "aldi",
@@ -10530,6 +10410,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "tortilla chip",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Lightly Salted Tortilla Chips",
+    "generic_name": "lightly salted tortilla chips",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": false,
+    "price_package": 0.57,
+    "price_per_unit": null,
+    "price_per_100": null,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "tortilla chips",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -10590,6 +10485,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "turkey breakfast sausage",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "aldi",
+    "original_name": "Sausage & Mash",
+    "generic_name": "sausage",
+    "package_size_value": 400.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 2.79,
+    "price_per_unit": null,
+    "price_per_100": 0.6975,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "turkey breast",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -10602,21 +10512,6 @@
     "price_package": 3.59,
     "price_per_unit": null,
     "price_per_100": 0.9573,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "turkey sausage",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Sausage & Mash",
-    "generic_name": "sausage",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.79,
-    "price_per_unit": null,
-    "price_per_100": 0.6975,
     "currency": "GBP"
   },
   {
@@ -10635,18 +10530,18 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "unsweetened cacao powder",
+    "ingredient_name": "unsalted butter",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "aldi",
-    "original_name": "Sweet & Sour Cooking Sauce",
-    "generic_name": "sweet",
-    "package_size_value": 500.0,
-    "unit": "ml",
+    "original_name": "Cooked Mussels with Garlic & Butter",
+    "generic_name": "butter",
+    "package_size_value": 450.0,
+    "unit": "g",
     "sold_by_weight": false,
-    "price_package": 0.99,
+    "price_package": 2.19,
     "price_per_unit": null,
-    "price_per_100": 0.198,
+    "price_per_100": 0.4867,
     "currency": "GBP"
   },
   {
@@ -10677,36 +10572,6 @@
     "price_package": 0.99,
     "price_per_unit": null,
     "price_per_100": 0.198,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "unsweetened vanilla vegan protein powder",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Sweet & Sour Cooking Sauce",
-    "generic_name": "sweet",
-    "package_size_value": 500.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": null,
-    "price_per_100": 0.198,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "vanilla almond butter",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Cooked Mussels with Garlic & Butter",
-    "generic_name": "butter",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.19,
-    "price_per_unit": null,
-    "price_per_100": 0.4867,
     "currency": "GBP"
   },
   {
@@ -10827,21 +10692,6 @@
     "price_package": 0.99,
     "price_per_unit": null,
     "price_per_100": 0.2481,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "vegan dark chocolate chips",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Chocolate & Cream Luxurious Dessert",
-    "generic_name": "chocolate",
-    "package_size_value": 190.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": null,
-    "price_per_100": 0.5211,
     "currency": "GBP"
   },
   {
@@ -11115,21 +10965,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "white cheddar",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "British Mild White Cheddar Cheese",
-    "generic_name": "mild white cheddar cheese",
-    "package_size_value": 900.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.85,
-    "price_per_unit": null,
-    "price_per_100": 0.5389,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "white cheddar cheese",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -11172,21 +11007,6 @@
     "price_package": 1.49,
     "price_per_unit": null,
     "price_per_100": null,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "white mushrooms",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Sliced Mushrooms",
-    "generic_name": "mushrooms",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": null,
-    "price_per_100": 0.198,
     "currency": "GBP"
   },
   {
@@ -11280,21 +11100,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "whole chicken",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "aldi",
-    "original_name": "Roast in the Bag Pork, Sage & Onion Stuffed Whole Chicken",
-    "generic_name": "onion stuffed whole chicken",
-    "package_size_value": 1602.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.59,
-    "price_per_unit": null,
-    "price_per_100": 0.3489,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "whole grain rice & quinoa",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -11307,6 +11112,21 @@
     "price_package": 2.89,
     "price_per_unit": null,
     "price_per_100": 0.7605,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "whole wheat wrap",
+    "match_type": "auto",
+    "fuzzy_score": 85.7,
+    "shop": "aldi",
+    "original_name": "Wholewheat Pasta 500g, Fusilli",
+    "generic_name": "wholewheat pasta , fusilli",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 0.75,
+    "price_per_unit": null,
+    "price_per_100": 0.15,
     "currency": "GBP"
   },
   {
@@ -11385,9 +11205,9 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "yukon gold potatoes",
+    "ingredient_name": "yukon gold potato",
     "match_type": "auto",
-    "fuzzy_score": 100.0,
+    "fuzzy_score": 85.7,
     "shop": "aldi",
     "original_name": "British Baby Potatoes",
     "generic_name": "potatoes",
@@ -11427,6 +11247,21 @@
     "price_package": 0.99,
     "price_per_unit": null,
     "price_per_100": 0.33,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "all-purpose flour",
+    "match_type": "ai",
+    "fuzzy_score": 70.6,
+    "shop": "aldi",
+    "original_name": "Plain Flour",
+    "generic_name": "plain flour",
+    "package_size_value": 1489.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 0.7,
+    "price_per_unit": null,
+    "price_per_100": 0.047,
     "currency": "GBP"
   },
   {
@@ -11580,6 +11415,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "canned cannellini beans",
+    "match_type": "ai",
+    "fuzzy_score": 64.3,
+    "shop": "aldi",
+    "original_name": "Red Kidney Beans",
+    "generic_name": "red kidney beans",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": false,
+    "price_package": 0.33,
+    "price_per_unit": null,
+    "price_per_100": null,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "canned green chiles",
     "match_type": "ai",
     "fuzzy_score": 78.3,
@@ -11640,21 +11490,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "cassava seasoned coating mix",
-    "match_type": "ai",
-    "fuzzy_score": 70.6,
-    "shop": "aldi",
-    "original_name": "Beef Casserole Seasoning Mix",
-    "generic_name": "beef casserole seasoning mix",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.35,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "cassava tortilla",
     "match_type": "ai",
     "fuzzy_score": 66.7,
@@ -11667,6 +11502,21 @@
     "price_package": 0.99,
     "price_per_unit": 0.17,
     "price_per_100": null,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "chipotle hot sauce",
+    "match_type": "ai",
+    "fuzzy_score": 80.0,
+    "shop": "aldi",
+    "original_name": "Curry Sauce",
+    "generic_name": "curry sauce",
+    "package_size_value": 441.0,
+    "unit": "ml",
+    "sold_by_weight": false,
+    "price_package": 0.49,
+    "price_per_unit": null,
+    "price_per_100": 0.1111,
     "currency": "GBP"
   },
   {
@@ -11745,33 +11595,63 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "gluten-free pretzels",
+    "ingredient_name": "gluten free crackers",
     "match_type": "ai",
-    "fuzzy_score": 65.0,
+    "fuzzy_score": 78.9,
     "shop": "aldi",
-    "original_name": "Salted Baked Pretzels 6 Pack",
-    "generic_name": "salted baked pretzels 6 pack",
-    "package_size_value": 132.0,
+    "original_name": "Lightly Salted Rice Crackers",
+    "generic_name": "lightly salted rice crackers",
+    "package_size_value": 100.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 1.29,
+    "price_package": 0.89,
     "price_per_unit": null,
-    "price_per_100": 0.9773,
+    "price_per_100": 0.89,
     "currency": "GBP"
   },
   {
-    "ingredient_name": "green chiles",
+    "ingredient_name": "gluten free sourdough bread",
     "match_type": "ai",
-    "fuzzy_score": 75.0,
+    "fuzzy_score": 71.8,
     "shop": "aldi",
-    "original_name": "Finger Chillies",
-    "generic_name": "finger chillies",
-    "package_size_value": 80.0,
+    "original_name": "Seeded Sourdough Sliced Loaf",
+    "generic_name": "seeded sourdough loaf",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": false,
+    "price_package": 1.89,
+    "price_per_unit": null,
+    "price_per_100": null,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "green chile",
+    "match_type": "ai",
+    "fuzzy_score": 73.7,
+    "shop": "aldi",
+    "original_name": "Red Chillies",
+    "generic_name": "red chillies",
+    "package_size_value": 65.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 0.79,
+    "price_package": 0.55,
     "price_per_unit": null,
-    "price_per_100": 0.9875,
+    "price_per_100": 0.8462,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "green plantain",
+    "match_type": "ai",
+    "fuzzy_score": 66.7,
+    "shop": "aldi",
+    "original_name": "Banana & Custard Fat Free Yogurt",
+    "generic_name": "banana",
+    "package_size_value": 160.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 0.39,
+    "price_per_unit": null,
+    "price_per_100": 0.2437,
     "currency": "GBP"
   },
   {
@@ -11790,21 +11670,6 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "hemp seeds",
-    "match_type": "ai",
-    "fuzzy_score": 82.4,
-    "shop": "aldi",
-    "original_name": "Sunflower Seeds",
-    "generic_name": "sunflower seeds",
-    "package_size_value": 250.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.15,
-    "price_per_unit": null,
-    "price_per_100": 0.46,
-    "currency": "GBP"
-  },
-  {
     "ingredient_name": "hummus",
     "match_type": "ai",
     "fuzzy_score": 72.7,
@@ -11820,47 +11685,17 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "italian dressing seasoning",
+    "ingredient_name": "maple extract",
     "match_type": "ai",
-    "fuzzy_score": 71.0,
+    "fuzzy_score": 70.6,
     "shop": "aldi",
-    "original_name": "Italian Mixed Herbs",
-    "generic_name": "italian mixed herbs",
+    "original_name": "Maple Syrup",
+    "generic_name": "maple syrup",
     "package_size_value": null,
     "unit": null,
     "sold_by_weight": false,
-    "price_package": 0.69,
+    "price_package": 3.99,
     "price_per_unit": null,
-    "price_per_100": null,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "lettuce leaves",
-    "match_type": "ai",
-    "fuzzy_score": 69.0,
-    "shop": "aldi",
-    "original_name": "Chopped Iceberg Lettuce",
-    "generic_name": "iceberg lettuce",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.64,
-    "price_per_unit": null,
-    "price_per_100": 0.32,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "liquid stevia",
-    "match_type": "ai",
-    "fuzzy_score": 63.2,
-    "shop": "aldi",
-    "original_name": "Stevia Sweetener Tablets",
-    "generic_name": "stevia sweetener tablets",
-    "package_size_value": 1,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 0.59,
-    "price_per_unit": 0.59,
     "price_per_100": null,
     "currency": "GBP"
   },
@@ -11907,21 +11742,6 @@
     "price_package": 1.29,
     "price_per_unit": null,
     "price_per_100": 0.9773,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "mint leaves",
-    "match_type": "ai",
-    "fuzzy_score": 66.7,
-    "shop": "aldi",
-    "original_name": "Cut Mint",
-    "generic_name": "cut mint",
-    "package_size_value": 30.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.5,
-    "price_per_unit": null,
-    "price_per_100": 1.6667,
     "currency": "GBP"
   },
   {
@@ -12000,33 +11820,78 @@
     "currency": "GBP"
   },
   {
-    "ingredient_name": "raw pecan halves",
+    "ingredient_name": "poultry seasoning",
+    "match_type": "ai",
+    "fuzzy_score": 84.6,
+    "shop": "aldi",
+    "original_name": "Garlic & Herb Seasoning",
+    "generic_name": "herb seasoning",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": false,
+    "price_package": 0.59,
+    "price_per_unit": null,
+    "price_per_100": null,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "powdered sugar",
+    "match_type": "ai",
+    "fuzzy_score": 72.7,
+    "shop": "aldi",
+    "original_name": "Granulated Sugar",
+    "generic_name": "granulated sugar",
+    "package_size_value": 1000,
+    "unit": "g",
+    "sold_by_weight": true,
+    "price_package": 1.09,
+    "price_per_unit": null,
+    "price_per_100": 0.109,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "provolone",
+    "match_type": "ai",
+    "fuzzy_score": 61.5,
+    "shop": "aldi",
+    "original_name": "Mascarpone",
+    "generic_name": "mascarpone",
+    "package_size_value": 250.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.79,
+    "price_per_unit": null,
+    "price_per_100": 0.716,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "red thai chilis",
     "match_type": "ai",
     "fuzzy_score": 83.3,
     "shop": "aldi",
-    "original_name": "Pecans",
-    "generic_name": "pecans",
-    "package_size_value": 150.0,
+    "original_name": "Red Chillies",
+    "generic_name": "red chillies",
+    "package_size_value": 65.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 2.99,
+    "price_package": 0.55,
     "price_per_unit": null,
-    "price_per_100": 1.9933,
+    "price_per_100": 0.8462,
     "currency": "GBP"
   },
   {
     "ingredient_name": "refried beans",
     "match_type": "ai",
-    "fuzzy_score": 69.2,
+    "fuzzy_score": 69.6,
     "shop": "aldi",
-    "original_name": "Mildly Spiced Taco Mixed Beans in a Tomato Sauce",
-    "generic_name": "mildly spiced taco mixed beans in a tomato sauce",
-    "package_size_value": null,
-    "unit": null,
+    "original_name": "Three Bean Chilli",
+    "generic_name": "three bean chilli",
+    "package_size_value": 500.0,
+    "unit": "g",
     "sold_by_weight": false,
-    "price_package": 0.79,
+    "price_package": 2.49,
     "price_per_unit": null,
-    "price_per_100": null,
+    "price_per_100": 0.498,
     "currency": "GBP"
   },
   {
@@ -12042,6 +11907,21 @@
     "price_package": 0.85,
     "price_per_unit": null,
     "price_per_100": 0.085,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "sandwich bun",
+    "match_type": "ai",
+    "fuzzy_score": 63.2,
+    "shop": "aldi",
+    "original_name": "Made with 100% British Beef Wagyu Burgers",
+    "generic_name": "made with beef burgers",
+    "package_size_value": 284.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 3.29,
+    "price_per_unit": null,
+    "price_per_100": 1.1585,
     "currency": "GBP"
   },
   {
@@ -12072,36 +11952,6 @@
     "price_package": 0.99,
     "price_per_unit": null,
     "price_per_100": null,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "shredded lettuce",
-    "match_type": "ai",
-    "fuzzy_score": 72.0,
-    "shop": "aldi",
-    "original_name": "Chopped Iceberg Lettuce",
-    "generic_name": "iceberg lettuce",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.64,
-    "price_per_unit": null,
-    "price_per_100": 0.32,
-    "currency": "GBP"
-  },
-  {
-    "ingredient_name": "skirt steak",
-    "match_type": "ai",
-    "fuzzy_score": 75.0,
-    "shop": "aldi",
-    "original_name": "XXL Rump Steaks",
-    "generic_name": "rump steaks",
-    "package_size_value": 800.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 12.99,
-    "price_per_unit": null,
-    "price_per_100": 1.6238,
     "currency": "GBP"
   },
   {
@@ -12165,6 +12015,21 @@
     "currency": "GBP"
   },
   {
+    "ingredient_name": "taco seasoning",
+    "match_type": "ai",
+    "fuzzy_score": 83.3,
+    "shop": "aldi",
+    "original_name": "Smoky BBQ Seasoning",
+    "generic_name": "smoky bbq seasoning",
+    "package_size_value": 35.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 0.55,
+    "price_per_unit": null,
+    "price_per_100": 1.5714,
+    "currency": "GBP"
+  },
+  {
     "ingredient_name": "tapioca flour",
     "match_type": "ai",
     "fuzzy_score": 77.8,
@@ -12207,6 +12072,51 @@
     "price_package": 0.89,
     "price_per_unit": null,
     "price_per_100": 0.445,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "tzatziki sauce",
+    "match_type": "ai",
+    "fuzzy_score": 72.7,
+    "shop": "aldi",
+    "original_name": "Slow Cooked Chicken Shawarma with Tzatziki",
+    "generic_name": "slow chicken shawarma with tzatziki",
+    "package_size_value": 480.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 3.69,
+    "price_per_unit": null,
+    "price_per_100": 0.7688,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "whole wheat breadcrumbs",
+    "match_type": "ai",
+    "fuzzy_score": 84.8,
+    "shop": "aldi",
+    "original_name": "Natural Breadcrumbs",
+    "generic_name": "natural breadcrumbs",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": false,
+    "price_package": 0.99,
+    "price_per_unit": null,
+    "price_per_100": null,
+    "currency": "GBP"
+  },
+  {
+    "ingredient_name": "yellow mustard",
+    "match_type": "ai",
+    "fuzzy_score": 78.3,
+    "shop": "aldi",
+    "original_name": "Dijon Mustard",
+    "generic_name": "dijon mustard",
+    "package_size_value": 200.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 0.49,
+    "price_per_unit": null,
+    "price_per_100": 0.245,
     "currency": "GBP"
   }
 ]

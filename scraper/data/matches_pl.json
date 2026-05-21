@@ -15,7 +15,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "ananas mrozony",
+    "ingredient_name": "ananas mroony",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "biedronka",
@@ -120,6 +120,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "banany plantain",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "biedronka",
+    "original_name": "Banan",
+    "generic_name": "banan",
+    "package_size_value": 1000.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 6.99,
+    "price_per_unit": null,
+    "price_per_100": 0.699,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "batat",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -180,21 +195,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "bazylia tajska",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "BIO Bazylia   Pewni Dobrego sztuka",
-    "generic_name": "bazylia",
-    "package_size_value": 100.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.99,
-    "price_per_unit": null,
-    "price_per_100": 7.99,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "bazylia świeża",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -225,24 +225,9 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "biala cebula",
+    "ingredient_name": "bezcukrowe kropelki czekoladowe",
     "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Cebula Warzywa Auchan na wagę ok. 1 kg",
-    "generic_name": "cebula",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 3.28,
-    "price_per_unit": null,
-    "price_per_100": 0.328,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "bialko czekoladowe w proszku",
-    "match_type": "auto",
-    "fuzzy_score": 88.2,
+    "fuzzy_score": 87.5,
     "shop": "auchan",
     "original_name": "Mleko czekoladowe UHT Mlekovita 1 l",
     "generic_name": "mleko czekoladowe",
@@ -255,22 +240,22 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "bialko serwatkowe",
+    "ingredient_name": "bezglutenowa mąka uniwersalna",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
-    "original_name": "Ser sałatkowy Grikios 270 g",
-    "generic_name": "ser",
-    "package_size_value": 270.0,
+    "original_name": "Mąka La Pasta 100%   Molino Casillo  1 kg",
+    "generic_name": "mąka",
+    "package_size_value": 1000.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 7.69,
+    "price_package": 8.19,
     "price_per_unit": null,
-    "price_per_100": 2.8481,
+    "price_per_100": 0.819,
     "currency": "PLN"
   },
   {
-    "ingredient_name": "bialko serwatkowe waniliowe",
+    "ingredient_name": "bialko serwatkowe",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -300,6 +285,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "biała fasola",
+    "match_type": "auto",
+    "fuzzy_score": 92.3,
+    "shop": "auchan",
+    "original_name": "BIO Fasolka Adzuki   EUREKO 400 g",
+    "generic_name": "fasolka",
+    "package_size_value": 400.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 17.79,
+    "price_per_unit": null,
+    "price_per_100": 4.4475,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "białka jaj",
     "match_type": "auto",
     "fuzzy_score": 85.7,
@@ -312,21 +312,6 @@
     "price_package": 10.49,
     "price_per_unit": null,
     "price_per_100": null,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "białko serwatkowe bez smaku",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Ser sałatkowy Grikios 270 g",
-    "generic_name": "ser",
-    "package_size_value": 270.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.69,
-    "price_per_unit": null,
-    "price_per_100": 2.8481,
     "currency": "PLN"
   },
   {
@@ -345,18 +330,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "borowki",
+    "ingredient_name": "borówka amerykańska",
     "match_type": "auto",
-    "fuzzy_score": 85.7,
+    "fuzzy_score": 100.0,
     "shop": "auchan",
-    "original_name": "Borówki amerykańska Owoce  Auchan 250 g",
-    "generic_name": "borówki amerykańska",
+    "original_name": "Borówka Amerykańska  Owoce  Auchan 250 g",
+    "generic_name": "borówka",
     "package_size_value": 250.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 17.29,
+    "price_package": 16.99,
     "price_per_unit": null,
-    "price_per_100": 6.916,
+    "price_per_100": 6.796,
     "currency": "PLN"
   },
   {
@@ -390,21 +375,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "brokuy",
-    "match_type": "auto",
-    "fuzzy_score": 90.9,
-    "shop": "biedronka",
-    "original_name": "Brokuł 1 szt.",
-    "generic_name": "brokuł",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.99,
-    "price_per_unit": null,
-    "price_per_100": 1.198,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "brokuł",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -420,7 +390,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "brokułowe mikroliście",
+    "ingredient_name": "brokuły",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "biedronka",
@@ -435,7 +405,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "brokuły",
+    "ingredient_name": "brokuły microgreens",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "biedronka",
@@ -495,18 +465,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "brązowy ryż błyskawiczny",
+    "ingredient_name": "brązowy ryż",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
-    "original_name": "Ryż Basmati Kupiec 400 g",
-    "generic_name": "ryż",
-    "package_size_value": 400.0,
+    "original_name": "Ryż brązowy Britta 500 g",
+    "generic_name": "ryż brązowy",
+    "package_size_value": 500.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 10.39,
+    "price_package": 6.18,
     "price_per_unit": null,
-    "price_per_100": 2.5975,
+    "price_per_100": 1.236,
     "currency": "PLN"
   },
   {
@@ -540,6 +510,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "burak",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Buraki gotowane całe Auchan 500 g",
+    "generic_name": "buraki gotowane całe",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 4.19,
+    "price_per_unit": null,
+    "price_per_100": 0.838,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "buraki",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -570,6 +555,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "bułka do kanapek",
+    "match_type": "auto",
+    "fuzzy_score": 87.5,
+    "shop": "biedronka",
+    "original_name": "Pano Bułki do kanapki w stylu amerykańskim 228 g",
+    "generic_name": "pano bułki do kanapki w stylu amerykańskim",
+    "package_size_value": 228.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 5.19,
+    "price_per_unit": null,
+    "price_per_100": 2.2763,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "bułka tarta przyprawiona",
     "match_type": "auto",
     "fuzzy_score": 88.9,
@@ -585,7 +585,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "bułki do burgerów",
+    "ingredient_name": "bułki",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "biedronka",
@@ -597,36 +597,6 @@
     "price_package": 5.69,
     "price_per_unit": null,
     "price_per_100": 1.7781,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "bułki do kanapek",
-    "match_type": "auto",
-    "fuzzy_score": 93.8,
-    "shop": "biedronka",
-    "original_name": "Pano Bułki do kanapki w stylu amerykańskim 228 g",
-    "generic_name": "pano bułki do kanapki w stylu amerykańskim",
-    "package_size_value": 228.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.19,
-    "price_per_unit": null,
-    "price_per_100": 2.2763,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "caly kurczak",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Kraina Mięs Select Kurczak farmerski porcja rosołowa z kurczaka kg",
-    "generic_name": "kurczak",
-    "package_size_value": 600.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.99,
-    "price_per_unit": null,
-    "price_per_100": 0.9983,
     "currency": "PLN"
   },
   {
@@ -657,21 +627,6 @@
     "price_package": 2.99,
     "price_per_unit": null,
     "price_per_100": 2.99,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "cebula biala",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Cebula Warzywa Auchan na wagę ok. 1 kg",
-    "generic_name": "cebula",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 3.28,
-    "price_per_unit": null,
-    "price_per_100": 0.328,
     "currency": "PLN"
   },
   {
@@ -795,21 +750,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "cebula zolta",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Cebula Warzywa Auchan na wagę ok. 1 kg",
-    "generic_name": "cebula",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 3.28,
-    "price_per_unit": null,
-    "price_per_100": 0.328,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "cebula żółta",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -840,21 +780,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "cheddar biały",
-    "match_type": "auto",
-    "fuzzy_score": 87.5,
-    "shop": "auchan",
-    "original_name": "Ryż biały Parboiled Auchan 4 x 100 g",
-    "generic_name": "ryż biały",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.29,
-    "price_per_unit": null,
-    "price_per_100": 0.8225,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "cheerios",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -867,21 +792,6 @@
     "price_package": 11.29,
     "price_per_unit": null,
     "price_per_100": 3.2257,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "chili",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Mięso z małży omułki chilijskie Auchan 450 g",
-    "generic_name": "mięso z małży omułki chilijskie",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 26.99,
-    "price_per_unit": null,
-    "price_per_100": 5.9978,
     "currency": "PLN"
   },
   {
@@ -1005,6 +915,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "coleslaw",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Surówka coleslaw MAGA 300 g",
+    "generic_name": "surówka coleslaw",
+    "package_size_value": 300.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 3.99,
+    "price_per_unit": null,
+    "price_per_100": 1.33,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "cukier",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -1017,21 +942,6 @@
     "price_package": 9.49,
     "price_per_unit": null,
     "price_per_100": 0.4745,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "cukier brzowy",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Cukier drobny Auchan 750 g",
-    "generic_name": "cukier",
-    "package_size_value": 750.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.49,
-    "price_per_unit": null,
-    "price_per_100": 1.2653,
     "currency": "PLN"
   },
   {
@@ -1080,6 +990,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "cukier kokosowy pudrowy",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Cukier drobny Auchan 750 g",
+    "generic_name": "cukier",
+    "package_size_value": 750.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 9.49,
+    "price_per_unit": null,
+    "price_per_100": 1.2653,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "cukier palmowy",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -1110,21 +1035,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "cukier puder kokosowy",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Cukier puder Polski Cukier 500 g",
-    "generic_name": "cukier puder",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.49,
-    "price_per_unit": null,
-    "price_per_100": 1.498,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "cukier trzcinowy",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -1152,6 +1062,21 @@
     "price_package": 5.2,
     "price_per_unit": null,
     "price_per_100": 1.3,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "cukrowy groszek",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Groszek cukrowy Auchan 450 g",
+    "generic_name": "groszek cukrowy",
+    "package_size_value": 450.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 10.25,
+    "price_per_unit": null,
+    "price_per_100": 2.2778,
     "currency": "PLN"
   },
   {
@@ -1305,22 +1230,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "czekolada keto",
-    "match_type": "auto",
-    "fuzzy_score": 85.7,
-    "shop": "auchan",
-    "original_name": "Jogurt skyr proteinowy biała czekolada kokos Auchan 330 g",
-    "generic_name": "jogurt skyr proteinowy biała czekolada kokos",
-    "package_size_value": 330.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.69,
-    "price_per_unit": null,
-    "price_per_100": 1.4212,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "czekoladowe bialko serwatkowe",
+    "ingredient_name": "czekoladowe białko serwatkowe",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -1332,6 +1242,21 @@
     "price_package": 7.69,
     "price_per_unit": null,
     "price_per_100": 2.8481,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "czerwona cebula",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Cebula Warzywa Auchan na wagę ok. 1 kg",
+    "generic_name": "cebula",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 3.28,
+    "price_per_unit": null,
+    "price_per_100": 0.328,
     "currency": "PLN"
   },
   {
@@ -1347,21 +1272,6 @@
     "price_package": 11.99,
     "price_per_unit": null,
     "price_per_100": 2.9975,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "czerwone gruszki",
-    "match_type": "auto",
-    "fuzzy_score": 87.5,
-    "shop": "auchan",
-    "original_name": "Gruszki Owoce  Auchan na wagę ok. 600 g",
-    "generic_name": "gruszki g",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 4.79,
-    "price_per_unit": null,
-    "price_per_100": 0.799,
     "currency": "PLN"
   },
   {
@@ -1440,21 +1350,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "daktyle bez pestek",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Daktyle Medijule Jumbo Palma Deluxe 500 g",
-    "generic_name": "daktyle",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 32.19,
-    "price_per_unit": null,
-    "price_per_100": 6.438,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "daktyle medjool",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -1485,21 +1380,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "dressing cytrynowo-ziolowy",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Dr. Oetker Śmietan-fix 9 g",
-    "generic_name": "dr",
-    "package_size_value": 9.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": null,
-    "price_per_100": 11.0,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "dressing cytrynowo-ziołowy",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -1516,36 +1396,6 @@
   },
   {
     "ingredient_name": "dressing kolendrowo-bazyliowy",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Dr. Oetker Śmietan-fix 9 g",
-    "generic_name": "dr",
-    "package_size_value": 9.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": null,
-    "price_per_100": 11.0,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "drewniane patyczki",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Dr. Oetker Śmietan-fix 9 g",
-    "generic_name": "dr",
-    "package_size_value": 9.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": null,
-    "price_per_100": 11.0,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "drozdze nieaktywne",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "biedronka",
@@ -1650,6 +1500,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "dynia makaronowa",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "biedronka",
+    "original_name": "Dynia piżmowa",
+    "generic_name": "dynia",
+    "package_size_value": 1500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 10.48,
+    "price_per_unit": null,
+    "price_per_100": 0.6987,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "dynia piżmowa",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -1710,6 +1575,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "dziki ryż",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Ryż Basmati Kupiec 400 g",
+    "generic_name": "ryż",
+    "package_size_value": 400.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 10.39,
+    "price_per_unit": null,
+    "price_per_100": 2.5975,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "dżem morelowy",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -1755,21 +1635,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "erytrytol granulowany",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Erytrytol Big Nature 1 kg",
-    "generic_name": "erytrytol",
-    "package_size_value": 1000.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 28.8,
-    "price_per_unit": null,
-    "price_per_100": 2.88,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "erytrytol pudrowy",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -1800,36 +1665,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "fajita z kurczaka",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Kraina Mięs Select Kurczak farmerski porcja rosołowa z kurczaka kg",
-    "generic_name": "kurczak",
-    "package_size_value": 600.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.99,
-    "price_per_unit": null,
-    "price_per_100": 0.9983,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "fasola biala",
-    "match_type": "auto",
-    "fuzzy_score": 92.3,
-    "shop": "auchan",
-    "original_name": "BIO Fasolka Adzuki   EUREKO 400 g",
-    "generic_name": "fasolka",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 17.79,
-    "price_per_unit": null,
-    "price_per_100": 4.4475,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "fasola cannellini",
     "match_type": "auto",
     "fuzzy_score": 92.3,
@@ -1845,18 +1680,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "fasola czarna",
+    "ingredient_name": "fasola cannellini z puszki",
     "match_type": "auto",
-    "fuzzy_score": 100.0,
+    "fuzzy_score": 92.3,
     "shop": "auchan",
-    "original_name": "Fasola czarna   Dawtona 400 g",
-    "generic_name": "fasola czarna",
-    "package_size_value": 240.0,
+    "original_name": "BIO Fasolka Adzuki   EUREKO 400 g",
+    "generic_name": "fasolka",
+    "package_size_value": 400.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 3.38,
+    "price_package": 17.79,
     "price_per_unit": null,
-    "price_per_100": 1.4083,
+    "price_per_100": 4.4475,
     "currency": "PLN"
   },
   {
@@ -1890,7 +1725,22 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "fasola po meksykansku",
+    "ingredient_name": "fasola refried",
+    "match_type": "auto",
+    "fuzzy_score": 92.3,
+    "shop": "auchan",
+    "original_name": "BIO Fasolka Adzuki   EUREKO 400 g",
+    "generic_name": "fasolka",
+    "package_size_value": 400.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 17.79,
+    "price_per_unit": null,
+    "price_per_100": 4.4475,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "fasola refried jalapeno",
     "match_type": "auto",
     "fuzzy_score": 92.3,
     "shop": "auchan",
@@ -1906,6 +1756,21 @@
   },
   {
     "ingredient_name": "fasolka szparagowa",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Fasolka szparagowa zielona Hortex 450 g",
+    "generic_name": "fasolka szparagowa zielona",
+    "package_size_value": 450.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 8.19,
+    "price_per_unit": null,
+    "price_per_100": 1.82,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "fasolka szparagowa zielona",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -1965,9 +1830,9 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "galka muszkatolowa mielona",
+    "ingredient_name": "gałka muszkatołowa",
     "match_type": "auto",
-    "fuzzy_score": 92.3,
+    "fuzzy_score": 100.0,
     "shop": "auchan",
     "original_name": "Gałka muszkatołowa mielona Prymat 10 g",
     "generic_name": "gałka muszkatołowa mielona",
@@ -1980,7 +1845,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "gałka muszkatołowa",
+    "ingredient_name": "gałka muszkatołowa mielona",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -2010,6 +1875,51 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "gotowe fajita z kurczaka",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "biedronka",
+    "original_name": "Kraina Mięs Select Kurczak farmerski porcja rosołowa z kurczaka kg",
+    "generic_name": "kurczak",
+    "package_size_value": 600.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 5.99,
+    "price_per_unit": null,
+    "price_per_100": 0.9983,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "goździk",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Jaglanka o smaku jabłko-cynamon i goździków Pewni Dobrego 180 g",
+    "generic_name": "jaglanka o smaku jabłko-cynamon i goździków",
+    "package_size_value": 180.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 5.99,
+    "price_per_unit": null,
+    "price_per_100": 3.3278,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "goździki",
+    "match_type": "auto",
+    "fuzzy_score": 87.5,
+    "shop": "auchan",
+    "original_name": "Jaglanka o smaku jabłko-cynamon i goździków Pewni Dobrego 180 g",
+    "generic_name": "jaglanka o smaku jabłko-cynamon i goździków",
+    "package_size_value": 180.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 5.99,
+    "price_per_unit": null,
+    "price_per_100": 3.3278,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "granola",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -2025,7 +1935,37 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "granulat cebuli",
+    "match_type": "auto",
+    "fuzzy_score": 85.7,
+    "shop": "auchan",
+    "original_name": "Granola ChocoLove One Day More 400 g",
+    "generic_name": "granola",
+    "package_size_value": 450.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 17.79,
+    "price_per_unit": null,
+    "price_per_100": 3.9533,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "granulat czosnkowy",
+    "match_type": "auto",
+    "fuzzy_score": 85.7,
+    "shop": "auchan",
+    "original_name": "Granola ChocoLove One Day More 400 g",
+    "generic_name": "granola",
+    "package_size_value": 450.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 17.79,
+    "price_per_unit": null,
+    "price_per_100": 3.9533,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "granulat czosnku",
     "match_type": "auto",
     "fuzzy_score": 85.7,
     "shop": "auchan",
@@ -2070,7 +2010,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "groszek zielony mrożony",
+    "ingredient_name": "groszek zielony",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -2100,6 +2040,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "gruszki",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Gruszki Odmiana Konferencja Owoce  Auchan na wagę ok. 600 g",
+    "generic_name": "gruszki odmiana konferencja g",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 4.19,
+    "price_per_unit": null,
+    "price_per_100": 0.699,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "grzanki",
     "match_type": "auto",
     "fuzzy_score": 85.7,
@@ -2112,21 +2067,6 @@
     "price_package": 2.2,
     "price_per_unit": null,
     "price_per_100": 10.4762,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "grzyby",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Grzyby Shimeji brązowe całe Warzywa Auchan 150 g",
-    "generic_name": "grzyby shimeji brązowe całe",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.99,
-    "price_per_unit": null,
-    "price_per_100": 5.3267,
     "currency": "PLN"
   },
   {
@@ -2157,21 +2097,6 @@
     "price_package": 12.98,
     "price_per_unit": null,
     "price_per_100": 6.49,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "halloumi",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Ser na grill typu halloumi Grikios 200 g",
-    "generic_name": "ser na grill typu halloumi",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.98,
-    "price_per_unit": null,
-    "price_per_100": 4.99,
     "currency": "PLN"
   },
   {
@@ -2235,21 +2160,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "imbirowe maslo migdalowe",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Imbir korzeń Owoce  Auchan na wagę ok. 100 g",
-    "generic_name": "imbir",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 2.19,
-    "price_per_unit": null,
-    "price_per_100": 2.189,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "indyk",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -2280,6 +2190,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "jabłka słodko-kwaśne",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Jabłka Owoce  Auchan 3 kg",
+    "generic_name": "jabłka",
+    "package_size_value": 3000.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 11.48,
+    "price_per_unit": null,
+    "price_per_100": 0.3827,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "jabłko",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -2292,6 +2217,36 @@
     "price_package": 7.79,
     "price_per_unit": null,
     "price_per_100": 1.1129,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "jabłko zielone",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "biedronka",
+    "original_name": "Jabłko polskie 1,5 kg",
+    "generic_name": "jabłko",
+    "package_size_value": 1500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 5.99,
+    "price_per_unit": null,
+    "price_per_100": 0.3993,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "jagoda",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Skyr jogurt typu islandzkiego jagoda Piątnica 330 ml",
+    "generic_name": "skyr jogurt typu islandzkiego jagoda",
+    "package_size_value": 330.0,
+    "unit": "ml",
+    "sold_by_weight": false,
+    "price_package": 5.48,
+    "price_per_unit": null,
+    "price_per_100": 1.6606,
     "currency": "PLN"
   },
   {
@@ -2328,6 +2283,21 @@
     "ingredient_name": "jajka",
     "match_type": "auto",
     "fuzzy_score": 88.9,
+    "shop": "auchan",
+    "original_name": "Jaja ekologiczne Pewni Dobrego 6 sztuk",
+    "generic_name": "jaja",
+    "package_size_value": 6.0,
+    "unit": "pcs",
+    "sold_by_weight": false,
+    "price_package": 10.49,
+    "price_per_unit": null,
+    "price_per_100": null,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "jajka na twardo",
+    "match_type": "auto",
+    "fuzzy_score": 85.7,
     "shop": "auchan",
     "original_name": "Jaja ekologiczne Pewni Dobrego 6 sztuk",
     "generic_name": "jaja",
@@ -2385,36 +2355,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "jarmuz",
-    "match_type": "auto",
-    "fuzzy_score": 90.9,
-    "shop": "auchan",
-    "original_name": "Jarmuż myty  Warzywa Auchan 150 g",
-    "generic_name": "jarmuż myty",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.49,
-    "price_per_unit": null,
-    "price_per_100": 2.9933,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "jarmuz toskanski",
-    "match_type": "auto",
-    "fuzzy_score": 90.9,
-    "shop": "biedronka",
-    "original_name": "Vital Fresh Jarmuż 200 g",
-    "generic_name": "jarmuż",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 6.99,
-    "price_per_unit": null,
-    "price_per_100": 3.495,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "jarmuż",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -2431,6 +2371,21 @@
   },
   {
     "ingredient_name": "jarmuż baby",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "biedronka",
+    "original_name": "Vital Fresh Jarmuż 200 g",
+    "generic_name": "jarmuż",
+    "package_size_value": 200.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 6.99,
+    "price_per_unit": null,
+    "price_per_100": 3.495,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "jarmuż toskański",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "biedronka",
@@ -2475,7 +2430,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "jogurt grecki",
+    "ingredient_name": "jogurt",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -2490,7 +2445,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "jogurt migdalowy",
+    "ingredient_name": "jogurt grecki",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -2535,21 +2490,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "jogurt rosliny",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Jogurt naturalny     Auchan 400 g",
-    "generic_name": "jogurt",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.49,
-    "price_per_unit": null,
-    "price_per_100": 0.6225,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "jogurt roślinny",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -2577,21 +2517,6 @@
     "price_package": 6.69,
     "price_per_unit": null,
     "price_per_100": 6.0818,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "kakao ciemne",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Bakello Kakao extra ciemne 200 g",
-    "generic_name": "bakello kakao ciemne",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 10.99,
-    "price_per_unit": null,
-    "price_per_100": 5.495,
     "currency": "PLN"
   },
   {
@@ -2670,21 +2595,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "kapusta i marchew",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Marchew",
-    "generic_name": "marchew",
-    "package_size_value": 100.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.4,
-    "price_per_unit": null,
-    "price_per_100": 0.4,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "kapusta pekińska",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -2745,78 +2655,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "kielbasa",
+    "ingredient_name": "keto czekolada",
     "match_type": "auto",
-    "fuzzy_score": 87.5,
+    "fuzzy_score": 88.0,
     "shop": "auchan",
-    "original_name": "Kiełbasa podwawelska Pewni Dobrego 420 g",
-    "generic_name": "kiełbasa podwawelska",
-    "package_size_value": 420.0,
+    "original_name": "Danio extra czekolada Danone 4 x 130 g",
+    "generic_name": "danio czekolada",
+    "package_size_value": 560.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 18.99,
+    "price_package": 8.98,
     "price_per_unit": null,
-    "price_per_100": 4.5214,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "kielbasa andouille",
-    "match_type": "auto",
-    "fuzzy_score": 87.5,
-    "shop": "auchan",
-    "original_name": "Kiełbasa Krakowska Spichlerz Rusiecki 280 g",
-    "generic_name": "kiełbasa",
-    "package_size_value": 280.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.79,
-    "price_per_unit": null,
-    "price_per_100": 3.4964,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "kielbasa wloska",
-    "match_type": "auto",
-    "fuzzy_score": 87.5,
-    "shop": "auchan",
-    "original_name": "Kiełbasa Krakowska Spichlerz Rusiecki 280 g",
-    "generic_name": "kiełbasa",
-    "package_size_value": 280.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.79,
-    "price_per_unit": null,
-    "price_per_100": 3.4964,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "kielbasa z kurczaka",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Kraina Mięs Select Kurczak farmerski porcja rosołowa z kurczaka kg",
-    "generic_name": "kurczak",
-    "package_size_value": 600.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.99,
-    "price_per_unit": null,
-    "price_per_100": 0.9983,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "kielbaski sniadaniowe",
-    "match_type": "auto",
-    "fuzzy_score": 95.2,
-    "shop": "auchan",
-    "original_name": "Śniadaniowe z Łukowa 63% Lumiko 270 g",
-    "generic_name": "śniadaniowe",
-    "package_size_value": 270.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.89,
-    "price_per_unit": null,
-    "price_per_100": 1.4407,
+    "price_per_100": 1.6036,
     "currency": "PLN"
   },
   {
@@ -2895,7 +2745,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "kiełbasa włoska ostra beyond meat",
+    "ingredient_name": "kiełbasa włoska ostra",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -2907,21 +2757,6 @@
     "price_package": 9.79,
     "price_per_unit": null,
     "price_per_100": 3.4964,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "kiełbasa z indyka",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Szyja z indyka Auchan na wagę ok. 600 g",
-    "generic_name": "indyk",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 7.14,
-    "price_per_unit": null,
-    "price_per_100": 1.19,
     "currency": "PLN"
   },
   {
@@ -2955,6 +2790,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "kiełbasa śniadaniowa",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Śniadaniowa klasyczna Bielmar 450 g",
+    "generic_name": "śniadaniowa",
+    "package_size_value": 450.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 5.39,
+    "price_per_unit": null,
+    "price_per_100": 1.1978,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "kiełbasa śniadaniowa wieprzowa",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -2967,6 +2817,21 @@
     "price_package": 5.39,
     "price_per_unit": null,
     "price_per_100": 1.1978,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "kiełbaski z indyka na śniadanie",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Szyja z indyka Auchan na wagę ok. 600 g",
+    "generic_name": "indyk",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 7.14,
+    "price_per_unit": null,
+    "price_per_100": 1.19,
     "currency": "PLN"
   },
   {
@@ -3090,9 +2955,9 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "komosa ryzowa",
+    "ingredient_name": "komosa ryżowa",
     "match_type": "auto",
-    "fuzzy_score": 92.3,
+    "fuzzy_score": 100.0,
     "shop": "auchan",
     "original_name": "Quinoa Komosa Ryżowa Intenson 250 g",
     "generic_name": "komosa ryżowa",
@@ -3105,7 +2970,22 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "komosa ryżowa",
+    "ingredient_name": "komosa ryżowa biała",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Quinoa Komosa Ryżowa Intenson 250 g",
+    "generic_name": "komosa ryżowa",
+    "package_size_value": 250.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 9.49,
+    "price_per_unit": null,
+    "price_per_100": 3.796,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "komosa ryżowa ugotowana",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -3147,21 +3027,6 @@
     "price_package": 8.0,
     "price_per_unit": null,
     "price_per_100": 1.599,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "konfitura morelowa",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Konfitura extra z Truskawek o obniżonej zawartości cukru Herbapol 240 g",
-    "generic_name": "konfitura",
-    "package_size_value": 240.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.48,
-    "price_per_unit": null,
-    "price_per_100": 3.1167,
     "currency": "PLN"
   },
   {
@@ -3225,6 +3090,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "kostka rosołowa wołowa",
+    "match_type": "auto",
+    "fuzzy_score": 85.7,
+    "shop": "biedronka",
+    "original_name": "Kraina Mięs Porcja rosołowa wołowa",
+    "generic_name": "wołowina",
+    "package_size_value": 800.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 22.32,
+    "price_per_unit": null,
+    "price_per_100": 2.79,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "kozieradka",
     "match_type": "auto",
     "fuzzy_score": 90.0,
@@ -3252,21 +3132,6 @@
     "price_package": 1.89,
     "price_per_unit": null,
     "price_per_100": 2.1,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "krem kokosowy",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "BIO Ekologiczny krem kokosowy o zawartości tłuszczu 17% NaturaVena 400 ml",
-    "generic_name": "krem kokosowy o zawartości tłuszczu 17%",
-    "package_size_value": 400.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 12.39,
-    "price_per_unit": null,
-    "price_per_100": 3.0975,
     "currency": "PLN"
   },
   {
@@ -3315,33 +3180,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "kropelki czekoladowe",
+    "ingredient_name": "kruszony rozmaryn",
     "match_type": "auto",
-    "fuzzy_score": 87.5,
+    "fuzzy_score": 100.0,
     "shop": "auchan",
-    "original_name": "Mleko czekoladowe UHT Mlekovita 1 l",
-    "generic_name": "mleko czekoladowe",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 5.79,
-    "price_per_unit": null,
-    "price_per_100": 0.579,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "kruszone ziarna kakaowca",
-    "match_type": "auto",
-    "fuzzy_score": 85.7,
-    "shop": "auchan",
-    "original_name": "Warzywa suszone Makar 500 g",
-    "generic_name": "suszone",
-    "package_size_value": 500.0,
+    "original_name": "Rozmaryn Kamis 15 g",
+    "generic_name": "rozmaryn",
+    "package_size_value": 15.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 19.75,
+    "price_package": 2.48,
     "price_per_unit": null,
-    "price_per_100": 3.95,
+    "price_per_100": 16.5333,
     "currency": "PLN"
   },
   {
@@ -3360,21 +3210,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "kukurydza mrożona",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "MR Słynne Roślinne Margaryna 500 g",
-    "generic_name": "mr",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.99,
-    "price_per_unit": null,
-    "price_per_100": 1.598,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "kukurydza słodka",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -3387,21 +3222,6 @@
     "price_package": 4.19,
     "price_per_unit": null,
     "price_per_100": 2.9929,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "kur-kuma",
-    "match_type": "auto",
-    "fuzzy_score": 93.3,
-    "shop": "auchan",
-    "original_name": "Kurkuma korzeń Owoce  Auchan na wagę ok. 100 g",
-    "generic_name": "kurkuma",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 5.18,
-    "price_per_unit": null,
-    "price_per_100": 5.179,
     "currency": "PLN"
   },
   {
@@ -3435,7 +3255,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "kurczak z rożna",
+    "ingredient_name": "kurczak gotowany",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "biedronka",
@@ -3555,21 +3375,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "liście jarmużu",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Vital Fresh Jarmuż 200 g",
-    "generic_name": "jarmuż",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 6.99,
-    "price_per_unit": null,
-    "price_per_100": 3.495,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "losos",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -3630,21 +3435,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "maka",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Makaron na patelnię z kurkami Hortex 450 g",
-    "generic_name": "makaron na patelnię z kurkami",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 12.69,
-    "price_per_unit": null,
-    "price_per_100": 2.82,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "maka bezglutenowa",
     "match_type": "auto",
     "fuzzy_score": 94.1,
@@ -3687,21 +3477,6 @@
     "price_package": 16.59,
     "price_per_unit": null,
     "price_per_100": 16.59,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "maka owsiana",
-    "match_type": "auto",
-    "fuzzy_score": 93.3,
-    "shop": "auchan",
-    "original_name": "Owsianka malinowa Auchan 50 g",
-    "generic_name": "owsianka",
-    "package_size_value": 50.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.89,
-    "price_per_unit": null,
-    "price_per_100": 3.78,
     "currency": "PLN"
   },
   {
@@ -3765,21 +3540,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "makaron fusilli z ciecierzycy",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Makaron Fusilli Al Bronzo   Auchan 500 g",
-    "generic_name": "makaron",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.49,
-    "price_per_unit": null,
-    "price_per_100": 1.098,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "makaron jajeczny",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -3822,21 +3582,6 @@
     "price_package": 4.65,
     "price_per_unit": null,
     "price_per_100": 0.93,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "makaron lokszykowy",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Makaron Fusilli Al Bronzo   Auchan 500 g",
-    "generic_name": "makaron",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.49,
-    "price_per_unit": null,
-    "price_per_100": 1.098,
     "currency": "PLN"
   },
   {
@@ -3885,6 +3630,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "makaron quinoa bezglutenowy",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Makaron Fusilli Al Bronzo   Auchan 500 g",
+    "generic_name": "makaron",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 5.49,
+    "price_per_unit": null,
+    "price_per_100": 1.098,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "makaron ramen z brązowego ryżu i prosa",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -3915,36 +3675,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "makaron ryzowy",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Makaron Fusilli Al Bronzo   Auchan 500 g",
-    "generic_name": "makaron",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.49,
-    "price_per_unit": null,
-    "price_per_100": 1.098,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "makaron ryzowy brazowy",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Makaron Fusilli Al Bronzo   Auchan 500 g",
-    "generic_name": "makaron",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.49,
-    "price_per_unit": null,
-    "price_per_100": 1.098,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "makaron ryżowy",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -3957,6 +3687,21 @@
     "price_package": 6.68,
     "price_per_unit": null,
     "price_per_100": 3.34,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "makaron ryżowy brązowy",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Makaron ryżowy Vermicelli House of Asia 200 g",
+    "generic_name": "makaron ryżowy",
+    "package_size_value": 200.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 6.14,
+    "price_per_unit": null,
+    "price_per_100": 3.07,
     "currency": "PLN"
   },
   {
@@ -4005,6 +3750,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "makaron z ciecierzycy z serem",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Ser sałatkowy Grikios 270 g",
+    "generic_name": "ser",
+    "package_size_value": 270.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 7.69,
+    "price_per_unit": null,
+    "price_per_100": 2.8481,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "makaron z cukinii",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -4020,7 +3780,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "makaron z komosy ryżowej",
+    "ingredient_name": "makaron łokieć",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -4032,21 +3792,6 @@
     "price_package": 5.49,
     "price_per_unit": null,
     "price_per_100": 1.098,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "makaron z serem",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Ser sałatkowy Grikios 270 g",
-    "generic_name": "ser",
-    "package_size_value": 270.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.69,
-    "price_per_unit": null,
-    "price_per_100": 2.8481,
     "currency": "PLN"
   },
   {
@@ -4080,21 +3825,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "mandarynki",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Mandarynki Owoce  Auchan 1 kg",
-    "generic_name": "mandarynki",
-    "package_size_value": 1000.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.99,
-    "price_per_unit": null,
-    "price_per_100": 0.899,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "mango",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -4125,37 +3855,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "marchewka",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Marchew",
-    "generic_name": "marchew",
-    "package_size_value": 100.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.4,
-    "price_per_unit": null,
-    "price_per_100": 0.4,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "marchewka baby",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Marchew",
-    "generic_name": "marchew",
-    "package_size_value": 100.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.4,
-    "price_per_unit": null,
-    "price_per_100": 0.4,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "marchewki",
+    "ingredient_name": "marchew baby",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "biedronka",
@@ -4185,18 +3885,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "maslo kokosowe",
+    "ingredient_name": "marynowane serce karczocha",
     "match_type": "auto",
-    "fuzzy_score": 88.0,
+    "fuzzy_score": 100.0,
     "shop": "auchan",
-    "original_name": "Mleko kokosowe House of Asia 400 ml",
-    "generic_name": "mleko kokosowe",
-    "package_size_value": 400.0,
-    "unit": "ml",
+    "original_name": "Ser sałatkowy Grikios 270 g",
+    "generic_name": "ser",
+    "package_size_value": 270.0,
+    "unit": "g",
     "sold_by_weight": false,
-    "price_package": 6.28,
+    "price_package": 7.69,
     "price_per_unit": null,
-    "price_per_100": 1.57,
+    "price_per_100": 2.8481,
     "currency": "PLN"
   },
   {
@@ -4212,21 +3912,6 @@
     "price_package": 11.39,
     "price_per_unit": null,
     "price_per_100": 3.2543,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "maslo orzechowe czekoladowe",
-    "match_type": "auto",
-    "fuzzy_score": 93.3,
-    "shop": "auchan",
-    "original_name": "Masło orzechowe Smooth Sante 900 g",
-    "generic_name": "masło orzechowe",
-    "package_size_value": 900.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 25.49,
-    "price_per_unit": null,
-    "price_per_100": 2.8322,
     "currency": "PLN"
   },
   {
@@ -4290,7 +3975,67 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "masło migdałowe niesłodzone",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Masło extra Osełka górska z dodatkiem soli morskiej 82% tłuszczu Sobik 100 g",
+    "generic_name": "masło",
+    "package_size_value": 100.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 6.79,
+    "price_per_unit": null,
+    "price_per_100": 6.79,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "masło migdałowe z przyprawą piernikową",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Masło extra Osełka górska z dodatkiem soli morskiej 82% tłuszczu Sobik 100 g",
+    "generic_name": "masło",
+    "package_size_value": 100.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 6.79,
+    "price_per_unit": null,
+    "price_per_100": 6.79,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "masło niesolone",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Masło extra Osełka górska z dodatkiem soli morskiej 82% tłuszczu Sobik 100 g",
+    "generic_name": "masło",
+    "package_size_value": 100.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 6.79,
+    "price_per_unit": null,
+    "price_per_100": 6.79,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "masło orzechowe",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Masło extra Osełka górska z dodatkiem soli morskiej 82% tłuszczu Sobik 100 g",
+    "generic_name": "masło",
+    "package_size_value": 100.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 6.79,
+    "price_per_unit": null,
+    "price_per_100": 6.79,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "masło orzechowe czekoladowe",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -4317,6 +4062,66 @@
     "price_package": 6.79,
     "price_per_unit": null,
     "price_per_100": 6.79,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "masło z nerkowców",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Masło extra Osełka górska z dodatkiem soli morskiej 82% tłuszczu Sobik 100 g",
+    "generic_name": "masło",
+    "package_size_value": 100.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 6.79,
+    "price_per_unit": null,
+    "price_per_100": 6.79,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "masło z orzechów nerkowca",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Masło extra Osełka górska z dodatkiem soli morskiej 82% tłuszczu Sobik 100 g",
+    "generic_name": "masło",
+    "package_size_value": 100.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 6.79,
+    "price_per_unit": null,
+    "price_per_100": 6.79,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "małe złote ziemniaki",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "biedronka",
+    "original_name": "Ziemniaki sałatkowe 1,5 kg",
+    "generic_name": "ziemniaki",
+    "package_size_value": 1500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 5.99,
+    "price_per_unit": null,
+    "price_per_100": 0.3993,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "maślanka w proszku",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Maślanka naturalna            Pewni Dobrego 1 kg",
+    "generic_name": "maślanka",
+    "package_size_value": 1000.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 3.98,
+    "price_per_unit": null,
+    "price_per_100": 0.398,
     "currency": "PLN"
   },
   {
@@ -4350,21 +4155,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "melon cantaloupe",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Melon Galia",
-    "generic_name": "melon",
-    "package_size_value": 1200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 15.59,
-    "price_per_unit": null,
-    "price_per_100": 1.2992,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "melon kantalupa",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -4395,6 +4185,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "mielona kurkuma",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Kurkuma korzeń Owoce  Auchan na wagę ok. 100 g",
+    "generic_name": "kurkuma",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 5.18,
+    "price_per_unit": null,
+    "price_per_100": 5.179,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "mielona wieprzowina",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -4413,21 +4218,6 @@
     "ingredient_name": "mielona wolowina",
     "match_type": "auto",
     "fuzzy_score": 93.8,
-    "shop": "auchan",
-    "original_name": "Mięso mielone wołowe Łuków 400 g",
-    "generic_name": "mielona wołowina",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 22.99,
-    "price_per_unit": null,
-    "price_per_100": 5.7475,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "mielona woowina",
-    "match_type": "auto",
-    "fuzzy_score": 96.8,
     "shop": "auchan",
     "original_name": "Mięso mielone wołowe Łuków 400 g",
     "generic_name": "mielona wołowina",
@@ -4485,6 +4275,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "mielony imbir",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Imbir korzeń Owoce  Auchan na wagę ok. 100 g",
+    "generic_name": "imbir",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 2.19,
+    "price_per_unit": null,
+    "price_per_100": 2.189,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "mielony indyk",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -4497,6 +4302,21 @@
     "price_package": 7.14,
     "price_per_unit": null,
     "price_per_100": 1.19,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "mielony kmin rzymski",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Kmin rzymski mielony Kotányi 15 g",
+    "generic_name": "kmin rzymski mielony",
+    "package_size_value": 15.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 2.34,
+    "price_per_unit": null,
+    "price_per_100": 15.6,
     "currency": "PLN"
   },
   {
@@ -4545,21 +4365,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "mieszane mrozone jagody",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "MR Słynne Roślinne Margaryna 500 g",
-    "generic_name": "mr",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.99,
-    "price_per_unit": null,
-    "price_per_100": 1.598,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "mieszane warzywa",
     "match_type": "auto",
     "fuzzy_score": 87.5,
@@ -4572,6 +4377,51 @@
     "price_package": 7.58,
     "price_per_unit": null,
     "price_per_100": 1.6844,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "mieszanka do sosu ranch",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Sos Sałatkowy Paprykowo-ziołowy Knorr 9 g",
+    "generic_name": "sos",
+    "package_size_value": 9.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.44,
+    "price_per_unit": null,
+    "price_per_100": 16.0,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "mieszanka kapusty i marchwi",
+    "match_type": "auto",
+    "fuzzy_score": 85.7,
+    "shop": "biedronka",
+    "original_name": "Marchew",
+    "generic_name": "marchew",
+    "package_size_value": 100.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 0.4,
+    "price_per_unit": null,
+    "price_per_100": 0.4,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "mieszanka mąki bezglutenowej",
+    "match_type": "auto",
+    "fuzzy_score": 85.7,
+    "shop": "auchan",
+    "original_name": "Mieszanka bezglutenowa ekstra uniwersalna Bezgluten 500 g",
+    "generic_name": "mieszanka bezglutenowa ekstra uniwersalna",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 16.59,
+    "price_per_unit": null,
+    "price_per_100": 3.318,
     "currency": "PLN"
   },
   {
@@ -4602,21 +4452,6 @@
     "price_package": 9.19,
     "price_per_unit": null,
     "price_per_100": 9.19,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "mieszanka serów meksykanskich",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Ser sałatkowy Grikios 270 g",
-    "generic_name": "ser",
-    "package_size_value": 270.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.69,
-    "price_per_unit": null,
-    "price_per_100": 2.8481,
     "currency": "PLN"
   },
   {
@@ -4665,22 +4500,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "mieszanka warzyw do smazenia mrozonych",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "MR Słynne Roślinne Margaryna 500 g",
-    "generic_name": "mr",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.99,
-    "price_per_unit": null,
-    "price_per_100": 1.598,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "mieszanka warzyw mrożona",
+    "ingredient_name": "mieszanka warzywna mrożona",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "biedronka",
@@ -4707,6 +4527,21 @@
     "price_package": 16.99,
     "price_per_unit": null,
     "price_per_100": 5.6633,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "migdał",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Lody śmietankowo waniliowe w czekoladzie mlecznej z migdałami Auchan 120 ml",
+    "generic_name": "lody śmietankowo waniliowe w czekoladzie mlecznej z migdałami",
+    "package_size_value": 120.0,
+    "unit": "ml",
+    "sold_by_weight": false,
+    "price_package": 3.49,
+    "price_per_unit": null,
+    "price_per_100": 2.9083,
     "currency": "PLN"
   },
   {
@@ -4875,21 +4710,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "mleko roslinne",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Mleko Polskie 3.2% Mlekovita 1 l",
-    "generic_name": "mleko",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 4.18,
-    "price_per_unit": null,
-    "price_per_100": 0.418,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "mleko roślinne",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -4902,36 +4722,6 @@
     "price_package": 4.18,
     "price_per_unit": null,
     "price_per_100": 0.418,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "mlode ziemniaki",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Ziemniaki sałatkowe 1,5 kg",
-    "generic_name": "ziemniaki",
-    "package_size_value": 1500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.99,
-    "price_per_unit": null,
-    "price_per_100": 0.3993,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "mlode ziemniaki czerwone",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Ziemniaki sałatkowe 1,5 kg",
-    "generic_name": "ziemniaki",
-    "package_size_value": 1500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.99,
-    "price_per_unit": null,
-    "price_per_100": 0.3993,
     "currency": "PLN"
   },
   {
@@ -5007,6 +4797,36 @@
     "price_package": 15.49,
     "price_per_unit": null,
     "price_per_100": 6.196,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "mrożona kukurydza",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "biedronka",
+    "original_name": "MR Słynne Roślinne Margaryna 500 g",
+    "generic_name": "mr",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 7.99,
+    "price_per_unit": null,
+    "price_per_100": 1.598,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "mrożone warzywa do stir-fry",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "biedronka",
+    "original_name": "MR Słynne Roślinne Margaryna 500 g",
+    "generic_name": "mr",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 7.99,
+    "price_per_unit": null,
+    "price_per_100": 1.598,
     "currency": "PLN"
   },
   {
@@ -5115,6 +4935,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "mąka bezglutenowa do wypieków",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Mąka La Pasta 100%   Molino Casillo  1 kg",
+    "generic_name": "mąka",
+    "package_size_value": 1000.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 8.19,
+    "price_per_unit": null,
+    "price_per_100": 0.819,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "mąka bezglutenowa uniwersalna",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -5187,6 +5022,21 @@
     "price_package": 7.19,
     "price_per_unit": null,
     "price_per_100": 0.719,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "mąka pszenna",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Mąka pszenna tortowa typ 450  Szczepanki 1 kg",
+    "generic_name": "mąka pszenna tortowa typ 450",
+    "package_size_value": 1000.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 3.18,
+    "price_per_unit": null,
+    "price_per_100": 0.318,
     "currency": "PLN"
   },
   {
@@ -5277,6 +5127,21 @@
     "price_package": 8.19,
     "price_per_unit": null,
     "price_per_100": 0.819,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "młode ziemniaki",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "biedronka",
+    "original_name": "Ziemniaki sałatkowe 1,5 kg",
+    "generic_name": "ziemniaki",
+    "package_size_value": 1500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 5.99,
+    "price_per_unit": null,
+    "price_per_100": 0.3993,
     "currency": "PLN"
   },
   {
@@ -5430,21 +5295,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "niesłodzony waniliowy wegański proszek białkowy",
-    "match_type": "auto",
-    "fuzzy_score": 85.7,
-    "shop": "auchan",
-    "original_name": "Groszek konserwowy Auchan 400 g",
-    "generic_name": "groszek",
-    "package_size_value": 240.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.65,
-    "price_per_unit": null,
-    "price_per_100": 1.1042,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "ocet balsamiczny",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -5457,21 +5307,6 @@
     "price_package": 11.39,
     "price_per_unit": null,
     "price_per_100": 4.556,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "ocet jablkowy",
-    "match_type": "auto",
-    "fuzzy_score": 92.3,
-    "shop": "auchan",
-    "original_name": "Ocet jabłkowy 6% Auchan 750 ml",
-    "generic_name": "ocet jabłkowy 6%",
-    "package_size_value": 750.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 5.99,
-    "price_per_unit": null,
-    "price_per_100": 0.7987,
     "currency": "PLN"
   },
   {
@@ -5550,21 +5385,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "ocet winny bialy",
-    "match_type": "auto",
-    "fuzzy_score": 93.8,
-    "shop": "auchan",
-    "original_name": "Ocet winny biały Monini 500 ml",
-    "generic_name": "ocet winny biały",
-    "package_size_value": 500.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 16.99,
-    "price_per_unit": null,
-    "price_per_100": 3.398,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "ocet winny biały",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -5595,21 +5415,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "odzywka bialkowa",
-    "match_type": "auto",
-    "fuzzy_score": 87.5,
-    "shop": "auchan",
-    "original_name": "Whey Protein Complex 100% odżywka białkowa wanilia Olimp 2,27 kg",
-    "generic_name": "whey protein complex 100% odżywka białkowa wanilia",
-    "package_size_value": 2270.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 229.98,
-    "price_per_unit": null,
-    "price_per_100": 10.1313,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "odżywka białkowa",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -5622,6 +5427,21 @@
     "price_package": 229.98,
     "price_per_unit": null,
     "price_per_100": 10.1313,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "odżywka białkowa czekoladowa",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Odżywka białkowa Mass Up wanilia ACTIVLAB 1,2 kg",
+    "generic_name": "odżywka białkowa",
+    "package_size_value": 1200.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 49.98,
+    "price_per_unit": null,
+    "price_per_100": 4.165,
     "currency": "PLN"
   },
   {
@@ -5760,21 +5580,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "olej awokado",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Awokado Hass 1 szt.",
-    "generic_name": "awokado",
-    "package_size_value": 1.0,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 6.99,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "olej kokosowy",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -5823,21 +5628,6 @@
     "ingredient_name": "olej sezamowy",
     "match_type": "auto",
     "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Olej sezamowy z prażonych nasion sezamu Diamond 250 ml",
-    "generic_name": "olej sezamowy z prażonych nasion sezamu",
-    "package_size_value": 250.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 20.69,
-    "price_per_unit": null,
-    "price_per_100": 8.276,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "olej sezamowy prażony",
-    "match_type": "auto",
-    "fuzzy_score": 90.5,
     "shop": "auchan",
     "original_name": "Olej sezamowy z prażonych nasion sezamu Diamond 250 ml",
     "generic_name": "olej sezamowy z prażonych nasion sezamu",
@@ -5940,36 +5730,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "oliwa z oliwek extra vergine",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Oliwa z oliwek Urzante 1 l",
-    "generic_name": "oliwa z oliwek",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 21.99,
-    "price_per_unit": null,
-    "price_per_100": 2.199,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "oliwa z oliwek extra virgin",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Oliwa z oliwek Urzante 1 l",
-    "generic_name": "oliwa z oliwek",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 21.99,
-    "price_per_unit": null,
-    "price_per_100": 2.199,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "oliwki",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -6012,6 +5772,21 @@
     "price_package": 49.99,
     "price_per_unit": null,
     "price_per_100": 6.6653,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "oliwki zielone",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Oliwki zielone nadziewane pastą anchois Auchan 350 g",
+    "generic_name": "oliwki zielone nadziewane pastą anchois",
+    "package_size_value": 150.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 5.75,
+    "price_per_unit": null,
+    "price_per_100": 3.8333,
     "currency": "PLN"
   },
   {
@@ -6180,6 +5955,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "ostra kiełbasa włoska",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Kiełbasa Krakowska Spichlerz Rusiecki 280 g",
+    "generic_name": "kiełbasa",
+    "package_size_value": 280.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 9.79,
+    "price_per_unit": null,
+    "price_per_100": 3.4964,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "ostry sos chili czosnkowy",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -6192,21 +5982,6 @@
     "price_package": 1.44,
     "price_per_unit": null,
     "price_per_100": 16.0,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "owoc",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Mieszanka owocowa z rabarbarem Auchan 450 g",
-    "generic_name": "mieszanka owocowa z rabarbarem",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 6.99,
-    "price_per_unit": null,
-    "price_per_100": 1.5533,
     "currency": "PLN"
   },
   {
@@ -6225,18 +6000,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "paluszki jerky",
+    "ingredient_name": "papier ryżowy",
     "match_type": "auto",
-    "fuzzy_score": 88.0,
+    "fuzzy_score": 100.0,
     "shop": "auchan",
-    "original_name": "Paluszki rybne z fileta Auchan 300 g",
-    "generic_name": "paluszki rybne z fileta",
+    "original_name": "Papier ryżowy okrągły 22 cm Ricefield Cu Chi 300 g",
+    "generic_name": "papier ryżowy okrągły 22 cm",
     "package_size_value": 300.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 11.49,
+    "price_package": 14.39,
     "price_per_unit": null,
-    "price_per_100": 3.83,
+    "price_per_100": 4.7967,
     "currency": "PLN"
   },
   {
@@ -6252,21 +6027,6 @@
     "price_package": 10.39,
     "price_per_unit": null,
     "price_per_100": 2.5975,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "papryczka jalapeno",
-    "match_type": "auto",
-    "fuzzy_score": 94.1,
-    "shop": "auchan",
-    "original_name": "Papryka jalapeno zielona w zalewie octowej Helcom 290 g",
-    "generic_name": "papryka jalapeno zielona w zalewie octowej",
-    "package_size_value": 140.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 6.79,
-    "price_per_unit": null,
-    "price_per_100": 4.85,
     "currency": "PLN"
   },
   {
@@ -6300,6 +6060,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "papryczki pepperoncini",
+    "match_type": "auto",
+    "fuzzy_score": 90.0,
+    "shop": "auchan",
+    "original_name": "Papryczki peperoni ostre mix Warzywa Auchan 150 g",
+    "generic_name": "papryczki peperoni ostre mix",
+    "package_size_value": 150.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 13.79,
+    "price_per_unit": null,
+    "price_per_100": 9.1933,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "papryka",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -6330,7 +6105,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "papryka pepperoncini",
+    "ingredient_name": "papryka czerwona pieczona",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -6405,21 +6180,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "papryka wedzona",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "BIO  Papryka Bicolor   Warzywa Auchan 400 g",
-    "generic_name": "papryka",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.99,
-    "price_per_unit": null,
-    "price_per_100": 2.9975,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "papryka wędzona",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -6447,6 +6207,21 @@
     "price_package": 8.5,
     "price_per_unit": null,
     "price_per_100": 1.699,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "papryka żółta",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Papryka żółta Warzywa Auchan na wagę od 500 g",
+    "generic_name": "papryka żółta",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 8.49,
+    "price_per_unit": null,
+    "price_per_100": 1.698,
     "currency": "PLN"
   },
   {
@@ -6480,18 +6255,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "pasta curry czerwone",
+    "ingredient_name": "patyczki drewniane",
     "match_type": "auto",
     "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Curry Kamis 20 g",
-    "generic_name": "curry",
-    "package_size_value": 20.0,
+    "shop": "biedronka",
+    "original_name": "Dr. Oetker Śmietan-fix 9 g",
+    "generic_name": "dr",
+    "package_size_value": 9.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 2.48,
+    "price_package": 0.99,
     "price_per_unit": null,
-    "price_per_100": 12.4,
+    "price_per_100": 11.0,
     "currency": "PLN"
   },
   {
@@ -6570,6 +6345,36 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "pieczarka",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Pieczarka świeża Pieczarka Siedlecka 500 g",
+    "generic_name": "pieczarka",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 7.99,
+    "price_per_unit": null,
+    "price_per_100": 1.598,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "pieczarka brązowa",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Pieczarka świeża Pieczarka Siedlecka 500 g",
+    "generic_name": "pieczarka",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 7.99,
+    "price_per_unit": null,
+    "price_per_100": 1.598,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "pieczarka portobello",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -6630,21 +6435,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "pieczarki brazowe",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Pieczarki świeże   Warzywa Auchan na wagę ok. 300 g",
-    "generic_name": "pieczarki",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 4.13,
-    "price_per_unit": null,
-    "price_per_100": 1.378,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "pieczarki cremini",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -6690,6 +6480,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "pieczeń wołowa",
+    "match_type": "auto",
+    "fuzzy_score": 85.7,
+    "shop": "biedronka",
+    "original_name": "Kraina Mięs Porcja rosołowa wołowa",
+    "generic_name": "wołowina",
+    "package_size_value": 800.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 22.32,
+    "price_per_unit": null,
+    "price_per_100": 2.79,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "pieczona czerwona papryka",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -6702,6 +6507,21 @@
     "price_package": 11.99,
     "price_per_unit": null,
     "price_per_100": 2.9975,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "pieczona dynia kabocha z klonem",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "biedronka",
+    "original_name": "Dynia piżmowa",
+    "generic_name": "dynia",
+    "package_size_value": 1500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 10.48,
+    "price_per_unit": null,
+    "price_per_100": 0.6987,
     "currency": "PLN"
   },
   {
@@ -6765,52 +6585,22 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "pieprz czarny mielony",
+    "ingredient_name": "pieprz mielony",
     "match_type": "auto",
-    "fuzzy_score": 100.0,
+    "fuzzy_score": 92.9,
     "shop": "auchan",
-    "original_name": "Pieprz czarny mielony Auchan 500 g",
-    "generic_name": "pieprz czarny mielony",
-    "package_size_value": 500.0,
+    "original_name": "Hiszpański pieprz zielony Figaro 110 ml",
+    "generic_name": "hiszpański pieprz zielony",
+    "package_size_value": 65.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 23.0,
+    "price_package": 6.89,
     "price_per_unit": null,
-    "price_per_100": 4.6,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "pieprz czerwony",
-    "match_type": "auto",
-    "fuzzy_score": 85.7,
-    "shop": "auchan",
-    "original_name": "Pieprz czarny mielony Auchan 500 g",
-    "generic_name": "pieprz czarny mielony",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 23.0,
-    "price_per_unit": null,
-    "price_per_100": 4.6,
+    "price_per_100": 10.6,
     "currency": "PLN"
   },
   {
     "ingredient_name": "pierś z indyka",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Kraina Mięs Select Mięso na kotlety z fileta z piersi indyka 400 g",
-    "generic_name": "pierś z indyka",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 13.49,
-    "price_per_unit": null,
-    "price_per_100": 3.3725,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "pierś z indyka wędlina",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "biedronka",
@@ -6900,18 +6690,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "plasterki ananasa",
+    "ingredient_name": "platki drozdzowe",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "biedronka",
-    "original_name": "Ananas",
-    "generic_name": "ananas",
-    "package_size_value": 1500.0,
+    "original_name": "Dr. Oetker Śmietan-fix 9 g",
+    "generic_name": "dr",
+    "package_size_value": 9.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 11.98,
+    "price_package": 0.99,
     "price_per_unit": null,
-    "price_per_100": 0.7987,
+    "price_per_100": 11.0,
     "currency": "PLN"
   },
   {
@@ -7005,7 +6795,22 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "pomidor roma",
+    "ingredient_name": "pomidor koktajlowy",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Pomidor malinowy XL Warzywa Auchan na wagę ok 500g",
+    "generic_name": "pomidor",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 8.0,
+    "price_per_unit": null,
+    "price_per_100": 1.599,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "pomidor rzymski",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -7065,22 +6870,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "pomidory grillowane",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Pomidor malinowy XL Warzywa Auchan na wagę ok 500g",
-    "generic_name": "pomidor",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 8.0,
-    "price_per_unit": null,
-    "price_per_100": 1.599,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "pomidory koktajlowe",
+    "ingredient_name": "pomidory Roma",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -7110,6 +6900,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "pomidory krojone z puszki",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Pomidor malinowy XL Warzywa Auchan na wagę ok 500g",
+    "generic_name": "pomidor",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 8.0,
+    "price_per_unit": null,
+    "price_per_100": 1.599,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "pomidory kruszone",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -7125,7 +6930,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "pomidory prażone z chili",
+    "ingredient_name": "pomidory kruszone z papryczkami chili",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -7140,7 +6945,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "pomidory prażone z zielonym chili",
+    "ingredient_name": "pomidory miażdżone",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -7155,7 +6960,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "pomidory przeciskane",
+    "ingredient_name": "pomidory prażone",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -7185,7 +6990,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "pomidory rzymskie",
+    "ingredient_name": "pomidory suszone",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -7200,7 +7005,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "pomidory suszone",
+    "ingredient_name": "pomidory w puszce z papryczkami chili",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -7260,21 +7065,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "prażone orzeszki ziemne",
-    "match_type": "auto",
-    "fuzzy_score": 85.0,
-    "shop": "biedronka",
-    "original_name": "Vitanella Baton migdały żurawina orzeszki ziemne 40 g",
-    "generic_name": "vitanella baton migdały żurawina orzeszki ziemne",
-    "package_size_value": 40.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.14,
-    "price_per_unit": null,
-    "price_per_100": 7.85,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "prosciutto",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -7320,37 +7110,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "proszek czosnkowy",
-    "match_type": "auto",
-    "fuzzy_score": 85.7,
-    "shop": "auchan",
-    "original_name": "Groszek konserwowy Auchan 400 g",
-    "generic_name": "groszek",
-    "package_size_value": 240.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.65,
-    "price_per_unit": null,
-    "price_per_100": 1.1042,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "proszek do pieczenia",
-    "match_type": "auto",
-    "fuzzy_score": 85.7,
-    "shop": "auchan",
-    "original_name": "Groszek konserwowy Auchan 400 g",
-    "generic_name": "groszek",
-    "package_size_value": 240.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.65,
-    "price_per_unit": null,
-    "price_per_100": 1.1042,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "proszek malankowy",
     "match_type": "auto",
     "fuzzy_score": 85.7,
     "shop": "auchan",
@@ -7380,6 +7140,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "przecier pomidorowy",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Pomidor malinowy XL Warzywa Auchan na wagę ok 500g",
+    "generic_name": "pomidor",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 8.0,
+    "price_per_unit": null,
+    "price_per_100": 1.599,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "przyprawa",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -7395,7 +7170,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "przyprawa 5 smaków",
+    "ingredient_name": "przyprawa BBQ do suchych marynat",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -7410,7 +7185,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "przyprawa AIP",
+    "ingredient_name": "przyprawa aip",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -7426,21 +7201,6 @@
   },
   {
     "ingredient_name": "przyprawa bbq",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Przyprawa Uniwersalna Auchan 1 kg",
-    "generic_name": "przyprawa",
-    "package_size_value": 1000.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 6.99,
-    "price_per_unit": null,
-    "price_per_100": 0.699,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "przyprawa bbq sucha",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -7500,22 +7260,22 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "przyprawa cytrynowo-pieprzowa z ziolami",
+    "ingredient_name": "przyprawa cytrynowo-pieprzowa z ziołami",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
-    "original_name": "Przyprawa Uniwersalna Auchan 1 kg",
-    "generic_name": "przyprawa",
-    "package_size_value": 1000.0,
+    "original_name": "Zioła Prowansalskie   Auchan 10 g",
+    "generic_name": "zioła",
+    "package_size_value": 10.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 6.99,
+    "price_package": 1.29,
     "price_per_unit": null,
-    "price_per_100": 0.699,
+    "price_per_100": 12.9,
     "currency": "PLN"
   },
   {
-    "ingredient_name": "przyprawa cytrynowo-ziolowa",
+    "ingredient_name": "przyprawa cytrynowo-ziołowa",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -7590,7 +7350,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "przyprawa do sosu wloskiego",
+    "ingredient_name": "przyprawa do sałatek włoska",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -7636,6 +7396,21 @@
   },
   {
     "ingredient_name": "przyprawa pięciu smaków",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Przyprawa Uniwersalna Auchan 1 kg",
+    "generic_name": "przyprawa",
+    "package_size_value": 1000.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 6.99,
+    "price_per_unit": null,
+    "price_per_100": 0.699,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "przyprawa pięć smaków",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -7725,6 +7500,51 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "przyprawa ziołowa",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Przyprawa Uniwersalna Auchan 1 kg",
+    "generic_name": "przyprawa",
+    "package_size_value": 1000.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 6.99,
+    "price_per_unit": null,
+    "price_per_100": 0.699,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "płatki chex",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Płatki Chocapic XXL Nestle  600 g",
+    "generic_name": "płatki",
+    "package_size_value": 600.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 18.39,
+    "price_per_unit": null,
+    "price_per_100": 3.065,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "płatki chex bezglutenowe",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Płatki Chocapic XXL Nestle  600 g",
+    "generic_name": "płatki",
+    "package_size_value": 600.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 18.39,
+    "price_per_unit": null,
+    "price_per_100": 3.065,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "płatki chili",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -7755,7 +7575,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "płatki drożdżowe",
+    "ingredient_name": "płatki czerwonego pieprzu",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -7782,6 +7602,21 @@
     "price_package": 3.58,
     "price_per_unit": null,
     "price_per_100": 0.895,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "płatki owsiane górskie",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "BIO Płatki owsiane górskie 500g Melvit 500 g",
+    "generic_name": "płatki owsiane górskie",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 5.48,
+    "price_per_unit": null,
+    "price_per_100": 1.096,
     "currency": "PLN"
   },
   {
@@ -7830,36 +7665,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "ricotta wegańska",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Ricotta Auchan 250 g",
-    "generic_name": "ricotta",
-    "package_size_value": 250.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.95,
-    "price_per_unit": null,
-    "price_per_100": 2.38,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "risotto czosnkowe",
-    "match_type": "auto",
-    "fuzzy_score": 85.7,
-    "shop": "biedronka",
-    "original_name": "Czosnek 250 g",
-    "generic_name": "czosnek",
-    "package_size_value": 250.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.99,
-    "price_per_unit": null,
-    "price_per_100": 3.196,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "rodzynki",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -7905,6 +7710,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "rozmaryn świeży",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Rozmaryn Kamis 15 g",
+    "generic_name": "rozmaryn",
+    "package_size_value": 15.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 2.48,
+    "price_per_unit": null,
+    "price_per_100": 16.5333,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "rukola",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -7917,81 +7737,6 @@
     "price_package": 5.49,
     "price_per_unit": null,
     "price_per_100": 3.66,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "ryz",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "BIO Mleko pasteryzowane mikrofiltrowane świeże Piątnica 1 l",
-    "generic_name": "mleko pasteryzowane mikrofiltrowane",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 7.48,
-    "price_per_unit": null,
-    "price_per_100": 0.748,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "ryz basmati",
-    "match_type": "auto",
-    "fuzzy_score": 90.9,
-    "shop": "auchan",
-    "original_name": "Ryż Basmati Auchan 4 x 100 g",
-    "generic_name": "ryż basmati 4 x",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.98,
-    "price_per_unit": null,
-    "price_per_100": 1.245,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "ryz bialy dlugoziarnisty",
-    "match_type": "auto",
-    "fuzzy_score": 88.2,
-    "shop": "auchan",
-    "original_name": "Ryż długoziarnisty Sollana 1 kg",
-    "generic_name": "ryż długoziarnisty",
-    "package_size_value": 1000.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.99,
-    "price_per_unit": null,
-    "price_per_100": 0.999,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "ryz brązowy",
-    "match_type": "auto",
-    "fuzzy_score": 90.9,
-    "shop": "auchan",
-    "original_name": "Ryż brązowy długoziarnisty Auchan 4 x 100 g",
-    "generic_name": "ryż brązowy długoziarnisty",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.29,
-    "price_per_unit": null,
-    "price_per_100": 0.8225,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "ryz jaśminowy",
-    "match_type": "auto",
-    "fuzzy_score": 92.3,
-    "shop": "auchan",
-    "original_name": "Ryż jaśminowy Auchan 4 x 100 g",
-    "generic_name": "ryż jaśminowy",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.29,
-    "price_per_unit": null,
-    "price_per_100": 0.8225,
     "currency": "PLN"
   },
   {
@@ -8100,7 +7845,22 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "ryż brązowy błyskawiczny",
+    "ingredient_name": "ryż brązowy instant",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Ryż brązowy Britta 500 g",
+    "generic_name": "ryż brązowy",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 6.18,
+    "price_per_unit": null,
+    "price_per_100": 1.236,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "ryż brązowy z komosą ryżową",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -8160,18 +7920,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "ryż pełnoziarnisty i komosa ryżowa",
+    "ingredient_name": "ryż pełnoziarnisty z komosą ryżową",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
-    "original_name": "Quinoa Komosa Ryżowa Intenson 250 g",
-    "generic_name": "komosa ryżowa",
-    "package_size_value": 250.0,
+    "original_name": "Ryż pełnoziarnisty Parboiled Kupiec 400 g",
+    "generic_name": "ryż pełnoziarnisty",
+    "package_size_value": 400.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 9.49,
+    "price_package": 6.78,
     "price_per_unit": null,
-    "price_per_100": 3.796,
+    "price_per_100": 1.695,
     "currency": "PLN"
   },
   {
@@ -8205,7 +7965,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "ryż z kalafiora z kolendrą i limonką",
+    "ingredient_name": "ryżowany kalafior",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "biedronka",
@@ -8280,6 +8040,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "różyczki brokułów",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "biedronka",
+    "original_name": "Brokuł 1 szt.",
+    "generic_name": "brokuł",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 5.99,
+    "price_per_unit": null,
+    "price_per_100": 1.198,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "różyczki kalafiora",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -8307,21 +8082,6 @@
     "price_package": 5.98,
     "price_per_unit": null,
     "price_per_100": 3.9867,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "salata rzymska",
-    "match_type": "auto",
-    "fuzzy_score": 92.9,
-    "shop": "auchan",
-    "original_name": "Sałata rzymska mini Warzywa Auchan 2 sztuki",
-    "generic_name": "sałata rzymska mini",
-    "package_size_value": 100.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.99,
-    "price_per_unit": null,
-    "price_per_100": 4.99,
     "currency": "PLN"
   },
   {
@@ -8355,7 +8115,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "sałata liściasta",
+    "ingredient_name": "sałata bostońska",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -8370,7 +8130,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "sałata lodowa",
+    "ingredient_name": "sałata liściasta",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -8475,6 +8235,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "ser cheddar",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Ser Cheddar Red twardy w plastrach Auchan 150 g",
+    "generic_name": "ser cheddar red twardy w plastrach",
+    "package_size_value": 150.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 8.59,
+    "price_per_unit": null,
+    "price_per_100": 5.7267,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "ser cheddar biały",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -8490,7 +8265,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "ser cheddar roślinny",
+    "ingredient_name": "ser cheddar roślinny tarty",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -8595,7 +8370,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "ser kozie",
+    "ingredient_name": "ser meksykański",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -8610,7 +8385,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "ser meksykański",
+    "ingredient_name": "ser meksykański tarty",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -8685,7 +8460,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "ser roślinny tarty",
+    "ingredient_name": "ser ricotta wegański",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -8715,37 +8490,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "ser żółty",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Ser sałatkowy Grikios 270 g",
-    "generic_name": "ser",
-    "package_size_value": 270.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.69,
-    "price_per_unit": null,
-    "price_per_100": 2.8481,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "serca karczochów",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Ser sałatkowy Grikios 270 g",
-    "generic_name": "ser",
-    "package_size_value": 270.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.69,
-    "price_per_unit": null,
-    "price_per_100": 2.8481,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "serce karczocha",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -8790,66 +8535,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "sezam czarny",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Sezam czarny Makar 500 g",
-    "generic_name": "sezam czarny",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 14.25,
-    "price_per_unit": null,
-    "price_per_100": 2.85,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "siemie lniane",
-    "match_type": "auto",
-    "fuzzy_score": 92.3,
-    "shop": "auchan",
-    "original_name": "Siemię lniane Auchan 1 kg",
-    "generic_name": "siemię lniane",
-    "package_size_value": 1000.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.9,
-    "price_per_unit": null,
-    "price_per_100": 0.99,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "siemie lniane mielone",
-    "match_type": "auto",
-    "fuzzy_score": 92.3,
-    "shop": "auchan",
-    "original_name": "Siemię lniane Auchan 1 kg",
-    "generic_name": "siemię lniane",
-    "package_size_value": 1000.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.9,
-    "price_per_unit": null,
-    "price_per_100": 0.99,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "siemie lniane zlote",
-    "match_type": "auto",
-    "fuzzy_score": 92.3,
-    "shop": "auchan",
-    "original_name": "Siemię lniane Auchan 1 kg",
-    "generic_name": "siemię lniane",
-    "package_size_value": 1000.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.9,
-    "price_per_unit": null,
-    "price_per_100": 0.99,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "siemię lniane mielone",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -8865,18 +8550,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "skorka cytrynowa",
+    "ingredient_name": "siemię lniane złote",
     "match_type": "auto",
-    "fuzzy_score": 85.7,
+    "fuzzy_score": 100.0,
     "shop": "auchan",
-    "original_name": "Cytryny Owoce  Auchan 1 kg",
-    "generic_name": "cytryny",
+    "original_name": "Siemię lniane Auchan 1 kg",
+    "generic_name": "siemię lniane",
     "package_size_value": 1000.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 16.99,
+    "price_package": 9.9,
     "price_per_unit": null,
-    "price_per_100": 1.699,
+    "price_per_100": 0.99,
     "currency": "PLN"
   },
   {
@@ -9015,51 +8700,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "smietana roslinna",
-    "match_type": "auto",
-    "fuzzy_score": 87.5,
-    "shop": "auchan",
-    "original_name": "Śmietana 12%  Auchan 330 g",
-    "generic_name": "śmietana",
-    "package_size_value": 330.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.98,
-    "price_per_unit": null,
-    "price_per_100": 0.903,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "smietanka 30%",
-    "match_type": "auto",
-    "fuzzy_score": 92.3,
-    "shop": "auchan",
-    "original_name": "Słodka śmietanka 30% do deserów i zup Piątnica 400 g",
-    "generic_name": "słodka śmietanka 30% do deserów i zup",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.28,
-    "price_per_unit": null,
-    "price_per_100": 2.07,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "smietanka kokosowa",
-    "match_type": "auto",
-    "fuzzy_score": 88.9,
-    "shop": "auchan",
-    "original_name": "Śmietanka UHT 18% Auchan 250 ml",
-    "generic_name": "śmietanka",
-    "package_size_value": 250.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 3.38,
-    "price_per_unit": null,
-    "price_per_100": 1.352,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "soczewica",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -9087,21 +8727,6 @@
     "price_package": 4.49,
     "price_per_unit": null,
     "price_per_100": 1.1225,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "soczewica sucha",
-    "match_type": "auto",
-    "fuzzy_score": 85.7,
-    "shop": "auchan",
-    "original_name": "BIO Soczewica czarna beluga EKO Alfabet 400 g",
-    "generic_name": "soczewica czarna beluga",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 16.39,
-    "price_per_unit": null,
-    "price_per_100": 4.0975,
     "currency": "PLN"
   },
   {
@@ -9180,21 +8805,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "sok z papryki pepperoncini",
-    "match_type": "auto",
-    "fuzzy_score": 85.7,
-    "shop": "auchan",
-    "original_name": "BIO  Papryka Bicolor   Warzywa Auchan 400 g",
-    "generic_name": "papryka",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.99,
-    "price_per_unit": null,
-    "price_per_100": 2.9975,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "sol",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -9225,6 +8835,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "sos BBQ",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Sos Sałatkowy Paprykowo-ziołowy Knorr 9 g",
+    "generic_name": "sos",
+    "package_size_value": 9.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.44,
+    "price_per_unit": null,
+    "price_per_100": 16.0,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "sos Worcestershire",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -9241,6 +8866,21 @@
   },
   {
     "ingredient_name": "sos adobo",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Sos Sałatkowy Paprykowo-ziołowy Knorr 9 g",
+    "generic_name": "sos",
+    "package_size_value": 9.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.44,
+    "price_per_unit": null,
+    "price_per_100": 16.0,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "sos barbecue",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -9495,7 +9135,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "sos miodowo-musztardowy",
+    "ingredient_name": "sos musztardowo-miodowy",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -9525,7 +9165,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "sos ostrygowo",
+    "ingredient_name": "sos ostrygowy",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -9537,6 +9177,21 @@
     "price_package": 1.44,
     "price_per_unit": null,
     "price_per_100": 16.0,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "sos pieczeniowy z indyka",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Szyja z indyka Auchan na wagę ok. 600 g",
+    "generic_name": "indyk",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 7.14,
+    "price_per_unit": null,
+    "price_per_100": 1.19,
     "currency": "PLN"
   },
   {
@@ -9586,21 +9241,6 @@
   },
   {
     "ingredient_name": "sos pomidorowy z pieczonym czosnkiem",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Pomidor malinowy XL Warzywa Auchan na wagę ok 500g",
-    "generic_name": "pomidor",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 8.0,
-    "price_per_unit": null,
-    "price_per_100": 1.599,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "sos pomidorowy z puszki",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -9675,6 +9315,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "sos sojowy niskosodowy",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Sos Sałatkowy Paprykowo-ziołowy Knorr 9 g",
+    "generic_name": "sos",
+    "package_size_value": 9.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.44,
+    "price_per_unit": null,
+    "price_per_100": 16.0,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "sos specjalny",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -9735,21 +9390,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "sos wloski",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Sos Sałatkowy Paprykowo-ziołowy Knorr 9 g",
-    "generic_name": "sos",
-    "package_size_value": 9.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.44,
-    "price_per_unit": null,
-    "price_per_100": 16.0,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "sos worcestershire",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -9765,18 +9405,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "sos z indyka",
+    "ingredient_name": "sos włoski",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
-    "original_name": "Szyja z indyka Auchan na wagę ok. 600 g",
-    "generic_name": "indyk",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 7.14,
+    "original_name": "Sos sałatkowy włoski Knorr 8 g",
+    "generic_name": "sos włoski",
+    "package_size_value": 8.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.44,
     "price_per_unit": null,
-    "price_per_100": 1.19,
+    "price_per_100": 18.0,
     "currency": "PLN"
   },
   {
@@ -9792,21 +9432,6 @@
     "price_package": 7.69,
     "price_per_unit": null,
     "price_per_100": 2.8481,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "sos zurawinowy",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Sos Sałatkowy Paprykowo-ziołowy Knorr 9 g",
-    "generic_name": "sos",
-    "package_size_value": 9.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.44,
-    "price_per_unit": null,
-    "price_per_100": 16.0,
     "currency": "PLN"
   },
   {
@@ -9855,9 +9480,9 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "spray do smarowania oliwa z oliwek",
+    "ingredient_name": "spray do smażenia z oliwy z oliwek",
     "match_type": "auto",
-    "fuzzy_score": 100.0,
+    "fuzzy_score": 92.9,
     "shop": "auchan",
     "original_name": "Oliwa z oliwek Urzante 1 l",
     "generic_name": "oliwa z oliwek",
@@ -9900,6 +9525,51 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "stek",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Śliwki połówki bez pestek Auchan 400 g",
+    "generic_name": "śliwki połówki bez pestek",
+    "package_size_value": 400.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 5.99,
+    "price_per_unit": null,
+    "price_per_100": 1.4975,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "stek z wołowiny",
+    "match_type": "auto",
+    "fuzzy_score": 87.5,
+    "shop": "biedronka",
+    "original_name": "Kraina Mięs Porcja rosołowa wołowa",
+    "generic_name": "wołowina",
+    "package_size_value": 800.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 22.32,
+    "price_per_unit": null,
+    "price_per_100": 2.79,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "stewia w płynie",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Stevia słodzik pochodzenia naturalnego z inuliną Zielony listek 140 g",
+    "generic_name": "stewia",
+    "package_size_value": 140.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 12.49,
+    "price_per_unit": null,
+    "price_per_100": 8.9214,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "sumak",
     "match_type": "auto",
     "fuzzy_score": 88.9,
@@ -9915,24 +9585,39 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "surówka coleslaw",
+    "ingredient_name": "suszona bazylia",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
-    "original_name": "Surówka coleslaw MAGA 300 g",
-    "generic_name": "surówka coleslaw",
-    "package_size_value": 300.0,
+    "original_name": "BIO Bazylia   Pewni Dobrego sztuka",
+    "generic_name": "bazylia",
+    "package_size_value": 100.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 3.99,
+    "price_package": 7.99,
     "price_per_unit": null,
-    "price_per_100": 1.33,
+    "price_per_100": 7.99,
     "currency": "PLN"
   },
   {
-    "ingredient_name": "suszona szałwia",
+    "ingredient_name": "suszone cebula",
     "match_type": "auto",
-    "fuzzy_score": 92.3,
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Cebula Warzywa Auchan na wagę ok. 1 kg",
+    "generic_name": "cebula",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 3.28,
+    "price_per_unit": null,
+    "price_per_100": 0.328,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "suszone czerwone chili",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
     "shop": "auchan",
     "original_name": "Warzywa suszone Makar 500 g",
     "generic_name": "suszone",
@@ -9945,37 +9630,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "suszone czerwone papryczki chili",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Warzywa suszone Makar 500 g",
-    "generic_name": "suszone",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 19.75,
-    "price_per_unit": null,
-    "price_per_100": 3.95,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "suszone daktyle bez pestek",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Daktyle Medijule Jumbo Palma Deluxe 500 g",
-    "generic_name": "daktyle",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 32.19,
-    "price_per_unit": null,
-    "price_per_100": 6.438,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "suszone jabłka w krążkach",
+    "ingredient_name": "suszone jabłka",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -10020,21 +9675,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "suszone koperek",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Koperek Kamis 8 g",
-    "generic_name": "koperek",
-    "package_size_value": 6.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.48,
-    "price_per_unit": null,
-    "price_per_100": 41.3333,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "suszone małe czerwone chili",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -10047,21 +9687,6 @@
     "price_package": 19.75,
     "price_per_unit": null,
     "price_per_100": 3.95,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "suszone mince cebula",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Cebula Warzywa Auchan na wagę ok. 1 kg",
-    "generic_name": "cebula",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 3.28,
-    "price_per_unit": null,
-    "price_per_100": 0.328,
     "currency": "PLN"
   },
   {
@@ -10080,33 +9705,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "suszone pomidory",
+    "ingredient_name": "suszone szałwia",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
-    "original_name": "Pomidor malinowy XL Warzywa Auchan na wagę ok 500g",
-    "generic_name": "pomidor",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 8.0,
-    "price_per_unit": null,
-    "price_per_100": 1.599,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "suszone rozmaryn",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Rozmaryn Kamis 15 g",
-    "generic_name": "rozmaryn",
-    "package_size_value": 15.0,
+    "original_name": "Warzywa suszone Makar 500 g",
+    "generic_name": "suszone",
+    "package_size_value": 500.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 2.48,
+    "price_package": 19.75,
     "price_per_unit": null,
-    "price_per_100": 16.5333,
+    "price_per_100": 3.95,
     "currency": "PLN"
   },
   {
@@ -10167,6 +9777,36 @@
     "price_package": 19.75,
     "price_per_unit": null,
     "price_per_100": 3.95,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "suszonej bazylii",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Warzywa suszone Makar 500 g",
+    "generic_name": "suszone",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 19.75,
+    "price_per_unit": null,
+    "price_per_100": 3.95,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "suszony oregano",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "BIO Oregano  Pewni Dobrego sztuka",
+    "generic_name": "oregano",
+    "package_size_value": 100.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 7.99,
+    "price_per_unit": null,
+    "price_per_100": 7.99,
     "currency": "PLN"
   },
   {
@@ -10245,33 +9885,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "szalwia",
+    "ingredient_name": "szalotka tajska",
     "match_type": "auto",
-    "fuzzy_score": 85.7,
+    "fuzzy_score": 100.0,
     "shop": "auchan",
-    "original_name": "Nasiona chia szałwia hiszpańska Makar 1 kg",
-    "generic_name": "nasiona chia szałwia hiszpańska",
-    "package_size_value": 1000.0,
+    "original_name": "Szalotka Warzywa Auchan 250 g",
+    "generic_name": "szalotka",
+    "package_size_value": 250.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 29.4,
+    "price_package": 6.49,
     "price_per_unit": null,
-    "price_per_100": 2.94,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "szalwia suszona",
-    "match_type": "auto",
-    "fuzzy_score": 85.7,
-    "shop": "auchan",
-    "original_name": "Bazylia suszona Auchan 10 g",
-    "generic_name": "bazylia suszona",
-    "package_size_value": 10.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.29,
-    "price_per_unit": null,
-    "price_per_100": 12.9,
+    "price_per_100": 2.596,
     "currency": "PLN"
   },
   {
@@ -10410,21 +10035,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "sól morska gruboziarnista",
-    "match_type": "auto",
-    "fuzzy_score": 96.0,
-    "shop": "auchan",
-    "original_name": "Sól morska, gruboziarnista, jodowana o'Sole 900 g",
-    "generic_name": "sól morska, gruboziarnista, jodowana o'sole",
-    "package_size_value": 900.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.59,
-    "price_per_unit": null,
-    "price_per_100": 0.51,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "sól przyprawiona",
     "match_type": "auto",
     "fuzzy_score": 88.9,
@@ -10485,7 +10095,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "tortellini z serem bezglutenowe",
+    "ingredient_name": "tortellini serowe bezglutenowe",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -10512,6 +10122,21 @@
     "price_package": 3.69,
     "price_per_unit": null,
     "price_per_100": 1.0543,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "tortilla pełnoziarnista",
+    "match_type": "auto",
+    "fuzzy_score": 85.7,
+    "shop": "auchan",
+    "original_name": "Mąka żytnia pełnoziarnista Gdańskie Młyny 1 kg",
+    "generic_name": "mąka żytnia pełnoziarnista",
+    "package_size_value": 1000.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 4.19,
+    "price_per_unit": null,
+    "price_per_100": 0.419,
     "currency": "PLN"
   },
   {
@@ -10545,18 +10170,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "tortille szpinakowe",
+    "ingredient_name": "tortille kokosowe",
     "match_type": "auto",
-    "fuzzy_score": 100.0,
+    "fuzzy_score": 88.0,
     "shop": "auchan",
-    "original_name": "Szpinak Warzywa Auchan 200 g",
-    "generic_name": "szpinak",
-    "package_size_value": 200.0,
-    "unit": "g",
+    "original_name": "Mleko kokosowe House of Asia 400 ml",
+    "generic_name": "mleko kokosowe",
+    "package_size_value": 400.0,
+    "unit": "ml",
     "sold_by_weight": false,
-    "price_package": 6.89,
+    "price_package": 6.28,
     "price_per_unit": null,
-    "price_per_100": 3.445,
+    "price_per_100": 1.57,
     "currency": "PLN"
   },
   {
@@ -10572,6 +10197,21 @@
     "price_package": 16.99,
     "price_per_unit": null,
     "price_per_100": 1.699,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "truskawka",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Wegańska jaglanka na kokosie z truskawkami Pewni Dobrego 210 g",
+    "generic_name": "wegańska jaglanka na kokosie z truskawkami",
+    "package_size_value": 210.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 5.85,
+    "price_per_unit": null,
+    "price_per_100": 2.7857,
     "currency": "PLN"
   },
   {
@@ -10602,21 +10242,6 @@
     "price_package": 11.99,
     "price_per_unit": null,
     "price_per_100": 2.398,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "tunczyk",
-    "match_type": "auto",
-    "fuzzy_score": 85.7,
-    "shop": "auchan",
-    "original_name": "Tuńczyk kawałki w sosie własnym GRAAL 170 g",
-    "generic_name": "tuńczyk kawałki w sosie własnym",
-    "package_size_value": 120.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.98,
-    "price_per_unit": null,
-    "price_per_100": 7.4833,
     "currency": "PLN"
   },
   {
@@ -10725,6 +10350,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "tłuczone ziemniaki",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "biedronka",
+    "original_name": "Ziemniaki sałatkowe 1,5 kg",
+    "generic_name": "ziemniaki",
+    "package_size_value": 1500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 5.99,
+    "price_per_unit": null,
+    "price_per_100": 0.3993,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "udka z kurczaka",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -10770,7 +10410,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "waniliowe bialko serwatkowe",
+    "ingredient_name": "waniliowe białko serwatkowe",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -10797,21 +10437,6 @@
     "price_package": 15.99,
     "price_per_unit": null,
     "price_per_100": 3.9975,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "wedzona papryka",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "BIO  Papryka Bicolor   Warzywa Auchan 400 g",
-    "generic_name": "papryka",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.99,
-    "price_per_unit": null,
-    "price_per_100": 2.9975,
     "currency": "PLN"
   },
   {
@@ -10860,6 +10485,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "wegańskie kropelki czekoladowe",
+    "match_type": "auto",
+    "fuzzy_score": 87.5,
+    "shop": "auchan",
+    "original_name": "Mleko czekoladowe UHT Mlekovita 1 l",
+    "generic_name": "mleko czekoladowe",
+    "package_size_value": 1000.0,
+    "unit": "ml",
+    "sold_by_weight": false,
+    "price_package": 5.79,
+    "price_per_unit": null,
+    "price_per_100": 0.579,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "wieprzowina",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -10875,6 +10515,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "wino czerwone",
+    "match_type": "auto",
+    "fuzzy_score": 87.0,
+    "shop": "auchan",
+    "original_name": "Buraki czerwone Warzywa Auchan na wagę ok. 1kg",
+    "generic_name": "buraki czerwone",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 2.49,
+    "price_per_unit": null,
+    "price_per_100": 0.249,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "winogrona",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -10887,6 +10542,36 @@
     "price_package": 9.8,
     "price_per_unit": null,
     "price_per_100": 1.959,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "winogrona czerwone bezpestkowe",
+    "match_type": "auto",
+    "fuzzy_score": 95.2,
+    "shop": "auchan",
+    "original_name": "Winogrona Owoce  Auchan na wagę ok. 600 g",
+    "generic_name": "winogrona g",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 11.99,
+    "price_per_unit": null,
+    "price_per_100": 1.999,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "winogrona zielone",
+    "match_type": "auto",
+    "fuzzy_score": 95.2,
+    "shop": "auchan",
+    "original_name": "Winogrona Owoce  Auchan na wagę ok. 600 g",
+    "generic_name": "winogrona g",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 11.99,
+    "price_per_unit": null,
+    "price_per_100": 1.999,
     "currency": "PLN"
   },
   {
@@ -10935,21 +10620,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "wolowina fajita",
-    "match_type": "auto",
-    "fuzzy_score": 87.5,
-    "shop": "biedronka",
-    "original_name": "Kraina Mięs Porcja rosołowa wołowa",
-    "generic_name": "wołowina",
-    "package_size_value": 800.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 22.32,
-    "price_per_unit": null,
-    "price_per_100": 2.79,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "wołowina",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -10965,7 +10635,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "wołowina do gulaszu",
+    "ingredient_name": "wołowina fajita",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "biedronka",
@@ -10977,21 +10647,6 @@
     "price_package": 22.32,
     "price_per_unit": null,
     "price_per_100": 2.79,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "wrapy pełnoziarniste",
-    "match_type": "auto",
-    "fuzzy_score": 88.9,
-    "shop": "auchan",
-    "original_name": "Ryż pełnoziarnisty Parboiled Kupiec 400 g",
-    "generic_name": "ryż pełnoziarnisty",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 6.78,
-    "price_per_unit": null,
-    "price_per_100": 1.695,
     "currency": "PLN"
   },
   {
@@ -11040,6 +10695,21 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "ziarna granatu",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "biedronka",
+    "original_name": "Granat",
+    "generic_name": "granat",
+    "package_size_value": 400.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 8.0,
+    "price_per_unit": null,
+    "price_per_100": 2.0,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "ziele angielskie",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -11085,36 +10755,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "zielona papryka",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Papryka zielona Warzywa Auchan na wagę ok. 500 g",
-    "generic_name": "papryka zielona",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 8.5,
-    "price_per_unit": null,
-    "price_per_100": 1.699,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "zielone jabłko",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Jabłko polskie 1,5 kg",
-    "generic_name": "jabłko",
-    "package_size_value": 1500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.99,
-    "price_per_unit": null,
-    "price_per_100": 0.3993,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "zielone oliwki",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -11127,21 +10767,6 @@
     "price_package": 6.39,
     "price_per_unit": null,
     "price_per_100": 6.39,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "zielone winogrona",
-    "match_type": "auto",
-    "fuzzy_score": 90.0,
-    "shop": "auchan",
-    "original_name": "Winogrona Owoce  Auchan na wagę ok. 600 g",
-    "generic_name": "winogrona g",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 11.99,
-    "price_per_unit": null,
-    "price_per_100": 1.999,
     "currency": "PLN"
   },
   {
@@ -11175,7 +10800,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "ziemniak bialy",
+    "ingredient_name": "ziemniak biały",
     "match_type": "auto",
     "fuzzy_score": 94.1,
     "shop": "biedronka",
@@ -11205,7 +10830,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "ziemniak russet",
+    "ingredient_name": "ziemniak holenderski żółty",
     "match_type": "auto",
     "fuzzy_score": 94.1,
     "shop": "biedronka",
@@ -11220,7 +10845,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "ziemniak woskowy",
+    "ingredient_name": "ziemniak yukon gold",
     "match_type": "auto",
     "fuzzy_score": 94.1,
     "shop": "biedronka",
@@ -11250,21 +10875,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "ziemniaki baby",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Ziemniaki sałatkowe 1,5 kg",
-    "generic_name": "ziemniaki",
-    "package_size_value": 1500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.99,
-    "price_per_unit": null,
-    "price_per_100": 0.3993,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "ziemniaki czerwone",
     "match_type": "auto",
     "fuzzy_score": 100.0,
@@ -11277,126 +10887,6 @@
     "price_package": 5.99,
     "price_per_unit": null,
     "price_per_100": 0.3993,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "ziemniaki russet",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Ziemniaki sałatkowe 1,5 kg",
-    "generic_name": "ziemniaki",
-    "package_size_value": 1500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.99,
-    "price_per_unit": null,
-    "price_per_100": 0.3993,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "ziemniaki starte",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Ziemniaki sałatkowe 1,5 kg",
-    "generic_name": "ziemniaki",
-    "package_size_value": 1500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.99,
-    "price_per_unit": null,
-    "price_per_100": 0.3993,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "ziemniaki yukon gold",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Ziemniaki sałatkowe 1,5 kg",
-    "generic_name": "ziemniaki",
-    "package_size_value": 1500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.99,
-    "price_per_unit": null,
-    "price_per_100": 0.3993,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "ziemniaki złociste",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Ziemniaki sałatkowe 1,5 kg",
-    "generic_name": "ziemniaki",
-    "package_size_value": 1500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.99,
-    "price_per_unit": null,
-    "price_per_100": 0.3993,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "ziemniaki złote",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Ziemniaki sałatkowe 1,5 kg",
-    "generic_name": "ziemniaki",
-    "package_size_value": 1500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.99,
-    "price_per_unit": null,
-    "price_per_100": 0.3993,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "ziemniaki żółte holenderskie",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Ziemniaki sałatkowe 1,5 kg",
-    "generic_name": "ziemniaki",
-    "package_size_value": 1500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.99,
-    "price_per_unit": null,
-    "price_per_100": 0.3993,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "zolta cebula",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "Cebula Warzywa Auchan na wagę ok. 1 kg",
-    "generic_name": "cebula",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 3.28,
-    "price_per_unit": null,
-    "price_per_100": 0.328,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "zolta papryka",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "BIO  Papryka Bicolor   Warzywa Auchan 400 g",
-    "generic_name": "papryka",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.99,
-    "price_per_unit": null,
-    "price_per_100": 2.9975,
     "currency": "PLN"
   },
   {
@@ -11475,7 +10965,52 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "śmietana roślinna",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Śmietana 12%  Auchan 330 g",
+    "generic_name": "śmietana",
+    "package_size_value": 330.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 2.98,
+    "price_per_unit": null,
+    "price_per_100": 0.903,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "śmietanka 30%",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Śmietanka UHT 18% Auchan 250 ml",
+    "generic_name": "śmietanka",
+    "package_size_value": 250.0,
+    "unit": "ml",
+    "sold_by_weight": false,
+    "price_package": 3.38,
+    "price_per_unit": null,
+    "price_per_100": 1.352,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "śmietanka kokosowa",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "Śmietanka UHT 18% Auchan 250 ml",
+    "generic_name": "śmietanka",
+    "package_size_value": 250.0,
+    "unit": "ml",
+    "sold_by_weight": false,
+    "price_package": 3.38,
+    "price_per_unit": null,
+    "price_per_100": 1.352,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "śmietanka kremówka",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
@@ -11505,18 +11040,48 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "świeża pietruszka",
+    "ingredient_name": "świeża kolendra",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
-    "original_name": "Pietruszka korzeń Warzywa Auchan na wagę ok. 300 g",
-    "generic_name": "pietruszka",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 2.4,
+    "original_name": "BIO Kolendra  Pewni Dobrego sztuka",
+    "generic_name": "kolendra",
+    "package_size_value": 100.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 7.99,
     "price_per_unit": null,
-    "price_per_100": 0.799,
+    "price_per_100": 7.99,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "świeża tajska bazylia",
+    "match_type": "auto",
+    "fuzzy_score": 100.0,
+    "shop": "auchan",
+    "original_name": "BIO Bazylia   Pewni Dobrego sztuka",
+    "generic_name": "bazylia",
+    "package_size_value": 100.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 7.99,
+    "price_per_unit": null,
+    "price_per_100": 7.99,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "świeże mieszane jagody",
+    "match_type": "auto",
+    "fuzzy_score": 85.7,
+    "shop": "auchan",
+    "original_name": "Lody Śliwka Nałęczowska   Solidarność 900 ml",
+    "generic_name": "lody",
+    "package_size_value": 900.0,
+    "unit": "ml",
+    "sold_by_weight": false,
+    "price_package": 25.59,
+    "price_per_unit": null,
+    "price_per_100": 2.8433,
     "currency": "PLN"
   },
   {
@@ -11535,33 +11100,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "świeży rozmaryn",
+    "ingredient_name": "świeży szczypiorek",
     "match_type": "auto",
     "fuzzy_score": 100.0,
     "shop": "auchan",
-    "original_name": "Rozmaryn Kamis 15 g",
-    "generic_name": "rozmaryn",
-    "package_size_value": 15.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.48,
-    "price_per_unit": null,
-    "price_per_100": 16.5333,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "świeży tymianek",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "BIO Tymianek  Pewni Dobrego sztuka",
-    "generic_name": "tymianek",
+    "original_name": "Szczypior sałatkowy Warzywa Auchan sztuka",
+    "generic_name": "szczypior",
     "package_size_value": 100.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 9.49,
+    "price_package": 6.99,
     "price_per_unit": null,
-    "price_per_100": 9.49,
+    "price_per_100": 6.99,
     "currency": "PLN"
   },
   {
@@ -11610,51 +11160,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "aminokokosowe",
-    "match_type": "ai",
-    "fuzzy_score": 78.3,
-    "shop": "auchan",
-    "original_name": "Mleczko kokosowe Auchan 400 ml",
-    "generic_name": "mleczko kokosowe",
-    "package_size_value": 400.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 4.99,
-    "price_per_unit": null,
-    "price_per_100": 1.2475,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "aminokokosowy",
-    "match_type": "ai",
-    "fuzzy_score": 78.3,
-    "shop": "auchan",
-    "original_name": "Mleko kokosowe House of Asia 400 ml",
-    "generic_name": "mleko kokosowe",
-    "package_size_value": 400.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 6.28,
-    "price_per_unit": null,
-    "price_per_100": 1.57,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "aminokwasy kokosowe",
-    "match_type": "ai",
-    "fuzzy_score": 78.3,
-    "shop": "auchan",
-    "original_name": "Mleczko kokosowe Auchan 400 ml",
-    "generic_name": "mleczko kokosowe",
-    "package_size_value": 400.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 4.99,
-    "price_per_unit": null,
-    "price_per_100": 1.2475,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "baklazan",
     "match_type": "ai",
     "fuzzy_score": 75.0,
@@ -11685,33 +11190,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "bialka jajek",
+    "ingredient_name": "becon",
     "match_type": "ai",
     "fuzzy_score": 80.0,
     "shop": "auchan",
-    "original_name": "Veggs Wegański zamiennik jajek  Cultured Foods 180 g",
-    "generic_name": "veggs wegański zamiennik jajek",
-    "package_size_value": 180.0,
+    "original_name": "Smalec bekonowy Agro-Top 200 g",
+    "generic_name": "smalec bekonowy",
+    "package_size_value": 200.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 21.49,
+    "price_package": 7.59,
     "price_per_unit": null,
-    "price_per_100": 11.9389,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "bialko jajka",
-    "match_type": "ai",
-    "fuzzy_score": 75.0,
-    "shop": "auchan",
-    "original_name": "Veggs Wegański zamiennik jajek  Cultured Foods 180 g",
-    "generic_name": "veggs wegański zamiennik jajek",
-    "package_size_value": 180.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 21.49,
-    "price_per_unit": null,
-    "price_per_100": 11.9389,
+    "price_per_100": 3.795,
     "currency": "PLN"
   },
   {
@@ -11730,6 +11220,36 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "białe czekoladowe chipsy",
+    "match_type": "ai",
+    "fuzzy_score": 70.8,
+    "shop": "auchan",
+    "original_name": "Müllermilch o smaku białej czekolady i orzechów makadamia   Müller 400 g",
+    "generic_name": "müllermilch o smaku białej czekolady i orzechów makadamia",
+    "package_size_value": 400.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 3.84,
+    "price_per_unit": null,
+    "price_per_100": 0.96,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "białka jaj w płynie",
+    "match_type": "ai",
+    "fuzzy_score": 75.0,
+    "shop": "auchan",
+    "original_name": "Jaja ekologiczne Pewni Dobrego 6 sztuk",
+    "generic_name": "jaja",
+    "package_size_value": 6.0,
+    "unit": "pcs",
+    "sold_by_weight": false,
+    "price_package": 10.49,
+    "price_per_unit": null,
+    "price_per_100": null,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "białko jajka",
     "match_type": "ai",
     "fuzzy_score": 75.0,
@@ -11745,33 +11265,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "bielka jajek",
+    "ingredient_name": "cheddar ostry",
     "match_type": "ai",
-    "fuzzy_score": 75.0,
+    "fuzzy_score": 76.9,
     "shop": "auchan",
-    "original_name": "Jaja ekologiczne Pewni Dobrego 6 sztuk",
-    "generic_name": "jaja",
-    "package_size_value": 6.0,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 10.49,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "broccolini",
-    "match_type": "ai",
-    "fuzzy_score": 66.7,
-    "shop": "biedronka",
-    "original_name": "Brokuł 1 szt.",
-    "generic_name": "brokuł",
-    "package_size_value": 500.0,
+    "original_name": "Ser topiony cheddar plastry Lactima 600 g",
+    "generic_name": "ser topiony cheddar plastry",
+    "package_size_value": 600.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 5.99,
+    "price_package": 23.59,
     "price_per_unit": null,
-    "price_per_100": 1.198,
+    "price_per_100": 3.9317,
     "currency": "PLN"
   },
   {
@@ -11790,21 +11295,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "chili chipotle",
-    "match_type": "ai",
-    "fuzzy_score": 69.6,
-    "shop": "auchan",
-    "original_name": "Toczony z nerkowców z chipolte Wege Siostry 140 g",
-    "generic_name": "toczony z nerkowców z chipolte",
-    "package_size_value": 140.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 21.58,
-    "price_per_unit": null,
-    "price_per_100": 15.4143,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "chipsy tortilla",
     "match_type": "ai",
     "fuzzy_score": 74.1,
@@ -11817,6 +11307,36 @@
     "price_package": 3.99,
     "price_per_unit": null,
     "price_per_100": 2.66,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "chleb na zakwasie bezglutenowy",
+    "match_type": "ai",
+    "fuzzy_score": 77.8,
+    "shop": "auchan",
+    "original_name": "Chleb jasny bezglutenowy mieszanka piekarnicza Grano 500 g",
+    "generic_name": "chleb jasny bezglutenowy mieszanka piekarnicza",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 13.59,
+    "price_per_unit": null,
+    "price_per_100": 2.718,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "chleb pita bezglutenowy",
+    "match_type": "ai",
+    "fuzzy_score": 82.6,
+    "shop": "auchan",
+    "original_name": "Chleb jasny bezglutenowy mieszanka piekarnicza Grano 500 g",
+    "generic_name": "chleb jasny bezglutenowy mieszanka piekarnicza",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 13.59,
+    "price_per_unit": null,
+    "price_per_100": 2.718,
     "currency": "PLN"
   },
   {
@@ -11835,9 +11355,9 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "ciemna czekolada w kropelkach",
+    "ingredient_name": "ciemna czekolada w kroplach",
     "match_type": "ai",
-    "fuzzy_score": 67.7,
+    "fuzzy_score": 72.2,
     "shop": "auchan",
     "original_name": "BIO Czekolada deserowa Pewni Dobrego 200 g",
     "generic_name": "czekolada deserowa",
@@ -11850,7 +11370,37 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "czekolada półsłodka",
+    "ingredient_name": "ciemne kakao",
+    "match_type": "ai",
+    "fuzzy_score": 75.0,
+    "shop": "biedronka",
+    "original_name": "Bakello Kakao extra ciemne 200 g",
+    "generic_name": "bakello kakao ciemne",
+    "package_size_value": 200.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 10.99,
+    "price_per_unit": null,
+    "price_per_100": 5.495,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "czarne nasiona sezamu",
+    "match_type": "ai",
+    "fuzzy_score": 80.0,
+    "shop": "auchan",
+    "original_name": "Nasiona sezamu białego Thai Pride 100 g",
+    "generic_name": "nasiona sezamu białego",
+    "package_size_value": 100.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 6.59,
+    "price_per_unit": null,
+    "price_per_100": 6.59,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "czekolada półsłodka w kroplach",
     "match_type": "ai",
     "fuzzy_score": 71.4,
     "shop": "auchan",
@@ -11865,18 +11415,33 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "dziki ryz",
+    "ingredient_name": "czekoladowe kropelki",
     "match_type": "ai",
-    "fuzzy_score": 66.7,
+    "fuzzy_score": 71.4,
     "shop": "auchan",
-    "original_name": "Ryż Basmati Kupiec 400 g",
-    "generic_name": "ryż",
-    "package_size_value": 400.0,
+    "original_name": "BIO Czekolada deserowa Pewni Dobrego 200 g",
+    "generic_name": "czekolada deserowa",
+    "package_size_value": 200.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 10.39,
+    "price_package": 15.99,
     "price_per_unit": null,
-    "price_per_100": 2.5975,
+    "price_per_100": 7.995,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "czekoladowe kropelki półsłodkie",
+    "match_type": "ai",
+    "fuzzy_score": 71.4,
+    "shop": "auchan",
+    "original_name": "BIO Czekolada deserowa Pewni Dobrego 200 g",
+    "generic_name": "czekolada deserowa",
+    "package_size_value": 200.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 15.99,
+    "price_per_unit": null,
+    "price_per_100": 7.995,
     "currency": "PLN"
   },
   {
@@ -11940,7 +11505,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "galazki ziol",
+    "ingredient_name": "gałązki ziół",
     "match_type": "ai",
     "fuzzy_score": 66.7,
     "shop": "auchan",
@@ -11970,48 +11535,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "gwozdziki",
+    "ingredient_name": "gruba sól morska",
     "match_type": "ai",
-    "fuzzy_score": 66.7,
+    "fuzzy_score": 76.9,
     "shop": "auchan",
-    "original_name": "Jaglanka o smaku jabłko-cynamon i goździków Pewni Dobrego 180 g",
-    "generic_name": "jaglanka o smaku jabłko-cynamon i goździków",
-    "package_size_value": 180.0,
+    "original_name": "Sól morska, gruboziarnista, jodowana o'Sole 900 g",
+    "generic_name": "sól morska, gruboziarnista, jodowana o'sole",
+    "package_size_value": 900.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 5.99,
+    "price_package": 4.59,
     "price_per_unit": null,
-    "price_per_100": 3.3278,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "jablka",
-    "match_type": "ai",
-    "fuzzy_score": 83.3,
-    "shop": "auchan",
-    "original_name": "Jabłka mix Owoce  Auchan 1 kg",
-    "generic_name": "jabłka mix",
-    "package_size_value": 1000.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.99,
-    "price_per_unit": null,
-    "price_per_100": 0.399,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "jablka slodko-kwasne",
-    "match_type": "ai",
-    "fuzzy_score": 83.3,
-    "shop": "auchan",
-    "original_name": "Jabłka Owoce  Auchan 3 kg",
-    "generic_name": "jabłka",
-    "package_size_value": 3000.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.48,
-    "price_per_unit": null,
-    "price_per_100": 0.3827,
+    "price_per_100": 0.51,
     "currency": "PLN"
   },
   {
@@ -12019,14 +11554,14 @@
     "match_type": "ai",
     "fuzzy_score": 83.3,
     "shop": "auchan",
-    "original_name": "Mus jabłkowy  Pewni Dobrego 700 g",
-    "generic_name": "mus jabłkowy",
-    "package_size_value": 700.0,
+    "original_name": "100% jabłko z sadów z regionu Warki Pewni Dobrego 230 g",
+    "generic_name": "100% jabłko",
+    "package_size_value": 230.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 7.79,
+    "price_package": 6.49,
     "price_per_unit": null,
-    "price_per_100": 1.1129,
+    "price_per_100": 2.8217,
     "currency": "PLN"
   },
   {
@@ -12045,18 +11580,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "jezyny",
+    "ingredient_name": "jalapeño marynowane",
     "match_type": "ai",
-    "fuzzy_score": 83.3,
+    "fuzzy_score": 70.6,
     "shop": "auchan",
-    "original_name": "Jeżyny Owoce  Auchan 125 g",
-    "generic_name": "jeżyny",
-    "package_size_value": 125.0,
+    "original_name": "Papryka marynowana Auchan 300 g",
+    "generic_name": "papryka marynowana",
+    "package_size_value": 300.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 15.99,
+    "price_package": 5.99,
     "price_per_unit": null,
-    "price_per_100": 12.792,
+    "price_per_100": 1.9967,
     "currency": "PLN"
   },
   {
@@ -12075,36 +11610,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "karkowka wolowa",
-    "match_type": "ai",
-    "fuzzy_score": 72.0,
-    "shop": "biedronka",
-    "original_name": "Kraina Mięs Porcja rosołowa wołowa",
-    "generic_name": "wołowina",
-    "package_size_value": 800.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 22.32,
-    "price_per_unit": null,
-    "price_per_100": 2.79,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "karkówka wolowa",
-    "match_type": "ai",
-    "fuzzy_score": 80.0,
-    "shop": "biedronka",
-    "original_name": "Kraina Mięs Porcja rosołowa wołowa",
-    "generic_name": "wołowina",
-    "package_size_value": 800.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 22.32,
-    "price_per_unit": null,
-    "price_per_100": 2.79,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "klementynki",
     "match_type": "ai",
     "fuzzy_score": 66.7,
@@ -12117,21 +11622,6 @@
     "price_package": 8.99,
     "price_per_unit": null,
     "price_per_100": 0.899,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "kostka bulionu wolowego",
-    "match_type": "ai",
-    "fuzzy_score": 71.1,
-    "shop": "auchan",
-    "original_name": "Bulion warzywny w kostkach Auchan 100 g",
-    "generic_name": "bulion warzywny w kostkach",
-    "package_size_value": 100.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.49,
-    "price_per_unit": null,
-    "price_per_100": 3.49,
     "currency": "PLN"
   },
   {
@@ -12165,81 +11655,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "kukurydza grillowana",
-    "match_type": "ai",
-    "fuzzy_score": 84.2,
-    "shop": "biedronka",
-    "original_name": "Banan",
-    "generic_name": "banan",
-    "package_size_value": 1000.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 6.99,
-    "price_per_unit": null,
-    "price_per_100": 0.699,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "kukurydza mini",
-    "match_type": "ai",
-    "fuzzy_score": 83.3,
-    "shop": "auchan",
-    "original_name": "Kukurydza super słodka Auchan Collection  340 g",
-    "generic_name": "kukurydza super słodka",
-    "package_size_value": 340.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.99,
-    "price_per_unit": null,
-    "price_per_100": 1.1735,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "kukurydza z ognia",
-    "match_type": "ai",
-    "fuzzy_score": 81.2,
-    "shop": "auchan",
-    "original_name": "Kukurydza gotowana Auchan 480 g",
-    "generic_name": "kukurydza gotowana",
-    "package_size_value": 480.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 6.99,
-    "price_per_unit": null,
-    "price_per_100": 1.4563,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "liście sałaty",
-    "match_type": "ai",
-    "fuzzy_score": 83.3,
-    "shop": "auchan",
-    "original_name": "Szpinak liście Auchan 1 kg",
-    "generic_name": "szpinak liście",
-    "package_size_value": 1000.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 10.79,
-    "price_per_unit": null,
-    "price_per_100": 1.079,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "majonez chipotle lime",
-    "match_type": "ai",
-    "fuzzy_score": 64.7,
-    "shop": "biedronka",
-    "original_name": "Winiary Majonez lekki 300 ml",
-    "generic_name": "winiary majonez lekki",
-    "package_size_value": 300.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 7.49,
-    "price_per_unit": null,
-    "price_per_100": 2.4967,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "majonez kewpie",
     "match_type": "ai",
     "fuzzy_score": 74.1,
@@ -12252,21 +11667,6 @@
     "price_package": 3.89,
     "price_per_unit": null,
     "price_per_100": 1.3893,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "maka z siemienia lnianego",
-    "match_type": "ai",
-    "fuzzy_score": 76.9,
-    "shop": "auchan",
-    "original_name": "Mąka La Pasta 100%   Molino Casillo  1 kg",
-    "generic_name": "mąka",
-    "package_size_value": 1000.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.19,
-    "price_per_unit": null,
-    "price_per_100": 0.819,
     "currency": "PLN"
   },
   {
@@ -12285,18 +11685,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "mielona jagniecina",
+    "ingredient_name": "mielona jagnięcina",
     "match_type": "ai",
     "fuzzy_score": 76.5,
     "shop": "auchan",
-    "original_name": "Mięso mielone jagnięce Połonina Lesko na wagę ok. 350 g",
-    "generic_name": "mielona baranina",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 23.45,
+    "original_name": "Mięso mielone wołowe Łuków 400 g",
+    "generic_name": "mielona wołowina",
+    "package_size_value": 400.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 22.99,
     "price_per_unit": null,
-    "price_per_100": 6.699,
+    "price_per_100": 5.7475,
     "currency": "PLN"
   },
   {
@@ -12315,9 +11715,9 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "mieszanka do coleslaw",
+    "ingredient_name": "mieszanka warzyw coleslaw",
     "match_type": "ai",
-    "fuzzy_score": 73.3,
+    "fuzzy_score": 76.9,
     "shop": "auchan",
     "original_name": "Surówka coleslaw MAGA 300 g",
     "generic_name": "surówka coleslaw",
@@ -12345,6 +11745,36 @@
     "currency": "PLN"
   },
   {
+    "ingredient_name": "mięso roślinne mielone",
+    "match_type": "ai",
+    "fuzzy_score": 68.2,
+    "shop": "biedronka",
+    "original_name": "Tarczyński Kabanosy roślinne oryginalne 90 g",
+    "generic_name": "tarczyński kabanosy roślinne oryginalne",
+    "package_size_value": 90.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 6.99,
+    "price_per_unit": null,
+    "price_per_100": 7.7667,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "mięso wołowe do gulaszu",
+    "match_type": "ai",
+    "fuzzy_score": 62.5,
+    "shop": "biedronka",
+    "original_name": "Kraina Mięs Porcja rosołowa wołowa",
+    "generic_name": "wołowina",
+    "package_size_value": 800.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 22.32,
+    "price_per_unit": null,
+    "price_per_100": 2.79,
+    "currency": "PLN"
+  },
+  {
     "ingredient_name": "mięso wołowe na gulasz",
     "match_type": "ai",
     "fuzzy_score": 75.0,
@@ -12363,15 +11793,15 @@
     "ingredient_name": "musztarda dijon",
     "match_type": "ai",
     "fuzzy_score": 73.3,
-    "shop": "auchan",
-    "original_name": "Ayran Pewni Dobrego 330 g",
-    "generic_name": "ayran",
-    "package_size_value": 330.0,
+    "shop": "biedronka",
+    "original_name": "Kamis Musztarda francuska 185 g",
+    "generic_name": "kamis musztarda francuska",
+    "package_size_value": 185.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 2.69,
+    "price_package": 3.69,
     "price_per_unit": null,
-    "price_per_100": 0.8152,
+    "price_per_100": 1.9946,
     "currency": "PLN"
   },
   {
@@ -12405,22 +11835,22 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "musztarda żółta",
+    "ingredient_name": "młode liście",
     "match_type": "ai",
-    "fuzzy_score": 73.3,
-    "shop": "biedronka",
-    "original_name": "Kamis Musztarda francuska 185 g",
-    "generic_name": "kamis musztarda francuska",
-    "package_size_value": 185.0,
+    "fuzzy_score": 73.7,
+    "shop": "auchan",
+    "original_name": "Szpinak liście Auchan 1 kg",
+    "generic_name": "szpinak liście",
+    "package_size_value": 1000.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 3.69,
+    "price_package": 10.79,
     "price_per_unit": null,
-    "price_per_100": 1.9946,
+    "price_per_100": 1.079,
     "currency": "PLN"
   },
   {
-    "ingredient_name": "nieslodzona czekolada",
+    "ingredient_name": "niesłodzona czekolada",
     "match_type": "ai",
     "fuzzy_score": 71.8,
     "shop": "auchan",
@@ -12438,21 +11868,6 @@
     "ingredient_name": "ogorek",
     "match_type": "ai",
     "fuzzy_score": 83.3,
-    "shop": "auchan",
-    "original_name": "Ogórek krótki Pewni Dobrego na wagę ok. 500 g",
-    "generic_name": "ogórek krótki",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 3.5,
-    "price_per_unit": null,
-    "price_per_100": 0.699,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "ogórek angielski",
-    "match_type": "ai",
-    "fuzzy_score": 78.3,
     "shop": "auchan",
     "original_name": "Ogórek krótki Pewni Dobrego na wagę ok. 500 g",
     "generic_name": "ogórek krótki",
@@ -12510,36 +11925,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "olej z otrebów ryzowych",
-    "match_type": "ai",
-    "fuzzy_score": 63.6,
-    "shop": "auchan",
-    "original_name": "Olej rzepakowy Auchan 1 l",
-    "generic_name": "olej rzepakowy",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 4.59,
-    "price_per_unit": null,
-    "price_per_100": 0.459,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "orzechy mieszane",
-    "match_type": "ai",
-    "fuzzy_score": 68.8,
-    "shop": "biedronka",
-    "original_name": "BakaD'Or Mieszanka nerkowiec-żurawina 200 g",
-    "generic_name": "bakad'or mieszanka nerkowiec-żurawina",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.49,
-    "price_per_unit": null,
-    "price_per_100": 4.745,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "orzechy pekan",
     "match_type": "ai",
     "fuzzy_score": 84.6,
@@ -12555,48 +11940,33 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "orzechy wloskie posiekane",
+    "ingredient_name": "orzechy włoskie posiekane",
     "match_type": "ai",
-    "fuzzy_score": 64.9,
+    "fuzzy_score": 65.1,
     "shop": "auchan",
-    "original_name": "Ser Krowi orzech włoski Landana 200 g",
-    "generic_name": "ser krowi orzech włoski",
-    "package_size_value": 200.0,
+    "original_name": "Roucoulons z orzechami włoskimi    Fromagerie Milleret 125 g",
+    "generic_name": "roucoulons z orzechami włoskimi",
+    "package_size_value": 125.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 25.5,
+    "price_package": 17.79,
     "price_per_unit": null,
-    "price_per_100": 12.75,
+    "price_per_100": 14.232,
     "currency": "PLN"
   },
   {
-    "ingredient_name": "otrby owsiane",
+    "ingredient_name": "orzeszki ziemne prażone",
     "match_type": "ai",
-    "fuzzy_score": 70.0,
-    "shop": "auchan",
-    "original_name": "Mąka owsiana   Młyn Niedźwiady 1 kg",
-    "generic_name": "mąka owsiana",
-    "package_size_value": 1000.0,
+    "fuzzy_score": 78.9,
+    "shop": "biedronka",
+    "original_name": "Felix Carmelove Orzeszki ziemne w karmelu ze szczyptą soli 160 g",
+    "generic_name": "felix carmelove orzeszki ziemne w karmelu ze szczyptą soli",
+    "package_size_value": 160.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 7.19,
+    "price_package": 9.39,
     "price_per_unit": null,
-    "price_per_100": 0.719,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "papier ryzowy do sajgonek",
-    "match_type": "ai",
-    "fuzzy_score": 83.7,
-    "shop": "auchan",
-    "original_name": "Papier ryżowy okrągły 22 cm Ricefield Cu Chi 300 g",
-    "generic_name": "papier ryżowy okrągły 22 cm",
-    "package_size_value": 300.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 14.39,
-    "price_per_unit": null,
-    "price_per_100": 4.7967,
+    "price_per_100": 5.8688,
     "currency": "PLN"
   },
   {
@@ -12612,51 +11982,6 @@
     "price_package": 13.79,
     "price_per_unit": null,
     "price_per_100": 9.1933,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "pasta chili",
-    "match_type": "ai",
-    "fuzzy_score": 77.8,
-    "shop": "auchan",
-    "original_name": "Pasta czerwona curry Cook brand 50 g",
-    "generic_name": "pasta czerwona curry",
-    "package_size_value": 50.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.08,
-    "price_per_unit": null,
-    "price_per_100": 6.16,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "pestki konopi prażone",
-    "match_type": "ai",
-    "fuzzy_score": 61.9,
-    "shop": "auchan",
-    "original_name": "BIO Nasiona konopii łuskane NaturaVena 200 g",
-    "generic_name": "nasiona konopii łuskane",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 22.99,
-    "price_per_unit": null,
-    "price_per_100": 11.495,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "pieczeń wolowa",
-    "match_type": "ai",
-    "fuzzy_score": 71.4,
-    "shop": "biedronka",
-    "original_name": "Kraina Mięs Porcja rosołowa wołowa",
-    "generic_name": "wołowina",
-    "package_size_value": 800.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 22.32,
-    "price_per_unit": null,
-    "price_per_100": 2.79,
     "currency": "PLN"
   },
   {
@@ -12690,138 +12015,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "plantany",
-    "match_type": "ai",
-    "fuzzy_score": 80.0,
-    "shop": "auchan",
-    "original_name": "Banany Owoce  Auchan na wagę kiść 4-6 szt  ok 1 kg",
-    "generic_name": "banany kiść 4",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 5.98,
-    "price_per_unit": null,
-    "price_per_100": 0.598,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "platki Chex bezglutenowe",
-    "match_type": "ai",
-    "fuzzy_score": 75.0,
-    "shop": "auchan",
-    "original_name": "Platki Corn Flakes kukurydziane bezglutenowe Nestlé 600 g",
-    "generic_name": "platki corn flakes kukurydziane bezglutenowe",
-    "package_size_value": 600.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 14.99,
-    "price_per_unit": null,
-    "price_per_100": 2.4983,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "platki kokosowe",
-    "match_type": "ai",
-    "fuzzy_score": 84.6,
-    "shop": "biedronka",
-    "original_name": "Bakello Wiórki kokosowe 200 g",
-    "generic_name": "bakello wiórki kokosowe",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.99,
-    "price_per_unit": null,
-    "price_per_100": 2.495,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "platki ryzowe",
+    "ingredient_name": "platki ryzowe chrupiace",
     "match_type": "ai",
     "fuzzy_score": 84.6,
     "shop": "auchan",
-    "original_name": "Płatki ryżowe błyskawiczne Auchan 700 g",
-    "generic_name": "płatki ryżowe błyskawiczne",
-    "package_size_value": 700.0,
+    "original_name": "BIO Płatki ryżowe  BioLife 300 g",
+    "generic_name": "płatki ryżowe",
+    "package_size_value": 300.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 7.99,
+    "price_package": 13.39,
     "price_per_unit": null,
-    "price_per_100": 1.1414,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "poledwica wolowa",
-    "match_type": "ai",
-    "fuzzy_score": 71.4,
-    "shop": "biedronka",
-    "original_name": "Kraina Mięs Porcja rosołowa wołowa",
-    "generic_name": "wołowina",
-    "package_size_value": 800.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 22.32,
-    "price_per_unit": null,
-    "price_per_100": 2.79,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "prazony sezam",
-    "match_type": "ai",
-    "fuzzy_score": 72.7,
-    "shop": "auchan",
-    "original_name": "Sezam czarny Makar 500 g",
-    "generic_name": "sezam czarny",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 14.25,
-    "price_per_unit": null,
-    "price_per_100": 2.85,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "prażone solone orzeszki ziemne",
-    "match_type": "ai",
-    "fuzzy_score": 73.1,
-    "shop": "biedronka",
-    "original_name": "Felix Carmelove Orzeszki ziemne w karmelu ze szczyptą soli 160 g",
-    "generic_name": "felix carmelove orzeszki ziemne w karmelu ze szczyptą soli",
-    "package_size_value": 160.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.39,
-    "price_per_unit": null,
-    "price_per_100": 5.8688,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "puree z batata",
-    "match_type": "ai",
-    "fuzzy_score": 66.7,
-    "shop": "auchan",
-    "original_name": "Frytki z batatów, kalarepy, fasolki szparagowej Hortex 450 g",
-    "generic_name": "frytki z batatów, kalarepy, fasolki szparagowej",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.19,
-    "price_per_unit": null,
-    "price_per_100": 2.0422,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "puree ziemniaczane",
-    "match_type": "ai",
-    "fuzzy_score": 77.8,
-    "shop": "biedronka",
-    "original_name": "Ziemniaki sałatkowe 1,5 kg",
-    "generic_name": "ziemniaki",
-    "package_size_value": 1500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.99,
-    "price_per_unit": null,
-    "price_per_100": 0.3993,
+    "price_per_100": 4.4633,
     "currency": "PLN"
   },
   {
@@ -12837,81 +12042,6 @@
     "price_package": 10.48,
     "price_per_unit": null,
     "price_per_100": 0.6987,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "ryz bialy",
-    "match_type": "ai",
-    "fuzzy_score": 80.0,
-    "shop": "auchan",
-    "original_name": "Ryż biały średnioziarnisty Auchan 4 x 100 g",
-    "generic_name": "ryż biały średnioziarnisty",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.45,
-    "price_per_unit": null,
-    "price_per_100": 0.6125,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "ryz brazowy",
-    "match_type": "ai",
-    "fuzzy_score": 81.8,
-    "shop": "auchan",
-    "original_name": "Ryż brązowy długoziarnisty Auchan 4 x 100 g",
-    "generic_name": "ryż brązowy długoziarnisty",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.29,
-    "price_per_unit": null,
-    "price_per_100": 0.8225,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "ryz brazowy z quinoa",
-    "match_type": "ai",
-    "fuzzy_score": 81.8,
-    "shop": "auchan",
-    "original_name": "Ryż brązowy długoziarnisty Auchan 4 x 100 g",
-    "generic_name": "ryż brązowy długoziarnisty",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.29,
-    "price_per_unit": null,
-    "price_per_100": 0.8225,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "ryz jasmine",
-    "match_type": "ai",
-    "fuzzy_score": 76.2,
-    "shop": "auchan",
-    "original_name": "Ryż jaśminowy Auchan 4 x 100 g",
-    "generic_name": "ryż jaśminowy",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.29,
-    "price_per_unit": null,
-    "price_per_100": 0.8225,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "ryz jasminowy",
-    "match_type": "ai",
-    "fuzzy_score": 84.6,
-    "shop": "auchan",
-    "original_name": "Ryż jaśminowy Auchan 4 x 100 g",
-    "generic_name": "ryż jaśminowy",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.29,
-    "price_per_unit": null,
-    "price_per_100": 0.8225,
     "currency": "PLN"
   },
   {
@@ -12945,22 +12075,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "schab wieprzowy",
-    "match_type": "ai",
-    "fuzzy_score": 81.5,
-    "shop": "auchan",
-    "original_name": "Nogi wieprzowe tylne tacka Auchan na wagę ok. 800 g",
-    "generic_name": "wieprzowina",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 6.39,
-    "price_per_unit": null,
-    "price_per_100": 0.799,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "skrobia maranty",
+    "ingredient_name": "skrobia maranta",
     "match_type": "ai",
     "fuzzy_score": 69.6,
     "shop": "auchan",
@@ -12990,37 +12105,7 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "skrobia strzecha",
-    "match_type": "ai",
-    "fuzzy_score": 66.7,
-    "shop": "auchan",
-    "original_name": "BIO Ekologiczna skrobia kukurydziana NaturaVena 250 g",
-    "generic_name": "skrobia kukurydziana",
-    "package_size_value": 250.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.79,
-    "price_per_unit": null,
-    "price_per_100": 3.916,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "skrobia strzelista",
-    "match_type": "ai",
-    "fuzzy_score": 66.7,
-    "shop": "auchan",
-    "original_name": "BIO Ekologiczna skrobia kukurydziana NaturaVena 250 g",
-    "generic_name": "skrobia kukurydziana",
-    "package_size_value": 250.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.79,
-    "price_per_unit": null,
-    "price_per_100": 3.916,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "skrobia z tapioki",
+    "ingredient_name": "skrobia tapiokowa",
     "match_type": "ai",
     "fuzzy_score": 69.2,
     "shop": "auchan",
@@ -13047,6 +12132,81 @@
     "price_package": 4.49,
     "price_per_unit": null,
     "price_per_100": 1.1225,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "spray do gotowania",
+    "match_type": "ai",
+    "fuzzy_score": 77.4,
+    "shop": "auchan",
+    "original_name": "Oliwa z oliwek do smażenia i gotowania Auchan 1 l",
+    "generic_name": "oliwa z oliwek do smażenia i gotowania",
+    "package_size_value": 1000.0,
+    "unit": "ml",
+    "sold_by_weight": false,
+    "price_package": 24.99,
+    "price_per_unit": null,
+    "price_per_100": 2.499,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "spray do pieczenia",
+    "match_type": "ai",
+    "fuzzy_score": 83.3,
+    "shop": "auchan",
+    "original_name": "Margaryna Palma do pieczenia i smażenia   Bielmar 250 g",
+    "generic_name": "margaryna palma do pieczenia i smażenia",
+    "package_size_value": 250.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 3.49,
+    "price_per_unit": null,
+    "price_per_100": 1.396,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "spray do smażenia",
+    "match_type": "ai",
+    "fuzzy_score": 82.4,
+    "shop": "auchan",
+    "original_name": "Margaryna Palma do pieczenia i smażenia   Bielmar 250 g",
+    "generic_name": "margaryna palma do pieczenia i smażenia",
+    "package_size_value": 250.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 3.49,
+    "price_per_unit": null,
+    "price_per_100": 1.396,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "spray olejowy",
+    "match_type": "ai",
+    "fuzzy_score": 70.0,
+    "shop": "auchan",
+    "original_name": "Olej kokosowy Fratelli Mantova 200 ml",
+    "generic_name": "olej kokosowy",
+    "package_size_value": 200.0,
+    "unit": "ml",
+    "sold_by_weight": false,
+    "price_package": 29.99,
+    "price_per_unit": null,
+    "price_per_100": 14.995,
+    "currency": "PLN"
+  },
+  {
+    "ingredient_name": "stek boczny wołowy",
+    "match_type": "ai",
+    "fuzzy_score": 71.4,
+    "shop": "biedronka",
+    "original_name": "Kraina Mięs Porcja rosołowa wołowa",
+    "generic_name": "wołowina",
+    "package_size_value": 800.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 22.32,
+    "price_per_unit": null,
+    "price_per_100": 2.79,
     "currency": "PLN"
   },
   {
@@ -13080,52 +12240,22 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "stevia",
-    "match_type": "ai",
-    "fuzzy_score": 83.3,
-    "shop": "auchan",
-    "original_name": "Stevia słodzik pochodzenia naturalnego z inuliną Zielony listek 140 g",
-    "generic_name": "stewia",
-    "package_size_value": 140.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 12.49,
-    "price_per_unit": null,
-    "price_per_100": 8.9214,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "swieze ziola",
-    "match_type": "ai",
-    "fuzzy_score": 80.0,
-    "shop": "auchan",
-    "original_name": "Zioła Prowansalskie   Auchan 10 g",
-    "generic_name": "zioła",
-    "package_size_value": 10.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.29,
-    "price_per_unit": null,
-    "price_per_100": 12.9,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "twarog kremowy",
     "match_type": "ai",
-    "fuzzy_score": 83.3,
+    "fuzzy_score": 76.2,
     "shop": "auchan",
-    "original_name": "Twaróg chudy Auchan 250 g",
-    "generic_name": "twaróg",
-    "package_size_value": 250.0,
+    "original_name": "Serek kremowy naturalny Arla 200 g",
+    "generic_name": "serek kremowy",
+    "package_size_value": 200.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 3.65,
+    "price_package": 6.98,
     "price_per_unit": null,
-    "price_per_100": 1.46,
+    "price_per_100": 3.49,
     "currency": "PLN"
   },
   {
-    "ingredient_name": "wiorki kokosowe nieslodzone",
+    "ingredient_name": "wiorki kokosowe niesodzone",
     "match_type": "ai",
     "fuzzy_score": 73.7,
     "shop": "biedronka",
@@ -13137,21 +12267,6 @@
     "price_package": 4.99,
     "price_per_unit": null,
     "price_per_100": 2.495,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "wisnie",
-    "match_type": "ai",
-    "fuzzy_score": 83.3,
-    "shop": "auchan",
-    "original_name": "Lody wisnia z czekoladą Auchan 1 l",
-    "generic_name": "lody wisnia z czekoladą",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 15.29,
-    "price_per_unit": null,
-    "price_per_100": 1.529,
     "currency": "PLN"
   },
   {
@@ -13170,18 +12285,18 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "wiśnie czerwone",
+    "ingredient_name": "łosoś wędzony",
     "match_type": "ai",
-    "fuzzy_score": 73.3,
+    "fuzzy_score": 63.6,
     "shop": "auchan",
-    "original_name": "Jogurt kremowy z wiśnią. czereśnią i granolą Bakoma 230 g",
-    "generic_name": "jogurt kremowy z wiśnią. czereśnią i granolą",
-    "package_size_value": 230.0,
+    "original_name": "Łosoś kawałki w sosie pomidorowym Auchan 150 g",
+    "generic_name": "łosoś kawałki w sosie pomidorowym",
+    "package_size_value": 150.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 6.08,
+    "price_package": 6.75,
     "price_per_unit": null,
-    "price_per_100": 2.6435,
+    "price_per_100": 4.5,
     "currency": "PLN"
   },
   {
