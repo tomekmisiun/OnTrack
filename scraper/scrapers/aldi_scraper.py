@@ -177,6 +177,22 @@ def extract_product(content: str, url: str) -> dict | None:
         except ValueError:
             pass
 
+    # Wielkość opakowania i cena jednostkowa (np. "4 Each (£0.46/1 Each)", "6 Pack (£0.25/1 Pack)")
+    pack_size    = None
+    price_per_unit = None
+    pack_m = re.search(
+        r'(\d+(?:\.\d+)?)\s*(Each|Pack)\s*\(£([\d.]+)/\d+\s*(?:Each|Pack)\)',
+        content, re.IGNORECASE
+    )
+    if pack_m:
+        qty  = pack_m.group(1)
+        unit = pack_m.group(2).capitalize()
+        pack_size = f"{qty} {unit}"
+        try:
+            price_per_unit = float(pack_m.group(3))
+        except ValueError:
+            pass
+
     # Kategoria z breadcrumba (pomijamy Home i Products)
     category = " > ".join(
         b for b in breadcrumb
@@ -187,15 +203,17 @@ def extract_product(content: str, url: str) -> dict | None:
     brand = (product_data.get("brand") or {}).get("name", "")
 
     return {
-        "name":         name,
-        "url":          url,
-        "image_url":    image_url,
-        "price":        price,
-        "price_per_kg": price_per_kg,
-        "currency":     currency,
-        "category":     category,
-        "brand":        brand,
-        "description":  description,
+        "name":           name,
+        "url":            url,
+        "image_url":      image_url,
+        "price":          price,
+        "price_per_kg":   price_per_kg,
+        "pack_size":      pack_size,
+        "price_per_unit": price_per_unit,
+        "currency":       currency,
+        "category":       category,
+        "brand":          brand,
+        "description":    description,
     }
 
 
@@ -297,7 +315,8 @@ async def run(args):
             print(f"Limit: {args.limit}")
 
         # Scraping produktów (współbieżnie)
-        to_scrape = [(u, c) for u, c in all_urls if u not in existing]
+        # Re-scrape produkty bez pola pack_size (nowe pole dodane później)
+        to_scrape = [(u, c) for u, c in all_urls if u not in existing or "pack_size" not in existing[u]]
         skipped   = len(all_urls) - len(to_scrape)
         print(f"Do pobrania: {len(to_scrape)}, pominięte: {skipped}\n")
 
