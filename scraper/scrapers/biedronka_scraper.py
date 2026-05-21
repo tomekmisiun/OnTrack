@@ -20,6 +20,9 @@ import argparse
 import random
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).parent.parent / "processing"))
+from food_categories import classify_product
+
 try:
     from playwright.async_api import async_playwright, Page
 except ImportError:
@@ -359,14 +362,34 @@ async def main(args):
 
         await browser.close()
 
+    # Klasyfikuj do 12 standardowych kategorii i filtruj
+    classified = []
+    skipped    = 0
+    for p in all_products:
+        result = classify_product(p)
+        if result:
+            classified.append(result)
+        else:
+            skipped += 1
+
     out = Path(args.out)
     with open(out, "w", encoding="utf-8") as f:
-        json.dump(all_products, f, ensure_ascii=False, indent=2)
+        json.dump(classified, f, ensure_ascii=False, indent=2)
+
+    by_cat: dict[str, int] = {}
+    for p in classified:
+        c = p["standard_category"]
+        by_cat[c] = by_cat.get(c, 0) + 1
 
     print(f"\n{'='*60}")
-    print(f"Łącznie: {len(all_products)} produktów → {out}")
-    if not all_products:
-        print("⚠  0 produktów. Spróbuj: --headful --debug")
+    print(f"Łącznie:    {len(all_products)} produktów")
+    print(f"Dopasowane: {len(classified)}")
+    print(f"Odrzucone:  {skipped}")
+    for cat, count in sorted(by_cat.items(), key=lambda x: -x[1]):
+        print(f"  {count:4d}  {cat}")
+    print(f"Zapisano → {out}")
+    if not classified:
+        print("⚠  0 produktów po klasyfikacji.")
 
 
 if __name__ == "__main__":
@@ -374,5 +397,5 @@ if __name__ == "__main__":
     ap.add_argument("--limit",   type=int, default=0)
     ap.add_argument("--debug",   action="store_true")
     ap.add_argument("--headful", action="store_true")
-    ap.add_argument("--out",     default="biedronka_products.json")
+    ap.add_argument("--out",     default=str(Path(__file__).parent.parent / "data" / "biedronka_products.json"))
     asyncio.run(main(ap.parse_args()))
