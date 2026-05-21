@@ -368,6 +368,8 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
   return (
     <div key={key} style={{ display:'flex', flexDirection:'column' }}>
       <div onClick={() => handleOtherClick(key)}
+        onMouseEnter={e => e.currentTarget.style.filter='brightness(1.35)'}
+        onMouseLeave={e => e.currentTarget.style.filter='brightness(1)'}
         style={{
           height:70, borderRadius:10, cursor:'pointer',
           background: gradient,
@@ -1128,6 +1130,8 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
           return (
             <div key={key} style={{ display:'flex', flexDirection:'column' }}>
               <div onClick={() => handleTileClick(key)}
+                onMouseEnter={e => e.currentTarget.style.filter='brightness(1.35)'}
+                onMouseLeave={e => e.currentTarget.style.filter='brightness(1)'}
                 style={{
                   height:100, borderRadius:12, cursor:'pointer',
                   background: gradient,

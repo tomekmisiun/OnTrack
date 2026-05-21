@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Icon } from '@iconify/react';
 import { products as api, importPrices } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -56,7 +56,9 @@ export default function Products() {
   const [promptCopied, setPromptCopied] = useState(false);
   const [selectionMode, setSelectionMode] = useState(false);
   const [selectedIds, setSelectedIds] = useState(new Set());
+  const [visibleCount, setVisibleCount] = useState(50);
   const fileInputRef = useRef();
+  const sentinelRef = useRef(null);
 
   const toggleSelect = (id) => setSelectedIds(prev => {
     const next = new Set(prev);
@@ -96,6 +98,24 @@ export default function Products() {
   const isTextFile  = (file) => file && /\.(txt|csv)$/i.test(file.name);
 
   useEffect(() => { loadProducts(); }, []);
+
+  const filteredProducts = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return q ? productList.filter(p => p.name.toLowerCase().includes(q)) : productList;
+  }, [productList, search]);
+
+  useEffect(() => { setVisibleCount(50); }, [search]);
+
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting)
+        setVisibleCount(v => Math.min(v + 50, filteredProducts.length));
+    }, { rootMargin: '300px' });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [filteredProducts.length]);
 
   const loadProducts = async () => {
     try { setProductList((await api.getAll()).data); }
@@ -823,7 +843,7 @@ Czekam na moją listę.`}</pre>
             <tr><th>{t('col_name')}</th><th>{t('col_kcal')}</th><th>{t('col_macro')}</th><th>Pojemność Opakowania</th><th>Cena (opak/kg)</th><th></th></tr>
           </thead>
           <tbody>
-            {productList.filter(p => !search.trim() || p.name.toLowerCase().includes(search.trim().toLowerCase())).map(p => {
+            {filteredProducts.slice(0, visibleCount).map(p => {
               const isEditing = editId === p.id;
               return (
                 <React.Fragment key={p.id}>
@@ -941,8 +961,15 @@ Czekam na moją listę.`}</pre>
             {productList.length === 0 && (
               <tr><td colSpan={6} style={{ textAlign: 'center', color: '#6b7280' }}>{t('no_products')}</td></tr>
             )}
-            {productList.length > 0 && search.trim() && !productList.some(p => p.name.toLowerCase().includes(search.trim().toLowerCase())) && (
+            {filteredProducts.length === 0 && search.trim() && (
               <tr><td colSpan={6} style={{ textAlign: 'center', color: '#6b7280', fontStyle: 'italic' }}>Nie znaleziono produktu „{search}"</td></tr>
+            )}
+            {visibleCount < filteredProducts.length && (
+              <tr ref={sentinelRef}>
+                <td colSpan={6} style={{ textAlign: 'center', color: '#4b5563', padding: '10px 0', fontSize: 12 }}>
+                  Pokazano {visibleCount} z {filteredProducts.length} produktów…
+                </td>
+              </tr>
             )}
           </tbody>
         </table>

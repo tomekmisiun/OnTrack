@@ -56,6 +56,9 @@ code {
 
 /* Product list row hover */
 .product-row td { transition: background 0.15s, border-color 0.15s; background: #1a2433; border-top: 1px solid transparent; border-bottom: 1px solid transparent; user-select: none; }
+
+.template-row { transition: background 0.15s, border-left-color 0.15s; border-left: 3px solid transparent; cursor: pointer; }
+.template-row:hover { background: #0d948818 !important; border-left-color: #0d9488 !important; }
 .product-row td:first-child { border-left: 3px solid transparent; border-radius: 6px 0 0 6px; }
 .product-row td:last-child { border-right: 1px solid transparent; border-radius: 0 6px 6px 0; }
 .product-row:hover td { background: #0d948818 !important; }

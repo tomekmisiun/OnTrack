@@ -117,9 +117,20 @@ function Summary({ onGoToTab }) {
   const [customLoading, setCustomLoading] = useState(false);
 
   // Templates
-  const [templates] = useState(() => {
+  const [templates, setTemplates] = useState(() => {
     try { return JSON.parse(localStorage.getItem('weekTemplates') || '[]'); } catch { return []; }
   });
+
+  const [expandedTpl, setExpandedTpl] = useState(null);
+
+  const deleteTemplate = (idx) => {
+    const updated = templates.filter((_, i) => i !== idx);
+    setTemplates(updated);
+    localStorage.setItem('weekTemplates', JSON.stringify(updated));
+    if (expandedTpl === idx) setExpandedTpl(null);
+  };
+
+  const DAY_NAMES = ['Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob', 'Nd'];
   const [recipeList, setRecipeList] = useState([]);
   const [productList, setProductList] = useState([]);
   const [drinkItems, setDrinkItems] = useState([]);
@@ -395,26 +406,59 @@ function Summary({ onGoToTab }) {
         </div>
 
         <div style={{ borderTop:'1px solid #374151' }}>
-            {tplData.map((tpl, i) => (
-              <div key={i} style={{
-                padding:'12px 20px',
-                borderBottom: i < tplData.length-1 ? '1px solid #2d3748' : 'none',
-                display:'flex', justifyContent:'space-between', alignItems:'center',
-              }}>
-                <div>
-                  <div style={{ fontWeight:700, fontSize:14 }}>{tpl.name}</div>
-                  <div style={{ fontSize:12, color:'#6b7280', marginTop:2 }}>
-                    {t('meals_n')(tpl.meals.length)}
+            {tplData.map((tpl, i) => {
+              const isOpen = expandedTpl === i;
+              // Grupuj posiłki po dniu
+              const byDay = Array.from({ length: 7 }, (_, d) =>
+                tpl.meals.filter(m => m.dayOffset === d).sort((a, b) => a.position - b.position)
+              );
+              const activeDays = byDay.map((meals, d) => ({ d, meals })).filter(x => x.meals.length > 0);
+
+              return (
+                <div key={i} style={{ borderBottom: i < tplData.length-1 ? '1px solid #2d3748' : 'none' }}>
+                  {/* Nagłówek wiersza */}
+                  <div
+                    className="template-row"
+                    style={{ padding:'12px 20px', display:'flex', justifyContent:'space-between', alignItems:'center' }}
+                    onClick={() => setExpandedTpl(isOpen ? null : i)}
+                  >
+                    <div>
+                      <div style={{ fontWeight:700, fontSize:14 }}>{tpl.name}</div>
+                      <div style={{ fontSize:12, color:'#6b7280', marginTop:2 }}>{t('meals_n')(tpl.meals.length)}</div>
+                    </div>
+                    <div style={{ display:'flex', alignItems:'center', gap:16 }}>
+                      <div style={{ textAlign:'right' }}>
+                        <div style={{ fontSize:11, color:'#6b7280' }}>{t('est_weekly_cost')}</div>
+                        <div style={{ fontSize:18, fontWeight:700, color:'#0d9488' }}>~{tpl.estimatedCost.toFixed(2)} zł</div>
+                      </div>
+                      <button
+                        className="btn btn-danger"
+                        onClick={e => { e.stopPropagation(); deleteTemplate(i); }}
+                      >
+                        Usuń
+                      </button>
+                    </div>
                   </div>
+
+                  {/* Rozwinięta zawartość */}
+                  {isOpen && (
+                    <div style={{ padding:'0 20px 14px', display:'flex', gap:8, flexWrap:'wrap' }}>
+                      {activeDays.map(({ d, meals }) => (
+                        <div key={d} style={{ background:'#111827', borderRadius:8, padding:'8px 12px', minWidth:110 }}>
+                          <div style={{ fontSize:11, fontWeight:700, color:'#0d9488', marginBottom:6 }}>{DAY_NAMES[d]}</div>
+                          {meals.map((m, mi) => (
+                            <div key={mi} style={{ fontSize:12, color:'#e2e8f0', marginBottom:3, display:'flex', gap:6, alignItems:'flex-start' }}>
+                              <span style={{ fontSize:10, color:'#6b7280', minWidth:14, paddingTop:1 }}>{m.position}.</span>
+                              <span>{m.recipe_name}</span>
+                            </div>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
-                <div style={{ textAlign:'right' }}>
-                  <div style={{ fontSize:11, color:'#6b7280' }}>{t('est_weekly_cost')}</div>
-                  <div style={{ fontSize:18, fontWeight:700, color:'#0d9488' }}>
-                    ~{tpl.estimatedCost.toFixed(2)} zł
-                  </div>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
       </div>
     </div>

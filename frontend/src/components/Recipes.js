@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Icon } from '@iconify/react';
 import { recipes as api, products as productsApi } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -144,6 +144,7 @@ export default function Recipes() {
   const [productList, setProductList] = useState([]);
   const [search, setSearch] = useState('');
   const [expanded, setExpanded] = useState(null);
+  const [expandedDetail, setExpandedDetail] = useState(null);
   const [pasteText, setPasteText] = useState('');
   const [parsed, setParsed] = useState(null);
   const [parsing, setParsing] = useState(false);
@@ -159,7 +160,9 @@ export default function Recipes() {
   const [hoveredId, setHoveredId] = useState(null);
   const [selectionMode, setSelectionMode] = useState(false);
   const [selectedIds, setSelectedIds] = useState(new Set());
+  const [visibleCount, setVisibleCount] = useState(50);
   const textareaRef = useRef(null);
+  const sentinelRef = useRef(null);
 
   const toggleSelect = (id) => setSelectedIds(prev => {
     const next = new Set(prev);
@@ -194,8 +197,30 @@ export default function Recipes() {
 
   useEffect(() => { loadRecipes(); loadProducts(); loadParseLimit(); }, []);
 
+  const filteredRecipes = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    const list = q ? recipeList.filter(r => r.name.toLowerCase().includes(q)) : recipeList;
+    return [...list].sort((a, b) => (b.is_favorite ? 1 : 0) - (a.is_favorite ? 1 : 0));
+  }, [recipeList, search]);
+
+  useEffect(() => { setVisibleCount(50); }, [search]);
+
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting)
+        setVisibleCount(v => Math.min(v + 50, filteredRecipes.length));
+    }, { rootMargin: '300px' });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [filteredRecipes.length]);
+
   const loadRecipes = async () => {
     try { setRecipeList((await api.getAll()).data); } catch { showError(t('err_load_recipes_list')); }
+  };
+  const loadExpandedDetail = async (id) => {
+    try { setExpandedDetail((await api.get(id)).data); } catch {}
   };
   const loadProducts = async () => {
     try { setProductList((await productsApi.getAll()).data); } catch {}
@@ -600,7 +625,7 @@ Zasady:
           />
         </div>
         {recipeList.length === 0 && <p style={{ textAlign: 'center', color: '#6b7280' }}>{t('no_recipes_add')}</p>}
-        {recipeList.length > 0 && search.trim() && !recipeList.some(r => r.name.toLowerCase().includes(search.trim().toLowerCase())) && (
+        {recipeList.length > 0 && search.trim() && filteredRecipes.length === 0 && (
           <p style={{ textAlign: 'center', color: '#6b7280', fontStyle: 'italic' }}>Nie znaleziono przepisu „{search}"</p>
         )}
         <div style={{ overflowX: 'auto' }}>
@@ -614,14 +639,17 @@ Zasady:
             </tr>
           </thead>
           <tbody>
-        {recipeList.filter(r => !search.trim() || r.name.toLowerCase().includes(search.trim().toLowerCase())).sort((a, b) => (b.is_favorite ? 1 : 0) - (a.is_favorite ? 1 : 0)).map(r => (
+        {filteredRecipes.slice(0, visibleCount).map(r => (
           <>
           <tr key={r.id}
             className={`recipe-row${selectedIds.has(r.id) ? ' recipe-row-checked' : ''}`}
             onClick={() => {
               if (selectionMode) { toggleSelect(r.id); return; }
-              setExpanded(expanded === r.id ? null : r.id);
+              const next = expanded === r.id ? null : r.id;
+              setExpanded(next);
               setEditingIngredients(null);
+              if (next) loadExpandedDetail(next);
+              else setExpandedDetail(null);
             }}
             style={{ cursor: 'pointer' }}>
             <td colSpan={2} style={!selectionMode && expanded === r.id ? { background: '#0d948818', borderLeft: '3px solid #0d9488', borderTop: '1px solid #0d948860', borderBottom: '1px solid #0d948860' } : {}}>
@@ -691,26 +719,27 @@ Zasady:
             const blStyle  = { borderLeft: '3px solid #0d9488' };
             const inpS     = { width: 38, padding: '1px 3px', fontSize: 11, background: '#1f2937', border: '1px solid #0d9488', borderRadius: 4, color: '#e2e8f0', textAlign: 'center', minWidth: 0 };
 
+            const ings = expandedDetail?.id === r.id ? (expandedDetail.ingredients || []) : null;
             const saveIngMacro = async (ing, vals) => {
               const toN = v => v === '' ? null : parseFloat(v) || 0;
-              try { await productsApi.update(ing.product_id, { kcal: toN(vals.kcal), protein: toN(vals.protein), fat: toN(vals.fat), carbs: toN(vals.carbs) }); await loadRecipes(); }
+              try { await productsApi.update(ing.product_id, { kcal: toN(vals.kcal), protein: toN(vals.protein), fat: toN(vals.fat), carbs: toN(vals.carbs) }); await loadExpandedDetail(r.id); }
               catch { showError('Błąd zapisu makro'); }
               setEditingIngCell(null);
             };
             const saveIngWeight = async (ing, weight) => {
               if (!weight || isNaN(parseFloat(weight))) { setEditingIngCell(null); return; }
-              try { await api.update(r.id, { ingredients: r.ingredients.map(x => ({ product_id: x.product_id, weight: x.id === ing.id ? parseFloat(weight) : x.weight })) }); await loadRecipes(); }
+              try { await api.update(r.id, { ingredients: ings.map(x => ({ product_id: x.product_id, weight: x.id === ing.id ? parseFloat(weight) : x.weight })) }); await loadExpandedDetail(r.id); }
               catch { showError('Błąd zapisu'); }
               setEditingIngCell(null);
             };
             const saveIngName = async (ing, name) => {
               if (!name.trim()) { setEditingIngCell(null); return; }
-              try { await productsApi.update(ing.product_id, { name: name.trim() }); await loadRecipes(); }
+              try { await productsApi.update(ing.product_id, { name: name.trim() }); await loadExpandedDetail(r.id); }
               catch { showError('Błąd zapisu nazwy'); }
               setEditingIngCell(null);
             };
             const deleteIng = async (ing) => {
-              try { await api.update(r.id, { ingredients: r.ingredients.filter(x => x.id !== ing.id).map(x => ({ product_id: x.product_id, weight: x.weight })) }); await loadRecipes(); }
+              try { await api.update(r.id, { ingredients: ings.filter(x => x.id !== ing.id).map(x => ({ product_id: x.product_id, weight: x.weight })) }); await loadExpandedDetail(r.id); }
               catch { showError('Błąd usuwania składnika'); }
             };
             const initAdding = () => setAddingIng({ recipeId: r.id, search: '', product: null, weight: '', showDrop: false, kcal: '', protein: '', fat: '', carbs: '', unit: 'g', soldByWeight: false, priceOpak: '', pkgWeight: '', priceKg: '', priceSzt: '' });
@@ -733,8 +762,8 @@ Zasady:
                   const toN = v => v === '' ? null : parseFloat(v) || 0;
                   await productsApi.update(pid, { kcal: toN(a.kcal), protein: toN(a.protein), fat: toN(a.fat), carbs: toN(a.carbs) });
                 }
-                await api.update(r.id, { ingredients: [...r.ingredients.map(x => ({ product_id: x.product_id, weight: x.weight })), { product_id: pid, weight: parseFloat(a.weight) }] });
-                await loadRecipes();
+                await api.update(r.id, { ingredients: [...ings.map(x => ({ product_id: x.product_id, weight: x.weight })), { product_id: pid, weight: parseFloat(a.weight) }] });
+                await loadExpandedDetail(r.id);
                 setAddingIng(null);
               } catch { showError('Błąd dodawania składnika'); }
             };
@@ -747,6 +776,10 @@ Zasady:
             const addUnit = addingIng?.product?.unit || addingIng?.unit || 'g';
 
             return (<>
+              {ings === null && (
+                <tr style={ingStyle}><td colSpan={5} style={{ textAlign: 'center', padding: 12, color: '#6b7280', fontSize: 13 }}>Ładowanie składników…</td></tr>
+              )}
+              {ings !== null && <>
               <tr style={ingStyle}>
                 <th style={{ ...blStyle, fontSize: 11, color: '#6b7280', fontWeight: 700, letterSpacing: '0.5px', padding: '6px 8px' }}>Nazwa produktu</th>
                 <th style={{ textAlign: 'left', fontSize: 11, color: '#6b7280', fontWeight: 700, letterSpacing: '0.5px', width: 100 }}>Potrzebuje</th>
@@ -754,7 +787,7 @@ Zasady:
                 <th style={{ textAlign: 'right', fontSize: 11, color: '#6b7280', fontWeight: 700, letterSpacing: '0.5px', whiteSpace: 'nowrap' }}>Koszt</th>
                 <th style={{ textAlign: 'center', fontSize: 11, color: '#6b7280', fontWeight: 700, letterSpacing: '0.5px', width: 60 }}>Usuń</th>
               </tr>
-              {r.ingredients.map(ing => {
+              {ings.map(ing => {
                 const factor  = ing.unit === 'szt' ? ing.weight : ing.weight / 100;
                 const kcal    = ing.kcal    != null ? Math.round(ing.kcal    * factor) : null;
                 const protein = ing.protein != null ? Math.round(ing.protein * factor * 10) / 10 : null;
@@ -946,10 +979,18 @@ Zasady:
                   </td>
                 </tr>
               )}
+            </>}
             </>);
           })()}
           </>
         ))}
+        {visibleCount < filteredRecipes.length && (
+          <tr ref={sentinelRef}>
+            <td colSpan={5} style={{ textAlign: 'center', color: '#4b5563', padding: '10px 0', fontSize: 12 }}>
+              Pokazano {visibleCount} z {filteredRecipes.length} przepisów…
+            </td>
+          </tr>
+        )}
           </tbody>
         </table>
         </div>
