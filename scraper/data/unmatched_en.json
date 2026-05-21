@@ -2425,31 +2425,6 @@
     ]
   },
   {
-    "ingredient_name": "palm sugar",
-    "top_candidates": [
-      {
-        "product": "demerara sugar",
-        "score": 82.4
-      },
-      {
-        "product": "less sugar",
-        "score": 77.8
-      },
-      {
-        "product": "plum",
-        "score": 75.0
-      },
-      {
-        "product": "icing sugar",
-        "score": 75.0
-      },
-      {
-        "product": "caster sugar",
-        "score": 75.0
-      }
-    ]
-  },
-  {
     "ingredient_name": "pepitas",
     "top_candidates": [
       {
@@ -3146,6 +3121,31 @@
       {
         "product": "clotted cream flavour swiss roll",
         "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "taco seasoning",
+    "top_candidates": [
+      {
+        "product": "mediterranean chicken seasoning",
+        "score": 83.3
+      },
+      {
+        "product": "cajun chicken seasoning",
+        "score": 83.3
+      },
+      {
+        "product": "herb seasoning",
+        "score": 83.3
+      },
+      {
+        "product": "smoky bbq seasoning",
+        "score": 83.3
+      },
+      {
+        "product": "peri peri seasoning",
+        "score": 83.3
       }
     ]
   },

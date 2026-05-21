@@ -62,6 +62,7 @@ READY_TO_EAT_PL = [
     "ready to eat",
     "ready to cook",
     "ready-to-eat",
+    "deser ",          # "deser mleczno ryżowy" itp.
 ]
 
 # Marki wyłącznie gotowych dań (PL)

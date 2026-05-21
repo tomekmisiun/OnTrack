@@ -366,6 +366,184 @@
     "cost_complete": false
   },
   {
+    "name_en": "Sheet Pan Meal Prep Breakfast - French Toast Sticks & Sausage",
+    "name_pl": "Śniadanie Meal Prep na Blasze - Paluszki Tostów Francuskich i Kiełbasa",
+    "url": "https://mealpreponfleek.com/french-toast-sticks-sausage-sheet-pan-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/12/sheet-pan-french-toast-sticks-2-e1767618092246.jpg",
+    "category": "breakfast",
+    "ingredients_en": [
+      {
+        "name": "gluten-free bread",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "eggs",
+        "amount": 3,
+        "unit": "pcs"
+      },
+      {
+        "name": "milk",
+        "amount": 118,
+        "unit": "ml"
+      },
+      {
+        "name": "cinnamon",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "vanilla extract",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "breakfast sausage links",
+        "amount": 8,
+        "unit": "pcs"
+      },
+      {
+        "name": "fresh fruit",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "maple syrup",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "chleb bezglutenowy",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "jajka",
+        "amount": 3,
+        "unit": "pcs"
+      },
+      {
+        "name": "mleko",
+        "amount": 118,
+        "unit": "ml"
+      },
+      {
+        "name": "cynamon",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "ekstrakt waniliowy",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "kiełbaski śniadaniowe",
+        "amount": 8,
+        "unit": "pcs"
+      },
+      {
+        "name": "świeże owoce",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "syrop klonowy",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
+    "name_en": "Kabocha Squash Waffle Meal Prep (Gluten Free, Paleo-Friendly)",
+    "name_pl": "Gofry z dyni kabocha",
+    "url": "https://mealpreponfleek.com/kabocha-squash-waffle-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/11/Kaboch-Squash-Waffle-Meal-Prep-Edited-4-e1766784792772.jpg",
+    "category": "breakfast",
+    "ingredients_en": [
+      {
+        "name": "kabocha squash",
+        "amount": 300,
+        "unit": "g"
+      },
+      {
+        "name": "eggs",
+        "amount": 4,
+        "unit": "pcs"
+      },
+      {
+        "name": "coconut flour",
+        "amount": 14,
+        "unit": "g"
+      },
+      {
+        "name": "cinnamon",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "baking powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sea salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sweetener",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "dynia kabocha",
+        "amount": 300,
+        "unit": "g"
+      },
+      {
+        "name": "jajka",
+        "amount": 4,
+        "unit": "pcs"
+      },
+      {
+        "name": "mąka kokosowa",
+        "amount": 14,
+        "unit": "g"
+      },
+      {
+        "name": "cynamon",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "proszek do pieczenia",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sól morska",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "słodzik",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
     "name_en": "Apple, Bacon, Onion & Cheddar Breakfast Squares (GF, Low Carb)",
     "name_pl": "Kwadraty Śniadaniowe z Jabłkiem, Bekonem, Cebulą i Cheddarem (Bezglutenowe, Niskowęglowodanowe)",
     "url": "https://mealpreponfleek.com/apple-bacon-onion-cheddar-breakfast-squares/",
@@ -604,6 +782,140 @@
     "cost_complete": false
   },
   {
+    "name_en": "Chickpea Frittata Meal Prep",
+    "name_pl": "Frittata z ciecierzycy",
+    "url": "https://mealpreponfleek.com/chickpea-frittata/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2021/07/Chickpea-Frittata-Single-Container-e1759751088588.jpg",
+    "category": "breakfast",
+    "ingredients_en": [
+      {
+        "name": "chickpea flour",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "nutritional yeast",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "baking powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sea salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "italian seasoning",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "garlic powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "water",
+        "amount": 591,
+        "unit": "ml"
+      },
+      {
+        "name": "olive oil",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "cremini mushrooms",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "spinach",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "mandarin orange segments",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "kiwi",
+        "amount": 2,
+        "unit": "pcs"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "mąka z ciecierzycy",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "płatki drożdżowe",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "proszek do pieczenia",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sól morska",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "przyprawa włoska",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "czosnek w proszku",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "woda",
+        "amount": 591,
+        "unit": "ml"
+      },
+      {
+        "name": "oliwa z oliwek",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "pieczarki cremini",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "szpinak",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "mandarynki",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "kiwi",
+        "amount": 2,
+        "unit": "pcs"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
     "name_en": "Easy Gluten-Free Fall Breakfast Granola (Healthy Meal Prep Snack)",
     "name_pl": "Jesienna granola bezglutenowa",
     "url": "https://mealpreponfleek.com/easy-gluten-free-fall-breakfast-granola/",
@@ -822,6 +1134,170 @@
     "cost_complete": false
   },
   {
+    "name_en": "Carrot Cake Pancakes",
+    "name_pl": "Naleśniki Marchewkowe",
+    "url": "https://mealpreponfleek.com/carrot-cake-pancake-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/04/vegan-carrot-cake-pancake-6-e1753448313551.jpg",
+    "category": "breakfast",
+    "ingredients_en": [
+      {
+        "name": "whole wheat flour",
+        "amount": 300,
+        "unit": "g"
+      },
+      {
+        "name": "baking powder",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "cinnamon",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "nutmeg",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "almond milk",
+        "amount": 472,
+        "unit": "ml"
+      },
+      {
+        "name": "apple cider vinegar",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "ground flax seed",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "water",
+        "amount": 118,
+        "unit": "ml"
+      },
+      {
+        "name": "vanilla extract",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "molasses",
+        "amount": 23,
+        "unit": "ml"
+      },
+      {
+        "name": "maple syrup",
+        "amount": 75,
+        "unit": "ml"
+      },
+      {
+        "name": "coconut oil",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "carrots",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "raisins",
+        "amount": 180,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "mąka pszenna pełnoziarnista",
+        "amount": 300,
+        "unit": "g"
+      },
+      {
+        "name": "proszek do pieczenia",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "sól",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "cynamon",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "gałka muszkatołowa",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "mleko migdałowe",
+        "amount": 472,
+        "unit": "ml"
+      },
+      {
+        "name": "ocet jabłkowy",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "siemię lniane mielone",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "woda",
+        "amount": 118,
+        "unit": "ml"
+      },
+      {
+        "name": "ekstrakt waniliowy",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "melasa",
+        "amount": 23,
+        "unit": "ml"
+      },
+      {
+        "name": "syrop klonowy",
+        "amount": 75,
+        "unit": "ml"
+      },
+      {
+        "name": "olej kokosowy",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "marchew",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "rodzynki",
+        "amount": 180,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
     "name_en": "Cocoa Hazelnut Energy Bites",
     "name_pl": "Kulki Energetyczne Kakaowo-Orzechowe",
     "url": "https://mealpreponfleek.com/cocoa-hazelnut-energy-bites/",
@@ -893,6 +1369,130 @@
     ],
     "available": true,
     "estimated_cost_pln": 8.13,
+    "cost_complete": true
+  },
+  {
+    "name_en": "Grain Free Granola",
+    "name_pl": "Granola Bezglutenowa",
+    "url": "https://mealpreponfleek.com/grain-free-granola/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/08/Grain-Free-Strawberry-Coconut-Granola-Multi-Container-2-e1750163563267.jpg",
+    "category": "breakfast",
+    "ingredients_en": [
+      {
+        "name": "almonds",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "cashews",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "coconut flakes",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "freeze-dried strawberries",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "pumpkin seeds",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "coconut oil",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "honey",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "vanilla extract",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "greek yogurt",
+        "amount": 480,
+        "unit": "g"
+      },
+      {
+        "name": "honey",
+        "amount": 20,
+        "unit": "ml"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "migdały",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "nerkowce",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "wiórki kokosowe",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "liofilizowane truskawki",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "pestki dyni",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "olej kokosowy",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "miód",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "ekstrakt waniliowy",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "sól",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "jogurt grecki",
+        "amount": 480,
+        "unit": "g"
+      },
+      {
+        "name": "miód",
+        "amount": 20,
+        "unit": "ml"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": 41.11,
     "cost_complete": true
   },
   {
@@ -1856,6 +2456,90 @@
     "cost_complete": false
   },
   {
+    "name_en": "French Toast Breakfast Berry Casserole",
+    "name_pl": "Zapiekanka z tostów francuskich z jagodami",
+    "url": "https://mealpreponfleek.com/french-toast-breakfast-berry-casserole/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/04/French-Toast-Breakfast-Berry-Casserole-jpg.webp",
+    "category": "breakfast",
+    "ingredients_en": [
+      {
+        "name": "bread",
+        "amount": 8,
+        "unit": "pcs"
+      },
+      {
+        "name": "eggs",
+        "amount": 5,
+        "unit": "pcs"
+      },
+      {
+        "name": "almond milk",
+        "amount": 118,
+        "unit": "ml"
+      },
+      {
+        "name": "brown sugar",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "vanilla extract",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "mixed berries",
+        "amount": 454,
+        "unit": "g"
+      },
+      {
+        "name": "maple syrup",
+        "amount": 60,
+        "unit": "ml"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "chleb",
+        "amount": 8,
+        "unit": "pcs"
+      },
+      {
+        "name": "jajka",
+        "amount": 5,
+        "unit": "pcs"
+      },
+      {
+        "name": "mleko migdalowe",
+        "amount": 118,
+        "unit": "ml"
+      },
+      {
+        "name": "cukier brązowy",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "ekstrakt waniliowy",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "mieszane jagody",
+        "amount": 454,
+        "unit": "g"
+      },
+      {
+        "name": "syrop klonowy",
+        "amount": 60,
+        "unit": "ml"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
     "name_en": "Meal Prep Breakfast Sandwich - Freezer Friendly",
     "name_pl": "Kanapka śniadaniowa do przygotowania - mrożona",
     "url": "https://mealpreponfleek.com/meal-prep-breakfast-sandwich-freezer-friendly/",
@@ -2366,7 +3050,91 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 14.26,
+    "estimated_cost_pln": 19.76,
+    "cost_complete": true
+  },
+  {
+    "name_en": "Cinnamon Almond Butter Protein Balls",
+    "name_pl": "Kulki białkowe z masłem migdałowym i cynamonem",
+    "url": "https://mealpreponfleek.com/cinnamon-almond-butter-protein-balls/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/07/Cinnamon-Almond-Butter-Protein-Balls-jpg.webp",
+    "category": "breakfast",
+    "ingredients_en": [
+      {
+        "name": "oats",
+        "amount": 90,
+        "unit": "g"
+      },
+      {
+        "name": "almonds",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "shredded coconut",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "dark chocolate chips",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "almond butter",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "vanilla extract",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "honey",
+        "amount": 15,
+        "unit": "ml"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "płatki owsiane",
+        "amount": 90,
+        "unit": "g"
+      },
+      {
+        "name": "migdały",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "wiórki kokosowe",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "ciemna czekolada w kropelkach",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "masło migdałowe",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "ekstrakt waniliowy",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "miód",
+        "amount": 15,
+        "unit": "ml"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": 20.12,
     "cost_complete": true
   },
   {
@@ -3242,6 +4010,150 @@
     "cost_complete": true
   },
   {
+    "name_en": "Cinnamon Roll Coffee Cake",
+    "name_pl": "Ciasto Kawa z Cynamonem",
+    "url": "https://mealpreponfleek.com/cinnamon-roll-coffee-cake/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/06/Cinnamon-Roll-Coffee-Cake-Meal-Prep--jpg.webp",
+    "category": "breakfast",
+    "ingredients_en": [
+      {
+        "name": "eggs",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "coconut oil",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "coffee",
+        "amount": 236,
+        "unit": "ml"
+      },
+      {
+        "name": "milk",
+        "amount": 118,
+        "unit": "ml"
+      },
+      {
+        "name": "gluten free all-purpose flour",
+        "amount": 360,
+        "unit": "g"
+      },
+      {
+        "name": "coconut sugar",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "baking powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "coconut oil",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "name": "coconut sugar",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "cinnamon",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "gluten free flour",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "coconut butter",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "coconut sugar",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "jajka",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "olej kokosowy",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "kawa",
+        "amount": 236,
+        "unit": "ml"
+      },
+      {
+        "name": "mleko",
+        "amount": 118,
+        "unit": "ml"
+      },
+      {
+        "name": "mąka bezglutenowa uniwersalna",
+        "amount": 360,
+        "unit": "g"
+      },
+      {
+        "name": "cukier kokosowy",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "proszek do pieczenia",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "olej kokosowy",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "name": "cukier kokosowy",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "cynamon",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "mąka bezglutenowa",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "masło kokosowe",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "cukier kokosowy",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": 59.64,
+    "cost_complete": true
+  },
+  {
     "name_en": "Scrambled Egg Stuffed Sweet Potato",
     "name_pl": "Batat Faszerowany Jajecznicą",
     "url": "https://mealpreponfleek.com/stuffed-sweet-potato/",
@@ -3383,6 +4295,324 @@
         "name": "batat",
         "amount": 4,
         "unit": "pcs"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
+    "name_en": "Donut Holes",
+    "name_pl": "Pączki mini",
+    "url": "https://mealpreponfleek.com/donut-holes/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2020/01/Gluten-Free-Donut-Holes-777x431-1.jpg",
+    "category": "breakfast",
+    "ingredients_en": [
+      {
+        "name": "butter",
+        "amount": 56,
+        "unit": "g"
+      },
+      {
+        "name": "granulated erythritol",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "eggs",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "vanilla extract",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "blanched almond flour",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "coconut flour",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "baking powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sea salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "coconut butter",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "almond milk",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "coconut oil",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "confectioner's erythritol",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "cottage cheese",
+        "amount": 480,
+        "unit": "g"
+      },
+      {
+        "name": "strawberries",
+        "amount": 75,
+        "unit": "g"
+      },
+      {
+        "name": "raspberries",
+        "amount": 75,
+        "unit": "g"
+      },
+      {
+        "name": "almonds",
+        "amount": 30,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "masło",
+        "amount": 56,
+        "unit": "g"
+      },
+      {
+        "name": "erytrytol granulowany",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "jajka",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "ekstrakt waniliowy",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "mąka migdałowa",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "mąka kokosowa",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "proszek do pieczenia",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sól morska",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "masło kokosowe",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "mleko migdałowe",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "olej kokosowy",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "erytrytol pudrowy",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "twaróg",
+        "amount": 480,
+        "unit": "g"
+      },
+      {
+        "name": "truskawki",
+        "amount": 75,
+        "unit": "g"
+      },
+      {
+        "name": "maliny",
+        "amount": 75,
+        "unit": "g"
+      },
+      {
+        "name": "migdały",
+        "amount": 30,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": 51.29,
+    "cost_complete": true
+  },
+  {
+    "name_en": "Peanut Butter Chocolate Muffins",
+    "name_pl": "Muffinki czekoladowe z maslem orzechowym",
+    "url": "https://mealpreponfleek.com/peanut-butter-chocolate-muffins/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/02/Peanut-Butter-Chocolate-Muffins-2-jpg.webp",
+    "category": "breakfast",
+    "ingredients_en": [
+      {
+        "name": "almond flour",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "cacao powder",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "erythritol",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "baking powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sea salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "egg",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "egg white",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "butter",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "vanilla extract",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "peanut butter",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "greek yogurt",
+        "amount": 480,
+        "unit": "g"
+      },
+      {
+        "name": "blackberries",
+        "amount": 75,
+        "unit": "g"
+      },
+      {
+        "name": "raspberries",
+        "amount": 60,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "maka migdalowa",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "kakao",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "erytrytol",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "proszek do pieczenia",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sól morska",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "jajko",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "bialko jajka",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "maslo",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "ekstrakt waniliowy",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "maslo orzechowe",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "jogurt grecki",
+        "amount": 480,
+        "unit": "g"
+      },
+      {
+        "name": "jezyny",
+        "amount": 75,
+        "unit": "g"
+      },
+      {
+        "name": "maliny",
+        "amount": 60,
+        "unit": "g"
       }
     ],
     "available": true,
@@ -3641,6 +4871,244 @@
         "name": "salsa",
         "amount": null,
         "unit": null
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
+    "name_en": "Vegan Mushroom Quinoa Breakfast Hash",
+    "name_pl": "Wegański Smażony Ryż z Komosą i Grzybami na Śniadanie",
+    "url": "https://mealpreponfleek.com/vegan-mushroom-quinoa-breakfast-hash/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/02/Vegan-Mushroom-Quinoa-Breakfast-Hash-.png",
+    "category": "breakfast",
+    "ingredients_en": [
+      {
+        "name": "quinoa",
+        "amount": 370,
+        "unit": "g"
+      },
+      {
+        "name": "diced tomatoes",
+        "amount": 425,
+        "unit": "g"
+      },
+      {
+        "name": "mushrooms",
+        "amount": 170,
+        "unit": "g"
+      },
+      {
+        "name": "kale",
+        "amount": 1.5,
+        "unit": "pcs"
+      },
+      {
+        "name": "white wine vinegar",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "olive oil",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "garlic",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "dried sage",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pepper",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "komosa ryżowa",
+        "amount": 370,
+        "unit": "g"
+      },
+      {
+        "name": "krojone pomidory",
+        "amount": 425,
+        "unit": "g"
+      },
+      {
+        "name": "pieczarki",
+        "amount": 170,
+        "unit": "g"
+      },
+      {
+        "name": "jarmuż",
+        "amount": 1.5,
+        "unit": "pcs"
+      },
+      {
+        "name": "ocet winny biały",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "oliwa z oliwek",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "czosnek",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "suszona szałwia",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sól",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pieprz",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
+    "name_en": "Stuffed French Toast Meal Prep",
+    "name_pl": "Nadziewana tost francuski",
+    "url": "https://mealpreponfleek.com/stuffed-french-toast-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/11/Stuffed-French-Toast-Blog.jpg",
+    "category": "breakfast",
+    "ingredients_en": [
+      {
+        "name": "bread",
+        "amount": 8,
+        "unit": "pcs"
+      },
+      {
+        "name": "liquid egg whites",
+        "amount": 118,
+        "unit": "ml"
+      },
+      {
+        "name": "almond milk",
+        "amount": 236,
+        "unit": "ml"
+      },
+      {
+        "name": "cinnamon",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "vanilla extract",
+        "amount": 2,
+        "unit": "g"
+      },
+      {
+        "name": "greek yogurt",
+        "amount": 113,
+        "unit": "g"
+      },
+      {
+        "name": "vanilla extract",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "egg",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "liquid stevia",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "raspberries",
+        "amount": 113,
+        "unit": "g"
+      },
+      {
+        "name": "blueberries",
+        "amount": 113,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "chleb",
+        "amount": 8,
+        "unit": "pcs"
+      },
+      {
+        "name": "płynne białka jaj",
+        "amount": 118,
+        "unit": "ml"
+      },
+      {
+        "name": "mleko migdałowe",
+        "amount": 236,
+        "unit": "ml"
+      },
+      {
+        "name": "cynamon",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "ekstrakt waniliowy",
+        "amount": 2,
+        "unit": "g"
+      },
+      {
+        "name": "jogurt grecki",
+        "amount": 113,
+        "unit": "g"
+      },
+      {
+        "name": "ekstrakt waniliowy",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "jajko",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "płynna stewia",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "maliny",
+        "amount": 113,
+        "unit": "g"
+      },
+      {
+        "name": "jagody",
+        "amount": 113,
+        "unit": "g"
       }
     ],
     "available": true,
@@ -4040,6 +5508,100 @@
     "cost_complete": false
   },
   {
+    "name_en": "Strawberry Chocolate Almond Granola Squares",
+    "name_pl": "Batoniki granola z truskawką, czekoladą i migdałami",
+    "url": "https://mealpreponfleek.com/strawberry-chocolate-almond-granola-squares/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/04/Strawberry-Chocolate-Almond-Granola-Squares.jpg",
+    "category": "breakfast",
+    "ingredients_en": [
+      {
+        "name": "rolled oats",
+        "amount": 180,
+        "unit": "g"
+      },
+      {
+        "name": "almond butter",
+        "amount": 180,
+        "unit": "g"
+      },
+      {
+        "name": "honey",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "freeze-dried strawberries",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "semi-sweet chocolate chips",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "sliced almonds",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "vanilla extract",
+        "amount": 7.5,
+        "unit": "ml"
+      },
+      {
+        "name": "sea salt",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "płatki owsiane",
+        "amount": 180,
+        "unit": "g"
+      },
+      {
+        "name": "masło migdałowe",
+        "amount": 180,
+        "unit": "g"
+      },
+      {
+        "name": "miód",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "truskawki liofilizowane",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "czekolada półsłodka",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "migdały w płatkach",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "ekstrakt waniliowy",
+        "amount": 7.5,
+        "unit": "ml"
+      },
+      {
+        "name": "sól morska",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": 26.52,
+    "cost_complete": true
+  },
+  {
     "name_en": "Healthy Oatmeal Muffins",
     "name_pl": "Zdrowe muffinki owsiane",
     "url": "https://mealpreponfleek.com/healthy-oatmeal-muffins/",
@@ -4298,110 +5860,6 @@
     "cost_complete": false
   },
   {
-    "name_en": "Quinoa-Oat Bars (Vegan, GF)",
-    "name_pl": "Batony quinoa-owsiane (wegańskie, bezglutenowe)",
-    "url": "https://mealpreponfleek.com/vegan-quinoa-oat-bars/",
-    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2021/11/Vegan-Quinoa-Oat-Bars-777x431-1.jpg",
-    "category": "breakfast",
-    "ingredients_en": [
-      {
-        "name": "almond butter",
-        "amount": 80,
-        "unit": "g"
-      },
-      {
-        "name": "agave nectar",
-        "amount": 60,
-        "unit": "ml"
-      },
-      {
-        "name": "oats",
-        "amount": 60,
-        "unit": "g"
-      },
-      {
-        "name": "quinoa",
-        "amount": 120,
-        "unit": "g"
-      },
-      {
-        "name": "pistachios",
-        "amount": 15,
-        "unit": "g"
-      },
-      {
-        "name": "pepitas",
-        "amount": 15,
-        "unit": "g"
-      },
-      {
-        "name": "chia seeds",
-        "amount": 15,
-        "unit": "g"
-      },
-      {
-        "name": "sea salt",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "clementines",
-        "amount": 6,
-        "unit": "pcs"
-      }
-    ],
-    "ingredients_pl": [
-      {
-        "name": "masło migdałowe",
-        "amount": 80,
-        "unit": "g"
-      },
-      {
-        "name": "syrop z agawy",
-        "amount": 60,
-        "unit": "ml"
-      },
-      {
-        "name": "płatki owsiane",
-        "amount": 60,
-        "unit": "g"
-      },
-      {
-        "name": "quinoa",
-        "amount": 120,
-        "unit": "g"
-      },
-      {
-        "name": "pistacje",
-        "amount": 15,
-        "unit": "g"
-      },
-      {
-        "name": "pestki dyni",
-        "amount": 15,
-        "unit": "g"
-      },
-      {
-        "name": "nasiona chia",
-        "amount": 15,
-        "unit": "g"
-      },
-      {
-        "name": "sól morska",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "klementynki",
-        "amount": 6,
-        "unit": "pcs"
-      }
-    ],
-    "available": true,
-    "estimated_cost_pln": null,
-    "cost_complete": false
-  },
-  {
     "name_en": "Bacon Egg Bites",
     "name_pl": "Bajgle z Jajkiem i Bekonem",
     "url": "https://mealpreponfleek.com/delicious-and-easy-bacon-egg-bites/",
@@ -4578,6 +6036,120 @@
     "available": true,
     "estimated_cost_pln": null,
     "cost_complete": false
+  },
+  {
+    "name_en": "Protein Freezer Waffles",
+    "name_pl": "Białkowe Gofry do Zamrażania",
+    "url": "https://mealpreponfleek.com/protein-freezer-waffles/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/06/Protein-Freezer-Waffles.jpg",
+    "category": "breakfast",
+    "ingredients_en": [
+      {
+        "name": "protein powder",
+        "amount": 29,
+        "unit": "g"
+      },
+      {
+        "name": "rolled oats",
+        "amount": 68,
+        "unit": "g"
+      },
+      {
+        "name": "cottage cheese",
+        "amount": 240,
+        "unit": "g"
+      },
+      {
+        "name": "eggs",
+        "amount": 3,
+        "unit": "pcs"
+      },
+      {
+        "name": "maple syrup",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "vanilla extract",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "baking powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "berries",
+        "amount": 600,
+        "unit": "g"
+      },
+      {
+        "name": "maple syrup",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "almond butter",
+        "amount": 60,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "odżywka białkowa",
+        "amount": 29,
+        "unit": "g"
+      },
+      {
+        "name": "płatki owsiane",
+        "amount": 68,
+        "unit": "g"
+      },
+      {
+        "name": "twaróg",
+        "amount": 240,
+        "unit": "g"
+      },
+      {
+        "name": "jajka",
+        "amount": 3,
+        "unit": "pcs"
+      },
+      {
+        "name": "syrop klonowy",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "ekstrakt waniliowy",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "proszek do pieczenia",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "jagody",
+        "amount": 600,
+        "unit": "g"
+      },
+      {
+        "name": "syrop klonowy",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "masło migdałowe",
+        "amount": 60,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": 58.26,
+    "cost_complete": true
   },
   {
     "name_en": "Sausage and Egg Breakfast Bake",
@@ -4882,6 +6454,110 @@
     "cost_complete": false
   },
   {
+    "name_en": "Paleo Maple Pecan Banana Bread Muffins",
+    "name_pl": "Paleo muffinki bananowe z klonem i pekanem",
+    "url": "https://mealpreponfleek.com/paleo-maple-pecan-banana-bread-muffins/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/03/Paleo-Maple-Pecan-Banana-Bread-Muffins-Blog.png",
+    "category": "breakfast",
+    "ingredients_en": [
+      {
+        "name": "bananas",
+        "amount": 3,
+        "unit": "pcs"
+      },
+      {
+        "name": "coconut oil",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "eggs",
+        "amount": 5,
+        "unit": "pcs"
+      },
+      {
+        "name": "maple extract",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "liquid stevia",
+        "amount": 1,
+        "unit": "ml"
+      },
+      {
+        "name": "almond flour",
+        "amount": 210,
+        "unit": "g"
+      },
+      {
+        "name": "baking powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sea salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pecans",
+        "amount": 60,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "banany",
+        "amount": 3,
+        "unit": "pcs"
+      },
+      {
+        "name": "olej kokosowy",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "jajka",
+        "amount": 5,
+        "unit": "pcs"
+      },
+      {
+        "name": "ekstrakt klonowy",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "płynna stewia",
+        "amount": 1,
+        "unit": "ml"
+      },
+      {
+        "name": "mąka migdałowa",
+        "amount": 210,
+        "unit": "g"
+      },
+      {
+        "name": "proszek do pieczenia",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sól morska",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pekan",
+        "amount": 60,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
     "name_en": "Cinnamon Apple Protein Bites",
     "name_pl": "Kulki Białkowe Cynamonowo-Jabłkowe",
     "url": "https://mealpreponfleek.com/cinnamon-apple-protein-bites/",
@@ -5088,6 +6764,150 @@
     "available": true,
     "estimated_cost_pln": null,
     "cost_complete": false
+  },
+  {
+    "name_en": "Cinnamon Raisin Granola",
+    "name_pl": "Granola Cynamonowo-Rodzynkowa",
+    "url": "https://mealpreponfleek.com/cinnamon-raisin-granola/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/04/DIY-Cinnamon-Raisin-Granola-web.jpg",
+    "category": "breakfast",
+    "ingredients_en": [
+      {
+        "name": "pumpkin seeds",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "almonds",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "pecans",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "sunflower seeds",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "shredded coconut",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "raisins",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "coconut oil",
+        "amount": 80,
+        "unit": "ml"
+      },
+      {
+        "name": "honey",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "maple syrup",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "cinnamon",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "allspice",
+        "amount": 2,
+        "unit": "g"
+      },
+      {
+        "name": "vanilla extract",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "nasiona dyni",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "migdały",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "orzechy pekan",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "nasiona słonecznika",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "wiórki kokosowe",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "rodzynki",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "olej kokosowy",
+        "amount": 80,
+        "unit": "ml"
+      },
+      {
+        "name": "miód",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "syrop klonowy",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "cynamon",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "ziele angielskie",
+        "amount": 2,
+        "unit": "g"
+      },
+      {
+        "name": "ekstrakt waniliowy",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "sól",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": 29.07,
+    "cost_complete": true
   },
   {
     "name_en": "Whole30 Zucchini & Sweet Potato Hashbrown Meal Prep",
@@ -5558,6 +7378,130 @@
     "available": true,
     "estimated_cost_pln": null,
     "cost_complete": false
+  },
+  {
+    "name_en": "Coconut Oat Breakfast Cookies",
+    "name_pl": "Kokosowe Owsiane Ciasteczka Sniadaniowe",
+    "url": "https://mealpreponfleek.com/coconut-oat-breakfast-cookies/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2021/07/Coconut-Oat-Breakfast-Cookies-777x431-1.jpg",
+    "category": "breakfast",
+    "ingredients_en": [
+      {
+        "name": "coconut milk powder",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "water",
+        "amount": 118,
+        "unit": "ml"
+      },
+      {
+        "name": "egg",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "brown sugar",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "vanilla extract",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "rolled oats",
+        "amount": 180,
+        "unit": "g"
+      },
+      {
+        "name": "coconut flakes",
+        "amount": 160,
+        "unit": "g"
+      },
+      {
+        "name": "baking powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sea salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "mixed berries",
+        "amount": 300,
+        "unit": "g"
+      },
+      {
+        "name": "greek yogurt",
+        "amount": 240,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "mleko kokosowe w proszku",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "woda",
+        "amount": 118,
+        "unit": "ml"
+      },
+      {
+        "name": "jajko",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "cukier brzozowy",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "ekstrakt waniliowy",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "platki owsiane",
+        "amount": 180,
+        "unit": "g"
+      },
+      {
+        "name": "platki kokosowe",
+        "amount": 160,
+        "unit": "g"
+      },
+      {
+        "name": "proszek do pieczenia",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sól morska",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "mieszane jagody",
+        "amount": 300,
+        "unit": "g"
+      },
+      {
+        "name": "jogurt grecki",
+        "amount": 240,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": 21.91,
+    "cost_complete": true
   },
   {
     "name_en": "Keto Pizza Frittata Meal Prep",
@@ -6042,7 +7986,7 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 54.39,
+    "estimated_cost_pln": 22.32,
     "cost_complete": true
   },
   {
@@ -7506,232 +9450,8 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 33.14,
+    "estimated_cost_pln": 33.67,
     "cost_complete": true
-  },
-  {
-    "name_en": "Savory Almond Butter Chicken Thigh Skillet",
-    "name_pl": "Pikantne udka z kurczaka w sosie z masła migdałowego",
-    "url": "https://mealpreponfleek.com/savory-almond-butter-chicken-thigh-skillet/",
-    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2020/12/Almond-Butter-Chicken-Thighs-IG.jpg",
-    "category": "lunch",
-    "ingredients_en": [
-      {
-        "name": "almond butter",
-        "amount": 80,
-        "unit": "g"
-      },
-      {
-        "name": "coconut milk",
-        "amount": 160,
-        "unit": "ml"
-      },
-      {
-        "name": "coconut aminos",
-        "amount": 45,
-        "unit": "ml"
-      },
-      {
-        "name": "lime juice",
-        "amount": 30,
-        "unit": "ml"
-      },
-      {
-        "name": "monk fruit sweetener",
-        "amount": 15,
-        "unit": "g"
-      },
-      {
-        "name": "coriander",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "turmeric",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "ginger",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "salt",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "black pepper",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "olive oil",
-        "amount": 15,
-        "unit": "ml"
-      },
-      {
-        "name": "chicken thighs",
-        "amount": 454,
-        "unit": "g"
-      },
-      {
-        "name": "garlic",
-        "amount": 5,
-        "unit": "g"
-      },
-      {
-        "name": "red bell pepper",
-        "amount": 150,
-        "unit": "g"
-      },
-      {
-        "name": "cilantro",
-        "amount": 15,
-        "unit": "g"
-      },
-      {
-        "name": "almonds",
-        "amount": 30,
-        "unit": "g"
-      },
-      {
-        "name": "olive oil",
-        "amount": 15,
-        "unit": "ml"
-      },
-      {
-        "name": "broccoli",
-        "amount": 300,
-        "unit": "g"
-      },
-      {
-        "name": "red onion",
-        "amount": 100,
-        "unit": "g"
-      },
-      {
-        "name": "salt",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "black pepper",
-        "amount": 1,
-        "unit": "g"
-      }
-    ],
-    "ingredients_pl": [
-      {
-        "name": "masło migdałowe",
-        "amount": 80,
-        "unit": "g"
-      },
-      {
-        "name": "mleko kokosowe",
-        "amount": 160,
-        "unit": "ml"
-      },
-      {
-        "name": "aminokokosowy",
-        "amount": 45,
-        "unit": "ml"
-      },
-      {
-        "name": "sok z limonki",
-        "amount": 30,
-        "unit": "ml"
-      },
-      {
-        "name": "słodzik z mnicha",
-        "amount": 15,
-        "unit": "g"
-      },
-      {
-        "name": "kolendra",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "kurkuma",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "imbir",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "sól",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "pieprz czarny",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "oliwa z oliwek",
-        "amount": 15,
-        "unit": "ml"
-      },
-      {
-        "name": "udka z kurczaka",
-        "amount": 454,
-        "unit": "g"
-      },
-      {
-        "name": "czosnek",
-        "amount": 5,
-        "unit": "g"
-      },
-      {
-        "name": "papryka czerwona",
-        "amount": 150,
-        "unit": "g"
-      },
-      {
-        "name": "kolendra",
-        "amount": 15,
-        "unit": "g"
-      },
-      {
-        "name": "migdały",
-        "amount": 30,
-        "unit": "g"
-      },
-      {
-        "name": "oliwa z oliwek",
-        "amount": 15,
-        "unit": "ml"
-      },
-      {
-        "name": "brokuły",
-        "amount": 300,
-        "unit": "g"
-      },
-      {
-        "name": "cebula czerwona",
-        "amount": 100,
-        "unit": "g"
-      },
-      {
-        "name": "sól",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "pieprz czarny",
-        "amount": 1,
-        "unit": "g"
-      }
-    ],
-    "available": true,
-    "estimated_cost_pln": null,
-    "cost_complete": false
   },
   {
     "name_en": "Air Fryer Turkey Breast",
@@ -8970,21 +10690,51 @@
     "cost_complete": false
   },
   {
-    "name_en": "Thai Inspired Tenderloin: Thai Sweet Chili Pork Meal Prep",
-    "name_pl": "Polędwiczka Wieprzowa w Stylu Tajskim z Słodko-Ostrym Sosem Chili",
-    "url": "https://mealpreponfleek.com/thai-sweet-chili-pork-tenderloin/",
-    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/04/6O0A9605-2-scaled-e1754312626763.jpg",
+    "name_en": "Apple BBQ Meatloaf & Mashed Potato Meal Prep",
+    "name_pl": "Klops z Jabłkiem w Sosie BBQ i Puree Ziemniaczanym",
+    "url": "https://mealpreponfleek.com/apple-bbq-meatloaf-mashed-potato-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/03/apple-bbq-meatloaf-img5-e1754764672826.jpg",
     "category": "lunch",
     "ingredients_en": [
       {
-        "name": "pork tenderloin",
-        "amount": 907,
+        "name": "ground beef",
+        "amount": 567,
         "unit": "g"
       },
       {
-        "name": "coconut aminos",
-        "amount": 60,
+        "name": "eggs",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "red onion",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "apple",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "onion powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "paprika",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "bbq sauce",
+        "amount": 120,
         "unit": "ml"
+      },
+      {
+        "name": "almond flour",
+        "amount": 40,
+        "unit": "g"
       },
       {
         "name": "salt",
@@ -8992,66 +10742,76 @@
         "unit": "g"
       },
       {
-        "name": "rice",
-        "amount": 555,
+        "name": "pepper",
+        "amount": 1,
         "unit": "g"
       },
       {
-        "name": "green beans",
-        "amount": 720,
-        "unit": "g"
+        "name": "russet potatoes",
+        "amount": 2,
+        "unit": "pcs"
       },
       {
-        "name": "sesame oil",
-        "amount": 15,
-        "unit": "ml"
-      },
-      {
-        "name": "red chili",
-        "amount": 60,
-        "unit": "g"
-      },
-      {
-        "name": "garlic",
-        "amount": 30,
-        "unit": "g"
-      },
-      {
-        "name": "water",
+        "name": "almond milk",
         "amount": 236,
         "unit": "ml"
       },
       {
-        "name": "honey",
-        "amount": 120,
-        "unit": "ml"
-      },
-      {
-        "name": "rice wine vinegar",
-        "amount": 120,
-        "unit": "ml"
-      },
-      {
-        "name": "arrowroot powder",
-        "amount": 15,
+        "name": "parsley",
+        "amount": 1,
         "unit": "g"
       },
       {
         "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pepper",
         "amount": 1,
         "unit": "g"
       }
     ],
     "ingredients_pl": [
       {
-        "name": "polędwiczka wieprzowa",
-        "amount": 907,
+        "name": "mielona wołowina",
+        "amount": 567,
         "unit": "g"
       },
       {
-        "name": "aminokokosowy",
-        "amount": 60,
+        "name": "jajka",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "cebula czerwona",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "jabłko",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "proszek cebulowy",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "papryka",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sos bbq",
+        "amount": 120,
         "unit": "ml"
+      },
+      {
+        "name": "mąka migdałowa",
+        "amount": 40,
+        "unit": "g"
       },
       {
         "name": "sól",
@@ -9059,206 +10819,32 @@
         "unit": "g"
       },
       {
-        "name": "ryż",
-        "amount": 555,
+        "name": "pieprz",
+        "amount": 1,
         "unit": "g"
       },
       {
-        "name": "fasolka szparagowa",
-        "amount": 720,
-        "unit": "g"
+        "name": "ziemniaki",
+        "amount": 2,
+        "unit": "pcs"
       },
       {
-        "name": "olej sezamowy",
-        "amount": 15,
-        "unit": "ml"
-      },
-      {
-        "name": "chili czerwone",
-        "amount": 60,
-        "unit": "g"
-      },
-      {
-        "name": "czosnek",
-        "amount": 30,
-        "unit": "g"
-      },
-      {
-        "name": "woda",
+        "name": "mleko migdałowe",
         "amount": 236,
         "unit": "ml"
       },
       {
-        "name": "miód",
-        "amount": 120,
-        "unit": "ml"
-      },
-      {
-        "name": "ocet ryżowy",
-        "amount": 120,
-        "unit": "ml"
-      },
-      {
-        "name": "skrobia strzałkowata",
-        "amount": 15,
+        "name": "pietruszka",
+        "amount": 1,
         "unit": "g"
       },
       {
         "name": "sól",
         "amount": 1,
         "unit": "g"
-      }
-    ],
-    "available": true,
-    "estimated_cost_pln": null,
-    "cost_complete": false
-  },
-  {
-    "name_en": "Garlic Shrimp and Broccoli Meal Prep (Whole30 & Takeout-Inspired)",
-    "name_pl": "Krewetki Czosnkowe z Brokułami (Inspirowane Whole30 i Daniami na Wynos)",
-    "url": "https://mealpreponfleek.com/whole30-garlic-shrimp-broccoli-meal-prep/",
-    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/04/6O0A0383-e1754311475652.jpg",
-    "category": "lunch",
-    "ingredients_en": [
-      {
-        "name": "shrimp",
-        "amount": 680,
-        "unit": "g"
       },
       {
-        "name": "broccoli",
-        "amount": 454,
-        "unit": "g"
-      },
-      {
-        "name": "sesame oil",
-        "amount": 15,
-        "unit": "ml"
-      },
-      {
-        "name": "coconut aminos",
-        "amount": 90,
-        "unit": "ml"
-      },
-      {
-        "name": "sesame oil",
-        "amount": 15,
-        "unit": "ml"
-      },
-      {
-        "name": "ginger",
-        "amount": 15,
-        "unit": "g"
-      },
-      {
-        "name": "white wine vinegar",
-        "amount": 15,
-        "unit": "ml"
-      },
-      {
-        "name": "medjool date",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "red chili",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "garlic",
-        "amount": 45,
-        "unit": "g"
-      },
-      {
-        "name": "arrowroot powder",
-        "amount": 5,
-        "unit": "g"
-      },
-      {
-        "name": "cauliflower",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "olive oil",
-        "amount": 15,
-        "unit": "ml"
-      },
-      {
-        "name": "salt",
-        "amount": 1,
-        "unit": "g"
-      }
-    ],
-    "ingredients_pl": [
-      {
-        "name": "krewetki",
-        "amount": 680,
-        "unit": "g"
-      },
-      {
-        "name": "brokuły",
-        "amount": 454,
-        "unit": "g"
-      },
-      {
-        "name": "olej sezamowy",
-        "amount": 15,
-        "unit": "ml"
-      },
-      {
-        "name": "aminokokosowy",
-        "amount": 90,
-        "unit": "ml"
-      },
-      {
-        "name": "olej sezamowy",
-        "amount": 15,
-        "unit": "ml"
-      },
-      {
-        "name": "imbir",
-        "amount": 15,
-        "unit": "g"
-      },
-      {
-        "name": "ocet winny biały",
-        "amount": 15,
-        "unit": "ml"
-      },
-      {
-        "name": "daktyle medjool",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "chili czerwone",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "czosnek",
-        "amount": 45,
-        "unit": "g"
-      },
-      {
-        "name": "skrobia strzałkowata",
-        "amount": 5,
-        "unit": "g"
-      },
-      {
-        "name": "kalafior",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "oliwa z oliwek",
-        "amount": 15,
-        "unit": "ml"
-      },
-      {
-        "name": "sól",
+        "name": "pieprz",
         "amount": 1,
         "unit": "g"
       }
@@ -12982,6 +14568,110 @@
     "cost_complete": false
   },
   {
+    "name_en": "Apricot Sesame Chicken & Shrimp",
+    "name_pl": "Kurczak i krewetki z morelą i sezamem",
+    "url": "https://mealpreponfleek.com/apricot-sesame-chicken-shrimp/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/09/Meal-Prep-Thumb-Shramp.jpg",
+    "category": "lunch",
+    "ingredients_en": [
+      {
+        "name": "shrimp",
+        "amount": 454,
+        "unit": "g"
+      },
+      {
+        "name": "chicken breast",
+        "amount": 454,
+        "unit": "g"
+      },
+      {
+        "name": "apricot preserves",
+        "amount": 157,
+        "unit": "ml"
+      },
+      {
+        "name": "soy sauce",
+        "amount": 17.5,
+        "unit": "ml"
+      },
+      {
+        "name": "garlic powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "onion powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sesame seeds",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "broccoli",
+        "amount": 472,
+        "unit": "ml"
+      },
+      {
+        "name": "brown rice",
+        "amount": 710,
+        "unit": "ml"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "krewetki",
+        "amount": 454,
+        "unit": "g"
+      },
+      {
+        "name": "filet z kurczaka",
+        "amount": 454,
+        "unit": "g"
+      },
+      {
+        "name": "dżem morelowy",
+        "amount": 157,
+        "unit": "ml"
+      },
+      {
+        "name": "sos sojowy",
+        "amount": 17.5,
+        "unit": "ml"
+      },
+      {
+        "name": "proszek czosnkowy",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "proszek cebulowy",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "nasiona sezamu",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "brokuły",
+        "amount": 472,
+        "unit": "ml"
+      },
+      {
+        "name": "ryż brązowy",
+        "amount": 710,
+        "unit": "ml"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": 74.99,
+    "cost_complete": true
+  },
+  {
     "name_en": "Veggie Supreme Pizza Chicken Meal Prep",
     "name_pl": "Kurczak w stylu pizzy supreme z warzywami",
     "url": "https://mealpreponfleek.com/veggie-supreme-pizza-chicken-meal-prep/",
@@ -14854,6 +16544,280 @@
     "cost_complete": false
   },
   {
+    "name_en": "Chicken Finger & French Fry Meal Prep",
+    "name_pl": "Paluszki z Kurczaka z Frytkami",
+    "url": "https://mealpreponfleek.com/chicken-finger-french-fry/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/07/Chicken-Finger-French-Fry-1-jpg.webp",
+    "category": "lunch",
+    "ingredients_en": [
+      {
+        "name": "chicken tenders",
+        "amount": 680,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "sea salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "mustard powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "thyme",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "egg",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "almond flour",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "unsweetened coconut flakes",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "arrowroot",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "sea salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "thyme",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "garlic powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "mustard powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "cayenne pepper",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sweet potato",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "olive oil",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pepper",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "mayonnaise",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "coconut milk",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "parsley",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "garlic",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "dill",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "onion powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pepper",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "filet z kurczaka",
+        "amount": 680,
+        "unit": "g"
+      },
+      {
+        "name": "oliwa z oliwek",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "sól morska",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "proszek musztardowy",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "tymianek",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "jajko",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "mąka migdałowa",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "wiórki kokosowe niesłodzone",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "mąka z maranty",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "sól morska",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "tymianek",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "czosnek granulowany",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "proszek musztardowy",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pieprz cayenne",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "batat",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "oliwa z oliwek",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "sól",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pieprz",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "majonez",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "mleko kokosowe",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "pietruszka",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "czosnek",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "koper",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "cebula granulowana",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sól",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pieprz",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
     "name_en": "Greek Rice & Turkey Meal Prep Bowls",
     "name_pl": "Miski z Ryżem po Grecku i Indykiem",
     "url": "https://mealpreponfleek.com/greek-rice-turkey-meal-prep-bowls/",
@@ -15219,6 +17183,120 @@
         "name": "ryż jaśminowy",
         "amount": 740,
         "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
+    "name_en": "Shrimp Spring Roll Bowl",
+    "name_pl": "Miska z Krewetkami w Stylu Spring Roll",
+    "url": "https://mealpreponfleek.com/shrimp-spring-roll-bowl/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/03/Shrimp-Spring-Roll-Bowl-jpg.webp",
+    "category": "lunch",
+    "ingredients_en": [
+      {
+        "name": "shrimp",
+        "amount": 454,
+        "unit": "g"
+      },
+      {
+        "name": "red bell pepper",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "purple cabbage",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "cucumber",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "edamame",
+        "amount": 240,
+        "unit": "g"
+      },
+      {
+        "name": "rice noodles",
+        "amount": 113,
+        "unit": "g"
+      },
+      {
+        "name": "garlic",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "peanut butter",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "soy sauce",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "sesame oil",
+        "amount": 15,
+        "unit": "ml"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "krewetki",
+        "amount": 454,
+        "unit": "g"
+      },
+      {
+        "name": "papryka czerwona",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "kapusta fioletowa",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "ogórek",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "edamame",
+        "amount": 240,
+        "unit": "g"
+      },
+      {
+        "name": "makaron ryżowy",
+        "amount": 113,
+        "unit": "g"
+      },
+      {
+        "name": "czosnek",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "masło orzechowe",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "sos sojowy",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "olej sezamowy",
+        "amount": 15,
+        "unit": "ml"
       }
     ],
     "available": true,
@@ -16154,6 +18232,150 @@
     "cost_complete": false
   },
   {
+    "name_en": "Gluten Free Sweet Potato Pizza Meal Prep",
+    "name_pl": "Pizza z batatów",
+    "url": "https://mealpreponfleek.com/gluten-free-sweet-potato-pizza-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/05/Gluten-Free-Sweet-Potato-Pizza-Meal-Prep-1-jpg.webp",
+    "category": "lunch",
+    "ingredients_en": [
+      {
+        "name": "sweet potato puree",
+        "amount": 300,
+        "unit": "g"
+      },
+      {
+        "name": "eggs",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "almond flour",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "arrowroot flour",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "white wine vinegar",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "Italian seasoning",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pizza sauce",
+        "amount": 180,
+        "unit": "ml"
+      },
+      {
+        "name": "mixed vegetables",
+        "amount": 320,
+        "unit": "g"
+      },
+      {
+        "name": "mozzarella",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "parmesan",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "red pepper flakes",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "puree z batata",
+        "amount": 300,
+        "unit": "g"
+      },
+      {
+        "name": "jajka",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "mąka migdałowa",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "mąka z maranty",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "oliwa z oliwek",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "ocet winny biały",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "przyprawa włoska",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sól",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sos pomidorowy do pizzy",
+        "amount": 180,
+        "unit": "ml"
+      },
+      {
+        "name": "mieszane warzywa",
+        "amount": 320,
+        "unit": "g"
+      },
+      {
+        "name": "mozzarella",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "parmezan",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "płatki chili",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
     "name_en": "Easy Falafel Meal Prep",
     "name_pl": "Łatwy Falafel Meal Prep",
     "url": "https://mealpreponfleek.com/falafel-meal-prep/",
@@ -16309,6 +18531,230 @@
       },
       {
         "name": "cytryna",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
+    "name_en": "Sweet Potato & Black Bean Veggie Burger Meal Prep",
+    "name_pl": "Burger Wegetariański z Batatem i Czarną Fasolą Meal Prep",
+    "url": "https://mealpreponfleek.com/sweet-potato-black-bean-veggie-burger/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/06/Sweet-Potato-Black-Bean-Veggie-Burger-Meal-Prep-jpg.webp",
+    "category": "lunch",
+    "ingredients_en": [
+      {
+        "name": "pumpkin seeds",
+        "amount": 90,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 7,
+        "unit": "ml"
+      },
+      {
+        "name": "onion",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "coconut aminos",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "cumin",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "dijon mustard",
+        "amount": 7,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "quinoa",
+        "amount": 270,
+        "unit": "g"
+      },
+      {
+        "name": "sweet potato puree",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "black beans",
+        "amount": 400,
+        "unit": "g"
+      },
+      {
+        "name": "cilantro",
+        "amount": 16,
+        "unit": "g"
+      },
+      {
+        "name": "flax meal",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "burger buns",
+        "amount": 8,
+        "unit": "pcs"
+      },
+      {
+        "name": "lettuce",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "tomato",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "onion",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "avocado",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "pickles",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "mushrooms",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "cheese",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "special sauce",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "pestki dyni",
+        "amount": 90,
+        "unit": "g"
+      },
+      {
+        "name": "oliwa z oliwek",
+        "amount": 7,
+        "unit": "ml"
+      },
+      {
+        "name": "cebula",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "aminokokosowy",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "kmin rzymski",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "musztarda dijon",
+        "amount": 7,
+        "unit": "g"
+      },
+      {
+        "name": "sól",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "komosa ryżowa",
+        "amount": 270,
+        "unit": "g"
+      },
+      {
+        "name": "puree z batata",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "czarna fasola",
+        "amount": 400,
+        "unit": "g"
+      },
+      {
+        "name": "kolendra",
+        "amount": 16,
+        "unit": "g"
+      },
+      {
+        "name": "mielone siemię lniane",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "bułki do burgerów",
+        "amount": 8,
+        "unit": "pcs"
+      },
+      {
+        "name": "sałata",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "pomidor",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "cebula",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "awokado",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "ogórki kiszone",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "pieczarki",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "ser",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "sos specjalny",
         "amount": null,
         "unit": null
       }
@@ -17420,180 +19866,6 @@
     "cost_complete": false
   },
   {
-    "name_en": "Tasty Thai Chili Garlic Noodles",
-    "name_pl": "Pyszne Tajskie Makarony Chili Czosnkowe",
-    "url": "https://mealpreponfleek.com/thai-chili-garlic-noodles/",
-    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/03/Thai-Garlic-and-Chili-Noodles.jpg",
-    "category": "lunch",
-    "ingredients_en": [
-      {
-        "name": "sweet potato",
-        "amount": 3,
-        "unit": "pcs"
-      },
-      {
-        "name": "coconut oil",
-        "amount": 22.5,
-        "unit": "ml"
-      },
-      {
-        "name": "sesame oil",
-        "amount": 5,
-        "unit": "ml"
-      },
-      {
-        "name": "garlic",
-        "amount": 10,
-        "unit": "g"
-      },
-      {
-        "name": "coconut aminos",
-        "amount": 30,
-        "unit": "ml"
-      },
-      {
-        "name": "sesame oil",
-        "amount": 7.5,
-        "unit": "ml"
-      },
-      {
-        "name": "garlic granules",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "rice wine vinegar",
-        "amount": 2.5,
-        "unit": "ml"
-      },
-      {
-        "name": "chili garlic hot sauce",
-        "amount": 2.5,
-        "unit": "ml"
-      },
-      {
-        "name": "sea salt",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "black sesame seeds",
-        "amount": 10,
-        "unit": "g"
-      },
-      {
-        "name": "lime",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "broccoli florets",
-        "amount": 2,
-        "unit": "pcs"
-      },
-      {
-        "name": "cilantro",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "scallions",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "coleslaw mix",
-        "amount": 4,
-        "unit": "pcs"
-      }
-    ],
-    "ingredients_pl": [
-      {
-        "name": "batat",
-        "amount": 3,
-        "unit": "pcs"
-      },
-      {
-        "name": "olej kokosowy",
-        "amount": 22.5,
-        "unit": "ml"
-      },
-      {
-        "name": "olej sezamowy",
-        "amount": 5,
-        "unit": "ml"
-      },
-      {
-        "name": "czosnek",
-        "amount": 10,
-        "unit": "g"
-      },
-      {
-        "name": "aminokokosowy",
-        "amount": 30,
-        "unit": "ml"
-      },
-      {
-        "name": "olej sezamowy",
-        "amount": 7.5,
-        "unit": "ml"
-      },
-      {
-        "name": "granulat czosnkowy",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "ocet ryżowy",
-        "amount": 2.5,
-        "unit": "ml"
-      },
-      {
-        "name": "ostry sos chili czosnkowy",
-        "amount": 2.5,
-        "unit": "ml"
-      },
-      {
-        "name": "sól morska",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "czarne nasiona sezamu",
-        "amount": 10,
-        "unit": "g"
-      },
-      {
-        "name": "limonka",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "różyczki brokuła",
-        "amount": 2,
-        "unit": "pcs"
-      },
-      {
-        "name": "kolendra",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "szczypiorek",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "mieszanka coleslaw",
-        "amount": 4,
-        "unit": "pcs"
-      }
-    ],
-    "available": true,
-    "estimated_cost_pln": null,
-    "cost_complete": false
-  },
-  {
     "name_en": "Gazpacho Meal Prep",
     "name_pl": "Gazpacho",
     "url": "https://mealpreponfleek.com/gazpacho-meal-prep/",
@@ -17992,7 +20264,7 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 47.34,
+    "estimated_cost_pln": 52.84,
     "cost_complete": true
   },
   {
@@ -19608,6 +21880,190 @@
     "cost_complete": false
   },
   {
+    "name_en": "Moroccan Chicken",
+    "name_pl": "Kurczak po Marokańsku",
+    "url": "https://mealpreponfleek.com/moroccan-chicken/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/08/Whole30-Instant-Pot-Moroccan-Chicken-Meal-Prep-blog.jpg",
+    "category": "lunch",
+    "ingredients_en": [
+      {
+        "name": "chicken thighs",
+        "amount": 680,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pepper",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "onion",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "garlic",
+        "amount": 3,
+        "unit": "pcs"
+      },
+      {
+        "name": "ginger",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "cumin",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "cinnamon",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "cayenne pepper",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "chicken broth",
+        "amount": 236,
+        "unit": "ml"
+      },
+      {
+        "name": "almond butter",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "dried cherries",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "carrots",
+        "amount": 454,
+        "unit": "g"
+      },
+      {
+        "name": "cilantro",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "almonds",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "cauliflower rice",
+        "amount": 4,
+        "unit": "pcs"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "udka z kurczaka",
+        "amount": 680,
+        "unit": "g"
+      },
+      {
+        "name": "sól",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pieprz",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "oliwa z oliwek",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "cebula",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "czosnek",
+        "amount": 3,
+        "unit": "pcs"
+      },
+      {
+        "name": "imbir",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "kmin rzymski",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "cynamon",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pieprz cayenne",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "bulion drobiowy",
+        "amount": 236,
+        "unit": "ml"
+      },
+      {
+        "name": "masło migdałowe",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "suszone wiśnie",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "marchew",
+        "amount": 454,
+        "unit": "g"
+      },
+      {
+        "name": "kolendra",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "migdały",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "ryż z kalafiora",
+        "amount": 4,
+        "unit": "pcs"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
     "name_en": "Grilled Halloumi and Watermelon Salad",
     "name_pl": "Grillowany Halloumi z Arbuzem Sałatka",
     "url": "https://mealpreponfleek.com/grilled-halloumi-and-watermelon-salad/",
@@ -19839,6 +22295,170 @@
         "name": "kalafior",
         "amount": 2,
         "unit": "pcs"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
+    "name_en": "Buffalo Chicken Mac & Cheese",
+    "name_pl": "Makaron z Kurczakiem po Buffalo",
+    "url": "https://mealpreponfleek.com/buffalo-chicken-mac-cheese/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/11/Gluten-Free-Buffalo-Mac-Cheese-blog.jpg",
+    "category": "lunch",
+    "ingredients_en": [
+      {
+        "name": "olive oil",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "chicken breast",
+        "amount": 454,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pepper",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "butter",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "hot sauce",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "gluten free pasta",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "milk",
+        "amount": 236,
+        "unit": "ml"
+      },
+      {
+        "name": "arrowroot flour",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "sea salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "mustard powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "white cheddar cheese",
+        "amount": 90,
+        "unit": "g"
+      },
+      {
+        "name": "parmesan",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "carrots",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "celery",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "oliwa z oliwek",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "filet z kurczaka",
+        "amount": 454,
+        "unit": "g"
+      },
+      {
+        "name": "sól",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pieprz",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "masło",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "sos ostry",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "makaron bezglutenowy",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "mleko",
+        "amount": 236,
+        "unit": "ml"
+      },
+      {
+        "name": "skrobia kukurydziana",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "sól morska",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "proszek musztardowy",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "ser cheddar biały",
+        "amount": 90,
+        "unit": "g"
+      },
+      {
+        "name": "parmezan",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "marchew",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "seler",
+        "amount": null,
+        "unit": null
       }
     ],
     "available": true,
@@ -20425,120 +23045,6 @@
         "name": "rukola",
         "amount": null,
         "unit": null
-      }
-    ],
-    "available": true,
-    "estimated_cost_pln": null,
-    "cost_complete": false
-  },
-  {
-    "name_en": "Fruity Quinoa and Grilled Salmon",
-    "name_pl": "Owocowa Quinoa z Grillowanym Lososiem",
-    "url": "https://mealpreponfleek.com/fruity-quinoa-grilled-salmon/",
-    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/07/Fruity-Quinoa-and-Grilled-Salmon.jpg",
-    "category": "lunch",
-    "ingredients_en": [
-      {
-        "name": "salmon",
-        "amount": 567,
-        "unit": "g"
-      },
-      {
-        "name": "cauliflower",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "white quinoa",
-        "amount": 370,
-        "unit": "g"
-      },
-      {
-        "name": "scallion",
-        "amount": 4,
-        "unit": "pcs"
-      },
-      {
-        "name": "lemon",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "blueberries",
-        "amount": 75,
-        "unit": "g"
-      },
-      {
-        "name": "strawberries",
-        "amount": 4,
-        "unit": "pcs"
-      },
-      {
-        "name": "mango",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "salt",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "pepper",
-        "amount": 1,
-        "unit": "g"
-      }
-    ],
-    "ingredients_pl": [
-      {
-        "name": "losos",
-        "amount": 567,
-        "unit": "g"
-      },
-      {
-        "name": "kalafior",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "quinoa biala",
-        "amount": 370,
-        "unit": "g"
-      },
-      {
-        "name": "szczypiorek",
-        "amount": 4,
-        "unit": "pcs"
-      },
-      {
-        "name": "cytryna",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "borowki",
-        "amount": 75,
-        "unit": "g"
-      },
-      {
-        "name": "truskawki",
-        "amount": 4,
-        "unit": "pcs"
-      },
-      {
-        "name": "mango",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "sol",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "pieprz",
-        "amount": 1,
-        "unit": "g"
       }
     ],
     "available": true,
@@ -22792,6 +25298,190 @@
     "cost_complete": true
   },
   {
+    "name_en": "Eggplant Lasagna",
+    "name_pl": "Lasagne z Baklazanem",
+    "url": "https://mealpreponfleek.com/eggplant-lasagna/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2020/08/Low-Calorie-Eggplant-Lasagna-777x431-1.jpg",
+    "category": "lunch",
+    "ingredients_en": [
+      {
+        "name": "olive oil",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "eggplant",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "ricotta cheese",
+        "amount": 160,
+        "unit": "g"
+      },
+      {
+        "name": "egg",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "sea salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "dried basil",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "garlic powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "shredded mozzarella",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "basil",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "ground beef",
+        "amount": 340,
+        "unit": "g"
+      },
+      {
+        "name": "pasta sauce",
+        "amount": 480,
+        "unit": "ml"
+      },
+      {
+        "name": "dried oregano",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sea salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "broccolini",
+        "amount": 227,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "sea salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pepper",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "oliwa z oliwek",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "baklazan",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "ser ricotta",
+        "amount": 160,
+        "unit": "g"
+      },
+      {
+        "name": "jajko",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "sól morska",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "suszone oregano",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "czosnek w proszku",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "mozzarella tarta",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "bazylia",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "mielona wołowina",
+        "amount": 340,
+        "unit": "g"
+      },
+      {
+        "name": "sos pomidorowy do makaronu",
+        "amount": 480,
+        "unit": "ml"
+      },
+      {
+        "name": "suszone oregano",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sól morska",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "broccolini",
+        "amount": 227,
+        "unit": "g"
+      },
+      {
+        "name": "oliwa z oliwek",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "sól morska",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pieprz",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
     "name_en": "Vegetarian Chorizo and Quinoa Stuffed Peppers",
     "name_pl": "Papryki Faszerowane Wegetariańskim Chorizo i Komosą Ryżową",
     "url": "https://mealpreponfleek.com/vegetarian-chorizo-and-quinoa-stuffed-peppers/",
@@ -24296,7 +26986,7 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 55.63,
+    "estimated_cost_pln": 55.86,
     "cost_complete": true
   },
   {
@@ -25020,7 +27710,7 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 38.53,
+    "estimated_cost_pln": 37.82,
     "cost_complete": true
   },
   {
@@ -25089,6 +27779,130 @@
       },
       {
         "name": "oliwa z oliwek",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
+    "name_en": "Mango Chicken Sticky Rice Meal Prep",
+    "name_pl": "Przygotowanie posilku z kurczakiem, mango i ryzem",
+    "url": "https://mealpreponfleek.com/lighter-mango-chicken-sticky-rice-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/02/Lighter-Mango-Chicken-Sticky-Rice-Meal-Prep-blog.png",
+    "category": "lunch",
+    "ingredients_en": [
+      {
+        "name": "long grain white rice",
+        "amount": 185,
+        "unit": "g"
+      },
+      {
+        "name": "mango",
+        "amount": 300,
+        "unit": "g"
+      },
+      {
+        "name": "chicken breast",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "olive oil",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "rice wine vinegar",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "chili paste",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "paprika",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "dried parsley",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pepper",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "scallions",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "ryz bialy dlugoziarnisty",
+        "amount": 185,
+        "unit": "g"
+      },
+      {
+        "name": "mango",
+        "amount": 300,
+        "unit": "g"
+      },
+      {
+        "name": "filet z kurczaka",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "oliwa z oliwek",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "ocet ryzowy",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "pasta chili",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "papryka",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "natka pietruszki suszona",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sol",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pieprz",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "szczypiorek",
         "amount": null,
         "unit": null
       }
@@ -25245,120 +28059,6 @@
         "name": "krewetki",
         "amount": 227,
         "unit": "g"
-      }
-    ],
-    "available": true,
-    "estimated_cost_pln": null,
-    "cost_complete": false
-  },
-  {
-    "name_en": "Tuna Quinoa Salad In Endive Wraps",
-    "name_pl": "Salatka z tuna i quinoa w lisciu endywii",
-    "url": "https://mealpreponfleek.com/tuna-quinoa-salad-endive-wraps/",
-    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/06/Tuna-Quinoa-Salad-In-Endive-Wraps.jpg",
-    "category": "lunch",
-    "ingredients_en": [
-      {
-        "name": "quinoa",
-        "amount": 46,
-        "unit": "g"
-      },
-      {
-        "name": "tuna",
-        "amount": 170,
-        "unit": "g"
-      },
-      {
-        "name": "plain yogurt",
-        "amount": 60,
-        "unit": "g"
-      },
-      {
-        "name": "lemon juice",
-        "amount": 5,
-        "unit": "ml"
-      },
-      {
-        "name": "radish",
-        "amount": 30,
-        "unit": "g"
-      },
-      {
-        "name": "dried parsley",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "dill",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "salt",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "pepper",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "endive",
-        "amount": null,
-        "unit": null
-      }
-    ],
-    "ingredients_pl": [
-      {
-        "name": "quinoa",
-        "amount": 46,
-        "unit": "g"
-      },
-      {
-        "name": "tunczyk",
-        "amount": 170,
-        "unit": "g"
-      },
-      {
-        "name": "jogurt naturalny",
-        "amount": 60,
-        "unit": "g"
-      },
-      {
-        "name": "sok z cytryny",
-        "amount": 5,
-        "unit": "ml"
-      },
-      {
-        "name": "rzodkiewka",
-        "amount": 30,
-        "unit": "g"
-      },
-      {
-        "name": "natka pietruszki suszona",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "koperek",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "sol",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "pieprz",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "endywia",
-        "amount": null,
-        "unit": null
       }
     ],
     "available": true,
@@ -25858,210 +28558,6 @@
       {
         "name": "szpinak baby",
         "amount": 60,
-        "unit": "g"
-      }
-    ],
-    "available": true,
-    "estimated_cost_pln": null,
-    "cost_complete": false
-  },
-  {
-    "name_en": "Air Fryer Coconut Shrimp",
-    "name_pl": "Krewetki Kokosowe z Frytkownicy Powietrznej",
-    "url": "https://mealpreponfleek.com/air-fryer-coconut-shrimp/",
-    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/12/Air-Fryer-Coconut-Shrimp-777x431-1.jpg",
-    "category": "lunch",
-    "ingredients_en": [
-      {
-        "name": "shrimp",
-        "amount": 302,
-        "unit": "g"
-      },
-      {
-        "name": "eggs",
-        "amount": 2,
-        "unit": "pcs"
-      },
-      {
-        "name": "coconut flour",
-        "amount": 30,
-        "unit": "g"
-      },
-      {
-        "name": "shredded coconut",
-        "amount": 80,
-        "unit": "g"
-      },
-      {
-        "name": "salt",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "lime",
-        "amount": 4,
-        "unit": "pcs"
-      },
-      {
-        "name": "riced cauliflower",
-        "amount": 600,
-        "unit": "g"
-      },
-      {
-        "name": "avocado oil",
-        "amount": 15,
-        "unit": "ml"
-      },
-      {
-        "name": "lime juice",
-        "amount": 30,
-        "unit": "ml"
-      },
-      {
-        "name": "lime zest",
-        "amount": 15,
-        "unit": "ml"
-      },
-      {
-        "name": "cilantro",
-        "amount": 5,
-        "unit": "g"
-      },
-      {
-        "name": "salt",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "tomato paste",
-        "amount": 30,
-        "unit": "ml"
-      },
-      {
-        "name": "coconut aminos",
-        "amount": 45,
-        "unit": "ml"
-      },
-      {
-        "name": "sesame oil",
-        "amount": 30,
-        "unit": "ml"
-      },
-      {
-        "name": "lime juice",
-        "amount": 30,
-        "unit": "ml"
-      },
-      {
-        "name": "monk fruit sweetener",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "garlic",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "ginger",
-        "amount": 1,
-        "unit": "g"
-      }
-    ],
-    "ingredients_pl": [
-      {
-        "name": "krewetki",
-        "amount": 302,
-        "unit": "g"
-      },
-      {
-        "name": "jajka",
-        "amount": 2,
-        "unit": "pcs"
-      },
-      {
-        "name": "mąka kokosowa",
-        "amount": 30,
-        "unit": "g"
-      },
-      {
-        "name": "wiórki kokosowe",
-        "amount": 80,
-        "unit": "g"
-      },
-      {
-        "name": "sól",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "limonka",
-        "amount": 4,
-        "unit": "pcs"
-      },
-      {
-        "name": "kalafior ryżowy",
-        "amount": 600,
-        "unit": "g"
-      },
-      {
-        "name": "olej z awokado",
-        "amount": 15,
-        "unit": "ml"
-      },
-      {
-        "name": "sok z limonki",
-        "amount": 30,
-        "unit": "ml"
-      },
-      {
-        "name": "skórka z limonki",
-        "amount": 15,
-        "unit": "ml"
-      },
-      {
-        "name": "kolendra",
-        "amount": 5,
-        "unit": "g"
-      },
-      {
-        "name": "sól",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "koncentrat pomidorowy",
-        "amount": 30,
-        "unit": "ml"
-      },
-      {
-        "name": "aminokwasy kokosowe",
-        "amount": 45,
-        "unit": "ml"
-      },
-      {
-        "name": "olej sezamowy",
-        "amount": 30,
-        "unit": "ml"
-      },
-      {
-        "name": "sok z limonki",
-        "amount": 30,
-        "unit": "ml"
-      },
-      {
-        "name": "słodzik z mnicha",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "czosnek",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "imbir",
-        "amount": 1,
         "unit": "g"
       }
     ],
@@ -26592,7 +29088,7 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 85.2,
+    "estimated_cost_pln": 85.31,
     "cost_complete": true
   },
   {
@@ -27490,8 +29986,8 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 64.92,
-    "cost_complete": true
+    "estimated_cost_pln": null,
+    "cost_complete": false
   },
   {
     "name_en": "Korean BBQ Chicken Thighs",
@@ -27594,7 +30090,7 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 44.28,
+    "estimated_cost_pln": 42.72,
     "cost_complete": true
   },
   {
@@ -27960,6 +30456,120 @@
     "cost_complete": false
   },
   {
+    "name_en": "Air Fryer Firecracker Chicken",
+    "name_pl": "Kurczak firecracker z air fryera",
+    "url": "https://mealpreponfleek.com/air-fryer-firecracker-chicken/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2020/03/Air-Fried-Firecracker-Chicken-777x431-1.jpg",
+    "category": "lunch",
+    "ingredients_en": [
+      {
+        "name": "chicken breast",
+        "amount": 680,
+        "unit": "g"
+      },
+      {
+        "name": "gluten free flour",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "hot sauce",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "name": "honey",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "coconut aminos",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "red pepper flakes",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "green onion",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "white rice",
+        "amount": 185,
+        "unit": "g"
+      },
+      {
+        "name": "edamame",
+        "amount": 3,
+        "unit": "pcs"
+      },
+      {
+        "name": "sea salt",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "filet z kurczaka",
+        "amount": 680,
+        "unit": "g"
+      },
+      {
+        "name": "mąka bezglutenowa",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "sos ostry",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "name": "miód",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "aminokokosowy",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "płatki chili",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "szczypiorek",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "ryż biały",
+        "amount": 185,
+        "unit": "g"
+      },
+      {
+        "name": "edamame",
+        "amount": 3,
+        "unit": "pcs"
+      },
+      {
+        "name": "sól morska",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
     "name_en": "Honey Garlic Mushroom Meatballs",
     "name_pl": "Klopsiki miodowo-czosnkowe z pieczarkami",
     "url": "https://mealpreponfleek.com/honey-garlic-mushroom-meatballs/",
@@ -28127,6 +30737,190 @@
         "name": "czosnek",
         "amount": null,
         "unit": null
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
+    "name_en": "Fall Harvest Sausage Salad",
+    "name_pl": "Jesienna sałatka z kiełbasą",
+    "url": "https://mealpreponfleek.com/fall-harvest-sausage-salad/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/08/Al-Fresco-Harvest-Sausage-Salad.jpg",
+    "category": "lunch",
+    "ingredients_en": [
+      {
+        "name": "mixed greens",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "chicken sausage",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "quinoa",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "butternut squash",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "goat cheese",
+        "amount": 56,
+        "unit": "g"
+      },
+      {
+        "name": "scallions",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "slivered almonds",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "dried cranberries",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "avocado oil",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "honey",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "lime juice",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "apple cider vinegar",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "onion powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "garlic powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "paprika",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pepper",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "mieszanka sałat",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "kiełbasa z kurczaka",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "komosa ryzowa",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "dynia piżmowa",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "ser kozi",
+        "amount": 56,
+        "unit": "g"
+      },
+      {
+        "name": "szczypiorek",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "migdały w słupkach",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "suszone żurawiny",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "olej z awokado",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "miod",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "sok z limonki",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "ocet jabłkowy",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "proszek cebulowy",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "proszek czosnkowy",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "papryka",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sól",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pieprz",
+        "amount": 1,
+        "unit": "g"
       }
     ],
     "available": true,
@@ -29448,6 +32242,140 @@
     "cost_complete": false
   },
   {
+    "name_en": "Cranberry BBQ Vegan Meatballs",
+    "name_pl": "Wegańskie klopsiki z żurawiną i BBQ",
+    "url": "https://mealpreponfleek.com/cranberry-bbq-vegan-meatballs/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/06/Cranberry-BBQ-Vegan-Meatballs-1-jpg.webp",
+    "category": "dinner",
+    "ingredients_en": [
+      {
+        "name": "ground flax",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "water",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "rolled oats",
+        "amount": 90,
+        "unit": "g"
+      },
+      {
+        "name": "garbanzo beans",
+        "amount": 400,
+        "unit": "g"
+      },
+      {
+        "name": "hemp seeds",
+        "amount": 90,
+        "unit": "g"
+      },
+      {
+        "name": "onion powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "garlic powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "black pepper",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "bbq sauce",
+        "amount": 480,
+        "unit": "ml"
+      },
+      {
+        "name": "cranberries",
+        "amount": 140,
+        "unit": "g"
+      },
+      {
+        "name": "quinoa",
+        "amount": 185,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "siemię lniane mielone",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "woda",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "platki owsiane",
+        "amount": 90,
+        "unit": "g"
+      },
+      {
+        "name": "ciecierzyca",
+        "amount": 400,
+        "unit": "g"
+      },
+      {
+        "name": "nasiona konopi",
+        "amount": 90,
+        "unit": "g"
+      },
+      {
+        "name": "proszek cebulowy",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "proszek czosnkowy",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sól",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pieprz czarny",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sos bbq",
+        "amount": 480,
+        "unit": "ml"
+      },
+      {
+        "name": "żurawina",
+        "amount": 140,
+        "unit": "g"
+      },
+      {
+        "name": "komosa ryżowa",
+        "amount": 185,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": 106.93,
+    "cost_complete": true
+  },
+  {
     "name_en": "Turmeric Ginger Salmon in Foil Meal Prep",
     "name_pl": "Łosoś z Kurkumą i Imbirem w Foliu Meal Prep",
     "url": "https://mealpreponfleek.com/turmeric-ginger-salmon-foil-meal-prep/",
@@ -30670,70 +33598,45 @@
     "cost_complete": false
   },
   {
-    "name_en": "Arugula Pesto Pasta Meal Prep",
-    "name_pl": "Przygotowanie Makaronu z Pesto Rukolowym",
-    "url": "https://mealpreponfleek.com/vegan-arugula-pesto-pasta-meal-prep/",
-    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/04/Vegan-Arugula-Pesto-Pasta-Meal-Prep-blog.jpg",
+    "name_en": "Baked Lentil Sweet Potato Falafel with Avocado Cream Sauce",
+    "name_pl": "Pieczone Falafele z Soczewicy i Batata z Kremem Awokado",
+    "url": "https://mealpreponfleek.com/baked-lentil-sweet-potato-falafels-avocado-cream-sauce/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/02/Baked-Lentil-Sweet-Potato-Falafels-with-Avocado-Cream-Sauce.png",
     "category": "dinner",
     "ingredients_en": [
       {
-        "name": "pasta",
-        "amount": 227,
+        "name": "lentils",
+        "amount": 370,
         "unit": "g"
       },
       {
-        "name": "avocado oil",
-        "amount": 10,
-        "unit": "ml"
-      },
-      {
-        "name": "zucchini",
-        "amount": 2,
-        "unit": "pcs"
-      },
-      {
-        "name": "peas",
-        "amount": 340,
+        "name": "sweet potato puree",
+        "amount": 425,
         "unit": "g"
       },
       {
-        "name": "broccoli",
-        "amount": 4,
-        "unit": "pcs"
-      },
-      {
-        "name": "arugula pesto",
-        "amount": 120,
-        "unit": "ml"
-      },
-      {
-        "name": "walnuts",
-        "amount": 120,
+        "name": "coconut flour",
+        "amount": 30,
         "unit": "g"
       },
       {
         "name": "garlic",
-        "amount": 2,
-        "unit": "pcs"
+        "amount": 30,
+        "unit": "g"
       },
       {
-        "name": "arugula",
-        "amount": 2,
-        "unit": "pcs"
+        "name": "cumin",
+        "amount": 1,
+        "unit": "g"
       },
       {
-        "name": "olive oil",
-        "amount": 120,
-        "unit": "ml"
+        "name": "paprika",
+        "amount": 1,
+        "unit": "g"
       },
       {
-        "name": "lemon juice",
-        "amount": 10,
-        "unit": "ml"
-      },
-      {
-        "name": "nutritional yeast",
-        "amount": 15,
+        "name": "cayenne pepper",
+        "amount": 1,
         "unit": "g"
       },
       {
@@ -30742,70 +33645,55 @@
         "unit": "g"
       },
       {
-        "name": "black pepper",
+        "name": "pepper",
         "amount": 1,
         "unit": "g"
+      },
+      {
+        "name": "avocado",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "coconut milk",
+        "amount": 30,
+        "unit": "ml"
       }
     ],
     "ingredients_pl": [
       {
-        "name": "makaron",
-        "amount": 227,
+        "name": "soczewica",
+        "amount": 370,
         "unit": "g"
       },
       {
-        "name": "olej awokado",
-        "amount": 10,
-        "unit": "ml"
-      },
-      {
-        "name": "cukinia",
-        "amount": 2,
-        "unit": "pcs"
-      },
-      {
-        "name": "groszek",
-        "amount": 340,
+        "name": "puree z batata",
+        "amount": 425,
         "unit": "g"
       },
       {
-        "name": "brokuly",
-        "amount": 4,
-        "unit": "pcs"
-      },
-      {
-        "name": "pesto rukolowe",
-        "amount": 120,
-        "unit": "ml"
-      },
-      {
-        "name": "orzechy wloskie",
-        "amount": 120,
+        "name": "maka kokosowa",
+        "amount": 30,
         "unit": "g"
       },
       {
         "name": "czosnek",
-        "amount": 2,
-        "unit": "pcs"
+        "amount": 30,
+        "unit": "g"
       },
       {
-        "name": "rukola",
-        "amount": 2,
-        "unit": "pcs"
+        "name": "kmin rzymski",
+        "amount": 1,
+        "unit": "g"
       },
       {
-        "name": "oliwa z oliwek",
-        "amount": 120,
-        "unit": "ml"
+        "name": "papryka",
+        "amount": 1,
+        "unit": "g"
       },
       {
-        "name": "sok z cytryny",
-        "amount": 10,
-        "unit": "ml"
-      },
-      {
-        "name": "drozdze nieaktywne",
-        "amount": 15,
+        "name": "pieprz cayenne",
+        "amount": 1,
         "unit": "g"
       },
       {
@@ -30814,9 +33702,19 @@
         "unit": "g"
       },
       {
-        "name": "pieprz czarny",
+        "name": "pieprz",
         "amount": 1,
         "unit": "g"
+      },
+      {
+        "name": "awokado",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "mleko kokosowe",
+        "amount": 30,
+        "unit": "ml"
       }
     ],
     "available": true,
@@ -31484,61 +34382,349 @@
     "cost_complete": false
   },
   {
-    "name_en": "Low Sugar Chocolate Peanut Butter Cups",
-    "name_pl": "Niskocukrowe Kubki Czekoladowo-Orzechowe",
-    "url": "https://mealpreponfleek.com/low-sugar-chocolate-peanut-butter-cups/",
-    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/02/Low-Sugar-Chocolate-Peanut-Butter-Cups-2-jpg.webp",
+    "name_en": "Brown Rice Pudding",
+    "name_pl": "Budyń z Brązowego Ryżu",
+    "url": "https://mealpreponfleek.com/brown-rice-pudding/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/05/Brown-Rice-Pudding-2-jpg.webp",
     "category": "desserts",
     "ingredients_en": [
       {
-        "name": "dark chocolate",
-        "amount": 252,
+        "name": "brown rice",
+        "amount": 185,
         "unit": "g"
       },
       {
-        "name": "unsweetened chocolate",
-        "amount": 56,
-        "unit": "g"
-      },
-      {
-        "name": "coconut oil",
-        "amount": 15,
+        "name": "water",
+        "amount": 944,
         "unit": "ml"
       },
       {
-        "name": "peanut butter",
+        "name": "oat milk powder",
         "amount": 90,
         "unit": "g"
       },
       {
-        "name": "cacao nibs",
+        "name": "brown sugar",
+        "amount": 50,
+        "unit": "g"
+      },
+      {
+        "name": "vanilla extract",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "cinnamon",
+        "amount": 5,
+        "unit": "g"
+      },
+      {
+        "name": "sea salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "mixed berries",
+        "amount": 480,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "ryz brązowy",
+        "amount": 185,
+        "unit": "g"
+      },
+      {
+        "name": "woda",
+        "amount": 944,
+        "unit": "ml"
+      },
+      {
+        "name": "mleko owsiane w proszku",
+        "amount": 90,
+        "unit": "g"
+      },
+      {
+        "name": "cukier brązowy",
+        "amount": 50,
+        "unit": "g"
+      },
+      {
+        "name": "ekstrakt waniliowy",
+        "amount": 10,
+        "unit": "ml"
+      },
+      {
+        "name": "cynamon",
+        "amount": 5,
+        "unit": "g"
+      },
+      {
+        "name": "sól morska",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "mieszane jagody",
+        "amount": 480,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": 34.34,
+    "cost_complete": true
+  },
+  {
+    "name_en": "Cream Cheese Fruit Dip Snack Box",
+    "name_pl": "Serek z dipem owocowym",
+    "url": "https://mealpreponfleek.com/cream-cheese-fruit-dip-snack-box/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2020/04/Cream-Cheese-Fruit-Dip-Snack-Boxes-777x431-1.jpg",
+    "category": "desserts",
+    "ingredients_en": [
+      {
+        "name": "cream cheese",
+        "amount": 226,
+        "unit": "g"
+      },
+      {
+        "name": "greek yogurt",
+        "amount": 240,
+        "unit": "g"
+      },
+      {
+        "name": "powdered erythritol",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "vanilla extract",
+        "amount": 2.5,
+        "unit": "ml"
+      },
+      {
+        "name": "pineapple",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "nectarines",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "strawberries",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "blackberries",
+        "amount": 75,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "twarog kremowy",
+        "amount": 226,
+        "unit": "g"
+      },
+      {
+        "name": "jogurt grecki",
+        "amount": 240,
+        "unit": "g"
+      },
+      {
+        "name": "erytrytol w proszku",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "ekstrakt waniliowy",
+        "amount": 2.5,
+        "unit": "ml"
+      },
+      {
+        "name": "ananas",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "nektarynki",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "truskawki",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "jezyny",
+        "amount": 75,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": 23.98,
+    "cost_complete": true
+  },
+  {
+    "name_en": "Churro Meal Prep",
+    "name_pl": "Churros",
+    "url": "https://mealpreponfleek.com/churro-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/03/Vegan-Churro-Meal-Prep.jpg",
+    "category": "desserts",
+    "ingredients_en": [
+      {
+        "name": "gluten-free all-purpose flour",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "water",
+        "amount": 236,
+        "unit": "ml"
+      },
+      {
+        "name": "cane sugar",
+        "amount": 72,
+        "unit": "g"
+      },
+      {
+        "name": "avocado",
+        "amount": 118,
+        "unit": "ml"
+      },
+      {
+        "name": "coconut oil",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "egg replacer",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "water",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "cinnamon",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "vanilla extract",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "baking powder",
+        "amount": 2.5,
+        "unit": "g"
+      },
+      {
+        "name": "sea salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "coconut oil",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "cacao powder",
+        "amount": 45,
+        "unit": "g"
+      },
+      {
+        "name": "maple syrup",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "fresh fruit",
         "amount": null,
         "unit": null
       }
     ],
     "ingredients_pl": [
       {
-        "name": "gorzka czekolada",
-        "amount": 252,
+        "name": "maka bezglutenowa",
+        "amount": 120,
         "unit": "g"
       },
       {
-        "name": "nieslodzona czekolada",
-        "amount": 56,
+        "name": "woda",
+        "amount": 236,
+        "unit": "ml"
+      },
+      {
+        "name": "cukier trzcinowy",
+        "amount": 72,
+        "unit": "g"
+      },
+      {
+        "name": "awokado",
+        "amount": 118,
+        "unit": "ml"
+      },
+      {
+        "name": "olej kokosowy",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "zamiennik jajka",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "woda",
+        "amount": 45,
+        "unit": "ml"
+      },
+      {
+        "name": "cynamon",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "ekstrakt waniliowy",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "proszek do pieczenia",
+        "amount": 2.5,
+        "unit": "g"
+      },
+      {
+        "name": "sól morska",
+        "amount": 1,
         "unit": "g"
       },
       {
         "name": "olej kokosowy",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "kakao",
+        "amount": 45,
+        "unit": "g"
+      },
+      {
+        "name": "syrop klonowy",
         "amount": 15,
         "unit": "ml"
       },
       {
-        "name": "maslo orzechowe",
-        "amount": 90,
-        "unit": "g"
-      },
-      {
-        "name": "nasiona kakaowca",
+        "name": "swieze owoce",
         "amount": null,
         "unit": null
       }
@@ -31652,6 +34838,194 @@
     "cost_complete": false
   },
   {
+    "name_en": "Nutty Peanut Butter Trail Mix Bars",
+    "name_pl": "Orzechowe Batony z Masłem Orzechowym i Mieszanką Bakalii",
+    "url": "https://mealpreponfleek.com/nutty-peanut-butter-trail-mix-bars/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/03/Nutty-Peanut-Butter-Trail-Mix-Bars-blog.png",
+    "category": "desserts",
+    "ingredients_en": [
+      {
+        "name": "rolled oats",
+        "amount": 135,
+        "unit": "g"
+      },
+      {
+        "name": "almonds",
+        "amount": 160,
+        "unit": "g"
+      },
+      {
+        "name": "dried fruit medley",
+        "amount": 160,
+        "unit": "g"
+      },
+      {
+        "name": "cashews",
+        "amount": 180,
+        "unit": "g"
+      },
+      {
+        "name": "pepitas",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "ground flax",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "sunflower seeds",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "peanut butter",
+        "amount": 240,
+        "unit": "g"
+      },
+      {
+        "name": "honey",
+        "amount": 80,
+        "unit": "ml"
+      },
+      {
+        "name": "sea salt",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "płatki owsiane",
+        "amount": 135,
+        "unit": "g"
+      },
+      {
+        "name": "migdały",
+        "amount": 160,
+        "unit": "g"
+      },
+      {
+        "name": "mieszanka suszonych owoców",
+        "amount": 160,
+        "unit": "g"
+      },
+      {
+        "name": "nerkowce",
+        "amount": 180,
+        "unit": "g"
+      },
+      {
+        "name": "pestki dyni",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "siemię lniane mielone",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "nasiona słonecznika",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "masło orzechowe",
+        "amount": 240,
+        "unit": "g"
+      },
+      {
+        "name": "miód",
+        "amount": 80,
+        "unit": "ml"
+      },
+      {
+        "name": "sól morska",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": 67.36,
+    "cost_complete": true
+  },
+  {
+    "name_en": "Peanut Butter Chocolate Chip Granola",
+    "name_pl": "Granola z Maslem Orzechowym i Czekolada",
+    "url": "https://mealpreponfleek.com/peanut-butter-chocolate-chip-granola-recipe-gluten-free-healthy-snack-ideas/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/12/Peanut-Butter-Chocolate-Chip-Granola-Recipe-Gluten-Free1.jpg",
+    "category": "snacks",
+    "ingredients_en": [
+      {
+        "name": "rolled oats",
+        "amount": 450,
+        "unit": "g"
+      },
+      {
+        "name": "peanut butter",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "honey",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "name": "vanilla extract",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "chocolate chips",
+        "amount": 120,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "platki owsiane",
+        "amount": 450,
+        "unit": "g"
+      },
+      {
+        "name": "maslo orzechowe",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "miod",
+        "amount": 120,
+        "unit": "ml"
+      },
+      {
+        "name": "ekstrakt waniliowy",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "sol",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "kropelki czekoladowe",
+        "amount": 120,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
     "name_en": "Buffalo Chicken Mini Bell Peppers",
     "name_pl": "Mini papryki faszerowane kurczakiem buffalo",
     "url": "https://mealpreponfleek.com/low-carb-buffalo-chicken-mini-bell-peppers/",
@@ -31737,6 +35111,90 @@
       },
       {
         "name": "szczypiorek",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
+    "name_en": "Candied Nut Mix",
+    "name_pl": "Kandyzowana mieszanka orzechów",
+    "url": "https://mealpreponfleek.com/candied-nut-mix-for-the-holidays/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2022/10/candied-mixed-nuts-on-a-sheet-pan-1-e1734122178838.jpeg",
+    "category": "snacks",
+    "ingredients_en": [
+      {
+        "name": "mixed nuts",
+        "amount": 360,
+        "unit": "g"
+      },
+      {
+        "name": "egg white",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "water",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "sugar",
+        "amount": 133,
+        "unit": "g"
+      },
+      {
+        "name": "brown sugar",
+        "amount": 67,
+        "unit": "g"
+      },
+      {
+        "name": "cinnamon",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "orzechy mieszane",
+        "amount": 360,
+        "unit": "g"
+      },
+      {
+        "name": "bialko jajka",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "woda",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "cukier",
+        "amount": 133,
+        "unit": "g"
+      },
+      {
+        "name": "cukier brzozowy",
+        "amount": 67,
+        "unit": "g"
+      },
+      {
+        "name": "cynamon",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sól",
         "amount": 1,
         "unit": "g"
       }
@@ -31856,8 +35314,8 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 2.31,
-    "cost_complete": true
+    "estimated_cost_pln": null,
+    "cost_complete": false
   },
   {
     "name_en": "Keto Cracker Snack Boxes",
@@ -32710,7 +36168,7 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 37.28,
+    "estimated_cost_pln": 39.64,
     "cost_complete": true
   },
   {
@@ -32771,6 +36229,120 @@
         "name": "szczypiorek",
         "amount": 2,
         "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
+    "name_en": "Air Fryer Baked Apples",
+    "name_pl": "Pieczone jabłka z air fryera",
+    "url": "https://mealpreponfleek.com/air-fryer-baked-apples/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/09/Air-Fryer-Baked-Apples-jpg.webp",
+    "category": "snacks",
+    "ingredients_en": [
+      {
+        "name": "maple syrup",
+        "amount": 22,
+        "unit": "ml"
+      },
+      {
+        "name": "butter",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "vanilla extract",
+        "amount": 2,
+        "unit": "g"
+      },
+      {
+        "name": "cinnamon",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "ginger",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sea salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "apple",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "nonstick cooking spray",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "greek yogurt",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "walnuts",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "syrop klonowy",
+        "amount": 22,
+        "unit": "ml"
+      },
+      {
+        "name": "maslo",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "ekstrakt waniliowy",
+        "amount": 2,
+        "unit": "g"
+      },
+      {
+        "name": "cynamon",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "imbir",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sól morska",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "jablko",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "spray do pieczenia",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "jogurt grecki",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "orzechy wloskie",
+        "amount": null,
+        "unit": null
       }
     ],
     "available": true,

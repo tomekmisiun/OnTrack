@@ -431,7 +431,7 @@
   },
   {
     "name_en": "Kabocha Squash Waffle Meal Prep (Gluten Free, Paleo-Friendly)",
-    "name_pl": "Wafle z Dyni Kabocha Meal Prep (Bezglutenowe, Paleo)",
+    "name_pl": "Gofry z dyni kabocha",
     "url": "https://mealpreponfleek.com/kabocha-squash-waffle-meal-prep/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/11/Kaboch-Squash-Waffle-Meal-Prep-Edited-4-e1766784792772.jpg",
     "category": "breakfast",
@@ -1011,7 +1011,7 @@
   },
   {
     "name_en": "Chickpea Frittata Meal Prep",
-    "name_pl": "Frittata z ciecierzycy na meal prep",
+    "name_pl": "Frittata z ciecierzycy",
     "url": "https://mealpreponfleek.com/chickpea-frittata/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2021/07/Chickpea-Frittata-Single-Container-e1759751088588.jpg",
     "category": "breakfast",
@@ -1145,7 +1145,7 @@
   },
   {
     "name_en": "Easy Breakfast Beef Sausage (AIP, Paleo, Whole30, Keto)",
-    "name_pl": "Easy Breakfast Beef Sausage (AIP, Paleo, Whole30, Keto)",
+    "name_pl": "Wołowe kiełbaski śniadaniowe",
     "url": "https://mealpreponfleek.com/aip-breakfast-sausage/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2021/02/AIP-Breakfast-Sausage-Patties-Single-Container-e1755518349583.jpg",
     "category": "breakfast",
@@ -4605,7 +4605,7 @@
   },
   {
     "name_en": "Stuffed French Toast Meal Prep",
-    "name_pl": "Nadziewany Francuski Tost Meal Prep",
+    "name_pl": "Nadziewana tost francuski",
     "url": "https://mealpreponfleek.com/stuffed-french-toast-meal-prep/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/11/Stuffed-French-Toast-Blog.jpg",
     "category": "breakfast",
@@ -6233,7 +6233,7 @@
   },
   {
     "name_en": "The Best Paleo Blueberry Muffins",
-    "name_pl": "Najlepsze paleo muffiny jagodowe",
+    "name_pl": "Paleo muffinki jagodowe",
     "url": "https://mealpreponfleek.com/paleo-blueberry-muffins/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2021/11/Paleo-Blueberry-Muffins-777x431-2.jpg",
     "category": "breakfast",
@@ -8011,7 +8011,7 @@
   },
   {
     "name_en": "Keto Pizza Frittata Meal Prep",
-    "name_pl": "Keto Pizza Frittata Meal Prep",
+    "name_pl": "Keto frittata pizza",
     "url": "https://mealpreponfleek.com/keto-pizza-frittata-meal-prep/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/11/Keto-Pepperoni-Pizza-Frittata-Blog.jpg",
     "category": "breakfast",
@@ -8929,7 +8929,7 @@
   },
   {
     "name_en": "Cheesy Keto Chicken Meatballs (High-Protein, Freezer-Friendly)",
-    "name_pl": "Serowe keto klopsiki z kurczaka",
+    "name_pl": "Keto pulpety z kurczaka z serem",
     "url": "https://mealpreponfleek.com/cheesy-keto-chicken-meatballs/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/11/mozarella-meatballs-img3-e1766786414980.jpg",
     "category": "lunch",
@@ -9253,130 +9253,6 @@
         "name": "dynia kabocha",
         "amount": null,
         "unit": null
-      }
-    ],
-    "available": true,
-    "estimated_cost_gbp": null,
-    "cost_complete": false
-  },
-  {
-    "name_en": "Hot Honey Ground Beef and Sweet Potato Bowls",
-    "name_pl": "Miski z mieloną wołowiną i batatami w ostrym miodzie",
-    "url": "https://mealpreponfleek.com/hot-honey-ground-beef-and-sweet-potato-bowls/",
-    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2025/04/Hot-Honey-Ground-Beef-and-Sweet-Potato-Bowls.jpg",
-    "category": "lunch",
-    "ingredients_en": [
-      {
-        "name": "sweet potato",
-        "amount": 680,
-        "unit": "g"
-      },
-      {
-        "name": "olive oil",
-        "amount": 15,
-        "unit": "ml"
-      },
-      {
-        "name": "salt",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "black pepper",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "ground beef",
-        "amount": 908,
-        "unit": "g"
-      },
-      {
-        "name": "garlic",
-        "amount": 30,
-        "unit": "g"
-      },
-      {
-        "name": "onion",
-        "amount": 80,
-        "unit": "g"
-      },
-      {
-        "name": "taco seasoning",
-        "amount": 60,
-        "unit": "g"
-      },
-      {
-        "name": "cottage cheese",
-        "amount": 480,
-        "unit": "g"
-      },
-      {
-        "name": "avocado",
-        "amount": 2,
-        "unit": "pcs"
-      },
-      {
-        "name": "hot honey",
-        "amount": 60,
-        "unit": "ml"
-      }
-    ],
-    "ingredients_pl": [
-      {
-        "name": "batat",
-        "amount": 680,
-        "unit": "g"
-      },
-      {
-        "name": "oliwa z oliwek",
-        "amount": 15,
-        "unit": "ml"
-      },
-      {
-        "name": "sól",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "pieprz czarny",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "mielona wołowina",
-        "amount": 908,
-        "unit": "g"
-      },
-      {
-        "name": "czosnek",
-        "amount": 30,
-        "unit": "g"
-      },
-      {
-        "name": "cebula",
-        "amount": 80,
-        "unit": "g"
-      },
-      {
-        "name": "przyprawa taco",
-        "amount": 60,
-        "unit": "g"
-      },
-      {
-        "name": "twaróg",
-        "amount": 480,
-        "unit": "g"
-      },
-      {
-        "name": "awokado",
-        "amount": 2,
-        "unit": "pcs"
-      },
-      {
-        "name": "miód ostry",
-        "amount": 60,
-        "unit": "ml"
       }
     ],
     "available": true,
@@ -10135,7 +10011,7 @@
   },
   {
     "name_en": "Cauliflower Rice Salmon Poke Bowl Meal Prep (Whole30 Compliant)",
-    "name_pl": "Miska poke z ryzem kalafiorowym i lososiem (zgodne z Whole30)",
+    "name_pl": "Poke bowl z łososiem i ryżem kalafiorowym",
     "url": "https://mealpreponfleek.com/cauliflower-rice-salmon-poke-bowl-meal-prep/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/08/Cauliflower-Rice-Salmon-Poke-Bowl-Meal-Prep-Whole30-compliant.jpg",
     "category": "lunch",
@@ -10229,7 +10105,7 @@
   },
   {
     "name_en": "Garlic and Thyme Chicken Meal Prep (Whole30 Friendly)",
-    "name_pl": "Kurczak z czosnkiem i tymiankiem (zgodne z Whole30)",
+    "name_pl": "Kurczak z czosnkiem i tymiankiem",
     "url": "https://mealpreponfleek.com/garlic-thyme-chicken-meal-prep/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/09/GarlicThyme_Chicken2-e1758193236623.jpg",
     "category": "lunch",
@@ -10591,7 +10467,7 @@
   },
   {
     "name_en": "Vegan Chopped Chickpea Greek Salad Meal Prep",
-    "name_pl": "Vegan Chopped Chickpea Greek Salad Meal Prep",
+    "name_pl": "Sałatka grecka z ciecierzycą",
     "url": "https://mealpreponfleek.com/vegan-chopped-chickpea-greek-salad-meal-prep/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/05/6O0A1729-e1754310090800.jpg",
     "category": "lunch",
@@ -10755,7 +10631,7 @@
   },
   {
     "name_en": "Chimichurri Steak Meal Prep - Two Ways (Bowls and Tacos)",
-    "name_pl": "Chimichurri Steak Meal Prep - Two Ways (Bowls and Tacos)",
+    "name_pl": "Stek z chimichurri",
     "url": "https://mealpreponfleek.com/whole30-chimichurri-steak-meal-prep/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/04/6O0A9397-e1753792426778.jpg",
     "category": "lunch",
@@ -10929,7 +10805,7 @@
   },
   {
     "name_en": "Vegan 'Cheesy' Spaghetti Squash Meal Prep",
-    "name_pl": "Vegan 'Cheesy' Spaghetti Squash Meal Prep",
+    "name_pl": "Spaghetti z dyni z serem wegańskim",
     "url": "https://mealpreponfleek.com/vegan-cheesy-spaghetti-squash-meal-prep/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/09/cheesy-spaghetti-squash-img2-scaled-e1753361022139.jpg",
     "category": "lunch",
@@ -12213,7 +12089,7 @@
   },
   {
     "name_en": "Sweet Potato Chicken Poppers (AIP friendly)",
-    "name_pl": "Kulki z kurczaka i batata (AIP friendly)",
+    "name_pl": "Kurczak z batatami",
     "url": "https://mealpreponfleek.com/sweet-potato-chicken-poppers/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2020/11/Sweet-Potato-Chicken-Poppers-777x431-1.jpg",
     "category": "lunch",
@@ -12307,7 +12183,7 @@
   },
   {
     "name_en": "Single Serve Mushroom Q-Cup Stuffing",
-    "name_pl": "Single Serve Mushroom Q-Cup Stuffing",
+    "name_pl": "Nadziewane pieczarki",
     "url": "https://mealpreponfleek.com/single-serve-mushroom-q-cup-stuffing/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/10/Single-Serve-Mushroom-Q-Cups-Stuffing.jpg",
     "category": "lunch",
@@ -12461,7 +12337,7 @@
   },
   {
     "name_en": "Simple Meal Prep Lunch Container",
-    "name_pl": "Simple Meal Prep Lunch Container",
+    "name_pl": "Pojemnik na lunch",
     "url": "https://mealpreponfleek.com/simple-lunch-container/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2022/01/Simple-Lunch-Container-777x431-1.jpg",
     "category": "lunch",
@@ -14093,7 +13969,7 @@
   },
   {
     "name_en": "Chicken Adobo Meal Prep",
-    "name_pl": "Adobo z Kurczaka Meal Prep",
+    "name_pl": "Adobo z kurczaka",
     "url": "https://mealpreponfleek.com/chicken-adobo-meal-prep/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/11/Filipino-Adobo-Chicken-Meal-Prep.jpg",
     "category": "lunch",
@@ -15001,7 +14877,7 @@
   },
   {
     "name_en": "Egg Roll in a Bowl",
-    "name_pl": "Egg Roll in a Bowl",
+    "name_pl": "Sałatka z jajkiem",
     "url": "https://mealpreponfleek.com/egg-roll-in-a-bowl/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/02/Egg-Roll-in-a-Bowl-1-jpg.webp",
     "category": "lunch",
@@ -15155,7 +15031,7 @@
   },
   {
     "name_en": "Yummy Bacon Burger Bowls",
-    "name_pl": "Yummy Bacon Burger Bowls",
+    "name_pl": "Miska burgera z bekonem",
     "url": "https://mealpreponfleek.com/yummy-bacon-burger-bowls/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/02/Yummy-Bacon-Burger-Bowls-jpg.webp",
     "category": "lunch",
@@ -15259,7 +15135,7 @@
   },
   {
     "name_en": "Steak & Avocado Salad Recipe",
-    "name_pl": "Steak & Avocado Salad Recipe",
+    "name_pl": "Sałatka ze stekiem i awokado",
     "url": "https://mealpreponfleek.com/steak-avocado-salad/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/02/Steak-Avocado-Salad-Recipe-jpg.webp",
     "category": "lunch",
@@ -15403,7 +15279,7 @@
   },
   {
     "name_en": "Instant Pot Honey Sesame Chicken",
-    "name_pl": "Instant Pot Honey Sesame Chicken",
+    "name_pl": "Kurczak z miodem i sezamem",
     "url": "https://mealpreponfleek.com/instant-pot-honey-sesame-chicken/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/03/Instant-Pot-Honey-Sesame-Chicken-1-jpg.webp",
     "category": "lunch",
@@ -15983,7 +15859,7 @@
   },
   {
     "name_en": "BBQ Jackfruit & Avocado Slaw Meal Prep",
-    "name_pl": "BBQ Jackfruit & Avocado Slaw Meal Prep",
+    "name_pl": "Jackfruit BBQ z colesławem z awokado",
     "url": "https://mealpreponfleek.com/bbq-jackfruit-avocado-slaw/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/06/BBQ-Jackfruit-Avocado-Slaw-Meal-Prep-1-jpg.webp",
     "category": "lunch",
@@ -16157,7 +16033,7 @@
   },
   {
     "name_en": "Crockpot Golden Lentil Soup",
-    "name_pl": "Crockpot Golden Lentil Soup",
+    "name_pl": "Złota zupa z soczewicy z wolnowaru",
     "url": "https://mealpreponfleek.com/crockpot-golden-lentil-soup/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/06/Crockpot-Golden-Lentil-Soup-jpg.webp",
     "category": "lunch",
@@ -17289,7 +17165,7 @@
   },
   {
     "name_en": "Gazpacho Meal Prep",
-    "name_pl": "Gazpacho Meal Prep",
+    "name_pl": "Gazpacho",
     "url": "https://mealpreponfleek.com/gazpacho-meal-prep/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/04/Gazpacho-Meal-Prep.jpg",
     "category": "lunch",
@@ -17597,7 +17473,7 @@
   },
   {
     "name_en": "Chicken Buddha Bowl Meal Prep",
-    "name_pl": "Miski Buddyjskie z Kurczakiem Meal Prep",
+    "name_pl": "Buddha bowl z kurczakiem",
     "url": "https://mealpreponfleek.com/chicken-buddha-bowl/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/07/Gluten-Free-Chicken-Buddha-Bowl-Meal-PrepC2A0-blog.jpg",
     "category": "lunch",
@@ -17691,7 +17567,7 @@
   },
   {
     "name_en": "Cold Veggie Pizza Meal Prep",
-    "name_pl": "Zimna Pizza Warzywna Meal Prep",
+    "name_pl": "Zimna pizza warzywna",
     "url": "https://mealpreponfleek.com/veggie-pizza-meal-prep/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/07/Gluten-Free-Cold-Veggie-Pizza-Meal-Prep-blog.jpg",
     "category": "lunch",
@@ -18013,7 +17889,7 @@
   },
   {
     "name_en": "Greek Salad",
-    "name_pl": "Greek Salad",
+    "name_pl": "Sałatka grecka",
     "url": "https://mealpreponfleek.com/greek-salad/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/05/Chicken-Greek-Salad-Recipe-for-Meal-Prep-jpg.webp",
     "category": "lunch",
@@ -18107,7 +17983,7 @@
   },
   {
     "name_en": "Vegan Chickpea Curry & Basmati Rice Meal Prep",
-    "name_pl": "Vegan Chickpea Curry & Basmati Rice Meal Prep",
+    "name_pl": "Curry z ciecierzycy z ryżem basmati",
     "url": "https://mealpreponfleek.com/vegan-chickpea-curry-basmati-rice-meal-prep/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/03/Vegan-Chickpea-Curry-Basmati-Rice-Meal-Prep-blog.png",
     "category": "lunch",
@@ -18851,7 +18727,7 @@
   },
   {
     "name_en": "Gumbo Meal Prep",
-    "name_pl": "Gumbo Meal Prep",
+    "name_pl": "Gumbo",
     "url": "https://mealpreponfleek.com/gumbo-meal-prep/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/09/Crockpot-Gumbo-Meal-Prep.jpg",
     "category": "lunch",
@@ -19213,7 +19089,7 @@
   },
   {
     "name_en": "Grilled Steak and Garlic Roasted Potato Meal Prep",
-    "name_pl": "Grillowany Stek z Pieczonymi Ziemniakami i Czosnkiem Meal Prep",
+    "name_pl": "Grillowany stek z pieczonymi ziemniakami czosnkowymi",
     "url": "https://mealpreponfleek.com/grilled-steak-garlic-roasted-potato-meal-prep/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/08/mealprep_steakB.jpg",
     "category": "lunch",
@@ -19595,7 +19471,7 @@
   },
   {
     "name_en": "Sheet Pan Steak and Veggies Meal Prep",
-    "name_pl": "Stek z Warzywami z Blachy Meal Prep",
+    "name_pl": "Stek z warzywami z blachy",
     "url": "https://mealpreponfleek.com/sheet-pan-steak-and-veggies-meal-prep/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2021/12/Sheet-Pan-Steak-and-Veggies-777x431-1.jpg",
     "category": "lunch",
@@ -22534,80 +22410,6 @@
     "cost_complete": false
   },
   {
-    "name_en": "Sheet Pan Chicken Fajitas",
-    "name_pl": "Fajita z Kurczaka z Blachy",
-    "url": "https://mealpreponfleek.com/sheet-pan-chicken-fajitas/",
-    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/04/Sheet-Pan-Fajitas.jpg",
-    "category": "lunch",
-    "ingredients_en": [
-      {
-        "name": "chicken breast",
-        "amount": 680,
-        "unit": "g"
-      },
-      {
-        "name": "olive oil",
-        "amount": null,
-        "unit": null
-      },
-      {
-        "name": "taco seasoning",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "bell pepper",
-        "amount": 3,
-        "unit": "pcs"
-      },
-      {
-        "name": "onion",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "lime",
-        "amount": null,
-        "unit": null
-      }
-    ],
-    "ingredients_pl": [
-      {
-        "name": "filet z kurczaka",
-        "amount": 680,
-        "unit": "g"
-      },
-      {
-        "name": "oliwa z oliwek",
-        "amount": null,
-        "unit": null
-      },
-      {
-        "name": "przyprawa taco",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "papryka",
-        "amount": 3,
-        "unit": "pcs"
-      },
-      {
-        "name": "cebula",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "limonka",
-        "amount": null,
-        "unit": null
-      }
-    ],
-    "available": true,
-    "estimated_cost_gbp": null,
-    "cost_complete": false
-  },
-  {
     "name_en": "Pumpkin Mustard Stuffed Cabbage",
     "name_pl": "Gołąbki z Dynią i Musztardą",
     "url": "https://mealpreponfleek.com/whole30-pumpkin-mustard-stuffed-cabbage/",
@@ -22981,7 +22783,7 @@
   },
   {
     "name_en": "Fall Harvest Sheet Pan Dinner Meal Prep",
-    "name_pl": "Jesienna Kolacja z Blachy na Meal Prep",
+    "name_pl": "Jesienna kolacja z blachy",
     "url": "https://mealpreponfleek.com/fall-harvest-sheet-pan-dinner/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2021/11/Fall-Harvest-Sheet-Pan-Dinner-777x431-1.jpg",
     "category": "lunch",
@@ -24145,7 +23947,7 @@
   },
   {
     "name_en": "Chicken Jambalaya",
-    "name_pl": "Chicken Jambalaya",
+    "name_pl": "Jambalaya z kurczakiem",
     "url": "https://mealpreponfleek.com/chicken-jambalaya/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2022/05/Chicken-Jambalaya-777x431-1.jpg",
     "category": "lunch",
@@ -24289,7 +24091,7 @@
   },
   {
     "name_en": "Gorgeous Greek Salad",
-    "name_pl": "Gorgeous Greek Salad",
+    "name_pl": "Sałatka grecka",
     "url": "https://mealpreponfleek.com/greek-salad-2/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/03/Gorgeous-Greek-Salad-777x431-1.jpg",
     "category": "lunch",
@@ -24362,112 +24164,8 @@
     "cost_complete": false
   },
   {
-    "name_en": "Taco Bowls",
-    "name_pl": "Taco Bowls",
-    "url": "https://mealpreponfleek.com/taco-bowls/",
-    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2022/07/Taco-Bowls-777x431-1.jpg",
-    "category": "lunch",
-    "ingredients_en": [
-      {
-        "name": "ground beef",
-        "amount": 454,
-        "unit": "g"
-      },
-      {
-        "name": "white rice",
-        "amount": 740,
-        "unit": "g"
-      },
-      {
-        "name": "taco seasoning",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "tomato",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "avocado",
-        "amount": 2,
-        "unit": "pcs"
-      },
-      {
-        "name": "corn",
-        "amount": 227,
-        "unit": "g"
-      },
-      {
-        "name": "black beans",
-        "amount": 227,
-        "unit": "g"
-      },
-      {
-        "name": "lime",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "shredded cheese",
-        "amount": 113,
-        "unit": "g"
-      }
-    ],
-    "ingredients_pl": [
-      {
-        "name": "mielona wolowina",
-        "amount": 454,
-        "unit": "g"
-      },
-      {
-        "name": "ryz bialy",
-        "amount": 740,
-        "unit": "g"
-      },
-      {
-        "name": "przyprawa taco",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "pomidor",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "awokado",
-        "amount": 2,
-        "unit": "pcs"
-      },
-      {
-        "name": "kukurydza",
-        "amount": 227,
-        "unit": "g"
-      },
-      {
-        "name": "czarna fasola",
-        "amount": 227,
-        "unit": "g"
-      },
-      {
-        "name": "limonka",
-        "amount": 1,
-        "unit": "pcs"
-      },
-      {
-        "name": "ser tarty",
-        "amount": 113,
-        "unit": "g"
-      }
-    ],
-    "available": true,
-    "estimated_cost_gbp": null,
-    "cost_complete": false
-  },
-  {
     "name_en": "Sheet Pan Italian Sausage and Peppers",
-    "name_pl": "Sheet Pan Italian Sausage and Peppers",
+    "name_pl": "Włoska kiełbasa z papryką z blachy",
     "url": "https://mealpreponfleek.com/sheet-pan-italian-sausage-and-peppers/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2020/05/Sheet-Pan-Sausage-Peppers-777x431-1.jpg",
     "category": "lunch",
@@ -26293,7 +25991,7 @@
   },
   {
     "name_en": "Sausage Grill Packet Meal Prep",
-    "name_pl": "Sausage Grill Packet Meal Prep",
+    "name_pl": "Kiełbasa z grilla w paczce",
     "url": "https://mealpreponfleek.com/sausage-grill-packet/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/06/6O0A2370-e1757106376985.jpg",
     "category": "dinner",
@@ -26407,7 +26105,7 @@
   },
   {
     "name_en": "Marry Me Tortellini - A Tasty Twist on Marry Me Chicken",
-    "name_pl": "Marry Me Tortellini - A Tasty Twist on Marry Me Chicken",
+    "name_pl": "Tortellini Marry Me",
     "url": "https://mealpreponfleek.com/marry-me-tortellini/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2024/10/meal-prep-Marry-Me-Tortellini.jpg",
     "category": "dinner",
@@ -27263,130 +26961,6 @@
         "name": "pieprz czarny",
         "amount": 1,
         "unit": "g"
-      }
-    ],
-    "available": true,
-    "estimated_cost_gbp": null,
-    "cost_complete": false
-  },
-  {
-    "name_en": "Taco Skillet Meal Prep",
-    "name_pl": "Taco z Patelni Meal Prep",
-    "url": "https://mealpreponfleek.com/taco-skillet-meal-prep/",
-    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/01/Keto-Taco-Skillet-Meal-Prep.jpg",
-    "category": "dinner",
-    "ingredients_en": [
-      {
-        "name": "ground beef",
-        "amount": 454,
-        "unit": "g"
-      },
-      {
-        "name": "red onion",
-        "amount": 0.5,
-        "unit": "pcs"
-      },
-      {
-        "name": "lettuce",
-        "amount": 30,
-        "unit": "g"
-      },
-      {
-        "name": "mexican cheese blend",
-        "amount": 113,
-        "unit": "g"
-      },
-      {
-        "name": "roma tomato",
-        "amount": 2,
-        "unit": "pcs"
-      },
-      {
-        "name": "taco seasoning",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "salsa verde",
-        "amount": 118,
-        "unit": "ml"
-      },
-      {
-        "name": "plain yogurt",
-        "amount": 118,
-        "unit": "ml"
-      },
-      {
-        "name": "avocado oil",
-        "amount": 30,
-        "unit": "ml"
-      },
-      {
-        "name": "avocado",
-        "amount": null,
-        "unit": null
-      },
-      {
-        "name": "tortilla chips",
-        "amount": null,
-        "unit": null
-      }
-    ],
-    "ingredients_pl": [
-      {
-        "name": "mielona wołowina",
-        "amount": 454,
-        "unit": "g"
-      },
-      {
-        "name": "cebula czerwona",
-        "amount": 0.5,
-        "unit": "pcs"
-      },
-      {
-        "name": "sałata",
-        "amount": 30,
-        "unit": "g"
-      },
-      {
-        "name": "mieszanka serów meksykańskich",
-        "amount": 113,
-        "unit": "g"
-      },
-      {
-        "name": "pomidor roma",
-        "amount": 2,
-        "unit": "pcs"
-      },
-      {
-        "name": "przyprawa taco",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "salsa verde",
-        "amount": 118,
-        "unit": "ml"
-      },
-      {
-        "name": "jogurt naturalny",
-        "amount": 118,
-        "unit": "ml"
-      },
-      {
-        "name": "olej z awokado",
-        "amount": 30,
-        "unit": "ml"
-      },
-      {
-        "name": "awokado",
-        "amount": null,
-        "unit": null
-      },
-      {
-        "name": "chipsy tortilla",
-        "amount": null,
-        "unit": null
       }
     ],
     "available": true,
@@ -28727,7 +28301,7 @@
   },
   {
     "name_en": "No Bake Collagen Brownie Cups",
-    "name_pl": "No Bake Collagen Brownie Cups",
+    "name_pl": "Kubeczki brownie z kolagenem bez pieczenia",
     "url": "https://mealpreponfleek.com/collagen-brownie/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/06/No-Bake-Collagen-Brownie-Cups-1-jpg.webp",
     "category": "desserts",
@@ -28811,7 +28385,7 @@
   },
   {
     "name_en": "Peanut Butter Cheesecake Cups",
-    "name_pl": "Peanut Butter Cheesecake Cups",
+    "name_pl": "Kubeczki sernikowe z masłem orzechowym",
     "url": "https://mealpreponfleek.com/peanut-butter-cheesecake-cups/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/04/Peanut-Butter-Cheesecake-Cups-2-jpg.webp",
     "category": "desserts",
@@ -28945,7 +28519,7 @@
   },
   {
     "name_en": "Chocolate Chocolate Chip Protein Cookie Dough",
-    "name_pl": "Chocolate Chocolate Chip Protein Cookie Dough",
+    "name_pl": "Ciasto ciasteczkowe z kawałkami czekolady i białkiem",
     "url": "https://mealpreponfleek.com/chocolate-chocolate-chip-protein-cookie-dough/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/02/High-Protein-Chocolate-Chip-Cookie-Dough-BLOG.jpg",
     "category": "desserts",
@@ -29059,7 +28633,7 @@
   },
   {
     "name_en": "Vegan Triple Chocolate Brownie Cake",
-    "name_pl": "Vegan Triple Chocolate Brownie Cake",
+    "name_pl": "Wegańskie brownie potrójnie czekoladowe",
     "url": "https://mealpreponfleek.com/vegan-triple-chocolate-brownie-cake/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/11/Vegan-Triple-Chocolate-Brownie-Cake-777X431.jpg",
     "category": "desserts",
@@ -29213,7 +28787,7 @@
   },
   {
     "name_en": "Funfetti Protein Puppy Chow",
-    "name_pl": "Funfetti Protein Puppy Chow",
+    "name_pl": "Funfetti proteinowa przekąska",
     "url": "https://mealpreponfleek.com/funfetti-protein-puppy-chow/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/02/Protein-Puppy-Chow-777X431.jpg",
     "category": "desserts",
@@ -29287,7 +28861,7 @@
   },
   {
     "name_en": "Protein Almond Butter Cups",
-    "name_pl": "Protein Almond Butter Cups",
+    "name_pl": "Kubeczki proteinowe z masłem migdałowym",
     "url": "https://mealpreponfleek.com/protein-almond-butter-cups/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/08/protein-almond-butter-cups.jpg",
     "category": "desserts",
@@ -29351,7 +28925,7 @@
   },
   {
     "name_en": "Berry Almond Chia Pudding Meal Prep",
-    "name_pl": "Jagodowo Migdalowy Budyn Chia Meal Prep",
+    "name_pl": "Pudding chia z jagodami i migdałami",
     "url": "https://mealpreponfleek.com/berry-almond-chia-pudding-meal-prep/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/03/Berry-Almond-Chia-Pudding-Meal-Prep-blog.png",
     "category": "desserts",
@@ -29529,7 +29103,7 @@
   },
   {
     "name_en": "Keto Raspberry Cheesecake",
-    "name_pl": "Keto Sernik Malinowy",
+    "name_pl": "Keto sernik malinowy",
     "url": "https://mealpreponfleek.com/keto-raspberry-cheesecake/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/04/Low-Carb-Fresh-Raspberry-Cheesecake-blog.jpg",
     "category": "desserts",
@@ -30301,7 +29875,7 @@
   },
   {
     "name_en": "Keto Cracker Snack Boxes",
-    "name_pl": "Pudelka przekaskowe z krakersami keto",
+    "name_pl": "Keto krakersy w pudełku",
     "url": "https://mealpreponfleek.com/keto-cracker-snack-boxes/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/11/Easy-Keto-Crackers.jpg",
     "category": "snacks",
@@ -30919,7 +30493,7 @@
   },
   {
     "name_en": "Bacon Jalapeno Poppers",
-    "name_pl": "Bacon Jalapeno Poppers",
+    "name_pl": "Poppery z boczkiem i jalapeño",
     "url": "https://mealpreponfleek.com/bacon-jalapeno-poppers/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2020/01/Keto-Bacon-Wrapped-Jalapeno-Poppers-777x431-1.jpg",
     "category": "snacks",
@@ -30983,7 +30557,7 @@
   },
   {
     "name_en": "Air Fryer Baked Apples",
-    "name_pl": "Air Fryer Baked Apples",
+    "name_pl": "Pieczone jabłka z air fryera",
     "url": "https://mealpreponfleek.com/air-fryer-baked-apples/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/09/Air-Fryer-Baked-Apples-jpg.webp",
     "category": "snacks",
@@ -31097,7 +30671,7 @@
   },
   {
     "name_en": "Air Fryer Rosemary Sweet Potato Wedges with Garlic Aioli",
-    "name_pl": "Air Fryer Rosemary Sweet Potato Wedges with Garlic Aioli",
+    "name_pl": "Kliny batatów z rozmarynem i czosnkowym aioli z air fryera",
     "url": "https://mealpreponfleek.com/air-fryer-rosemary-sweet-potato-wedges-with-garlic-aioli/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/07/Air-Fryer-Rosemary-Sweet-Potato-Wedges-with-Garlic-Aioli-jpg.webp",
     "category": "snacks",
@@ -31211,7 +30785,7 @@
   },
   {
     "name_en": "Air-Fried Chickpeas",
-    "name_pl": "Air-Fried Chickpeas",
+    "name_pl": "Ciecierzyca z air fryera",
     "url": "https://mealpreponfleek.com/air-fried-chickpeas/",
     "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/03/Air-Fried-Chickpeas-777x431-1.jpg",
     "category": "snacks",

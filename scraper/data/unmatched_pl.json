@@ -3,7 +3,7 @@
     "ingredient_name": "ajerkoniak",
     "top_candidates": [
       {
-        "product": "lajkonik junior safari drobne pieczywo o smaku waniliowym",
+        "product": "lajkonik junior safari o smaku waniliowym",
         "score": 77.8
       },
       {
@@ -36,15 +36,15 @@
         "score": 66.7
       },
       {
-        "product": "serek homogenizowany ciasteczkowy",
-        "score": 66.7
-      },
-      {
         "product": "ryż",
         "score": 66.7
       },
       {
         "product": "daktyle",
+        "score": 60.0
+      },
+      {
+        "product": "indyk",
         "score": 60.0
       }
     ]
@@ -115,11 +115,11 @@
         "score": 67.9
       },
       {
-        "product": "ryż",
+        "product": "ryż basmati bezglutenowy",
         "score": 66.7
       },
       {
-        "product": "ryż basmati bezglutenowy",
+        "product": "ryż",
         "score": 66.7
       }
     ]
@@ -144,8 +144,8 @@
         "score": 73.9
       },
       {
-        "product": "bakuś serek czekoladowy",
-        "score": 71.8
+        "product": "serek czekoladowy",
+        "score": 72.7
       }
     ]
   },
@@ -169,7 +169,7 @@
         "score": 60.0
       },
       {
-        "product": "melon cantalupe owoce auchan kg",
+        "product": "chili jalapeno kruszone",
         "score": 57.9
       }
     ]
@@ -182,6 +182,10 @@
         "score": 78.8
       },
       {
+        "product": "groszek",
+        "score": 76.9
+      },
+      {
         "product": "lody śmietankowo waniliowe w czekoladzie mlecznej z migdałami",
         "score": 73.1
       },
@@ -192,10 +196,6 @@
       {
         "product": "serwatka demineralizowana w proszku",
         "score": 71.1
-      },
-      {
-        "product": "kozie mleko w proszku",
-        "score": 70.6
       }
     ]
   },
@@ -228,24 +228,24 @@
     "ingredient_name": "białko konopne",
     "top_candidates": [
       {
-        "product": "men jogurt pitny wysokobiałkowy owoce leśne",
-        "score": 71.4
-      },
-      {
         "product": "jabłko",
         "score": 66.7
       },
       {
-        "product": "men jogurt pitny wysokobiałkowy mango",
+        "product": "krewetki białe gotowane 31-40",
         "score": 64.3
       },
       {
-        "product": "go active peanut butter wysokobiałkowy krem o smaku waniliowym",
+        "product": "odżywka białkowa sojowa",
         "score": 64.3
       },
       {
-        "product": "mkaron penne",
-        "score": 63.2
+        "product": "men jogurt pitny wysokobiałkowy leśne",
+        "score": 64.3
+      },
+      {
+        "product": "whey protein complex 100% odżywka białkowa czekolada",
+        "score": 64.3
       }
     ]
   },
@@ -325,31 +325,6 @@
     ]
   },
   {
-    "ingredient_name": "broccolini",
-    "top_candidates": [
-      {
-        "product": "leibniz",
-        "score": 72.7
-      },
-      {
-        "product": "brokuł",
-        "score": 66.7
-      },
-      {
-        "product": "robico",
-        "score": 66.7
-      },
-      {
-        "product": "berlinki parówki classic",
-        "score": 66.7
-      },
-      {
-        "product": "lindt",
-        "score": 66.7
-      }
-    ]
-  },
-  {
     "ingredient_name": "bulion wolowy",
     "top_candidates": [
       {
@@ -407,10 +382,6 @@
         "score": 76.2
       },
       {
-        "product": "cebula tuba",
-        "score": 73.7
-      },
-      {
         "product": "cebula",
         "score": 72.7
       },
@@ -420,6 +391,10 @@
       },
       {
         "product": "bułka paryska",
+        "score": 70.0
+      },
+      {
+        "product": "bułka grahamka",
         "score": 70.0
       }
     ]
@@ -453,10 +428,6 @@
     "ingredient_name": "bulka tarta panko",
     "top_candidates": [
       {
-        "product": "cebula tuba",
-        "score": 73.7
-      },
-      {
         "product": "cebula",
         "score": 72.7
       },
@@ -471,6 +442,10 @@
       {
         "product": "cebula żółta",
         "score": 70.0
+      },
+      {
+        "product": "mango",
+        "score": 66.7
       }
     ]
   },
@@ -650,6 +625,31 @@
     ]
   },
   {
+    "ingredient_name": "chili czerwone",
+    "top_candidates": [
+      {
+        "product": "buraki czerwone",
+        "score": 83.3
+      },
+      {
+        "product": "ziemniaki czerwone",
+        "score": 83.3
+      },
+      {
+        "product": "buraczki czerwone wiórki",
+        "score": 78.6
+      },
+      {
+        "product": "jabłka czerwone",
+        "score": 78.3
+      },
+      {
+        "product": "pieprz chili cayenne",
+        "score": 74.1
+      }
+    ]
+  },
+  {
     "ingredient_name": "chili w proszku",
     "top_candidates": [
       {
@@ -669,8 +669,8 @@
         "score": 80.0
       },
       {
-        "product": "mleko w proszku granulowane",
-        "score": 73.3
+        "product": "groszek",
+        "score": 76.9
       }
     ]
   },
@@ -680,6 +680,10 @@
       {
         "product": "ksylitol w proszku",
         "score": 81.2
+      },
+      {
+        "product": "groszek",
+        "score": 76.9
       },
       {
         "product": "kozie mleko w proszku",
@@ -692,10 +696,6 @@
       {
         "product": "mleko w proszku pełne 26%",
         "score": 72.7
-      },
-      {
-        "product": "serwatka demineralizowana w proszku",
-        "score": 71.4
       }
     ]
   },
@@ -782,6 +782,10 @@
         "score": 82.4
       },
       {
+        "product": "serek czekoladowy",
+        "score": 76.5
+      },
+      {
         "product": "płatki czekoladowe",
         "score": 72.2
       },
@@ -792,10 +796,31 @@
       {
         "product": "koperek",
         "score": 71.4
+      }
+    ]
+  },
+  {
+    "ingredient_name": "czarne nasiona sezamu",
+    "top_candidates": [
+      {
+        "product": "czarnuszka nasiona",
+        "score": 81.2
       },
       {
-        "product": "mullermilch o smaku ciasteczkowa czekoladowa karmel",
-        "score": 69.6
+        "product": "olej sezamowy z prażonych nasion sezamu",
+        "score": 81.1
+      },
+      {
+        "product": "nasiona sezamu białego",
+        "score": 80.0
+      },
+      {
+        "product": "nasiona chia",
+        "score": 75.0
+      },
+      {
+        "product": "chia nasiona",
+        "score": 75.0
       }
     ]
   },
@@ -811,16 +836,16 @@
         "score": 75.9
       },
       {
+        "product": "serek czekoladowy",
+        "score": 74.1
+      },
+      {
         "product": "cukier",
         "score": 72.7
       },
       {
         "product": "czosnek",
         "score": 72.7
-      },
-      {
-        "product": "czekolada deserowa",
-        "score": 71.4
       }
     ]
   },
@@ -836,15 +861,15 @@
         "score": 75.9
       },
       {
+        "product": "serek czekoladowy",
+        "score": 74.1
+      },
+      {
         "product": "czosnek",
         "score": 72.7
       },
       {
         "product": "czekolada deserowa",
-        "score": 71.4
-      },
-      {
-        "product": "koperek",
         "score": 71.4
       }
     ]
@@ -861,15 +886,15 @@
         "score": 75.9
       },
       {
+        "product": "serek czekoladowy",
+        "score": 74.1
+      },
+      {
         "product": "czosnek",
         "score": 72.7
       },
       {
         "product": "czekolada deserowa",
-        "score": 71.4
-      },
-      {
-        "product": "koperek",
         "score": 71.4
       }
     ]
@@ -925,77 +950,27 @@
     ]
   },
   {
-    "ingredient_name": "edamame",
+    "ingredient_name": "ekstrakt miętowy",
     "top_candidates": [
       {
-        "product": "edam ser topiony w plastrach",
-        "score": 72.7
+        "product": "mięta",
+        "score": 80.0
       },
       {
-        "product": "ser edam bez laktozy",
-        "score": 71.4
+        "product": "lody śmietankowe o smaku miętowym z kawałkami czekolady",
+        "score": 68.8
       },
       {
-        "product": "ser old amststerdam mild auchan collection g",
-        "score": 71.4
+        "product": "lody o smaku miętowym z płatkami czekolady",
+        "score": 68.8
       },
       {
-        "product": "müllermilch o smaku czekolady i orzechów makadamia",
-        "score": 66.7
+        "product": "miks ekstra śmietankowy z masłem",
+        "score": 68.8
       },
-      {
-        "product": "radamer",
-        "score": 66.7
-      }
-    ]
-  },
-  {
-    "ingredient_name": "ekstrakt stewii",
-    "top_candidates": [
       {
         "product": "masło ekstra",
         "score": 66.7
-      },
-      {
-        "product": "masło ekstra osełkowe 83% tłuszczu",
-        "score": 66.7
-      },
-      {
-        "product": "ser",
-        "score": 66.7
-      },
-      {
-        "product": "mleczko kokosowe 19% tłuszczu ekstrakt 60%",
-        "score": 66.7
-      },
-      {
-        "product": "konfitura ekstra z wiśni o obniżonej zawartości cukrów",
-        "score": 66.7
-      }
-    ]
-  },
-  {
-    "ingredient_name": "ekstrakt waniliowy",
-    "top_candidates": [
-      {
-        "product": "serek waniliowy",
-        "score": 82.8
-      },
-      {
-        "product": "lody oshee protein smak waniliowy",
-        "score": 81.2
-      },
-      {
-        "product": "bakuś serek waniliowy",
-        "score": 81.2
-      },
-      {
-        "product": "batonik twarogowy proteinowy smak waniliowy",
-        "score": 81.2
-      },
-      {
-        "product": "rolmlecz serek waniliowy",
-        "score": 81.2
       }
     ]
   },
@@ -1107,6 +1082,10 @@
         "score": 66.7
       },
       {
+        "product": "do woka",
+        "score": 66.7
+      },
+      {
         "product": "granat",
         "score": 66.7
       },
@@ -1117,10 +1096,31 @@
       {
         "product": "przyprawa do dań z makaronu i kuchni włoskiej",
         "score": 63.6
+      }
+    ]
+  },
+  {
+    "ingredient_name": "gorzka czekolada",
+    "top_candidates": [
+      {
+        "product": "danio czekolada",
+        "score": 84.6
       },
       {
-        "product": "pomarańcza deserowa",
-        "score": 63.6
+        "product": "whey protein complex 100% odżywka białkowa czekolada",
+        "score": 82.8
+      },
+      {
+        "product": "granola czekoladowa",
+        "score": 77.4
+      },
+      {
+        "product": "milka czekolada mleczna z nadzieniem toffi",
+        "score": 77.4
+      },
+      {
+        "product": "milka czekolada mleczna",
+        "score": 77.4
       }
     ]
   },
@@ -1194,7 +1194,32 @@
         "score": 71.4
       },
       {
-        "product": "sałata",
+        "product": "ananas",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "herbatnik graham",
+    "top_candidates": [
+      {
+        "product": "bagietka graham",
+        "score": 78.6
+      },
+      {
+        "product": "lotus biscoff herbatniki karmelizowane",
+        "score": 75.0
+      },
+      {
+        "product": "bułka grahamka",
+        "score": 72.7
+      },
+      {
+        "product": "whey",
+        "score": 66.7
+      },
+      {
+        "product": "ser",
         "score": 66.7
       }
     ]
@@ -1290,11 +1315,11 @@
         "score": 66.7
       },
       {
-        "product": "grapefruit owoce auchan",
+        "product": "grapefruit biały",
         "score": 66.7
       },
       {
-        "product": "fruvita skyr naturalny",
+        "product": "fruvita skyr",
         "score": 66.7
       }
     ]
@@ -1311,15 +1336,15 @@
         "score": 66.7
       },
       {
+        "product": "ananas",
+        "score": 66.7
+      },
+      {
         "product": "ser",
         "score": 66.7
       },
       {
         "product": "vegan",
-        "score": 66.7
-      },
-      {
-        "product": "ananas",
         "score": 66.7
       }
     ]
@@ -1357,10 +1382,6 @@
         "score": 75.0
       },
       {
-        "product": "erytrytol słodzik stołowy",
-        "score": 75.0
-      },
-      {
         "product": "erytrytol",
         "score": 75.0
       },
@@ -1371,6 +1392,10 @@
       {
         "product": "pomysł na…makaron spaghetti 4 sery",
         "score": 75.0
+      },
+      {
+        "product": "jeżyny",
+        "score": 66.7
       }
     ]
   },
@@ -1594,8 +1619,8 @@
         "score": 80.0
       },
       {
-        "product": "zamiennik jajek w proszku veggs",
-        "score": 76.5
+        "product": "groszek",
+        "score": 76.9
       }
     ]
   },
@@ -1678,6 +1703,10 @@
     "ingredient_name": "kropelki czekolady półsłodkiej",
     "top_candidates": [
       {
+        "product": "serek czekoladowy",
+        "score": 76.5
+      },
+      {
         "product": "lody",
         "score": 75.0
       },
@@ -1692,16 +1721,16 @@
       {
         "product": "serek z czekoladą",
         "score": 70.6
-      },
-      {
-        "product": "płatki czekoladowe",
-        "score": 68.6
       }
     ]
   },
   {
     "ingredient_name": "kropelki czekolady roslinne",
     "top_candidates": [
+      {
+        "product": "serek czekoladowy",
+        "score": 76.5
+      },
       {
         "product": "lody",
         "score": 75.0
@@ -1717,34 +1746,30 @@
       {
         "product": "koperek",
         "score": 71.4
-      },
-      {
-        "product": "mleko czekoladowe",
-        "score": 70.6
       }
     ]
   },
   {
-    "ingredient_name": "kruszone ziarna kakaowca",
+    "ingredient_name": "liofilizowane borowki",
     "top_candidates": [
       {
-        "product": "natka",
-        "score": 80.0
+        "product": "granola z białą czekoladą i truskawkami liofilizowanymi",
+        "score": 72.2
       },
       {
-        "product": "krakus",
-        "score": 80.0
+        "product": "borówka",
+        "score": 71.4
       },
       {
-        "product": "gruszka",
+        "product": "granola proteinowa z czekoladą i wiśnią liofilizowana",
+        "score": 70.6
+      },
+      {
+        "product": "por",
         "score": 66.7
       },
       {
-        "product": "suszone grzyby",
-        "score": 66.7
-      },
-      {
-        "product": "kaczka",
+        "product": "brokuł",
         "score": 66.7
       }
     ]
@@ -1796,6 +1821,31 @@
       {
         "product": "zioła prowansalskie mieszanka przypraw",
         "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "liście kapusty",
+    "top_candidates": [
+      {
+        "product": "liście limonki",
+        "score": 72.7
+      },
+      {
+        "product": "pasztecik z pieczarkami i kapustą",
+        "score": 72.0
+      },
+      {
+        "product": "surówka z białej kapusty z porem",
+        "score": 71.4
+      },
+      {
+        "product": "big-active zielona herbata z owocem pigwy liściasta",
+        "score": 69.6
+      },
+      {
+        "product": "adalbert's tea earl grey herbata czarna liściasta",
+        "score": 69.6
       }
     ]
   },
@@ -1915,12 +1965,12 @@
         "score": 75.0
       },
       {
-        "product": "kiełbasa parzona",
+        "product": "malina",
         "score": 72.7
       },
       {
-        "product": "malina",
-        "score": 72.7
+        "product": "żurawina",
+        "score": 66.7
       }
     ]
   },
@@ -1961,16 +2011,16 @@
         "score": 75.0
       },
       {
+        "product": "suszone",
+        "score": 72.7
+      },
+      {
         "product": "czosnek",
         "score": 72.7
       },
       {
         "product": "mąka migdałowa",
         "score": 71.4
-      },
-      {
-        "product": "sorbet migdałowy",
-        "score": 66.7
       }
     ]
   },
@@ -2046,31 +2096,6 @@
       {
         "product": "masło osełeczka górska z czosnkiem",
         "score": 69.6
-      }
-    ]
-  },
-  {
-    "ingredient_name": "mielona jagniecina",
-    "top_candidates": [
-      {
-        "product": "cielęcina",
-        "score": 80.0
-      },
-      {
-        "product": "melon",
-        "score": 80.0
-      },
-      {
-        "product": "mielona baranina",
-        "score": 76.5
-      },
-      {
-        "product": "jaja",
-        "score": 75.0
-      },
-      {
-        "product": "cukinia",
-        "score": 72.7
       }
     ]
   },
@@ -2275,40 +2300,11 @@
     ]
   },
   {
-    "ingredient_name": "mieszanka suszonych owoców",
-    "top_candidates": [
-      {
-        "product": "śmietanka",
-        "score": 77.8
-      },
-      {
-        "product": "pieprz ziołowy mielony - mieszanka suszonych przypraw i ziół",
-        "score": 76.9
-      },
-      {
-        "product": "mieszanka grzybów",
-        "score": 74.1
-      },
-      {
-        "product": "mieszanka owocowa z rabarbarem",
-        "score": 71.4
-      },
-      {
-        "product": "słomki smakowe do mleka o smaku mieszanki owoców",
-        "score": 71.4
-      }
-    ]
-  },
-  {
     "ingredient_name": "mieszanka warzywna do colesław",
     "top_candidates": [
       {
         "product": "mieszanka grzybów",
         "score": 84.8
-      },
-      {
-        "product": "warzywa do woka",
-        "score": 80.0
       },
       {
         "product": "mieszanka warzywna kalafior, brokuł i kapusty romanesco",
@@ -2321,6 +2317,10 @@
       {
         "product": "mieszanka warzywna marchewka z groszkiem",
         "score": 78.6
+      },
+      {
+        "product": "mieszanka warzywna na ratatouille",
+        "score": 78.4
       }
     ]
   },
@@ -2403,24 +2403,24 @@
     "ingredient_name": "migdały w słupkach",
     "top_candidates": [
       {
+        "product": "cukier biały w kostkach",
+        "score": 72.7
+      },
+      {
         "product": "bakallino migdały łuskane",
         "score": 72.7
       },
       {
-        "product": "mr",
+        "product": "cukier biały w saszetkach",
+        "score": 68.6
+      },
+      {
+        "product": "ser biały w kostkach do sałatek",
         "score": 66.7
       },
       {
-        "product": "stewia w kryształkach",
-        "score": 62.9
-      },
-      {
-        "product": "bataty w kawałkach",
-        "score": 62.5
-      },
-      {
-        "product": "sorbet migdałowy",
-        "score": 60.9
+        "product": "ser biały w kostkach z ziołami w oleju",
+        "score": 66.7
       }
     ]
   },
@@ -2500,31 +2500,6 @@
     ]
   },
   {
-    "ingredient_name": "morele suszone",
-    "top_candidates": [
-      {
-        "product": "grzyby mun krojone suszone",
-        "score": 80.0
-      },
-      {
-        "product": "gusto bello pomidory suszone",
-        "score": 80.0
-      },
-      {
-        "product": "pomidory suszone w oleju krojone",
-        "score": 78.6
-      },
-      {
-        "product": "pomidory suszone w oleju",
-        "score": 78.6
-      },
-      {
-        "product": "pomidory suszone z czosnkiem i bazylią",
-        "score": 78.6
-      }
-    ]
-  },
-  {
     "ingredient_name": "mushroom q-cups",
     "top_candidates": [
       {
@@ -2575,31 +2550,6 @@
     ]
   },
   {
-    "ingredient_name": "musztarda żółta",
-    "top_candidates": [
-      {
-        "product": "papryka żółta",
-        "score": 78.3
-      },
-      {
-        "product": "musli",
-        "score": 75.0
-      },
-      {
-        "product": "cebula żółta",
-        "score": 73.7
-      },
-      {
-        "product": "kamis musztarda francuska",
-        "score": 73.3
-      },
-      {
-        "product": "sałata",
-        "score": 66.7
-      }
-    ]
-  },
-  {
     "ingredient_name": "nasiona kakaowca",
     "top_candidates": [
       {
@@ -2615,11 +2565,11 @@
         "score": 76.9
       },
       {
-        "product": "nasiona sezamu",
+        "product": "nasza",
         "score": 75.0
       },
       {
-        "product": "nasza",
+        "product": "asia",
         "score": 75.0
       }
     ]
@@ -2632,20 +2582,20 @@
         "score": 75.0
       },
       {
-        "product": "kefir naturalny",
-        "score": 75.0
+        "product": "maliny",
+        "score": 66.7
       },
       {
-        "product": "jogurt naturalny",
-        "score": 72.0
+        "product": "por",
+        "score": 66.7
       },
       {
-        "product": "jogurt owczy naturalny",
-        "score": 69.4
+        "product": "ser owczy",
+        "score": 66.7
       },
       {
-        "product": "jogurt naturalny 2%",
-        "score": 69.0
+        "product": "konfitura",
+        "score": 66.7
       }
     ]
   },
@@ -2675,81 +2625,6 @@
     ]
   },
   {
-    "ingredient_name": "niesłodzony waniliowy wegański proszek białkowy",
-    "top_candidates": [
-      {
-        "product": "groszek cukrowy",
-        "score": 73.3
-      },
-      {
-        "product": "serek wysokobiałkowy",
-        "score": 72.7
-      },
-      {
-        "product": "wegański ser blok",
-        "score": 70.6
-      },
-      {
-        "product": "wegański ser grecki",
-        "score": 68.4
-      },
-      {
-        "product": "mus jabłkowy",
-        "score": 66.7
-      }
-    ]
-  },
-  {
-    "ingredient_name": "olej z otrebów ryzowych",
-    "top_candidates": [
-      {
-        "product": "zott",
-        "score": 75.0
-      },
-      {
-        "product": "por",
-        "score": 66.7
-      },
-      {
-        "product": "ryż",
-        "score": 66.7
-      },
-      {
-        "product": "krem z orzechów laskowych bez dodatku kakao",
-        "score": 65.2
-      },
-      {
-        "product": "olej rzepakowy",
-        "score": 63.6
-      }
-    ]
-  },
-  {
-    "ingredient_name": "orzechy mieszane",
-    "top_candidates": [
-      {
-        "product": "por",
-        "score": 80.0
-      },
-      {
-        "product": "chili mieszanka przypraw",
-        "score": 69.0
-      },
-      {
-        "product": "curry mieszanka przypraw",
-        "score": 69.0
-      },
-      {
-        "product": "lody waniliowe z nadzieniem o smaku słony karmel, orzechami pekan i kawałkami ciastek z czekoladą",
-        "score": 68.8
-      },
-      {
-        "product": "cappuccino napój mleczny z mieszanką kaw arabica-robusta",
-        "score": 68.8
-      }
-    ]
-  },
-  {
     "ingredient_name": "orzeszki piniowe",
     "top_candidates": [
       {
@@ -2771,31 +2646,6 @@
       {
         "product": "grześki mini wafel przekładany kremem kakaowym w czekoladzie 20x20 g",
         "score": 68.8
-      }
-    ]
-  },
-  {
-    "ingredient_name": "otrby owsiane",
-    "top_candidates": [
-      {
-        "product": "owsianka",
-        "score": 80.0
-      },
-      {
-        "product": "płatki owsiane",
-        "score": 76.2
-      },
-      {
-        "product": "asia",
-        "score": 75.0
-      },
-      {
-        "product": "ośmiornica macki gotowane",
-        "score": 70.0
-      },
-      {
-        "product": "mleko pasteryzowane mikrofiltrowane",
-        "score": 70.0
       }
     ]
   },
@@ -2900,27 +2750,27 @@
     ]
   },
   {
-    "ingredient_name": "pasta chili",
+    "ingredient_name": "parmezan wegański",
     "top_candidates": [
       {
-        "product": "pastani",
-        "score": 83.3
+        "product": "go vege majonez wegański",
+        "score": 78.6
       },
       {
-        "product": "pasta czerwona curry",
-        "score": 77.8
+        "product": "ser wegański kremowy cheddar bez laktozy",
+        "score": 69.0
       },
       {
-        "product": "top tortilla chipsy kukurydziane smak ostre chili",
-        "score": 76.2
+        "product": "por",
+        "score": 66.7
       },
       {
-        "product": "asia",
-        "score": 75.0
+        "product": "kiwi",
+        "score": 66.7
       },
       {
-        "product": "pasta miso shiro",
-        "score": 73.7
+        "product": "smalczyk wegański z cebulą",
+        "score": 64.7
       }
     ]
   },
@@ -2996,6 +2846,31 @@
       {
         "product": "ser smażony domowy",
         "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "pesto rukolowe",
+    "top_candidates": [
+      {
+        "product": "rukola",
+        "score": 83.3
+      },
+      {
+        "product": "serek kremowy z pesto i rukolą",
+        "score": 78.6
+      },
+      {
+        "product": "winogrona białe bezpestkowe",
+        "score": 72.7
+      },
+      {
+        "product": "winogrona różowe bezpestkowe",
+        "score": 72.7
+      },
+      {
+        "product": "winogrona jasne bezpestkowe",
+        "score": 72.7
       }
     ]
   },
@@ -3150,31 +3025,6 @@
     ]
   },
   {
-    "ingredient_name": "prażone solone orzeszki ziemne",
-    "top_candidates": [
-      {
-        "product": "por",
-        "score": 80.0
-      },
-      {
-        "product": "kiwi zielone",
-        "score": 76.2
-      },
-      {
-        "product": "vitanella baton migdały żurawina orzeszki ziemne",
-        "score": 73.1
-      },
-      {
-        "product": "śliwki ciemne",
-        "score": 72.7
-      },
-      {
-        "product": "felix carmelove orzeszki ziemne w karmelu ze szczyptą soli",
-        "score": 70.0
-      }
-    ]
-  },
-  {
     "ingredient_name": "precle",
     "top_candidates": [
       {
@@ -3221,131 +3071,6 @@
       {
         "product": "płatki jaglane bezglutenowe",
         "score": 84.8
-      }
-    ]
-  },
-  {
-    "ingredient_name": "proszek cebulowy",
-    "top_candidates": [
-      {
-        "product": "cebula",
-        "score": 83.3
-      },
-      {
-        "product": "por",
-        "score": 80.0
-      },
-      {
-        "product": "groszek cukrowy",
-        "score": 80.0
-      },
-      {
-        "product": "lody",
-        "score": 75.0
-      },
-      {
-        "product": "alpro",
-        "score": 75.0
-      }
-    ]
-  },
-  {
-    "ingredient_name": "proszek chipotle",
-    "top_candidates": [
-      {
-        "product": "por",
-        "score": 80.0
-      },
-      {
-        "product": "alpro",
-        "score": 75.0
-      },
-      {
-        "product": "toczony z nerkowców z chipolte",
-        "score": 69.2
-      },
-      {
-        "product": "kimchi",
-        "score": 66.7
-      },
-      {
-        "product": "groszek cukrowy",
-        "score": 66.7
-      }
-    ]
-  },
-  {
-    "ingredient_name": "proszek do pieczenia",
-    "top_candidates": [
-      {
-        "product": "por",
-        "score": 80.0
-      },
-      {
-        "product": "czereśnia",
-        "score": 80.0
-      },
-      {
-        "product": "polędwiczka w przyprawach do pieczenia",
-        "score": 78.8
-      },
-      {
-        "product": "schab w przyprawach do pieczenia",
-        "score": 78.8
-      },
-      {
-        "product": "karkówka w przyprawach do pieczenia",
-        "score": 78.8
-      }
-    ]
-  },
-  {
-    "ingredient_name": "proszek malankowy",
-    "top_candidates": [
-      {
-        "product": "por",
-        "score": 80.0
-      },
-      {
-        "product": "alpro",
-        "score": 75.0
-      },
-      {
-        "product": "danio serek bananowy",
-        "score": 69.0
-      },
-      {
-        "product": "groszek cukrowy",
-        "score": 68.8
-      },
-      {
-        "product": "maliny",
-        "score": 66.7
-      }
-    ]
-  },
-  {
-    "ingredient_name": "proszek musztardowy",
-    "top_candidates": [
-      {
-        "product": "por",
-        "score": 80.0
-      },
-      {
-        "product": "sos miodowo-musztardowy",
-        "score": 75.0
-      },
-      {
-        "product": "alpro",
-        "score": 75.0
-      },
-      {
-        "product": "groszek cukrowy",
-        "score": 70.6
-      },
-      {
-        "product": "whey",
-        "score": 66.7
       }
     ]
   },
@@ -3400,81 +3125,6 @@
     ]
   },
   {
-    "ingredient_name": "puree z batata",
-    "top_candidates": [
-      {
-        "product": "natka",
-        "score": 75.0
-      },
-      {
-        "product": "sałata",
-        "score": 72.7
-      },
-      {
-        "product": "por",
-        "score": 66.7
-      },
-      {
-        "product": "sałatka",
-        "score": 66.7
-      },
-      {
-        "product": "frytki z batatów",
-        "score": 66.7
-      }
-    ]
-  },
-  {
-    "ingredient_name": "puree ziemniaczane",
-    "top_candidates": [
-      {
-        "product": "ziemniaki",
-        "score": 77.8
-      },
-      {
-        "product": "lay's chipsy ziemniaczane o smaku zielonej cebulki",
-        "score": 77.8
-      },
-      {
-        "product": "crunchips sticks chipsy ziemniaczane o smaku ketchup",
-        "score": 77.8
-      },
-      {
-        "product": "lay's chipsy ziemniaczane o smaku śmietankowego serka z ziołami",
-        "score": 77.8
-      },
-      {
-        "product": "lay's max chipsy ziemniaczane karbowane o smaku zielonej cebulki",
-        "score": 77.8
-      }
-    ]
-  },
-  {
-    "ingredient_name": "purée dyniowe",
-    "top_candidates": [
-      {
-        "product": "dynia",
-        "score": 80.0
-      },
-      {
-        "product": "por",
-        "score": 66.7
-      },
-      {
-        "product": "zupa dyniowa z marchewką",
-        "score": 66.7
-      },
-      {
-        "product": "whey",
-        "score": 66.7
-      },
-      {
-        "product": "śniadaniowe",
-        "score": 66.7
-      }
-    ]
-  },
-  {
     "ingredient_name": "pół na pół",
     "top_candidates": [
       {
@@ -3525,6 +3175,56 @@
     ]
   },
   {
+    "ingredient_name": "quinoa",
+    "top_candidates": [
+      {
+        "product": "mozzarella wysokoproteinowa",
+        "score": 72.7
+      },
+      {
+        "product": "owsianka żurawinowa",
+        "score": 72.7
+      },
+      {
+        "product": "wieprzowina",
+        "score": 66.7
+      },
+      {
+        "product": "wołowina",
+        "score": 66.7
+      },
+      {
+        "product": "mielona wieprzowina",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "quinoa biala",
+    "top_candidates": [
+      {
+        "product": "kasza gryczana biała",
+        "score": 70.0
+      },
+      {
+        "product": "cenos kasza gryczana biała",
+        "score": 70.0
+      },
+      {
+        "product": "bazylia",
+        "score": 66.7
+      },
+      {
+        "product": "winogrona białe bezpestkowe",
+        "score": 66.7
+      },
+      {
+        "product": "cebula biała",
+        "score": 66.7
+      }
+    ]
+  },
+  {
     "ingredient_name": "rostbef",
     "top_candidates": [
       {
@@ -3565,7 +3265,7 @@
         "score": 72.7
       },
       {
-        "product": "gruszki odmiana konferencja owoce auchan g",
+        "product": "gruszki odmiana konferencja g",
         "score": 66.7
       },
       {
@@ -3625,6 +3325,31 @@
     ]
   },
   {
+    "ingredient_name": "sezam prazony",
+    "top_candidates": [
+      {
+        "product": "ser",
+        "score": 80.0
+      },
+      {
+        "product": "sezam czarny",
+        "score": 72.0
+      },
+      {
+        "product": "sezam niełuskany",
+        "score": 70.0
+      },
+      {
+        "product": "jabłka szampion",
+        "score": 66.7
+      },
+      {
+        "product": "por",
+        "score": 66.7
+      }
+    ]
+  },
+  {
     "ingredient_name": "sirloin tips",
     "top_candidates": [
       {
@@ -3646,6 +3371,31 @@
       {
         "product": "solone miks tłuszczowy",
         "score": 60.9
+      }
+    ]
+  },
+  {
+    "ingredient_name": "slodzik",
+    "top_candidates": [
+      {
+        "product": "lody",
+        "score": 75.0
+      },
+      {
+        "product": "skyr jogurt typu islandzkiego",
+        "score": 71.4
+      },
+      {
+        "product": "skyr jogurt typu islandzkiego mango i marakuja",
+        "score": 71.4
+      },
+      {
+        "product": "skyr jogurt typu islandzkiego wiśnia",
+        "score": 71.4
+      },
+      {
+        "product": "skyr jogurt typu islandzkiego o smaku waniliowym",
+        "score": 71.4
       }
     ]
   },
@@ -3890,11 +3640,11 @@
         "score": 66.7
       },
       {
-        "product": "ryż",
+        "product": "stewia",
         "score": 66.7
       },
       {
-        "product": "sok z cytryn",
+        "product": "ryż",
         "score": 66.7
       }
     ]
@@ -3950,106 +3700,6 @@
     ]
   },
   {
-    "ingredient_name": "suszona szałwia",
-    "top_candidates": [
-      {
-        "product": "nasza",
-        "score": 80.0
-      },
-      {
-        "product": "tzatziki czosnkowa przyprawa do sosu - suszona mieszanka przyprawowa",
-        "score": 73.3
-      },
-      {
-        "product": "przyprawa karkówka grill - suszona mieszanka przyprawowa",
-        "score": 73.3
-      },
-      {
-        "product": "pietruszka suszona nać",
-        "score": 69.2
-      },
-      {
-        "product": "bakallino żurawina suszona, cięta",
-        "score": 69.0
-      }
-    ]
-  },
-  {
-    "ingredient_name": "suszone czerwone papryczki chili",
-    "top_candidates": [
-      {
-        "product": "kimchi",
-        "score": 83.3
-      },
-      {
-        "product": "ser w kostkach z czerwoną papryką i chili",
-        "score": 79.3
-      },
-      {
-        "product": "suszone grzyby",
-        "score": 75.0
-      },
-      {
-        "product": "ogórki konserwowe z papryczką chili",
-        "score": 74.6
-      },
-      {
-        "product": "czerwona porzeczka",
-        "score": 72.2
-      }
-    ]
-  },
-  {
-    "ingredient_name": "suszone małe czerwone chili",
-    "top_candidates": [
-      {
-        "product": "jabłka czerwone",
-        "score": 73.3
-      },
-      {
-        "product": "suszone grzyby",
-        "score": 72.7
-      },
-      {
-        "product": "ziemniaki czerwone",
-        "score": 72.2
-      },
-      {
-        "product": "cebula czerwona",
-        "score": 66.7
-      },
-      {
-        "product": "buraki czerwone",
-        "score": 66.7
-      }
-    ]
-  },
-  {
-    "ingredient_name": "suszone wiśnie",
-    "top_candidates": [
-      {
-        "product": "suszone grzyby",
-        "score": 72.7
-      },
-      {
-        "product": "suszone grzyby mun",
-        "score": 72.7
-      },
-      {
-        "product": "suszone pomidory z czosnkiem i bazylią",
-        "score": 72.7
-      },
-      {
-        "product": "pomidory suszone w oleju krojone",
-        "score": 71.4
-      },
-      {
-        "product": "pomidory suszone w oleju",
-        "score": 71.4
-      }
-    ]
-  },
-  {
     "ingredient_name": "swerve",
     "top_candidates": [
       {
@@ -4065,37 +3715,62 @@
         "score": 80.0
       },
       {
-        "product": "serek homogenizowany waniliowy",
+        "product": "serek stracciatella",
         "score": 80.0
       },
       {
-        "product": "serek homogenizowany stracciatella",
+        "product": "serek bez laktozy",
         "score": 80.0
       }
     ]
   },
   {
-    "ingredient_name": "szałwia suszona",
+    "ingredient_name": "swieze owoce",
     "top_candidates": [
       {
-        "product": "natka pietruszki suszona",
-        "score": 81.5
+        "product": "musli owocowe",
+        "score": 69.6
       },
       {
-        "product": "bazylia suszona",
-        "score": 80.0
+        "product": "les dessetrs lody jogurtowe z owocami leśnymi",
+        "score": 66.7
       },
       {
-        "product": "bakallino żurawina suszona, cięta",
-        "score": 80.0
+        "product": "lody owocowe",
+        "score": 66.7
       },
       {
-        "product": "bezmięsny bezmięsna kiełbasa suszona",
-        "score": 80.0
+        "product": "serca wieprzowe",
+        "score": 66.7
       },
       {
-        "product": "cebula suszona",
-        "score": 78.3
+        "product": "nerki wieprzowe",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "słodzik",
+    "top_candidates": [
+      {
+        "product": "słodkie ziemniaki",
+        "score": 83.3
+      },
+      {
+        "product": "słodka śmietanka 30% do deserów i zup",
+        "score": 83.3
+      },
+      {
+        "product": "słodki ziemniak",
+        "score": 83.3
+      },
+      {
+        "product": "słodka kraina strucla owocowa",
+        "score": 83.3
+      },
+      {
+        "product": "słodka kraina strucla truskawkowa",
+        "score": 83.3
       }
     ]
   },
@@ -4121,6 +3796,31 @@
       {
         "product": "jeżyny",
         "score": 60.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "słodzik mnich",
+    "top_candidates": [
+      {
+        "product": "masło",
+        "score": 75.0
+      },
+      {
+        "product": "słodka śmietanka 30% do deserów i zup",
+        "score": 69.6
+      },
+      {
+        "product": "słodki ziemniak",
+        "score": 69.2
+      },
+      {
+        "product": "kimchi",
+        "score": 66.7
+      },
+      {
+        "product": "ser kozi mini",
+        "score": 66.7
       }
     ]
   },
@@ -4161,7 +3861,7 @@
         "score": 73.3
       },
       {
-        "product": "lody waniliowe z nadzieniem o smaku słony karmel, orzechami pekan i kawałkami ciastek z czekoladą",
+        "product": "lody waniliowe z nadzieniem o smaku słony karmel, orzechami pekan i kawałkami ciastek z białą czekoladą",
         "score": 71.1
       },
       {
@@ -4171,6 +3871,31 @@
       {
         "product": "kozi smakołyk waniliowy",
         "score": 70.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "słodzik z mnicha",
+    "top_candidates": [
+      {
+        "product": "masło",
+        "score": 75.0
+      },
+      {
+        "product": "słodki ziemniak",
+        "score": 71.4
+      },
+      {
+        "product": "słodkie ziemniaki",
+        "score": 71.0
+      },
+      {
+        "product": "sos",
+        "score": 66.7
+      },
+      {
+        "product": "tic",
+        "score": 66.7
       }
     ]
   },
@@ -4419,7 +4144,7 @@
         "score": 78.3
       },
       {
-        "product": "jogurt naturalny 0% tłuszczu lekki",
+        "product": "jogurt 0% tłuszczu lekki",
         "score": 73.3
       }
     ]
@@ -4428,7 +4153,7 @@
     "ingredient_name": "wanilia mnich",
     "top_candidates": [
       {
-        "product": "serek homogenizowany waniliowy z laską wanilii",
+        "product": "serek waniliowy z laską wanilii",
         "score": 70.0
       },
       {
@@ -4444,7 +4169,7 @@
         "score": 70.0
       },
       {
-        "product": "whey protein complex 100% odżywka wanilia",
+        "product": "whey protein complex 100% odżywka białkowa wanilia",
         "score": 70.0
       }
     ]
@@ -4452,6 +4177,10 @@
   {
     "ingredient_name": "wegańskie ciemne kropelki czekolady",
     "top_candidates": [
+      {
+        "product": "serek czekoladowy",
+        "score": 77.4
+      },
       {
         "product": "wegański ser grecki",
         "score": 77.4
@@ -4467,10 +4196,6 @@
       {
         "product": "góralki z czekoladą",
         "score": 75.0
-      },
-      {
-        "product": "wegański ser blok",
-        "score": 74.1
       }
     ]
   },
@@ -4478,7 +4203,7 @@
     "ingredient_name": "whisky bourbon",
     "top_candidates": [
       {
-        "product": "dr. oetker ekstrakt naturalny wanilia bourbon",
+        "product": "dr. oetker ekstrakt wanilia bourbon",
         "score": 75.0
       },
       {
@@ -4571,6 +4296,31 @@
       {
         "product": "ser topiony z łososiem",
         "score": 61.5
+      }
+    ]
+  },
+  {
+    "ingredient_name": "zamiennik cukru brazowego",
+    "top_candidates": [
+      {
+        "product": "kuskus razowy",
+        "score": 69.2
+      },
+      {
+        "product": "oregano",
+        "score": 66.7
+      },
+      {
+        "product": "ziemniaki",
+        "score": 66.7
+      },
+      {
+        "product": "cukier",
+        "score": 66.7
+      },
+      {
+        "product": "kamis",
+        "score": 66.7
       }
     ]
   },
@@ -4690,7 +4440,7 @@
         "score": 66.7
       },
       {
-        "product": "sól stołowa jodowana o'sole",
+        "product": "sól jodowana o'sole",
         "score": 61.5
       },
       {
@@ -4725,6 +4475,31 @@
     ]
   },
   {
+    "ingredient_name": "świeże owoce",
+    "top_candidates": [
+      {
+        "product": "lody owocowe",
+        "score": 66.7
+      },
+      {
+        "product": "musli owocowe",
+        "score": 66.7
+      },
+      {
+        "product": "teekanne świat owoców mieszanka herbatek owocowych grecka morela 20x2",
+        "score": 66.7
+      },
+      {
+        "product": "ser owczy",
+        "score": 62.5
+      },
+      {
+        "product": "dżem z owoców leśnych o obniżonej zawartości cukrów",
+        "score": 60.9
+      }
+    ]
+  },
+  {
     "ingredient_name": "świeże owoce mieszane",
     "top_candidates": [
       {
@@ -4732,12 +4507,8 @@
         "score": 76.2
       },
       {
-        "product": "kefir owoce leśne",
+        "product": "suszone",
         "score": 66.7
-      },
-      {
-        "product": "men jogurt pitny wysokobiałkowy owoce leśne",
-        "score": 62.9
       },
       {
         "product": "śmietana",
@@ -4746,6 +4517,10 @@
       {
         "product": "tymianek",
         "score": 62.5
+      },
+      {
+        "product": "zioła włoskie mieszanka przypraw",
+        "score": 61.9
       }
     ]
   }
