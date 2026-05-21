@@ -417,6 +417,7 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
   const totalProtein = meals.reduce((s, m) => s + (m.recipe.total_protein || 0), 0);
   const totalFat     = meals.reduce((s, m) => s + (m.recipe.total_fat     || 0), 0);
   const totalCarbs   = meals.reduce((s, m) => s + (m.recipe.total_carbs   || 0), 0);
+  const totalCost    = meals.reduce((s, m) => s + (m.recipe.total_cost    || 0), 0);
   const hasAnyMacro  = totalKcal > 0 || totalProtein > 0 || totalFat > 0 || totalCarbs > 0;
 
   return (
@@ -499,10 +500,15 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
         )}
         {hasMeals && hasAnyMacro && (
           <>
-            <div style={{fontSize:12,fontWeight:700,whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>
-              <span style={{color: macroGoals ? macroColor(totalKcal, macroGoals.kcal) : '#2dd4bf'}}>{totalKcal}</span>
-              {macroGoals && <span style={{color:'#6b7280',fontWeight:400}}>/{macroGoals.kcal}</span>}
-              <span style={{color:'#6b7280',fontWeight:400}}> kcal</span>
+            <div style={{fontSize:12,fontWeight:700,whiteSpace:'nowrap',overflow:'hidden',display:'flex',justifyContent:'space-between',alignItems:'baseline',gap:4}}>
+              <span>
+                <span style={{color: macroGoals ? macroColor(totalKcal, macroGoals.kcal) : '#2dd4bf'}}>{totalKcal}</span>
+                {macroGoals && <span style={{color:'#6b7280',fontWeight:400}}>/{macroGoals.kcal}</span>}
+                <span style={{color:'#6b7280',fontWeight:400}}> kcal</span>
+              </span>
+              {totalCost > 0 && (
+                <span style={{color:'#0d9488',fontWeight:600,fontSize:11,flexShrink:0}}>{totalCost.toFixed(2)} zł</span>
+              )}
             </div>
             <div style={{fontSize:11,whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>
               {[['B',Math.round(totalProtein),macroGoals?.protein],['T',Math.round(totalFat),macroGoals?.fat],['W',Math.round(totalCarbs),macroGoals?.carbs]].map(([lbl,val,tgt],i)=>(
