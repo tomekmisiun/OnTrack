@@ -371,6 +371,8 @@ _CULINARY_PATTERNS_PL = [
     r"\bbez\s+skóry\b",
     r"\bbez\s+kości\b",
     r"\brasy\b",              # "rasy Puławskiej" — po break zostaje samo "rasy"
+    r"\bze?\s+ściółki\b",     # "ze ściółki" — opis chowu, nie nazwa składnika
+    r"\bze?\s+sadu\b.*",      # "z sadu/sadów..." — origin description
     r"\bz\s+sadów\b.*",       # "z sadów z regionu..." — usuń do końca
     r"\bz\s+regionu\b.*",     # "z regionu..." — usuń do końca
     r"\bpicante\b",
@@ -423,17 +425,26 @@ _ANIMAL_PL = [
 
 _POULTRY = {"kurczak", "kaczka", "gęś", "indyk"}
 
-# Części ciała drobiu
+# Części ciała drobiu — substring match (unikamy problemów z \b i polskimi znakami)
+# Uwaga: "pierś" (mianownik) ≠ "piersi" (dopełniacz) — to różne znaki ('ś' vs 'si')
 _POULTRY_PARTS = [
-    (re.compile(r"\bpierś\w*|filet\w*\b"),              "pierś"),
-    (re.compile(r"\budka?\b|udz\w+\b"),                 "udka"),
-    (re.compile(r"\bskrzydełk\w+|skrzydł\w+\b"),       "skrzydełka"),
-    (re.compile(r"\bnóżk\w+\b"),                        "nóżki"),
+    (re.compile(r"piersi|pierś"),   "pierś"),       # z piersi / pierś z
+    (re.compile(r"\bfilet\w*\b"),   "filet"),       # filet z kurczaka
+    (re.compile(r"udka|udziec"),    "udka"),
+    (re.compile(r"skrzydełk"),      "skrzydełka"),
+    (re.compile(r"nóżk"),           "nóżki"),
+    (re.compile(r"polędwiczk"),     "polędwiczka"),
 ]
+
+# Organy — NIE są mięśniem, nie przechodzą przez canonicalizację
+_ORGAN_MEATS_PL = re.compile(
+    r"\b(wątrob\w+|wątróbk\w+|serc\w+|nerk\w+|flak\w*|podróbk\w+|"
+    r"żołąd\w+|ozór\w*|móżdżek)\b"
+)
 
 # Słowa-wskaźniki że to produkt mięsny (nie warzywny czy inny)
 _MEAT_INDICATORS = re.compile(
-    r"\b(mięso|mięs\w+|schab|żeberek|żeberka|szynka|polędwica|karkówka|"
+    r"\b(mięso|mięs\w+|schab|żeberek|żeberka|szynka|polędwic\w+|karkówka|"
     r"boczek|łopatka|udziec|filet|pierś|udka|skrzydełka|nóżki|"
     r"wołow\w+|wieprzow\w+|cielęc\w+|barani\w+|jagnięc\w+|"
     r"kurczak\w*|kaczk\w*|gęsi?\b|indyk\w*)\b"
@@ -443,11 +454,15 @@ _MEAT_INDICATORS = re.compile(
 def _canonicalize_meat_pl(name: str) -> str:
     """
     Jeśli nazwa dotyczy mięsa — sprowadź do kanonicznej formy:
-      - drób: [pierś/udka/skrzydełka/nóżki] z [kurczaka/kaczki/gęsi]
-      - inne: [mielona ]? + [wołowina/wieprzowina/...]
-    Jeśli to nie mięso — zwróć name bez zmian.
+      - organy (wątroba, serce, nerki): zwróć bez zmian
+      - drób: [pierś/udka/skrzydełka/nóżki/polędwiczka] z [kurczaka/...]
+      - inne: [mielona]? + [wołowina/wieprzowina/...]
     """
     if not _MEAT_INDICATORS.search(name):
+        return name
+
+    # Organy — nie normalizuj, zostaw oryginalną nazwę
+    if _ORGAN_MEATS_PL.search(name):
         return name
 
     is_ground = bool(re.search(r"\bmielon\w+\b", name))
@@ -463,18 +478,16 @@ def _canonicalize_meat_pl(name: str) -> str:
         return name  # nie rozpoznano — nie zmieniaj
 
     if animal in _POULTRY:
-        # Drób — szukaj części ciała
-        for pattern, part in _POULTRY_PARTS:
-            if pattern.search(name):
-                if is_ground:
-                    return f"mielony {animal}"
-                # Genitive form for "z X"
-                genitive = {"kurczak": "kurczaka", "kaczka": "kaczki",
-                            "gęś": "gęsi", "indyk": "indyka"}
-                return f"{part} z {genitive.get(animal, animal)}"
-        # Brak konkretnej części — sam drób
         if is_ground:
             return f"mielony {animal}"
+        genitive = {"kurczak": "kurczaka", "kaczka": "kaczki",
+                    "gęś": "gęsi", "indyk": "indyka"}
+        gen = genitive.get(animal, animal)
+        # Szukaj części ciała
+        for pattern, part in _POULTRY_PARTS:
+            if pattern.search(name):
+                return f"{part} z {gen}"
+        # Brak konkretnej części — sam drób
         return animal
     else:
         # Wołowina, wieprzowina itd.

@@ -143,16 +143,16 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Flaki wołowe     Auchan 1 kg",
+    "original_name": "Kraina Mięs Porcja rosołowa wołowa",
     "generic_name": "wołowina",
-    "shop": "auchan",
+    "shop": "biedronka",
     "currency": "PLN",
-    "package_size_value": 1000.0,
+    "package_size_value": 800.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 25.99,
+    "price_package": 22.32,
     "price_per_unit": null,
-    "price_per_100": 2.599,
+    "price_per_100": 2.79,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -676,16 +676,16 @@
     "standard_category": "Produkty konserwowe i słoikowe"
   },
   {
-    "original_name": "Kraina Wędlin Serdelki z filetem z indyka 300 g",
+    "original_name": "Kraina Mięs Select Mięso na kotlety z fileta z piersi indyka 400 g",
     "generic_name": "pierś z indyka",
     "shop": "biedronka",
     "currency": "PLN",
-    "package_size_value": 300.0,
+    "package_size_value": 400.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 7.49,
+    "price_package": 13.49,
     "price_per_unit": null,
-    "price_per_100": 2.4967,
+    "price_per_100": 3.3725,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -936,16 +936,16 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Porcja rosołowa z kaczki ściółkowej Pewni Dobrego na wagę ok. 800 g",
-    "generic_name": "kaczka",
+    "original_name": "Wątroba z kaczki ze ściółki Pewni Dobrego 500 g",
+    "generic_name": "wątroba z kaczki",
     "shop": "auchan",
     "currency": "PLN",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 10.38,
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 16.98,
     "price_per_unit": null,
-    "price_per_100": 1.298,
+    "price_per_100": 3.396,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -13962,29 +13962,42 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Kraina Mięs Select Kurczak farmerski porcja rosołowa z kurczaka kg",
-    "generic_name": "kurczak",
-    "shop": "biedronka",
+    "original_name": "Polędwiczka z kurczaka papryka Morliny 400 g",
+    "generic_name": "polędwiczka z kurczaka",
+    "shop": "auchan",
     "currency": "PLN",
-    "package_size_value": 600.0,
+    "package_size_value": 400.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 5.99,
+    "price_package": 15.99,
     "price_per_unit": null,
-    "price_per_100": 0.9983,
+    "price_per_100": 3.9975,
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Kraina Mięs Skrzydła z kurczaka",
+    "original_name": "Skrzydełka z kurczaka Auchan na wagę ok. 400 g",
     "generic_name": "skrzydełka z kurczaka",
-    "shop": "biedronka",
+    "shop": "auchan",
     "currency": "PLN",
-    "package_size_value": 700.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 6.99,
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 4.36,
     "price_per_unit": null,
-    "price_per_100": 0.9986,
+    "price_per_100": 1.09,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
+    "original_name": "Wątroba wieprzowa Auchan na wagę ok. 400 g",
+    "generic_name": "wątroba wieprzowa",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 4.0,
+    "price_per_unit": null,
+    "price_per_100": 0.999,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -14014,6 +14027,19 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
+    "original_name": "Kraina Mięs Select Kurczak farmerski porcja rosołowa z kurczaka kg",
+    "generic_name": "kurczak",
+    "shop": "biedronka",
+    "currency": "PLN",
+    "package_size_value": 600.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 5.99,
+    "price_per_unit": null,
+    "price_per_100": 0.9983,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
     "original_name": "Mięso mielone z nogi kurczaka Auchan 400 g",
     "generic_name": "mielony kurczak",
     "shop": "auchan",
@@ -14028,7 +14054,7 @@
   },
   {
     "original_name": "Filet z kaczki  ze skórą Auchan na wagę ok. 400 g",
-    "generic_name": "pierś z kaczki",
+    "generic_name": "filet z kaczki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -14037,6 +14063,19 @@
     "price_package": 19.16,
     "price_per_unit": null,
     "price_per_100": 4.79,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
+    "original_name": "Porcja rosołowa z kaczki ściółkowej Pewni Dobrego na wagę ok. 800 g",
+    "generic_name": "kaczka",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 10.38,
+    "price_per_unit": null,
+    "price_per_100": 1.298,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -14050,6 +14089,32 @@
     "price_package": 14.99,
     "price_per_unit": null,
     "price_per_100": 3.7475,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
+    "original_name": "Filet z piersi kaczki ze ściółki bez kości ze skórą Pewni Dobrego na wagę ok. 600 g",
+    "generic_name": "pierś z kaczki",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 29.99,
+    "price_per_unit": null,
+    "price_per_100": 4.998,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
+    "original_name": "Serca wieprzowe Auchan na wagę ok. 550 g",
+    "generic_name": "serca wieprzowe",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 6.59,
+    "price_per_unit": null,
+    "price_per_100": 1.199,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -14089,6 +14154,19 @@
     "price_package": 18.99,
     "price_per_unit": null,
     "price_per_100": 1.899,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
+    "original_name": "Kraina Wędlin Serdelki z filetem z indyka 300 g",
+    "generic_name": "filet z indyka",
+    "shop": "biedronka",
+    "currency": "PLN",
+    "package_size_value": 300.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 7.49,
+    "price_per_unit": null,
+    "price_per_100": 2.4967,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -14183,6 +14261,19 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
+    "original_name": "Nerki wieprzowe Auchan na wagę ok. 400 g",
+    "generic_name": "nerki wieprzowe",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 3.8,
+    "price_per_unit": null,
+    "price_per_100": 0.949,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
     "original_name": "Kości karkowe Auchan na wagę ok. 1 kg",
     "generic_name": "kości karkowe",
     "shop": "auchan",
@@ -14209,19 +14300,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Kraina Mięs Podudzie z kurczaka świeże klasa A",
-    "generic_name": "udka z kurczaka",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 6.0,
-    "price_per_unit": null,
-    "price_per_100": 1.2,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Polędwiczka w przyprawach do pieczenia Auchan na wagę ok. 400 g",
     "generic_name": "polędwiczka w przyprawach do pieczenia",
     "shop": "auchan",
@@ -14232,19 +14310,6 @@
     "price_package": 14.8,
     "price_per_unit": null,
     "price_per_100": 3.699,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Kraina Mięs Zestaw rosołowy z indyka, świeży (część korpusu, skrzydło, szyja)",
-    "generic_name": "skrzydełka z indyka",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 900.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.69,
-    "price_per_unit": null,
-    "price_per_100": 1.2989,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -14261,6 +14326,19 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
+    "original_name": "Serca z kurczaka Auchan na wagę ok. 400 g",
+    "generic_name": "serca z kurczaka",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 5.19,
+    "price_per_unit": null,
+    "price_per_100": 1.297,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
     "original_name": "Skrzydełka z kaczki ze ściółki świeże Pewni Dobrego na wagę ok. 400 g",
     "generic_name": "skrzydełka z kaczki",
     "shop": "auchan",
@@ -14271,6 +14349,19 @@
     "price_package": 5.59,
     "price_per_unit": null,
     "price_per_100": 1.398,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
+    "original_name": "Żołądki z kurczaka świeże Auchan na wagę ok. 400 g",
+    "generic_name": "żołądki z kurczaka",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 4.99,
+    "price_per_unit": null,
+    "price_per_100": 1.248,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -14313,6 +14404,19 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
+    "original_name": "Wątroba z kurczaka świeża Auchan na wagę ok. 500 g",
+    "generic_name": "wątroba z kurczaka",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 5.74,
+    "price_per_unit": null,
+    "price_per_100": 1.148,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
     "original_name": "Boczek rolowany na Grill Auchan 300 g",
     "generic_name": "boczek rolowany",
     "shop": "auchan",
@@ -14352,16 +14456,16 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Flaki cielęce blanszowane Auchan 900 g",
+    "original_name": "Sokołów Sokoliki Parówki drobiowo-cielęce 140 g",
     "generic_name": "cielęcina",
-    "shop": "auchan",
+    "shop": "biedronka",
     "currency": "PLN",
-    "package_size_value": 900.0,
+    "package_size_value": 140.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 22.99,
+    "price_package": 4.19,
     "price_per_unit": null,
-    "price_per_100": 2.5544,
+    "price_per_100": 2.9929,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -14401,6 +14505,19 @@
     "price_package": 38.99,
     "price_per_unit": null,
     "price_per_100": 8.6644,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
+    "original_name": "Wątróbka z indyka Auchan 500 g",
+    "generic_name": "wątróbka z indyka",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 11.49,
+    "price_per_unit": null,
+    "price_per_100": 2.298,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -14456,6 +14573,19 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
+    "original_name": "Flaki cielęce blanszowane Auchan 900 g",
+    "generic_name": "flaki cielęce blanszowane",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": 900.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 22.99,
+    "price_per_unit": null,
+    "price_per_100": 2.5544,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
     "original_name": "Boczek w przyprawach do pieczenia Auchan na wagę ok. 800 g",
     "generic_name": "boczek w przyprawach do pieczenia",
     "shop": "auchan",
@@ -14466,6 +14596,32 @@
     "price_package": 21.59,
     "price_per_unit": null,
     "price_per_100": 2.699,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
+    "original_name": "Żołądki z indyka Auchan 500 g",
+    "generic_name": "żołądki z indyka",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 13.89,
+    "price_per_unit": null,
+    "price_per_100": 2.778,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
+    "original_name": "Żołądki z kaczki ze ściółki Pewni Dobrego 500 g",
+    "generic_name": "żołądki z kaczki",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 13.98,
+    "price_per_unit": null,
+    "price_per_100": 2.796,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -14547,6 +14703,19 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
+    "original_name": "Serca z indyka Auchan 500 g",
+    "generic_name": "serca z indyka",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 12.69,
+    "price_per_unit": null,
+    "price_per_100": 2.538,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
     "original_name": "Szynka z dzika bez kości Elite 500 g",
     "generic_name": "szynka z dzika",
     "shop": "auchan",
@@ -14570,6 +14739,19 @@
     "price_package": 6.36,
     "price_per_unit": null,
     "price_per_100": 1.59,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
+    "original_name": "Flaki wołowe     Auchan 1 kg",
+    "generic_name": "flaki wołowe",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": 1000.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 25.99,
+    "price_per_unit": null,
+    "price_per_100": 2.599,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -14599,19 +14781,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Skrzydło i człon z gęsi   Pewni Dobrego na wagę ok 400 g",
-    "generic_name": "skrzydełka z gęsi",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 8.0,
-    "price_per_unit": null,
-    "price_per_100": 1.999,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Pierś z gęsi z kością ze skórą  Pewni Dobrego na wagę ok 1.2 kg",
     "generic_name": "pierś z gęsi",
     "shop": "auchan",
@@ -14622,6 +14791,19 @@
     "price_package": 107.99,
     "price_per_unit": null,
     "price_per_100": 8.999,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
+    "original_name": "Serca z kaczki ze ściółki Pewni Dobrego 500 g",
+    "generic_name": "serca z kaczki",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 12.98,
+    "price_per_unit": null,
+    "price_per_100": 2.596,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -29718,6 +29900,19 @@
     "standard_category": "Przyprawy, zioła i proszki"
   },
   {
+    "original_name": "Kraina Mięs Paski z fileta kurczaka świeże 400 g",
+    "generic_name": "filet z kurczaka",
+    "shop": "biedronka",
+    "currency": "PLN",
+    "package_size_value": 400.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 16.99,
+    "price_per_unit": null,
+    "price_per_100": 4.2475,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
     "original_name": "Przyprawa do dań z makaronu i kuchni włoskiej Prymat 20 g",
     "generic_name": "przyprawa do dań z makaronu i kuchni włoskiej",
     "shop": "auchan",
@@ -30717,6 +30912,19 @@
     "price_per_unit": null,
     "price_per_100": 12.4,
     "standard_category": "Przyprawy, zioła i proszki"
+  },
+  {
+    "original_name": "Pasztet z kaczki z dodatkiem wątroby indyczej i mięsa wieprzowego Auchan 180 g",
+    "generic_name": "pasztet z kaczki z dodatkiem wątroby indyczej i mięsa wieprzowego",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": 180.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 7.69,
+    "price_per_unit": null,
+    "price_per_100": 4.2722,
+    "standard_category": "Mięso, drób i ryby"
   },
   {
     "original_name": "Przyprawa do potraw kuchni meksykańskiej    Kamis 25 g",
