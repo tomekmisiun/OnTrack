@@ -290,14 +290,16 @@ const DraggableRecipe = React.memo(function DraggableRecipe({ recipe, onToggleFa
       <div style={{
         borderTop:'1px solid rgba(255,255,255,0.2)',
         background:'rgba(0,0,0,0.35)',
-        padding:'4px 11px',
-        fontSize:10.5, fontWeight:600,
-        color:'rgba(255,255,255,0.9)',
-        textAlign:'right',
-        flexShrink:0,
-        position:'relative', zIndex:1,
+        padding:'4px 8px',
+        display:'flex', justifyContent:'space-between', alignItems:'center',
+        flexShrink:0, position:'relative', zIndex:1,
       }}>
-        {recipe.total_cost.toFixed(2)} zł
+        <span style={{ fontSize:8.5, fontWeight:500, color:'rgba(255,255,255,0.5)', letterSpacing:'0.2px' }}>
+          szac. koszt
+        </span>
+        <span style={{ fontSize:10.5, fontWeight:700, color:'rgba(255,255,255,0.9)' }}>
+          {recipe.total_cost.toFixed(2)} zł
+        </span>
       </div>
     </div>
   );
