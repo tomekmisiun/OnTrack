@@ -66,6 +66,10 @@ READY_TO_EAT_PL = [
     "baton ",          # batoniki energetyczne
     "batonik",
     "vitanella",
+    "frytki",          # gotowe frytki (nie surowy ziemniak/batat)
+    "chipsy",
+    "paluszki",
+    "precel",
 ]
 
 # Marki wyłącznie gotowych dań (PL)

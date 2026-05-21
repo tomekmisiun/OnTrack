@@ -101,6 +101,24 @@ COCONUT AMINOS — important:
   → name_en: "coconut aminos", name_pl: "amino kokosowe"
   → Do NOT map to coconut milk, coconut oil, or any other coconut product
 
+CHEESE — all cheese varieties collapse to generic unless truly distinctive:
+  cheddar, colby jack, colby, monterey jack, american cheese → "cheese" / "ser"
+  KEEP specific: parmesan, mozzarella, feta, brie, ricotta, cream cheese, cottage cheese
+  Example: "colby jack cheese" → name_en: "cheese", name_pl: "ser"
+
+BRANDED / SPECIALTY SEASONINGS — cannot be found in regular stores:
+  "Traeger seasoning", "Primal Kitchen", "Whole30 approved", "Paleo Powder",
+  specific seasoning blends with brand names → name_en: "seasoning", name_pl: "przyprawa",
+  amount: null, unit: null  (treat as "to taste" — do NOT default to 1g)
+
+PICKLED JALAPENOS / PICKLED PEPPERS:
+  "jar of jalapenos", "pickled jalapenos", "sliced jalapenos (jarred)" → "jalapeño"
+  amount: use the practical cooking amount (not the whole jar), e.g. 2 tbsp = 30g
+
+PICKLES / GHERKINS:
+  "sliced pickles", "dill pickles", "kosher pickles" → "ogórki kiszone"
+  "1 ea sliced pickle" = 1 piece ≈ 30g
+
 KEEP when it defines the ingredient:
 - ground / mince (always normalize "mince" to "ground"):
   beef mince -> ground beef | pork mince -> ground pork

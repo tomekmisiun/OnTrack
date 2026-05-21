@@ -32,7 +32,7 @@ OUT_EN       = DATA / "matches_en.json"
 OUT_PL       = DATA / "matches_pl.json"
 
 SCORE_AUTO      = 85
-SCORE_UNCERTAIN = 70   # było 55 — zbyt luźne, AI dostaje bzdury i kreatywnie dopasowuje
+SCORE_UNCERTAIN = 100  # WYŁĄCZONE — tylko exacty/bliskie >= 85% przechodzą, reszta = NO_MATCH
 UNCERTAIN_BATCH = 15
 MAX_CANDIDATES  = 10
 MAX_RETRIES     = 2
