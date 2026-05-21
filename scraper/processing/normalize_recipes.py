@@ -207,6 +207,68 @@ def get_client() -> "OpenAI":
     return OpenAI(api_key=key, base_url="https://api.deepseek.com")
 
 
+_PL_LETTERS  = re.compile(r"[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]")
+_EN_KEYWORDS = re.compile(
+    r"\b(easy|simple|the |and |with |for |from |gluten.free|dairy.free|"
+    r"meal prep|whole30|paleo|keto|aip|diy|low.carb|high.protein|sugar.free)\b", re.I
+)
+
+# Listicle / roundup — nie są przepisami
+_ROUNDUP = re.compile(
+    r"^\d{1,3}\s+(ideas?|ways?|recipes?\b|best|easy|healthy|egg.free|"
+    r"high.protein|low.carb|meal prep ideas)", re.I
+)
+
+
+def _is_untranslated(name_en: str, name_pl: str) -> bool:
+    """Sprawdza czy name_pl to w rzeczywistości nieprzetłumaczone name_en."""
+    if not name_pl:
+        return True
+    if name_pl.lower().strip() == name_en.lower().strip():
+        return True
+    if not _PL_LETTERS.search(name_pl) and _EN_KEYWORDS.search(name_pl):
+        return True
+    return False
+
+
+def _fix_translation(client, recipe: dict) -> dict:
+    """Ponawia tłumaczenie tylko dla name_pl (szybkie, bez pełnej normalizacji)."""
+    prompt = (
+        f"Translate this English recipe title to Polish. "
+        f"Use natural Polish, drop marketing words like 'Easy', 'Simple', 'Meal Prep'. "
+        f"Return ONLY the Polish title, nothing else.\n\n{recipe.get('name_en', '')}"
+    )
+    try:
+        resp = client.chat.completions.create(
+            model="deepseek-chat",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.1,
+            max_tokens=60,
+        )
+        pl = resp.choices[0].message.content.strip().strip('"\'')
+        if pl:
+            recipe["name_pl"] = pl
+            log.info(f"  Przetłumaczono: {recipe['name_en'][:40]} → {pl}")
+    except Exception as e:
+        log.warning(f"  Fix translation nieudany: {e}")
+    return recipe
+
+
+def _validate_and_fix(client, results: list, originals: list) -> list:
+    """Sprawdza wyniki i naprawia brakujące tłumaczenia name_pl."""
+    fixed = []
+    for i, r in enumerate(results):
+        if r is None:
+            fixed.append(r)
+            continue
+        name_en = r.get("name_en", "")
+        name_pl = r.get("name_pl", "")
+        if _is_untranslated(name_en, name_pl):
+            r = _fix_translation(client, r)
+        fixed.append(r)
+    return fixed
+
+
 def _parse_response(content: str) -> list:
     content = content.strip()
     content = re.sub(r"^```(?:json)?\s*", "", content)
@@ -233,11 +295,12 @@ def _call_api(client, recipes_batch: list) -> list:
 
 
 def normalize_batch(client, recipes: list) -> list:
-    """Batch z retry. Przy niepowodzeniu — per-recipe fallback."""
+    """Batch z retry. Przy niepowodzeniu — per-recipe fallback. Waliduje tłumaczenia."""
     last_err = None
     for attempt in range(MAX_RETRIES + 1):
         try:
-            return _call_api(client, recipes)
+            results = _call_api(client, recipes)
+            return _validate_and_fix(client, results, recipes)
         except Exception as e:
             last_err = e
             if "429" in str(e) or "rate" in str(e).lower():
@@ -251,7 +314,9 @@ def normalize_batch(client, recipes: list) -> list:
     results = []
     for recipe in recipes:
         try:
-            results.append(_call_api(client, [recipe])[0])
+            r = _call_api(client, [recipe])[0]
+            r = _validate_and_fix(client, [r], [recipe])[0]
+            results.append(r)
         except Exception as e:
             log.error(f"Przepis '{recipe.get('name', '?')}' nieudany: {e}")
             results.append(None)
@@ -265,7 +330,11 @@ def main():
         log.info(f"Plik wyjściowy już istnieje: {OUTPUT_FILE}. Pomijam krok 1.")
         return
 
-    recipes = json.loads(INPUT_FILE.read_text("utf-8"))
+    all_recipes = json.loads(INPUT_FILE.read_text("utf-8"))
+    # Odfiltruj listicle / roundup articles ("17 Breakfast Ideas", "10 Easy Ways...")
+    recipes = [r for r in all_recipes if not _ROUNDUP.search(r.get("name", "") or "")]
+    if len(recipes) < len(all_recipes):
+        log.info(f"Odfiltrowano {len(all_recipes) - len(recipes)} roundup articles")
     log.info(f"Wczytano {len(recipes)} przepisów")
 
     # Wczytaj checkpoint
