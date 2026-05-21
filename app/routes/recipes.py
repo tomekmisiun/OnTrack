@@ -15,7 +15,7 @@ recipes_bp = Blueprint('recipes', __name__)
 @jwt_required()
 def get_recipes():
     recipes = Recipe.query.filter_by(user_id=current_uid()).order_by(Recipe.name).all()
-    return jsonify([r.to_dict() for r in recipes])
+    return jsonify([r.to_dict_summary() for r in recipes])
 
 
 @recipes_bp.route('/<int:id>', methods=['GET'])

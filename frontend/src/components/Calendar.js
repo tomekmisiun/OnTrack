@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import {
   DndContext, DragOverlay, PointerSensor,
   useSensor, useSensors, useDraggable, useDroppable,
@@ -22,11 +22,19 @@ function plPrzepis(n) {
 // ─── Recipe preview modal ─────────────────────────────────────────────────────
 function RecipePreviewModal({ recipe, onClose }) {
   const { showError } = useToast();
-  const [localIngredients, setLocalIngredients] = useState(recipe?.ingredients || []);
+  const [fullRecipe, setFullRecipe] = useState(null);
+  const [localIngredients, setLocalIngredients] = useState([]);
   const [editingIdx, setEditingIdx] = useState(null);
   const [editVals, setEditVals] = useState({ kcal: '', protein: '', fat: '', carbs: '' });
 
-  useEffect(() => { setLocalIngredients(recipe?.ingredients || []); }, [recipe]);
+  useEffect(() => {
+    if (!recipe) { setFullRecipe(null); setLocalIngredients([]); return; }
+    setFullRecipe(null);
+    recipesApi.get(recipe.id).then(res => {
+      setFullRecipe(res.data);
+      setLocalIngredients(res.data.ingredients || []);
+    }).catch(() => setLocalIngredients([]));
+  }, [recipe?.id]);
 
   const startEdit = (i, ing) => {
     setEditingIdx(i);
@@ -91,20 +99,26 @@ function RecipePreviewModal({ recipe, onClose }) {
             <div style={{ fontSize: 20, fontWeight: 800, color: '#fff', textShadow: '0 2px 6px rgba(0,0,0,0.8)', marginBottom: 10 }}>
               {recipe.name}
             </div>
-            {recipe.total_kcal > 0 && (
-              <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
-                <div style={{ background: 'rgba(0,0,0,0.55)', borderRadius: 8, padding: '4px 12px' }}>
-                  <span style={{ fontSize: 22, fontWeight: 800, color: '#fff' }}>{recipe.total_kcal}</span>
-                  <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.8)', marginLeft: 3 }}>kcal</span>
-                </div>
-                {[['Białko', recipe.total_protein], ['Tłuszcz', recipe.total_fat], ['Węglowodany', recipe.total_carbs]].map(([lbl, val]) => (
-                  <div key={lbl} style={{ background: 'rgba(0,0,0,0.55)', borderRadius: 8, padding: '4px 10px', textAlign: 'center' }}>
-                    <div style={{ fontSize: 9, color: 'rgba(255,255,255,0.7)', marginBottom: 1 }}>{lbl}</div>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: '#fff' }}>{Math.round(val)}g</div>
+            {(() => {
+              const r = fullRecipe || recipe;
+              const kcal = r.total_kcal > 0 ? r.total_kcal : r.kcal_100g;
+              const per100 = r.total_kcal === 0 && r.kcal_100g != null;
+              if (!kcal) return null;
+              return (
+                <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+                  <div style={{ background: 'rgba(0,0,0,0.55)', borderRadius: 8, padding: '4px 12px' }}>
+                    <span style={{ fontSize: 22, fontWeight: 800, color: '#fff' }}>{Math.round(kcal)}</span>
+                    <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.8)', marginLeft: 3 }}>kcal{per100 ? '/100g' : ''}</span>
                   </div>
-                ))}
-              </div>
-            )}
+                  {[['Białko', per100 ? r.protein_100g : r.total_protein], ['Tłuszcz', per100 ? r.fat_100g : r.total_fat], ['Węglowodany', per100 ? r.carbs_100g : r.total_carbs]].map(([lbl, val]) => val != null && (
+                    <div key={lbl} style={{ background: 'rgba(0,0,0,0.55)', borderRadius: 8, padding: '4px 10px', textAlign: 'center' }}>
+                      <div style={{ fontSize: 9, color: 'rgba(255,255,255,0.7)', marginBottom: 1 }}>{lbl}</div>
+                      <div style={{ fontSize: 13, fontWeight: 700, color: '#fff' }}>{Math.round(val)}g</div>
+                    </div>
+                  ))}
+                </div>
+              );
+            })()}
           </div>
         </div>
         {/* Składniki */}
@@ -117,6 +131,7 @@ function RecipePreviewModal({ recipe, onClose }) {
               Uzupełnij / Edytuj
             </div>
           </div>
+          {!fullRecipe && <div style={{ textAlign: 'center', color: '#6b7280', fontSize: 12, padding: '12px 0' }}>Ładowanie składników…</div>}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             {localIngredients.map((ing, i) => {
               const factor  = (ing.unit === 'szt') ? ing.weight : (ing.weight / 100);
@@ -182,12 +197,17 @@ function RecipePreviewModal({ recipe, onClose }) {
 }
 
 // ─── Draggable recipe ─────────────────────────────────────────────────────────
-function DraggableRecipe({ recipe, onToggleFavorite, onPreview }) {
+const DraggableRecipe = React.memo(function DraggableRecipe({ recipe, onToggleFavorite, onPreview }) {
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: `recipe-${recipe.id}`, data: { type: 'recipe', recipe },
   });
   const pointerStart = React.useRef(null);
-  const hasKcal = recipe.total_kcal > 0;
+  const displayKcal    = recipe.total_kcal > 0 ? recipe.total_kcal    : recipe.kcal_100g;
+  const displayProtein = recipe.total_kcal > 0 ? recipe.total_protein : recipe.protein_100g;
+  const displayFat     = recipe.total_kcal > 0 ? recipe.total_fat     : recipe.fat_100g;
+  const displayCarbs   = recipe.total_kcal > 0 ? recipe.total_carbs   : recipe.carbs_100g;
+  const isPer100g      = recipe.total_kcal === 0 && recipe.kcal_100g != null;
+  const hasKcal        = displayKcal != null;
   return (
     <div ref={setNodeRef} {...listeners} {...attributes}
       onPointerDown={e => { pointerStart.current = { x: e.clientX, y: e.clientY }; listeners?.onPointerDown?.(e); }}
@@ -236,14 +256,16 @@ function DraggableRecipe({ recipe, onToggleFavorite, onPreview }) {
       <div style={{padding:'0 8px 7px', position:'relative', zIndex:1}}>
         {hasKcal ? (
           <>
-            <div style={{display:'flex', alignItems:'baseline', gap:3, padding:'0 3px', marginBottom:5}}>
+            <div style={{display:'flex', alignItems:'baseline', gap:3, padding:'0 3px', marginBottom:isPer100g ? 2 : 5}}>
               <span style={{fontSize:18, fontWeight:800, color:'#fff', lineHeight:1, textShadow:'0 1px 4px rgba(0,0,0,0.8)'}}>
-                {recipe.total_kcal}
+                {Math.round(displayKcal)}
               </span>
-              <span style={{fontSize:9, fontWeight:700, color:'#fff', textShadow:'0 1px 3px rgba(0,0,0,0.8)'}}>kcal</span>
+              <span style={{fontSize:9, fontWeight:700, color:'#fff', textShadow:'0 1px 3px rgba(0,0,0,0.8)'}}>
+                kcal{isPer100g ? '/100g' : ''}
+              </span>
             </div>
             <div style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:3}}>
-              {[['B', recipe.total_protein], ['T', recipe.total_fat], ['W', recipe.total_carbs]].map(([lbl, val]) => (
+              {[['B', displayProtein], ['T', displayFat], ['W', displayCarbs]].map(([lbl, val]) => (
                 <div key={lbl} style={{
                   background:'rgba(0,0,0,0.45)', borderRadius:5,
                   padding:'3px 0', textAlign:'center',
@@ -255,7 +277,6 @@ function DraggableRecipe({ recipe, onToggleFavorite, onPreview }) {
             </div>
           </>
         ) : (
-          /* placeholder so price stays at the same position */
           <div style={{height:52}} />
         )}
       </div>
@@ -275,7 +296,7 @@ function DraggableRecipe({ recipe, onToggleFavorite, onPreview }) {
       </div>
     </div>
   );
-}
+});
 
 // ─── Draggable meal ───────────────────────────────────────────────────────────
 function DraggableMeal({ meal, onDelete }) {
@@ -778,6 +799,68 @@ function Btn({ children, danger, paste }) {
   );
 }
 
+// ─── Carousel list (wirtualne okno — renderuje tylko widoczne karty) ──────────
+const CARD_W = 138; // 128px width + 10px gap
+const PAGE    = 20;
+
+function CarouselList({ recipes, search, visible, setVisible, scrollRef, dragRef, onPreview, onToggleFavorite, t }) {
+  const filtered = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    const sorted = [...recipes].sort((a, b) => (b.is_favorite ? 1 : 0) - (a.is_favorite ? 1 : 0));
+    return q ? sorted.filter(r => r.name.toLowerCase().includes(q)) : sorted;
+  }, [recipes, search]);
+
+  // reset okna gdy zmienia się wyszukiwanie
+  const prevSearch = useRef(search);
+  if (prevSearch.current !== search) {
+    prevSearch.current = search;
+    setVisible(30);
+    if (scrollRef.current) scrollRef.current.scrollLeft = 0;
+  }
+
+  const slice = filtered.slice(0, visible);
+  const hasMore = visible < filtered.length;
+
+  if (filtered.length === 0) {
+    return <p style={{fontSize:13,color:'#4b5563',margin:0}}>{search.trim() ? `Brak przepisów pasujących do "${search}"` : t('no_recipes_cal')}</p>;
+  }
+
+  return (
+    <div
+      ref={scrollRef}
+      style={{display:'flex',gap:10,overflowX:'auto',paddingBottom:6,scrollbarWidth:'thin',scrollbarColor:'#374151 transparent'}}
+      onMouseDown={e => {
+        if (e.button !== 0) return;
+        const el = scrollRef.current; if (!el) return;
+        dragRef.current = { active: true, startX: e.pageX - el.offsetLeft, scrollLeft: el.scrollLeft };
+        el.style.cursor = 'grabbing'; e.preventDefault();
+      }}
+      onMouseMove={e => {
+        const d = dragRef.current; if (!d.active) return;
+        const el = scrollRef.current; if (!el) return;
+        el.scrollLeft = d.scrollLeft - (e.pageX - el.offsetLeft - d.startX);
+      }}
+      onMouseUp={() => { dragRef.current.active = false; if (scrollRef.current) scrollRef.current.style.cursor = 'default'; }}
+      onMouseLeave={() => { dragRef.current.active = false; if (scrollRef.current) scrollRef.current.style.cursor = 'default'; }}
+      onScroll={e => {
+        const el = e.currentTarget;
+        if (hasMore && el.scrollLeft + el.clientWidth >= el.scrollWidth - CARD_W * 3) {
+          setVisible(v => Math.min(v + PAGE, filtered.length));
+        }
+      }}
+    >
+      {slice.map(r => (
+        <DraggableRecipe key={r.id} recipe={r} onToggleFavorite={onToggleFavorite} onPreview={onPreview} />
+      ))}
+      {hasMore && (
+        <div style={{flexShrink:0,width:CARD_W-10,display:'flex',alignItems:'center',justifyContent:'center',color:'#4b5563',fontSize:11}}>
+          +{filtered.length - visible}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Calendar({ onGoToTab }) {
   const { t } = useLanguage();
   const { showError, showSuccess, showConfirm } = useToast();
@@ -796,6 +879,13 @@ export default function Calendar({ onGoToTab }) {
   const [howToOpen,setHowToOpen]     = useState(false);
   const [carouselOpen,setCarouselOpen] = useState(true);
   const [recipeSearch, setRecipeSearch] = useState('');
+  const [carouselVisible, setCarouselVisible] = useState(30);
+  const carouselScrollRef = useRef(null);
+  const carouselDrag = useRef({ active: false, startX: 0, scrollLeft: 0 });
+  const handleToggleFavorite = useCallback(async (id) => {
+    await recipesApi.toggleFavorite(id);
+    recipesApi.getAll().then(res => setRecipes(res.data));
+  }, []);
   const [tplSlots,setTplSlots]       = useState({});
   const [tplOpen,setTplOpen]         = useState(false);
   const [previewRecipe,setPreviewRecipe] = useState(null);
@@ -1081,16 +1171,17 @@ export default function Calendar({ onGoToTab }) {
               />
               <span style={{fontSize:11,color:'#6b7280',flexShrink:0}}>{t('drag_to_cal')}</span>
             </div>
-            {(() => {
-              const filtered = [...recipes]
-                .sort((a,b)=>(b.is_favorite?1:0)-(a.is_favorite?1:0))
-                .filter(r => !recipeSearch.trim() || r.name.toLowerCase().includes(recipeSearch.trim().toLowerCase()));
-              return filtered.length === 0
-                ? <p style={{fontSize:13,color:'#4b5563',margin:0}}>{recipeSearch.trim() ? `Brak przepisów pasujących do "${recipeSearch}"` : t('no_recipes_cal')}</p>
-                : <div style={{display:'flex',gap:10,overflowX:'auto',paddingBottom:6,scrollbarWidth:'thin',scrollbarColor:'#374151 transparent'}}>
-                    {filtered.map(r=><DraggableRecipe key={r.id} recipe={r} onToggleFavorite={async (id)=>{ await recipesApi.toggleFavorite(id); recipesApi.getAll().then(res=>setRecipes(res.data)); }} onPreview={setPreviewRecipe}/>)}
-                  </div>;
-            })()}
+            <CarouselList
+              recipes={recipes}
+              search={recipeSearch}
+              visible={carouselVisible}
+              setVisible={setCarouselVisible}
+              scrollRef={carouselScrollRef}
+              dragRef={carouselDrag}
+              onPreview={setPreviewRecipe}
+              onToggleFavorite={handleToggleFavorite}
+              t={t}
+            />
           </div>
         )}
       </div>

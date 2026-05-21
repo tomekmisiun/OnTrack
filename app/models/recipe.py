@@ -80,6 +80,27 @@ class Recipe(db.Model):
             carbs   += (p.carbs   or 0) * factor
         return round(kcal), round(protein, 1), round(fat, 1), round(carbs, 1)
 
+    def to_dict_summary(self):
+        """Tylko nagłówek przepisu — bez składników. Używany w liście."""
+        return {
+            'id': self.id,
+            'name': self.name,
+            'notes': self.notes,
+            'is_favorite': bool(self.is_favorite),
+            'ingredients': [],
+            'total_cost': 0,
+            'total_kcal': 0,
+            'total_protein': 0,
+            'total_fat': 0,
+            'total_carbs': 0,
+            'kcal_100g': self.kcal_100g,
+            'protein_100g': self.protein_100g,
+            'fat_100g': self.fat_100g,
+            'carbs_100g': self.carbs_100g,
+            'image_url': self.image_url,
+            'source_url': self.source_url,
+        }
+
     def to_dict(self):
         kcal, protein, fat, carbs = self._calc_macros()
         return {
