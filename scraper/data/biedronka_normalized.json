@@ -4745,32 +4745,6 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
-    "original_name": "Top Chipsy smak papryka 150 g",
-    "generic_name": "top chipsy smak papryka",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.95,
-    "price_per_unit": null,
-    "price_per_100": 3.3,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Top Tortilla Chipsy kukurydziane solone 150 g",
-    "generic_name": "top tortilla chipsy kukurydziane solone",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.99,
-    "price_per_unit": null,
-    "price_per_100": 2.66,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Hit Minis Markizy o smaku czekoladowym 130 g",
     "generic_name": "hit minis markizy o smaku czekoladowym",
     "shop": "biedronka",
@@ -5081,19 +5055,6 @@
     "price_per_unit": null,
     "price_per_100": 0.9975,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Lay's Chipsy ziemniaczane o smaku zielonej cebulki 130 g",
-    "generic_name": "lay's chipsy ziemniaczane o smaku zielonej cebulki",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 130.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.29,
-    "price_per_unit": null,
-    "price_per_100": 6.3769,
-    "standard_category": "Produkty zbożowe i mąki"
   },
   {
     "original_name": "Kotlin Ketchup łagodny 450 g",
@@ -6032,19 +5993,6 @@
     "standard_category": "Przyprawy, zioła i proszki"
   },
   {
-    "original_name": "Crunchips Sticks Chipsy ziemniaczane o smaku ketchup 70 g",
-    "generic_name": "crunchips sticks chipsy ziemniaczane o smaku ketchup",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 70.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.99,
-    "price_per_unit": null,
-    "price_per_100": 5.7,
-    "standard_category": "Tłuszcze, oleje i sosy"
-  },
-  {
     "original_name": "Dega Paprykarz z łososia 135 g",
     "generic_name": "dega paprykarz z łososia",
     "shop": "biedronka",
@@ -6264,19 +6212,6 @@
     "price_per_unit": null,
     "price_per_100": 1.4271,
     "standard_category": "Tłuszcze, oleje i sosy"
-  },
-  {
-    "original_name": "Lay's Chipsy ziemniaczane o smaku śmietankowego serka z ziołami 130 g",
-    "generic_name": "lay's chipsy ziemniaczane o smaku śmietankowego serka z ziołami",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 130.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.29,
-    "price_per_unit": null,
-    "price_per_100": 6.3769,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Toffifee Orzech laskowy w karmelu kremie orzechowym i czekoladzie 24 szt. 200 g",
@@ -6628,19 +6563,6 @@
     "price_per_unit": null,
     "price_per_100": 4.7,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Top Tortilla Chipsy kukurydziane smak ser 150 g",
-    "generic_name": "top tortilla chipsy kukurydziane smak ser",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.99,
-    "price_per_unit": null,
-    "price_per_100": 2.66,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Culineo Cebulka smażona 200 g",
@@ -7137,19 +7059,6 @@
     "standard_category": "Słodziki i dodatki smakowe"
   },
   {
-    "original_name": "Pringles Chipsy Sour Cream & Onion 165 g",
-    "generic_name": "pringles",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 165.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 10.99,
-    "price_per_unit": null,
-    "price_per_100": 6.6606,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Profi Pasztet firmowy 131 g",
     "generic_name": "profi pasztet firmowy",
     "shop": "biedronka",
@@ -7265,32 +7174,6 @@
     "price_per_unit": null,
     "price_per_100": 3.728,
     "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
-    "original_name": "Lay's Max Chipsy ziemniaczane karbowane o smaku zielonej cebulki 120 g",
-    "generic_name": "lay's max chipsy ziemniaczane karbowane o smaku zielonej cebulki",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 120.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.29,
-    "price_per_unit": null,
-    "price_per_100": 6.9083,
-    "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
-    "original_name": "Crunchips Chipsy ziemniaczane pieczone żeberka 130 g",
-    "generic_name": "crunchips chipsy ziemniaczane pieczone żeberka",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 130.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.99,
-    "price_per_unit": null,
-    "price_per_100": 6.1462,
-    "standard_category": "Mięso, drób i ryby"
   },
   {
     "original_name": "E. Wedel Czekolada truskawkowa 100 g",
@@ -8658,19 +8541,6 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
-    "original_name": "Top Tortilla Chipsy kukurydziane smak ostre chili 150 g",
-    "generic_name": "top tortilla chipsy kukurydziane smak ostre chili",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.99,
-    "price_per_unit": null,
-    "price_per_100": 2.66,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Adalbert's Tea Earl Grey Herbata czarna liściasta 100 g",
     "generic_name": "adalbert's tea earl grey herbata czarna liściasta",
     "shop": "biedronka",
@@ -8708,19 +8578,6 @@
     "price_per_unit": null,
     "price_per_100": 18.495,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Lay's Max Strong Chipsy ziemniaczane karbowane o smaku ostrego chilli i limonki 120 g",
-    "generic_name": "lay's max strong chipsy ziemniaczane karbowane o smaku ostrego chilli i limonki",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 120.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.29,
-    "price_per_unit": null,
-    "price_per_100": 6.9083,
-    "standard_category": "Owoce"
   },
   {
     "original_name": "Adalbert's Tea Herbata zielona z wyciągiem z flaszowca miękkociernistego liściasta 100 g",
@@ -9228,19 +9085,6 @@
     "price_per_unit": null,
     "price_per_100": 4.6,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Pringles Chipsy Paprika 165 g",
-    "generic_name": "pringles",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 165.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 10.99,
-    "price_per_unit": null,
-    "price_per_100": 6.6606,
-    "standard_category": "Przyprawy, zioła i proszki"
   },
   {
     "original_name": "Mutti Sos pomidorowy z grillowanymi warzywami 400 g",

@@ -4173,19 +4173,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Frytki stekowe McCain 650 g",
-    "generic_name": "frytki stekowe",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 650.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.39,
-    "price_per_unit": null,
-    "price_per_100": 1.7523,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Gotowa zupa pomidorowa Hortex 350 g",
     "generic_name": "gotowa zupa pomidorowa",
     "shop": "auchan",
@@ -4209,19 +4196,6 @@
     "price_package": 7.49,
     "price_per_unit": null,
     "price_per_100": 1.6644,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Frytki z batatów Aviko 450 g",
-    "generic_name": "frytki z batatów",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 18.98,
-    "price_per_unit": null,
-    "price_per_100": 4.2178,
     "standard_category": "Warzywa"
   },
   {
@@ -4496,32 +4470,6 @@
     "price_per_unit": null,
     "price_per_100": 1.3311,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Frytki z batatów, kalarepy, fasolki szparagowej Hortex 450 g",
-    "generic_name": "frytki z batatów, kalarepy, fasolki szparagowej",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.19,
-    "price_per_unit": null,
-    "price_per_100": 2.0422,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Paluszki rybne z fileta Auchan 300 g",
-    "generic_name": "paluszki rybne z fileta",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 300.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.49,
-    "price_per_unit": null,
-    "price_per_100": 3.83,
-    "standard_category": "Mięso, drób i ryby"
   },
   {
     "original_name": "Lody wodne o smaku malinowym i jagodowym z polewą o smaku gumy balonowej   Kaktus 9 x 45 ml",
@@ -4901,19 +4849,6 @@
     "standard_category": "Przyprawy, zioła i proszki"
   },
   {
-    "original_name": "Rożek kakaowy z paluszkiem waflowym w mlecznej czekoladzie  KitKat 110 ml",
-    "generic_name": "rożek kakaowy z paluszkiem waflowym w mlecznej czekoladzie",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 110.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 6.69,
-    "price_per_unit": null,
-    "price_per_100": 6.0818,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Lody Jak Dawniej śmietankowe z wiśniami Bracia Koral 900 ml",
     "generic_name": "lody jak dawniej śmietankowe z wiśniami",
     "shop": "auchan",
@@ -5197,19 +5132,6 @@
     "price_package": 29.98,
     "price_per_unit": null,
     "price_per_100": 16.6556,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Paluszki rybne Kapitańskie Abramczyk 300 g",
-    "generic_name": "paluszki rybne",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 300.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 13.79,
-    "price_per_unit": null,
-    "price_per_100": 4.5967,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -6357,19 +6279,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Paluszki rybne z dorsza Auchan 450 g",
-    "generic_name": "paluszki rybne z dorsza",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 15.29,
-    "price_per_unit": null,
-    "price_per_100": 3.3978,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Lody Trio Crunchy straciatella i ciasteczka Big Milk 90 ml",
     "generic_name": "lody trio crunchy straciatella i ciasteczka",
     "shop": "auchan",
@@ -6381,19 +6290,6 @@
     "price_per_unit": null,
     "price_per_100": 6.2111,
     "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Paluszki rybne z fileta mintaja panierowane Auchan 500 g",
-    "generic_name": "paluszki rybne z fileta mintaja panierowane",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 14.65,
-    "price_per_unit": null,
-    "price_per_100": 2.93,
-    "standard_category": "Mięso, drób i ryby"
   },
   {
     "original_name": "Lody waniliowe z nadzieniem o smaku słony karmel, orzechami pekan i kawałkami ciastek z białą czekoladą  Ben&Jerry's 465 ml",
@@ -14144,19 +14040,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Paluszki serowe z mozzarelli dla dzieci Pik-Nik 4 x 20 g",
-    "generic_name": "paluszki serowe z mozzarelli dla dzieci",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 80.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 6.18,
-    "price_per_unit": null,
-    "price_per_100": 7.725,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Ser gouda porcjowany Mlekpol 250 g",
     "generic_name": "ser gouda porcjowany",
     "shop": "auchan",
@@ -14872,19 +14755,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Kids Paluszki serowe Pik-Nik 80 g",
-    "generic_name": "kids paluszki serowe",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 80.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 6.18,
-    "price_per_unit": null,
-    "price_per_100": 7.725,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Ser camembert z ziołami prowansalskimi Auchan 120 g",
     "generic_name": "ser camembert z ziołami prowansalskimi",
     "shop": "auchan",
@@ -15389,19 +15259,6 @@
     "price_package": 5.04,
     "price_per_unit": null,
     "price_per_100": 10.08,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Paluszki z sera mozzarella  Cheesupers 4 x 20 g",
-    "generic_name": "paluszki z sera mozzarella",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 80.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.24,
-    "price_per_unit": null,
-    "price_per_100": 9.05,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -34671,32 +34528,6 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
-    "original_name": "Top Chipsy smak papryka 150 g",
-    "generic_name": "top chipsy smak papryka",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.95,
-    "price_per_unit": null,
-    "price_per_100": 3.3,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Top Tortilla Chipsy kukurydziane solone 150 g",
-    "generic_name": "top tortilla chipsy kukurydziane solone",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.99,
-    "price_per_unit": null,
-    "price_per_100": 2.66,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Hit Minis Markizy o smaku czekoladowym 130 g",
     "generic_name": "hit minis markizy o smaku czekoladowym",
     "shop": "biedronka",
@@ -35007,19 +34838,6 @@
     "price_per_unit": null,
     "price_per_100": 0.9975,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Lay's Chipsy ziemniaczane o smaku zielonej cebulki 130 g",
-    "generic_name": "lay's chipsy ziemniaczane o smaku zielonej cebulki",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 130.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.29,
-    "price_per_unit": null,
-    "price_per_100": 6.3769,
-    "standard_category": "Produkty zbożowe i mąki"
   },
   {
     "original_name": "Kotlin Ketchup łagodny 450 g",
@@ -35919,19 +35737,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Crunchips Sticks Chipsy ziemniaczane o smaku ketchup 70 g",
-    "generic_name": "crunchips sticks chipsy ziemniaczane o smaku ketchup",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 70.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.99,
-    "price_per_unit": null,
-    "price_per_100": 5.7,
-    "standard_category": "Tłuszcze, oleje i sosy"
-  },
-  {
     "original_name": "Dega Paprykarz z łososia 135 g",
     "generic_name": "dega paprykarz z łososia",
     "shop": "biedronka",
@@ -36125,19 +35930,6 @@
     "price_per_unit": null,
     "price_per_100": 1.4271,
     "standard_category": "Tłuszcze, oleje i sosy"
-  },
-  {
-    "original_name": "Lay's Chipsy ziemniaczane o smaku śmietankowego serka z ziołami 130 g",
-    "generic_name": "lay's chipsy ziemniaczane o smaku śmietankowego serka z ziołami",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 130.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.29,
-    "price_per_unit": null,
-    "price_per_100": 6.3769,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Toffifee Orzech laskowy w karmelu kremie orzechowym i czekoladzie 24 szt. 200 g",
@@ -36450,19 +36242,6 @@
     "price_per_unit": null,
     "price_per_100": 4.7,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Top Tortilla Chipsy kukurydziane smak ser 150 g",
-    "generic_name": "top tortilla chipsy kukurydziane smak ser",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.99,
-    "price_per_unit": null,
-    "price_per_100": 2.66,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Culineo Cebulka smażona 200 g",
@@ -36894,19 +36673,6 @@
     "standard_category": "Słodziki i dodatki smakowe"
   },
   {
-    "original_name": "Pringles Chipsy Sour Cream & Onion 165 g",
-    "generic_name": "pringles",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 165.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 10.99,
-    "price_per_unit": null,
-    "price_per_100": 6.6606,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Profi Pasztet firmowy 131 g",
     "generic_name": "profi pasztet firmowy",
     "shop": "biedronka",
@@ -36996,32 +36762,6 @@
     "price_per_unit": null,
     "price_per_100": 3.728,
     "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
-    "original_name": "Lay's Max Chipsy ziemniaczane karbowane o smaku zielonej cebulki 120 g",
-    "generic_name": "lay's max chipsy ziemniaczane karbowane o smaku zielonej cebulki",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 120.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.29,
-    "price_per_unit": null,
-    "price_per_100": 6.9083,
-    "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
-    "original_name": "Crunchips Chipsy ziemniaczane pieczone żeberka 130 g",
-    "generic_name": "crunchips chipsy ziemniaczane pieczone żeberka",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 130.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.99,
-    "price_per_unit": null,
-    "price_per_100": 6.1462,
-    "standard_category": "Mięso, drób i ryby"
   },
   {
     "original_name": "E. Wedel Czekolada truskawkowa 100 g",
@@ -38233,19 +37973,6 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
-    "original_name": "Top Tortilla Chipsy kukurydziane smak ostre chili 150 g",
-    "generic_name": "top tortilla chipsy kukurydziane smak ostre chili",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.99,
-    "price_per_unit": null,
-    "price_per_100": 2.66,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Adalbert's Tea Earl Grey Herbata czarna liściasta 100 g",
     "generic_name": "adalbert's tea earl grey herbata czarna liściasta",
     "shop": "biedronka",
@@ -38283,19 +38010,6 @@
     "price_per_unit": null,
     "price_per_100": 18.495,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Lay's Max Strong Chipsy ziemniaczane karbowane o smaku ostrego chilli i limonki 120 g",
-    "generic_name": "lay's max strong chipsy ziemniaczane karbowane o smaku ostrego chilli i limonki",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 120.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.29,
-    "price_per_unit": null,
-    "price_per_100": 6.9083,
-    "standard_category": "Owoce"
   },
   {
     "original_name": "Adalbert's Tea Herbata zielona z wyciągiem z flaszowca miękkociernistego liściasta 100 g",

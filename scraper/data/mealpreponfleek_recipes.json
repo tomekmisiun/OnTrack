@@ -11,7 +11,8 @@
       "4 large hard boiled eggs",
       "berries (optional)",
       "lemon wedges (optional)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Portable Chocolate Chip Pancakes",
@@ -24,7 +25,8 @@
       "1/3 cup Water (or milk)",
       "3 tbsp oil",
       "1/3 cup dairy-free chocolate chips"
-    ]
+    ],
+    "servings": 12
   },
   {
     "name": "Steak &#038; Egg White Salsa Verde Breakfast Wraps (High-Protein Meal Prep)",
@@ -44,7 +46,8 @@
       "5 oz flank steak",
       "5 medium whole wheat wraps",
       "seasoning"
-    ]
+    ],
+    "servings": 5
   },
   {
     "name": "High-Protein Gluten-Free Cottage Cheese Pancakes",
@@ -58,7 +61,8 @@
       "2 ea eggs (large)",
       "2 scoops collagen powder (Primal Kitchen)",
       "1 tbsp maple syrup"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "Sweet Potato Hash Brown Breakfast Waffles",
@@ -75,7 +79,8 @@
       "2/3 cup liquid egg whites",
       "Salt and pepper to taste",
       "1 cup mixed berries (blueberries, raspberries, strawberries, etc)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sweet Potato Waffle Meal Prep (With Veggies and Protein!)",
@@ -93,7 +98,8 @@
       "1/8 tsp Salt",
       "1/8 tsp Pepper",
       "1 tbsp. olive oil"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "DIY Fruit &amp; Protein Snack Boxes (Under $4)",
@@ -106,7 +112,8 @@
       "1 cup green grapes",
       "4 large  strawberries (sliced)",
       "1/2 cup blackberries"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Meal Prep Breakfast - French Toast Sticks &#038; Sausage",
@@ -122,7 +129,8 @@
       "8  breakfast sausage links (pre-cooked)",
       "fresh fruit",
       "maple syrup"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Kabocha Squash Waffle Meal Prep (Gluten Free, Paleo-Friendly)",
@@ -137,7 +145,8 @@
       "2 tsp  baking powder",
       "pinch sea salt",
       "sweetener (optional)"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "Apple, Bacon, Onion &amp; Cheddar Breakfast Squares (GF, Low Carb)",
@@ -156,7 +165,8 @@
       "1/2 cup sharp cheddar (leave out for paleo/whole30 option)",
       "3-4 tbs  fresh herbs (we used thyme, sage and rosemary)",
       "salt &amp; pepper (to taste)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Crockpot Breakfast Casserole",
@@ -173,7 +183,8 @@
       "1 cup sliced mushrooms",
       "1 medium red bell pepper (thinly sliced)",
       "4 cups fresh spinach"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Banana oat breakfast bars (gluten and dairy free)",
@@ -191,7 +202,8 @@
       "1 tsp. baking powder",
       "1/2 tsp. cinnamon (4)",
       "4 tbsp dairy-free chocolate chips (or as many as you'd like!)"
-    ]
+    ],
+    "servings": 12
   },
   {
     "name": "Low Carb Cinnamon Apple Muffins",
@@ -212,7 +224,8 @@
       "1/2 cup peeled/grated green apple",
       "2 cups 2% plain Greek yogurt",
       "1/4 cup pomegranate seeds"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Pumpkin Scones with Maple Glaze (Gluten-Free + Low Sugar)",
@@ -235,7 +248,8 @@
       "2 tsp unsweetened coconut milk",
       "1 cup low fat cottage cheese",
       "4  kiwis (halved)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Chickpea Frittata Meal Prep (Vegan + Gluten-Free)",
@@ -255,7 +269,8 @@
       "2 cups fresh spinach",
       "2 cups mandarin orange segments",
       "2 cups sliced kiwi"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Easy Gluten-Free Fall Breakfast Granola (Healthy Meal Prep Snack)",
@@ -270,7 +285,8 @@
       "1/4 cup agave",
       "1/4 cup Coconut Oil",
       "1/2 tsp ground cinnamon"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "Lemon Poppy Seed Oatmeal Bars (Easy Snack Meal Prep)",
@@ -295,7 +311,8 @@
       "1 cup cubed watermelon",
       "1 cup cubed cantaloupe",
       "1 cup low-fat Greek yogurt (use coconut milk yogurt for vegan)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Morning Glory Muffins (Gluten-Free, Refined Sugar-Free)",
@@ -316,7 +333,8 @@
       "1/2 cup grated carrots",
       "2 cups cherries",
       "1 cup low fat cottage cheese"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Overnight 'Oats' with Almond Butter (Keto Friendly)",
@@ -328,7 +346,8 @@
       "1/3 cup  Unsweetened Almond Milk",
       "2 tbsp Almond Butter",
       "2 tsp Chia Seeds"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "Easy Breakfast Beef Sausage (AIP, Paleo, Whole30, Keto)",
@@ -348,7 +367,8 @@
       "1 cup raspberries",
       "1 cup blueberries",
       "4 cups baby spinach (optional)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "How to Make Carrot Cake Pancakes",
@@ -371,7 +391,8 @@
       "1/4 cup Coconut Oil",
       "2 cups grated carrots",
       "3/4 cup raisins"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "Cajun Sausage Breakfast Scramble",
@@ -388,7 +409,8 @@
       "1 tsp cajun seasoning (*listed below)",
       "1/2 cup half and half",
       "1 1/4 cup cheddar cheese"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cocoa Hazelnut Energy Bites (No Bake!)",
@@ -402,7 +424,8 @@
       "1 tbsp. Honey (or sweetener of choice)",
       "2 tbsp. ground flax",
       "1 tsp. Sea Salt"
-    ]
+    ],
+    "servings": 9
   },
   {
     "name": "Grain Free Granola",
@@ -421,7 +444,8 @@
       "1/8 tsp sea salt",
       "2 cups Greek yogurt",
       "4 tsp honey"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Easy Summer Breakfast Salad Meal Prep",
@@ -439,7 +463,8 @@
       "1/2 tbs fresh lime juice",
       "1.5 tbs Extra-virgin olive oil",
       "salt &amp; pepper (to taste)"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "The Best Turmeric Scrambled Eggs for Breakfast",
@@ -454,7 +479,8 @@
       "salt &amp; pepper (to taste)",
       "1 cup Broccoli (steamed)",
       "8 small pre-cooked sausages (brand of choice)"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "Meal Prep Overnight Oats with Berries",
@@ -469,7 +495,8 @@
       "Almonds",
       "Cinnamon",
       "2  Bananas"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Omelet - That Doubles as a Breakfast Wrap",
@@ -485,7 +512,8 @@
       "12 ea sausage links (sliced into bite-sized pieces)",
       "Salt and pepper (to taste)",
       "10 ea tortillas (burrito size)"
-    ]
+    ],
+    "servings": 10
   },
   {
     "name": "Sausage Lover's Hashbrown Casserole | Freezer Friendly",
@@ -500,7 +528,8 @@
       "1 cup Spinach",
       "salt &amp; pepper, to taste",
       "oil for coating pan"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Easy Pork Breakfast Hash Recipe - AIP-Friendly",
@@ -516,7 +545,8 @@
       "1 tbsp Paleo Powder AIP Seasoning",
       "2 cups fresh cherries",
       "2 cups diced pineapple"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cran-Blackberry Overnight French Toast (Paleo friendly)",
@@ -533,7 +563,8 @@
       "2 scoops collagen (*can sub for protein powder or leave out)",
       "1 cup fresh cranberries",
       "3/4 cup fresh blackberries"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Sheet Pan Breakfast Hash and Eggs",
@@ -554,7 +585,8 @@
       "1 tsp sea salt",
       "1/4 tsp cracked black pepper",
       "1/4 cup chopped parsley"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Breakfast PRO Power Bowl",
@@ -570,7 +602,8 @@
       "1 medium avocado (sliced )",
       "1/2 tsp garlic powder",
       "1/4 tsp cumin"
-    ]
+    ],
+    "servings": 3
   },
   {
     "name": "Breakfast Burrito",
@@ -583,7 +616,8 @@
       "12 large eggs",
       "1 cup Shredded cheese",
       "1 cup Salsa"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Breakfast Bowls",
@@ -596,7 +630,8 @@
       "1 large avocado",
       "1/2 cup Shredded cheese",
       "1/2 large Onion"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "French Toast Breakfast Berry Casserole",
@@ -611,7 +646,8 @@
       "2 tsp vanilla extract",
       "1 lbs Frozen mixed berries",
       "4 tbsp Maple syrup"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "Meal Prep Breakfast Sandwich - Freezer Friendly",
@@ -627,7 +663,8 @@
       "4  breakfast sandwich buns",
       "Salt",
       "Pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Low Carb Sun Dried Tomato Egg Cups",
@@ -640,7 +677,8 @@
       "1/2 cup sun dried tomatoes (chopped)",
       "3/4 cup shredded cheese",
       "salt &amp; pepper (to taste )"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Yes, You CAN Meal Prep Pancakes!",
@@ -655,7 +693,8 @@
       "Almond Butter",
       "strawberries",
       "maple syrup"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Pizza Chicken Meal Prep Recipe (Low Carb, High Flavor)",
@@ -669,7 +708,8 @@
       "4 oz mozzarella cheese",
       "2 oz pepperoni",
       "2 cups Broccoli (steamed)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Gluten Free Caesar Pasta Salad Meal Prep",
@@ -685,7 +725,8 @@
       "3/4 cup croutons (we used Fox Hill Kitchen brand*)",
       "1 1/2 cup cherry tomatoes (sliced)",
       "lemon wedges (if desired)"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "Baked Breakfast Quinoa and Spinach Bites",
@@ -701,7 +742,8 @@
       "1/8 tsp Ground Pepper",
       "1/4 tsp Garlic Powder",
       "1/4 tsp Dried Italian Seasoning"
-    ]
+    ],
+    "servings": 12
   },
   {
     "name": "Sheet Pan Paleo Protein Pancakes",
@@ -712,7 +754,8 @@
       "1 1/2  cups pancake mix",
       "1 1/3 cup  egg whites",
       "1 - 1 1/2 cups favorite fruit"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cinnamon Almond Butter Protein Balls",
@@ -727,7 +770,8 @@
       "1/2 cup cinnamon almond butter",
       "1 tsp vanilla extract",
       "1 tbsp honey"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "Protein Peanut Butter Energy Bites",
@@ -743,7 +787,8 @@
       "1/2 cup vanilla protein powder",
       "1/4 cup  chia seeds",
       "1 cup water"
-    ]
+    ],
+    "servings": 18
   },
   {
     "name": "Pineapple Coconut Overnight Oats Meal Prep",
@@ -760,7 +805,8 @@
       "1 scoop vanilla protein powder (or collagen powder)",
       "1 tbs dark maple syrup",
       "granola (optional)"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "Sheet Pan Marmalade Sausage Meal Prep",
@@ -777,7 +823,8 @@
       "1 tbsp olive oil",
       "salt &amp; pepper (to taste)",
       "fresh sage"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "Steak, Sweet Potato and Apple Hash Meal Prep",
@@ -793,7 +840,8 @@
       "1/2  tsp dried sage",
       "1/4 tsp Salt",
       "Pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Apple Walnut Toffee Crisp",
@@ -812,7 +860,8 @@
       "⅛ tsp. sea salt",
       "½ cup rolled oats",
       "¼ cup chopped walnuts (or pecans)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sweet Potato Latkes",
@@ -830,7 +879,8 @@
       "2 cups mixed berries",
       "1/2 cup dairy-free sour cream (we used Forager brand)",
       "1 tbsp fresh chopped chives (optional)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cauliflower Mash Breakfast Bowls",
@@ -846,7 +896,8 @@
       "5 oz. sliced white button mushrooms",
       "4 large eggs (soft boiled)",
       "4 cups watercress"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Savory Breakfast Muffins",
@@ -863,7 +914,8 @@
       "1 cup grapes",
       "1 cup cubed cantaloupe",
       "1 cup blueberries"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Breakfast Taco Bowls",
@@ -883,7 +935,8 @@
       "2 tbsp chopped cilantro",
       "1 tbsp lime juice",
       "1/4 tsp sea salt"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Gluten Free Cinnamon Roll Meal Prep",
@@ -904,7 +957,8 @@
       "1/2 cup coconut sugar",
       "1.5 tbsp ground cinnamon",
       "dark maple syrup (as desired)"
-    ]
+    ],
+    "servings": 12
   },
   {
     "name": "Egg Muffins",
@@ -918,7 +972,8 @@
       "2  jalapenos",
       "¼  onion",
       "½   tomato"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Paleo Blueberry Muffins",
@@ -937,7 +992,8 @@
       "1 tsp baking soda",
       "pinch of salt",
       "1 cup blueberries (a handful per muffin)"
-    ]
+    ],
+    "servings": 12
   },
   {
     "name": "High Protein Breakfast Oats",
@@ -952,7 +1008,8 @@
       "4 tbsp almond butter",
       "1 cup almonds",
       "1 cup blueberries"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Taco Seasoned Ground Beef and Sweet Potato Hash",
@@ -974,7 +1031,8 @@
       "6 large eggs",
       "1/2 cup unsweetened almond milk",
       "Salt and pepper to taste"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Bacon Wrapped Omelets",
@@ -991,7 +1049,8 @@
       "1 tbs olive oil",
       "1 tbs red wine vinegar",
       "1 tbs lemon juice"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Whole30 Bacon &#038; Strawberry Breakfast Salad",
@@ -1014,7 +1073,8 @@
       "1/4 cup fresh parsley",
       "1/4 cup fresh basil",
       "2 tbs fresh dill"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Keto Prosciutto Egg Cups",
@@ -1027,7 +1087,8 @@
       "1/4 cup arugula",
       "Salt (to taste)",
       "Black pepper (to taste)"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Nutty Keto Pancakes Meal Prep",
@@ -1042,7 +1103,8 @@
       "1/4 cup milk",
       "1/4 cup  chopped nuts (we used hazelnuts)",
       "1/4 cup unsweetened almond butter (or nut butter of choice )"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "Blueberry Pie French Toast Meal Prep",
@@ -1059,7 +1121,8 @@
       "1 tbs orange juice",
       "2 tbs maple syrup",
       "1 cup fresh blueberries"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cinnamon Roll Coffee Cake Meal Prep",
@@ -1080,7 +1143,8 @@
       "1 tbs gluten-free flour",
       "1/4 cup coconut butter",
       "1 tsp unrefined coconut sugar"
-    ]
+    ],
+    "servings": 12
   },
   {
     "name": "Scrambled Egg Stuffed Sweet Potato Meal Prep",
@@ -1096,7 +1160,8 @@
       "Black pepper (to taste)",
       "Hot sauce (to taste)",
       "1/2 medium avocado (sliced)"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "Whole30 Breakfast Snack Boxes Meal Prep",
@@ -1108,7 +1173,8 @@
       "1 pint strawberries",
       "2 large Avocado (sliced)",
       "4 large sweet potatoes (cut into 1\" rounds )"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan No-Bake Paleo Energy Bars",
@@ -1125,7 +1191,8 @@
       "1/3 cup melted coconut oil",
       "1/2 tsp cinnamon",
       "1/4 tsp sea salt"
-    ]
+    ],
+    "servings": 12
   },
   {
     "name": "Freezer Friendly Chocolate Waffles",
@@ -1143,7 +1210,8 @@
       "1 cup strawberries",
       "1 cup raspberries",
       "1/2 cup maple syrup"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Eggnog French Toast Bake",
@@ -1158,7 +1226,8 @@
       "1 tsp ground cinnamon plus extra for topping",
       "1/4 cup maple syrup",
       "4 medium figs (halved)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Donut Holes",
@@ -1182,7 +1251,8 @@
       "1/2 cup sliced strawberries",
       "1/2 cup raspberries",
       "2 tbsp raw almonds"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Low Carb Pumpkin Spice Bagel",
@@ -1205,7 +1275,8 @@
       "8 drops NOW Foods Pumpkin Spice Monkfruit Sweetener",
       "1/4 tsp ground cinnamon",
       "4  kiwis (halved)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Berry Protein Pancake Bites",
@@ -1223,7 +1294,8 @@
       "1/2 cup chopped mixed berries (blueberries, strawberries, raspberries)",
       "1 cup mixed berries",
       "3 cups low-fat cottage cheese"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Peanut Butter Chocolate Muffins",
@@ -1244,7 +1316,8 @@
       "2 cups fat-free Greek yogurt",
       "1/2 cup blackberries",
       "1/2 cup raspberries"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Vegan Blueberry Breakfast Bars",
@@ -1263,7 +1336,8 @@
       "1 tsp cornstarch",
       "2 cups unsweetened vegan yogurt (So Delicious)",
       "6  kiwi (peeled and chopped)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "One Dish Baked Blueberry Oatmeal",
@@ -1283,7 +1357,8 @@
       "3 tbsp coconut oil (melted)",
       "1 tsp  liquid stevia",
       "1 1/2 cups blueberries (fresh)"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Vegan Shakshuka Meal Prep",
@@ -1302,7 +1377,8 @@
       "2 tbsp olive oil",
       "salt &amp; pepper (as desired)",
       "4 slices of bread (of choice)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Middle Eastern Breakfast Salad Bowls",
@@ -1330,7 +1406,8 @@
       "1/4 tsp Sea Salt",
       "1/4 cup hummus",
       "1.5 tbsp mild harissa"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Double Chocolate Donuts",
@@ -1355,7 +1432,8 @@
       "pepitas",
       "Shredded Coconut",
       "chopped nuts"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Collard Wrap Breakfast Burritos",
@@ -1374,7 +1452,8 @@
       "1 cup Cherry Tomatoes (halved)",
       "cilantro (for garnish)",
       "salsa (if desired)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Vegan Mushroom Quinoa Breakfast Hash",
@@ -1391,7 +1470,8 @@
       "2 cloves garlic (minced)",
       "1/2 tsp  dried sage",
       "Salt &amp; pepper (to taste)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Stuffed French Toast Meal Prep",
@@ -1410,7 +1490,8 @@
       "1/8 tsp liquid stevia (can replace with 2 tbs granulated sweetener, if desired)",
       "3/4 cup raspberries**",
       "3/4 cup blueberries"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "High Protein Breakfast Egg Muffin Meal Prep",
@@ -1426,7 +1507,8 @@
       "1/2 tsp black pepper",
       "1/4 tsp garlic powder",
       "1/8 tsp salt"
-    ]
+    ],
+    "servings": 3
   },
   {
     "name": "Quinoa Stuffed Sweet Potato Meal Prep - 3 Ways!",
@@ -1456,7 +1538,8 @@
       "taco seasoning (as desired)",
       "Fresh cilantro (optional)",
       "fresh lime (optional )"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "Sheet Pan Sweet Potato Breakfast Hash",
@@ -1476,7 +1559,8 @@
       "8 large  eggs",
       "Avocado",
       "fruit"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cinnamon Roll Muffin Meal Prep",
@@ -1497,7 +1581,8 @@
       "macadamia nuts",
       "marcona almonds",
       "strawberries"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "Loaded Sausage and Bacon Breakfast Casserole",
@@ -1516,7 +1601,8 @@
       "2 tsp paprika",
       "1/4 tsp Sea Salt",
       "1/2 tsp black pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Tuscan Chickpea Scramble",
@@ -1540,7 +1626,8 @@
       "3 tbs pepitas",
       "juice of lemon",
       "blood orange"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Strawberry Chocolate Almond Granola Squares",
@@ -1556,7 +1643,8 @@
       "1/3 cup sliced almonds (raw and unsalted)",
       "1.5 tsp pure vanilla extract",
       "1/4 tsp Sea Salt"
-    ]
+    ],
+    "servings": 9
   },
   {
     "name": "Beef Breakfast Sausage Egg Cups",
@@ -1578,7 +1666,8 @@
       "2 cups yogurt",
       "1/2 cup granola",
       "2 cups mixed fresh fruit"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "Healthy Oatmeal Muffins",
@@ -1597,7 +1686,8 @@
       "pinch salt",
       "1/4 cup blueberries",
       "1/4 tsp. allspice (or cinnamon, ginger, or nutmeg)"
-    ]
+    ],
+    "servings": 14
   },
   {
     "name": "Philly Cheesesteak Breakfast Casserole",
@@ -1617,7 +1707,8 @@
       "1/2 tsp sea salt",
       "1/8 tsp cracked black pepper",
       "2 cups sliced persimmons"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sausage, Kale &#038; Pomegranate Hash Meal Prep",
@@ -1638,7 +1729,8 @@
       "1 tsp smoked paprika",
       "salt &amp; pepper (as desired)",
       "fresh parsley (if desired)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Pepperoni Pizza Egg Cups",
@@ -1656,7 +1748,8 @@
       "1/2 tsp. Himalayan Pink Salt",
       "1/4 tsp. Ground Black Pepper",
       "Optional: Red Chili Flakes; Italian Parsley; Grated Parmesan"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Gluten-free Healthy-ish Pop Tarts",
@@ -1678,7 +1771,8 @@
       "Naturally Dyed Sprinkles",
       "Freeze-dried Berries (crushed)",
       "Natural Food Dyes"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Pancake Bread",
@@ -1706,7 +1800,8 @@
       "8 tablespoons Pomegranate Seeds",
       "4 tablespoons Pure Maple Syrup (divided into four 1/2 tablespoon portions)",
       "Coconut Oil (for lightly greasing loaf pan)"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "Air Fryer Breakfast Sausage",
@@ -1728,7 +1823,8 @@
       "6 cups baby kale",
       "1 tsp ghee",
       "1/4 tsp sea salt"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Savory Waffles with Kale and Bacon",
@@ -1745,7 +1841,8 @@
       "1 teaspoon baking powder",
       "4 cups fresh chopped kale",
       "2  strips thick cut bacon"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Watercress, Leek, and Butternut Squash Quiche",
@@ -1775,7 +1872,8 @@
       "1/4 cup sliced basil",
       "1/4 tsp sea salt",
       "Cracked black pepper to taste"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "The Best Paleo Blueberry Muffins",
@@ -1788,7 +1886,8 @@
       "1 cup blueberries",
       "1 tablespoon vanilla extract",
       "Nonstick cooking spray or muffin liners"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Quinoa-Oat Bars (Vegan, GF)",
@@ -1805,7 +1904,8 @@
       "1 tbsp chia seeds (do not substitute )",
       "1/4 tsp sea salt",
       "6  peeled/segmented clementines (can serve with any fruit )"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Delicious and Easy Bacon Egg Bites",
@@ -1819,7 +1919,8 @@
       "Salt and pepper",
       "1/2 teaspoon Italian seasoning (optional)",
       "1/2 teaspoon chili pepper flakes (crushed )"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Cheesy Mexican Cauliflower Fritter Meal Prep",
@@ -1835,7 +1936,8 @@
       "1  jalapeno pepper",
       "1/4 tsp salt",
       "coconut oil (for cooking (not included in macros below))"
-    ]
+    ],
+    "servings": 3
   },
   {
     "name": "Protein Freezer Waffles",
@@ -1853,7 +1955,8 @@
       "4 cups berries",
       "4 tbsp maple syrup",
       "4 tbsp almond butter (or nut butter of choice)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Coffee Almond Quinoa Breakfast Bowl",
@@ -1868,7 +1971,8 @@
       "1/2 cup raspberries**",
       "2 tbs sliced almonds",
       "sweetener (as desired)"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "Tofu Breakfast Scramble",
@@ -1892,7 +1996,8 @@
       "Pinch of cayenne pepper",
       "4 cups green and red grapes",
       "GoodCook Meal Prep Containers"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sausage and Egg Breakfast Bake",
@@ -1910,7 +2015,8 @@
       "1/2 tsp sea salt",
       "1/4 tsp cracked black pepper",
       "5 cups mixed berries (strawberries, blueberries etc.)"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Vegetarian Italian Sausage Egg Cups",
@@ -1928,7 +2034,8 @@
       "Avocado Oil Spray (or silicone muffin tray liners)",
       "2 Cups Fresh Cantaloupe Melon",
       "2 Cups Red Cherries"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Greek Egg Bake",
@@ -1942,7 +2049,8 @@
       "1/2 cup feta",
       "1/2 tsp oregano",
       "Salt and Pepper (to taste)"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Paleo Maple Pecan Banana Bread Muffins",
@@ -1959,7 +2067,8 @@
       "2 tsp. baking powder",
       "1/2 tsp. Sea Salt",
       "1/2  cup pecans (chopped)"
-    ]
+    ],
+    "servings": 10
   },
   {
     "name": "Cinnamon Apple Protein Bites",
@@ -1976,7 +2085,8 @@
       "1/2 tsp. ground cinnamon",
       "pinch sea salt (optional)",
       "water (if needed )"
-    ]
+    ],
+    "servings": 16
   },
   {
     "name": "Oatmeal Bowls With Sauteed Cinnamon Apples",
@@ -1993,7 +2103,8 @@
       "1 tsp cinnamon",
       "2 tbsp hemp seeds",
       "1/4 cup chopped pecans"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cinnamon Apple Banana Snack Bread",
@@ -2013,7 +2124,8 @@
       "1 1/2 tsp baking powder",
       "1 tsp baking soda",
       "1/4 cup walnuts"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "Cinnamon Raisin Granola",
@@ -2034,7 +2146,8 @@
       "1/2 tsp allspice",
       "1 tsp pure vanilla extract",
       "1/4 tsp salt"
-    ]
+    ],
+    "servings": 5
   },
   {
     "name": "Smoked Salmon &#038; Lentil Breakfast Salad",
@@ -2053,7 +2166,8 @@
       "1 tbs Dijon mustard",
       "Fresh lemon juice",
       "Salt &amp; pepper (to taste)"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "Whole30 Zucchini &#038; Sweet Potato Hashbrown Meal Prep",
@@ -2068,7 +2182,8 @@
       "1 large avocado (sliced)",
       "salt &amp; pepper (to taste)",
       "broccoli microgreens or other greens (if desired)"
-    ]
+    ],
+    "servings": 3
   },
   {
     "name": "Egg Potato and Broccoli Breakfast Meal Prep",
@@ -2084,7 +2199,8 @@
       "1/2 tsp pepper",
       "1/2 tsp garlic powder",
       "1/2 tsp cayenne pepper ((optional))"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Egg, Sweet Potato, and Sausage Breakfast Meal Prep",
@@ -2098,7 +2214,8 @@
       "5 oz spinach (1 large bag)",
       "1 tbsp Olive oil",
       "Salt and Pepper ( to taste)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Butternut Squash Cranberry Skillet Meal Prep",
@@ -2114,7 +2231,8 @@
       "1/2 tsp. dried thyme",
       "1 tbsp. olive oil",
       "hard boiled eggs (optional)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Broccoli Rice Red Pepper Egg Muffins",
@@ -2129,7 +2247,8 @@
       "1/2 cup roasted red pepper (diced)",
       "1/2 tsp  garlic powder",
       "Salt &amp; black pepper (to taste)"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "17 Breakfast Ideas Without Eggs",
@@ -2146,7 +2265,8 @@
       "3 tbsp green onions chopped",
       "1  Lemon (or lime Vinaigrette)",
       "2 ½ cups vegetable broth"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Coconut Oat Breakfast Cookies",
@@ -2165,7 +2285,8 @@
       "1/4 tsp sea salt",
       "2 cups mixed berries",
       "8 oz. low-fat Greek yogurt"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Keto Pizza Frittata Meal Prep",
@@ -2182,7 +2303,8 @@
       "1/8 tsp Salt",
       "1 bunch fresh basil",
       "15 slices pepperoni (paleo, if needed)"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "Portobello Mushroom Bacon and Feta Egg Cups",
@@ -2198,7 +2320,8 @@
       "4 slices bacon (cooked and chopped)",
       "1/2 cup feta cheese crumbles",
       "4 cups mixed fresh berries (strawberries, blueberries, raspberries)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Thai Basil Chicken Meal Prep | Thai Larb",
@@ -2217,7 +2340,8 @@
       "1/4 cup chicken broth",
       "1 tsp arrowroot",
       "2 cups fresh Thai Basil"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Instant Pot Chicken Enchilada Soup",
@@ -2241,7 +2365,8 @@
       "1.5 tbsp ground cumin",
       "1.5 tbsp Dried oregano",
       "1 tsp Sea Salt"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Sriracha Honey Glazed Salmon",
@@ -2266,7 +2391,8 @@
       "1/8 tsp Sea Salt",
       "2 tsp black sesame seeds (for garnish)",
       "1/2 tsp liquid smoke (for glaze)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Slow Cooker Taco Meatballs",
@@ -2283,7 +2409,8 @@
       "1 1/2 cups salsa",
       "2 oz. Gluten-free tortilla chips (Siete brand)",
       "1/2 cup salsa"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Freezer Friendly Hawaiian Chicken Tenders (Easy Meal Prep)",
@@ -2301,7 +2428,8 @@
       "2 cups jasmine rice (cooked )",
       "4 cups broccoli (steamed )",
       "1 tsp sea salt"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Southwestern Chicken Bake Meal Prep",
@@ -2326,7 +2454,8 @@
       "green onions",
       "cilantro",
       "diced tomato"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Chicken Fajita Veggie Meal Prep",
@@ -2348,7 +2477,8 @@
       "1/2 cup greek yogurt (plain and unsweetened)",
       "salt &amp; pepper (to taste)",
       "2 medium Avocado"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Homemade Traditional Greek Meatballs",
@@ -2385,7 +2515,8 @@
       "1 tsp dried basil",
       "1 tsp sea salt",
       "1/8 tsp cracked black pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cauliflower Steak With Quinoa &#038; Tahini Meal Prep",
@@ -2402,7 +2533,8 @@
       "1/2 cup Water",
       "2 tbs lemon juice",
       "fresh parsley"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Air Fryer Pork Rind Coated Pork Chops",
@@ -2430,7 +2562,8 @@
       "2 tbsp unsalted butter",
       "1 tsp sea salt",
       "1/8 tsp black pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "African Peanut Stew",
@@ -2453,7 +2586,8 @@
       "2 cups shredded kale",
       "1/2 cup chopped cilantro for topping",
       "1/2 cup chopped peanuts for topping"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Air Fryer Garlic Parmesan Chicken Wings (with Herb Potatoes &amp; Swiss Chard)",
@@ -2478,7 +2612,8 @@
       "1/2 tsp minced garlic",
       "1/4 tsp sea salt",
       "Pinch of black pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "High Protein Griddle Steak Fried Rice Meal Prep",
@@ -2499,7 +2634,8 @@
       "Use tamari or coconut aminos for a gluten-free option",
       "Estimated Macros Per Serving",
       "Each serving of this griddle fried rice contains approximately:"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Greek Arugula Power Salad",
@@ -2524,7 +2660,8 @@
       "1/2 cup sliced red onion",
       "1/2 cup feta cheese",
       "1/3 cup lemon herb dressing (recipe above)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Salsa Verde Chicken Enchiladas Meal Prep (Gluten-Free)",
@@ -2544,7 +2681,8 @@
       "1/2 cup Greek yogurt",
       "1/3 cup chicken broth (or vegetable broth)",
       "1/2 tsp cumin"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Lemon Herb Chicken and Potato Sheet Pan",
@@ -2563,7 +2701,8 @@
       "1 large onion (sliced)",
       "4 cups Broccoli (chopped)",
       "1  Lemon (sliced)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cheesy Keto Chicken Meatballs (High-Protein, Freezer-Friendly)",
@@ -2579,7 +2718,8 @@
       "2 tbsp no salt or sugar added marinara sauce (for topping)",
       "Salt (to taste)",
       "dried parsley (for garnish)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "20 Minute Meatballs (Super Simple Base)",
@@ -2594,7 +2734,8 @@
       "3/4 tsp Sea Salt",
       "1/2 tsp ground black pepper",
       "Additional seasonings (as desired)"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "Maple Roasted Kabocha Squash &#038; Quinoa Salad",
@@ -2615,7 +2756,8 @@
       "1/3 cup Scallions (chopped)",
       "salt &amp; pepper (to taste)",
       "1 batch maple roasted kabocha squash"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Chicken Bacon Ranch Meal Prep (One-Pan, Whole30, Paleo, Gluten-Free)",
@@ -2632,7 +2774,8 @@
       "1/3 cup Whole30 ranch dressing",
       "Chives",
       "Spinach (if desired)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Instant Pot Cashew Chicken (Gluten-Free, Paleo, Whole30)",
@@ -2654,7 +2797,8 @@
       "1/2 teaspoon Pink Himalayan Salt",
       "2  Scallions (sliced)",
       "2  Garlic Cloves (minced)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Freeze Friendly Sheet Pan Sweet and Sour Tempeh",
@@ -2672,7 +2816,8 @@
       "1 tsp minced garlic",
       "1/2 cup chopped cilantro (for serving)",
       "4 cups cooked brown rice"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Watercress and Feta Stuffed Flank Steak",
@@ -2697,7 +2842,8 @@
       "2 tbsp olive oil",
       "1 tbsp red wine vinegar",
       "Sea salt and pepper to taste"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Savory Almond Butter Chicken Thigh Skillet",
@@ -2724,7 +2870,8 @@
       "2 cups baby broccoli (ends trimmed)",
       "1 cup sliced red onion",
       "Salt and pepper to taste"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Hot Honey Ground Beef and Sweet Potato Bowls",
@@ -2742,7 +2889,8 @@
       "2 cups 2% low fat cottage cheese",
       "2  ripe avocados (sliced)",
       "4 tbsp hot honey (or more to taste)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Grilled Spicy Salmon Rice Bowl (15-Minute Meal Prep)",
@@ -2757,7 +2905,8 @@
       "1  medium carrot (shredded)",
       "1  small cucumber (thinly sliced)",
       "1 tbsp Everything but the Bagel seasoning (to taste)"
-    ]
+    ],
+    "servings": 3
   },
   {
     "name": "Watercress and Artichoke Stuffed Chicken Breasts",
@@ -2777,7 +2926,8 @@
       "4 cups broccoli florets",
       "1 tbsp olive oil",
       "Sea salt and pepper to taste"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "The Perfect Air Fryer Turkey Breast",
@@ -2792,7 +2942,8 @@
       "¼ tsp garlic powder",
       "1 tsp sea salt",
       "1/8 tsp black pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Vegan Meatballs with Lemon Dijon Sauce",
@@ -2818,7 +2969,8 @@
       "2 tbsp olive oil",
       "4 cups zucchini noodles",
       "Salt and pepper to taste"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Vegan Lasagna Soup",
@@ -2841,7 +2993,8 @@
       "Red Chili Flakes",
       "Fresh Italian Parsley",
       "Spinach"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Low Carb Crockpot Beef Ragu Meal Prep",
@@ -2864,7 +3017,8 @@
       "1/2 tsbp. dried thyme",
       "salt &amp; pepper (to taste)",
       "4 cups zucchini noodles"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Fall Harvest Power Salad",
@@ -2885,7 +3039,8 @@
       "1/2 cup dried cranberries",
       "1/2 cup raw walnuts",
       "1/2 cup lemon herb dressing"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Kale and Steak Power Salad",
@@ -2912,7 +3067,8 @@
       "1/2 cup blue cheese",
       "1/3 cup chopped pecans",
       "1/2 cup lemon herb dressing  (above)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Jamaican Beef Stew Meal Prep (Gluten-Free + Freezer-Friendly)",
@@ -2937,7 +3093,8 @@
       "1/2 tsp sea salt",
       "1/3 cup chopped green onion",
       "1 1/2 cups dry long grain white rice"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Low Carb Philly Cheesesteak Meal Prep (Griddle or Skillet Method)",
@@ -2954,7 +3111,8 @@
       "3 slices provolone cheese",
       "Salt (to taste)",
       "Black pepper (to taste)"
-    ]
+    ],
+    "servings": 3
   },
   {
     "name": "Sun Dried Tomato Meatloaf (Vegan + Gluten-Free Meal Prep)",
@@ -2985,7 +3143,8 @@
       "2 tbsp olive oil",
       "1 tbsp agave nectar",
       "1/3 cup shaved Parmesan cheese"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Brazilian Style Skirt Steak Meal Prep (Keto, Paleo, Whole30)",
@@ -3004,7 +3163,8 @@
       "4 ounces red onion (sliced)",
       "1 tbs olive oil",
       "salt &amp; pepper (to taste)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Chilled Avocado Soup Meal Prep (Keto + Dairy-Free Option)",
@@ -3021,7 +3181,8 @@
       "Water (as needed for thinning)",
       "red onion",
       "cilantro"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cauliflower Rice Salmon Poke Bowl Meal Prep (Whole30 compliant)",
@@ -3037,7 +3198,8 @@
       "1 tbs rice vinegar",
       "1  green onion (thinly sliced)",
       "Sesame Seeds (for serving, optional )"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Garlic and Thyme Chicken Meal Prep (Whole30 Friendly)",
@@ -3054,7 +3216,8 @@
       "1/2 tsp black",
       "1 tsp Salt",
       "fresh thyme"
-    ]
+    ],
+    "servings": 3
   },
   {
     "name": "Sweet and Sour Mushrooms",
@@ -3077,7 +3240,8 @@
       "1/2 tsp minced garlic",
       "1/2 tsp ginger paste",
       "1 tsp tapioca starch"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Pesto Noodles with Crispy Chicken Bites (Gluten-Free Meal Prep)",
@@ -3106,7 +3270,8 @@
       "2 tsp red wine vinegar",
       "1 tsp olive oil",
       "Sea salt and black pepper to taste"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Mexican Whole Grain Rice &#038; Quinoa Casserole Meal Prep",
@@ -3122,7 +3287,8 @@
       "chives (for garnish)",
       "mixed greens (for serving)",
       "plantain chips (for serving)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Chicken Tikka Masala Meal Prep (Instant Pot Version)",
@@ -3150,7 +3316,8 @@
       "1/4 tsp. Pink Himalayan Salt",
       "1/4 tsp. Ground Black Pepper",
       "1/4 tsp. Cayenne Pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Healthier Kung Pao Chicken Meal Prep",
@@ -3170,7 +3337,8 @@
       "2 tbsp toasted sesame oil",
       "1 tbsp Now Real Food®  Organic 1:1 Monk Fruit Sweetener",
       "1 tsp corn starch"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Instant Pot Beef Barbacoa Meal Prep Bowls",
@@ -3197,7 +3365,8 @@
       "3 cups cooked quinoa",
       "1/4 small red onion (diced)",
       "1/2 cup Fresh cilantro"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Mediterranean Pasta Bake (Meal Prep Friendly)",
@@ -3225,7 +3394,8 @@
       "1 cup cubed pineapple",
       "1 cup cubed cantaloupe",
       "1/2 cup blueberries"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Thai Chili Tofu Sheet Pan Meal Prep",
@@ -3247,7 +3417,8 @@
       "1  lime",
       "1/2 cup basil (for garnish)",
       "1/4 cup cilantro (for garnish (optional))"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Apple BBQ Meatloaf &#038; Mashed Potato Meal Prep",
@@ -3268,7 +3439,8 @@
       "1 cup almond milk (or milk of choice)",
       "1 tbsp parsley (chopped)",
       "Salt and pepper (to taste)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Thai Inspired Tenderloin: Thai Sweet Chili Pork Meal Prep",
@@ -3289,7 +3461,8 @@
       "1/2 cup rice wine vinegar",
       "1 tbs arrowroot powder",
       "3/4 tsp Salt"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "My Favorite Pesto Beef Kabob Meal Prep",
@@ -3305,7 +3478,8 @@
       "1/3 cup pine nuts",
       "3 cloves garlic",
       "Salt (to taste)"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "Garlic Shrimp and Broccoli Meal Prep (Whole30 &amp; Takeout-Inspired)",
@@ -3327,7 +3501,8 @@
       "1 medium head cauliflower",
       "1 tbs olive oil",
       "Salt (to taste )"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "The Best Beet Hummus - Plus a Veggie Dipper Snacks",
@@ -3343,7 +3518,8 @@
       "1/4 tsp Salt",
       "1 can chickpeas (rinsed and drained)",
       "3 cups assorted veggies (carrots, cucumbers, peppers)"
-    ]
+    ],
+    "servings": 5
   },
   {
     "name": "Vegan Chopped Chickpea Greek Salad Meal Prep",
@@ -3366,7 +3542,8 @@
       "1 tsp Dijon Mustard",
       "1/2 tsp italian seasoning",
       "1/4 tsp Salt"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Chimichurri Steak Meal Prep - Two Ways (Bowls and Tacos)",
@@ -3389,7 +3566,8 @@
       "1/2 tsp Salt",
       "1/4 tsp paprika",
       "1/4 tsp red chili flakes"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Vegan 'Cheesy' Spaghetti Squash Meal Prep",
@@ -3406,7 +3584,8 @@
       "4 tbs nutritional yeast",
       "2 tsp crushed red pepper flakes",
       "salt &amp; pepper (as desired)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Plantain Taco Bowl Meal Prep (Whole30 Friendly)",
@@ -3428,7 +3607,8 @@
       "2 cups shredded lettuce",
       "2 medium avocados",
       "1/2 cup salsa"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Baked Salmon Meatballs with Avocado Crema",
@@ -3452,7 +3632,8 @@
       "1 ea garlic clove (minced)",
       "½ tsp salt",
       "2 tbsp water (adjust for desired consistency)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Easy Avocado + Mango Sushi Roll",
@@ -3466,7 +3647,8 @@
       "1 head Purple Cabbage (thinly sliced)",
       "1 large Mango (thinly sliced)",
       "1 large Carrots (thinly sliced)"
-    ]
+    ],
+    "servings": 5
   },
   {
     "name": "Grilled Halloumi &#038; Summer Squash Kabob Meal Prep",
@@ -3487,7 +3669,8 @@
       "3  Scallions (thinly sliced (green part only))",
       "5  red radish (thinly sliced)",
       "6-8  basil leaves (julienne )"
-    ]
+    ],
+    "servings": 5
   },
   {
     "name": "Avocado and Chicken Summer Rolls | (No-Cook + Meal Prep Friendly)",
@@ -3503,7 +3686,8 @@
       "2 medium avocados (thinly sliced)",
       "1 medium lime (juiced)",
       "Salt &amp; black pepper (to taste )"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Peach Summer Rolls with Tahini Dipping Sauce",
@@ -3524,7 +3708,8 @@
       "1/2 tbs Honey",
       "Sea Salt (to taste)",
       "sriracha chili sauce (optional)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Watercress Spring Rolls (No-Cook + Meal Prep Friendly!)",
@@ -3545,7 +3730,8 @@
       "2 tbsp coconut aminos",
       "2 tbsp fresh lime juice",
       "1 tsp sriracha sauce"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "My Favorite Teriyaki Chicken and Vegetables Recipe for Meal Prep",
@@ -3569,7 +3755,8 @@
       "1/2 Tbsp. Grated Fresh Ginger",
       "1/2 tsp. Red Chili Flakes",
       "1 tsp. Onion Powder"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "How to Cook Spaghetti Squash and Meal Prep with it",
@@ -3584,7 +3771,8 @@
       "1/2 tsp salt (to taste)",
       "1/2 tsp pepper (to taste)",
       "1 tbsp Sriracha"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "Chicken Penne With Asparagus and Pistachios",
@@ -3603,7 +3791,8 @@
       "4 tsp. Pistachios (Chopped Shelled )",
       "1/2 tsp. Black Pepper",
       "1/4 tsp. Salt"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Freeze-Friendly Instant Pot Steakhouse Chili",
@@ -3630,7 +3819,8 @@
       "1/4 cup chopped green onion",
       "1/2 cup sour cream",
       "1/2 cup shredded cheddar cheese"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Creamy Sweet Potato and Sausage Pasta – My Go-To Meal Prep for Busy Weeks",
@@ -3650,7 +3840,8 @@
       "⅓ cup Parmesan cheese (finely grated)",
       "2 cups baby spinach (coarsely chopped)",
       "1 cup fresh basil (ribboned (optional))"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Asian-Inspired Brothy Beef Soup - Freezer-Friendly",
@@ -3666,7 +3857,8 @@
       "3 tablespoons olive oil",
       "4 ea shallots (diced)",
       "2 cups watercress"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Easy Beef Lasagna Casserole (Quick and Easy)",
@@ -3691,7 +3883,8 @@
       "1 Tbsp. Fresh Parsley (roughly chopped)",
       "1/2 tsp. Himalayan Pink Salt",
       "1 tsp. Ground Black Pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Chicken Apple Sausage and Veggies",
@@ -3713,7 +3906,8 @@
       "1/2 tsp. Garlic Powder",
       "1/2 tsp. Himalayan Pink Salt",
       "1/2 tsp. Ground Black Pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cauliflower Fried Rice with Legumes and Chicken Shish Kabobs",
@@ -3735,7 +3929,8 @@
       "1/2 tsp curry (or to taste)",
       "1/2 tsp onion powder (or to taste)",
       "1/2 tsp garlic powder (or to taste)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Philly Cheesesteak - Easy Dinner Meal Prep",
@@ -3755,7 +3950,8 @@
       "1 Tbsp. Italian Parsley",
       "1 tsp. Himalayan Pink Salt",
       "1 tsp. Ground Black Pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "High Protein Meal Prep: Creamy Spinach Turkey Meatballs",
@@ -3777,7 +3973,8 @@
       "1 3/4 cups heavy cream",
       "3 cups spinach",
       "1/2 cup parmesan"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Air Fried Crispy Chicken",
@@ -3793,7 +3990,8 @@
       "1/4 tsp black pepper",
       "1 lb. Brussels sprouts (ends removed)",
       "1/2 lb. baby golden potatoes"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "10-Ingredient Cajun Dirty Rice with Shrimp",
@@ -3813,7 +4011,8 @@
       "1 tbsp unsalted butter",
       "8 cups chopped collard greens",
       "Sea salt and pepper to taste"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Creamy Garlic Zoodles with Chicken",
@@ -3829,7 +4028,8 @@
       "1/4 cup  water",
       "1 tsp. salt",
       "Black pepper (to taste)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Easy White Chicken Chili (Healthy + Gluten Free)",
@@ -3855,7 +4055,8 @@
       "1/2 cup chopped red onion",
       "1/3 cup sliced pickled jalapeños",
       "2 tbsp raw pepitas"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Easy Low Carb Beef and Broccoli Stir Fry",
@@ -3873,7 +4074,8 @@
       "2 tsp tapioca flour",
       "2 tbsp coconut aminos",
       "Salt and pepper, to taste"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "One Pan Asian Turkey Meatballs",
@@ -3895,7 +4097,8 @@
       "2 tbsp lime juice or rice wine vinegar",
       "1 tbsp toasted sesame seeds",
       "4 cups cooked white rice"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Asian Crunch Buddha Bowl - Flavorful Lunch Bowl",
@@ -3913,7 +4116,8 @@
       "3 tbsp rice vinegar",
       "3 tbsp coconut aminos",
       "2 tbsp creamy unsalted peanut butter"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Extra Tender Slow Cooker Asian Beef Stew",
@@ -3936,7 +4140,8 @@
       "4 oz. shiitake mushrooms (or cremini, white button, portobello, etc.)",
       "2 tbsp chopped cilantro (or green onion)",
       "3 cups cooked jasmine rice (or brown rice, quinoa, pasta, white rice)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Slow Cooker Asian Pot Roast Meal Prep",
@@ -3955,7 +4160,8 @@
       "6 large carrots (cut into 2-inch pieces)",
       "2 medium waxy potatoes (quartered)",
       "Salt (to taste)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Pulled Pork Sliders With Sweet Potato Buns",
@@ -3972,7 +4178,8 @@
       "4 cups romaine lettuce",
       "2 large sweet potatoes (cut into 1\" rounds)",
       "any Whole30 approved toppings"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Bacon Wrapped Chicken Meal Prep",
@@ -3986,7 +4193,8 @@
       "1 tsp thyme",
       "1 tsp onion powder",
       "Salt &amp; pepper (to taste)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Korean Beef Bowl (Sticky Beef) - Easy 15 Minute Meal Prep",
@@ -4003,7 +4211,8 @@
       "1 tablespoon vegetable oil",
       "1 tablespoon garlic (minced)",
       "2 ea green onions (thinly sliced)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sweet Potato Chicken Poppers (AIP friendly)",
@@ -4019,7 +4228,8 @@
       "4 cups broccoli florets (steamed)",
       "1/2 tsp sea salt",
       "1/2 cup paleo compliant ketchup"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cheeseburger Pizza Chicken Meal Prep",
@@ -4035,7 +4245,8 @@
       "1/3 cup dill pickles (drained)",
       "Salt &amp; pepper (to taste)",
       "2 cups broccoli (steamed or roasted)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "10 Minute Pad Thai Zoodles",
@@ -4056,7 +4267,8 @@
       "3 tbsp chopped nuts (your choice)",
       "3 tbsp Scallions (chopped)",
       "2 ea zucchini (medium size)"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "Single Serve Mushroom Q-Cup Stuffing",
@@ -4078,7 +4290,8 @@
       "2 lbs. sliced air-fried turkey breast",
       "1 cup cranberry sauce",
       "½ cup turkey gravy"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Low Carb Pork Fried Rice Meal Prep",
@@ -4097,7 +4310,8 @@
       "sriracha chili sauce (to taste)",
       "1/4 cup cashews",
       "1/4 cup green onion (sliced)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Simple Meal Prep Lunch Container",
@@ -4112,7 +4326,8 @@
       "1 cup grapes",
       "4 ea string cheese (chopped)",
       "1 cup hummus"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "One Pan Mushroom, Pomegranate &#038; Feta Wild Rice",
@@ -4130,7 +4345,8 @@
       "1/2 cup pomegranate seeds",
       "1/2 cup feta (or goat cheese)",
       "salt &amp; pepper (as desired)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cilantro Lime Cauliflower Rice",
@@ -4144,7 +4360,8 @@
       "1/4 cup fresh lime juice",
       "1 tbsp lime zest",
       "1 tsp sea salt"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "Baked Buffalo Chicken Casserole (GF, Whole30)",
@@ -4163,7 +4380,8 @@
       "1/2 cup eggwhites",
       "ranch dressing (if desired)",
       "chives (if desired)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Chipotle Eye Round Roast Meal Prep",
@@ -4181,7 +4399,8 @@
       "1 medium white onion (chopped)",
       "1 pound Brussels sprouts (halved)",
       "1 large waxy potato (chopped)"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Pot Roast with Au Jus",
@@ -4202,7 +4421,8 @@
       "1/2 Tbsp. Garlic Powder",
       "2 tsp. Ground Black Pepper",
       "1 tsp. Himalayan Pink Salt"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Instant Pot Roast with Mashed Potatoes",
@@ -4226,7 +4446,8 @@
       "2  Garlic Cloves (crushed)",
       "2 teaspoons Arrowroot Powder",
       "2 teaspoons water"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Salmon Cakes with Mango Salsa",
@@ -4256,7 +4477,8 @@
       "1 tbsp olive oil",
       "1/4 tsp salt",
       "1/8 tsp black pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Steak and Brussels Sprout Stir-Fry Meal Prep",
@@ -4274,7 +4496,8 @@
       "24 oz Sirloin Tips",
       "4  tbsp Soy Sauce",
       "2 tsp Vegetable Oil"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "One Pan Roasted Salmon, Asparagus &#038; Potatoes Recipe",
@@ -4287,7 +4510,8 @@
       "3 lbs Dutch Yellow Potatoes",
       "1 tbsp olive oil",
       "1 tsp Garlic Powder"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Hawaiian Pizza Chicken Meal Prep",
@@ -4304,7 +4528,8 @@
       "1/2 cup pineapple (diced)",
       "parmesan &amp; red pepper flakes (for garnish, optional)",
       "2 cups Broccoli (steamed)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Easy Steak and Potato Bites",
@@ -4325,7 +4550,8 @@
       "1 tbsp olive oil",
       "1/4 tsp sea salt",
       "1/8 tsp black pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Air Fryer Molasses Dijon Ham with Roasted Vegetables",
@@ -4349,7 +4575,8 @@
       "1 tbsp olive oil",
       "1 tsp cinnamon",
       "1/4 tsp sea salt"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Garlic Pepper Beef",
@@ -4369,7 +4596,8 @@
       "1 tsp Garlic Powder",
       "1 tsp Paprika",
       "1 tsp Chilli Flakes"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Tomato and Chickpea Rice with Beef Patties and Steamed Broccoli",
@@ -4390,7 +4618,8 @@
       "2/3 cup tomato (chopped)",
       "1 tsp. ghee",
       "1 large  head broccoli"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Easy Pan-Roasted Chicken Meal Prep",
@@ -4408,7 +4637,8 @@
       "1 ea Lemon",
       "4 oz Arugala",
       "10 tsp olive oil"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Zoodles with Tomato Oregano Sauce and Grilled Chicken Breast",
@@ -4424,7 +4654,8 @@
       "1 tsp. salt",
       "2 tbsp. oregano",
       "2 tbsp. avocado oil"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "One Pan Beef Stroganoff (Paleo,GF)",
@@ -4446,7 +4677,8 @@
       "salt &amp; pepper (as desired)",
       "fresh parsley (optional)",
       "2 pounds spaghetti squash (cooked (32oz))"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Salmon Tacos with Beets",
@@ -4467,7 +4699,8 @@
       "¼ cup fresh corn kernels (from about ½ small ear)",
       "1 Tbsp fresh mint (torn)",
       "3  small corn tortillas"
-    ]
+    ],
+    "servings": 3
   },
   {
     "name": "Apricot Sesame Chicken &#038; Shrimp",
@@ -4483,7 +4716,8 @@
       "4 tsp Sesame Seeds",
       "2 cups Broccoli (steamed)",
       "3-5 cups Brown Rice (to serve)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Veggie Supreme Pizza Chicken Meal Prep",
@@ -4503,7 +4737,8 @@
       "Salt &amp; pepper (to taste)",
       "Fresh basil (optional)",
       "2 cups broccoli (steamed or roasted )"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Angel Hair Pasta with Shrimp",
@@ -4520,7 +4755,8 @@
       "⅓ cup parsley (chopped)",
       "1 tbsp  olive oil",
       "Salt and pepper to taste"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Crispy Tofu and Broccoli",
@@ -4544,7 +4780,8 @@
       "4 cups Brown Rice (cooked (can sub cauliflower rice))",
       "Sesame Seeds (optional)",
       "green onions (optional )"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Crispy Fish Sticks",
@@ -4563,7 +4800,8 @@
       "1/4 tsp cracked black pepper",
       "4  lemon wedges",
       "1/2 cup Paleo ketchup (primal kitchen)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Crispy Sheet Pan Tofu",
@@ -4583,7 +4821,8 @@
       "2 tbsp lime juice",
       "1 tbsp coconut aminos",
       "1 tbsp agave nectar"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Chicken Carnitas Nachos",
@@ -4604,7 +4843,8 @@
       "1/4 tsp sea salt",
       "1 lb. sweet potatoes (thinly sliced to 1/8 inch)",
       "1/2 tsp sea salt"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cremini Mushroom Meatloaf",
@@ -4631,7 +4871,8 @@
       "10 oz. baby broccoli (trimmed)",
       "1 tbsp ghee",
       "sea salt and pepper to taste"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Bacon Ranch Chicken and Veggies Foil Packets",
@@ -4650,7 +4891,8 @@
       "1/4 tsp. Himalayan Pink Salt",
       "2 Cups Fresh Spinach",
       "2  ears corn on the cob (halved)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "High Protein Vegetarian Meal Prep",
@@ -4667,7 +4909,8 @@
       "1  lemon",
       "Salt (to taste)",
       "Pepper (to taste)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Instant Pot Beef Barbacoa",
@@ -4689,7 +4932,8 @@
       "1/3 cup chopped cilantro",
       "1/3 cup chopped red onion",
       "4  lime wedges"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cajun Stuffed Peppers",
@@ -4714,7 +4958,8 @@
       "1/2 tsp garlic powder",
       "1/2 tsp onion powder",
       "1/2 tsp black pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Tempeh Burrito Bowls",
@@ -4742,7 +4987,8 @@
       "2 tbsp chopped cilantro",
       "1 tbsp minced jalapeno",
       "1/4 tsp sea salt"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sesame Chicken and Broccoli Stir Fry",
@@ -4763,7 +5009,8 @@
       "2 tsp lankanto monk fruit sweetener with erythritol",
       "1 tsp xanthum gum",
       "1 tbs Water"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Gluten-Free Thai Peanut Stir Fry Meal Prep",
@@ -4783,7 +5030,8 @@
       "1 tsp lime juice",
       "cilantro (for garnish)",
       "chili flakes (for garnish)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Shish Tawook Meal Prep",
@@ -4808,7 +5056,8 @@
       "parsley (optional)",
       "2 tbsp olive oil",
       "1.5 tbsp red wine vinegar"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Vegetarian Jambalaya",
@@ -4832,7 +5081,8 @@
       "4 cups cooked cauliflower rice",
       "4 cups steamed green beans",
       "Salt and pepper to taste"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Chicken Zucchini Burgers",
@@ -4850,7 +5100,8 @@
       "lettuce leaves",
       "ketchup",
       "mustard"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Thai Chicken Tenders with Creamy Almond Dipping Sauce",
@@ -4871,7 +5122,8 @@
       "2 tbsp creamy unsalted almond butter at room temperature",
       "1 tbsp lime juice or apple cider vinegar",
       "1 tsp sriracha sauce (optional)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Instant Pot Beef BBQ Ribs",
@@ -4900,7 +5152,8 @@
       "1  Garlic Clove",
       "1/2 tsp. Garlic Powder",
       "6 Tbsp. Butter (for serving, optional )"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Chicken Adobo Meal Prep",
@@ -4918,7 +5171,8 @@
       "1 tbsp white wine vinegar",
       "4 cups riced cauliflower (cooked)",
       "4 cups green beans (steamed )"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Caprese Pesto Sausage Pasta",
@@ -4933,7 +5187,8 @@
       "1 cup mozzarella pearls",
       "2 cups spinach",
       "fresh basil (if desired)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Italian Sausage Pasta Salad Meal Prep",
@@ -4950,7 +5205,8 @@
       "1/2 cup grated parmesean cheese",
       "3/4 cup mini mozzarella balls",
       "1/2 cup Italian Salad dressing (can use up to 1 cup)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "One Skillet Spaghetti Squash and Meatballs",
@@ -4963,7 +5219,8 @@
       "1 cup  pasta sauce",
       "1 recipe 20 Minute Meatballs (*see link above)",
       "1 cup Shredded Mozzarella Cheese"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Beef and Vegetable Fried Rice",
@@ -4980,7 +5237,8 @@
       "3 tablespoons Tamari sauce",
       "2 teaspoons sesame oil",
       "1/4 cup thinly sliced green onions"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "BBQ Pulled Chicken Stuffed Sweet Potatoes",
@@ -4999,7 +5257,8 @@
       "1 tbsp honey",
       "1/4 tsp sea salt",
       "1/8 tsp cracked black pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Watercress Pesto Spaghetti",
@@ -5017,7 +5276,8 @@
       "1 lb boneless/skinless chicken breasts (4-4 ounces breasts)",
       "Sea salt and black pepper to taste",
       "1 cup watercress (for topping)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Chicken Finger &#038; French Fry Meal Prep",
@@ -5049,7 +5309,8 @@
       "1/4 tsp dill",
       "1/4 tsp onion powder",
       "pinch salt &amp; pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Greek Rice &#038; Turkey Meal Prep Bowls",
@@ -5070,7 +5331,8 @@
       "salt &amp; pepper",
       "1 cup cucumber slices",
       "Fresh lemon slices, for garnish"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Chipotle Brown Rice Grain Bowl",
@@ -5098,7 +5360,8 @@
       "1 cup fresh cilantro",
       "1/2 cup chopped red onion",
       "1/2 cup cilantro basil dressing"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Mexican Zucchini Boats",
@@ -5120,7 +5383,8 @@
       "1 cup shredded cheddar cheese",
       "1/4 ea red onion (chopped)",
       "1/4 ea cilantro (chopped)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Chicken Pot Pie Stew",
@@ -5139,7 +5403,8 @@
       "1/2 cup 2% milk",
       "Sea salt and pepper to taste",
       "50  simple mills gluten-free sea salt crackers"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Honey Garlic Chicken",
@@ -5154,7 +5419,8 @@
       "4 tbsp Honey",
       "1 bag Coleslaw",
       "4 Cups Jasmine Rice"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Shrimp Spring Roll Bowl",
@@ -5172,7 +5438,8 @@
       "2 tbsp Peanut (or almond Butter)",
       "1 tbsp Soy sauce",
       "1 tbsp Sesame Oil"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Chicken Shawarma Bowl",
@@ -5201,7 +5468,8 @@
       "Fresh parsley (chopped)",
       "Feta cheese",
       "Red pepper flakes (optional)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Salmon Fajitas",
@@ -5226,7 +5494,8 @@
       "1/3 cup cilantro",
       "4  lime wedges",
       "2/3 cup salsa"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Lemon Chicken and Pasta",
@@ -5241,7 +5510,8 @@
       "1 tbsp dried oregano",
       "8 oz Brown rice pasta",
       "salt and pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sweet 'N Spicy Jalapeno Sausage Fried Rice",
@@ -5261,7 +5531,8 @@
       "1  lime (qaurtered)",
       "1 medium Avocado (optional )",
       "salt &amp; pepper (if desired)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Egg Roll in a Bowl",
@@ -5283,7 +5554,8 @@
       "Chopped Green onion",
       "Chili paste",
       "Sriracha"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Yummy Bacon Burger Bowls",
@@ -5300,7 +5572,8 @@
       "1/4 tsp garlic powder",
       "1 cup cherry tomatoes",
       "Sliced dill pickles"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Steak &#038; Avocado Salad Recipe",
@@ -5320,7 +5593,8 @@
       "1 tsp Garlic powder",
       "1 tsp Chili powder",
       "2 tbsp salt & pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Instant Pot Honey Sesame Chicken",
@@ -5338,7 +5612,8 @@
       "1 tbsp toasted sesame seeds (+ extra for serving)",
       "1 tbsp gluten-free flour (optional)",
       "5 cups cooked white rice"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "20 Minute Paleo Thai Almond Butter Turkey Meatballs",
@@ -5357,7 +5632,8 @@
       "1 tbsp Coconut Aminos",
       "1/8th tsp liquid stevia ((or 1 tbs coconut sugar))",
       "squeeze fresh lime juice"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "One Pot Bacon Cheeseburger Pasta",
@@ -5377,7 +5653,8 @@
       "2 cups pasta (uncooked )",
       "1 cup cheddar cheese (shredded )",
       "Pickles for serving (optional)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Low-Carb Lettuce Wrap Sliders",
@@ -5393,7 +5670,8 @@
       "½  red onion (sliced thinly)",
       "4  romaine leaves",
       "4  Primal Kitchen Garlic Aioli Mayonnaise"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Mediterranean Salmon Bowl",
@@ -5414,7 +5692,8 @@
       "1/4 cup feta cheese",
       "1/2  cup hummus",
       "1/4 cup kalamata olives"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Salmon Cobb Salad Meal Prep",
@@ -5431,7 +5710,8 @@
       "salt &amp; pepper (as desired)",
       "4 tbsp red wine vinegar",
       "2 tbsp olive oil"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Ahi Tuna and Watercress Poke Bowl",
@@ -5451,7 +5731,8 @@
       "2 tbsp rice wine vinegar",
       "1 tbsp toasted sesame oil",
       "2 tsp sesame seeds"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Gluten Free Sweet Potato Pizza Meal Prep",
@@ -5472,7 +5753,8 @@
       "cup mozzarella cheese",
       "Parmesan cheese (optional)",
       "red pepper flakes (optional)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Crockpot Ropa Vieja Meal Prep",
@@ -5495,7 +5777,8 @@
       "2 cups chicken broth",
       "3/4 cup pitted green olives (sliced)",
       "2 tsp white wine vinegar"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Easy Falafel Meal Prep",
@@ -5517,7 +5800,8 @@
       "1  cucumber (diced)",
       "1  red onion (sliced thin)",
       "1  lemon (optional )"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sweet Potato &#038; Black Bean Veggie Burger Meal Prep",
@@ -5546,7 +5830,8 @@
       "sauteed mushrooms",
       "cheese",
       "Sir Kensington special sauce"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "BBQ Jackfruit &#038; Avocado Slaw Meal Prep",
@@ -5570,7 +5855,8 @@
       "raw cashews (for garnish)",
       "cilantro (chopped, for garnish)",
       "fresh lime juice (for garnish)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Crockpot Golden Lentil Soup",
@@ -5594,7 +5880,8 @@
       "2 tbsp lime juice",
       "pinch cayenne pepper (optional)",
       "cilantro (to garnish, optional)"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Eggplant Meatballs and Zoodle Meal Prep",
@@ -5613,7 +5900,8 @@
       "1/2 tso sea salt",
       "2 large zucchini (spiralized)",
       "1 jar pasta sauce (Whole30 compliant, if needed)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Slow Cooker Lentil Soup",
@@ -5637,7 +5925,8 @@
       "1/2 tsp black pepper",
       "2 cups chopped kale",
       "1/2 cup chopped parsley  (for serving)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Korean Beef Bowls",
@@ -5652,7 +5941,8 @@
       "4 cups assorted veggies (such as thinly sliced cabbage, shredded carrots, broccoli or cucumbers)",
       "2/3 cup chopped kimchi",
       "1/4 cup thinly sliced green onion"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Italian Sub Lettuce Wrap Meal Prep",
@@ -5668,7 +5958,8 @@
       "1/4 cup olive oil (or avocado oil)",
       "1/4 cup red wine vinegar",
       "salt &amp; pepper (as desired)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Apricot Salmon Meal Prep",
@@ -5685,7 +5976,8 @@
       "4 cups mixed vegetable",
       "Salt (to taste)",
       "jasmine rice (for serving)"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "Beef Zucchini Enchilada Meal Prep",
@@ -5702,7 +5994,8 @@
       "1 cup red sauce",
       "4 large zucchini (sliced with a mandolin)",
       "1/2 cup shredded cheddar cheese"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Chickpea Curry With Jasmine Rice Meal Prep",
@@ -5723,7 +6016,8 @@
       "1-13.5 ounce can  coconut milk",
       "dash  Sriracha",
       "cilantro (optional )"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Slow Cooker Thai Yellow Curry Meal Prep",
@@ -5745,7 +6039,8 @@
       "3 medium carrots (peeled and cut into large chunks)",
       "cilantro (for garnish)",
       "6 cups cauliflower rice"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "One Skillet Chicken Thighs With Roasted Grapes and Blue Cheese",
@@ -5763,7 +6058,8 @@
       "2 sprigs fresh thyme",
       "fresh lemon (sliced)",
       "2 cups arugula"
-    ]
+    ],
+    "servings": 3
   },
   {
     "name": "Buffalo Chicken Stuffed Pepper Meal Prep",
@@ -5782,7 +6078,8 @@
       "1 tbsp avocado oil",
       "lime (if desired)",
       "1/4 cup Whole30 compliant ranch (we like Primal Kitchen brand )"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Chicken Pad Thai Zoodles",
@@ -5806,7 +6103,8 @@
       "2 ea eggs (beaten)",
       "¼ cup cilantro (chopped)",
       "¼ cup peanuts (chopped)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sweet and Sour Cauliflower Bites Meal Prep",
@@ -5825,7 +6123,8 @@
       "1 tsp Garlic Powder",
       "2 tbs ketchup",
       "Water (as needed to thin sauce )"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Mushroom Carnitas Burrito Bowls",
@@ -5852,7 +6151,8 @@
       "1 medium Avocado",
       "1/2 cup black olives",
       "1 cup vegan pepper jack cheese (or cheese of choice)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Butter Herb Shrimp Corn and Potato Bake",
@@ -5870,7 +6170,8 @@
       "1 tsp minced garlic",
       "1/2 tsp sea salt",
       "1/8 tsp black pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Mediterranean Chicken Salad",
@@ -5894,7 +6195,8 @@
       "2 oz. feta cheese (crumbled)",
       "1/4 cup roasted shelled pistachios",
       "8 tbsp balsamic vinaigrette"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Garlic Coconut Butter Chicken Thighs and Zoodles",
@@ -5915,7 +6217,8 @@
       "1/4 cup chopped parsley",
       "salt &amp; pepper (as desired)",
       "4  NOW FOODS Coconut Infusions Non-Dairy Butter Packets"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Nutty Peanut Noodles",
@@ -5935,7 +6238,8 @@
       "1 cup sliced cucumbers",
       "1/4 cup chopped cilantro",
       "1 tbsp toasted sesame seeds"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Simple Stuffed Enjoya Bell Peppers",
@@ -5953,7 +6257,8 @@
       "2 tbsp Melissa’s peeled garlic (minced)",
       "2 cups white rice (cooked)",
       "8 oz marinara sauce"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Baked Fish and Chips Meal Prep",
@@ -5973,7 +6278,8 @@
       "1/2 tsp Sea Salt",
       "1/2 tsp Ground Pepper",
       "2 cup arugula"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "General Tso’s Cauliflower Bowls",
@@ -5999,7 +6305,8 @@
       "2 tsp tahini",
       "1 tsp corn starch",
       "black sesame seeds (optional )"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Tasty Thai Chili Garlic “Noodles”",
@@ -6023,7 +6330,8 @@
       "1/4 fresh cilantro",
       "1/4 cup Scallions",
       "4 cups coleslaw mixed veggies (plain, no dressing )"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Gazpacho Meal Prep",
@@ -6041,7 +6349,8 @@
       "1/4 cup packed fresh basil",
       "1 tsp Sea Salt",
       "1 tsp ground black pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Chicken Ramen Meal Prep",
@@ -6064,7 +6373,8 @@
       "Sriracha",
       "Sesame Seeds",
       "red chili flakes"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Vegetarian Cobb Salad Meal Prep",
@@ -6087,7 +6397,8 @@
       "1/4 tsp Salt",
       "1/4 tsp black pepper",
       "1 medium Avocado (sliced)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Macrobiotic Bowl",
@@ -6106,7 +6417,8 @@
       "1/2 cup tahini",
       "2 tbsp Coconut Aminos (or soy sauce if not gluten-free)",
       "2 tbsp Water"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Oven Baked BBQ Chicken and Veggies Meal Prep",
@@ -6128,7 +6440,8 @@
       "3 tbsp avocado oil (divided)",
       "1 tsp sea salt",
       "1 tsp ground black pepper"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Sheet Pan Chimichurri Chicken and Veggies",
@@ -6151,7 +6464,8 @@
       "2 tbsp red onion",
       "2 tsp Sea Salt",
       "1/4 tsp red chili pepper flakes"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Leftover Turkey Sweet Potato Shepherd’s Pie",
@@ -6175,7 +6489,8 @@
       "salt &amp; pepper (as desired)",
       "2 tbsp arrowroot flour",
       "2 cups leftover turkey (chopped)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Chicken Buddha Bowl Meal Prep",
@@ -6191,7 +6506,8 @@
       "black pepper",
       "1 tsp all-purpose seasoning",
       "fresh squeezed lemon juice"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cold Veggie Pizza Meal Prep",
@@ -6210,7 +6526,8 @@
       "fresh dill",
       "black pepper",
       "arugula"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Pulled Pork Stuffed Sweet Potatoes",
@@ -6225,7 +6542,8 @@
       "16 ea Sliced Pickles",
       "4 tbsp BBQ Sauce (I used Primal Kitchen)",
       "Seasoning (I used Traeger Classic)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Tofu Tikka Masala",
@@ -6251,7 +6569,8 @@
       "1/2 large head cauliflower",
       "1 tbs sesame oil",
       "Salt and Pepper (as desired )"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Apricot Cucumber Tofu Steak Meal Prep",
@@ -6269,7 +6588,8 @@
       "8 cups green beans (trimmed)",
       "2 cups cooked quinoa",
       "fresh mint serving"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Pesto Chicken Meal Prep",
@@ -6291,7 +6611,8 @@
       "1/4 cup walnuts",
       "1 clove garlic",
       "1/4 tsp salt"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Popcorn Chicken with Rice Noodles and Gochujang Sauce",
@@ -6314,7 +6635,8 @@
       "3 tbsp Coconut Sugar",
       "1 tbsp Soy Sauce",
       "3 tbsp Korean chili paste"
-    ]
+    ],
+    "servings": 5
   },
   {
     "name": "Greek Salad",
@@ -6330,7 +6652,8 @@
       "⅓ cup feta cheese",
       "1 lb chicken fajita",
       "Primal Kitchen Greek Dressing"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Vegan Chickpea Curry &#038; Basmati Rice Meal Prep",
@@ -6347,7 +6670,8 @@
       "30 ounces chickpeas (drained and rinsed)",
       "2 packages Vee Tee Basmati Rice",
       "fresh herbs (for garnish)"
-    ]
+    ],
+    "servings": 5
   },
   {
     "name": "Slow Cooker Beef Ragu Pasta Meal Prep",
@@ -6368,7 +6692,8 @@
       "1 pound chickpea pasta (or pasta of choice)",
       "grated Parmesan cheese",
       "parsley"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "Keto Bacon Sausage Meatballs",
@@ -6381,7 +6706,8 @@
       "2 tbsp. garlic (minced)",
       "2 tbsp. white onion (diced)",
       "1 tbsp. Dried oregano"
-    ]
+    ],
+    "servings": 9
   },
   {
     "name": "10 Minute Chili Meal Prep",
@@ -6399,7 +6725,8 @@
       "shredded cheese",
       "cilantro",
       "chives"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "Beef Patties-Sweet Corn Rice and Sautéed Veggies",
@@ -6419,7 +6746,8 @@
       "4 handfuls spinach",
       "10 cherry  tomatoes",
       "Coconut oil (as needed)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Crockpot Pumpkin Chili Meal Prep",
@@ -6440,7 +6768,8 @@
       "1/2 tsp paprika",
       "1 tsp dried parsley (plus additional for garnish)",
       "salt &amp; pepper (to taste)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Instant Pot Moroccan Chicken Meal Prep",
@@ -6465,7 +6794,8 @@
       "cilantro (to garnish, optional )",
       "silvered almonds (to garnish, optional)",
       "4 cups riced cauliflower"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Grilled Halloumi and Watermelon Salad",
@@ -6480,7 +6810,8 @@
       "1 large  Avocado",
       "1 lemon sliced",
       "4 tbs balsamic glaze"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Kimchi Buddha Bowl Meal Prep",
@@ -6501,7 +6832,8 @@
       "2 tbsp avocado oil",
       "salt &amp; pepper (to taste)",
       "Sesame Seeds (optional )"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sausage and Mashed Potato Meal Prep",
@@ -6523,7 +6855,8 @@
       "1 tsp thyme",
       "1 tbsp arrowroot",
       "2 tbsp Water"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Orange Chicken Meal Prep",
@@ -6547,7 +6880,8 @@
       "1 tbsp arrowroot flour",
       "4 cups riced cauliflower (prepared)",
       "1 pound green beans or broccoli (steamed)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Gumbo Meal Prep",
@@ -6569,7 +6903,8 @@
       "2 cups okra (sliced)",
       "2 medium bell peppers (diced)",
       "2 cups riced cauliflower"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Buffalo Chicken Mac &#038; Cheese",
@@ -6591,7 +6926,8 @@
       "1/2 cup Parmesan cheese",
       "Carrots (cut into slices)",
       "celerey (cut into slices)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Mozzarella Stuffed Meatballs",
@@ -6609,7 +6945,8 @@
       "zoodles (4 cups)",
       "gluten free pasta (2 cups)",
       "Marinara Sauce"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Roasted Mediterranean Cauliflower Gnocchi &#038; Veggies",
@@ -6627,7 +6964,8 @@
       "2 tbsp avocado oil",
       "1 tsp Sea Salt",
       "1 tsp black pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Zuppa Pomodoro Meal Prep",
@@ -6648,7 +6986,8 @@
       "1/2 cup orzo pasta",
       "1/3 cup hemp hearts",
       "1/2 cup basil (roughly chopped + garnish)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Teriyaki Chicken and Pineapple Fried Rice",
@@ -6668,7 +7007,8 @@
       "1/2 cup diced frozen mixed veggies",
       "1 tsp black sesame seeds",
       "4 cups mixed greens"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Indonesian Grain Bowl",
@@ -6686,7 +7026,8 @@
       "1 pound green beans (end trimmed)",
       "5 cups cauliflower florets",
       "12 ounces bean sprouts"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "One Pan Mushroom Tetrazzini",
@@ -6707,7 +7048,8 @@
       "1 pound gluten free spaghetti (or pasta of choice (we used Banza brand))",
       "2 tbsp lemon juice",
       "1/2 cup gluten free panko breacrumbs"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Mole Tempeh Enchiladas",
@@ -6740,7 +7082,8 @@
       "1/2 cup onion (diced)",
       "8 corn tortillas",
       "1 1/2 cups  vegan shredded cheddar cheese (or pepper jack (can sub for regular cheese if not vegan))"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Thyme Pork Chops and Marinated Salad",
@@ -6769,7 +7112,8 @@
       "1/4 tsp dried oregano",
       "1 medium Lemon (zested)",
       "cups fresh arugula"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Coconut Sugar Sriracha Shrimp Meal Prep",
@@ -6785,7 +7129,8 @@
       "2 tbsp. chives (optional)",
       "2 cups riced cauliflower (cooked)",
       "2 cups Broccoli (steamed)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Grilled Steak and Garlic Roasted Potato Meal Prep",
@@ -6800,7 +7145,8 @@
       "1 tsp. dried thyme",
       "Salt &amp; pepper (to taste)",
       "1 cup broccoli (roasted)"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "Fruity Quinoa and Grilled Salmon",
@@ -6817,7 +7163,8 @@
       "4 large strawberries",
       "1/3 cup mango chunks",
       "Salt and pepper (to taste)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Bruschetta Chicken",
@@ -6841,7 +7188,8 @@
       "2 tbsp butter",
       "1/4 tsp sea salt",
       "1/8 tsp black pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Steak and Veggies Meal Prep",
@@ -6854,7 +7202,8 @@
       "½  yellow onion",
       "3  sweet potatoes",
       "2 cups mushrooms"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Carrot Meatballs With Mint Cauliflower Rice",
@@ -6874,7 +7223,8 @@
       "4  mint leaves",
       "Salt &amp; pepper (to taste)",
       "1/2 cup water"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Chicken Quinoa Salad",
@@ -6890,7 +7240,8 @@
       "5 ea scallions",
       "1/4 cup pomegranate arils (seeds)",
       "2 ea limes"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Air Fried Parmesan Broccoli",
@@ -6903,7 +7254,8 @@
       "1 tsp lemon pepper",
       "1 tbsp butter",
       "1 tsp garlic powder"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Shrimp Bowtie Pasta",
@@ -6916,7 +7268,8 @@
       "1  jar garlic pasta sauce",
       "4  whole garlic cloves",
       "1  large bag spinach"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Slow Cooker Lemon Garlic Chicken Meal Prep",
@@ -6932,7 +7285,8 @@
       "8 cloves garlic (smashed)",
       "8 springs fresh thyme (or 1 tbsp dried thyme)",
       "vegetables for serving"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Tuna Poke Bowl Meal Prep",
@@ -6954,7 +7308,8 @@
       "Rice noodles (if desired)",
       "Spring onions (if desired)",
       "Spinach (if desired)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sun Dried Tomato, Mozzarella &#038; Basil Stuffed Chicken",
@@ -6970,7 +7325,8 @@
       "1.5 tsp olive oil (or oil of choice)",
       "salt &amp; pepper (to taste)",
       "zucchini noodles"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Skillet Shrimp with Tomato and Avocado",
@@ -6989,7 +7345,8 @@
       "1 ea avocado (seeded and diced)",
       "1 tbsp lime juice (or more as needed)",
       "1/4 cup fresh cilantro (chopped)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "One Pan Paleo Sticky Sesame Chicken Thighs",
@@ -7005,7 +7362,8 @@
       "1.5 tsp.  garlic powder (can sub crushed garlic)",
       "2 tbsp. coconut flour",
       "sesame seeds (optional )"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Sheet Pan Salmon and Veggies Meal Prep",
@@ -7020,7 +7378,8 @@
       "2 small Yellow Squash (cut into rounds)",
       "½ large Red Onion (sliced)",
       "1 large Red Bell Pepper (sliced)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Change Up Your Meal Prep Protein Game With A Shrimp Meal Prep",
@@ -7035,7 +7394,8 @@
       "1 tbsp ghee",
       "Seasonings of choice",
       "Blueberries or favorite fruit"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Packing A Bunch Of Protein Into Your Meal Prep Has Never Been Easier!",
@@ -7057,7 +7417,8 @@
       "½ tsp kosher salt",
       "¼ tsp black pepper",
       "1  –2 tsp olive oil to make a loose paste"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "One Dish Spaghetti Squash &#038; Spicy BBQ Chicken Drumsticks",
@@ -7069,7 +7430,8 @@
       "1 1/2 lbs.  chicken drumsticks",
       "1/2 cup bbq sauce",
       "1 tsp.  hot sauce"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Molasses Bourbon BBQ Glazed Chicken Meatballs",
@@ -7096,7 +7458,8 @@
       "2/3  Broccoli (steamed)",
       "2/3  Cauliflower (steamed)",
       "3/4  Cooked Brown Rice with 1/4 Cooked Quinoa"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Balsamic Caprese Chicken",
@@ -7116,7 +7479,8 @@
       "2 tsp. Dried Oregano",
       "1 tsp. Himalayan Pink Salt",
       "1 tsp. Ground Black Pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Caribbean Chicken Thighs",
@@ -7144,7 +7508,8 @@
       "1 tbsp lime juice",
       "1 tsp minced jalapeño",
       "1/4 tsp sea salt"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Chicken Enchiladas",
@@ -7169,7 +7534,8 @@
       "1 Tsp. Garlic Granules",
       "1/2 tsp. Ground Black Pepper",
       "1/2 tsp. Pink Himalayan Salt"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Turkey Stuffed Sweet Potatoes",
@@ -7194,7 +7560,8 @@
       "1 Tbsp. Avocado Oil",
       "2 tsp. Siete brand Chipotle Hot Sauce",
       "1 tsp. Garlic Powder"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Stir Fry Chicken and Veggies",
@@ -7219,7 +7586,8 @@
       "1/2 Cup Chopped Ripe Mango",
       "1/2 tsp. Grated Fresh Ginger",
       "1 tsp. Rice Vinegar"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Broiled Cod with Mango Relish",
@@ -7240,7 +7608,8 @@
       "1  Lime (juiced)",
       "1/2 tsp. Pink Himalayan Salt",
       "1/2 tsp. Ground Black Pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Instant Pot Minestrone Soup",
@@ -7263,7 +7632,8 @@
       "1 teaspoon Ground Black Pepper",
       "1/2 teaspoon red chili flakes",
       "1/2 teaspoon Pink Himalayan Salt"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Beef and Cheese Taquitos",
@@ -7291,7 +7661,8 @@
       "1/2 tsp chili powder",
       "1/4 tsp sea salt",
       "1/4 cup crumbled cojita cheese"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Spicy Italian Sausage and Tortellini Soup",
@@ -7312,7 +7683,8 @@
       "1/3 cup heavy cream",
       "1/4 cup shaved Parmesan cheese",
       "1/3 cup chopped fresh basil"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Pork Fried Cauliflower Rice",
@@ -7331,7 +7703,8 @@
       "5 cups cilantro lime cauliflower rice",
       "1/4 cup coconut aminos",
       "1/2 cup sliced green onion for serving"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "One Pan Baked Pasta Primavera",
@@ -7347,7 +7720,8 @@
       "2 cups unsweetened almond milk",
       "2/3 cup shredded low-fat mozzarella cheese",
       "1/3 cup fresh basil (chopped)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Moroccan Farro Grain Bowl",
@@ -7373,7 +7747,8 @@
       "1/2 cup shelled pistachios (chopped)",
       "1/2 cup fresh cilantro (chopped)",
       "1/2 cup cilantro-basil dressing"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Eggplant Lasagna",
@@ -7397,7 +7772,8 @@
       "8 oz. broccolini",
       "1 tbsp olive oil",
       "Sea salt and pepper to taste"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Taco Wontons",
@@ -7419,7 +7795,8 @@
       "3 tbsp olive oil",
       "2 tbsp fresh lime juice",
       "1/2 tsp sea salt"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Vegetarian Chorizo and Quinoa Stuffed Peppers",
@@ -7437,7 +7814,8 @@
       "1/2 cup plant-based shredded cheese",
       "1/2 cup salsa",
       "4 tbsp chopped cilantro"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Spicy Turkey Meatballs and Rice",
@@ -7455,7 +7833,8 @@
       "1 tbsp red pepper",
       "1 tsp Italian seasoning",
       "1/2 cup Chicken broth"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Tuna Snack Box",
@@ -7467,7 +7846,8 @@
       "1 ea cucumber",
       "1 cup Almonds",
       "8 ea cheese sticks"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Avocado Egg Salad Meal Prep",
@@ -7483,7 +7863,8 @@
       "1 tbsp Salt",
       "1 tbsp Pepper",
       "For serving: Blue corn tortilla chips (any gf crackers, or bell pepper slices)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Keto Parmesan Chicken Patties",
@@ -7504,7 +7885,8 @@
       "2 tbsp olive oil",
       "1/4 tsp sea salt",
       "Cracked black pepper to taste"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Slow Cooker Keto Pork Carnitas Bowls",
@@ -7533,7 +7915,8 @@
       "1/2 cup cheddar cheese",
       "salsa (optional)",
       "jalapenos (optional )"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Keto Lamb Meatball Meal Prep",
@@ -7556,7 +7939,8 @@
       "zoodles",
       "brown rice",
       "shredded cheese"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Firecracker Beef",
@@ -7574,7 +7958,8 @@
       "1 tbsp apple cider vinegar",
       "4 tbsp honey",
       "1 tbsp cornstarch"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Chicken Fried Rice",
@@ -7596,7 +7981,8 @@
       "1/2 cup carrot",
       "1 tbsp soy sauce",
       "Salt + Pepper to taste"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Spicy Air Fryer Shrimp",
@@ -7609,7 +7995,8 @@
       "1 tsp paprika",
       "2 tsp hot sauce (optional)",
       "1 tbsp olive oil"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Pork Tenderloin Meal Prep",
@@ -7624,7 +8011,8 @@
       "1 tsp dried thyme",
       "1/2 tsp paprika",
       "Salt &amp; pepper (to taste)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "BBQ Pulled Mushrooms",
@@ -7649,7 +8037,8 @@
       "1 tbsp raw honey",
       "1 tsp Dijon mustard",
       "1/4 tsp black pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Caribbean Drumsticks",
@@ -7679,7 +8068,8 @@
       "1 tsp. Honey",
       "1/4 tsp. Pink Himalayan Salt",
       "1/4 tsp. Ground Black Pepper"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Slow Cooker Stuffed Cabbage Soup",
@@ -7701,7 +8091,8 @@
       "4 cups beef stock",
       "Salt and pepper to taste",
       "2 tbsp fresh chopped parsley"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Teriyaki Salmon &#038; Pineapple Skewer Meal Prep",
@@ -7722,7 +8113,8 @@
       "1/2 tsp Ground Ginger",
       "1/2 tsp seas salt",
       "Water (optional to thin sauce to desired consistency )"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "BBQ Lentil Taco Meal Prep",
@@ -7755,7 +8147,8 @@
       "6  corn tortillas",
       "3 cups lettuce (chopped)",
       "1  tomato (chopped)"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Five-Spice Beef and Broccoli",
@@ -7776,7 +8169,8 @@
       "1 tbsp coconut sugar",
       "1 tsp Chinese 5-Spice seasoning",
       "1/2 tsp minced garlic"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Red Pepper and Parmesan Quinoa Pasta",
@@ -7796,7 +8190,8 @@
       "1/4 cup fresh basil + extra for serving",
       "6 oz. low-fat cream cheese (cubed)",
       "4 cups steamed broccoli"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Mongolian Beef Meatballs",
@@ -7817,7 +8212,8 @@
       "2 tsp arrowroot flour",
       "4 cups broccoli florets (steamed)",
       "Sea salt to taste"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Firecracker Tofu",
@@ -7836,7 +8232,8 @@
       "2 tbsp vegetable oil",
       "4 cups steamed white rice",
       "4 cups steamed broccoli"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Thai Red Curry Chicken",
@@ -7858,7 +8255,8 @@
       "1/2 tsp sea salt",
       "1/2 cup fresh basil leaves",
       "8 cups riced cauliflower"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Air Fryer Chicken Parmesan",
@@ -7881,7 +8279,8 @@
       "1 tsp olive oil",
       "8 cups spiral sliced zucchini",
       "1 tsp minced garlic"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Vegan Sweet Potato Chipotle Bowl",
@@ -7906,7 +8305,8 @@
       "1/2 cup chopped tomatoes",
       "1/4 cup finely chopped red onion",
       "2 tbsp pumpkin seeds"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Asian Chicken",
@@ -7927,7 +8327,8 @@
       "1 tbsp coconut sugar",
       "1 tsp minced garlic",
       "1/2 tsp ginger paste"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Air Fryer Egg Rolls",
@@ -7954,7 +8355,8 @@
       "1/2 tsp minced garlic",
       "1/4 tsp chili flakes",
       "1/4 tsp sesame seeds"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Orange Sesame Tofu and Snap Peas",
@@ -7974,7 +8376,8 @@
       "4 cups snap peas",
       "1/2 cup chopped green onion",
       "2 tsp sesame seeds"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Low Carb Lasagna Meal Prep",
@@ -7997,7 +8400,8 @@
       "1 large egg",
       "1/4 cup fresh parsley",
       "2 cup Shredded Mozzarella Cheese"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Shrimp Quinoa Broccoli Meal Prep | Garlic Shrimp Recipe",
@@ -8014,7 +8418,8 @@
       "1 lb shrimp",
       "2 cups quinoa (cooked)",
       "2 cups steamed broccoli"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Chicken Fajitas",
@@ -8028,7 +8433,8 @@
       "3 ea bell peppers (sliced)",
       "1 ea onion (sliced thinly)",
       "Fresh limes"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Pumpkin Mustard Stuffed Cabbage",
@@ -8049,7 +8455,8 @@
       "1/2 tsp ground nutmeg (optional)",
       "3/4 bottle  pumpkin mustard",
       "hemp seeds (optional )"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "One Pan Baked Cod and Veggies",
@@ -8062,7 +8469,8 @@
       "2 cups purple potatoes (diced)",
       "3-4 tbsp. oil of choice",
       "seasoning (as desired)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Parmesan Chicken Tenders | Meal Prep",
@@ -8079,7 +8487,8 @@
       "2 cloves Melissa's Minced Garlic",
       "1 lb Melissa's Ready to Eat Green Beans",
       "1 cup Grape Tomatoes"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Pineapple Chicken",
@@ -8101,7 +8510,8 @@
       "1 tsp. Dried Basil",
       "1/2 tsp. Himalayan Pink Salt",
       "1/4 tsp. Ground Black Pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Mediterranean Style Meal Prep Bowls",
@@ -8119,7 +8529,8 @@
       "1/2 cup  reduced fat feta cheese",
       "1/3 cup sliced olives",
       "1/2 cup Tzatziki sauce"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Air Fryer Popcorn Chicken",
@@ -8142,7 +8553,8 @@
       "1/4 cup Dijon mustard",
       "3 tbsp Paleo mayonnaise",
       "2 tbsp honey"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Fall Harvest Sheet Pan Dinner Meal Prep",
@@ -8156,7 +8568,8 @@
       "1.5 lbs brussels sprouts",
       "2 tbsp lemon, pepper, herb seasoning",
       "Olive oil ((optional))"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cilantro Lime Rice",
@@ -8170,7 +8583,8 @@
       "1  lime",
       "1/2  onion (white or red)",
       "2 cups vegetable (or chicken broth)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Loaded Mediterranean Bowl Meal Prep",
@@ -8187,7 +8601,8 @@
       "1 tbsp extra virgin olive oil",
       "1/4 tsp turmeric",
       "fresh lemon"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Lighter Mango Chicken Sticky Rice Meal Prep",
@@ -8205,7 +8620,8 @@
       "1/2 tsp dried parsley",
       "Salt and pepper (to taste)",
       "Scallions (for garnish)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "One Pot Jambalaya Meal Prep",
@@ -8227,7 +8643,8 @@
       "1/4 cup chicken broth (or water)",
       "1 pound cauliflower rice",
       "8 ounces medium shrimp (peeled and deveined)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Tuna Quinoa Salad In Endive Wraps",
@@ -8244,7 +8661,8 @@
       "1/2 tsp. fresh dill",
       "Salt &amp; pepper (to taste)",
       "Endive leaves (to make wraps)"
-    ]
+    ],
+    "servings": 1
   },
   {
     "name": "Chicken Salad",
@@ -8259,7 +8677,8 @@
       "1/4 cup Cilantro",
       "1/3 cup Mayo",
       "1/4 cup Dijon Mustard"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cold Chicken Soba Noodle Meal Prep",
@@ -8281,7 +8700,8 @@
       "Sesame Seeds (black/white)",
       "cilantro",
       "fresh lime juice"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Spicy Mustard Thyme Chicken &#038; Coconut Roasted Brussels Sprouts",
@@ -8296,7 +8716,8 @@
       "1 tsp. thyme",
       "salt &amp; pepper (to taste)",
       "1 tbsp. coconut oil (melted)"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "Jalapeno Sliders With Sweet Potato Bun Meal Prep",
@@ -8312,7 +8733,8 @@
       "1 tbsp. olive oil",
       "salt &amp; pepper (to taste)",
       "sides as desired"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "Mediterranean Roasted Eggplant Salad",
@@ -8333,7 +8755,8 @@
       "1/2 tsp minced garlic",
       "1/2 tsp salt",
       "1/8 tsp cracked black pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Turkey Wrap",
@@ -8346,7 +8769,8 @@
       "2 tbsp Primal Kitchen Chipotle Lime Mayo",
       "4 ounces cheese",
       "2 cups baby spinach"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Air Fryer Coconut Shrimp",
@@ -8373,7 +8797,8 @@
       "1/4 tsp monk fruit sweetener",
       "1/4 tsp minced garlic",
       "1/4 tsp ground ginger"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Autumn Sheet Pan Chicken Recipe",
@@ -8394,7 +8819,8 @@
       "1 tbsp thyme",
       "1 tbsp sage",
       "1 tbsp rosemary"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Shrimp Fajitas",
@@ -8419,7 +8845,8 @@
       "1/4 tsp sea salt",
       "1  lime (sliced into wedges)",
       "4  corn tortillas"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cranberry Turkey Pinwheels",
@@ -8433,7 +8860,8 @@
       "1/3 cup cranberry sauce",
       "2 tbsp walnuts",
       "1 cup spinach (baby)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Maple Crusted Air Fryer Salmon (Heart Healthy)",
@@ -8452,7 +8880,8 @@
       "1/4 cup walnuts (chopped )",
       "1/4 tsp salt",
       "2 cups brown rice (cooked )"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Jalapeño Buffalo Chicken Casserole",
@@ -8472,7 +8901,8 @@
       "1 tablespoon minced garlic",
       "1 teaspoon salt",
       "1/2 teaspoon black pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Spaghetti Squash Shrimp Scampi",
@@ -8487,7 +8917,8 @@
       "1  Bag Spinach",
       "6  Whole Garlic Cloves",
       "1  Can Diced Tomatoes"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Chicken Jambalaya",
@@ -8508,7 +8939,8 @@
       "1 teaspoon dried oregano",
       "2 cups chicken broth",
       "4 cups Minute White Rice Cups"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Gorgeous Greek Salad",
@@ -8522,7 +8954,8 @@
       "1 ea cucumber",
       "2 tbsp Feta cheese",
       "2 tbsp Greek salad dressing"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Taco Bowls",
@@ -8539,7 +8972,8 @@
       "8 oz black beans",
       "1 ea lime",
       "4 oz shredded cheese"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Italian Sausage and Peppers",
@@ -8552,7 +8986,8 @@
       "2 tbsp olive oil",
       "1 tsp dried Italian seasoning",
       "4 cups cooked brown rice"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Roasted Vegetable Vegan Stew",
@@ -8574,7 +9009,8 @@
       "Salt and pepper to taste",
       "Fresh chopped parsley for serving",
       "2 cups cooked quinoa"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Broccoli Cheddar Stuffed Chicken Breast &#038; Rice Pilaf",
@@ -8601,7 +9037,8 @@
       "2 cups chicken stock",
       "Sea salt and black pepper to taste",
       "1/4 cup chopped parsley"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Korean BBQ Chicken Thighs",
@@ -8618,7 +9055,8 @@
       "1 tsp. Sesame Seeds",
       "1/2 tsp. Garlic Powder",
       "1/4 tsp. Pink Himalayan Salt"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Spicy Peanut Tempeh and Sesame Vegetables",
@@ -8637,7 +9075,8 @@
       "3 tbsp toasted sesame oil",
       "1/2 tsp salt",
       "5  Teal Good Cook meal prep containers"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Pulled Pork Lettuce Wrap Meal Prep",
@@ -8655,7 +9094,8 @@
       "butter lettuce leaves",
       "Cherry Tomatoes",
       "mustard"
-    ]
+    ],
+    "servings": 3
   },
   {
     "name": "Sheet Pan Zesty Stuffed Poblano Peppers",
@@ -8675,7 +9115,8 @@
       "1/2 cup shredded cheddar cheese",
       "1/3 cup chopped red onion",
       "1/3 cup chopped cilantro"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Buffalo Chicken Stuffed Sweet Potato Skins",
@@ -8693,7 +9134,8 @@
       "2  celery stalks (sliced into sticks)",
       "2 medium carrots (sliced into sticks)",
       "1/2 cup blue cheese or ranch dressing"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Baked Salmon with Blackberry Quinoa Salad",
@@ -8713,7 +9155,8 @@
       "1/2 tsp. Garlic Granules",
       "1/4 tsp. Pink Himalayan Salt",
       "1/4 tsp. Ground Black Pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Air Fryer Firecracker Chicken",
@@ -8731,7 +9174,8 @@
       "1 cup <strong>dry white rice </strong>",
       "3 cups <strong>steamed edamame </strong>",
       "1/4 tsp <strong>flaky sea salt </strong>"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sun Dried Tomato, Broccoli &#038; Portobello Mushroom Mac &#038; Cheese",
@@ -8746,7 +9190,8 @@
       "2 cup broccoli florets (680 grams)",
       "1/2 cup sun dried tomatoes (176 grams )",
       "6 ounces portobello mushrooms (sliced, 168 grams )"
-    ]
+    ],
+    "servings": 5
   },
   {
     "name": "Honey Garlic Mushroom Meatballs",
@@ -8771,7 +9216,8 @@
       "1/2 cup coconut aminos",
       "1/4 cup raw honey",
       "2 tsp minced garlic"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Fall Harvest Sausage Salad",
@@ -8795,7 +9241,8 @@
       "1/8 tsp..  garlic powder",
       "1/8 tsp.  paprika",
       "salt &amp; pepper (if desired)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "One Pan Sausage and Veggie Meal Prep",
@@ -8811,7 +9258,8 @@
       "6 oz Cherry Tomatoes",
       "4 ea baby cauliflower",
       "1 ea red bell pepper (sliced)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "One Skillet Honey Dijon Pork Chops With Apples &#038; Onions",
@@ -8828,7 +9276,8 @@
       "1 tsp Sea Salt",
       "1/2 tsp black pepper",
       "1 tbs fresh herbs (we used thyme, rosemary and sage)"
-    ]
+    ],
+    "servings": 3
   },
   {
     "name": "Instant Pot Ranch Chicken Lettuce Wraps (Keto Tex-Mex Meal Prep)",
@@ -8849,7 +9298,8 @@
       "8 large  lettuce leaves",
       "1 1/3  cup guacamole",
       "1 1/3 cup  salsa (no sugar added)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sausage Grill Packet Meal Prep",
@@ -8866,7 +9316,8 @@
       "1 cup mushrooms (sliced)",
       "herb sprigs (if desired)",
       "Salt &amp; pepper (to taste)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Recipe Chicken and Asparagus Bowl",
@@ -8879,7 +9330,8 @@
       "1 lb Asparagus (tough ends trimmed)",
       "1/4 cup Oyster sauce",
       "2 cloves garlic (minced)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Easy Lemon Pepper Sheet Pan Salmon with Chive Yogurt Sauce",
@@ -8898,7 +9350,8 @@
       "⅛ teaspoon salt",
       "½ teaspoon chives (sub for scallions, diced)",
       "1 tablespoon lemon zest"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Marry Me Tortellini - A Tasty Twist on Marry Me Chicken",
@@ -8918,7 +9371,8 @@
       "1 tbsp red pepper",
       "1 tsp garlic powder",
       "1 tbsp Salt and Pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Crockpot Beef with Sugar Snap Peas",
@@ -8937,7 +9391,8 @@
       "1 pound sugar snap peas (trimmed)",
       "1/2 cup fresh basil leaves (finely chopped, for garnish)",
       "White rice (cooked, optional, for serving)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "The Most Flavorful Asian Air Fryer Salmon",
@@ -8957,7 +9412,8 @@
       "4 cups fresh green beans (ends trimmed)",
       "1 tbsp olive oil",
       "1/4 tsp sea salt"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "One Pan Salmon with Creamed Spinach Farro",
@@ -8976,7 +9432,8 @@
       "14 ounces canned coconut milk",
       "6 ounces baby spinach",
       "1 cup Italian pearled farro"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Salmon Burgers",
@@ -9002,7 +9459,8 @@
       "2/3 cup mayonnaise",
       "1/4 cup jarred roasted red bell peppers (drained)",
       "1 tsp lemon juice"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Lemon-Pepper Chicken Drumstick Recipe",
@@ -9014,7 +9472,8 @@
       "12 ounces green beans (frozen (1 bag))",
       "2 cups uncooked quinoa",
       "Mrs. Dash Lemon Pepper seasoning"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Balsamic Sausage and Veggie Meal Prep",
@@ -9035,7 +9494,8 @@
       "1/4 tsp Salt",
       "1/4 tsp black pepper",
       "1  Lemon (juiced)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Steak Fajita Meal Prep",
@@ -9066,7 +9526,8 @@
       "sliced avocado",
       "salsa",
       "Sour Cream (or greek yogurt)"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Chicken Marsala Meatballs",
@@ -9090,7 +9551,8 @@
       "1 tbsp plain Greek yogurt",
       "12 ounces green beans (optional)",
       "16 ounces store-bought mashed potatoes (optional)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Crockpot Chicken Piccata and Green Beans",
@@ -9106,7 +9568,8 @@
       "10 oz frozen green beans",
       "1 tbsp butter",
       "½ tsp garlic powder"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Kofta Kebab Meal Prep",
@@ -9127,7 +9590,8 @@
       "1/4 tsp ground paprika",
       "2 tsp grapeseed oil or neutral oil of choice",
       "1 pound  ground beef (we used 80/20)"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "Cranberry BBQ Vegan Meatballs",
@@ -9147,7 +9611,8 @@
       "2 cups bbq sauce (your choice)",
       "1 cup frozen cranberries",
       "1 cup dry quinoa (prepared)"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Turmeric Ginger Salmon in Foil Meal Prep",
@@ -9162,7 +9627,8 @@
       "1 tsp ground ginger",
       "1 1/2 tsp ground turmeric",
       "1 tsp black pepper"
-    ]
+    ],
+    "servings": 3
   },
   {
     "name": "Crockpot Mississippi Chicken Thighs with Noodles",
@@ -9176,7 +9642,8 @@
       "12 ounces pepperoncini peppers",
       "1/2 cup reserved pepperoncini juice",
       "8 ounces egg noodles"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Skillet Bacon Broccoli Pork Chops Meal Prep",
@@ -9198,7 +9665,8 @@
       "1 cup baby bella mushrooms (sliced)",
       "1 tsp garlic powder",
       "Garlic risotto (optional, cooked according to package directions)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Crockpot French Onion Stuffed Shells Meal Prep",
@@ -9224,7 +9692,8 @@
       "4 cups spinach (sauteed, optional)",
       "2 cups mushrooms (sauteed, optional)",
       "1 tsp garlic powder (optional)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Lemon Ricotta Chicken and Roasted Broccoli",
@@ -9250,7 +9719,8 @@
       "1 tbsp olive oil",
       "Salt (to taste)",
       "Pepper (to taste)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Salmon with Capers and Broccolini Pasta",
@@ -9270,7 +9740,8 @@
       "2 tbsp coconut aminos",
       "1 cup low-sodium chicken broth",
       "1 1/2 cups heavy cream"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Taco Skillet Meal Prep",
@@ -9289,7 +9760,8 @@
       "2 tbsp avocado oil",
       "Avocado",
       "tortilla chips (if desired )"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Quinoa Chickpea Taco Bowls",
@@ -9312,7 +9784,8 @@
       "1-2 tbsp lime juice (to taste)",
       "1  Jalapeno (minced or to taste)",
       "1/4 tsp Sea Salt"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cauliflower Tabouli and Salmon Meal Prep",
@@ -9334,7 +9807,8 @@
       "1/4 tsp black pepper",
       "fresh mint",
       "lemon slices (for garnish)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "One-Pan Chicken and Orzo Recipe",
@@ -9353,7 +9827,8 @@
       "Basil leaves",
       "Olive oil",
       "1 cup bocconcini"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sesame Salmon with Baby Bok Choy and Mushrooms",
@@ -9373,7 +9848,8 @@
       "1/2 lemon juice",
       "1/2 tsp salt",
       "1/2 tsp black pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Paleo Chicken Soup with Kale",
@@ -9393,7 +9869,8 @@
       "4 cups chicken broth",
       "4 cups water",
       "1  whole chicken"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Vegan Minestrone Soup",
@@ -9414,7 +9891,8 @@
       "18 oz steamed red kidney beans",
       "18 oz steamed garbanzo beans",
       "1 cup elbow pasta"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "Minute Rice Buffalo Chicken Meatballs Recipes",
@@ -9433,7 +9911,8 @@
       "1/2 tsp salt",
       "1 cup panko breadcrumbs",
       "4 cups Minute White Rice"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Arugula Pesto Shrimp Meal Prep",
@@ -9448,7 +9927,8 @@
       "2 medium zucchini (sliced into coins)",
       "1/2 tsp Garlic Powder",
       "salt &amp; pepper (to taste)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Pork Burger Meal Prep",
@@ -9475,7 +9955,8 @@
       "4  lettuce leaves",
       "4 large eggs (cooked to liking)",
       "olives (optional (not included in nutrition facts))"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Baked Lentil Sweet Potato Falafel with Avocado Cream Sauce",
@@ -9493,7 +9974,8 @@
       "salt &amp; pepper (to taste)",
       "1 large Avocado (pitted)",
       "2 tbsp unsweetened coconut milk"
-    ]
+    ],
+    "servings": 12
   },
   {
     "name": "Arugula Pesto Pasta Meal Prep",
@@ -9515,7 +9997,8 @@
       "1/4 cup nutritional yeast",
       "1/2 tsp  salt",
       "1/4 tsp black pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Moroccan Turmeric Chicken Stew",
@@ -9538,7 +10021,8 @@
       "4 cups  rice cauliflower (cooked)",
       "parsley (for garnish)",
       "salt &amp; pepper (to taste)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Chicken and Veggies",
@@ -9556,7 +10040,8 @@
       "1 tablespoon salt",
       "1 tablespoon pepper",
       "1 tablespoon paprika"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sheet Pan Greek Chicken and Vegetables",
@@ -9578,7 +10063,8 @@
       "1 cup coarsely chopped red onion",
       "1 cup cherry tomatoes",
       "8 cups mixed greens"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Hawaiian Chicken Teriyaki Skewer Meal Prep",
@@ -9598,7 +10084,8 @@
       "1  green bell pepper (cut into bite sized pieces)",
       "1  orange bell pepper (cut into bite sized pieces)",
       "avocado oil (as needed for grill )"
-    ]
+    ],
+    "servings": 10
   },
   {
     "name": "Snickers Protein Bars (Vegan, GF)",
@@ -9616,7 +10103,8 @@
       "2 tbsp roasted salted peanuts (coarsely chopped (can use any nut))",
       "1/4 cup unsweetened vegan dark chocolate chips (use any kind of chocolate )",
       "2 cups sliced strawberries (swap for any fruit )"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "How to Make Candied Pecans for a Holiday Snack",
@@ -9630,7 +10118,8 @@
       "1/2 tsp vanilla extract",
       "1/4 tsp cinnamon",
       "2 cups nonfat Greek yogurt (or dairy-free, if vegan)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Air-Fried Apple Chips",
@@ -9645,7 +10134,8 @@
       "1/2 cup non-fat Greek yogurt",
       "3 tbsp honey",
       "1 tsp cinnamon"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Keto Chocolate Snack Boxes",
@@ -9661,7 +10151,8 @@
       "1 drop Now Foods Organic Vanilla Monk Fruit Sweetener Sweetener (add more or less to desired sweetness)",
       "1 cups mixed berries",
       "4 tbsp nut butter"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "The Best Pecan Pie Bars (Low Carb and Meal Prep friendly)",
@@ -9683,7 +10174,8 @@
       "1  cup chopped raw pecans (toasted)",
       "2 cups blackberries",
       "2/3 cup pomegranate seeds"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "How to Make Homemade Mint Oreo Cookies (Vegan friendly)",
@@ -9703,7 +10195,8 @@
       "1/2 tsp Vanilla extract",
       "1/2 tsp mint extract",
       "green food coloring (if desired)"
-    ]
+    ],
+    "servings": 12
   },
   {
     "name": "Meal Prep Snack idea: Greek Yogurt Cookie Dough Fruit Dip",
@@ -9720,7 +10213,8 @@
       "2 tbs mini chocolate chips",
       "4 cups fresh strawberries",
       "2 cups mixed fresh berries (raspberries, blueberries, blackberries)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Keto Snowball Cookies",
@@ -9737,7 +10231,8 @@
       "1/2 cup powdered erythritol for rolling",
       "1 cup macadamia nuts",
       "1 recipe  keto chocolate"
-    ]
+    ],
+    "servings": 18
   },
   {
     "name": "Vanilla Chia Pudding",
@@ -9752,7 +10247,8 @@
       "1/2 cup Chia Seeds",
       "6 tbs swerve",
       "berries (optional)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Low Sugar Chocolate Peanut Butter Cups",
@@ -9765,7 +10261,8 @@
       "1 tbsp coconut oil",
       "6 tbsp peanut butter (smooth)",
       "cacao nibs (to garnish, optional )"
-    ]
+    ],
+    "servings": 12
   },
   {
     "name": "Keto Cashew Cheesecake Bites",
@@ -9777,7 +10274,8 @@
       "1 cup cashew butter**",
       "1 tsp ground cinnamon",
       "1/4 cup cashews (optional, for topping)"
-    ]
+    ],
+    "servings": 12
   },
   {
     "name": "Brown Rice Pudding",
@@ -9793,7 +10291,8 @@
       "1 tsp cinnamon",
       "1 pinch sea salt",
       "2 cups mixed berries (for serving)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "AB&#038;J Fat Bombs Meal Prep",
@@ -9806,7 +10305,8 @@
       "3/4 cup Almond Butter (no sugar added)",
       "3/4 cup Coconut Oil",
       "1-2 tbs sweetener (optional)"
-    ]
+    ],
+    "servings": 12
   },
   {
     "name": "No Bake Collagen Brownie Cups",
@@ -9821,7 +10321,8 @@
       "1/2 cup unsweetened almond milk",
       "3 tbs maple syrup",
       "1/4 cup peanut butter (or nut/seed butter of choice)"
-    ]
+    ],
+    "servings": 12
   },
   {
     "name": "Brownie Batter Hummus",
@@ -9837,7 +10338,8 @@
       "Pinch of sea salt",
       "1 cup sliced strawberries",
       "8  graham cracker squares"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cream Cheese Fruit Dip Snack Box",
@@ -9853,7 +10355,8 @@
       "1 cup peeled nectarines",
       "1 cup halved strawberries",
       "1/2 cup blackberries"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Peanut Butter Cheesecake Cups",
@@ -9873,7 +10376,8 @@
       "1/4 cup unsweetened cacao powder",
       "2 tbsp coconut oil",
       "2 tbsp Now Foods 1:1 Monk Fruit Sweetener"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Keto Chocolate Mug Cake",
@@ -9889,7 +10393,8 @@
       "1 Tbsp melted butter",
       "1/2 tsp baking powder",
       "1 pinch salt"
-    ]
+    ],
+    "servings": 1
   },
   {
     "name": "Tasty Churro Meal Prep",
@@ -9911,7 +10416,8 @@
       "3 tbsp cacao powder",
       "1 tbsp maple syrup",
       "fresh fruit"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Chocolate Chocolate Chip Protein Cookie Dough",
@@ -9929,7 +10435,8 @@
       "mini pretzels",
       "fresh fruit",
       "graham crackers"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "Chocolate Almond Butter Bark",
@@ -9941,7 +10448,8 @@
       "1/4 cup unsweetened almond butter",
       "1 tbs sweetener (optional)",
       "1/4 cup unsalted, slivered almonds"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Vegan Dark Chocolate Cinnamon Roasted Chickpea Bark",
@@ -9953,7 +10461,8 @@
       "1 tbs Coconut Oil",
       "1 tbs ground cinnamon",
       "1 cup dairy-free chocolate chips"
-    ]
+    ],
+    "servings": 12
   },
   {
     "name": "Vegan Triple Chocolate Brownie Cake",
@@ -9975,7 +10484,8 @@
       "1 cup almond milk (or milk of choice)",
       "1/2 cup dairy-free chocolate chips",
       "1/4 cup almond milk"
-    ]
+    ],
+    "servings": 10
   },
   {
     "name": "Funfetti Protein Puppy Chow",
@@ -9989,7 +10499,8 @@
       "1 1/2 scoops BiPro French Vanilla Whey Protein Powder ((60g) would work well with the chocolate too!)",
       "1/4 cup sprinkle (optional)",
       "fruit (optional)"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Protein Almond Butter Cups",
@@ -10002,7 +10513,8 @@
       "4 tbsp. dark chocolate chips (dairy-free if needed)",
       "1 tsp. coconut oil or vanilla flavored ghee",
       "1 tbsp. coconut oil (optional*)"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "Gluten Free Gingerbread Cookies",
@@ -10026,7 +10538,8 @@
       "2 tablespoons Water",
       "1 cup Roasted Mixed Nuts",
       "4 medium Red Pears (cut into bite sized pieces)"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "Berry Almond Chia Pudding Meal Prep",
@@ -10040,7 +10553,8 @@
       "2 tbsp sliced almonds",
       "Sweetener, if desired (such as honey, stevia, agave, maple syrup)",
       "Pinch sea salt"
-    ]
+    ],
+    "servings": 3
   },
   {
     "name": "Dark Chocolate Gingerbread Spice Pumpkin Bars",
@@ -10055,7 +10569,8 @@
       "1 tsp vanilla extract",
       "1 tsp baking powder",
       "6 tbsp dark chocolate chips"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "10 Minute Raw Vegan Brownies",
@@ -10072,7 +10587,8 @@
       "2 tbsp date syrup",
       "2 tbsp cocoa powder (or cacao powder)",
       "cacao nibs (for garnish, optional)"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Keto Raspberry Cheesecake",
@@ -10093,7 +10609,8 @@
       "1 tbs pure vanilla extract",
       "fresh raspberries (optional)",
       "almonds (optional)"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "The EASIEST Gluten Free Brownies",
@@ -10112,7 +10629,8 @@
       "1 Egg",
       "2 cups fresh raspberries",
       "2 cups fresh blackberries"
-    ]
+    ],
+    "servings": 9
   },
   {
     "name": "Nutty Peanut Butter Trail Mix Bars",
@@ -10130,7 +10648,8 @@
       "1 cup high-protein peanut butter (or nut butter of choice)",
       "1/3 cup Honey (or liquid sweetener of choice)",
       "pinch Sea Salt"
-    ]
+    ],
+    "servings": 12
   },
   {
     "name": "No Bake Chocolate Peanut Butter Bars",
@@ -10142,7 +10661,8 @@
       "1/2 cup coconut flour",
       "1 cup no sugar added chocolate chips",
       "2 tbsp coconut oil"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "Chia Pudding (Vegan, GF, Paleo)",
@@ -10157,7 +10677,8 @@
       "1 cup toasted unsweetened toasted coconut flakes",
       "1/2 cup freeze dried strawberries",
       "1/2 cup freeze dried blueberries"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Air Fryer Cinnamon Sugar Chickpeas",
@@ -10172,7 +10693,8 @@
       "2 oz. cheddar cheese (cubed)",
       "1/4 cup raw almonds",
       "3 oz. jerky (sliced into bite sized pieces)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Peanut Butter - Chocolate Chip Granola Recipe - Gluten-Free - Healthy Snack Ideas",
@@ -10186,7 +10708,8 @@
       "1 tsp Vanilla extract",
       "1 tsp Salt (Or to taste)",
       "1/2 cup Chocolate chips"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cranberry Turkey Lettuce Wrap",
@@ -10204,7 +10727,8 @@
       "1  Pear",
       "Salt",
       "Pepper"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Sweet Potato Wedges With Tahini",
@@ -10219,7 +10743,8 @@
       "1/2 tsp smoked paprika",
       "salt &amp; pepper",
       "2 tbs runny tahini"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "Low Carb Buffalo Chicken Mini Bell Peppers",
@@ -10235,7 +10760,8 @@
       "1/8 tsp garlic powder",
       "1/2 cup cheddar cheese (shredded )",
       "1 tbsp chopped chives (divided)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Candied Nut Mix for the Holidays",
@@ -10250,7 +10776,8 @@
       "1/3 cup Swerve brown sugar",
       "1 tbsp cinnamon",
       "1 tsp salt"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Healthy Homemade Ranch Dressing",
@@ -10269,7 +10796,8 @@
       "1/2 tsp garlic powder",
       "1/4 tsp sea salt",
       "1 tbsp water (or more as needed to achieve desired consistency)"
-    ]
+    ],
+    "servings": 16
   },
   {
     "name": "Keto Cracker Snack Boxes",
@@ -10286,7 +10814,8 @@
       "1/2 cup macadamia nuts (or almonds)",
       "1/2 cup cucumbers (optional)",
       "1/2 cup Cherry Tomatoes (optional)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cake Batter Oat Bars",
@@ -10299,7 +10828,8 @@
       "1/3 cup agave (or sticky syrup)",
       "2 tbsp. Coconut Oil",
       "1/4 cup gluten-free sprinkles"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Peanut Butter Protein Squares Recipe",
@@ -10312,7 +10842,8 @@
       "4 cups Crispy Cereal",
       "2 scoops Nuts N More Whey Protein Powder",
       "1 pinch Salt"
-    ]
+    ],
+    "servings": 16
   },
   {
     "name": "Mint Chocolate Energy Bites",
@@ -10327,7 +10858,8 @@
       "2 tbsp almond butter",
       "1 tbsp. honey ((could swap for agave))",
       "1-2 drops mint extract"
-    ]
+    ],
+    "servings": 13
   },
   {
     "name": "Air Fryer Crispy Zucchini Chips",
@@ -10343,7 +10875,8 @@
       "1 tsp Italian seasoning",
       "1/2 tsp salt",
       "1 cup gluten-free ranch dressing"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Baked Breaded Zucchini Bites with Marinara",
@@ -10355,7 +10888,8 @@
       "¾ cup Paleo Powder No Salt Coating Mix",
       "2 large Eggs",
       "1.5 cups Marinara or Tomato Sauce of choice"
-    ]
+    ],
+    "servings": 3
   },
   {
     "name": "Air Fryer Sweet and Spicy Mixed Nuts",
@@ -10369,7 +10903,8 @@
       "1 tsp packed brown sugar",
       "1/4 tsp fine sea salt",
       "1 cup  raw whole mixed nuts ((almonds, cashews, pecans, and/or walnuts work best))"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Our Favorite Tostones Recipe",
@@ -10379,7 +10914,8 @@
     "ingredients": [
       "3  green plaintains (medium sized)",
       "1/3 cup avocado oil"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Antipasto Skewer Snack Boxes",
@@ -10394,7 +10930,8 @@
       "1/4 cup Grape Tomatoes",
       "8 large eggs (hard boiled )",
       "1/4 cup pepperoni slices"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Air Fryer Ranch Carrot Fries",
@@ -10406,7 +10943,8 @@
       "1 Tbsp olive oil",
       "1 1/2 Tbsp ranch seasoning",
       "Fine sea salt (to taste)"
-    ]
+    ],
+    "servings": 3
   },
   {
     "name": "Cinnamon Raisin Sweet Potato Snack Bread",
@@ -10423,7 +10961,8 @@
       "1 cup mashed sweet potato",
       "1  tbsp pure vanilla extract",
       "1/2 cup no sugar added raisins"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Turkey Bacon Ranch Pinwheel Snack Boxes",
@@ -10438,7 +10977,8 @@
       "1/2 cup baby spinach",
       "mandarin oranges",
       "Veggies"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Bacon Wrapped Potato Wedges",
@@ -10453,7 +10993,8 @@
       "1/4 tsp Sea Salt",
       "1/4 cup Primal Kitchen Ranch Dressing",
       "broccoli florets (steamed or raw)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Cinnamon Raisin Energy Bites",
@@ -10468,7 +11009,8 @@
       "2 scoops whey protein powder",
       "1/3 cup raisins",
       "1/4 cup milk"
-    ]
+    ],
+    "servings": 20
   },
   {
     "name": "Protein Cheerios Trail Mix",
@@ -10483,7 +11025,8 @@
       "⅓ cup peanut butter",
       "⅓ cup honey",
       "⅓ cup butter"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "Superfoods Almond Butter Bars",
@@ -10501,7 +11044,8 @@
       "1/4 cup honey",
       "2 tbsp coconut sugar",
       "2 tsp coconut oil (if needed*)"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "Pretzel Bites",
@@ -10524,7 +11068,8 @@
       "2 tbsp butter",
       "1 tsp gluten free flour",
       "1/4 tsp sea salt"
-    ]
+    ],
+    "servings": 6
   },
   {
     "name": "Bacon Jalapeño Poppers",
@@ -10537,7 +11082,8 @@
       "4 oz. cream cheese (at room temperature)",
       "1/2 cup shredded cheddar cheese",
       "2 tsp minced chives"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Air Fryer Baked Apples",
@@ -10555,7 +11101,8 @@
       "Nonstick cooking spray",
       "Greek yogurt (optional, for serving)",
       "Walnuts (toasted and chopped, optional, for serving)"
-    ]
+    ],
+    "servings": 2
   },
   {
     "name": "Air Fryer Rosemary Sweet Potato Wedges with Garlic Aioli",
@@ -10573,7 +11120,8 @@
       "1 Tbsp lemon juice",
       "Salt (to taste)",
       "Black pepper (to taste)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Mexican Street Corn Dip",
@@ -10590,7 +11138,8 @@
       "1/4 tsp garlic powder",
       "3 tbsp grated Parmesan cheese",
       "20   Tortilla chips"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Air-Fried Chickpeas",
@@ -10603,7 +11152,8 @@
       "2 tbsp sea salt",
       "1 tsp paprika",
       "1 tbsp pepper"
-    ]
+    ],
+    "servings": 8
   },
   {
     "name": "Zesty Gluten-free Chex Mix",
@@ -10620,7 +11170,8 @@
       "1/4 tsp dried dill",
       "1/4 tsp salt",
       "1/8 tsp garlic powder"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Roasted Red Pepper Hummus Snack Boxes",
@@ -10640,7 +11191,8 @@
       "15  gluten free crackers",
       "1 cup sliced carrot",
       "1 cup sliced cucumber"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Garlic Sweet Potato Wedges With Hummus",
@@ -10656,7 +11208,8 @@
       "1/4 tsp. Pink Himalayan Salt",
       "1/4 tsp. Ground Black Pepper",
       "1 package Hummus (about 7 servings per container )"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Healthy Snack Box",
@@ -10669,7 +11222,8 @@
       "1 cup Strawberries",
       "2 cup pretzels (gluten-free)",
       "4 oz vanilla almond butter"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Baba Ghanoush (Vegan, GF)",
@@ -10687,7 +11241,8 @@
       "1 tsp toasted sesame seeds for topping",
       "4 oz. gluten-free pita bread (sliced into triangles (Bfree brand, if gluten free))",
       "Olive oil cooking spray"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Everything Bagel Cashews",
@@ -10703,7 +11258,8 @@
       "1 tsp dried minced onion",
       "1/8 tsp garlic powder",
       "4 oz. paleo jerky sticks (sliced into bite sized pieces) (can sub with fruit)"
-    ]
+    ],
+    "servings": 4
   },
   {
     "name": "Spinach Artichoke Dip (Paleo, GF, Low Carb)",
@@ -10721,6 +11277,588 @@
       "1 tbsp nutritional yeast",
       "1 cup carrot chips or sliced carrots",
       "3  celery stalks (sliced into 3-inch pieces)"
-    ]
+    ],
+    "servings": 4
+  },
+  {
+    "name": "Protein-Packed Breakfast Bagel Sandwiches for Meal Prep",
+    "url": "https://mealpreponfleek.com/breakfast-bagel-sandwiches/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2024/09/High-Protein-Breakfast-Bagel-Sandwich-Meal-Prep.jpg",
+    "category": "breakfast",
+    "ingredients": []
+  },
+  {
+    "name": "Warm Breakfast Frittata Meal Prep",
+    "url": "https://mealpreponfleek.com/warm-frittata-breakfast-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/11/MPOF-2.jpg",
+    "category": "breakfast",
+    "ingredients": []
+  },
+  {
+    "name": "11 Best French Toast Recipes",
+    "url": "https://mealpreponfleek.com/11-best-french-toast-recipes/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/05/11-Best-French-Toast-Recipes-jpg.webp",
+    "category": "breakfast",
+    "ingredients": []
+  },
+  {
+    "name": "25 Healthy Lunches For People Who Hate Salads (Updated)",
+    "url": "https://mealpreponfleek.com/25-healthy-lunches-people-hate-salads/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/01/25-Healthy-Lunches-For-People-Who-Hate-Salads.jpg",
+    "category": "breakfast",
+    "ingredients": []
+  },
+  {
+    "name": "Memorial Day Grilling Recipes For Easy Summer Meal Prep",
+    "url": "https://mealpreponfleek.com/11-memorial-day-grilling-recipes/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2025/01/Memorial-Day-Grilling-.jpg",
+    "category": "breakfast",
+    "ingredients": []
+  },
+  {
+    "name": "The Top 20 Chicken Meal Prep Recipes for 2026",
+    "url": "https://mealpreponfleek.com/top-20-chicken-meal-prep-recipes/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/01/Top-20-Chicken-Meal-Prep-Recipes-of-2026.jpg",
+    "category": "breakfast",
+    "ingredients": []
+  },
+  {
+    "name": "21 Day Sugar Detox Meal Prep Ideas",
+    "url": "https://mealpreponfleek.com/21-day-sugar-detox-meal-prep-ideas/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2026/03/21-Day.jpg",
+    "category": "breakfast",
+    "ingredients": []
+  },
+  {
+    "name": "How I Read a Nutrition Label (Without Losing My Mind)",
+    "url": "https://mealpreponfleek.com/how-to-read-a-food-nutrition-label/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/06/How-to-Read-a-Food-Nutrition-Label.jpg",
+    "category": "breakfast",
+    "ingredients": []
+  },
+  {
+    "name": "Stuffed Delicata Squash Breakfast Meal Prep",
+    "url": "https://mealpreponfleek.com/stuffed-delicata-squash-breakfast-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/11/Stuff-Delicataed-Squash-Egg-Bacon-Meal-Prep.jpg",
+    "category": "breakfast",
+    "ingredients": []
+  },
+  {
+    "name": "Egg, Sausage, Bell Pepper, and Avocado Breakfast Meal Prep",
+    "url": "https://mealpreponfleek.com/egg-sausage-bell-pepper-and-avocado-breakfast-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/08/breakfast-meal-prep-sausage-bell-pepper.jpg",
+    "category": "breakfast",
+    "ingredients": []
+  },
+  {
+    "name": "Meal Prep Menu 2023: Week 32",
+    "url": "https://mealpreponfleek.com/meal-prep-menu-2023-week-32/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/08/Meal-Prep-Menu-2023-Week-32-jpg.webp",
+    "category": "breakfast",
+    "ingredients": []
+  },
+  {
+    "name": "Meal Prep Menu 2023: Week 35",
+    "url": "https://mealpreponfleek.com/meal-prep-menu-2023-week-35/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/08/Meal-Prep-Menu-2023-Week-35-jpg.webp",
+    "category": "breakfast",
+    "ingredients": []
+  },
+  {
+    "name": "Meal Prep Menu 2023: Week 33",
+    "url": "https://mealpreponfleek.com/meal-prep-menu-2023-week-33/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/08/Meal-Prep-Menu-2023-Week-33-jpg.webp",
+    "category": "breakfast",
+    "ingredients": []
+  },
+  {
+    "name": "Meal Prep Menu 2023: Week 31",
+    "url": "https://mealpreponfleek.com/meal-prep-menu-2023-week-31/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/08/Meal-Prep-Menu-2023-Week-31-jpg.webp",
+    "category": "breakfast",
+    "ingredients": []
+  },
+  {
+    "name": "11 Deliciously Easy Overnight Oat Recipes",
+    "url": "https://mealpreponfleek.com/11-deliciously-easy-overnight-oat-recipes/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/05/Easy-Overnight-Oat-Recipes-1-jpg.webp",
+    "category": "breakfast",
+    "ingredients": []
+  },
+  {
+    "name": "17 Breakfast Recipes For When You're Sick and Tired of Eggs",
+    "url": "https://mealpreponfleek.com/17-no-egg-breakfast-recipes/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/04/17-Breakfast-Recipes-For-When-Youre-Sick-and-Tired-of-Eggs-web.jpg",
+    "category": "breakfast",
+    "ingredients": []
+  },
+  {
+    "name": "35 Sheet Pan Meal Prep Recipes (That Will Change Your Life)",
+    "url": "https://mealpreponfleek.com/35-sheet-pan-recipes-will-change-life/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/02/35-Sheet-Pan-Recipes-That-Will-Change-Your-Life-MPOF.jpg",
+    "category": "breakfast",
+    "ingredients": []
+  },
+  {
+    "name": "How to Make Extra Crispy Pork Chops and Roasted Vegetables",
+    "url": "https://mealpreponfleek.com/crispy-pork-chops-and-roasted-vegetables/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2020/10/One-Pan-Crispy-Pork-Chops-Multi-Container-e1724891078346.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Homemade Chicken Doner Wraps",
+    "url": "https://mealpreponfleek.com/homemade-chicken-doner-wraps/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2025/11/viral-homemade-Chicken-Doner-Wraps.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Low Carb Hamburger Helper",
+    "url": "https://mealpreponfleek.com/low-carb-hamburger-helper/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/09/Multiple-Container-2-e1761310960848.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "How to Make Crockpot Sweet Potatoes",
+    "url": "https://mealpreponfleek.com/crockpot-sweet-potatoes/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2020/02/Crockpot-Sweet-Potatoes-Process-e1726281348403.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Viral Cuban Pasta Salad",
+    "url": "https://mealpreponfleek.com/cuban-pasta-salad/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2024/09/IMG_2606-e1726171681522.jpeg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Loaded Lean Beef Burger Bowls - 4 Ways!",
+    "url": "https://mealpreponfleek.com/lean-beef-burger-bowls/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2021/05/Burger-Bowls-4-Ways-777x431-1.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "20 Best Meal Prep Bowl Recipes",
+    "url": "https://mealpreponfleek.com/best-meal-prep-bowl-recipes/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/06/19-Best-Meal-Prep-Bowl-Recipes-jpg.webp",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "15 Best Pasta Meal Prep Recipes",
+    "url": "https://mealpreponfleek.com/15-best-pasta-meal-prep-recipes/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/05/15-Best-Pasta-Meal-Prep-Recipes-jpg.webp",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "30-Minute High-Protein Pasta and Broccoli Meal Prep",
+    "url": "https://mealpreponfleek.com/high-protein-pasta-and-broccoli/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2024/09/High-Protein-Pasta-Meal-Prep-Dinner-3.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Green and Hot Bison Burger Bowl",
+    "url": "https://mealpreponfleek.com/green-and-hot-bison-burger-bowl/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2024/09/Green-and-Hot-Bison-Burger-Bowl-2.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Hotdog Meal Prep - A Fun and Affordable Meal Idea!",
+    "url": "https://mealpreponfleek.com/hotdog-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/09/4-dollar-meal-prep.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Here’s An Easy Lunch That Will Bring Colorful Vegetables To Your Meal Prep",
+    "url": "https://mealpreponfleek.com/colorful-vegetables-to-your-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/08/whatevers-left-chop-salad.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Easy Homemade Meatballs and 15 Ways to Change Them Up",
+    "url": "https://mealpreponfleek.com/easy-homemade-meatballs-recipes/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2024/06/Easy-Homemade-Meatballs.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Spicy Meatball and Mashed Potato Meal Prep",
+    "url": "https://mealpreponfleek.com/spicy-meatball-mashed-potato-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/11/Spicy-Meatball-Sweet-Potato-Meal-Prep.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Meatloaf and Mashed Potato Meal Prep (paleo, GF)",
+    "url": "https://mealpreponfleek.com/meatloaf-mashed-potato-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/11/MPOF.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Chicken Bacon Ranch Meal Prep",
+    "url": "https://mealpreponfleek.com/chicken-bacon-ranch-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/10/MPOF-2-1.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Chicken Sausage &#038; Parsnip Fries Meal Prep",
+    "url": "https://mealpreponfleek.com/chicken-sausage-parsnip-fries-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/10/MPOF-2.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Ghost Pepper and Tamarind Salmon Meal Prep",
+    "url": "https://mealpreponfleek.com/ghost-pepper-tamarind-salmon-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/10/MPOF-6.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Cauliflower and White Bean Soup with Shrimp Meal Prep",
+    "url": "https://mealpreponfleek.com/cauliflower-white-bean-soup-with-shrimp-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/10/MPOF-5.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Salmon &#038; Bacon 'Rice' Meal Prep",
+    "url": "https://mealpreponfleek.com/salmon-bacon-rice-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/10/MPOF_-3-e1476815567868.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Burger and Veggie Meal Prep",
+    "url": "https://mealpreponfleek.com/burger-and-veggie-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/10/MPOF_-2-e1476814948262.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Low Carb Meal Prep: Shrimp, Veggies, and Cauliflower Rice",
+    "url": "https://mealpreponfleek.com/low-carb-meal-prep-shrimp-veggies-cauliflower-rice/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/10/cauli-shrimp-fried-rice.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Simple Low Carb Salmon Meal Prep",
+    "url": "https://mealpreponfleek.com/simple-low-carb-salmon-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/09/FullSizeRender-1.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Meal Prep on the Grill",
+    "url": "https://mealpreponfleek.com/meal-prep-on-the-grill/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/09/grilling-meal-prep-on-the-grill.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "A Crockpot Roast Meal Prep To Make Your Week Easy!",
+    "url": "https://mealpreponfleek.com/crockpot-roast-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/09/crockpot-slow-cooker-meal-prep.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Low Carb Cajun Steak Meal Prep",
+    "url": "https://mealpreponfleek.com/low-carb-cajun-steak-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/09/low-carb-cajun-meal-prep.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Roasted Chicken and Winter Persimmons Make This Sweet &#038; Savory Meal Prep",
+    "url": "https://mealpreponfleek.com/combine-meal-prep-items-one-container-sweet-savory-meal/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/08/IMG_6735.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Four Ingredient Pineapple Thai Turkey Meatball Meal Prep",
+    "url": "https://mealpreponfleek.com/4-ingredient-thai-turkey-meatball-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/09/turrkey-meatball-spiralizer-sweet-potato.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Feta Turkey Meatball Meal Prep + Two Tricks!",
+    "url": "https://mealpreponfleek.com/feta-turkey-meatball-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/08/EDA2B519-1587-4838-8A8A-C408FCB8E17E.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Simple Fruit Salsa Salmon Meal Prep",
+    "url": "https://mealpreponfleek.com/salmon-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/08/IMG_9348.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "BBQ Chicken Meal Prep with Roasted Brussels Sprouts and Sweet Potato",
+    "url": "https://mealpreponfleek.com/bbq-chicken-meal-prep-with-roasted-brussels-sprouts-and-sweet-potato/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/08/sweet-potato-brussels-bbq-chicken.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Vegetarian Salad in a Jar",
+    "url": "https://mealpreponfleek.com/vegetarian-salad-in-a-jar/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/08/Salad-in-a-Jar-e1724763701174.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "3 Ingredient Salmon Meal Prep",
+    "url": "https://mealpreponfleek.com/3-ingredient-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/08/3-ingredient-meal-prep.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Zoodle Meal Prep",
+    "url": "https://mealpreponfleek.com/zoodle-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/08/zoodle-meal-prep.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "3 Easy Power Salad Bowls for Meal Prep",
+    "url": "https://mealpreponfleek.com/3-easy-power-salad-bowl-meal-prep-recipes/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2020/10/Harvest-Watercress-Salad-Bowl-Multi-Container-e1726171802198.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "11 Lunch Ideas That Take Less Than 20 Minutes to Make",
+    "url": "https://mealpreponfleek.com/lunch-ideas-that-take-less-than-20-minutes-to-make/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/03/20-minute-lunch-ideas.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "15 Unique Salad Meal Prep Recipes",
+    "url": "https://mealpreponfleek.com/15-unique-salad-meal-prep-recipes/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/04/15-Unique-Salad-Meal-Prep-Recipes-jpg.webp",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "23 Best High Protein Lunch Meal Prep Recipes",
+    "url": "https://mealpreponfleek.com/23-best-high-protein-lunch-meal-prep-recipes/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/04/23-Best-High-Protein-Lunch-Meal-Prep-Recipes-jpg.webp",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "15 Italian Meal Prep Ideas that are Better than Pizza",
+    "url": "https://mealpreponfleek.com/italian-meal-prep-recipe-ideas/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/04/15-Italian-Recipe-that-are-Better-than-Pizza-jpg.webp",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "One Pan Fajita Salmon Meal Prep",
+    "url": "https://mealpreponfleek.com/one-pan-salmon-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/04/One-Pan-Fajita-Salmon-Meal-Prep-jpg.webp",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "20 Minute Chicken, Lemon, Broccoli, Pasta Skillet",
+    "url": "https://mealpreponfleek.com/20-minute-chicken-lemon-broccoli-pasta-skillet/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/10/Meal-Prep-lemon-chicken-PastaSQ.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "20 Dinners in 20 Minutes or Less",
+    "url": "https://mealpreponfleek.com/20-dinners-in-20-minutes-or-less/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/06/20-Dinners-in-20-Minutes-or-Less-meal-prep-jpg.webp",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Low Carb Pizza Meal Prep Recipe",
+    "url": "https://mealpreponfleek.com/low-carb-pizza-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/11/MPOF-3.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "5 Easy Meal Prep Chicken Marinades",
+    "url": "https://mealpreponfleek.com/chicken-breast-marinades/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/09/Slow-Cooker-Chicken-Marinades.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Perfectly Seared Scallops Meal Prep",
+    "url": "https://mealpreponfleek.com/perfectly-seared-scallops-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/01/fullsizerender-2-1-scaled.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Lunch and Dinner Meal Prep",
+    "url": "https://mealpreponfleek.com/lunch-and-dinner-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/08/full-meal-prep-on-fleek-1.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "Southwestern Meal Prep Recipe",
+    "url": "https://mealpreponfleek.com/southwestern-meal-prep-recipe/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/08/southwestern-meal-prep-recipe.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "The Ultimate Guide To Affordable Beef Recipes",
+    "url": "https://mealpreponfleek.com/the-ultimate-guide-to-affordable-beef-recipes/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2020/04/Affordable-Beef-Meal-Prep-Recipes.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "3 Easy Grain Bowl Meal Prep Recipes",
+    "url": "https://mealpreponfleek.com/3-easy-grain-bowl-meal-prep-recipes/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2020/08/Grain-Bowls-3-Ways-777x431-1.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "15 Healthy Vegan Recipes That Are Easy To Pack",
+    "url": "https://mealpreponfleek.com/15-healthy-vegan-recipes-easy-pack/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/09/15-Healthy-Vegan-Recipes-That-Are-Easy-To-Pack-777X431.jpg",
+    "category": "lunch",
+    "ingredients": []
+  },
+  {
+    "name": "7 Days of Whole30 Dinner Recipes (Simple, Satisfying &amp; Weeknight-Ready)",
+    "url": "https://mealpreponfleek.com/7-days-whole30-dinner-recipes/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/08/7-days-of-whole30-dinners.jpg",
+    "category": "dinner",
+    "ingredients": []
+  },
+  {
+    "name": "The Best Garlic Butter Steak Bites",
+    "url": "https://mealpreponfleek.com/best-garlic-butter-steak-bites/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2024/12/The-Best-Garlic-Butter-Steak-Bites.jpg",
+    "category": "dinner",
+    "ingredients": []
+  },
+  {
+    "name": "Olive Garden Chicken Gnocchi Soup (Copycat Recipe)",
+    "url": "https://mealpreponfleek.com/olive-garden-chicken-gnocchi-soup/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2024/11/Olive-Garden-Chicken-Gnocchi-Soup-on-spoon.jpg",
+    "category": "dinner",
+    "ingredients": []
+  },
+  {
+    "name": "Healthy Recipes To Make With Your Thanksgiving Leftovers",
+    "url": "https://mealpreponfleek.com/healthy-thanksgiving-leftover-recipes/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2020/11/Thanksgiving-Leftover-Meal-Ideas.jpg",
+    "category": "dinner",
+    "ingredients": []
+  },
+  {
+    "name": "Steak and Veggie Meal Prep",
+    "url": "https://mealpreponfleek.com/steak-and-veggie-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2016/08/MPOF-steak-meal-prep.jpg",
+    "category": "dinner",
+    "ingredients": []
+  },
+  {
+    "name": "Steak &#038; Broccoli Stir Fry",
+    "url": "https://mealpreponfleek.com/steak-broccoli-stir-fry/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2022/01/Steak-Broccoli-Stir-Fry-777x431-1.jpg",
+    "category": "dinner",
+    "ingredients": []
+  },
+  {
+    "name": "15 Best Healthy Valentine's Day Desserts",
+    "url": "https://mealpreponfleek.com/15-best-healthy-valentines-day-desserts/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/02/Valentines-Day-Desserts.jpg",
+    "category": "desserts",
+    "ingredients": []
+  },
+  {
+    "name": "Easy Almond Joy Cookies",
+    "url": "https://mealpreponfleek.com/almond-joy-cookies/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/06/Keto-Almond-Joy-Cookies-blog.jpg",
+    "category": "desserts",
+    "ingredients": []
+  },
+  {
+    "name": "Keto Peanut Butter Cookies",
+    "url": "https://mealpreponfleek.com/keto-peanut-butter-cookies/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/06/Peanut-Butter-Cookies-777x431-2.jpg",
+    "category": "desserts",
+    "ingredients": []
+  },
+  {
+    "name": "Frozen Yogurt Bark",
+    "url": "https://mealpreponfleek.com/frozen-yogurt-bark/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2024/09/IMG_2567.jpeg",
+    "category": "snacks",
+    "ingredients": []
+  },
+  {
+    "name": "7 Protein-Filled Mid-Afternoon Snacks to Take the Edge Off",
+    "url": "https://mealpreponfleek.com/7-protein-filled-mid-afternoon-snacks-to-take-the-edge-off/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/04/7-Protein-Filled-Mid-Afternoon-Snacks-to-Take-the-Edge-Off-jpg.webp",
+    "category": "snacks",
+    "ingredients": []
+  },
+  {
+    "name": "18 Easy Keto Snack Recipes",
+    "url": "https://mealpreponfleek.com/18-easy-keto-snack-recipes/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/02/18-Easy-Keto-Snack-Recipes-blog.png",
+    "category": "snacks",
+    "ingredients": []
+  },
+  {
+    "name": "8 High Protein Snack Ideas",
+    "url": "https://mealpreponfleek.com/8-high-protein-snacks/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/07/8-High-Protein-Snacks-jpg.webp",
+    "category": "snacks",
+    "ingredients": []
+  },
+  {
+    "name": "4 Keto Fat Bombs You Can Make This Month",
+    "url": "https://mealpreponfleek.com/4-keto-fat-bombs-you-can-make-this-month/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/03/fat-bombs-keto-meal-prep.jpg",
+    "category": "snacks",
+    "ingredients": []
+  },
+  {
+    "name": "23 Best Snack Box Recipes",
+    "url": "https://mealpreponfleek.com/best-snack-box-recipes/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/01/Best-Snack-Box-Recipes-777x431-1.jpg",
+    "category": "snacks",
+    "ingredients": []
+  },
+  {
+    "name": "15 Best Energy Ball Meal Prep Recipes",
+    "url": "https://mealpreponfleek.com/best-energy-ball-meal-prep-recipes/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2022/12/Best-Energy-Ball-Meal-Prep-Recipes-777x431-1.jpg",
+    "category": "snacks",
+    "ingredients": []
   }
 ]
