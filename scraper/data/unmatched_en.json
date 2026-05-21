@@ -1,0 +1,3652 @@
+[
+  {
+    "ingredient_name": "agave",
+    "top_candidates": [
+      {
+        "product": "savoy cabbage",
+        "score": 75.0
+      },
+      {
+        "product": "sweetheart cabbage",
+        "score": 75.0
+      },
+      {
+        "product": "roast in the bag pork, sage",
+        "score": 75.0
+      },
+      {
+        "product": "peas, cabbage",
+        "score": 75.0
+      },
+      {
+        "product": "white cabbage",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "agave nectar",
+    "top_candidates": [
+      {
+        "product": "nectarines",
+        "score": 75.0
+      },
+      {
+        "product": "feta",
+        "score": 75.0
+      },
+      {
+        "product": "sage",
+        "score": 66.7
+      },
+      {
+        "product": "pear",
+        "score": 66.7
+      },
+      {
+        "product": "vegetarian sushi platter",
+        "score": 63.2
+      }
+    ]
+  },
+  {
+    "ingredient_name": "arrowroot",
+    "top_candidates": [
+      {
+        "product": "carrot",
+        "score": 80.0
+      },
+      {
+        "product": "carrots",
+        "score": 72.7
+      },
+      {
+        "product": "beetroot",
+        "score": 66.7
+      },
+      {
+        "product": "chantenay carrots",
+        "score": 66.7
+      },
+      {
+        "product": "carrot, broccoli",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "arrowroot powder",
+    "top_candidates": [
+      {
+        "product": "cocoa powder",
+        "score": 81.8
+      },
+      {
+        "product": "carrot",
+        "score": 80.0
+      },
+      {
+        "product": "curry powder",
+        "score": 73.7
+      },
+      {
+        "product": "carrots",
+        "score": 72.7
+      },
+      {
+        "product": "baking powder",
+        "score": 70.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "artichoke heart",
+    "top_candidates": [
+      {
+        "product": "rich",
+        "score": 75.0
+      },
+      {
+        "product": "hake",
+        "score": 75.0
+      },
+      {
+        "product": "rice",
+        "score": 75.0
+      },
+      {
+        "product": "pear",
+        "score": 75.0
+      },
+      {
+        "product": "garlic",
+        "score": 72.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "artichoke hearts",
+    "top_candidates": [
+      {
+        "product": "rich",
+        "score": 75.0
+      },
+      {
+        "product": "hake",
+        "score": 75.0
+      },
+      {
+        "product": "rice",
+        "score": 75.0
+      },
+      {
+        "product": "pear",
+        "score": 75.0
+      },
+      {
+        "product": "garlic",
+        "score": 72.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "artichokes",
+    "top_candidates": [
+      {
+        "product": "cookies",
+        "score": 76.9
+      },
+      {
+        "product": "rich",
+        "score": 75.0
+      },
+      {
+        "product": "hake",
+        "score": 75.0
+      },
+      {
+        "product": "rice",
+        "score": 75.0
+      },
+      {
+        "product": "garlic",
+        "score": 72.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "arugula",
+    "top_candidates": [
+      {
+        "product": "loaf",
+        "score": 66.7
+      },
+      {
+        "product": "pear",
+        "score": 66.7
+      },
+      {
+        "product": "mozzarella",
+        "score": 61.5
+      },
+      {
+        "product": "tagliatelle pasta",
+        "score": 61.5
+      },
+      {
+        "product": "soft italian mozzarella",
+        "score": 61.5
+      }
+    ]
+  },
+  {
+    "ingredient_name": "asparagus",
+    "top_candidates": [
+      {
+        "product": "aspartame sweetener tablets",
+        "score": 75.0
+      },
+      {
+        "product": "pear",
+        "score": 75.0
+      },
+      {
+        "product": "oranges",
+        "score": 66.7
+      },
+      {
+        "product": "ready to cook straight to wok beansprouts",
+        "score": 66.7
+      },
+      {
+        "product": "mash",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "assorted veggies",
+    "top_candidates": [
+      {
+        "product": "limes",
+        "score": 75.0
+      },
+      {
+        "product": "bites",
+        "score": 75.0
+      },
+      {
+        "product": "roasted vegetable cous cous",
+        "score": 71.4
+      },
+      {
+        "product": "tube it assorted yogurts 9 pack",
+        "score": 68.8
+      },
+      {
+        "product": "mash",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "baking soda",
+    "top_candidates": [
+      {
+        "product": "baking potato",
+        "score": 81.8
+      },
+      {
+        "product": "baking potatoes",
+        "score": 81.8
+      },
+      {
+        "product": "baking powder",
+        "score": 81.8
+      },
+      {
+        "product": "king of steaks thick cut sirloin steak 30 day matured",
+        "score": 70.6
+      },
+      {
+        "product": "bang bang chicken",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "balsamic glaze",
+    "top_candidates": [
+      {
+        "product": "balsamic vinegar of modena",
+        "score": 78.3
+      },
+      {
+        "product": "basil",
+        "score": 75.0
+      },
+      {
+        "product": "& basa",
+        "score": 72.7
+      },
+      {
+        "product": "ham",
+        "score": 66.7
+      },
+      {
+        "product": "pastrami",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "balsamic vinaigrette",
+    "top_candidates": [
+      {
+        "product": "balsamic vinegar of modena",
+        "score": 78.8
+      },
+      {
+        "product": "basil",
+        "score": 75.0
+      },
+      {
+        "product": "& basa",
+        "score": 72.7
+      },
+      {
+        "product": "ginger",
+        "score": 66.7
+      },
+      {
+        "product": "courgettes",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "bbq spice rub",
+    "top_candidates": [
+      {
+        "product": "bbq sauce",
+        "score": 77.8
+      },
+      {
+        "product": "rice",
+        "score": 75.0
+      },
+      {
+        "product": "ice cubes",
+        "score": 75.0
+      },
+      {
+        "product": "bbq chicken",
+        "score": 70.0
+      },
+      {
+        "product": "pie",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "blanched almond flour",
+    "top_candidates": [
+      {
+        "product": "salmon",
+        "score": 83.3
+      },
+      {
+        "product": "lemon",
+        "score": 80.0
+      },
+      {
+        "product": "flaked almonds",
+        "score": 78.6
+      },
+      {
+        "product": "cornflour",
+        "score": 77.8
+      },
+      {
+        "product": "plain flour",
+        "score": 73.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "bocconcini",
+    "top_candidates": [
+      {
+        "product": "onion",
+        "score": 80.0
+      },
+      {
+        "product": "broccoli",
+        "score": 76.9
+      },
+      {
+        "product": "corn",
+        "score": 75.0
+      },
+      {
+        "product": "choc minis",
+        "score": 70.6
+      },
+      {
+        "product": "purple sprouting broccoli",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "boston lettuce",
+    "top_candidates": [
+      {
+        "product": "romaine lettuce",
+        "score": 75.0
+      },
+      {
+        "product": "iceberg lettuce",
+        "score": 72.7
+      },
+      {
+        "product": "sweet gem lettuce",
+        "score": 72.7
+      },
+      {
+        "product": "rice",
+        "score": 66.7
+      },
+      {
+        "product": "alphabet potato letters",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "bouillon cube",
+    "top_candidates": [
+      {
+        "product": "ice cubes",
+        "score": 71.4
+      },
+      {
+        "product": "cucumber",
+        "score": 66.7
+      },
+      {
+        "product": "beef",
+        "score": 66.7
+      },
+      {
+        "product": "brie",
+        "score": 66.7
+      },
+      {
+        "product": "bourbon creams",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "bourbon whisky",
+    "top_candidates": [
+      {
+        "product": "bourbon creams",
+        "score": 72.7
+      },
+      {
+        "product": "soy",
+        "score": 66.7
+      },
+      {
+        "product": "apricot flavour thick",
+        "score": 60.9
+      },
+      {
+        "product": "raspberry flavour thick",
+        "score": 60.9
+      },
+      {
+        "product": "strawberry flavour thick",
+        "score": 60.9
+      }
+    ]
+  },
+  {
+    "ingredient_name": "brown sugar alternative",
+    "top_candidates": [
+      {
+        "product": "brown soft sugar",
+        "score": 81.5
+      },
+      {
+        "product": "zero sugar",
+        "score": 80.0
+      },
+      {
+        "product": "liver",
+        "score": 75.0
+      },
+      {
+        "product": "chive",
+        "score": 75.0
+      },
+      {
+        "product": "salt",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "cacao",
+    "top_candidates": [
+      {
+        "product": "macaroni cheese",
+        "score": 80.0
+      },
+      {
+        "product": "gluten free coconut macaroons",
+        "score": 80.0
+      },
+      {
+        "product": "jamaica cake",
+        "score": 80.0
+      },
+      {
+        "product": "macaroni pasta",
+        "score": 80.0
+      },
+      {
+        "product": "acacia squeezy honey",
+        "score": 80.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "cacao nibs",
+    "top_candidates": [
+      {
+        "product": "avocado",
+        "score": 66.7
+      },
+      {
+        "product": "macaroni cheese",
+        "score": 66.7
+      },
+      {
+        "product": "cod",
+        "score": 66.7
+      },
+      {
+        "product": "gluten free coconut macaroons",
+        "score": 66.7
+      },
+      {
+        "product": "macaroni pasta",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "canned pumpkin",
+    "top_candidates": [
+      {
+        "product": "plum",
+        "score": 75.0
+      },
+      {
+        "product": "special quinoa, pumpkin",
+        "score": 75.0
+      },
+      {
+        "product": "pumpkin seeds",
+        "score": 70.0
+      },
+      {
+        "product": "dumplings",
+        "score": 66.7
+      },
+      {
+        "product": "pie",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "cannellini beans",
+    "top_candidates": [
+      {
+        "product": "pecans",
+        "score": 80.0
+      },
+      {
+        "product": "green beans",
+        "score": 73.7
+      },
+      {
+        "product": "peanuts",
+        "score": 72.7
+      },
+      {
+        "product": "ricotta cannelloni",
+        "score": 69.2
+      },
+      {
+        "product": "bananas",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "canola oil",
+    "top_candidates": [
+      {
+        "product": "cola ice coolers",
+        "score": 75.0
+      },
+      {
+        "product": "cola bottle ice lollies 6 pack",
+        "score": 70.6
+      },
+      {
+        "product": "strawberry granola top protein",
+        "score": 70.0
+      },
+      {
+        "product": "vanilla granola top protein",
+        "score": 70.0
+      },
+      {
+        "product": "chocolate lolly",
+        "score": 70.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "cantaloupe",
+    "top_candidates": [
+      {
+        "product": "pie",
+        "score": 80.0
+      },
+      {
+        "product": "picanha",
+        "score": 66.7
+      },
+      {
+        "product": "pecans",
+        "score": 66.7
+      },
+      {
+        "product": "nut",
+        "score": 66.7
+      },
+      {
+        "product": "pear",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "capers",
+    "top_candidates": [
+      {
+        "product": "white seedless grapes",
+        "score": 80.0
+      },
+      {
+        "product": "mixed seedless grapes",
+        "score": 80.0
+      },
+      {
+        "product": "seedless red grapes",
+        "score": 80.0
+      },
+      {
+        "product": "seedless sable grapes",
+        "score": 80.0
+      },
+      {
+        "product": "black seedless grapes",
+        "score": 80.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "cassava breading",
+    "top_candidates": [
+      {
+        "product": "brie",
+        "score": 75.0
+      },
+      {
+        "product": "cashews",
+        "score": 72.7
+      },
+      {
+        "product": "ginger",
+        "score": 66.7
+      },
+      {
+        "product": "radish",
+        "score": 66.7
+      },
+      {
+        "product": "raisin",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "cheerios",
+    "top_candidates": [
+      {
+        "product": "cheese",
+        "score": 80.0
+      },
+      {
+        "product": "lychee",
+        "score": 80.0
+      },
+      {
+        "product": "cheese bacon chicken en croûte",
+        "score": 76.9
+      },
+      {
+        "product": "cheese select",
+        "score": 76.9
+      },
+      {
+        "product": "cheese selection",
+        "score": 76.9
+      }
+    ]
+  },
+  {
+    "ingredient_name": "chipotle hot sauce",
+    "top_candidates": [
+      {
+        "product": "mint sauce",
+        "score": 82.4
+      },
+      {
+        "product": "soy sauce",
+        "score": 82.4
+      },
+      {
+        "product": "bbq sauce",
+        "score": 80.0
+      },
+      {
+        "product": "satay sauce",
+        "score": 77.8
+      },
+      {
+        "product": "chipotle chicken",
+        "score": 76.9
+      }
+    ]
+  },
+  {
+    "ingredient_name": "chuck roast",
+    "top_candidates": [
+      {
+        "product": "roasted",
+        "score": 83.3
+      },
+      {
+        "product": "duck",
+        "score": 75.0
+      },
+      {
+        "product": "yeast",
+        "score": 75.0
+      },
+      {
+        "product": "pasta",
+        "score": 75.0
+      },
+      {
+        "product": "chicken",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "chuck tender roast",
+    "top_candidates": [
+      {
+        "product": "roasted",
+        "score": 83.3
+      },
+      {
+        "product": "duck",
+        "score": 75.0
+      },
+      {
+        "product": "yeast",
+        "score": 75.0
+      },
+      {
+        "product": "pasta",
+        "score": 75.0
+      },
+      {
+        "product": "spicy 'n' zingy sweet chilli chicken tenders",
+        "score": 72.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "cilantro",
+    "top_candidates": [
+      {
+        "product": "latte macchiato",
+        "score": 71.4
+      },
+      {
+        "product": "parmigiano reggiano",
+        "score": 66.7
+      },
+      {
+        "product": "chilli",
+        "score": 66.7
+      },
+      {
+        "product": "nut",
+        "score": 66.7
+      },
+      {
+        "product": "citrus fruit kombucha",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "clementines",
+    "top_candidates": [
+      {
+        "product": "lemon",
+        "score": 80.0
+      },
+      {
+        "product": "nectarines",
+        "score": 75.0
+      },
+      {
+        "product": "lime",
+        "score": 75.0
+      },
+      {
+        "product": "lemons",
+        "score": 66.7
+      },
+      {
+        "product": "limes",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "cloves",
+    "top_candidates": [
+      {
+        "product": "closed cup mushrooms",
+        "score": 80.0
+      },
+      {
+        "product": "walnut halves",
+        "score": 80.0
+      },
+      {
+        "product": "coleslaw",
+        "score": 72.7
+      },
+      {
+        "product": "herb olives",
+        "score": 72.7
+      },
+      {
+        "product": "garlic olives",
+        "score": 72.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "coating mix",
+    "top_candidates": [
+      {
+        "product": "cod",
+        "score": 80.0
+      },
+      {
+        "product": "spaghetti bolognese seasoning mix",
+        "score": 80.0
+      },
+      {
+        "product": "beef casserole seasoning mix",
+        "score": 80.0
+      },
+      {
+        "product": "chicken casserole seasoning mix",
+        "score": 80.0
+      },
+      {
+        "product": "chilli con carne seasoning mix",
+        "score": 80.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "croutons",
+    "top_candidates": [
+      {
+        "product": "gluten free coconut macaroons",
+        "score": 80.0
+      },
+      {
+        "product": "trimmed brussel sprouts",
+        "score": 76.9
+      },
+      {
+        "product": "ready to cook straight to wok beansprouts",
+        "score": 76.9
+      },
+      {
+        "product": "apricot conserve",
+        "score": 75.0
+      },
+      {
+        "product": "carrot",
+        "score": 72.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "dill pickles",
+    "top_candidates": [
+      {
+        "product": "limes",
+        "score": 75.0
+      },
+      {
+        "product": "leeks",
+        "score": 75.0
+      },
+      {
+        "product": "sprinkles",
+        "score": 75.0
+      },
+      {
+        "product": "confetti sprinkles",
+        "score": 69.6
+      },
+      {
+        "product": "lemons",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "dried dill",
+    "top_candidates": [
+      {
+        "product": "dried black peppercorn grinder",
+        "score": 77.8
+      },
+      {
+        "product": "rice",
+        "score": 75.0
+      },
+      {
+        "product": "brie",
+        "score": 75.0
+      },
+      {
+        "product": "dried prunes",
+        "score": 75.0
+      },
+      {
+        "product": "red chillies",
+        "score": 73.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "dried oregano",
+    "top_candidates": [
+      {
+        "product": "dried prunes",
+        "score": 76.2
+      },
+      {
+        "product": "mango",
+        "score": 75.0
+      },
+      {
+        "product": "rice",
+        "score": 75.0
+      },
+      {
+        "product": "brie",
+        "score": 75.0
+      },
+      {
+        "product": "oregano passata rustica",
+        "score": 70.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "egg replacer",
+    "top_candidates": [
+      {
+        "product": "celery",
+        "score": 66.7
+      },
+      {
+        "product": "eggs 6 pack",
+        "score": 66.7
+      },
+      {
+        "product": "pickled onion rocket racers",
+        "score": 66.7
+      },
+      {
+        "product": "beef rocket racers",
+        "score": 66.7
+      },
+      {
+        "product": "pear",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "egg white",
+    "top_candidates": [
+      {
+        "product": "mature white cheddar cheese",
+        "score": 77.8
+      },
+      {
+        "product": "pepper egg bites",
+        "score": 77.8
+      },
+      {
+        "product": "bacon egg bites",
+        "score": 77.8
+      },
+      {
+        "product": "leek egg bites",
+        "score": 77.8
+      },
+      {
+        "product": "bake at home white baguettes",
+        "score": 77.8
+      }
+    ]
+  },
+  {
+    "ingredient_name": "eggnog",
+    "top_candidates": [
+      {
+        "product": "egg noodles",
+        "score": 83.3
+      },
+      {
+        "product": "protein egg noodles",
+        "score": 83.3
+      },
+      {
+        "product": "slow beef bourguignon",
+        "score": 66.7
+      },
+      {
+        "product": "egg custard tart 4 pack",
+        "score": 66.7
+      },
+      {
+        "product": "eggs 6 pack",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "eggplant",
+    "top_candidates": [
+      {
+        "product": "nut",
+        "score": 80.0
+      },
+      {
+        "product": "parmigiano reggiano",
+        "score": 66.7
+      },
+      {
+        "product": "plain toasting egg waffles",
+        "score": 66.7
+      },
+      {
+        "product": "peanuts",
+        "score": 66.7
+      },
+      {
+        "product": "pomegranate seeds",
+        "score": 62.5
+      }
+    ]
+  },
+  {
+    "ingredient_name": "enchilada sauce",
+    "top_candidates": [
+      {
+        "product": "bbq sauce",
+        "score": 80.0
+      },
+      {
+        "product": "soy sauce",
+        "score": 80.0
+      },
+      {
+        "product": "satay sauce",
+        "score": 80.0
+      },
+      {
+        "product": "midly spiced red kidney beans in chilli sauce",
+        "score": 75.9
+      },
+      {
+        "product": "lime sauce",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "endive",
+    "top_candidates": [
+      {
+        "product": "liver",
+        "score": 75.0
+      },
+      {
+        "product": "chive",
+        "score": 75.0
+      },
+      {
+        "product": "tenderstem broccoli",
+        "score": 72.7
+      },
+      {
+        "product": "denver",
+        "score": 72.7
+      },
+      {
+        "product": "individual cheddar",
+        "score": 72.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "erythritol",
+    "top_candidates": [
+      {
+        "product": "strawberry trifle",
+        "score": 70.0
+      },
+      {
+        "product": "strawberry trifles 3 pack",
+        "score": 70.0
+      },
+      {
+        "product": "raspberry trifles 3 pack",
+        "score": 70.0
+      },
+      {
+        "product": "celery",
+        "score": 66.7
+      },
+      {
+        "product": "cool",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "everything bagel seasoning",
+    "top_candidates": [
+      {
+        "product": "herb seasoning",
+        "score": 84.6
+      },
+      {
+        "product": "denver",
+        "score": 80.0
+      },
+      {
+        "product": "onion",
+        "score": 80.0
+      },
+      {
+        "product": "cajun seasoning",
+        "score": 80.0
+      },
+      {
+        "product": "thigh",
+        "score": 80.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "eye round roast",
+    "top_candidates": [
+      {
+        "product": "ground",
+        "score": 83.3
+      },
+      {
+        "product": "roasted",
+        "score": 83.3
+      },
+      {
+        "product": "yeast",
+        "score": 75.0
+      },
+      {
+        "product": "pasta",
+        "score": 75.0
+      },
+      {
+        "product": "lean beef ground steak",
+        "score": 73.3
+      }
+    ]
+  },
+  {
+    "ingredient_name": "fajita seasoning",
+    "top_candidates": [
+      {
+        "product": "cajun seasoning",
+        "score": 84.6
+      },
+      {
+        "product": "herb seasoning",
+        "score": 83.3
+      },
+      {
+        "product": "fajita kit",
+        "score": 82.4
+      },
+      {
+        "product": "peri peri seasoning",
+        "score": 81.5
+      },
+      {
+        "product": "onion",
+        "score": 80.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "farro",
+    "top_candidates": [
+      {
+        "product": "ready to cook carrot batons",
+        "score": 80.0
+      },
+      {
+        "product": "carrots",
+        "score": 80.0
+      },
+      {
+        "product": "chantenay carrots",
+        "score": 80.0
+      },
+      {
+        "product": "30 day matured rump steaks with a bone marrow melt 2 pack",
+        "score": 80.0
+      },
+      {
+        "product": "carrot",
+        "score": 80.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "fennel",
+    "top_candidates": [
+      {
+        "product": "finely wiltshire ham",
+        "score": 72.7
+      },
+      {
+        "product": "penne pasta",
+        "score": 72.7
+      },
+      {
+        "product": "golden delicious apples",
+        "score": 66.7
+      },
+      {
+        "product": "coarse ardennes pâté",
+        "score": 66.7
+      },
+      {
+        "product": "feta",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "fennel seed",
+    "top_candidates": [
+      {
+        "product": "wholemeal seeded loaf",
+        "score": 72.7
+      },
+      {
+        "product": "flaxseed",
+        "score": 71.4
+      },
+      {
+        "product": "swede",
+        "score": 66.7
+      },
+      {
+        "product": "sweet",
+        "score": 66.7
+      },
+      {
+        "product": "pomegranate seeds",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "fenugreek",
+    "top_candidates": [
+      {
+        "product": "coconut greek style yogurt",
+        "score": 77.8
+      },
+      {
+        "product": "protein greek style kebabs with tzatziki dip",
+        "score": 77.8
+      },
+      {
+        "product": "leeks",
+        "score": 75.0
+      },
+      {
+        "product": "greek feta",
+        "score": 73.7
+      },
+      {
+        "product": "greek style yogurt",
+        "score": 71.4
+      }
+    ]
+  },
+  {
+    "ingredient_name": "five-spice powder",
+    "top_candidates": [
+      {
+        "product": "cocoa powder",
+        "score": 76.2
+      },
+      {
+        "product": "curry powder",
+        "score": 76.2
+      },
+      {
+        "product": "rice",
+        "score": 75.0
+      },
+      {
+        "product": "chilli powder",
+        "score": 72.7
+      },
+      {
+        "product": "baking powder",
+        "score": 70.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "flank steak",
+    "top_candidates": [
+      {
+        "product": "beef sirloin steak",
+        "score": 77.8
+      },
+      {
+        "product": "beef salt dry aged sirloin steak",
+        "score": 77.8
+      },
+      {
+        "product": "scotch beef salt dry aged sirloin steak",
+        "score": 77.8
+      },
+      {
+        "product": "beef steak",
+        "score": 75.0
+      },
+      {
+        "product": "lean beef ground steak",
+        "score": 73.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "flax meal",
+    "top_candidates": [
+      {
+        "product": "oriental noodle meal",
+        "score": 75.0
+      },
+      {
+        "product": "flame grilled beef burger",
+        "score": 71.4
+      },
+      {
+        "product": "butter chicken rice meal",
+        "score": 71.4
+      },
+      {
+        "product": "chorizo paella rice meal",
+        "score": 71.4
+      },
+      {
+        "product": "galia melon",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "garbanzo beans",
+    "top_candidates": [
+      {
+        "product": "pecans",
+        "score": 80.0
+      },
+      {
+        "product": "peanuts",
+        "score": 72.7
+      },
+      {
+        "product": "green beans",
+        "score": 72.0
+      },
+      {
+        "product": "whole green beans",
+        "score": 72.0
+      },
+      {
+        "product": "bananas",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "gluten free all purpose flour",
+    "top_candidates": [
+      {
+        "product": "glutenfree fusilli",
+        "score": 78.8
+      },
+      {
+        "product": "gluten free spaghetti",
+        "score": 76.5
+      },
+      {
+        "product": "cornflour",
+        "score": 71.4
+      },
+      {
+        "product": "plain flour",
+        "score": 70.6
+      },
+      {
+        "product": "peach flavour",
+        "score": 70.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "gluten free all-purpose flour",
+    "top_candidates": [
+      {
+        "product": "glutenfree fusilli",
+        "score": 78.8
+      },
+      {
+        "product": "gluten free spaghetti",
+        "score": 76.5
+      },
+      {
+        "product": "cornflour",
+        "score": 71.4
+      },
+      {
+        "product": "plain flour",
+        "score": 70.6
+      },
+      {
+        "product": "peach flavour",
+        "score": 70.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "gluten free bread",
+    "top_candidates": [
+      {
+        "product": "gluten free coconut macaroons",
+        "score": 82.8
+      },
+      {
+        "product": "gluten free spaghetti",
+        "score": 82.8
+      },
+      {
+        "product": "glutenfree fusilli",
+        "score": 78.6
+      },
+      {
+        "product": "white bread",
+        "score": 77.8
+      },
+      {
+        "product": "brie",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "gluten free breadcrumbs",
+    "top_candidates": [
+      {
+        "product": "golden breadcrumbs",
+        "score": 83.9
+      },
+      {
+        "product": "panko breadcrumbs",
+        "score": 82.8
+      },
+      {
+        "product": "natural breadcrumbs",
+        "score": 77.4
+      },
+      {
+        "product": "brie",
+        "score": 75.0
+      },
+      {
+        "product": "glutenfree fusilli",
+        "score": 73.3
+      }
+    ]
+  },
+  {
+    "ingredient_name": "gluten free crackers",
+    "top_candidates": [
+      {
+        "product": "cream crackers",
+        "score": 84.6
+      },
+      {
+        "product": "gluten free coconut macaroons",
+        "score": 80.0
+      },
+      {
+        "product": "lightly salted rice crackers",
+        "score": 78.9
+      },
+      {
+        "product": "gluten free spaghetti",
+        "score": 78.8
+      },
+      {
+        "product": "prawn crackers",
+        "score": 78.3
+      }
+    ]
+  },
+  {
+    "ingredient_name": "gluten free flour blend",
+    "top_candidates": [
+      {
+        "product": "glutenfree fusilli",
+        "score": 81.2
+      },
+      {
+        "product": "beef",
+        "score": 75.0
+      },
+      {
+        "product": "gluten free spaghetti",
+        "score": 72.7
+      },
+      {
+        "product": "gluten free coconut macaroons",
+        "score": 70.3
+      },
+      {
+        "product": "snackin' chicken protein southern fried flavour bites",
+        "score": 69.6
+      }
+    ]
+  },
+  {
+    "ingredient_name": "gluten free sourdough bread",
+    "top_candidates": [
+      {
+        "product": "white bread",
+        "score": 77.8
+      },
+      {
+        "product": "glutenfree fusilli",
+        "score": 77.4
+      },
+      {
+        "product": "sourdough mix",
+        "score": 76.9
+      },
+      {
+        "product": "gluten free spaghetti",
+        "score": 76.5
+      },
+      {
+        "product": "brie",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "gluten-free Chex cereal",
+    "top_candidates": [
+      {
+        "product": "cream",
+        "score": 80.0
+      },
+      {
+        "product": "fibre cereal",
+        "score": 76.2
+      },
+      {
+        "product": "glutenfree fusilli",
+        "score": 73.3
+      },
+      {
+        "product": "gluten free spaghetti",
+        "score": 72.2
+      },
+      {
+        "product": "frosted wheats cereal",
+        "score": 70.3
+      }
+    ]
+  },
+  {
+    "ingredient_name": "gluten-free all purpose flour",
+    "top_candidates": [
+      {
+        "product": "glutenfree fusilli",
+        "score": 78.8
+      },
+      {
+        "product": "cornflour",
+        "score": 71.4
+      },
+      {
+        "product": "plain flour",
+        "score": 70.6
+      },
+      {
+        "product": "gluten free spaghetti",
+        "score": 70.6
+      },
+      {
+        "product": "peach flavour",
+        "score": 70.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "gluten-free all-purpose flour",
+    "top_candidates": [
+      {
+        "product": "glutenfree fusilli",
+        "score": 78.8
+      },
+      {
+        "product": "cornflour",
+        "score": 71.4
+      },
+      {
+        "product": "plain flour",
+        "score": 70.6
+      },
+      {
+        "product": "gluten free spaghetti",
+        "score": 70.6
+      },
+      {
+        "product": "peach flavour",
+        "score": 70.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "gluten-free bread",
+    "top_candidates": [
+      {
+        "product": "glutenfree fusilli",
+        "score": 78.6
+      },
+      {
+        "product": "white bread",
+        "score": 77.8
+      },
+      {
+        "product": "gluten free coconut macaroons",
+        "score": 75.9
+      },
+      {
+        "product": "gluten free spaghetti",
+        "score": 75.9
+      },
+      {
+        "product": "brie",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "gluten-free breadcrumbs",
+    "top_candidates": [
+      {
+        "product": "golden breadcrumbs",
+        "score": 83.9
+      },
+      {
+        "product": "panko breadcrumbs",
+        "score": 82.8
+      },
+      {
+        "product": "natural breadcrumbs",
+        "score": 77.4
+      },
+      {
+        "product": "brie",
+        "score": 75.0
+      },
+      {
+        "product": "glutenfree fusilli",
+        "score": 73.3
+      }
+    ]
+  },
+  {
+    "ingredient_name": "gluten-free pita bread",
+    "top_candidates": [
+      {
+        "product": "white pitta bread",
+        "score": 82.8
+      },
+      {
+        "product": "white bread",
+        "score": 80.0
+      },
+      {
+        "product": "cheese pizza bread",
+        "score": 77.4
+      },
+      {
+        "product": "brie",
+        "score": 75.0
+      },
+      {
+        "product": "glutenfree fusilli",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "gluten-free pitas",
+    "top_candidates": [
+      {
+        "product": "gluten free spaghetti",
+        "score": 81.2
+      },
+      {
+        "product": "glutenfree fusilli",
+        "score": 78.6
+      },
+      {
+        "product": "gluten free coconut macaroons",
+        "score": 75.9
+      },
+      {
+        "product": "red potatoes",
+        "score": 66.7
+      },
+      {
+        "product": "mash",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "gluten-free tortillas",
+    "top_candidates": [
+      {
+        "product": "gluten free spaghetti",
+        "score": 73.7
+      },
+      {
+        "product": "glutenfree fusilli",
+        "score": 73.3
+      },
+      {
+        "product": "seeded tortilla wraps",
+        "score": 72.7
+      },
+      {
+        "product": "white tortilla wraps",
+        "score": 71.0
+      },
+      {
+        "product": "gluten free coconut macaroons",
+        "score": 68.6
+      }
+    ]
+  },
+  {
+    "ingredient_name": "golden beets",
+    "top_candidates": [
+      {
+        "product": "golden vegetable rice",
+        "score": 83.3
+      },
+      {
+        "product": "golden breadcrumbs",
+        "score": 81.8
+      },
+      {
+        "product": "golden syrup",
+        "score": 80.0
+      },
+      {
+        "product": "golden syrup flavour instant porridge pot",
+        "score": 80.0
+      },
+      {
+        "product": "golden syrup flavour instant porridge satchets 8 pack",
+        "score": 80.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "granulated erythritol",
+    "top_candidates": [
+      {
+        "product": "granulated sugar",
+        "score": 82.8
+      },
+      {
+        "product": "grains",
+        "score": 80.0
+      },
+      {
+        "product": "grape",
+        "score": 75.0
+      },
+      {
+        "product": "celery",
+        "score": 66.7
+      },
+      {
+        "product": "grain salad",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "greek dressing",
+    "top_candidates": [
+      {
+        "product": "caeser salad dressing",
+        "score": 78.3
+      },
+      {
+        "product": "mustard salad dressing",
+        "score": 78.3
+      },
+      {
+        "product": "house salad dressing",
+        "score": 78.3
+      },
+      {
+        "product": "thousand island salad dressing",
+        "score": 78.3
+      },
+      {
+        "product": "grape",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "green food coloring",
+    "top_candidates": [
+      {
+        "product": "corn",
+        "score": 75.0
+      },
+      {
+        "product": "grape",
+        "score": 75.0
+      },
+      {
+        "product": "cool",
+        "score": 75.0
+      },
+      {
+        "product": "orange",
+        "score": 72.7
+      },
+      {
+        "product": "green beans",
+        "score": 70.6
+      }
+    ]
+  },
+  {
+    "ingredient_name": "green plantain",
+    "top_candidates": [
+      {
+        "product": "green beans",
+        "score": 76.2
+      },
+      {
+        "product": "grape",
+        "score": 75.0
+      },
+      {
+        "product": "black beans/green lentils",
+        "score": 74.1
+      },
+      {
+        "product": "garden peas",
+        "score": 70.0
+      },
+      {
+        "product": "banana",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "half and half",
+    "top_candidates": [
+      {
+        "product": "ham",
+        "score": 80.0
+      },
+      {
+        "product": "salt and chilli chicken",
+        "score": 69.2
+      },
+      {
+        "product": "hake",
+        "score": 66.7
+      },
+      {
+        "product": "half fat cheddar cheese",
+        "score": 66.7
+      },
+      {
+        "product": "loaf",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "hemp hearts",
+    "top_candidates": [
+      {
+        "product": "pear",
+        "score": 75.0
+      },
+      {
+        "product": "carrots",
+        "score": 72.7
+      },
+      {
+        "product": "conference pears",
+        "score": 66.7
+      },
+      {
+        "product": "ripen at home conference pears",
+        "score": 66.7
+      },
+      {
+        "product": "hake",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "italian dressing",
+    "top_candidates": [
+      {
+        "product": "caeser salad dressing",
+        "score": 82.8
+      },
+      {
+        "product": "mustard salad dressing",
+        "score": 82.8
+      },
+      {
+        "product": "house salad dressing",
+        "score": 82.8
+      },
+      {
+        "product": "thousand island salad dressing",
+        "score": 82.8
+      },
+      {
+        "product": "italian meat",
+        "score": 80.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "jalapeno refried beans",
+    "top_candidates": [
+      {
+        "product": "jam",
+        "score": 80.0
+      },
+      {
+        "product": "pecans",
+        "score": 80.0
+      },
+      {
+        "product": "green beans",
+        "score": 76.2
+      },
+      {
+        "product": "rice",
+        "score": 75.0
+      },
+      {
+        "product": "brie",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "kalamata olives",
+    "top_candidates": [
+      {
+        "product": "limes",
+        "score": 80.0
+      },
+      {
+        "product": "liver",
+        "score": 80.0
+      },
+      {
+        "product": "herb olives",
+        "score": 77.8
+      },
+      {
+        "product": "garlic olives",
+        "score": 76.2
+      },
+      {
+        "product": "lime",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "korean chili paste",
+    "top_candidates": [
+      {
+        "product": "chilli",
+        "score": 83.3
+      },
+      {
+        "product": "pasta",
+        "score": 80.0
+      },
+      {
+        "product": "chicken paste",
+        "score": 77.4
+      },
+      {
+        "product": "fusili pasta",
+        "score": 76.2
+      },
+      {
+        "product": "beef paste",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "liquid smoke",
+    "top_candidates": [
+      {
+        "product": "rocket",
+        "score": 66.7
+      },
+      {
+        "product": "pork dry cured unsmoked back bacon 8 pack",
+        "score": 66.7
+      },
+      {
+        "product": "mild delicate smoked salmon",
+        "score": 66.7
+      },
+      {
+        "product": "pork dry cured unsmoked streaky bacon 14 pack",
+        "score": 66.7
+      },
+      {
+        "product": "hake",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "maple extract",
+    "top_candidates": [
+      {
+        "product": "madagascan vanilla extract",
+        "score": 81.8
+      },
+      {
+        "product": "apple",
+        "score": 80.0
+      },
+      {
+        "product": "mighty yeast extract",
+        "score": 76.2
+      },
+      {
+        "product": "apples",
+        "score": 72.7
+      },
+      {
+        "product": "apple pies",
+        "score": 70.6
+      }
+    ]
+  },
+  {
+    "ingredient_name": "marsala wine",
+    "top_candidates": [
+      {
+        "product": "salad",
+        "score": 80.0
+      },
+      {
+        "product": "mash",
+        "score": 75.0
+      },
+      {
+        "product": "hot chicken tikka masala with pilau rice",
+        "score": 75.0
+      },
+      {
+        "product": "chicken tikka masala with pilau rice",
+        "score": 75.0
+      },
+      {
+        "product": "salt",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "molasses",
+    "top_candidates": [
+      {
+        "product": "strawberry mousse",
+        "score": 71.4
+      },
+      {
+        "product": "chocolate flavour protein mousse",
+        "score": 71.4
+      },
+      {
+        "product": "salted caramel flavour protein mousse",
+        "score": 71.4
+      },
+      {
+        "product": "white chocolate flavour protein mousse",
+        "score": 71.4
+      },
+      {
+        "product": "mussels with garlic",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "mustard powder",
+    "top_candidates": [
+      {
+        "product": "garam malasa powder",
+        "score": 78.3
+      },
+      {
+        "product": "mustard sauce",
+        "score": 76.2
+      },
+      {
+        "product": "curry powder",
+        "score": 76.2
+      },
+      {
+        "product": "cocoa powder",
+        "score": 73.7
+      },
+      {
+        "product": "mustard salad dressing",
+        "score": 72.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "natural food coloring",
+    "top_candidates": [
+      {
+        "product": "corn",
+        "score": 75.0
+      },
+      {
+        "product": "natural yogurt",
+        "score": 75.0
+      },
+      {
+        "product": "tuna",
+        "score": 75.0
+      },
+      {
+        "product": "cool",
+        "score": 75.0
+      },
+      {
+        "product": "orange",
+        "score": 72.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "nonstick cooking spray",
+    "top_candidates": [
+      {
+        "product": "king prawns",
+        "score": 76.2
+      },
+      {
+        "product": "onion",
+        "score": 75.0
+      },
+      {
+        "product": "cool",
+        "score": 75.0
+      },
+      {
+        "product": "cookies",
+        "score": 71.4
+      },
+      {
+        "product": "korma cooking sauce",
+        "score": 70.6
+      }
+    ]
+  },
+  {
+    "ingredient_name": "oat bran",
+    "top_candidates": [
+      {
+        "product": "ready to cook carrot batons",
+        "score": 75.0
+      },
+      {
+        "product": "barista style oat drink",
+        "score": 75.0
+      },
+      {
+        "product": "no sugars oat drink",
+        "score": 75.0
+      },
+      {
+        "product": "chicken with patatas bravas",
+        "score": 75.0
+      },
+      {
+        "product": "vanilla flavoured protein yogurt with milk chocolate balls",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "oat flour",
+    "top_candidates": [
+      {
+        "product": "strong white bread flour",
+        "score": 82.4
+      },
+      {
+        "product": "plain flour",
+        "score": 80.0
+      },
+      {
+        "product": "self raising flour",
+        "score": 80.0
+      },
+      {
+        "product": "vanilla flavour double delights fromage frais 4 pack",
+        "score": 77.8
+      },
+      {
+        "product": "vanilla flavoured authentic greek yogurt",
+        "score": 77.8
+      }
+    ]
+  },
+  {
+    "ingredient_name": "old fashioned oats",
+    "top_candidates": [
+      {
+        "product": "honey",
+        "score": 80.0
+      },
+      {
+        "product": "mash",
+        "score": 75.0
+      },
+      {
+        "product": "red potatoes",
+        "score": 73.7
+      },
+      {
+        "product": "mashed potato",
+        "score": 69.2
+      },
+      {
+        "product": "potatoes",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "orzo",
+    "top_candidates": [
+      {
+        "product": "ready to roast mediterranean style vegetables",
+        "score": 75.0
+      },
+      {
+        "product": "chorizo kebabs 4 pack",
+        "score": 75.0
+      },
+      {
+        "product": "chorizo kebabs",
+        "score": 75.0
+      },
+      {
+        "product": "italian ham, portobello mushroom",
+        "score": 75.0
+      },
+      {
+        "product": "chorizo paella",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "oyster sauce",
+    "top_candidates": [
+      {
+        "product": "bbq sauce",
+        "score": 80.0
+      },
+      {
+        "product": "soy",
+        "score": 80.0
+      },
+      {
+        "product": "dark soy sauce",
+        "score": 80.0
+      },
+      {
+        "product": "soy sauce",
+        "score": 80.0
+      },
+      {
+        "product": "mustard sauce",
+        "score": 78.3
+      }
+    ]
+  },
+  {
+    "ingredient_name": "paleo buns",
+    "top_candidates": [
+      {
+        "product": "easter chick bao buns",
+        "score": 82.4
+      },
+      {
+        "product": "easter bao buns",
+        "score": 82.4
+      },
+      {
+        "product": "cinnamon buns",
+        "score": 73.7
+      },
+      {
+        "product": "parsley",
+        "score": 72.7
+      },
+      {
+        "product": "brioche burger buns",
+        "score": 70.6
+      }
+    ]
+  },
+  {
+    "ingredient_name": "palm sugar",
+    "top_candidates": [
+      {
+        "product": "demerara sugar",
+        "score": 82.4
+      },
+      {
+        "product": "less sugar",
+        "score": 77.8
+      },
+      {
+        "product": "plum",
+        "score": 75.0
+      },
+      {
+        "product": "icing sugar",
+        "score": 75.0
+      },
+      {
+        "product": "caster sugar",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "pepitas",
+    "top_candidates": [
+      {
+        "product": "pie",
+        "score": 80.0
+      },
+      {
+        "product": "petits pois",
+        "score": 76.9
+      },
+      {
+        "product": "sugar snap peas",
+        "score": 72.7
+      },
+      {
+        "product": "peas, cabbage",
+        "score": 72.7
+      },
+      {
+        "product": "garden peas",
+        "score": 72.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "pickled jalapeños",
+    "top_candidates": [
+      {
+        "product": "pie",
+        "score": 80.0
+      },
+      {
+        "product": "pickle pies 6 pack",
+        "score": 71.4
+      },
+      {
+        "product": "fully loaded jalapeño peanuts",
+        "score": 70.6
+      },
+      {
+        "product": "pickled pink onions",
+        "score": 69.2
+      },
+      {
+        "product": "pickled onion rocket racers",
+        "score": 69.2
+      }
+    ]
+  },
+  {
+    "ingredient_name": "pico de gallo",
+    "top_candidates": [
+      {
+        "product": "pie",
+        "score": 80.0
+      },
+      {
+        "product": "shallots",
+        "score": 66.7
+      },
+      {
+        "product": "cod",
+        "score": 66.7
+      },
+      {
+        "product": "loaf",
+        "score": 66.7
+      },
+      {
+        "product": "liquorice allsorts",
+        "score": 64.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "pinto beans",
+    "top_candidates": [
+      {
+        "product": "pie",
+        "score": 80.0
+      },
+      {
+        "product": "pecans",
+        "score": 80.0
+      },
+      {
+        "product": "green beans",
+        "score": 77.8
+      },
+      {
+        "product": "whole green beans",
+        "score": 77.8
+      },
+      {
+        "product": "red kidney beans in water",
+        "score": 72.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "pizza sauce",
+    "top_candidates": [
+      {
+        "product": "pie",
+        "score": 80.0
+      },
+      {
+        "product": "bbq sauce",
+        "score": 80.0
+      },
+      {
+        "product": "soy sauce",
+        "score": 80.0
+      },
+      {
+        "product": "salmon in teriyaki sauce",
+        "score": 77.8
+      },
+      {
+        "product": "mascarpone pasta sauce",
+        "score": 77.8
+      }
+    ]
+  },
+  {
+    "ingredient_name": "pizza seasoning",
+    "top_candidates": [
+      {
+        "product": "peri peri seasoning",
+        "score": 84.6
+      },
+      {
+        "product": "cajun seasoning",
+        "score": 84.6
+      },
+      {
+        "product": "herb seasoning",
+        "score": 83.3
+      },
+      {
+        "product": "onion",
+        "score": 80.0
+      },
+      {
+        "product": "pie",
+        "score": 80.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "plantain",
+    "top_candidates": [
+      {
+        "product": "plain cottage cheese",
+        "score": 76.9
+      },
+      {
+        "product": "plain soya pot",
+        "score": 76.9
+      },
+      {
+        "product": "plain chicken",
+        "score": 76.9
+      },
+      {
+        "product": "plain naan breads",
+        "score": 76.9
+      },
+      {
+        "product": "panini rolls",
+        "score": 76.9
+      }
+    ]
+  },
+  {
+    "ingredient_name": "plantain chips",
+    "top_candidates": [
+      {
+        "product": "banana chips",
+        "score": 83.3
+      },
+      {
+        "product": "cut chips",
+        "score": 80.0
+      },
+      {
+        "product": "lentil chips",
+        "score": 78.3
+      },
+      {
+        "product": "skin on beef dripping chips",
+        "score": 75.0
+      },
+      {
+        "product": "milk chocolate chips",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "plantains",
+    "top_candidates": [
+      {
+        "product": "grains",
+        "score": 80.0
+      },
+      {
+        "product": "plain soya pot",
+        "score": 75.0
+      },
+      {
+        "product": "plain sugar waffles",
+        "score": 75.0
+      },
+      {
+        "product": "raisins",
+        "score": 72.7
+      },
+      {
+        "product": "bananas",
+        "score": 71.4
+      }
+    ]
+  },
+  {
+    "ingredient_name": "polenta",
+    "top_candidates": [
+      {
+        "product": "feta",
+        "score": 75.0
+      },
+      {
+        "product": "potatoes",
+        "score": 72.7
+      },
+      {
+        "product": "potatoes mashed potato",
+        "score": 72.7
+      },
+      {
+        "product": "potato dauphinoise",
+        "score": 72.7
+      },
+      {
+        "product": "potato au gratin",
+        "score": 72.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "poppy seeds",
+    "top_candidates": [
+      {
+        "product": "pomegranate seeds",
+        "score": 70.6
+      },
+      {
+        "product": "pumpkin seeds",
+        "score": 70.6
+      },
+      {
+        "product": "sunflower seeds",
+        "score": 70.6
+      },
+      {
+        "product": "whole chia seeds",
+        "score": 70.6
+      },
+      {
+        "product": "sesame seeds",
+        "score": 70.6
+      }
+    ]
+  },
+  {
+    "ingredient_name": "poultry seasoning",
+    "top_candidates": [
+      {
+        "product": "herb seasoning",
+        "score": 84.6
+      },
+      {
+        "product": "onion",
+        "score": 80.0
+      },
+      {
+        "product": "cajun seasoning",
+        "score": 80.0
+      },
+      {
+        "product": "pepper seasoning",
+        "score": 78.6
+      },
+      {
+        "product": "peri peri seasoning",
+        "score": 77.4
+      }
+    ]
+  },
+  {
+    "ingredient_name": "powdered erythritol",
+    "top_candidates": [
+      {
+        "product": "celery",
+        "score": 66.7
+      },
+      {
+        "product": "pork",
+        "score": 66.7
+      },
+      {
+        "product": "cod",
+        "score": 66.7
+      },
+      {
+        "product": "cocoa powder",
+        "score": 66.7
+      },
+      {
+        "product": "curry powder",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "powdered sugar",
+    "top_candidates": [
+      {
+        "product": "zero sugar",
+        "score": 80.0
+      },
+      {
+        "product": "mixed fruit squash no added sugar",
+        "score": 78.3
+      },
+      {
+        "product": "less sugar",
+        "score": 77.8
+      },
+      {
+        "product": "caster sugar",
+        "score": 72.7
+      },
+      {
+        "product": "granulated sugar",
+        "score": 72.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "provolone",
+    "top_candidates": [
+      {
+        "product": "honey",
+        "score": 75.0
+      },
+      {
+        "product": "cool",
+        "score": 75.0
+      },
+      {
+        "product": "cavolo nero",
+        "score": 66.7
+      },
+      {
+        "product": "pork",
+        "score": 66.7
+      },
+      {
+        "product": "lemon",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "psyllium husk",
+    "top_candidates": [
+      {
+        "product": "plum",
+        "score": 75.0
+      },
+      {
+        "product": "lime",
+        "score": 75.0
+      },
+      {
+        "product": "soy",
+        "score": 66.7
+      },
+      {
+        "product": "limes",
+        "score": 60.0
+      },
+      {
+        "product": "parsley",
+        "score": 60.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "ranch dressing",
+    "top_candidates": [
+      {
+        "product": "caeser salad dressing",
+        "score": 80.0
+      },
+      {
+        "product": "mustard salad dressing",
+        "score": 80.0
+      },
+      {
+        "product": "house salad dressing",
+        "score": 80.0
+      },
+      {
+        "product": "thousand island salad dressing",
+        "score": 80.0
+      },
+      {
+        "product": "prawn",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "ranch dressing mix",
+    "top_candidates": [
+      {
+        "product": "nut mix",
+        "score": 76.9
+      },
+      {
+        "product": "prawn",
+        "score": 75.0
+      },
+      {
+        "product": "french fries",
+        "score": 72.7
+      },
+      {
+        "product": "caeser salad dressing",
+        "score": 69.0
+      },
+      {
+        "product": "mustard salad dressing",
+        "score": 69.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "ranch dressing powder mix",
+    "top_candidates": [
+      {
+        "product": "baking powder",
+        "score": 76.9
+      },
+      {
+        "product": "prawn",
+        "score": 75.0
+      },
+      {
+        "product": "french fries",
+        "score": 72.7
+      },
+      {
+        "product": "nut mix",
+        "score": 72.7
+      },
+      {
+        "product": "seed mix",
+        "score": 71.4
+      }
+    ]
+  },
+  {
+    "ingredient_name": "red enchilada sauce",
+    "top_candidates": [
+      {
+        "product": "bbq sauce",
+        "score": 80.0
+      },
+      {
+        "product": "soy sauce",
+        "score": 80.0
+      },
+      {
+        "product": "satay sauce",
+        "score": 80.0
+      },
+      {
+        "product": "red lentils",
+        "score": 76.2
+      },
+      {
+        "product": "lime sauce",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "sambal oelek",
+    "top_candidates": [
+      {
+        "product": "leeks",
+        "score": 75.0
+      },
+      {
+        "product": "salmon",
+        "score": 66.7
+      },
+      {
+        "product": "ham",
+        "score": 66.7
+      },
+      {
+        "product": "salt",
+        "score": 66.7
+      },
+      {
+        "product": "sage",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "sandwich buns",
+    "top_candidates": [
+      {
+        "product": "rich",
+        "score": 75.0
+      },
+      {
+        "product": "salad",
+        "score": 66.7
+      },
+      {
+        "product": "salmon",
+        "score": 66.7
+      },
+      {
+        "product": "salt",
+        "score": 66.7
+      },
+      {
+        "product": "spanish inspired air fryer bites",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "sesame oil",
+    "top_candidates": [
+      {
+        "product": "sesame bagels 5 pack",
+        "score": 82.4
+      },
+      {
+        "product": "sesame seeds",
+        "score": 82.4
+      },
+      {
+        "product": "slightly salted spreadable butter blended with rapeseed oil",
+        "score": 77.8
+      },
+      {
+        "product": "lighter spreadable butter blended with rapeseed oil",
+        "score": 77.8
+      },
+      {
+        "product": "rapeseed oil",
+        "score": 77.8
+      }
+    ]
+  },
+  {
+    "ingredient_name": "sirloin cap roast",
+    "top_candidates": [
+      {
+        "product": "roasted",
+        "score": 83.3
+      },
+      {
+        "product": "yeast",
+        "score": 75.0
+      },
+      {
+        "product": "pasta",
+        "score": 75.0
+      },
+      {
+        "product": "sirloin steak 21 day matured",
+        "score": 74.1
+      },
+      {
+        "product": "sirloin steak 30 day matured",
+        "score": 74.1
+      }
+    ]
+  },
+  {
+    "ingredient_name": "special sauce",
+    "top_candidates": [
+      {
+        "product": "lime sauce",
+        "score": 82.4
+      },
+      {
+        "product": "special coconut rice pouch",
+        "score": 81.8
+      },
+      {
+        "product": "bbq sauce",
+        "score": 80.0
+      },
+      {
+        "product": "soy sauce",
+        "score": 80.0
+      },
+      {
+        "product": "special quinoa, pumpkin",
+        "score": 78.3
+      }
+    ]
+  },
+  {
+    "ingredient_name": "star anise",
+    "top_candidates": [
+      {
+        "product": "pasta",
+        "score": 75.0
+      },
+      {
+        "product": "custard sweets",
+        "score": 70.0
+      },
+      {
+        "product": "chive starry night mix",
+        "score": 70.0
+      },
+      {
+        "product": "vinegar starry night mix",
+        "score": 70.0
+      },
+      {
+        "product": "werther's original butter candies",
+        "score": 70.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "sumac",
+    "top_candidates": [
+      {
+        "product": "prosecco spumante docg valdobbiadene",
+        "score": 80.0
+      },
+      {
+        "product": "smash burgers 4 pack",
+        "score": 75.0
+      },
+      {
+        "product": "succulent trout 2 pack",
+        "score": 75.0
+      },
+      {
+        "product": "smash burger",
+        "score": 75.0
+      },
+      {
+        "product": "smashed avocado",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "swiss chard",
+    "top_candidates": [
+      {
+        "product": "kiwis",
+        "score": 66.7
+      },
+      {
+        "product": "ham",
+        "score": 66.7
+      },
+      {
+        "product": "cheddar",
+        "score": 66.7
+      },
+      {
+        "product": "sicilian lemon swiss roll",
+        "score": 66.7
+      },
+      {
+        "product": "clotted cream flavour swiss roll",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "tahini",
+    "top_candidates": [
+      {
+        "product": "thin crust stonebaked bbq meat feast pizza",
+        "score": 80.0
+      },
+      {
+        "product": "original bagel thins",
+        "score": 72.7
+      },
+      {
+        "product": "high protein bagel thins",
+        "score": 72.7
+      },
+      {
+        "product": "cheese thins",
+        "score": 72.7
+      },
+      {
+        "product": "multi-seed flatbread thins",
+        "score": 72.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "tamari",
+    "top_candidates": [
+      {
+        "product": "mango coconut marinated chicken breast sizzlers",
+        "score": 83.3
+      },
+      {
+        "product": "maris piper potatoes",
+        "score": 80.0
+      },
+      {
+        "product": "marie rose king prawn cocktail",
+        "score": 80.0
+      },
+      {
+        "product": "marinated tomatoes",
+        "score": 80.0
+      },
+      {
+        "product": "marinade",
+        "score": 80.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "tempeh",
+    "top_candidates": [
+      {
+        "product": "tempura chicken bites",
+        "score": 80.0
+      },
+      {
+        "product": "tempura chicken tenders",
+        "score": 80.0
+      },
+      {
+        "product": "tempura fish burgers",
+        "score": 80.0
+      },
+      {
+        "product": "tempura chicken",
+        "score": 80.0
+      },
+      {
+        "product": "tempura prawns 12 pack",
+        "score": 80.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "toothpick",
+    "top_candidates": [
+      {
+        "product": "thick cut unsmoked back bacon 10 pack",
+        "score": 71.4
+      },
+      {
+        "product": "thick cut back bacon 10 pack",
+        "score": 71.4
+      },
+      {
+        "product": "thick cut big daddy rump steak 30 day matured",
+        "score": 71.4
+      },
+      {
+        "product": "raspberry thick",
+        "score": 71.4
+      },
+      {
+        "product": "strawberry thick",
+        "score": 71.4
+      }
+    ]
+  },
+  {
+    "ingredient_name": "turkey gravy",
+    "top_candidates": [
+      {
+        "product": "turkey breast",
+        "score": 78.3
+      },
+      {
+        "product": "slow lamb shanks with mint gravy",
+        "score": 73.7
+      },
+      {
+        "product": "ground turkey",
+        "score": 72.0
+      },
+      {
+        "product": "extra lean ground turkey",
+        "score": 66.7
+      },
+      {
+        "product": "tuna",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "tzatziki sauce",
+    "top_candidates": [
+      {
+        "product": "lime sauce",
+        "score": 82.4
+      },
+      {
+        "product": "mint sauce",
+        "score": 82.4
+      },
+      {
+        "product": "bbq sauce",
+        "score": 80.0
+      },
+      {
+        "product": "soy sauce",
+        "score": 80.0
+      },
+      {
+        "product": "teriyaki sauce",
+        "score": 80.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "unflavored whey protein powder",
+    "top_candidates": [
+      {
+        "product": "baking powder",
+        "score": 81.8
+      },
+      {
+        "product": "protein peach",
+        "score": 76.9
+      },
+      {
+        "product": "cocoa powder",
+        "score": 73.7
+      },
+      {
+        "product": "curry powder",
+        "score": 73.7
+      },
+      {
+        "product": "chilli powder",
+        "score": 72.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "vegan parmesan",
+    "top_candidates": [
+      {
+        "product": "chicken, parmesan",
+        "score": 84.6
+      },
+      {
+        "product": "pear",
+        "score": 75.0
+      },
+      {
+        "product": "vegan bacon",
+        "score": 73.7
+      },
+      {
+        "product": "vegan melt bakes 2 pack",
+        "score": 72.7
+      },
+      {
+        "product": "vinegar peanuts",
+        "score": 69.2
+      }
+    ]
+  },
+  {
+    "ingredient_name": "whey protein powder",
+    "top_candidates": [
+      {
+        "product": "baking powder",
+        "score": 81.8
+      },
+      {
+        "product": "protein peach",
+        "score": 76.9
+      },
+      {
+        "product": "chicken katsu curry protein pot",
+        "score": 75.0
+      },
+      {
+        "product": "thai green curry protein pot",
+        "score": 75.0
+      },
+      {
+        "product": "cocoa powder",
+        "score": 73.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "white miso paste",
+    "top_candidates": [
+      {
+        "product": "white fish",
+        "score": 84.2
+      },
+      {
+        "product": "salmon paste",
+        "score": 80.0
+      },
+      {
+        "product": "pasta",
+        "score": 80.0
+      },
+      {
+        "product": "white onions",
+        "score": 76.2
+      },
+      {
+        "product": "beef paste",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "whole wheat breadcrumbs",
+    "top_candidates": [
+      {
+        "product": "natural breadcrumbs",
+        "score": 84.8
+      },
+      {
+        "product": "panko breadcrumbs",
+        "score": 83.9
+      },
+      {
+        "product": "white bread",
+        "score": 81.8
+      },
+      {
+        "product": "golden breadcrumbs",
+        "score": 80.0
+      },
+      {
+        "product": "brie",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "whole wheat flour",
+    "top_candidates": [
+      {
+        "product": "wholewheat pasta , fusilli",
+        "score": 78.6
+      },
+      {
+        "product": "wholewheat pasta , spagh.",
+        "score": 78.6
+      },
+      {
+        "product": "plain flour",
+        "score": 73.7
+      },
+      {
+        "product": "whole chicken",
+        "score": 72.7
+      },
+      {
+        "product": "peach flavour",
+        "score": 72.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "whole wheat israeli couscous",
+    "top_candidates": [
+      {
+        "product": "sage",
+        "score": 75.0
+      },
+      {
+        "product": "whole chicken",
+        "score": 72.7
+      },
+      {
+        "product": "coconut",
+        "score": 71.4
+      },
+      {
+        "product": "garlic",
+        "score": 66.7
+      },
+      {
+        "product": "whole salmon",
+        "score": 66.7
+      }
+    ]
+  },
+  {
+    "ingredient_name": "whole wheat wraps",
+    "top_candidates": [
+      {
+        "product": "wholewheat pasta , fusilli",
+        "score": 83.9
+      },
+      {
+        "product": "wholewheat pasta , spagh.",
+        "score": 83.9
+      },
+      {
+        "product": "tomato wrap",
+        "score": 73.7
+      },
+      {
+        "product": "whole chicken",
+        "score": 72.7
+      },
+      {
+        "product": "white grapes",
+        "score": 69.6
+      }
+    ]
+  },
+  {
+    "ingredient_name": "wonton wrappers",
+    "top_candidates": [
+      {
+        "product": "apples",
+        "score": 83.3
+      },
+      {
+        "product": "grape",
+        "score": 80.0
+      },
+      {
+        "product": "apple",
+        "score": 80.0
+      },
+      {
+        "product": "onion",
+        "score": 80.0
+      },
+      {
+        "product": "herbs",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "wooden skewers",
+    "top_candidates": [
+      {
+        "product": "protein salt chilli ready chicken skewers",
+        "score": 83.3
+      },
+      {
+        "product": "protein teriyaki ready chicken skewers",
+        "score": 83.3
+      },
+      {
+        "product": "lightly seasoned chicken skewers",
+        "score": 83.3
+      },
+      {
+        "product": "protein tandoori chicken skewers",
+        "score": 83.3
+      },
+      {
+        "product": "sweet and sour coated chicken skewers",
+        "score": 83.3
+      }
+    ]
+  },
+  {
+    "ingredient_name": "worcestershire sauce",
+    "top_candidates": [
+      {
+        "product": "lime sauce",
+        "score": 84.2
+      },
+      {
+        "product": "bbq sauce",
+        "score": 80.0
+      },
+      {
+        "product": "soy sauce",
+        "score": 80.0
+      },
+      {
+        "product": "tartare sauce",
+        "score": 76.2
+      },
+      {
+        "product": "rice",
+        "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "xanthan gum",
+    "top_candidates": [
+      {
+        "product": "banana",
+        "score": 66.7
+      },
+      {
+        "product": "plum",
+        "score": 66.7
+      },
+      {
+        "product": "ham",
+        "score": 66.7
+      },
+      {
+        "product": "nut",
+        "score": 66.7
+      },
+      {
+        "product": "picanha",
+        "score": 61.5
+      }
+    ]
+  },
+  {
+    "ingredient_name": "yellow mustard",
+    "top_candidates": [
+      {
+        "product": "dijon mustard",
+        "score": 78.3
+      },
+      {
+        "product": "wholegrain mustard",
+        "score": 72.7
+      },
+      {
+        "product": "english mustard",
+        "score": 72.7
+      },
+      {
+        "product": "mustard sauce",
+        "score": 70.0
+      },
+      {
+        "product": "yellowfin tuna",
+        "score": 69.6
+      }
+    ]
+  },
+  {
+    "ingredient_name": "zucchini",
+    "top_candidates": [
+      {
+        "product": "chilli",
+        "score": 72.7
+      },
+      {
+        "product": "chicken",
+        "score": 66.7
+      },
+      {
+        "product": "chinese marinated pork loin",
+        "score": 66.7
+      },
+      {
+        "product": "chinese bbq ribs",
+        "score": 66.7
+      },
+      {
+        "product": "chinese style salt chilli pork ribs",
+        "score": 66.7
+      }
+    ]
+  }
+]
