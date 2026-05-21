@@ -186,7 +186,7 @@ function RecipePreviewModal({ recipe, onClose }) {
               <div style={{ marginTop: 4 }}>
                 <a href={recipe.source_url} target="_blank" rel="noreferrer"
                    style={{ color: '#9ca3af', textDecoration: 'none', fontSize: 12, fontWeight: 600 }}>
-                  Zobacz przepis na: aniagotuje.pl ↗
+                  Przejdź na stronę z przepisem ↗
                 </a>
               </div>
             )}
