@@ -1145,7 +1145,7 @@
   },
   {
     "original_name": "Gruszki Odmiana Konferencja Owoce  Auchan na wagę ok. 600 g",
-    "generic_name": "gruszki odmiana konferencja owoce auchan g",
+    "generic_name": "gruszki odmiana konferencja g",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -1210,7 +1210,7 @@
   },
   {
     "original_name": "Cebula Warzywa Auchan na wagę ok. 1 kg",
-    "generic_name": "cebula warzywa auchan kg",
+    "generic_name": "cebula",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -1275,7 +1275,7 @@
   },
   {
     "original_name": "Banany Owoce  Auchan na wagę kiść 4-6 szt  ok 1 kg",
-    "generic_name": "banany owoce auchan kiść 4- kg",
+    "generic_name": "banany kiść 4",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -1378,19 +1378,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "BIO Banany  Owoce  Auchan na wagę kiść 4-6 szt ok. 1,2 kg",
-    "generic_name": "banany owoce auchan kiść 4",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 11.99,
-    "price_per_unit": null,
-    "price_per_100": 0.999,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Jabłka  Pewni Dobrego 4 sztuki",
     "generic_name": "jabłka pewni dobrego 4 sztuki",
     "shop": "auchan",
@@ -1470,7 +1457,7 @@
   },
   {
     "original_name": "Jabłka Ligol Auchan na wagę ok.1 kg",
-    "generic_name": "jabłka ligol auchan kg",
+    "generic_name": "jabłka ligol",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -1535,7 +1522,7 @@
   },
   {
     "original_name": "Por Warzywa Auchan na wagę ok. 400 g",
-    "generic_name": "por warzywa auchan g",
+    "generic_name": "por g",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -1574,7 +1561,7 @@
   },
   {
     "original_name": "Pomarańcze Owoce  Auchan na wagę ok. 500 g",
-    "generic_name": "pomarańcze owoce auchan g",
+    "generic_name": "pomarańcze g",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -1600,7 +1587,7 @@
   },
   {
     "original_name": "Kapusta Pekińska Warzywa Auchan na wagę ok. 1 kg",
-    "generic_name": "kapusta pekińska warzywa auchan kg",
+    "generic_name": "kapusta pekińska",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -1743,7 +1730,7 @@
   },
   {
     "original_name": "Jabłka Szampion Auchan na wagę ok.1 kg",
-    "generic_name": "jabłka szampion auchan kg",
+    "generic_name": "jabłka szampion",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -1752,19 +1739,6 @@
     "price_package": 4.69,
     "price_per_unit": null,
     "price_per_100": 0.469,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Cebula Pewni Dobrego 1 kg",
-    "generic_name": "cebula",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.99,
-    "price_per_unit": null,
-    "price_per_100": 0.399,
     "standard_category": "Warzywa"
   },
   {
@@ -1834,7 +1808,7 @@
   },
   {
     "original_name": "Gruszki Owoce  Auchan na wagę ok. 600 g",
-    "generic_name": "gruszki owoce auchan g",
+    "generic_name": "gruszki g",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -1951,7 +1925,7 @@
   },
   {
     "original_name": "Bakłażan Warzywa Auchan 1 sztuka na wagę ok. 500 g",
-    "generic_name": "bakłażan warzywa auchan 1 g",
+    "generic_name": "bakłażan 1 g",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -2029,7 +2003,7 @@
   },
   {
     "original_name": "Jabłka Jonaprince Owoce  Auchan 4 sztuki",
-    "generic_name": "jabłka jonaprince owoce auchan 4 sztuki",
+    "generic_name": "jabłka jonaprince 4 sztuki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -2081,7 +2055,7 @@
   },
   {
     "original_name": "Jabłka Red Prince XXL  Owoce  Auchan na wagę ok.1 kg",
-    "generic_name": "jabłka red prince owoce auchan kg",
+    "generic_name": "jabłka red prince",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -2211,7 +2185,7 @@
   },
   {
     "original_name": "Jabłka Golden Delicious Auchan na wagę ok.1 kg",
-    "generic_name": "jabłka golden delicious auchan kg",
+    "generic_name": "jabłka golden delicious",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -2354,7 +2328,7 @@
   },
   {
     "original_name": "Mandarynki Owoce  Auchan na wagę ok . 600 g",
-    "generic_name": "mandarynki owoce auchan ok",
+    "generic_name": "mandarynki ok",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -2380,7 +2354,7 @@
   },
   {
     "original_name": "Marakuja Owoce  Auchan 3 sztuki",
-    "generic_name": "marakuja owoce auchan 3 sztuki",
+    "generic_name": "marakuja 3 sztuki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -2445,7 +2419,7 @@
   },
   {
     "original_name": "Melon Cantalupe Owoce  Auchan na wagę ok. 1 kg",
-    "generic_name": "melon cantalupe owoce auchan kg",
+    "generic_name": "melon cantalupe",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -2549,7 +2523,7 @@
   },
   {
     "original_name": "Mandarynki Owoce  Auchan na wagę ok. 600 g",
-    "generic_name": "mandarynki owoce auchan g",
+    "generic_name": "mandarynki g",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -2575,7 +2549,7 @@
   },
   {
     "original_name": "Jabłka Eko Owoce  Auchan 4 sztuki",
-    "generic_name": "jabłka owoce auchan 4 sztuki",
+    "generic_name": "jabłka 4 sztuki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -2601,7 +2575,7 @@
   },
   {
     "original_name": "Limonka Owoce  Auchan na wagę ok. 300 g",
-    "generic_name": "limonka owoce auchan g",
+    "generic_name": "limonka g",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -2991,7 +2965,7 @@
   },
   {
     "original_name": "Arbuz Owoce  Auchan na wagę ok. 4 kg",
-    "generic_name": "arbuz owoce auchan kg",
+    "generic_name": "arbuz",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -3862,7 +3836,7 @@
   },
   {
     "original_name": "Grapefruit Biały Owoce  Auchan na wagę od 500 g",
-    "generic_name": "grapefruit biały owoce auchan",
+    "generic_name": "grapefruit biały",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -3888,7 +3862,7 @@
   },
   {
     "original_name": "Winogrona Owoce  Auchan na wagę ok. 600 g",
-    "generic_name": "winogrona owoce auchan g",
+    "generic_name": "winogrona g",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -4057,7 +4031,7 @@
   },
   {
     "original_name": "Warzywa na patelnię z cukinią Auchan 450 g",
-    "generic_name": "warzywa na patelnię z cukinią",
+    "generic_name": "na patelnię z cukinią",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 450.0,
@@ -4226,7 +4200,7 @@
   },
   {
     "original_name": "Warzywa na patelnię po wiejsku z grzybami  Hortex 450 g",
-    "generic_name": "warzywa na patelnię po z grzybami",
+    "generic_name": "na patelnię po z grzybami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 450.0,
@@ -4304,7 +4278,7 @@
   },
   {
     "original_name": "Warzywa na patelnię z ziołami i papryką Hortex 450 g",
-    "generic_name": "warzywa na patelnię z ziołami i papryką",
+    "generic_name": "na patelnię z ziołami i papryką",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 450.0,
@@ -4369,7 +4343,7 @@
   },
   {
     "original_name": "Warzywa na patelnię z przyprawą orielntalną Hortex 450 g",
-    "generic_name": "warzywa na patelnię z przyprawą orielntalną",
+    "generic_name": "na patelnię z przyprawą orielntalną",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 450.0,
@@ -4421,7 +4395,7 @@
   },
   {
     "original_name": "Warzywa na patelnię z bazylią Auchan 450 g",
-    "generic_name": "warzywa na patelnię z bazylią",
+    "generic_name": "na patelnię z bazylią",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 450.0,
@@ -4447,7 +4421,7 @@
   },
   {
     "original_name": "Warzywa na patelnię z bazylią i tymiankiem Hortex 450 g",
-    "generic_name": "warzywa na patelnię z bazylią i tymiankiem",
+    "generic_name": "na patelnię z bazylią i tymiankiem",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 450.0,
@@ -4473,7 +4447,7 @@
   },
   {
     "original_name": "Warzywa na patelnię ze szpinakiem Hortex 450 g",
-    "generic_name": "warzywa na patelnię ze szpinakiem",
+    "generic_name": "na patelnię ze szpinakiem",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 450.0,
@@ -4512,7 +4486,7 @@
   },
   {
     "original_name": "Warzywa na patelnię po Niderlandzku  Auchan 450 g",
-    "generic_name": "warzywa na patelnię",
+    "generic_name": "na patelnię",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 450.0,
@@ -4694,7 +4668,7 @@
   },
   {
     "original_name": "Warzywa na patelnię  z suszonymi pomidorami Hortex 400 g",
-    "generic_name": "warzywa na patelnię z suszonymi pomidorami",
+    "generic_name": "na patelnię z suszonymi pomidorami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -4772,7 +4746,7 @@
   },
   {
     "original_name": "Warzywa na patelnię z przyprawą włoską Hortex 450 g",
-    "generic_name": "warzywa na patelnię z przyprawą włoską",
+    "generic_name": "na patelnię z przyprawą włoską",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 450.0,
@@ -4785,7 +4759,7 @@
   },
   {
     "original_name": "Warzywa na patelnię z koperkiem i grzybami Hortex 450 g",
-    "generic_name": "warzywa na patelnię z koperkiem i grzybami",
+    "generic_name": "na patelnię z koperkiem i grzybami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 450.0,
@@ -6202,7 +6176,7 @@
   },
   {
     "original_name": "Warzywa do zapiekania z kurkami Hortex 450 g",
-    "generic_name": "warzywa do zapiekania z kurkami",
+    "generic_name": "do zapiekania z kurkami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 450.0,
@@ -6345,7 +6319,7 @@
   },
   {
     "original_name": "Warzywa z tofu w sosie teriyaki high protein    Hortex 450 g",
-    "generic_name": "warzywa z tofu w sosie teriyaki high protein",
+    "generic_name": "z tofu w sosie teriyaki high protein",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 450.0,
@@ -8165,7 +8139,7 @@
   },
   {
     "original_name": "Jogurt pitny owoce leśne Auchan 400 g",
-    "generic_name": "jogurt pitny owoce leśne",
+    "generic_name": "jogurt pitny leśne",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -11155,7 +11129,7 @@
   },
   {
     "original_name": "Kefir owoce leśne Jovi 350 g",
-    "generic_name": "kefir owoce leśne",
+    "generic_name": "kefir leśne",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 350.0,
@@ -13508,7 +13482,7 @@
   },
   {
     "original_name": "Men jogurt pitny wysokobiałkowy owoce leśne Bakoma 230 g",
-    "generic_name": "men jogurt pitny wysokobiałkowy owoce leśne",
+    "generic_name": "men jogurt pitny wysokobiałkowy leśne",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 230.0,
@@ -14119,7 +14093,7 @@
   },
   {
     "original_name": "Frankfurterki Auchan na wagę ok. 500 g",
-    "generic_name": "frankfurterki auchan g",
+    "generic_name": "frankfurterki g",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -16875,7 +16849,7 @@
   },
   {
     "original_name": "Ser Cheddar Mild White   Auchan na wagę ok. 130 g",
-    "generic_name": "ser cheddar mild white auchan g",
+    "generic_name": "ser cheddar mild white g",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -17031,7 +17005,7 @@
   },
   {
     "original_name": "Ser Ricotta Pecorina    Auchan na wagę ok. 130 g",
-    "generic_name": "ser ricotta pecorina auchan g",
+    "generic_name": "ser ricotta pecorina g",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -18110,7 +18084,7 @@
   },
   {
     "original_name": "Ser Old Amststerdam Mild Auchan Collection  na wagę ok. 130 g",
-    "generic_name": "ser old amststerdam mild auchan collection g",
+    "generic_name": "ser old amststerdam mild collection g",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -18162,7 +18136,7 @@
   },
   {
     "original_name": "Ser Brie Auchan na wagę ok. 150 g",
-    "generic_name": "ser brie auchan g",
+    "generic_name": "ser brie g",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -19280,7 +19254,7 @@
   },
   {
     "original_name": "Ser Cambozola Black   Auchan na wagę ok.130g",
-    "generic_name": "ser cambozola black auchan g",
+    "generic_name": "ser cambozola black g",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -19449,7 +19423,7 @@
   },
   {
     "original_name": "Ser Dor Blue   Auchan Collection  na wagę ok. 130 g",
-    "generic_name": "ser dor blue auchan collection g",
+    "generic_name": "ser dor blue collection g",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -19631,7 +19605,7 @@
   },
   {
     "original_name": "Ser Pecorino Toscano  Auchan Collection  na wagę ok.120 g",
-    "generic_name": "ser pecorino toscano auchan collection g",
+    "generic_name": "ser pecorino toscano collection g",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -19670,7 +19644,7 @@
   },
   {
     "original_name": "Ryż Basmati Auchan 4 x 100 g",
-    "generic_name": "ryż basmati auchan 4 x",
+    "generic_name": "ryż basmati 4 x",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -31487,7 +31461,7 @@
   },
   {
     "original_name": "Jałowiec owoce cały Kamis 10 g",
-    "generic_name": "jałowiec owoce cały",
+    "generic_name": "jałowiec cały",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 10.0,
@@ -31513,7 +31487,7 @@
   },
   {
     "original_name": "Warzywa do woka House of Asia 330 g",
-    "generic_name": "warzywa do woka",
+    "generic_name": "do woka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 190.0,
@@ -31617,7 +31591,7 @@
   },
   {
     "original_name": "Warzywa suszone Makar 500 g",
-    "generic_name": "warzywa suszone",
+    "generic_name": "suszone",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -32133,19 +32107,6 @@
     "price_package": 1.0,
     "price_per_unit": null,
     "price_per_100": 1.0,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Arbuz",
-    "generic_name": "arbuz",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 5000.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 39.95,
-    "price_per_unit": null,
-    "price_per_100": 0.799,
     "standard_category": "Owoce"
   },
   {
@@ -33398,7 +33359,7 @@
   },
   {
     "original_name": "Fruvita Pure jogurt owoce mango banan marakuja 150 g",
-    "generic_name": "fruvita pure jogurt owoce mango banan marakuja",
+    "generic_name": "fruvita pure jogurt mango banan marakuja",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -33424,7 +33385,7 @@
   },
   {
     "original_name": "Fruvita Pure jogurt owoce jagoda banan 150 g",
-    "generic_name": "fruvita pure jogurt owoce jagoda banan",
+    "generic_name": "fruvita pure jogurt jagoda banan",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -33814,7 +33775,7 @@
   },
   {
     "original_name": "Fruvita Pure Jogurt owoce truskawka banan jabłko 150 g",
-    "generic_name": "fruvita pure jogurt owoce truskawka banan jabłko",
+    "generic_name": "fruvita pure jogurt truskawka banan jabłko",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -34282,7 +34243,7 @@
   },
   {
     "original_name": "Biedronka Szynka swojska sądecka tradycyjna 100 g",
-    "generic_name": "biedronka szynka swojska sądecka tradycyjna",
+    "generic_name": "szynka swojska sądecka tradycyjna",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -34321,7 +34282,7 @@
   },
   {
     "original_name": "Biedronka Polędwica wiejska sądecka tradycyjna 100 g",
-    "generic_name": "biedronka polędwica sądecka tradycyjna",
+    "generic_name": "polędwica sądecka tradycyjna",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -34360,7 +34321,7 @@
   },
   {
     "original_name": "Marinero Łosoś świeży filet ze skórą kg",
-    "generic_name": "marinero łosoś filet ze skórą kg",
+    "generic_name": "marinero łosoś filet ze skórą",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 1200.0,
@@ -34542,7 +34503,7 @@
   },
   {
     "original_name": "Kraina Wędlin Kiełbasa podwawelska kg",
-    "generic_name": "kraina wędlin kiełbasa podwawelska kg",
+    "generic_name": "kraina wędlin kiełbasa podwawelska",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 800.0,
@@ -34841,7 +34802,7 @@
   },
   {
     "original_name": "Biedronka Filety z tuńczyka w oliwie z oliwek 140 g",
-    "generic_name": "biedronka filety z tuńczyka w oliwie z oliwek",
+    "generic_name": "filety z tuńczyka w oliwie z oliwek",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 140.0,
@@ -35387,7 +35348,7 @@
   },
   {
     "original_name": "Lajkonik Junior Safari Drobne pieczywo o smaku waniliowym 180 g",
-    "generic_name": "lajkonik junior safari pieczywo o smaku waniliowym",
+    "generic_name": "lajkonik junior safari o smaku waniliowym",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -36479,7 +36440,7 @@
   },
   {
     "original_name": "Kinder Kinderini Biszkopty z mlecznymi i kakaowymi dekoracjami 4x2 szt. 100 g",
-    "generic_name": "kinder kinderini biszkopty z mlecznymi i kakaowymi dekoracjami 4x2 szt",
+    "generic_name": "kinder kinderini biszkopty z mlecznymi i kakaowymi dekoracjami 4x2",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -36801,19 +36762,6 @@
     "price_per_unit": null,
     "price_per_100": 3.9975,
     "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
-    "original_name": "Biedronka Premium Oliwa z oliwek Extra Virgin 500 ml",
-    "generic_name": "biedronka oliwa z oliwek",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 500.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 30.99,
-    "price_per_unit": null,
-    "price_per_100": 6.198,
-    "standard_category": "Tłuszcze, oleje i sosy"
   },
   {
     "original_name": "Go Active Protein krem o smaku pistacjowym 180 g",

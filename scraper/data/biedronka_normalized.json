@@ -2172,7 +2172,7 @@
   },
   {
     "original_name": "Fruvita Pure jogurt owoce mango banan marakuja 150 g",
-    "generic_name": "fruvita pure jogurt owoce mango banan marakuja",
+    "generic_name": "fruvita pure jogurt mango banan marakuja",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -2198,7 +2198,7 @@
   },
   {
     "original_name": "Fruvita Pure jogurt owoce jagoda banan 150 g",
-    "generic_name": "fruvita pure jogurt owoce jagoda banan",
+    "generic_name": "fruvita pure jogurt jagoda banan",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -2679,7 +2679,7 @@
   },
   {
     "original_name": "Fruvita Pure Jogurt owoce truskawka banan jabłko 150 g",
-    "generic_name": "fruvita pure jogurt owoce truskawka banan jabłko",
+    "generic_name": "fruvita pure jogurt truskawka banan jabłko",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -3264,7 +3264,7 @@
   },
   {
     "original_name": "Biedronka Szynka swojska sądecka tradycyjna 100 g",
-    "generic_name": "biedronka szynka swojska sądecka tradycyjna",
+    "generic_name": "szynka swojska sądecka tradycyjna",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -3342,7 +3342,7 @@
   },
   {
     "original_name": "Biedronka Polędwica wiejska sądecka tradycyjna 100 g",
-    "generic_name": "biedronka polędwica sądecka tradycyjna",
+    "generic_name": "polędwica sądecka tradycyjna",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -3394,7 +3394,7 @@
   },
   {
     "original_name": "Marinero Łosoś świeży filet ze skórą kg",
-    "generic_name": "marinero łosoś filet ze skórą kg",
+    "generic_name": "marinero łosoś filet ze skórą",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 1200.0,
@@ -3836,7 +3836,7 @@
   },
   {
     "original_name": "Kraina Wędlin Kiełbasa podwawelska kg",
-    "generic_name": "kraina wędlin kiełbasa podwawelska kg",
+    "generic_name": "kraina wędlin kiełbasa podwawelska",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 800.0,
@@ -4278,7 +4278,7 @@
   },
   {
     "original_name": "Biedronka Filety z tuńczyka w oliwie z oliwek 140 g",
-    "generic_name": "biedronka filety z tuńczyka w oliwie z oliwek",
+    "generic_name": "filety z tuńczyka w oliwie z oliwek",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 140.0,
@@ -4850,7 +4850,7 @@
   },
   {
     "original_name": "Lajkonik Junior Safari Drobne pieczywo o smaku waniliowym 180 g",
-    "generic_name": "lajkonik junior safari pieczywo o smaku waniliowym",
+    "generic_name": "lajkonik junior safari o smaku waniliowym",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -5955,7 +5955,7 @@
   },
   {
     "original_name": "Kinder Kinderini Biszkopty z mlecznymi i kakaowymi dekoracjami 4x2 szt. 100 g",
-    "generic_name": "kinder kinderini biszkopty z mlecznymi i kakaowymi dekoracjami 4x2 szt",
+    "generic_name": "kinder kinderini biszkopty z mlecznymi i kakaowymi dekoracjami 4x2",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -6332,7 +6332,7 @@
   },
   {
     "original_name": "Biedronka Premium Oliwa z oliwek Extra Virgin 500 ml",
-    "generic_name": "biedronka oliwa z oliwek",
+    "generic_name": "oliwa z oliwek",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 500.0,

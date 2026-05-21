@@ -107,6 +107,35 @@ _FAMILY_RULES: list[tuple[re.Pattern, str]] = [
     (re.compile(r"^bulion drobiowy\b|^rosół\b(?! wołowy)"), "bulion drobiowy"),
     (re.compile(r"^bulion wołowy\b"),          "bulion wołowy"),
     (re.compile(r"^bulion warzywny\b"),        "bulion warzywny"),
+    # Wędliny i mięso przetworzone — wszystkie warianty → prosta nazwa
+    (re.compile(r"^kiełbas\w*\b|^kielbas\w*\b"), "kiełbasa"),
+    (re.compile(r"^boczek\b"),                 "boczek"),
+    (re.compile(r"^szynka\b"),                 "szynka"),
+    (re.compile(r"^bekon\b|^boczek\s+boczek"), "bekon"),
+    # Sól — wszystkie typy to "sól"
+    (re.compile(r"^sól\b|^sol\b"),             "sól"),
+    # Sery
+    (re.compile(r"^parmezan\b|^ser\s+parmezan|^parmigiano"),  "parmezan"),
+    (re.compile(r"^mozzarella\b"),             "mozzarella"),
+    (re.compile(r"^ser\s+feta\b|^feta\b"),     "ser feta"),
+    # Superfoods / pseudozboża
+    (re.compile(r"^maca\b"),                   "maca"),
+    (re.compile(r"^spirulina\b"),              "spirulina"),
+    (re.compile(r"^komosa\b|^quinoa\b"),       "komosa ryżowa"),
+    # Mąki
+    (re.compile(r"^mąka\b(?! migdałowa| kokosowa| owsiana| z ciecierzycy)"), "mąka"),
+    (re.compile(r"^mąka migdałowa\b"),         "mąka migdałowa"),
+    (re.compile(r"^mąka kokosowa\b"),          "mąka kokosowa"),
+    # Orzechy i nasiona
+    (re.compile(r"^orzech\w*\s+włosk\w*\b"),   "orzechy włoskie"),
+    (re.compile(r"^orzech\w*\s+nerkowc\w*\b"),  "orzechy nerkowca"),
+    (re.compile(r"^orzech\w*\s+laskow\w*\b"),   "orzechy laskowe"),
+    (re.compile(r"^orzech\w*\s+ziemn\w*\b|^masło orzechowe\b"), "masło orzechowe"),
+    (re.compile(r"^migdał\w*\b"),              "migdały"),
+    # Octy — rozróżniamy bo ceny różne
+    (re.compile(r"^ocet jabłkowy\b"),          "ocet jabłkowy"),
+    (re.compile(r"^ocet balsamiczny\b"),       "ocet balsamiczny"),
+    (re.compile(r"^ocet\b(?! jabłkowy| balsamiczny| winny| ryżowy)"), "ocet"),
 ]
 
 

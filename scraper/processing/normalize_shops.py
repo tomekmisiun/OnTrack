@@ -428,12 +428,18 @@ _REMOVE_WORDS_PL = [
     r"\bchud\w*\b",
     r"\bwiejsk\w*\b",
     r"\bnaturalnie\b",
-    r"\bnaturalny\b", r"\bnaturalna\b", r"\bnaturalne\b",  # "naturalny" gdy zbędny
+    r"\bnaturalny\b", r"\bnaturalna\b", r"\bnaturalne\b",
     r"\bśwież\w*\b",
     r"\bpasteryzowany\w*\b",
     r"\bhomogenizowany\w*\b",
-    r"\bwzbogacon\w*\b",           # "wzbogacony w..."
+    r"\bwzbogacon\w*\b",
     r"\bkonserwowy\b",
+    # Nazwy sklepów (mogą pojawić się w nazwie produktu jako lowercase)
+    r"\bauchan\b", r"\bbiedronka\b", r"\blidl\b", r"\bnetto\b",
+    # Słowa kategorii sklepowych
+    r"\bowoce\b", r"\bwarzywa\b", r"\bnabiał\b", r"\bpieczywo\b",
+    # Standalone jednostki bez liczby (pozostałość po usunięciu "1 kg" itp.)
+    r"\bkg\b", r"\bszt\b",
 ]
 
 # Trailing prepositions/connectors
