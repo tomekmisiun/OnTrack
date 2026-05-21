@@ -11,7 +11,9 @@ Uruchomienie (przez Docker):
 
 import argparse
 import json
+import re
 import sys
+import unicodedata
 from pathlib import Path
 
 DATA = Path(__file__).parent.parent / "data"
@@ -35,91 +37,203 @@ def load(filename: str) -> list:
     return json.loads(path.read_text("utf-8"))
 
 
+def strip_accents(s: str) -> str:
+    """Usuwa polskie akcenty dla porównania: żryżowy → ryzowy."""
+    return "".join(
+        c for c in unicodedata.normalize("NFKD", s)
+        if not unicodedata.combining(c)
+    )
+
+
+def dedup_key(name: str) -> str:
+    """Klucz deduplicacji: lowercase + bez akcentów + oczyszczony."""
+    return re.sub(r"\s+", " ", strip_accents(name.lower().strip()))
+
+
+_EN_WORDS = re.compile(
+    r"\b(easy|simple|meal prep|gluten.free|dairy.free|whole30|paleo|keto|aip|"
+    r"minute rice|the |and |with |cups?|tbsp|recipe)\b", re.I
+)
+_PL_LETTERS = re.compile(r"[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]")
+
+
+def is_english_name(name: str) -> bool:
+    """Zwraca True jeśli nazwa wygląda na angielską (nie powinna być w PL DB)."""
+    return bool(_EN_WORDS.search(name)) and not _PL_LETTERS.search(name)
+
+
+# Kolaps rodzin produktów — wiele wariantów → jedna prosta nazwa
+# Format: (prefix_lub_regex, canonical_name)
+_FAMILY_RULES: list[tuple[re.Pattern, str]] = [
+    (re.compile(r"^makaron\b"),                          "makaron"),
+    (re.compile(r"^ryż\b"),                              "ryż"),
+    (re.compile(r"^płatki owsiane\b|^owsian"),           "płatki owsiane"),
+    (re.compile(r"^cebula\b(?! dymka)"),                 "cebula"),
+    (re.compile(r"^czosnek\b"),                          "czosnek"),
+    (re.compile(r"^pomidor\b(?! suszony)"),              "pomidor"),
+    (re.compile(r"^ziemniak"),                           "ziemniaki"),
+    (re.compile(r"^papryka\b(?! chili| ostra| cayenne)"), "papryka"),
+    (re.compile(r"^marchew\b|^marchewka\b"),             "marchew"),
+    (re.compile(r"^szpinak\b"),                          "szpinak"),
+    (re.compile(r"^jogurt\b(?! grecki)"),                "jogurt naturalny"),
+    (re.compile(r"^ser\b(?! feta| parmezan| cheddar| mozzarella| twaróg| kozi)"), "ser żółty"),
+    (re.compile(r"^fasola\b(?! czerwona| edamame)"),     "fasola biała"),
+    (re.compile(r"^kurczak\b(?! mielony)"),              "kurczak"),
+]
+
+
+def collapse_family(name: str) -> str:
+    """Sprowadza warianty produktu do prostej nazwy rodzinnej."""
+    for pattern, canonical in _FAMILY_RULES:
+        if pattern.match(name):
+            return canonical
+    return name
+
+
 def build_macro_map(macros: list, key: str) -> dict:
-    """Buduje słownik name_en/name_pl → makro."""
-    return {
-        m[key]: {
+    """Buduje słownik name_en/name_pl → makro (z wariantem bez akcentów)."""
+    result = {}
+    for m in macros:
+        if not m.get(key):
+            continue
+        val = {
             "kcal":    m.get("kcal"),
             "protein": m.get("protein_g"),
             "fat":     m.get("fat_g"),
             "carbs":   m.get("carbs_g"),
         }
-        for m in macros if m.get(key)
-    }
+        result[m[key]] = val
+        result[dedup_key(m[key])] = val  # wersja bez akcentów jako fallback
+    return result
 
 
 def unit_to_app(unit: str | None) -> str:
-    """Konwertuje jednostkę pipeline → format aplikacji (pcs → szt)."""
     if unit == "pcs":
         return "szt"
     return unit or "g"
 
 
-def convert_weight(amount: float | None, ing_unit: str | None, prod_unit: str) -> float | None:
-    """Przelicza ilość składnika na jednostkę produktu."""
+# Średnie wagi składników sprzedawanych na sztuki (pcs → g)
+_PCS_WEIGHT = {
+    "batat": 200, "bataty": 200, "słodki ziemniak": 200,
+    "jajko": 60,  "jajka": 60,  "egg": 60,
+    "cebula": 100, "cebula biała": 100, "cebula czerwona": 100, "cebula dymka": 15,
+    "czosnek": 3,  # ząbek
+    "pomidor": 120, "avocado": 200, "awokado": 200,
+    "cytryna": 80, "limonka": 70, "pomarańcza": 200,
+    "ziemniak": 150, "marchew": 80, "marchewka": 80,
+    "papryka": 150, "ogórek": 250, "cukinia": 300,
+    "bakłażan": 250, "banan": 100, "jabłko": 150,
+    "gruszka": 150, "mango": 300, "ananas": 900,
+}
+
+
+def convert_weight(amount: float | None, ing_unit: str | None,
+                   prod_unit: str, ing_name: str = "") -> float | None:
     if amount is None:
         return None
     iu = (ing_unit or "g").lower()
     pu = prod_unit.lower()
-    # Zgodne jednostki lub g↔ml traktujemy 1:1
-    if iu == pu or {iu, pu} <= {"g", "ml"}:
-        return float(amount)
-    # pcs/szt
+
+    # pcs → szt (countable items)
     if iu in ("pcs", "szt") and pu == "szt":
         return float(amount)
-    return float(amount)  # best-effort
+
+    # pcs → g: użyj domyślnej wagi jeśli produkt w gramach
+    if iu in ("pcs", "szt") and pu == "g":
+        key = ing_name.lower().strip()
+        default_g = _PCS_WEIGHT.get(key, 100)
+        return float(amount) * default_g
+
+    # g ↔ ml: traktujemy 1:1 dla płynów
+    if {iu, pu} <= {"g", "ml"}:
+        return float(amount)
+
+    return float(amount)
 
 
 # ── Import produktów ──────────────────────────────────────────────────────────
 
 def import_products(user_id: int, lang: str) -> dict[str, int]:
-    """Importuje produkty, zwraca mapę nazwa.lower() → product_id."""
-    if lang == "en":
-        db_file   = "ingredient_db_en.json"
-        macro_key = "name_en"
-        currency  = "GBP"
-    else:
-        db_file   = "ingredient_db_pl.json"
-        macro_key = "name_pl"
-        currency  = "PLN"
+    """Importuje produkty — 1 produkt na unikalną nazwę (deduplikacja po akcentach)."""
+    db_file   = "ingredient_db_en.json" if lang == "en" else "ingredient_db_pl.json"
+    macro_key = "name_en"               if lang == "en" else "name_pl"
 
     ingredients = load(db_file)
-    macros_raw  = load("ingredients_macros.json")
-    macro_map   = build_macro_map(macros_raw, macro_key)
+    macro_map   = build_macro_map(load("ingredients_macros.json"), macro_key)
 
-    added = 0
+    # Grupuj po generic_name (nazwa produktu sklepowego) — to jest właściwy klucz
+    # ingredient_name = specyficzna nazwa z przepisu ("makaron angel hair")
+    # generic_name    = znormalizowana nazwa sklepowa ("makaron")
+    # Chcemy 1 produkt per generic_name, ale product_map musi mapować OBA warianty
+
+    seen: set[str] = set()   # dedup po generic_name key
+    added = skipped_dup = skipped_en = 0
     product_map: dict[str, int] = {}
 
     for item in ingredients:
-        name = item.get("ingredient_name", "").strip()
-        if not name:
+        ing_name     = item.get("ingredient_name", "").strip()
+        generic_name = (item.get("generic_name") or ing_name).strip()
+
+        if not ing_name:
             continue
+
+        # Pomiń angielskie nazwy w PL imporcie (bez polskich liter + typowe EN słowa)
+        if lang == "pl" and is_english_name(ing_name) and is_english_name(generic_name):
+            skipped_en += 1
+            continue
+
+        # Produkt tworzony na podstawie generic_name, dalej upraszczany do rodziny
+        # "makaron angel hair" → generic "makaron" → family "makaron" ✓
+        prod_name = collapse_family(generic_name)
+        prod_key  = dedup_key(prod_name)
+
+        if prod_key in seen:
+            # Produkt już istnieje — dodaj tylko mapowanie ingredient_name → prod_id
+            existing_id = product_map.get(prod_key)
+            if existing_id:
+                product_map[ing_name.lower()]    = existing_id
+                product_map[dedup_key(ing_name)] = existing_id
+            skipped_dup += 1
+            continue
+        seen.add(prod_key)
 
         price_per_100 = item.get("price_per_100")
         pkg_val       = item.get("package_size_value")
         unit          = unit_to_app(item.get("unit"))
         sold_by_wt    = bool(item.get("sold_by_weight", False))
-        macro         = macro_map.get(name, {})
+
+        # Makro: szukaj po generic_name, potem ingredient_name, potem bez akcentów
+        macro = (macro_map.get(prod_name)
+              or macro_map.get(dedup_key(prod_name))
+              or macro_map.get(ing_name)
+              or macro_map.get(dedup_key(ing_name))
+              or {})
 
         prod = Product(
-            user_id       = user_id,
-            name          = name,
-            price         = round(float(price_per_100), 4) if price_per_100 else 0.0,
-            package_weight= round(float(pkg_val), 1)      if pkg_val        else 100.0,
-            unit          = unit,
-            sold_by_weight= sold_by_wt,
-            kcal          = macro.get("kcal"),
-            protein       = macro.get("protein"),
-            fat           = macro.get("fat"),
-            carbs         = macro.get("carbs"),
+            user_id        = user_id,
+            name           = prod_name,
+            price          = round(float(price_per_100), 4) if price_per_100 else 0.0,
+            package_weight = round(float(pkg_val), 1)       if pkg_val        else 100.0,
+            unit           = unit,
+            sold_by_weight = sold_by_wt,
+            kcal           = macro.get("kcal"),
+            protein        = macro.get("protein"),
+            fat            = macro.get("fat"),
+            carbs          = macro.get("carbs"),
         )
         db.session.add(prod)
         db.session.flush()
-        product_map[name.lower()] = prod.id
+
+        # Mapuj OBA warianty nazwy → ten sam product_id
+        for k in (prod_name.lower(), prod_key, ing_name.lower(), dedup_key(ing_name)):
+            product_map[k] = prod.id
+
         added += 1
 
     db.session.commit()
-    print(f"  Produkty ({lang.upper()}): dodano {added}")
+    print(f"  Produkty ({lang.upper()}): dodano {added}, "
+          f"duplikaty={skipped_dup}, angielskie={skipped_en}")
     return product_map
 
 
@@ -158,7 +272,8 @@ def import_recipes(user_id: int, lang: str, product_map: dict[str, int]):
             amount   = ing.get("amount")
             unit     = ing.get("unit")
 
-            prod_id = product_map.get(ing_name)
+            # Szukaj produktu — najpierw dokładnie, potem bez akcentów
+            prod_id = product_map.get(ing_name) or product_map.get(dedup_key(ing_name))
 
             if not prod_id:
                 # Utwórz placeholder
@@ -173,7 +288,7 @@ def import_recipes(user_id: int, lang: str, product_map: dict[str, int]):
                 placeholder_count += 1
 
             prod_unit = db.session.get(Product, prod_id).unit or "g"
-            weight    = convert_weight(amount, unit, prod_unit)
+            weight    = convert_weight(amount, unit, prod_unit, ing_name)
             if weight is None or weight <= 0:
                 weight = 1.0
 
