@@ -292,10 +292,39 @@ _EN_KEYWORDS = re.compile(
 )
 
 # Listicle / roundup — nie są przepisami
-_ROUNDUP = re.compile(
-    r"^\d{1,3}\s+(ideas?|ways?|recipes?\b|best|easy|healthy|egg.free|"
-    r"high.protein|low.carb|meal prep ideas)", re.I
+# RECIPE (zostaw): "20 Minute...", "10-Ingredient...", "3 Serving...", "30-Minute..."
+_RECIPE_PREFIX = re.compile(
+    r"^\d{1,3}[\s-]+(minute|min|second|ingredient|serving|day meal)", re.I
 )
+# ROUNDUP (usuń): zaczyna się od liczby + zawiera słowo wskazujące na listę artykułów
+_ROUNDUP_BODY = re.compile(
+    r"\b(recipes?|ideas?|ways?|lunches?|dinners?|breakfasts?|snacks?|"
+    r"desserts?|meals?|bowls?|options?|favorites?|favourites?)\b",
+    re.I
+)
+_ROUNDUP_ADJECTIVE = re.compile(
+    r"^\d{1,3}\s+(best|top|healthy|easy|quick|simple|unique|delicious|"
+    r"amazing|great|tasty|yummy|perfect)\b", re.I
+)
+_ROUNDUP_DAYS = re.compile(r"^\d{1,3}[\s-]+days?\s+(of|worth)", re.I)
+_STARTS_WITH_NUMBER = re.compile(r"^\d{1,3}[\s-]")
+
+
+def _is_roundup(name: str) -> bool:
+    """Zwraca True jeśli to artykuł-listicle, nie przepis."""
+    if not _STARTS_WITH_NUMBER.match(name):
+        return False
+    # Wyraźnie PRZEPIS: "20 Minute", "10-Ingredient", "3 Serving"
+    if _RECIPE_PREFIX.match(name):
+        return False
+    # Wyraźnie ROUNDUP
+    if _ROUNDUP_ADJECTIVE.match(name):
+        return True
+    if _ROUNDUP_DAYS.match(name):
+        return True
+    if _ROUNDUP_BODY.search(name):
+        return True
+    return False
 
 
 def _is_untranslated(name_en: str, name_pl: str) -> bool:
@@ -409,8 +438,8 @@ def main():
         return
 
     all_recipes = json.loads(INPUT_FILE.read_text("utf-8"))
-    # Odfiltruj listicle / roundup articles ("17 Breakfast Ideas", "10 Easy Ways...")
-    recipes = [r for r in all_recipes if not _ROUNDUP.search(r.get("name", "") or "")]
+    # Odfiltruj listicle / roundup articles
+    recipes = [r for r in all_recipes if not _is_roundup(r.get("name", "") or "")]
     if len(recipes) < len(all_recipes):
         log.info(f"Odfiltrowano {len(all_recipes) - len(recipes)} roundup articles")
     log.info(f"Wczytano {len(recipes)} przepisów")
