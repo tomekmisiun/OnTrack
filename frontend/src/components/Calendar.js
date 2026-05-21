@@ -500,17 +500,17 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
         )}
         {hasMeals && hasAnyMacro && (
           <>
-            <div style={{fontSize:12,fontWeight:700,whiteSpace:'nowrap',overflow:'hidden',display:'flex',justifyContent:'space-between',alignItems:'baseline',gap:4}}>
-              <span>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',gap:2,overflow:'hidden'}}>
+              <div style={{fontSize:12,fontWeight:700,whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',minWidth:0}}>
                 <span style={{color: macroGoals ? macroColor(totalKcal, macroGoals.kcal) : '#2dd4bf'}}>{totalKcal}</span>
                 {macroGoals && <span style={{color:'#6b7280',fontWeight:400}}>/{macroGoals.kcal}</span>}
                 <span style={{color:'#6b7280',fontWeight:400}}> kcal</span>
-              </span>
+              </div>
               {totalCost > 0 && (
-                <span style={{display:'flex',flexDirection:'column',alignItems:'flex-end',flexShrink:0}}>
-                  <span style={{color:'#6b7280',fontSize:8,fontWeight:500,lineHeight:1}}>szac. koszt</span>
-                  <span style={{color:'#0d9488',fontWeight:700,fontSize:11,lineHeight:1.2}}>{totalCost.toFixed(2)} zł</span>
-                </span>
+                <div style={{flexShrink:0,textAlign:'right'}}>
+                  <div style={{color:'#6b7280',fontSize:8,fontWeight:500,lineHeight:1}}>szac. koszt</div>
+                  <div style={{color:'#0d9488',fontWeight:700,fontSize:11,lineHeight:1.2}}>{totalCost.toFixed(2)} zł</div>
+                </div>
               )}
             </div>
             <div style={{fontSize:11,whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>
