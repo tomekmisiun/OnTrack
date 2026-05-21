@@ -11,37 +11,44 @@ import { useMember } from '../contexts/MemberContext';
 import { dateToStr, addDays, toEU, getUpcomingMondays, getCalGrid as getMonthGrid } from '../utils/dates';
 
 // Custom sensor: drag aktywuje się TYLKO przy ruchu głównie pionowym (≥45°)
-// Poziomy ruch → karuzela scrolluje, przepis się nie draguje
-class VerticalDragSensor extends PointerSensor {
-  static activators = [
-    {
-      eventName: 'onPointerDown',
-      handler: ({ nativeEvent: event }, { onActivation }) => {
-        const startX = event.clientX;
-        const startY = event.clientY;
+// Poziomy ruch → natywny scroll karuzeli, pionowy → drag-and-drop na kalendarz
+class VerticalDragSensor extends PointerSensor {}
 
-        function onMove(e) {
-          const dx = Math.abs(e.clientX - startX);
-          const dy = Math.abs(e.clientY - startY);
-          if (Math.max(dx, dy) < 5) return;
+// Ustawiamy activators PO definicji klasy (tak samo jak dnd-kit ustawia PointerSensor.activators)
+// Użycie class field syntax powoduje błąd z Babel/webpack przy dziedziczeniu
+VerticalDragSensor.activators = [
+  {
+    eventName: 'onPointerDown',
+    handler: ({ nativeEvent: event }, { onActivation }) => {
+      if (!event.isPrimary || event.button !== 0) return false;
 
-          cleanup();
-          if (dy > dx) onActivation({ event });
+      const startX = event.clientX;
+      const startY = event.clientY;
+
+      function onMove(e) {
+        const dx = Math.abs(e.clientX - startX);
+        const dy = Math.abs(e.clientY - startY);
+        if (Math.max(dx, dy) < 5) return; // za mało ruchu
+
+        cleanup();
+        if (dy > dx && typeof onActivation === 'function') {
+          onActivation({ event }); // pionowy → aktywuj dnd drag
         }
+        // poziomy → nic, natywny scroll karuzeli przejmie
+      }
 
-        function cleanup() {
-          window.removeEventListener('pointermove', onMove, true);
-          window.removeEventListener('pointerup',   cleanup, true);
-          window.removeEventListener('pointercancel', cleanup, true);
-        }
+      function cleanup() {
+        window.removeEventListener('pointermove',   onMove,   true);
+        window.removeEventListener('pointerup',     cleanup,  true);
+        window.removeEventListener('pointercancel', cleanup,  true);
+      }
 
-        window.addEventListener('pointermove',   onMove,   true);
-        window.addEventListener('pointerup',     cleanup,  true);
-        window.addEventListener('pointercancel', cleanup,  true);
-      },
+      window.addEventListener('pointermove',   onMove,   true);
+      window.addEventListener('pointerup',     cleanup,  true);
+      window.addEventListener('pointercancel', cleanup,  true);
     },
-  ];
-}
+  },
+];
 
 const COLORS = ['#4a6fa5', '#93c5fd', '#fcd34d', '#c2410c', '#6366f1'];
 const getColor = (pos) => COLORS[(pos - 1) % 5];
