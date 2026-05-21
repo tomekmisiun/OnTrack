@@ -141,6 +141,14 @@ def build_recipes(
         if not available:
             continue
 
+        # Odrzuć przepisy bez żadnego składnika z wagą (same przyprawy do smaku)
+        matched_with_amount = sum(
+            1 for i in ings
+            if i.get("amount") is not None and i.get("name") in db
+        )
+        if matched_with_amount == 0:
+            continue
+
         output.append({
             "name_en":          r.get("name_en"),
             "name_pl":          r.get("name_pl"),

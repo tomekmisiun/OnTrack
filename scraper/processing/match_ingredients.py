@@ -44,10 +44,12 @@ log = logging.getLogger(__name__)
 # ── Scoring ───────────────────────────────────────────────────────────────────
 
 def score(ingredient: str, product_generic: str) -> float:
-    return max(
-        fuzz.token_sort_ratio(ingredient, product_generic),
-        fuzz.partial_ratio(ingredient, product_generic),
-    )
+    tsr = fuzz.token_sort_ratio(ingredient, product_generic)
+    pr  = fuzz.partial_ratio(ingredient, product_generic)
+    # Geometric mean — zapobiega fałszywym matchom gdzie tylko partial_ratio jest wysoki
+    # np. "proszek do pieczenia" vs "groszek": tsr≈45, pr≈85 → GM≈62 (poniżej progu 85)
+    # Prawdziwy match: "makaron" vs "makaron": tsr=100, pr=100 → GM=100
+    return (tsr * pr) ** 0.5
 
 
 def rank_candidates(ingredient: str, shop_products: list[dict]) -> list[tuple[float, dict]]:
