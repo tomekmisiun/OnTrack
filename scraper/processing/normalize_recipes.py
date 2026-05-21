@@ -129,16 +129,19 @@ Seasonings that always get 1g default when no amount given:
 
 ═══ AMOUNT & UNIT RULES ═══
 
-Output units MUST be one of: g, ml, pcs — never "cups", "tbsp", "tsp", "oz", "lb", "can".
-Always convert to g / ml / pcs.
+Output units MUST be one of: g, ml, pcs — NEVER output "cups", "tbsp", "tsp", "oz", "lb".
+Always convert volumetric/imperial units to g or ml before returning.
 
-Conversions:
-  1 cup liquid = 240ml | 1 cup flour = 120g | 1 cup sugar = 200g | 1 cup oats = 90g
-  1 cup rice = 185g | 1 cup nuts = 120g | 1 cup leafy greens = 30g | 1 cup cilantro = 16g
-  1 oz = 28g | 1 lb = 454g
-  1 tbsp liquid = 15ml | 1 tbsp solid = 12g | 1 tbsp spice/herb = 8g
-  1 tsp liquid = 5ml  | 1 tsp solid = 4g   | 1 tsp spice/herb = 3g
-  1 can (standard) = 400g
+Conversions (use these exactly):
+  1 cup  = 236ml (liquids, broths, juices, milk, oil, yogurt, sour cream)
+  1 cup  = 120g  (flour) | 200g (sugar, brown sugar) | 90g (oats, rolled oats)
+  1 cup  = 185g  (rice, quinoa) | 120g (nuts, seeds) | 30g (leafy greens, spinach)
+  1 cup  = 160g  (shredded cheese) | 170g (ricotta, cream cheese) | 240g (Greek yogurt)
+  1 cup  = 150g  (blueberries, raspberries) | 180g (strawberries) | 16g (fresh cilantro/parsley)
+  1 oz   = 28g   | 1 lb = 454g
+  1 tbsp = 15ml  (liquids) | 15g (solid ingredients, spices, sauces, nut butters)
+  1 tsp  = 5ml   (liquids) | 5g  (solid ingredients, spices, extracts)
+  1 can  = 400g  (standard 14oz can: tomatoes, beans, coconut milk, chickpeas)
 
 amount must be a number or null, never a string.
 
