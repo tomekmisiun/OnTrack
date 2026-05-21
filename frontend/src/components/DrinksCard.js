@@ -67,7 +67,7 @@ const OTHER_TYPES = [
   { key:'biurowe',    label:'Art. biurowe',   emoji:'📎', gradient:'linear-gradient(135deg,#0a1a2a,#1a3a4a)' },
 ];
 // Klucze wydatków domowych — współdzielone między profilami (jeden budżet na gospodarstwodo domowe)
-const SHARED_KEYS = new Set(['czynsz','prad','gaz_oplata','media','ogrzewanie','zwierze','pranie','zmywanie','sprzatan']);
+const SHARED_KEYS = new Set(['czynsz','prad','gaz_oplata','media','ogrzewanie','dziecko','zwierze','pranie','zmywanie','sprzatan']);
 const OTHER_DEFAULTS = {
   papier:   { enabled:false, monthlyAmount:'', dailyRolls:'0.5', pkgPrice:'', rollsPerPkg:'8' },
   pranie:   { enabled:false, monthlyAmount:'', washesPerWeek:'5', detergentType:'proszek',
@@ -382,13 +382,13 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
         <div style={{ position:'absolute', inset:0, background: enabled ? 'transparent' : 'rgba(0,0,0,0.2)' }} />
         {isShared && (
           <div style={{
-            position:'absolute', top:3, right:3, zIndex:3,
-            display:'flex', alignItems:'center', gap:2,
-            background:'rgba(45,212,191,0.12)', border:'1px solid rgba(45,212,191,0.25)',
-            borderRadius:4, padding:'2px 4px',
+            position:'absolute', top:4, right:4, zIndex:3,
+            display:'flex', alignItems:'center', gap:3,
+            background:'rgba(45,212,191,0.18)', border:'1px solid rgba(45,212,191,0.4)',
+            borderRadius:5, padding:'3px 6px',
           }}>
-            <Icon icon="heroicons:users-solid" style={{ width:8, height:8, color:'#2dd4bf', flexShrink:0 }} />
-            <span style={{ fontSize:7, fontWeight:700, color:'#2dd4bf', letterSpacing:'0.2px', lineHeight:1 }}>wspólne</span>
+            <Icon icon="heroicons:users-solid" style={{ width:11, height:11, color:'#2dd4bf', flexShrink:0 }} />
+            <span style={{ fontSize:10, fontWeight:700, color:'#2dd4bf', letterSpacing:'0.3px', lineHeight:1 }}>wspólne</span>
           </div>
         )}
         <span style={{ fontSize:16, lineHeight:1, position:'relative', zIndex:1 }}>{emoji}</span>
