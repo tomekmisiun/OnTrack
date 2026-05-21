@@ -3,6 +3,12 @@ import {
   DndContext, DragOverlay, PointerSensor,
   useSensor, useSensors, useDraggable, useDroppable,
 } from '@dnd-kit/core';
+import { Icon } from '@iconify/react';
+import { mealPlan as api, recipes as recipesApi, products as productsApi } from '../api';
+import { useLanguage } from '../contexts/LanguageContext';
+import { useToast } from '../contexts/ToastContext';
+import { useMember } from '../contexts/MemberContext';
+import { dateToStr, addDays, toEU, getUpcomingMondays, getCalGrid as getMonthGrid } from '../utils/dates';
 
 // Custom sensor: drag aktywuje się TYLKO przy ruchu głównie pionowym (≥45°)
 // Poziomy ruch → karuzela scrolluje, przepis się nie draguje
@@ -17,11 +23,10 @@ class VerticalDragSensor extends PointerSensor {
         function onMove(e) {
           const dx = Math.abs(e.clientX - startX);
           const dy = Math.abs(e.clientY - startY);
-          if (Math.max(dx, dy) < 5) return; // za mało ruchu, czekaj
+          if (Math.max(dx, dy) < 5) return;
 
           cleanup();
-          if (dy > dx) onActivation({ event }); // pionowy → aktywuj drag
-          // poziomy → nic, karuzelowy scroll przejmie
+          if (dy > dx) onActivation({ event });
         }
 
         function cleanup() {
@@ -37,12 +42,6 @@ class VerticalDragSensor extends PointerSensor {
     },
   ];
 }
-import { Icon } from '@iconify/react';
-import { mealPlan as api, recipes as recipesApi, products as productsApi } from '../api';
-import { useLanguage } from '../contexts/LanguageContext';
-import { useToast } from '../contexts/ToastContext';
-import { useMember } from '../contexts/MemberContext';
-import { dateToStr, addDays, toEU, getUpcomingMondays, getCalGrid as getMonthGrid } from '../utils/dates';
 
 const COLORS = ['#4a6fa5', '#93c5fd', '#fcd34d', '#c2410c', '#6366f1'];
 const getColor = (pos) => COLORS[(pos - 1) % 5];
