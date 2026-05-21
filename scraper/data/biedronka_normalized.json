@@ -1794,19 +1794,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Zott Monte Deser 150 g",
-    "generic_name": "zott",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.19,
-    "price_per_unit": null,
-    "price_per_100": 2.7933,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Gusto Bello Grana Padano wiórki 100 g",
     "generic_name": "gusto bello grana padano wiórki",
     "shop": "biedronka",
@@ -2262,19 +2249,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Zott Belriso Deser mleczny z ryżem mango 200 g",
-    "generic_name": "zott belriso deser mleczny z ryżem mango",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.29,
-    "price_per_unit": null,
-    "price_per_100": 1.645,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Fruvita Jogurt naturalny Low Carb 150 g",
     "generic_name": "fruvita jogurt",
     "shop": "biedronka",
@@ -2350,19 +2324,6 @@
     "price_package": 8.99,
     "price_per_unit": null,
     "price_per_100": 1.7288,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Zott Belriso Deser mleczny z ryżem i sosem 200 g",
-    "generic_name": "zott belriso deser mleczny z ryżem i sosem",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.29,
-    "price_per_unit": null,
-    "price_per_100": 1.645,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -4420,19 +4381,6 @@
     "standard_category": "Białka i zamienniki"
   },
   {
-    "original_name": "Vitanella Płatki owsiane górskie 1 kg",
-    "generic_name": "vitanella płatki owsiane górskie",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.99,
-    "price_per_unit": null,
-    "price_per_100": 0.499,
-    "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
     "original_name": "Kujawski Olej rzepakowy z pierwszego tłoczenia 1 l",
     "generic_name": "kujawski olej rzepakowy z pierwszego tłoczenia",
     "shop": "biedronka",
@@ -5213,19 +5161,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Vitanella Baton Protein bez dodatku cukrów 27 % białka 49 g",
-    "generic_name": "vitanella baton protein bez dodatku cukrów 27 % białka",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 49.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.99,
-    "price_per_unit": null,
-    "price_per_100": 10.1837,
-    "standard_category": "Białka i zamienniki"
-  },
-  {
     "original_name": "Nasza Spiżarnia Pieczarki marynowane 695 g",
     "generic_name": "nasza spiżarnia pieczarki marynowane",
     "shop": "biedronka",
@@ -5379,19 +5314,6 @@
     "price_package": 9.49,
     "price_per_unit": null,
     "price_per_100": 4.745,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Vitanella Baton migdały żurawina orzeszki ziemne 40 g",
-    "generic_name": "vitanella baton migdały żurawina orzeszki ziemne",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 40.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.14,
-    "price_per_unit": null,
-    "price_per_100": 7.85,
     "standard_category": "Owoce"
   },
   {
@@ -5876,19 +5798,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Go On Energy Baton z orzeszkami arachidowymi i karmelem oblany mleczną czekoladą 45 g",
-    "generic_name": "go on energy baton z orzeszkami arachidowymi i karmelem oblany mleczną czekoladą",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 45.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.49,
-    "price_per_unit": null,
-    "price_per_100": 7.7556,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Fritt Guma rozpuszczalna o smaku wiśniowym z witaminą C (6x11,7 g) 70 g",
     "generic_name": "fritt guma rozpuszczalna o smaku wiśniowym z witaminą c (6x11, )",
     "shop": "biedronka",
@@ -6303,19 +6212,6 @@
     "price_per_unit": null,
     "price_per_100": 3.9975,
     "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
-    "original_name": "Gusto Bello Deser Tiramisu 500 g",
-    "generic_name": "gusto",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 15.99,
-    "price_per_unit": null,
-    "price_per_100": 3.198,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Plony Natury Kasza gryczana prażona 900 g",
@@ -7215,19 +7111,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Twój Deser Budyń smak śmietankowy 5 x 40 g",
-    "generic_name": "twój deser budyń smak śmietankowy 5 x",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.99,
-    "price_per_unit": null,
-    "price_per_100": 1.495,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "BakaD'Or Superfoods Nasiona Chia 125 g",
     "generic_name": "bakad'or",
     "shop": "biedronka",
@@ -7395,19 +7278,6 @@
     "price_per_unit": null,
     "price_per_100": 6.9083,
     "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
-    "original_name": "Kinder Chocolate Batonik z czekolady (8 szt.) 100 g",
-    "generic_name": "kinder chocolate batonik z czekolady ( .)",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 100.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.99,
-    "price_per_unit": null,
-    "price_per_100": 7.99,
-    "standard_category": "Słodziki i dodatki smakowe"
   },
   {
     "original_name": "Crunchips Chipsy ziemniaczane pieczone żeberka 130 g",
@@ -7733,19 +7603,6 @@
     "price_per_unit": null,
     "price_per_100": 2.99,
     "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Twój Deser Budyń smak czekoladowy 5 x 40 g",
-    "generic_name": "twój deser budyń smak czekoladowy 5 x",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.99,
-    "price_per_unit": null,
-    "price_per_100": 1.495,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Bonitki wafle kokosowe, 200 g",
@@ -8164,19 +8021,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Vitanella Smoothie Baton rabarbar, truskawka 40 g",
-    "generic_name": "vitanella smoothie baton rabarbar, truskawka",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 40.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.99,
-    "price_per_unit": null,
-    "price_per_100": 7.475,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Dallmayr Kawa mielona classic intense 500 g",
     "generic_name": "dallmayr kawa mielona classic intense",
     "shop": "biedronka",
@@ -8346,19 +8190,6 @@
     "standard_category": "Słodziki i dodatki smakowe"
   },
   {
-    "original_name": "Kinder Chocolate Batonik z mlecznej czekolady z nadzieniem mlecznym 50 g (4 sztuki)",
-    "generic_name": "kinder chocolate batonik z mlecznej czekolady z nadzieniem mlecznym (4 sztuki)",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 50.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.99,
-    "price_per_unit": null,
-    "price_per_100": 9.98,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Orbit Bezcukrowa guma do żucia White Fruit (21 szt.) 29 g",
     "generic_name": "orbit bezcukrowa guma do żucia",
     "shop": "biedronka",
@@ -8502,19 +8333,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Vitanella Olej kokosowy bezzapachowy 500ml",
-    "generic_name": "vitanella olej kokosowy bezzapachowy",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 500.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 12.99,
-    "price_per_unit": null,
-    "price_per_100": 2.598,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Prima Finezja Kawa mielona 500 g",
     "generic_name": "prima finezja kawa mielona",
     "shop": "biedronka",
@@ -8539,19 +8357,6 @@
     "price_per_unit": null,
     "price_per_100": null,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Vitanella Orito kakaowe 350 g",
-    "generic_name": "vitanella orito kakaowe",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 350.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.49,
-    "price_per_unit": null,
-    "price_per_100": 2.4257,
-    "standard_category": "Słodziki i dodatki smakowe"
   },
   {
     "original_name": "Orbit Spearmint Mints Cukierki bez cukru (16 szt.) 28 g",
@@ -8812,32 +8617,6 @@
     "price_per_unit": null,
     "price_per_100": 0.8225,
     "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
-    "original_name": "Vitanella RAW Baton kakao 40 g",
-    "generic_name": "vitanella raw baton kakao",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 40.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.39,
-    "price_per_unit": null,
-    "price_per_100": 5.975,
-    "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
-    "original_name": "Knoppers Baton orzechowy (3 x 40 g) 120 g",
-    "generic_name": "knoppers baton orzechowy (3 x )",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 120.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.99,
-    "price_per_unit": null,
-    "price_per_100": 6.6583,
-    "standard_category": "Orzechy, nasiona i masła orzechowe"
   },
   {
     "original_name": "Orbit Peppermint Bezcukrowa guma do żucia (21 szt.) 29 g",
@@ -9360,19 +9139,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Vitanella Smoothie Baton burak, czarna porzeczka 40 g",
-    "generic_name": "vitanella smoothie baton burak, czarna porzeczka",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 40.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.99,
-    "price_per_unit": null,
-    "price_per_100": 7.475,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Lindt Nuxor Praliny z czekolady mlecznej Gianduja z całymi orzechami laskowymi 150 g",
     "generic_name": "lindt nuxor praliny z czekolady mlecznej",
     "shop": "biedronka",
@@ -9436,19 +9202,6 @@
     "price_per_unit": null,
     "price_per_100": 17.2069,
     "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Go On Vitamin Baton kokosowy z l-karnityną magnezem i witaminami oblany mleczną czekoladą 45 g",
-    "generic_name": "go on vitamin baton kokosowy z l-karnityną magnezem i witaminami oblany mleczną czekoladą",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 45.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.49,
-    "price_per_unit": null,
-    "price_per_100": 7.7556,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Dr. Oetker Ekstrakt naturalny wanilia bourbon z Madagaskaru 30 ml",
@@ -9527,19 +9280,6 @@
     "price_per_unit": null,
     "price_per_100": 4.7,
     "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Twój Deser Budyń smak waniliowy 5 x 40 g",
-    "generic_name": "twój deser budyń smak waniliowy 5 x",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.99,
-    "price_per_unit": null,
-    "price_per_100": 1.495,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Nongshim Bowl Noodle Kurczak 85 g",

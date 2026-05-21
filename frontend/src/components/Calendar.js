@@ -10,45 +10,6 @@ import { useToast } from '../contexts/ToastContext';
 import { useMember } from '../contexts/MemberContext';
 import { dateToStr, addDays, toEU, getUpcomingMondays, getCalGrid as getMonthGrid } from '../utils/dates';
 
-// Custom sensor: drag aktywuje się TYLKO przy ruchu głównie pionowym (≥45°)
-// Poziomy ruch → natywny scroll karuzeli, pionowy → drag-and-drop na kalendarz
-class VerticalDragSensor extends PointerSensor {}
-
-// Ustawiamy activators PO definicji klasy (tak samo jak dnd-kit ustawia PointerSensor.activators)
-// Użycie class field syntax powoduje błąd z Babel/webpack przy dziedziczeniu
-VerticalDragSensor.activators = [
-  {
-    eventName: 'onPointerDown',
-    handler: ({ nativeEvent: event }, { onActivation }) => {
-      if (!event.isPrimary || event.button !== 0) return false;
-
-      const startX = event.clientX;
-      const startY = event.clientY;
-
-      function onMove(e) {
-        const dx = Math.abs(e.clientX - startX);
-        const dy = Math.abs(e.clientY - startY);
-        if (Math.max(dx, dy) < 5) return; // za mało ruchu
-
-        cleanup();
-        if (dy > dx && typeof onActivation === 'function') {
-          onActivation({ event }); // pionowy → aktywuj dnd drag
-        }
-        // poziomy → nic, natywny scroll karuzeli przejmie
-      }
-
-      function cleanup() {
-        window.removeEventListener('pointermove',   onMove,   true);
-        window.removeEventListener('pointerup',     cleanup,  true);
-        window.removeEventListener('pointercancel', cleanup,  true);
-      }
-
-      window.addEventListener('pointermove',   onMove,   true);
-      window.addEventListener('pointerup',     cleanup,  true);
-      window.addEventListener('pointercancel', cleanup,  true);
-    },
-  },
-];
 
 const COLORS = ['#4a6fa5', '#93c5fd', '#fcd34d', '#c2410c', '#6366f1'];
 const getColor = (pos) => COLORS[(pos - 1) % 5];
@@ -249,25 +210,36 @@ const DraggableRecipe = React.memo(function DraggableRecipe({ recipe, onToggleFa
   const isPer100g      = recipe.total_kcal === 0 && recipe.kcal_100g != null;
   const hasKcal        = displayKcal != null;
   return (
-    <div ref={setNodeRef} {...listeners} {...attributes}
-      onPointerDown={e => { pointerStart.current = { x: e.clientX, y: e.clientY }; listeners?.onPointerDown?.(e); }}
-      onClick={e => {
-        if (!pointerStart.current) return;
-        const dx = e.clientX - pointerStart.current.x;
-        const dy = e.clientY - pointerStart.current.y;
-        if (Math.sqrt(dx*dx + dy*dy) < 6) onPreview(recipe);
-      }}
+    <div
+      ref={setNodeRef}
+      {...attributes}
+      onClick={() => onPreview(recipe)}
       style={{
-      flexShrink:0, width:128, height:148,
-      background: recipe.image_url
-        ? `url(${recipe.image_url}) center/cover`
-        : 'linear-gradient(135deg, #0d9488, #0f766e)',
-      borderRadius:12, cursor:'grab', opacity: isDragging ? 0.3 : 1,
-      userSelect:'none', touchAction:'none',
-      boxShadow:'0 4px 12px rgba(0,0,0,0.4)',
-      display:'flex', flexDirection:'column', overflow:'hidden',
-      position:'relative',
-    }}>
+        flexShrink:0, width:128, height:148,
+        background: recipe.image_url
+          ? `url(${recipe.image_url}) center/cover`
+          : 'linear-gradient(135deg, #0d9488, #0f766e)',
+        borderRadius:12, cursor:'pointer', opacity: isDragging ? 0.3 : 1,
+        userSelect:'none',
+        boxShadow:'0 4px 12px rgba(0,0,0,0.4)',
+        display:'flex', flexDirection:'column', overflow:'hidden',
+        position:'relative',
+      }}
+    >
+      {/* Uchwyt do drag-and-drop — tylko stąd można przeciągnąć przepis na kalendarz */}
+      <div
+        {...listeners}
+        onPointerDown={e => e.stopPropagation()}
+        onClick={e => e.stopPropagation()}
+        title="Przeciągnij na kalendarz"
+        style={{
+          position:'absolute', top:6, right:6, zIndex:10,
+          background:'rgba(0,0,0,0.55)', borderRadius:4,
+          padding:'3px 4px', cursor:'grab', lineHeight:1,
+          fontSize:11, color:'rgba(255,255,255,0.8)',
+          touchAction:'none', userSelect:'none',
+        }}
+      >⠿</div>
       {recipe.image_url && <div style={{ position:'absolute', inset:0, background:'rgba(0,0,0,0.45)', borderRadius:12 }} />}
       {/* Name + star */}
       <div style={{flex:1, padding:'8px 11px 6px', display:'flex', flexDirection:'column', position:'relative', zIndex:1}}>
@@ -963,7 +935,7 @@ export default function Calendar({ onGoToTab }) {
     setTimeout(()=>setToast(null), 3000);
   };
 
-  const sensors = useSensors(useSensor(VerticalDragSensor));
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 8 } }));
   const days = getMonthGrid(year, month);
 
   useEffect(()=>{
