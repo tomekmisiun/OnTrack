@@ -224,18 +224,54 @@ def build_macro_map(macros: list, key: str) -> dict:
     return result
 
 
+# Statyczne makro dla produktów które nie mają odpowiednika w ingredients_macros.json
+_STATIC_MACROS: dict[str, dict] = {
+    "bułka":             {"kcal": 267, "protein": 9.0,  "fat": 3.0,  "carbs": 50.0},
+    "chleb":             {"kcal": 265, "protein": 9.0,  "fat": 3.2,  "carbs": 49.0},
+    "burak":             {"kcal": 43,  "protein": 1.6,  "fat": 0.2,  "carbs": 9.6},
+    "kapusta fioletowa": {"kcal": 31,  "protein": 1.5,  "fat": 0.1,  "carbs": 7.4},
+    "krewetki":          {"kcal": 99,  "protein": 18.0, "fat": 1.5,  "carbs": 0.9},
+    "nerkowce":          {"kcal": 553, "protein": 18.2, "fat": 43.8, "carbs": 30.2},
+    "nasiona konopi":    {"kcal": 553, "protein": 31.6, "fat": 48.8, "carbs": 8.7},
+    "parmezan":          {"kcal": 431, "protein": 38.5, "fat": 29.0, "carbs": 3.2},
+    "olej sezamowy":     {"kcal": 884, "protein": 0.0,  "fat": 100.0,"carbs": 0.0},
+    "olej w sprayu":     {"kcal": 800, "protein": 0.0,  "fat": 92.0, "carbs": 0.0},
+    "tortilla":          {"kcal": 312, "protein": 8.0,  "fat": 7.0,  "carbs": 52.0},
+    "harissa":           {"kcal": 50,  "protein": 1.8,  "fat": 2.5,  "carbs": 5.5},
+    "kapary":            {"kcal": 23,  "protein": 2.4,  "fat": 0.9,  "carbs": 4.9},
+    "ziarna kakaowca":   {"kcal": 456, "protein": 14.3, "fat": 43.1, "carbs": 34.0},
+    "warzywa":           {"kcal": 40,  "protein": 2.0,  "fat": 0.5,  "carbs": 7.0},
+    "warzywa mieszane":  {"kcal": 40,  "protein": 2.0,  "fat": 0.5,  "carbs": 7.0},
+    "gałązki ziół":      {"kcal": 40,  "protein": 3.0,  "fat": 0.5,  "carbs": 5.0},
+    "ekstrakt miętowy":  {"kcal": 0,   "protein": 0.0,  "fat": 0.0,  "carbs": 0.0},
+}
+
+
 def fuzzy_macro(name: str, macro_map: dict) -> dict:
-    """Szuka makro po fuzzy match (rapidfuzz) jeśli nie ma dokładnego trafienia."""
+    """Szuka makro po fuzzy match. Priorytet: statyczny dict → exact → partial_ratio."""
+    # 1. Statyczny dict dla znanych produktów
+    static = _STATIC_MACROS.get(name.lower())
+    if static:
+        return static
+
     try:
         from rapidfuzz import process, fuzz
     except ImportError:
         return {}
-    best = process.extractOne(
+
+    # 2. partial_ratio ale z kontrolą na false positives:
+    #    wybierz najlepszy wynik tylko jeśli pasujące słowo jest PREFIXEM składnika
+    candidates = process.extract(
         name, macro_map.keys(),
-        scorer=fuzz.token_sort_ratio, score_cutoff=75
+        scorer=fuzz.partial_ratio, score_cutoff=90, limit=5
     )
-    if best:
-        return macro_map[best[0]]
+    # Preferuj klucze które zawierają query jako token, nie przypadkowe podciągi
+    name_tokens = set(name.lower().split())
+    for key, score, _ in sorted(candidates, key=lambda x: -x[1]):
+        key_tokens = set(key.lower().split())
+        if name_tokens & key_tokens:   # mają wspólny token
+            return macro_map[key]
+
     return {}
 
 
@@ -429,7 +465,7 @@ def import_products(user_id: int, lang: str) -> dict[str, int]:
 
 # ── Import przepisów ──────────────────────────────────────────────────────────
 
-def import_recipes(user_id: int, lang: str, product_map: dict[str, int]):
+def import_recipes(user_id: int, lang: str, product_map: dict[str, int], macro_map: dict = None):
     if lang == "en":
         recipes_file = "recipes_en.json"
         name_key     = "name_en"
@@ -466,10 +502,15 @@ def import_recipes(user_id: int, lang: str, product_map: dict[str, int]):
             prod_id = product_map.get(ing_name) or product_map.get(dedup_key(ing_name))
 
             if not prod_id:
-                # Utwórz placeholder
+                # Utwórz placeholder — szukaj makro przez fuzzy match
+                ph_macro = fuzzy_macro(ing_name, macro_map or {}) or {}
                 placeholder = Product(
                     user_id=user_id, name=ing_name[:200],
                     price=0, package_weight=100, unit="g", sold_by_weight=False,
+                    kcal    = ph_macro.get("kcal"),
+                    protein = ph_macro.get("protein"),
+                    fat     = ph_macro.get("fat"),
+                    carbs   = ph_macro.get("carbs"),
                 )
                 db.session.add(placeholder)
                 db.session.flush()
@@ -536,8 +577,10 @@ def main():
             print(f"Usunięto: {r_count} przepisów, {p_count} produktów")
 
         print(f"Importuję dla user_id={uid}, lang={args.lang}...")
+        macro_key   = "name_en" if args.lang == "en" else "name_pl"
+        macro_map   = build_macro_map(load("ingredients_macros.json"), macro_key)
         product_map = import_products(uid, args.lang)
-        import_recipes(uid, args.lang, product_map)
+        import_recipes(uid, args.lang, product_map, macro_map)
         print("Gotowe!")
 
 

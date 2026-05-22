@@ -17,9 +17,10 @@ except ImportError:
 HERE = Path(__file__).parent
 DATA = HERE.parent / "data"
 
-INPUT_FILE  = DATA / "ingredient_db_en.json"
-OUTPUT_FILE = DATA / "ingredients_macros.json"
-PARTIAL     = DATA / "ingredients_macros_partial.json"
+INPUT_FILE_EN = DATA / "ingredient_db_en.json"
+INPUT_FILE_PL = DATA / "ingredient_db_pl.json"
+OUTPUT_FILE   = DATA / "ingredients_macros.json"
+PARTIAL       = DATA / "ingredients_macros_partial.json"
 
 BATCH_SIZE  = 30
 MAX_RETRIES = 2
@@ -84,36 +85,108 @@ def fetch_macros(client, names: list[str]) -> list[dict]:
     return []
 
 
+SYSTEM_PROMPT_PL = """\
+Podaj makroskładniki na 100g lub 100ml surowej/podstawowej formy każdego składnika.
+Zwróć TYLKO poprawną tablicę JSON, bez markdownu:
+[{
+  "name_en": string,
+  "name_pl": string,
+  "kcal": number,
+  "protein_g": number,
+  "fat_g": number,
+  "carbs_g": number,
+  "fiber_g": number
+}]
+Użyj wartości USDA. Zaokrąglij do 1 miejsca po przecinku. name_pl w mianowniku.
+"""
+
+
+def fetch_macros_pl(client, names_pl: list[str]) -> list[dict]:
+    """Jak fetch_macros ale dla polskich nazw składników."""
+    last_err = None
+    for attempt in range(MAX_RETRIES + 1):
+        try:
+            resp = client.chat.completions.create(
+                model="deepseek-chat",
+                messages=[
+                    {"role": "system", "content": SYSTEM_PROMPT_PL},
+                    {"role": "user",   "content": json.dumps(names_pl, ensure_ascii=False)},
+                ],
+                temperature=0.0,
+            )
+            content = resp.choices[0].message.content.strip()
+            content = re.sub(r"^```(?:json)?\s*", "", content)
+            content = re.sub(r"\s*```$", "", content)
+            parsed = json.loads(content)
+            if isinstance(parsed, list):
+                return parsed
+            for v in parsed.values():
+                if isinstance(v, list):
+                    return v
+            raise ValueError("Odpowiedź nie jest listą")
+        except Exception as e:
+            last_err = e
+            if "429" in str(e) or "rate" in str(e).lower():
+                log.warning("Rate limit — czekam 10s")
+                time.sleep(10)
+            elif attempt < MAX_RETRIES:
+                time.sleep(2)
+    log.error(f"Batch PL nieudany: {last_err}")
+    return []
+
+
 def main():
     if OUTPUT_FILE.exists():
         log.info(f"Plik {OUTPUT_FILE.name} już istnieje. Pomijam krok 5.")
         return
 
-    db = json.loads(INPUT_FILE.read_text("utf-8"))
-    names = sorted({item["ingredient_name"] for item in db})
-    log.info(f"Składniki do zapytania o makro: {len(names)}")
+    # Krok 5a: EN składniki
+    db_en = json.loads(INPUT_FILE_EN.read_text("utf-8"))
+    names_en = sorted({item["ingredient_name"] for item in db_en})
+    log.info(f"Składniki EN do zapytania o makro: {len(names_en)}")
 
     # Wczytaj checkpoint
     done: dict[str, dict] = {}
     if PARTIAL.exists():
         try:
             partial = json.loads(PARTIAL.read_text("utf-8"))
-            done = {item["name_en"]: item for item in partial}
+            done = {item["name_en"]: item for item in partial if item.get("name_en")}
             log.info(f"Checkpoint: {len(done)} gotowych")
         except Exception:
             pass
 
     client = get_client()
-    todo   = [n for n in names if n not in done]
+    todo_en = [n for n in names_en if n not in done]
 
-    for i in range(0, len(todo), BATCH_SIZE):
-        batch = todo[i:i + BATCH_SIZE]
+    for i in range(0, len(todo_en), BATCH_SIZE):
+        batch = todo_en[i:i + BATCH_SIZE]
         results = fetch_macros(client, batch)
         for item in results:
             if item.get("name_en"):
                 done[item["name_en"]] = item
-        log.info(f"Batch {i//BATCH_SIZE + 1}/{(len(todo)-1)//BATCH_SIZE + 1}: "
-                 f"{len(results)} wyników, łącznie {len(done)}/{len(names)}")
+        log.info(f"Batch EN {i//BATCH_SIZE + 1}/{max(1,(len(todo_en)-1)//BATCH_SIZE + 1)}: "
+                 f"{len(results)} wyników, łącznie {len(done)}/{len(names_en)}")
+        PARTIAL.write_text(json.dumps(list(done.values()), ensure_ascii=False, indent=2), "utf-8")
+        time.sleep(0.3)
+
+    # Krok 5b: PL składniki bez makro
+    done_pl_names = {(item.get("name_pl") or "").lower() for item in done.values()}
+    db_pl = json.loads(INPUT_FILE_PL.read_text("utf-8")) if INPUT_FILE_PL.exists() else []
+    # Unikalne generic_name z PL bazy (nazwy produktów sklepowych)
+    pl_products = sorted({item.get("generic_name") or item["ingredient_name"] for item in db_pl})
+    missing_pl = [p for p in pl_products if p.lower() not in done_pl_names]
+    log.info(f"PL produkty bez makro: {len(missing_pl)}")
+
+    for i in range(0, len(missing_pl), BATCH_SIZE):
+        batch = missing_pl[i:i + BATCH_SIZE]
+        results = fetch_macros_pl(client, batch)
+        for item in results:
+            if item.get("name_pl"):
+                # Klucz po name_pl żeby nie kolidować z EN
+                key = f"__pl__{item['name_pl']}"
+                done[key] = item
+        log.info(f"Batch PL {i//BATCH_SIZE + 1}/{max(1,(len(missing_pl)-1)//BATCH_SIZE + 1)}: "
+                 f"{len(results)} wyników")
         PARTIAL.write_text(json.dumps(list(done.values()), ensure_ascii=False, indent=2), "utf-8")
         time.sleep(0.3)
 
@@ -124,9 +197,9 @@ def main():
     if PARTIAL.exists():
         PARTIAL.unlink()
 
-    missing = set(names) - set(done)
+    missing = set(names_en) - set(done)
     if missing:
-        log.warning(f"Brak makro dla {len(missing)} składników: {sorted(missing)[:10]}...")
+        log.warning(f"Brak makro EN dla {len(missing)} składników: {sorted(missing)[:10]}...")
 
 
 if __name__ == "__main__":
