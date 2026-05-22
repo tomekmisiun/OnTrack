@@ -72,12 +72,31 @@ _INGREDIENT_CANONICAL_EN: dict[str, str] = {
     "tuna":                 "tuna chunks in spring water",
     "applesauce":           "apple sauce",
     "apple sauce":          "apple sauce",
+    "beef broth":           "chicken stock",   # ALDI nie ma beef broth → chicken stock jako substytut
+    "beef stock":           "chicken stock",
+    "vegetable broth":      "vegetable stock",
+    "chicken broth":        "chicken stock",
     "ground beef":          "beef mince",
     "ground pork":          "pork mince",
     "minced beef":          "beef mince",
     "minced pork":          "pork mince",
     "pork":                 "pork loin",
     "beef":                 "beef steak",  # generyczny beef → steak/cut nie mince
+    # Berries — blueberries to odmiana berries
+    "berries":              "blueberries",
+    "mixed berries":        "blueberries",
+    # Orzechy — liczba mnoga jest inna forma tokenu
+    "almond":              "whole almonds",
+    "cashew":              "cashews",
+    "walnut":              "walnuts",
+    "hazelnut":            "hazelnuts",
+    "pecan":               "pecans",
+    # Owoce — liczba mnoga
+    "cranberry":           "cranberries",
+    "blueberry":           "blueberries",
+    "strawberry":          "strawberries",
+    "raspberry":           "raspberries",
+    "blackberry":          "blackberries",
 }
 
 SCORE_AUTO      = 85
@@ -113,7 +132,8 @@ def score(ingredient: str, product_generic: str) -> float:
     # "apricot jam" ≠ "apricot", "apple sauce" ≠ "apple" (jako surowy owoc)
     _PROCESSED_FORMS = {"jam", "jelly", "sauce", "preserve", "preserves", "conserve",
                         "conserves", "paste", "extract", "syrup", "concentrate",
-                        "puree", "purée", "compote", "curd"}
+                        "puree", "purée", "compote", "curd",
+                        "yogurt", "yoghurt"}  # coconut sugar ≠ coconut yogurt
     if (meaningful_p & _PROCESSED_FORMS) and not (meaningful_i & _PROCESSED_FORMS):
         return tsr  # produkt to przetworzona forma, składnik to surowy
 

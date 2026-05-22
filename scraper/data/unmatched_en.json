@@ -294,8 +294,8 @@
         "score": 77.8
       },
       {
-        "product": "almond mono lolly",
-        "score": 76.2
+        "product": "pineapple almond roule cheese",
+        "score": 75.0
       }
     ]
   },
@@ -357,10 +357,6 @@
         "score": 90.9
       },
       {
-        "product": "almond mono lolly",
-        "score": 84.2
-      },
-      {
         "product": "lemon",
         "score": 80.0
       },
@@ -370,6 +366,10 @@
       },
       {
         "product": "salmon in teriyaki sauce",
+        "score": 73.7
+      },
+      {
+        "product": "salmon in soy, ginger",
         "score": 73.7
       }
     ]
@@ -469,8 +469,8 @@
         "score": 100.0
       },
       {
-        "product": "childrens immunity juice drink mango, peach, apricot",
-        "score": 100.0
+        "product": "garlic",
+        "score": 72.7
       }
     ]
   },
@@ -1075,31 +1075,6 @@
     ]
   },
   {
-    "ingredient_name": "blackberry",
-    "top_candidates": [
-      {
-        "product": "yogurt & fruit compote blackberry & raspberry and red cherry splitpots 6 pack",
-        "score": 100.0
-      },
-      {
-        "product": "blackberries",
-        "score": 94.7
-      },
-      {
-        "product": "black beans/green lentils",
-        "score": 77.8
-      },
-      {
-        "product": "blueberry yogurt granola",
-        "score": 73.7
-      },
-      {
-        "product": "blueberry blackcurrant layered yogurt",
-        "score": 73.7
-      }
-    ]
-  },
-  {
     "ingredient_name": "blood orange",
     "top_candidates": [
       {
@@ -1500,6 +1475,31 @@
     ]
   },
   {
+    "ingredient_name": "butternut squash",
+    "top_candidates": [
+      {
+        "product": "nut",
+        "score": 100.0
+      },
+      {
+        "product": "buttery",
+        "score": 92.3
+      },
+      {
+        "product": "mash",
+        "score": 85.7
+      },
+      {
+        "product": "peanut butter nut bars 3 pack",
+        "score": 75.0
+      },
+      {
+        "product": "peanuts",
+        "score": 71.4
+      }
+    ]
+  },
+  {
     "ingredient_name": "cabbage carrot mix",
     "top_candidates": [
       {
@@ -1807,10 +1807,6 @@
         "score": 75.0
       },
       {
-        "product": "cola bottle ice lollies 6 pack",
-        "score": 70.6
-      },
-      {
         "product": "strawberry granola top protein",
         "score": 70.0
       },
@@ -1819,8 +1815,12 @@
         "score": 70.0
       },
       {
-        "product": "chocolate lolly",
+        "product": "chocolate rolls",
         "score": 70.0
+      },
+      {
+        "product": "mango",
+        "score": 66.7
       }
     ]
   },
@@ -2307,10 +2307,6 @@
         "score": 78.6
       },
       {
-        "product": "chipotle feta bakes 2 pack",
-        "score": 76.9
-      },
-      {
         "product": "chipotle chicken",
         "score": 75.0
       },
@@ -2321,6 +2317,10 @@
       {
         "product": "curry powder",
         "score": 73.7
+      },
+      {
+        "product": "baking powder",
+        "score": 70.0
       }
     ]
   },
@@ -2361,15 +2361,15 @@
         "score": 92.3
       },
       {
-        "product": "chocolate lolly",
-        "score": 80.0
-      },
-      {
         "product": "chocolate rolls",
         "score": 80.0
       },
       {
         "product": "dark chocolate butter biscuits",
+        "score": 80.0
+      },
+      {
+        "product": "milk chocolate butter biscuits",
         "score": 80.0
       }
     ]
@@ -2586,15 +2586,15 @@
         "score": 83.3
       },
       {
-        "product": "coconut greek style yogurt",
-        "score": 83.3
-      },
-      {
         "product": "coconut chilli chicken ramen bowl",
         "score": 81.8
       },
       {
         "product": "sour cream",
+        "score": 80.0
+      },
+      {
+        "product": "cod",
         "score": 80.0
       }
     ]
@@ -2644,8 +2644,33 @@
         "score": 80.0
       },
       {
-        "product": "coconut greek style yogurt",
+        "product": "coconut chilli chicken ramen bowl",
+        "score": 76.2
+      }
+    ]
+  },
+  {
+    "ingredient_name": "coconut sugar",
+    "top_candidates": [
+      {
+        "product": "nut",
+        "score": 100.0
+      },
+      {
+        "product": "cod",
+        "score": 80.0
+      },
+      {
+        "product": "coconut milk",
+        "score": 80.0
+      },
+      {
+        "product": "coconut water",
         "score": 78.3
+      },
+      {
+        "product": "mango coconut marinated chicken breast sizzlers",
+        "score": 76.9
       }
     ]
   },
@@ -2665,12 +2690,12 @@
         "score": 81.8
       },
       {
-        "product": "coconut vanilla greek style yogurt 4 pack",
+        "product": "cod",
         "score": 80.0
       },
       {
-        "product": "coconut greek style yogurt",
-        "score": 80.0
+        "product": "cider vinegar",
+        "score": 76.2
       }
     ]
   },
@@ -3025,6 +3050,31 @@
     ]
   },
   {
+    "ingredient_name": "cranberry sauce",
+    "top_candidates": [
+      {
+        "product": "curry sauce",
+        "score": 90.0
+      },
+      {
+        "product": "soy sauce",
+        "score": 87.5
+      },
+      {
+        "product": "strawberry sauce gateau",
+        "score": 86.7
+      },
+      {
+        "product": "cranberries",
+        "score": 84.2
+      },
+      {
+        "product": "wensleydale cranberry cheese",
+        "score": 80.0
+      }
+    ]
+  },
+  {
     "ingredient_name": "cremini mushroom",
     "top_candidates": [
       {
@@ -3340,11 +3390,11 @@
         "score": 72.7
       },
       {
-        "product": "childrens immunity juice drink mango, peach, apricot",
-        "score": 72.7
+        "product": "sweet sour chicken with egg fried rice",
+        "score": 69.6
       },
       {
-        "product": "sweet sour chicken with egg fried rice",
+        "product": "beef in black bean sauce with egg fried rice",
         "score": 69.6
       }
     ]
@@ -3903,10 +3953,6 @@
     "ingredient_name": "fenugreek",
     "top_candidates": [
       {
-        "product": "coconut greek style yogurt",
-        "score": 77.8
-      },
-      {
         "product": "protein greek style kebabs with tzatziki dip",
         "score": 77.8
       },
@@ -3919,7 +3965,11 @@
         "score": 73.7
       },
       {
-        "product": "greek style yogurt",
+        "product": "greek style honey yogurt",
+        "score": 71.4
+      },
+      {
+        "product": "greek yoghurt",
         "score": 71.4
       }
     ]
@@ -4219,8 +4269,8 @@
         "score": 71.4
       },
       {
-        "product": "childrens immunity juice drink blueberry, apple, pear",
-        "score": 68.2
+        "product": "celery",
+        "score": 66.7
       }
     ]
   },
@@ -5225,6 +5275,31 @@
     ]
   },
   {
+    "ingredient_name": "hazelnut",
+    "top_candidates": [
+      {
+        "product": "chocolate hazelnut tiramisu 2 pack",
+        "score": 100.0
+      },
+      {
+        "product": "spirals hazelnut 7 pack",
+        "score": 100.0
+      },
+      {
+        "product": "hazelnut crisp milk chocolate sticks 11 pack",
+        "score": 100.0
+      },
+      {
+        "product": "dark hazelnut chocolate",
+        "score": 100.0
+      },
+      {
+        "product": "choco hazelnut flavour filled soft bakes 5 pack",
+        "score": 100.0
+      }
+    ]
+  },
+  {
     "ingredient_name": "heavy cream",
     "top_candidates": [
       {
@@ -5469,7 +5544,7 @@
         "score": 71.4
       },
       {
-        "product": "fruit spiral lollies 5 pack",
+        "product": "fruit tower 4 pack",
         "score": 71.4
       }
     ]
@@ -5557,20 +5632,20 @@
         "score": 85.7
       },
       {
-        "product": "double strength lemon squash",
-        "score": 69.6
-      },
-      {
         "product": "radish",
         "score": 66.7
       },
       {
-        "product": "butternut squash",
-        "score": 66.7
+        "product": "garlic ciabatta squares 4 pack",
+        "score": 64.3
       },
       {
-        "product": "spicy butternut squash",
-        "score": 66.7
+        "product": "smashed avocado",
+        "score": 62.1
+      },
+      {
+        "product": "cheddar quiche",
+        "score": 58.3
       }
     ]
   },
@@ -5790,12 +5865,12 @@
         "score": 90.9
       },
       {
-        "product": "lemon greek style yogurt 4 pack",
-        "score": 77.8
-      },
-      {
         "product": "lemonade",
         "score": 76.9
+      },
+      {
+        "product": "belgian chocolate ganache lemons",
+        "score": 75.0
       }
     ]
   },
@@ -6419,7 +6494,7 @@
         "score": 66.7
       },
       {
-        "product": "pine nut girasoli",
+        "product": "lemon meringue gelato tub",
         "score": 66.7
       }
     ]
@@ -6632,10 +6707,6 @@
         "score": 85.7
       },
       {
-        "product": "orange lollies",
-        "score": 85.7
-      },
-      {
         "product": "orange ice coolers",
         "score": 85.7
       },
@@ -6645,6 +6716,10 @@
       },
       {
         "product": "orange flavour jelly",
+        "score": 85.7
+      },
+      {
+        "product": "orange chocolate bubbly bar",
         "score": 85.7
       }
     ]
@@ -6694,7 +6769,7 @@
         "score": 100.0
       },
       {
-        "product": "ice blitz lollies 6 pack",
+        "product": "anchovies in extra virgin olive oil",
         "score": 83.3
       }
     ]
@@ -7832,10 +7907,6 @@
         "score": 80.0
       },
       {
-        "product": "mixed fruit squash no added sugar",
-        "score": 78.3
-      },
-      {
         "product": "less sugar",
         "score": 77.8
       },
@@ -7846,6 +7917,10 @@
       {
         "product": "granulated sugar",
         "score": 72.7
+      },
+      {
+        "product": "demerara sugar",
+        "score": 72.0
       }
     ]
   },
@@ -9161,16 +9236,16 @@
         "score": 76.2
       },
       {
-        "product": "double strength orange squash",
-        "score": 76.2
+        "product": "berry summer tarts",
+        "score": 72.0
       },
       {
-        "product": "double strength summer fruits squash",
-        "score": 76.2
+        "product": "summer berry family crumble",
+        "score": 70.0
       },
       {
-        "product": "pineapple squash",
-        "score": 76.2
+        "product": "metro subs",
+        "score": 70.0
       }
     ]
   },
@@ -9775,6 +9850,31 @@
     ]
   },
   {
+    "ingredient_name": "vanilla bean",
+    "top_candidates": [
+      {
+        "product": "vanilla and strawberry yogurt with biscuit split pots 6 pack",
+        "score": 90.9
+      },
+      {
+        "product": "vanilla granola top protein",
+        "score": 83.3
+      },
+      {
+        "product": "vanilla luxurious dessert",
+        "score": 80.0
+      },
+      {
+        "product": "vanilla yogurt",
+        "score": 80.0
+      },
+      {
+        "product": "vanilla flavoured authentic greek yogurt",
+        "score": 80.0
+      }
+    ]
+  },
+  {
     "ingredient_name": "vanilla extract",
     "top_candidates": [
       {
@@ -9846,6 +9946,31 @@
       {
         "product": "vanilla yogurt",
         "score": 75.0
+      }
+    ]
+  },
+  {
+    "ingredient_name": "vanilla protein powder",
+    "top_candidates": [
+      {
+        "product": "vanilla protein yogurt",
+        "score": 85.0
+      },
+      {
+        "product": "baking powder",
+        "score": 81.8
+      },
+      {
+        "product": "vanilla yogurt",
+        "score": 76.9
+      },
+      {
+        "product": "protein peach",
+        "score": 76.9
+      },
+      {
+        "product": "spanish paella protein pot",
+        "score": 76.9
       }
     ]
   },
@@ -10096,6 +10221,31 @@
       {
         "product": "white rolls",
         "score": 70.6
+      }
+    ]
+  },
+  {
+    "ingredient_name": "white rice",
+    "top_candidates": [
+      {
+        "product": "long grain white rice",
+        "score": 100.0
+      },
+      {
+        "product": "thai green curry with rice",
+        "score": 84.2
+      },
+      {
+        "product": "chicken curry with rice",
+        "score": 84.2
+      },
+      {
+        "product": "white bread",
+        "score": 84.2
+      },
+      {
+        "product": "white cabbage",
+        "score": 82.4
       }
     ]
   },
@@ -10357,20 +10507,20 @@
         "score": 85.7
       },
       {
-        "product": "double strength orange squash",
-        "score": 76.2
+        "product": "yellow peach luxury yogurt",
+        "score": 72.0
       },
       {
-        "product": "apple blackcurrant super concentrated squirty squash",
-        "score": 76.2
+        "product": "yellow fruits yogurt 6 pack",
+        "score": 70.0
       },
       {
-        "product": "orange super concentrated squirty squash",
-        "score": 76.2
+        "product": "radish",
+        "score": 66.7
       },
       {
-        "product": "summer fruits super concentrated squirty squash",
-        "score": 76.2
+        "product": "yellowfin tuna",
+        "score": 66.7
       }
     ]
   },

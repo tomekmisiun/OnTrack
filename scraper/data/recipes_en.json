@@ -722,6 +722,140 @@
     "cost_complete": false
   },
   {
+    "name_en": "Baked Salmon with Blackberry Quinoa Salad",
+    "name_pl": "Pieczony Łosoś z Sałatką Quinoa z Jeżynami",
+    "url": "https://mealpreponfleek.com/baked-salmon-with-blackberry-quinoa-salad/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/09/Baked-Salmon-with-Blackberry-Quinoa.jpg",
+    "category": "lunch",
+    "ingredients_en": [
+      {
+        "name": "salmon",
+        "amount": 113,
+        "unit": "g"
+      },
+      {
+        "name": "quinoa",
+        "amount": 185,
+        "unit": "g"
+      },
+      {
+        "name": "blackberry",
+        "amount": 19,
+        "unit": "g"
+      },
+      {
+        "name": "red cabbage",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "celery",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "avocado oil",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "dijon mustard",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "honey",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "coconut aminos",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "garlic powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "black pepper",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "łosoś",
+        "amount": 113,
+        "unit": "g"
+      },
+      {
+        "name": "quinoa",
+        "amount": 185,
+        "unit": "g"
+      },
+      {
+        "name": "jeżyna",
+        "amount": 19,
+        "unit": "g"
+      },
+      {
+        "name": "kapusta czerwona",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "seler",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "olej z awokado",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "musztarda dijon",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "miód",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "amino kokosowe",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "czosnek w proszku",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sól",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pieprz czarny",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_gbp": null,
+    "cost_complete": false
+  },
+  {
     "name_en": "Lemon-Pepper Chicken Drumstick Recipe",
     "name_pl": "Przepis na Udka z Kurczaka Cytrynowo-Pieprzowe",
     "url": "https://mealpreponfleek.com/lemon-pepper-chicken-recipe/",

@@ -48,6 +48,10 @@ READY_TO_EAT_EN = [
     "basted",                  # "butter basted chicken" = marynowany kurczak, nie masło
     "wheats", "wheat cereal",  # "apricot fruit wheats" = płatki, nie owoc
     "fruit wheats",
+    "lolly", "lollies",        # "almond mono lolly" = lód na patyku
+    " squash",                 # "berries squash" = napój/syrop, nie owoce (ze spacją żeby nie łapać butternut squash)
+    "juice drink",             # "cranberry juice drink" = napój, nie składnik
+    "greek style yogurt",      # "coconut greek style yogurt" = jogurt, nie cukier/mąka kokosowa
 ]
 
 # PL keywords (Auchan / Biedronka) — kompletne dania gotowe do spożycia

@@ -871,19 +871,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Butternut Squash Each",
-    "generic_name": "butternut squash each",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 1,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 1.09,
-    "price_per_unit": 1.09,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Washed & Ready to Cook Carrot Batons",
     "generic_name": "washed ready to cook carrot batons",
     "shop": "aldi",
@@ -9009,32 +8996,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Butternut Squash & Pine Nut Girasoli",
-    "generic_name": "butternut squash",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 250.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.49,
-    "price_per_unit": null,
-    "price_per_100": 0.996,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Butternut Squash & Pine Nut Girasoli",
-    "generic_name": "pine nut girasoli",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 250.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.49,
-    "price_per_unit": null,
-    "price_per_100": 0.996,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Mezzelune Pasta",
     "generic_name": "mezzelune pasta",
     "shop": "aldi",
@@ -9646,19 +9607,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Fat Free Greek Style Yogurt",
-    "generic_name": "greek style yogurt",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 1000,
-    "unit": "g",
-    "sold_by_weight": true,
-    "price_package": 1.49,
-    "price_per_unit": null,
-    "price_per_100": 0.149,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Peach & Passion Fruit Thick & Creamy Yogurt 4 Pack",
     "generic_name": "peach & passion fruit thick & creamy yogurt 4 pack",
     "shop": "aldi",
@@ -9747,45 +9695,6 @@
     "price_package": 0.75,
     "price_per_unit": null,
     "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Strawberry Greek Style Yogurt 4 Pack",
-    "generic_name": "strawberry greek style yogurt 4 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 460.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": null,
-    "price_per_100": 0.2152,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Coconut & Vanilla Greek Style Yogurt 4 Pack",
-    "generic_name": "coconut vanilla greek style yogurt 4 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 460.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": null,
-    "price_per_100": 0.2152,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lemon Greek Style Yogurt 4 Pack",
-    "generic_name": "lemon greek style yogurt 4 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 460.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": null,
-    "price_per_100": 0.2152,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -10098,19 +10007,6 @@
     "price_package": 2.99,
     "price_per_unit": null,
     "price_per_100": 0.7475,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Coconut Greek Style Yogurt",
-    "generic_name": "coconut greek style yogurt",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 451.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.19,
-    "price_per_unit": null,
-    "price_per_100": 0.2639,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -13559,19 +13455,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Mini Chocolate Lolly",
-    "generic_name": "chocolate lolly",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 286.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.05,
-    "price_per_unit": null,
-    "price_per_100": 0.7168,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Breaded Omega 3 Fish Fingers 15 Pack",
     "generic_name": "breaded omega 3 fish fingers 15 pack",
     "shop": "aldi",
@@ -13674,19 +13557,6 @@
     "price_per_unit": null,
     "price_per_100": 0.099,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Ice Blitz Lollies 6 Pack",
-    "generic_name": "ice blitz lollies 6 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.39,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Garden Peas",
@@ -13923,32 +13793,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Tropico Exotic Fruit Lollies 3 Pack",
-    "generic_name": "tropico exotic fruit lollies 3 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.39,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Mini Whirls Lollies 8 Pack",
-    "generic_name": "whirls lollies 8 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 2.29,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Thin Crust Stonebaked BBQ Meat Feast Pizza",
     "generic_name": "thin crust stonebaked bbq meat feast pizza",
     "shop": "aldi",
@@ -13960,19 +13804,6 @@
     "price_per_unit": null,
     "price_per_100": 0.4394,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Almond Mono Lolly",
-    "generic_name": "almond mono lolly",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Milk Choc Ices 8 Pack",
@@ -14012,32 +13843,6 @@
     "price_per_unit": null,
     "price_per_100": 0.439,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Fruit Spiral Lollies 5 Pack",
-    "generic_name": "fruit spiral lollies 5 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.29,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Rocket Lollies 8 Pack",
-    "generic_name": "rocket lollies 8 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.39,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Frozen Deepwater Prawns",
@@ -16107,32 +15912,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Spicy Butternut Squash & Chipotle Feta Bakes 2 Pack",
-    "generic_name": "spicy butternut squash",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Spicy Butternut Squash & Chipotle Feta Bakes 2 Pack",
-    "generic_name": "chipotle feta bakes 2 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Salt & Pepper Grill Fries",
     "generic_name": "salt pepper grill fries",
     "shop": "aldi",
@@ -16354,97 +16133,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Classic Ice Lollies",
-    "generic_name": "ice lollies",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "White Ice Lollies",
-    "generic_name": "white ice lollies",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Mango Fruit Sticks Ice Lollies 12 Pack",
-    "generic_name": "mango fruit sticks ice lollies 12 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 2.29,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Pineapple Fruit Sticks Ice Lollies 12 Pack",
-    "generic_name": "pineapple fruit sticks ice lollies 12 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 2.29,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Forest Fruit Sticks Ice Lollies 12 Pack",
-    "generic_name": "forest fruit sticks ice lollies 12 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 2.29,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Cola Bottle Ice Lollies 6 Pack",
-    "generic_name": "cola bottle ice lollies 6 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Cherry Cola Bottle Ice Lollies 6 Pack",
-    "generic_name": "cherry cola bottle ice lollies 6 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Slow Cooked Hot Honey Pulled Pork",
     "generic_name": "slow hot honey pulled pork",
     "shop": "aldi",
@@ -16469,19 +16157,6 @@
     "price_per_unit": null,
     "price_per_100": 0.7766,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Fiesta Lolly",
-    "generic_name": "fiesta lolly",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Beef Smash Burgers 4 Pack",
@@ -16521,58 +16196,6 @@
     "price_per_unit": null,
     "price_per_100": 0.7247,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Orange Lollies",
-    "generic_name": "orange lollies",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 2.29,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "British Raspberry Lollies 4 Pack",
-    "generic_name": "raspberry lollies 4 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 2.29,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Pink Lemonade Lollies 4 Pack",
-    "generic_name": "pink lemonade lollies 4 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 2.29,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Raspberry Flavour Sour Spiral Lollies",
-    "generic_name": "raspberry flavour sour spiral lollies",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.29,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Fish Steaks in a Butter Sauce 2 Pack",
@@ -16911,32 +16534,6 @@
     "price_per_unit": null,
     "price_per_100": 1.745,
     "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Twisty Pop lollies Bubblegum",
-    "generic_name": "twisty pop lollies bubblegum",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 2.29,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Twisty Pop lollies Strawberry & Vanilla",
-    "generic_name": "twisty pop lollies strawberry vanilla",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 2.29,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Cola Ice Coolers",
@@ -27274,32 +26871,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Original Raspberry & Milk Drumstick Squashies",
-    "generic_name": "original raspberry",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 140.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 0.89,
-    "price_per_unit": null,
-    "price_per_100": 0.6357,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Original Raspberry & Milk Drumstick Squashies",
-    "generic_name": "milk drumstick squashies",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 140.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 0.89,
-    "price_per_unit": null,
-    "price_per_100": 0.6357,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Teriyaki Noodle Boxes",
     "generic_name": "teriyaki noodle boxes",
     "shop": "aldi",
@@ -27311,32 +26882,6 @@
     "price_per_unit": null,
     "price_per_100": null,
     "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
-    "original_name": "Sour Cherry & Apple Flavour Drumstick Squashies",
-    "generic_name": "sour cherry",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 140.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.89,
-    "price_per_unit": null,
-    "price_per_100": 0.6357,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Sour Cherry & Apple Flavour Drumstick Squashies",
-    "generic_name": "apple flavour drumstick squashies",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 140.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.89,
-    "price_per_unit": null,
-    "price_per_100": 0.6357,
-    "standard_category": "Warzywa"
   },
   {
     "original_name": "Katsu Noodle Boxes",
@@ -28015,19 +27560,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Tropical Fruit Juice Drink",
-    "generic_name": "tropical fruit juice drink",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.49,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Smooth Orange Juice From Concentrate",
     "generic_name": "smooth orange juice from concentrate",
     "shop": "aldi",
@@ -28036,32 +27568,6 @@
     "unit": null,
     "sold_by_weight": false,
     "price_package": 1.45,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Summer Fruits Flavoured Juice Drink",
-    "generic_name": "summer fruits flavoured juice drink",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.49,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Cranberry Juice Drink",
-    "generic_name": "cranberry juice drink",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.35,
     "price_per_unit": null,
     "price_per_100": null,
     "standard_category": "Owoce"
@@ -28275,32 +27781,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Double Strength Apple & Blackcurrant Squash",
-    "generic_name": "double strength apple",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.89,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Double Strength Apple & Blackcurrant Squash",
-    "generic_name": "blackcurrant squash",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.89,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Lemonade",
     "generic_name": "lemonade",
     "shop": "aldi",
@@ -28312,71 +27792,6 @@
     "price_per_unit": null,
     "price_per_100": null,
     "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Double Strength Orange Squash",
-    "generic_name": "double strength orange squash",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.89,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Double Strength Summer Fruits Squash",
-    "generic_name": "double strength summer fruits squash",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.89,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Apple & Blackcurrant Super Concentrated Squirty Squash",
-    "generic_name": "apple blackcurrant super concentrated squirty squash",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.49,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Orange Super Concentrated Squirty Squash",
-    "generic_name": "orange super concentrated squirty squash",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.49,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Summer Fruits Super Concentrated Squirty Squash",
-    "generic_name": "summer fruits super concentrated squirty squash",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.49,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Warzywa"
   },
   {
     "original_name": "zX Cherry Cola Zero Sugar",
@@ -28403,71 +27818,6 @@
     "price_per_unit": null,
     "price_per_100": null,
     "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
-    "original_name": "Double Strength Lemon Squash",
-    "generic_name": "double strength lemon squash",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.89,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Double Strength Orange & Pineapple Squash",
-    "generic_name": "double strength orange",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.89,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Double Strength Orange & Pineapple Squash",
-    "generic_name": "pineapple squash",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.89,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Double Strength Cherries & Berries Squash",
-    "generic_name": "double strength cherries",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.89,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Double Strength Cherries & Berries Squash",
-    "generic_name": "berries squash",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.89,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Warzywa"
   },
   {
     "original_name": "Detox Herbal Tea 20 Pack",
@@ -28558,19 +27908,6 @@
     "price_package": 1.69,
     "price_per_unit": null,
     "price_per_100": 0.845,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "No Added Sugar Cranberry Juice Drink",
-    "generic_name": "no added sugar cranberry juice drink",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": null,
-    "price_per_100": null,
     "standard_category": "Owoce"
   },
   {
@@ -28769,32 +28106,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Fruit & Barley Summer Fruits Squash",
-    "generic_name": "fruit barley summer fruits squash",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.09,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Mixed Fruit Squash",
-    "generic_name": "mixed fruit squash",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.09,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Lemon",
     "generic_name": "lemon",
     "shop": "aldi",
@@ -28808,32 +28119,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Mixed Fruit Squash No Added Sugar",
-    "generic_name": "mixed fruit squash no added sugar",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.09,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Fruity Blast Apple Juice Drink 8 Pack",
-    "generic_name": "fruity blast apple juice drink 8 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 200.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 1.59,
-    "price_per_unit": null,
-    "price_per_100": 0.795,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Twisted Fruits",
     "generic_name": "twisted fruits",
     "shop": "aldi",
@@ -28844,58 +28129,6 @@
     "price_package": 0.69,
     "price_per_unit": null,
     "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Fruity Blasts Apple & Blackcurrant Juice Drink 8 Pack",
-    "generic_name": "fruity blasts apple",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 200.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 1.59,
-    "price_per_unit": null,
-    "price_per_100": 0.795,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Fruity Blasts Apple & Blackcurrant Juice Drink 8 Pack",
-    "generic_name": "blackcurrant juice drink 8 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 200.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 1.59,
-    "price_per_unit": null,
-    "price_per_100": 0.795,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Fruity Blasts Orange Juice Drink 8 Pack",
-    "generic_name": "fruity blasts orange juice drink 8 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 200.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 1.59,
-    "price_per_unit": null,
-    "price_per_100": 0.795,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Fruity Blasts Summer Fruits Juice Drink 8 Pack",
-    "generic_name": "fruity blasts summer fruits juice drink 8 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 200.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 1.59,
-    "price_per_unit": null,
-    "price_per_100": 0.795,
     "standard_category": "Owoce"
   },
   {
@@ -29076,45 +28309,6 @@
     "unit": null,
     "sold_by_weight": false,
     "price_package": 1.79,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Childrens Immunity Juice Drink Blueberry, Apple, Pear",
-    "generic_name": "childrens immunity juice drink blueberry, apple, pear",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 2.99,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Childrens Immunity Juice Drink Strawberry, Kiwi, Apple",
-    "generic_name": "childrens immunity juice drink strawberry, kiwi, apple",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 2.99,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Childrens Immunity Juice Drink Mango, Peach, Apricot",
-    "generic_name": "childrens immunity juice drink mango, peach, apricot",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 2.99,
     "price_per_unit": null,
     "price_per_100": null,
     "standard_category": "Owoce"
