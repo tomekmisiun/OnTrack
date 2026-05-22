@@ -29,10 +29,10 @@
   {
     "name_en": "apple cider",
     "name_pl": "cydr jabłkowy",
-    "kcal": 47.0,
+    "kcal": 46.0,
     "protein_g": 0.1,
     "fat_g": 0.1,
-    "carbs_g": 11.7,
+    "carbs_g": 11.5,
     "fiber_g": 0.0
   },
   {
@@ -50,8 +50,8 @@
     "kcal": 68.0,
     "protein_g": 0.2,
     "fat_g": 0.1,
-    "carbs_g": 17.9,
-    "fiber_g": 1.5
+    "carbs_g": 17.7,
+    "fiber_g": 1.2
   },
   {
     "name_en": "apricot",
@@ -86,7 +86,7 @@
     "kcal": 70.0,
     "protein_g": 1.9,
     "fat_g": 0.1,
-    "carbs_g": 15.9,
+    "carbs_g": 15.7,
     "fiber_g": 1.8
   },
   {
@@ -113,7 +113,7 @@
     "kcal": 53.0,
     "protein_g": 0.0,
     "fat_g": 0.0,
-    "carbs_g": 27.8,
+    "carbs_g": 27.7,
     "fiber_g": 0.2
   },
   {
@@ -200,9 +200,9 @@
   {
     "name_en": "beef stew meat",
     "name_pl": "mięso wołowe do gulaszu",
-    "kcal": 224.0,
+    "kcal": 250.0,
     "protein_g": 26.0,
-    "fat_g": 13.0,
+    "fat_g": 15.0,
     "carbs_g": 0.0,
     "fiber_g": 0.0
   },
@@ -320,7 +320,7 @@
     "kcal": 364.0,
     "protein_g": 7.4,
     "fat_g": 2.8,
-    "carbs_g": 76.6,
+    "carbs_g": 76.0,
     "fiber_g": 3.4
   },
   {
@@ -329,7 +329,7 @@
     "kcal": 364.0,
     "protein_g": 7.4,
     "fat_g": 2.8,
-    "carbs_g": 76.6,
+    "carbs_g": 76.0,
     "fiber_g": 3.4
   },
   {
@@ -373,7 +373,7 @@
     "name_pl": "przyprawa cajun",
     "kcal": 282.0,
     "protein_g": 10.0,
-    "fat_g": 8.0,
+    "fat_g": 9.0,
     "carbs_g": 50.0,
     "fiber_g": 20.0
   },
@@ -387,26 +387,8 @@
     "fiber_g": 2.8
   },
   {
-    "name_en": "carrots",
-    "name_pl": "marchew",
-    "kcal": 41.0,
-    "protein_g": 0.9,
-    "fat_g": 0.2,
-    "carbs_g": 9.6,
-    "fiber_g": 2.8
-  },
-  {
     "name_en": "cashew",
-    "name_pl": "orzech nerkowca",
-    "kcal": 553.0,
-    "protein_g": 18.2,
-    "fat_g": 43.8,
-    "carbs_g": 30.2,
-    "fiber_g": 3.3
-  },
-  {
-    "name_en": "cashews",
-    "name_pl": "orzechy nerkowca",
+    "name_pl": "nerkowiec",
     "kcal": 553.0,
     "protein_g": 18.2,
     "fat_g": 43.8,
@@ -451,7 +433,7 @@
   },
   {
     "name_en": "celery",
-    "name_pl": "seler naciowy",
+    "name_pl": "seler",
     "kcal": 16.0,
     "protein_g": 0.7,
     "fat_g": 0.2,
@@ -535,7 +517,7 @@
     "name_pl": "podudzie kurczaka",
     "kcal": 172.0,
     "protein_g": 28.3,
-    "fat_g": 5.7,
+    "fat_g": 5.9,
     "carbs_g": 0.0,
     "fiber_g": 0.0
   },
@@ -563,7 +545,7 @@
     "kcal": 4.0,
     "protein_g": 0.5,
     "fat_g": 0.1,
-    "carbs_g": 0.4,
+    "carbs_g": 0.3,
     "fiber_g": 0.0
   },
   {
@@ -588,7 +570,7 @@
     "name_en": "chicken wing",
     "name_pl": "skrzydło kurczaka",
     "kcal": 203.0,
-    "protein_g": 30.5,
+    "protein_g": 30.2,
     "fat_g": 8.1,
     "carbs_g": 0.0,
     "fiber_g": 0.0
@@ -598,9 +580,9 @@
     "name_pl": "ciecierzyca",
     "kcal": 139.0,
     "protein_g": 7.6,
-    "fat_g": 2.6,
+    "fat_g": 2.2,
     "carbs_g": 22.5,
-    "fiber_g": 7.6
+    "fiber_g": 6.4
   },
   {
     "name_en": "chickpea fusilli pasta",
@@ -625,9 +607,9 @@
     "name_pl": "ciecierzyca",
     "kcal": 139.0,
     "protein_g": 7.6,
-    "fat_g": 2.6,
+    "fat_g": 2.2,
     "carbs_g": 22.5,
-    "fiber_g": 7.6
+    "fiber_g": 6.4
   },
   {
     "name_en": "chili powder",
@@ -669,7 +651,7 @@
     "name_en": "cinnamon",
     "name_pl": "cynamon",
     "kcal": 247.0,
-    "protein_g": 4.0,
+    "protein_g": 3.9,
     "fat_g": 1.2,
     "carbs_g": 80.6,
     "fiber_g": 53.1
@@ -767,11 +749,11 @@
   {
     "name_en": "corn",
     "name_pl": "kukurydza",
-    "kcal": 96.0,
-    "protein_g": 3.4,
-    "fat_g": 1.5,
-    "carbs_g": 21.0,
-    "fiber_g": 2.4
+    "kcal": 86.0,
+    "protein_g": 3.3,
+    "fat_g": 1.4,
+    "carbs_g": 18.7,
+    "fiber_g": 2.0
   },
   {
     "name_en": "cottage cheese",
@@ -813,7 +795,7 @@
     "name_en": "crispy rice cereal",
     "name_pl": "chrupki ryżowe",
     "kcal": 400.0,
-    "protein_g": 5.0,
+    "protein_g": 5.3,
     "fat_g": 2.0,
     "carbs_g": 89.0,
     "fiber_g": 1.0
@@ -843,7 +825,7 @@
     "protein_g": 14.3,
     "fat_g": 14.0,
     "carbs_g": 55.8,
-    "fiber_g": 53.2
+    "fiber_g": 53.0
   },
   {
     "name_en": "dairy free chocolate chips",
@@ -865,7 +847,7 @@
   },
   {
     "name_en": "dark chocolate chips",
-    "name_pl": "kropelki gorzkiej czekolady",
+    "name_pl": "kropelki z gorzkiej czekolady",
     "kcal": 546.0,
     "protein_g": 4.9,
     "fat_g": 31.3,
@@ -904,9 +886,9 @@
     "name_pl": "suszone żurawiny",
     "kcal": 308.0,
     "protein_g": 0.2,
-    "fat_g": 1.1,
+    "fat_g": 0.1,
     "carbs_g": 82.8,
-    "fiber_g": 5.3
+    "fiber_g": 4.6
   },
   {
     "name_en": "dried pitted date",
@@ -933,7 +915,7 @@
     "protein_g": 4.5,
     "fat_g": 2.1,
     "carbs_g": 25.2,
-    "fiber_g": 1.2
+    "fiber_g": 1.1
   },
   {
     "name_en": "feta",
@@ -996,7 +978,7 @@
     "protein_g": 1.5,
     "fat_g": 1.5,
     "carbs_g": 8.0,
-    "fiber_g": 1.5
+    "fiber_g": 1.0
   },
   {
     "name_en": "ginger",
@@ -1067,7 +1049,7 @@
     "kcal": 31.0,
     "protein_g": 1.8,
     "fat_g": 0.2,
-    "carbs_g": 7.0,
+    "carbs_g": 7.1,
     "fiber_g": 2.7
   },
   {
@@ -1136,20 +1118,20 @@
   {
     "name_en": "herbs",
     "name_pl": "zioła",
-    "kcal": 0.0,
-    "protein_g": 0.0,
-    "fat_g": 0.0,
-    "carbs_g": 0.0,
-    "fiber_g": 0.0
+    "kcal": 36.0,
+    "protein_g": 2.0,
+    "fat_g": 0.5,
+    "carbs_g": 6.5,
+    "fiber_g": 3.5
   },
   {
     "name_en": "hoisin sauce",
     "name_pl": "sos hoisin",
     "kcal": 220.0,
-    "protein_g": 3.4,
-    "fat_g": 3.6,
-    "carbs_g": 44.4,
-    "fiber_g": 2.0
+    "protein_g": 3.3,
+    "fat_g": 3.0,
+    "carbs_g": 44.0,
+    "fiber_g": 1.0
   },
   {
     "name_en": "honey",
@@ -1199,11 +1181,11 @@
   {
     "name_en": "lemon herb seasoning",
     "name_pl": "przyprawa cytrynowo-ziołowa",
-    "kcal": 0.0,
-    "protein_g": 0.0,
-    "fat_g": 0.0,
-    "carbs_g": 0.0,
-    "fiber_g": 0.0
+    "kcal": 50.0,
+    "protein_g": 1.5,
+    "fat_g": 0.5,
+    "carbs_g": 10.0,
+    "fiber_g": 2.0
   },
   {
     "name_en": "lemon juice",
@@ -1217,11 +1199,11 @@
   {
     "name_en": "lemon pepper seasoning",
     "name_pl": "przyprawa cytrynowo-pieprzowa",
-    "kcal": 0.0,
-    "protein_g": 0.0,
-    "fat_g": 0.0,
-    "carbs_g": 0.0,
-    "fiber_g": 0.0
+    "kcal": 50.0,
+    "protein_g": 1.5,
+    "fat_g": 0.5,
+    "carbs_g": 10.0,
+    "fiber_g": 2.0
   },
   {
     "name_en": "lentils",
@@ -1298,8 +1280,8 @@
   {
     "name_en": "mayonnaise",
     "name_pl": "majonez",
-    "kcal": 724.0,
-    "protein_g": 1.0,
+    "kcal": 717.0,
+    "protein_g": 0.9,
     "fat_g": 79.0,
     "carbs_g": 0.6,
     "fiber_g": 0.0
@@ -1307,37 +1289,37 @@
   {
     "name_en": "meatballs",
     "name_pl": "klopsiki",
-    "kcal": 0.0,
-    "protein_g": 0.0,
-    "fat_g": 0.0,
-    "carbs_g": 0.0,
-    "fiber_g": 0.0
+    "kcal": 200.0,
+    "protein_g": 14.0,
+    "fat_g": 15.0,
+    "carbs_g": 5.0,
+    "fiber_g": 0.5
   },
   {
     "name_en": "milk",
     "name_pl": "mleko",
-    "kcal": 42.0,
-    "protein_g": 3.4,
-    "fat_g": 1.0,
-    "carbs_g": 5.0,
+    "kcal": 61.0,
+    "protein_g": 3.2,
+    "fat_g": 3.3,
+    "carbs_g": 4.8,
     "fiber_g": 0.0
   },
   {
     "name_en": "mixed fruit",
     "name_pl": "mieszanka owoców",
-    "kcal": 0.0,
-    "protein_g": 0.0,
-    "fat_g": 0.0,
-    "carbs_g": 0.0,
-    "fiber_g": 0.0
+    "kcal": 50.0,
+    "protein_g": 0.5,
+    "fat_g": 0.2,
+    "carbs_g": 12.0,
+    "fiber_g": 1.5
   },
   {
     "name_en": "mixed nuts",
     "name_pl": "mieszanka orzechów",
     "kcal": 607.0,
     "protein_g": 20.0,
-    "fat_g": 53.5,
-    "carbs_g": 21.0,
+    "fat_g": 53.0,
+    "carbs_g": 20.0,
     "fiber_g": 7.0
   },
   {
@@ -1347,7 +1329,7 @@
     "protein_g": 2.9,
     "fat_g": 0.3,
     "carbs_g": 13.1,
-    "fiber_g": 4.3
+    "fiber_g": 4.4
   },
   {
     "name_en": "mozzarella cheese",
@@ -1360,7 +1342,7 @@
   },
   {
     "name_en": "mushrooms",
-    "name_pl": "grzyby",
+    "name_pl": "pieczarki",
     "kcal": 22.0,
     "protein_g": 3.1,
     "fat_g": 0.3,
@@ -1418,8 +1400,8 @@
     "kcal": 350.0,
     "protein_g": 10.0,
     "fat_g": 1.0,
-    "carbs_g": 80.0,
-    "fiber_g": 5.0
+    "carbs_g": 79.0,
+    "fiber_g": 7.0
   },
   {
     "name_en": "orange juice",
@@ -1498,8 +1480,8 @@
     "name_pl": "sos do makaronu",
     "kcal": 42.0,
     "protein_g": 1.2,
-    "fat_g": 1.5,
-    "carbs_g": 6.5,
+    "fat_g": 1.0,
+    "carbs_g": 7.0,
     "fiber_g": 1.5
   },
   {
@@ -1548,6 +1530,15 @@
     "fiber_g": 9.6
   },
   {
+    "name_en": "pecans",
+    "name_pl": "orzechy pekan",
+    "kcal": 691.0,
+    "protein_g": 9.2,
+    "fat_g": 72.0,
+    "carbs_g": 13.9,
+    "fiber_g": 9.6
+  },
+  {
     "name_en": "penne pasta",
     "name_pl": "makaron penne",
     "kcal": 131.0,
@@ -1559,27 +1550,27 @@
   {
     "name_en": "pepper",
     "name_pl": "pieprz",
-    "kcal": 251.0,
+    "kcal": 255.0,
     "protein_g": 10.4,
     "fat_g": 3.3,
-    "carbs_g": 64.0,
+    "carbs_g": 64.8,
     "fiber_g": 25.3
   },
   {
     "name_en": "peppercorns",
     "name_pl": "ziarna pieprzu",
-    "kcal": 251.0,
+    "kcal": 255.0,
     "protein_g": 10.4,
     "fat_g": 3.3,
-    "carbs_g": 64.0,
+    "carbs_g": 64.8,
     "fiber_g": 25.3
   },
   {
     "name_en": "pepperoni",
     "name_pl": "pepperoni",
     "kcal": 494.0,
-    "protein_g": 22.5,
-    "fat_g": 44.0,
+    "protein_g": 23.0,
+    "fat_g": 43.0,
     "carbs_g": 1.2,
     "fiber_g": 0.0
   },
@@ -1811,11 +1802,11 @@
   {
     "name_en": "red curry paste",
     "name_pl": "czerwona pasta curry",
-    "kcal": 150.0,
+    "kcal": 113.0,
     "protein_g": 3.0,
-    "fat_g": 10.0,
-    "carbs_g": 12.0,
-    "fiber_g": 3.0
+    "fat_g": 7.0,
+    "carbs_g": 10.0,
+    "fiber_g": 2.0
   },
   {
     "name_en": "red kidney beans",
@@ -1905,7 +1896,7 @@
     "protein_g": 1.8,
     "fat_g": 0.2,
     "carbs_g": 24.9,
-    "fiber_g": 1.0
+    "fiber_g": 0.4
   },
   {
     "name_en": "rice wine vinegar",
@@ -1994,7 +1985,7 @@
     "kcal": 346.0,
     "protein_g": 14.1,
     "fat_g": 31.7,
-    "carbs_g": 2.1,
+    "carbs_g": 1.8,
     "fiber_g": 0.0
   },
   {
@@ -2067,7 +2058,7 @@
     "protein_g": 5.1,
     "fat_g": 0.1,
     "carbs_g": 21.4,
-    "fiber_g": 0.0
+    "fiber_g": 0.1
   },
   {
     "name_en": "sour cream",
@@ -2081,11 +2072,11 @@
   {
     "name_en": "soy chorizo",
     "name_pl": "sojowe chorizo",
-    "kcal": 200.0,
+    "kcal": 230.0,
     "protein_g": 14.0,
-    "fat_g": 10.0,
-    "carbs_g": 14.0,
-    "fiber_g": 4.0
+    "fat_g": 12.0,
+    "carbs_g": 18.0,
+    "fiber_g": 5.0
   },
   {
     "name_en": "soy sauce",
@@ -2171,28 +2162,28 @@
   {
     "name_en": "sun dried tomatoes",
     "name_pl": "pomidory suszone",
-    "kcal": 213.0,
-    "protein_g": 5.1,
+    "kcal": 258.0,
+    "protein_g": 14.1,
     "fat_g": 2.9,
-    "carbs_g": 46.0,
+    "carbs_g": 55.8,
     "fiber_g": 12.3
   },
   {
     "name_en": "sun-dried tomato",
     "name_pl": "pomidor suszony",
-    "kcal": 213.0,
-    "protein_g": 5.1,
+    "kcal": 258.0,
+    "protein_g": 14.1,
     "fat_g": 2.9,
-    "carbs_g": 46.0,
+    "carbs_g": 55.8,
     "fiber_g": 12.3
   },
   {
     "name_en": "sun-dried tomatoes",
     "name_pl": "pomidory suszone",
-    "kcal": 213.0,
-    "protein_g": 5.1,
+    "kcal": 258.0,
+    "protein_g": 14.1,
     "fat_g": 2.9,
-    "carbs_g": 46.0,
+    "carbs_g": 55.8,
     "fiber_g": 12.3
   },
   {
@@ -2245,8 +2236,8 @@
     "name_pl": "sos słodko-kwaśny tajski",
     "kcal": 200.0,
     "protein_g": 0.5,
-    "fat_g": 0.5,
-    "carbs_g": 49.0,
+    "fat_g": 0.0,
+    "carbs_g": 50.0,
     "fiber_g": 0.0
   },
   {
@@ -2289,7 +2280,7 @@
     "name_en": "tomato paste",
     "name_pl": "koncentrat pomidorowy",
     "kcal": 82.0,
-    "protein_g": 4.0,
+    "protein_g": 4.3,
     "fat_g": 0.5,
     "carbs_g": 18.9,
     "fiber_g": 4.1
@@ -2298,8 +2289,8 @@
     "name_en": "tuna",
     "name_pl": "tuńczyk",
     "kcal": 130.0,
-    "protein_g": 26.0,
-    "fat_g": 2.0,
+    "protein_g": 29.0,
+    "fat_g": 0.8,
     "carbs_g": 0.0,
     "fiber_g": 0.0
   },
@@ -2317,7 +2308,7 @@
     "name_pl": "laska wanilii",
     "kcal": 288.0,
     "protein_g": 0.0,
-    "fat_g": 0.1,
+    "fat_g": 0.0,
     "carbs_g": 12.7,
     "fiber_g": 0.0
   },
@@ -2325,8 +2316,8 @@
     "name_en": "vanilla extract",
     "name_pl": "ekstrakt waniliowy",
     "kcal": 288.0,
-    "protein_g": 0.1,
-    "fat_g": 0.1,
+    "protein_g": 0.0,
+    "fat_g": 0.0,
     "carbs_g": 12.7,
     "fiber_g": 0.0
   },
@@ -2336,8 +2327,8 @@
     "kcal": 65.0,
     "protein_g": 2.0,
     "fat_g": 0.5,
-    "carbs_g": 13.0,
-    "fiber_g": 4.0
+    "carbs_g": 12.0,
+    "fiber_g": 3.0
   },
   {
     "name_en": "vegetable oil",
@@ -2354,8 +2345,8 @@
     "kcal": 65.0,
     "protein_g": 2.0,
     "fat_g": 0.5,
-    "carbs_g": 13.0,
-    "fiber_g": 4.0
+    "carbs_g": 12.0,
+    "fiber_g": 3.0
   },
   {
     "name_en": "watermelon",
@@ -2424,9 +2415,9 @@
     "name_en": "yeast",
     "name_pl": "drożdże",
     "kcal": 105.0,
-    "protein_g": 14.3,
+    "protein_g": 12.6,
     "fat_g": 1.9,
-    "carbs_g": 18.1,
+    "carbs_g": 13.1,
     "fiber_g": 8.1
   },
   {
@@ -2448,7 +2439,16 @@
     "fiber_g": 3.0
   },
   {
-    "name_en": "bacon (rolled, cured, pan-fried)",
+    "name_en": "basil dried",
+    "name_pl": "bazylia suszona",
+    "kcal": 233.0,
+    "protein_g": 22.8,
+    "fat_g": 4.1,
+    "carbs_g": 47.8,
+    "fiber_g": 37.7
+  },
+  {
+    "name_en": "bacon rolled",
     "name_pl": "boczek rolowany",
     "kcal": 541.0,
     "protein_g": 37.0,
@@ -2457,7 +2457,7 @@
     "fiber_g": 0.0
   },
   {
-    "name_en": "blueberries (raw)",
+    "name_en": "blueberries",
     "name_pl": "borówki amerykańska",
     "kcal": 57.0,
     "protein_g": 0.7,
@@ -2466,7 +2466,7 @@
     "fiber_g": 2.4
   },
   {
-    "name_en": "broccoli (raw)",
+    "name_en": "broccoli",
     "name_pl": "brokuły",
     "kcal": 34.0,
     "protein_g": 2.8,
@@ -2475,34 +2475,43 @@
     "fiber_g": 2.6
   },
   {
-    "name_en": "brussels sprouts (frozen, unprepared)",
+    "name_en": "brussels sprouts frozen",
     "name_pl": "brukselka mrożona",
     "kcal": 41.0,
-    "protein_g": 3.8,
+    "protein_g": 3.6,
     "fat_g": 0.4,
-    "carbs_g": 7.9,
+    "carbs_g": 8.0,
     "fiber_g": 3.8
   },
   {
-    "name_en": "broth (canned, ready-to-serve)",
+    "name_en": "broth",
     "name_pl": "bulion",
     "kcal": 4.0,
-    "protein_g": 0.5,
+    "protein_g": 0.3,
     "fat_g": 0.1,
     "carbs_g": 0.4,
     "fiber_g": 0.0
   },
   {
-    "name_en": "vegetable broth (canned, ready-to-serve)",
+    "name_en": "chicken broth without palm oil",
+    "name_pl": "bulion drobiowy bez oleju palmowego",
+    "kcal": 4.0,
+    "protein_g": 0.3,
+    "fat_g": 0.1,
+    "carbs_g": 0.4,
+    "fiber_g": 0.0
+  },
+  {
+    "name_en": "vegetable broth",
     "name_pl": "bulion warzywny",
     "kcal": 4.0,
     "protein_g": 0.2,
     "fat_g": 0.1,
-    "carbs_g": 0.7,
+    "carbs_g": 0.6,
     "fiber_g": 0.0
   },
   {
-    "name_en": "beets (raw)",
+    "name_en": "beetroot",
     "name_pl": "burak podłużny",
     "kcal": 43.0,
     "protein_g": 1.6,
@@ -2511,7 +2520,7 @@
     "fiber_g": 2.8
   },
   {
-    "name_en": "beets (raw)",
+    "name_en": "beets",
     "name_pl": "buraki",
     "kcal": 43.0,
     "protein_g": 1.6,
@@ -2520,16 +2529,25 @@
     "fiber_g": 2.8
   },
   {
-    "name_en": "bread (white, commercially prepared)",
+    "name_en": "morning roll",
     "name_pl": "bułka poranna",
-    "kcal": 265.0,
-    "protein_g": 9.0,
-    "fat_g": 3.2,
-    "carbs_g": 49.0,
-    "fiber_g": 2.7
+    "kcal": 266.0,
+    "protein_g": 8.7,
+    "fat_g": 3.3,
+    "carbs_g": 50.0,
+    "fiber_g": 2.4
   },
   {
-    "name_en": "onions (red, raw)",
+    "name_en": "breakfast roll with seeds",
+    "name_pl": "bułka śniadaniowa z ziarnami",
+    "kcal": 266.0,
+    "protein_g": 8.7,
+    "fat_g": 3.3,
+    "carbs_g": 50.0,
+    "fiber_g": 2.4
+  },
+  {
+    "name_en": "onion red",
     "name_pl": "cebula czerwona",
     "kcal": 40.0,
     "protein_g": 1.1,
@@ -2538,16 +2556,16 @@
     "fiber_g": 1.7
   },
   {
-    "name_en": "onion powder",
-    "name_pl": "cebula granulowana",
-    "kcal": 341.0,
-    "protein_g": 10.4,
-    "fat_g": 0.5,
-    "carbs_g": 79.0,
-    "fiber_g": 7.0
+    "name_en": "onion sweet",
+    "name_pl": "cebula słodka tuba",
+    "kcal": 40.0,
+    "protein_g": 1.1,
+    "fat_g": 0.1,
+    "carbs_g": 9.3,
+    "fiber_g": 1.7
   },
   {
-    "name_en": "onions (yellow, raw)",
+    "name_en": "onion yellow",
     "name_pl": "cebula żółta",
     "kcal": 40.0,
     "protein_g": 1.1,
@@ -2556,16 +2574,16 @@
     "fiber_g": 1.7
   },
   {
-    "name_en": "chili powder",
+    "name_en": "chili seasoning mix",
     "name_pl": "chili mieszanka przypraw",
     "kcal": 282.0,
-    "protein_g": 13.5,
-    "fat_g": 14.3,
-    "carbs_g": 49.7,
-    "fiber_g": 34.8
+    "protein_g": 12.0,
+    "fat_g": 14.0,
+    "carbs_g": 49.0,
+    "fiber_g": 28.0
   },
   {
-    "name_en": "bread (white, commercially prepared)",
+    "name_en": "wheat bread",
     "name_pl": "chleb pszenny",
     "kcal": 265.0,
     "protein_g": 9.0,
@@ -2574,16 +2592,16 @@
     "fiber_g": 2.7
   },
   {
-    "name_en": "chorizo (pork and beef)",
+    "name_en": "chorizo",
     "name_pl": "chorizo",
     "kcal": 455.0,
-    "protein_g": 24.1,
-    "fat_g": 38.3,
-    "carbs_g": 1.9,
+    "protein_g": 24.0,
+    "fat_g": 38.0,
+    "carbs_g": 2.0,
     "fiber_g": 0.0
   },
   {
-    "name_en": "sugar (granulated, white)",
+    "name_en": "sugar",
     "name_pl": "cukier",
     "kcal": 387.0,
     "protein_g": 0.0,
@@ -2592,7 +2610,7 @@
     "fiber_g": 0.0
   },
   {
-    "name_en": "sugar (powdered)",
+    "name_en": "powdered sugar",
     "name_pl": "cukier puder",
     "kcal": 389.0,
     "protein_g": 0.0,
@@ -2601,16 +2619,16 @@
     "fiber_g": 0.0
   },
   {
-    "name_en": "sugar (brown)",
+    "name_en": "cane sugar",
     "name_pl": "cukier trzcinowy",
-    "kcal": 380.0,
-    "protein_g": 0.1,
+    "kcal": 387.0,
+    "protein_g": 0.0,
     "fat_g": 0.0,
-    "carbs_g": 98.1,
+    "carbs_g": 100.0,
     "fiber_g": 0.0
   },
   {
-    "name_en": "zucchini (raw)",
+    "name_en": "zucchini",
     "name_pl": "cukinia",
     "kcal": 17.0,
     "protein_g": 1.2,
@@ -2622,22 +2640,22 @@
     "name_en": "curry powder",
     "name_pl": "curry",
     "kcal": 325.0,
-    "protein_g": 14.3,
+    "protein_g": 14.0,
     "fat_g": 14.0,
-    "carbs_g": 55.8,
-    "fiber_g": 53.2
+    "carbs_g": 55.0,
+    "fiber_g": 53.0
   },
   {
-    "name_en": "cinnamon (ground)",
+    "name_en": "cinnamon ground",
     "name_pl": "cynamon mielony",
     "kcal": 247.0,
-    "protein_g": 3.9,
+    "protein_g": 4.0,
     "fat_g": 1.2,
     "carbs_g": 80.6,
     "fiber_g": 53.1
   },
   {
-    "name_en": "lemons (raw, without peel)",
+    "name_en": "lemons",
     "name_pl": "cytryny",
     "kcal": 29.0,
     "protein_g": 1.1,
@@ -2646,16 +2664,16 @@
     "fiber_g": 2.8
   },
   {
-    "name_en": "chocolate (dark, 70-85% cacao)",
+    "name_en": "dark chocolate",
     "name_pl": "czekolada deserowa",
-    "kcal": 598.0,
-    "protein_g": 7.8,
-    "fat_g": 42.6,
-    "carbs_g": 45.9,
-    "fiber_g": 10.9
+    "kcal": 546.0,
+    "protein_g": 4.9,
+    "fat_g": 31.0,
+    "carbs_g": 61.0,
+    "fiber_g": 7.0
   },
   {
-    "name_en": "garlic powder",
+    "name_en": "garlic granulated",
     "name_pl": "czosnek granulowany",
     "kcal": 331.0,
     "protein_g": 16.6,
@@ -2664,7 +2682,7 @@
     "fiber_g": 9.0
   },
   {
-    "name_en": "dates (deglet noor)",
+    "name_en": "dates",
     "name_pl": "daktyle",
     "kcal": 282.0,
     "protein_g": 2.5,
@@ -2673,16 +2691,43 @@
     "fiber_g": 8.0
   },
   {
-    "name_en": "yeast (baker's, active dry)",
-    "name_pl": "drożdże tradycyjne",
-    "kcal": 325.0,
-    "protein_g": 40.4,
-    "fat_g": 7.6,
+    "name_en": "dates dried pitted",
+    "name_pl": "daktyle suszone bez pestek",
+    "kcal": 282.0,
+    "protein_g": 2.5,
+    "fat_g": 0.4,
+    "carbs_g": 75.0,
+    "fiber_g": 8.0
+  },
+  {
+    "name_en": "tea additives",
+    "name_pl": "dodatki do herbatki",
+    "kcal": 0.0,
+    "protein_g": 0.0,
+    "fat_g": 0.0,
+    "carbs_g": 0.0,
+    "fiber_g": 0.0
+  },
+  {
+    "name_en": "instant dry yeast",
+    "name_pl": "drożdże suszone instant",
+    "kcal": 362.0,
+    "protein_g": 47.9,
+    "fat_g": 5.7,
     "carbs_g": 41.2,
     "fiber_g": 26.9
   },
   {
-    "name_en": "pumpkin (raw)",
+    "name_en": "traditional yeast",
+    "name_pl": "drożdże tradycyjne",
+    "kcal": 105.0,
+    "protein_g": 12.6,
+    "fat_g": 1.9,
+    "carbs_g": 13.1,
+    "fiber_g": 8.1
+  },
+  {
+    "name_en": "pumpkin",
     "name_pl": "dynia",
     "kcal": 26.0,
     "protein_g": 1.0,
@@ -2691,22 +2736,31 @@
     "fiber_g": 0.5
   },
   {
-    "name_en": "jam (apricot, reduced sugar)",
+    "name_en": "low sugar apricot jam",
     "name_pl": "dżem morelowy niskosłodzony",
     "kcal": 150.0,
     "protein_g": 0.5,
     "fat_g": 0.1,
     "carbs_g": 37.0,
-    "fiber_g": 1.0
+    "fiber_g": 0.8
   },
   {
     "name_en": "erythritol",
     "name_pl": "erytrytol",
-    "kcal": 20.0,
+    "kcal": 0.2,
     "protein_g": 0.0,
     "fat_g": 0.0,
     "carbs_g": 100.0,
     "fiber_g": 0.0
+  },
+  {
+    "name_en": "beans",
+    "name_pl": "fasola",
+    "kcal": 132.0,
+    "protein_g": 8.7,
+    "fat_g": 0.5,
+    "carbs_g": 24.0,
+    "fiber_g": 6.4
   },
   {
     "name_en": "black beans",
@@ -2727,13 +2781,40 @@
     "fiber_g": 2.7
   },
   {
-    "name_en": "nutmeg ground",
+    "name_en": "dried figs",
+    "name_pl": "figi suszone",
+    "kcal": 249.0,
+    "protein_g": 3.3,
+    "fat_g": 0.9,
+    "carbs_g": 63.9,
+    "fiber_g": 9.8
+  },
+  {
+    "name_en": "garam masala",
+    "name_pl": "garam masala",
+    "kcal": 307.0,
+    "protein_g": 10.9,
+    "fat_g": 12.0,
+    "carbs_g": 55.0,
+    "fiber_g": 33.0
+  },
+  {
+    "name_en": "ground nutmeg",
     "name_pl": "gałka muszkatołowa mielona",
     "kcal": 525.0,
     "protein_g": 5.8,
     "fat_g": 36.3,
     "carbs_g": 49.3,
     "fiber_g": 20.8
+  },
+  {
+    "name_en": "ground cloves",
+    "name_pl": "goździki mielone",
+    "kcal": 274.0,
+    "protein_g": 6.0,
+    "fat_g": 13.0,
+    "carbs_g": 65.5,
+    "fiber_g": 33.9
   },
   {
     "name_en": "granola",
@@ -2763,16 +2844,34 @@
     "fiber_g": 5.1
   },
   {
+    "name_en": "mushrooms",
+    "name_pl": "grzyby",
+    "kcal": 22.0,
+    "protein_g": 3.1,
+    "fat_g": 0.3,
+    "carbs_g": 3.3,
+    "fiber_g": 1.0
+  },
+  {
+    "name_en": "dried whole shiitake mushrooms",
+    "name_pl": "grzyby shiitake całe suszone",
+    "kcal": 296.0,
+    "protein_g": 9.6,
+    "fat_g": 1.0,
+    "carbs_g": 75.4,
+    "fiber_g": 11.5
+  },
+  {
     "name_en": "harissa spice blend",
     "name_pl": "harissa mieszanka przypraw",
-    "kcal": 315.0,
-    "protein_g": 12.0,
-    "fat_g": 12.0,
+    "kcal": 300.0,
+    "protein_g": 8.0,
+    "fat_g": 10.0,
     "carbs_g": 50.0,
     "fiber_g": 20.0
   },
   {
-    "name_en": "ginger ground",
+    "name_en": "ground ginger",
     "name_pl": "imbir mielony",
     "kcal": 335.0,
     "protein_g": 9.0,
@@ -2784,14 +2883,23 @@
     "name_en": "turkey",
     "name_pl": "indyk",
     "kcal": 135.0,
-    "protein_g": 29.3,
-    "fat_g": 1.5,
+    "protein_g": 22.6,
+    "fat_g": 4.6,
     "carbs_g": 0.0,
     "fiber_g": 0.0
   },
   {
-    "name_en": "goji berries",
-    "name_pl": "jagody goji",
+    "name_en": "dried apples",
+    "name_pl": "jabłka suszone",
+    "kcal": 243.0,
+    "protein_g": 0.9,
+    "fat_g": 0.3,
+    "carbs_g": 65.9,
+    "fiber_g": 8.7
+  },
+  {
+    "name_en": "dried goji berries",
+    "name_pl": "jagody goji suszone",
     "kcal": 349.0,
     "protein_g": 14.3,
     "fat_g": 0.4,
@@ -2799,12 +2907,12 @@
     "fiber_g": 13.0
   },
   {
-    "name_en": "mixed berries",
+    "name_en": "forest berries",
     "name_pl": "jagody leśne",
     "kcal": 57.0,
     "protein_g": 0.7,
     "fat_g": 0.3,
-    "carbs_g": 13.8,
+    "carbs_g": 14.5,
     "fiber_g": 2.4
   },
   {
@@ -2826,21 +2934,21 @@
     "fiber_g": 3.6
   },
   {
-    "name_en": "blackberries frozen",
+    "name_en": "frozen blackberries",
     "name_pl": "jeżyna mrożona",
     "kcal": 64.0,
     "protein_g": 1.5,
-    "fat_g": 0.4,
+    "fat_g": 0.7,
     "carbs_g": 15.7,
     "fiber_g": 5.0
   },
   {
     "name_en": "yogurt",
     "name_pl": "jogurt",
-    "kcal": 63.0,
-    "protein_g": 5.3,
+    "kcal": 61.0,
+    "protein_g": 3.5,
     "fat_g": 3.3,
-    "carbs_g": 4.0,
+    "carbs_g": 4.7,
     "fiber_g": 0.0
   },
   {
@@ -2862,25 +2970,34 @@
     "fiber_g": 2.5
   },
   {
-    "name_en": "napa cabbage",
+    "name_en": "Chinese cabbage (pe-tsai)",
     "name_pl": "kapusta pekińska",
-    "kcal": 12.0,
-    "protein_g": 1.1,
+    "kcal": 13.0,
+    "protein_g": 1.5,
     "fat_g": 0.2,
     "carbs_g": 2.2,
     "fiber_g": 1.0
   },
   {
-    "name_en": "iced coffee",
+    "name_en": "Artichokes, (globe or french), raw",
+    "name_pl": "karczochy krojone w ziołach",
+    "kcal": 47.0,
+    "protein_g": 3.3,
+    "fat_g": 0.2,
+    "carbs_g": 10.5,
+    "fiber_g": 5.4
+  },
+  {
+    "name_en": "Coffee, instant, with sugar, mocha flavor, powder",
     "name_pl": "kawa mrożona",
-    "kcal": 40.0,
-    "protein_g": 1.3,
-    "fat_g": 1.0,
-    "carbs_g": 6.5,
+    "kcal": 400.0,
+    "protein_g": 5.0,
+    "fat_g": 5.0,
+    "carbs_g": 85.0,
     "fiber_g": 0.0
   },
   {
-    "name_en": "ketchup",
+    "name_en": "Ketchup",
     "name_pl": "ketchup",
     "kcal": 101.0,
     "protein_g": 1.0,
@@ -2889,25 +3006,25 @@
     "fiber_g": 0.3
   },
   {
-    "name_en": "mung bean sprouts canned",
-    "name_pl": "kiełki fasoli mung w zalewie",
-    "kcal": 12.0,
-    "protein_g": 1.4,
-    "fat_g": 0.1,
-    "carbs_g": 2.0,
-    "fiber_g": 0.8
+    "name_en": "Mung beans, mature seeds, sprouted, raw",
+    "name_pl": "kiełki fasoli",
+    "kcal": 30.0,
+    "protein_g": 3.0,
+    "fat_g": 0.2,
+    "carbs_g": 5.9,
+    "fiber_g": 1.8
   },
   {
-    "name_en": "kimchi",
+    "name_en": "Kimchi",
     "name_pl": "kimchi",
     "kcal": 24.0,
     "protein_g": 1.1,
-    "fat_g": 0.5,
-    "carbs_g": 4.0,
+    "fat_g": 0.2,
+    "carbs_g": 4.2,
     "fiber_g": 1.6
   },
   {
-    "name_en": "cumin ground",
+    "name_en": "Spices, cumin seed",
     "name_pl": "kmin rzymski mielony",
     "kcal": 375.0,
     "protein_g": 17.8,
@@ -2916,7 +3033,16 @@
     "fiber_g": 10.5
   },
   {
-    "name_en": "coconut meat",
+    "name_en": "Sauce, pasta, ready-to-serve, Italian style",
+    "name_pl": "knorr sos włoski",
+    "kcal": 60.0,
+    "protein_g": 1.5,
+    "fat_g": 1.5,
+    "carbs_g": 10.0,
+    "fiber_g": 1.5
+  },
+  {
+    "name_en": "Coconut meat, raw",
     "name_pl": "kokos w łupinie",
     "kcal": 354.0,
     "protein_g": 3.3,
@@ -2925,16 +3051,7 @@
     "fiber_g": 9.0
   },
   {
-    "name_en": "jam",
-    "name_pl": "konfitura",
-    "kcal": 250.0,
-    "protein_g": 0.4,
-    "fat_g": 0.1,
-    "carbs_g": 65.0,
-    "fiber_g": 0.5
-  },
-  {
-    "name_en": "dill",
+    "name_en": "Dill weed, fresh",
     "name_pl": "koperek",
     "kcal": 43.0,
     "protein_g": 3.5,
@@ -2943,25 +3060,25 @@
     "fiber_g": 2.1
   },
   {
-    "name_en": "saltine crackers mix",
+    "name_en": "Crackers, saltines, fat-free, low-sodium",
     "name_pl": "krakersy solone mix",
-    "kcal": 418.0,
+    "kcal": 393.0,
     "protein_g": 9.0,
-    "fat_g": 9.0,
-    "carbs_g": 74.0,
+    "fat_g": 5.0,
+    "carbs_g": 78.0,
     "fiber_g": 2.0
   },
   {
-    "name_en": "shrimp cocktail",
+    "name_en": "Shrimp, mixed species, raw",
     "name_pl": "krewetki koktajlowe",
     "kcal": 85.0,
-    "protein_g": 20.0,
+    "protein_g": 20.3,
     "fat_g": 0.5,
     "carbs_g": 0.0,
     "fiber_g": 0.0
   },
   {
-    "name_en": "sweet corn",
+    "name_en": "Corn, sweet, yellow, raw",
     "name_pl": "kukurydza słodka",
     "kcal": 86.0,
     "protein_g": 3.3,
@@ -2970,7 +3087,7 @@
     "fiber_g": 2.7
   },
   {
-    "name_en": "turmeric",
+    "name_en": "Spices, turmeric, ground",
     "name_pl": "kurkuma",
     "kcal": 354.0,
     "protein_g": 7.8,
@@ -2979,70 +3096,88 @@
     "fiber_g": 21.1
   },
   {
-    "name_en": "light mayonnaise",
+    "name_en": "Strawberries, freeze-dried, whole",
+    "name_pl": "liofilizowane truskawki całe",
+    "kcal": 396.0,
+    "protein_g": 4.0,
+    "fat_g": 3.0,
+    "carbs_g": 84.0,
+    "fiber_g": 20.0
+  },
+  {
+    "name_en": "Mayonnaise, reduced-calorie or diet, no cholesterol",
     "name_pl": "majonez lekki",
-    "kcal": 238.0,
-    "protein_g": 0.5,
-    "fat_g": 22.0,
-    "carbs_g": 10.0,
+    "kcal": 333.0,
+    "protein_g": 0.3,
+    "fat_g": 33.3,
+    "carbs_g": 6.7,
     "fiber_g": 0.0
   },
   {
-    "name_en": "fusilli pasta",
+    "name_en": "Spices, poppy seed",
+    "name_pl": "mak niebieski",
+    "kcal": 525.0,
+    "protein_g": 18.0,
+    "fat_g": 41.6,
+    "carbs_g": 28.1,
+    "fiber_g": 19.5
+  },
+  {
+    "name_en": "Pasta, cooked, enriched, without added salt, cavatappi",
+    "name_pl": "makaron cavatappi z pszenicy durum",
+    "kcal": 131.0,
+    "protein_g": 5.0,
+    "fat_g": 1.1,
+    "carbs_g": 25.0,
+    "fiber_g": 1.8
+  },
+  {
+    "name_en": "Pasta, cooked, enriched, without added salt, fusilli",
     "name_pl": "makaron fusilli",
-    "kcal": 357.0,
-    "protein_g": 12.5,
-    "fat_g": 1.5,
-    "carbs_g": 71.3,
-    "fiber_g": 3.2
+    "kcal": 131.0,
+    "protein_g": 5.0,
+    "fat_g": 1.1,
+    "carbs_g": 25.0,
+    "fiber_g": 1.8
   },
   {
-    "name_en": "farfalle pasta",
+    "name_en": "Pasta, cooked, enriched, without added salt, farfalle",
     "name_pl": "makaron kokardki",
-    "kcal": 357.0,
-    "protein_g": 12.5,
-    "fat_g": 1.5,
-    "carbs_g": 71.3,
-    "fiber_g": 3.2
+    "kcal": 131.0,
+    "protein_g": 5.0,
+    "fat_g": 1.1,
+    "carbs_g": 25.0,
+    "fiber_g": 1.8
   },
   {
-    "name_en": "orzo pasta medium",
+    "name_en": "Pasta, cooked, enriched, without added salt, orzo",
     "name_pl": "makaron orzo medium",
-    "kcal": 357.0,
-    "protein_g": 12.5,
-    "fat_g": 1.5,
-    "carbs_g": 71.3,
-    "fiber_g": 3.2
+    "kcal": 131.0,
+    "protein_g": 5.0,
+    "fat_g": 1.1,
+    "carbs_g": 25.0,
+    "fiber_g": 1.8
   },
   {
-    "name_en": "ramen noodles",
+    "name_en": "Pasta, cooked, enriched, without added salt, ramen",
     "name_pl": "makaron ramen",
-    "kcal": 436.0,
-    "protein_g": 10.2,
-    "fat_g": 17.6,
-    "carbs_g": 60.3,
-    "fiber_g": 1.8
+    "kcal": 138.0,
+    "protein_g": 4.5,
+    "fat_g": 2.1,
+    "carbs_g": 25.0,
+    "fiber_g": 1.0
   },
   {
-    "name_en": "brown rice noodles threads",
-    "name_pl": "makaron z brązowego ryżu nitki",
-    "kcal": 364.0,
-    "protein_g": 3.4,
-    "fat_g": 0.7,
-    "carbs_g": 80.2,
-    "fiber_g": 1.8
-  },
-  {
-    "name_en": "chickpea pasta spirals",
+    "name_en": "Pasta, chickpea, cooked",
     "name_pl": "makaron z ciecierzycy świderki",
-    "kcal": 357.0,
-    "protein_g": 19.0,
-    "fat_g": 6.0,
-    "carbs_g": 55.0,
-    "fiber_g": 11.0
+    "kcal": 130.0,
+    "protein_g": 7.0,
+    "fat_g": 2.0,
+    "carbs_g": 22.0,
+    "fiber_g": 5.0
   },
   {
-    "name_en": "buttermilk",
+    "name_en": "Buttermilk, fluid, cultured, lowfat",
     "name_pl": "maślanka",
     "kcal": 40.0,
     "protein_g": 3.3,
@@ -3051,16 +3186,16 @@
     "fiber_g": 0.0
   },
   {
-    "name_en": "mulberry molasses",
+    "name_en": "Molasses, blackstrap",
     "name_pl": "melasa z owoców morwy",
     "kcal": 290.0,
     "protein_g": 0.0,
-    "fat_g": 0.0,
-    "carbs_g": 72.0,
+    "fat_g": 0.1,
+    "carbs_g": 74.7,
     "fiber_g": 0.0
   },
   {
-    "name_en": "melon",
+    "name_en": "Melon, cantaloupe, raw",
     "name_pl": "melon",
     "kcal": 34.0,
     "protein_g": 0.8,
@@ -3069,22 +3204,40 @@
     "fiber_g": 0.9
   },
   {
-    "name_en": "all-purpose gluten-free flour blend",
+    "name_en": "Mixed nuts, dry roasted, with peanuts, salted",
+    "name_pl": "mieszanka",
+    "kcal": 607.0,
+    "protein_g": 20.0,
+    "fat_g": 53.0,
+    "carbs_g": 21.0,
+    "fiber_g": 7.0
+  },
+  {
+    "name_en": "Gluten-free all-purpose flour blend",
     "name_pl": "mieszanka bezglutenowa uniwersalna",
-    "kcal": 357.0,
-    "protein_g": 5.0,
+    "kcal": 367.0,
+    "protein_g": 3.0,
     "fat_g": 1.0,
-    "carbs_g": 80.0,
+    "carbs_g": 83.0,
     "fiber_g": 3.0
   },
   {
-    "name_en": "Mexican vegetable mix",
-    "name_pl": "mieszanka warzywna meksykańska",
-    "kcal": 50.0,
-    "protein_g": 2.5,
+    "name_en": "Mixed dried fruit",
+    "name_pl": "mieszanka owoców suszonych",
+    "kcal": 320.0,
+    "protein_g": 3.0,
     "fat_g": 0.5,
-    "carbs_g": 10.0,
-    "fiber_g": 3.0
+    "carbs_g": 78.0,
+    "fiber_g": 7.0
+  },
+  {
+    "name_en": "Mixed vegetables, frozen, Mexican style",
+    "name_pl": "mieszanka warzywna meksykańska",
+    "kcal": 70.0,
+    "protein_g": 3.0,
+    "fat_g": 0.5,
+    "carbs_g": 14.0,
+    "fiber_g": 4.0
   },
   {
     "name_en": "almonds",
@@ -3096,13 +3249,13 @@
     "fiber_g": 12.5
   },
   {
-    "name_en": "salad mix with lamb's lettuce",
+    "name_en": "mixed salad with lamb's lettuce",
     "name_pl": "mix sałat z roszponką",
     "kcal": 17.0,
     "protein_g": 1.5,
     "fat_g": 0.3,
     "carbs_g": 3.0,
-    "fiber_g": 1.5
+    "fiber_g": 1.8
   },
   {
     "name_en": "multifloral honey",
@@ -3123,20 +3276,29 @@
     "fiber_g": 6.8
   },
   {
+    "name_en": "dried apricots",
+    "name_pl": "morele suszone",
+    "kcal": 241.0,
+    "protein_g": 3.4,
+    "fat_g": 0.5,
+    "carbs_g": 62.6,
+    "fiber_g": 7.3
+  },
+  {
     "name_en": "mustard",
     "name_pl": "musztarda",
     "kcal": 66.0,
     "protein_g": 3.7,
     "fat_g": 3.3,
-    "carbs_g": 6.0,
+    "carbs_g": 6.4,
     "fiber_g": 1.5
   },
   {
-    "name_en": "Mutti pasta sauce",
+    "name_en": "mutti pasta sauce",
     "name_pl": "mutti sos do makaronu",
-    "kcal": 40.0,
+    "kcal": 42.0,
     "protein_g": 1.5,
-    "fat_g": 1.0,
+    "fat_g": 1.5,
     "carbs_g": 6.0,
     "fiber_g": 1.5
   },
@@ -3163,27 +3325,18 @@
     "name_pl": "mąka owsiana",
     "kcal": 404.0,
     "protein_g": 14.7,
-    "fat_g": 6.9,
-    "carbs_g": 68.3,
+    "fat_g": 9.1,
+    "carbs_g": 65.7,
     "fiber_g": 6.5
   },
   {
-    "name_en": "rice flour gluten-free",
+    "name_en": "rice flour (gluten-free)",
     "name_pl": "mąka ryżowa bezglutenowa",
     "kcal": 366.0,
     "protein_g": 5.9,
     "fat_g": 1.4,
     "carbs_g": 80.1,
     "fiber_g": 2.4
-  },
-  {
-    "name_en": "chickpea flour gluten-free",
-    "name_pl": "mąka z ciecierzycy bez glutenu",
-    "kcal": 387.0,
-    "protein_g": 22.4,
-    "fat_g": 6.7,
-    "carbs_g": 57.8,
-    "fiber_g": 10.8
   },
   {
     "name_en": "hemp seeds",
@@ -3213,7 +3366,16 @@
     "fiber_g": 3.3
   },
   {
-    "name_en": "spirit vinegar",
+    "name_en": "cashew nuts",
+    "name_pl": "nerkowce",
+    "kcal": 553.0,
+    "protein_g": 18.2,
+    "fat_g": 43.8,
+    "carbs_g": 30.2,
+    "fiber_g": 3.3
+  },
+  {
+    "name_en": "distilled vinegar",
     "name_pl": "ocet spirytusowy",
     "kcal": 18.0,
     "protein_g": 0.0,
@@ -3225,9 +3387,9 @@
     "name_en": "red wine vinegar",
     "name_pl": "ocet winny z czerwonego wina",
     "kcal": 19.0,
-    "protein_g": 0.1,
+    "protein_g": 0.0,
     "fat_g": 0.0,
-    "carbs_g": 0.3,
+    "carbs_g": 0.0,
     "fiber_g": 0.0
   },
   {
@@ -3237,10 +3399,10 @@
     "protein_g": 80.0,
     "fat_g": 3.0,
     "carbs_g": 10.0,
-    "fiber_g": 1.0
+    "fiber_g": 0.0
   },
   {
-    "name_en": "cucumber",
+    "name_en": "english cucumber",
     "name_pl": "ogórek długi",
     "kcal": 15.0,
     "protein_g": 0.7,
@@ -3267,8 +3429,8 @@
     "fiber_g": 0.0
   },
   {
-    "name_en": "toasted sesame oil",
-    "name_pl": "olej sezamowy z prażonych nasion sezamu",
+    "name_en": "unrefined sesame oil",
+    "name_pl": "olej sezamowy nierafinowany",
     "kcal": 884.0,
     "protein_g": 0.0,
     "fat_g": 100.0,
@@ -3276,7 +3438,16 @@
     "fiber_g": 0.0
   },
   {
-    "name_en": "grapeseed oil",
+    "name_en": "avocado oil spray",
+    "name_pl": "olej z awokado spray",
+    "kcal": 884.0,
+    "protein_g": 0.0,
+    "fat_g": 100.0,
+    "carbs_g": 0.0,
+    "fiber_g": 0.0
+  },
+  {
+    "name_en": "grape seed oil",
     "name_pl": "olej z pestek winogron",
     "kcal": 884.0,
     "protein_g": 0.0,
@@ -3285,30 +3456,30 @@
     "fiber_g": 0.0
   },
   {
-    "name_en": "black olives, pitted",
+    "name_en": "black olives pitted",
     "name_pl": "oliwki czarne drylowane",
     "kcal": 115.0,
     "protein_g": 0.8,
     "fat_g": 10.7,
     "carbs_g": 6.3,
-    "fiber_g": 1.6
+    "fiber_g": 3.2
   },
   {
     "name_en": "sicilian olives",
     "name_pl": "oliwki sycylijskie",
     "kcal": 145.0,
     "protein_g": 1.0,
-    "fat_g": 13.5,
-    "carbs_g": 6.0,
-    "fiber_g": 3.0
+    "fat_g": 15.0,
+    "carbs_g": 3.8,
+    "fiber_g": 3.3
   },
   {
     "name_en": "green olives stuffed with almonds",
     "name_pl": "oliwki zielone nadziewane migdałami",
     "kcal": 145.0,
     "protein_g": 1.5,
-    "fat_g": 13.0,
-    "carbs_g": 4.0,
+    "fat_g": 15.0,
+    "carbs_g": 3.0,
     "fiber_g": 2.5
   },
   {
@@ -3318,34 +3489,88 @@
     "protein_g": 9.0,
     "fat_g": 4.3,
     "carbs_g": 68.9,
-    "fiber_g": 42.8
+    "fiber_g": 42.5
   },
   {
-    "name_en": "round rice paper 22 cm",
-    "name_pl": "papier ryżowy okrągły 22 cm",
+    "name_en": "dried oregano",
+    "name_pl": "oregano suszone",
+    "kcal": 265.0,
+    "protein_g": 9.0,
+    "fat_g": 4.3,
+    "carbs_g": 68.9,
+    "fiber_g": 42.5
+  },
+  {
+    "name_en": "hazelnuts",
+    "name_pl": "orzechy laskowe",
+    "kcal": 628.0,
+    "protein_g": 15.0,
+    "fat_g": 60.8,
+    "carbs_g": 16.7,
+    "fiber_g": 9.7
+  },
+  {
+    "name_en": "cashew nuts",
+    "name_pl": "orzechy nerkowca",
+    "kcal": 553.0,
+    "protein_g": 18.2,
+    "fat_g": 43.8,
+    "carbs_g": 30.2,
+    "fiber_g": 3.3
+  },
+  {
+    "name_en": "walnuts",
+    "name_pl": "orzechy włoskie",
+    "kcal": 654.0,
+    "protein_g": 15.2,
+    "fat_g": 65.2,
+    "carbs_g": 13.7,
+    "fiber_g": 6.7
+  },
+  {
+    "name_en": "pine nuts",
+    "name_pl": "orzeszki pini",
+    "kcal": 673.0,
+    "protein_g": 13.7,
+    "fat_g": 68.4,
+    "carbs_g": 13.1,
+    "fiber_g": 3.7
+  },
+  {
+    "name_en": "rice paper (tapioca)",
+    "name_pl": "papier ryżowy z tapioką",
     "kcal": 333.0,
-    "protein_g": 5.6,
-    "fat_g": 0.3,
-    "carbs_g": 79.0,
-    "fiber_g": 1.0
+    "protein_g": 0.2,
+    "fat_g": 0.1,
+    "carbs_g": 82.3,
+    "fiber_g": 0.0
   },
   {
-    "name_en": "hot pepperoncini mix",
+    "name_en": "pepperoni (hot mix)",
     "name_pl": "papryczki peperoni ostre mix",
-    "kcal": 20.0,
-    "protein_g": 0.9,
-    "fat_g": 0.2,
-    "carbs_g": 4.5,
-    "fiber_g": 1.5
+    "kcal": 282.0,
+    "protein_g": 10.0,
+    "fat_g": 25.0,
+    "carbs_g": 4.0,
+    "fiber_g": 0.0
   },
   {
-    "name_en": "sweet paprika",
+    "name_en": "cayenne pepper, ground",
+    "name_pl": "papryka ostra mielona",
+    "kcal": 318.0,
+    "protein_g": 12.0,
+    "fat_g": 17.3,
+    "carbs_g": 56.6,
+    "fiber_g": 27.2
+  },
+  {
+    "name_en": "paprika, sweet",
     "name_pl": "papryka słodka",
     "kcal": 282.0,
     "protein_g": 14.1,
     "fat_g": 12.9,
-    "carbs_g": 54.0,
-    "fiber_g": 37.4
+    "carbs_g": 53.9,
+    "fiber_g": 21.6
   },
   {
     "name_en": "green bell pepper",
@@ -3366,26 +3591,17 @@
     "fiber_g": 0.9
   },
   {
-    "name_en": "red curry paste",
-    "name_pl": "pasta czerwona curry",
-    "kcal": 113.0,
-    "protein_g": 3.0,
-    "fat_g": 5.0,
-    "carbs_g": 15.0,
-    "fiber_g": 3.0
+    "name_en": "pasta, dry",
+    "name_pl": "pasta",
+    "kcal": 371.0,
+    "protein_g": 13.0,
+    "fat_g": 1.5,
+    "carbs_g": 74.7,
+    "fiber_g": 3.2
   },
   {
-    "name_en": "mushroom",
-    "name_pl": "pieczarka",
-    "kcal": 22.0,
-    "protein_g": 3.1,
-    "fat_g": 0.3,
-    "carbs_g": 3.3,
-    "fiber_g": 1.0
-  },
-  {
-    "name_en": "mushrooms",
-    "name_pl": "pieczarki",
+    "name_en": "mushrooms, white, mini",
+    "name_pl": "pieczarka mini",
     "kcal": 22.0,
     "protein_g": 3.1,
     "fat_g": 0.3,
@@ -3405,10 +3621,10 @@
     "name_en": "lemon pepper, ground",
     "name_pl": "pieprz cytrynowy mielony",
     "kcal": 255.0,
-    "protein_g": 10.0,
-    "fat_g": 3.0,
-    "carbs_g": 65.0,
-    "fiber_g": 25.0
+    "protein_g": 10.4,
+    "fat_g": 3.3,
+    "carbs_g": 64.8,
+    "fiber_g": 26.5
   },
   {
     "name_en": "black pepper, ground",
@@ -3416,21 +3632,21 @@
     "kcal": 251.0,
     "protein_g": 10.4,
     "fat_g": 3.3,
-    "carbs_g": 64.0,
-    "fiber_g": 25.3
+    "carbs_g": 64.8,
+    "fiber_g": 26.5
   },
   {
-    "name_en": "mixed peppercorns",
-    "name_pl": "pieprz kolorowy",
-    "kcal": 255.0,
-    "protein_g": 10.0,
-    "fat_g": 3.0,
-    "carbs_g": 65.0,
-    "fiber_g": 25.0
+    "name_en": "garlic pepper, ground",
+    "name_pl": "pieprz czosnkowy",
+    "kcal": 331.0,
+    "protein_g": 16.6,
+    "fat_g": 0.7,
+    "carbs_g": 72.7,
+    "fiber_g": 2.1
   },
   {
-    "name_en": "pistachios, unsalted, roasted",
-    "name_pl": "pistacje niesolone prażone",
+    "name_en": "pistachio nuts, roasted, unsalted",
+    "name_pl": "pistacje prażone niesolone",
     "kcal": 562.0,
     "protein_g": 20.2,
     "fat_g": 45.3,
@@ -3438,7 +3654,7 @@
     "fiber_g": 10.6
   },
   {
-    "name_en": "orange",
+    "name_en": "orange, raw",
     "name_pl": "pomarańcza",
     "kcal": 47.0,
     "protein_g": 0.9,
@@ -3447,7 +3663,7 @@
     "fiber_g": 2.4
   },
   {
-    "name_en": "tomatoes",
+    "name_en": "tomatoes, raw",
     "name_pl": "pomidory",
     "kcal": 18.0,
     "protein_g": 0.9,
@@ -3456,34 +3672,43 @@
     "fiber_g": 1.2
   },
   {
+    "name_en": "poultry seasoning",
+    "name_pl": "przyprawa do drobiu",
+    "kcal": 307.0,
+    "protein_g": 9.7,
+    "fat_g": 7.5,
+    "carbs_g": 65.6,
+    "fiber_g": 24.4
+  },
+  {
     "name_en": "fish seasoning",
     "name_pl": "przyprawa do ryb",
-    "kcal": 150.0,
-    "protein_g": 5.0,
-    "fat_g": 2.0,
-    "carbs_g": 30.0,
-    "fiber_g": 5.0
+    "kcal": 255.0,
+    "protein_g": 10.4,
+    "fat_g": 3.3,
+    "carbs_g": 64.8,
+    "fiber_g": 26.5
   },
   {
-    "name_en": "flakes",
+    "name_en": "cereal flakes (generic)",
     "name_pl": "płatki",
-    "kcal": 350.0,
-    "protein_g": 10.0,
-    "fat_g": 5.0,
-    "carbs_g": 70.0,
-    "fiber_g": 5.0
+    "kcal": 379.0,
+    "protein_g": 7.5,
+    "fat_g": 1.5,
+    "carbs_g": 83.0,
+    "fiber_g": 3.0
   },
   {
-    "name_en": "nutritional yeast flakes",
+    "name_en": "nutritional yeast",
     "name_pl": "płatki drożdżowe",
-    "kcal": 350.0,
-    "protein_g": 50.0,
+    "kcal": 325.0,
+    "protein_g": 47.9,
     "fat_g": 5.0,
-    "carbs_g": 35.0,
+    "carbs_g": 38.0,
     "fiber_g": 20.0
   },
   {
-    "name_en": "rolled oats",
+    "name_en": "oats, rolled",
     "name_pl": "płatki owsiane",
     "kcal": 389.0,
     "protein_g": 16.9,
@@ -3492,7 +3717,7 @@
     "fiber_g": 10.6
   },
   {
-    "name_en": "ricotta cheese",
+    "name_en": "ricotta cheese, whole milk",
     "name_pl": "ricotta",
     "kcal": 174.0,
     "protein_g": 11.3,
@@ -3501,7 +3726,7 @@
     "fiber_g": 0.0
   },
   {
-    "name_en": "rocket",
+    "name_en": "arugula, raw",
     "name_pl": "rukola",
     "kcal": 25.0,
     "protein_g": 2.6,
@@ -3510,7 +3735,7 @@
     "fiber_g": 1.6
   },
   {
-    "name_en": "white rice",
+    "name_en": "rice, white, medium-grain, cooked",
     "name_pl": "ryż biały",
     "kcal": 130.0,
     "protein_g": 2.7,
@@ -3519,25 +3744,25 @@
     "fiber_g": 0.4
   },
   {
-    "name_en": "jasmine rice",
+    "name_en": "rice, jasmine, cooked",
     "name_pl": "ryż jaśminowy",
     "kcal": 130.0,
     "protein_g": 2.7,
     "fat_g": 0.3,
-    "carbs_g": 28.7,
+    "carbs_g": 28.2,
     "fiber_g": 0.4
   },
   {
     "name_en": "salami with tomato and basil",
     "name_pl": "salami z pomidorami i bazylią",
-    "kcal": 350.0,
-    "protein_g": 18.0,
-    "fat_g": 28.0,
-    "carbs_g": 4.0,
+    "kcal": 261.0,
+    "protein_g": 12.0,
+    "fat_g": 22.0,
+    "carbs_g": 2.0,
     "fiber_g": 0.0
   },
   {
-    "name_en": "lettuce",
+    "name_en": "lettuce, raw",
     "name_pl": "sałata",
     "kcal": 15.0,
     "protein_g": 1.4,
@@ -3546,7 +3771,7 @@
     "fiber_g": 1.3
   },
   {
-    "name_en": "butter lettuce",
+    "name_en": "butterhead lettuce, raw",
     "name_pl": "sałata masłowa",
     "kcal": 13.0,
     "protein_g": 1.4,
@@ -3556,21 +3781,12 @@
   },
   {
     "name_en": "celery",
-    "name_pl": "seler",
+    "name_pl": "seler naciowy",
     "kcal": 16.0,
     "protein_g": 0.7,
     "fat_g": 0.2,
     "carbs_g": 3.0,
     "fiber_g": 1.6
-  },
-  {
-    "name_en": "blue gourmage cheese",
-    "name_pl": "ser blue gourmage w kawałku",
-    "kcal": 353.0,
-    "protein_g": 21.0,
-    "fat_g": 29.0,
-    "carbs_g": 2.0,
-    "fiber_g": 0.0
   },
   {
     "name_en": "gruyere cheese",
@@ -3585,17 +3801,26 @@
     "name_en": "halloumi cheese",
     "name_pl": "ser halloumi",
     "kcal": 321.0,
-    "protein_g": 21.0,
+    "protein_g": 21.6,
     "fat_g": 25.0,
-    "carbs_g": 2.0,
+    "carbs_g": 2.2,
     "fiber_g": 0.0
   },
   {
     "name_en": "goat cheese",
     "name_pl": "ser kozi",
     "kcal": 364.0,
-    "protein_g": 21.0,
-    "fat_g": 30.0,
+    "protein_g": 21.6,
+    "fat_g": 29.8,
+    "carbs_g": 0.1,
+    "fiber_g": 0.0
+  },
+  {
+    "name_en": "mimolette cheese",
+    "name_pl": "ser mimolette w kawałku",
+    "kcal": 402.0,
+    "protein_g": 27.0,
+    "fat_g": 32.0,
     "carbs_g": 0.0,
     "fiber_g": 0.0
   },
@@ -3603,9 +3828,18 @@
     "name_en": "blue cheese",
     "name_pl": "ser pleśniowy",
     "kcal": 353.0,
-    "protein_g": 21.0,
-    "fat_g": 29.0,
-    "carbs_g": 2.0,
+    "protein_g": 21.4,
+    "fat_g": 28.7,
+    "carbs_g": 2.3,
+    "fiber_g": 0.0
+  },
+  {
+    "name_en": "ricotta pecorina cheese",
+    "name_pl": "ser ricotta pecorina",
+    "kcal": 174.0,
+    "protein_g": 11.3,
+    "fat_g": 13.0,
+    "carbs_g": 3.0,
     "fiber_g": 0.0
   },
   {
@@ -3618,6 +3852,15 @@
     "fiber_g": 0.0
   },
   {
+    "name_en": "sesame seeds",
+    "name_pl": "sezam",
+    "kcal": 573.0,
+    "protein_g": 17.7,
+    "fat_g": 49.7,
+    "carbs_g": 23.5,
+    "fiber_g": 11.8
+  },
+  {
     "name_en": "black sesame seeds",
     "name_pl": "sezam czarny",
     "kcal": 573.0,
@@ -3627,7 +3870,7 @@
     "fiber_g": 11.8
   },
   {
-    "name_en": "cornstarch",
+    "name_en": "corn starch",
     "name_pl": "skrobia kukurydziana",
     "kcal": 381.0,
     "protein_g": 0.3,
@@ -3646,7 +3889,7 @@
   },
   {
     "name_en": "sour cream",
-    "name_pl": "śmietana",
+    "name_pl": "smietana",
     "kcal": 198.0,
     "protein_g": 2.4,
     "fat_g": 19.3,
@@ -3654,13 +3897,13 @@
     "fiber_g": 0.0
   },
   {
-    "name_en": "lemon juice",
-    "name_pl": "sok z cytryn",
-    "kcal": 22.0,
+    "name_en": "lime juice from concentrate",
+    "name_pl": "sok z limonki z soku zagęszczonego",
+    "kcal": 25.0,
     "protein_g": 0.4,
-    "fat_g": 0.2,
-    "carbs_g": 6.9,
-    "fiber_g": 0.3
+    "fat_g": 0.1,
+    "carbs_g": 8.4,
+    "fiber_g": 0.4
   },
   {
     "name_en": "sauce",
@@ -3669,15 +3912,15 @@
     "protein_g": 1.0,
     "fat_g": 5.0,
     "carbs_g": 12.0,
-    "fiber_g": 0.0
+    "fiber_g": 0.5
   },
   {
     "name_en": "garlic sauce",
     "name_pl": "sos czosnkowy typ",
-    "kcal": 400.0,
+    "kcal": 450.0,
     "protein_g": 1.0,
-    "fat_g": 40.0,
-    "carbs_g": 8.0,
+    "fat_g": 48.0,
+    "carbs_g": 5.0,
     "fiber_g": 0.0
   },
   {
@@ -3690,13 +3933,13 @@
     "fiber_g": 0.0
   },
   {
-    "name_en": "italian sauce",
-    "name_pl": "sos włoski",
-    "kcal": 150.0,
-    "protein_g": 1.0,
-    "fat_g": 12.0,
-    "carbs_g": 10.0,
-    "fiber_g": 0.0
+    "name_en": "tomato sauce",
+    "name_pl": "sos pomidorowy",
+    "kcal": 42.0,
+    "protein_g": 1.7,
+    "fat_g": 0.2,
+    "carbs_g": 9.5,
+    "fiber_g": 1.5
   },
   {
     "name_en": "stevia",
@@ -3710,11 +3953,20 @@
   {
     "name_en": "syrup",
     "name_pl": "syrop",
-    "kcal": 300.0,
+    "kcal": 290.0,
     "protein_g": 0.0,
     "fat_g": 0.0,
-    "carbs_g": 80.0,
+    "carbs_g": 77.0,
     "fiber_g": 0.0
+  },
+  {
+    "name_en": "light agave syrup",
+    "name_pl": "syrop z agawy jasny",
+    "kcal": 310.0,
+    "protein_g": 0.1,
+    "fat_g": 0.5,
+    "carbs_g": 76.4,
+    "fiber_g": 0.2
   },
   {
     "name_en": "asparagus",
@@ -3737,15 +3989,15 @@
   {
     "name_en": "turkey neck",
     "name_pl": "szyja z indyka",
-    "kcal": 150.0,
-    "protein_g": 20.0,
-    "fat_g": 7.0,
+    "kcal": 155.0,
+    "protein_g": 18.0,
+    "fat_g": 8.9,
     "carbs_g": 0.0,
     "fiber_g": 0.0
   },
   {
-    "name_en": "iodized salt",
-    "name_pl": "sól jodowana",
+    "name_en": "garlic salt",
+    "name_pl": "sól czosnkowa",
     "kcal": 0.0,
     "protein_g": 0.0,
     "fat_g": 0.0,
@@ -3771,6 +4023,15 @@
     "fiber_g": 9.3
   },
   {
+    "name_en": "gluten free tonnarelli pasta",
+    "name_pl": "tonnarelli makaron bezglutenowy",
+    "kcal": 357.0,
+    "protein_g": 5.0,
+    "fat_g": 1.5,
+    "carbs_g": 78.0,
+    "fiber_g": 2.0
+  },
+  {
     "name_en": "multigrain tortilla wraps",
     "name_pl": "tortilla wraps placki wieloziarniste",
     "kcal": 300.0,
@@ -3780,7 +4041,7 @@
     "fiber_g": 5.0
   },
   {
-    "name_en": "tuna chunks in own juice",
+    "name_en": "tuna chunks in water",
     "name_pl": "tuńczyk kawałki w sosie własnym",
     "kcal": 116.0,
     "protein_g": 26.0,
@@ -3800,10 +4061,10 @@
   {
     "name_en": "egg replacer powder (veggs)",
     "name_pl": "zamiennik jajek w proszku veggs",
-    "kcal": 333.0,
+    "kcal": 300.0,
     "protein_g": 0.0,
     "fat_g": 0.0,
-    "carbs_g": 83.3,
+    "carbs_g": 75.0,
     "fiber_g": 0.0
   },
   {
@@ -3820,9 +4081,9 @@
     "name_pl": "zielone oliwki nadziewane migdałami",
     "kcal": 145.0,
     "protein_g": 1.5,
-    "fat_g": 13.9,
-    "carbs_g": 3.8,
-    "fiber_g": 2.5
+    "fat_g": 13.0,
+    "carbs_g": 5.0,
+    "fiber_g": 3.0
   },
   {
     "name_en": "potatoes",
@@ -3837,45 +4098,63 @@
     "name_en": "pork shoulder",
     "name_pl": "łopatka",
     "kcal": 242.0,
-    "protein_g": 19.5,
-    "fat_g": 17.7,
+    "protein_g": 19.0,
+    "fat_g": 18.0,
     "carbs_g": 0.0,
+    "fiber_g": 0.0
+  },
+  {
+    "name_en": "sour cream",
+    "name_pl": "śmietana",
+    "kcal": 198.0,
+    "protein_g": 2.4,
+    "fat_g": 19.3,
+    "carbs_g": 4.6,
     "fiber_g": 0.0
   },
   {
     "name_en": "cream",
     "name_pl": "śmietanka",
-    "kcal": 345.0,
+    "kcal": 340.0,
     "protein_g": 2.8,
-    "fat_g": 36.1,
-    "carbs_g": 3.0,
+    "fat_g": 36.0,
+    "carbs_g": 2.8,
     "fiber_g": 0.0
   },
   {
     "name_en": "breakfast sausage",
     "name_pl": "śniadaniowa",
-    "kcal": 268.0,
-    "protein_g": 14.1,
-    "fat_g": 22.5,
-    "carbs_g": 1.5,
+    "kcal": 300.0,
+    "protein_g": 14.0,
+    "fat_g": 26.0,
+    "carbs_g": 2.0,
     "fiber_g": 0.0
   },
   {
     "name_en": "breakfast cereal",
     "name_pl": "śniadaniowe",
-    "kcal": 379.0,
-    "protein_g": 7.5,
-    "fat_g": 2.5,
-    "carbs_g": 83.0,
-    "fiber_g": 3.5
+    "kcal": 380.0,
+    "protein_g": 7.0,
+    "fat_g": 5.0,
+    "carbs_g": 80.0,
+    "fiber_g": 3.0
   },
   {
     "name_en": "pork ribs",
     "name_pl": "żeberka",
-    "kcal": 277.0,
-    "protein_g": 16.9,
-    "fat_g": 22.8,
+    "kcal": 337.0,
+    "protein_g": 16.0,
+    "fat_g": 30.0,
     "carbs_g": 0.0,
     "fiber_g": 0.0
+  },
+  {
+    "name_en": "dried cranberries",
+    "name_pl": "żurawina suszona",
+    "kcal": 308.0,
+    "protein_g": 0.2,
+    "fat_g": 1.1,
+    "carbs_g": 82.4,
+    "fiber_g": 5.3
   }
 ]

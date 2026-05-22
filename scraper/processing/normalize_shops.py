@@ -468,8 +468,7 @@ _CULINARY_PATTERNS_PL = [
     r"\bpolędwica\b",               # "dorsz polędwica" → "dorsz" (forma filetu ryby, nie wieprzowiny)
     r"\bz\s+tofu\b",                # "pesto z tofu" → "pesto"
     r"\bz\s+\w+skich\s+upraw\b.*",  # "z europejskich upraw" → usuń
-    r"\bsuszon\w*\b",               # "żurawina suszona" → "żurawina" (forma to nie zmienia produktu)
-    r"\bcięt\w*\b",                 # "żurawina cięta" → "żurawina"
+    # suszone/cięte celowo zachowujemy — "jabłka suszone" ≠ "jabłka" (świeże)
     r"\bw\s+kryształkach\b",        # "w kryształkach" — forma
     r"\bkrystaliczn\w*\b",
     r"\bgranulat\w*\b",             # "granulowany"

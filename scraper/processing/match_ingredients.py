@@ -48,13 +48,7 @@ _INGREDIENT_CANONICAL_PL: dict[str, str] = {
     "mieszanka sałat":      "mix sałat z roszponką",  # → mix sałat
     # Inne
     "majonez":              "winiary majonez lekki",  # nie wegański
-    # Suszone/liofilizowane owoce — sklep nie ma → nie matchuj do świeżych
-    "suszone jabłka":            "suszone jabłka niematchuj",
-    "suszone śliwki":            "suszone śliwki niematchuj",
-    "suszone morele":            "suszone morele niematchuj",
-    "suszone mango":             "suszone mango niematchuj",
-    "liofilizowane truskawki":   "liofilizowane truskawki niematchuj",
-    "liofilizowane maliny":      "liofilizowane maliny niematchuj",
+    # Suszone/liofilizowane — teraz są w bazie (auchan bakalie), nie blokuj
     # Kolor/odmiana → konkretny produkt sklepu
     "brązowy cukier":       "cukier trzcinowy",
     "biały cukier":         "cukier biały",
@@ -126,8 +120,16 @@ def score(ingredient: str, product_generic: str) -> float:
 def rank_candidates(ingredient: str, shop_products: list[dict]) -> list[tuple[float, dict]]:
     scored = [(score(ingredient, p["generic_name"]), p) for p in shop_products]
     ing_words = len(ingredient.split())
-    # Przy remisie preferuj produkt o liczbie słów najbliższej składnikowi (nie zawsze krótszy)
-    scored.sort(key=lambda x: (-x[0], abs(len(x[1]["generic_name"].split()) - ing_words)))
+    ing_tokens = set(ingredient.lower().split())
+    # Tiebreaker:
+    # 1. Więcej tokenów składnika w produkcie → lepiej (liofil. truskawki → liofil. truskawki całe > truskawki)
+    # 2. Mniejsza różnica liczby słów → lepiej (mielona wołowina → mielona wołowina > wołowina)
+    def sort_key(x):
+        s, p = x
+        prod_tokens = set(p["generic_name"].lower().split())
+        overlap = len(ing_tokens & prod_tokens)
+        return (-s, -overlap, abs(len(p["generic_name"].split()) - ing_words))
+    scored.sort(key=sort_key)
     return scored
 
 

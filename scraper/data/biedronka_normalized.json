@@ -4395,7 +4395,7 @@
   },
   {
     "original_name": "Nasza Spiżarnia Pomidory suszone w paskach z ziołami, 270 g/150 g",
-    "generic_name": "nasza spiżarnia pomidory w paskach z ziołami",
+    "generic_name": "nasza spiżarnia pomidory suszone w paskach z ziołami",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -6215,7 +6215,7 @@
   },
   {
     "original_name": "Bakallino Żurawina suszona, cięta 300 g",
-    "generic_name": "żurawina",
+    "generic_name": "żurawina suszona, cięta",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -6293,7 +6293,7 @@
   },
   {
     "original_name": "Donatello Antipasti nadziewane serkiem suszone pomidory 150 g",
-    "generic_name": "donatello antipasti nadziewane serkiem pomidory",
+    "generic_name": "donatello antipasti nadziewane serkiem suszone pomidory",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -6423,7 +6423,7 @@
   },
   {
     "original_name": "Gusto Bello Pomidory suszone 280 g",
-    "generic_name": "gusto bello pomidory",
+    "generic_name": "gusto bello pomidory suszone",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 170.0,
@@ -7073,7 +7073,7 @@
   },
   {
     "original_name": "Nasza Spiżarnia Pomidory suszone z ziołami 270 g",
-    "generic_name": "nasza spiżarnia pomidory z ziołami",
+    "generic_name": "nasza spiżarnia pomidory suszone z ziołami",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -7749,7 +7749,7 @@
   },
   {
     "original_name": "BezMięsny Bezmięsna kiełbasa suszona 100 g",
-    "generic_name": "bezmięsny bezmięsna kiełbasa",
+    "generic_name": "bezmięsny bezmięsna kiełbasa suszona",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -8243,7 +8243,7 @@
   },
   {
     "original_name": "Bakello Drożdże suszone instant 8 g",
-    "generic_name": "drożdże instant",
+    "generic_name": "drożdże suszone instant",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 8.0,

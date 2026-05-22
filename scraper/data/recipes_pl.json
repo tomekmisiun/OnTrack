@@ -1,5 +1,69 @@
 [
   {
+    "name_en": "Diy Fruit And Protein Snack Boxes Under 4",
+    "name_pl": "Pudełka Z Owocami I Białkiem",
+    "url": "https://mealpreponfleek.com/diy-fruit-protein-snack-boxes/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/05/1_FruitAndProteinSnackBox_SingleContainers_Cropped-e1754486116772.jpg",
+    "category": "breakfast",
+    "ingredients_en": [
+      {
+        "name": "walnuts",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "cheese",
+        "amount": 14,
+        "unit": "g"
+      },
+      {
+        "name": "green grapes",
+        "amount": 59,
+        "unit": "g"
+      },
+      {
+        "name": "strawberries",
+        "amount": 45,
+        "unit": "g"
+      },
+      {
+        "name": "blackberries",
+        "amount": 22.5,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "orzechy włoskie",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "ser",
+        "amount": 14,
+        "unit": "g"
+      },
+      {
+        "name": "winogrona zielone",
+        "amount": 59,
+        "unit": "g"
+      },
+      {
+        "name": "truskawki",
+        "amount": 45,
+        "unit": "g"
+      },
+      {
+        "name": "jeżyny",
+        "amount": 22.5,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
     "name_en": "Overnight Oats With Almond Butter",
     "name_pl": "Owsianka na Noc z Masłem Migdałowym",
     "url": "https://mealpreponfleek.com/keto-overnight-oats/",
@@ -228,7 +292,7 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 6.51,
+    "estimated_cost_pln": 7.22,
     "cost_complete": true
   },
   {
@@ -336,6 +400,110 @@
     "cost_complete": false
   },
   {
+    "name_en": "Pineapple Coconut Overnight Oats",
+    "name_pl": "Owsianka Kokosowo-Ananasowa na Noc",
+    "url": "https://mealpreponfleek.com/pineapple-coconut-overnight-oats/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/06/Pineapple-Coconut-Overnight-Oats-Meal-Prep-jpg.webp",
+    "category": "breakfast",
+    "ingredients_en": [
+      {
+        "name": "rolled oats",
+        "amount": 45,
+        "unit": "g"
+      },
+      {
+        "name": "chia seeds",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "shredded coconut",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "pineapple",
+        "amount": 75,
+        "unit": "g"
+      },
+      {
+        "name": "coconut milk",
+        "amount": 236,
+        "unit": "ml"
+      },
+      {
+        "name": "lime juice",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "vanilla protein powder",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "maple syrup",
+        "amount": 7.5,
+        "unit": "ml"
+      },
+      {
+        "name": "granola",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "płatki owsiane",
+        "amount": 45,
+        "unit": "g"
+      },
+      {
+        "name": "nasiona chia",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "wiórki kokosowe",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "ananas",
+        "amount": 75,
+        "unit": "g"
+      },
+      {
+        "name": "mleko kokosowe",
+        "amount": 236,
+        "unit": "ml"
+      },
+      {
+        "name": "sok z limonki",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "odżywka białkowa waniliowa",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "syrop klonowy",
+        "amount": 7.5,
+        "unit": "ml"
+      },
+      {
+        "name": "granola",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
     "name_en": "High Protein Breakfast Oats",
     "name_pl": "Owsianka Białkowa na Śniadanie",
     "url": "https://mealpreponfleek.com/high-protein-breakfast-oats/",
@@ -416,55 +584,55 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 7.55,
+    "estimated_cost_pln": 6.83,
     "cost_complete": true
   },
   {
-    "name_en": "Healthy Oatmeal Muffins",
-    "name_pl": "Zdrowe babeczki owsiane",
-    "url": "https://mealpreponfleek.com/healthy-oatmeal-muffins/",
-    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/06/1-u9L3mHXO2eP7z8a-7rhnfA.jpeg",
+    "name_en": "Vegan Mushroom Quinoa Breakfast Hash",
+    "name_pl": "Wegański Hash z Grzybami i Quinoa na Śniadanie",
+    "url": "https://mealpreponfleek.com/vegan-mushroom-quinoa-breakfast-hash/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/02/Vegan-Mushroom-Quinoa-Breakfast-Hash-.png",
     "category": "breakfast",
     "ingredients_en": [
       {
-        "name": "rolled oats",
-        "amount": 16,
+        "name": "quinoa",
+        "amount": 93,
         "unit": "g"
       },
       {
-        "name": "almond milk",
-        "amount": 34,
+        "name": "diced tomatoes",
+        "amount": 106,
+        "unit": "g"
+      },
+      {
+        "name": "mushrooms",
+        "amount": 43,
+        "unit": "g"
+      },
+      {
+        "name": "kale",
+        "amount": 11,
+        "unit": "g"
+      },
+      {
+        "name": "white wine vinegar",
+        "amount": 4,
         "unit": "ml"
       },
       {
-        "name": "protein powder",
-        "amount": 10,
+        "name": "olive oil",
+        "amount": 4,
+        "unit": "ml"
+      },
+      {
+        "name": "garlic",
+        "amount": 3,
         "unit": "g"
       },
       {
-        "name": "eggs",
-        "amount": 9,
-        "unit": "g"
-      },
-      {
-        "name": "banana",
-        "amount": 9,
-        "unit": "g"
-      },
-      {
-        "name": "cinnamon",
+        "name": "dried sage",
         "amount": 1,
         "unit": "g"
-      },
-      {
-        "name": "honey",
-        "amount": 1,
-        "unit": "ml"
-      },
-      {
-        "name": "coconut oil",
-        "amount": 2,
-        "unit": "ml"
       },
       {
         "name": "salt",
@@ -472,56 +640,51 @@
         "unit": "g"
       },
       {
-        "name": "blueberries",
-        "amount": 4,
-        "unit": "g"
-      },
-      {
-        "name": "allspice",
+        "name": "pepper",
         "amount": 1,
         "unit": "g"
       }
     ],
     "ingredients_pl": [
       {
-        "name": "płatki owsiane",
-        "amount": 16,
+        "name": "komosa ryżowa",
+        "amount": 93,
         "unit": "g"
       },
       {
-        "name": "mleko migdałowe",
-        "amount": 34,
+        "name": "krojone pomidory",
+        "amount": 106,
+        "unit": "g"
+      },
+      {
+        "name": "pieczarki",
+        "amount": 43,
+        "unit": "g"
+      },
+      {
+        "name": "jarmuż",
+        "amount": 11,
+        "unit": "g"
+      },
+      {
+        "name": "ocet winny biały",
+        "amount": 4,
         "unit": "ml"
       },
       {
-        "name": "odżywka białkowa",
-        "amount": 10,
+        "name": "oliwa z oliwek",
+        "amount": 4,
+        "unit": "ml"
+      },
+      {
+        "name": "czosnek",
+        "amount": 3,
         "unit": "g"
       },
       {
-        "name": "jajka",
-        "amount": 9,
-        "unit": "g"
-      },
-      {
-        "name": "banan",
-        "amount": 9,
-        "unit": "g"
-      },
-      {
-        "name": "cynamon",
+        "name": "szałwia suszona",
         "amount": 1,
         "unit": "g"
-      },
-      {
-        "name": "miód",
-        "amount": 1,
-        "unit": "ml"
-      },
-      {
-        "name": "olej kokosowy",
-        "amount": 2,
-        "unit": "ml"
       },
       {
         "name": "sól",
@@ -529,12 +692,7 @@
         "unit": "g"
       },
       {
-        "name": "borówki",
-        "amount": 4,
-        "unit": "g"
-      },
-      {
-        "name": "ziele angielskie",
+        "name": "pieprz",
         "amount": 1,
         "unit": "g"
       }
@@ -762,10 +920,10 @@
     "cost_complete": false
   },
   {
-    "name_en": "Lemon Herb Chicken and Potato Sheet Pan",
-    "name_pl": "Kurczak z Cytryną i Ziołami na Blasze",
-    "url": "https://mealpreponfleek.com/lemon-herb-chicken-and-potato-sheet-pan/",
-    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/12/6O0A2957-e1767618796843.jpg",
+    "name_en": "Southwestern Chicken Bake Meal Prep",
+    "name_pl": "Zapiekanka z Kurczakiem po Południowo-Zachodnim",
+    "url": "https://mealpreponfleek.com/southwestern-chicken-bake-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/03/Southwestern-Chicken-Bake-Meal-Prep-1.jpg",
     "category": "lunch",
     "ingredients_en": [
       {
@@ -774,7 +932,47 @@
         "unit": "g"
       },
       {
-        "name": "rosemary",
+        "name": "black beans",
+        "amount": 59,
+        "unit": "g"
+      },
+      {
+        "name": "corn",
+        "amount": 59,
+        "unit": "g"
+      },
+      {
+        "name": "cheese",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "quinoa",
+        "amount": 139,
+        "unit": "g"
+      },
+      {
+        "name": "poblano pepper",
+        "amount": 38,
+        "unit": "g"
+      },
+      {
+        "name": "bell pepper",
+        "amount": 38,
+        "unit": "g"
+      },
+      {
+        "name": "lime",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "lime juice",
+        "amount": 7,
+        "unit": "ml"
+      },
+      {
+        "name": "oregano",
         "amount": 1,
         "unit": "g"
       },
@@ -782,11 +980,6 @@
         "name": "thyme",
         "amount": 1,
         "unit": "g"
-      },
-      {
-        "name": "lemon juice",
-        "amount": 8,
-        "unit": "ml"
       },
       {
         "name": "salt",
@@ -799,29 +992,24 @@
         "unit": "g"
       },
       {
-        "name": "olive oil",
-        "amount": 4,
-        "unit": "ml"
+        "name": "avocado",
+        "amount": null,
+        "unit": null
       },
       {
-        "name": "red potatoes",
-        "amount": 113,
-        "unit": "g"
+        "name": "green onion",
+        "amount": null,
+        "unit": null
       },
       {
-        "name": "onion",
-        "amount": 25,
-        "unit": "g"
+        "name": "cilantro",
+        "amount": null,
+        "unit": null
       },
       {
-        "name": "broccoli",
-        "amount": 120,
-        "unit": "g"
-      },
-      {
-        "name": "lemon",
-        "amount": 20,
-        "unit": "g"
+        "name": "tomato",
+        "amount": null,
+        "unit": null
       }
     ],
     "ingredients_pl": [
@@ -831,7 +1019,47 @@
         "unit": "g"
       },
       {
-        "name": "rozmaryn",
+        "name": "czarna fasola",
+        "amount": 59,
+        "unit": "g"
+      },
+      {
+        "name": "kukurydza",
+        "amount": 59,
+        "unit": "g"
+      },
+      {
+        "name": "ser",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "komosa ryżowa",
+        "amount": 139,
+        "unit": "g"
+      },
+      {
+        "name": "papryka poblano",
+        "amount": 38,
+        "unit": "g"
+      },
+      {
+        "name": "papryka",
+        "amount": 38,
+        "unit": "g"
+      },
+      {
+        "name": "limonka",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "sok z limonki",
+        "amount": 7,
+        "unit": "ml"
+      },
+      {
+        "name": "oregano",
         "amount": 1,
         "unit": "g"
       },
@@ -839,11 +1067,6 @@
         "name": "tymianek",
         "amount": 1,
         "unit": "g"
-      },
-      {
-        "name": "sok z cytryny",
-        "amount": 8,
-        "unit": "ml"
       },
       {
         "name": "sól",
@@ -856,29 +1079,24 @@
         "unit": "g"
       },
       {
-        "name": "oliwa z oliwek",
-        "amount": 4,
-        "unit": "ml"
+        "name": "awokado",
+        "amount": null,
+        "unit": null
       },
       {
-        "name": "ziemniaki czerwone",
-        "amount": 113,
-        "unit": "g"
+        "name": "szczypiorek",
+        "amount": null,
+        "unit": null
       },
       {
-        "name": "cebula",
-        "amount": 25,
-        "unit": "g"
+        "name": "kolendra",
+        "amount": null,
+        "unit": null
       },
       {
-        "name": "brokuły",
-        "amount": 120,
-        "unit": "g"
-      },
-      {
-        "name": "cytryna",
-        "amount": 20,
-        "unit": "g"
+        "name": "pomidor",
+        "amount": null,
+        "unit": null
       }
     ],
     "available": true,
@@ -970,35 +1188,35 @@
     "cost_complete": false
   },
   {
-    "name_en": "The Perfect Air Fryer Turkey Breast",
-    "name_pl": "Idealna Pierś z Indyka z Frytkownicy Powietrznej",
-    "url": "https://mealpreponfleek.com/air-fryer-turkey-breast/",
-    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/11/The-Perfect-Air-Fryer-Turkey-Breast-2.jpg",
+    "name_en": "Chilled Avocado Soup Meal Prep",
+    "name_pl": "Zimna zupa z awokado",
+    "url": "https://mealpreponfleek.com/chilled-avocado-soup-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/08/Chilled-Avocado-Soup-Meal-Prep-5.jpg",
     "category": "lunch",
     "ingredients_en": [
       {
-        "name": "turkey breast",
-        "amount": 567,
+        "name": "avocado",
+        "amount": 100,
         "unit": "g"
       },
       {
-        "name": "butter",
-        "amount": 8,
+        "name": "dairy free yogurt",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "lime juice",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "cilantro",
+        "amount": 4,
         "unit": "g"
       },
       {
-        "name": "rosemary",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "thyme",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "garlic powder",
-        "amount": 1,
+        "name": "cucumber",
+        "amount": 62.5,
         "unit": "g"
       },
       {
@@ -1007,35 +1225,50 @@
         "unit": "g"
       },
       {
-        "name": "pepper",
+        "name": "black pepper",
         "amount": 1,
         "unit": "g"
+      },
+      {
+        "name": "water",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "red onion",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "cilantro",
+        "amount": null,
+        "unit": null
       }
     ],
     "ingredients_pl": [
       {
-        "name": "pierś z indyka",
-        "amount": 567,
+        "name": "awokado",
+        "amount": 100,
         "unit": "g"
       },
       {
-        "name": "masło",
-        "amount": 8,
+        "name": "jogurt roślinny",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "sok z limonki",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "kolendra",
+        "amount": 4,
         "unit": "g"
       },
       {
-        "name": "rozmaryn",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "tymianek",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "czosnek w proszku",
-        "amount": 1,
+        "name": "ogórek",
+        "amount": 62.5,
         "unit": "g"
       },
       {
@@ -1044,14 +1277,29 @@
         "unit": "g"
       },
       {
-        "name": "pieprz",
+        "name": "pieprz czarny",
         "amount": 1,
         "unit": "g"
+      },
+      {
+        "name": "woda",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "cebula czerwona",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "kolendra",
+        "amount": null,
+        "unit": null
       }
     ],
     "available": true,
-    "estimated_cost_pln": 14.95,
-    "cost_complete": true
+    "estimated_cost_pln": null,
+    "cost_complete": false
   },
   {
     "name_en": "Cauliflower Rice Salmon Poke Bowl Meal Prep",
@@ -1714,8 +1962,8 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": null,
-    "cost_complete": false
+    "estimated_cost_pln": 7.84,
+    "cost_complete": true
   },
   {
     "name_en": "Air Fried Crispy Chicken",
@@ -1892,8 +2140,8 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": null,
-    "cost_complete": false
+    "estimated_cost_pln": 8.07,
+    "cost_complete": true
   },
   {
     "name_en": "One Pan Roasted Salmon, Asparagus And Potatoes Recipe",
@@ -1956,7 +2204,181 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 24.46,
+    "estimated_cost_pln": 22.75,
+    "cost_complete": true
+  },
+  {
+    "name_en": "Air Fryer Molasses Dijon Ham With Roasted Vegetables",
+    "name_pl": "Szynka z Melasą i Musztardą Dijon z Pieczonymi Warzywami w Air Fryer",
+    "url": "https://mealpreponfleek.com/air-fryer-molasses-dijon-ham-with-roasted-vegetables/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/11/Air-Fryer-Molasses-Dijon-Ham-and-Roasted-Vegetables-Process-2-e1724890914970.jpg",
+    "category": "lunch",
+    "ingredients_en": [
+      {
+        "name": "ham",
+        "amount": 340,
+        "unit": "g"
+      },
+      {
+        "name": "molasses",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "butter",
+        "amount": 7,
+        "unit": "g"
+      },
+      {
+        "name": "apple cider vinegar",
+        "amount": 4,
+        "unit": "ml"
+      },
+      {
+        "name": "dijon mustard",
+        "amount": 3,
+        "unit": "g"
+      },
+      {
+        "name": "ground clove",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "brussels sprouts",
+        "amount": 118,
+        "unit": "g"
+      },
+      {
+        "name": "balsamic vinegar",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "olive oil",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "thyme",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "garlic",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "butternut squash",
+        "amount": 118,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "cinnamon",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "szynka",
+        "amount": 340,
+        "unit": "g"
+      },
+      {
+        "name": "melasa",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "masło",
+        "amount": 7,
+        "unit": "g"
+      },
+      {
+        "name": "ocet jabłkowy",
+        "amount": 4,
+        "unit": "ml"
+      },
+      {
+        "name": "musztarda dijon",
+        "amount": 3,
+        "unit": "g"
+      },
+      {
+        "name": "goździki mielone",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "brukselka",
+        "amount": 118,
+        "unit": "g"
+      },
+      {
+        "name": "ocet balsamiczny",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "oliwa z oliwek",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "tymianek",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "czosnek",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sól",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "dynia piżmowa",
+        "amount": 118,
+        "unit": "g"
+      },
+      {
+        "name": "oliwa z oliwek",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "cynamon",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sól",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": 17.87,
     "cost_complete": true
   },
   {
@@ -2188,6 +2610,230 @@
     "cost_complete": false
   },
   {
+    "name_en": "Instant Pot Beef Bbq Ribs",
+    "name_pl": "Żeberka Wołowe Bbq Z Instant Pot",
+    "url": "https://mealpreponfleek.com/instant-pot-beef-bbq-ribs/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/08/MealPreponFleek_InstantPotBeefBBQRibs_FeaturedImage_8-28-2019.png",
+    "category": "lunch",
+    "ingredients_en": [
+      {
+        "name": "beef ribs",
+        "amount": 227,
+        "unit": "g"
+      },
+      {
+        "name": "bbq sauce",
+        "amount": 59,
+        "unit": "ml"
+      },
+      {
+        "name": "apple cider vinegar",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "beef broth",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "seasoning",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "coconut sugar",
+        "amount": 4,
+        "unit": "g"
+      },
+      {
+        "name": "avocado oil",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "arugula",
+        "amount": 118,
+        "unit": "ml"
+      },
+      {
+        "name": "coleslaw mix",
+        "amount": 236,
+        "unit": "ml"
+      },
+      {
+        "name": "mayonnaise",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "sour cream",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "apple cider vinegar",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "honey",
+        "amount": 5,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pepper",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "cauliflower",
+        "amount": 177,
+        "unit": "ml"
+      },
+      {
+        "name": "greek yogurt",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "avocado oil",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "garlic",
+        "amount": 5,
+        "unit": "g"
+      },
+      {
+        "name": "garlic powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "butter",
+        "amount": 23,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "żeberka wołowe",
+        "amount": 227,
+        "unit": "g"
+      },
+      {
+        "name": "sos bbq",
+        "amount": 59,
+        "unit": "ml"
+      },
+      {
+        "name": "ocet jabłkowy",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "bulion wołowy",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "przyprawa",
+        "amount": null,
+        "unit": null
+      },
+      {
+        "name": "cukier kokosowy",
+        "amount": 4,
+        "unit": "g"
+      },
+      {
+        "name": "olej z awokado",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "rukola",
+        "amount": 118,
+        "unit": "ml"
+      },
+      {
+        "name": "mieszanka do coleslaw",
+        "amount": 236,
+        "unit": "ml"
+      },
+      {
+        "name": "majonez",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "śmietana",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "ocet jabłkowy",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "miód",
+        "amount": 5,
+        "unit": "g"
+      },
+      {
+        "name": "sól",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pieprz",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "kalafior",
+        "amount": 177,
+        "unit": "ml"
+      },
+      {
+        "name": "jogurt grecki",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "olej z awokado",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "czosnek",
+        "amount": 5,
+        "unit": "g"
+      },
+      {
+        "name": "czosnek w proszku",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "masło",
+        "amount": 23,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
     "name_en": "Caprese Pesto Sausage Pasta",
     "name_pl": "Makaron Z Kiełbasą Pesto Caprese",
     "url": "https://mealpreponfleek.com/caprese-pesto-sausage-pasta/",
@@ -2268,7 +2914,7 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 17.17,
+    "estimated_cost_pln": 17.65,
     "cost_complete": true
   },
   {
@@ -2404,100 +3050,6 @@
     "available": true,
     "estimated_cost_pln": null,
     "cost_complete": false
-  },
-  {
-    "name_en": "Lemon Chicken and Pasta",
-    "name_pl": "Kurczak z cytryną i makaronem",
-    "url": "https://mealpreponfleek.com/lemon-chicken-and-pasta/",
-    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/02/Lemon-Chicken-and-Pasta-jpg.webp",
-    "category": "lunch",
-    "ingredients_en": [
-      {
-        "name": "chicken breast",
-        "amount": 113,
-        "unit": "g"
-      },
-      {
-        "name": "lemon juice",
-        "amount": 30,
-        "unit": "ml"
-      },
-      {
-        "name": "garlic",
-        "amount": 4,
-        "unit": "g"
-      },
-      {
-        "name": "thyme",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "oregano",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "brown rice pasta",
-        "amount": 57,
-        "unit": "g"
-      },
-      {
-        "name": "salt",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "pepper",
-        "amount": 1,
-        "unit": "g"
-      }
-    ],
-    "ingredients_pl": [
-      {
-        "name": "filet z kurczaka",
-        "amount": 113,
-        "unit": "g"
-      },
-      {
-        "name": "sok z cytryny",
-        "amount": 30,
-        "unit": "ml"
-      },
-      {
-        "name": "czosnek",
-        "amount": 4,
-        "unit": "g"
-      },
-      {
-        "name": "tymianek",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "oregano",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "makaron z brązowego ryżu",
-        "amount": 57,
-        "unit": "g"
-      },
-      {
-        "name": "sól",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "pieprz",
-        "amount": 1,
-        "unit": "g"
-      }
-    ],
-    "available": true,
-    "estimated_cost_pln": 7.21,
-    "cost_complete": true
   },
   {
     "name_en": "Low-Carb Lettuce Wrap Sliders",
@@ -2749,6 +3301,180 @@
       },
       {
         "name": "cytryna",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
+    "name_en": "Crockpot Golden Lentil Soup",
+    "name_pl": "Zupa z soczewicy w wolnowarze",
+    "url": "https://mealpreponfleek.com/crockpot-golden-lentil-soup/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/06/Crockpot-Golden-Lentil-Soup-jpg.webp",
+    "category": "lunch",
+    "ingredients_en": [
+      {
+        "name": "red lentils",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 2.5,
+        "unit": "ml"
+      },
+      {
+        "name": "onion",
+        "amount": 17,
+        "unit": "g"
+      },
+      {
+        "name": "garlic",
+        "amount": 2,
+        "unit": "g"
+      },
+      {
+        "name": "turmeric",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "cumin",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "cinnamon",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "ginger",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "diced tomatoes",
+        "amount": 71,
+        "unit": "g"
+      },
+      {
+        "name": "coconut milk",
+        "amount": 71,
+        "unit": "g"
+      },
+      {
+        "name": "vegetable broth",
+        "amount": 157,
+        "unit": "ml"
+      },
+      {
+        "name": "spinach",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "lime juice",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "cayenne pepper",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "cilantro",
+        "amount": null,
+        "unit": null
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "soczewica czerwona",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "oliwa z oliwek",
+        "amount": 2.5,
+        "unit": "ml"
+      },
+      {
+        "name": "cebula",
+        "amount": 17,
+        "unit": "g"
+      },
+      {
+        "name": "czosnek",
+        "amount": 2,
+        "unit": "g"
+      },
+      {
+        "name": "kurkuma",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "kmin rzymski",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "cynamon",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "imbir",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sól",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pomidory krojone",
+        "amount": 71,
+        "unit": "g"
+      },
+      {
+        "name": "mleko kokosowe",
+        "amount": 71,
+        "unit": "g"
+      },
+      {
+        "name": "bulion warzywny",
+        "amount": 157,
+        "unit": "ml"
+      },
+      {
+        "name": "szpinak",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "sok z limonki",
+        "amount": 5,
+        "unit": "ml"
+      },
+      {
+        "name": "pieprz cayenne",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "kolendra",
         "amount": null,
         "unit": null
       }
@@ -3036,71 +3762,36 @@
     "cost_complete": false
   },
   {
-    "name_en": "Oven Baked BBQ Chicken And Veggies Meal Prep",
-    "name_pl": "Pieczony kurczak BBQ z warzywami",
-    "url": "https://mealpreponfleek.com/oven-baked-bbq-chicken-and-veggies-meal-prep/",
-    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/02/Oven-Baked-BBQ-Chicken-and-Veggies-Meal-Prep-1-jpg.webp",
+    "name_en": "Sheet Pan Chimichurri Chicken And Veggies",
+    "name_pl": "Kurczak z chimichurri i warzywami z blachy",
+    "url": "https://mealpreponfleek.com/sheet-pan-chimichurri-chicken-and-veggies/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/06/Chimichurri-Chicken-and-Veggies.jpg",
     "category": "lunch",
     "ingredients_en": [
       {
         "name": "chicken thighs",
-        "amount": 151,
+        "amount": 170,
         "unit": "g"
       },
       {
-        "name": "russet potato",
-        "amount": 100,
-        "unit": "g"
-      },
-      {
-        "name": "asparagus",
-        "amount": 67,
-        "unit": "g"
-      },
-      {
-        "name": "carrot",
-        "amount": 53,
-        "unit": "g"
-      },
-      {
-        "name": "garlic",
-        "amount": 3,
-        "unit": "g"
-      },
-      {
-        "name": "grape tomatoes",
-        "amount": 21,
+        "name": "gold potato",
+        "amount": 113,
         "unit": "g"
       },
       {
         "name": "green beans",
-        "amount": 85,
-        "unit": "g"
-      },
-      {
-        "name": "bbq sauce",
-        "amount": 40,
-        "unit": "ml"
-      },
-      {
-        "name": "seasoning",
-        "amount": null,
-        "unit": null
-      },
-      {
-        "name": "thyme",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "rosemary",
-        "amount": 1,
+        "amount": 177,
         "unit": "g"
       },
       {
         "name": "avocado oil",
-        "amount": 8,
+        "amount": 11,
         "unit": "ml"
+      },
+      {
+        "name": "black pepper",
+        "amount": 1,
+        "unit": "g"
       },
       {
         "name": "salt",
@@ -3108,7 +3799,47 @@
         "unit": "g"
       },
       {
-        "name": "black pepper",
+        "name": "parsley",
+        "amount": 4,
+        "unit": "g"
+      },
+      {
+        "name": "cilantro",
+        "amount": 4,
+        "unit": "g"
+      },
+      {
+        "name": "lemon juice",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "lime juice",
+        "amount": 4,
+        "unit": "ml"
+      },
+      {
+        "name": "garlic",
+        "amount": 3,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "red onion",
+        "amount": 8,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "red pepper flakes",
         "amount": 1,
         "unit": "g"
       }
@@ -3116,63 +3847,28 @@
     "ingredients_pl": [
       {
         "name": "udka z kurczaka",
-        "amount": 151,
+        "amount": 170,
         "unit": "g"
       },
       {
         "name": "ziemniak",
-        "amount": 100,
-        "unit": "g"
-      },
-      {
-        "name": "szparagi",
-        "amount": 67,
-        "unit": "g"
-      },
-      {
-        "name": "marchew",
-        "amount": 53,
-        "unit": "g"
-      },
-      {
-        "name": "czosnek",
-        "amount": 3,
-        "unit": "g"
-      },
-      {
-        "name": "pomidorki koktajlowe",
-        "amount": 21,
+        "amount": 113,
         "unit": "g"
       },
       {
         "name": "fasolka szparagowa",
-        "amount": 85,
-        "unit": "g"
-      },
-      {
-        "name": "sos BBQ",
-        "amount": 40,
-        "unit": "ml"
-      },
-      {
-        "name": "przyprawa",
-        "amount": null,
-        "unit": null
-      },
-      {
-        "name": "tymianek",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "rozmaryn",
-        "amount": 1,
+        "amount": 177,
         "unit": "g"
       },
       {
         "name": "olej z awokado",
-        "amount": 8,
+        "amount": 11,
         "unit": "ml"
+      },
+      {
+        "name": "pieprz czarny",
+        "amount": 1,
+        "unit": "g"
       },
       {
         "name": "sól",
@@ -3180,7 +3876,47 @@
         "unit": "g"
       },
       {
-        "name": "pieprz czarny",
+        "name": "pietruszka",
+        "amount": 4,
+        "unit": "g"
+      },
+      {
+        "name": "kolendra",
+        "amount": 4,
+        "unit": "g"
+      },
+      {
+        "name": "sok z cytryny",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "sok z limonki",
+        "amount": 4,
+        "unit": "ml"
+      },
+      {
+        "name": "czosnek",
+        "amount": 3,
+        "unit": "g"
+      },
+      {
+        "name": "oliwa z oliwek",
+        "amount": 30,
+        "unit": "ml"
+      },
+      {
+        "name": "cebula czerwona",
+        "amount": 8,
+        "unit": "g"
+      },
+      {
+        "name": "sól",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "płatki chili",
         "amount": 1,
         "unit": "g"
       }
@@ -3280,7 +4016,7 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 21.56,
+    "estimated_cost_pln": 21.66,
     "cost_complete": true
   },
   {
@@ -3438,8 +4174,8 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": null,
-    "cost_complete": false
+    "estimated_cost_pln": 2.74,
+    "cost_complete": true
   },
   {
     "name_en": "Beef Patties-Sweet Corn Rice and Sautéed Veggies",
@@ -3686,8 +4422,8 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": null,
-    "cost_complete": false
+    "estimated_cost_pln": 27.29,
+    "cost_complete": true
   },
   {
     "name_en": "Sheet Pan Bruschetta Chicken",
@@ -4018,7 +4754,7 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 25.13,
+    "estimated_cost_pln": 28.72,
     "cost_complete": true
   },
   {
@@ -4578,7 +5314,101 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 11.47,
+    "estimated_cost_pln": 11.34,
+    "cost_complete": true
+  },
+  {
+    "name_en": "One Pan Baked Pasta Primavera",
+    "name_pl": "Makaron primavera zapiekany z jednej patelni",
+    "url": "https://mealpreponfleek.com/one-pan-baked-pasta-primavera/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2020/05/One-Pan-Baked-Primavera-Pasta-777x431-1.jpg",
+    "category": "lunch",
+    "ingredients_en": [
+      {
+        "name": "rotini pasta",
+        "amount": 85,
+        "unit": "g"
+      },
+      {
+        "name": "pasta sauce",
+        "amount": 177,
+        "unit": "ml"
+      },
+      {
+        "name": "carrot",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "zucchini",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "green peas",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "almond milk",
+        "amount": 118,
+        "unit": "ml"
+      },
+      {
+        "name": "mozzarella",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "basil",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "makaron rotini",
+        "amount": 85,
+        "unit": "g"
+      },
+      {
+        "name": "sos pomidorowy do makaronu",
+        "amount": 177,
+        "unit": "ml"
+      },
+      {
+        "name": "marchew",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "cukinia",
+        "amount": 120,
+        "unit": "g"
+      },
+      {
+        "name": "groszek zielony",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "mleko migdałowe",
+        "amount": 118,
+        "unit": "ml"
+      },
+      {
+        "name": "mozzarella",
+        "amount": 40,
+        "unit": "g"
+      },
+      {
+        "name": "bazylia",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": 21.26,
     "cost_complete": true
   },
   {
@@ -4830,8 +5660,8 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": null,
-    "cost_complete": false
+    "estimated_cost_pln": 14.92,
+    "cost_complete": true
   },
   {
     "name_en": "Spicy Air Fryer Shrimp",
@@ -4894,8 +5724,172 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 11.01,
+    "estimated_cost_pln": 10.98,
     "cost_complete": true
+  },
+  {
+    "name_en": "Slow Cooker Stuffed Cabbage Soup",
+    "name_pl": "Zupa Gołąbkowa z Wolnowaru",
+    "url": "https://mealpreponfleek.com/slow-cooker-stuffed-cabbage-soup/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2022/10/Slow-Cooker-Unstuffed-Cabbage-Soup-777x431-1.jpg",
+    "category": "lunch",
+    "ingredients_en": [
+      {
+        "name": "ground beef",
+        "amount": 113,
+        "unit": "g"
+      },
+      {
+        "name": "brown rice",
+        "amount": 23,
+        "unit": "g"
+      },
+      {
+        "name": "green bell pepper",
+        "amount": 38,
+        "unit": "g"
+      },
+      {
+        "name": "celery",
+        "amount": 38,
+        "unit": "g"
+      },
+      {
+        "name": "yellow onion",
+        "amount": 38,
+        "unit": "g"
+      },
+      {
+        "name": "carrot",
+        "amount": 38,
+        "unit": "g"
+      },
+      {
+        "name": "italian seasoning",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "garlic",
+        "amount": 4,
+        "unit": "g"
+      },
+      {
+        "name": "green cabbage",
+        "amount": 113,
+        "unit": "g"
+      },
+      {
+        "name": "tomato sauce",
+        "amount": 57,
+        "unit": "ml"
+      },
+      {
+        "name": "diced tomatoes",
+        "amount": 106,
+        "unit": "g"
+      },
+      {
+        "name": "beef broth",
+        "amount": 236,
+        "unit": "ml"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pepper",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "parsley",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "mielona wołowina",
+        "amount": 113,
+        "unit": "g"
+      },
+      {
+        "name": "ryż brązowy",
+        "amount": 23,
+        "unit": "g"
+      },
+      {
+        "name": "papryka zielona",
+        "amount": 38,
+        "unit": "g"
+      },
+      {
+        "name": "seler",
+        "amount": 38,
+        "unit": "g"
+      },
+      {
+        "name": "cebula żółta",
+        "amount": 38,
+        "unit": "g"
+      },
+      {
+        "name": "marchew",
+        "amount": 38,
+        "unit": "g"
+      },
+      {
+        "name": "przyprawa włoska",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "czosnek",
+        "amount": 4,
+        "unit": "g"
+      },
+      {
+        "name": "kapusta biała",
+        "amount": 113,
+        "unit": "g"
+      },
+      {
+        "name": "sos pomidorowy",
+        "amount": 57,
+        "unit": "ml"
+      },
+      {
+        "name": "pomidory krojone",
+        "amount": 106,
+        "unit": "g"
+      },
+      {
+        "name": "bulion wołowy",
+        "amount": 236,
+        "unit": "ml"
+      },
+      {
+        "name": "sól",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pieprz",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pietruszka",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
   },
   {
     "name_en": "Sheet Pan Chicken Fajitas",
@@ -5032,7 +6026,7 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 15.35,
+    "estimated_cost_pln": 15.23,
     "cost_complete": true
   },
   {
@@ -5110,34 +6104,49 @@
     "cost_complete": false
   },
   {
-    "name_en": "Spicy Mustard Thyme Chicken & Coconut Roasted Brussels Sprouts",
-    "name_pl": "Pikantny Kurczak z Musztardą i Tymiankiem oraz Pieczone Brukselki z Kokosem",
-    "url": "https://mealpreponfleek.com/spicy-mustard-thyme-chicken-coconut-roasted-brussels-sprouts/",
-    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2017/06/picy-Mustard-Thyme-Chicken-Coconut-Roasted-Brussels-Sprouts.jpg",
+    "name_en": "Lighter Mango Chicken Sticky Rice Meal Prep",
+    "name_pl": "Lżejsze Mango z Kurczakiem i Ryżem",
+    "url": "https://mealpreponfleek.com/lighter-mango-chicken-sticky-rice-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/02/Lighter-Mango-Chicken-Sticky-Rice-Meal-Prep-blog.png",
     "category": "lunch",
     "ingredients_en": [
       {
-        "name": "brussels sprouts",
-        "amount": 227,
+        "name": "rice",
+        "amount": 46,
+        "unit": "g"
+      },
+      {
+        "name": "mango",
+        "amount": 150,
         "unit": "g"
       },
       {
         "name": "chicken breast",
-        "amount": 113.5,
+        "amount": 180,
         "unit": "g"
       },
       {
-        "name": "spicy brown mustard",
-        "amount": 30,
-        "unit": "g"
-      },
-      {
-        "name": "lemon juice",
-        "amount": 15,
+        "name": "olive oil",
+        "amount": 8,
         "unit": "ml"
       },
       {
-        "name": "thyme",
+        "name": "rice wine vinegar",
+        "amount": 4,
+        "unit": "ml"
+      },
+      {
+        "name": "chili paste",
+        "amount": 8,
+        "unit": "g"
+      },
+      {
+        "name": "paprika",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "parsley",
         "amount": 1,
         "unit": "g"
       },
@@ -5147,39 +6156,54 @@
         "unit": "g"
       },
       {
-        "name": "pepper",
+        "name": "black pepper",
         "amount": 1,
         "unit": "g"
       },
       {
-        "name": "coconut oil",
-        "amount": 7.5,
-        "unit": "ml"
+        "name": "scallions",
+        "amount": null,
+        "unit": null
       }
     ],
     "ingredients_pl": [
       {
-        "name": "brukselka",
-        "amount": 227,
+        "name": "ryż",
+        "amount": 46,
+        "unit": "g"
+      },
+      {
+        "name": "mango",
+        "amount": 150,
         "unit": "g"
       },
       {
         "name": "filet z kurczaka",
-        "amount": 113.5,
+        "amount": 180,
         "unit": "g"
       },
       {
-        "name": "musztarda ostra",
-        "amount": 30,
-        "unit": "g"
-      },
-      {
-        "name": "sok z cytryny",
-        "amount": 15,
+        "name": "oliwa z oliwek",
+        "amount": 8,
         "unit": "ml"
       },
       {
-        "name": "tymianek",
+        "name": "ocet ryżowy",
+        "amount": 4,
+        "unit": "ml"
+      },
+      {
+        "name": "pasta chili",
+        "amount": 8,
+        "unit": "g"
+      },
+      {
+        "name": "papryka",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pietruszka",
         "amount": 1,
         "unit": "g"
       },
@@ -5189,19 +6213,103 @@
         "unit": "g"
       },
       {
-        "name": "pieprz",
+        "name": "pieprz czarny",
         "amount": 1,
         "unit": "g"
       },
       {
-        "name": "olej kokosowy",
-        "amount": 7.5,
-        "unit": "ml"
+        "name": "szczypiorek",
+        "amount": null,
+        "unit": null
       }
     ],
     "available": true,
-    "estimated_cost_pln": 8.31,
-    "cost_complete": true
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
+    "name_en": "Chicken Salad",
+    "name_pl": "Sałatka z Kurczakiem",
+    "url": "https://mealpreponfleek.com/chicken-salad/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2022/03/Chicken-Salad-777x431-1.jpg",
+    "category": "lunch",
+    "ingredients_en": [
+      {
+        "name": "chicken breast",
+        "amount": 113.5,
+        "unit": "g"
+      },
+      {
+        "name": "celery",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "red onion",
+        "amount": 12.5,
+        "unit": "g"
+      },
+      {
+        "name": "walnuts",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "cilantro",
+        "amount": 4,
+        "unit": "g"
+      },
+      {
+        "name": "mayonnaise",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "dijon mustard",
+        "amount": 15,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "filet z kurczaka",
+        "amount": 113.5,
+        "unit": "g"
+      },
+      {
+        "name": "seler",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "cebula czerwona",
+        "amount": 12.5,
+        "unit": "g"
+      },
+      {
+        "name": "orzechy włoskie",
+        "amount": 10,
+        "unit": "g"
+      },
+      {
+        "name": "kolendra",
+        "amount": 4,
+        "unit": "g"
+      },
+      {
+        "name": "majonez",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "musztarda dijon",
+        "amount": 15,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
   },
   {
     "name_en": "Chicken Jambalaya",
@@ -5586,7 +6694,7 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 7.9,
+    "estimated_cost_pln": 11.22,
     "cost_complete": true
   },
   {
@@ -5800,8 +6908,8 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": null,
-    "cost_complete": false
+    "estimated_cost_pln": 13.27,
+    "cost_complete": true
   },
   {
     "name_en": "Pulled Pork Lettuce Wrap Meal Prep",
@@ -5916,6 +7024,190 @@
     "available": true,
     "estimated_cost_pln": null,
     "cost_complete": false
+  },
+  {
+    "name_en": "Fall Harvest Sausage Salad",
+    "name_pl": "Jesienna sałatka z kiełbasą",
+    "url": "https://mealpreponfleek.com/fall-harvest-sausage-salad/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2019/08/Al-Fresco-Harvest-Sausage-Salad.jpg",
+    "category": "lunch",
+    "ingredients_en": [
+      {
+        "name": "mixed greens",
+        "amount": 177,
+        "unit": "g"
+      },
+      {
+        "name": "chicken sausage",
+        "amount": 113,
+        "unit": "g"
+      },
+      {
+        "name": "quinoa",
+        "amount": 46,
+        "unit": "g"
+      },
+      {
+        "name": "butternut squash",
+        "amount": 59,
+        "unit": "g"
+      },
+      {
+        "name": "goat cheese",
+        "amount": 14,
+        "unit": "g"
+      },
+      {
+        "name": "scallion",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "slivered almonds",
+        "amount": 7,
+        "unit": "g"
+      },
+      {
+        "name": "dried cranberries",
+        "amount": 7,
+        "unit": "g"
+      },
+      {
+        "name": "avocado oil",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "honey",
+        "amount": 4,
+        "unit": "g"
+      },
+      {
+        "name": "lime juice",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "apple cider vinegar",
+        "amount": 4,
+        "unit": "ml"
+      },
+      {
+        "name": "onion powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "garlic powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "paprika",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pepper",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "mieszanka sałat",
+        "amount": 177,
+        "unit": "g"
+      },
+      {
+        "name": "kiełbasa z kurczaka",
+        "amount": 113,
+        "unit": "g"
+      },
+      {
+        "name": "komosa ryżowa",
+        "amount": 46,
+        "unit": "g"
+      },
+      {
+        "name": "dynia piżmowa",
+        "amount": 59,
+        "unit": "g"
+      },
+      {
+        "name": "ser kozi",
+        "amount": 14,
+        "unit": "g"
+      },
+      {
+        "name": "szczypiorek",
+        "amount": 15,
+        "unit": "g"
+      },
+      {
+        "name": "migdały w płatkach",
+        "amount": 7,
+        "unit": "g"
+      },
+      {
+        "name": "suszone żurawiny",
+        "amount": 7,
+        "unit": "g"
+      },
+      {
+        "name": "olej z awokado",
+        "amount": 15,
+        "unit": "ml"
+      },
+      {
+        "name": "miód",
+        "amount": 4,
+        "unit": "g"
+      },
+      {
+        "name": "sok z limonki",
+        "amount": 8,
+        "unit": "ml"
+      },
+      {
+        "name": "ocet jabłkowy",
+        "amount": 4,
+        "unit": "ml"
+      },
+      {
+        "name": "cebula w proszku",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "czosnek w proszku",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "papryka w proszku",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sól",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pieprz",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": 17.24,
+    "cost_complete": true
   },
   {
     "name_en": "Sausage Grill Packet Meal Prep",
@@ -6340,6 +7632,100 @@
     "cost_complete": false
   },
   {
+    "name_en": "Sheet Pan Arugula Pesto Shrimp Meal Prep",
+    "name_pl": "Krewetki Z Pesto Rukolowym Z Blachy",
+    "url": "https://mealpreponfleek.com/sheet-pan-arugula-pesto-shrimp-meal-prep/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/02/Sheet-Pan-Arugula-Pesto-Shrimp-Meal-Prep-blog.png",
+    "category": "dinner",
+    "ingredients_en": [
+      {
+        "name": "shrimp",
+        "amount": 113.5,
+        "unit": "g"
+      },
+      {
+        "name": "arugula",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "macadamia nuts",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "olive oil",
+        "amount": 7.5,
+        "unit": "ml"
+      },
+      {
+        "name": "zucchini",
+        "amount": 75,
+        "unit": "g"
+      },
+      {
+        "name": "garlic powder",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "black pepper",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "krewetki",
+        "amount": 113.5,
+        "unit": "g"
+      },
+      {
+        "name": "rukola",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "orzechy makadamia",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "oliwa z oliwek",
+        "amount": 7.5,
+        "unit": "ml"
+      },
+      {
+        "name": "cukinia",
+        "amount": 75,
+        "unit": "g"
+      },
+      {
+        "name": "czosnek granulowany",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sól",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pieprz czarny",
+        "amount": 1,
+        "unit": "g"
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": 18.6,
+    "cost_complete": true
+  },
+  {
     "name_en": "Sheet Pan Chicken And Veggies",
     "name_pl": "Kurczak i Warzywa z Blachy",
     "url": "https://mealpreponfleek.com/sheet-pan-chicken-veggies/",
@@ -6534,112 +7920,8 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 1.45,
+    "estimated_cost_pln": 1.53,
     "cost_complete": true
-  },
-  {
-    "name_en": "10 Minute Raw Vegan Brownies",
-    "name_pl": "Surowe Wegańskie Brownie w 10 Minut",
-    "url": "https://mealpreponfleek.com/10-minute-raw-vegan-brownies/",
-    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2018/02/10-Minute-Raw-Vegan-Brownies-blog.jpg",
-    "category": "desserts",
-    "ingredients_en": [
-      {
-        "name": "cashews",
-        "amount": 40,
-        "unit": "g"
-      },
-      {
-        "name": "cocoa powder",
-        "amount": 13.33,
-        "unit": "g"
-      },
-      {
-        "name": "dates",
-        "amount": 37.78,
-        "unit": "g"
-      },
-      {
-        "name": "coconut oil",
-        "amount": 5,
-        "unit": "ml"
-      },
-      {
-        "name": "salt",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "coconut oil",
-        "amount": 5,
-        "unit": "ml"
-      },
-      {
-        "name": "date syrup",
-        "amount": 5,
-        "unit": "ml"
-      },
-      {
-        "name": "cocoa powder",
-        "amount": 10,
-        "unit": "g"
-      },
-      {
-        "name": "cacao nibs",
-        "amount": null,
-        "unit": null
-      }
-    ],
-    "ingredients_pl": [
-      {
-        "name": "orzechy nerkowca",
-        "amount": 40,
-        "unit": "g"
-      },
-      {
-        "name": "kakao",
-        "amount": 13.33,
-        "unit": "g"
-      },
-      {
-        "name": "daktyle",
-        "amount": 37.78,
-        "unit": "g"
-      },
-      {
-        "name": "olej kokosowy",
-        "amount": 5,
-        "unit": "ml"
-      },
-      {
-        "name": "sól",
-        "amount": 1,
-        "unit": "g"
-      },
-      {
-        "name": "olej kokosowy",
-        "amount": 5,
-        "unit": "ml"
-      },
-      {
-        "name": "syrop daktylowy",
-        "amount": 5,
-        "unit": "ml"
-      },
-      {
-        "name": "kakao",
-        "amount": 10,
-        "unit": "g"
-      },
-      {
-        "name": "ziarna kakaowca",
-        "amount": null,
-        "unit": null
-      }
-    ],
-    "available": true,
-    "estimated_cost_pln": null,
-    "cost_complete": false
   },
   {
     "name_en": "Buffalo Chicken Mini Bell Peppers",
@@ -6732,8 +8014,8 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": null,
-    "cost_complete": false
+    "estimated_cost_pln": 14.37,
+    "cost_complete": true
   },
   {
     "name_en": "Mint Chocolate Energy Bites",
@@ -6904,7 +8186,7 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 0.77,
+    "estimated_cost_pln": 1.37,
     "cost_complete": true
   },
   {
@@ -7220,7 +8502,7 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 1.65,
+    "estimated_cost_pln": 1.77,
     "cost_complete": true
   }
 ]

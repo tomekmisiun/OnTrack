@@ -50,6 +50,7 @@ CATEGORIES = [
     ("Sery",                                 "https://zakupy.auchan.pl/categories/artyku%C5%82y-spo%C5%BCywcze/sery/2534?source=SUB_CATEGORY_IMAGE_CLICKED"),
     ("Sypkie i produkty zbożowe",            "https://zakupy.auchan.pl/categories/artyku%C5%82y-spo%C5%BCywcze/sypkie-i-produkty-zbo%C5%BCowe/4710?source=SUB_CATEGORY_IMAGE_CLICKED"),
     ("Konserwy, przetwory i dod. kulinarne", "https://zakupy.auchan.pl/categories/artyku%C5%82y-spo%C5%BCywcze/konserwy-przetwory-i-dodatki-kulinarne/4563?source=SUB_CATEGORY_IMAGE_CLICKED"),
+    ("Bakalie i suszone owoce",              "https://zakupy.auchan.pl/categories/artyku%C5%82y-spo%C5%BCywcze/bakalie/2222?source=SUB_CATEGORY_IMAGE_CLICKED"),
 ]
 
 # Poziom 3 — Windows UA (bardziej powszechny niż Linux)

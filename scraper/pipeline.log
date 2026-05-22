@@ -1,0 +1,742 @@
+19:18:38 INFO Uruchamiam kroki: [1, 2, 3, 4, 5]
+19:18:38 INFO ============================================================
+19:18:38 INFO KROK 1: normalize_recipes
+19:18:38 INFO ============================================================
+19:31:02 INFO ✓ Krok 1 zakończony — 744.1s
+19:31:02 INFO ============================================================
+19:31:02 INFO KROK 2: normalize_shops
+19:31:02 INFO ============================================================
+19:31:02 INFO ✓ Krok 2 zakończony — 0.0s
+19:31:02 INFO ============================================================
+19:31:02 INFO KROK 3: match_ingredients
+19:31:02 INFO ============================================================
+19:32:47 INFO ✓ Krok 3 zakończony — 105.3s
+19:32:47 INFO ============================================================
+19:32:47 INFO KROK 4: build_database
+19:32:47 INFO ============================================================
+19:32:49 INFO ✓ Krok 4 zakończony — 2.4s
+19:32:49 INFO ============================================================
+19:32:49 INFO KROK 5: get_macros
+19:32:49 INFO ============================================================
+19:39:19 INFO ✓ Krok 5 zakończony — 389.6s
+19:39:19 INFO 
+============================================================
+19:39:19 INFO Pipeline zakończony pomyślnie — łączny czas: 1241.4s
+19:39:19 INFO ============================================================
+19:39:19 INFO 
+Pliki wynikowe:
+19:39:19 INFO   ✓  recipes_normalized.json               557 rekordów
+19:39:19 INFO   ✓  shops_en.json                        2399 rekordów
+19:39:19 INFO   ✓  shops_pl.json                        3059 rekordów
+19:39:19 INFO   ✓  matches_en.json                       808 rekordów
+19:39:19 INFO   ✓  matches_pl.json                       821 rekordów
+19:39:19 INFO   ✓  ingredient_db_en.json                 808 rekordów
+19:39:19 INFO   ✓  ingredient_db_pl.json                 821 rekordów
+19:39:19 INFO   ✓  unmatched_en.json                     141 rekordów
+19:39:19 INFO   ✓  unmatched_pl.json                     155 rekordów
+19:39:19 INFO   ✓  recipes_en.json                       256 rekordów
+19:39:19 INFO   ✓  recipes_pl.json                       298 rekordów
+19:39:19 INFO   ✓  ingredients_macros.json               807 rekordów
+19:45:47 INFO Uruchamiam kroki: [3, 4, 5]
+19:45:47 INFO ============================================================
+19:45:47 INFO KROK 3: match_ingredients
+19:45:47 INFO ============================================================
+19:46:47 INFO ✓ Krok 3 zakończony — 59.3s
+19:46:47 INFO ============================================================
+19:46:47 INFO KROK 4: build_database
+19:46:47 INFO ============================================================
+19:46:49 INFO ✓ Krok 4 zakończony — 2.4s
+19:46:49 INFO ============================================================
+19:46:49 INFO KROK 5: get_macros
+19:46:49 INFO ============================================================
+19:52:54 INFO ✓ Krok 5 zakończony — 364.9s
+19:52:54 INFO 
+============================================================
+19:52:54 INFO Pipeline zakończony pomyślnie — łączny czas: 426.6s
+19:52:54 INFO ============================================================
+19:52:54 INFO 
+Pliki wynikowe:
+19:52:54 INFO   ✓  recipes_normalized.json               557 rekordów
+19:52:54 INFO   ✓  shops_en.json                        2399 rekordów
+19:52:54 INFO   ✓  shops_pl.json                        2996 rekordów
+19:52:54 INFO   ✓  matches_en.json                       808 rekordów
+19:52:54 INFO   ✓  matches_pl.json                       822 rekordów
+19:52:54 INFO   ✓  ingredient_db_en.json                 808 rekordów
+19:52:54 INFO   ✓  ingredient_db_pl.json                 822 rekordów
+19:52:54 INFO   ✓  unmatched_en.json                     141 rekordów
+19:52:54 INFO   ✓  unmatched_pl.json                     154 rekordów
+19:52:54 INFO   ✓  recipes_en.json                       256 rekordów
+19:52:54 INFO   ✓  recipes_pl.json                       305 rekordów
+19:52:54 INFO   ✓  ingredients_macros.json               808 rekordów
+20:21:13 INFO Uruchamiam kroki: [1, 2, 3, 4, 5]
+20:21:13 INFO ============================================================
+20:21:13 INFO KROK 1: normalize_recipes
+20:21:13 INFO ============================================================
+20:33:00 INFO ✓ Krok 1 zakończony — 707.0s
+20:33:00 INFO ============================================================
+20:33:00 INFO KROK 2: normalize_shops
+20:33:00 INFO ============================================================
+20:33:01 INFO ✓ Krok 2 zakończony — 0.7s
+20:33:01 INFO ============================================================
+20:33:01 INFO KROK 3: match_ingredients
+20:33:01 INFO ============================================================
+20:33:11 INFO ✓ Krok 3 zakończony — 10.7s
+20:33:11 INFO ============================================================
+20:33:11 INFO KROK 4: build_database
+20:33:11 INFO ============================================================
+20:33:14 INFO ✓ Krok 4 zakończony — 2.8s
+20:33:14 INFO ============================================================
+20:33:14 INFO KROK 5: get_macros
+20:33:14 INFO ============================================================
+20:38:04 INFO ✓ Krok 5 zakończony — 290.3s
+20:38:04 INFO 
+============================================================
+20:38:04 INFO Pipeline zakończony pomyślnie — łączny czas: 1011.5s
+20:38:04 INFO ============================================================
+20:38:04 INFO 
+Pliki wynikowe:
+20:38:04 INFO   ✓  recipes_normalized.json               626 rekordów
+20:38:04 INFO   ✓  shops_en.json                        2399 rekordów
+20:38:05 INFO   ✓  shops_pl.json                        2974 rekordów
+20:38:05 INFO   ✓  matches_en.json                       633 rekordów
+20:38:05 INFO   ✓  matches_pl.json                       609 rekordów
+20:38:05 INFO   ✓  ingredient_db_en.json                 633 rekordów
+20:38:05 INFO   ✓  ingredient_db_pl.json                 609 rekordów
+20:38:05 INFO   ✓  unmatched_en.json                     158 rekordów
+20:38:05 INFO   ✓  unmatched_pl.json                     183 rekordów
+20:38:05 INFO   ✓  recipes_en.json                       299 rekordów
+20:38:05 INFO   ✓  recipes_pl.json                       311 rekordów
+20:38:05 INFO   ✓  ingredients_macros.json               632 rekordów
+20:50:46 INFO Uruchamiam kroki: [1, 2, 3, 4, 5]
+20:50:46 INFO ============================================================
+20:50:46 INFO KROK 1: normalize_recipes
+20:50:46 INFO ============================================================
+21:02:28 INFO ✓ Krok 1 zakończony — 701.8s
+21:02:28 INFO ============================================================
+21:02:28 INFO KROK 2: normalize_shops
+21:02:28 INFO ============================================================
+21:02:28 INFO ✓ Krok 2 zakończony — 0.0s
+21:02:28 INFO ============================================================
+21:02:28 INFO KROK 3: match_ingredients
+21:02:28 INFO ============================================================
+21:02:38 INFO ✓ Krok 3 zakończony — 10.2s
+21:02:38 INFO ============================================================
+21:02:38 INFO KROK 4: build_database
+21:02:38 INFO ============================================================
+21:02:46 INFO ✓ Krok 4 zakończony — 8.5s
+21:02:46 INFO ============================================================
+21:02:46 INFO KROK 5: get_macros
+21:02:46 INFO ============================================================
+21:04:53 INFO ✓ Krok 5 zakończony — 126.8s
+21:04:53 INFO 
+============================================================
+21:04:53 INFO Pipeline zakończony pomyślnie — łączny czas: 847.3s
+21:04:53 INFO ============================================================
+21:04:53 INFO 
+Pliki wynikowe:
+21:04:53 INFO   ✓  recipes_normalized.json               615 rekordów
+21:04:53 INFO   ✓  shops_en.json                        2399 rekordów
+21:04:53 INFO   ✓  shops_pl.json                        2974 rekordów
+21:04:53 INFO   ✓  matches_en.json                       276 rekordów
+21:04:53 INFO   ✓  matches_pl.json                       235 rekordów
+21:04:53 INFO   ✓  ingredient_db_en.json                 276 rekordów
+21:04:53 INFO   ✓  ingredient_db_pl.json                 235 rekordów
+21:04:53 INFO   ✓  unmatched_en.json                     510 rekordów
+21:04:53 INFO   ✓  unmatched_pl.json                     576 rekordów
+21:04:53 INFO   ✓  recipes_en.json                        18 rekordów
+21:04:53 INFO   ✓  recipes_pl.json                         0 rekordów
+21:04:53 INFO   ✓  ingredients_macros.json               272 rekordów
+21:10:59 INFO Uruchamiam kroki: [3, 4, 5]
+21:10:59 INFO ============================================================
+21:10:59 INFO KROK 3: match_ingredients
+21:10:59 INFO ============================================================
+21:11:11 INFO ✓ Krok 3 zakończony — 11.3s
+21:11:11 INFO ============================================================
+21:11:11 INFO KROK 4: build_database
+21:11:11 INFO ============================================================
+21:11:16 INFO ✓ Krok 4 zakończony — 5.8s
+21:11:16 INFO ============================================================
+21:11:16 INFO KROK 5: get_macros
+21:11:16 INFO ============================================================
+21:13:19 INFO ✓ Krok 5 zakończony — 122.5s
+21:13:19 INFO 
+============================================================
+21:13:19 INFO Pipeline zakończony pomyślnie — łączny czas: 139.6s
+21:13:19 INFO ============================================================
+21:13:19 INFO 
+Pliki wynikowe:
+21:13:19 INFO   ✓  recipes_normalized.json               615 rekordów
+21:13:19 INFO   ✓  shops_en.json                        2399 rekordów
+21:13:19 INFO   ✓  shops_pl.json                        2974 rekordów
+21:13:19 INFO   ✓  matches_en.json                       276 rekordów
+21:13:19 INFO   ✓  matches_pl.json                       527 rekordów
+21:13:19 INFO   ✓  ingredient_db_en.json                 276 rekordów
+21:13:19 INFO   ✓  ingredient_db_pl.json                 527 rekordów
+21:13:19 INFO   ✓  unmatched_en.json                     510 rekordów
+21:13:19 INFO   ✓  unmatched_pl.json                     284 rekordów
+21:13:19 INFO   ✓  recipes_en.json                        18 rekordów
+21:13:19 INFO   ✓  recipes_pl.json                       109 rekordów
+21:13:19 INFO   ✓  ingredients_macros.json               270 rekordów
+23:00:05 INFO Uruchamiam kroki: [2, 3, 4, 5]
+23:00:05 INFO ============================================================
+23:00:05 INFO KROK 2: normalize_shops
+23:00:05 INFO ============================================================
+23:00:06 INFO ✓ Krok 2 zakończony — 0.8s
+23:00:06 INFO ============================================================
+23:00:06 INFO KROK 3: match_ingredients
+23:00:06 INFO ============================================================
+23:00:17 INFO ✓ Krok 3 zakończony — 10.7s
+23:00:17 INFO ============================================================
+23:00:17 INFO KROK 4: build_database
+23:00:17 INFO ============================================================
+23:00:22 INFO ✓ Krok 4 zakończony — 5.5s
+23:00:22 INFO ============================================================
+23:00:22 INFO KROK 5: get_macros
+23:00:22 INFO ============================================================
+23:02:18 INFO ✓ Krok 5 zakończony — 115.6s
+23:02:18 INFO 
+============================================================
+23:02:18 INFO Pipeline zakończony pomyślnie — łączny czas: 132.7s
+23:02:18 INFO ============================================================
+23:02:18 INFO 
+Pliki wynikowe:
+23:02:18 INFO   ✓  recipes_normalized.json               615 rekordów
+23:02:18 INFO   ✓  shops_en.json                        2399 rekordów
+23:02:18 INFO   ✓  shops_pl.json                        2781 rekordów
+23:02:18 INFO   ✓  matches_en.json                       276 rekordów
+23:02:18 INFO   ✓  matches_pl.json                       522 rekordów
+23:02:18 INFO   ✓  ingredient_db_en.json                 276 rekordów
+23:02:18 INFO   ✓  ingredient_db_pl.json                 522 rekordów
+23:02:18 INFO   ✓  unmatched_en.json                     510 rekordów
+23:02:18 INFO   ✓  unmatched_pl.json                     289 rekordów
+23:02:18 INFO   ✓  recipes_en.json                        18 rekordów
+23:02:18 INFO   ✓  recipes_pl.json                       108 rekordów
+23:02:18 INFO   ✓  ingredients_macros.json               269 rekordów
+23:06:03 INFO Uruchamiam kroki: [2, 3, 4, 5]
+23:06:03 INFO ============================================================
+23:06:03 INFO KROK 2: normalize_shops
+23:06:03 INFO ============================================================
+23:06:04 INFO ✓ Krok 2 zakończony — 0.9s
+23:06:04 INFO ============================================================
+23:06:04 INFO KROK 3: match_ingredients
+23:06:04 INFO ============================================================
+23:06:14 INFO ✓ Krok 3 zakończony — 10.0s
+23:06:14 INFO ============================================================
+23:06:14 INFO KROK 4: build_database
+23:06:14 INFO ============================================================
+23:06:19 INFO ✓ Krok 4 zakończony — 5.4s
+23:06:19 INFO ============================================================
+23:06:19 INFO KROK 5: get_macros
+23:06:19 INFO ============================================================
+23:08:10 INFO ✓ Krok 5 zakończony — 110.7s
+23:08:10 INFO 
+============================================================
+23:08:10 INFO Pipeline zakończony pomyślnie — łączny czas: 127.0s
+23:08:10 INFO ============================================================
+23:08:10 INFO 
+Pliki wynikowe:
+23:08:10 INFO   ✓  recipes_normalized.json               615 rekordów
+23:08:10 INFO   ✓  shops_en.json                        2399 rekordów
+23:08:10 INFO   ✓  shops_pl.json                        2756 rekordów
+23:08:10 INFO   ✓  matches_en.json                       276 rekordów
+23:08:10 INFO   ✓  matches_pl.json                       522 rekordów
+23:08:10 INFO   ✓  ingredient_db_en.json                 276 rekordów
+23:08:10 INFO   ✓  ingredient_db_pl.json                 522 rekordów
+23:08:10 INFO   ✓  unmatched_en.json                     510 rekordów
+23:08:10 INFO   ✓  unmatched_pl.json                     289 rekordów
+23:08:10 INFO   ✓  recipes_en.json                        18 rekordów
+23:08:10 INFO   ✓  recipes_pl.json                       108 rekordów
+23:08:10 INFO   ✓  ingredients_macros.json               269 rekordów
+23:11:40 INFO Uruchamiam kroki: [3, 4, 5]
+23:11:40 INFO ============================================================
+23:11:40 INFO KROK 3: match_ingredients
+23:11:40 INFO ============================================================
+23:11:52 INFO ✓ Krok 3 zakończony — 11.6s
+23:11:52 INFO ============================================================
+23:11:52 INFO KROK 4: build_database
+23:11:52 INFO ============================================================
+23:11:57 INFO ✓ Krok 4 zakończony — 5.4s
+23:11:57 INFO ============================================================
+23:11:57 INFO KROK 5: get_macros
+23:11:57 INFO ============================================================
+23:13:54 INFO ✓ Krok 5 zakończony — 116.6s
+23:13:54 INFO 
+============================================================
+23:13:54 INFO Pipeline zakończony pomyślnie — łączny czas: 133.6s
+23:13:54 INFO ============================================================
+23:13:54 INFO 
+Pliki wynikowe:
+23:13:54 INFO   ✓  recipes_normalized.json               615 rekordów
+23:13:54 INFO   ✓  shops_en.json                        2399 rekordów
+23:13:54 INFO   ✓  shops_pl.json                        2756 rekordów
+23:13:54 INFO   ✓  matches_en.json                       276 rekordów
+23:13:54 INFO   ✓  matches_pl.json                       522 rekordów
+23:13:54 INFO   ✓  ingredient_db_en.json                 276 rekordów
+23:13:54 INFO   ✓  ingredient_db_pl.json                 522 rekordów
+23:13:54 INFO   ✓  unmatched_en.json                     510 rekordów
+23:13:54 INFO   ✓  unmatched_pl.json                     289 rekordów
+23:13:54 INFO   ✓  recipes_en.json                        18 rekordów
+23:13:54 INFO   ✓  recipes_pl.json                       108 rekordów
+23:13:54 INFO   ✓  ingredients_macros.json               269 rekordów
+23:19:28 INFO Uruchamiam kroki: [2, 3, 4, 5]
+23:19:28 INFO ============================================================
+23:19:28 INFO KROK 2: normalize_shops
+23:19:28 INFO ============================================================
+23:19:28 INFO ✓ Krok 2 zakończony — 0.8s
+23:19:28 INFO ============================================================
+23:19:28 INFO KROK 3: match_ingredients
+23:19:28 INFO ============================================================
+23:19:40 INFO ✓ Krok 3 zakończony — 11.3s
+23:19:40 INFO ============================================================
+23:19:40 INFO KROK 4: build_database
+23:19:40 INFO ============================================================
+23:19:45 INFO ✓ Krok 4 zakończony — 5.4s
+23:19:45 INFO ============================================================
+23:19:45 INFO KROK 5: get_macros
+23:19:45 INFO ============================================================
+23:21:31 INFO ✓ Krok 5 zakończony — 105.6s
+23:21:31 INFO 
+============================================================
+23:21:31 INFO Pipeline zakończony pomyślnie — łączny czas: 123.2s
+23:21:31 INFO ============================================================
+23:21:31 INFO 
+Pliki wynikowe:
+23:21:31 INFO   ✓  recipes_normalized.json               615 rekordów
+23:21:31 INFO   ✓  shops_en.json                        2399 rekordów
+23:21:31 INFO   ✓  shops_pl.json                        2732 rekordów
+23:21:31 INFO   ✓  matches_en.json                       276 rekordów
+23:21:31 INFO   ✓  matches_pl.json                       520 rekordów
+23:21:31 INFO   ✓  ingredient_db_en.json                 276 rekordów
+23:21:31 INFO   ✓  ingredient_db_pl.json                 520 rekordów
+23:21:31 INFO   ✓  unmatched_en.json                     510 rekordów
+23:21:31 INFO   ✓  unmatched_pl.json                     291 rekordów
+23:21:31 INFO   ✓  recipes_en.json                        18 rekordów
+23:21:31 INFO   ✓  recipes_pl.json                       108 rekordów
+23:21:31 INFO   ✓  ingredients_macros.json               270 rekordów
+23:22:53 INFO Uruchamiam kroki: [2, 3, 4, 5]
+23:22:53 INFO ============================================================
+23:22:53 INFO KROK 2: normalize_shops
+23:22:53 INFO ============================================================
+23:22:54 INFO ✓ Krok 2 zakończony — 0.9s
+23:22:54 INFO ============================================================
+23:22:54 INFO KROK 3: match_ingredients
+23:22:54 INFO ============================================================
+23:23:05 INFO ✓ Krok 3 zakończony — 11.3s
+23:23:05 INFO ============================================================
+23:23:05 INFO KROK 4: build_database
+23:23:05 INFO ============================================================
+23:23:10 INFO ✓ Krok 4 zakończony — 5.4s
+23:23:10 INFO ============================================================
+23:23:10 INFO KROK 5: get_macros
+23:23:10 INFO ============================================================
+23:24:53 INFO ✓ Krok 5 zakończony — 102.8s
+23:24:53 INFO 
+============================================================
+23:24:53 INFO Pipeline zakończony pomyślnie — łączny czas: 120.4s
+23:24:53 INFO ============================================================
+23:24:53 INFO 
+Pliki wynikowe:
+23:24:53 INFO   ✓  recipes_normalized.json               615 rekordów
+23:24:53 INFO   ✓  shops_en.json                        2399 rekordów
+23:24:53 INFO   ✓  shops_pl.json                        2732 rekordów
+23:24:53 INFO   ✓  matches_en.json                       276 rekordów
+23:24:53 INFO   ✓  matches_pl.json                       520 rekordów
+23:24:53 INFO   ✓  ingredient_db_en.json                 276 rekordów
+23:24:53 INFO   ✓  ingredient_db_pl.json                 520 rekordów
+23:24:53 INFO   ✓  unmatched_en.json                     510 rekordów
+23:24:53 INFO   ✓  unmatched_pl.json                     291 rekordów
+23:24:53 INFO   ✓  recipes_en.json                        18 rekordów
+23:24:53 INFO   ✓  recipes_pl.json                       108 rekordów
+23:24:53 INFO   ✓  ingredients_macros.json               269 rekordów
+08:50:27 INFO Uruchamiam kroki: [2, 3, 4, 5]
+08:50:27 INFO ============================================================
+08:50:27 INFO KROK 2: normalize_shops
+08:50:27 INFO ============================================================
+08:50:28 INFO ✓ Krok 2 zakończony — 1.0s
+08:50:28 INFO ============================================================
+08:50:28 INFO KROK 3: match_ingredients
+08:50:28 INFO ============================================================
+08:50:40 INFO ✓ Krok 3 zakończony — 11.2s
+08:50:40 INFO ============================================================
+08:50:40 INFO KROK 4: build_database
+08:50:40 INFO ============================================================
+08:50:45 INFO ✓ Krok 4 zakończony — 5.6s
+08:50:45 INFO ============================================================
+08:50:45 INFO KROK 5: get_macros
+08:50:45 INFO ============================================================
+08:53:22 INFO ✓ Krok 5 zakończony — 156.7s
+08:53:22 INFO 
+============================================================
+08:53:22 INFO Pipeline zakończony pomyślnie — łączny czas: 174.6s
+08:53:22 INFO ============================================================
+08:53:22 INFO 
+Pliki wynikowe:
+08:53:22 INFO   ✓  recipes_normalized.json               615 rekordów
+08:53:22 INFO   ✓  shops_en.json                        2399 rekordów
+08:53:22 INFO   ✓  shops_pl.json                        2726 rekordów
+08:53:22 INFO   ✓  matches_en.json                       276 rekordów
+08:53:22 INFO   ✓  matches_pl.json                       519 rekordów
+08:53:22 INFO   ✓  ingredient_db_en.json                 276 rekordów
+08:53:22 INFO   ✓  ingredient_db_pl.json                 519 rekordów
+08:53:22 INFO   ✓  unmatched_en.json                     510 rekordów
+08:53:22 INFO   ✓  unmatched_pl.json                     292 rekordów
+08:53:22 INFO   ✓  recipes_en.json                        18 rekordów
+08:53:22 INFO   ✓  recipes_pl.json                       108 rekordów
+08:53:22 INFO   ✓  ingredients_macros.json               272 rekordów
+09:01:31 INFO Uruchamiam kroki: [2, 3, 4, 5]
+09:01:31 INFO ============================================================
+09:01:31 INFO KROK 2: normalize_shops
+09:01:31 INFO ============================================================
+09:01:32 INFO ✓ Krok 2 zakończony — 0.9s
+09:01:32 INFO ============================================================
+09:01:32 INFO KROK 3: match_ingredients
+09:01:32 INFO ============================================================
+09:01:44 INFO ✓ Krok 3 zakończony — 11.8s
+09:01:44 INFO ============================================================
+09:01:44 INFO KROK 4: build_database
+09:01:44 INFO ============================================================
+09:01:49 INFO ✓ Krok 4 zakończony — 5.5s
+09:01:49 INFO ============================================================
+09:01:49 INFO KROK 5: get_macros
+09:01:49 INFO ============================================================
+09:04:25 INFO ✓ Krok 5 zakończony — 155.3s
+09:04:25 INFO 
+============================================================
+09:04:25 INFO Pipeline zakończony pomyślnie — łączny czas: 173.5s
+09:04:25 INFO ============================================================
+09:04:25 INFO 
+Pliki wynikowe:
+09:04:25 INFO   ✓  recipes_normalized.json               615 rekordów
+09:04:25 INFO   ✓  shops_en.json                        2399 rekordów
+09:04:25 INFO   ✓  shops_pl.json                        2723 rekordów
+09:04:25 INFO   ✓  matches_en.json                       276 rekordów
+09:04:25 INFO   ✓  matches_pl.json                       518 rekordów
+09:04:25 INFO   ✓  ingredient_db_en.json                 276 rekordów
+09:04:25 INFO   ✓  ingredient_db_pl.json                 518 rekordów
+09:04:25 INFO   ✓  unmatched_en.json                     510 rekordów
+09:04:25 INFO   ✓  unmatched_pl.json                     293 rekordów
+09:04:25 INFO   ✓  recipes_en.json                        18 rekordów
+09:04:25 INFO   ✓  recipes_pl.json                       107 rekordów
+09:04:25 INFO   ✓  ingredients_macros.json               268 rekordów
+09:08:25 INFO Uruchamiam kroki: [2, 3, 4, 5]
+09:08:25 INFO ============================================================
+09:08:25 INFO KROK 2: normalize_shops
+09:08:25 INFO ============================================================
+09:08:26 INFO ✓ Krok 2 zakończony — 0.9s
+09:08:26 INFO ============================================================
+09:08:26 INFO KROK 3: match_ingredients
+09:08:26 INFO ============================================================
+09:08:38 INFO ✓ Krok 3 zakończony — 12.0s
+09:08:38 INFO ============================================================
+09:08:38 INFO KROK 4: build_database
+09:08:38 INFO ============================================================
+09:08:43 INFO ✓ Krok 4 zakończony — 5.7s
+09:08:43 INFO ============================================================
+09:08:43 INFO KROK 5: get_macros
+09:08:43 INFO ============================================================
+09:11:22 INFO ✓ Krok 5 zakończony — 158.6s
+09:11:22 INFO 
+============================================================
+09:11:22 INFO Pipeline zakończony pomyślnie — łączny czas: 177.1s
+09:11:22 INFO ============================================================
+09:11:22 INFO 
+Pliki wynikowe:
+09:11:22 INFO   ✓  recipes_normalized.json               615 rekordów
+09:11:22 INFO   ✓  shops_en.json                        2399 rekordów
+09:11:22 INFO   ✓  shops_pl.json                        2715 rekordów
+09:11:22 INFO   ✓  matches_en.json                       276 rekordów
+09:11:22 INFO   ✓  matches_pl.json                       518 rekordów
+09:11:22 INFO   ✓  ingredient_db_en.json                 276 rekordów
+09:11:22 INFO   ✓  ingredient_db_pl.json                 518 rekordów
+09:11:22 INFO   ✓  unmatched_en.json                     510 rekordów
+09:11:22 INFO   ✓  unmatched_pl.json                     292 rekordów
+09:11:22 INFO   ✓  recipes_en.json                        18 rekordów
+09:11:22 INFO   ✓  recipes_pl.json                        78 rekordów
+09:11:22 INFO   ✓  ingredients_macros.json               272 rekordów
+09:13:13 INFO Uruchamiam kroki: [3, 4, 5]
+09:13:13 INFO ============================================================
+09:13:13 INFO KROK 3: match_ingredients
+09:13:13 INFO ============================================================
+09:13:25 INFO ✓ Krok 3 zakończony — 11.9s
+09:13:25 INFO ============================================================
+09:13:25 INFO KROK 4: build_database
+09:13:25 INFO ============================================================
+09:13:30 INFO ✓ Krok 4 zakończony — 5.9s
+09:13:30 INFO ============================================================
+09:13:30 INFO KROK 5: get_macros
+09:13:30 INFO ============================================================
+09:16:06 INFO ✓ Krok 5 zakończony — 155.2s
+09:16:06 INFO 
+============================================================
+09:16:06 INFO Pipeline zakończony pomyślnie — łączny czas: 173.0s
+09:16:06 INFO ============================================================
+09:16:06 INFO 
+Pliki wynikowe:
+09:16:06 INFO   ✓  recipes_normalized.json               615 rekordów
+09:16:06 INFO   ✓  shops_en.json                        2399 rekordów
+09:16:06 INFO   ✓  shops_pl.json                        2715 rekordów
+09:16:06 INFO   ✓  matches_en.json                       276 rekordów
+09:16:06 INFO   ✓  matches_pl.json                       519 rekordów
+09:16:06 INFO   ✓  ingredient_db_en.json                 276 rekordów
+09:16:06 INFO   ✓  ingredient_db_pl.json                 519 rekordów
+09:16:06 INFO   ✓  unmatched_en.json                     510 rekordów
+09:16:06 INFO   ✓  unmatched_pl.json                     292 rekordów
+09:16:06 INFO   ✓  recipes_en.json                        18 rekordów
+09:16:06 INFO   ✓  recipes_pl.json                       109 rekordów
+09:16:06 INFO   ✓  ingredients_macros.json               268 rekordów
+09:34:50 INFO Uruchamiam kroki: [5]
+09:34:50 INFO ============================================================
+09:34:50 INFO KROK 5: get_macros
+09:34:50 INFO ============================================================
+09:38:57 INFO ✓ Krok 5 zakończony — 246.8s
+09:38:57 INFO 
+============================================================
+09:38:57 INFO Pipeline zakończony pomyślnie — łączny czas: 246.8s
+09:38:57 INFO ============================================================
+09:38:57 INFO 
+Pliki wynikowe:
+09:38:57 INFO   ✓  recipes_normalized.json               615 rekordów
+09:38:57 INFO   ✓  shops_en.json                        2399 rekordów
+09:38:57 INFO   ✓  shops_pl.json                        2715 rekordów
+09:38:57 INFO   ✓  matches_en.json                       276 rekordów
+09:38:57 INFO   ✓  matches_pl.json                       519 rekordów
+09:38:57 INFO   ✓  ingredient_db_en.json                 276 rekordów
+09:38:57 INFO   ✓  ingredient_db_pl.json                 519 rekordów
+09:38:57 INFO   ✓  unmatched_en.json                     510 rekordów
+09:38:57 INFO   ✓  unmatched_pl.json                     292 rekordów
+09:38:57 INFO   ✓  recipes_en.json                        18 rekordów
+09:38:57 INFO   ✓  recipes_pl.json                       109 rekordów
+09:38:57 INFO   ✓  ingredients_macros.json               417 rekordów
+09:52:14 INFO Uruchamiam kroki: [3, 4, 5]
+09:52:14 INFO ============================================================
+09:52:14 INFO KROK 3: match_ingredients
+09:52:14 INFO ============================================================
+09:52:25 INFO ✓ Krok 3 zakończony — 11.2s
+09:52:25 INFO ============================================================
+09:52:25 INFO KROK 4: build_database
+09:52:25 INFO ============================================================
+09:52:31 INFO ✓ Krok 4 zakończony — 6.0s
+09:52:31 INFO ============================================================
+09:52:31 INFO KROK 5: get_macros
+09:52:31 INFO ============================================================
+09:56:25 INFO ✓ Krok 5 zakończony — 233.2s
+09:56:25 INFO 
+============================================================
+09:56:25 INFO Pipeline zakończony pomyślnie — łączny czas: 250.4s
+09:56:25 INFO ============================================================
+09:56:25 INFO 
+Pliki wynikowe:
+09:56:25 INFO   ✓  recipes_normalized.json               615 rekordów
+09:56:25 INFO   ✓  shops_en.json                        2399 rekordów
+09:56:25 INFO   ✓  shops_pl.json                        2715 rekordów
+09:56:25 INFO   ✓  matches_en.json                       276 rekordów
+09:56:25 INFO   ✓  matches_pl.json                       488 rekordów
+09:56:25 INFO   ✓  ingredient_db_en.json                 276 rekordów
+09:56:25 INFO   ✓  ingredient_db_pl.json                 488 rekordów
+09:56:25 INFO   ✓  unmatched_en.json                     510 rekordów
+09:56:25 INFO   ✓  unmatched_pl.json                     323 rekordów
+09:56:25 INFO   ✓  recipes_en.json                        18 rekordów
+09:56:25 INFO   ✓  recipes_pl.json                        92 rekordów
+09:56:25 INFO   ✓  ingredients_macros.json               394 rekordów
+10:50:10 INFO Uruchamiam kroki: [2, 3, 4, 5]
+10:50:10 INFO ============================================================
+10:50:10 INFO KROK 2: normalize_shops
+10:50:10 INFO ============================================================
+10:50:11 INFO ✓ Krok 2 zakończony — 0.9s
+10:50:11 INFO ============================================================
+10:50:11 INFO KROK 3: match_ingredients
+10:50:11 INFO ============================================================
+10:50:21 INFO ✓ Krok 3 zakończony — 10.9s
+10:50:21 INFO ============================================================
+10:50:21 INFO KROK 4: build_database
+10:50:21 INFO ============================================================
+10:50:28 INFO ✓ Krok 4 zakończony — 6.9s
+10:50:28 INFO ============================================================
+10:50:28 INFO KROK 5: get_macros
+10:50:28 INFO ============================================================
+10:54:53 INFO ✓ Krok 5 zakończony — 264.6s
+10:54:53 INFO 
+============================================================
+10:54:53 INFO Pipeline zakończony pomyślnie — łączny czas: 283.3s
+10:54:53 INFO ============================================================
+10:54:53 INFO 
+Pliki wynikowe:
+10:54:53 INFO   ✓  recipes_normalized.json               615 rekordów
+10:54:53 INFO   ✓  shops_en.json                        2399 rekordów
+10:54:53 INFO   ✓  shops_pl.json                        2712 rekordów
+10:54:53 INFO   ✓  matches_en.json                       276 rekordów
+10:54:53 INFO   ✓  matches_pl.json                       354 rekordów
+10:54:53 INFO   ✓  ingredient_db_en.json                 276 rekordów
+10:54:53 INFO   ✓  ingredient_db_pl.json                 354 rekordów
+10:54:53 INFO   ✓  unmatched_en.json                     510 rekordów
+10:54:53 INFO   ✓  unmatched_pl.json                     457 rekordów
+10:54:53 INFO   ✓  recipes_en.json                        18 rekordów
+10:54:53 INFO   ✓  recipes_pl.json                        36 rekordów
+10:54:53 INFO   ✓  ingredients_macros.json               436 rekordów
+10:56:37 INFO Uruchamiam kroki: [3, 4, 5]
+10:56:37 INFO ============================================================
+10:56:37 INFO KROK 3: match_ingredients
+10:56:37 INFO ============================================================
+10:56:47 INFO ✓ Krok 3 zakończony — 10.4s
+10:56:47 INFO ============================================================
+10:56:47 INFO KROK 4: build_database
+10:56:47 INFO ============================================================
+10:56:54 INFO ✓ Krok 4 zakończony — 6.8s
+10:56:54 INFO ============================================================
+10:56:54 INFO KROK 5: get_macros
+10:56:54 INFO ============================================================
+11:01:28 INFO ✓ Krok 5 zakończony — 273.9s
+11:01:28 INFO 
+============================================================
+11:01:28 INFO Pipeline zakończony pomyślnie — łączny czas: 291.1s
+11:01:28 INFO ============================================================
+11:01:28 INFO 
+Pliki wynikowe:
+11:01:28 INFO   ✓  recipes_normalized.json               615 rekordów
+11:01:28 INFO   ✓  shops_en.json                        2399 rekordów
+11:01:28 INFO   ✓  shops_pl.json                        2712 rekordów
+11:01:28 INFO   ✓  matches_en.json                       276 rekordów
+11:01:28 INFO   ✓  matches_pl.json                       357 rekordów
+11:01:28 INFO   ✓  ingredient_db_en.json                 276 rekordów
+11:01:28 INFO   ✓  ingredient_db_pl.json                 357 rekordów
+11:01:28 INFO   ✓  unmatched_en.json                     510 rekordów
+11:01:28 INFO   ✓  unmatched_pl.json                     454 rekordów
+11:01:28 INFO   ✓  recipes_en.json                        18 rekordów
+11:01:28 INFO   ✓  recipes_pl.json                        38 rekordów
+11:01:28 INFO   ✓  ingredients_macros.json               436 rekordów
+11:05:12 INFO Uruchamiam kroki: [2, 3, 4, 5]
+11:05:12 INFO ============================================================
+11:05:12 INFO KROK 2: normalize_shops
+11:05:12 INFO ============================================================
+11:05:13 INFO ✓ Krok 2 zakończony — 0.9s
+11:05:13 INFO ============================================================
+11:05:13 INFO KROK 3: match_ingredients
+11:05:13 INFO ============================================================
+11:05:23 INFO ✓ Krok 3 zakończony — 10.6s
+11:05:23 INFO ============================================================
+11:05:23 INFO KROK 4: build_database
+11:05:23 INFO ============================================================
+11:05:29 INFO ✓ Krok 4 zakończony — 6.1s
+11:05:29 INFO ============================================================
+11:05:29 INFO KROK 5: get_macros
+11:05:29 INFO ============================================================
+11:09:58 INFO ✓ Krok 5 zakończony — 269.0s
+11:09:58 INFO 
+============================================================
+11:09:58 INFO Pipeline zakończony pomyślnie — łączny czas: 286.5s
+11:09:58 INFO ============================================================
+11:09:58 INFO 
+Pliki wynikowe:
+11:09:58 INFO   ✓  recipes_normalized.json               615 rekordów
+11:09:58 INFO   ✓  shops_en.json                        2399 rekordów
+11:09:58 INFO   ✓  shops_pl.json                        2709 rekordów
+11:09:58 INFO   ✓  matches_en.json                       276 rekordów
+11:09:58 INFO   ✓  matches_pl.json                       432 rekordów
+11:09:58 INFO   ✓  ingredient_db_en.json                 276 rekordów
+11:09:58 INFO   ✓  ingredient_db_pl.json                 432 rekordów
+11:09:58 INFO   ✓  unmatched_en.json                     510 rekordów
+11:09:58 INFO   ✓  unmatched_pl.json                     379 rekordów
+11:09:58 INFO   ✓  recipes_en.json                        18 rekordów
+11:09:58 INFO   ✓  recipes_pl.json                        71 rekordów
+11:09:58 INFO   ✓  ingredients_macros.json               431 rekordów
+12:06:05 INFO Uruchamiam kroki: [2, 3, 4, 5]
+12:06:05 INFO ============================================================
+12:06:05 INFO KROK 2: normalize_shops
+12:06:05 INFO ============================================================
+12:06:06 INFO ✓ Krok 2 zakończony — 0.9s
+12:06:06 INFO ============================================================
+12:06:06 INFO KROK 3: match_ingredients
+12:06:06 INFO ============================================================
+12:06:17 INFO ✓ Krok 3 zakończony — 11.3s
+12:06:17 INFO ============================================================
+12:06:17 INFO KROK 4: build_database
+12:06:17 INFO ============================================================
+12:06:23 INFO ✓ Krok 4 zakończony — 6.1s
+12:06:23 INFO ============================================================
+12:06:23 INFO KROK 5: get_macros
+12:06:23 INFO ============================================================
+12:10:41 INFO ✓ Krok 5 zakończony — 258.2s
+12:10:41 INFO 
+============================================================
+12:10:41 INFO Pipeline zakończony pomyślnie — łączny czas: 276.4s
+12:10:41 INFO ============================================================
+12:10:41 INFO 
+Pliki wynikowe:
+12:10:41 INFO   ✓  recipes_normalized.json               615 rekordów
+12:10:41 INFO   ✓  shops_en.json                        2399 rekordów
+12:10:41 INFO   ✓  shops_pl.json                        2835 rekordów
+12:10:41 INFO   ✓  matches_en.json                       276 rekordów
+12:10:41 INFO   ✓  matches_pl.json                       460 rekordów
+12:10:41 INFO   ✓  ingredient_db_en.json                 276 rekordów
+12:10:41 INFO   ✓  ingredient_db_pl.json                 460 rekordów
+12:10:41 INFO   ✓  unmatched_en.json                     510 rekordów
+12:10:41 INFO   ✓  unmatched_pl.json                     351 rekordów
+12:10:41 INFO   ✓  recipes_en.json                        18 rekordów
+12:10:41 INFO   ✓  recipes_pl.json                        77 rekordów
+12:10:41 INFO   ✓  ingredients_macros.json               452 rekordów
+12:12:53 INFO Uruchamiam kroki: [2, 3, 4, 5]
+12:12:53 INFO ============================================================
+12:12:53 INFO KROK 2: normalize_shops
+12:12:53 INFO ============================================================
+12:12:54 INFO ✓ Krok 2 zakończony — 0.9s
+12:12:54 INFO ============================================================
+12:12:54 INFO KROK 3: match_ingredients
+12:12:54 INFO ============================================================
+12:13:05 INFO ✓ Krok 3 zakończony — 11.2s
+12:13:05 INFO ============================================================
+12:13:05 INFO KROK 4: build_database
+12:13:05 INFO ============================================================
+12:13:11 INFO ✓ Krok 4 zakończony — 5.9s
+12:13:11 INFO ============================================================
+12:13:11 INFO KROK 5: get_macros
+12:13:11 INFO ============================================================
+12:17:31 INFO ✓ Krok 5 zakończony — 260.4s
+12:17:31 INFO 
+============================================================
+12:17:31 INFO Pipeline zakończony pomyślnie — łączny czas: 278.5s
+12:17:31 INFO ============================================================
+12:17:31 INFO 
+Pliki wynikowe:
+12:17:31 INFO   ✓  recipes_normalized.json               615 rekordów
+12:17:31 INFO   ✓  shops_en.json                        2399 rekordów
+12:17:31 INFO   ✓  shops_pl.json                        2859 rekordów
+12:17:31 INFO   ✓  matches_en.json                       276 rekordów
+12:17:31 INFO   ✓  matches_pl.json                       463 rekordów
+12:17:31 INFO   ✓  ingredient_db_en.json                 276 rekordów
+12:17:31 INFO   ✓  ingredient_db_pl.json                 463 rekordów
+12:17:31 INFO   ✓  unmatched_en.json                     510 rekordów
+12:17:31 INFO   ✓  unmatched_pl.json                     348 rekordów
+12:17:31 INFO   ✓  recipes_en.json                        18 rekordów
+12:17:31 INFO   ✓  recipes_pl.json                        79 rekordów
+12:17:31 INFO   ✓  ingredients_macros.json               454 rekordów
+12:38:37 INFO Uruchamiam kroki: [3, 4, 5]
+12:38:37 INFO ============================================================
+12:38:37 INFO KROK 3: match_ingredients
+12:38:37 INFO ============================================================
+12:38:50 INFO ✓ Krok 3 zakończony — 13.1s
+12:38:50 INFO ============================================================
+12:38:50 INFO KROK 4: build_database
+12:38:50 INFO ============================================================
+12:38:57 INFO ✓ Krok 4 zakończony — 6.5s
+12:38:57 INFO ============================================================
+12:38:57 INFO KROK 5: get_macros
+12:38:57 INFO ============================================================
+12:43:13 INFO ✓ Krok 5 zakończony — 256.6s
+12:43:13 INFO 
+============================================================
+12:43:13 INFO Pipeline zakończony pomyślnie — łączny czas: 276.2s
+12:43:13 INFO ============================================================
+12:43:13 INFO 
+Pliki wynikowe:
+12:43:13 INFO   ✓  recipes_normalized.json               615 rekordów
+12:43:13 INFO   ✓  shops_en.json                        2399 rekordów
+12:43:13 INFO   ✓  shops_pl.json                        2859 rekordów
+12:43:13 INFO   ✓  matches_en.json                       276 rekordów
+12:43:13 INFO   ✓  matches_pl.json                       463 rekordów
+12:43:13 INFO   ✓  ingredient_db_en.json                 276 rekordów
+12:43:13 INFO   ✓  ingredient_db_pl.json                 463 rekordów
+12:43:13 INFO   ✓  unmatched_en.json                     510 rekordów
+12:43:13 INFO   ✓  unmatched_pl.json                     348 rekordów
+12:43:13 INFO   ✓  recipes_en.json                        18 rekordów
+12:43:13 INFO   ✓  recipes_pl.json                        79 rekordów
+12:43:13 INFO   ✓  ingredients_macros.json               462 rekordów
