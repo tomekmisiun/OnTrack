@@ -573,7 +573,7 @@
   },
   {
     "original_name": "Pomidorki w drogę 4x100 g",
-    "generic_name": "pomidor w drogę 4x100 g",
+    "generic_name": "pomidor w drogę 4x100",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -1067,7 +1067,7 @@
   },
   {
     "original_name": "Pano Chleb wieloziarnisty Złoty łan z dodatkiem naturalnego zakwasu żytniego 400 g",
-    "generic_name": "pano chleb wieloziarnisty",
+    "generic_name": "chleb wieloziarnisty",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -1106,7 +1106,7 @@
   },
   {
     "original_name": "Pano Chleb żytni 100% pełnoziarnisty 300 g",
-    "generic_name": "pano chleb żytni 100% pełnoziarnisty",
+    "generic_name": "chleb żytni pełnoziarnisty",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -1145,7 +1145,7 @@
   },
   {
     "original_name": "Pano Tortilla Wraps Placki wieloziarniste 306 g",
-    "generic_name": "pano tortilla wraps placki wieloziarniste",
+    "generic_name": "tortilla wraps placki wieloziarniste",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 306.0,
@@ -1158,7 +1158,7 @@
   },
   {
     "original_name": "Pano Chleb tostowy maślany 500 g",
-    "generic_name": "pano chleb tostowy maślany",
+    "generic_name": "chleb tostowy maślany",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -1197,7 +1197,7 @@
   },
   {
     "original_name": "Pano Bułki do burgerów Master 320 g",
-    "generic_name": "pano bułki do burgerów",
+    "generic_name": "bułki do burgerów",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 320.0,
@@ -1223,7 +1223,7 @@
   },
   {
     "original_name": "Pano Wafle kukurydziane o smaku sera 120 g",
-    "generic_name": "pano wafle kukurydziane o smaku sera",
+    "generic_name": "wafle kukurydziane o smaku sera",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 120.0,
@@ -1275,7 +1275,7 @@
   },
   {
     "original_name": "Pano Bułki typu hot dog 240 g",
-    "generic_name": "pano bułki typu hot dog",
+    "generic_name": "bułki typu hot dog",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 240.0,
@@ -1301,7 +1301,7 @@
   },
   {
     "original_name": "Pano Chleb żytni 100% pełnoziarnisty z dodatkiem amarantusa i komosy ryżowej 300 g",
-    "generic_name": "pano chleb żytni 100% pełnoziarnisty z dodatkiem amarantusa i komosy ryżowej",
+    "generic_name": "chleb żytni pełnoziarnisty z dodatkiem amarantusa i komosy ryżowej",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -1314,7 +1314,7 @@
   },
   {
     "original_name": "Pano Bułki do kanapki w stylu amerykańskim 228 g",
-    "generic_name": "pano bułki do kanapki w stylu amerykańskim",
+    "generic_name": "bułki do kanapki w stylu amerykańskim",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 228.0,
@@ -1327,7 +1327,7 @@
   },
   {
     "original_name": "Pano Wafle ryżowe musli 100 g",
-    "generic_name": "pano wafle ryżowe musli",
+    "generic_name": "wafle ryżowe musli",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -1340,7 +1340,7 @@
   },
   {
     "original_name": "Pano Mini burgery z sezamem 224 g",
-    "generic_name": "pano mini burgery z sezamem",
+    "generic_name": "mini burgery z sezamem",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 224.0,
@@ -1353,7 +1353,7 @@
   },
   {
     "original_name": "Pano Bułki pszenne hamburgerowe z sezamem 212 g",
-    "generic_name": "pano bułki pszenne hamburgerowe z sezamem",
+    "generic_name": "bułki pszenne hamburgerowe z sezamem",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 212.0,
@@ -1392,7 +1392,7 @@
   },
   {
     "original_name": "Pano Hot dog pszenny z dodatkiem mąki graham 240 g",
-    "generic_name": "pano hot dog pszenny z dodatkiem mąki graham",
+    "generic_name": "hot dog pszenny z dodatkiem mąki graham",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 240.0,
@@ -1405,7 +1405,7 @@
   },
   {
     "original_name": "Milka Choco Croissant Rogalik z ciasta francuskiego z nadzieniem o smaku waniliowym 50 g",
-    "generic_name": "milka choco croissant rogalik z ciasta francuskiego z nadzieniem o smaku waniliowym",
+    "generic_name": "milka choco croissant rogalik z ciasta z nadzieniem o smaku waniliowym",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 50.0,
@@ -1431,7 +1431,7 @@
   },
   {
     "original_name": "Mleczna Dolina Mleko UHT 1,5 % bez laktozy 1 l",
-    "generic_name": "mleczna dolina mleko uht 1,5 % bez laktozy",
+    "generic_name": "mleczna dolina mleko uht bez laktozy",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -1444,7 +1444,7 @@
   },
   {
     "original_name": "Mlekovita Masło Polskie ekstra 82 % tł. 200 g",
-    "generic_name": "mlekovita masło ekstra 82 % tł",
+    "generic_name": "mlekovita masło tł",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -1496,7 +1496,7 @@
   },
   {
     "original_name": "Sierpc Królewski Ser żółty plastry 135 g",
-    "generic_name": "sierpc królewski ser żółty plastry",
+    "generic_name": "sierpc królewski ser",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 135.0,
@@ -1509,7 +1509,7 @@
   },
   {
     "original_name": "Elios Ser halloumi 225 g",
-    "generic_name": "elios ser halloumi",
+    "generic_name": "ser halloumi",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 225.0,
@@ -1548,7 +1548,7 @@
   },
   {
     "original_name": "Światowid Ser kozi plastry 160 g",
-    "generic_name": "światowid ser kozi plastry",
+    "generic_name": "światowid ser kozi",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 160.0,
@@ -1561,7 +1561,7 @@
   },
   {
     "original_name": "Włoszczowa Ser Gouda plastry 400 g",
-    "generic_name": "włoszczowa ser gouda plastry",
+    "generic_name": "włoszczowa ser",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -1574,7 +1574,7 @@
   },
   {
     "original_name": "Mlekovita Mleko UHT 3,2 % tłuszczu Wypasione 1 l",
-    "generic_name": "mlekovita mleko uht 3,2 % tłuszczu",
+    "generic_name": "mlekovita mleko uht tłuszczu",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -1600,7 +1600,7 @@
   },
   {
     "original_name": "Piątnica Mleko wiejskie świeże 2,0 % 1 l",
-    "generic_name": "piątnica mleko 2,0 %",
+    "generic_name": "piątnica mleko",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -1613,7 +1613,7 @@
   },
   {
     "original_name": "Mleczna Dolina Mleko UHT bez laktozy zawartość tłuszczu 3,2 % 1 l",
-    "generic_name": "mleczna dolina mleko uht bez laktozy zawartość tłuszczu 3,2 %",
+    "generic_name": "mleczna dolina mleko uht bez laktozy zawartość tłuszczu",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -1635,19 +1635,6 @@
     "price_package": 6.49,
     "price_per_unit": null,
     "price_per_100": 4.3267,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Actimel Napój jogurtowy o smaku truskawkowym (6 x 100 g) 600 g",
-    "generic_name": "actimel napój jogurtowy o smaku truskawkowym (6 x )",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 600.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 13.49,
-    "price_per_unit": null,
-    "price_per_100": 2.2483,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -1678,7 +1665,7 @@
   },
   {
     "original_name": "Światowid Ser żółty Edamski porcja 250 g",
-    "generic_name": "światowid ser żółty",
+    "generic_name": "światowid ser porcja",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -1691,7 +1678,7 @@
   },
   {
     "original_name": "Światowid Ser żółty salami plastry 300g",
-    "generic_name": "światowid ser żółty salami plastry",
+    "generic_name": "światowid ser salami",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -1782,7 +1769,7 @@
   },
   {
     "original_name": "Ryki Ser żółty Rycki Edam Exclusive plastry 135 g",
-    "generic_name": "ryki ser żółty",
+    "generic_name": "ryki ser",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 135.0,
@@ -1833,19 +1820,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Actimel Napój jogurtowy o smaku wieloowocowym (6 x 100 g) 600 g",
-    "generic_name": "actimel napój jogurtowy o smaku wieloowocowym (6 x )",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 600.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 13.49,
-    "price_per_unit": null,
-    "price_per_100": 2.2483,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Moja Kurka Jaja wolny wybieg M 10 szt.",
     "generic_name": "moja kurka jaja wolny wybieg m",
     "shop": "biedronka",
@@ -1873,7 +1847,7 @@
   },
   {
     "original_name": "Fantasia Jogurt kremowy chrupiący słony karmel 99 g",
-    "generic_name": "fantasia jogurt kremowy chrupiący słony karmel",
+    "generic_name": "fantasia jogurt chrupiący słony karmel",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 99.0,
@@ -1925,7 +1899,7 @@
   },
   {
     "original_name": "Sierpc Ser Królewski wędzony plastry 135 g",
-    "generic_name": "sierpc ser królewski plastry",
+    "generic_name": "sierpc ser królewski",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 135.0,
@@ -2003,7 +1977,7 @@
   },
   {
     "original_name": "SM Gostyń Mleko zagęszczone niesłodzone 7,5 % gostyńskie 500 g",
-    "generic_name": "sm gostyń mleko zagęszczone niesłodzone 7,5 % gostyńskie",
+    "generic_name": "sm gostyń mleko zagęszczone niesłodzone gostyńskie",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -2016,7 +1990,7 @@
   },
   {
     "original_name": "Hochland Ser kremowy z szynką w trójkącikach 8 szt. 180 g",
-    "generic_name": "hochland ser kremowy z szynką w trójkącikach",
+    "generic_name": "hochland ser z szynką w trójkącikach",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -2042,7 +2016,7 @@
   },
   {
     "original_name": "Mlekovita Mleko UHT 2% tłuszczu Wypasione 1l",
-    "generic_name": "mlekovita mleko uht 2% tłuszczu",
+    "generic_name": "mlekovita mleko uht tłuszczu",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -2055,7 +2029,7 @@
   },
   {
     "original_name": "Włoszczowa Ser Włoszczowski plastry 400 g",
-    "generic_name": "włoszczowa ser włoszczowski plastry",
+    "generic_name": "włoszczowa ser włoszczowski",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -2120,7 +2094,7 @@
   },
   {
     "original_name": "Fantasia Jogurt kremowy z kulkami w czekoladzie 100 g",
-    "generic_name": "fantasia jogurt kremowy z kulkami w czekoladzie",
+    "generic_name": "fantasia jogurt z kulkami w czekoladzie",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -2133,7 +2107,7 @@
   },
   {
     "original_name": "Sierpc Ser Królewski Light plastry 135 g",
-    "generic_name": "sierpc ser królewski plastry",
+    "generic_name": "sierpc ser królewski",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 135.0,
@@ -2224,7 +2198,7 @@
   },
   {
     "original_name": "Fruvita Jogurt typu islandzkiego Skyr czerwona-czarna porzeczka 150 g",
-    "generic_name": "fruvita jogurt typu islandzkiego",
+    "generic_name": "fruvita jogurt",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -2341,7 +2315,7 @@
   },
   {
     "original_name": "Piątnica Skyr jogurt pitny typu islandzkiego nektarynka & malina 330 ml",
-    "generic_name": "piątnica skyr jogurt pitny typu islandzkiego nektarynka & malina",
+    "generic_name": "piątnica skyr jogurt pitny nektarynka & malina",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 330.0,
@@ -2354,7 +2328,7 @@
   },
   {
     "original_name": "Hochland Ser kremowy mixtett w trójkącikach 8 szt. 180 g",
-    "generic_name": "hochland ser kremowy mixtett w trójkącikach",
+    "generic_name": "hochland ser mixtett w trójkącikach",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -2367,7 +2341,7 @@
   },
   {
     "original_name": "Piątnica Skyr jogurt pitny typu islandzkiego wiśnia 330 ml",
-    "generic_name": "piątnica skyr jogurt pitny typu islandzkiego wiśnia",
+    "generic_name": "piątnica skyr jogurt pitny wiśnia",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 330.0,
@@ -2380,7 +2354,7 @@
   },
   {
     "original_name": "Piątnica Skyr jogurt pitny typu islandzkiego limonka & nuta mięty 330 ml",
-    "generic_name": "piątnica skyr jogurt pitny typu islandzkiego limonka & nuta mięty",
+    "generic_name": "piątnica skyr jogurt pitny limonka & nuta mięty",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 330.0,
@@ -2393,7 +2367,7 @@
   },
   {
     "original_name": "Delikate Mascarpone Ser śmietankowo-kremowy 250 g",
-    "generic_name": "delikate mascarpone ser śmietankowo-kremowy",
+    "generic_name": "delikate mascarpone ser śmietankowo",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -2458,7 +2432,7 @@
   },
   {
     "original_name": "Hochland Ser kremowy ze śmietanką w trójkącikach 8 szt. 180 g",
-    "generic_name": "hochland ser kremowy ze śmietanką w trójkącikach",
+    "generic_name": "hochland ser ze śmietanką w trójkącikach",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -2497,7 +2471,7 @@
   },
   {
     "original_name": "Światowid Ser żółty Radamer wędzony 250 g",
-    "generic_name": "światowid ser żółty",
+    "generic_name": "światowid ser",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -2510,7 +2484,7 @@
   },
   {
     "original_name": "Światowid Ser żółty Gouda 400 g",
-    "generic_name": "światowid ser żółty",
+    "generic_name": "światowid ser",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -2519,19 +2493,6 @@
     "price_package": 12.59,
     "price_per_unit": null,
     "price_per_100": 3.1475,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Müllermilch Protein Napój mleczny malina 400 g",
-    "generic_name": "müllermilch protein napój mleczny malina",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.29,
-    "price_per_unit": null,
-    "price_per_100": 1.3225,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -2601,7 +2562,7 @@
   },
   {
     "original_name": "Delikate Kremowy bawarski ser z zielonym pieprzem 150 g",
-    "generic_name": "delikate kremowy bawarski ser z zielonym pieprzem",
+    "generic_name": "delikate bawarski ser z zielonym pieprzem",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -2623,19 +2584,6 @@
     "price_package": 4.99,
     "price_per_unit": null,
     "price_per_100": 1.7821,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Actimel Kids Napój jogurtowy o smaku truskawkowo-bananowym (6 x 100 g) 600 g",
-    "generic_name": "actimel kids napój jogurtowy o smaku truskawkowo-bananowym (6 x )",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 600.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 13.49,
-    "price_per_unit": null,
-    "price_per_100": 2.2483,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -2666,7 +2614,7 @@
   },
   {
     "original_name": "Mleczna Dolina Mleko bez laktozy 2% 1 l",
-    "generic_name": "mleczna dolina mleko bez laktozy 2%",
+    "generic_name": "mleczna dolina mleko bez laktozy",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -2744,7 +2692,7 @@
   },
   {
     "original_name": "Fantasia Jogurt kremowy z mini kawałkami Maltesers 103 g",
-    "generic_name": "fantasia jogurt kremowy z mini kawałkami",
+    "generic_name": "fantasia jogurt z mini kawałkami",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 103.0,
@@ -2757,7 +2705,7 @@
   },
   {
     "original_name": "Światowid Ser żółty Radamer 250 g",
-    "generic_name": "światowid ser żółty",
+    "generic_name": "światowid ser",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -2770,7 +2718,7 @@
   },
   {
     "original_name": "Delikate Kremowy bawarski ser blue 150 g",
-    "generic_name": "delikate kremowy bawarski ser blue",
+    "generic_name": "delikate bawarski ser blue",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -2783,7 +2731,7 @@
   },
   {
     "original_name": "Delikate Kremowy bawarski ser łagodny 150 g",
-    "generic_name": "delikate kremowy bawarski ser łagodny",
+    "generic_name": "delikate bawarski ser",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -2796,7 +2744,7 @@
   },
   {
     "original_name": "Delikate Kremowy bawarski ser Caractere 150 g",
-    "generic_name": "delikate kremowy bawarski ser",
+    "generic_name": "delikate bawarski ser",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -2848,7 +2796,7 @@
   },
   {
     "original_name": "Fantasia Jogurt kremowy z mieszanką Mars 104 g",
-    "generic_name": "fantasia jogurt kremowy z mieszanką",
+    "generic_name": "fantasia jogurt z mieszanką",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 104.0,
@@ -3017,7 +2965,7 @@
   },
   {
     "original_name": "Fantasia Jogurt kremowy z płatkami w czekoladzie 102 g",
-    "generic_name": "fantasia jogurt kremowy z płatkami w czekoladzie",
+    "generic_name": "fantasia jogurt z płatkami w czekoladzie",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 102.0,
@@ -3108,7 +3056,7 @@
   },
   {
     "original_name": "Fantasia Jogurt kremowy z truskawkami 118 g",
-    "generic_name": "fantasia jogurt kremowy z truskawkami",
+    "generic_name": "fantasia jogurt z truskawkami",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 118.0,
@@ -3147,7 +3095,7 @@
   },
   {
     "original_name": "Marinero Łosoś Norweski wędzony plastry 150 g",
-    "generic_name": "marinero łosoś norweski plastry",
+    "generic_name": "łosoś",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -3173,7 +3121,7 @@
   },
   {
     "original_name": "Kraina Wędlin Select Szynka z wędzarni plastry 200 g",
-    "generic_name": "kraina wędlin select szynka z wędzarni plastry",
+    "generic_name": "kraina wędlin select szynka z wędzarni",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -3186,7 +3134,7 @@
   },
   {
     "original_name": "Tarczyński Naturalnie Parówki 100 % z szynki 200 g (2 x 100 g)",
-    "generic_name": "tarczyński parówki 100 % (2 x )",
+    "generic_name": "tarczyński parówki (2 x )",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -3199,7 +3147,7 @@
   },
   {
     "original_name": "Marinero Łosoś Atlantycki filet świeży opak. ok. 300 g",
-    "generic_name": "marinero łosoś atlantycki filet opak. g",
+    "generic_name": "łosoś filet",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -3238,7 +3186,7 @@
   },
   {
     "original_name": "Kraina Wędlin Select Schab z wędzarni plastry 200 g",
-    "generic_name": "kraina wędlin select schab z wędzarni plastry",
+    "generic_name": "kraina wędlin select schab z wędzarni",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -3290,7 +3238,7 @@
   },
   {
     "original_name": "Kraina Wędlin Polędwica sopocka 250 g",
-    "generic_name": "kraina wędlin polędwica sopocka",
+    "generic_name": "kraina wędlin sopocka",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -3303,7 +3251,7 @@
   },
   {
     "original_name": "Biedronka Polędwica wiejska sądecka tradycyjna 100 g",
-    "generic_name": "polędwica sądecka tradycyjna",
+    "generic_name": "sądecka tradycyjna",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -3316,7 +3264,7 @@
   },
   {
     "original_name": "Marinero Makrela wędzona tusza opak ok. 250 g",
-    "generic_name": "marinero makrela tusza opak g",
+    "generic_name": "makrela",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -3329,7 +3277,7 @@
   },
   {
     "original_name": "Marinero Łosoś plastry wędzony na zimno 100 g",
-    "generic_name": "marinero łosoś plastry na zimno",
+    "generic_name": "łosoś na zimno",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -3355,7 +3303,7 @@
   },
   {
     "original_name": "Marinero Łosoś świeży filet ze skórą kg",
-    "generic_name": "marinero łosoś filet ze skórą",
+    "generic_name": "łosoś filet ze skórą",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 1200.0,
@@ -3420,7 +3368,7 @@
   },
   {
     "original_name": "Kraina Wędlin Polędwica sopocka plastry 140 g",
-    "generic_name": "kraina wędlin polędwica sopocka plastry",
+    "generic_name": "kraina wędlin sopocka",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 140.0,
@@ -3537,7 +3485,7 @@
   },
   {
     "original_name": "Marinero Dorsz atlantycki polędwica opak. ok. 500 g",
-    "generic_name": "marinero dorsz atlantycki polędwica opak. g",
+    "generic_name": "dorsz",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -3550,7 +3498,7 @@
   },
   {
     "original_name": "Kraina Wędlin Nature Schab wędzony plastry 100 g",
-    "generic_name": "kraina wędlin nature schab plastry",
+    "generic_name": "kraina wędlin nature schab",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -3628,7 +3576,7 @@
   },
   {
     "original_name": "Marinero Łosoś wędzony na gorąco łagodny 125 g",
-    "generic_name": "marinero łosoś na gorąco łagodny",
+    "generic_name": "łosoś na gorąco",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 125.0,
@@ -3667,7 +3615,7 @@
   },
   {
     "original_name": "Kraina Wędlin Select Salami ostródzkie plastry 100 g",
-    "generic_name": "kraina wędlin select salami ostródzkie plastry",
+    "generic_name": "kraina wędlin select salami ostródzkie",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -3771,7 +3719,7 @@
   },
   {
     "original_name": "Marinero Łosoś wędzony na gorąco z koperkiem 125 g",
-    "generic_name": "marinero łosoś na gorąco z koperkiem",
+    "generic_name": "łosoś na gorąco z koperkiem",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 125.0,
@@ -3784,7 +3732,7 @@
   },
   {
     "original_name": "Marinero Pstrąg tęczowy świeży patroszony",
-    "generic_name": "marinero pstrąg tęczowy patroszony",
+    "generic_name": "pstrąg tęczowy patroszony",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 800.0,
@@ -3810,7 +3758,7 @@
   },
   {
     "original_name": "Marinero Mintaj filet bez skóry",
-    "generic_name": "marinero mintaj filet",
+    "generic_name": "mintaj filet",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -3849,7 +3797,7 @@
   },
   {
     "original_name": "Kraina Wędlin Nature Szynka wędzona plastry 100 g",
-    "generic_name": "kraina wędlin nature szynka plastry",
+    "generic_name": "kraina wędlin nature szynka",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -3927,7 +3875,7 @@
   },
   {
     "original_name": "Lisner Śledź atlantycki w sosie śmietanowym 700 g",
-    "generic_name": "lisner śledź atlantycki w sosie śmietanowym",
+    "generic_name": "lisner śledź w sosie śmietanowym",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 700.0,
@@ -3979,7 +3927,7 @@
   },
   {
     "original_name": "Marinero Łosoś wędzony na gorąco z pieprzem 125 g",
-    "generic_name": "marinero łosoś na gorąco z pieprzem",
+    "generic_name": "łosoś na gorąco z pieprzem",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 125.0,
@@ -4005,7 +3953,7 @@
   },
   {
     "original_name": "Fisherking Pstrąg łososiowy wędzony w plastrach 100 g",
-    "generic_name": "fisherking pstrąg łososiowy w plastrach",
+    "generic_name": "fisherking pstrąg łososiowy",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -4031,7 +3979,7 @@
   },
   {
     "original_name": "Kraina Wędlin Nature Salami plastry 80 g",
-    "generic_name": "kraina wędlin nature salami plastry",
+    "generic_name": "kraina wędlin nature salami",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 80.0,
@@ -4174,7 +4122,7 @@
   },
   {
     "original_name": "Plony Natury Ryż biały długoziarnisty z europejskich upraw 4 x 125 g",
-    "generic_name": "plony natury ryż biały długoziarnisty z europejskich upraw 4 x",
+    "generic_name": "ryż biały",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -4187,7 +4135,7 @@
   },
   {
     "original_name": "Graal Tuńczyk kawałki w sosie własnym 3x140 g",
-    "generic_name": "graal tuńczyk kawałki w sosie własnym 3x140 g",
+    "generic_name": "graal tuńczyk kawałki w sosie własnym 3x140",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 294.0,
@@ -4200,7 +4148,7 @@
   },
   {
     "original_name": "Bakallino Orzechy nerkowca 200 g",
-    "generic_name": "bakallino orzechy nerkowca",
+    "generic_name": "orzechy nerkowca",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -4317,7 +4265,7 @@
   },
   {
     "original_name": "E. Wedel Czekolada klasyczna gorzka 64% 90 g",
-    "generic_name": "e. wedel czekolada gorzka 64%",
+    "generic_name": "e. wedel czekolada gorzka",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 90.0,
@@ -4369,7 +4317,7 @@
   },
   {
     "original_name": "Go Vege Barista owies 1 l",
-    "generic_name": "go vege barista owies",
+    "generic_name": "barista owies",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -4395,7 +4343,7 @@
   },
   {
     "original_name": "Rapsodia 100 % Owoców Czarna porzeczka 220 g",
-    "generic_name": "rapsodia 100 % owoców czarna porzeczka",
+    "generic_name": "rapsodia owoców czarna porzeczka",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 220.0,
@@ -4434,7 +4382,7 @@
   },
   {
     "original_name": "Bakallino Migdały łuskane 300 g",
-    "generic_name": "bakallino migdały łuskane",
+    "generic_name": "migdały",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -4447,7 +4395,7 @@
   },
   {
     "original_name": "Nasza Spiżarnia Pomidory suszone w paskach z ziołami, 270 g/150 g",
-    "generic_name": "nasza spiżarnia pomidory suszone w paskach z ziołami",
+    "generic_name": "nasza spiżarnia pomidory w paskach z ziołami",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -4499,7 +4447,7 @@
   },
   {
     "original_name": "Dawtona Koncentrat pomidorowy 190 g",
-    "generic_name": "dawtona koncentrat pomidorowy",
+    "generic_name": "koncentrat pomidorowy",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 190.0,
@@ -4525,7 +4473,7 @@
   },
   {
     "original_name": "Grześki Mini Wafel przekładany kremem kakaowym w czekoladzie 20x20 g",
-    "generic_name": "grześki mini wafel przekładany kremem kakaowym w czekoladzie 20x20 g",
+    "generic_name": "grześki mini wafel przekładany kremem kakaowym w czekoladzie 20x20",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -4538,7 +4486,7 @@
   },
   {
     "original_name": "Plony Natury Soczewica czerwona 500 g",
-    "generic_name": "plony natury soczewica czerwona",
+    "generic_name": "soczewica czerwona",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -4564,7 +4512,7 @@
   },
   {
     "original_name": "Graal Tuńczyk kawałki w oleju roślinnym 3x140 g",
-    "generic_name": "graal tuńczyk kawałki w oleju roślinnym 3x140 g",
+    "generic_name": "graal tuńczyk kawałki w oleju roślinnym 3x140",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 294.0,
@@ -4603,7 +4551,7 @@
   },
   {
     "original_name": "BakaD'Or Sélection Pistacje łuskane niesolone prażone 70 g",
-    "generic_name": "bakad'or sélection pistacje łuskane niesolone prażone",
+    "generic_name": "pistacje niesolone prażone",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 70.0,
@@ -4642,7 +4590,7 @@
   },
   {
     "original_name": "Plony Natury Ryż basmati długoziarnisty 400 g",
-    "generic_name": "plony natury ryż basmati długoziarnisty",
+    "generic_name": "ryż basmati",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -4733,7 +4681,7 @@
   },
   {
     "original_name": "Plony Natury Kasza gryczana prażona 400 g",
-    "generic_name": "plony natury kasza gryczana prażona",
+    "generic_name": "kasza gryczana prażona",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -4759,7 +4707,7 @@
   },
   {
     "original_name": "Kamis Curry 20 g",
-    "generic_name": "kamis",
+    "generic_name": "curry",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 20.0,
@@ -4811,7 +4759,7 @@
   },
   {
     "original_name": "Go Vege Napój owsiany 1 l",
-    "generic_name": "go vege napój owsiany",
+    "generic_name": "napój owsiany",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -4836,21 +4784,8 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Teekanne Świat Owoców Mieszanka herbatek owocowych grecka morela 20x2,25 g",
-    "generic_name": "teekanne świat owoców mieszanka herbatek owocowych grecka morela 20x2",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 20.0,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 0.27,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Go Vege Majonez sałatkowy wegański 280 g",
-    "generic_name": "go vege majonez wegański",
+    "generic_name": "majonez wegański",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 280.0,
@@ -4876,7 +4811,7 @@
   },
   {
     "original_name": "Top Popcorn o smaku maślanym 3 x 100 g",
-    "generic_name": "top popcorn o smaku maślanym 3 x",
+    "generic_name": "popcorn o smaku maślanym 3 x",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -4889,7 +4824,7 @@
   },
   {
     "original_name": "Plony Natury Kasza bulgur z pszenicy twardej 400 g",
-    "generic_name": "plony natury kasza bulgur z pszenicy twardej",
+    "generic_name": "kasza bulgur z pszenicy twardej",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -4941,7 +4876,7 @@
   },
   {
     "original_name": "Go Vege Masło orzechowe smooth 945 g",
-    "generic_name": "go vege masło orzechowe smooth",
+    "generic_name": "masło orzechowe",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 945.0,
@@ -5058,7 +4993,7 @@
   },
   {
     "original_name": "Kotlin Ketchup łagodny 450 g",
-    "generic_name": "kotlin ketchup łagodny",
+    "generic_name": "ketchup",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 450.0,
@@ -5097,7 +5032,7 @@
   },
   {
     "original_name": "Nestlé Lion Płatki śniadaniowe karmel i czekolada 375 g",
-    "generic_name": "nestlé lion płatki śniadaniowe karmel i czekolada",
+    "generic_name": "lion płatki śniadaniowe karmel i czekolada",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 375.0,
@@ -5136,7 +5071,7 @@
   },
   {
     "original_name": "Pudliszki Ketchup łagodny 0 dodatku cukru 440 g",
-    "generic_name": "pudliszki ketchup łagodny 0 dodatku cukru",
+    "generic_name": "pudliszki ketchup 0 dodatku cukru",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 440.0,
@@ -5253,7 +5188,7 @@
   },
   {
     "original_name": "Bakello Erytrytol 250 g",
-    "generic_name": "bakello",
+    "generic_name": "erytrytol",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -5266,7 +5201,7 @@
   },
   {
     "original_name": "BakaD'Or Mieszanka nerkowiec-żurawina 200 g",
-    "generic_name": "bakad'or mieszanka nerkowiec-żurawina",
+    "generic_name": "mieszanka nerkowiec-żurawina",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -5318,7 +5253,7 @@
   },
   {
     "original_name": "Go Vege Penne 100 % z zielonego groszku 250 g",
-    "generic_name": "go vege penne 100 % z zielonego groszku",
+    "generic_name": "penne z zielonego groszku",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -5331,7 +5266,7 @@
   },
   {
     "original_name": "Plony Natury Mąka orkiszowa pełnoziarnista typ 2000 1 kg",
-    "generic_name": "plony natury mąka orkiszowa pełnoziarnista typ 2000",
+    "generic_name": "mąka orkiszowa pełnoziarnista typ 2000",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -5344,7 +5279,7 @@
   },
   {
     "original_name": "Heinz Ketchup łagodny 450 g",
-    "generic_name": "heinz ketchup łagodny",
+    "generic_name": "heinz ketchup",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 450.0,
@@ -5357,7 +5292,7 @@
   },
   {
     "original_name": "Kamis Pieprz czarny ziarnisty 42 g",
-    "generic_name": "kamis pieprz czarny ziarnisty",
+    "generic_name": "pieprz czarny ziarnisty",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 42.0,
@@ -5383,7 +5318,7 @@
   },
   {
     "original_name": "Plony Natury Kuskus perłowy 400 g",
-    "generic_name": "plony natury kuskus perłowy",
+    "generic_name": "kuskus perłowy",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -5408,21 +5343,8 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
-    "original_name": "Teekanne Herbatka owocowa \"LOVE\" Blueberry & Blackberry 20 torebek x 2,25 g",
-    "generic_name": "teekanne herbatka owocowa \"love\"",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 20.0,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 0.27,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Culineo Ocet spirytusowy 10 % kwasowości 750 ml",
-    "generic_name": "culineo ocet spirytusowy 10 % kwasowości",
+    "generic_name": "culineo ocet spirytusowy",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 750.0,
@@ -5474,7 +5396,7 @@
   },
   {
     "original_name": "Plony Natury Mąka pszenna T 450 Tortowa 1 kg",
-    "generic_name": "plony natury mąka pszenna t 450",
+    "generic_name": "mąka pszenna t 450",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -5513,7 +5435,7 @@
   },
   {
     "original_name": "Top Krakersy solone mix 90 g",
-    "generic_name": "top krakersy solone mix",
+    "generic_name": "krakersy solone mix",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 90.0,
@@ -5526,7 +5448,7 @@
   },
   {
     "original_name": "Nestlé Cini Minis Zbożowe kwadraciki o smaku cynamonowym 375 g",
-    "generic_name": "nestlé cini minis zbożowe kwadraciki o smaku cynamonowym",
+    "generic_name": "cini minis zbożowe kwadraciki o smaku cynamonowym",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 375.0,
@@ -5552,7 +5474,7 @@
   },
   {
     "original_name": "Top Słonecznik prażony 200 g",
-    "generic_name": "top słonecznik prażony",
+    "generic_name": "słonecznik prażony",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -5708,7 +5630,7 @@
   },
   {
     "original_name": "Pudliszki Ketchup łagodny 480 g",
-    "generic_name": "pudliszki ketchup łagodny",
+    "generic_name": "pudliszki ketchup",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 480.0,
@@ -5721,7 +5643,7 @@
   },
   {
     "original_name": "Plony Natury Mąka pszenna T 650 Babuni 1 kg",
-    "generic_name": "plony natury mąka pszenna t 650",
+    "generic_name": "mąka pszenna t 650",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -5734,7 +5656,7 @@
   },
   {
     "original_name": "Bakallino Migdały blanszowane w płatkach 150 g",
-    "generic_name": "bakallino migdały blanszowane w płatkach",
+    "generic_name": "migdały",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -5760,7 +5682,7 @@
   },
   {
     "original_name": "Fritt Guma rozpuszczalna o smaku wiśniowym z witaminą C (6x11,7 g) 70 g",
-    "generic_name": "fritt guma rozpuszczalna o smaku wiśniowym z witaminą c (6x11, )",
+    "generic_name": "fritt guma rozpuszczalna o smaku wiśniowym",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 70.0,
@@ -5811,19 +5733,6 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
-    "original_name": "Plony Natury Natural Mix Kasza gryczana kasza bulgur soczewica suszone pomidory pestki dyni 4x100 g",
-    "generic_name": "plony natury natural mix kasza gryczana kasza bulgur soczewica suszone pomidory pestki dyni 4x100 g",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.49,
-    "price_per_unit": null,
-    "price_per_100": 1.3725,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Kinder Kinderini Biszkopty z mlecznymi i kakaowymi dekoracjami 4x2 szt. 100 g",
     "generic_name": "kinder kinderini biszkopty z mlecznymi i kakaowymi dekoracjami 4x2",
     "shop": "biedronka",
@@ -5838,7 +5747,7 @@
   },
   {
     "original_name": "Kamis Sól morska jodowana Specialite młynek 90 g",
-    "generic_name": "kamis sól morska jodowana",
+    "generic_name": "sól morska jodowana",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 90.0,
@@ -5851,7 +5760,7 @@
   },
   {
     "original_name": "Pudliszki Ketchup pikantny 480 g",
-    "generic_name": "pudliszki ketchup pikantny",
+    "generic_name": "pudliszki ketchup",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 480.0,
@@ -5877,7 +5786,7 @@
   },
   {
     "original_name": "Kamis Tymianek 8 g",
-    "generic_name": "kamis",
+    "generic_name": "tymianek",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 8.0,
@@ -5929,7 +5838,7 @@
   },
   {
     "original_name": "BONITKI O!KULKI w mlecznej czekoladzie 260 g",
-    "generic_name": "bonitki o!kulki w mlecznej czekoladzie",
+    "generic_name": "bonitki o! w mlecznej czekoladzie",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 260.0,
@@ -5967,21 +5876,8 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Teekanne Aromatyzowana herbatka owocowa słodka brzoskwinia (20 x 2,25 g) 45 g",
-    "generic_name": "teekanne aromatyzowana herbatka owocowa słodka brzoskwinia (20 x )",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 20.0,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 0.27,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Kamis Bazylia 8 g",
-    "generic_name": "kamis",
+    "generic_name": "bazylia",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 8.0,
@@ -6020,7 +5916,7 @@
   },
   {
     "original_name": "Patak's Tikka Masala Kremowy sos pomidorowy z nutą kolendry 450 g",
-    "generic_name": "patak's tikka masala kremowy sos pomidorowy z nutą kolendry",
+    "generic_name": "patak's tikka masala sos pomidorowy z nutą kolendry",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 450.0,
@@ -6059,7 +5955,7 @@
   },
   {
     "original_name": "Nestlé Corn Flakes Chrupiące płatki kukurydziane z witaminami 500 g",
-    "generic_name": "nestlé corn flakes chrupiące płatki kukurydziane z witaminami",
+    "generic_name": "corn flakes chrupiące płatki kukurydziane z witaminami",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -6082,19 +5978,6 @@
     "price_per_unit": null,
     "price_per_100": 9.9947,
     "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
-    "original_name": "Felix Carmelove Orzeszki ziemne w karmelu ze szczyptą soli 160 g",
-    "generic_name": "felix carmelove orzeszki ziemne w karmelu ze szczyptą soli",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 160.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.39,
-    "price_per_unit": null,
-    "price_per_100": 5.8688,
-    "standard_category": "Przyprawy, zioła i proszki"
   },
   {
     "original_name": "Go Active Protein krem o smaku słony karmel 180 g",
@@ -6163,7 +6046,7 @@
   },
   {
     "original_name": "Plony Natury Kasza gryczana prażona 900 g",
-    "generic_name": "plony natury kasza gryczana prażona",
+    "generic_name": "kasza gryczana prażona",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 900.0,
@@ -6212,19 +6095,6 @@
     "price_per_unit": null,
     "price_per_100": 1.4271,
     "standard_category": "Tłuszcze, oleje i sosy"
-  },
-  {
-    "original_name": "Toffifee Orzech laskowy w karmelu kremie orzechowym i czekoladzie 24 szt. 200 g",
-    "generic_name": "toffifee orzech laskowy w karmelu kremie orzechowym i czekoladzie",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 15.99,
-    "price_per_unit": null,
-    "price_per_100": 7.995,
-    "standard_category": "Orzechy, nasiona i masła orzechowe"
   },
   {
     "original_name": "Lindt Excellence Czekolada ciemna z kawałkami malin 100 g",
@@ -6293,7 +6163,7 @@
   },
   {
     "original_name": "Bakallino Rodzynki sułtańskie 400 g",
-    "generic_name": "bakallino rodzynki sułtańskie",
+    "generic_name": "rodzynki",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -6345,7 +6215,7 @@
   },
   {
     "original_name": "Bakallino Żurawina suszona, cięta 300 g",
-    "generic_name": "bakallino żurawina suszona, cięta",
+    "generic_name": "żurawina",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -6423,7 +6293,7 @@
   },
   {
     "original_name": "Donatello Antipasti nadziewane serkiem suszone pomidory 150 g",
-    "generic_name": "donatello antipasti nadziewane serkiem suszone pomidory",
+    "generic_name": "donatello antipasti nadziewane serkiem pomidory",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -6488,7 +6358,7 @@
   },
   {
     "original_name": "Go Vege Pesto z tofu i pomidorami 190 g",
-    "generic_name": "go vege pesto z tofu i pomidorami",
+    "generic_name": "pesto i pomidorami",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 190.0,
@@ -6553,7 +6423,7 @@
   },
   {
     "original_name": "Gusto Bello Pomidory suszone 280 g",
-    "generic_name": "gusto bello pomidory suszone",
+    "generic_name": "gusto bello pomidory",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 170.0,
@@ -6579,7 +6449,7 @@
   },
   {
     "original_name": "Nestlé Nesquik Zbożowe kuleczki o smaku czekoladowym 375 g",
-    "generic_name": "nestlé nesquik zbożowe kuleczki o smaku czekoladowym",
+    "generic_name": "nesquik zbożowe kuleczki o smaku czekoladowym",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 375.0,
@@ -6657,7 +6527,7 @@
   },
   {
     "original_name": "Go Vege Pesto z tofu 190 g",
-    "generic_name": "go vege pesto z tofu",
+    "generic_name": "pesto",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 190.0,
@@ -6709,7 +6579,7 @@
   },
   {
     "original_name": "Plony Natury Ciecierzyca ziarno 500 g",
-    "generic_name": "plony natury ciecierzyca ziarno",
+    "generic_name": "ciecierzyca ziarno",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -6761,7 +6631,7 @@
   },
   {
     "original_name": "Marinero sardynki w oleju roślinnym 110 g",
-    "generic_name": "marinero sardynki w oleju roślinnym",
+    "generic_name": "sardynki w oleju roślinnym",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 55.0,
@@ -6771,32 +6641,6 @@
     "price_per_unit": null,
     "price_per_100": 4.8545,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Teekanne Herbatka owocowa \"LOVE\" Pomegranate 20 torebek x 2,25 g",
-    "generic_name": "teekanne herbatka owocowa \"love\"",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 20.0,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 0.27,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Teekanne Herbatka owocowa \"PASSION\" Passionfruit 20 torebek x 2,25 g",
-    "generic_name": "teekanne herbatka owocowa \"passion\"",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 20.0,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 0.27,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Owoce"
   },
   {
     "original_name": "Podravka Vegeta czerwona 70 g",
@@ -6813,7 +6657,7 @@
   },
   {
     "original_name": "Lindt Excellence Czekolada ciemna 70 % Cocoa 100 g",
-    "generic_name": "lindt excellence czekolada ciemna 70 %",
+    "generic_name": "lindt excellence czekolada ciemna",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -6943,7 +6787,7 @@
   },
   {
     "original_name": "Marinero Łosoś kawałki w sosie pomidorowym 150 g",
-    "generic_name": "marinero łosoś kawałki w sosie pomidorowym",
+    "generic_name": "łosoś kawałki w sosie pomidorowym",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -7021,7 +6865,7 @@
   },
   {
     "original_name": "Top Solony popcorn 3 x 100 g",
-    "generic_name": "top solony popcorn 3 x",
+    "generic_name": "solony popcorn 3 x",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -7031,32 +6875,6 @@
     "price_per_unit": null,
     "price_per_100": 1.9967,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "BakaD'Or Superfoods Nasiona Chia 125 g",
-    "generic_name": "bakad'or",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 125.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.95,
-    "price_per_unit": null,
-    "price_per_100": 4.76,
-    "standard_category": "Orzechy, nasiona i masła orzechowe"
-  },
-  {
-    "original_name": "Nestlé Cheerios Zbożowe kółeczka z miodem 375 g",
-    "generic_name": "nestlé cheerios zbożowe kółeczka z miodem",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 350.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.29,
-    "price_per_unit": null,
-    "price_per_100": 3.2257,
-    "standard_category": "Słodziki i dodatki smakowe"
   },
   {
     "original_name": "Profi Pasztet firmowy 131 g",
@@ -7138,7 +6956,7 @@
   },
   {
     "original_name": "Rybak Ketchup łagodny Słodka Ania 310 g",
-    "generic_name": "rybak ketchup łagodny",
+    "generic_name": "rybak ketchup",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 310.0,
@@ -7164,7 +6982,7 @@
   },
   {
     "original_name": "Nestle Płatki śniadaniowe Kangus 250 g",
-    "generic_name": "nestle płatki śniadaniowe",
+    "generic_name": "płatki śniadaniowe",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -7203,7 +7021,7 @@
   },
   {
     "original_name": "Nestlé Corn Flakes Chrupiące płatki kukurydziane miód i orzeszki 250 g",
-    "generic_name": "nestlé corn flakes chrupiące płatki kukurydziane miód i orzeszki",
+    "generic_name": "corn flakes chrupiące płatki kukurydziane miód i orzeszki",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -7216,7 +7034,7 @@
   },
   {
     "original_name": "Pudliszki Ketchup pikantny 0 dodatku cukru 440 g",
-    "generic_name": "pudliszki ketchup pikantny 0 dodatku cukru",
+    "generic_name": "pudliszki ketchup 0 dodatku cukru",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 440.0,
@@ -7242,7 +7060,7 @@
   },
   {
     "original_name": "Plony Natury Kasza pęczak jęczmienny 400 g",
-    "generic_name": "plony natury kasza pęczak jęczmienny",
+    "generic_name": "kasza pęczak jęczmienny",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -7255,7 +7073,7 @@
   },
   {
     "original_name": "Nasza Spiżarnia Pomidory suszone z ziołami 270 g",
-    "generic_name": "nasza spiżarnia pomidory suszone z ziołami",
+    "generic_name": "nasza spiżarnia pomidory z ziołami",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -7268,7 +7086,7 @@
   },
   {
     "original_name": "Kamis Gałka muszkatołowa mielona 9 g",
-    "generic_name": "kamis gałka muszkatołowa mielona",
+    "generic_name": "gałka muszkatołowa mielona",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 9.0,
@@ -7281,7 +7099,7 @@
   },
   {
     "original_name": "Kamis Musztarda kremska 185 g",
-    "generic_name": "kamis musztarda kremska",
+    "generic_name": "musztarda",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 185.0,
@@ -7294,7 +7112,7 @@
   },
   {
     "original_name": "Knorr Sos sałatkowy francuski 8 g",
-    "generic_name": "knorr sos francuski",
+    "generic_name": "knorr sos",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 8.0,
@@ -7333,7 +7151,7 @@
   },
   {
     "original_name": "Marinero Filety z makreli w oleju roślinnym 170 g",
-    "generic_name": "marinero filety z makreli w oleju roślinnym",
+    "generic_name": "filety z makreli w oleju roślinnym",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 170.0,
@@ -7346,7 +7164,7 @@
   },
   {
     "original_name": "Roleski Ketchup premium łagodny sycylijski do pizzy 465 g",
-    "generic_name": "roleski ketchup łagodny sycylijski do pizzy",
+    "generic_name": "roleski ketchup sycylijski do pizzy",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 465.0,
@@ -7398,7 +7216,7 @@
   },
   {
     "original_name": "Fritt Guma rozpuszczalna o smaku truskawkowym z witaminą C (6x11,7 g) 70 g",
-    "generic_name": "fritt guma rozpuszczalna o smaku truskawkowym z witaminą c (6x11, )",
+    "generic_name": "fritt guma rozpuszczalna o smaku truskawkowym",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 70.0,
@@ -7450,7 +7268,7 @@
   },
   {
     "original_name": "Marinero Pasta z tuńczyka kremowa łagodna 115 g",
-    "generic_name": "marinero pasta z tuńczyka kremowa łagodna",
+    "generic_name": "pasta z tuńczyka łagodna",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 115.0,
@@ -7580,7 +7398,7 @@
   },
   {
     "original_name": "Bakello Wiórki kokosowe 200 g",
-    "generic_name": "bakello wiórki kokosowe",
+    "generic_name": "wiórki kokosowe",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -7645,7 +7463,7 @@
   },
   {
     "original_name": "Plony Natury Kasza manna 500 g",
-    "generic_name": "plony natury kasza manna",
+    "generic_name": "kasza manna",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -7658,7 +7476,7 @@
   },
   {
     "original_name": "Plony Natury Kasza gryczana biała (4 x 100 g) 400 g",
-    "generic_name": "plony natury kasza gryczana biała (4 x )",
+    "generic_name": "kasza gryczana biała (4 x )",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -7671,7 +7489,7 @@
   },
   {
     "original_name": "Kamis Musztarda francuska 185 g",
-    "generic_name": "kamis musztarda francuska",
+    "generic_name": "musztarda",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 185.0,
@@ -7684,7 +7502,7 @@
   },
   {
     "original_name": "Marinero sardynki w sosie pomidorowym 110 g",
-    "generic_name": "marinero sardynki w sosie pomidorowym",
+    "generic_name": "sardynki w sosie pomidorowym",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 77.0,
@@ -7697,7 +7515,7 @@
   },
   {
     "original_name": "Marinero sardynki w sosie paprykowym 110 g",
-    "generic_name": "marinero sardynki w sosie paprykowym",
+    "generic_name": "sardynki w sosie paprykowym",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 72.0,
@@ -7775,7 +7593,7 @@
   },
   {
     "original_name": "Plony Natury Kasza jaglana z prosa (4x100 g) 400 g",
-    "generic_name": "plony natury kasza jaglana z prosa (4x100 g)",
+    "generic_name": "kasza jaglana z prosa (4x100 )",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -7788,7 +7606,7 @@
   },
   {
     "original_name": "Kamis Czosnek granulowany 20 g",
-    "generic_name": "kamis czosnek granulowany",
+    "generic_name": "czosnek granulowany",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 16.0,
@@ -7801,7 +7619,7 @@
   },
   {
     "original_name": "Kamis Pieprz ziołowy 15 g",
-    "generic_name": "kamis pieprz ziołowy",
+    "generic_name": "pieprz ziołowy",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 15.0,
@@ -7814,7 +7632,7 @@
   },
   {
     "original_name": "Kamis Przyprawa do mięsa mielonego 20 g",
-    "generic_name": "kamis przyprawa do mięsa mielonego",
+    "generic_name": "przyprawa do mięsa mielonego",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 20.0,
@@ -7931,7 +7749,7 @@
   },
   {
     "original_name": "BezMięsny Bezmięsna kiełbasa suszona 100 g",
-    "generic_name": "bezmięsny bezmięsna kiełbasa suszona",
+    "generic_name": "bezmięsny bezmięsna kiełbasa",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -7944,7 +7762,7 @@
   },
   {
     "original_name": "Nestlé KitKat Płatki śniadaniowe o smaku kakaowym 350 g",
-    "generic_name": "nestlé kitkat płatki śniadaniowe o smaku kakaowym",
+    "generic_name": "kitkat płatki śniadaniowe o smaku kakaowym",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 350.0,
@@ -8035,7 +7853,7 @@
   },
   {
     "original_name": "Kamis Mieszanka przyprawowa przyprawa do ryb 20 g",
-    "generic_name": "kamis mieszanka przyprawowa przyprawa do ryb",
+    "generic_name": "mieszanka przyprawowa przyprawa do ryb",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 20.0,
@@ -8061,7 +7879,7 @@
   },
   {
     "original_name": "Bakello Kakao extra ciemne 200 g",
-    "generic_name": "bakello kakao ciemne",
+    "generic_name": "kakao ciemne",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -8269,7 +8087,7 @@
   },
   {
     "original_name": "Lindt Excellence Czekolada ciemna 85 % Cocoa 100 g",
-    "generic_name": "lindt excellence czekolada ciemna 85 %",
+    "generic_name": "lindt excellence czekolada ciemna",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -8321,7 +8139,7 @@
   },
   {
     "original_name": "Kamis Lubczyk 8 g",
-    "generic_name": "kamis",
+    "generic_name": "lubczyk",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 8.0,
@@ -8386,7 +8204,7 @@
   },
   {
     "original_name": "Nestlé Nesquik Alphabet Zbożowe literki o smaku czekoladowym 275 g",
-    "generic_name": "nestlé nesquik alphabet zbożowe literki o smaku czekoladowym",
+    "generic_name": "nesquik alphabet zbożowe literki o smaku czekoladowym",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 275.0,
@@ -8425,7 +8243,7 @@
   },
   {
     "original_name": "Bakello Drożdże suszone instant 8 g",
-    "generic_name": "bakello drożdże suszone instant",
+    "generic_name": "drożdże instant",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 8.0,
@@ -8490,7 +8308,7 @@
   },
   {
     "original_name": "Plony Natury Ryż brązowy długoziarnisty 4x100 g",
-    "generic_name": "plony natury ryż brązowy długoziarnisty 4x100 g",
+    "generic_name": "ryż brązowy 4x100",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -8607,7 +8425,7 @@
   },
   {
     "original_name": "Kotlin Ketchup pikantny 450 g",
-    "generic_name": "kotlin ketchup pikantny",
+    "generic_name": "ketchup",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 450.0,
@@ -8620,7 +8438,7 @@
   },
   {
     "original_name": "Marinero Pasta z tuńczyka kremowa pikantna 115 g",
-    "generic_name": "marinero pasta z tuńczyka kremowa pikantna",
+    "generic_name": "pasta z tuńczyka pikantna",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 115.0,
@@ -8633,7 +8451,7 @@
   },
   {
     "original_name": "Bakello Kisiel instant truskawkowy 30 g",
-    "generic_name": "bakello kisiel instant truskawkowy",
+    "generic_name": "kisiel instant truskawkowy",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 30.0,
@@ -8685,7 +8503,7 @@
   },
   {
     "original_name": "Kamis Koperek 6 g",
-    "generic_name": "kamis",
+    "generic_name": "koperek",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 6.0,
@@ -8711,7 +8529,7 @@
   },
   {
     "original_name": "Patak's Korma Kremowy sos z wiórkami kokosowymi i cebulą 450 g",
-    "generic_name": "patak's korma kremowy sos z wiórkami kokosowymi i cebulą",
+    "generic_name": "patak's korma sos z wiórkami kokosowymi i cebulą",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 450.0,
@@ -8724,7 +8542,7 @@
   },
   {
     "original_name": "Plony Natury Mąka żytnia T 2000 Pełnoziarnista 1 kg",
-    "generic_name": "plony natury mąka żytnia t 2000",
+    "generic_name": "mąka żytnia t 2000",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -8737,7 +8555,7 @@
   },
   {
     "original_name": "Bakello Galaretka smak cytrynowy 2 x 75 g",
-    "generic_name": "bakello galaretka smak cytrynowy 2 x",
+    "generic_name": "galaretka smak cytrynowy 2 x",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -8815,7 +8633,7 @@
   },
   {
     "original_name": "Nestlé Lion Triple Crunchy Płatki śniadaniowe ze słonym karmelem 350 g",
-    "generic_name": "nestlé lion triple crunchy płatki śniadaniowe ze słonym karmelem",
+    "generic_name": "lion triple płatki śniadaniowe ze słonym karmelem",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 350.0,
@@ -8867,7 +8685,7 @@
   },
   {
     "original_name": "Kamis Mieszanka przyprawowa pieprz cytrynowy 20 g",
-    "generic_name": "kamis mieszanka przyprawowa pieprz cytrynowy",
+    "generic_name": "mieszanka przyprawowa pieprz cytrynowy",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 20.0,
@@ -8880,7 +8698,7 @@
   },
   {
     "original_name": "Ferrero Rocher Chrupiący wafelek z kremowym nadzieniem i orzechem laskowym w czekoladzie 200 g",
-    "generic_name": "ferrero rocher chrupiący wafelek z kremowym nadzieniem i orzechem laskowym w czekoladzie",
+    "generic_name": "ferrero rocher chrupiący wafelek z nadzieniem i orzechem laskowym w czekoladzie",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -8893,7 +8711,7 @@
   },
   {
     "original_name": "Kamis Przyprawa do karkówki 20 g",
-    "generic_name": "kamis przyprawa do karkówki",
+    "generic_name": "przyprawa do karkówki",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 20.0,
@@ -8932,7 +8750,7 @@
   },
   {
     "original_name": "Plony Natury Siemię lniane 400 g",
-    "generic_name": "plony natury siemię lniane",
+    "generic_name": "siemię lniane",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -8958,7 +8776,7 @@
   },
   {
     "original_name": "Elios Tahini klasyczne 300 g",
-    "generic_name": "elios tahini",
+    "generic_name": "tahini",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -9114,7 +8932,7 @@
   },
   {
     "original_name": "Fritt Guma rozpuszczalna o smaku grejpfrutowym z witaminą C (6 x 11,7 g) 70 g",
-    "generic_name": "fritt guma rozpuszczalna o smaku grejpfrutowym z witaminą c (6 x )",
+    "generic_name": "fritt guma rozpuszczalna o smaku grejpfrutowym",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 70.0,
@@ -9322,7 +9140,7 @@
   },
   {
     "original_name": "Plony Natury Mąka pszenna T 1850 Pełnoziarnista 1 kg",
-    "generic_name": "plony natury mąka pszenna t 1850",
+    "generic_name": "mąka pszenna t 1850",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 1000.0,

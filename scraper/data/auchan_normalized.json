@@ -118,7 +118,7 @@
   },
   {
     "original_name": "Ekologiczne masło ekstra 82% Pewni Dobrego 125 g",
-    "generic_name": "masło ekstra 82%",
+    "generic_name": "masło",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 125.0,
@@ -612,7 +612,7 @@
   },
   {
     "original_name": "100% wiśnia z sadów regionu Łowicza Pewni Dobrego 230 g",
-    "generic_name": "100% wiśnia",
+    "generic_name": "wiśnia",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 230.0,
@@ -1002,7 +1002,7 @@
   },
   {
     "original_name": "100% jabłko z sadów z regionu Warki Pewni Dobrego 230 g",
-    "generic_name": "100% jabłko",
+    "generic_name": "jabłko",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 230.0,
@@ -1015,7 +1015,7 @@
   },
   {
     "original_name": "Konserwa luncheon meat ekstra  Pewni Dobrego 180 g",
-    "generic_name": "konserwa luncheon meat ekstra",
+    "generic_name": "konserwa luncheon meat",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -1080,7 +1080,7 @@
   },
   {
     "original_name": "100% czarna porzeczka z regionu Łowicza Pewni Dobrego 230 g",
-    "generic_name": "100% czarna porzeczka",
+    "generic_name": "czarna porzeczka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 230.0,
@@ -1366,7 +1366,7 @@
   },
   {
     "original_name": "Gruszki Odmiana Konferencja Owoce  Auchan na wagę ok. 600 g",
-    "generic_name": "gruszki odmiana konferencja g",
+    "generic_name": "gruszki odmiana konferencja",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -1769,7 +1769,7 @@
   },
   {
     "original_name": "Czosnek ekstra Warzywa Auchan 1 sztuka",
-    "generic_name": "czosnek ekstra",
+    "generic_name": "czosnek",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -1795,7 +1795,7 @@
   },
   {
     "original_name": "Por Warzywa Auchan na wagę ok. 400 g",
-    "generic_name": "por g",
+    "generic_name": "por",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -1847,7 +1847,7 @@
   },
   {
     "original_name": "Pomarańcze Owoce  Auchan na wagę ok. 500 g",
-    "generic_name": "pomarańcze g",
+    "generic_name": "pomarańcze",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -2185,7 +2185,7 @@
   },
   {
     "original_name": "Gruszki Owoce  Auchan na wagę ok. 600 g",
-    "generic_name": "gruszki g",
+    "generic_name": "gruszki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -2315,7 +2315,7 @@
   },
   {
     "original_name": "Bakłażan Warzywa Auchan 1 sztuka na wagę ok. 500 g",
-    "generic_name": "bakłażan 1 g",
+    "generic_name": "bakłażan 1",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -2380,7 +2380,7 @@
   },
   {
     "original_name": "Granat kaliber średni Owoce  Auchan sztuka",
-    "generic_name": "granat kaliber",
+    "generic_name": "granat",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -3043,7 +3043,7 @@
   },
   {
     "original_name": "Mandarynki Owoce  Auchan na wagę ok. 600 g",
-    "generic_name": "mandarynki g",
+    "generic_name": "mandarynki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -3121,7 +3121,7 @@
   },
   {
     "original_name": "Limonka Owoce  Auchan na wagę ok. 300 g",
-    "generic_name": "limonka g",
+    "generic_name": "limonka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -3615,7 +3615,7 @@
   },
   {
     "original_name": "Jarmuż cięty Warzywa Auchan 300 g",
-    "generic_name": "jarmuż cięty",
+    "generic_name": "jarmuż",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -3810,7 +3810,7 @@
   },
   {
     "original_name": "Granat duży kaliber Owoce  Auchan sztuka",
-    "generic_name": "granat duży kaliber",
+    "generic_name": "granat duży",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -4135,7 +4135,7 @@
   },
   {
     "original_name": "BIO Ekologiczny sok 100% z buraków kiszonych Charsznickie Pola Natury 500 ml",
-    "generic_name": "sok 100% z buraków kiszonych",
+    "generic_name": "sok z buraków kiszonych",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -4356,7 +4356,7 @@
   },
   {
     "original_name": "Suszone grzyby Mun Tao Tao 50 g",
-    "generic_name": "suszone grzyby",
+    "generic_name": "grzyby",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 50.0,
@@ -4382,7 +4382,7 @@
   },
   {
     "original_name": "Podgrzybek brunatny suszony krajanka Runopol 20 g",
-    "generic_name": "podgrzybek brunatny suszony krajanka",
+    "generic_name": "podgrzybek brunatny krajanka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 20.0,
@@ -4408,7 +4408,7 @@
   },
   {
     "original_name": "Mix grzybów leśnych suszonych Pol Grzyb 30 g",
-    "generic_name": "mix grzybów leśnych suszonych",
+    "generic_name": "mix grzybów leśnych",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 30.0,
@@ -4473,7 +4473,7 @@
   },
   {
     "original_name": "Podgrzybek brunatny suszony krojony Fungopol 20 g",
-    "generic_name": "podgrzybek brunatny suszony krojony",
+    "generic_name": "podgrzybek brunatny krojony",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 20.0,
@@ -4512,7 +4512,7 @@
   },
   {
     "original_name": "Suszone grzyby mun Pol Grzyb 40 g",
-    "generic_name": "suszone grzyby mun",
+    "generic_name": "grzyby mun",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 40.0,
@@ -4538,7 +4538,7 @@
   },
   {
     "original_name": "Grzyby Mun suszone  Orient Taste 20 g",
-    "generic_name": "grzyby mun suszone",
+    "generic_name": "grzyby mun",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 20.0,
@@ -4707,7 +4707,7 @@
   },
   {
     "original_name": "Podgrzybek brunatny suszony cały Pol Grzyb 50 g",
-    "generic_name": "podgrzybek brunatny suszony cały",
+    "generic_name": "podgrzybek brunatny cały",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 50.0,
@@ -4785,7 +4785,7 @@
   },
   {
     "original_name": "Grzyby suszone Shiitake   Orient Taste 20 g",
-    "generic_name": "grzyby suszone",
+    "generic_name": "grzyby",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 20.0,
@@ -4837,7 +4837,7 @@
   },
   {
     "original_name": "Winogrona Owoce  Auchan na wagę ok. 600 g",
-    "generic_name": "winogrona g",
+    "generic_name": "winogrona",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -4889,7 +4889,7 @@
   },
   {
     "original_name": "Grzyby Shiitake całe suszone House of Asia 30 g",
-    "generic_name": "grzyby shiitake całe suszone",
+    "generic_name": "grzyby shiitake całe",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 30.0,
@@ -4928,7 +4928,7 @@
   },
   {
     "original_name": "Grzyby Mun krojone suszone House of Asia 30 g",
-    "generic_name": "grzyby mun krojone suszone",
+    "generic_name": "grzyby mun krojone",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 30.0,
@@ -4966,19 +4966,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Lody śmietankowo waniliowe w czekoladzie mlecznej z migdałami Auchan 120 ml",
-    "generic_name": "lody śmietankowo waniliowe w czekoladzie mlecznej z migdałami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 120.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 3.49,
-    "price_per_unit": null,
-    "price_per_100": 2.9083,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Bób mrożony Auchan 450 g",
     "generic_name": "bób mrożony",
     "shop": "auchan",
@@ -4990,19 +4977,6 @@
     "price_per_unit": null,
     "price_per_100": 1.7444,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Lody śmietankowe w waflu Koral 180 g",
-    "generic_name": "lody śmietankowe w waflu",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 180.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 3.29,
-    "price_per_unit": null,
-    "price_per_100": 1.8278,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Ananas kawałki Auchan 400 g",
@@ -5044,34 +5018,8 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Lody wodne cytrynowe i truskawkowe z zieloną polewą  Kaktus 9 sztuk",
-    "generic_name": "lody wodne cytrynowe i truskawkowe z zieloną polewą",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 405.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 18.48,
-    "price_per_unit": null,
-    "price_per_100": 4.563,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Lody o smaku śmietankowym Auchan 110 ml",
-    "generic_name": "lody o smaku śmietankowym",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 110.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 1.19,
-    "price_per_unit": null,
-    "price_per_100": 1.0818,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Soja blanszowana Edamame Seacon 500 g",
-    "generic_name": "soja blanszowana edamame",
+    "generic_name": "soja edamame",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -5120,19 +5068,6 @@
     "price_per_unit": null,
     "price_per_100": 1.4975,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Lody Almond Vegan Magnum 90 ml",
-    "generic_name": "lody",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 90.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 8.69,
-    "price_per_unit": null,
-    "price_per_100": 9.6556,
-    "standard_category": "Orzechy, nasiona i masła orzechowe"
   },
   {
     "original_name": "Rożek o smaku malinowym Auchan 110 ml",
@@ -5201,7 +5136,7 @@
   },
   {
     "original_name": "Brokuły różyczki Hortex 450 g",
-    "generic_name": "brokuły różyczki",
+    "generic_name": "brokuły",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 450.0,
@@ -5237,19 +5172,6 @@
     "price_per_unit": null,
     "price_per_100": 4.22,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Lody wodne owocowe ze strzelającym cukrem Zozole 52 ml",
-    "generic_name": "lody wodne owocowe ze strzelającym cukrem",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 52.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 2.89,
-    "price_per_unit": null,
-    "price_per_100": 5.5577,
-    "standard_category": "Owoce"
   },
   {
     "original_name": "Warzywa na patelnię z ziołami i papryką Hortex 450 g",
@@ -5302,19 +5224,6 @@
     "price_per_unit": null,
     "price_per_100": 2.43,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Lody Almond Magnum 110 ml",
-    "generic_name": "lody",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 110.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 8.69,
-    "price_per_unit": null,
-    "price_per_100": 7.9,
-    "standard_category": "Orzechy, nasiona i masła orzechowe"
   },
   {
     "original_name": "Mix fasolek mieszanka warzywna Hortex 450 g",
@@ -5395,19 +5304,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Lody śmietankowe w polewie czekoladowej Big Milk 100 ml",
-    "generic_name": "lody śmietankowe w polewie czekoladowej",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 100.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 4.59,
-    "price_per_unit": null,
-    "price_per_100": 4.59,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Warzywa na patelnię z bazylią i tymiankiem Hortex 450 g",
     "generic_name": "na patelnię z bazylią i tymiankiem",
     "shop": "auchan",
@@ -5431,19 +5327,6 @@
     "price_package": 11.49,
     "price_per_unit": null,
     "price_per_100": 3.2829,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Lody wodne cytrynowe i truskawkowe z zieloną polewą  Kaktus 45 ml",
-    "generic_name": "lody wodne cytrynowe i truskawkowe z zieloną polewą",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 45.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 2.89,
-    "price_per_unit": null,
-    "price_per_100": 6.4222,
     "standard_category": "Owoce"
   },
   {
@@ -5473,19 +5356,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Lody classic waniliowe w mlecznej czekoladzie Magnum 110 ml",
-    "generic_name": "lody classic waniliowe w mlecznej czekoladzie",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 110.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 8.69,
-    "price_per_unit": null,
-    "price_per_100": 7.9,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Warzywa na patelnię Hortex 450 g",
     "generic_name": "na patelnię",
     "shop": "auchan",
@@ -5497,19 +5367,6 @@
     "price_per_unit": null,
     "price_per_100": 1.6644,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Lody wodne o smaku malinowym i jagodowym z polewą o smaku gumy balonowej   Kaktus 9 x 45 ml",
-    "generic_name": "lody wodne o smaku i jagodowym z polewą o smaku gumy balonowej",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 405.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 18.48,
-    "price_per_unit": null,
-    "price_per_100": 4.563,
-    "standard_category": "Owoce"
   },
   {
     "original_name": "Marchewka mini Hortex 450 g",
@@ -5577,19 +5434,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Lody waniliowe mlecznej czekoladzie Magnum 6 x 55 ml",
-    "generic_name": "lody waniliowe mlecznej czekoladzie",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 330.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 18.68,
-    "price_per_unit": null,
-    "price_per_100": 5.6606,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Bukiet jarzyn Wiosenny Hortex 450 g",
     "generic_name": "bukiet jarzyn",
     "shop": "auchan",
@@ -5629,19 +5473,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Lody śmietankowo waniliowe w czekoladzie mlecznej  Auchan 120 ml",
-    "generic_name": "lody śmietankowo waniliowe w czekoladzie mlecznej",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 120.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 3.49,
-    "price_per_unit": null,
-    "price_per_100": 2.9083,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Zupa jarzynowa Hortex 450 g",
     "generic_name": "zupa jarzynowa",
     "shop": "auchan",
@@ -5668,21 +5499,8 @@
     "standard_category": "Produkty konserwowe i słoikowe"
   },
   {
-    "original_name": "Lody Double Raspberry Magnum 88 ml",
-    "generic_name": "lody",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 85.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 8.69,
-    "price_per_unit": null,
-    "price_per_100": 10.2235,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Warzywa na patelnię  z suszonymi pomidorami Hortex 400 g",
-    "generic_name": "na patelnię z suszonymi pomidorami",
+    "generic_name": "na patelnię z pomidorami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -5695,7 +5513,7 @@
   },
   {
     "original_name": "Kalafior różyczki Auchan 1 kg",
-    "generic_name": "kalafior różyczki",
+    "generic_name": "kalafior",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -5824,19 +5642,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Lody Euphoria Pink Lemonade Magnum 90 ml",
-    "generic_name": "lody",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 90.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 8.69,
-    "price_per_unit": null,
-    "price_per_100": 9.6556,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Zupa z grzybowa Auchan Collection  450 g",
     "generic_name": "zupa z grzybowa",
     "shop": "auchan",
@@ -5848,45 +5653,6 @@
     "price_per_unit": null,
     "price_per_100": 1.7756,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Lody o smaku śmietankowym Auchan 6 x 120 ml",
-    "generic_name": "lody o smaku śmietankowym",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 660.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 7.85,
-    "price_per_unit": null,
-    "price_per_100": 1.1894,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lody o smaku śmietankowo waniliowym Big Milk 900 ml",
-    "generic_name": "lody o smaku śmietankowo waniliowym",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 900.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 19.58,
-    "price_per_unit": null,
-    "price_per_100": 2.1756,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lody śmietankowe w waflu Auchan 6 x 110 ml",
-    "generic_name": "lody śmietankowe w waflu",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 660.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 15.49,
-    "price_per_unit": null,
-    "price_per_100": 2.347,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Knedle ze śliwkami Jawo 450 g",
@@ -5902,21 +5668,8 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Lody śmietankowo waniliowe w czekoladzie mlecznej Auchan 6 x 120 ml",
-    "generic_name": "lody śmietankowo waniliowe w czekoladzie mlecznej",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 720.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 17.99,
-    "price_per_unit": null,
-    "price_per_100": 2.4986,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Polędwiczki z dorsza atlantyckiego 10% glazury MyFood 500g",
-    "generic_name": "polędwiczki z dorsza atlantyckiego 10% glazury",
+    "generic_name": "polędwiczki z dorsza glazury",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -5941,21 +5694,8 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Lody Vanilla & Chocolate Swirl Milka 100 ml",
-    "generic_name": "lody",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 90.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 6.98,
-    "price_per_unit": null,
-    "price_per_100": 7.7556,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Fasolka szparagowa zielona cięta Auchan 450 g",
-    "generic_name": "fasolka szparagowa zielona cięta",
+    "generic_name": "fasolka szparagowa zielona",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 450.0,
@@ -5980,21 +5720,8 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Lody śmietankowe o smaku słonego karmelu z sosem toffi Auchan 1 l",
-    "generic_name": "lody śmietankowe o smaku słonego karmelu z sosem toffi",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 14.99,
-    "price_per_unit": null,
-    "price_per_100": 1.499,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Top Milker strawberry Koral 110 ml",
-    "generic_name": "top milker strawberry",
+    "generic_name": "milker strawberry",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 110.0,
@@ -6019,21 +5746,8 @@
     "standard_category": "Przyprawy, zioła i proszki"
   },
   {
-    "original_name": "Lody Jak Dawniej śmietankowe z wiśniami Bracia Koral 900 ml",
-    "generic_name": "lody jak dawniej śmietankowe z wiśniami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 900.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 21.98,
-    "price_per_unit": null,
-    "price_per_100": 2.4422,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Top Milker classic Koral 110 ml",
-    "generic_name": "top milker classic",
+    "generic_name": "milker classic",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 110.0,
@@ -6084,45 +5798,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Lody śmietankowe Auchan 1 l",
-    "generic_name": "lody śmietankowe",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 14.99,
-    "price_per_unit": null,
-    "price_per_100": 1.499,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lody kakaowo waniliowe Nesquik 9 x 43 ml",
-    "generic_name": "lody kakaowo waniliowe",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 387.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 18.48,
-    "price_per_unit": null,
-    "price_per_100": 4.7752,
-    "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
-    "original_name": "Lody o smaku waniliowym i truskawkowym Auchan 1 l",
-    "generic_name": "lody o smaku waniliowym i truskawkowym",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 7.29,
-    "price_per_unit": null,
-    "price_per_100": 0.729,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Rybusie z dorsza Auchan 200 g",
     "generic_name": "rybusie z dorsza",
     "shop": "auchan",
@@ -6134,19 +5809,6 @@
     "price_per_unit": null,
     "price_per_100": 5.225,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Lody Minecraft Big Milk 75 ml",
-    "generic_name": "lody",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 75.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 5.64,
-    "price_per_unit": null,
-    "price_per_100": 7.52,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Groszek cukrowy Auchan 450 g",
@@ -6162,19 +5824,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Lody o smaku waniliowym i czekoladowym Auchan 1 l",
-    "generic_name": "lody o smaku waniliowym i czekoladowym",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 7.29,
-    "price_per_unit": null,
-    "price_per_100": 0.729,
-    "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
     "original_name": "Rożek karmelowo - śmietankowy Zielona Budka 110 ml",
     "generic_name": "rożek karmelowo - śmietankowy",
     "shop": "auchan",
@@ -6186,58 +5835,6 @@
     "price_per_unit": null,
     "price_per_100": 4.7182,
     "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lody o smaku waniliowym i mango Auchan 1 l",
-    "generic_name": "lody o smaku waniliowym i mango",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 7.29,
-    "price_per_unit": null,
-    "price_per_100": 0.729,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Lody o smaku wanilii i czekolady Auchan 12 sztuk",
-    "generic_name": "lody o smaku wanilii i czekolady",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 402.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.99,
-    "price_per_unit": null,
-    "price_per_100": 2.9826,
-    "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
-    "original_name": "Lody tiramisu mascarpone Auchan 900 ml",
-    "generic_name": "lody tiramisu mascarpone",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 900.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 13.99,
-    "price_per_unit": null,
-    "price_per_100": 1.5544,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lody czekoladowe z płatkami czekolady Zielona Budka 1 l",
-    "generic_name": "lody czekoladowe z płatkami czekolady",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 21.98,
-    "price_per_unit": null,
-    "price_per_100": 2.198,
-    "standard_category": "Słodziki i dodatki smakowe"
   },
   {
     "original_name": "Zupa pieczarkowa Hortex 450 g",
@@ -6254,7 +5851,7 @@
   },
   {
     "original_name": "Krewetki białe blanszowane (bez glazury 750 g) Owoce morza na wagę ok. 1 kg",
-    "generic_name": "krewetki białe blanszowane (bez glazury )",
+    "generic_name": "krewetki białe (bez glazury )",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -6264,19 +5861,6 @@
     "price_per_unit": null,
     "price_per_100": 7.49,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Lody śmietankowe w polewie o smaku toffi  Big Milk 100 ml",
-    "generic_name": "lody śmietankowe w polewie o smaku toffi",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 100.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 4.59,
-    "price_per_unit": null,
-    "price_per_100": 4.59,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Maliny mrożone new one 400 g",
@@ -6306,7 +5890,7 @@
   },
   {
     "original_name": "Marchew gotowana plastry Auchan 750 g",
-    "generic_name": "marchew gotowana plastry",
+    "generic_name": "marchew gotowana",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 750.0,
@@ -6332,7 +5916,7 @@
   },
   {
     "original_name": "Rożek cytrynowo - truskawkowy z zieloną polewą i kawałkami suszonej truskawki  Kaktus 110 ml",
-    "generic_name": "rożek cytrynowo - truskawkowy z zieloną polewą i kawałkami suszonej truskawki",
+    "generic_name": "rożek cytrynowo - truskawkowy z zieloną polewą i kawałkami truskawki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 110.0,
@@ -6341,19 +5925,6 @@
     "price_package": 6.69,
     "price_per_unit": null,
     "price_per_100": 6.0818,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Lody o smaku owoców leśnych  Auchan 900 ml",
-    "generic_name": "lody o smaku owoców leśnych",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 900.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 13.99,
-    "price_per_unit": null,
-    "price_per_100": 1.5544,
     "standard_category": "Owoce"
   },
   {
@@ -6368,19 +5939,6 @@
     "price_per_unit": null,
     "price_per_100": 4.236,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Lody wisnia z czekoladą Auchan 1 l",
-    "generic_name": "lody wisnia z czekoladą",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 15.29,
-    "price_per_unit": null,
-    "price_per_100": 1.529,
-    "standard_category": "Owoce"
   },
   {
     "original_name": "Gotowa zupa krupnik z kaszą pęczak Hortex 450 g",
@@ -6409,19 +5967,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Lody bananowe w polewie czekoladowej  Chiquita 80 ml",
-    "generic_name": "lody bananowe w polewie czekoladowej",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 80.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 7.19,
-    "price_per_unit": null,
-    "price_per_100": 8.9875,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Jagody leśne  Hortex 280 g",
     "generic_name": "jagody leśne",
     "shop": "auchan",
@@ -6436,7 +5981,7 @@
   },
   {
     "original_name": "Przekąski z ciasta francuskiego z warzywami Auchan 400 g",
-    "generic_name": "przekąski z ciasta francuskiego z warzywami",
+    "generic_name": "przekąski z ciasta z warzywami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -6461,60 +6006,8 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Shake lody z sorbetem malinowym Kaktus 90 ml",
-    "generic_name": "shake lody z sorbetem",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 90.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 5.79,
-    "price_per_unit": null,
-    "price_per_100": 6.4333,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Lody czekoladowo-orzechowe w czekoladzie mlecznej  Monte 110 ml",
-    "generic_name": "lody czekoladowo-orzechowe w czekoladzie mlecznej",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 110.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 6.89,
-    "price_per_unit": null,
-    "price_per_100": 6.2636,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lody karmelowe z solą Zielona Budka 1 l",
-    "generic_name": "lody karmelowe z solą",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 21.98,
-    "price_per_unit": null,
-    "price_per_100": 2.198,
-    "standard_category": "Przyprawy, zioła i proszki"
-  },
-  {
-    "original_name": "Lody Mango bez dodatku cukru Mancuso 400 ml",
-    "generic_name": "lody mango bez dodatku cukru",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 400.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 18.39,
-    "price_per_unit": null,
-    "price_per_100": 4.5975,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Ziemniaki plastry sarladais Auchan 600 g",
-    "generic_name": "ziemniaki plastry sarladais",
+    "generic_name": "ziemniaki sarladais",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 600.0,
@@ -6524,32 +6017,6 @@
     "price_per_unit": null,
     "price_per_100": 3.3317,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Lody o smaku śmietankowo czekoladowym Big Milk 900 ml",
-    "generic_name": "lody o smaku śmietankowo czekoladowym",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 900.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 19.58,
-    "price_per_unit": null,
-    "price_per_100": 2.1756,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lody śmietankowe z sosem o smaku czekolady i orzechów laskowych   Big Milk 100 ml",
-    "generic_name": "lody śmietankowe z sosem o smaku czekolady i orzechów laskowych",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 100.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 4.59,
-    "price_per_unit": null,
-    "price_per_100": 4.59,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Mięso z małży omułki chilijskie Auchan 450 g",
@@ -6565,47 +6032,8 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Lody Słoneczna pomarańcza Manhattan 1.4 l",
-    "generic_name": "lody słoneczna pomarańcza",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1400.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 23.98,
-    "price_per_unit": null,
-    "price_per_100": 1.7129,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Les Dessetrs lody jogurtowe z owocami leśnymi CARTE D'OR 825 ml",
-    "generic_name": "les dessetrs lody jogurtowe z owocami leśnymi",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 825.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 25.48,
-    "price_per_unit": null,
-    "price_per_100": 3.0885,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lody waniliowe z orzechami macadamia w karmelu Häagen-Dazs 460 ml",
-    "generic_name": "lody waniliowe z orzechami macadamia w karmelu",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 460.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 28.48,
-    "price_per_unit": null,
-    "price_per_100": 6.1913,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Filet z mintaja bez skóry glazura 10% Seacon 750 g",
-    "generic_name": "filet z mintaja glazura 10%",
+    "generic_name": "filet z mintaja glazura",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 750.0,
@@ -6615,45 +6043,6 @@
     "price_per_unit": null,
     "price_per_100": 2.9187,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Lody owocowe Haribo  Algida 6 x 85 ml",
-    "generic_name": "lody owocowe",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 510.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 19.98,
-    "price_per_unit": null,
-    "price_per_100": 3.9176,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Lody o smaku waniliowym „100% ice cream” w kubeczku waflowym Rud 150 ml",
-    "generic_name": "lody o smaku waniliowym „100% ice cream” w kubeczku waflowym",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 150.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 2.79,
-    "price_per_unit": null,
-    "price_per_100": 1.86,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lody waniliowe z mleczną czekoladą  i migdałami Magnum 440 ml",
-    "generic_name": "lody waniliowe z mleczną czekoladą i migdałami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 440.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 27.18,
-    "price_per_unit": null,
-    "price_per_100": 6.1773,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Sorbet o smaku mango Auchan 650 g",
@@ -6669,19 +6058,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Lody śmietankowe o smaku miętowym z kawałkami czekolady Auchan 1 l",
-    "generic_name": "lody śmietankowe o smaku miętowym z kawałkami czekolady",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 15.29,
-    "price_per_unit": null,
-    "price_per_100": 1.529,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Kalmary krążki MyFood 700 g",
     "generic_name": "kalmary krążki",
     "shop": "auchan",
@@ -6695,19 +6071,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Lody o smaku miętowym z płatkami czekolady Zielona Budka 1 l",
-    "generic_name": "lody o smaku miętowym z płatkami czekolady",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 21.98,
-    "price_per_unit": null,
-    "price_per_100": 2.198,
-    "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
     "original_name": "Krewetki gotowane obrane z ogonkiem rozmiar: 16 - 20 Auchan 400 g",
     "generic_name": "krewetki gotowane obrane z ogonkiem rozmiar: 16 - 20",
     "shop": "auchan",
@@ -6719,71 +6082,6 @@
     "price_per_unit": null,
     "price_per_100": 14.9975,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Lody waniliowe z kawałkami orzechów pekan Auchan 490 g",
-    "generic_name": "lody waniliowe z kawałkami orzechów pekan",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 489.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 15.99,
-    "price_per_unit": null,
-    "price_per_100": 3.2699,
-    "standard_category": "Orzechy, nasiona i masła orzechowe"
-  },
-  {
-    "original_name": "Lody śmietankowe z ciasteczkami Bracia Koral 900 ml",
-    "generic_name": "lody śmietankowe z ciasteczkami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 900.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 21.98,
-    "price_per_unit": null,
-    "price_per_100": 2.4422,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lody o smaku masła orzechowego Ben&Jerry's 465 ml",
-    "generic_name": "lody o smaku masła orzechowego",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 465.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 33.98,
-    "price_per_unit": null,
-    "price_per_100": 7.3075,
-    "standard_category": "Orzechy, nasiona i masła orzechowe"
-  },
-  {
-    "original_name": "Lody smak śmietankowo orzechowy Big Milk 900 ml",
-    "generic_name": "lody smak śmietankowo orzechowy",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 900.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 18.39,
-    "price_per_unit": null,
-    "price_per_100": 2.0433,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lody waniliowo czekoladowe Manhattan 1,4 l",
-    "generic_name": "lody waniliowo czekoladowe",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1400.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 23.98,
-    "price_per_unit": null,
-    "price_per_100": 1.7129,
-    "standard_category": "Słodziki i dodatki smakowe"
   },
   {
     "original_name": "Kluski kładzione z grzybami Auchan Collection  500 g",
@@ -6810,58 +6108,6 @@
     "price_per_unit": null,
     "price_per_100": 13.5245,
     "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
-    "original_name": "Lody truskawkowe Zielona Budka 1 l",
-    "generic_name": "lody truskawkowe",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 21.98,
-    "price_per_unit": null,
-    "price_per_100": 2.198,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Lody mango marakuja śmietankowe smak owoców leśnych Zielona Budka 1 l",
-    "generic_name": "lody mango marakuja śmietankowe smak owoców leśnych",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 23.74,
-    "price_per_unit": null,
-    "price_per_100": 2.374,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lody bakaliowe z orzechami i rodzynkami Zielona Budka 1 l",
-    "generic_name": "lody bakaliowe z orzechami i rodzynkami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 21.98,
-    "price_per_unit": null,
-    "price_per_100": 2.198,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Lody Intense o smaku czekoladowym z sosem i kawałkami czekolady  Big Milk 900 ml",
-    "generic_name": "lody intense o smaku czekoladowym z sosem i kawałkami czekolady",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 900.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 22.99,
-    "price_per_unit": null,
-    "price_per_100": 2.5544,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Bułeczki maśłane z czekoladą Auchan 6 sztuk",
@@ -6891,7 +6137,7 @@
   },
   {
     "original_name": "Krewetki koktajlowe blanszowane Auchan 400 g",
-    "generic_name": "krewetki koktajlowe blanszowane",
+    "generic_name": "krewetki koktajlowe",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -6903,34 +6149,8 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Lody śmietankowe w polewie truskawkowej   Big Milk 100 ml",
-    "generic_name": "lody śmietankowe w polewie truskawkowej",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 100.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 4.59,
-    "price_per_unit": null,
-    "price_per_100": 4.59,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lody Lemon Pie z kawałkami ciasteczek i sosem cytrynowym  CARTE D'OR 825 ml",
-    "generic_name": "lody lemon pie z kawałkami ciasteczek i sosem cytrynowym",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 825.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 25.48,
-    "price_per_unit": null,
-    "price_per_100": 3.0885,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Mintaj filet kostka glazura  do 5% Seacon 380 g",
-    "generic_name": "mintaj filet kostka glazura do 5%",
+    "generic_name": "mintaj filet kostka glazura",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 380.0,
@@ -6940,19 +6160,6 @@
     "price_per_unit": null,
     "price_per_100": 4.3658,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Lody o smaku ananasa Twister 80 ml",
-    "generic_name": "lody o smaku ananasa",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 80.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 4.88,
-    "price_per_unit": null,
-    "price_per_100": 6.1,
-    "standard_category": "Owoce"
   },
   {
     "original_name": "Krewetki gotowane obrane z ogonkiem 16-20 Auchan 180 g",
@@ -6981,58 +6188,6 @@
     "standard_category": "Orzechy, nasiona i masła orzechowe"
   },
   {
-    "original_name": "Lody czekoladowo - karmelowe z orzechami ziemnymi Manhattan 1,4 l",
-    "generic_name": "lody czekoladowo - karmelowe z orzechami ziemnymi",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1400.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 23.98,
-    "price_per_unit": null,
-    "price_per_100": 1.7129,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Lody Strawberry Doughnut-eee Ben&Jerry's 465 ml",
-    "generic_name": "lody",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 465.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 33.58,
-    "price_per_unit": null,
-    "price_per_100": 7.2215,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Lody waniliowo truskawkowe Manhattan 1,4 l",
-    "generic_name": "lody waniliowo truskawkowe",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1400.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 23.98,
-    "price_per_unit": null,
-    "price_per_100": 1.7129,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Les Dessetrs lody o smaku truskawkowym CARTE D'OR 825 ml",
-    "generic_name": "les dessetrs lody o smaku truskawkowym",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 825.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 25.48,
-    "price_per_unit": null,
-    "price_per_100": 3.0885,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Marchew z groszkiem Kuchnia eksperta 450 g",
     "generic_name": "marchew z groszkiem",
     "shop": "auchan",
@@ -7044,32 +6199,6 @@
     "price_per_unit": null,
     "price_per_100": 1.42,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Lody śmietankowo jagodowe  Manhattan 1,4 l",
-    "generic_name": "lody śmietankowo jagodowe",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1400.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 23.98,
-    "price_per_unit": null,
-    "price_per_100": 1.7129,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lody o smaku mango i maliny Häagen-Dazs 460 ml",
-    "generic_name": "lody o smaku mango i maliny",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 460.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 28.48,
-    "price_per_unit": null,
-    "price_per_100": 6.1913,
-    "standard_category": "Owoce"
   },
   {
     "original_name": "Mochi Coconut    Soti Natural 6 x 36 ml",
@@ -7098,45 +6227,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Lody Utopia Double Hazelnut Magnum 85 ml",
-    "generic_name": "lody",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 85.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 8.69,
-    "price_per_unit": null,
-    "price_per_100": 10.2235,
-    "standard_category": "Orzechy, nasiona i masła orzechowe"
-  },
-  {
-    "original_name": "Lody czekoladowe z kawałkami ciastek brownie  Ben&Jerry's 465 ml",
-    "generic_name": "lody czekoladowe z kawałkami ciastek brownie",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 465.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 33.98,
-    "price_per_unit": null,
-    "price_per_100": 7.3075,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Lody o smaku waniliowym z ciasteczkami kakaowymi  Oreo 110 ml",
-    "generic_name": "lody o smaku waniliowym z ciasteczkami kakaowymi",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 110.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 6.98,
-    "price_per_unit": null,
-    "price_per_100": 6.3455,
-    "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
     "original_name": "Sorbet o smaku mango  Mancuso 450 ml",
     "generic_name": "sorbet o smaku mango",
     "shop": "auchan",
@@ -7148,19 +6238,6 @@
     "price_per_unit": null,
     "price_per_100": 4.9978,
     "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Lody ciasteczkowe z karmel i solą Zielona Budka 1 l",
-    "generic_name": "lody ciasteczkowe z karmel i solą",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 23.74,
-    "price_per_unit": null,
-    "price_per_100": 2.374,
-    "standard_category": "Przyprawy, zioła i proszki"
   },
   {
     "original_name": "Sorbet migdałowy Mancuso 450 ml",
@@ -7176,21 +6253,8 @@
     "standard_category": "Orzechy, nasiona i masła orzechowe"
   },
   {
-    "original_name": "Lody orzechowe bez cukru Mancuso 400 ml",
-    "generic_name": "lody orzechowe bez cukru",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 400.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 18.39,
-    "price_per_unit": null,
-    "price_per_100": 4.5975,
-    "standard_category": "Orzechy, nasiona i masła orzechowe"
-  },
-  {
     "original_name": "Top Milker choco Koral 110 ml",
-    "generic_name": "top milker choco",
+    "generic_name": "milker choco",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 110.0,
@@ -7215,19 +6279,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Lody bananowo czekoladowe Manhattan 1.4 l",
-    "generic_name": "lody bananowo czekoladowe",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1400.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 23.98,
-    "price_per_unit": null,
-    "price_per_100": 1.7129,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Ośmiorniczki baby surowe MyFood sztuka",
     "generic_name": "ośmiorniczki baby surowe",
     "shop": "auchan",
@@ -7242,7 +6293,7 @@
   },
   {
     "original_name": "Top Milker toffi Koral 110 ml",
-    "generic_name": "top milker toffi",
+    "generic_name": "milker toffi",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 110.0,
@@ -7251,32 +6302,6 @@
     "price_package": 5.59,
     "price_per_unit": null,
     "price_per_100": 5.0818,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lody waniliowe soft & crunchy z sosem czekoladowym i wafelkami CARTE D'OR 750 ml",
-    "generic_name": "lody waniliowe soft & crunchy z sosem czekoladowym i wafelkami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 750.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 22.99,
-    "price_per_unit": null,
-    "price_per_100": 3.0653,
-    "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
-    "original_name": "Les Desserts lody z likierem jajecznym CARTE D'OR 825 ml",
-    "generic_name": "les desserts lody z likierem jajecznym",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 825.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 25.48,
-    "price_per_unit": null,
-    "price_per_100": 3.0885,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -7293,32 +6318,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Lody waniliowe z kawałkami ciastek i czekolady  Ben&Jerry's 465 ml",
-    "generic_name": "lody waniliowe z kawałkami ciastek i czekolady",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 465.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 33.98,
-    "price_per_unit": null,
-    "price_per_100": 7.3075,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Chili Sin Carne high protein  Hortex 450 g",
-    "generic_name": "chili sin carne high protein",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 15.28,
-    "price_per_unit": null,
-    "price_per_100": 3.3956,
-    "standard_category": "Przyprawy, zioła i proszki"
-  },
-  {
     "original_name": "Warzywne risotto z patelni Bonduelle 400 g",
     "generic_name": "warzywne risotto z patelni",
     "shop": "auchan",
@@ -7330,97 +6329,6 @@
     "price_per_unit": null,
     "price_per_100": 2.495,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Lody Vanilla - Caramel - Brownie   Häagen-Dazs 460 ml",
-    "generic_name": "lody",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 460.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 28.48,
-    "price_per_unit": null,
-    "price_per_100": 6.1913,
-    "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
-    "original_name": "Lody Trio Chrup choco&crisps Big Milk 90 ml",
-    "generic_name": "lody trio chrup choco&crisps",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 90.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 5.29,
-    "price_per_unit": null,
-    "price_per_100": 5.8778,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lody z truskawkową masą sernikową i ciasteczkową Ben&Jerry's 465 ml",
-    "generic_name": "lody z truskawkową masą sernikową i ciasteczkową",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 465.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 33.98,
-    "price_per_unit": null,
-    "price_per_100": 7.3075,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Lody Cookie Vermont-ster z kawałkami ciastek z czekoladą Ben&Jerry's 427 ml",
-    "generic_name": "lody cookie vermont-ster z kawałkami ciastek z czekoladą",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 427.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 33.98,
-    "price_per_unit": null,
-    "price_per_100": 7.9578,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Intense Lody super śmietankowe Big Milk 900 ml",
-    "generic_name": "intense lody super śmietankowe",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 900.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 22.99,
-    "price_per_unit": null,
-    "price_per_100": 2.5544,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lody Intense smak truskawkowy z sosem truskawkowym   Big Milk 900 ml",
-    "generic_name": "lody intense smak truskawkowy z sosem truskawkowym",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 900.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 22.99,
-    "price_per_unit": null,
-    "price_per_100": 2.5544,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lody Praline Chocolate Milka 90 ml",
-    "generic_name": "lody",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 90.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 8.19,
-    "price_per_unit": null,
-    "price_per_100": 9.1,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Warzywa do zapiekania z kurkami Hortex 450 g",
@@ -7449,32 +6357,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Lody Butter Cookie  Milka 90 ml",
-    "generic_name": "lody",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 90.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 6.98,
-    "price_per_unit": null,
-    "price_per_100": 7.7556,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lody czekoladowe z kawałkami mlecznej czekolady  CARTE D'OR 900 ml",
-    "generic_name": "lody czekoladowe z kawałkami mlecznej czekolady",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 25.48,
-    "price_per_unit": null,
-    "price_per_100": 2.548,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Kluski kładzione ze szpinakiem Auchan Collection  500 g",
     "generic_name": "kluski kładzione ze szpinakiem",
     "shop": "auchan",
@@ -7486,32 +6368,6 @@
     "price_per_unit": null,
     "price_per_100": 2.198,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Lody Tiramisu Coffee & Mascarpone Häagen-Dazs 346 ml",
-    "generic_name": "lody",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 346.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 29.69,
-    "price_per_unit": null,
-    "price_per_100": 8.5809,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lody Tort Królewski z sosem z wiśni Zielona Budka 1 l",
-    "generic_name": "lody tort królewski z sosem z wiśni",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 21.98,
-    "price_per_unit": null,
-    "price_per_100": 2.198,
-    "standard_category": "Owoce"
   },
   {
     "original_name": "Zupa Dyniowa z marchewką  New One  450 g",
@@ -7527,19 +6383,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Lody Soft & Crunchy Strawberry CARTE D'OR 750 ml",
-    "generic_name": "lody",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 750.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 25.48,
-    "price_per_unit": null,
-    "price_per_100": 3.3973,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Zupa meksykańska high protein   Hortex 450 g",
     "generic_name": "zupa meksykańska high protein",
     "shop": "auchan",
@@ -7551,19 +6394,6 @@
     "price_per_unit": null,
     "price_per_100": 2.44,
     "standard_category": "Białka i zamienniki"
-  },
-  {
-    "original_name": "Les Desserts wegańskie lody o smaku orzeszków ziemnych i o smaku bananowym CARTE D'OR 825 ml",
-    "generic_name": "les desserts wegańskie lody o smaku orzeszków ziemnych i o smaku bananowym",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 825.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 30.49,
-    "price_per_unit": null,
-    "price_per_100": 3.6958,
-    "standard_category": "Owoce"
   },
   {
     "original_name": "Mini Croissant czekoladowe    Schulstad 360 g",
@@ -7579,19 +6409,6 @@
     "standard_category": "Słodziki i dodatki smakowe"
   },
   {
-    "original_name": "Lody Peanut Caramel Milka 90 ml",
-    "generic_name": "lody",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 90.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 8.29,
-    "price_per_unit": null,
-    "price_per_100": 9.2111,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Makaron na patelnię z kurkami Hortex 450 g",
     "generic_name": "makaron na patelnię z kurkami",
     "shop": "auchan",
@@ -7605,34 +6422,8 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
-    "original_name": "Lody śmietankowe Kolorowe Lato Koral 1 l",
-    "generic_name": "lody śmietankowe",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 19.59,
-    "price_per_unit": null,
-    "price_per_100": 1.959,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lody o smaku orzechów laskowych z kawałkami czekolady Milka 200 ml",
-    "generic_name": "lody o smaku orzechów laskowych z kawałkami czekolady",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 200.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 17.28,
-    "price_per_unit": null,
-    "price_per_100": 8.64,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Warzywa z tofu w sosie teriyaki high protein    Hortex 450 g",
-    "generic_name": "z tofu w sosie teriyaki high protein",
+    "generic_name": "w sosie teriyaki high protein",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 450.0,
@@ -7642,19 +6433,6 @@
     "price_per_unit": null,
     "price_per_100": 3.3956,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Lody waniliowe z kawałkami czekolady mlecznej  Milka 480 ml",
-    "generic_name": "lody waniliowe z kawałkami czekolady mlecznej",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 480.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 28.49,
-    "price_per_unit": null,
-    "price_per_100": 5.9354,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Tort lodowy waniliowy z sorbetem malinowym Auchan 475 g",
@@ -7683,58 +6461,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Lody owocowe Rik Rok Fruity    Auchan 8 x 40 g",
-    "generic_name": "lody owocowe",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 320.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 11.99,
-    "price_per_unit": null,
-    "price_per_100": 3.7469,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Lody Trio Crunchy straciatella i ciasteczka Big Milk 90 ml",
-    "generic_name": "lody trio crunchy straciatella i ciasteczka",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 90.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 5.59,
-    "price_per_unit": null,
-    "price_per_100": 6.2111,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Lody waniliowe z nadzieniem o smaku słony karmel, orzechami pekan i kawałkami ciastek z białą czekoladą  Ben&Jerry's 465 ml",
-    "generic_name": "lody waniliowe z nadzieniem o smaku słony karmel, orzechami pekan i kawałkami ciastek z białą czekoladą",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 465.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 33.98,
-    "price_per_unit": null,
-    "price_per_100": 7.3075,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Lody rzemieślnicze proteinowe o smaku śmietankowym Kosmos 475 ml",
-    "generic_name": "lody rzemieślnicze proteinowe o smaku śmietankowym",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 380.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 46.59,
-    "price_per_unit": null,
-    "price_per_100": 12.2605,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Makaron pappardelle z sosem kurkowym Auchan Collection  500 g",
     "generic_name": "makaron pappardelle z sosem kurkowym",
     "shop": "auchan",
@@ -7746,19 +6472,6 @@
     "price_per_unit": null,
     "price_per_100": 3.678,
     "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
-    "original_name": "Lody na patyku czekoladowe 6 sztuk i waniliowe 6 sztuk Auchan 450 g",
-    "generic_name": "lody na patyku czekoladowe i waniliowe",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 15.99,
-    "price_per_unit": null,
-    "price_per_100": 3.5533,
-    "standard_category": "Słodziki i dodatki smakowe"
   },
   {
     "original_name": "Soczewica zielona gotowana Auchan 600 g",
@@ -7774,19 +6487,6 @@
     "standard_category": "Produkty konserwowe i słoikowe"
   },
   {
-    "original_name": "Lody Oshee Protein smak waniliowy Koral 110 ml",
-    "generic_name": "lody oshee protein smak waniliowy",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 100.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 6.99,
-    "price_per_unit": null,
-    "price_per_100": 6.99,
-    "standard_category": "Białka i zamienniki"
-  },
-  {
     "original_name": "Ptysie z nadzieniem waniliowymi z sosem czekoladowym Auchan 280 g",
     "generic_name": "ptysie z nadzieniem waniliowymi z sosem czekoladowym",
     "shop": "auchan",
@@ -7800,47 +6500,8 @@
     "standard_category": "Słodziki i dodatki smakowe"
   },
   {
-    "original_name": "Lody Delightful Strawberry  CARTE D'OR 1 l",
-    "generic_name": "lody",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 28.98,
-    "price_per_unit": null,
-    "price_per_100": 2.898,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Lody Strawberry Meringue Dream CARTE D'OR 200 ml",
-    "generic_name": "lody",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 200.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 10.39,
-    "price_per_unit": null,
-    "price_per_100": 5.195,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Lody Śliwka Nałęczowska   Solidarność 900 ml",
-    "generic_name": "lody",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 900.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 25.59,
-    "price_per_unit": null,
-    "price_per_100": 2.8433,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Duńskie masło klasyczne 82% tłuszczu Lurpak 200 g",
-    "generic_name": "duńskie masło 82% tłuszczu",
+    "generic_name": "duńskie masło tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -7879,7 +6540,7 @@
   },
   {
     "original_name": "Ser kozi twardy dojrzewający w plastrach Danmis 100 g",
-    "generic_name": "ser kozi twardy dojrzewający w plastrach",
+    "generic_name": "ser kozi twardy dojrzewający",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -7905,7 +6566,7 @@
   },
   {
     "original_name": "Śmietana 18% do zup sosów i sałatek Piątnica 400 g",
-    "generic_name": "śmietana 18% do zup sosów i sałatek",
+    "generic_name": "śmietana do zup sosów i sałatek",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -7918,7 +6579,7 @@
   },
   {
     "original_name": "Mleko wiejskie świeże 2%  Piątnica 1 l",
-    "generic_name": "mleko 2%",
+    "generic_name": "mleko",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -7944,7 +6605,7 @@
   },
   {
     "original_name": "Mleko świeże 3.2% Łaciate 1 l",
-    "generic_name": "mleko 3.2%",
+    "generic_name": "mleko",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -8009,7 +6670,7 @@
   },
   {
     "original_name": "Mleko UHT bez laktozy 1.5 % Auchan 1 l",
-    "generic_name": "mleko uht bez laktozy 1.5 %",
+    "generic_name": "mleko uht bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -8048,7 +6709,7 @@
   },
   {
     "original_name": "Mleko wiejskie świeże 3.2%  Piątnica 1 l",
-    "generic_name": "mleko 3.2%",
+    "generic_name": "mleko",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -8100,7 +6761,7 @@
   },
   {
     "original_name": "Skyr jogurt typu islandzkiego naturalny   Piątnica 330 g",
-    "generic_name": "skyr jogurt typu islandzkiego",
+    "generic_name": "skyr jogurt",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 330.0,
@@ -8152,7 +6813,7 @@
   },
   {
     "original_name": "Fantasia Jogurt kremowy z mleczną czekoladą Danone 106 g",
-    "generic_name": "fantasia jogurt kremowy z mleczną czekoladą",
+    "generic_name": "fantasia jogurt z mleczną czekoladą",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 106.0,
@@ -8230,7 +6891,7 @@
   },
   {
     "original_name": "Jogurt naturalny kremowy bez laktozy Auchan 180 g",
-    "generic_name": "jogurt kremowy bez laktozy",
+    "generic_name": "jogurt bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -8308,7 +6969,7 @@
   },
   {
     "original_name": "Mleko świeże 2% Łaciate 1 l",
-    "generic_name": "mleko 2%",
+    "generic_name": "mleko",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -8334,7 +6995,7 @@
   },
   {
     "original_name": "Mleko polskie 2 % Mlekovita 1 l",
-    "generic_name": "mleko 2 %",
+    "generic_name": "mleko",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -8360,7 +7021,7 @@
   },
   {
     "original_name": "Skyr jogurt typu islandzkiego mango i marakuja Piątnica 330 ml",
-    "generic_name": "skyr jogurt typu islandzkiego mango i marakuja",
+    "generic_name": "skyr jogurt mango i marakuja",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 330.0,
@@ -8464,7 +7125,7 @@
   },
   {
     "original_name": "Skyr jogurt typu islandzkiego wiśnia Piątnica 330 ml",
-    "generic_name": "skyr jogurt typu islandzkiego wiśnia",
+    "generic_name": "skyr jogurt wiśnia",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 330.0,
@@ -8477,7 +7138,7 @@
   },
   {
     "original_name": "Fantasia Jogurt kremowy z gwiazdkami w czekoladzie Danone 102 g",
-    "generic_name": "fantasia jogurt kremowy z gwiazdkami w czekoladzie",
+    "generic_name": "fantasia jogurt z gwiazdkami w czekoladzie",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 102.0,
@@ -8490,7 +7151,7 @@
   },
   {
     "original_name": "Twaróg wiejski lekki 0% Piątnica 250 g",
-    "generic_name": "twaróg lekki 0%",
+    "generic_name": "twaróg lekki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -8503,7 +7164,7 @@
   },
   {
     "original_name": "Jogurt naturalny kremowy 3%  Auchan 180 g",
-    "generic_name": "jogurt kremowy 3%",
+    "generic_name": "jogurt",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -8529,7 +7190,7 @@
   },
   {
     "original_name": "Skyr jogurt typu islandzkiego o smaku waniliowym Bakoma 150 g",
-    "generic_name": "skyr jogurt typu islandzkiego o smaku waniliowym",
+    "generic_name": "skyr jogurt o smaku waniliowym",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -8542,7 +7203,7 @@
   },
   {
     "original_name": "Jogurt naturalny typu greckiego 0% tłuszczu Piątnica 150 g",
-    "generic_name": "jogurt typu greckiego 0% tłuszczu",
+    "generic_name": "jogurt typu greckiego tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -8555,7 +7216,7 @@
   },
   {
     "original_name": "Mleko zagęszczone niesłodzone 7.5% Gostyńskie 500 g",
-    "generic_name": "mleko zagęszczone niesłodzone 7.5%",
+    "generic_name": "mleko zagęszczone niesłodzone",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -8568,7 +7229,7 @@
   },
   {
     "original_name": "Skyr jogurt typu islandzkiego jagoda Piątnica 330 ml",
-    "generic_name": "skyr jogurt typu islandzkiego jagoda",
+    "generic_name": "skyr jogurt jagoda",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 330.0,
@@ -8581,7 +7242,7 @@
   },
   {
     "original_name": "Skyr jogurt typu islandzkiego nektarynka & malina Piątnica 330 ml",
-    "generic_name": "skyr jogurt typu islandzkiego nektarynka & malina",
+    "generic_name": "skyr jogurt nektarynka & malina",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 330.0,
@@ -8594,7 +7255,7 @@
   },
   {
     "original_name": "Mleko świeże 3.2% Auchan 1 l",
-    "generic_name": "mleko 3.2%",
+    "generic_name": "mleko",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -8672,7 +7333,7 @@
   },
   {
     "original_name": "Śmietana 12% do sałatek, zup i sosów Piątnica 200 g",
-    "generic_name": "śmietana 12% do sałatek, zup i sosów",
+    "generic_name": "śmietana do sałatek, zup i sosów",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -8724,7 +7385,7 @@
   },
   {
     "original_name": "Mleko UHT zawartość tłuszczu 0 %.  Łaciate 1 l",
-    "generic_name": "mleko uht zawartość tłuszczu 0 %",
+    "generic_name": "mleko uht zawartość tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -8737,7 +7398,7 @@
   },
   {
     "original_name": "Śmietana 18% homogenizowana Auchan 330 ml",
-    "generic_name": "śmietana 18% homogenizowana",
+    "generic_name": "śmietana homogenizowana",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 330.0,
@@ -8763,7 +7424,7 @@
   },
   {
     "original_name": "Skyr jogurt typu islandzkiego jagoda Bakoma 150 g",
-    "generic_name": "skyr jogurt typu islandzkiego jagoda",
+    "generic_name": "skyr jogurt jagoda",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -8815,7 +7476,7 @@
   },
   {
     "original_name": "Słodka śmietanka 30% do deserów i zup Piątnica 400 g",
-    "generic_name": "słodka śmietanka 30% do deserów i zup",
+    "generic_name": "słodka śmietanka do deserów i zup",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -8828,7 +7489,7 @@
   },
   {
     "original_name": "Mleko zagęszczone słodzone 8% Gostyńskie 530 g",
-    "generic_name": "mleko zagęszczone słodzone 8%",
+    "generic_name": "mleko zagęszczone słodzone",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 530.0,
@@ -8867,7 +7528,7 @@
   },
   {
     "original_name": "Mleko świeże 2% Auchan 1 l",
-    "generic_name": "mleko 2%",
+    "generic_name": "mleko",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -8893,7 +7554,7 @@
   },
   {
     "original_name": "Masło ekstra Łaciate 200 g",
-    "generic_name": "masło ekstra",
+    "generic_name": "masło",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -8906,7 +7567,7 @@
   },
   {
     "original_name": "Jogurt naturalny gęsty 2.8% tłuszczu Bakoma 150 g",
-    "generic_name": "jogurt gęsty 2.8% tłuszczu",
+    "generic_name": "jogurt gęsty tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -8958,7 +7619,7 @@
   },
   {
     "original_name": "Jogurt naturalny gęsty 2.8% tłuszczu Bakoma 390 g",
-    "generic_name": "jogurt gęsty 2.8% tłuszczu",
+    "generic_name": "jogurt gęsty tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 390.0,
@@ -8971,7 +7632,7 @@
   },
   {
     "original_name": "Tradycyjne masło irlandzkie 82% Kerrygold 200 g",
-    "generic_name": "tradycyjne masło irlandzkie 82%",
+    "generic_name": "tradycyjne masło irlandzkie",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -9127,7 +7788,7 @@
   },
   {
     "original_name": "Jogurt kremowy z malinami i granolą  Bakoma 230 g",
-    "generic_name": "jogurt kremowy z malinami i granolą",
+    "generic_name": "jogurt z malinami i granolą",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 230.0,
@@ -9153,7 +7814,7 @@
   },
   {
     "original_name": "Jogobella Jogurt owocowy 0% tłuszczu 0% dodatków cukru mix smaków Zott 150 g",
-    "generic_name": "jogobella jogurt owocowy 0% tłuszczu 0% dodatków cukru mix smaków",
+    "generic_name": "jogobella jogurt owocowy tłuszczu dodatków cukru mix smaków",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -9205,7 +7866,7 @@
   },
   {
     "original_name": "Mleko UHT bez laktozy 3.2% Łaciate 1 l",
-    "generic_name": "mleko uht bez laktozy 3.2%",
+    "generic_name": "mleko uht bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -9270,7 +7931,7 @@
   },
   {
     "original_name": "Fantasia Jogurt kremowy z wiśniami Danone 118 g",
-    "generic_name": "fantasia jogurt kremowy z wiśniami",
+    "generic_name": "fantasia jogurt z wiśniami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 118.0,
@@ -9296,7 +7957,7 @@
   },
   {
     "original_name": "Śmietanka 36% homogenizowana Piątnica 200 g",
-    "generic_name": "śmietanka 36% homogenizowana",
+    "generic_name": "śmietanka homogenizowana",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -9361,7 +8022,7 @@
   },
   {
     "original_name": "Fantasia Jogurt kremowy w truskawkami Danone 118 g",
-    "generic_name": "fantasia jogurt kremowy w truskawkami",
+    "generic_name": "fantasia jogurt w truskawkami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 118.0,
@@ -9439,7 +8100,7 @@
   },
   {
     "original_name": "Fantasia Jogurt kremowy z płatkami w czekoladzie Danone 102 g",
-    "generic_name": "fantasia jogurt kremowy z płatkami w czekoladzie",
+    "generic_name": "fantasia jogurt z płatkami w czekoladzie",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 102.0,
@@ -9517,7 +8178,7 @@
   },
   {
     "original_name": "Masło ekstra bez laktozy Auchan 200 g",
-    "generic_name": "masło ekstra bez laktozy",
+    "generic_name": "masło bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -9530,7 +8191,7 @@
   },
   {
     "original_name": "Jogurt naturalny 0% tłuszczu lekki Bieluch 180 g",
-    "generic_name": "jogurt 0% tłuszczu lekki",
+    "generic_name": "jogurt tłuszczu lekki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -9634,7 +8295,7 @@
   },
   {
     "original_name": "Masło klarowane 99,8% tłuszczu mlecznego Auchan 250 g",
-    "generic_name": "masło klarowane 99,8% tłuszczu mlecznego",
+    "generic_name": "masło klarowane tłuszczu mlecznego",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -9647,7 +8308,7 @@
   },
   {
     "original_name": "Mleko 3,2% z Polskiej Mleczarni  Mlekovita 1 l",
-    "generic_name": "mleko 3,2%",
+    "generic_name": "mleko",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -9660,7 +8321,7 @@
   },
   {
     "original_name": "Jogurt Skyr naturalny 0% Mlekovita 500 g",
-    "generic_name": "jogurt skyr 0%",
+    "generic_name": "jogurt skyr",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -9816,7 +8477,7 @@
   },
   {
     "original_name": "Fantasia Jogurt kremowy z kulkami w czekoladzie  Danone 100 g",
-    "generic_name": "fantasia jogurt kremowy z kulkami w czekoladzie",
+    "generic_name": "fantasia jogurt z kulkami w czekoladzie",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -9894,7 +8555,7 @@
   },
   {
     "original_name": "Śmietana 18% bez laktozy Mlekovita 200 g",
-    "generic_name": "śmietana 18% bez laktozy",
+    "generic_name": "śmietana bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -9907,7 +8568,7 @@
   },
   {
     "original_name": "Fantasia Jogurt kremowy z jagodami Danone 118 g",
-    "generic_name": "fantasia jogurt kremowy z jagodami",
+    "generic_name": "fantasia jogurt z jagodami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 118.0,
@@ -9972,7 +8633,7 @@
   },
   {
     "original_name": "Jogurt kremowy z brzoskwiniami i granolą Bakoma 230 g",
-    "generic_name": "jogurt kremowy z brzoskwiniami i granolą",
+    "generic_name": "jogurt z brzoskwiniami i granolą",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 230.0,
@@ -9981,32 +8642,6 @@
     "price_package": 6.08,
     "price_per_unit": null,
     "price_per_100": 2.6435,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Napój jogurtowy o smaku banan truskawka Jovi 350 g",
-    "generic_name": "napój jogurtowy o smaku banan truskawka",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 350.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.98,
-    "price_per_unit": null,
-    "price_per_100": 0.8514,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Actimel truskawkowy  Danone 4 x 100 g",
-    "generic_name": "actimel truskawkowy",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.84,
-    "price_per_unit": null,
-    "price_per_100": 2.46,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -10089,7 +8724,7 @@
   },
   {
     "original_name": "Śmietana 18 % homogenizowana Krasnystaw 150 g",
-    "generic_name": "śmietana 18 % homogenizowana",
+    "generic_name": "śmietana homogenizowana",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -10128,7 +8763,7 @@
   },
   {
     "original_name": "Mleko truskawkowe 1.5% UHT  Mlekovita 200 ml",
-    "generic_name": "mleko truskawkowe 1.5%",
+    "generic_name": "mleko truskawkowe",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -10141,7 +8776,7 @@
   },
   {
     "original_name": "Mleko zagęszczone niesłodzone 4% light Gostyńskie 500 g",
-    "generic_name": "mleko zagęszczone niesłodzone 4%",
+    "generic_name": "mleko zagęszczone niesłodzone",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -10258,7 +8893,7 @@
   },
   {
     "original_name": "Jogurt naturalny 2%   Auchan 1 kg",
-    "generic_name": "jogurt 2%",
+    "generic_name": "jogurt",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -10267,19 +8902,6 @@
     "price_package": 6.99,
     "price_per_unit": null,
     "price_per_100": 0.699,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Actimel Kids truskawka banan Danone 4 x 100 g",
-    "generic_name": "actimel kids truskawka banan",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.84,
-    "price_per_unit": null,
-    "price_per_100": 2.46,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -10336,7 +8958,7 @@
   },
   {
     "original_name": "Mleko UHT bez laktozy 3.2 % Auchan 1 l",
-    "generic_name": "mleko uht bez laktozy 3.2 %",
+    "generic_name": "mleko uht bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -10479,7 +9101,7 @@
   },
   {
     "original_name": "Serek wiejski z twarożkiem kremowym Almette 150 g",
-    "generic_name": "serek z twarożkiem kremowym",
+    "generic_name": "serek z twarożkiem",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -10505,7 +9127,7 @@
   },
   {
     "original_name": "Fantasia Jogurt kremowy z brzoskwinią Danone 118 g",
-    "generic_name": "fantasia jogurt kremowy z brzoskwinią",
+    "generic_name": "fantasia jogurt z brzoskwinią",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 118.0,
@@ -10518,7 +9140,7 @@
   },
   {
     "original_name": "Nieznormalizowane biomleko pełne 4% tłuszczu Olma 1 l",
-    "generic_name": "nieznormalizowane biomleko pełne 4% tłuszczu",
+    "generic_name": "nieznormalizowane biomleko pełne tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -10596,7 +9218,7 @@
   },
   {
     "original_name": "Śmietana 18% ekstra kremowa  Zott 180 g",
-    "generic_name": "śmietana 18% ekstra kremowa",
+    "generic_name": "śmietana",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -10778,7 +9400,7 @@
   },
   {
     "original_name": "Classic tłuszcz do smarowania 75% tłuszczu Rama 400 g",
-    "generic_name": "classic tłuszcz do smarowania 75% tłuszczu",
+    "generic_name": "classic tłuszcz do smarowania tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -10869,7 +9491,7 @@
   },
   {
     "original_name": "Masło ekstra osełkowe 83% tłuszczu Pewni Dobrego 300 g",
-    "generic_name": "masło ekstra osełkowe 83% tłuszczu",
+    "generic_name": "masło osełkowe tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -10882,7 +9504,7 @@
   },
   {
     "original_name": "Śmietana zawartość tłuszczu 18% Łaciata 180 g",
-    "generic_name": "śmietana zawartość tłuszczu 18%",
+    "generic_name": "śmietana zawartość tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -10947,7 +9569,7 @@
   },
   {
     "original_name": "Jogurt kremowy kokosowo migdałowy Bakoma 150 g",
-    "generic_name": "jogurt kremowy kokosowo migdałowy",
+    "generic_name": "jogurt kokosowo migdałowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -11024,19 +9646,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Napój jogurtowy o smaku truskawka kiwi Jovi 350 g",
-    "generic_name": "napój jogurtowy o smaku truskawka kiwi",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 350.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.98,
-    "price_per_unit": null,
-    "price_per_100": 0.8514,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Serek homogenizowany czekoladowy  Krasnystaw 125 g",
     "generic_name": "serek czekoladowy",
     "shop": "auchan",
@@ -11051,7 +9660,7 @@
   },
   {
     "original_name": "Wydojone Mleko bez laktozy 2% Mlekovita 1 l",
-    "generic_name": "wydojone mleko bez laktozy 2%",
+    "generic_name": "wydojone mleko bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -11090,7 +9699,7 @@
   },
   {
     "original_name": "Vegan Cocoghurt kremowy Auchan 400 g",
-    "generic_name": "vegan cocoghurt kremowy",
+    "generic_name": "vegan cocoghurt",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -11103,7 +9712,7 @@
   },
   {
     "original_name": "Śmietana 12 % homogenizowana 300g Krasnystaw 300 g",
-    "generic_name": "śmietana 12 % homogenizowana",
+    "generic_name": "śmietana homogenizowana",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -11116,7 +9725,7 @@
   },
   {
     "original_name": "Jogurt kremowy kawowy Bakoma 150 g",
-    "generic_name": "jogurt kremowy kawowy",
+    "generic_name": "jogurt kawowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 140.0,
@@ -11181,7 +9790,7 @@
   },
   {
     "original_name": "Śmietana kremowa 30% President 200 g",
-    "generic_name": "śmietana kremowa 30%",
+    "generic_name": "śmietana",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -11207,7 +9816,7 @@
   },
   {
     "original_name": "Wydojone Mleko bez laktozy 3.2% Mlekovita 1 l",
-    "generic_name": "wydojone mleko bez laktozy 3.2%",
+    "generic_name": "wydojone mleko bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -11272,7 +9881,7 @@
   },
   {
     "original_name": "Margaryna o smaku wiejskiego masełka 39% tłuszczu Delma 450 g",
-    "generic_name": "margaryna o smaku masełka 39% tłuszczu",
+    "generic_name": "margaryna o smaku masełka tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 450.0,
@@ -11320,19 +9929,6 @@
     "price_package": 7.98,
     "price_per_unit": null,
     "price_per_100": 3.99,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Actimel wieloowocowy Danone 4 x 100 g",
-    "generic_name": "actimel wieloowocowy",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.84,
-    "price_per_unit": null,
-    "price_per_100": 2.46,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -11675,7 +10271,7 @@
   },
   {
     "original_name": "Tłuszcz roślinny 79% do smarowania Eleplant 200 g",
-    "generic_name": "tłuszcz roślinny 79% do smarowania",
+    "generic_name": "tłuszcz roślinny do smarowania",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -11752,19 +10348,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Actimel truskawkowy Danone 8 x 100 g",
-    "generic_name": "actimel truskawkowy",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 800.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 20.69,
-    "price_per_unit": null,
-    "price_per_100": 2.5863,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Margaryna maślany smak Smakowita 450 g",
     "generic_name": "margaryna maślany smak",
     "shop": "auchan",
@@ -11805,7 +10388,7 @@
   },
   {
     "original_name": "Masło ekstra osełka Łaciate 300 g",
-    "generic_name": "masło ekstra osełka",
+    "generic_name": "masło osełka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -11844,7 +10427,7 @@
   },
   {
     "original_name": "Fantasia Jogurt kremowy z marakują Danone 118 g",
-    "generic_name": "fantasia jogurt kremowy z marakują",
+    "generic_name": "fantasia jogurt z marakują",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 118.0,
@@ -11883,7 +10466,7 @@
   },
   {
     "original_name": "Mleko świeże bez laktozy 2% Piątnica 1 l",
-    "generic_name": "mleko bez laktozy 2%",
+    "generic_name": "mleko bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -11935,7 +10518,7 @@
   },
   {
     "original_name": "Ekologiczne masło ekstra 82% Pewni Dobrego 125 g",
-    "generic_name": "masło ekstra 82%",
+    "generic_name": "masło",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 125.0,
@@ -12026,7 +10609,7 @@
   },
   {
     "original_name": "Twaróg wysokobiałkowy 0% tłuszczu, bez laktozy Mlekovita 500 g",
-    "generic_name": "twaróg wysokobiałkowy 0% tłuszczu, bez laktozy",
+    "generic_name": "twaróg wysokobiałkowy tłuszczu, bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -12035,19 +10618,6 @@
     "price_package": 11.49,
     "price_per_unit": null,
     "price_per_100": 2.298,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Actimel L.casei z witaminami B6 i D naturalny Danone 4 x 100 g",
-    "generic_name": "actimel l.casei z witaminami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.84,
-    "price_per_unit": null,
-    "price_per_100": 2.46,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -12074,19 +10644,6 @@
     "price_package": 2.79,
     "price_per_unit": null,
     "price_per_100": 1.395,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Müllermilch o smaku białej czekolady i orzechów makadamia   Müller 400 g",
-    "generic_name": "müllermilch o smaku białej czekolady i orzechów makadamia",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.84,
-    "price_per_unit": null,
-    "price_per_100": 0.96,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -12117,7 +10674,7 @@
   },
   {
     "original_name": "Osełeczka górska mini 83% Sobik 100 g",
-    "generic_name": "osełeczka górska mini 83%",
+    "generic_name": "osełeczka górska mini",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -12195,7 +10752,7 @@
   },
   {
     "original_name": "Twaróg chudy 0% Bieluch 250 g",
-    "generic_name": "twaróg 0%",
+    "generic_name": "twaróg",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -12208,7 +10765,7 @@
   },
   {
     "original_name": "Mleko UHT do spieniania 3.2% tłuszczu SM Gostyń 1 l",
-    "generic_name": "mleko uht do spieniania 3.2% tłuszczu",
+    "generic_name": "mleko uht do spieniania tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -12311,19 +10868,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Actimel L.casei z witaminami B6 i D malinowy Danone 8 x 100 g",
-    "generic_name": "actimel l.casei z witaminami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 800.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 20.69,
-    "price_per_unit": null,
-    "price_per_100": 2.5863,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Mój Ulubiony twarożek kanapkowo-sernikowy   Wieluń 1 kg",
     "generic_name": "mój ulubiony twarożek kanapkowo-sernikowy",
     "shop": "auchan",
@@ -12399,19 +10943,6 @@
     "price_package": 4.69,
     "price_per_unit": null,
     "price_per_100": 1.4212,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Actimel L.casei z witaminami B6 i D wieloowocowy Danone 8 x 100 g",
-    "generic_name": "actimel l.casei z witaminami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 800.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 20.69,
-    "price_per_unit": null,
-    "price_per_100": 2.5863,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -12533,7 +11064,7 @@
   },
   {
     "original_name": "Fantasia Jogurt kremowy Mars Danone 120 g",
-    "generic_name": "fantasia jogurt kremowy",
+    "generic_name": "fantasia jogurt",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 104.0,
@@ -12598,7 +11129,7 @@
   },
   {
     "original_name": "Fantasia Jogurt kremowy smak malina, czerwona porzeczka z kawałkami czekolady Danone 116 g",
-    "generic_name": "fantasia jogurt kremowy smak malina, czerwona porzeczka z kawałkami czekolady",
+    "generic_name": "fantasia jogurt smak malina, czerwona porzeczka z kawałkami czekolady",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 116.0,
@@ -12689,7 +11220,7 @@
   },
   {
     "original_name": "Smietana 18% ekstra kremowa Zott 330 g",
-    "generic_name": "smietana 18% ekstra kremowa",
+    "generic_name": "smietana",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 330.0,
@@ -12780,7 +11311,7 @@
   },
   {
     "original_name": "Osełka masło ekstra Auchan 300 g",
-    "generic_name": "osełka masło ekstra",
+    "generic_name": "osełka masło",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -12793,7 +11324,7 @@
   },
   {
     "original_name": "Jogurt Skyr z truskawkami 0% Mlekovita 500 g",
-    "generic_name": "jogurt skyr z truskawkami 0%",
+    "generic_name": "jogurt skyr z truskawkami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -12819,7 +11350,7 @@
   },
   {
     "original_name": "Jogurt kremowy z wiśnią. czereśnią i granolą Bakoma 230 g",
-    "generic_name": "jogurt kremowy z wiśnią. czereśnią i granolą",
+    "generic_name": "jogurt z wiśnią. czereśnią i granolą",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 230.0,
@@ -12884,7 +11415,7 @@
   },
   {
     "original_name": "Jogurt kremowy z czarną porzeczką i granolą Bakoma 230 g",
-    "generic_name": "jogurt kremowy z czarną porzeczką i granolą",
+    "generic_name": "jogurt z czarną porzeczką i granolą",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 230.0,
@@ -12910,7 +11441,7 @@
   },
   {
     "original_name": "Śmietana ukwaszona 12% bez laktozy Maluta 200 g",
-    "generic_name": "śmietana ukwaszona 12% bez laktozy",
+    "generic_name": "śmietana ukwaszona bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -12958,19 +11489,6 @@
     "price_package": 3.49,
     "price_per_unit": null,
     "price_per_100": 2.792,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Actimel Kids wanilia Danone 100 g",
-    "generic_name": "actimel kids wanilia",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.84,
-    "price_per_unit": null,
-    "price_per_100": 2.46,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -13092,7 +11610,7 @@
   },
   {
     "original_name": "Jogurt kremowy o smaku biszkoptowym Danone 4 x 120 g",
-    "generic_name": "jogurt kremowy o smaku biszkoptowym",
+    "generic_name": "jogurt o smaku biszkoptowym",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 480.0,
@@ -13144,7 +11662,7 @@
   },
   {
     "original_name": "Tłuszcz do smarowania 75%  Rama 400 g",
-    "generic_name": "tłuszcz do smarowania 75%",
+    "generic_name": "tłuszcz do smarowania",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 450.0,
@@ -13325,19 +11843,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Nesquik snack kakao Nestle 26 g",
-    "generic_name": "nesquik snack kakao",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 26.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.98,
-    "price_per_unit": null,
-    "price_per_100": 7.6154,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Protein Drink czekoladowy Zott 250 ml",
     "generic_name": "protein drink czekoladowy",
     "shop": "auchan",
@@ -13417,7 +11922,7 @@
   },
   {
     "original_name": "Śmietana zawartość tłuszczu 18% Łaciata 330 g",
-    "generic_name": "śmietana zawartość tłuszczu 18%",
+    "generic_name": "śmietana zawartość tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 330.0,
@@ -13716,7 +12221,7 @@
   },
   {
     "original_name": "Primo Śmietana bez laktozy  18%  Zott 180 g",
-    "generic_name": "primo śmietana bez laktozy 18%",
+    "generic_name": "primo śmietana bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -13846,7 +12351,7 @@
   },
   {
     "original_name": "Jogurt naturalny light 3.5%  Greek Style 180 g",
-    "generic_name": "jogurt 3.5%",
+    "generic_name": "jogurt",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -13885,7 +12390,7 @@
   },
   {
     "original_name": "Ekologiczne masło ekstra  EKOŁukta 200 g",
-    "generic_name": "masło ekstra",
+    "generic_name": "masło",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -13924,7 +12429,7 @@
   },
   {
     "original_name": "Fantasia Jogurt kremowy Maltesers Danone 103 g",
-    "generic_name": "fantasia jogurt kremowy",
+    "generic_name": "fantasia jogurt",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 103.0,
@@ -13989,7 +12494,7 @@
   },
   {
     "original_name": "Mleko świeże 3,2% Auchan 1 l",
-    "generic_name": "mleko 3,2%",
+    "generic_name": "mleko",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -14002,7 +12507,7 @@
   },
   {
     "original_name": "Śmietana 18 % homogenizowana   Krasnystaw 300 g",
-    "generic_name": "śmietana 18 % homogenizowana",
+    "generic_name": "śmietana homogenizowana",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -14054,7 +12559,7 @@
   },
   {
     "original_name": "Jogurt Skyr brzoskwinia-marakuja 0% Mlekovita 500 g",
-    "generic_name": "jogurt skyr brzoskwinia-marakuja 0%",
+    "generic_name": "jogurt skyr brzoskwinia-marakuja",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -14171,7 +12676,7 @@
   },
   {
     "original_name": "Śmietana 12 % homogenizowana Krasnystaw 150 g",
-    "generic_name": "śmietana 12 % homogenizowana",
+    "generic_name": "śmietana homogenizowana",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -14184,7 +12689,7 @@
   },
   {
     "original_name": "Masło klarowane 99,8% tłuszczu mlecznego Mlekovita 200 g",
-    "generic_name": "masło klarowane 99,8% tłuszczu mlecznego",
+    "generic_name": "masło klarowane tłuszczu mlecznego",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -14197,7 +12702,7 @@
   },
   {
     "original_name": "Kefir naturalny 1.5% Pewni Dobrego 250 g",
-    "generic_name": "kefir 1.5%",
+    "generic_name": "kefir",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -14288,7 +12793,7 @@
   },
   {
     "original_name": "Mleko świeże 2% Rolmlecz 1 l",
-    "generic_name": "mleko 2%",
+    "generic_name": "mleko",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -14353,7 +12858,7 @@
   },
   {
     "original_name": "Mleko wypasione 2.0% Mlekovita 500 ml",
-    "generic_name": "mleko wypasione 2.0%",
+    "generic_name": "mleko wypasione",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -14392,7 +12897,7 @@
   },
   {
     "original_name": "BIO Masło ekstra bez laktozy EKOŁukta 125 g",
-    "generic_name": "masło ekstra bez laktozy",
+    "generic_name": "masło bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 125.0,
@@ -14509,7 +13014,7 @@
   },
   {
     "original_name": "Miks ekstra śmietankowy z masłem Masmix 380 g",
-    "generic_name": "miks ekstra śmietankowy z masłem",
+    "generic_name": "miks śmietankowy z masłem",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 380.0,
@@ -14548,7 +13053,7 @@
   },
   {
     "original_name": "Margaryna Ekstra maślany smak do ciast i kremów Kasia 250 g",
-    "generic_name": "margaryna ekstra maślany smak do ciast i kremów",
+    "generic_name": "margaryna maślany smak do ciast i kremów",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -14756,7 +13261,7 @@
   },
   {
     "original_name": "Mleko w proszku pełne 26% Mlekovita 400 g",
-    "generic_name": "mleko w proszku pełne 26%",
+    "generic_name": "mleko w proszku pełne",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -14808,7 +13313,7 @@
   },
   {
     "original_name": "BIO Śmietana sałatkowa 10% EKOŁukta 180 g",
-    "generic_name": "śmietana 10%",
+    "generic_name": "śmietana",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -14860,7 +13365,7 @@
   },
   {
     "original_name": "BIO Ekologiczny krem kokosowy o zawartości tłuszczu 17% NaturaVena 400 ml",
-    "generic_name": "krem kokosowy o zawartości tłuszczu 17%",
+    "generic_name": "krem kokosowy o zawartości tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -14938,7 +13443,7 @@
   },
   {
     "original_name": "Whey Protein Complex 100% odżywka białkowa wanilia Olimp 2,27 kg",
-    "generic_name": "whey protein complex 100% odżywka białkowa wanilia",
+    "generic_name": "whey protein complex odżywka białkowa wanilia",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 2270.0,
@@ -15016,7 +13521,7 @@
   },
   {
     "original_name": "Masło irlandzkie 82% tłuszczu Auchan 200 g",
-    "generic_name": "masło irlandzkie 82% tłuszczu",
+    "generic_name": "masło irlandzkie tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -15133,7 +13638,7 @@
   },
   {
     "original_name": "Mleko wysokobiałkowe klasyczne 0,5% Mlekovita 1 l",
-    "generic_name": "mleko wysokobiałkowe 0,5%",
+    "generic_name": "mleko wysokobiałkowe",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -15198,7 +13703,7 @@
   },
   {
     "original_name": "Masło ekstra 82% tłuszczu Auchan 200 g",
-    "generic_name": "masło ekstra 82% tłuszczu",
+    "generic_name": "masło tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -15211,7 +13716,7 @@
   },
   {
     "original_name": "Mleko zagęszczone niesłodzone 7,5% tłuszczu Łaciate 250 ml",
-    "generic_name": "mleko zagęszczone niesłodzone 7,5% tłuszczu",
+    "generic_name": "mleko zagęszczone niesłodzone tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -15246,19 +13751,6 @@
     "price_package": 69.99,
     "price_per_unit": null,
     "price_per_100": 9.9986,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Protein 80 Białko lody waniliowe Proactive 700 g",
-    "generic_name": "protein 80 białko lody waniliowe",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 700.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 49.99,
-    "price_per_unit": null,
-    "price_per_100": 7.1414,
     "standard_category": "Nabiał i jaja"
   },
   {
@@ -15315,7 +13807,7 @@
   },
   {
     "original_name": "Mix tłuszczowy do smarowania 68% tłuszczu Mlemix Zambrowski 200 g",
-    "generic_name": "mix tłuszczowy do smarowania 68% tłuszczu",
+    "generic_name": "mix tłuszczowy do smarowania tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -15354,7 +13846,7 @@
   },
   {
     "original_name": "Masło ekstra Mazurski Smak  83% Mlekpol 200 g",
-    "generic_name": "masło ekstra",
+    "generic_name": "masło",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -15419,7 +13911,7 @@
   },
   {
     "original_name": "Whey Protein Complex 100% - białko Olimp 600 g",
-    "generic_name": "whey protein complex 100% - białko",
+    "generic_name": "whey protein complex - białko",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 600.0,
@@ -15432,7 +13924,7 @@
   },
   {
     "original_name": "Whey Protein Complex 100% - 600g białko Olimp 600 g",
-    "generic_name": "whey protein complex 100% - białko",
+    "generic_name": "whey protein complex - białko",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 600.0,
@@ -15614,7 +14106,7 @@
   },
   {
     "original_name": "Riazenka - pieczone mleko 3.2% napój mleczny fermentowany Gamtos 500 g",
-    "generic_name": "riazenka - pieczone mleko 3.2% napój mleczny fermentowany",
+    "generic_name": "riazenka - pieczone mleko napój mleczny fermentowany",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -15783,7 +14275,7 @@
   },
   {
     "original_name": "Whey Protein Complex 100% białko Olimp 600 g",
-    "generic_name": "whey protein complex 100% białko",
+    "generic_name": "whey protein complex białko",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 600.0,
@@ -15887,7 +14379,7 @@
   },
   {
     "original_name": "Whey Protein Complex 100% odżywka białkowa ciastko z kremem Olimp 2,27 kg",
-    "generic_name": "whey protein complex 100% odżywka białkowa ciastko z kremem",
+    "generic_name": "whey protein complex odżywka białkowa ciastko z kremem",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 2270.0,
@@ -15926,7 +14418,7 @@
   },
   {
     "original_name": "Whey Protein Complex 100% - 700g białko Olimp 700 g",
-    "generic_name": "whey protein complex 100% - białko",
+    "generic_name": "whey protein complex - białko",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 700.0,
@@ -16069,7 +14561,7 @@
   },
   {
     "original_name": "Mleko świeże 3.2% bez laktozy Pewni Dobrego 1 l",
-    "generic_name": "mleko 3.2% bez laktozy",
+    "generic_name": "mleko bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -16147,7 +14639,7 @@
   },
   {
     "original_name": "Whey Protein Complex 100% - 600g białko Olimp 700 g",
-    "generic_name": "whey protein complex 100% - białko",
+    "generic_name": "whey protein complex - białko",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 600.0,
@@ -16160,7 +14652,7 @@
   },
   {
     "original_name": "Skyr jogurt pitny typu islandzkiego wanilia  Piątnica 330 ml",
-    "generic_name": "skyr jogurt pitny typu islandzkiego wanilia",
+    "generic_name": "skyr jogurt pitny wanilia",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 330.0,
@@ -16173,7 +14665,7 @@
   },
   {
     "original_name": "Whey Protein Complex 100% 600g białko Olimp 600 g",
-    "generic_name": "whey protein complex 100% białko",
+    "generic_name": "whey protein complex białko",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 600.0,
@@ -16251,7 +14743,7 @@
   },
   {
     "original_name": "Śmietana 18% do zup, sosów i sałatek Piątnica 1 kg",
-    "generic_name": "śmietana 18% do zup, sosów i sałatek",
+    "generic_name": "śmietana do zup, sosów i sałatek",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -16446,7 +14938,7 @@
   },
   {
     "original_name": "Whey Protein Complex 100% odżywka białkowa czekolada Olimp 2,27 kg",
-    "generic_name": "whey protein complex 100% odżywka białkowa czekolada",
+    "generic_name": "whey protein complex odżywka białkowa czekolada",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 2270.0,
@@ -16511,7 +15003,7 @@
   },
   {
     "original_name": "Fantasia Jogurt kremowy z kawałkami czekolady mlecznej Danone 104 g",
-    "generic_name": "fantasia jogurt kremowy z kawałkami czekolady mlecznej",
+    "generic_name": "fantasia jogurt z kawałkami czekolady mlecznej",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 104.0,
@@ -16550,7 +15042,7 @@
   },
   {
     "original_name": "Masło ekstra 82% tłuszczu   President 200 g",
-    "generic_name": "masło ekstra 82% tłuszczu",
+    "generic_name": "masło tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -17356,7 +15848,7 @@
   },
   {
     "original_name": "Frankfurterki Auchan na wagę ok. 500 g",
-    "generic_name": "frankfurterki g",
+    "generic_name": "frankfurterki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -18084,7 +16576,7 @@
   },
   {
     "original_name": "Tuszka królicza z podrobami świeża Auchan na wagę ok. 1,2 kg",
-    "generic_name": "tuszka królicza z podrobami",
+    "generic_name": "królicza z podrobami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -18448,7 +16940,7 @@
   },
   {
     "original_name": "Flaki cielęce blanszowane Auchan 900 g",
-    "generic_name": "flaki cielęce blanszowane",
+    "generic_name": "flaki cielęce",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 900.0,
@@ -18669,7 +17161,7 @@
   },
   {
     "original_name": "Perliczka tuszka świeża pakowana Perliczka na wagę ok. 1,5 kg",
-    "generic_name": "perliczka tuszka pakowana",
+    "generic_name": "perliczka pakowana",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -19176,7 +17668,7 @@
   },
   {
     "original_name": "Ser gouda porcjowany Mlekpol 250 g",
-    "generic_name": "ser gouda porcjowany",
+    "generic_name": "ser porcjowany",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -19215,7 +17707,7 @@
   },
   {
     "original_name": "Ser salami w plastrach Mlekpol 150 g",
-    "generic_name": "ser salami w plastrach",
+    "generic_name": "ser salami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -19228,7 +17720,7 @@
   },
   {
     "original_name": "Ser gouda w plastrach Hochland 135 g",
-    "generic_name": "ser gouda w plastrach",
+    "generic_name": "ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 135.0,
@@ -19254,7 +17746,7 @@
   },
   {
     "original_name": "Ser kozi holenderski w plastrach Auchan 100 g",
-    "generic_name": "ser kozi holenderski w plastrach",
+    "generic_name": "ser kozi holenderski",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -19332,7 +17824,7 @@
   },
   {
     "original_name": "Ser gouda podpuszczkowy dojrzewający Auchan 250 g",
-    "generic_name": "ser gouda podpuszczkowy dojrzewający",
+    "generic_name": "ser podpuszczkowy dojrzewający",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -19358,7 +17850,7 @@
   },
   {
     "original_name": "Ser Cheddar Red twardy w plastrach Auchan 150 g",
-    "generic_name": "ser cheddar red twardy w plastrach",
+    "generic_name": "ser ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -19462,7 +17954,7 @@
   },
   {
     "original_name": "Ser tylżycki w plastrach Hochland 135 g",
-    "generic_name": "ser tylżycki w plastrach",
+    "generic_name": "ser tylżycki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 135.0,
@@ -19475,7 +17967,7 @@
   },
   {
     "original_name": "Lekki serek naturalny o 30% mniej tłuszczu Bieluch 150 g",
-    "generic_name": "lekki serek o 30% mniej tłuszczu",
+    "generic_name": "lekki serek o mniej tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -19501,7 +17993,7 @@
   },
   {
     "original_name": "Kremowy serek z paluszkami chlebowymi Kiri 35 g",
-    "generic_name": "kremowy serek z paluszkami chlebowymi",
+    "generic_name": "serek z paluszkami chlebowymi",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 35.0,
@@ -19566,7 +18058,7 @@
   },
   {
     "original_name": "Ser Mozzarella plastry Auchan 150 g",
-    "generic_name": "ser mozzarella plastry",
+    "generic_name": "ser mozzarella",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -19579,7 +18071,7 @@
   },
   {
     "original_name": "Ser maasdamer w plastrach Hochland 135 g",
-    "generic_name": "ser maasdamer w plastrach",
+    "generic_name": "ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 135.0,
@@ -19618,7 +18110,7 @@
   },
   {
     "original_name": "Ser żółty typu szwajcarskiego w plastrach Włoszczowa 150 g",
-    "generic_name": "ser żółty typu szwajcarskiego w plastrach",
+    "generic_name": "ser typu szwajcarskiego",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -19644,7 +18136,7 @@
   },
   {
     "original_name": "Ser tost kremowy topiony w plastrach Hochland 130 g",
-    "generic_name": "ser tost kremowy topiony w plastrach",
+    "generic_name": "ser tost topiony",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 130.0,
@@ -19670,7 +18162,7 @@
   },
   {
     "original_name": "Ser Gouda z czarnuszką Spomlek 135 g",
-    "generic_name": "ser gouda z czarnuszką",
+    "generic_name": "ser z czarnuszką",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 135.0,
@@ -19683,7 +18175,7 @@
   },
   {
     "original_name": "Ser mascarpone śmietankowo-kremowy Piątnica 250 g",
-    "generic_name": "ser mascarpone śmietankowo-kremowy",
+    "generic_name": "ser mascarpone śmietankowo",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -19696,7 +18188,7 @@
   },
   {
     "original_name": "Ser cheddar kremowy topiony w plastrach Hochland 130 g",
-    "generic_name": "ser cheddar kremowy topiony w plastrach",
+    "generic_name": "ser ser topiony",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 130.0,
@@ -19709,7 +18201,7 @@
   },
   {
     "original_name": "Ser typu szwajcarskiego plastry Auchan 500 g",
-    "generic_name": "ser typu szwajcarskiego plastry",
+    "generic_name": "ser typu szwajcarskiego",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -19722,7 +18214,7 @@
   },
   {
     "original_name": "Ser camembert lekki 12% tłuszczu Président 120 g",
-    "generic_name": "ser camembert lekki 12% tłuszczu",
+    "generic_name": "ser camembert lekki tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 120.0,
@@ -19735,7 +18227,7 @@
   },
   {
     "original_name": "Śmietankowy ser żółty w plastrach Hochland 135 g",
-    "generic_name": "śmietankowy ser żółty w plastrach",
+    "generic_name": "śmietankowy ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 135.0,
@@ -19761,7 +18253,7 @@
   },
   {
     "original_name": "Ser gouda bez laktozy dojrzewający plastry Mlekovita 150 g",
-    "generic_name": "ser gouda bez laktozy dojrzewający plastry",
+    "generic_name": "ser bez laktozy dojrzewający",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -19774,7 +18266,7 @@
   },
   {
     "original_name": "Serek śmietankowy light 30% mniej tłuszczu Philadelphia 125 g",
-    "generic_name": "serek śmietankowy 30% mniej tłuszczu",
+    "generic_name": "serek śmietankowy mniej tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 125.0,
@@ -19826,7 +18318,7 @@
   },
   {
     "original_name": "Ser Gouda z kozieradką Sery z Radzynia Podlaskiego 135 g",
-    "generic_name": "ser gouda z kozieradką",
+    "generic_name": "ser z kozieradką",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 135.0,
@@ -19982,7 +18474,7 @@
   },
   {
     "original_name": "Ser gouda dojrzewający wiórki Mlekovita 150 g",
-    "generic_name": "ser gouda dojrzewający wiórki",
+    "generic_name": "ser dojrzewający wiórki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -20034,7 +18526,7 @@
   },
   {
     "original_name": "Parmigiano Reggiano ser tarty  Granarolo 90 g",
-    "generic_name": "parmigiano reggiano ser tarty",
+    "generic_name": "parmigiano reggiano ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 90.0,
@@ -20086,7 +18578,7 @@
   },
   {
     "original_name": "Gouda wędzona ser żółty w plastrach  Hochland 135 g",
-    "generic_name": "gouda ser żółty w plastrach",
+    "generic_name": "ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 135.0,
@@ -20099,7 +18591,7 @@
   },
   {
     "original_name": "Serek kremowy śmietankowy Hochland 90 g",
-    "generic_name": "serek kremowy śmietankowy",
+    "generic_name": "serek śmietankowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 90.0,
@@ -20138,7 +18630,7 @@
   },
   {
     "original_name": "Ser edamski w plastrach Hochland 135 g",
-    "generic_name": "ser edamski w plastrach",
+    "generic_name": "ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 135.0,
@@ -20164,7 +18656,7 @@
   },
   {
     "original_name": "Ser Ementaler + Gouda wiórki Mlekovita 100 g",
-    "generic_name": "ser ementaler + gouda wiórki",
+    "generic_name": "ser ementaler + wiórki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -20216,7 +18708,7 @@
   },
   {
     "original_name": "Ser kremowy topiony Auchan 100 g",
-    "generic_name": "ser kremowy topiony",
+    "generic_name": "ser topiony",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -20268,7 +18760,7 @@
   },
   {
     "original_name": "BIO Ser Parmezan Parmigiano Reggiano tarty Auchan 50 g",
-    "generic_name": "ser parmezan parmigiano reggiano tarty",
+    "generic_name": "ser parmezan parmigiano reggiano",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 50.0,
@@ -20281,7 +18773,7 @@
   },
   {
     "original_name": "Ser topiony gouda Auchan 100 g",
-    "generic_name": "ser topiony gouda",
+    "generic_name": "ser topiony",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -20294,7 +18786,7 @@
   },
   {
     "original_name": "Ser Gouda plastry Włoszczowa na wagę ok. 250 g",
-    "generic_name": "ser gouda plastry",
+    "generic_name": "ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -20320,7 +18812,7 @@
   },
   {
     "original_name": "Ser Cheddar White Irlandzki  Auchan 150 g",
-    "generic_name": "ser",
+    "generic_name": "ser ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -20333,7 +18825,7 @@
   },
   {
     "original_name": "Ser twardy tarty Auchan 40 g",
-    "generic_name": "ser twardy tarty",
+    "generic_name": "ser twardy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 40.0,
@@ -20346,7 +18838,7 @@
   },
   {
     "original_name": "Gouda ser topiony Lactima 130 g",
-    "generic_name": "gouda ser topiony",
+    "generic_name": "ser topiony",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 130.0,
@@ -20372,7 +18864,7 @@
   },
   {
     "original_name": "Ser Królewski tarty Sierpc 150 g",
-    "generic_name": "ser królewski tarty",
+    "generic_name": "ser królewski",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -20411,7 +18903,7 @@
   },
   {
     "original_name": "Ser kremowy topiony śmietankowy Hochland 180 g",
-    "generic_name": "ser kremowy topiony śmietankowy",
+    "generic_name": "ser topiony śmietankowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -20476,7 +18968,7 @@
   },
   {
     "original_name": "Serek włoski mascarpone śmietankowo-kremowy Galbani 250 g",
-    "generic_name": "serek włoski mascarpone śmietankowo-kremowy",
+    "generic_name": "serek włoski mascarpone śmietankowo",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -20541,7 +19033,7 @@
   },
   {
     "original_name": "Bursztyn ser tarty długodojrzewający 6 miesięcy Skarby Serowara 100 g",
-    "generic_name": "bursztyn ser tarty długodojrzewający 6 miesięcy",
+    "generic_name": "bursztyn ser długodojrzewający 6 miesięcy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -20580,7 +19072,7 @@
   },
   {
     "original_name": "Ser twarogowy śmietankowy w plastrach Bakoma 135 g",
-    "generic_name": "ser twarogowy śmietankowy w plastrach",
+    "generic_name": "ser twarogowy śmietankowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -20619,7 +19111,7 @@
   },
   {
     "original_name": "Ser Sokół bez laktozy dojrzewający plastry Mlekovita 150 g",
-    "generic_name": "ser sokół bez laktozy dojrzewający plastry",
+    "generic_name": "ser sokół bez laktozy dojrzewający",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -20749,7 +19241,7 @@
   },
   {
     "original_name": "Serek kremowy naturalny Arla 200 g",
-    "generic_name": "serek kremowy",
+    "generic_name": "serek",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -20762,7 +19254,7 @@
   },
   {
     "original_name": "Gouda flavour 100% vegan Violife 100 g",
-    "generic_name": "gouda flavour 100% vegan",
+    "generic_name": "flavour vegan",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -20775,7 +19267,7 @@
   },
   {
     "original_name": "Ser gouda kremowy topiony w plastrach Hochland 130 g",
-    "generic_name": "ser gouda kremowy topiony w plastrach",
+    "generic_name": "ser topiony",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 130.0,
@@ -20840,7 +19332,7 @@
   },
   {
     "original_name": "Ser owczy w plastrach Auchan 100 g",
-    "generic_name": "ser owczy w plastrach",
+    "generic_name": "ser owczy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -20879,7 +19371,7 @@
   },
   {
     "original_name": "Ser typu śródziemnomorskiego w zalewie olejowej z suszonymi pomidorami  Apetina 100 g",
-    "generic_name": "ser typu śródziemnomorskiego w zalewie olejowej z suszonymi pomidorami",
+    "generic_name": "ser typu śródziemnomorskiego w zalewie olejowej z pomidorami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -20892,7 +19384,7 @@
   },
   {
     "original_name": "Serek kremowy z jalapeno Apetina 125 g",
-    "generic_name": "serek kremowy z jalapeno",
+    "generic_name": "serek z jalapeno",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 125.0,
@@ -21061,7 +19553,7 @@
   },
   {
     "original_name": "Edam ser topiony w plastrach Lactima 130 g",
-    "generic_name": "edam ser topiony w plastrach",
+    "generic_name": "ser topiony",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 130.0,
@@ -21100,7 +19592,7 @@
   },
   {
     "original_name": "Ser Cheddar Mild Red tarty Auchan 200 g",
-    "generic_name": "ser cheddar mild red tarty",
+    "generic_name": "ser ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -21152,7 +19644,7 @@
   },
   {
     "original_name": "Ser topiony z mozzarellą plastry Lactima 130 g",
-    "generic_name": "ser topiony z mozzarellą plastry",
+    "generic_name": "ser topiony z mozzarellą",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 130.0,
@@ -21165,7 +19657,7 @@
   },
   {
     "original_name": "Ser kremowy z przerostem niebieskiej pleśni Castelli 150 g",
-    "generic_name": "ser kremowy z przerostem niebieskiej pleśni",
+    "generic_name": "ser z przerostem niebieskiej pleśni",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -21191,7 +19683,7 @@
   },
   {
     "original_name": "Ser cheddar red irlandzki półtwardy dojrzewający Dublin Dairy 200 g",
-    "generic_name": "ser cheddar red irlandzki półtwardy dojrzewający",
+    "generic_name": "ser ser red irlandzki półtwardy dojrzewający",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -21217,7 +19709,7 @@
   },
   {
     "original_name": "Ser rajski w plastrach Włoszczowa 150 g",
-    "generic_name": "ser rajski w plastrach",
+    "generic_name": "ser rajski",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -21256,7 +19748,7 @@
   },
   {
     "original_name": "Ser kremowy topiony mix ziół papryki i śmietanki Hochland 180 g",
-    "generic_name": "ser kremowy topiony mix ziół papryki i śmietanki",
+    "generic_name": "ser topiony mix ziół papryki i śmietanki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -21373,7 +19865,7 @@
   },
   {
     "original_name": "Ser żółty Morski w kawałku Włoszczowa na wagę ok. 250 g",
-    "generic_name": "ser żółty",
+    "generic_name": "ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -21425,7 +19917,7 @@
   },
   {
     "original_name": "Ser Gouda Fresh Pack na wagę ok. 200 g",
-    "generic_name": "ser gouda pack g",
+    "generic_name": "ser pack",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -21451,7 +19943,7 @@
   },
   {
     "original_name": "Wegański ser typu cheddar w plastrach Violife 100 g",
-    "generic_name": "wegański ser typu cheddar w plastrach",
+    "generic_name": "wegański ser typu ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -21477,7 +19969,7 @@
   },
   {
     "original_name": "Ser mazdamer w plastrach Włoszczowa 150 g",
-    "generic_name": "ser mazdamer w plastrach",
+    "generic_name": "ser mazdamer",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -21529,7 +20021,7 @@
   },
   {
     "original_name": "Serek kremowy naturalny bez laktozy  Arla 200 g",
-    "generic_name": "serek kremowy bez laktozy",
+    "generic_name": "serek bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -21542,7 +20034,7 @@
   },
   {
     "original_name": "Serek kremowy z papają i curry Apetina 125 g",
-    "generic_name": "serek kremowy z papają i curry",
+    "generic_name": "serek z papają i curry",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 125.0,
@@ -21555,7 +20047,7 @@
   },
   {
     "original_name": "Ser tarty mix Sierpc 150 g",
-    "generic_name": "ser tarty mix",
+    "generic_name": "ser mix",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -21568,7 +20060,7 @@
   },
   {
     "original_name": "Ser Złoty Mazur plastry Auchan na wagę ok. 250 g",
-    "generic_name": "ser złoty mazur plastry",
+    "generic_name": "ser złoty mazur",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -21581,7 +20073,7 @@
   },
   {
     "original_name": "Ser Edam bez laktozy Auchan Collection  150 g",
-    "generic_name": "ser edam bez laktozy",
+    "generic_name": "ser bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -21594,7 +20086,7 @@
   },
   {
     "original_name": "Ser kozi wędzony w plastrach Goat Farm 100 g",
-    "generic_name": "ser kozi w plastrach",
+    "generic_name": "ser kozi",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -21646,7 +20138,7 @@
   },
   {
     "original_name": "Ser kozi półtwardy w plastrach Goat Farm 100 g",
-    "generic_name": "ser kozi półtwardy w plastrach",
+    "generic_name": "ser kozi półtwardy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -21659,7 +20151,7 @@
   },
   {
     "original_name": "Serek kremowy z jogurtem typu islandzkiego Skyr Apetina 125 g",
-    "generic_name": "serek kremowy z jogurtem typu islandzkiego",
+    "generic_name": "serek z jogurtem",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 125.0,
@@ -21724,7 +20216,7 @@
   },
   {
     "original_name": "Ser Cheddar Mild White   Auchan na wagę ok. 130 g",
-    "generic_name": "ser cheddar mild white g",
+    "generic_name": "ser ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -21737,7 +20229,7 @@
   },
   {
     "original_name": "Ser z szynką kremowy topiony w plastrach Hochland 130 g",
-    "generic_name": "ser z szynką kremowy topiony w plastrach",
+    "generic_name": "ser z szynką topiony",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 130.0,
@@ -21802,7 +20294,7 @@
   },
   {
     "original_name": "Kremowy serek do smarowania bez laktozy Violife 150 g",
-    "generic_name": "kremowy serek do smarowania bez laktozy",
+    "generic_name": "serek do smarowania bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -21815,7 +20307,7 @@
   },
   {
     "original_name": "Ser szwajcarski emmentaler wiórkowany Auchan 200 g",
-    "generic_name": "ser szwajcarski emmentaler wiórkowany",
+    "generic_name": "ser szwajcarski wiórkowany",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -21841,7 +20333,7 @@
   },
   {
     "original_name": "Ser kremowy topiony Emmentaler  Hochland 90 g",
-    "generic_name": "ser kremowy topiony",
+    "generic_name": "ser topiony",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 90.0,
@@ -21854,7 +20346,7 @@
   },
   {
     "original_name": "Ser francuski camembert kremowy Le Rustique 250 g",
-    "generic_name": "ser francuski camembert kremowy",
+    "generic_name": "ser camembert",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -21893,7 +20385,7 @@
   },
   {
     "original_name": "Ser Maasdamer plastry Ryki na wagę ok. 200 g",
-    "generic_name": "ser maasdamer plastry",
+    "generic_name": "ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -21906,7 +20398,7 @@
   },
   {
     "original_name": "Ser Ricotta Pecorina    Auchan na wagę ok. 130 g",
-    "generic_name": "ser ricotta pecorina g",
+    "generic_name": "ser ricotta pecorina",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -21919,7 +20411,7 @@
   },
   {
     "original_name": "Serek kremowy z pesto i rukolą Arla 125 g",
-    "generic_name": "serek kremowy z pesto i rukolą",
+    "generic_name": "serek z pesto i rukolą",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 125.0,
@@ -21945,7 +20437,7 @@
   },
   {
     "original_name": "Ser kremowy topiony z szynką Hochland 180 g",
-    "generic_name": "ser kremowy topiony z szynką",
+    "generic_name": "ser topiony z szynką",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -21997,7 +20489,7 @@
   },
   {
     "original_name": "Ser kremowy z ziołami Hochland 90 g",
-    "generic_name": "ser kremowy z ziołami",
+    "generic_name": "ser z ziołami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 90.0,
@@ -22010,7 +20502,7 @@
   },
   {
     "original_name": "BIO Ser Kozi plastry   Goat Farm 90 g",
-    "generic_name": "ser kozi plastry",
+    "generic_name": "ser kozi",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 90.0,
@@ -22036,7 +20528,7 @@
   },
   {
     "original_name": "Ser żółty płatki Dziugas 100 g",
-    "generic_name": "ser żółty płatki",
+    "generic_name": "ser płatki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -22088,7 +20580,7 @@
   },
   {
     "original_name": "Ser kozio-owczy w plastrach Goat Farm 100 g",
-    "generic_name": "ser kozio-owczy w plastrach",
+    "generic_name": "ser kozio-owczy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -22101,7 +20593,7 @@
   },
   {
     "original_name": "Ser Cheddar   Auchan 200 g",
-    "generic_name": "ser",
+    "generic_name": "ser ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -22140,7 +20632,7 @@
   },
   {
     "original_name": "Ser cheddar white irlandzki półtwardy dojrzewający Dublin Dairy 200 g",
-    "generic_name": "ser cheddar white irlandzki półtwardy dojrzewający",
+    "generic_name": "ser ser white irlandzki półtwardy dojrzewający",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -22166,7 +20658,7 @@
   },
   {
     "original_name": "BIO Ser Cheddar plastry Auchan 125 g",
-    "generic_name": "ser cheddar plastry",
+    "generic_name": "ser ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 125.0,
@@ -22218,7 +20710,7 @@
   },
   {
     "original_name": "Ser salami w plastrach Serenada na wagę ok. 150 g",
-    "generic_name": "ser salami w plastrach",
+    "generic_name": "ser salami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -22244,7 +20736,7 @@
   },
   {
     "original_name": "Sortett ser kremowy topiony   Hochland 180 g",
-    "generic_name": "sortett ser kremowy topiony",
+    "generic_name": "sortett ser topiony",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -22257,7 +20749,7 @@
   },
   {
     "original_name": "Ser Włoszczowski plastry Auchan na wagę ok. 250 g",
-    "generic_name": "ser włoszczowski plastry",
+    "generic_name": "ser włoszczowski",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -22270,7 +20762,7 @@
   },
   {
     "original_name": "Ser topiony cheddar plastry Lactima 600 g",
-    "generic_name": "ser topiony cheddar plastry",
+    "generic_name": "ser topiony ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 600.0,
@@ -22309,7 +20801,7 @@
   },
   {
     "original_name": "Ser topiony Cheddar Sertop 130 g",
-    "generic_name": "ser topiony",
+    "generic_name": "ser topiony ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 130.0,
@@ -22348,7 +20840,7 @@
   },
   {
     "original_name": "Ser podpuszczkowy dojrzewający tarty Dziugas 100 g",
-    "generic_name": "ser podpuszczkowy dojrzewający tarty",
+    "generic_name": "ser podpuszczkowy dojrzewający",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -22439,7 +20931,7 @@
   },
   {
     "original_name": "Ser radamer w plastrach Serenada na wagę ok. 200 g",
-    "generic_name": "ser radamer w plastrach",
+    "generic_name": "ser radamer",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -22465,7 +20957,7 @@
   },
   {
     "original_name": "Ser kremowy topiony z szynka   Hochland 90 g",
-    "generic_name": "ser kremowy topiony z szynka",
+    "generic_name": "ser topiony z szynka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 90.0,
@@ -22478,7 +20970,7 @@
   },
   {
     "original_name": "Ser Tylżycki plastry Auchan na wagę ok. 200 g",
-    "generic_name": "ser tylżycki plastry",
+    "generic_name": "ser tylżycki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -22504,7 +20996,7 @@
   },
   {
     "original_name": "BIO Ser Tylżycki  plastry Auchan 125 g",
-    "generic_name": "ser tylżycki plastry",
+    "generic_name": "ser tylżycki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 125.0,
@@ -22556,7 +21048,7 @@
   },
   {
     "original_name": "BIO Ser Massdam plastry Auchan 125 g",
-    "generic_name": "ser massdam plastry",
+    "generic_name": "ser massdam",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 125.0,
@@ -22569,7 +21061,7 @@
   },
   {
     "original_name": "Ser Gouda czerwone pesto Auchan na wagę ok. 130 g",
-    "generic_name": "ser gouda czerwone pesto",
+    "generic_name": "ser czerwone pesto",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -22582,7 +21074,7 @@
   },
   {
     "original_name": "Serek kremowy z ananasem Castelli 125 g",
-    "generic_name": "serek kremowy z ananasem",
+    "generic_name": "serek z ananasem",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 125.0,
@@ -22608,7 +21100,7 @@
   },
   {
     "original_name": "Ser Edamski plastry ZM Sokołów na wagę ok. 250 g",
-    "generic_name": "ser edamski plastry",
+    "generic_name": "ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -22621,7 +21113,7 @@
   },
   {
     "original_name": "Serek kremowy z ananasem Arla 200 g",
-    "generic_name": "serek kremowy z ananasem",
+    "generic_name": "serek z ananasem",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -22660,7 +21152,7 @@
   },
   {
     "original_name": "Ser Gouda Holenderska plastry Frico na wagę ok. 200 g",
-    "generic_name": "ser gouda holenderska plastry",
+    "generic_name": "ser holenderska",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -22803,7 +21295,7 @@
   },
   {
     "original_name": "Ser Gouda czosnek Auchan na wagę ok. 135 g",
-    "generic_name": "ser gouda czosnek",
+    "generic_name": "ser czosnek",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -22842,7 +21334,7 @@
   },
   {
     "original_name": "Serek kremowy z pomidorami i bazylią Arla 125 g",
-    "generic_name": "serek kremowy z pomidorami i bazylią",
+    "generic_name": "serek z pomidorami i bazylią",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 125.0,
@@ -22881,7 +21373,7 @@
   },
   {
     "original_name": "Ser emmentaler kremowy topiony w plastrach Hochland 130 g",
-    "generic_name": "ser emmentaler kremowy topiony w plastrach",
+    "generic_name": "ser topiony",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 130.0,
@@ -23024,7 +21516,7 @@
   },
   {
     "original_name": "Ser Ementaler plastry Ryki na wagę ok. 200 g",
-    "generic_name": "ser ementaler plastry",
+    "generic_name": "ser ementaler",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -23102,7 +21594,7 @@
   },
   {
     "original_name": "Ser francuski Comte w kawałku EntreMont 200 g",
-    "generic_name": "ser francuski",
+    "generic_name": "ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -23167,7 +21659,7 @@
   },
   {
     "original_name": "Ser ze szczypiorkiem kremowy topiony w plastrach Hochland 130 g",
-    "generic_name": "ser ze szczypiorkiem kremowy topiony w plastrach",
+    "generic_name": "ser ze szczypiorkiem topiony",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 130.0,
@@ -23180,7 +21672,7 @@
   },
   {
     "original_name": "Organiczny ser holenderski gouda  Landana 180 g",
-    "generic_name": "organiczny ser holenderski gouda",
+    "generic_name": "organiczny ser holenderski",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -23193,7 +21685,7 @@
   },
   {
     "original_name": "Ser Cheddar Red porcja  Auchan na wagę ok. 200 g",
-    "generic_name": "ser cheddar red porcja",
+    "generic_name": "ser ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -23245,7 +21737,7 @@
   },
   {
     "original_name": "Ser Old Amststerdam Mild Auchan Collection  na wagę ok. 130 g",
-    "generic_name": "ser old amststerdam mild collection g",
+    "generic_name": "ser old amststerdam mild collection",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -23310,7 +21802,7 @@
   },
   {
     "original_name": "Ser Brie Auchan na wagę ok. 150 g",
-    "generic_name": "ser brie g",
+    "generic_name": "ser brie",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -23453,7 +21945,7 @@
   },
   {
     "original_name": "Ser Ementaler Francuski plastry EntreMont na wagę ok. 200 g",
-    "generic_name": "ser ementaler francuski plastry",
+    "generic_name": "ser ementaler",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -23492,7 +21984,7 @@
   },
   {
     "original_name": "Serek kremowy z cebulką i szczypiorkiem Arla 200 g",
-    "generic_name": "serek kremowy z cebulką i szczypiorkiem",
+    "generic_name": "serek z cebulką i szczypiorkiem",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -23544,7 +22036,7 @@
   },
   {
     "original_name": "Ser żółty holenderski Masdaamer w kawałku Euroser na wagę ok. 250 g",
-    "generic_name": "ser żółty holenderski",
+    "generic_name": "ser holenderski",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -23557,7 +22049,7 @@
   },
   {
     "original_name": "Ser Cheddar   Auchan Collection  150 g",
-    "generic_name": "ser",
+    "generic_name": "ser ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -23583,7 +22075,7 @@
   },
   {
     "original_name": "Ser wegański kremowy cheddar bez laktozy Violife 150 g",
-    "generic_name": "ser wegański kremowy cheddar bez laktozy",
+    "generic_name": "ser wegański ser bez laktozy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -23622,7 +22114,7 @@
   },
   {
     "original_name": "Ser Gorgonzola dolce kremowy z niebieską pleśnią porcja Auchan na wagę ok. 150 g",
-    "generic_name": "ser gorgonzola dolce kremowy z niebieską pleśnią porcja",
+    "generic_name": "ser gorgonzola dolce z niebieską pleśnią porcja",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -23713,7 +22205,7 @@
   },
   {
     "original_name": "BIO Ser Cheddar kawałek Auchan 200 g",
-    "generic_name": "ser cheddar kawałek",
+    "generic_name": "ser ser kawałek",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -23791,7 +22283,7 @@
   },
   {
     "original_name": "Ser Serenada babuni  plastry Auchan na wagę ok. 250 g",
-    "generic_name": "ser serenada babuni plastry",
+    "generic_name": "ser serenada babuni",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -23804,7 +22296,7 @@
   },
   {
     "original_name": "Serek kremowy z chili i imbirem Castelli 125 g",
-    "generic_name": "serek kremowy z chili i imbirem",
+    "generic_name": "serek z chili i imbirem",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 125.0,
@@ -24064,7 +22556,7 @@
   },
   {
     "original_name": "Bleu dAuvergne plastry Jansen na wagę ok. 200 g",
-    "generic_name": "bleu dauvergne plastry",
+    "generic_name": "bleu dauvergne",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -24077,7 +22569,7 @@
   },
   {
     "original_name": "Ser Kasztelan plastry Auchan na wagę ok. 250 g",
-    "generic_name": "ser kasztelan plastry",
+    "generic_name": "ser kasztelan",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -24090,7 +22582,7 @@
   },
   {
     "original_name": "Ser Złota Gouda z dziurami plastry Auchan na wagę ok. 250 g",
-    "generic_name": "ser złota gouda z dziurami plastry",
+    "generic_name": "ser złota z dziurami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -24103,7 +22595,7 @@
   },
   {
     "original_name": "Ser Salami z pomidorem i bazylią plastry Serenada na wagę ok. 250 g",
-    "generic_name": "ser salami z pomidorem i bazylią plastry",
+    "generic_name": "ser salami z pomidorem i bazylią",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -24220,7 +22712,7 @@
   },
   {
     "original_name": "Ser Królewiecki Szwajcar  plastry Auchan na wagę ok. 250 g",
-    "generic_name": "ser królewiecki szwajcar plastry",
+    "generic_name": "ser królewiecki szwajcar",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -24246,7 +22738,7 @@
   },
   {
     "original_name": "Ser Salami z pieprzem i chili plastry  Spomlek na wagę ok. 200 g",
-    "generic_name": "ser salami z pieprzem i chili plastry",
+    "generic_name": "ser salami z pieprzem i chili",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -24285,7 +22777,7 @@
   },
   {
     "original_name": "Ser Cheddar z winem  Fresh Pack na wagę ok. 200 g",
-    "generic_name": "ser cheddar z winem",
+    "generic_name": "ser ser z winem",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -24376,7 +22868,7 @@
   },
   {
     "original_name": "Toast plastry seropodobne topione Lactima 600 g",
-    "generic_name": "toast plastry seropodobne topione",
+    "generic_name": "toast seropodobne topione",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 600.0,
@@ -24454,7 +22946,7 @@
   },
   {
     "original_name": "Ser twardy dojrzewający 12m plastry Dziugas na wagę ok. 250 g",
-    "generic_name": "ser twardy dojrzewający 12m plastry",
+    "generic_name": "ser twardy dojrzewający 12m",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -24467,7 +22959,7 @@
   },
   {
     "original_name": "Serek kremowy z ziołami i przyprawami Arla 200 g",
-    "generic_name": "serek kremowy z ziołami i przyprawami",
+    "generic_name": "serek z ziołami i przyprawami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -24545,7 +23037,7 @@
   },
   {
     "original_name": "Ser Salami plastry OSM w Śremie na wagę ok. 200 g",
-    "generic_name": "ser salami plastry",
+    "generic_name": "ser salami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -24597,7 +23089,7 @@
   },
   {
     "original_name": "Ser Cambozola Black   Auchan na wagę ok.130g",
-    "generic_name": "ser cambozola black g",
+    "generic_name": "ser cambozola black",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -24662,7 +23154,7 @@
   },
   {
     "original_name": "Ser Zamojski plastry Ryki na wagę ok. 250 g",
-    "generic_name": "ser zamojski plastry",
+    "generic_name": "ser zamojski",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -24714,7 +23206,7 @@
   },
   {
     "original_name": "BIO Ser gouda holenderska Auchan na wagę ok. 200 g",
-    "generic_name": "ser gouda holenderska",
+    "generic_name": "ser holenderska",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -24727,7 +23219,7 @@
   },
   {
     "original_name": "Ser Gouda wędzona plastry OSM Giżycko na wagę ok. 250 g",
-    "generic_name": "ser gouda plastry",
+    "generic_name": "ser",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -24818,7 +23310,7 @@
   },
   {
     "original_name": "Ser Dor Blue   Auchan Collection  na wagę ok. 130 g",
-    "generic_name": "ser dor blue collection g",
+    "generic_name": "ser dor blue collection",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -25000,7 +23492,7 @@
   },
   {
     "original_name": "Smarowaniec kremowy na sernik Wege Siostry 750 g",
-    "generic_name": "smarowaniec kremowy na sernik",
+    "generic_name": "smarowaniec na sernik",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 750.0,
@@ -25013,7 +23505,7 @@
   },
   {
     "original_name": "Ser Puławski tłusty plastry OSM w Śremie na wagę ok. 250 g",
-    "generic_name": "ser puławski tłusty plastry",
+    "generic_name": "ser puławski tłusty",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -25026,7 +23518,7 @@
   },
   {
     "original_name": "Ser Pecorino Toscano  Auchan Collection  na wagę ok.120 g",
-    "generic_name": "ser pecorino toscano collection g",
+    "generic_name": "ser pecorino toscano collection",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -25559,7 +24051,7 @@
   },
   {
     "original_name": "Ryż biały długoziarnisty Auchan 500 g",
-    "generic_name": "ryż biały długoziarnisty",
+    "generic_name": "ryż biały",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -25572,7 +24064,7 @@
   },
   {
     "original_name": "Ryż biały długoziarnisty Kupiec 4 x 100 g",
-    "generic_name": "ryż biały długoziarnisty",
+    "generic_name": "ryż biały",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -25676,7 +24168,7 @@
   },
   {
     "original_name": "Ryż biały długoziarnisty Auchan 400 g",
-    "generic_name": "ryż biały długoziarnisty",
+    "generic_name": "ryż biały",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -25741,7 +24233,7 @@
   },
   {
     "original_name": "Makaron Lasagne w 100% z semoliny z pszenicy durum Primo Gusto 500 g",
-    "generic_name": "makaron lasagne w 100% z semoliny z pszenicy durum",
+    "generic_name": "makaron lasagne w z semoliny z pszenicy durum",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -26287,7 +24779,7 @@
   },
   {
     "original_name": "Groch żółty łuskany połówki Cenos 500 g",
-    "generic_name": "groch żółty łuskany połówki",
+    "generic_name": "groch żółty połówki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -26546,19 +25038,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Płatki Cheerios  Nestle 450 g",
-    "generic_name": "płatki",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 13.88,
-    "price_per_unit": null,
-    "price_per_100": 3.0844,
-    "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
     "original_name": "Mąka pszenna typ 500 Auchan 500 g",
     "generic_name": "mąka pszenna typ 500",
     "shop": "auchan",
@@ -26612,7 +25091,7 @@
   },
   {
     "original_name": "Ryż biały długoziarnisty basmati  Lestello 500 g",
-    "generic_name": "ryż biały długoziarnisty basmati",
+    "generic_name": "ryż biały basmati",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -26846,7 +25325,7 @@
   },
   {
     "original_name": "Makaron Muszelki ze 100% semoliny pszenicy durum Primo Gusto 500 g",
-    "generic_name": "makaron muszelki ze 100% semoliny pszenicy durum",
+    "generic_name": "makaron muszelki ze semoliny pszenicy durum",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -26885,7 +25364,7 @@
   },
   {
     "original_name": "Fussili makaron ze 100% semoliny pszenicy durum Primo Gusto 500 g",
-    "generic_name": "fussili makaron ze 100% semoliny pszenicy durum",
+    "generic_name": "fussili makaron ze semoliny pszenicy durum",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -26924,7 +25403,7 @@
   },
   {
     "original_name": "Ryż brązowy długoziarnisty Auchan 4 x 100 g",
-    "generic_name": "ryż brązowy długoziarnisty",
+    "generic_name": "ryż brązowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -26950,7 +25429,7 @@
   },
   {
     "original_name": "Kolanka Makaron w 100% semoliny pszenicy durum Primo Gusto 500 g",
-    "generic_name": "kolanka makaron w 100% semoliny pszenicy durum",
+    "generic_name": "kolanka makaron w semoliny pszenicy durum",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -27535,7 +26014,7 @@
   },
   {
     "original_name": "Bucatini Makaron w 100% z semoliny z pszenicy durum Primo Gusto 500 g",
-    "generic_name": "bucatini makaron w 100% z semoliny z pszenicy durum",
+    "generic_name": "bucatini makaron w z semoliny z pszenicy durum",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -27626,7 +26105,7 @@
   },
   {
     "original_name": "BIO Ekologiczna długoziarnisty ryż biały NaturaVena 500 g",
-    "generic_name": "długoziarnisty ryż biały",
+    "generic_name": "ryż biały",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -28354,7 +26833,7 @@
   },
   {
     "original_name": "Ryż biały długoziarnisty  Halina 10 x 100 g",
-    "generic_name": "ryż biały długoziarnisty",
+    "generic_name": "ryż biały",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -28497,7 +26976,7 @@
   },
   {
     "original_name": "Cannelloni Makaron w 100% z semoliny z pszenicy durum Primo Gusto 250 g",
-    "generic_name": "cannelloni makaron w 100% z semoliny z pszenicy durum",
+    "generic_name": "cannelloni makaron w z semoliny z pszenicy durum",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -28611,19 +27090,6 @@
     "price_per_unit": null,
     "price_per_100": 5.99,
     "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
-    "original_name": "Tortellini z szynką prosciutto Primo Gusto 250 g",
-    "generic_name": "tortellini z szynką prosciutto",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 250.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.69,
-    "price_per_unit": null,
-    "price_per_100": 3.876,
-    "standard_category": "Mięso, drób i ryby"
   },
   {
     "original_name": "Mąka żytnia pełnoziarnista Gdańskie Młyny 1 kg",
@@ -28744,7 +27210,7 @@
   },
   {
     "original_name": "Zbożowe kulki o smaku czekoladowym Lubella 250 g",
-    "generic_name": "zbożowe kulki o smaku czekoladowym",
+    "generic_name": "zbożowe o smaku czekoladowym",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -28913,7 +27379,7 @@
   },
   {
     "original_name": "Linguine Makaron w 100% z semoliny z pszenicy durum Primo Gusto 500 g",
-    "generic_name": "linguine makaron w 100% z semoliny z pszenicy durum",
+    "generic_name": "linguine makaron w z semoliny z pszenicy durum",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -29160,7 +27626,7 @@
   },
   {
     "original_name": "Mieszanka bezglutenowa ekstra uniwersalna Bezgluten 500 g",
-    "generic_name": "mieszanka bezglutenowa ekstra uniwersalna",
+    "generic_name": "mieszanka bezglutenowa uniwersalna",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -29211,19 +27677,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Tortellini trzykolorowe z szynką prosciutto Primo Gusto 250 g",
-    "generic_name": "tortellini trzykolorowe z szynką prosciutto",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 250.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.69,
-    "price_per_unit": null,
-    "price_per_100": 3.876,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Makaron nitka walcowana Czaniecki 500 g",
     "generic_name": "makaron nitka walcowana",
     "shop": "auchan",
@@ -29248,19 +27701,6 @@
     "price_per_unit": null,
     "price_per_100": 3.52,
     "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
-    "original_name": "Tortellini ze szpinakiem i czosnkiem Barilla 250 g",
-    "generic_name": "tortellini ze szpinakiem i czosnkiem",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 250.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.89,
-    "price_per_unit": null,
-    "price_per_100": 3.556,
-    "standard_category": "Warzywa"
   },
   {
     "original_name": "Płatki Nesquik alphabet Nestle 450 g",
@@ -29822,19 +28262,6 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
-    "original_name": "Płatki Cheerios XXL Nestle 600 g",
-    "generic_name": "płatki",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 600.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 18.39,
-    "price_per_unit": null,
-    "price_per_100": 3.065,
-    "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
     "original_name": "Kasza gryczana biała Lestello 500 g",
     "generic_name": "kasza gryczana biała",
     "shop": "auchan",
@@ -30018,7 +28445,7 @@
   },
   {
     "original_name": "Makaron Peppa Pig 100% pszenicy durum Melissa 400 g",
-    "generic_name": "makaron peppa pig 100% pszenicy durum",
+    "generic_name": "makaron peppa pig pszenicy durum",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -30226,7 +28653,7 @@
   },
   {
     "original_name": "Kulki kakaowe bezglutenowe Jerry Gluten Out   EkoWital 375 g",
-    "generic_name": "kulki kakaowe bezglutenowe",
+    "generic_name": "kakaowe bezglutenowe",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 375.0,
@@ -30681,7 +29108,7 @@
   },
   {
     "original_name": "Gnocchi makaron ze 100% semoliny pszenicy durum Primo Gusto 500 g",
-    "generic_name": "gnocchi makaron ze 100% semoliny pszenicy durum",
+    "generic_name": "gnocchi makaron ze semoliny pszenicy durum",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -30785,7 +29212,7 @@
   },
   {
     "original_name": "Makaron Bluey 100% pszenicy durum  Melissa 400 g",
-    "generic_name": "makaron bluey 100% pszenicy durum",
+    "generic_name": "makaron bluey pszenicy durum",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -30850,7 +29277,7 @@
   },
   {
     "original_name": "Cavatelli - Tradycyjny włoski makaron 100% z pszenicy twardej durum Di Carlo 500 g",
-    "generic_name": "cavatelli - tradycyjny włoski makaron 100% z pszenicy twardej durum",
+    "generic_name": "cavatelli - tradycyjny włoski makaron z pszenicy twardej durum",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -31123,7 +29550,7 @@
   },
   {
     "original_name": "Ryż biały długoziarnisty  Britta 4 x 100 g",
-    "generic_name": "ryż biały długoziarnisty",
+    "generic_name": "ryż biały",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -31461,7 +29888,7 @@
   },
   {
     "original_name": "BIO Jagody goji suszone Bio Planet 100 g",
-    "generic_name": "jagody goji suszone",
+    "generic_name": "jagody goji",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -31565,7 +29992,7 @@
   },
   {
     "original_name": "BIO Nasiona konopii łuskane NaturaVena 200 g",
-    "generic_name": "nasiona konopii łuskane",
+    "generic_name": "nasiona konopii",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -31669,7 +30096,7 @@
   },
   {
     "original_name": "Ryż biały długoziarnisty  Ricefield 1 kg",
-    "generic_name": "ryż biały długoziarnisty",
+    "generic_name": "ryż biały",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -31721,7 +30148,7 @@
   },
   {
     "original_name": "Ryż długoziarnisty Sollana 1 kg",
-    "generic_name": "ryż długoziarnisty",
+    "generic_name": "ryż",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -31848,19 +30275,6 @@
     "price_per_unit": null,
     "price_per_100": 3.578,
     "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
-    "original_name": "Tortellini z grzybami Primo Gusto 250 g",
-    "generic_name": "tortellini z grzybami",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 250.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 9.69,
-    "price_per_unit": null,
-    "price_per_100": 3.876,
-    "standard_category": "Warzywa"
   },
   {
     "original_name": "Makaron Trafilata al Bronzo Spaghetti   La Molisana 500 g",
@@ -33151,7 +31565,7 @@
   },
   {
     "original_name": "Kulki zbożowe o smaku kakaowym Bakalland 1000 g",
-    "generic_name": "kulki zbożowe o smaku kakaowym",
+    "generic_name": "zbożowe o smaku kakaowym",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -33813,45 +32227,6 @@
     "standard_category": "Przyprawy, zioła i proszki"
   },
   {
-    "original_name": "Zapiefix ser z szynką Knorr 42 g",
-    "generic_name": "zapiefix ser z szynką",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 42.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.18,
-    "price_per_unit": null,
-    "price_per_100": 12.3333,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Zapiefix kremowy łosoś Knorr 35 g",
-    "generic_name": "zapiefix kremowy łosoś",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 35.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.18,
-    "price_per_unit": null,
-    "price_per_100": 14.8,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Zapiefix kurczak z pomidorami Knorr 48 g",
-    "generic_name": "kurczak",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 48.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 5.18,
-    "price_per_unit": null,
-    "price_per_100": 10.7917,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Oliwa z oliwek Fenolio Extra Vergine  Levante 500 ml",
     "generic_name": "oliwa z oliwek",
     "shop": "auchan",
@@ -33866,7 +32241,7 @@
   },
   {
     "original_name": "Ocet spirytusowy 10% Auchan 1 l",
-    "generic_name": "ocet spirytusowy 10%",
+    "generic_name": "ocet spirytusowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -33905,7 +32280,7 @@
   },
   {
     "original_name": "Ocet spirytusowy 10% kwasowości Auchan 500 ml",
-    "generic_name": "ocet spirytusowy 10% kwasowości",
+    "generic_name": "ocet spirytusowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -33944,7 +32319,7 @@
   },
   {
     "original_name": "Rafinowany olej rzepakowy 100% Wielkopolski 1 l",
-    "generic_name": "rafinowany olej rzepakowy 100%",
+    "generic_name": "rafinowany olej rzepakowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -34074,7 +32449,7 @@
   },
   {
     "original_name": "Pomidory suszone w oleju krojone Auchan 150 g",
-    "generic_name": "pomidory suszone w oleju krojone",
+    "generic_name": "pomidory w oleju krojone",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -34126,7 +32501,7 @@
   },
   {
     "original_name": "Oregano suszone.  Prymat 8 g",
-    "generic_name": "oregano suszone",
+    "generic_name": "oregano",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 8.0,
@@ -34178,7 +32553,7 @@
   },
   {
     "original_name": "Suszone pomidory z czosnkiem i bazylią  Prymat 15 g",
-    "generic_name": "suszone pomidory z czosnkiem i bazylią",
+    "generic_name": "pomidory z czosnkiem i bazylią",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 15.0,
@@ -34308,7 +32683,7 @@
   },
   {
     "original_name": "Bazylia suszona Prymat 10 g",
-    "generic_name": "bazylia suszona",
+    "generic_name": "bazylia",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 10.0,
@@ -34542,7 +32917,7 @@
   },
   {
     "original_name": "Cebula suszona Prymat 15 g",
-    "generic_name": "cebula suszona",
+    "generic_name": "cebula",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 15.0,
@@ -34568,7 +32943,7 @@
   },
   {
     "original_name": "Mieszanka przyprawowa curry - kompozycja suszonych przypraw Prymat 20 g",
-    "generic_name": "mieszanka przyprawowa curry - kompozycja suszonych przypraw",
+    "generic_name": "mieszanka przyprawowa curry - kompozycja przypraw",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 20.0,
@@ -34906,7 +33281,7 @@
   },
   {
     "original_name": "Mleczko kokosowe 19% tłuszczu ekstrakt 60% Aroy-D 150 ml",
-    "generic_name": "mleczko kokosowe 19% tłuszczu ekstrakt 60%",
+    "generic_name": "mleczko kokosowe tłuszczu ekstrakt",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -34984,7 +33359,7 @@
   },
   {
     "original_name": "Konfitura ekstra z wiśni o obniżonej zawartości cukrów Łowicz 240 g",
-    "generic_name": "konfitura ekstra z wiśni o obniżonej zawartości cukrów",
+    "generic_name": "konfitura z wiśni o obniżonej zawartości cukrów",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 240.0,
@@ -35049,7 +33424,7 @@
   },
   {
     "original_name": "100% truskawka z regionu Łowicza Pewni Dobrego 230 g",
-    "generic_name": "100% truskawka",
+    "generic_name": "truskawka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 230.0,
@@ -35088,7 +33463,7 @@
   },
   {
     "original_name": "Koperek suszony Prymat 6 g",
-    "generic_name": "koperek suszony",
+    "generic_name": "koperek",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 6.0,
@@ -35114,7 +33489,7 @@
   },
   {
     "original_name": "Pomidory suszone w oleju Auchan 155 g",
-    "generic_name": "pomidory suszone w oleju",
+    "generic_name": "pomidory w oleju",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 155.0,
@@ -35127,7 +33502,7 @@
   },
   {
     "original_name": "Oregano suszone Auchan 10 g",
-    "generic_name": "oregano suszone",
+    "generic_name": "oregano",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 10.0,
@@ -35309,7 +33684,7 @@
   },
   {
     "original_name": "Koperek suszony. Wysuszone i rodrobnione liście kopru Auchan 8 g",
-    "generic_name": "koperek suszony",
+    "generic_name": "koperek",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 8.0,
@@ -35504,7 +33879,7 @@
   },
   {
     "original_name": "Liść lubczyku suszony Prymat 10 g",
-    "generic_name": "liść lubczyku suszony",
+    "generic_name": "liść lubczyku",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 10.0,
@@ -35595,7 +33970,7 @@
   },
   {
     "original_name": "Natka pietruszki suszona Prymat 6 g",
-    "generic_name": "natka pietruszki suszona",
+    "generic_name": "natka pietruszki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 6.0,
@@ -35621,7 +33996,7 @@
   },
   {
     "original_name": "Ananas plastry w lekkim syropie MK 565 g",
-    "generic_name": "ananas plastry w lekkim syropie",
+    "generic_name": "ananas w lekkim syropie",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 340.0,
@@ -35738,7 +34113,7 @@
   },
   {
     "original_name": "Pieprz ziołowy mielony - mieszanka suszonych przypraw i ziół Prymat 20 g",
-    "generic_name": "pieprz ziołowy mielony - mieszanka suszonych przypraw i ziół",
+    "generic_name": "pieprz ziołowy mielony - mieszanka przypraw i ziół",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 20.0,
@@ -35842,7 +34217,7 @@
   },
   {
     "original_name": "Pomidory suszone z czosnkiem i bazylią Kamis 12 g",
-    "generic_name": "pomidory suszone z czosnkiem i bazylią",
+    "generic_name": "pomidory z czosnkiem i bazylią",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 12.0,
@@ -35881,7 +34256,7 @@
   },
   {
     "original_name": "Ocet spirytusowy 10% kwasowości Jamar 1 l",
-    "generic_name": "ocet spirytusowy 10% kwasowości",
+    "generic_name": "ocet spirytusowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -35907,7 +34282,7 @@
   },
   {
     "original_name": "Bazylia suszona Auchan 10 g",
-    "generic_name": "bazylia suszona",
+    "generic_name": "bazylia",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 10.0,
@@ -35920,7 +34295,7 @@
   },
   {
     "original_name": "Ananas plastry w syropie  Auchan 560 g",
-    "generic_name": "ananas plastry w syropie",
+    "generic_name": "ananas w syropie",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 340.0,
@@ -36050,7 +34425,7 @@
   },
   {
     "original_name": "Pomidory suszone w oleju z ziołami krojone Auchan 650 g",
-    "generic_name": "pomidory suszone w oleju z ziołami krojone",
+    "generic_name": "pomidory w oleju z ziołami krojone",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 420.0,
@@ -36141,7 +34516,7 @@
   },
   {
     "original_name": "Tzatziki czosnkowa przyprawa do sosu - suszona mieszanka przyprawowa Prymat 20 g",
-    "generic_name": "tzatziki czosnkowa przyprawa do sosu - suszona mieszanka przyprawowa",
+    "generic_name": "tzatziki czosnkowa przyprawa do sosu - mieszanka przyprawowa",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 20.0,
@@ -36180,7 +34555,7 @@
   },
   {
     "original_name": "Ananas plastry w syropie Auchan 565 g",
-    "generic_name": "ananas plastry w syropie",
+    "generic_name": "ananas w syropie",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 340.0,
@@ -36219,7 +34594,7 @@
   },
   {
     "original_name": "Rafinowany olej słonecznikowy 100% Wielkopolski 1 l",
-    "generic_name": "rafinowany olej słonecznikowy 100%",
+    "generic_name": "rafinowany olej słonecznikowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -36414,7 +34789,7 @@
   },
   {
     "original_name": "Ocet ryżowy kwasowość 5% House of Asia 150 ml",
-    "generic_name": "ocet ryżowy kwasowość 5%",
+    "generic_name": "ocet ryżowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -36557,7 +34932,7 @@
   },
   {
     "original_name": "Dżem 100% figowy  Auchan 230 g",
-    "generic_name": "dżem 100% figowy",
+    "generic_name": "dżem figowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 230.0,
@@ -36674,7 +35049,7 @@
   },
   {
     "original_name": "Oliwa z oliwek ekstra virgin  Auchan 500 ml",
-    "generic_name": "oliwa z oliwek ekstra virgin",
+    "generic_name": "oliwa z oliwek virgin",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -36765,7 +35140,7 @@
   },
   {
     "original_name": "Przyprawa Karkówka grill - suszona mieszanka przyprawowa Prymat 20 g",
-    "generic_name": "przyprawa karkówka grill - suszona mieszanka przyprawowa",
+    "generic_name": "przyprawa karkówka grill - mieszanka przyprawowa",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 20.0,
@@ -36778,7 +35153,7 @@
   },
   {
     "original_name": "Dżem 100% owoców malinowy Auchan 230 g",
-    "generic_name": "dżem 100% owoców",
+    "generic_name": "dżem owoców",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 230.0,
@@ -36882,7 +35257,7 @@
   },
   {
     "original_name": "Ocet jabłkowy 6% Auchan 750 ml",
-    "generic_name": "ocet jabłkowy 6%",
+    "generic_name": "ocet jabłkowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 750.0,
@@ -36921,7 +35296,7 @@
   },
   {
     "original_name": "Dżem ekstra z malin Bonne Maman 370 g",
-    "generic_name": "dżem ekstra z malin",
+    "generic_name": "dżem z malin",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 370.0,
@@ -36986,7 +35361,7 @@
   },
   {
     "original_name": "Pomidory suszone z ziołami Auchan 270 g",
-    "generic_name": "pomidory suszone z ziołami",
+    "generic_name": "pomidory z ziołami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -37090,7 +35465,7 @@
   },
   {
     "original_name": "Mleczko kokosowe lekki 5-7% tłuszczu Auchan 400 ml",
-    "generic_name": "mleczko kokosowe lekki 5-7% tłuszczu",
+    "generic_name": "mleczko kokosowe lekki 5- tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -37129,7 +35504,7 @@
   },
   {
     "original_name": "Mexicana Tuńczyk z Warzywami  GRAAL 280 g",
-    "generic_name": "mexicana tuńczyk",
+    "generic_name": "tuńczyk",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 280.0,
@@ -37285,7 +35660,7 @@
   },
   {
     "original_name": "Mleczko kokosowe 17% tłuszczu ekstrakt 70% Aroy-D 500 ml",
-    "generic_name": "mleczko kokosowe 17% tłuszczu ekstrakt 70%",
+    "generic_name": "mleczko kokosowe tłuszczu ekstrakt",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -37376,7 +35751,7 @@
   },
   {
     "original_name": "Pomidory suszone z pestkami dyni i ziołami Auchan 270 g",
-    "generic_name": "pomidory suszone z pestkami dyni i ziołami",
+    "generic_name": "pomidory z pestkami dyni i ziołami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -37389,7 +35764,7 @@
   },
   {
     "original_name": "Dżem 100% owoców wiśniowy Auchan 230 g",
-    "generic_name": "dżem 100% owoców wiśniowy",
+    "generic_name": "dżem owoców wiśniowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 230.0,
@@ -37519,7 +35894,7 @@
   },
   {
     "original_name": "Sos sałatkowy francuski Vinaigrette   Prymat 9 g",
-    "generic_name": "sos francuski",
+    "generic_name": "sos",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 9.0,
@@ -37714,7 +36089,7 @@
   },
   {
     "original_name": "BIO Oliwa ekstra virgin  Auchan 500 ml",
-    "generic_name": "oliwa ekstra virgin",
+    "generic_name": "oliwa virgin",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -37753,7 +36128,7 @@
   },
   {
     "original_name": "Pomidory suszone z żurawiną i ziołami Auchan 270 g",
-    "generic_name": "pomidory suszone z żurawiną i ziołami",
+    "generic_name": "pomidory z żurawiną i ziołami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -38468,7 +36843,7 @@
   },
   {
     "original_name": "Ocet jabłkowy 6% kwasowości. Ocet winno-jabłkowy Jamar 500 ml",
-    "generic_name": "ocet jabłkowy 6% kwasowości",
+    "generic_name": "ocet jabłkowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -38546,7 +36921,7 @@
   },
   {
     "original_name": "Olej rzepakowy 100 % Wielkopolski 2 l",
-    "generic_name": "olej rzepakowy 100 %",
+    "generic_name": "olej rzepakowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 2000.0,
@@ -38780,7 +37155,7 @@
   },
   {
     "original_name": "Olej z awokado tłoczony na zimno Auchan Collection  250 ml",
-    "generic_name": "olej z awokado tłoczony na zimno",
+    "generic_name": "olej z awokado",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -38962,7 +37337,7 @@
   },
   {
     "original_name": "100% wiśnia z sadów regionu Łowicza Pewni Dobrego 230 g",
-    "generic_name": "100% wiśnia",
+    "generic_name": "wiśnia",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 230.0,
@@ -39053,7 +37428,7 @@
   },
   {
     "original_name": "Miód nektarowy wielokwiatowy kremowany Auchan Collection  600 g",
-    "generic_name": "miód nektarowy wielokwiatowy kremowany",
+    "generic_name": "miód nektarowy wielokwiatowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 600.0,
@@ -39287,7 +37662,7 @@
   },
   {
     "original_name": "Olej lniany tłoczony na zimno z wit. D SOlej 250 ml",
-    "generic_name": "olej lniany tłoczony na zimno z wit. d",
+    "generic_name": "olej lniany z wit. d",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -39417,7 +37792,7 @@
   },
   {
     "original_name": "Ananas  plastry w lekkim syropie Splendor 340 g",
-    "generic_name": "ananas plastry w lekkim syropie",
+    "generic_name": "ananas w lekkim syropie",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 340.0,
@@ -39651,7 +38026,7 @@
   },
   {
     "original_name": "Mango plastry w syropie Sandra 425 g",
-    "generic_name": "mango plastry w syropie",
+    "generic_name": "mango w syropie",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 230.0,
@@ -39703,7 +38078,7 @@
   },
   {
     "original_name": "Pomidory suszone w oleju z ziołami Auchan 650 g",
-    "generic_name": "pomidory suszone w oleju z ziołami",
+    "generic_name": "pomidory w oleju z ziołami",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 420.0,
@@ -40067,7 +38442,7 @@
   },
   {
     "original_name": "Kiełbasa Krakowska 85% mięsa Auchan 300 g",
-    "generic_name": "kiełbasa krakowska 85% mięsa",
+    "generic_name": "kiełbasa krakowska mięsa",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -40379,7 +38754,7 @@
   },
   {
     "original_name": "Ocet winny z czerwonego wina. 6% kwasowości Kamis 250 ml",
-    "generic_name": "ocet winny z czerwonego wina. 6% kwasowości",
+    "generic_name": "ocet winny z czerwonego wina",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -40392,7 +38767,7 @@
   },
   {
     "original_name": "Pomidory suszone nasączone. w oleju Rolnik 720 ml",
-    "generic_name": "pomidory suszone nasączone. w oleju",
+    "generic_name": "pomidory nasączone. w oleju",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 380.0,
@@ -41042,7 +39417,7 @@
   },
   {
     "original_name": "Papryczki czereśniowe z kremową masą serową w oleju roślinnym Bracia Zawadzcy 150 g",
-    "generic_name": "papryczki czereśniowe z kremową masą serową w oleju roślinnym",
+    "generic_name": "papryczki czereśniowe z masą serową w oleju roślinnym",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 150.0,
@@ -41133,7 +39508,7 @@
   },
   {
     "original_name": "Olej z pestek dyni z witaminą D tłoczony na zimno Oleofarm 250 ml",
-    "generic_name": "olej z pestek dyni z witaminą d tłoczony na zimno",
+    "generic_name": "olej z pestek dyni",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -41159,7 +39534,7 @@
   },
   {
     "original_name": "Pietruszka zielona cięta Kotányi 8 g",
-    "generic_name": "pietruszka zielona cięta",
+    "generic_name": "pietruszka zielona",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 8.0,
@@ -41289,7 +39664,7 @@
   },
   {
     "original_name": "Ocet jabłkowy 6 % Jamar 250 ml",
-    "generic_name": "ocet jabłkowy 6 %",
+    "generic_name": "ocet jabłkowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -41419,7 +39794,7 @@
   },
   {
     "original_name": "Ocet winny z białego wina. 6% kwasowości Kamis 250 ml",
-    "generic_name": "ocet winny z białego wina. 6% kwasowości",
+    "generic_name": "ocet winny z białego wina",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -41432,7 +39807,7 @@
   },
   {
     "original_name": "Ocet spirytusowy 10% Dagoma 500 ml",
-    "generic_name": "ocet spirytusowy 10%",
+    "generic_name": "ocet spirytusowy",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -41575,7 +39950,7 @@
   },
   {
     "original_name": "Pietruszka suszona nać  Appetita 6 g",
-    "generic_name": "pietruszka suszona nać",
+    "generic_name": "pietruszka nać",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 6.0,
@@ -41744,7 +40119,7 @@
   },
   {
     "original_name": "100% jabłko z sadów z regionu Warki Pewni Dobrego 230 g",
-    "generic_name": "100% jabłko",
+    "generic_name": "jabłko",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 230.0,
@@ -41861,7 +40236,7 @@
   },
   {
     "original_name": "Mleczko kokosowe 17% tłuszczu ekstrakt 60% Aroy-D 1 l",
-    "generic_name": "mleczko kokosowe 17% tłuszczu ekstrakt 60%",
+    "generic_name": "mleczko kokosowe tłuszczu ekstrakt",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -41900,7 +40275,7 @@
   },
   {
     "original_name": "Mleczko kokosowe 19% tłuszczu Suree 165 ml",
-    "generic_name": "mleczko kokosowe 19% tłuszczu",
+    "generic_name": "mleczko kokosowe tłuszczu",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 165.0,
@@ -41991,7 +40366,7 @@
   },
   {
     "original_name": "Konserwa luncheon meat ekstra  Pewni Dobrego 180 g",
-    "generic_name": "konserwa luncheon meat ekstra",
+    "generic_name": "konserwa luncheon meat",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 180.0,
@@ -42014,19 +40389,6 @@
     "price_per_unit": null,
     "price_per_100": 5.1225,
     "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
-    "original_name": "Warzywa suszone Makar 500 g",
-    "generic_name": "suszone",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 19.75,
-    "price_per_unit": null,
-    "price_per_100": 3.95,
-    "standard_category": "Warzywa"
   },
   {
     "original_name": "Oliwa z oliwek extra virgin z bazylią Monini 250 ml",

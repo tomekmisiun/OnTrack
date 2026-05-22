@@ -70,10 +70,22 @@ READY_TO_EAT_PL = [
     "chipsy",
     "paluszki",
     "precel",
+    "lody ",           # lody wszelkiego rodzaju
+    "tortellini",
+    "müllermilch",
+    "zapiefix",
+    "toffifee",
+    "chili sin carne",
+    "napój jogurtowy",
+    "nesquik snack",
+    "carmelove",     # Felix Carmelove — brandowe słodzone orzechy
+    "cheerios",      # Nestlé Cheerios — płatki śniadaniowe z marki
+    "natural mix",   # Plony Natury mix — wieloskładnikowy produkt brandowy
+    "actimel",       # Danone Actimel — napój probiotyczny
 ]
 
 # Marki wyłącznie gotowych dań (PL)
-READY_BRANDS_PL = ["froста", "frosta", "proste historie", "bistro ", "family fish"]
+READY_BRANDS_PL = ["froста", "frosta", "proste historie", "bistro ", "family fish", "teekanne"]
 
 WHITELIST_PATTERNS_EN = [
     r"smoked salmon",
@@ -360,6 +372,29 @@ def normalize_name_en(name: str, brand: str = None) -> list[str]:
 
 # ── PL (Auchan / Biedronka) ──────────────────────────────────────────────────
 
+# Znane marki które pojawiają się na POCZĄTKU nazwy produktu — usuwamy prefiks
+# (sortuj od najdłuższego do najkrótszego żeby "bakad'or sélection" był przed "bakad'or")
+_BRAND_PREFIXES_PL = sorted([
+    "bakallino",
+    "bakad'or sélection",
+    "bakad'or",
+    "bakello",
+    "marinero",
+    "dawtona",
+    "plony natury",
+    "go vege",
+    "elios",
+    "kotlin",
+    "kamis",
+    "pano",
+    "nestlé",
+    "nestle",
+    "felix",
+    "mexicana",
+    "teekanne",
+    "top",
+], key=len, reverse=True)
+
 # Słowa marketingowe/brandowe usuwane NA ORYGINALNEJ PISOWNI (przed detekcją marki)
 _MARKETING_PL_CASED = [
     r"\bBIO\b", r"\bEKO\b", r"\bBio\b", r"\bEko\b",
@@ -377,6 +412,13 @@ _SUBSTITUTIONS_PL = [
     (r"\bbatatat\w*\b",             ""),
     (r"\bstevia\b",                 "stewia"),   # EN spelling → PL
     (r"\berytrol\b",                "erytrytol"),
+    # Sery żółte: kolejność ma znaczenie!
+    # 1. cheddar standalone → "ser" (bo nie ma przed nim "ser żółty")
+    (r"\bcheddar\b",               "ser"),
+    # 2. usuń typ sera z "ser żółty [typ]" — zostaje samo "ser żółty"
+    (r"\b(?:gouda|edam(?:ski\w*)?|maasd\w*|emment\w*|tilit\w*|morbi\w*|conte\w*)\b", ""),
+    # 3. ser żółty (po usunięciu typu) → "ser"
+    (r"\bser\s+żółty\b",           "ser"),
     (r"\bxylitol\b|\bksylitol\b",   "ksylitol"),
     (r"\bquinoa\b",                 "komosa ryżowa"),
     (r"\bedamame\b",                "edamame"),
@@ -402,8 +444,29 @@ _CULINARY_PATTERNS_PL = [
     r"\bz\s+inuliną\b",             # "z inuliną" — dodatek funkcjonalny
     r"\bsłodzik\w*\b",              # "słodzik stołowy" → usuń "słodzik", zostaje "erytrytol"
     r"\bstołow\w*\b",               # "stołowy" (słodzik stołowy)
-    r"\bkaliber\s*\d+\b",           # "kaliber 12" — rozmiar owocu
+    r"\bkaliber\s*\d*\b",            # "kaliber 12" / "kaliber" — rozmiar owocu
+    r"\bkwasow\w*\b.*",              # "kwasowość/kwasowości 5%" itp. — techniczny parametr octu
+    r"\bz\s+witaminą\b.*",           # "z witaminą D tłoczony na zimno" → usuń
+    r"\btłoczon\w*\s+na\s+zimno\b",  # "tłoczony na zimno" — technologia
     r"\bśredni\b(?!\s+tłust)",      # "średni" jako rozmiar, nie tłustość
+    r"\bekstra\b",                  # "śmietana ekstra kremowa" → "śmietana kremowa"
+    r"\bkremow\w*\b",               # "śmietana kremowa" → "śmietana"
+    r"\błagodny\b",                 # "ketchup łagodny" → "ketchup"
+    r"\bpikantny\b",                # "ketchup pikantny" → "ketchup"
+    r"\bkremsk\w*\b",               # "musztarda kremska" → "musztarda"
+    r"\bfrancusk\w*\b",             # "musztarda francuska" → "musztarda"
+    r"\btusz\w*\b",                 # "makrela tusza" → "makrela" (ryba)
+    r"\bplastry\b",                 # "łosoś plastry" → "łosoś" (forma krojenia)
+    r"\bw\s+plastrach\b",           # "ser żółty w plastrach" → "ser żółty"
+    r"\btarty\b",                   # "ser żółty tarty" → "ser żółty" (forma starcia)
+    r"\bkulka\b", r"\bkulki\b",     # "mozzarella kulka" → "mozzarella"
+    r"\bnorwesk\w*\b",              # "łosoś norweski" → "łosoś" (geographic)
+    r"\batlantycki\w*\b",           # "dorsz atlantycki" → "dorsz" (geographic)
+    r"\bpolędwica\b",               # "dorsz polędwica" → "dorsz" (forma filetu ryby, nie wieprzowiny)
+    r"\bz\s+tofu\b",                # "pesto z tofu" → "pesto"
+    r"\bz\s+\w+skich\s+upraw\b.*",  # "z europejskich upraw" → usuń
+    r"\bsuszon\w*\b",               # "żurawina suszona" → "żurawina" (forma to nie zmienia produktu)
+    r"\bcięt\w*\b",                 # "żurawina cięta" → "żurawina"
     r"\bw\s+kryształkach\b",        # "w kryształkach" — forma
     r"\bkrystaliczn\w*\b",
     r"\bgranulat\w*\b",             # "granulowany"
@@ -427,6 +490,14 @@ _PRODUCE_QUALIFIERS_PL = [
     r"\bśredni\b",                 # rozmiar owocu
     r"\bdrobny\b", r"\bdrobne\b",
     r"\bwielk\w*\b",               # "wielkości"
+    r"\bróżyczki\b",               # "brokuły różyczki" → "brokuły"
+    r"\bsułtański\w*\b",           # "rodzynki sułtańskie" → "rodzynki"
+    r"\btypu\s+islandzkiego\b",    # "skyr jogurt typu islandzkiego" → "skyr jogurt"
+    r"\błuskan\w*\b",              # "migdały łuskane" → "migdały"
+    r"\bblanszow\w*\b",             # "migdały blanszowane/blanszowany" → "migdały"
+    r"\bw\s+płatkach\b",           # "migdały w płatkach" → "migdały"
+    r"\bdługoziarnist\w*\b",       # "ryż długoziarnisty" → "ryż"
+    r"\bkrótkoziarnist\w*\b",      # analogicznie
 ]
 
 _REMOVE_WORDS_PL = [
@@ -442,12 +513,17 @@ _REMOVE_WORDS_PL = [
     r"\bhomogenizowany\w*\b",
     r"\bwzbogacon\w*\b",
     r"\bkonserwowy\b",
+    r"\bsuperfoods?\b",     # "Superfoods" — marketing
+    r"\bsmooth\b",          # "masło orzechowe smooth" → "masło orzechowe"
+    r"\bcrunchy\b",         # analogicznie
     # Nazwy sklepów (mogą pojawić się w nazwie produktu jako lowercase)
     r"\bauchan\b", r"\bbiedronka\b", r"\blidl\b", r"\bnetto\b",
     # Słowa kategorii sklepowych
     r"\bowoce\b", r"\bwarzywa\b", r"\bnabiał\b", r"\bpieczywo\b",
     # Standalone jednostki bez liczby (pozostałość po usunięciu "1 kg" itp.)
-    r"\bkg\b", r"\bszt\b",
+    r"\bkg\b", r"\bszt\b", r"\bg\b", r"\bml\b",
+    # "opak." leftover po usunięciu gramatury
+    r"\bopak\.?\b",
 ]
 
 # Trailing prepositions/connectors
@@ -549,8 +625,8 @@ def normalize_name_pl(name: str) -> str:
     n = re.sub(r"\b\d+(?:[.,]\d+)?\s*(g|kg|ml|l|szt|sztuk|cl)\b", " ", n, flags=re.I)
     n = re.sub(r"\bsztuka\b", " ", n, flags=re.I)
 
-    # 2. Remove % patterns
-    n = re.sub(r"\b\d+(?:[.,]\d+)?\s*%\b", " ", n)
+    # 2. Remove % patterns (brak \b po % bo % to nie word-char — "100% jabłko" → " jabłko")
+    n = re.sub(r"\b\d+(?:[.,]\d+)?\s*%", " ", n)
 
     # 3. Substitutions (diminutywy, synonimy)
     for pattern, repl in _SUBSTITUTIONS_PL:
@@ -563,6 +639,15 @@ def normalize_name_pl(name: str) -> str:
     n = re.sub(r"\s+", " ", n).strip()
 
     # 5. Brand detection
+    n = re.sub(r"\s+", " ", n).strip()
+
+    # 5a. Strip known brand prefixes from the FRONT of the name
+    n_lower = n.lower()
+    for brand in _BRAND_PREFIXES_PL:
+        if n_lower.startswith(brand + " ") or n_lower == brand:
+            n = n[len(brand):].strip(" ,.-")
+            break
+
     # Rule A: After the FIRST lowercase word, any Title Case word = start of brand → break
     # Rule B: If NO lowercase words exist at all (e.g. "Pasztet Pewni Dobrego"),
     #         keep only the first token (rest are brand/descriptors)

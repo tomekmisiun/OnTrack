@@ -46,15 +46,28 @@ log = logging.getLogger(__name__)
 def score(ingredient: str, product_generic: str) -> float:
     tsr = fuzz.token_sort_ratio(ingredient, product_generic)
     pr  = fuzz.partial_ratio(ingredient, product_generic)
-    # Geometric mean — zapobiega fałszywym matchom gdzie tylko partial_ratio jest wysoki
-    # np. "proszek do pieczenia" vs "groszek": tsr≈45, pr≈85 → GM≈62 (poniżej progu 85)
-    # Prawdziwy match: "makaron" vs "makaron": tsr=100, pr=100 → GM=100
-    return (tsr * pr) ** 0.5
+
+    # Sprawdź czy tokeny faktycznie się pokrywają
+    # Jeśli NIE — używaj tylko token_sort_ratio (bardziej konserwatywny)
+    # To zapobiega "proszek do pieczenia" ≈ "groszek" (proszek ≠ groszek, brak wspólnych tokenów)
+    # Ale przepuszcza "cynamon" ≈ "cynamon mielony" ("cynamon" jest tokenem w obu)
+    tokens_i = set(ingredient.lower().split())
+    tokens_p = set(product_generic.lower().split())
+    # Ignoruj jednoliiterowe preposition-like tokens ('z','w','i','a','o') przy sprawdzaniu
+    meaningful_i = {t for t in tokens_i if len(t) > 1}
+    meaningful_p = {t for t in tokens_p if len(t) > 1}
+    has_common_token = bool(meaningful_i & meaningful_p)
+
+    if has_common_token:
+        return max(tsr, pr)   # trust both — "cynamon" w "cynamon mielony" ✓
+    else:
+        return tsr             # tylko token_sort — "proszek" ≠ "groszek" ✓
 
 
 def rank_candidates(ingredient: str, shop_products: list[dict]) -> list[tuple[float, dict]]:
     scored = [(score(ingredient, p["generic_name"]), p) for p in shop_products]
-    scored.sort(key=lambda x: -x[0])
+    # Przy remisie preferuj krótszą nazwę produktu (bardziej generyczną)
+    scored.sort(key=lambda x: (-x[0], len(x[1]["generic_name"].split())))
     return scored
 
 

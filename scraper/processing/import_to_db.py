@@ -94,15 +94,19 @@ _FAMILY_RULES: list[tuple[re.Pattern, str]] = [
     # Nabiał — upraszczamy
     (re.compile(r"^mleko\b(?! kokosowe| migdałowe| owsiane)"), "mleko"),
     (re.compile(r"^jogurt\b(?! grecki)"),      "jogurt naturalny"),
-    (re.compile(r"^ser\b(?! feta|parmezan|cheddar|mozzarella|twaróg|kozi|ricotta)"), "ser żółty"),
+    (re.compile(r"^ser\b(?!\s+(?:feta|parmezan|cheddar|mozzarella|twaróg|kozi|ricotta|halloumi|pleśniowy|dojrzewający|długodojrzewający|roquefort))"), "ser"),
     (re.compile(r"^śmietana\b"),               "śmietana"),
     (re.compile(r"^twaróg\b(?! kremowy)"),     "twaróg"),
     # Mięso i drób
     (re.compile(r"^kurczak\b(?! mielony)"),    "kurczak"),
     (re.compile(r"^wieprzowina\b"),            "wieprzowina"),
     (re.compile(r"^wołowina\b"),               "wołowina"),
+    # Warzywa — merge form deklinacyjnych
+    (re.compile(r"^brokuł"),                   "brokuł"),
+    (re.compile(r"^ciecierzyca"),              "ciecierzyca"),
     # Rośliny strączkowe
-    (re.compile(r"^fasola\b(?! czerwona|edamame)"), "fasola biała"),
+    (re.compile(r"^fasola\b(?!\s+(?:czerwona|edamame))"), "fasola biała"),
+    (re.compile(r"^czerwona fasola|^fasola czerwona"), "fasola czerwona"),
     (re.compile(r"^soczewica\b"),              "soczewica"),
     # Słodziki — każdy to jedna nazwa
     (re.compile(r"^stewia\b|^stevia\b"),       "stewia"),
@@ -130,6 +134,7 @@ _FAMILY_RULES: list[tuple[re.Pattern, str]] = [
     (re.compile(r"^bułka|^bułki"),             "bułka"),
     (re.compile(r"^tortilla"),                 "tortilla"),
     (re.compile(r"^wrap"),                     "wrap"),
+    (re.compile(r"^krakersy"),                 "krakersy"),
     # Pasty i sosy — usuń markę, zostaw bazowy składnik
     (re.compile(r"^tahini"),                   "tahini"),
     (re.compile(r"^hummus"),                   "hummus"),
