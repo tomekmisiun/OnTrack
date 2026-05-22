@@ -1145,7 +1145,7 @@
   },
   {
     "original_name": "Wątroba z kaczki ze ściółki Pewni Dobrego 500 g",
-    "generic_name": "wątroba z kaczki",
+    "generic_name": "wątroba",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -15328,7 +15328,7 @@
   },
   {
     "original_name": "Wątroba wieprzowa Auchan na wagę ok. 400 g",
-    "generic_name": "wątroba wieprzowa",
+    "generic_name": "wątroba",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -15432,7 +15432,7 @@
   },
   {
     "original_name": "Filet z kaczki do pieczenia Pewni Dobrego 460 g",
-    "generic_name": "filet z kaczki",
+    "generic_name": "pierś z kaczki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 460.0,
@@ -15523,7 +15523,7 @@
   },
   {
     "original_name": "Serca wieprzowe Auchan na wagę ok. 550 g",
-    "generic_name": "serca wieprzowe",
+    "generic_name": "serca",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -15627,7 +15627,7 @@
   },
   {
     "original_name": "Filet z indyka luz Auchan na wagę ok. 900 g",
-    "generic_name": "filet z indyka",
+    "generic_name": "pierś z indyka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -15939,7 +15939,7 @@
   },
   {
     "original_name": "Nerki wieprzowe Auchan na wagę ok. 400 g",
-    "generic_name": "nerki wieprzowe",
+    "generic_name": "nerki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -16160,7 +16160,7 @@
   },
   {
     "original_name": "Serca z kurczaka Auchan na wagę ok. 400 g",
-    "generic_name": "serca z kurczaka",
+    "generic_name": "serca",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -16251,7 +16251,7 @@
   },
   {
     "original_name": "Żołądki z kurczaka świeże Auchan na wagę ok. 400 g",
-    "generic_name": "żołądki z kurczaka",
+    "generic_name": "żołądki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -16381,7 +16381,7 @@
   },
   {
     "original_name": "Wątroba z kurczaka świeża Auchan na wagę ok. 500 g",
-    "generic_name": "wątroba z kurczaka",
+    "generic_name": "wątroba",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -16550,7 +16550,7 @@
   },
   {
     "original_name": "Filet z kaczki  ze skórą Auchan na wagę ok. 400 g",
-    "generic_name": "filet z kaczki",
+    "generic_name": "pierś z kaczki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -16784,7 +16784,7 @@
   },
   {
     "original_name": "Wątróbka z indyka Auchan 500 g",
-    "generic_name": "wątróbka z indyka",
+    "generic_name": "wątróbka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -16940,7 +16940,7 @@
   },
   {
     "original_name": "Flaki cielęce blanszowane Auchan 900 g",
-    "generic_name": "flaki cielęce",
+    "generic_name": "flaki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 900.0,
@@ -16966,7 +16966,7 @@
   },
   {
     "original_name": "Żołądki z indyka Auchan 500 g",
-    "generic_name": "żołądki z indyka",
+    "generic_name": "żołądki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -16992,7 +16992,7 @@
   },
   {
     "original_name": "Żołądki z kaczki ze ściółki Pewni Dobrego 500 g",
-    "generic_name": "żołądki z kaczki",
+    "generic_name": "żołądki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -17239,7 +17239,7 @@
   },
   {
     "original_name": "Serca z indyka Auchan 500 g",
-    "generic_name": "serca z indyka",
+    "generic_name": "serca",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -17291,7 +17291,7 @@
   },
   {
     "original_name": "Bekon z fileta z kaczki w przyprawie klasycznej   Pewni Dobrego 320 g",
-    "generic_name": "filet z kaczki",
+    "generic_name": "pierś z kaczki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 320.0,
@@ -17317,7 +17317,7 @@
   },
   {
     "original_name": "Wątroba z kaczki ze ściółki Pewni Dobrego 500 g",
-    "generic_name": "wątroba z kaczki",
+    "generic_name": "wątroba",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -17382,7 +17382,7 @@
   },
   {
     "original_name": "Stek z fileta z kaczki w przyprawie Pewni Dobrego 320 g",
-    "generic_name": "filet z kaczki",
+    "generic_name": "pierś z kaczki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 320.0,
@@ -17395,7 +17395,7 @@
   },
   {
     "original_name": "Flaki wołowe     Auchan 1 kg",
-    "generic_name": "flaki wołowe",
+    "generic_name": "flaki",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 1000.0,
@@ -17577,7 +17577,7 @@
   },
   {
     "original_name": "Serca z kaczki ze ściółki Pewni Dobrego 500 g",
-    "generic_name": "serca z kaczki",
+    "generic_name": "serca",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 500.0,
@@ -37584,7 +37584,7 @@
   },
   {
     "original_name": "Filet z kurczaka High Protein   Krakus 300 g",
-    "generic_name": "filet z kurczaka",
+    "generic_name": "pierś z kurczaka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -39157,7 +39157,7 @@
   },
   {
     "original_name": "Pasztet z kaczki z dodatkiem wątroby indyczej i mięsa wieprzowego Auchan 180 g",
-    "generic_name": "pasztet z kaczki z dodatkiem wątroby indyczej i mięsa wieprzowego",
+    "generic_name": "wątroby",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 180.0,

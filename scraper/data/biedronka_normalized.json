@@ -3082,7 +3082,7 @@
   },
   {
     "original_name": "Kraina Mięs Paski z fileta kurczaka świeże 400 g",
-    "generic_name": "filet z kurczaka",
+    "generic_name": "pierś z kurczaka",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 400.0,
@@ -3641,7 +3641,7 @@
   },
   {
     "original_name": "Kraina Wędlin Serdelki z filetem z indyka 300 g",
-    "generic_name": "filet z indyka",
+    "generic_name": "pierś z indyka",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -3771,7 +3771,7 @@
   },
   {
     "original_name": "Duda Filet pieczony z kurczaka 200 g",
-    "generic_name": "filet z kurczaka",
+    "generic_name": "pierś z kurczaka",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 200.0,

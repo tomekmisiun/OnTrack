@@ -31,6 +31,18 @@ SHOPS_PL     = DATA / "shops_pl.json"
 OUT_EN       = DATA / "matches_en.json"
 OUT_PL       = DATA / "matches_pl.json"
 
+# Aliasy składników — tłumaczenie przed matchowaniem (normalize_recipes może produkować różne formy)
+_INGREDIENT_CANONICAL_PL: dict[str, str] = {
+    "filet z kurczaka":   "pierś z kurczaka",
+    "filety z kurczaka":  "pierś z kurczaka",
+    "filet z indyka":     "pierś z indyka",
+    "żołądek z kurczaka": "żołądki z kurczaka",
+}
+_INGREDIENT_CANONICAL_EN: dict[str, str] = {
+    "chicken fillet":  "chicken breast",
+    "chicken fillets": "chicken breast",
+}
+
 SCORE_AUTO      = 85
 SCORE_UNCERTAIN = 100  # WYŁĄCZONE — tylko exacty/bliskie >= 85% przechodzą, reszta = NO_MATCH
 UNCERTAIN_BATCH = 15
@@ -160,21 +172,24 @@ def build_matches(
     uncertain_items: list[dict]      = []
     no_match:        list[str]       = []
 
-    for ing in unique_ingredients:
+    for orig_ing in unique_ingredients:
+        # Tłumacz znane aliasy — używaj kanonicznej nazwy do matchowania,
+        # ale zachowaj oryginalną jako klucz słownika (bo przepisy używają orig nazwy)
+        ing = _INGREDIENT_CANONICAL_PL.get(orig_ing, orig_ing) if lang == "PL" else _INGREDIENT_CANONICAL_EN.get(orig_ing, orig_ing)
         ranked = rank_candidates(ing, shops)
         top_score, top_product = ranked[0] if ranked else (0, None)
 
         if top_score >= SCORE_AUTO:
-            auto_matches[ing] = (top_score, top_product)
+            auto_matches[orig_ing] = (top_score, top_product)  # klucz = oryginalna nazwa
         elif top_score >= SCORE_UNCERTAIN:
             candidates = [
                 {"idx": i, "product": ranked[i][1]["generic_name"]}
                 for i in range(min(MAX_CANDIDATES, len(ranked)))
                 if ranked[i][0] >= SCORE_UNCERTAIN
             ]
-            uncertain_items.append({"ingredient": ing, "candidates": candidates, "_ranked": ranked})
+            uncertain_items.append({"ingredient": orig_ing, "candidates": candidates, "_ranked": ranked})
         else:
-            no_match.append(ing)
+            no_match.append(orig_ing)
 
     log.info(f"[{lang}] Auto: {len(auto_matches)}, Uncertain: {len(uncertain_items)}, No match: {len(no_match)}")
 

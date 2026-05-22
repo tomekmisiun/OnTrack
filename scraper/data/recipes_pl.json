@@ -1694,7 +1694,7 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 19.91,
+    "estimated_cost_pln": 14.95,
     "cost_complete": true
   },
   {
@@ -2502,7 +2502,7 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 17.56,
+    "estimated_cost_pln": 15.56,
     "cost_complete": true
   },
   {
@@ -4356,7 +4356,7 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 6.46,
+    "estimated_cost_pln": 4.46,
     "cost_complete": true
   },
   {
@@ -4879,6 +4879,180 @@
         "name": "sos ranczerski",
         "amount": null,
         "unit": null
+      }
+    ],
+    "available": true,
+    "estimated_cost_pln": null,
+    "cost_complete": false
+  },
+  {
+    "name_en": "Mediterranean Chicken Salad",
+    "name_pl": "Sałatka z Kurczakiem po Śródziemnomorsku",
+    "url": "https://mealpreponfleek.com/mediterranean-chicken-salad/",
+    "image_url": "https://mealpreponfleek.com/wp-content/uploads/2023/04/Mediterranean-Chicken-Salad-2-jpg.webp",
+    "category": "lunch",
+    "ingredients_en": [
+      {
+        "name": "chicken breast",
+        "amount": 113,
+        "unit": "g"
+      },
+      {
+        "name": "lemon juice",
+        "amount": 7.5,
+        "unit": "ml"
+      },
+      {
+        "name": "olive oil",
+        "amount": 3.75,
+        "unit": "ml"
+      },
+      {
+        "name": "lemon zest",
+        "amount": 0.75,
+        "unit": "g"
+      },
+      {
+        "name": "garlic",
+        "amount": 1.25,
+        "unit": "g"
+      },
+      {
+        "name": "oregano",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "salt",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "black pepper",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "mixed greens",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "artichoke hearts",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "cucumber",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "red onion",
+        "amount": 12.5,
+        "unit": "g"
+      },
+      {
+        "name": "avocado",
+        "amount": 50,
+        "unit": "g"
+      },
+      {
+        "name": "feta cheese",
+        "amount": 14,
+        "unit": "g"
+      },
+      {
+        "name": "pistachios",
+        "amount": 7.5,
+        "unit": "g"
+      },
+      {
+        "name": "balsamic vinaigrette",
+        "amount": 30,
+        "unit": "ml"
+      }
+    ],
+    "ingredients_pl": [
+      {
+        "name": "filet z kurczaka",
+        "amount": 113,
+        "unit": "g"
+      },
+      {
+        "name": "sok z cytryny",
+        "amount": 7.5,
+        "unit": "ml"
+      },
+      {
+        "name": "oliwa z oliwek",
+        "amount": 3.75,
+        "unit": "ml"
+      },
+      {
+        "name": "skórka z cytryny",
+        "amount": 0.75,
+        "unit": "g"
+      },
+      {
+        "name": "czosnek",
+        "amount": 1.25,
+        "unit": "g"
+      },
+      {
+        "name": "oregano",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "sól",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "pieprz czarny",
+        "amount": 1,
+        "unit": "g"
+      },
+      {
+        "name": "mieszanka sałat",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "serca karczochów",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "ogórek",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "cebula czerwona",
+        "amount": 12.5,
+        "unit": "g"
+      },
+      {
+        "name": "awokado",
+        "amount": 50,
+        "unit": "g"
+      },
+      {
+        "name": "ser feta",
+        "amount": 14,
+        "unit": "g"
+      },
+      {
+        "name": "pistacje",
+        "amount": 7.5,
+        "unit": "g"
+      },
+      {
+        "name": "vinaigrette balsamiczny",
+        "amount": 30,
+        "unit": "ml"
       }
     ],
     "available": true,
@@ -6938,7 +7112,7 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 13.82,
+    "estimated_cost_pln": 11.82,
     "cost_complete": true
   },
   {
@@ -7646,7 +7820,7 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 14.38,
+    "estimated_cost_pln": 12.38,
     "cost_complete": true
   },
   {
@@ -8364,7 +8538,7 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 10.02,
+    "estimated_cost_pln": 8.01,
     "cost_complete": true
   },
   {

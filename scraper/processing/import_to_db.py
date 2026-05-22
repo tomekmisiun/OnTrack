@@ -101,6 +101,11 @@ _FAMILY_RULES: list[tuple[re.Pattern, str]] = [
     (re.compile(r"^kurczak\b(?! mielony)"),    "kurczak"),
     (re.compile(r"^wieprzowina\b"),            "wieprzowina"),
     (re.compile(r"^wołowina\b"),               "wołowina"),
+    # Mięso — aliasy i sprowadzanie organów do prostej nazwy (bez "z kurczaka")
+    (re.compile(r"^filet\w*\s+z\s+kurczaka"), "pierś z kurczaka"),
+    (re.compile(r"^żołądk\w+"),               "żołądki z kurczaka"),
+    (re.compile(r"^wątrob\w+"),               "wątroba"),
+    (re.compile(r"^serce\b"),                 "serce"),
     # Warzywa — merge form deklinacyjnych
     (re.compile(r"^brokuł"),                   "brokuł"),
     (re.compile(r"^ciecierzyca"),              "ciecierzyca"),
@@ -305,15 +310,23 @@ def convert_weight(amount: float | None, ing_unit: str | None,
     iu = (ing_unit or "g").lower()
     pu = prod_unit.lower()
 
-    # pcs → szt (countable items)
+    # pcs → szt (countable items): zaokrąglaj w górę (0.5 jajka → 1 jajko)
     if iu in ("pcs", "szt") and pu == "szt":
-        return float(amount)
+        import math
+        return math.ceil(float(amount))
 
     # pcs → g: użyj domyślnej wagi jeśli produkt w gramach
     if iu in ("pcs", "szt") and pu == "g":
         key = ing_name.lower().strip()
         default_g = _PCS_WEIGHT.get(key, 100)
         return float(amount) * default_g
+
+    # g → szt: przelicz gramy na sztuki przez domyślną wagę; zaokrąglaj w górę (0.5 → 1)
+    if iu in ("g", "ml") and pu == "szt":
+        key = ing_name.lower().strip()
+        default_g = _PCS_WEIGHT.get(key, 100)
+        import math
+        return math.ceil(float(amount) / default_g) if default_g else float(amount)
 
     # g ↔ ml: traktujemy 1:1 dla płynów
     if {iu, pu} <= {"g", "ml"}:

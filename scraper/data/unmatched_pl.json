@@ -44,7 +44,7 @@
         "score": 61.5
       },
       {
-        "product": "barista owies",
+        "product": "nerki",
         "score": 60.0
       }
     ]
@@ -415,12 +415,12 @@
         "score": 82.4
       },
       {
-        "product": "fasola biała konserwowa",
-        "score": 72.7
+        "product": "serca",
+        "score": 80.0
       },
       {
-        "product": "jabłko",
-        "score": 66.7
+        "product": "fasola biała konserwowa",
+        "score": 72.7
       }
     ]
   },
@@ -1169,7 +1169,7 @@
         "score": 75.7
       },
       {
-        "product": "płatki śniadaniowe czekoladowe pączki oho!",
+        "product": "flaki",
         "score": 75.0
       }
     ]
@@ -1500,6 +1500,31 @@
     ]
   },
   {
+    "ingredient_name": "fajita z kurczaka",
+    "top_candidates": [
+      {
+        "product": "kurczak",
+        "score": 100.0
+      },
+      {
+        "product": "polędwiczka z kurczaka",
+        "score": 82.8
+      },
+      {
+        "product": "skrzydełka z kurczaka",
+        "score": 82.8
+      },
+      {
+        "product": "pierś z kurczaka",
+        "score": 81.5
+      },
+      {
+        "product": "natka",
+        "score": 75.0
+      }
+    ]
+  },
+  {
     "ingredient_name": "farro",
     "top_candidates": [
       {
@@ -1665,12 +1690,12 @@
         "score": 66.7
       },
       {
-        "product": "żołądki z indyka",
-        "score": 60.9
-      },
-      {
         "product": "migdały",
         "score": 60.0
+      },
+      {
+        "product": "jogurt jabłko i ziarna",
+        "score": 58.3
       }
     ]
   },
@@ -1915,11 +1940,11 @@
         "score": 83.3
       },
       {
-        "product": "gruszka",
-        "score": 72.7
+        "product": "nerki",
+        "score": 75.0
       },
       {
-        "product": "granat",
+        "product": "gruszka",
         "score": 72.7
       }
     ]
@@ -2644,7 +2669,7 @@
         "score": 66.7
       },
       {
-        "product": "flaki wołowe",
+        "product": "kaszka",
         "score": 66.7
       }
     ]
@@ -2657,20 +2682,20 @@
         "score": 80.0
       },
       {
-        "product": "serca wieprzowe",
-        "score": 74.1
-      },
-      {
-        "product": "nerki wieprzowe",
-        "score": 74.1
-      },
-      {
         "product": "pieprz ziołowy",
         "score": 72.7
       },
       {
         "product": "kotlety mielone",
         "score": 72.0
+      },
+      {
+        "product": "filety z makreli w sosie pieprzowym",
+        "score": 71.4
+      },
+      {
+        "product": "pieprz kolorowy",
+        "score": 69.6
       }
     ]
   },
@@ -3407,6 +3432,10 @@
         "score": 100.0
       },
       {
+        "product": "nerki",
+        "score": 80.0
+      },
+      {
         "product": "śmietanka",
         "score": 77.8
       },
@@ -3417,10 +3446,6 @@
       {
         "product": "śmietanka do kawy",
         "score": 73.3
-      },
-      {
-        "product": "awokado",
-        "score": 71.4
       }
     ]
   },
@@ -3561,15 +3586,15 @@
         "score": 66.7
       },
       {
-        "product": "flaki wołowe",
-        "score": 66.7
-      },
-      {
         "product": "sos",
         "score": 66.7
       },
       {
         "product": "mr",
+        "score": 66.7
+      },
+      {
+        "product": "nasza",
         "score": 66.7
       }
     ]
@@ -3728,6 +3753,10 @@
     "ingredient_name": "nektar z agawy",
     "top_candidates": [
       {
+        "product": "nerki",
+        "score": 75.0
+      },
+      {
         "product": "miód pszczeli wielokwiatowy nektarowy",
         "score": 69.6
       },
@@ -3742,16 +3771,16 @@
       {
         "product": "miód pszczeli akacjowy nektarowy",
         "score": 69.6
-      },
-      {
-        "product": "huzar miód wielokwiatowy nektarowy",
-        "score": 69.6
       }
     ]
   },
   {
     "ingredient_name": "nerkowce",
     "top_candidates": [
+      {
+        "product": "nerki",
+        "score": 88.9
+      },
       {
         "product": "vermezan z nerkowców",
         "score": 87.5
@@ -3766,10 +3795,6 @@
       },
       {
         "product": "orzechy nerkowca",
-        "score": 87.5
-      },
-      {
-        "product": "mieszanka nerkowiec-żurawina",
         "score": 87.5
       }
     ]
@@ -4211,16 +4236,16 @@
         "score": 85.7
       },
       {
+        "product": "nerki",
+        "score": 80.0
+      },
+      {
         "product": "mąka",
         "score": 75.0
       },
       {
         "product": "pastani",
         "score": 72.7
-      },
-      {
-        "product": "pieczarka",
-        "score": 70.6
       }
     ]
   },
@@ -4286,16 +4311,16 @@
         "score": 83.3
       },
       {
+        "product": "serca",
+        "score": 80.0
+      },
+      {
         "product": "papryczka słodkka sweet bites",
         "score": 80.0
       },
       {
         "product": "papryka mix",
         "score": 76.2
-      },
-      {
-        "product": "mango",
-        "score": 75.0
       }
     ]
   },
@@ -4636,16 +4661,16 @@
         "score": 83.3
       },
       {
+        "product": "flaki",
+        "score": 80.0
+      },
+      {
         "product": "platki corn flakes kukurydziane bezglutenowe",
         "score": 80.0
       },
       {
         "product": "płatki cini minis",
         "score": 78.3
-      },
-      {
-        "product": "płatki chocapic minis",
-        "score": 76.2
       }
     ]
   },
@@ -4682,20 +4707,20 @@
         "score": 90.0
       },
       {
-        "product": "serca wieprzowe",
-        "score": 81.5
-      },
-      {
         "product": "por",
         "score": 80.0
       },
       {
-        "product": "wątroba wieprzowa",
-        "score": 78.6
-      },
-      {
         "product": "polędwiczka w przyprawach do pieczenia",
         "score": 77.8
+      },
+      {
+        "product": "mielona wieprzowina",
+        "score": 75.0
+      },
+      {
+        "product": "oliwa",
+        "score": 75.0
       }
     ]
   },
@@ -4740,12 +4765,12 @@
         "score": 80.0
       },
       {
-        "product": "wątroba wieprzowa",
-        "score": 78.6
+        "product": "polędwiczka z kurczaka",
+        "score": 76.5
       },
       {
-        "product": "serca wieprzowe",
-        "score": 76.9
+        "product": "oliwa",
+        "score": 75.0
       }
     ]
   },
@@ -5475,36 +5500,15 @@
     ]
   },
   {
-    "ingredient_name": "serca karczochów",
-    "top_candidates": [
-      {
-        "product": "ser",
-        "score": 100.0
-      },
-      {
-        "product": "serca z kaczki",
-        "score": 80.0
-      },
-      {
-        "product": "seler",
-        "score": 75.0
-      },
-      {
-        "product": "serek",
-        "score": 75.0
-      },
-      {
-        "product": "serca z kurczaka",
-        "score": 74.1
-      }
-    ]
-  },
-  {
     "ingredient_name": "serce karczocha",
     "top_candidates": [
       {
         "product": "ser",
         "score": 100.0
+      },
+      {
+        "product": "serca",
+        "score": 88.9
       },
       {
         "product": "serecek",
@@ -5517,10 +5521,6 @@
       {
         "product": "seler",
         "score": 75.0
-      },
-      {
-        "product": "serca z kaczki",
-        "score": 72.0
       }
     ]
   },
@@ -5561,15 +5561,15 @@
         "score": 66.7
       },
       {
+        "product": "flaki",
+        "score": 66.7
+      },
+      {
         "product": "ser",
         "score": 66.7
       },
       {
         "product": "ser krowi",
-        "score": 66.7
-      },
-      {
-        "product": "płatki",
         "score": 66.7
       }
     ]
@@ -5761,16 +5761,16 @@
         "score": 80.0
       },
       {
+        "product": "nerki",
+        "score": 75.0
+      },
+      {
         "product": "liście limonki",
         "score": 72.7
       },
       {
         "product": "bonitki",
         "score": 72.7
-      },
-      {
-        "product": "masło osełeczka górska z czosnkiem",
-        "score": 68.8
       }
     ]
   },
@@ -5915,12 +5915,12 @@
         "score": 76.2
       },
       {
-        "product": "bonitki",
-        "score": 72.7
+        "product": "nerki",
+        "score": 75.0
       },
       {
-        "product": "sok z kapusty kiszonej",
-        "score": 70.0
+        "product": "bonitki",
+        "score": 72.7
       }
     ]
   },
@@ -6178,10 +6178,6 @@
     "ingredient_name": "stek z polędwicy wołowej",
     "top_candidates": [
       {
-        "product": "flaki wołowe",
-        "score": 70.0
-      },
-      {
         "product": "wołowina",
         "score": 66.7
       },
@@ -6195,6 +6191,10 @@
       },
       {
         "product": "ser",
+        "score": 66.7
+      },
+      {
+        "product": "stewia",
         "score": 66.7
       }
     ]
@@ -6769,7 +6769,7 @@
         "score": 66.7
       },
       {
-        "product": "nerki wieprzowe",
+        "product": "ser owczy",
         "score": 66.7
       }
     ]
@@ -6932,20 +6932,20 @@
         "score": 83.3
       },
       {
-        "product": "serca z kaczki",
-        "score": 81.5
-      },
-      {
-        "product": "filet z kaczki",
-        "score": 78.3
-      },
-      {
         "product": "pierś z kaczki",
         "score": 78.3
       },
       {
         "product": "jogurt tłuszczu lekki",
         "score": 73.3
+      },
+      {
+        "product": "skrzydełka z kaczki",
+        "score": 72.0
+      },
+      {
+        "product": "twaróg wysokobiałkowy tłuszczu, bez laktozy",
+        "score": 68.8
       }
     ]
   },

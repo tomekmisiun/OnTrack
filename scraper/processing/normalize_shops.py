@@ -549,7 +549,7 @@ _POULTRY = {"kurczak", "kaczka", "gęś", "indyk"}
 # Uwaga: "pierś" (mianownik) ≠ "piersi" (dopełniacz) — to różne znaki ('ś' vs 'si')
 _POULTRY_PARTS = [
     (re.compile(r"piersi|pierś"),   "pierś"),       # z piersi / pierś z
-    (re.compile(r"\bfilet\w*\b"),   "filet"),       # filet z kurczaka
+    (re.compile(r"\bfilet\w*\b"),   "pierś"),       # filet = pierś (to samo co pierś z kurczaka)
     (re.compile(r"udka|udziec"),    "udka"),
     (re.compile(r"skrzydełk"),      "skrzydełka"),
     (re.compile(r"nóżk"),           "nóżki"),
@@ -581,9 +581,11 @@ def _canonicalize_meat_pl(name: str) -> str:
     if not _MEAT_INDICATORS.search(name):
         return name
 
-    # Organy — nie normalizuj, zostaw oryginalną nazwę
-    if _ORGAN_MEATS_PL.search(name):
-        return name
+    # Organy — zwróć TYLKO nazwę organu (bez "z kurczaka" itp.)
+    # żeby "żołądki z kurczaka" nie matchowało "filet z kurczaka" przy fuzzy
+    m = _ORGAN_MEATS_PL.search(name)
+    if m:
+        return m.group(0)  # np. "żołądki", "wątroba", "serce"
 
     is_ground = bool(re.search(r"\bmielon\w+\b", name))
 
