@@ -46,6 +46,15 @@ _INGREDIENT_CANONICAL_PL: dict[str, str] = {
     "serca karczochów":     "karczochy",          # brak w sklepach → unmatch
     "serce karczocha":      "karczochy",
     "mieszanka sałat":      "mix sałat z roszponką",  # → mix sałat
+    # Mięso — ogólne → konkretny produkt
+    "wieprzowina":          "karkówka",           # schab/szynka/karczek = karkówka jest najbardziej neutralna
+    "wołowina":             "wołowina",           # gulasz/udziec — zostawia jak jest (teraz sklep ma gulasz)
+    "żeberka wołowe":       "żeberka",            # wołowe → wieprzowe (niedostępne w PL)
+    "beef ribs":            "żeberka",
+    # Colesław — "mieszanka" to za ogólne, "coleslaw" jest kluczem
+    "mieszanka coleslaw":   "surówka colesław łagodna",
+    "coleslaw":             "surówka colesław łagodna",
+    "sałatka colesław":     "surówka colesław łagodna",
     # Inne
     "majonez":              "winiary majonez lekki",  # nie wegański
     # Suszone/liofilizowane — teraz są w bazie (auchan bakalie), nie blokuj
@@ -56,11 +65,19 @@ _INGREDIENT_CANONICAL_PL: dict[str, str] = {
     "biały ryż":            "ryż",
 }
 _INGREDIENT_CANONICAL_EN: dict[str, str] = {
-    "chicken":         "chicken breast",
-    "chicken fillet":  "chicken breast",
-    "chicken fillets": "chicken breast",
-    "turkey":          "turkey breast",
-    "tuna":            "tuna chunks in spring water",
+    "chicken":              "chicken breast",
+    "chicken fillet":       "chicken breast",
+    "chicken fillets":      "chicken breast",
+    "turkey":               "turkey breast",
+    "tuna":                 "tuna chunks in spring water",
+    "applesauce":           "apple sauce",
+    "apple sauce":          "apple sauce",
+    "ground beef":          "beef mince",
+    "ground pork":          "pork mince",
+    "minced beef":          "beef mince",
+    "minced pork":          "pork mince",
+    "pork":                 "pork loin",
+    "beef":                 "beef steak",  # generyczny beef → steak/cut nie mince
 }
 
 SCORE_AUTO      = 85
@@ -92,6 +109,14 @@ def score(ingredient: str, product_generic: str) -> float:
     if not has_common_token:
         return tsr   # "proszek" ≠ "groszek"
 
+    # Przetworzona forma produktu ≠ surowy składnik:
+    # "apricot jam" ≠ "apricot", "apple sauce" ≠ "apple" (jako surowy owoc)
+    _PROCESSED_FORMS = {"jam", "jelly", "sauce", "preserve", "preserves", "conserve",
+                        "conserves", "paste", "extract", "syrup", "concentrate",
+                        "puree", "purée", "compote", "curd"}
+    if (meaningful_p & _PROCESSED_FORMS) and not (meaningful_i & _PROCESSED_FORMS):
+        return tsr  # produkt to przetworzona forma, składnik to surowy
+
     # Mismatch kwalifikatora dietetycznego: "majonez wegański" ≠ "majonez"
     diet_p = meaningful_p & _DIETARY_QUALIFIERS
     diet_i = meaningful_i & _DIETARY_QUALIFIERS
@@ -102,7 +127,7 @@ def score(ingredient: str, product_generic: str) -> float:
     first_product_token = next((t for t in tokens_p if len(t) > 1), "")
     ingredient_leads = first_product_token in meaningful_i
 
-    if pr >= 85 and not ingredient_leads and tsr < 76:
+    if pr >= 85 and not ingredient_leads and tsr < 77:
         return tsr   # "jagoda" w "jogurt jagoda", "mak" w "jogurt mak marcepan"
 
     # Reguła 2→1: jeśli składnik ma 2 tokeny a produkt tylko 1,

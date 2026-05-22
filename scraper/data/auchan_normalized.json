@@ -105,7 +105,7 @@
   },
   {
     "original_name": "Schab wieprzowy bez kości Pewni Dobrego na wagę ok. 500 g",
-    "generic_name": "wieprzowina",
+    "generic_name": "schab",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -547,7 +547,7 @@
   },
   {
     "original_name": "Karkówka wieprzowa bez kości rasy Puławskiej MAP Pewni Dobrego na wagę ok. 600 g",
-    "generic_name": "wieprzowina",
+    "generic_name": "karkówka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -560,7 +560,7 @@
   },
   {
     "original_name": "Żeberka wieprzowe rasy Puławskiej MAP Pewni Dobrego na wagę ok. 800 g",
-    "generic_name": "wieprzowina",
+    "generic_name": "żeberka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -599,7 +599,7 @@
   },
   {
     "original_name": "Karkówka wieprzowa bez kości  Pewni Dobrego na wagę ok. 500g",
-    "generic_name": "wieprzowina",
+    "generic_name": "karkówka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -716,7 +716,7 @@
   },
   {
     "original_name": "Schab wieprzowy bez kości rasy Puławskiej Pewni Dobrego na wagę ok. 1.2kg",
-    "generic_name": "wieprzowina",
+    "generic_name": "schab",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -1054,7 +1054,7 @@
   },
   {
     "original_name": "Schab wieprzowy w plastrach Pewni Dobrego 100 g",
-    "generic_name": "wieprzowina",
+    "generic_name": "schab",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -1067,7 +1067,7 @@
   },
   {
     "original_name": "Schab wieprzowy surowy dojrzewający plastry Pewni Dobrego 100 g",
-    "generic_name": "wieprzowina",
+    "generic_name": "schab",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 100.0,
@@ -1080,7 +1080,7 @@
   },
   {
     "original_name": "Stek z antrykotu wołowego bez kości Pewni Dobrego na wagę ok. 400 g",
-    "generic_name": "wołowina",
+    "generic_name": "antrykot",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -1132,7 +1132,7 @@
   },
   {
     "original_name": "Stek wołowy z rostbefu dojrzewający Pewni Dobrego na wagę ok. 350 g",
-    "generic_name": "wołowina",
+    "generic_name": "rostbef",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -15341,7 +15341,7 @@
   },
   {
     "original_name": "Udziec wołowy Auchan na wagę ok. 1 kg",
-    "generic_name": "wołowina",
+    "generic_name": "udziec",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -15354,7 +15354,7 @@
   },
   {
     "original_name": "Golonka wieprzowa przednia z kością Auchan na wagę ok. 800 g",
-    "generic_name": "wieprzowina",
+    "generic_name": "golonka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -15380,7 +15380,7 @@
   },
   {
     "original_name": "Schab wieprzowy bez kości VAC Auchan na wagę ok. 1,5 kg",
-    "generic_name": "wieprzowina",
+    "generic_name": "schab",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -15419,7 +15419,7 @@
   },
   {
     "original_name": "Schab wieprzowy bez kości Auchan na wagę ok. 800 g",
-    "generic_name": "wieprzowina",
+    "generic_name": "schab",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -15484,7 +15484,7 @@
   },
   {
     "original_name": "Schab wieprzowy bez kości Pewni Dobrego na wagę ok. 500 g",
-    "generic_name": "wieprzowina",
+    "generic_name": "schab",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -15666,7 +15666,7 @@
   },
   {
     "original_name": "Boczek wieprzowy bez kości ekstra VAC Auchan na wagę ok. 1 kg",
-    "generic_name": "wieprzowina",
+    "generic_name": "boczek",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -15744,7 +15744,7 @@
   },
   {
     "original_name": "Schab wieprzowy bez kości Auchan na wagę ok. 1 kg",
-    "generic_name": "wieprzowina",
+    "generic_name": "schab",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -15809,7 +15809,7 @@
   },
   {
     "original_name": "Nogi wieprzowe tylne tacka Auchan na wagę ok. 800 g",
-    "generic_name": "wieprzowina",
+    "generic_name": "nogi wieprzowe",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -15991,7 +15991,7 @@
   },
   {
     "original_name": "Stek wołowy z antrykotu bez kości Łuków na wagę ok. 400 g",
-    "generic_name": "wołowina",
+    "generic_name": "antrykot",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -16108,7 +16108,7 @@
   },
   {
     "original_name": "Karkówka wieprzowa bez kości rasy Puławskiej MAP Pewni Dobrego na wagę ok. 600 g",
-    "generic_name": "wieprzowina",
+    "generic_name": "karkówka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -16134,7 +16134,7 @@
   },
   {
     "original_name": "Żeberka wieprzowe rasy Puławskiej MAP Pewni Dobrego na wagę ok. 800 g",
-    "generic_name": "wieprzowina",
+    "generic_name": "żeberka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -16212,7 +16212,7 @@
   },
   {
     "original_name": "Stek z antrykotu wołowego bez kości Wołowina na wagę ok. 400 g",
-    "generic_name": "wołowina",
+    "generic_name": "antrykot",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -16264,7 +16264,7 @@
   },
   {
     "original_name": "Karkówka wieprzowa bez kości  Pewni Dobrego na wagę ok. 500g",
-    "generic_name": "wieprzowina",
+    "generic_name": "karkówka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -16329,7 +16329,7 @@
   },
   {
     "original_name": "Stek z rostbefu wołowego bez kości rasy Limousine Wołowina na wagę ok. 350 g",
-    "generic_name": "wołowina",
+    "generic_name": "rostbef",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -16368,7 +16368,7 @@
   },
   {
     "original_name": "Schab wieprzowy bez kości rasy Puławskiej Pewni Dobrego na wagę ok. 1.2kg",
-    "generic_name": "wieprzowina",
+    "generic_name": "schab",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -16394,7 +16394,7 @@
   },
   {
     "original_name": "Golonka wieprzowa wolno gotowana Sokołów na wagę ok. 800 g",
-    "generic_name": "wieprzowina",
+    "generic_name": "golonka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -16719,7 +16719,7 @@
   },
   {
     "original_name": "Żeberka wieprzowe wolno gotowane Warmia na wagę ok. 500g",
-    "generic_name": "wieprzowina",
+    "generic_name": "żeberka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -16849,7 +16849,7 @@
   },
   {
     "original_name": "Golonka wieprzowa do pieczenia w siatce  Auchan 550 g",
-    "generic_name": "wieprzowina",
+    "generic_name": "golonka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 550.0,
@@ -16888,7 +16888,7 @@
   },
   {
     "original_name": "Stek z antrykotu wołowego bez kości Pewni Dobrego na wagę ok. 400 g",
-    "generic_name": "wołowina",
+    "generic_name": "antrykot",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -17031,7 +17031,7 @@
   },
   {
     "original_name": "Udziec jagnięcy z kością i golenią VAC Połonina Lesko na wagę ok. 2,5 kg",
-    "generic_name": "baranina",
+    "generic_name": "udziec",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -17070,7 +17070,7 @@
   },
   {
     "original_name": "Stek wołowy z rostbefu dojrzewający Pewni Dobrego na wagę ok. 350 g",
-    "generic_name": "wołowina",
+    "generic_name": "rostbef",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -17252,7 +17252,7 @@
   },
   {
     "original_name": "Antrykot wołowy stek bez kości ANGUS 300G Tender meat 300 g",
-    "generic_name": "wołowina",
+    "generic_name": "antrykot",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -17330,7 +17330,7 @@
   },
   {
     "original_name": "Antrykot wołowy stek bez kości WAGYU   Tender meat 300 g",
-    "generic_name": "wołowina",
+    "generic_name": "antrykot",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 300.0,

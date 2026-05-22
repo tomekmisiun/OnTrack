@@ -52,16 +52,16 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Kraina Mięs Porcja rosołowa wołowa",
+    "original_name": "Rosół wołowy Kucharek 120 g",
     "generic_name": "wołowina",
-    "shop": "biedronka",
+    "shop": "auchan",
     "currency": "PLN",
-    "package_size_value": 800.0,
+    "package_size_value": 120.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 22.32,
+    "price_package": 3.84,
     "price_per_unit": null,
-    "price_per_100": 2.79,
+    "price_per_100": 3.2,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -91,16 +91,29 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Nogi wieprzowe tylne tacka Auchan na wagę ok. 800 g",
+    "original_name": "Ogony wieprzowe Auchan na wagę ok. 800 g",
     "generic_name": "wieprzowina",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
     "unit": null,
     "sold_by_weight": true,
-    "price_package": 6.39,
+    "price_package": 7.19,
     "price_per_unit": null,
-    "price_per_100": 0.799,
+    "price_per_100": 0.899,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
+    "original_name": "Schab wieprzowy bez kości Auchan na wagę ok. 1 kg",
+    "generic_name": "schab",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 20.98,
+    "price_per_unit": null,
+    "price_per_100": 2.098,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -491,6 +504,32 @@
     "price_package": 13.99,
     "price_per_unit": null,
     "price_per_100": 7.7722,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
+    "original_name": "Karkówka wieprzowa bez kości rasy Puławskiej MAP Pewni Dobrego na wagę ok. 600 g",
+    "generic_name": "karkówka",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 21.59,
+    "price_per_unit": null,
+    "price_per_100": 3.599,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
+    "original_name": "Żeberka wędzone Mościbrody na wagę ok. 900 g",
+    "generic_name": "żeberka",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 14.39,
+    "price_per_unit": null,
+    "price_per_100": 1.599,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -897,6 +936,19 @@
     "standard_category": "Owoce"
   },
   {
+    "original_name": "Stek wołowy z antrykotu bez kości Łuków na wagę ok. 400 g",
+    "generic_name": "antrykot",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 32.0,
+    "price_per_unit": null,
+    "price_per_100": 7.999,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
     "original_name": "Wątroba wieprzowa Auchan na wagę ok. 400 g",
     "generic_name": "wątroba",
     "shop": "auchan",
@@ -907,6 +959,19 @@
     "price_package": 4.0,
     "price_per_unit": null,
     "price_per_100": 0.999,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
+    "original_name": "Stek z rostbefu wołowego bez kości rasy Limousine Wołowina na wagę ok. 350 g",
+    "generic_name": "rostbef",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 36.75,
+    "price_per_unit": null,
+    "price_per_100": 10.499,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -11700,6 +11765,32 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
+    "original_name": "Udziec wołowy Auchan na wagę ok. 1 kg",
+    "generic_name": "udziec",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 59.99,
+    "price_per_unit": null,
+    "price_per_100": 5.999,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
+    "original_name": "Golonka wieprzowa przednia z kością Auchan na wagę ok. 800 g",
+    "generic_name": "golonka",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 12.79,
+    "price_per_unit": null,
+    "price_per_100": 1.599,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
     "original_name": "Łopatka bez kości Auchan na wagę ok. 1 kg",
     "generic_name": "łopatka",
     "shop": "auchan",
@@ -11765,6 +11856,19 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
+    "original_name": "Boczek wieprzowy bez kości ekstra VAC Auchan na wagę ok. 1 kg",
+    "generic_name": "boczek",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 20.98,
+    "price_per_unit": null,
+    "price_per_100": 2.098,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
     "original_name": "Flaki wołowe blanszowane  Auchan 900 g",
     "generic_name": "flaki",
     "shop": "auchan",
@@ -11791,6 +11895,19 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
+    "original_name": "Nogi wieprzowe tylne tacka Auchan na wagę ok. 800 g",
+    "generic_name": "nogi wieprzowe",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 6.39,
+    "price_per_unit": null,
+    "price_per_100": 0.799,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
     "original_name": "Polędwiczka w przyprawach do pieczenia Auchan na wagę ok. 400 g",
     "generic_name": "polędwiczka w przyprawach do pieczenia",
     "shop": "auchan",
@@ -11814,19 +11931,6 @@
     "price_package": 15.99,
     "price_per_unit": null,
     "price_per_100": 3.9975,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Żeberka wędzone Mościbrody na wagę ok. 900 g",
-    "generic_name": "żeberka",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 14.39,
-    "price_per_unit": null,
-    "price_per_100": 1.599,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -32640,6 +32744,19 @@
     "price_package": 9.39,
     "price_per_unit": null,
     "price_per_100": 9.39,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
+    "original_name": "Kraina Mięs Porcja rosołowa wołowa",
+    "generic_name": "porcja rosołowa",
+    "shop": "biedronka",
+    "currency": "PLN",
+    "package_size_value": 800.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 22.32,
+    "price_per_unit": null,
+    "price_per_100": 2.79,
     "standard_category": "Mięso, drób i ryby"
   },
   {

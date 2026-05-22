@@ -2140,8 +2140,8 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 8.07,
-    "cost_complete": true
+    "estimated_cost_pln": null,
+    "cost_complete": false
   },
   {
     "name_en": "One Pan Roasted Salmon, Asparagus And Potatoes Recipe",
@@ -4174,8 +4174,8 @@
       }
     ],
     "available": true,
-    "estimated_cost_pln": 2.74,
-    "cost_complete": true
+    "estimated_cost_pln": null,
+    "cost_complete": false
   },
   {
     "name_en": "Beef Patties-Sweet Corn Rice and Sautéed Veggies",

@@ -92,7 +92,7 @@
   },
   {
     "original_name": "XXL Bramley Apple Sausages",
-    "generic_name": "bramley apple sausages",
+    "generic_name": "apple sausages",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 667.0,
@@ -338,17 +338,17 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Banana & Custard Fat Free Yogurt",
+    "original_name": "Banana",
     "generic_name": "banana",
     "shop": "aldi",
     "currency": "GBP",
-    "package_size_value": 160.0,
-    "unit": "g",
+    "package_size_value": 1,
+    "unit": "pcs",
     "sold_by_weight": false,
-    "price_package": 0.39,
-    "price_per_unit": null,
-    "price_per_100": 0.2437,
-    "standard_category": "Nabiał i jaja"
+    "price_package": 0.16,
+    "price_per_unit": 0.16,
+    "price_per_100": null,
+    "standard_category": "Owoce"
   },
   {
     "original_name": "Pineapple Chunks",
@@ -390,15 +390,15 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Pink Lady Apples",
-    "generic_name": "pink lady apples",
+    "original_name": "British Mini Apples",
+    "generic_name": "apples",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 6,
     "unit": "pcs",
     "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": 0.33,
+    "price_package": 0.99,
+    "price_per_unit": 0.17,
     "price_per_100": null,
     "standard_category": "Owoce"
   },
@@ -430,7 +430,7 @@
   },
   {
     "original_name": "Ripe & Ready Conference Pears",
-    "generic_name": "conference pears",
+    "generic_name": "pears",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 4,
@@ -468,16 +468,16 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Garlic & Rosemary Focaccia Mix",
+    "original_name": "Garlic",
     "generic_name": "garlic",
     "shop": "aldi",
     "currency": "GBP",
-    "package_size_value": 500.0,
-    "unit": "g",
+    "package_size_value": 4,
+    "unit": "pcs",
     "sold_by_weight": false,
-    "price_package": 0.89,
-    "price_per_unit": null,
-    "price_per_100": 0.178,
+    "price_package": 0.87,
+    "price_per_unit": 0.22,
+    "price_per_100": null,
     "standard_category": "Warzywa"
   },
   {
@@ -650,45 +650,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Granny Smith Apples",
-    "generic_name": "granny smith apples",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 6,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 1.59,
-    "price_per_unit": 0.27,
-    "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Golden Delicious Apples",
-    "generic_name": "golden delicious apples",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 6,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 1.59,
-    "price_per_unit": 0.27,
-    "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Jazz Apples",
-    "generic_name": "jazz apples",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 6,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": 0.33,
-    "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Smoked Salmon Slices",
     "generic_name": "smoked salmon slices",
     "shop": "aldi",
@@ -768,20 +729,7 @@
   },
   {
     "original_name": "Rocket & Baby Leaf Salad",
-    "generic_name": "rocket",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 90.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.89,
-    "price_per_unit": null,
-    "price_per_100": 0.9889,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Rocket & Baby Leaf Salad",
-    "generic_name": "leaf salad",
+    "generic_name": "rocket leaf salad",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 90.0,
@@ -858,19 +806,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Braeburn Apples",
-    "generic_name": "braeburn apples",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 6,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 1.59,
-    "price_per_unit": 0.27,
-    "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Best of British Apples",
     "generic_name": "best of apples",
     "shop": "aldi",
@@ -885,7 +820,7 @@
   },
   {
     "original_name": "Large Bramley Apple",
-    "generic_name": "bramley apple",
+    "generic_name": "apple",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 1,
@@ -949,21 +884,8 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Washed & Ready to Cook Straight to Wok Beansprouts",
-    "generic_name": "washed",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 399.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.85,
-    "price_per_unit": null,
-    "price_per_100": 0.213,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Washed & Ready to Cook Carrot Batons",
-    "generic_name": "ready to cook carrot batons",
+    "generic_name": "washed ready to cook carrot batons",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 399.0,
@@ -989,7 +911,7 @@
   },
   {
     "original_name": "British Broccoli & Cauliflower Florets",
-    "generic_name": "cauliflower florets",
+    "generic_name": "broccoli cauliflower florets",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 399.0,
@@ -1067,20 +989,7 @@
   },
   {
     "original_name": "Apple, Pineapple & Grape",
-    "generic_name": "apple, pineapple",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": null,
-    "price_per_100": 0.495,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Apple, Pineapple & Grape",
-    "generic_name": "grape",
+    "generic_name": "apple, pineapple grape",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 200.0,
@@ -1287,19 +1196,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "British Mini Apples",
-    "generic_name": "apples",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 6,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": 0.17,
-    "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "British Miniature Potatoes",
     "generic_name": "miniature potatoes",
     "shop": "aldi",
@@ -1405,7 +1301,7 @@
   },
   {
     "original_name": "British Royal Gala Apples",
-    "generic_name": "royal gala apples",
+    "generic_name": "royal apples",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 6,
@@ -1639,7 +1535,7 @@
   },
   {
     "original_name": "Washed & Ready to Cook Vegetable Medley",
-    "generic_name": "ready to cook vegetable medley",
+    "generic_name": "washed ready to cook vegetable medley",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 480.0,
@@ -2249,16 +2145,16 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "British Beef & Pork Mince",
+    "original_name": "British Diced Beef",
     "generic_name": "beef",
     "shop": "aldi",
     "currency": "GBP",
-    "package_size_value": 750.0,
+    "package_size_value": 700.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 4.49,
+    "price_package": 7.59,
     "price_per_unit": null,
-    "price_per_100": 0.5987,
+    "price_per_100": 1.0843,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -2522,16 +2418,16 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Chicken & Vegetable Pies 4 Pack",
+    "original_name": "Cooked Sliced Chicken",
     "generic_name": "chicken",
     "shop": "aldi",
     "currency": "GBP",
-    "package_size_value": 569.0,
+    "package_size_value": 340.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 1.99,
+    "price_package": 2.09,
     "price_per_unit": null,
-    "price_per_100": 0.3497,
+    "price_per_100": 0.6147,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -2678,17 +2574,17 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Sweet & Sour Cooking Sauce",
+    "original_name": "Sweet & Crispy",
     "generic_name": "sweet",
     "shop": "aldi",
     "currency": "GBP",
-    "package_size_value": 500.0,
-    "unit": "ml",
+    "package_size_value": 190.0,
+    "unit": "g",
     "sold_by_weight": false,
     "price_package": 0.99,
     "price_per_unit": null,
-    "price_per_100": 0.198,
-    "standard_category": "Tłuszcze, oleje i sosy"
+    "price_per_100": 0.5211,
+    "standard_category": "Warzywa"
   },
   {
     "original_name": "Sweet & Crispy",
@@ -2782,19 +2678,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Slow Cooked Beef Bourguignon",
-    "generic_name": "slow beef bourguignon",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 530.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.99,
-    "price_per_unit": null,
-    "price_per_100": 0.7528,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Slow Cooked Smoky BBQ Beef Brisket",
     "generic_name": "slow smoky bbq beef brisket",
     "shop": "aldi",
@@ -2818,19 +2701,6 @@
     "price_package": 4.99,
     "price_per_unit": null,
     "price_per_100": 0.8317,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Slow Cooked Chicken Shawarma with Tzatziki",
-    "generic_name": "slow chicken shawarma with tzatziki",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 480.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.69,
-    "price_per_unit": null,
-    "price_per_100": 0.7688,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -2860,16 +2730,16 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Salmon & Watercress Topped with Crunchy Breadcrumbs",
+    "original_name": "Salmon Pieces",
     "generic_name": "salmon",
     "shop": "aldi",
     "currency": "GBP",
-    "package_size_value": 380.0,
-    "unit": "ml",
+    "package_size_value": 250.0,
+    "unit": "g",
     "sold_by_weight": false,
-    "price_package": 3.99,
+    "price_package": 2.85,
     "price_per_unit": null,
-    "price_per_100": 1.05,
+    "price_per_100": 1.14,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -2926,7 +2796,7 @@
   },
   {
     "original_name": "Apples, Grapes & Cheese",
-    "generic_name": "apples, grapes",
+    "generic_name": "apples, grapes cheese",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 105.0,
@@ -2936,19 +2806,6 @@
     "price_per_unit": null,
     "price_per_100": 0.8476,
     "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Cheese & Tomato Pasta Bake",
-    "generic_name": "cheese",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 399.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": null,
-    "price_per_100": 0.2481,
-    "standard_category": "Warzywa"
   },
   {
     "original_name": "Melon, Mango & Pineapple Fingers",
@@ -3029,16 +2886,16 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "British Pork Mince 12% Fat",
-    "generic_name": "ground pork",
+    "original_name": "British Beef & Pork Mince",
+    "generic_name": "beef ground pork",
     "shop": "aldi",
     "currency": "GBP",
-    "package_size_value": 500.0,
+    "package_size_value": 750.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 2.25,
+    "price_package": 4.49,
     "price_per_unit": null,
-    "price_per_100": 0.45,
+    "price_per_100": 0.5987,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -3052,6 +2909,19 @@
     "price_package": 5.49,
     "price_per_unit": null,
     "price_per_100": 1.1558,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
+    "original_name": "British Pork Mince 12% Fat",
+    "generic_name": "ground pork",
+    "shop": "aldi",
+    "currency": "GBP",
+    "package_size_value": 500.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 2.25,
+    "price_per_unit": null,
+    "price_per_100": 0.45,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -3095,7 +2965,7 @@
   },
   {
     "original_name": "Ripen at Home Conference Pears",
-    "generic_name": "ripen at home conference pears",
+    "generic_name": "ripen at home pears",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 1000,
@@ -3225,20 +3095,7 @@
   },
   {
     "original_name": "Rich & Succulent Trout Fillets 2 Pack",
-    "generic_name": "rich",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 240.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.99,
-    "price_per_unit": null,
-    "price_per_100": 1.6625,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Rich & Succulent Trout Fillets 2 Pack",
-    "generic_name": "succulent trout 2 pack",
+    "generic_name": "rich succulent trout 2 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 240.0,
@@ -3393,21 +3250,8 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Apple & Berry No Added Sugar Granola",
-    "generic_name": "apple",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.19,
-    "price_per_unit": null,
-    "price_per_100": 0.238,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Apple & Grape Snack Pack",
-    "generic_name": "grape snack pack",
+    "generic_name": "apple grape snack pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 80.0,
@@ -3628,7 +3472,7 @@
   },
   {
     "original_name": "Bramley Apple Pork Sausages 6 Pack",
-    "generic_name": "bramley apple pork sausages 6 pack",
+    "generic_name": "apple pork sausages 6 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 400.0,
@@ -3900,32 +3744,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Cooked Mussels with Garlic & Butter",
-    "generic_name": "mussels with garlic",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.19,
-    "price_per_unit": null,
-    "price_per_100": 0.4867,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Cooked Mussels with Garlic & Butter",
-    "generic_name": "butter",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.19,
-    "price_per_unit": null,
-    "price_per_100": 0.4867,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Lean Unsmoked Bacon 8 Pack",
     "generic_name": "lean unsmoked bacon 8 pack",
     "shop": "aldi",
@@ -4148,7 +3966,7 @@
   },
   {
     "original_name": "Chicken & Chorizo Kebabs 4 Pack",
-    "generic_name": "chorizo kebabs 4 pack",
+    "generic_name": "chicken chorizo kebabs 4 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 320.0,
@@ -4720,20 +4538,7 @@
   },
   {
     "original_name": "Southern Fried Chicken Thighs & Drumsticks",
-    "generic_name": "southern fried chicken thighs",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 800.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.79,
-    "price_per_unit": null,
-    "price_per_100": 0.4738,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Southern Fried Chicken Thighs & Drumsticks",
-    "generic_name": "drumsticks",
+    "generic_name": "southern fried chicken thighs drumsticks",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 800.0,
@@ -5058,7 +4863,7 @@
   },
   {
     "original_name": "Salmon & Watercress Topped with Crunchy Breadcrumbs",
-    "generic_name": "watercress topped with crunchy breadcrumbs",
+    "generic_name": "salmon watercress topped with crunchy breadcrumbs",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 380.0,
@@ -5136,7 +4941,7 @@
   },
   {
     "original_name": "Garlic & Herb Ecuadorian Raw King Prawns",
-    "generic_name": "herb ecuadorian king prawns",
+    "generic_name": "garlic herb ecuadorian king prawns",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 165.0,
@@ -5292,7 +5097,7 @@
   },
   {
     "original_name": "Chicken & Chorizo Kebabs",
-    "generic_name": "chorizo kebabs",
+    "generic_name": "chicken chorizo kebabs",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -5395,21 +5200,8 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Tomato & Herb Pasta Sauce",
-    "generic_name": "tomato",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 441.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 0.49,
-    "price_per_unit": null,
-    "price_per_100": 0.1111,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Tomato & Basil Side Salad",
-    "generic_name": "basil side salad",
+    "generic_name": "tomato basil side salad",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 300.0,
@@ -5474,20 +5266,7 @@
   },
   {
     "original_name": "Chicken Wings BBQ & Buffalo",
-    "generic_name": "chicken wings bbq",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 700.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.89,
-    "price_per_unit": null,
-    "price_per_100": 0.4129,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Chicken Wings BBQ & Buffalo",
-    "generic_name": "buffalo",
+    "generic_name": "chicken wings bbq buffalo",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 700.0,
@@ -5617,7 +5396,7 @@
   },
   {
     "original_name": "Cheese & Bacon Hot Dogs",
-    "generic_name": "bacon hot dogs",
+    "generic_name": "cheese bacon hot dogs",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 600.0,
@@ -5708,7 +5487,7 @@
   },
   {
     "original_name": "Washed & Ready to Cook Straight to Wok Beansprouts",
-    "generic_name": "ready to cook straight to wok beansprouts",
+    "generic_name": "washed ready to cook straight to wok beansprouts",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 399.0,
@@ -5812,7 +5591,7 @@
   },
   {
     "original_name": "Sweet & Crunchy Stir Fry Family Size Pack",
-    "generic_name": "crunchy stir fry family size pack",
+    "generic_name": "sweet crunchy stir fry family size pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 599.0,
@@ -5980,21 +5759,8 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Coconut & Vanilla Greek Style Yogurt 4 Pack",
-    "generic_name": "coconut",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 460.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": null,
-    "price_per_100": 0.2152,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Coconut & Lemongrass Stir Fry Sauce",
-    "generic_name": "lemongrass stir fry sauce",
+    "generic_name": "coconut lemongrass stir fry sauce",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 175.0,
@@ -6072,20 +5838,7 @@
   },
   {
     "original_name": "Plum & Hoisin Stir Fry Sauce",
-    "generic_name": "plum",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 175.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 0.89,
-    "price_per_unit": null,
-    "price_per_100": 0.5086,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Plum & Hoisin Stir Fry Sauce",
-    "generic_name": "hoisin stir fry sauce",
+    "generic_name": "plum hoisin stir fry sauce",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 175.0,
@@ -6173,45 +5926,6 @@
     "price_per_unit": null,
     "price_per_100": 0.552,
     "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Egg Custard Tart 4 Pack",
-    "generic_name": "egg custard tart 4 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 4,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 1.05,
-    "price_per_unit": 0.26,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Cooked Chicken Breast Slices",
-    "generic_name": "chicken breast slices",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 2.19,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Mini Melton Pork Pies 6 Pack",
-    "generic_name": "melton pork pies 6 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.89,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Mięso, drób i ryby"
   },
   {
     "original_name": "Sausage Rolls 6 Pack",
@@ -6409,6 +6123,19 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
+    "original_name": "Cheese & Tomato Pizza",
+    "generic_name": "cheese tomato pizza",
+    "shop": "aldi",
+    "currency": "GBP",
+    "package_size_value": 314.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.1,
+    "price_per_unit": null,
+    "price_per_100": 0.3503,
+    "standard_category": "Warzywa"
+  },
+  {
     "original_name": "Mini Meatster Snack Salami 10 Pack",
     "generic_name": "meatster snack salami 10 pack",
     "shop": "aldi",
@@ -6417,19 +6144,6 @@
     "unit": null,
     "sold_by_weight": false,
     "price_package": 2.19,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Classic Pork Pies 4 Pack",
-    "generic_name": "pork pies 4 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.19,
     "price_per_unit": null,
     "price_per_100": null,
     "standard_category": "Mięso, drób i ryby"
@@ -6474,19 +6188,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Wafer Thin British Cooked Ham 40 Slices",
-    "generic_name": "wafer thin ham",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.89,
-    "price_per_unit": null,
-    "price_per_100": 0.4725,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Sausage Rolls 8 Pack",
     "generic_name": "sausage rolls 8 pack",
     "shop": "aldi",
@@ -6514,7 +6215,7 @@
   },
   {
     "original_name": "Rich & Indulgent Coleslaw",
-    "generic_name": "indulgent coleslaw",
+    "generic_name": "rich indulgent coleslaw",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -6527,7 +6228,7 @@
   },
   {
     "original_name": "Mozzarella & Semi-Dried Cherry Tomato Wood Fired Pizza",
-    "generic_name": "semi-dried cherry tomato wood fired pizza",
+    "generic_name": "mozzarella semi-dried cherry tomato wood fired pizza",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 490.0,
@@ -6540,7 +6241,7 @@
   },
   {
     "original_name": "Cheese & Onion Rolls 6 Pack",
-    "generic_name": "onion rolls 6 pack",
+    "generic_name": "cheese onion rolls 6 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -6625,19 +6326,6 @@
     "unit": null,
     "sold_by_weight": false,
     "price_package": 1.09,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Little Delights Strawberry, Apricot and Raspberry Fromage Frais 6 Pack",
-    "generic_name": "little delights strawberry, apricot and raspberry fromage frais 6 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.75,
     "price_per_unit": null,
     "price_per_100": null,
     "standard_category": "Nabiał i jaja"
@@ -7046,32 +6734,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Strawberry & Yogurt Breakfast Biscuits 5 Pack",
-    "generic_name": "strawberry",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 253.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.29,
-    "price_per_unit": null,
-    "price_per_100": 0.5099,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Strawberry & Vanilla Flavour Double Delights Fromage Frais 4 Pack",
-    "generic_name": "vanilla flavour double delights fromage frais 4 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.15,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Parmigiano Reggiano PDO",
     "generic_name": "parmigiano reggiano pdo",
     "shop": "aldi",
@@ -7109,19 +6771,6 @@
     "price_per_unit": null,
     "price_per_100": 0.2121,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Strawberry, Apricot and Raspberry Fromage Frais",
-    "generic_name": "strawberry, apricot and raspberry fromage frais",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 601.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.89,
-    "price_per_unit": null,
-    "price_per_100": 0.1481,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "British Mature Cheddar Cheese",
@@ -7268,20 +6917,7 @@
   },
   {
     "original_name": "Carrot & Swede Mash",
-    "generic_name": "carrot",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 450.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.35,
-    "price_per_unit": null,
-    "price_per_100": 0.3,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Carrot & Swede Mash",
-    "generic_name": "swede mash",
+    "generic_name": "carrot swede mash",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 450.0,
@@ -7346,7 +6982,7 @@
   },
   {
     "original_name": "Spinach & Ricotta Tortelloni",
-    "generic_name": "ricotta tortelloni",
+    "generic_name": "spinach ricotta tortelloni",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 300.0,
@@ -7528,7 +7164,7 @@
   },
   {
     "original_name": "Garlic & Herbs Mini Roule Cheese",
-    "generic_name": "herbs roule cheese",
+    "generic_name": "garlic herbs roule cheese",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 100.0,
@@ -7541,7 +7177,7 @@
   },
   {
     "original_name": "Pineapple & Almond Mini Roule Cheese",
-    "generic_name": "almond roule cheese",
+    "generic_name": "pineapple almond roule cheese",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 100.0,
@@ -7735,16 +7371,16 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "Chicken, Bacon & Leek Pies 2 Pack",
+    "original_name": "Chicken, Bacon & Sweetcorn Topped Pasta",
     "generic_name": "chicken, bacon",
     "shop": "aldi",
     "currency": "GBP",
-    "package_size_value": 400.0,
+    "package_size_value": 300.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 2.59,
+    "price_package": 1.99,
     "price_per_unit": null,
-    "price_per_100": 0.6475,
+    "price_per_100": 0.6633,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -7788,7 +7424,7 @@
   },
   {
     "original_name": "Tomato & Feta Topped Pasta",
-    "generic_name": "feta topped pasta",
+    "generic_name": "tomato feta topped pasta",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 300.0,
@@ -7814,7 +7450,7 @@
   },
   {
     "original_name": "Tuna & Sweetcorn Topped Pasta",
-    "generic_name": "tuna",
+    "generic_name": "tuna sweetcorn topped pasta",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 300.0,
@@ -7823,19 +7459,6 @@
     "price_package": 1.99,
     "price_per_unit": null,
     "price_per_100": 0.6633,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Chicken Tikka Pocket Wrap",
-    "generic_name": "chicken tikka pocket wrap",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 1,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 2.79,
-    "price_per_unit": 2.79,
-    "price_per_100": null,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -7930,19 +7553,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "British Dry Cured Cooked Ham 7 Slices",
-    "generic_name": "dry cured ham",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 120.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.59,
-    "price_per_unit": null,
-    "price_per_100": 1.325,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "British Dry Cured Oak Smoked Ham Family Pack 14 Slices",
     "generic_name": "dry cured oak ham",
     "shop": "aldi",
@@ -7980,32 +7590,6 @@
     "price_per_unit": null,
     "price_per_100": null,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Garlic Bread Baguette Twin Pack",
-    "generic_name": "garlic bread baguette",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 420.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.49,
-    "price_per_unit": null,
-    "price_per_100": 0.3548,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Reduced Fat Garlic Bread Twin Pack",
-    "generic_name": "garlic bread",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 420.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.49,
-    "price_per_unit": null,
-    "price_per_100": 0.3548,
-    "standard_category": "Warzywa"
   },
   {
     "original_name": "Honey Roast Thin Ham",
@@ -8100,7 +7684,20 @@
   },
   {
     "original_name": "Tuna & Sweetcorn Deli Filler",
-    "generic_name": "sweetcorn deli filler",
+    "generic_name": "tuna sweetcorn deli filler",
+    "shop": "aldi",
+    "currency": "GBP",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": false,
+    "price_package": 1.45,
+    "price_per_unit": null,
+    "price_per_100": null,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
+    "original_name": "Chicken & Sweetcorn Deli Filler",
+    "generic_name": "chicken sweetcorn deli filler",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -8268,6 +7865,19 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
+    "original_name": "British Wafer Thin Smoked Ham Family Pack 40 Slices",
+    "generic_name": "wafer thin ham",
+    "shop": "aldi",
+    "currency": "GBP",
+    "package_size_value": 400.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 2.19,
+    "price_per_unit": null,
+    "price_per_100": 0.5475,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
     "original_name": "British Honey Cured Ham 7 Slices",
     "generic_name": "honey cured ham",
     "shop": "aldi",
@@ -8320,32 +7930,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Mini Pork & Pickle Pies 6 Pack",
-    "generic_name": "pork",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.89,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Mini Pork & Pickle Pies 6 Pack",
-    "generic_name": "pickle pies 6 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.89,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Fish Pie",
     "generic_name": "fish pie",
     "shop": "aldi",
@@ -8360,7 +7944,7 @@
   },
   {
     "original_name": "Cheese & Caramelised Onion Rolls 4 Pack",
-    "generic_name": "caramelised onion rolls 4 pack",
+    "generic_name": "cheese caramelised onion rolls 4 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 188.0,
@@ -8412,7 +7996,7 @@
   },
   {
     "original_name": "Tomato & Mascarpone Pasta Sauce",
-    "generic_name": "mascarpone pasta sauce",
+    "generic_name": "tomato mascarpone pasta sauce",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 350.0,
@@ -8425,7 +8009,7 @@
   },
   {
     "original_name": "Tomato & Basil Pasta Sauce",
-    "generic_name": "basil pasta sauce",
+    "generic_name": "tomato basil pasta sauce",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 350.0,
@@ -8503,20 +8087,7 @@
   },
   {
     "original_name": "Chocolate & Cream Luxurious Dessert",
-    "generic_name": "chocolate",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 190.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": null,
-    "price_per_100": 0.5211,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Chocolate & Cream Luxurious Dessert",
-    "generic_name": "cream luxurious dessert",
+    "generic_name": "chocolate cream luxurious dessert",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 190.0,
@@ -8529,7 +8100,7 @@
   },
   {
     "original_name": "Spinach & Pine Nut Pasta",
-    "generic_name": "pine nut pasta",
+    "generic_name": "spinach pine nut pasta",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -8684,21 +8255,8 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Onion & Garlic Pasta Sauce",
-    "generic_name": "onion",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 500.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 0.69,
-    "price_per_unit": null,
-    "price_per_100": 0.138,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Onion & Garlic Dip",
-    "generic_name": "garlic dip",
+    "generic_name": "onion garlic dip",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -8708,6 +8266,19 @@
     "price_per_unit": null,
     "price_per_100": null,
     "standard_category": "Warzywa"
+  },
+  {
+    "original_name": "Cheese & Chive Dip",
+    "generic_name": "cheese chive dip",
+    "shop": "aldi",
+    "currency": "GBP",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": false,
+    "price_package": 0.99,
+    "price_per_unit": null,
+    "price_per_100": null,
+    "standard_category": "Przyprawy, zioła i proszki"
   },
   {
     "original_name": "Garlic Aioli Dip",
@@ -8724,7 +8295,7 @@
   },
   {
     "original_name": "Onion & Sweet Potato Bhaji",
-    "generic_name": "sweet potato bhaji",
+    "generic_name": "onion sweet potato bhaji",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 270.0,
@@ -8814,19 +8385,6 @@
     "standard_category": "Warzywa"
   },
   {
-    "original_name": "British Cooked Ham 10 Slices",
-    "generic_name": "ham",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 115.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.75,
-    "price_per_unit": null,
-    "price_per_100": 0.6522,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "British Cooked Honey Ham 10 Slices",
     "generic_name": "honey ham",
     "shop": "aldi",
@@ -8867,20 +8425,7 @@
   },
   {
     "original_name": "Chorizo & Gouda Rollitos 8 Pack",
-    "generic_name": "chorizo",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.89,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Chorizo & Gouda Rollitos 8 Pack",
-    "generic_name": "gouda rollitos 8 pack",
+    "generic_name": "chorizo gouda rollitos 8 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -8893,7 +8438,7 @@
   },
   {
     "original_name": "Serrano & Gouda Rollitos 8 Pack",
-    "generic_name": "serrano",
+    "generic_name": "serrano gouda rollitos 8 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -8932,7 +8477,7 @@
   },
   {
     "original_name": "Chicken & Mushroom Slices 2 Pack",
-    "generic_name": "mushroom slices 2 pack",
+    "generic_name": "chicken mushroom slices 2 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -8984,7 +8529,7 @@
   },
   {
     "original_name": "Garlic & Herb Pizza Dip",
-    "generic_name": "herb pizza dip",
+    "generic_name": "garlic herb pizza dip",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 100.0,
@@ -9036,7 +8581,7 @@
   },
   {
     "original_name": "Chicken & Bacon Layered Salad",
-    "generic_name": "bacon layered salad",
+    "generic_name": "chicken bacon layered salad",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 380.0,
@@ -9230,19 +8775,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "British Butter Basted Roast Chicken Breast 4 Slices",
-    "generic_name": "butter basted roast chicken breast",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 120.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.19,
-    "price_per_unit": null,
-    "price_per_100": 1.825,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "100% British Stuffing Topped Roast Chicken 4 Slices",
     "generic_name": "stuffing topped roast chicken",
     "shop": "aldi",
@@ -9361,20 +8893,7 @@
   },
   {
     "original_name": "Beef Stew & Dumplings",
-    "generic_name": "beef stew",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.79,
-    "price_per_unit": null,
-    "price_per_100": 0.6975,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Beef Stew & Dumplings",
-    "generic_name": "dumplings",
+    "generic_name": "beef stew dumplings",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 400.0,
@@ -9387,7 +8906,7 @@
   },
   {
     "original_name": "Chicken Casserole & Dumplings",
-    "generic_name": "chicken casserole",
+    "generic_name": "chicken casserole dumplings",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 400.0,
@@ -9751,7 +9270,7 @@
   },
   {
     "original_name": "Liver & Bacon with Mash",
-    "generic_name": "liver",
+    "generic_name": "liver bacon with mash",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 400.0,
@@ -9760,58 +9279,6 @@
     "price_package": 2.79,
     "price_per_unit": null,
     "price_per_100": 0.6975,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Liver & Bacon with Mash",
-    "generic_name": "bacon with mash",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.79,
-    "price_per_unit": null,
-    "price_per_100": 0.6975,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Chicken Caesar Triple Wraps",
-    "generic_name": "chicken caesar triple wraps",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 292.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.89,
-    "price_per_unit": null,
-    "price_per_100": 0.9897,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Chicken Fajita Triple Wraps",
-    "generic_name": "chicken fajita triple wraps",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 292.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.89,
-    "price_per_unit": null,
-    "price_per_100": 0.9897,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Sweet Chilli Chicken Triple Wraps",
-    "generic_name": "sweet chilli chicken triple wraps",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 292.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.89,
-    "price_per_unit": null,
-    "price_per_100": 0.9897,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -9829,7 +9296,7 @@
   },
   {
     "original_name": "Tomato & Mozzarella Salad",
-    "generic_name": "mozzarella salad",
+    "generic_name": "tomato mozzarella salad",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 200.0,
@@ -9842,20 +9309,7 @@
   },
   {
     "original_name": "Feta & Grain Salad",
-    "generic_name": "feta",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.29,
-    "price_per_unit": null,
-    "price_per_100": 1.145,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Feta & Grain Salad",
-    "generic_name": "grain salad",
+    "generic_name": "feta grain salad",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 200.0,
@@ -9947,19 +9401,6 @@
   {
     "original_name": "Toffee Fat Free Yogurt",
     "generic_name": "toffee yogurt",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 160.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.39,
-    "price_per_unit": null,
-    "price_per_100": 0.2437,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Banana & Custard Fat Free Yogurt",
-    "generic_name": "custard yogurt",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 160.0,
@@ -10271,20 +9712,7 @@
   },
   {
     "original_name": "Peach & Passion Fruit Protein Yogurt",
-    "generic_name": "peach",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.75,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Peach & Passion Fruit Protein Yogurt",
-    "generic_name": "passion fruit protein yogurt",
+    "generic_name": "peach passion fruit protein yogurt",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -10336,7 +9764,7 @@
   },
   {
     "original_name": "Coconut & Vanilla Greek Style Yogurt 4 Pack",
-    "generic_name": "vanilla greek style yogurt 4 pack",
+    "generic_name": "coconut vanilla greek style yogurt 4 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 460.0,
@@ -10427,20 +9855,7 @@
   },
   {
     "original_name": "Reduced Fat Soft Cheese Garlic & Herbs",
-    "generic_name": "soft cheese garlic",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.95,
-    "price_per_unit": null,
-    "price_per_100": 0.475,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Reduced Fat Soft Cheese Garlic & Herbs",
-    "generic_name": "herbs",
+    "generic_name": "soft cheese garlic herbs",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 200.0,
@@ -10609,20 +10024,7 @@
   },
   {
     "original_name": "British Double Gloucester Cheese with Onion & Chive 5 Slices",
-    "generic_name": "double gloucester cheese with onion",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 140.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.75,
-    "price_per_unit": null,
-    "price_per_100": 1.25,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "British Double Gloucester Cheese with Onion & Chive 5 Slices",
-    "generic_name": "chive",
+    "generic_name": "double gloucester cheese with onion chive",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 140.0,
@@ -10661,20 +10063,7 @@
   },
   {
     "original_name": "British Wensleydale & Cranberry Cheese",
-    "generic_name": "wensleydale",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": 0.995,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "British Wensleydale & Cranberry Cheese",
-    "generic_name": "cranberry cheese",
+    "generic_name": "wensleydale cranberry cheese",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 200.0,
@@ -10764,21 +10153,21 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Raspberry & Pistachio Summer Chouxnuts 2 Pack",
-    "generic_name": "raspberry",
+    "original_name": "Raspberry & Cream Luxury Yogurt",
+    "generic_name": "raspberry cream luxury yogurt",
     "shop": "aldi",
     "currency": "GBP",
-    "package_size_value": 110.0,
-    "unit": "g",
+    "package_size_value": null,
+    "unit": null,
     "sold_by_weight": false,
-    "price_package": 2.99,
+    "price_package": 0.59,
     "price_per_unit": null,
-    "price_per_100": 2.7182,
-    "standard_category": "Owoce"
+    "price_per_100": null,
+    "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Raspberry & Cream Luxury Yogurt",
-    "generic_name": "cream luxury yogurt",
+    "original_name": "Strawberry & Cream Luxury Yogurt",
+    "generic_name": "strawberry cream luxury yogurt",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -10791,7 +10180,7 @@
   },
   {
     "original_name": "Mango & Passion Fruit Luxury Yogurt",
-    "generic_name": "passion fruit luxury yogurt",
+    "generic_name": "mango passion fruit luxury yogurt",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -11194,7 +10583,7 @@
   },
   {
     "original_name": "Chicken & Bacon Single Slices",
-    "generic_name": "bacon single slices",
+    "generic_name": "chicken bacon single slices",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 150.0,
@@ -11311,7 +10700,7 @@
   },
   {
     "original_name": "Bramley Apple Family Crumble",
-    "generic_name": "bramley apple family crumble",
+    "generic_name": "apple family crumble",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -11333,32 +10722,6 @@
     "price_package": 2.99,
     "price_per_unit": null,
     "price_per_100": 0.598,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Apple Pies",
-    "generic_name": "apple pies",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 2.99,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Cherry Pies",
-    "generic_name": "cherry pies",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 2.99,
-    "price_per_unit": null,
-    "price_per_100": null,
     "standard_category": "Owoce"
   },
   {
@@ -11440,21 +10803,8 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Lemon & Lime Flavoured Still Water 4 Pack",
-    "generic_name": "lemon",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 500.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 1.59,
-    "price_per_unit": null,
-    "price_per_100": 0.318,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Lemon & Herb Olives",
-    "generic_name": "herb olives",
+    "generic_name": "lemon herb olives",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 140.0,
@@ -11466,21 +10816,8 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Chilli & Garlic Fusions Tuna",
-    "generic_name": "chilli",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 80.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.89,
-    "price_per_unit": null,
-    "price_per_100": 1.1125,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Chilli & Garlic Olives",
-    "generic_name": "garlic olives",
+    "generic_name": "chilli garlic olives",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -11584,7 +10921,7 @@
   },
   {
     "original_name": "Chicken & Bacon Tortelloni",
-    "generic_name": "bacon tortelloni",
+    "generic_name": "chicken bacon tortelloni",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 300.0,
@@ -11792,7 +11129,7 @@
   },
   {
     "original_name": "Chicken & Duck XL Selection Sushi",
-    "generic_name": "duck selection sushi",
+    "generic_name": "chicken duck selection sushi",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 284.0,
@@ -11961,7 +11298,7 @@
   },
   {
     "original_name": "Ham & Mushroom Tagliatelle",
-    "generic_name": "mushroom tagliatelle",
+    "generic_name": "ham mushroom tagliatelle",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 400.0,
@@ -12013,7 +11350,7 @@
   },
   {
     "original_name": "Chicken & Bacon Pasta Bake",
-    "generic_name": "bacon pasta bake",
+    "generic_name": "chicken bacon pasta bake",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 400.0,
@@ -12026,7 +11363,7 @@
   },
   {
     "original_name": "Tomato & Mozzarella Pasta Bake",
-    "generic_name": "mozzarella pasta bake",
+    "generic_name": "tomato mozzarella pasta bake",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 400.0,
@@ -12039,7 +11376,7 @@
   },
   {
     "original_name": "Spinach & Ricotta Cannelloni",
-    "generic_name": "ricotta cannelloni",
+    "generic_name": "spinach ricotta cannelloni",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 400.0,
@@ -12078,20 +11415,7 @@
   },
   {
     "original_name": "Grated Cheddar & Mozzarella Cheese Mix",
-    "generic_name": "cheddar",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 250.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": 0.796,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Grated Cheddar & Mozzarella Cheese Mix",
-    "generic_name": "mozzarella cheese mix",
+    "generic_name": "cheddar mozzarella cheese mix",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 250.0,
@@ -12104,7 +11428,7 @@
   },
   {
     "original_name": "Spinach & Ricotta Mezzaluna",
-    "generic_name": "ricotta mezzaluna",
+    "generic_name": "spinach ricotta mezzaluna",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 400.0,
@@ -12129,21 +11453,8 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
-    "original_name": "Ham & Cheddar Cheese Wrap",
-    "generic_name": "cheddar cheese wrap",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 1,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 2.29,
-    "price_per_unit": 2.29,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Tomato & Pesto Pasta Bake Family Pack",
-    "generic_name": "pesto pasta bake",
+    "generic_name": "tomato pesto pasta bake",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 1200.0,
@@ -12153,45 +11464,6 @@
     "price_per_unit": null,
     "price_per_100": 0.4158,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Southern Fried Chicken Wrap",
-    "generic_name": "southern fried chicken wrap",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 1,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 2.29,
-    "price_per_unit": 2.29,
-    "price_per_100": null,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Falafel & Houmous Wrap",
-    "generic_name": "falafel",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 1,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 2.29,
-    "price_per_unit": 2.29,
-    "price_per_100": null,
-    "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
-    "original_name": "Falafel & Houmous Wrap",
-    "generic_name": "houmous wrap",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 1,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 2.29,
-    "price_per_unit": 2.29,
-    "price_per_100": null,
-    "standard_category": "Produkty zbożowe i mąki"
   },
   {
     "original_name": "Coarse Farmhouse Pâté with Mushroom",
@@ -12207,32 +11479,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Chicken & Bacon Caesar Elevated Wrap",
-    "generic_name": "bacon caesar elevated wrap",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 210.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.29,
-    "price_per_unit": null,
-    "price_per_100": 1.0905,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Hoisin Duck Elevated Wrap",
-    "generic_name": "hoisin duck elevated wrap",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 210.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.29,
-    "price_per_unit": null,
-    "price_per_100": 1.0905,
-    "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
     "original_name": "Steak Family Pie",
     "generic_name": "family pie",
     "shop": "aldi",
@@ -12243,19 +11489,6 @@
     "price_package": 2.99,
     "price_per_unit": null,
     "price_per_100": 0.598,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Salt & Pepper Chicken with Mayo Wrap",
-    "generic_name": "salt pepper chicken with mayo wrap",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 210.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.29,
-    "price_per_unit": null,
-    "price_per_100": 1.0905,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -12338,7 +11571,7 @@
   },
   {
     "original_name": "Raspberry & Passion Fruit Layered Yogurt",
-    "generic_name": "passion fruit layered yogurt",
+    "generic_name": "raspberry passion fruit layered yogurt",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -12351,7 +11584,7 @@
   },
   {
     "original_name": "Mango & Vanilla layered Yogurt",
-    "generic_name": "vanilla layered yogurt",
+    "generic_name": "mango vanilla layered yogurt",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -12364,20 +11597,7 @@
   },
   {
     "original_name": "Blueberry & Blackcurrant Layered Yogurt",
-    "generic_name": "blueberry",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.69,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Blueberry & Blackcurrant Layered Yogurt",
-    "generic_name": "blackcurrant layered yogurt",
+    "generic_name": "blueberry blackcurrant layered yogurt",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -12390,7 +11610,7 @@
   },
   {
     "original_name": "Chicken & Pancetta Bake",
-    "generic_name": "pancetta bake",
+    "generic_name": "chicken pancetta bake",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 400.0,
@@ -12416,7 +11636,7 @@
   },
   {
     "original_name": "Mozzarella & Slow Roasted Tomato Wood Fired Sourdough Pizza",
-    "generic_name": "slow roasted tomato wood fired sourdough pizza",
+    "generic_name": "mozzarella slow roasted tomato wood fired sourdough pizza",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 210.0,
@@ -12481,7 +11701,7 @@
   },
   {
     "original_name": "Cheese & Onion Slices 2 Pack",
-    "generic_name": "onion slices 2 pack",
+    "generic_name": "cheese onion slices 2 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -12520,7 +11740,7 @@
   },
   {
     "original_name": "Cheese & Bacon Crispbakes 2 Pack",
-    "generic_name": "bacon crispbakes 2 pack",
+    "generic_name": "cheese bacon crispbakes 2 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 227.0,
@@ -12572,7 +11792,7 @@
   },
   {
     "original_name": "Cheese & Onion Crispbakes 2 Pack",
-    "generic_name": "onion crispbakes 2 pack",
+    "generic_name": "cheese onion crispbakes 2 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 227.0,
@@ -12636,32 +11856,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Apricot Flavour Thick & Creamy Yogurt",
-    "generic_name": "apricot flavour thick",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.49,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Apricot Flavour Thick & Creamy Yogurt",
-    "generic_name": "creamy yogurt",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.49,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Blossom Honey Roasted Wiltshire Cured Ham 6 Slices",
     "generic_name": "blossom honey roasted wiltshire cured ham",
     "shop": "aldi",
@@ -12673,45 +11867,6 @@
     "price_per_unit": null,
     "price_per_100": null,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Peach & Passionfruit Flavour Thick & Creamy Yogurt",
-    "generic_name": "peach & passionfruit flavour thick & creamy yogurt",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.49,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Raspberry Flavour Thick & Creamy Yogurt",
-    "generic_name": "raspberry flavour thick",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.49,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Strawberry Flavour Thick & Creamy Yogurt",
-    "generic_name": "strawberry flavour thick",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.49,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Protein Meat Feast Pizza",
@@ -12728,7 +11883,7 @@
   },
   {
     "original_name": "Chicken & Bacon Protein Poppers 5 Pack",
-    "generic_name": "bacon protein poppers 5 pack",
+    "generic_name": "chicken bacon protein poppers 5 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 150.0,
@@ -12819,7 +11974,7 @@
   },
   {
     "original_name": "Lemon & Coriander Topped Houmous",
-    "generic_name": "coriander topped houmous",
+    "generic_name": "lemon coriander topped houmous",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 170.0,
@@ -13027,7 +12182,7 @@
   },
   {
     "original_name": "Premium Mango & Passionfruit Trifles Twinpack",
-    "generic_name": "passionfruit trifles twinpack",
+    "generic_name": "mango passionfruit trifles twinpack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -13040,7 +12195,7 @@
   },
   {
     "original_name": "Chocolate & Hazelnut Tiramisu 2 Pack",
-    "generic_name": "hazelnut tiramisu 2 pack",
+    "generic_name": "chocolate hazelnut tiramisu 2 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -13196,7 +12351,7 @@
   },
   {
     "original_name": "Raspberry & Pistachio Summer Chouxnuts 2 Pack",
-    "generic_name": "pistachio summer chouxnuts 2 pack",
+    "generic_name": "raspberry pistachio summer chouxnuts 2 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 110.0,
@@ -13248,7 +12403,20 @@
   },
   {
     "original_name": "Garlic & Cheese Doughball Swirls",
-    "generic_name": "cheese doughball swirls",
+    "generic_name": "garlic cheese doughball swirls",
+    "shop": "aldi",
+    "currency": "GBP",
+    "package_size_value": 133.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.49,
+    "price_per_unit": null,
+    "price_per_100": 1.1203,
+    "standard_category": "Warzywa"
+  },
+  {
+    "original_name": "Tomato & Cheese Doughball Swirls",
+    "generic_name": "tomato cheese doughball swirls",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 133.0,
@@ -13325,21 +12493,8 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Bacon & Cheese Wraps 2 Pack",
-    "generic_name": "bacon",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 204.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.65,
-    "price_per_unit": null,
-    "price_per_100": 0.8088,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Bacon & Garlic Cocktail Sausage",
-    "generic_name": "garlic cocktail sausage",
+    "generic_name": "bacon garlic cocktail sausage",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -13365,7 +12520,7 @@
   },
   {
     "original_name": "Spinach & Pepper Egg Bites",
-    "generic_name": "pepper egg bites",
+    "generic_name": "spinach pepper egg bites",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -13378,7 +12533,7 @@
   },
   {
     "original_name": "Cheese & Bacon Egg Bites",
-    "generic_name": "bacon egg bites",
+    "generic_name": "cheese bacon egg bites",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -13391,7 +12546,7 @@
   },
   {
     "original_name": "Chicken & Leek Egg Bites",
-    "generic_name": "leek egg bites",
+    "generic_name": "chicken leek egg bites",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -13404,7 +12559,7 @@
   },
   {
     "original_name": "Spinach & Feta Parcels",
-    "generic_name": "feta parcels",
+    "generic_name": "spinach feta parcels",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -13417,7 +12572,7 @@
   },
   {
     "original_name": "Tomato & Mozzarella Parcels",
-    "generic_name": "mozzarella parcels",
+    "generic_name": "tomato mozzarella parcels",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -13482,20 +12637,7 @@
   },
   {
     "original_name": "Brussel & Shallot Pâté",
-    "generic_name": "brussel",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.49,
-    "price_per_unit": null,
-    "price_per_100": 0.9933,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Brussel & Shallot Pâté",
-    "generic_name": "shallot pâté",
+    "generic_name": "brussel shallot pâté",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 150.0,
@@ -13508,20 +12650,7 @@
   },
   {
     "original_name": "Duck & Orange Pâté",
-    "generic_name": "duck",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.49,
-    "price_per_unit": null,
-    "price_per_100": 0.9933,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Duck & Orange Pâté",
-    "generic_name": "orange pâté",
+    "generic_name": "duck orange pâté",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 150.0,
@@ -13599,7 +12728,7 @@
   },
   {
     "original_name": "Cheese & Onion Quiche",
-    "generic_name": "onion quiche",
+    "generic_name": "cheese onion quiche",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -13755,7 +12884,7 @@
   },
   {
     "original_name": "Garlic & Herb Coconut Oil Based Vegan Cheese Soft Spread",
-    "generic_name": "herb coconut oil based vegan cheese soft spread",
+    "generic_name": "garlic herb coconut oil based vegan cheese soft spread",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 170.0,
@@ -13806,19 +12935,6 @@
     "standard_category": "Przyprawy, zioła i proszki"
   },
   {
-    "original_name": "Katsu Elevated Wrap",
-    "generic_name": "katsu elevated wrap",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 210.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.29,
-    "price_per_unit": null,
-    "price_per_100": 1.0905,
-    "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
     "original_name": "Caramel Layered Yogurt",
     "generic_name": "caramel layered yogurt",
     "shop": "aldi",
@@ -13843,32 +12959,6 @@
     "price_per_unit": null,
     "price_per_100": 0.318,
     "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Herbs Sliced Cooked Chicken",
-    "generic_name": "herbs chicken",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 2.09,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "BBQ Chicken & Bacon Stonebaked Sourdough Pizza",
-    "generic_name": "bbq chicken",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 366.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.49,
-    "price_per_unit": null,
-    "price_per_100": 0.6803,
-    "standard_category": "Mięso, drób i ryby"
   },
   {
     "original_name": "Fish Snacking Sushi Pack",
@@ -13947,19 +13037,6 @@
     "price_per_unit": null,
     "price_per_100": null,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Butter Chicken",
-    "generic_name": "butter chicken",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 460.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.99,
-    "price_per_unit": null,
-    "price_per_100": 0.8674,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "King Prawn Bhuna",
@@ -14184,20 +13261,7 @@
   },
   {
     "original_name": "Protein BBQ Pulled Pork & Rice",
-    "generic_name": "protein bbq pulled pork",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 380.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.89,
-    "price_per_unit": null,
-    "price_per_100": 0.7605,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Protein BBQ Pulled Pork & Rice",
-    "generic_name": "rice",
+    "generic_name": "protein bbq pulled pork rice",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 380.0,
@@ -14639,7 +13703,7 @@
   },
   {
     "original_name": "Garlic & Cheese Pizza Bread",
-    "generic_name": "cheese pizza bread",
+    "generic_name": "garlic cheese pizza bread",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 236.0,
@@ -14779,19 +13843,6 @@
     "price_per_unit": null,
     "price_per_100": null,
     "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Garlic Bread Slices 10 Pack",
-    "generic_name": "garlic bread slices 10 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 260.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.05,
-    "price_per_unit": null,
-    "price_per_100": 0.4038,
-    "standard_category": "Warzywa"
   },
   {
     "original_name": "Fish Fingers 10 Pack",
@@ -15393,20 +14444,7 @@
   },
   {
     "original_name": "Prawn & White Wine Salmon Wellington",
-    "generic_name": "prawn",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 700.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.99,
-    "price_per_unit": null,
-    "price_per_100": 0.7129,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Prawn & White Wine Salmon Wellington",
-    "generic_name": "white wine salmon wellington",
+    "generic_name": "prawn white wine salmon wellington",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 700.0,
@@ -15432,7 +14470,7 @@
   },
   {
     "original_name": "Lemon & Herb Tempura Basa Fillets 2 Pack",
-    "generic_name": "herb tempura basa 2 pack",
+    "generic_name": "lemon herb tempura basa 2 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 310.0,
@@ -15444,21 +14482,8 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Salt & Pepper Fries",
-    "generic_name": "salt",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 799.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.95,
-    "price_per_unit": null,
-    "price_per_100": 0.2441,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Salt & Pepper Dusted Basa Fillets 2 Pack",
-    "generic_name": "pepper dusted basa 2 pack",
+    "generic_name": "salt pepper dusted basa 2 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 310.0,
@@ -15471,7 +14496,7 @@
   },
   {
     "original_name": "Garlic & Herb Basa Fillets",
-    "generic_name": "herb basa",
+    "generic_name": "garlic herb basa",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 310.0,
@@ -15522,21 +14547,8 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Banoffee Pie Meringue Dessert",
-    "generic_name": "banoffee pie meringue dessert",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.19,
-    "price_per_unit": null,
-    "price_per_100": 0.438,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Chicken & Mango Stonebaked Flatbread",
-    "generic_name": "mango stonebaked flatbread",
+    "generic_name": "chicken mango stonebaked flatbread",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 390.0,
@@ -15549,7 +14561,7 @@
   },
   {
     "original_name": "Mozzarella & Basil Stonebaked Flatbread",
-    "generic_name": "basil stonebaked flatbread",
+    "generic_name": "mozzarella basil stonebaked flatbread",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 350.0,
@@ -15637,45 +14649,6 @@
     "price_per_unit": null,
     "price_per_100": null,
     "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Chicken & Vegetable Pies 4 Pack",
-    "generic_name": "vegetable pies 4 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 569.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": 0.3497,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Steak & Gravy Pies 4 Pack",
-    "generic_name": "& gravy pies 4 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 569.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": 0.3497,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Chicken & Bacon Pies 4 Pack",
-    "generic_name": "bacon pies 4 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 569.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": 0.3497,
-    "standard_category": "Mięso, drób i ryby"
   },
   {
     "original_name": "Buttermilk Fish Burgers",
@@ -15900,7 +14873,7 @@
   },
   {
     "original_name": "Cheese & Tomato Pizza Subs 2 Pack",
-    "generic_name": "tomato pizza subs 2 pack",
+    "generic_name": "cheese tomato pizza subs 2 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 250.0,
@@ -16134,7 +15107,7 @@
   },
   {
     "original_name": "Onion & Rosemary Sausages 6 Pack",
-    "generic_name": "rosemary sausages 6 pack",
+    "generic_name": "onion rosemary sausages 6 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -16173,6 +15146,19 @@
   },
   {
     "original_name": "BBQ Chicken & Bacon Stonebaked Sourdough Pizza",
+    "generic_name": "bbq chicken",
+    "shop": "aldi",
+    "currency": "GBP",
+    "package_size_value": 366.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 2.49,
+    "price_per_unit": null,
+    "price_per_100": 0.6803,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
+    "original_name": "BBQ Chicken & Bacon Stonebaked Sourdough Pizza",
     "generic_name": "bacon stonebaked sourdough pizza",
     "shop": "aldi",
     "currency": "GBP",
@@ -16199,7 +15185,7 @@
   },
   {
     "original_name": "Cheese & Onion Quarter Pounders 4 Pack",
-    "generic_name": "onion quarter pounders 4 pack",
+    "generic_name": "cheese onion quarter pounders 4 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 454.0,
@@ -16303,7 +15289,7 @@
   },
   {
     "original_name": "Garlic & Herb Argentinian Prawns",
-    "generic_name": "herb argentinian prawns",
+    "generic_name": "garlic herb argentinian prawns",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 250.0,
@@ -16355,7 +15341,7 @@
   },
   {
     "original_name": "Salt & Vinegar-No Fish Fillets",
-    "generic_name": "vinegar-no fish",
+    "generic_name": "salt vinegar-no fish",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 224.0,
@@ -16458,19 +15444,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Bacon & Cheese Wraps 2 Pack",
-    "generic_name": "cheese wraps 2 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 204.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.65,
-    "price_per_unit": null,
-    "price_per_100": 0.8088,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Chicken Strips 4 Pack with BBQ Dip",
     "generic_name": "chicken 4 pack with bbq dip",
     "shop": "aldi",
@@ -16484,21 +15457,8 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "All Day Breakfast Wraps 2 Pack",
-    "generic_name": "all day breakfast wraps 2 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 240.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.65,
-    "price_per_unit": null,
-    "price_per_100": 0.6875,
-    "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
     "original_name": "Garlic & Herb Parmentier Potatoes with Salted Parsley Butter",
-    "generic_name": "herb parmentier potatoes with salted parsley butter",
+    "generic_name": "garlic herb parmentier potatoes with salted parsley butter",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 500.0,
@@ -16524,7 +15484,7 @@
   },
   {
     "original_name": "Cheese & Tomato Pasta Bake",
-    "generic_name": "tomato pasta bake",
+    "generic_name": "cheese tomato pasta bake",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 399.0,
@@ -16537,7 +15497,7 @@
   },
   {
     "original_name": "Salt & Pepper Fries",
-    "generic_name": "pepper fries",
+    "generic_name": "salt pepper fries",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 799.0,
@@ -16653,19 +15613,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Butter Basted Chicken Breast Joint",
-    "generic_name": "butter basted chicken breast",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 560.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.49,
-    "price_per_unit": null,
-    "price_per_100": 0.4446,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Ultimate No Beef Burgers 2 Pack",
     "generic_name": "ultimate no beef burgers 2 pack",
     "shop": "aldi",
@@ -16689,32 +15636,6 @@
     "price_package": 2.49,
     "price_per_unit": null,
     "price_per_100": 0.9222,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Chicken, Bacon & Leek Pies 2 Pack",
-    "generic_name": "leek pies 2 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.59,
-    "price_per_unit": null,
-    "price_per_100": 0.6475,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Steak & Ale Pies 2 Pack",
-    "generic_name": "& ale pies 2 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 400.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.59,
-    "price_per_unit": null,
-    "price_per_100": 0.6475,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -16913,21 +15834,8 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Pesto & Mozzarella Flatbread",
-    "generic_name": "pesto",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 245.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": 0.8122,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Pesto & Cheddar Sausages 6 Pack",
-    "generic_name": "cheddar sausages 6 pack",
+    "generic_name": "pesto cheddar sausages 6 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -17001,32 +15909,6 @@
     "price_package": 5.49,
     "price_per_unit": null,
     "price_per_100": 0.5942,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Protein Salt & Chilli Ready Cooked Chicken Skewers",
-    "generic_name": "protein salt chilli ready chicken skewers",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 340.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.99,
-    "price_per_unit": null,
-    "price_per_100": 0.8794,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Protein Teriyaki Ready Cooked Chicken Skewers",
-    "generic_name": "protein teriyaki ready chicken skewers",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 340.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.99,
-    "price_per_unit": null,
-    "price_per_100": 0.8794,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -17122,7 +16004,7 @@
   },
   {
     "original_name": "Cheese & Onion Bakes 2 Pack",
-    "generic_name": "onion bakes 2 pack",
+    "generic_name": "cheese onion bakes 2 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 288.0,
@@ -17148,7 +16030,7 @@
   },
   {
     "original_name": "Garlic & Herb Breaded Prawns 12 Pack*",
-    "generic_name": "herb breaded prawns 12 pack*",
+    "generic_name": "garlic herb breaded prawns 12 pack*",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 132.0,
@@ -17174,7 +16056,7 @@
   },
   {
     "original_name": "Salt & Pepper Breaded Prawns 12 Pack*",
-    "generic_name": "pepper breaded prawns 12 pack*",
+    "generic_name": "salt pepper breaded prawns 12 pack*",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 132.0,
@@ -17187,7 +16069,7 @@
   },
   {
     "original_name": "Cheese & Onion Crispbakes 4 Pack",
-    "generic_name": "onion crispbakes 4 pack",
+    "generic_name": "cheese onion crispbakes 4 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -17213,7 +16095,7 @@
   },
   {
     "original_name": "Pesto & Mozzarella Bakes 2 Pack",
-    "generic_name": "mozzarella bakes 2 pack",
+    "generic_name": "pesto mozzarella bakes 2 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -17252,7 +16134,7 @@
   },
   {
     "original_name": "Salt & Pepper Grill Fries",
-    "generic_name": "pepper grill fries",
+    "generic_name": "salt pepper grill fries",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 751.0,
@@ -17317,20 +16199,7 @@
   },
   {
     "original_name": "Stuffed Crust Loaded Pepperoni Pizza With Cheese & Pepperoni",
-    "generic_name": "stuffed crust loaded pepperoni pizza with cheese",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 472.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.49,
-    "price_per_unit": null,
-    "price_per_100": 0.5275,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Stuffed Crust Loaded Pepperoni Pizza With Cheese & Pepperoni",
-    "generic_name": "pepperoni",
+    "generic_name": "stuffed crust loaded pepperoni pizza with cheese pepperoni",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 472.0,
@@ -17446,32 +16315,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "BBQ Cooked Chicken Wings",
-    "generic_name": "bbq chicken wings",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 750.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.79,
-    "price_per_unit": null,
-    "price_per_100": 0.372,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Hot & Spicy Cooked Chicken Wings",
-    "generic_name": "hot spicy chicken wings",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 750.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.79,
-    "price_per_unit": null,
-    "price_per_100": 0.372,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
     "original_name": "Neopolitan Whippy Cones 4 Pack",
     "generic_name": "neopolitan whippy cones 4 pack",
     "shop": "aldi",
@@ -17486,7 +16329,7 @@
   },
   {
     "original_name": "Mango & White Chocolate Super Soft Ice Cones",
-    "generic_name": "white chocolate super soft ice cones",
+    "generic_name": "mango white chocolate super soft ice cones",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -17498,21 +16341,8 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Cookies & Cream Snackpack",
-    "generic_name": "cookies",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 220.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 1.49,
-    "price_per_unit": null,
-    "price_per_100": 0.6773,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Cookies & Chocolate Whippy Cones 4 Pack",
-    "generic_name": "chocolate whippy cones 4 pack",
+    "generic_name": "cookies chocolate whippy cones 4 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -18097,20 +16927,7 @@
   },
   {
     "original_name": "Twisty Pop lollies Strawberry & Vanilla",
-    "generic_name": "twisty pop lollies strawberry",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 2.29,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Twisty Pop lollies Strawberry & Vanilla",
-    "generic_name": "vanilla",
+    "generic_name": "twisty pop lollies strawberry vanilla",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -18250,45 +17067,6 @@
     "price_per_unit": null,
     "price_per_100": null,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Cheese & Tomato Wrap",
-    "generic_name": "tomato wrap",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 210.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.65,
-    "price_per_unit": null,
-    "price_per_100": 0.7857,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Brie & Cranberry Wrap",
-    "generic_name": "brie",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 204.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.65,
-    "price_per_unit": null,
-    "price_per_100": 0.8088,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Brie & Cranberry Wrap",
-    "generic_name": "cranberry wrap",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 204.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.65,
-    "price_per_unit": null,
-    "price_per_100": 0.8088,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Thai Green Curry Protein Pot",
@@ -18538,19 +17316,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Butter Chicken Rice Meal",
-    "generic_name": "butter chicken rice meal",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 701.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.69,
-    "price_per_unit": null,
-    "price_per_100": 0.3837,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Oriental Noodle Meal",
     "generic_name": "oriental noodle meal",
     "shop": "aldi",
@@ -18565,7 +17330,7 @@
   },
   {
     "original_name": "Chicken & Chorizo Paella Rice Meal",
-    "generic_name": "chorizo paella rice meal",
+    "generic_name": "chicken chorizo paella rice meal",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 701.0,
@@ -18851,7 +17616,7 @@
   },
   {
     "original_name": "Garlic & Coriander Naan Breads",
-    "generic_name": "coriander naan breads",
+    "generic_name": "garlic coriander naan breads",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 2,
@@ -18885,19 +17650,6 @@
     "sold_by_weight": false,
     "price_package": 1.59,
     "price_per_unit": 0.16,
-    "price_per_100": null,
-    "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
-    "original_name": "Mini White Tortilla Wraps",
-    "generic_name": "white tortilla wraps",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 8,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 0.79,
-    "price_per_unit": 0.1,
     "price_per_100": null,
     "standard_category": "Produkty zbożowe i mąki"
   },
@@ -19041,19 +17793,6 @@
     "sold_by_weight": false,
     "price_package": 1.19,
     "price_per_unit": 0.2,
-    "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Bramley Apple Pies",
-    "generic_name": "bramley apple pies",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 6,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 1.25,
-    "price_per_unit": 0.21,
     "price_per_100": null,
     "standard_category": "Owoce"
   },
@@ -19227,19 +17966,6 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
-    "original_name": "Tortilla Protein Wrap 6 Pack",
-    "generic_name": "tortilla protein wrap 6 pack",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 6,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": 0.17,
-    "price_per_100": null,
-    "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
     "original_name": "Protein Sourdough",
     "generic_name": "protein sourdough",
     "shop": "aldi",
@@ -19318,19 +18044,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Both In One Tortilla Wraps",
-    "generic_name": "both in one tortilla wraps",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 8,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": 0.12,
-    "price_per_100": null,
-    "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
     "original_name": "Medium Sliced White Bread",
     "generic_name": "white bread",
     "shop": "aldi",
@@ -19354,19 +18067,6 @@
     "price_package": 0.55,
     "price_per_unit": null,
     "price_per_100": 0.0688,
-    "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
-    "original_name": "Seeded Tortilla Wraps",
-    "generic_name": "seeded tortilla wraps",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 8,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": 0.12,
-    "price_per_100": null,
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
@@ -19475,7 +18175,7 @@
   },
   {
     "original_name": "Strawberry & Clotted Cream Flavour Swiss Roll",
-    "generic_name": "clotted cream flavour swiss roll",
+    "generic_name": "strawberry clotted cream flavour swiss roll",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 275.0,
@@ -19605,7 +18305,7 @@
   },
   {
     "original_name": "Smoked Garlic & Parsley Flatbreads",
-    "generic_name": "parsley flatbreads",
+    "generic_name": "garlic parsley flatbreads",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 2,
@@ -19683,7 +18383,7 @@
   },
   {
     "original_name": "Pesto & Mozzarella Flatbread",
-    "generic_name": "mozzarella flatbread",
+    "generic_name": "pesto mozzarella flatbread",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 245.0,
@@ -19696,7 +18396,7 @@
   },
   {
     "original_name": "Cookies & Cream Style Cake Pops",
-    "generic_name": "cream style cake pops",
+    "generic_name": "cookies cream style cake pops",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 4,
@@ -19722,20 +18422,7 @@
   },
   {
     "original_name": "Cinnamon & Raisin Bagels 5 Pack",
-    "generic_name": "cinnamon",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 5,
-    "unit": "pcs",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": 0.2,
-    "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Cinnamon & Raisin Bagels 5 Pack",
-    "generic_name": "raisin bagels 5 pack",
+    "generic_name": "cinnamon raisin bagels 5 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 5,
@@ -20215,21 +18902,8 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
-    "original_name": "Fruit & Nut Mix",
-    "generic_name": "fruit",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.59,
-    "price_per_unit": null,
-    "price_per_100": 0.295,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Fruit & Fibre Cereal",
-    "generic_name": "fibre cereal",
+    "generic_name": "fruit fibre cereal",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -20515,7 +19189,7 @@
   },
   {
     "original_name": "Fruit & Nut Mix",
-    "generic_name": "nut mix",
+    "generic_name": "fruit nut mix",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 200.0,
@@ -20671,7 +19345,7 @@
   },
   {
     "original_name": "Bramley Apple Sauce",
-    "generic_name": "bramley apple sauce",
+    "generic_name": "apple sauce",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -20814,20 +19488,7 @@
   },
   {
     "original_name": "Sage & Onion Stuffing Mix",
-    "generic_name": "sage",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.45,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Sage & Onion Stuffing Mix",
-    "generic_name": "onion stuffing mix",
+    "generic_name": "sage onion stuffing mix",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -21464,7 +20125,7 @@
   },
   {
     "original_name": "Salt & Vinegar Crunchy Sticks 24 Pack",
-    "generic_name": "vinegar crunchy sticks 24 pack",
+    "generic_name": "salt vinegar crunchy sticks 24 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -21474,19 +20135,6 @@
     "price_per_unit": null,
     "price_per_100": null,
     "standard_category": "Tłuszcze, oleje i sosy"
-  },
-  {
-    "original_name": "Custard Creams",
-    "generic_name": "custard creams",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.45,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
   },
   {
     "original_name": "Easy Cook Long Grain Rice",
@@ -21568,20 +20216,7 @@
   },
   {
     "original_name": "Roasted & Salted Pistachios",
-    "generic_name": "roasted",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 200.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": 0.995,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Roasted & Salted Pistachios",
-    "generic_name": "salted pistachios",
+    "generic_name": "roasted salted pistachios",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 200.0,
@@ -21828,20 +20463,7 @@
   },
   {
     "original_name": "Mega Cookies & Cream",
-    "generic_name": "mega cookies",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.59,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Mega Cookies & Cream",
-    "generic_name": "cream",
+    "generic_name": "mega cookies cream",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -22062,7 +20684,7 @@
   },
   {
     "original_name": "Chilli & Garlic Fusions Tuna",
-    "generic_name": "garlic fusions tuna",
+    "generic_name": "chilli garlic fusions tuna",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 80.0,
@@ -22075,7 +20697,7 @@
   },
   {
     "original_name": "Lemon & Thyme Fusions Tuna",
-    "generic_name": "thyme fusions tuna",
+    "generic_name": "lemon thyme fusions tuna",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 80.0,
@@ -22088,20 +20710,7 @@
   },
   {
     "original_name": "Soy & Ginger Fusions Tuna",
-    "generic_name": "soy",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 80.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.89,
-    "price_per_unit": null,
-    "price_per_100": 1.1125,
-    "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Soy & Ginger Fusions Tuna",
-    "generic_name": "ginger fusions tuna",
+    "generic_name": "soy ginger fusions tuna",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 80.0,
@@ -22179,7 +20788,7 @@
   },
   {
     "original_name": "Tomato & Olive Stir Through Sauce",
-    "generic_name": "olive stir through sauce",
+    "generic_name": "tomato olive stir through sauce",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 190.0,
@@ -22192,7 +20801,7 @@
   },
   {
     "original_name": "Tomato & Mascarpone Stir Through Sauce",
-    "generic_name": "mascarpone stir through sauce",
+    "generic_name": "tomato mascarpone stir through sauce",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 190.0,
@@ -22205,7 +20814,7 @@
   },
   {
     "original_name": "Tomato & Grilled Peppers Stir Through  Sauce",
-    "generic_name": "grilled peppers stir through sauce",
+    "generic_name": "tomato grilled peppers stir through sauce",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 190.0,
@@ -22322,7 +20931,7 @@
   },
   {
     "original_name": "Cookies &  Milk Chocolate Sticks 11 Pack",
-    "generic_name": "milk chocolate sticks 11 pack",
+    "generic_name": "cookies milk chocolate sticks 11 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 200.0,
@@ -22373,6 +20982,19 @@
     "standard_category": "Nabiał i jaja"
   },
   {
+    "original_name": "Milk Chocolate Sticks 11 Pack",
+    "generic_name": "milk chocolate sticks 11 pack",
+    "shop": "aldi",
+    "currency": "GBP",
+    "package_size_value": 200.0,
+    "unit": "ml",
+    "sold_by_weight": false,
+    "price_package": 1.89,
+    "price_per_unit": null,
+    "price_per_100": 0.945,
+    "standard_category": "Nabiał i jaja"
+  },
+  {
     "original_name": "Dark Hazelnut Chocolate",
     "generic_name": "dark hazelnut chocolate",
     "shop": "aldi",
@@ -22413,7 +21035,7 @@
   },
   {
     "original_name": "Fruit & Nut Chocolate",
-    "generic_name": "nut chocolate",
+    "generic_name": "fruit nut chocolate",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 200.0,
@@ -22439,7 +21061,7 @@
   },
   {
     "original_name": "Cookies & Cream Chocolate",
-    "generic_name": "cream chocolate",
+    "generic_name": "cookies cream chocolate",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 200.0,
@@ -22517,20 +21139,7 @@
   },
   {
     "original_name": "Yogurt & Forest Fruit Bars 6 Pack",
-    "generic_name": "yogurt",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.39,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Yogurt & Forest Fruit Bars 6 Pack",
-    "generic_name": "forest fruit bars 6 pack",
+    "generic_name": "yogurt forest fruit bars 6 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -22543,7 +21152,7 @@
   },
   {
     "original_name": "Yogurt & Strawberry Bars 6 Pack",
-    "generic_name": "strawberry bars 6 pack",
+    "generic_name": "yogurt strawberry bars 6 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -22569,7 +21178,7 @@
   },
   {
     "original_name": "Apple & Raisin Crispy Fruit Slices 5x3 Pack",
-    "generic_name": "raisin crispy fruit slices 5x3 pack",
+    "generic_name": "apple raisin crispy fruit slices 5x3 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -23011,20 +21620,7 @@
   },
   {
     "original_name": "Raisin & Almond Granola",
-    "generic_name": "raisin",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 1000,
-    "unit": "g",
-    "sold_by_weight": true,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": 0.199,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Raisin & Almond Granola",
-    "generic_name": "almond granola",
+    "generic_name": "raisin almond granola",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 1000,
@@ -23076,7 +21672,7 @@
   },
   {
     "original_name": "Garlic & Herb Seasoning",
-    "generic_name": "herb seasoning",
+    "generic_name": "garlic herb seasoning",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -23219,7 +21815,7 @@
   },
   {
     "original_name": "Tomato & Chilli Chutney",
-    "generic_name": "chilli chutney",
+    "generic_name": "tomato chilli chutney",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -23335,6 +21931,19 @@
     "standard_category": "Tłuszcze, oleje i sosy"
   },
   {
+    "original_name": "Cheese & Bacon Pasta Bake",
+    "generic_name": "cheese bacon pasta bake",
+    "shop": "aldi",
+    "currency": "GBP",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": false,
+    "price_package": 0.69,
+    "price_per_unit": null,
+    "price_per_100": null,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
     "original_name": "Creamy Tomato Pasta Bake Sauce",
     "generic_name": "creamy tomato pasta bake sauce",
     "shop": "aldi",
@@ -23349,7 +21958,7 @@
   },
   {
     "original_name": "Tomato & Bacon Pasta Bake Sauce",
-    "generic_name": "bacon pasta bake sauce",
+    "generic_name": "tomato bacon pasta bake sauce",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -23556,19 +22165,6 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "2 Step Butter Chicken Curry Sauce",
-    "generic_name": "2 step butter chicken curry sauce",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 360.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 1.69,
-    "price_per_unit": null,
-    "price_per_100": 0.4694,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "2 Step Korma Curry Sauce",
     "generic_name": "2 step korma curry sauce",
     "shop": "aldi",
@@ -23647,21 +22243,8 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Honey & Nut Crunchy Clusters Cereal",
-    "generic_name": "honey",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.99,
-    "price_per_unit": null,
-    "price_per_100": 0.398,
-    "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
     "original_name": "Honey & Mustard Salad Dressing",
-    "generic_name": "mustard salad dressing",
+    "generic_name": "honey mustard salad dressing",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -23765,7 +22348,7 @@
   },
   {
     "original_name": "Tomato & Basil Sauce For Meatballs",
-    "generic_name": "basil sauce for meatballs",
+    "generic_name": "tomato basil sauce for meatballs",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 500.0,
@@ -23778,7 +22361,7 @@
   },
   {
     "original_name": "Onion & Garlic Pasta Sauce",
-    "generic_name": "garlic pasta sauce",
+    "generic_name": "onion garlic pasta sauce",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 500.0,
@@ -23804,7 +22387,7 @@
   },
   {
     "original_name": "Tomato & Bacon Stir-In Pasta Sauce",
-    "generic_name": "bacon stir-in pasta sauce",
+    "generic_name": "tomato bacon stir-in pasta sauce",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 150.0,
@@ -23830,7 +22413,7 @@
   },
   {
     "original_name": "Tomato & Basil Stir-In Pasta Sauce",
-    "generic_name": "basil stir-in pasta sauce",
+    "generic_name": "tomato basil stir-in pasta sauce",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 150.0,
@@ -24051,7 +22634,7 @@
   },
   {
     "original_name": "Beef & Tomato Flavour Snack Noodles Pot",
-    "generic_name": "tomato flavour snack noodles pot",
+    "generic_name": "beef tomato flavour snack noodles pot",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -24103,7 +22686,7 @@
   },
   {
     "original_name": "Sweet & Sour Cooking Sauce",
-    "generic_name": "sour cooking sauce",
+    "generic_name": "sweet sour cooking sauce",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 500.0,
@@ -24116,7 +22699,7 @@
   },
   {
     "original_name": "Honey & Nut Crunchy Clusters Cereal",
-    "generic_name": "nut crunchy clusters cereal",
+    "generic_name": "honey nut crunchy clusters cereal",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 500.0,
@@ -24440,32 +23023,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Apricot Fruit Wheats Cereal",
-    "generic_name": "apricot fruit wheats cereal",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.65,
-    "price_per_unit": null,
-    "price_per_100": 0.33,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Blueberry Fruit Wheats",
-    "generic_name": "blueberry fruit wheats",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.65,
-    "price_per_unit": null,
-    "price_per_100": 0.33,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Basil Pesto",
     "generic_name": "basil pesto",
     "shop": "aldi",
@@ -24597,7 +23154,7 @@
   },
   {
     "original_name": "Sweet & Sour Stir Fry Sauce",
-    "generic_name": "sour stir fry sauce",
+    "generic_name": "sweet sour stir fry sauce",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 120.0,
@@ -24675,7 +23232,7 @@
   },
   {
     "original_name": "Salt & Pepper Seasoning",
-    "generic_name": "pepper seasoning",
+    "generic_name": "salt pepper seasoning",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 35.0,
@@ -24688,20 +23245,7 @@
   },
   {
     "original_name": "Medium Peri Peri Sauce & Marinade",
-    "generic_name": "peri peri sauce",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 265.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 1.49,
-    "price_per_unit": null,
-    "price_per_100": 0.5623,
-    "standard_category": "Tłuszcze, oleje i sosy"
-  },
-  {
-    "original_name": "Medium Peri Peri Sauce & Marinade",
-    "generic_name": "marinade",
+    "generic_name": "peri peri sauce marinade",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 265.0,
@@ -24727,7 +23271,7 @@
   },
   {
     "original_name": "Hot Peri Peri Sauce & Marinade",
-    "generic_name": "hot peri peri sauce",
+    "generic_name": "hot peri peri sauce marinade",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 265.0,
@@ -24740,7 +23284,7 @@
   },
   {
     "original_name": "Garlic Peri Peri Sauce & Marinade",
-    "generic_name": "garlic peri peri sauce",
+    "generic_name": "garlic peri peri sauce marinade",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 265.0,
@@ -24805,7 +23349,7 @@
   },
   {
     "original_name": "Cheese & Onion Twists",
-    "generic_name": "onion twists",
+    "generic_name": "cheese onion twists",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 125.0,
@@ -24818,7 +23362,7 @@
   },
   {
     "original_name": "Cheese & Chive Twists",
-    "generic_name": "chive twists",
+    "generic_name": "cheese chive twists",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 125.0,
@@ -24974,7 +23518,7 @@
   },
   {
     "original_name": "Chocolate & Salted Caramel Cookies",
-    "generic_name": "salted caramel cookies",
+    "generic_name": "chocolate salted caramel cookies",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 200.0,
@@ -25013,7 +23557,7 @@
   },
   {
     "original_name": "Cheddar & Cracked Black Pepper Flatbread Thins",
-    "generic_name": "cracked black pepper flatbread thins",
+    "generic_name": "cheddar cracked black pepper flatbread thins",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 125.0,
@@ -25026,20 +23570,7 @@
   },
   {
     "original_name": "Rosemary & Sea Salt Flatbread Thins",
-    "generic_name": "rosemary",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 125.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.19,
-    "price_per_unit": null,
-    "price_per_100": 0.952,
-    "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
-    "original_name": "Rosemary & Sea Salt Flatbread Thins",
-    "generic_name": "sea salt flatbread thins",
+    "generic_name": "rosemary sea salt flatbread thins",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 125.0,
@@ -25169,20 +23700,7 @@
   },
   {
     "original_name": "Jam & Cream Viennese Fingers",
-    "generic_name": "jam",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 120.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 0.99,
-    "price_per_unit": null,
-    "price_per_100": 0.825,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Jam & Cream Viennese Fingers",
-    "generic_name": "cream viennese fingers",
+    "generic_name": "jam cream viennese fingers",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 120.0,
@@ -25247,7 +23765,7 @@
   },
   {
     "original_name": "Sweet & Salty Popcorn Share Bag",
-    "generic_name": "salty popcorn share bag",
+    "generic_name": "sweet salty popcorn share bag",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 110.0,
@@ -25429,7 +23947,7 @@
   },
   {
     "original_name": "Garlic & Herb Cracker Sharing Tub",
-    "generic_name": "herb cracker sharing tub",
+    "generic_name": "garlic herb cracker sharing tub",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 250.0,
@@ -25662,32 +24180,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Sugar Free Rhubarb & Custard Sweets",
-    "generic_name": "sugar free rhubarb",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 44.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.95,
-    "price_per_unit": null,
-    "price_per_100": 2.1591,
-    "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
-    "original_name": "Sugar Free Rhubarb & Custard Sweets",
-    "generic_name": "custard sweets",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 44.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.95,
-    "price_per_unit": null,
-    "price_per_100": 2.1591,
-    "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
     "original_name": "Sugar Free Creamy Strawberry Sweets",
     "generic_name": "sugar free creamy strawberry sweets",
     "shop": "aldi",
@@ -25831,19 +24323,6 @@
     "standard_category": "Produkty zbożowe i mąki"
   },
   {
-    "original_name": "Butter Mintoes",
-    "generic_name": "butter mintoes",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 225.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.89,
-    "price_per_unit": null,
-    "price_per_100": 0.3956,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
     "original_name": "Mint Humbugs",
     "generic_name": "mint humbugs",
     "shop": "aldi",
@@ -25923,20 +24402,7 @@
   },
   {
     "original_name": "Bubblegum & Raspberry Flavour Mushrooms Sweets",
-    "generic_name": "bubblegum",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 75.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 0.49,
-    "price_per_unit": null,
-    "price_per_100": 0.6533,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Bubblegum & Raspberry Flavour Mushrooms Sweets",
-    "generic_name": "raspberry flavour mushrooms sweets",
+    "generic_name": "bubblegum raspberry flavour mushrooms sweets",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 75.0,
@@ -26000,32 +24466,6 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Rhubarb & Custard Boiled Sweets",
-    "generic_name": "rhubarb",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 200.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 1.05,
-    "price_per_unit": null,
-    "price_per_100": 0.525,
-    "standard_category": "Tłuszcze, oleje i sosy"
-  },
-  {
-    "original_name": "Rhubarb & Custard Boiled Sweets",
-    "generic_name": "custard boiled sweets",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 200.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 1.05,
-    "price_per_unit": null,
-    "price_per_100": 0.525,
-    "standard_category": "Tłuszcze, oleje i sosy"
-  },
-  {
     "original_name": "Squeezy Light Mayonnaise",
     "generic_name": "squeezy mayonnaise",
     "shop": "aldi",
@@ -26040,20 +24480,7 @@
   },
   {
     "original_name": "Basil & Oregano Passata Rustica",
-    "generic_name": "basil",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 689.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.95,
-    "price_per_unit": null,
-    "price_per_100": 0.283,
-    "standard_category": "Tłuszcze, oleje i sosy"
-  },
-  {
-    "original_name": "Basil & Oregano Passata Rustica",
-    "generic_name": "oregano passata rustica",
+    "generic_name": "basil oregano passata rustica",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 689.0,
@@ -26274,7 +24701,7 @@
   },
   {
     "original_name": "Honey & Lime Cashews",
-    "generic_name": "lime cashews",
+    "generic_name": "honey lime cashews",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 150.0,
@@ -26482,7 +24909,7 @@
   },
   {
     "original_name": "Lemon & Black Pepper Mayo",
-    "generic_name": "black pepper mayo",
+    "generic_name": "lemon black pepper mayo",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -26495,7 +24922,7 @@
   },
   {
     "original_name": "Strawberry & Yogurt Breakfast Biscuits 5 Pack",
-    "generic_name": "yogurt breakfast biscuits 5 pack",
+    "generic_name": "strawberry yogurt breakfast biscuits 5 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 253.0,
@@ -26560,20 +24987,7 @@
   },
   {
     "original_name": "Milk & Cereal Breakfast Biscuits 6 Pack",
-    "generic_name": "milk",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.69,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Nabiał i jaja"
-  },
-  {
-    "original_name": "Milk & Cereal Breakfast Biscuits 6 Pack",
-    "generic_name": "cereal breakfast biscuits 6 pack",
+    "generic_name": "milk cereal breakfast biscuits 6 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -26612,7 +25026,7 @@
   },
   {
     "original_name": "Salt & Vinegar Starry Night Mix",
-    "generic_name": "vinegar starry night mix",
+    "generic_name": "salt vinegar starry night mix",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 125.0,
@@ -26674,19 +25088,6 @@
     "price_per_unit": null,
     "price_per_100": null,
     "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Frosted Wheats Cereal",
-    "generic_name": "frosted wheats cereal",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 500.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.69,
-    "price_per_unit": null,
-    "price_per_100": 0.338,
-    "standard_category": "Produkty zbożowe i mąki"
   },
   {
     "original_name": "Milk Chocolate Fingers",
@@ -26807,20 +25208,7 @@
   },
   {
     "original_name": "Smoky BBQ Almonds & Cashews",
-    "generic_name": "smoky bbq almonds",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.59,
-    "price_per_unit": null,
-    "price_per_100": 1.06,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Smoky BBQ Almonds & Cashews",
-    "generic_name": "cashews",
+    "generic_name": "smoky bbq almonds cashews",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 150.0,
@@ -26833,7 +25221,7 @@
   },
   {
     "original_name": "Mighty Yeast Extract Almonds & Cashews",
-    "generic_name": "mighty yeast extract almonds",
+    "generic_name": "mighty yeast extract almonds cashews",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 150.0,
@@ -26872,7 +25260,7 @@
   },
   {
     "original_name": "Salt & Vinegar Flavour Potato Hoops 6 Pack",
-    "generic_name": "vinegar flavour potato hoops 6 pack",
+    "generic_name": "salt vinegar flavour potato hoops 6 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 150.0,
@@ -27236,7 +25624,7 @@
   },
   {
     "original_name": "Tomato & Basil Fusilli Pasta Pouch",
-    "generic_name": "basil fusilli pasta pouch",
+    "generic_name": "tomato basil fusilli pasta pouch",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 200.0,
@@ -27275,7 +25663,7 @@
   },
   {
     "original_name": "Tomato & Herb Pasta Sauce",
-    "generic_name": "herb pasta sauce",
+    "generic_name": "tomato herb pasta sauce",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 441.0,
@@ -27353,7 +25741,7 @@
   },
   {
     "original_name": "Sweet & Salty Popcorn 6 Pack",
-    "generic_name": "salty popcorn 6 pack",
+    "generic_name": "sweet salty popcorn 6 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 72.0,
@@ -27457,7 +25845,7 @@
   },
   {
     "original_name": "Apple & Berry No Added Sugar Granola",
-    "generic_name": "berry no added sugar granola",
+    "generic_name": "apple berry no added sugar granola",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 500.0,
@@ -27535,20 +25923,7 @@
   },
   {
     "original_name": "Sweet Pockets Multipack Chocolate Fruit & Nut",
-    "generic_name": "sweet pockets multipack chocolate fruit",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 125.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.49,
-    "price_per_unit": null,
-    "price_per_100": 1.192,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Sweet Pockets Multipack Chocolate Fruit & Nut",
-    "generic_name": "nut",
+    "generic_name": "sweet pockets multipack chocolate fruit nut",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 125.0,
@@ -27600,7 +25975,7 @@
   },
   {
     "original_name": "Garlic & Rosemary Focaccia Mix",
-    "generic_name": "rosemary focaccia mix",
+    "generic_name": "garlic rosemary focaccia mix",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 500.0,
@@ -27756,7 +26131,7 @@
   },
   {
     "original_name": "Salt & Vinegar Flavoured Rice Cakes",
-    "generic_name": "vinegar flavoured rice cakes",
+    "generic_name": "salt vinegar flavoured rice cakes",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 135.0,
@@ -27769,7 +26144,7 @@
   },
   {
     "original_name": "Cookies & Cream Snackpack",
-    "generic_name": "cream snackpack",
+    "generic_name": "cookies cream snackpack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 220.0,
@@ -27783,6 +26158,19 @@
   {
     "original_name": "Golden Cookies & Cream Snackpack",
     "generic_name": "golden cookies",
+    "shop": "aldi",
+    "currency": "GBP",
+    "package_size_value": 220.0,
+    "unit": "ml",
+    "sold_by_weight": false,
+    "price_package": 1.49,
+    "price_per_unit": null,
+    "price_per_100": 0.6773,
+    "standard_category": "Nabiał i jaja"
+  },
+  {
+    "original_name": "Golden Cookies & Cream Snackpack",
+    "generic_name": "cream snackpack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 220.0,
@@ -27964,7 +26352,7 @@
   },
   {
     "original_name": "Chicken & Mushroom Flavour Snack Noodle",
-    "generic_name": "mushroom flavour snack noodle",
+    "generic_name": "chicken mushroom flavour snack noodle",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -27984,6 +26372,19 @@
     "unit": null,
     "sold_by_weight": false,
     "price_package": 0.65,
+    "price_per_unit": null,
+    "price_per_100": null,
+    "standard_category": "Przyprawy, zioła i proszki"
+  },
+  {
+    "original_name": "Basil",
+    "generic_name": "basil",
+    "shop": "aldi",
+    "currency": "GBP",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": false,
+    "price_package": 0.75,
     "price_per_unit": null,
     "price_per_100": null,
     "standard_category": "Przyprawy, zioła i proszki"
@@ -28107,7 +26508,7 @@
   },
   {
     "original_name": "Salt & Vinegar Rice Snacks 5 Pack",
-    "generic_name": "vinegar rice snacks 5 pack",
+    "generic_name": "salt vinegar rice snacks 5 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -28559,6 +26960,32 @@
     "price_per_unit": null,
     "price_per_100": 4.3333,
     "standard_category": "Przyprawy, zioła i proszki"
+  },
+  {
+    "original_name": "Cadbury Fruit & Nut",
+    "generic_name": "fruit",
+    "shop": "aldi",
+    "currency": "GBP",
+    "package_size_value": 95.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.59,
+    "price_per_unit": null,
+    "price_per_100": 1.6737,
+    "standard_category": "Owoce"
+  },
+  {
+    "original_name": "Cadbury Fruit & Nut",
+    "generic_name": "nut",
+    "shop": "aldi",
+    "currency": "GBP",
+    "package_size_value": 95.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 1.59,
+    "price_per_unit": null,
+    "price_per_100": 1.6737,
+    "standard_category": "Owoce"
   },
   {
     "original_name": "Multigrain Shapes Cereal",
@@ -29459,20 +27886,7 @@
   },
   {
     "original_name": "Pasta & Sauce Macaroni Cheese",
-    "generic_name": "pasta",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.45,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
-    "original_name": "Pasta & Sauce Macaroni Cheese",
-    "generic_name": "sauce macaroni cheese",
+    "generic_name": "pasta sauce macaroni cheese",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -29771,20 +28185,7 @@
   },
   {
     "original_name": "Soothing & Refreshing Peppermint Infusion Bags 40 Pack",
-    "generic_name": "soothing",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 60.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 1.35,
-    "price_per_unit": null,
-    "price_per_100": 2.25,
-    "standard_category": "Warzywa"
-  },
-  {
-    "original_name": "Soothing & Refreshing Peppermint Infusion Bags 40 Pack",
-    "generic_name": "refreshing peppermint infusion bags 40 pack",
+    "generic_name": "soothing refreshing peppermint infusion bags 40 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 60.0,
@@ -29810,20 +28211,7 @@
   },
   {
     "original_name": "Vibrant & Fruity Berry Fruits Infusion Bags 40 Pack",
-    "generic_name": "vibrant",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 80.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 1.35,
-    "price_per_unit": null,
-    "price_per_100": 1.6875,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Vibrant & Fruity Berry Fruits Infusion Bags 40 Pack",
-    "generic_name": "fruity berry fruits infusion bags 40 pack",
+    "generic_name": "vibrant fruity berry fruits infusion bags 40 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 80.0,
@@ -29953,7 +28341,7 @@
   },
   {
     "original_name": "Apple & Blackcurrant Super Concentrated Squirty Squash",
-    "generic_name": "blackcurrant super concentrated squirty squash",
+    "generic_name": "apple blackcurrant super concentrated squirty squash",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -30122,20 +28510,7 @@
   },
   {
     "original_name": "Orange & Peach Flavoured Still Water",
-    "generic_name": "orange",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.49,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Orange & Peach Flavoured Still Water",
-    "generic_name": "peach flavoured still water",
+    "generic_name": "orange peach flavoured still water",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -30148,7 +28523,7 @@
   },
   {
     "original_name": "Lemon & Lime Flavoured Still Water",
-    "generic_name": "lime flavoured still water",
+    "generic_name": "lemon lime flavoured still water",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -30174,7 +28549,7 @@
   },
   {
     "original_name": "Apple & Raspberry Fruity Water Drink 8 Pack",
-    "generic_name": "raspberry fruity water drink 8 pack",
+    "generic_name": "apple raspberry fruity water drink 8 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 200.0,
@@ -30252,7 +28627,7 @@
   },
   {
     "original_name": "Apple & Blackcurrant Kids Smoothies 4 Pack",
-    "generic_name": "blackcurrant kids smoothies 4 pack",
+    "generic_name": "apple blackcurrant kids smoothies 4 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -30317,7 +28692,7 @@
   },
   {
     "original_name": "Apple & Raspberry Vitamin Drink",
-    "generic_name": "raspberry vitamin drink",
+    "generic_name": "apple raspberry vitamin drink",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -30368,34 +28743,8 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Apple & Elderflower Vitamin Drink",
-    "generic_name": "elderflower vitamin drink",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 0.79,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Cool & Refreshing Green Tea with Mint 40 Pack",
-    "generic_name": "cool",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": 76.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "price_package": 0.65,
-    "price_per_unit": null,
-    "price_per_100": 0.8553,
-    "standard_category": "Przyprawy, zioła i proszki"
-  },
-  {
-    "original_name": "Cool & Refreshing Green Tea with Mint 40 Pack",
-    "generic_name": "refreshing green tea with mint 40 pack",
+    "generic_name": "cool refreshing green tea with mint 40 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 76.0,
@@ -30408,20 +28757,7 @@
   },
   {
     "original_name": "SUN QUENCH, Fruit and Barley Drink, Apple & Pear",
-    "generic_name": "fruit and barley drink, apple",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.09,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "SUN QUENCH, Fruit and Barley Drink, Apple & Pear",
-    "generic_name": "pear",
+    "generic_name": "fruit and barley drink, apple pear",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -30434,7 +28770,7 @@
   },
   {
     "original_name": "Fruit & Barley Summer Fruits Squash",
-    "generic_name": "barley summer fruits squash",
+    "generic_name": "fruit barley summer fruits squash",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -30457,6 +28793,19 @@
     "price_per_unit": null,
     "price_per_100": null,
     "standard_category": "Warzywa"
+  },
+  {
+    "original_name": "Lemon",
+    "generic_name": "lemon",
+    "shop": "aldi",
+    "currency": "GBP",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": false,
+    "price_package": 0.69,
+    "price_per_unit": null,
+    "price_per_100": null,
+    "standard_category": "Owoce"
   },
   {
     "original_name": "Mixed Fruit Squash No Added Sugar",
@@ -30615,6 +28964,19 @@
     "standard_category": "Owoce"
   },
   {
+    "original_name": "Apple & Mango Juice",
+    "generic_name": "apple mango juice",
+    "shop": "aldi",
+    "currency": "GBP",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": false,
+    "price_package": 1.75,
+    "price_per_unit": null,
+    "price_per_100": null,
+    "standard_category": "Owoce"
+  },
+  {
     "original_name": "Protein  Latte Coffee",
     "generic_name": "protein latte coffee",
     "shop": "aldi",
@@ -30655,7 +29017,7 @@
   },
   {
     "original_name": "Ginger & Lemon Kombucha",
-    "generic_name": "lemon kombucha",
+    "generic_name": "ginger lemon kombucha",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -30693,8 +29055,8 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Pineapple & Lime",
-    "generic_name": "lime",
+    "original_name": "Dragonfruit & Raspberry",
+    "generic_name": "raspberry",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -30706,8 +29068,8 @@
     "standard_category": "Owoce"
   },
   {
-    "original_name": "Apple & Elderflower",
-    "generic_name": "elderflower",
+    "original_name": "Pineapple & Lime",
+    "generic_name": "lime",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -30798,7 +29160,7 @@
   },
   {
     "original_name": "Lemon & Lime Flavoured Still Water 4 Pack",
-    "generic_name": "lime flavoured still water 4 pack",
+    "generic_name": "lemon lime flavoured still water 4 pack",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": 500.0,
@@ -30824,7 +29186,7 @@
   },
   {
     "original_name": "Peach & Strawberry Bubble Tea",
-    "generic_name": "strawberry bubble tea",
+    "generic_name": "peach strawberry bubble tea",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -30837,20 +29199,7 @@
   },
   {
     "original_name": "Lychee & Passion Fruit Bubble Tea",
-    "generic_name": "lychee",
-    "shop": "aldi",
-    "currency": "GBP",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": false,
-    "price_package": 1.19,
-    "price_per_unit": null,
-    "price_per_100": null,
-    "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Lychee & Passion Fruit Bubble Tea",
-    "generic_name": "passion fruit bubble tea",
+    "generic_name": "lychee passion fruit bubble tea",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -30876,7 +29225,7 @@
   },
   {
     "original_name": "Lemon & Lime Flavoured Sparkling Water",
-    "generic_name": "lime flavoured sparkling water",
+    "generic_name": "lemon lime flavoured sparkling water",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,
@@ -30889,7 +29238,7 @@
   },
   {
     "original_name": "Peach & Passion Fruit Flavoured Sparkling Water",
-    "generic_name": "passion fruit flavoured sparkling water",
+    "generic_name": "peach passion fruit flavoured sparkling water",
     "shop": "aldi",
     "currency": "GBP",
     "package_size_value": null,

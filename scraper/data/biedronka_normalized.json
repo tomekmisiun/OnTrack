@@ -3290,7 +3290,7 @@
   },
   {
     "original_name": "Kraina Mięs Schab bez kości kotlety wieprzowe 360 g",
-    "generic_name": "wieprzowina",
+    "generic_name": "schab",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 360.0,
@@ -3394,7 +3394,7 @@
   },
   {
     "original_name": "Kraina Mięs Porcja rosołowa wołowa",
-    "generic_name": "wołowina",
+    "generic_name": "porcja rosołowa",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 800.0,
@@ -3524,7 +3524,7 @@
   },
   {
     "original_name": "Kraina Mięs Żeberka wieprzowe opak. ok. 1 kg",
-    "generic_name": "wieprzowina",
+    "generic_name": "żeberka",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 1000.0,

@@ -411,15 +411,15 @@
         "score": 66.7
       },
       {
+        "product": "boczek",
+        "score": 66.7
+      },
+      {
         "product": "tahini",
         "score": 66.7
       },
       {
         "product": "boczniak",
-        "score": 62.5
-      },
-      {
-        "product": "błonnik jabłkowy",
         "score": 62.5
       }
     ]
@@ -432,6 +432,10 @@
         "score": 66.7
       },
       {
+        "product": "boczek",
+        "score": 66.7
+      },
+      {
         "product": "rożek cytrynowo - truskawkowy z zieloną polewą i kawałkami suszonej truskawki",
         "score": 62.5
       },
@@ -441,10 +445,6 @@
       },
       {
         "product": "cooking coco",
-        "score": 62.5
-      },
-      {
-        "product": "mus proteinowy choco",
         "score": 62.5
       }
     ]
@@ -661,15 +661,15 @@
         "score": 72.7
       },
       {
+        "product": "antrykot",
+        "score": 66.7
+      },
+      {
         "product": "mango",
         "score": 66.7
       },
       {
         "product": "sałata",
-        "score": 66.7
-      },
-      {
-        "product": "brokuł",
         "score": 66.7
       }
     ]
@@ -1228,6 +1228,10 @@
     "ingredient_name": "czekolada półsłodka",
     "top_candidates": [
       {
+        "product": "boczek",
+        "score": 80.0
+      },
+      {
         "product": "danio czekolada",
         "score": 75.0
       },
@@ -1242,16 +1246,16 @@
       {
         "product": "czekolada deserowa",
         "score": 71.4
-      },
-      {
-        "product": "jogurt skyr proteinowy biała czekolada kokos",
-        "score": 70.6
       }
     ]
   },
   {
     "ingredient_name": "czekoladowe kropelki",
     "top_candidates": [
+      {
+        "product": "boczek",
+        "score": 80.0
+      },
       {
         "product": "mullermilch o smaku ciasteczkowa czekoladowa karmel",
         "score": 78.9
@@ -1267,10 +1271,6 @@
       {
         "product": "serek czekoladowy",
         "score": 75.7
-      },
-      {
-        "product": "flaki",
-        "score": 75.0
       }
     ]
   },
@@ -2040,11 +2040,11 @@
         "score": 71.4
       },
       {
-        "product": "surówka",
-        "score": 61.5
+        "product": "karkówka",
+        "score": 66.7
       },
       {
-        "product": "kurczak",
+        "product": "surówka",
         "score": 61.5
       }
     ]
@@ -2269,7 +2269,7 @@
         "score": 75.0
       },
       {
-        "product": "kiełki lucerny",
+        "product": "żeberka",
         "score": 66.7
       }
     ]
@@ -2371,31 +2371,6 @@
       {
         "product": "makaron nitka z jaj przepiórczych",
         "score": 71.4
-      }
-    ]
-  },
-  {
-    "ingredient_name": "karkówka wołowa",
-    "top_candidates": [
-      {
-        "product": "wołowina",
-        "score": 85.7
-      },
-      {
-        "product": "karkówka w marynacie bałkańskiej",
-        "score": 80.0
-      },
-      {
-        "product": "karkówka w przyprawach do pieczenia",
-        "score": 80.0
-      },
-      {
-        "product": "oliwa",
-        "score": 75.0
-      },
-      {
-        "product": "kura rosołowa",
-        "score": 72.7
       }
     ]
   },
@@ -2757,6 +2732,10 @@
         "score": 80.0
       },
       {
+        "product": "nogi wieprzowe",
+        "score": 75.0
+      },
+      {
         "product": "pieprz ziołowy",
         "score": 72.7
       },
@@ -2767,10 +2746,6 @@
       {
         "product": "pieprz kolorowy",
         "score": 69.6
-      },
-      {
-        "product": "fix do soczystych kotletów mielonych",
-        "score": 68.8
       }
     ]
   },
@@ -3340,12 +3315,12 @@
         "score": 84.0
       },
       {
-        "product": "danio serek czekoladowo orzechowy",
-        "score": 81.6
+        "product": "boczek",
+        "score": 83.3
       },
       {
-        "product": "biszkopt z kremem mlecznym i czekoladowo orzechowym",
-        "score": 80.0
+        "product": "danio serek czekoladowo orzechowy",
+        "score": 81.6
       }
     ]
   },
@@ -5094,7 +5069,7 @@
         "score": 75.0
       },
       {
-        "product": "oliwa",
+        "product": "nogi wieprzowe",
         "score": 75.0
       }
     ]
@@ -5144,7 +5119,7 @@
         "score": 76.5
       },
       {
-        "product": "oliwa",
+        "product": "nogi wieprzowe",
         "score": 75.0
       }
     ]
@@ -5707,6 +5682,10 @@
         "score": 80.0
       },
       {
+        "product": "schab",
+        "score": 75.0
+      },
+      {
         "product": "ice",
         "score": 66.7
       },
@@ -5717,10 +5696,6 @@
       {
         "product": "tic",
         "score": 66.7
-      },
-      {
-        "product": "zupa dyniowa z marchewką",
-        "score": 63.6
       }
     ]
   },
@@ -5932,6 +5907,10 @@
         "score": 76.9
       },
       {
+        "product": "schab",
+        "score": 75.0
+      },
+      {
         "product": "rożek śmietankowo - orzechowy z sosem czekoladowym i orzechami laskowymi",
         "score": 75.0
       },
@@ -5941,10 +5920,6 @@
       },
       {
         "product": "napój mleczny z czekoladą i orzechami laskowymi",
-        "score": 75.0
-      },
-      {
-        "product": "owsianka na jogurcie z rodzynkami i orzechami",
         "score": 75.0
       }
     ]
@@ -6061,15 +6036,15 @@
         "score": 75.0
       },
       {
+        "product": "schab",
+        "score": 66.7
+      },
+      {
         "product": "seler",
         "score": 66.7
       },
       {
         "product": "serek",
-        "score": 66.7
-      },
-      {
-        "product": "asia",
         "score": 66.7
       }
     ]
@@ -6169,7 +6144,7 @@
         "score": 69.6
       },
       {
-        "product": "ser",
+        "product": "antrykot",
         "score": 66.7
       }
     ]
@@ -6265,11 +6240,11 @@
         "score": 72.7
       },
       {
-        "product": "ser",
+        "product": "antrykot",
         "score": 66.7
       },
       {
-        "product": "ser krowi",
+        "product": "ser",
         "score": 66.7
       }
     ]
@@ -6403,6 +6378,10 @@
     "ingredient_name": "slodzik z mnicha",
     "top_candidates": [
       {
+        "product": "schab",
+        "score": 75.0
+      },
+      {
         "product": "ice",
         "score": 66.7
       },
@@ -6417,16 +6396,16 @@
       {
         "product": "słodkie ziemniaki",
         "score": 64.5
-      },
-      {
-        "product": "słodki ziemniak",
-        "score": 64.3
       }
     ]
   },
   {
     "ingredient_name": "slodzik z owocu mnicha",
     "top_candidates": [
+      {
+        "product": "schab",
+        "score": 75.0
+      },
       {
         "product": "ice",
         "score": 66.7
@@ -6442,10 +6421,6 @@
       {
         "product": "piątnica",
         "score": 61.5
-      },
-      {
-        "product": "fitness płatki z owocami",
-        "score": 60.6
       }
     ]
   },
@@ -7307,6 +7282,10 @@
         "score": 80.0
       },
       {
+        "product": "schab",
+        "score": 75.0
+      },
+      {
         "product": "schab w przyprawach do pieczenia",
         "score": 66.7
       },
@@ -7316,10 +7295,6 @@
       },
       {
         "product": "wegańska chia kokosowa z wsadem wiśniowym",
-        "score": 62.5
-      },
-      {
-        "product": "wegańska chia na kokosie z owocami leśnymi",
         "score": 62.5
       }
     ]
@@ -7344,7 +7319,7 @@
         "score": 66.7
       },
       {
-        "product": "boczek rolowany",
+        "product": "boczek",
         "score": 66.7
       }
     ]
@@ -7403,6 +7378,10 @@
     "ingredient_name": "stek z antrykotu",
     "top_candidates": [
       {
+        "product": "antrykot",
+        "score": 100.0
+      },
+      {
         "product": "ser",
         "score": 66.7
       },
@@ -7416,10 +7395,6 @@
       },
       {
         "product": "ryż",
-        "score": 66.7
-      },
-      {
-        "product": "stewia",
         "score": 66.7
       }
     ]
@@ -7778,6 +7753,10 @@
     "ingredient_name": "słodzik waniliowy z mnicha",
     "top_candidates": [
       {
+        "product": "schab",
+        "score": 75.0
+      },
+      {
         "product": "masło",
         "score": 75.0
       },
@@ -7792,16 +7771,16 @@
       {
         "product": "kozi smakołyk waniliowy",
         "score": 70.0
-      },
-      {
-        "product": "protein drink waniliowy",
-        "score": 70.0
       }
     ]
   },
   {
     "ingredient_name": "słodzik z mnicha",
     "top_candidates": [
+      {
+        "product": "schab",
+        "score": 75.0
+      },
       {
         "product": "masło",
         "score": 75.0
@@ -7817,10 +7796,6 @@
       {
         "product": "słonecznik",
         "score": 70.6
-      },
-      {
-        "product": "ice",
-        "score": 66.7
       }
     ]
   },
@@ -8015,11 +7990,11 @@
         "score": 71.4
       },
       {
-        "product": "por",
-        "score": 66.7
+        "product": "nogi wieprzowe",
+        "score": 69.6
       },
       {
-        "product": "whey",
+        "product": "por",
         "score": 66.7
       }
     ]
@@ -8178,6 +8153,10 @@
     "ingredient_name": "tłuszcz z boczku",
     "top_candidates": [
       {
+        "product": "boczek",
+        "score": 83.3
+      },
+      {
         "product": "boczniak",
         "score": 71.4
       },
@@ -8191,10 +8170,6 @@
       },
       {
         "product": "tłuszcz do smarowania",
-        "score": 69.2
-      },
-      {
-        "product": "tłuszcz do smarowania z solą",
         "score": 69.2
       }
     ]
@@ -8644,7 +8619,7 @@
         "score": 66.7
       },
       {
-        "product": "ser owczy",
+        "product": "udziec",
         "score": 66.7
       }
     ]

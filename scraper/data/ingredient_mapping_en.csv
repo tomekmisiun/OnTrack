@@ -1,212 +1,239 @@
-﻿ingredient_from_recipe;product_name;original_shop_name;pkg;unit;gbp_per_100;price_pkg;shop;fuzzy_score;kcal;protein_g;fat_g;carbs_g
-apple;apple;Apple & Berry No Added Sugar Granola;500.0;g;0.24;1.19;aldi;100.0;52.0;0.3;0.2;13.8
-apple cider;apple cider vinegar;Organic Apple Cider Vinegar;;;0.0;2.19;aldi;85.6;21.0;0.0;0.0;0.9
-applesauce;apples;British Mini Apples;6;pcs;0.0;0.99;aldi;86.6;52.0;0.3;0.2;13.8
-apricot;apricot jam;Apricot Jam;454.0;g;0.2;0.89;aldi;88.2;48.0;1.4;0.4;11.1
+﻿skladnik_z_przepisu;produkt_sklepowy;oryginalna_nazwa;pkg;jednostka;cena_per_100;cena_pkg;sklep;fuzzy_score;kcal;bialko_g;tluszcz_g;wegle_g
+almond;almond mono lolly;Almond Mono Lolly;;;0.0;1.99;aldi;100.0;;;;
+apple;apple;Large Bramley Apple;1;pcs;0.0;0.59;aldi;100.0;52.0;0.3;0.2;13.8
+apple cider;apple cider vinegar;Organic Apple Cider Vinegar;;;0.0;2.19;aldi;100.0;21.0;0.0;0.0;0.9
+applesauce;apple sauce;Bramley Apple Sauce;;;0.0;0.65;aldi;100.0;;;;
 avocado;avocado;Avocado;500.0;g;0.29;1.45;aldi;100.0;160.0;2.0;14.7;8.5
-bacon;bacon;Bacon & Cheese Wraps 2 Pack;204.0;g;0.81;1.65;aldi;100.0;541.0;37.0;42.0;1.4
-baking powder;baking powder;Baking Powder;200.0;g;0.33;0.65;aldi;100.0;53.0;0.0;0.0;27.8
-balsamic vinegar;balsamic vinegar of modena;Balsamic Vinegar of Modena;;;0.0;1.49;aldi;87.3;88.0;0.5;0.0;17.0
-banana;banana;Banana & Custard Fat Free Yogurt;160.0;g;0.24;0.39;aldi;100.0;89.0;1.1;0.3;22.8
-basil;basil;Basil & Oregano Passata Rustica;689.0;g;0.28;1.95;aldi;100.0;23.0;3.2;0.6;2.7
+bacon;bacon lardons;Smoked Bacon Lardons;200.0;g;0.9;1.79;aldi;100.0;;;;
+baking powder;baking powder;Baking Powder;200.0;g;0.33;0.65;aldi;100.0;53.0;0.0;0.0;27.7
+balsamic vinegar;balsamic vinegar of modena;Balsamic Vinegar of Modena;;;0.0;1.49;aldi;100.0;;;;
+banana;banana;Banana;1;pcs;0.0;0.16;aldi;100.0;89.0;1.1;0.3;22.8
+basil;basil;Basil;;;0.0;0.75;aldi;100.0;23.0;3.2;0.6;2.7
 basmati rice;basmati rice;Basmati Rice;1000;g;0.18;1.79;aldi;100.0;357.0;7.1;0.7;79.0
 bay leaf;bay leaf;Bay Leaf;;;0.0;0.49;aldi;100.0;313.0;7.6;8.4;75.0
 bbq sauce;bbq sauce;BBQ Sauce;;;0.0;0.75;aldi;100.0;135.0;0.8;0.6;32.0
-beef;beef;British Beef & Pork Mince;750.0;g;0.6;4.49;aldi;100.0;250.0;26.0;15.0;0.0
-beef sirloin;beef sirloin steak;100% British Beef Wagyu Sirloin Steak;227.0;g;3.96;8.99;aldi;89.4;206.0;26.0;11.0;0.0
-beef steak;beef steak;100% British Beef Wagyu Fillet Steak;170.0;g;6.46;10.99;aldi;100.0;271.0;25.0;19.0;0.0
-beef stew meat;beef stew;Beef Stew & Dumplings;400.0;g;0.7;2.79;aldi;88.5;224.0;26.0;13.0;0.0
+beef broth;beef;British Diced Beef;700.0;g;1.08;7.59;aldi;100.0;250.0;26.0;15.0;0.0
+beef sirloin;beef sirloin steak;100% British Beef Wagyu Sirloin Steak;227.0;g;3.96;8.99;aldi;100.0;;;;
+beef;beef steak;100% British Beef Wagyu Fillet Steak;170.0;g;6.46;10.99;aldi;100.0;271.0;26.0;19.0;0.0
+berries;berries squash;Double Strength Cherries & Berries Squash;;;0.0;0.89;aldi;100.0;;;;
+black beans;black beans/green lentils;Tinned Black Beans/Green Lentils;398.0;g;0.12;0.49;aldi;100.0;;;;
+black olive;black olives with feta;Pitted Green & Black Olives With Feta;;;0.0;1.99;aldi;100.0;;;;
 black pepper;black pepper;Black Pepper & Paprika Mini Roule Cheese;100.0;g;1.49;1.49;aldi;100.0;251.0;10.4;3.3;64.0
 blackberries;blackberries;Wonky Blackberries;150.0;g;1.26;1.89;aldi;100.0;43.0;1.4;0.5;9.6
-berries;blueberries;Blueberries;150.0;g;0.79;1.19;aldi;88.2;57.0;0.7;0.3;14.5
-blueberry;blueberry;Blueberry & Blackcurrant Layered Yogurt;;;0.0;0.69;aldi;100.0;57.0;0.7;0.3;14.5
+blueberries;blueberries;Blueberries;150.0;g;0.79;1.19;aldi;100.0;57.0;0.7;0.3;14.5
+blueberry;blueberry fruit;Blueberry Fruit & Grain Bars 6 Pack;;;0.0;1.15;aldi;100.0;;;;
 broccoli;broccoli;British Broccoli;361.0;g;0.22;0.79;aldi;100.0;34.0;2.8;0.4;6.6
 broccoli florets;broccoli florets;Broccoli Florets;1000;g;0.12;1.19;aldi;100.0;34.0;2.8;0.4;6.6
 brown rice;brown rice;Brown Rice;1000;g;0.14;1.39;aldi;100.0;111.0;2.6;0.9;23.0
-butter;butter;Cooked Mussels with Garlic & Butter;450.0;g;0.49;2.19;aldi;100.0;717.0;0.9;81.1;0.1
 butternut squash;butternut squash;Butternut Squash & Pine Nut Girasoli;250.0;g;1.0;2.49;aldi;100.0;45.0;1.0;0.1;11.7
-white button mushroom;button mushrooms;British Baby Button Mushrooms;200.0;g;0.47;0.95;aldi;88.6;22.0;3.1;0.3;3.3
-cajun seasoning;cajun seasoning;Cajun Seasoning;;;0.0;0.69;aldi;100.0;282.0;10.0;9.0;50.0
-carrot;carrot;Carrot & Swede Mash;450.0;g;0.3;1.35;aldi;100.0;41.0;0.9;0.2;9.6
-carrots;carrots;British Wonky Carrots;1491.0;g;0.05;0.79;aldi;100.0;;;;
-cashew;cashews;Smoky BBQ Almonds & Cashews;150.0;g;1.06;1.59;aldi;96.1;553.0;18.2;43.8;30.2
+butter;buttery;Flora Buttery;450.0;g;0.44;1.99;aldi;92.3;;;;
+white button mushroom;button mushrooms;British Baby Button Mushrooms;200.0;g;0.47;0.95;aldi;96.8;;;;
+cajun seasoning;cajun seasoning;Cajun Seasoning;;;0.0;0.69;aldi;100.0;310.0;12.0;10.0;50.0
+carrot;carrot swede mash;Carrot & Swede Mash;450.0;g;0.3;1.35;aldi;100.0;;;;
+cabbage and carrots;carrots;British Wonky Carrots;1491.0;g;0.05;0.79;aldi;100.0;41.0;0.9;0.2;9.6
+cashew;cashew nuts;Cashew Nuts;200.0;g;0.84;1.69;aldi;100.0;553.0;18.2;43.8;30.2
+cashews;cashews roasted and salted;Cashews Roasted and Salted;200.0;g;0.99;1.99;aldi;100.0;;;;
 cauliflower;cauliflower;British Cauliflower;1;pcs;0.0;1.19;aldi;100.0;25.0;1.9;0.3;5.0
-cayenne pepper;cayenne pepper;Cayenne Pepper;;;0.0;0.65;aldi;100.0;318.0;12.0;17.3;56.6
+cayenne;cayenne pepper;Cayenne Pepper;;;0.0;0.65;aldi;100.0;318.0;12.0;17.3;56.6
 celery;celery;Celery;1;pcs;0.0;0.75;aldi;100.0;16.0;0.7;0.2;3.0
-cheese;cheese;Cheese & Tomato Pasta Bake;399.0;g;0.25;0.99;aldi;100.0;404.0;25.0;33.1;1.3
+cheese;cheese select;Italian Meat & Cheese Select;;;0.0;1.89;aldi;100.0;;;;
+cheese stick;cheese slices 2 pack;Puff Pastry Ham & Cheese Slices 2 Pack;;;0.0;1.65;aldi;87.0;;;;
 cherries;cherries;Cherries;200.0;g;1.15;2.29;aldi;100.0;50.0;1.0;0.3;12.2
-cherry tomato;cherry tomatoes;Cherry Tomatoes;250.0;g;0.25;0.62;aldi;96.4;18.0;0.9;0.2;3.9
-chicken;chicken;Chicken & Vegetable Pies 4 Pack;569.0;g;0.35;1.99;aldi;100.0;239.0;27.3;13.6;0.0
-chicken breast;chicken breast;Chicken Breast Fillets;1000;g;0.42;4.25;aldi;100.0;165.0;31.0;3.6;0.0
-chicken drumstick;chicken drumsticks;Chicken Drumsticks;1000;g;0.21;2.15;aldi;98.6;172.0;20.8;9.5;0.0
-chicken legs;chicken legs;Chicken Legs;1000;g;0.23;2.25;aldi;100.0;184.0;20.6;10.8;0.0
-chicken sausage;chicken sausages 6 pack;Chicken Sausages 6 Pack;340.0;g;0.61;2.09;aldi;88.9;223.0;14.0;17.0;2.0
-chicken stock;chicken stock cubes;Chicken Stock Cubes;;;0.0;0.69;aldi;90.1;4.0;0.5;0.1;0.4
-chicken thigh;chicken thigh;Chicken Thigh Fillets;900.0;g;0.63;5.69;aldi;100.0;177.0;22.4;9.2;0.0
-chicken thighs;chicken thighs;Chicken Thighs;1000;g;0.3;2.99;aldi;100.0;177.0;22.4;9.2;0.0
-chicken wing;chicken wings;Chicken Wings;1000;g;0.21;2.15;aldi;98.0;203.0;18.3;13.9;0.0
-chickpea;chickpeas;Chickpeas;;;0.0;0.41;aldi;97.0;139.0;7.6;2.2;22.5
-chili powder;chilli powder;Chilli Powder;;;0.0;0.79;aldi;93.8;282.0;13.5;14.3;49.7
-chives;chive;British Double Gloucester Cheese with Onion & Chive 5 Slices;140.0;g;1.25;1.75;aldi;95.3;30.0;3.3;0.7;4.4
-chocolate;chocolate;Chocolate & Cream Luxurious Dessert;190.0;ml;0.52;0.99;aldi;100.0;546.0;4.9;31.3;59.4
-soy chorizo;chorizo;Chorizo & Gouda Rollitos 8 Pack;;;0.0;1.89;aldi;88.2;455.0;24.1;38.3;1.9
-cinnamon;cinnamon;Cinnamon & Raisin Bagels 5 Pack;5;pcs;0.0;0.99;aldi;100.0;247.0;4.0;1.2;80.6
+cherry;cherry tomatoes;Cherry Tomatoes;250.0;g;0.25;0.62;aldi;100.0;18.0;0.9;0.2;3.9
+cherry tomato;cherry tomatoes in rich tomato juice;Cherry Tomatoes in Rich Tomato Juice;400.0;g;0.19;0.75;aldi;100.0;;;;
+chicken apple sausage;chicken;Cooked Sliced Chicken;340.0;g;0.61;2.09;aldi;100.0;239.0;27.3;13.6;0.0
+chicken;chicken breast;Chicken Breast Fillets;1000;g;0.42;4.25;aldi;100.0;165.0;31.0;3.6;0.0
+chicken drumstick;chicken drumsticks;Chicken Drumsticks;1000;g;0.21;2.15;aldi;100.0;172.0;24.0;8.0;0.0
+chicken legs;chicken legs;Chicken Legs;1000;g;0.23;2.25;aldi;100.0;184.0;22.0;10.0;0.0
+chicken stock;chicken stock cubes;Chicken Stock Cubes;;;0.0;0.69;aldi;100.0;;;;
+chicken thigh;chicken thigh;Chicken Thigh Fillets;900.0;g;0.63;5.69;aldi;100.0;209.0;26.0;11.0;0.0
+chicken thighs;chicken thighs;Chicken Thighs;1000;g;0.3;2.99;aldi;100.0;209.0;26.0;11.0;0.0
+chicken wing;chicken wings;Chicken Wings;1000;g;0.21;2.15;aldi;100.0;203.0;18.3;13.9;0.0
+chickpea;chickpeas;Chickpeas;;;0.0;0.41;aldi;94.1;139.0;7.6;2.1;22.5
+chili powder;chilli powder;Chilli Powder;;;0.0;0.79;aldi;96.0;;;;
+chocolate;chocolate lolly;Mini Chocolate Lolly;286.0;g;0.72;2.05;aldi;100.0;;;;
+chocolate protein powder;chocolate protein porridge sachet;Chocolate Protein Porridge Sachet;288.0;g;0.48;1.39;aldi;93.3;;;;
+rice vinegar;cider vinegar;Cider Vinegar;;;0.0;1.65;aldi;85.7;;;;
+cinnamon;cinnamon buns;Cinnamon Buns;2;pcs;0.0;1.49;aldi;100.0;;;;
 cocoa powder;cocoa powder;Cocoa Powder 250g;250.0;g;1.2;2.99;aldi;100.0;228.0;19.6;13.7;57.9
-coconut;coconut;Coconut & Vanilla Greek Style Yogurt 4 Pack;460.0;g;0.22;0.99;aldi;100.0;354.0;3.3;33.5;15.2
-coconut milk;coconut milk;Coconut Milk 400ml Full Fat;400.0;ml;0.19;0.75;aldi;100.0;230.0;2.3;23.8;5.5
+coconut sugar;coconut greek style yogurt;Coconut Greek Style Yogurt;451.0;g;0.26;1.19;aldi;87.0;;;;
+coconut;coconut milk;Coconut Milk 400ml Full Fat;400.0;ml;0.19;0.75;aldi;100.0;230.0;2.3;23.8;5.5
+coconut wrap;coconut water;Coconut Water;;;0.0;1.99;aldi;90.9;;;;
 cod;cod;Cod Fillets;360.0;g;1.05;3.79;aldi;100.0;82.0;17.8;0.7;0.0
-coleslaw mix;coleslaw;Reduced Fat Coleslaw;;;0.0;0.79;aldi;89.4;23.0;1.3;0.1;5.0
-corn;corn;Baby Corn;145.0;g;0.75;1.09;aldi;100.0;96.0;3.4;1.5;21.0
+coleslaw mix;coleslaw;Reduced Fat Coleslaw;;;0.0;0.79;aldi;100.0;;;;
+baby corn;corn;Baby Corn;145.0;g;0.75;1.09;aldi;100.0;86.0;3.3;1.4;18.7
 cottage cheese;cottage cheese;Low Fat Cottage Cheese;300.0;g;0.33;0.99;aldi;100.0;98.0;11.1;4.3;3.4
 cranberries;cranberries;Raisins & Cranberries;300.0;g;0.45;1.35;aldi;100.0;46.0;0.4;0.1;12.2
-cranberry;cranberry wrap;Brie & Cranberry Wrap;204.0;g;0.81;1.65;aldi;88.5;46.0;0.4;0.1;12.2
-crackers;cream crackers;Cream Crackers;;;0.0;0.49;aldi;85.3;482.0;7.1;20.0;68.0
-crispy rice cereal;crisp rice cereal;Crisp Rice Cereal;;;0.0;0.89;aldi;95.6;400.0;5.3;2.0;89.8
+cranberry;cranberry juice drink;Cranberry Juice Drink;;;0.0;1.35;aldi;100.0;;;;
+cream cheese;cream cheese stuffed cherry bell peppers;Cream Cheese Stuffed Cherry Bell Peppers;150.0;ml;1.46;2.19;aldi;100.0;;;;
+graham crackers;cream crackers;Cream Crackers;;;0.0;0.49;aldi;88.0;;;;
+crispy rice cereal;crispy;Sweet & Crispy;190.0;g;0.52;0.99;aldi;100.0;;;;
 cucumber;cucumber;Cucumber;1;pcs;0.0;0.89;aldi;100.0;15.0;0.7;0.1;3.6
 cumin;cumin;Cumin;;;0.0;0.65;aldi;100.0;375.0;17.8;22.3;44.2
 curry powder;curry powder;Medium Curry Powder;90.0;g;0.99;0.89;aldi;100.0;325.0;14.3;14.0;55.8
-coriander;cut coriander;British Cut Coriander;30.0;g;1.67;0.5;aldi;90.5;23.0;2.1;0.5;3.7
-dark chocolate;dark chocolate;Dark Chocolate 100g;100.0;g;0.65;0.65;aldi;100.0;546.0;4.9;31.3;61.2
-dairy free chocolate chips;dark chocolate chips;Dark Chocolate Chips;100.0;g;1.19;1.19;aldi;85.7;546.0;4.9;31.3;61.2
-Dijon mustard;dijon mustard;Dijon Mustard;200.0;g;0.24;0.49;aldi;94.1;66.0;4.0;3.3;5.8
-edamame;edamame bean;Edamame Bean & Broccoli Stir Fry;320.0;g;0.31;0.99;aldi;85.8;121.0;11.9;5.2;8.9
-egg noodles;egg noodles;Egg Noodles;410.0;g;0.31;1.29;aldi;100.0;138.0;4.5;2.1;25.2
-feta;feta;Feta & Grain Salad;200.0;g;1.15;2.29;aldi;100.0;264.0;14.2;21.3;4.1
-orange marmalade;fine cut orange marmalade;Fine Cut Orange Marmalade;455.0;g;0.19;0.85;aldi;88.3;246.0;0.3;0.0;60.0
-flax seeds;flaxseed;Flaxseed;200.0;g;0.9;1.79;aldi;88.2;534.0;18.3;42.2;28.9
-fruit;fruit;Fruit & Nut Mix;200.0;g;0.29;0.59;aldi;100.0;57.0;0.8;0.2;14.0
-chickpea fusilli pasta;fusilli pasta;Fusilli Pasta 1kg;1000;g;0.12;1.19;aldi;86.2;357.0;19.0;6.0;63.0
-garlic;garlic;Garlic & Rosemary Focaccia Mix;500.0;g;0.18;0.89;aldi;100.0;149.0;6.4;0.5;33.1
+coriander;cut coriander;British Cut Coriander;30.0;g;1.67;0.5;aldi;100.0;;;;
+rosemary;cut rosemary;Cut Rosemary;20.0;g;2.5;0.5;aldi;100.0;;;;
+dark chocolate;dark chocolate;Dark Chocolate 100g;100.0;g;0.65;0.65;aldi;100.0;546.0;4.9;31.3;59.4
+dairy free chocolate chips;dark chocolate chips;Dark Chocolate Chips;100.0;g;1.19;1.19;aldi;88.9;546.0;4.9;31.3;61.2
+Dijon mustard;dijon mustard;Dijon Mustard;200.0;g;0.24;0.49;aldi;96.0;66.0;4.4;3.3;5.8
+distilled white vinegar;distilled vinegar;Distilled Vinegar;;;0.0;0.35;aldi;85.0;;;;
+edamame;edamame bean;Edamame Bean & Broccoli Stir Fry;320.0;g;0.31;0.99;aldi;100.0;;;;
+egg;egg noodles;Egg Noodles;410.0;g;0.31;1.29;aldi;100.0;138.0;4.5;2.1;25.2
+eggs;eggs 6 pack;Free Range Eggs 6 Pack;6;pcs;0.0;0.99;aldi;100.0;;;;
+feta;feta grain salad;Feta & Grain Salad;200.0;g;1.15;2.29;aldi;100.0;;;;
+fig;fig rolls;Fig Rolls;;;0.0;0.59;aldi;100.0;;;;
+orange marmalade;fine cut orange marmalade;Fine Cut Orange Marmalade;455.0;g;0.19;0.85;aldi;100.0;;;;
+flax seeds;flaxseed;Flaxseed;200.0;g;0.9;1.79;aldi;88.9;;;;
+fruit;fruit;Cadbury Fruit & Nut;95.0;g;1.67;1.59;aldi;100.0;57.0;0.8;0.2;14.0
+chickpea fusilli pasta;fusilli pasta;Fusilli Pasta 1kg;1000;g;0.12;1.19;aldi;100.0;131.0;5.0;1.1;25.0
+garam masala;garam malasa powder;Garam Malasa Powder;90.0;g;0.99;0.89;aldi;90.9;;;;
+green peas;garden peas;Garden Peas;898.0;g;0.13;1.15;aldi;85.7;;;;
+chili garlic sauce;garlic;Garlic;4;pcs;0.0;0.87;aldi;100.0;149.0;6.4;0.5;33.1
 garlic granules;garlic granules;Garlic Granules;;;0.0;0.69;aldi;100.0;331.0;16.6;0.7;72.7
-garlic pasta sauce;garlic pasta sauce;Onion & Garlic Pasta Sauce;500.0;ml;0.14;0.69;aldi;100.0;50.0;1.5;1.5;8.0
 ginger;ginger;Ginger;125.0;g;0.79;0.99;aldi;100.0;80.0;1.8;0.8;17.8
-gluten free spaghetti;gluten free spaghetti;Gluten Free Spaghetti;500.0;g;0.06;0.29;aldi;100.0;357.0;5.0;1.0;80.0
-grape;grape;Apple, Pineapple & Grape;200.0;g;0.49;0.99;aldi;100.0;69.0;0.7;0.2;18.1
-greek yogurt;greek yoghurt;Greek Yoghurt 0% Fat;;;0.0;1.99;aldi;93.8;97.0;9.0;5.0;3.6
-green beans;green beans;Green Beans;220.0;g;0.39;0.85;aldi;100.0;31.0;1.8;0.2;7.0
-ground beef;ground beef;Beef Mince 25% Fat;500.0;g;0.62;3.09;aldi;100.0;254.0;17.2;20.0;0.0
-ground lamb;ground lamb;British Lamb Mince 20% Fat;475.0;g;1.16;5.49;aldi;100.0;282.0;16.6;23.4;0.0
-ground pork;ground pork;British Pork Mince 12% Fat;500.0;g;0.45;2.25;aldi;100.0;263.0;16.9;21.2;0.0
-ground turkey;ground turkey;British Turkey Mince 7% Fat;500.0;g;0.6;2.99;aldi;100.0;193.0;18.4;13.0;0.0
-ham;ham;British Cooked Ham 10 Slices;115.0;g;0.65;0.75;aldi;100.0;145.0;20.9;6.3;1.5
-cocoa hazelnut spread;hazelnut spread;Hazelnut Spread;;;0.0;2.99;aldi;91.3;539.0;5.4;30.9;60.5
-pasta sauce;herb pasta sauce;Tomato & Herb Pasta Sauce;441.0;ml;0.11;0.49;aldi;90.3;42.0;1.2;1.5;6.5
-lemon herb seasoning;herb seasoning;Garlic & Herb Seasoning;;;0.0;0.59;aldi;90.7;50.0;1.5;0.5;10.0
-herbs;herbs;Reduced Fat Soft Cheese Garlic & Herbs;200.0;g;0.47;0.95;aldi;100.0;36.0;2.0;0.5;6.5
-hoisin sauce;hoisin sauce;Hoisin Sauce;;;0.0;1.39;aldi;100.0;220.0;3.4;3.0;44.0
-honey;honey;Honey & Nut Crunchy Clusters Cereal;500.0;g;0.4;1.99;aldi;100.0;304.0;0.3;0.0;82.4
-portobello mushroom;italian ham, portobello mushroom;Italian Ham, Portobello Mushroom & Mascapone Wood Fired Pizza;531.0;g;0.75;3.99;aldi;86.3;22.0;2.1;0.3;3.9
-kiwi;kiwis;Kiwis;6;pcs;0.0;1.19;aldi;94.3;61.0;1.1;0.5;14.7
-ground chicken;lean ground chicken;Lean Chicken Mince 5% Fat;500.0;g;0.52;2.59;aldi;92.1;143.0;17.4;8.1;0.0
-leek;leeks;British Leeks;500.0;g;0.28;1.39;aldi;94.3;61.0;1.5;0.3;14.2
-lemon;lemon;Lemon & Lime Flavoured Still Water 4 Pack;500.0;ml;0.32;1.59;aldi;100.0;29.0;1.1;0.3;9.3
+gluten free pasta;gluten free spaghetti;Gluten Free Spaghetti;500.0;g;0.06;0.29;aldi;87.5;357.0;5.0;1.5;78.0
+golden beet;golden breadcrumbs;Golden Breadcrumbs;;;0.0;0.99;aldi;85.7;;;;
+greek yogurt;greek yoghurt;Greek Yoghurt 0% Fat;;;0.0;1.99;aldi;96.0;;;;
+green beans;green beans;Green Beans;220.0;g;0.39;0.85;aldi;100.0;31.0;1.8;0.2;7.1
+ground clove;ground;Quorn Mince;;;0.0;2.35;aldi;100.0;;;;
+ground lamb;ground lamb;British Lamb Mince 20% Fat;475.0;g;1.16;5.49;aldi;100.0;282.0;17.0;23.0;0.0
+ground turkey;ground turkey;British Turkey Mince 7% Fat;500.0;g;0.6;2.99;aldi;100.0;149.0;18.0;8.0;0.0
+halloumi;halloumi vegetable burgers 2 pack;Slow Roasted Tomato & Halloumi Vegetable Burgers 2 Pack;227.0;g;0.88;1.99;aldi;100.0;;;;
+ham;ham mushroom tagliatelle;Ham & Mushroom Tagliatelle;400.0;g;0.7;2.79;aldi;100.0;;;;
+harissa;harissa salads;Harissa Salads;1;pcs;0.0;2.99;aldi;100.0;;;;
+cocoa hazelnut spread;hazelnut spread;Hazelnut Spread;;;0.0;2.99;aldi;100.0;;;;
+hoisin sauce;hoisin sauce;Hoisin Sauce;;;0.0;1.39;aldi;100.0;220.0;3.0;3.0;44.0
+honey;honey ham;British Cooked Honey Ham 10 Slices;115.0;g;0.65;0.75;aldi;100.0;;;;
+honey mustard;honey mustard salad dressing;Honey & Mustard Salad Dressing;;;0.0;0.99;aldi;100.0;;;;
+pepperoni;hot pepperoni;Hot Pepperoni 24 Slices;;;0.0;1.09;aldi;100.0;;;;
+italian seasoning;italian meat;Italian Meat & Cheese Select;;;0.0;1.89;aldi;87.0;;;;
+jalapeño;jalapeño fusions tuna;Jalapeño Fusions Tuna;80.0;g;1.11;0.89;aldi;100.0;;;;
+kimchi;kimchi vegetable burgers 2 pack;Kimchi Vegetable Burgers 2 Pack;227.0;g;0.88;1.99;aldi;100.0;;;;
+kiwi;kiwis;Kiwis;6;pcs;0.0;1.19;aldi;88.9;;;;
+ground chicken;lean ground chicken;Lean Chicken Mince 5% Fat;500.0;g;0.52;2.59;aldi;100.0;;;;
+leek;leek quiche;Individual Cheddar & Leek Quiche;;;0.0;1.39;aldi;100.0;;;;
+lemon;lemon;Lemon;;;0.0;0.69;aldi;100.0;29.0;1.1;0.3;9.3
 lemon juice;lemon juice;Lemon Juice;;;0.0;0.69;aldi;100.0;22.0;0.4;0.2;6.9
+lemon pepper;lemon pepper smoked salmon;Lemon & Pepper Smoked Salmon;100.0;g;3.09;3.09;aldi;100.0;;;;
+lentil;lentil chips;Lentil Chips;;;0.0;0.99;aldi;100.0;;;;
 lime;lime;Pineapple & Lime;;;0.0;1.79;aldi;100.0;30.0;0.7;0.2;10.5
-long grain white rice;long grain white rice;Long Grain White Rice;1000;g;0.05;0.52;aldi;100.0;130.0;2.7;0.3;28.2
-macadamia nuts;macadamias;Macadamias;200.0;g;1.5;2.99;aldi;88.9;718.0;7.9;75.8;13.8
-vanilla extract;madagascan vanilla extract;Madagascan Vanilla Extract;;;0.0;0.79;aldi;85.5;288.0;0.0;0.0;12.7
-mandarin orange;mandarin oranges in juice;Mandarin Oranges in Juice;;;0.0;0.69;aldi;86.6;53.0;0.8;0.3;13.3
+long grain white rice;long grain white rice;Long Grain White Rice;1000;g;0.05;0.52;aldi;100.0;365.0;7.1;0.7;80.0
+macaroni and cheese;macaroni cheese;Macaroni Cheese;400.0;g;0.62;2.49;aldi;88.2;;;;
+mandarin;mandarin oranges in juice;Mandarin Oranges in Juice;;;0.0;0.69;aldi;100.0;;;;
 mango;mango;Mango Chunks;240.0;g;0.87;2.09;aldi;100.0;60.0;0.8;0.4;15.0
 maple syrup;maple syrup;Maple Syrup;;;0.0;3.99;aldi;100.0;260.0;0.0;0.1;67.0
-mashed potatoes;mashed potato;Mashed Potato;700.0;g;0.17;1.19;aldi;96.4;83.0;1.8;0.6;18.0
-meatballs;meatballs;Meatballs;;;0.0;2.79;aldi;100.0;200.0;14.0;15.0;5.0
-milk;milk;Milk & Cereal Breakfast Biscuits 6 Pack;;;0.0;0.69;aldi;100.0;42.0;3.4;1.0;5.0
-chocolate chips;milk chocolate chips;Milk Chocolate Chips;100.0;ml;1.19;1.19;aldi;92.6;546.0;4.9;31.3;59.4
-mixed fruit;mixed fruit squash;Mixed Fruit Squash;;;0.0;1.09;aldi;87.1;50.0;0.5;0.2;12.0
-mixed nuts;mixed nuts;Mixed Nuts;200.0;g;0.88;1.75;aldi;100.0;607.0;20.0;54.0;20.0
-mixed vegetable;mixed vegetables;Mixed Vegetables;1000;g;0.1;0.99;aldi;98.4;65.0;2.9;0.3;13.1
-mozzarella;mozzarella;Classic Mozzarella;125.0;g;0.55;0.69;aldi;100.0;;;;
-mozzarella cheese;mozzarella cheese;Grated Mozzarella Cheese;500.0;g;0.6;2.99;aldi;100.0;280.0;22.0;17.0;3.1
-mushroom;mushrooms;Sliced Mushrooms;500.0;g;0.2;0.99;aldi;97.0;22.0;3.1;0.3;3.3
-nectarine;nectarines;Nectarines;4;pcs;0.0;1.79;aldi;97.3;44.0;1.1;0.3;10.6
-nuts;nut;Sweet Pockets Multipack Chocolate Fruit & Nut;125.0;g;1.19;1.49;aldi;92.6;607.0;20.0;54.0;20.0
-onion;onion;Onion & Garlic Pasta Sauce;500.0;ml;0.14;0.69;aldi;100.0;40.0;1.1;0.1;9.3
-onion granules;onion granules;Onion Granules;;;0.0;0.65;aldi;100.0;350.0;10.0;1.0;79.0
-orange zest;orange zero;Orange Zero;;;0.0;1.65;aldi;85.8;97.0;1.5;0.2;25.0
-bread crumbs;panko breadcrumbs;Panko Breadcrumbs;;;0.0;1.19;aldi;85.2;357.0;11.0;5.0;71.0
+mashed potatoes;mashed potato;Mashed Potato;700.0;g;0.17;1.19;aldi;100.0;;;;
+meatballs;meatballs;Meatballs;;;0.0;2.79;aldi;100.0;286.0;14.0;22.0;8.0
+milk;milk chocolate;Milk Chocolate 100g;100.0;g;0.65;0.65;aldi;100.0;;;;
+chocolate chips;milk chocolate chips;Milk Chocolate Chips;100.0;ml;1.19;1.19;aldi;100.0;;;;
+mint;mint humbugs;Mint Humbugs;225.0;g;0.4;0.89;aldi;100.0;;;;
+mixed berries;mixed berry kefir drink;Mixed Berry Kefir Drink;;;0.0;2.09;aldi;87.0;;;;
+mixed fruit;mixed fruit squash;Mixed Fruit Squash;;;0.0;1.09;aldi;100.0;;;;
+mixed nuts;mixed nuts;Mixed Nuts;200.0;g;0.88;1.75;aldi;100.0;607.0;20.0;53.5;20.0
+mixed vegetable;mixed vegetables;Mixed Vegetables;1000;g;0.1;0.99;aldi;100.0;65.0;2.9;0.3;13.1
+mozzarella;mozzarella;Classic Mozzarella;125.0;g;0.55;0.69;aldi;100.0;280.0;22.0;21.0;2.2
+mozzarella cheese;mozzarella cheese;Grated Mozzarella Cheese;500.0;g;0.6;2.99;aldi;100.0;280.0;22.0;21.0;2.2
+mushroom;mushroom stir fry;Mushroom Stir Fry;320.0;g;0.31;0.99;aldi;100.0;;;;
+cremini mushrooms;mushrooms;Sliced Mushrooms;500.0;g;0.2;0.99;aldi;100.0;22.0;3.1;0.3;3.3
+nectarine;nectarines;Nectarines;4;pcs;0.0;1.79;aldi;94.7;;;;
+nuts;nut;Cadbury Fruit & Nut;95.0;g;1.67;1.59;aldi;85.7;;;;
+garlic pasta sauce;onion garlic pasta sauce;Onion & Garlic Pasta Sauce;500.0;ml;0.14;0.69;aldi;100.0;;;;
+onion granules;onion granules;Onion Granules;;;0.0;0.65;aldi;100.0;350.0;10.0;1.0;80.0
+onion;onion pasty;Puff Pastry Cheese & Onion Pasty;;;0.0;0.69;aldi;100.0;;;;
+orange zest;orange zero;Orange Zero;;;0.0;1.65;aldi;90.0;;;;
+breadcrumbs;panko breadcrumbs;Panko Breadcrumbs;;;0.0;1.19;aldi;100.0;357.0;11.0;5.0;73.0
 paprika;paprika;Smoked Paprika;40.0;g;1.73;0.69;aldi;100.0;282.0;14.0;13.0;54.0
 parsley;parsley;Parsley;;;0.0;0.65;aldi;100.0;36.0;3.0;0.8;6.3
-parsnip;parsnips;British Parsnips;500.0;g;0.15;0.74;aldi;96.6;75.0;1.2;0.3;18.0
-pasta;pasta;Pasta & Sauce Macaroni Cheese;;;0.0;0.45;aldi;100.0;131.0;5.0;1.1;25.0
-peach;peach;Peach & Passion Fruit Protein Yogurt;;;0.0;0.75;aldi;100.0;39.0;0.9;0.3;9.5
+parsnip;parsnips;British Parsnips;500.0;g;0.15;0.74;aldi;93.3;;;;
+pasta sauce;pasta sauce macaroni cheese;Pasta & Sauce Macaroni Cheese;;;0.0;0.45;aldi;100.0;;;;
+peach;peach flavour;Complimints Sugar Free Strawberry & Peach Flavour;30.0;g;3.3;0.99;aldi;100.0;;;;
 peanuts;peanuts;Peanuts 200g;200.0;g;0.74;1.49;aldi;100.0;567.0;25.8;49.2;16.1
-pear;pear;SUN QUENCH, Fruit and Barley Drink, Apple & Pear;;;0.0;1.09;aldi;100.0;57.0;0.4;0.1;15.2
-pecan;pecans;Pecans;150.0;g;1.99;2.99;aldi;95.3;691.0;9.2;72.0;13.9
+pear;pears;Ripe & Ready Conference Pears;4;pcs;0.0;1.85;aldi;88.9;;;;
+pecan;pecan plaits 4 pack;Bake from Frozen Maple & Pecan Plaits 4 Pack;;;0.0;1.79;aldi;100.0;;;;
+pecans;pecans;Pecans;150.0;g;1.99;2.99;aldi;100.0;691.0;9.2;72.0;13.9
 penne pasta;penne pasta;Everyday Essentials Penne Pasta 500g;500.0;g;0.08;0.41;aldi;100.0;131.0;5.0;1.1;25.0
-lemon pepper seasoning;pepper seasoning;Salt & Pepper Seasoning;35.0;g;1.57;0.55;aldi;91.8;50.0;1.0;0.5;10.0
-pepper;pepperoni;Stuffed Crust Loaded Pepperoni Pizza With Cheese & Pepperoni;472.0;g;0.53;2.49;aldi;89.4;494.0;22.5;44.0;1.2
-pesto;pesto;Pesto & Mozzarella Flatbread;245.0;g;0.81;1.99;aldi;100.0;490.0;8.0;47.0;6.0
+pesto;pesto rosso;Pesto Rosso;190.0;g;1.05;1.99;aldi;100.0;;;;
+pie crust;pie;Steak Pie;500.0;g;1.0;4.99;aldi;100.0;;;;
 pine nuts;pine nuts;Pine Nuts;60.0;g;2.82;1.69;aldi;100.0;673.0;13.7;68.4;13.1
 pineapple;pineapple;Pineapple Chunks;300.0;g;0.46;1.39;aldi;100.0;50.0;0.5;0.1;13.1
-dried pitted date;pitted dates;Pitted Dates;500.0;g;0.56;2.79;aldi;85.2;282.0;2.5;0.4;75.0
-pomegranate;pomegranate seeds;Pomegranate Seeds;200.0;g;0.94;1.89;aldi;88.6;83.0;1.7;1.2;18.7
-pork;pork;Mini Pork & Pickle Pies 6 Pack;;;0.0;1.89;aldi;100.0;242.0;27.3;14.4;0.0
-pork chop;pork chops;Pork Chops;501.0;g;0.47;2.38;aldi;97.3;231.0;25.7;13.7;0.0
-pork loin;pork loin;British Pork Loin Joint;501.0;g;0.58;2.9;aldi;100.0;198.0;26.2;10.1;0.0
-pork shoulder;pork shoulder;British Pork Shoulder Joint;501.0;g;0.38;1.9;aldi;100.0;242.0;22.1;17.0;0.0
-potato;potatoes;British Baby Potatoes;1000;g;0.1;1.05;aldi;92.6;77.0;2.0;0.1;17.5
-pumpkin seed oil;pumpkin seeds;Pumpkin Seeds;250.0;g;0.68;1.69;aldi;89.1;559.0;30.2;49.1;10.7
+dried pitted date;pitted dates;Pitted Dates;500.0;g;0.56;2.79;aldi;95.7;;;;
+pomegranate;pomegranate seeds;Pomegranate Seeds;200.0;g;0.94;1.89;aldi;100.0;83.0;1.7;1.2;18.7
+pork chop;pork chops;Pork Chops;501.0;g;0.47;2.38;aldi;100.0;;;;
+ground pork;pork ham;British Pork Smoked Ham Family Pack 14 Slices;300.0;g;0.53;1.59;aldi;85.7;;;;
+pork;pork loin;British Pork Loin Joint;501.0;g;0.58;2.9;aldi;100.0;198.0;26.2;9.9;0.0
+pork shoulder;pork shoulder;British Pork Shoulder Joint;501.0;g;0.38;1.9;aldi;100.0;242.0;19.0;18.0;0.0
+potato;potato dauphinoise;Potato Dauphinoise;400.0;g;0.6;2.39;aldi;100.0;;;;
+purple potatoes;potatoes;British Baby Potatoes;1000;g;0.1;1.05;aldi;100.0;77.0;2.0;0.1;17.5
+pumpkin;pumpkin seeds;Pumpkin Seeds;250.0;g;0.68;1.69;aldi;100.0;559.0;30.2;49.1;10.7
 quinoa;quinoa;Quinoa & Grains;250.0;g;0.4;0.99;aldi;100.0;120.0;4.4;1.9;21.3
 radish;radish;British Radish;240.0;g;0.28;0.66;aldi;100.0;16.0;0.7;0.1;3.4
-peppercorns;rainbow peppercorns;Rainbow Peppercorns;;;0.0;1.99;aldi;85.6;255.0;10.4;3.3;64.8
-raisin;raisin;Raisin & Almond Granola;1000;g;0.2;1.99;aldi;100.0;299.0;3.1;0.5;79.2
+raisin;raisin brioche swirls;Raisin Brioche Swirls;6;pcs;0.0;1.89;aldi;100.0;;;;
 raisins;raisins;Raisins;500.0;g;0.34;1.69;aldi;100.0;299.0;3.1;0.5;79.2
 raspberries;raspberries;Raspberries;225.0;g;1.2;2.69;aldi;100.0;52.0;1.2;0.7;11.9
-raspberry;raspberry;Raspberry & Pistachio Summer Chouxnuts 2 Pack;110.0;g;2.72;2.99;aldi;100.0;52.0;1.2;0.7;11.9
-mayonnaise;real mayonnaise;Real Mayonnaise;;;0.0;0.89;aldi;89.4;700.0;1.0;77.0;0.6
-cabbage;red cabbage;Red Cabbage;1;pcs;0.0;0.89;aldi;88.2;31.0;1.4;0.2;7.4
-red chili;red chillies;Red Chillies;65.0;g;0.85;0.55;aldi;89.8;40.0;1.9;0.4;8.8
-kidney beans;red kidney beans;Red Kidney Beans;;;0.0;0.33;aldi;92.6;127.0;8.7;0.5;22.8
-lentils;red lentils;Red Lentils;500.0;g;0.2;0.99;aldi;88.2;116.0;9.0;0.4;20.1
-red onion;red onions;Red Onions;1000;g;0.1;0.95;aldi;97.3;40.0;1.1;0.1;9.3
+raspberry;raspberry;Dragonfruit & Raspberry;;;0.0;1.79;aldi;100.0;52.0;1.2;0.7;11.9
+mayonnaise;real mayonnaise;Real Mayonnaise;;;0.0;0.89;aldi;100.0;;;;
+cabbage;red cabbage;Red Cabbage;1;pcs;0.0;0.89;aldi;100.0;31.0;1.4;0.2;7.4
+dried red chiles;red chillies;Red Chillies;65.0;g;0.85;0.55;aldi;90.9;;;;
+red grapes;red grapefruit;Red Grapefruit;1;pcs;0.0;0.44;aldi;94.7;;;;
+kidney beans;red kidney beans;Red Kidney Beans;;;0.0;0.33;aldi;100.0;337.0;22.5;1.1;60.8
+lentils;red lentils;Red Lentils;500.0;g;0.2;0.99;aldi;100.0;358.0;25.8;2.2;63.1
+red onion;red onions;Red Onions;1000;g;0.1;0.95;aldi;100.0;;;;
 red pepper;red pepper;Red Pepper;1;pcs;0.0;0.7;aldi;100.0;31.0;1.0;0.3;6.0
-baby red potatoes;red potatoes;British Red Potatoes;2500.0;g;0.08;1.95;aldi;91.0;70.0;1.9;0.1;15.9
-red wine vinegar;red wine vinegar;Red Wine Vinegar;;;0.0;1.65;aldi;100.0;19.0;0.0;0.0;0.0
-rice;rice;Protein BBQ Pulled Pork & Rice;380.0;g;0.76;2.89;aldi;100.0;130.0;2.7;0.3;28.2
-brown rice noodles;rice noodles;Rice Noodles;300.0;g;0.33;0.99;aldi;89.4;109.0;1.8;0.2;24.9
-romaine lettuce;romaine lettuce;British Romaine Lettuce;2;pcs;0.0;1.15;aldi;100.0;17.0;1.2;0.3;3.3
-rosemary;rosemary;Rosemary & Sea Salt Flatbread Thins;125.0;g;0.95;1.19;aldi;100.0;131.0;3.3;5.9;20.7
-sage;sage;Sage & Onion Stuffing Mix;;;0.0;0.45;aldi;100.0;315.0;10.6;12.8;60.7
-almond;salmon;Salmon & Watercress Topped with Crunchy Breadcrumbs;380.0;ml;1.05;3.99;aldi;87.0;208.0;20.4;13.4;0.0
-salt;salt;Salt & Pepper Fries;799.0;g;0.24;1.95;aldi;100.0;0.0;0.0;0.0;0.0
-pistachios;salted pistachios;Roasted & Salted Pistachios;200.0;g;0.99;1.99;aldi;86.1;560.0;20.2;45.3;27.2
-sausage;sausage;Sausage & Mash;400.0;g;0.7;2.79;aldi;100.0;346.0;14.1;31.6;1.9
-black sesame seeds;sesame seeds;Sesame Seeds;;;0.0;0.85;aldi;89.4;573.0;17.7;49.7;23.5
-shallot;shallots;British Shallots 400g;399.0;g;0.29;1.15;aldi;96.6;72.0;2.5;0.1;16.8
-smoked salmon;smoked salmon slices;Smoked Salmon Slices;200.0;g;2.25;4.49;aldi;88.8;117.0;18.3;4.3;0.0
-orange juice;smooth orange juice;Smooth Orange Juice;1000.0;ml;0.12;1.15;aldi;88.0;45.0;0.7;0.2;10.4
-peanut butter;smooth peanut butter;Smooth Peanut Butter;340.0;g;0.29;0.99;aldi;88.8;588.0;25.1;50.4;20.0
-soba noodles;soba noodles pot;Classic Soba Noodles Pot;90.0;g;1.21;1.09;aldi;92.6;99.0;5.1;0.1;21.4
-sour cream;sour cream;Sour Cream & Chive Dip;150.0;ml;0.66;0.99;aldi;100.0;198.0;2.4;19.3;4.6
-soy sauce;soy sauce;Light Soy Sauce;;;0.0;0.55;aldi;100.0;53.0;8.1;0.6;4.9
+baby red potatoes;red potatoes;British Red Potatoes;2500.0;g;0.08;1.95;aldi;100.0;70.0;1.9;0.1;15.9
+red wine;red wine vinegar;Red Wine Vinegar;;;0.0;1.65;aldi;100.0;19.0;0.0;0.0;0.3
+brown rice noodles;rice noodles;Rice Noodles;300.0;g;0.33;0.99;aldi;100.0;109.0;1.8;0.2;24.9
+romaine;romaine lettuce;British Romaine Lettuce;2;pcs;0.0;1.15;aldi;100.0;17.0;1.2;0.3;3.3
+sage;sage onion stuffing mix;Sage & Onion Stuffing Mix;;;0.0;0.45;aldi;100.0;;;;
+salami;salami and cheese selection;Salami and Smoked Cheese Selection;;;0.0;1.89;aldi;100.0;;;;
+salmon;salmon;Salmon Pieces;250.0;g;1.14;2.85;aldi;100.0;208.0;20.4;13.4;0.0
+salt;salt grinder;Salt Grinder;;;0.0;1.79;aldi;100.0;;;;
+andouille sausage;sausage;Sausage & Mash;400.0;g;0.7;2.79;aldi;100.0;346.0;14.1;31.7;1.8
+sea salt;sea salt chocolate;Sea Salt Chocolate;125.0;g;1.59;1.99;aldi;100.0;;;;
+black sesame seeds;sesame seeds;Sesame Seeds;;;0.0;0.85;aldi;100.0;573.0;17.7;49.7;23.4
+shallot;shallots;British Shallots 400g;399.0;g;0.29;1.15;aldi;93.3;;;;
+smoked salmon;smoked salmon slices;Smoked Salmon Slices;200.0;g;2.25;4.49;aldi;100.0;;;;
+orange juice;smooth orange juice;Smooth Orange Juice;1000.0;ml;0.12;1.15;aldi;100.0;;;;
+peanut butter;smooth peanut butter;Smooth Peanut Butter;340.0;g;0.29;0.99;aldi;100.0;;;;
+soba noodles;soba noodles pot;Classic Soba Noodles Pot;90.0;g;1.21;1.09;aldi;100.0;;;;
+dairy free sour cream;sour cream;Sour Cream & Chive Dip;150.0;ml;0.66;0.99;aldi;100.0;198.0;2.4;19.3;4.6
+soy sauce;soy sauce;Light Soy Sauce;;;0.0;0.55;aldi;100.0;53.0;8.1;0.6;4.7
 spaghetti;spaghetti;Spaghetti;;;0.0;0.75;aldi;100.0;158.0;5.8;0.9;30.9
-baby spinach;spinach;British Baby Spinach;450.0;g;0.35;1.59;aldi;85.8;23.0;2.9;0.4;3.6
-olive oil;spray olive oil;Spray Light Olive Oil;;;0.0;1.29;aldi;86.6;884.0;0.0;100.0;0.0
+soy chorizo;spicy chorizo;Spicy Chorizo & Chilli Cheddar Rollitos 8 Pack;;;0.0;1.89;aldi;90.0;;;;
+beyond meat spicy italian sausage;spicy italian salami;Spicy Italian Salami & 'Nduja Wood Fired Sourdough Pizza;501.0;g;0.8;3.99;aldi;85.0;;;;
+baby spinach;spinach;British Baby Spinach;450.0;g;0.35;1.59;aldi;100.0;23.0;2.9;0.4;3.6
 spring onions;spring onions;Jumbo Spring Onions;130.0;g;0.68;0.89;aldi;100.0;32.0;1.8;0.2;7.3
 sprinkles;sprinkles;Sprinkles;95.0;g;1.04;0.99;aldi;100.0;400.0;0.0;0.0;100.0
-strawberries;strawberries;Strawberries;400.0;g;0.59;2.35;aldi;100.0;32.0;0.7;0.3;7.7
-strawberry;strawberry;Strawberry & Yogurt Breakfast Biscuits 5 Pack;253.0;g;0.51;1.29;aldi;100.0;32.0;0.7;0.3;7.7
-snap peas;sugar snap peas;British Sugar Snap Peas;160.0;g;0.62;0.99;aldi;86.6;42.0;2.8;0.2;7.6
-diced tomatoes;sundried tomatoes;Sundried Tomatoes;280.0;g;0.41;1.15;aldi;88.2;18.0;0.9;0.2;3.9
-sunflower seed;sunflower seeds;Sunflower Seeds;250.0;g;0.46;1.15;aldi;98.3;584.0;20.8;51.5;20.0
-thai sweet chili sauce;sweet chilli sauce;Sweet Chilli Sauce;;;0.0;1.89;aldi;90.9;200.0;0.5;0.5;48.0
-russet potato;sweet potato;Sweet Potato;1;pcs;0.0;0.69;aldi;85.3;86.0;1.6;0.1;20.1
-teriyaki sauce;teriyaki sauce;Teriyaki Sauce;;;0.0;1.39;aldi;100.0;89.0;1.5;0.0;18.0
-red curry paste;thai red curry paste;Thai Red Curry Paste;180.0;g;0.72;1.29;aldi;92.6;150.0;3.0;10.0;12.0
-thyme;thyme;Thyme;15.0;g;4.33;0.65;aldi;100.0;101.0;5.6;1.7;24.5
+sriracha;sriracha breaded prawns 12 pack*;Sriracha Breaded Prawns 12 Pack*;132.0;g;1.28;1.69;aldi;100.0;;;;
+stevia;stevia sweetener tablets;Stevia Sweetener Tablets;1;pcs;0.0;0.59;aldi;100.0;;;;
+freeze dried strawberries;strawberries;Strawberries;400.0;g;0.59;2.35;aldi;100.0;32.0;0.7;0.3;7.7
+strawberry;strawberry yogurt;Fat Free Strawberry Yogurt;449.0;g;0.2;0.89;aldi;100.0;;;;
+sugar snap peas;sugar snap peas;British Sugar Snap Peas;160.0;g;0.62;0.99;aldi;100.0;42.0;2.8;0.2;7.6
+sugar;sugar waffles;Sugar Mini Waffles;6;pcs;0.0;1.49;aldi;100.0;;;;
+sun-dried tomato;sun-dried tomato pesto;Sun-dried Tomato Pesto;190.0;g;0.47;0.89;aldi;100.0;;;;
+diced tomatoes;sundried tomatoes;Sundried Tomatoes;280.0;g;0.41;1.15;aldi;92.9;;;;
+sunflower seed;sunflower seeds;Sunflower Seeds;250.0;g;0.46;1.15;aldi;100.0;584.0;20.8;51.5;20.0
+sweet onion;sweet;Sweet & Crispy;190.0;g;0.52;0.99;aldi;100.0;;;;
+thai sweet chili sauce;sweet chilli sauce;Sweet Chilli Sauce;;;0.0;1.89;aldi;97.1;;;;
+russet potato;sweet potato;Sweet Potato;1;pcs;0.0;0.69;aldi;90.9;86.0;1.6;0.1;20.1
+teriyaki sauce;teriyaki sauce;Teriyaki Sauce;;;0.0;1.39;aldi;100.0;89.0;2.0;0.0;18.0
+red curry paste;thai red curry paste;Thai Red Curry Paste;180.0;g;0.72;1.29;aldi;100.0;;;;
+dried thyme;thyme;Thyme;15.0;g;4.33;0.65;aldi;100.0;101.0;5.6;1.7;24.5
 tofu;tofu;Organic Smoked Tofu;180.0;g;0.53;0.95;aldi;100.0;76.0;8.1;4.8;1.9
-tomatillo;tomato;Tomato & Herb Pasta Sauce;441.0;ml;0.11;0.49;aldi;85.3;18.0;0.9;0.2;3.9
-tomato paste;tomato pasta bake;Cheese & Tomato Pasta Bake;399.0;g;0.25;0.99;aldi;85.2;82.0;4.3;0.5;18.9
-brussels sprouts;trimmed brussel sprouts;British Trimmed Brussel Sprouts;200.0;g;0.55;1.09;aldi;86.3;43.0;3.4;0.3;9.0
-tuna;tuna;Tuna & Sweetcorn Topped Pasta;300.0;g;0.66;1.99;aldi;100.0;132.0;28.0;1.0;0.0
-turkey breast;turkey breast;British Turkey Breast Steaks 2% Fat;375.0;g;0.96;3.59;aldi;100.0;135.0;30.1;1.0;0.0
-vanilla bean;vanilla;Twisty Pop lollies Strawberry & Vanilla;;;0.0;2.29;aldi;85.8;288.0;0.0;0.0;12.7
-vegetable;vegetable oil;Vegetable Oil;;;0.0;1.45;aldi;90.5;884.0;0.0;100.0;0.0
+tomato paste;tomato pesto pasta bake;Tomato & Pesto Pasta Bake Family Pack;1200.0;g;0.42;4.99;aldi;87.0;;;;
+tomato;tomato pizza;"10"" Cheese & Tomato Pizza";300.0;g;0.33;0.99;aldi;100.0;;;;
+tuna;tuna in spring water;Tuna Chunks In Spring Water;145.0;g;0.45;0.65;aldi;90.0;;;;
+turkey;turkey breast;British Turkey Breast Steaks 2% Fat;375.0;g;0.96;3.59;aldi;100.0;135.0;29.3;1.7;0.0
+vanilla bean;vanilla and strawberry yogurt with biscuit split pots 6 pack;Vanilla And Strawberry Yogurt With Biscuit Pieces Split Pots 6 pack;;;0.0;2.29;aldi;90.9;;;;
+vanilla protein powder;vanilla protein yogurt;Vanilla Protein Yogurt;200.0;g;0.38;0.75;aldi;85.0;;;;
+vegetable broth;vegetable oil;Vegetable Oil;;;0.0;1.45;aldi;87.0;884.0;0.0;100.0;0.0
+vegetable;vegetable pasty;Puff Pastry Beef & Vegetable Pasty;;;0.0;0.69;aldi;100.0;;;;
+watercress;watercress spinach;Watercress Spinach & Rocket Salad;80.0;ml;0.94;0.75;aldi;100.0;;;;
 watermelon;watermelon;Mini Watermelon;1;pcs;0.0;1.99;aldi;100.0;30.0;0.6;0.2;7.6
-white beans;white bread;Medium Sliced White Bread;800.0;g;0.07;0.55;aldi;85.8;139.0;9.7;0.4;25.1
+white beans;white bread;Medium Sliced White Bread;800.0;g;0.07;0.55;aldi;90.0;;;;
 white chocolate chips;white chocolate chips;White Chocolate Chips;100.0;g;1.19;1.19;aldi;100.0;539.0;5.9;32.1;59.2
-white onion;white onions;Diced White Onions;500.0;g;0.2;0.99;aldi;97.8;40.0;1.1;0.1;9.3
-white wine vinegar;white wine vinegar;White Wine Vinegar;;;0.0;1.65;aldi;100.0;14.0;0.0;0.0;0.6
-chia seeds;whole chia seeds;Whole Chia Seeds;200.0;g;0.9;1.79;aldi;87.7;486.0;16.5;30.7;42.1
-yeast;yeast;Yeast;42.0;g;1.55;0.65;aldi;100.0;105.0;12.6;1.9;13.1
-yogurt;yogurt;Yogurt & Forest Fruit Bars 6 Pack;;;0.0;1.39;aldi;100.0;61.0;3.5;3.3;4.7
+white cooking wine;white cooking chocolate;White Cooking Chocolate;;;0.0;1.49;aldi;87.5;;;;
+white rice;white ice lollies;White Ice Lollies;;;0.0;1.99;aldi;94.7;;;;
+white onion;white onions;Diced White Onions;500.0;g;0.2;0.99;aldi;100.0;;;;
+white wine vinegar;white wine vinegar;White Wine Vinegar;;;0.0;1.65;aldi;100.0;18.0;0.0;0.0;0.0
+yeast;yeast;Yeast;42.0;g;1.55;0.65;aldi;100.0;105.0;14.3;1.9;18.1
+yogurt;yogurt strawberry bars 6 pack;Yogurt & Strawberry Bars 6 Pack;;;0.0;1.39;aldi;100.0;;;;

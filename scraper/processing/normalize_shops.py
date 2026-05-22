@@ -34,6 +34,20 @@ READY_TO_EAT_EN = [
     "pasta protein pot", "meatball pasta", "lasagne", "shepherd's pie",
     "mac & cheese", "mac n cheese", "lattice", "pie for one",
     "spaghetti & meatballs",
+    "wrap", "wraps",           # "bacon & cheese wraps" = gotowy posiłek
+    " pie ", " pies",          # "chicken pies" — "pies" bez trailing space żeby łapać końcówki
+    "custard",                 # "banana & custard yogurt" = deser
+    "cooked mussels", "cooked prawns", "cooked shrimp",
+    "cooked beef", "cooked chicken", "cooked ham",  # deli meats — nie surowe
+    "garlic bread",
+    "elderflower",             # "apple & elderflower" = napój, nie jabłko
+    "butter chicken",          # indyjskie danie — nie masło
+    "mintoes", "mints pack",   # cukierki miętowe — nie masło
+    "fromage frais",           # serki owocowe — nie pojedynczy owoc
+    "flavour thick",           # "apricot flavour thick yogurt" = jogurt z smakiem, nie owoc
+    "basted",                  # "butter basted chicken" = marynowany kurczak, nie masło
+    "wheats", "wheat cereal",  # "apricot fruit wheats" = płatki, nie owoc
+    "fruit wheats",
 ]
 
 # PL keywords (Auchan / Biedronka) — kompletne dania gotowe do spożycia
@@ -283,6 +297,10 @@ _REMOVE_PHRASES_EN = [
     r"family\s+pack", r"twin\s+pack", r"value\s+pack",
     r"rspca\s+assured", r"red\s+tractor",
     r"aberdeen\s+angus", r"ibérico", r"iberico",
+    # Odmiany jabłek/gruszek — nie zmieniają kategorii produktu
+    r"pink\s+lady", r"granny\s+smith", r"golden\s+delicious",
+    r"braeburn", r"bramley", r"gala\b", r"fuji\b", r"jazz\b", r"cox\b",
+    r"conference\b",  # gruszka Conference
 ]
 _REMOVE_WORDS_EN = [
     r"\bxxl\b", r"\bxl\b", r"\borganic\b", r"\bbio\b",
@@ -352,15 +370,22 @@ def normalize_name_en(name: str, brand: str = None) -> list[str]:
     for word_re in _REMOVE_WORDS_EN:
         n = re.sub(word_re, " ", n, flags=re.I)
 
-    # Split on & only when both parts are standalone ingredients
-    # (not when & joins a flavoring to a main protein, e.g. "smoky paprika & garlic loin")
+    # Split on & only when both parts are standalone same-category ingredients
     results = [n]
     if " & " in n and n.strip() not in _NO_SPLIT_EN:
         parts = [p.strip() for p in n.split(" & ")]
         if len(parts) == 2 and all(len(p.split()) >= 1 for p in parts):
             p1, p2 = parts
+            # Don't split when one part is a single flavor-word and the other is multi-word product
+            # e.g. "apple & berry granola" → p1="apple"(1w), p2="berry granola"(2w) → join
+            # e.g. "beef & pork mince" → p1="beef"(1w), p2="pork mince"(2w) → join
+            # e.g. "butter & garlic mussels" → join (avoid spurious "butter" from prepared dish)
+            if len(p1.split()) == 1 and len(p2.split()) >= 2:
+                results = [n.replace(" & ", " ")]  # join: "apple berry granola"
+            elif len(p2.split()) == 1 and len(p1.split()) >= 2:
+                results = [n.replace(" & ", " ")]  # join: "garlic butter" (rare)
             # Skip split if p2 is a protein and p1 is just a flavoring
-            if _PROTEIN_KW.search(p2) and not _PROTEIN_KW.search(p1):
+            elif _PROTEIN_KW.search(p2) and not _PROTEIN_KW.search(p1):
                 results = [n.replace(" & ", " ")]
             else:
                 results = parts
@@ -615,9 +640,25 @@ def _canonicalize_meat_pl(name: str) -> str:
         # Brak konkretnej części — sam drób
         return animal
     else:
-        # Wołowina, wieprzowina itd.
+        # Wołowina, wieprzowina itd. — zachowaj konkretny kawałek jeśli wymieniony
         if is_ground:
             return f"mielona {animal}"
+        # Kawałki mięsne — nie sprowadzaj do nazwy zwierzęcia
+        _MEAT_CUTS = [
+            (re.compile(r"\bporcja\s+rosołow\w*\b"),     "porcja rosołowa"),  # nie generic mięso!
+            (re.compile(r"\bżeberek|żeberka\b"),         "żeberka"),
+            (re.compile(r"\bschab\b"),                   "schab"),
+            (re.compile(r"\bkarkówk\w*|karkow\w*"),      "karkówka"),
+            (re.compile(r"\bboczek\b"),                  "boczek"),
+            (re.compile(r"\budzi\w+\b"),                 "udziec"),
+            (re.compile(r"\brostbef\w*|rostbeef\w*"),    "rostbef"),
+            (re.compile(r"\bantryk\w+\b"),                "antrykot"),
+            (re.compile(r"\bnogi\b"),                    "nogi wieprzowe"),  # nie "wieprzowina"
+            (re.compile(r"\bgolonk\w+\b"),               "golonka"),
+        ]
+        for pattern, cut in _MEAT_CUTS:
+            if pattern.search(name):
+                return cut
         return animal
 
 
