@@ -59,21 +59,27 @@ def score(ingredient: str, product_generic: str) -> float:
     tsr = fuzz.token_sort_ratio(ingredient, product_generic)
     pr  = fuzz.partial_ratio(ingredient, product_generic)
 
-    # Sprawdź czy tokeny faktycznie się pokrywają
-    # Jeśli NIE — używaj tylko token_sort_ratio (bardziej konserwatywny)
-    # To zapobiega "proszek do pieczenia" ≈ "groszek" (proszek ≠ groszek, brak wspólnych tokenów)
-    # Ale przepuszcza "cynamon" ≈ "cynamon mielony" ("cynamon" jest tokenem w obu)
-    tokens_i = set(ingredient.lower().split())
-    tokens_p = set(product_generic.lower().split())
-    # Ignoruj jednoliiterowe preposition-like tokens ('z','w','i','a','o') przy sprawdzaniu
-    meaningful_i = {t for t in tokens_i if len(t) > 1}
-    meaningful_p = {t for t in tokens_p if len(t) > 1}
+    tokens_i = ingredient.lower().split()
+    tokens_p = product_generic.lower().split()
+    meaningful_i   = {t for t in tokens_i if len(t) > 1}
+    meaningful_p   = {t for t in tokens_p if len(t) > 1}
     has_common_token = bool(meaningful_i & meaningful_p)
 
-    if has_common_token:
-        return max(tsr, pr)   # trust both — "cynamon" w "cynamon mielony" ✓
-    else:
-        return tsr             # tylko token_sort — "proszek" ≠ "groszek" ✓
+    if not has_common_token:
+        return tsr   # "proszek" ≠ "groszek" (brak wspólnych tokenów)
+
+    # Sprawdź czy składnik ZACZYNA nazwę produktu (jest głównym słowem)
+    # vs pojawia się tylko jako kwalifikator/smak (np. "jagoda" w "jogurt jagoda")
+    first_product_token = next((t for t in tokens_p if len(t) > 1), "")
+    ingredient_leads = first_product_token in meaningful_i
+
+    if pr >= 85 and not ingredient_leads and tsr < 76:
+        # Fałszywy trafienie: składnik jako suffix/smak w dłuższym produkcie
+        # np. "jagoda" w "jogurt jagoda", "mak" w "jogurt mak marcepan"
+        # np. "kukurydziana" w "kasza kukurydziana" (tortilla ≠ kasza!)
+        return tsr   # TSR jest niski dla tych fałszywych dopasowań
+
+    return max(tsr, pr)   # "cynamon" w "cynamon mielony" ✓, "makaron" w "makaron penne" ✓
 
 
 def rank_candidates(ingredient: str, shop_products: list[dict]) -> list[tuple[float, dict]]:
