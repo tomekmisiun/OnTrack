@@ -11765,16 +11765,16 @@
     "standard_category": "Mięso, drób i ryby"
   },
   {
-    "original_name": "Szyja z indyka Auchan na wagę ok. 600 g",
+    "original_name": "Skrzydło z indyka Auchan na wagę ok. 600g",
     "generic_name": "indyk",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
     "unit": null,
     "sold_by_weight": true,
-    "price_package": 7.14,
+    "price_package": 9.54,
     "price_per_unit": null,
-    "price_per_100": 1.19,
+    "price_per_100": 1.59,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -11905,6 +11905,19 @@
     "price_package": 21.88,
     "price_per_unit": null,
     "price_per_100": 3.6467,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
+    "original_name": "Szyja z indyka Auchan na wagę ok. 600 g",
+    "generic_name": "szyja z indyka",
+    "shop": "auchan",
+    "currency": "PLN",
+    "package_size_value": null,
+    "unit": null,
+    "sold_by_weight": true,
+    "price_package": 7.14,
+    "price_per_unit": null,
+    "price_per_100": 1.19,
     "standard_category": "Mięso, drób i ryby"
   },
   {
@@ -22881,7 +22894,7 @@
   },
   {
     "original_name": "Fasola czerwona konserwowa Auchan 400 g",
-    "generic_name": "fasola czerwona konserwowa",
+    "generic_name": "fasola czerwona",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 240.0,
@@ -22894,7 +22907,7 @@
   },
   {
     "original_name": "Kukurydza konserwowa Auchan 400 g",
-    "generic_name": "kukurydza konserwowa",
+    "generic_name": "kukurydza",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 220.0,
@@ -22930,19 +22943,6 @@
     "price_per_unit": null,
     "price_per_100": 0.848,
     "standard_category": "Tłuszcze, oleje i sosy"
-  },
-  {
-    "original_name": "Ciecierzyca konserwowa Auchan 400 g",
-    "generic_name": "ciecierzyca konserwowa",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 240.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.99,
-    "price_per_unit": null,
-    "price_per_100": 1.2458,
-    "standard_category": "Produkty konserwowe i słoikowe"
   },
   {
     "original_name": "Groszek konserwowy Auchan 400 g",
@@ -23062,16 +23062,16 @@
     "standard_category": "Przyprawy, zioła i proszki"
   },
   {
-    "original_name": "Bulion warzywny Winiary 160 g",
+    "original_name": "Winiary Bulion warzywny 160 g",
     "generic_name": "bulion warzywny",
-    "shop": "auchan",
+    "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 160.0,
     "unit": "g",
     "sold_by_weight": false,
-    "price_package": 7.98,
+    "price_package": 7.69,
     "price_per_unit": null,
-    "price_per_100": 4.9875,
+    "price_per_100": 4.8063,
     "standard_category": "Warzywa"
   },
   {
@@ -23128,7 +23128,7 @@
   },
   {
     "original_name": "Kukurydza konserwowa słodka Dawtona 400 g",
-    "generic_name": "kukurydza konserwowa słodka",
+    "generic_name": "kukurydza słodka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 220.0,
@@ -23323,7 +23323,7 @@
   },
   {
     "original_name": "Fasola biała konserwowa Auchan 400 g",
-    "generic_name": "fasola biała konserwowa",
+    "generic_name": "fasola biała",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 240.0,
@@ -23385,19 +23385,6 @@
     "price_per_unit": null,
     "price_per_100": 12.9643,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Fasola czerwona  Rolnik 400 g",
-    "generic_name": "fasola czerwona",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 240.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.48,
-    "price_per_unit": null,
-    "price_per_100": 1.45,
-    "standard_category": "Przyprawy, zioła i proszki"
   },
   {
     "original_name": "Marchewka z groszkiem  Dawtona 510 g",
@@ -24584,7 +24571,7 @@
   },
   {
     "original_name": "Szynka konserwowa premium Krakus 300 g",
-    "generic_name": "szynka konserwowa",
+    "generic_name": "szynka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -24750,19 +24737,6 @@
     "price_per_unit": null,
     "price_per_100": 11.4,
     "standard_category": "Owoce"
-  },
-  {
-    "original_name": "Kukurydza słodka Dawtona 150 g",
-    "generic_name": "kukurydza słodka",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 140.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 4.19,
-    "price_per_unit": null,
-    "price_per_100": 2.9929,
-    "standard_category": "Warzywa"
   },
   {
     "original_name": "Przyprawa Karkówka grill - suszona mieszanka przyprawowa Prymat 20 g",
@@ -25247,7 +25221,7 @@
   },
   {
     "original_name": "Soczewica konserwowa Rolnik 400 g",
-    "generic_name": "soczewica konserwowa",
+    "generic_name": "soczewica",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 240.0,
@@ -25650,7 +25624,7 @@
   },
   {
     "original_name": "BIO Fasolka szparagowa konserwowa  EkoWital 370 ml",
-    "generic_name": "fasolka szparagowa konserwowa",
+    "generic_name": "fasolka szparagowa",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 215.0,
@@ -25754,7 +25728,7 @@
   },
   {
     "original_name": "Ogórki konserwowe z czosnkiem Provitus 300 g",
-    "generic_name": "ogórki konserwowe z czosnkiem",
+    "generic_name": "ogórki z czosnkiem",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -25806,7 +25780,7 @@
   },
   {
     "original_name": "Kukurydza konserwowa z groszkiem Bonduelle 170 g",
-    "generic_name": "kukurydza konserwowa z groszkiem",
+    "generic_name": "kukurydza z groszkiem",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 140.0,
@@ -26261,7 +26235,7 @@
   },
   {
     "original_name": "Ogórki konserwowe z papryczką chili Provitus 300 g",
-    "generic_name": "ogórki konserwowe z papryczką chili",
+    "generic_name": "ogórki z papryczką chili",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -26336,19 +26310,6 @@
     "price_per_unit": null,
     "price_per_100": 8.7,
     "standard_category": "Produkty zbożowe i mąki"
-  },
-  {
-    "original_name": "Americana Tuńczyk z Warzywami GRAAL 280g",
-    "generic_name": "americana tuńczyk",
-    "shop": "auchan",
-    "currency": "PLN",
-    "package_size_value": 280.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 8.08,
-    "price_per_unit": null,
-    "price_per_100": 2.8857,
-    "standard_category": "Mięso, drób i ryby"
   },
   {
     "original_name": "Olej lniany tłoczony na zimno z wit. D SOlej 250 ml",
@@ -27080,7 +27041,7 @@
   },
   {
     "original_name": "Ogórki konserwowe drobna kostka  Urbanek 340 g",
-    "generic_name": "ogórki konserwowe drobna kostka",
+    "generic_name": "ogórki drobna kostka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -31513,7 +31474,7 @@
   },
   {
     "original_name": "Winiary Majonez Dekoracyjny 250 ml",
-    "generic_name": "winiary",
+    "generic_name": "majonez",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -31994,7 +31955,7 @@
   },
   {
     "original_name": "Nasza Spiżarnia Papryka konserwowa 650 g",
-    "generic_name": "nasza spiżarnia papryka konserwowa",
+    "generic_name": "nasza spiżarnia papryka",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -32069,19 +32030,6 @@
     "price_per_unit": null,
     "price_per_100": 0.498,
     "standard_category": "Słodziki i dodatki smakowe"
-  },
-  {
-    "original_name": "Winiary Bulion warzywny 160 g",
-    "generic_name": "winiary bulion warzywny",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 160.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 7.69,
-    "price_per_unit": null,
-    "price_per_100": 4.8063,
-    "standard_category": "Warzywa"
   },
   {
     "original_name": "Nasza Spiżarnia Marchewka z groszkiem 700g",
@@ -32280,7 +32228,7 @@
   },
   {
     "original_name": "Winiary Majonez lekki 300 ml",
-    "generic_name": "winiary majonez lekki",
+    "generic_name": "majonez lekki",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -32657,7 +32605,7 @@
   },
   {
     "original_name": "Winiary Szlachetne Smaki Zupa pieczarkowa 44 g",
-    "generic_name": "winiary szlachetne smaki zupa pieczarkowa",
+    "generic_name": "szlachetne smaki zupa pieczarkowa",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 44.0,
@@ -33008,7 +32956,7 @@
   },
   {
     "original_name": "Krakus Szynka konserwowa z galaretką 455 g",
-    "generic_name": "krakus szynka konserwowa z galaretką",
+    "generic_name": "krakus szynka z galaretką",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 455.0,
@@ -33138,7 +33086,7 @@
   },
   {
     "original_name": "Winiary Pomysł na... Kurczak w sosie śmietanowo-ziołowym 30 g",
-    "generic_name": "winiary pomysł na",
+    "generic_name": "pomysł na",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 30.0,
@@ -33592,6 +33540,19 @@
     "standard_category": "Warzywa"
   },
   {
+    "original_name": "Winiary Bulion Drobiowy 160 g",
+    "generic_name": "bulion",
+    "shop": "biedronka",
+    "currency": "PLN",
+    "package_size_value": 160.0,
+    "unit": "g",
+    "sold_by_weight": false,
+    "price_package": 7.69,
+    "price_per_unit": null,
+    "price_per_100": 4.8063,
+    "standard_category": "Mięso, drób i ryby"
+  },
+  {
     "original_name": "Nasza Spiżarnia Pomidory suszone z ziołami 270 g",
     "generic_name": "nasza spiżarnia pomidory z ziołami",
     "shop": "biedronka",
@@ -33723,7 +33684,7 @@
   },
   {
     "original_name": "Winiary Galaretka malinowy smak 71 g",
-    "generic_name": "winiary galaretka smak",
+    "generic_name": "galaretka smak",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 71.0,
@@ -33956,19 +33917,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Winiary Galaretka truskawkowy smak 71 g",
-    "generic_name": "winiary galaretka truskawkowy smak",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 71.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 3.19,
-    "price_per_unit": null,
-    "price_per_100": 4.493,
-    "standard_category": "Owoce"
-  },
-  {
     "original_name": "Pudliszki Koncentrat pomidorowy 90 g",
     "generic_name": "pudliszki koncentrat pomidorowy",
     "shop": "biedronka",
@@ -34188,19 +34136,6 @@
     "price_per_unit": null,
     "price_per_100": 4.5424,
     "standard_category": "Mięso, drób i ryby"
-  },
-  {
-    "original_name": "Winiary Zupa jarzynowa 48 g",
-    "generic_name": "winiary zupa jarzynowa",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 48.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.43,
-    "price_per_unit": null,
-    "price_per_100": 5.0625,
-    "standard_category": "Warzywa"
   },
   {
     "original_name": "Hellmann's Majonez Babuni 405 ml",
@@ -34450,19 +34385,6 @@
     "standard_category": "Nabiał i jaja"
   },
   {
-    "original_name": "Winiary Sos pieczarkowy 30 g",
-    "generic_name": "winiary sos pieczarkowy",
-    "shop": "biedronka",
-    "currency": "PLN",
-    "package_size_value": 30.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 2.55,
-    "price_per_unit": null,
-    "price_per_100": 8.5,
-    "standard_category": "Warzywa"
-  },
-  {
     "original_name": "Orbit Refreshers Bubblemint Bezcukrowa guma do żucia (12 szt.) 26 g",
     "generic_name": "orbit refreshers bubblemint bezcukrowa guma do żucia ( .)",
     "shop": "biedronka",
@@ -34477,7 +34399,7 @@
   },
   {
     "original_name": "Winiary Galaretka cytrynowy smak 71 g",
-    "generic_name": "winiary galaretka cytrynowy smak",
+    "generic_name": "galaretka cytrynowy smak",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 71.0,
@@ -35153,7 +35075,7 @@
   },
   {
     "original_name": "Winiary Zupa grochowa 75 g",
-    "generic_name": "winiary zupa grochowa",
+    "generic_name": "zupa grochowa",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 75.0,

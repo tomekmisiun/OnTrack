@@ -3199,7 +3199,7 @@
   },
   {
     "original_name": "Kraina Mięs Zestaw rosołowy z indyka, świeży (część korpusu, skrzydło, szyja)",
-    "generic_name": "indyk",
+    "generic_name": "szyja z indyka",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 900.0,
@@ -4577,7 +4577,7 @@
   },
   {
     "original_name": "Winiary Majonez Dekoracyjny 250 ml",
-    "generic_name": "winiary",
+    "generic_name": "majonez",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 250.0,
@@ -5136,7 +5136,7 @@
   },
   {
     "original_name": "Nasza Spiżarnia Papryka konserwowa 650 g",
-    "generic_name": "nasza spiżarnia papryka konserwowa",
+    "generic_name": "nasza spiżarnia papryka",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -5227,7 +5227,7 @@
   },
   {
     "original_name": "Winiary Bulion warzywny 160 g",
-    "generic_name": "winiary bulion warzywny",
+    "generic_name": "bulion warzywny",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 160.0,
@@ -5461,7 +5461,7 @@
   },
   {
     "original_name": "Winiary Majonez lekki 300 ml",
-    "generic_name": "winiary majonez lekki",
+    "generic_name": "majonez lekki",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -5903,7 +5903,7 @@
   },
   {
     "original_name": "Winiary Szlachetne Smaki Zupa pieczarkowa 44 g",
-    "generic_name": "winiary szlachetne smaki zupa pieczarkowa",
+    "generic_name": "szlachetne smaki zupa pieczarkowa",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 44.0,
@@ -6319,7 +6319,7 @@
   },
   {
     "original_name": "Krakus Szynka konserwowa z galaretką 455 g",
-    "generic_name": "krakus szynka konserwowa z galaretką",
+    "generic_name": "krakus szynka z galaretką",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 455.0,
@@ -6462,7 +6462,7 @@
   },
   {
     "original_name": "Winiary Pomysł na... Kurczak w sosie śmietanowo-ziołowym 30 g",
-    "generic_name": "winiary pomysł na",
+    "generic_name": "pomysł na",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 30.0,
@@ -7047,7 +7047,7 @@
   },
   {
     "original_name": "Winiary Bulion Drobiowy 160 g",
-    "generic_name": "winiary",
+    "generic_name": "bulion",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 160.0,
@@ -7229,7 +7229,7 @@
   },
   {
     "original_name": "Winiary Galaretka malinowy smak 71 g",
-    "generic_name": "winiary galaretka smak",
+    "generic_name": "galaretka smak",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 71.0,
@@ -7541,7 +7541,7 @@
   },
   {
     "original_name": "Winiary Galaretka truskawkowy smak 71 g",
-    "generic_name": "winiary galaretka truskawkowy smak",
+    "generic_name": "galaretka truskawkowy smak",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 71.0,
@@ -7814,7 +7814,7 @@
   },
   {
     "original_name": "Winiary Zupa jarzynowa 48 g",
-    "generic_name": "winiary zupa jarzynowa",
+    "generic_name": "zupa jarzynowa",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 48.0,
@@ -8165,7 +8165,7 @@
   },
   {
     "original_name": "Winiary Sos pieczarkowy 30 g",
-    "generic_name": "winiary sos pieczarkowy",
+    "generic_name": "sos pieczarkowy",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 30.0,
@@ -8191,7 +8191,7 @@
   },
   {
     "original_name": "Winiary Galaretka cytrynowy smak 71 g",
-    "generic_name": "winiary galaretka cytrynowy smak",
+    "generic_name": "galaretka cytrynowy smak",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 71.0,
@@ -9036,7 +9036,7 @@
   },
   {
     "original_name": "Winiary Zupa grochowa 75 g",
-    "generic_name": "winiary zupa grochowa",
+    "generic_name": "zupa grochowa",
     "shop": "biedronka",
     "currency": "PLN",
     "package_size_value": 75.0,

@@ -391,8 +391,11 @@ _BRAND_PREFIXES_PL = sorted([
     "nestle",
     "felix",
     "mexicana",
+    "americana",   # "Americana Tuńczyk z Warzywami" — analogicznie do Mexicana
     "teekanne",
     "top",
+    "winiary",     # Winiary majonez, sos, ketchup → zostaje sam produkt
+    "pewni dobrego",  # Premium brand Auchan → bardzo drogie, nie reprezentatywne
 ], key=len, reverse=True)
 
 # Słowa marketingowe/brandowe usuwane NA ORYGINALNEJ PISOWNI (przed detekcją marki)
@@ -512,7 +515,7 @@ _REMOVE_WORDS_PL = [
     r"\bpasteryzowany\w*\b",
     r"\bhomogenizowany\w*\b",
     r"\bwzbogacon\w*\b",
-    r"\bkonserwowy\b",
+    r"\bkonserwow\w*\b",   # konserwowy/konserwowa/konserwowe — forma opakowania
     r"\bsuperfoods?\b",     # "Superfoods" — marketing
     r"\bsmooth\b",          # "masło orzechowe smooth" → "masło orzechowe"
     r"\bcrunchy\b",         # analogicznie
@@ -549,7 +552,8 @@ _POULTRY = {"kurczak", "kaczka", "gęś", "indyk"}
 # Uwaga: "pierś" (mianownik) ≠ "piersi" (dopełniacz) — to różne znaki ('ś' vs 'si')
 _POULTRY_PARTS = [
     (re.compile(r"piersi|pierś"),   "pierś"),       # z piersi / pierś z
-    (re.compile(r"\bfilet\w*\b"),   "pierś"),       # filet = pierś (to samo co pierś z kurczaka)
+    (re.compile(r"\bfilet\w*\b"),   "pierś"),       # filet = pierś
+    (re.compile(r"szyja"),          "szyja"),       # szyja z indyka/kurczaka → szyja (nie indyk)
     (re.compile(r"udka|udziec"),    "udka"),
     (re.compile(r"skrzydełk"),      "skrzydełka"),
     (re.compile(r"nóżk"),           "nóżki"),

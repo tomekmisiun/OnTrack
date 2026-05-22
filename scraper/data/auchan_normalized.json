@@ -16615,7 +16615,7 @@
   },
   {
     "original_name": "Szyja z indyka Auchan na wagę ok. 600 g",
-    "generic_name": "indyk",
+    "generic_name": "szyja z indyka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": null,
@@ -32267,7 +32267,7 @@
   },
   {
     "original_name": "Fasola czerwona konserwowa Auchan 400 g",
-    "generic_name": "fasola czerwona konserwowa",
+    "generic_name": "fasola czerwona",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 240.0,
@@ -32293,7 +32293,7 @@
   },
   {
     "original_name": "Kukurydza konserwowa Auchan 400 g",
-    "generic_name": "kukurydza konserwowa",
+    "generic_name": "kukurydza",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 220.0,
@@ -32332,7 +32332,7 @@
   },
   {
     "original_name": "Ciecierzyca konserwowa Auchan 400 g",
-    "generic_name": "ciecierzyca konserwowa",
+    "generic_name": "ciecierzyca",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 240.0,
@@ -32358,7 +32358,7 @@
   },
   {
     "original_name": "Fasola czerwona konserwowa Dawtona 400 g",
-    "generic_name": "fasola czerwona konserwowa",
+    "generic_name": "fasola czerwona",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 240.0,
@@ -32410,7 +32410,7 @@
   },
   {
     "original_name": "Kukurydza konserwowa Bonduelle 340 g",
-    "generic_name": "kukurydza konserwowa",
+    "generic_name": "kukurydza",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 285.0,
@@ -32579,7 +32579,7 @@
   },
   {
     "original_name": "Kukurydza konserwowa słodka Dawtona 400 g",
-    "generic_name": "kukurydza konserwowa słodka",
+    "generic_name": "kukurydza słodka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 220.0,
@@ -32605,7 +32605,7 @@
   },
   {
     "original_name": "Kukurydza konserwowa Pudliszki 400 g",
-    "generic_name": "kukurydza konserwowa",
+    "generic_name": "kukurydza",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 220.0,
@@ -32865,7 +32865,7 @@
   },
   {
     "original_name": "Fasola biała konserwowa Dawtona 400 g",
-    "generic_name": "fasola biała konserwowa",
+    "generic_name": "fasola biała",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 240.0,
@@ -32891,7 +32891,7 @@
   },
   {
     "original_name": "Fasola biała konserwowa Auchan 400 g",
-    "generic_name": "fasola biała konserwowa",
+    "generic_name": "fasola biała",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 240.0,
@@ -32930,7 +32930,7 @@
   },
   {
     "original_name": "Kukurydza konserwowa Rolnik 285 g",
-    "generic_name": "kukurydza konserwowa",
+    "generic_name": "kukurydza",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 285.0,
@@ -33372,7 +33372,7 @@
   },
   {
     "original_name": "Fasola biała konserwowa  Rolnik 400 g",
-    "generic_name": "fasola biała konserwowa",
+    "generic_name": "fasola biała",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 240.0,
@@ -33476,7 +33476,7 @@
   },
   {
     "original_name": "Kukurydza konserwowa Bonduelle 170 g",
-    "generic_name": "kukurydza konserwowa",
+    "generic_name": "kukurydza",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 140.0,
@@ -34620,7 +34620,7 @@
   },
   {
     "original_name": "Fasola biała konserwowa  Auchan 400 g",
-    "generic_name": "fasola biała konserwowa",
+    "generic_name": "fasola biała",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 240.0,
@@ -34646,7 +34646,7 @@
   },
   {
     "original_name": "Kukurydza konserwowa Auchan 3 x 140 g",
-    "generic_name": "kukurydza konserwowa",
+    "generic_name": "kukurydza",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 140.0,
@@ -34893,7 +34893,7 @@
   },
   {
     "original_name": "Szynka konserwowa premium Krakus 300 g",
-    "generic_name": "szynka konserwowa",
+    "generic_name": "szynka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -34984,7 +34984,7 @@
   },
   {
     "original_name": "Fasola czerwona konserwowa Dawtona 200 g",
-    "generic_name": "fasola czerwona konserwowa",
+    "generic_name": "fasola czerwona",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 120.0,
@@ -35842,7 +35842,7 @@
   },
   {
     "original_name": "Soczewica konserwowa Rolnik 400 g",
-    "generic_name": "soczewica konserwowa",
+    "generic_name": "soczewica",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 240.0,
@@ -36297,7 +36297,7 @@
   },
   {
     "original_name": "BIO Kukurydza konserwowa   EkoWital 340 g",
-    "generic_name": "kukurydza konserwowa",
+    "generic_name": "kukurydza",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 340.0,
@@ -36414,7 +36414,7 @@
   },
   {
     "original_name": "BIO Fasolka szparagowa konserwowa  EkoWital 370 ml",
-    "generic_name": "fasolka szparagowa konserwowa",
+    "generic_name": "fasolka szparagowa",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 215.0,
@@ -36557,7 +36557,7 @@
   },
   {
     "original_name": "Ogórki konserwowe z czosnkiem Provitus 300 g",
-    "generic_name": "ogórki konserwowe z czosnkiem",
+    "generic_name": "ogórki z czosnkiem",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -36635,7 +36635,7 @@
   },
   {
     "original_name": "Kukurydza konserwowa z groszkiem Bonduelle 170 g",
-    "generic_name": "kukurydza konserwowa z groszkiem",
+    "generic_name": "kukurydza z groszkiem",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 140.0,
@@ -37441,7 +37441,7 @@
   },
   {
     "original_name": "Ogórki konserwowe z papryczką chili Provitus 300 g",
-    "generic_name": "ogórki konserwowe z papryczką chili",
+    "generic_name": "ogórki z papryczką chili",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 300.0,
@@ -37636,7 +37636,7 @@
   },
   {
     "original_name": "Americana Tuńczyk z Warzywami GRAAL 280g",
-    "generic_name": "americana tuńczyk",
+    "generic_name": "tuńczyk",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 280.0,
@@ -38793,7 +38793,7 @@
   },
   {
     "original_name": "Ogórki konserwowe drobna kostka  Urbanek 340 g",
-    "generic_name": "ogórki konserwowe drobna kostka",
+    "generic_name": "ogórki drobna kostka",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 200.0,
@@ -39209,7 +39209,7 @@
   },
   {
     "original_name": "Kukurydza konserwowa  Dawtona 340 g",
-    "generic_name": "kukurydza konserwowa",
+    "generic_name": "kukurydza",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 285.0,
@@ -39404,7 +39404,7 @@
   },
   {
     "original_name": "Fasola biała konserwowa Dawtona 200 g",
-    "generic_name": "fasola biała konserwowa",
+    "generic_name": "fasola biała",
     "shop": "auchan",
     "currency": "PLN",
     "package_size_value": 120.0,

@@ -31,16 +31,42 @@ SHOPS_PL     = DATA / "shops_pl.json"
 OUT_EN       = DATA / "matches_en.json"
 OUT_PL       = DATA / "matches_pl.json"
 
-# Aliasy składników — tłumaczenie przed matchowaniem (normalize_recipes może produkować różne formy)
+# Aliasy składników — tłumaczenie przed matchowaniem
 _INGREDIENT_CANONICAL_PL: dict[str, str] = {
-    "filet z kurczaka":   "pierś z kurczaka",
-    "filety z kurczaka":  "pierś z kurczaka",
-    "filet z indyka":     "pierś z indyka",
-    "żołądek z kurczaka": "żołądki z kurczaka",
+    # Drób — generyczne → konkretna część
+    "kurczak":              "pierś z kurczaka",
+    "indyk":                "pierś z indyka",
+    "filet z kurczaka":     "pierś z kurczaka",
+    "filety z kurczaka":    "pierś z kurczaka",
+    "filet z indyka":       "pierś z indyka",
+    "żołądek z kurczaka":   "żołądki z kurczaka",
+    # Ryby
+    "tuńczyk":              "tuńczyk kawałki w sosie własnym",
+    # Warzywa z mylącą nazwą
+    "serca karczochów":     "karczochy",          # brak w sklepach → unmatch
+    "serce karczocha":      "karczochy",
+    "mieszanka sałat":      "mix sałat z roszponką",  # → mix sałat
+    # Inne
+    "majonez":              "winiary majonez lekki",  # nie wegański
+    # Suszone/liofilizowane owoce — sklep nie ma → nie matchuj do świeżych
+    "suszone jabłka":            "suszone jabłka niematchuj",
+    "suszone śliwki":            "suszone śliwki niematchuj",
+    "suszone morele":            "suszone morele niematchuj",
+    "suszone mango":             "suszone mango niematchuj",
+    "liofilizowane truskawki":   "liofilizowane truskawki niematchuj",
+    "liofilizowane maliny":      "liofilizowane maliny niematchuj",
+    # Kolor/odmiana → konkretny produkt sklepu
+    "brązowy cukier":       "cukier trzcinowy",
+    "biały cukier":         "cukier biały",
+    "brązowy ryż":          "ryż brązowy",
+    "biały ryż":            "ryż",
 }
 _INGREDIENT_CANONICAL_EN: dict[str, str] = {
+    "chicken":         "chicken breast",
     "chicken fillet":  "chicken breast",
     "chicken fillets": "chicken breast",
+    "turkey":          "turkey breast",
+    "tuna":            "tuna chunks in spring water",
 }
 
 SCORE_AUTO      = 85
@@ -55,37 +81,53 @@ log = logging.getLogger(__name__)
 
 # ── Scoring ───────────────────────────────────────────────────────────────────
 
+# Kwalifikatory dietetyczne — produkt wegański ≠ zwykły (gdy składnik nie wskazuje wegańskiego)
+_DIETARY_QUALIFIERS = {"wegański", "wegańska", "wegańskie", "vegan"}
+
+
 def score(ingredient: str, product_generic: str) -> float:
     tsr = fuzz.token_sort_ratio(ingredient, product_generic)
     pr  = fuzz.partial_ratio(ingredient, product_generic)
 
     tokens_i = ingredient.lower().split()
     tokens_p = product_generic.lower().split()
-    meaningful_i   = {t for t in tokens_i if len(t) > 1}
-    meaningful_p   = {t for t in tokens_p if len(t) > 1}
+    meaningful_i = {t for t in tokens_i if len(t) > 1}
+    meaningful_p = {t for t in tokens_p if len(t) > 1}
     has_common_token = bool(meaningful_i & meaningful_p)
 
     if not has_common_token:
-        return tsr   # "proszek" ≠ "groszek" (brak wspólnych tokenów)
+        return tsr   # "proszek" ≠ "groszek"
 
-    # Sprawdź czy składnik ZACZYNA nazwę produktu (jest głównym słowem)
-    # vs pojawia się tylko jako kwalifikator/smak (np. "jagoda" w "jogurt jagoda")
+    # Mismatch kwalifikatora dietetycznego: "majonez wegański" ≠ "majonez"
+    diet_p = meaningful_p & _DIETARY_QUALIFIERS
+    diet_i = meaningful_i & _DIETARY_QUALIFIERS
+    if diet_p and not diet_i:
+        return tsr  # produkt ma kwalifikator, składnik nie — nie matchuj
+
+    # Składnik zaczyna nazwę produktu vs pojawia się jako kwalifikator/smak
     first_product_token = next((t for t in tokens_p if len(t) > 1), "")
     ingredient_leads = first_product_token in meaningful_i
 
     if pr >= 85 and not ingredient_leads and tsr < 76:
-        # Fałszywy trafienie: składnik jako suffix/smak w dłuższym produkcie
-        # np. "jagoda" w "jogurt jagoda", "mak" w "jogurt mak marcepan"
-        # np. "kukurydziana" w "kasza kukurydziana" (tortilla ≠ kasza!)
-        return tsr   # TSR jest niski dla tych fałszywych dopasowań
+        return tsr   # "jagoda" w "jogurt jagoda", "mak" w "jogurt mak marcepan"
 
-    return max(tsr, pr)   # "cynamon" w "cynamon mielony" ✓, "makaron" w "makaron penne" ✓
+    # Reguła 2→1: jeśli składnik ma 2 tokeny a produkt tylko 1,
+    # i żaden inny token składnika nie pojawia się w produkcie,
+    # i TSR jest niski → prawdopodobne fałszywe dopasowanie przez wspólne słowo
+    # TYLKO dla bardzo niskiego TSR (< 50) żeby nie blokować normalnych przypadków
+    if ingredient_leads and len(meaningful_i) >= 2 and len(meaningful_p) == 1:
+        non_leading_i = meaningful_i - {first_product_token}
+        if non_leading_i and not (non_leading_i & meaningful_p) and tsr < 50:
+            return tsr  # np. "serca karczochów"→"serca" (tsr≈48), "amino kokosowe"→"aminokwasy"
+
+    return max(tsr, pr)
 
 
 def rank_candidates(ingredient: str, shop_products: list[dict]) -> list[tuple[float, dict]]:
     scored = [(score(ingredient, p["generic_name"]), p) for p in shop_products]
-    # Przy remisie preferuj krótszą nazwę produktu (bardziej generyczną)
-    scored.sort(key=lambda x: (-x[0], len(x[1]["generic_name"].split())))
+    ing_words = len(ingredient.split())
+    # Przy remisie preferuj produkt o liczbie słów najbliższej składnikowi (nie zawsze krótszy)
+    scored.sort(key=lambda x: (-x[0], abs(len(x[1]["generic_name"].split()) - ing_words)))
     return scored
 
 
