@@ -1,11 +1,22 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { members as membersApi } from '../api';
 import { useAuth } from './AuthContext';
+import { useLanguage } from './LanguageContext';
 
 const MemberContext = createContext(null);
 
+const DEFAULT_PRIMARY = { pl: 'Ja', en: 'Me' };
+
+function localizePrimaryName(name, lang, isPrimary) {
+  if (!isPrimary) return name;
+  const other = lang === 'pl' ? 'Me' : 'Ja';
+  if (name === other) return DEFAULT_PRIMARY[lang] || name;
+  return name;
+}
+
 export function MemberProvider({ children }) {
   const { user } = useAuth();
+  const { lang } = useLanguage();
   const [members, setMembers] = useState([]);
   const [activeMemberId, setActiveMemberId] = useState(
     () => parseInt(localStorage.getItem('activeMemberId') || '0') || null
@@ -27,28 +38,39 @@ export function MemberProvider({ children }) {
     } catch {}
   }, []);
 
-  // Załaduj gdy user się zaloguje, wyczyść gdy wyloguje
+  // Załaduj gdy user się zaloguje, zmieni język, wyczyść gdy wyloguje
   useEffect(() => {
     if (user) { reload(); }
     else { setMembers([]); }
-  }, [user?.id, reload]);
+  }, [user?.id, user?.lang, reload]);
+
+  const displayMembers = members.map(m => ({
+    ...m,
+    name: localizePrimaryName(m.name, lang, m.is_primary),
+  }));
 
   const setActiveMember = (id) => {
     setActiveMemberId(id);
     localStorage.setItem('activeMemberId', String(id));
-    const m = members.find(x => x.id === id);
+    const m = displayMembers.find(x => x.id === id);
     if (m) localStorage.setItem('activeMemberName', m.name);
   };
 
-  const activeMember = members.find(m => m.id === activeMemberId) || members[0] || null;
+  const activeMember = displayMembers.find(m => m.id === activeMemberId) || displayMembers[0] || null;
 
   // Zapisz nazwę gdy się zmieni (po załadowaniu)
   useEffect(() => {
     if (activeMember) localStorage.setItem('activeMemberName', activeMember.name);
-  }, [activeMember?.id]);
+  }, [activeMember?.id, activeMember?.name]);
+
+  const fallbackName = DEFAULT_PRIMARY[lang] || 'Ja';
+  const storedName = localStorage.getItem('activeMemberName');
+  const activeMemberName = activeMember?.name
+    || (storedName ? localizePrimaryName(storedName, lang, true) : null)
+    || fallbackName;
 
   return (
-    <MemberContext.Provider value={{ members, activeMember, setActiveMember, reload, activeMemberName: activeMember?.name || localStorage.getItem('activeMemberName') || 'Ja' }}>
+    <MemberContext.Provider value={{ members: displayMembers, activeMember, setActiveMember, reload, activeMemberName }}>
       {children}
     </MemberContext.Provider>
   );
