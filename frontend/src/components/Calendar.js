@@ -226,9 +226,7 @@ const DraggableRecipe = React.memo(function DraggableRecipe({ recipe, onToggleFa
       }}
       style={{
         flexShrink:0, width:128, height:148,
-        background: recipe.image_url
-          ? `url(${recipe.image_url}) center/cover`
-          : 'linear-gradient(135deg, #0d9488, #0f766e)',
+        background: 'linear-gradient(135deg, #0d9488, #0f766e)',
         borderRadius:12, cursor:'grab', opacity: isDragging ? 0.3 : 1,
         userSelect:'none', touchAction:'none',
         boxShadow:'0 4px 12px rgba(0,0,0,0.4)',
@@ -236,6 +234,19 @@ const DraggableRecipe = React.memo(function DraggableRecipe({ recipe, onToggleFa
         position:'relative',
       }}
     >
+      {recipe.image_url && (
+        <img
+          src={recipe.image_url}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          draggable={false}
+          style={{
+            position:'absolute', inset:0, width:'100%', height:'100%',
+            objectFit:'cover', borderRadius:12, pointerEvents:'none',
+          }}
+        />
+      )}
       {recipe.image_url && <div style={{ position:'absolute', inset:0, background:'rgba(0,0,0,0.45)', borderRadius:12 }} />}
       {/* Name + star */}
       <div style={{flex:1, padding:'8px 11px 6px', display:'flex', flexDirection:'column', position:'relative', zIndex:1}}>
@@ -826,18 +837,21 @@ function Btn({ children, danger, paste }) {
 const CARD_W = 138; // 128px width + 10px gap
 const PAGE    = 20;
 
-function CarouselList({ recipes, search, visible, setVisible, scrollRef, dragRef, onPreview, onToggleFavorite, t }) {
+function CarouselList({ recipes, search, categoryFilter, visible, setVisible, scrollRef, dragRef, onPreview, onToggleFavorite, t }) {
   const filtered = useMemo(() => {
     const q = search.trim();
-    const sorted = [...recipes].sort((a, b) => (b.is_favorite ? 1 : 0) - (a.is_favorite ? 1 : 0));
+    let list = recipes;
+    if (categoryFilter) list = list.filter(r => r.category === categoryFilter);
+    const sorted = [...list].sort((a, b) => (b.is_favorite ? 1 : 0) - (a.is_favorite ? 1 : 0));
     return q ? sorted.filter(r => fuzzySearch(q, r.name)) : sorted;
-  }, [recipes, search]);
+  }, [recipes, search, categoryFilter]);
 
-  // reset okna gdy zmienia się wyszukiwanie
-  const prevSearch = useRef(search);
-  if (prevSearch.current !== search) {
-    prevSearch.current = search;
-    setVisible(30);
+  // reset window when search or category filter changes
+  const prevKey = useRef('');
+  const filterKey = `${search}|${categoryFilter || ''}`;
+  if (prevKey.current !== filterKey) {
+    prevKey.current = filterKey;
+    setVisible(12);
     if (scrollRef.current) scrollRef.current.scrollLeft = 0;
   }
 
@@ -892,8 +906,8 @@ export default function Calendar({ onGoToTab }) {
   const [carouselOpen,setCarouselOpen] = useState(true);
   const [recipeSearch, setRecipeSearch] = useState('');
   const [carouselCatFilter, setCarouselCatFilter] = useState(null);
-  const [carouselVisible, setCarouselVisible] = useState(30);
-  const handleCarouselCatFilter = (val) => { setCarouselCatFilter(val); setCarouselVisible(30); };
+  const [carouselVisible, setCarouselVisible] = useState(12);
+  const handleCarouselCatFilter = (val) => { setCarouselCatFilter(val); };
   const carouselScrollRef = useRef(null);
   const carouselDrag = useRef({ active: false, startX: 0, scrollLeft: 0 });
   const handleToggleFavorite = useCallback(async (id) => {
@@ -1198,8 +1212,9 @@ export default function Calendar({ onGoToTab }) {
               <span style={{fontSize:11,color:'#6b7280',flexShrink:0,marginLeft:'auto'}}>{t('drag_to_cal')}</span>
             </div>
             <CarouselList
-              recipes={carouselCatFilter ? recipes.filter(r => r.category === carouselCatFilter) : recipes}
+              recipes={recipes}
               search={recipeSearch}
+              categoryFilter={carouselCatFilter}
               visible={carouselVisible}
               setVisible={setCarouselVisible}
               scrollRef={carouselScrollRef}
