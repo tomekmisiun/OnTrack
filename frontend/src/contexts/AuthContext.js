@@ -7,6 +7,14 @@ const API = axios.create({
   baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5001',
 });
 
+function clearAuthQuery() {
+  const url = new URL(window.location.href);
+  url.searchParams.delete('code');
+  url.searchParams.delete('auth_error');
+  const qs = url.searchParams.toString();
+  window.history.replaceState({}, '', qs ? `${url.pathname}?${qs}` : url.pathname);
+}
+
 export function AuthProvider({ children, onLangChange }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -17,35 +25,63 @@ export function AuthProvider({ children, onLangChange }) {
   };
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const oauthToken = params.get('token');
-    if (oauthToken) {
-      localStorage.setItem('token', oauthToken);
-      window.history.replaceState({}, '', '/');
-    }
+    let cancelled = false;
 
-    const token = oauthToken || localStorage.getItem('token');
-    if (token) {
+    async function bootstrap() {
+      const params = new URLSearchParams(window.location.search);
+      const authCode = params.get('code');
+
+      if (authCode) {
+        try {
+          const res = await API.post('/api/auth/exchange', { code: authCode });
+          if (cancelled) return;
+          localStorage.setItem('token', res.data.token);
+          clearAuthQuery();
+        } catch {
+          if (cancelled) return;
+          const url = new URL(window.location.href);
+          url.searchParams.delete('code');
+          url.searchParams.set('auth_error', 'Login error');
+          window.history.replaceState({}, '', `${url.pathname}?${url.search}`);
+          setLoading(false);
+          return;
+        }
+      }
+
+      const token = localStorage.getItem('token');
+      if (!token) {
+        setLoading(false);
+        return;
+      }
+
       API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      API.get('/api/auth/me')
-        .then(async r => {
-          const pendingLang = localStorage.getItem('pending_lang');
-          if (oauthToken && pendingLang && pendingLang !== r.data.lang) {
-            localStorage.removeItem('pending_lang');
-            try {
-              await API.patch('/api/auth/language', { lang: pendingLang });
-              applyUser({ ...r.data, lang: pendingLang });
-            } catch { applyUser(r.data); }
-          } else {
-            if (pendingLang) localStorage.removeItem('pending_lang');
+      try {
+        const r = await API.get('/api/auth/me');
+        if (cancelled) return;
+        const pendingLang = localStorage.getItem('pending_lang');
+        if (authCode && pendingLang && pendingLang !== r.data.lang) {
+          localStorage.removeItem('pending_lang');
+          try {
+            await API.patch('/api/auth/language', { lang: pendingLang });
+            applyUser({ ...r.data, lang: pendingLang });
+          } catch {
             applyUser(r.data);
           }
-        })
-        .catch(() => { localStorage.removeItem('token'); delete API.defaults.headers.common['Authorization']; })
-        .finally(() => setLoading(false));
-    } else {
-      setLoading(false);
+        } else {
+          if (pendingLang) localStorage.removeItem('pending_lang');
+          applyUser(r.data);
+        }
+      } catch {
+        if (cancelled) return;
+        localStorage.removeItem('token');
+        delete API.defaults.headers.common['Authorization'];
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
     }
+
+    bootstrap();
+    return () => { cancelled = true; };
   }, []);
 
   const logout = () => {

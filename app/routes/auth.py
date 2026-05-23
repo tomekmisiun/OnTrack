@@ -3,6 +3,9 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 from authlib.integrations.flask_client import OAuth
 from app import db
 from app.models.user import User
+from app.models.auth_code import AuthCode
+from app.utils import default_primary_member_name, sync_primary_member_name
+from urllib.parse import urlencode
 import os
 
 auth_bp = Blueprint('auth', __name__)
@@ -31,13 +34,37 @@ def _find_or_create_oauth_user(email):
     return user
 
 
+def _frontend_redirect(path_query: str):
+    frontend_url = current_app.config.get('FRONTEND_URL', 'http://localhost:3000').rstrip('/')
+    return redirect(f'{frontend_url}/{path_query.lstrip("/")}')
+
+
 @auth_bp.route('/me', methods=['GET'])
 @jwt_required()
 def me():
     user = User.query.get(int(get_jwt_identity()))
     if not user:
         return jsonify({'error': 'User not found'}), 404
+    from app.seeds import catalog_needs_repair, import_lang_from_pipeline
+    if catalog_needs_repair(user.id, user.lang):
+        import_lang_from_pipeline(user.id, user.lang, replace=True)
+    sync_primary_member_name(user)
     return jsonify(user.to_dict())
+
+
+@auth_bp.route('/exchange', methods=['POST'])
+def exchange_code():
+    data = request.get_json() or {}
+    code = str(data.get('code', '')).strip()
+    if not code:
+        return jsonify({'error': 'Code is required'}), 400
+
+    user = AuthCode.redeem(code)
+    if not user:
+        return jsonify({'error': 'Invalid or expired code'}), 401
+
+    token = create_access_token(identity=str(user.id))
+    return jsonify({'token': token})
 
 
 # ---- Google OAuth ----
@@ -46,22 +73,25 @@ def me():
 def google_login():
     if not current_app.config.get('GOOGLE_CLIENT_ID'):
         return jsonify({'error': 'Google OAuth is not configured'}), 503
-    redirect_uri = f"http://localhost:5001/api/auth/google/callback"
-    return oauth.google.authorize_redirect(redirect_uri)
+    redirect_uri = current_app.config['GOOGLE_REDIRECT_URI']
+    pending_lang = request.args.get('lang') or request.cookies.get('pending_lang') or 'pl'
+    if pending_lang not in ('pl', 'en'):
+        pending_lang = 'pl'
+    resp = oauth.google.authorize_redirect(redirect_uri)
+    resp.set_cookie('pending_lang', pending_lang, max_age=300, httponly=True, samesite='Lax')
+    return resp
 
 
 @auth_bp.route('/google/callback')
 def google_callback():
-    frontend_url = current_app.config.get('FRONTEND_URL', 'http://localhost:3000')
     try:
         token = oauth.google.authorize_access_token()
         user_info = token.get('userinfo') or oauth.google.userinfo()
         email = user_info.get('email', '').lower()
         if not email:
-            return redirect(f'{frontend_url}?auth_error=No+email+returned+from+Google')
+            return _frontend_redirect(f'?{urlencode({"auth_error": "No email returned from Google"})}')
 
         is_new = not User.query.filter_by(email=email).first()
-        # Read pending_lang from cookie (set by frontend before OAuth redirect)
         pending_lang = request.cookies.get('pending_lang') or 'pl'
         user = _find_or_create_oauth_user(email)
         if is_new:
@@ -71,13 +101,15 @@ def google_callback():
             user.lang = lang
             db.session.commit()
             seed_user(user.id, lang=lang)
-            primary = HouseholdMember(user_id=user.id, name='Me' if lang == 'en' else 'Ja', is_primary=True)
+            primary = HouseholdMember(user_id=user.id, name=default_primary_member_name(lang), is_primary=True)
             db.session.add(primary)
             db.session.commit()
-        jwt_token = create_access_token(identity=str(user.id))
-        return redirect(f'{frontend_url}?token={jwt_token}')
-    except Exception as e:
-        return redirect(f'{frontend_url}?auth_error=Login+error')
+
+        ttl = current_app.config.get('AUTH_CODE_TTL_SECONDS', 120)
+        code = AuthCode.issue(user.id, ttl_seconds=ttl)
+        return _frontend_redirect(f'?{urlencode({"code": code})}')
+    except Exception:
+        return _frontend_redirect(f'?{urlencode({"auth_error": "Login error"})}')
 
 
 @auth_bp.route('/language', methods=['PATCH'])
@@ -96,6 +128,7 @@ def change_language():
 
     from app.seeds import ensure_user_seeded
     ensure_user_seeded(user.id, lang)
+    sync_primary_member_name(user)
 
     return jsonify(user.to_dict())
 

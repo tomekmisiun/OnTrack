@@ -67,6 +67,7 @@ export const nutrition = {
 
 export const auth = {
   changeLanguage: (lang) => API.patch('/api/auth/language', { lang }),
+  exchange: (code) => API.post('/api/auth/exchange', { code }),
 };
 
 export const importPrices = {

@@ -13,8 +13,10 @@ export default function Login() {
     const params = new URLSearchParams(window.location.search);
     const authError = params.get('auth_error');
     if (authError) {
-      setError(decodeURIComponent(authError));
-      window.history.replaceState({}, '', '/');
+      setError(authError);
+      params.delete('auth_error');
+      const qs = params.toString();
+      window.history.replaceState({}, '', qs ? `${window.location.pathname}?${qs}` : window.location.pathname);
     }
   }, []);
 
@@ -46,7 +48,7 @@ export default function Login() {
         )}
 
         <button
-          onClick={() => { localStorage.setItem('pending_lang', uiLang); window.location.href = `${API_URL}/api/auth/google`; }}
+          onClick={() => { localStorage.setItem('pending_lang', uiLang); window.location.href = `${API_URL}/api/auth/google?lang=${uiLang}`; }}
           style={{
             width: '100%', padding: '12px', border: '2px solid #374151',
             borderRadius: 8, background: '#1f2937', cursor: 'pointer',
