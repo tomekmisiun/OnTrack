@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 db = SQLAlchemy()
 migrate = Migrate()
@@ -11,6 +12,10 @@ jwt = JWTManager()
 def create_app():
     app = Flask(__name__)
     app.config.from_object('config.Config')
+
+    # Railway/nginx terminate TLS — trust X-Forwarded-* for OAuth redirect URLs.
+    if not app.config.get('FLASK_DEBUG'):
+        app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
 
     db.init_app(app)
     migrate.init_app(app, db)

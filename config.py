@@ -45,13 +45,17 @@ class Config:
     SQLALCHEMY_DATABASE_URI = _database_url()
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     FLASK_DEBUG = _env_bool('FLASK_DEBUG')
+    SESSION_COOKIE_SECURE = not FLASK_DEBUG
+    SESSION_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SAMESITE = 'Lax'
+    PREFERRED_URL_SCHEME = 'https' if not FLASK_DEBUG else 'http'
     SECRET_KEY = _require_secret('FLASK_SECRET_KEY', 'dev-only-flask-secret')
     JWT_SECRET_KEY = _require_secret('JWT_SECRET_KEY', 'dev-only-jwt-secret')
     JWT_ACCESS_TOKEN_EXPIRES = 60 * 60 * 24 * 7  # 7 dni
-    GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
-    GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET')
-    GOOGLE_REDIRECT_URI = os.environ.get(
+    GOOGLE_CLIENT_ID = (os.environ.get('GOOGLE_CLIENT_ID') or '').strip() or None
+    GOOGLE_CLIENT_SECRET = (os.environ.get('GOOGLE_CLIENT_SECRET') or '').strip() or None
+    GOOGLE_REDIRECT_URI = (os.environ.get(
         'GOOGLE_REDIRECT_URI', 'http://localhost:5001/api/auth/google/callback'
-    )
+    )).strip()
     FRONTEND_URL = os.environ.get('FRONTEND_URL', 'http://localhost:3000')
     AUTH_CODE_TTL_SECONDS = int(os.environ.get('AUTH_CODE_TTL_SECONDS', '120'))

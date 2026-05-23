@@ -27,7 +27,7 @@ def test_google_callback_redirects_with_exchange_code(client, monkeypatch):
     monkeypatch.setattr(
         auth_mod.oauth.google,
         "authorize_access_token",
-        lambda: {"userinfo": {"email": "oauth-new@example.com"}},
+        lambda *_a, **_k: {"userinfo": {"email": "oauth-new@example.com"}},
     )
 
     res = client.get("/api/auth/google/callback", headers={"Cookie": "pending_lang=pl"})
@@ -57,7 +57,7 @@ def test_google_callback_existing_user_skips_seed(client, user, monkeypatch):
     monkeypatch.setattr(
         auth_mod.oauth.google,
         "authorize_access_token",
-        lambda: {"userinfo": {"email": user.email}},
+        lambda *_a, **_k: {"userinfo": {"email": user.email}},
     )
 
     res = client.get("/api/auth/google/callback")
@@ -72,7 +72,7 @@ def test_google_callback_missing_email_redirects_with_error(client, monkeypatch)
     monkeypatch.setattr(
         auth_mod.oauth.google,
         "authorize_access_token",
-        lambda: {"userinfo": {"email": ""}},
+        lambda *_a, **_k: {"userinfo": {"email": ""}},
     )
 
     res = client.get("/api/auth/google/callback")
