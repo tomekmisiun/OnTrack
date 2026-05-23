@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 """
-Orchestrator całego pipeline'u przepisów + produktów.
+Orchestrator for the full recipe + product pipeline.
 
-Kroki:
-  1  normalize_recipes   — normalizacja przepisów EN+PL przez DeepSeek
-  2  normalize_shops     — normalizacja produktów sklepowych (czysty Python)
-  3  match_ingredients   — rapidfuzz + DeepSeek dla niejednoznacznych
-  4  build_database      — ingredient_db, unmatched, recipes z kosztem
-  5  get_macros          — makroskładniki przez DeepSeek
-  6  dump_seeds          — generuje products_seed_en.json + recipes_seed_en.json do app/data/
+Steps:
+  1  normalize_recipes   — normalize EN+PL recipes via DeepSeek
+  2  normalize_shops     — clean and normalize shop product data (pure Python)
+  3  match_ingredients   — rapidfuzz + DeepSeek for ambiguous matches
+  4  build_database      — build ingredient_db, unmatched lists, recipes with cost
+  5  get_macros          — fetch macronutrients via DeepSeek
+  6  dump_seeds          — generate products_seed_en.json + recipes_seed_en.json in app/data/
 
-Użycie:
-    python run_pipeline.py               # wszystkie kroki
-    python run_pipeline.py --from 3      # od kroku 3
-    python run_pipeline.py --only 2      # tylko krok 2
+Usage:
+    python run_pipeline.py               # all steps
+    python run_pipeline.py --from 3      # from step 3 onwards
+    python run_pipeline.py --only 2      # only step 2
 """
 
 import argparse
@@ -24,7 +24,7 @@ import sys
 import time
 from pathlib import Path
 
-# Wczytaj .env z katalogu projektu (mealprep/.env)
+# Load .env from project root (mealprep/.env)
 _env_file = Path(__file__).parent.parent / ".env"
 if _env_file.exists():
     for _line in _env_file.read_text().splitlines():
@@ -65,11 +65,11 @@ log = logging.getLogger(__name__)
 
 def run_step(num: int, name: str, script: Path) -> bool:
     log.info(f"{'='*60}")
-    log.info(f"KROK {num}: {name}")
+    log.info(f"STEP {num}: {name}")
     log.info(f"{'='*60}")
 
     if not script.exists():
-        log.error(f"Skrypt nie istnieje: {script}")
+        log.error(f"Script not found: {script}")
         return False
 
     start = time.time()
@@ -80,26 +80,26 @@ def run_step(num: int, name: str, script: Path) -> bool:
     elapsed = round(time.time() - start, 1)
 
     if result.returncode == 0:
-        log.info(f"✓ Krok {num} zakończony — {elapsed}s")
+        log.info(f"✓ Step {num} completed — {elapsed}s")
         return True
     else:
-        log.error(f"✗ Krok {num} nieudany (exit={result.returncode}) — {elapsed}s")
+        log.error(f"✗ Step {num} failed (exit={result.returncode}) — {elapsed}s")
         return False
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
-    ap = argparse.ArgumentParser(description="Pipeline przepisów + produktów")
+    ap = argparse.ArgumentParser(description="Recipe + product pipeline")
     ap.add_argument("--from", dest="from_step", type=int, default=1,
-                    help="Zacznij od kroku N (domyślnie: 1)")
+                    help="Start from step N (default: 1)")
     ap.add_argument("--only", dest="only_step", type=int, default=None,
-                    help="Uruchom tylko krok N")
+                    help="Run only step N")
     args = ap.parse_args()
 
     if not PYTHON.exists():
-        log.error(f"Brak .venv pod {PYTHON}")
-        log.error("Uruchom: cd scraper && python3 -m venv .venv && .venv/bin/pip install openai rapidfuzz")
+        log.error(f"Missing .venv at {PYTHON}")
+        log.error("Run: cd scraper && python3 -m venv .venv && .venv/bin/pip install openai rapidfuzz")
         sys.exit(1)
 
     steps_to_run = []
@@ -111,24 +111,24 @@ def main():
             steps_to_run.append((num, name, script))
 
     if not steps_to_run:
-        log.error("Brak kroków do uruchomienia.")
+        log.error("No steps selected.")
         sys.exit(1)
 
-    log.info(f"Uruchamiam kroki: {[n for n, _, _ in steps_to_run]}")
+    log.info(f"Running steps: {[n for n, _, _ in steps_to_run]}")
     pipeline_start = time.time()
 
     for num, name, script in steps_to_run:
         ok = run_step(num, name, script)
         if not ok:
-            log.error(f"Pipeline przerwany na kroku {num}.")
+            log.error(f"Pipeline aborted at step {num}.")
             sys.exit(1)
 
     total = round(time.time() - pipeline_start, 1)
     log.info(f"\n{'='*60}")
-    log.info(f"Pipeline zakończony pomyślnie — łączny czas: {total}s")
+    log.info(f"Pipeline completed — total time: {total}s")
     log.info(f"{'='*60}")
 
-    # Podsumowanie plików wynikowych
+    # Summary of output files
     DATA = HERE / "data"
     result_files = [
         "recipes_normalized.json",
@@ -142,28 +142,28 @@ def main():
         Path(__file__).parent.parent / "app" / "data" / "products_seed_en.json",
         Path(__file__).parent.parent / "app" / "data" / "recipes_seed_en.json",
     ]
-    log.info("\nPliki wynikowe:")
+    log.info("\nOutput files:")
     import json
     for fname in result_files:
         p = DATA / fname
         if p.exists():
             try:
                 count = len(json.loads(p.read_text("utf-8")))
-                log.info(f"  ✓  {fname:<35} {count:>5} rekordów")
+                log.info(f"  ✓  {fname:<35} {count:>5} records")
             except Exception:
                 log.info(f"  ✓  {fname}")
         else:
-            log.info(f"  -  {fname:<35} brak")
-    log.info("\nSeed pliki (app/data/):")
+            log.info(f"  -  {fname:<35} missing")
+    log.info("\nSeed files (app/data/):")
     for p in seed_files:
         if p.exists():
             try:
                 count = len(json.loads(p.read_text("utf-8")))
-                log.info(f"  ✓  {p.name:<35} {count:>5} rekordów")
+                log.info(f"  ✓  {p.name:<35} {count:>5} records")
             except Exception:
                 log.info(f"  ✓  {p.name}")
         else:
-            log.info(f"  -  {p.name:<35} brak")
+            log.info(f"  -  {p.name:<35} missing")
 
 
 if __name__ == "__main__":

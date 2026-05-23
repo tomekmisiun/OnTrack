@@ -99,17 +99,17 @@ def _write_debug():
         )
 
     def recipe_row(r):
-        return f"{r['name']:<55} | {len(r['ingredients'])} sk."
+        return f"{r['name']:<55} | {len(r['ingredients'])} ing."
 
     sections = [
         {
-            "title": "Statystyki seed danych",
+            "title": "Seed data stats",
             "stats": {
                 "Products seed EN":          len(products_seed),
                 "Recipes seed EN":           len(recipes_seed),
-                "Produkty z ceną > 0":       sum(1 for p in products_seed if p["price"] > 0),
-                "Produkty z makro (kcal)":   sum(1 for p in products_seed if p.get("kcal") is not None),
-                "Przepisy z URL":            sum(1 for r in recipes_seed if r.get("source_url")),
+                "Products with price > 0":   sum(1 for p in products_seed if p["price"] > 0),
+                "Products with macros":      sum(1 for p in products_seed if p.get("kcal") is not None),
+                "Recipes with URL":          sum(1 for r in recipes_seed if r.get("source_url")),
             },
             "rows": [],
         },

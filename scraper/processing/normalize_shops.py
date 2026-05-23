@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-Krok 2: Normalizuje produkty sklepowe — czysty Python, bez AI.
-- 2a. Filtruje gotowe dania (tylko ALDI)
-- 2b. Wyciąga gramaturę (ALDI)
-- 2c. Wyciąga gramaturę (Auchan / Biedronka)
-- 2d. Normalizuje generic_name (EN dla ALDI, PL dla pozostałych)
-- 2e. Deduplikuje (najtańszy per generic_name)
+Step 2: Normalizes shop products — pure Python, no AI.
+- 2a. Filters ready-to-eat items (ALDI + Auchan + Biedronka)
+- 2b. Extracts package size (ALDI)
+- 2c. Extracts package size (Auchan / Biedronka)
+- 2d. Normalizes generic_name (EN for ALDI, PL for others)
+- 2e. Deduplicates (cheapest per generic_name)
 
-Wejście:  data/aldi_products.json, data/auchan_products.json, data/biedronka_products.json
-Wyjście:  data/aldi_normalized.json, data/auchan_normalized.json, data/biedronka_normalized.json,
-          data/shops_en.json, data/shops_pl.json
+Input:  data/aldi_products.json, data/auchan_products.json, data/biedronka_products.json
+Output: data/aldi_normalized.json, data/auchan_normalized.json, data/biedronka_normalized.json,
+        data/shops_en.json, data/shops_pl.json
 """
 
 import re, json, sys, logging
@@ -21,7 +21,7 @@ DATA = HERE.parent / "data"
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s", datefmt="%H:%M:%S")
 log = logging.getLogger(__name__)
 
-# ── 2a. Filtr gotowych dań (ALDI + Auchan + Biedronka) ───────────────────────
+# ── 2a. Ready-to-eat filter (ALDI + Auchan + Biedronka) ──────────────────────
 
 # EN keywords (ALDI)
 READY_TO_EAT_EN = [
@@ -34,58 +34,58 @@ READY_TO_EAT_EN = [
     "pasta protein pot", "meatball pasta", "lasagne", "shepherd's pie",
     "mac & cheese", "mac n cheese", "lattice", "pie for one",
     "spaghetti & meatballs",
-    "wrap", "wraps",           # "bacon & cheese wraps" = gotowy posiłek
-    " pie ", " pies",          # "chicken pies" — "pies" bez trailing space żeby łapać końcówki
-    "custard",                 # "banana & custard yogurt" = deser
+    "wrap", "wraps",           # "bacon & cheese wraps" = prepared meal
+    " pie ", " pies",          # "chicken pies" — space prefix so we don't catch "pizza"
+    "custard",                 # "banana & custard yogurt" = dessert
     "cooked mussels", "cooked prawns", "cooked shrimp",
-    "cooked beef", "cooked chicken", "cooked ham",  # deli meats — nie surowe
-    "honey ham", "honey roast ham", "honey glazed", "honey cured",  # deli meats, nie miód
-    "fusions tuna", "fusions",  # "jalapeño fusions tuna" = tuńczyk w smaku jalapeño
-    "vegetable burger", "veggie burger", "vegetable burgers",  # gotowe burgery
-    "lentil chip", "lentil bite", "kale chip", "pea chip",  # chipsy ze strączkowych = przekąska
-    "pineapple & lime", "pineapple and lime",  # napój, nie owoc
+    "cooked beef", "cooked chicken", "cooked ham",  # deli meats — not raw
+    "honey ham", "honey roast ham", "honey glazed", "honey cured",  # deli meats, not honey
+    "fusions tuna", "fusions",  # "jalapeño fusions tuna" = flavoured tuna, not ingredient
+    "vegetable burger", "veggie burger", "vegetable burgers",  # prepared burgers
+    "lentil chip", "lentil bite", "kale chip", "pea chip",  # legume crisps = snack
+    "pineapple & lime", "pineapple and lime",  # drink, not fruit
     "garlic bread",
-    "elderflower",             # "apple & elderflower" = napój, nie jabłko
-    "butter chicken",          # indyjskie danie — nie masło
-    "mintoes", "mints pack",   # cukierki miętowe — nie masło
-    "humbugs",                 # "mint humbugs" = cukierki, nie zioło mint
-    "seal bars",               # "mint seal bars" = baton czekoladowy
-    "stir fry",                # "mushroom stir fry" = gotowe danie
-    "pasty", "pasties",        # "cheese & onion pasty" = gotowe ciasto/pieróg
-    "macaroni cheese",         # "pasta & sauce macaroni cheese" = gotowe danie
-    "mac & cheese",            # analogicznie
-    "fromage frais",           # serki owocowe — nie pojedynczy owoc
-    "flavour thick",           # "apricot flavour thick yogurt" = jogurt z smakiem, nie owoc
-    "basted",                  # "butter basted chicken" = marynowany kurczak, nie masło
-    "wheats", "wheat cereal",  # "apricot fruit wheats" = płatki, nie owoc
+    "elderflower",             # "apple & elderflower" = drink, not apple
+    "butter chicken",          # Indian dish — not butter
+    "mintoes", "mints pack",   # mint sweets — not butter
+    "humbugs",                 # "mint humbugs" = sweets, not mint herb
+    "seal bars",               # "mint seal bars" = chocolate bar
+    "stir fry",                # "mushroom stir fry" = prepared dish
+    "pasty", "pasties",        # "cheese & onion pasty" = prepared pastry
+    "macaroni cheese",         # "pasta & sauce macaroni cheese" = prepared dish
+    "mac & cheese",            # same
+    "fromage frais",           # fruit yogurt product — not a single fruit
+    "flavour thick",           # "apricot flavour thick yogurt" = flavoured yogurt, not fruit
+    "basted",                  # "butter basted chicken" = marinated chicken, not butter
+    "wheats", "wheat cereal",  # "apricot fruit wheats" = cereal, not fruit
     "fruit wheats",
-    "lolly", "lollies",        # "almond mono lolly" = lód na patyku
-    "double strength",         # napoje squash: "double strength apple & blackcurrant squash"
-    "squirty squash",          # skoncentrowane napoje squash
-    "squashies",               # cukierki drumstick squashies
-    "mixed fruit squash",      # "mixed fruit squash" = napój
-    "fruit & barley",          # "fruit & barley squash" = napój
-    "juice drink",             # "cranberry juice drink" = napój, nie składnik
-    "yogurt granola",          # "blueberry yogurt granola" = granola, nie jogurt
-    "yogurt bars", "yogurt bar",  # "yogurt & strawberry bars" = baton, nie jogurt
-    "caramel layered yogurt", "layered yogurt",  # jogurt z karmelem = deser
-    "kefir yogurt",            # kefir to nie zwykły jogurt
-    "cereal hoops",            # "honey cereal hoops" = płatki śniadaniowe, nie miód
-    "dauphinoise",             # "potato dauphinoise" = gotowe danie, nie ziemniaki
-    "brioche swirls", "brioche roll",  # "raisin brioche swirls" = ciasto, nie rodzynki
-    "sausage & mash",          # gotowe danie, nie kiełbasa
-    "rollitos",                # "Chorizo & Cheddar Rollitos" = przekąska, nie chorizo
-    "sourdough pizza", "wood fired pizza", "nduja",  # gotowa pizza
-    "chive dip", "cheese dip", "sour cream dip",  # gotowe dipy, nie śmietana
-    "complimints", "sugar free strawberry",  # cukierki, nie owoc
-    "breaded prawns", "breaded prawn",       # "sriracha breaded prawns" = gotowe danie
-    " pizza",                                # wszystkie pizze = gotowe danie (ze spacją żeby nie łapać "pizza sauce")
-    "jelly beans", "jelly bean",             # cukierki, nie fasola
-    "pasta bake",                            # "tomato & pesto pasta bake" = gotowe danie
-    "side salad",                            # "tomato & basil side salad" = gotowa sałatka
+    "lolly", "lollies",        # "almond mono lolly" = ice lolly
+    "double strength",         # squash drinks: "double strength apple & blackcurrant squash"
+    "squirty squash",          # concentrated squash drinks
+    "squashies",               # drumstick squashies sweets
+    "mixed fruit squash",      # = drink
+    "fruit & barley",          # "fruit & barley squash" = drink
+    "juice drink",             # "cranberry juice drink" = drink, not ingredient
+    "yogurt granola",          # "blueberry yogurt granola" = granola, not yogurt
+    "yogurt bars", "yogurt bar",  # "yogurt & strawberry bars" = bar, not yogurt
+    "caramel layered yogurt", "layered yogurt",  # caramel yogurt = dessert
+    "kefir yogurt",            # kefir is not plain yogurt
+    "cereal hoops",            # "honey cereal hoops" = breakfast cereal, not honey
+    "dauphinoise",             # "potato dauphinoise" = prepared dish, not potatoes
+    "brioche swirls", "brioche roll",  # "raisin brioche swirls" = pastry, not raisins
+    "sausage & mash",          # prepared dish, not sausage
+    "rollitos",                # "Chorizo & Cheddar Rollitos" = snack, not chorizo
+    "sourdough pizza", "wood fired pizza", "nduja",  # prepared pizza
+    "chive dip", "cheese dip", "sour cream dip",  # prepared dips, not cream
+    "complimints", "sugar free strawberry",  # sweets, not fruit
+    "breaded prawns", "breaded prawn",       # "sriracha breaded prawns" = prepared dish
+    " pizza",                                # all pizzas = prepared dish (space prefix to avoid "pizza sauce")
+    "jelly beans", "jelly bean",             # sweets, not beans
+    "pasta bake",                            # "tomato & pesto pasta bake" = prepared dish
+    "side salad",                            # "tomato & basil side salad" = prepared salad
 ]
 
-# PL keywords (Auchan / Biedronka) — kompletne dania gotowe do spożycia
+# PL keywords (Auchan / Biedronka) — complete ready-to-eat dishes
 READY_TO_EAT_PL = [
     "danie ",
     "lunchbox",
@@ -111,15 +111,15 @@ READY_TO_EAT_PL = [
     "ready to eat",
     "ready to cook",
     "ready-to-eat",
-    "deser ",          # "deser mleczno ryżowy" itp.
-    "baton ",          # batoniki energetyczne
+    "deser ",          # "deser mleczno ryżowy" etc.
+    "baton ",          # energy bars
     "batonik",
     "vitanella",
-    "frytki",          # gotowe frytki (nie surowy ziemniak/batat)
+    "frytki",          # prepared fries (not raw potato/sweet potato)
     "chipsy",
     "paluszki",
     "precel",
-    "lody ",           # lody wszelkiego rodzaju
+    "lody ",           # all types of ice cream
     "tortellini",
     "müllermilch",
     "zapiefix",
@@ -127,13 +127,13 @@ READY_TO_EAT_PL = [
     "chili sin carne",
     "napój jogurtowy",
     "nesquik snack",
-    "carmelove",     # Felix Carmelove — brandowe słodzone orzechy
-    "cheerios",      # Nestlé Cheerios — płatki śniadaniowe z marki
-    "natural mix",   # Plony Natury mix — wieloskładnikowy produkt brandowy
-    "actimel",       # Danone Actimel — napój probiotyczny
+    "carmelove",     # Felix Carmelove — branded sweetened nuts
+    "cheerios",      # Nestlé Cheerios — branded breakfast cereal
+    "natural mix",   # Plony Natury mix — multi-ingredient branded product
+    "actimel",       # Danone Actimel — probiotic drink
 ]
 
-# Marki wyłącznie gotowych dań (PL)
+# Brands that only sell prepared meals (PL)
 READY_BRANDS_PL = ["froста", "frosta", "proste historie", "bistro ", "family fish", "teekanne"]
 
 WHITELIST_PATTERNS_EN = [
@@ -146,11 +146,11 @@ WHITELIST_PATTERNS_EN = [
     r"bacon\s*&\s*sausage",
 ]
 
-# EN składniki które NIE są gotowymi daniami mimo podejrzanych słów
+# EN ingredients that are NOT prepared dishes despite suspicious keywords
 WHITELIST_PATTERNS_PL = [
-    r"^wątroba\b",       # wątroba = liver (składnik)
-    r"^szynka\b",        # szynka = ham (składnik)
-    r"curry\s*\d",       # "curry 50g" = przyprawa
+    r"^wątroba\b",       # wątroba = liver (ingredient)
+    r"^szynka\b",        # szynka = ham (ingredient)
+    r"curry\s*\d",       # "curry 50g" = spice
     r"\bproszek curry\b",
     r"\bpasta curry\b",
 ]
@@ -207,7 +207,7 @@ def _is_liquid(name: str, category: str) -> bool:
     )
 
 
-# ── Domyślne wagi dla produktów na sztuki ────────────────────────────────────
+# ── Default weights for products sold by piece ───────────────────────────────
 
 def _load_default_weights() -> dict:
     path = HERE.parent / "data" / "default_weights.json"
@@ -220,9 +220,9 @@ _DEFAULT_WEIGHTS = _load_default_weights()
 
 
 def _default_weight_for(name: str) -> int | None:
-    """Zwraca domyślną wagę (g) dla produktu na sztuki, szukając po słowach kluczowych."""
+    """Return default weight (g) for a piece-sold product, matched by keyword."""
     name_l = name.lower()
-    # Próbuj od najdłuższego dopasowania (np. "red grapefruit" przed "grapefruit")
+    # Try longest match first (e.g. "red grapefruit" before "grapefruit")
     best_key = None
     best_len = 0
     for key in _DEFAULT_WEIGHTS:
@@ -234,7 +234,7 @@ def _default_weight_for(name: str) -> int | None:
     return _DEFAULT_WEIGHTS.get("default")
 
 
-# ── 2b. Gramatura ALDI ────────────────────────────────────────────────────────
+# ── 2b. Package size — ALDI ──────────────────────────────────────────────────
 
 def extract_package_aldi(product: dict) -> dict:
     name        = product.get("name", "")
@@ -263,7 +263,7 @@ def extract_package_aldi(product: dict) -> dict:
             per_unit = product.get("price_per_unit")
             per_100  = None
 
-    # 2. price_per_kg exists → oblicz gramaturę
+    # 2. price_per_kg exists → compute package weight
     elif ppkg and price is not None:
         if abs(price - ppkg) < 0.01:
             # Sold by weight (price == price_per_kg)
@@ -277,20 +277,20 @@ def extract_package_aldi(product: dict) -> dict:
             unit    = "ml" if _is_liquid(name, category) else "g"
             per_100 = round(price / grams * 100, 4) if grams else None
 
-    # 3. pack_volume ze scrapera (np. "0.5 L (£4.38/1 L)" → pack_volume=500, unit="ml")
+    # 3. pack_volume from scraper (e.g. "0.5 L (£4.38/1 L)" → pack_volume=500, unit="ml")
     elif pack_volume and pack_vol_unit:
         pkg_val = pack_volume
         unit    = pack_vol_unit
         per_100 = round(price / pack_volume * 100, 4) if (price and pack_volume) else None
 
-    # 4. price_per_litre → oblicz objętość
+    # 4. price_per_litre → compute volume
     elif ppl and price is not None:
         ml = round(price / ppl * 1000, 0)
         pkg_val = ml
         unit    = "ml"
         per_100 = round(price / ml * 100, 4) if ml else None
 
-    # 5. Gramatura w description lub nazwie
+    # 5. Weight from description or name
     else:
         for text in (description, name):
             m = re.search(r"[Ww]eight[:\s]+(\d+(?:\.\d+)?)\s*(g|kg|ml|l)\b", text)
@@ -306,13 +306,13 @@ def extract_package_aldi(product: dict) -> dict:
                 per_100 = round(price / val * 100, 4) if (price and val) else None
                 break
 
-    # 6. pcs bez wagi → użyj default_weights.json
+    # 6. pcs without weight → use default_weights.json
     if unit == "pcs" and per_100 is None and price is not None:
         default_g = _default_weight_for(name)
         if default_g:
             per_100 = round(price / pkg_val / default_g * 100, 4) if pkg_val else round(price / default_g * 100, 4)
 
-    # Produkty na wagę wg nazwy (świeże warzywa/owoce/ryby/mięso)
+    # Sold-by-weight detection by name (fresh vegetables/fruit/fish/meat)
     _PRODUCE_EN = {
         "onion","potato","carrot","apple","banana","tomato","cucumber","pepper",
         "broccoli","cauliflower","spinach","lettuce","kale","rocket","arugula",
@@ -341,7 +341,7 @@ def extract_package_aldi(product: dict) -> dict:
     }
 
 
-# ── 2c. Gramatura Auchan / Biedronka ─────────────────────────────────────────
+# ── 2c. Package size — Auchan / Biedronka ────────────────────────────────────
 
 def extract_package_pl(product: dict) -> dict:
     name       = product.get("name", "")
@@ -374,7 +374,7 @@ def extract_package_pl(product: dict) -> dict:
         if m:
             per_100 = round(float(m.group(1).replace(",", ".")) / 10, 4)
     elif unit == "pcs" and pkg_val and price:
-        # Sprzedawane na sztuki — price_per_100 = None (nie porównujemy per 100g)
+        # Sold by piece — price_per_100 = None (no per-100g comparison)
         per_100 = None
     elif pkg_val and price and unit != "pcs":
         per_100 = round(price / pkg_val * 100, 4)
@@ -388,9 +388,9 @@ def extract_package_pl(product: dict) -> dict:
     }
 
 
-# ── 2d. Normalizacja nazw ─────────────────────────────────────────────────────
+# ── 2d. Name normalization ────────────────────────────────────────────────────
 
-# ── EN (ALDI) ──────────────────────────────────────────────────────────────────
+# ── EN (ALDI) ─────────────────────────────────────────────────────────────────
 
 _REMOVE_PHRASES_EN = [
     r"specially selected", r"ripe\s*&\s*ready", r"free[\s-]range",
@@ -400,10 +400,10 @@ _REMOVE_PHRASES_EN = [
     r"family\s+pack", r"twin\s+pack", r"value\s+pack",
     r"rspca\s+assured", r"red\s+tractor",
     r"aberdeen\s+angus", r"ibérico", r"iberico",
-    # Odmiany jabłek/gruszek — nie zmieniają kategorii produktu
+    # Apple/pear varieties — don't change the product category
     r"pink\s+lady", r"granny\s+smith", r"golden\s+delicious",
     r"braeburn", r"bramley", r"gala\b", r"fuji\b", r"jazz\b", r"cox\b",
-    r"conference\b",  # gruszka Conference
+    r"conference\b",  # Conference pear variety
 ]
 _REMOVE_WORDS_EN = [
     r"\bxxl\b", r"\bxl\b", r"\borganic\b", r"\bbio\b",
@@ -422,9 +422,9 @@ _NO_SPLIT_EN = {
     "macaroni & cheese", "mac & cheese", "fish & chips",
     "salt & vinegar", "bread & butter", "ham & cheese",
     "cookies & cream",
-    "fruit & nut",          # Cadbury Fruit & Nut = baton, nie "fruit" + "nut"
+    "fruit & nut",          # Cadbury Fruit & Nut = bar, not "fruit" + "nut"
     "nuts & raisins",       # trail mix
-    "cheese & onion",       # pasty filling — joined so "onion" nie staje sie osobnym produktem
+    "cheese & onion",       # pasty filling — joined so "onion" doesn't become its own product
 }
 
 # When the part AFTER & is a main protein, the & is a flavor separator, not a compound
@@ -437,14 +437,14 @@ _FISH_KW = re.compile(r"\b(salmon|haddock|mackerel|trout|herring|kipper|cod)\b")
 _BEEF_KW = re.compile(r"\b(beef|rump|sirloin|ribeye|rib-eye)\b")
 
 
-# Nazwy produktów, które są normalizowane błędnie (zbyt agresywne usunięcie brandu lub
-# konwersja mince→ground powoduje zbyt generyczny wynik). Klucz = lowercased original name.
+# Products that normalise incorrectly (overly aggressive brand removal or
+# mince→ground leaves a single generic token causing false-positive matches). Key = lowercased original.
 _NORMALIZE_OVERRIDES_EN: dict[str, str] = {
     "quorn mince": "quorn mince",
 }
 
-# Znane rozmiary opakowań dla produktów, których Aldi nie wyświetla per-kg/per-L na stronie.
-# Klucz = generic_name po normalizacji. Wartość = (rozmiar, jednostka)
+# Known package sizes for products Aldi does not display per-kg/per-L on the page.
+# Key = generic_name after normalisation. Value = (size, unit).
 _PRODUCT_SIZE_DEFAULTS_EN: dict[str, tuple[float, str]] = {
     "extra virgin olive oil": (500.0,  "ml"),
     "vegetable oil":          (1000.0, "ml"),
@@ -526,8 +526,8 @@ def normalize_name_en(name: str, brand: str = None) -> list[str]:
 
 # ── PL (Auchan / Biedronka) ──────────────────────────────────────────────────
 
-# Znane marki które pojawiają się na POCZĄTKU nazwy produktu — usuwamy prefiks
-# (sortuj od najdłuższego do najkrótszego żeby "bakad'or sélection" był przed "bakad'or")
+# Known brand prefixes that appear at the START of the product name — strip them.
+# (sorted longest-first so "bakad'or sélection" matches before "bakad'or")
 _BRAND_PREFIXES_PL = sorted([
     "bakallino",
     "bakad'or sélection",
@@ -545,14 +545,14 @@ _BRAND_PREFIXES_PL = sorted([
     "nestle",
     "felix",
     "mexicana",
-    "americana",   # "Americana Tuńczyk z Warzywami" — analogicznie do Mexicana
+    "americana",   # "Americana Tuńczyk z Warzywami" — same logic as Mexicana
     "teekanne",
     "top",
-    "winiary",     # Winiary majonez, sos, ketchup → zostaje sam produkt
-    "pewni dobrego",  # Premium brand Auchan → bardzo drogie, nie reprezentatywne
+    "winiary",     # Winiary mayo/sauce/ketchup → only the product name remains
+    "pewni dobrego",  # Premium Auchan brand → very expensive, not representative
 ], key=len, reverse=True)
 
-# Słowa marketingowe/brandowe usuwane NA ORYGINALNEJ PISOWNI (przed detekcją marki)
+# Marketing/brand words removed IN ORIGINAL CASE (before brand detection)
 _MARKETING_PL_CASED = [
     r"\bBIO\b", r"\bEKO\b", r"\bBio\b", r"\bEko\b",
     r"\bPremium\b", r"\bExtra\b", r"\bSuper\b",
@@ -563,25 +563,25 @@ _MARKETING_PL_CASED = [
     r"\bReady\b", r"\bTo\b", r"\bEat\b",  # "Ready To Eat" angielskie
 ]
 
-# Substytucje i kanonizacja (przed normalizacją, case-insensitive)
+# Substitutions and canonicalization (before normalisation, case-insensitive)
 _SUBSTITUTIONS_PL = [
     (r"\bpomidork\w+\b",            "pomidor"),
     (r"\bbatatat\w*\b",             ""),
-    (r"\bstevia\b",                 "stewia"),   # EN spelling → PL
+    (r"\bstevia\b",                 "stewia"),   # EN spelling → PL canonical
     (r"\berytrol\b",                "erytrytol"),
-    # Sery żółte: kolejność ma znaczenie!
-    # 1. cheddar standalone → "ser" (bo nie ma przed nim "ser żółty")
+    # Yellow cheeses: order matters!
+    # 1. cheddar standalone → "ser" (no preceding "ser żółty")
     (r"\bcheddar\b",               "ser"),
-    # 2. usuń typ sera z "ser żółty [typ]" — zostaje samo "ser żółty"
+    # 2. remove cheese type from "ser żółty [type]" — leaves "ser żółty"
     (r"\b(?:gouda|edam(?:ski\w*)?|maasd\w*|emment\w*|tilit\w*|morbi\w*|conte\w*)\b", ""),
-    # 3. ser żółty (po usunięciu typu) → "ser"
+    # 3. "ser żółty" (after type removal) → "ser"
     (r"\bser\s+żółty\b",           "ser"),
     (r"\bxylitol\b|\bksylitol\b",   "ksylitol"),
     (r"\bquinoa\b",                 "komosa ryżowa"),
     (r"\bedamame\b",                "edamame"),
 ]
 
-# Wzorce usuwające opis kulinarny i geograficzny (po lowercase)
+# Patterns that strip culinary and geographic descriptors (after lowercase)
 _CULINARY_PATTERNS_PL = [
     r"\bna\s+gulasz\b",
     r"\bz\s+szynki\b",
@@ -597,39 +597,39 @@ _CULINARY_PATTERNS_PL = [
     r"\bextra\b",
     r"\bwędzon\w*\b",
     r"\bready\s+to\b.*",            # "ready to eat/cook..."
-    r"\bpochodzenia\s+\w+\b",       # "naturalnego pochodzenia"
-    r"\bz\s+inuliną\b",             # "z inuliną" — dodatek funkcjonalny
-    r"\bsłodzik\w*\b",              # "słodzik stołowy" → usuń "słodzik", zostaje "erytrytol"
-    r"\bstołow\w*\b",               # "stołowy" (słodzik stołowy)
-    r"\bkaliber\s*\d*\b",            # "kaliber 12" / "kaliber" — rozmiar owocu
-    r"\bkwasow\w*\b.*",              # "kwasowość/kwasowości 5%" itp. — techniczny parametr octu
-    r"\bz\s+witaminą\b.*",           # "z witaminą D tłoczony na zimno" → usuń
-    r"\btłoczon\w*\s+na\s+zimno\b",  # "tłoczony na zimno" — technologia
-    r"\bśredni\b(?!\s+tłust)",      # "średni" jako rozmiar, nie tłustość
+    r"\bpochodzenia\s+\w+\b",       # "naturalnego pochodzenia" (natural origin)
+    r"\bz\s+inuliną\b",             # "z inuliną" — functional additive
+    r"\bsłodzik\w*\b",              # "słodzik stołowy" → removes "słodzik", leaves "erytrytol"
+    r"\bstołow\w*\b",               # "stołowy" (table-top sweetener)
+    r"\bkaliber\s*\d*\b",            # "kaliber 12" / "kaliber" — fruit size grade
+    r"\bkwasow\w*\b.*",              # "kwasowość 5%" etc. — technical vinegar parameter
+    r"\bz\s+witaminą\b.*",           # "z witaminą D tłoczony na zimno" → strip
+    r"\btłoczon\w*\s+na\s+zimno\b",  # "tłoczony na zimno" — cold-press method
+    r"\bśredni\b(?!\s+tłust)",      # "średni" as size, not fat content
     r"\bekstra\b",                  # "śmietana ekstra kremowa" → "śmietana kremowa"
     r"\bkremow\w*\b",               # "śmietana kremowa" → "śmietana"
-    r"\błagodny\b",                 # "ketchup łagodny" → "ketchup"
-    r"\bpikantny\b",                # "ketchup pikantny" → "ketchup"
+    r"\błagodny\b",                 # "ketchup łagodny" → "ketchup" (mild)
+    r"\bpikantny\b",                # "ketchup pikantny" → "ketchup" (spicy)
     r"\bkremsk\w*\b",               # "musztarda kremska" → "musztarda"
     r"\bfrancusk\w*\b",             # "musztarda francuska" → "musztarda"
-    r"\btusz\w*\b",                 # "makrela tusza" → "makrela" (ryba)
-    r"\bplastry\b",                 # "łosoś plastry" → "łosoś" (forma krojenia)
+    r"\btusz\w*\b",                 # "makrela tusza" → "makrela" (whole fish form)
+    r"\bplastry\b",                 # "łosoś plastry" → "łosoś" (sliced form)
     r"\bw\s+plastrach\b",           # "ser żółty w plastrach" → "ser żółty"
-    r"\btarty\b",                   # "ser żółty tarty" → "ser żółty" (forma starcia)
+    r"\btarty\b",                   # "ser żółty tarty" → "ser żółty" (grated form)
     r"\bkulka\b", r"\bkulki\b",     # "mozzarella kulka" → "mozzarella"
     r"\bnorwesk\w*\b",              # "łosoś norweski" → "łosoś" (geographic)
     r"\batlantycki\w*\b",           # "dorsz atlantycki" → "dorsz" (geographic)
-    r"\bpolędwica\b",               # "dorsz polędwica" → "dorsz" (forma filetu ryby, nie wieprzowiny)
+    r"\bpolędwica\b",               # "dorsz polędwica" → "dorsz" (fish fillet form, not pork)
     r"\bz\s+tofu\b",                # "pesto z tofu" → "pesto"
-    r"\bz\s+\w+skich\s+upraw\b.*",  # "z europejskich upraw" → usuń
-    # suszone/cięte celowo zachowujemy — "jabłka suszone" ≠ "jabłka" (świeże)
-    r"\bw\s+kryształkach\b",        # "w kryształkach" — forma
+    r"\bz\s+\w+skich\s+upraw\b.*",  # "z europejskich upraw" → strip
+    # dried/cut forms intentionally kept — "jabłka suszone" ≠ "jabłka" (fresh)
+    r"\bw\s+kryształkach\b",        # crystalline form
     r"\bkrystaliczn\w*\b",
-    r"\bgranulat\w*\b",             # "granulowany"
-    r"\bsypk\w*\b",                 # "sypki"
+    r"\bgranulat\w*\b",             # granulated form
+    r"\bsypk\w*\b",                 # loose/powdered form
 ]
 
-# Kwalifikatory odmianowe/opisowe warzyw i owoców (po lowercase)
+# Variety/form qualifiers for vegetables and fruit (after lowercase)
 _PRODUCE_QUALIFIERS_PL = [
     r"\bmalinow\w*\b",
     r"\bcherry\b",
@@ -642,18 +642,18 @@ _PRODUCE_QUALIFIERS_PL = [
     r"\bpiżmow\w*\b",
     r"\bpapryczkow\w*\b",
     r"\bszt\.\b",
-    r"\blub\s+\w+\b",              # "lub X" (alternatywa)
-    r"\bśredni\b",                 # rozmiar owocu
+    r"\blub\s+\w+\b",              # "lub X" (alternative)
+    r"\bśredni\b",                 # fruit size
     r"\bdrobny\b", r"\bdrobne\b",
-    r"\bwielk\w*\b",               # "wielkości"
-    r"\bróżyczki\b",               # "brokuły różyczki" → "brokuły"
-    r"\bsułtański\w*\b",           # "rodzynki sułtańskie" → "rodzynki"
+    r"\bwielk\w*\b",               # "wielkości" (size)
+    r"\bróżyczki\b",               # "brokuły różyczki" → "brokuły" (florets)
+    r"\bsułtański\w*\b",           # "rodzynki sułtańskie" → "rodzynki" (sultana variety)
     r"\btypu\s+islandzkiego\b",    # "skyr jogurt typu islandzkiego" → "skyr jogurt"
-    r"\błuskan\w*\b",              # "migdały łuskane" → "migdały"
-    r"\bblanszow\w*\b",             # "migdały blanszowane/blanszowany" → "migdały"
-    r"\bw\s+płatkach\b",           # "migdały w płatkach" → "migdały"
-    r"\bdługoziarnist\w*\b",       # "ryż długoziarnisty" → "ryż"
-    r"\bkrótkoziarnist\w*\b",      # analogicznie
+    r"\błuskan\w*\b",              # "migdały łuskane" → "migdały" (blanched/hulled)
+    r"\bblanszow\w*\b",             # "migdały blanszowane" → "migdały"
+    r"\bw\s+płatkach\b",           # "migdały w płatkach" → "migdały" (flaked)
+    r"\bdługoziarnist\w*\b",       # "ryż długoziarnisty" → "ryż" (long-grain)
+    r"\bkrótkoziarnist\w*\b",      # same for short-grain
 ]
 
 _REMOVE_WORDS_PL = [
@@ -668,17 +668,17 @@ _REMOVE_WORDS_PL = [
     r"\bpasteryzowany\w*\b",
     r"\bhomogenizowany\w*\b",
     r"\bwzbogacon\w*\b",
-    r"\bkonserwow\w*\b",   # konserwowy/konserwowa/konserwowe — forma opakowania
+    r"\bkonserwow\w*\b",   # konserwowy/konserwowa — packaging form
     r"\bsuperfoods?\b",     # "Superfoods" — marketing
     r"\bsmooth\b",          # "masło orzechowe smooth" → "masło orzechowe"
-    r"\bcrunchy\b",         # analogicznie
-    # Nazwy sklepów (mogą pojawić się w nazwie produktu jako lowercase)
+    r"\bcrunchy\b",         # same
+    # Shop names (can appear in product names as lowercase)
     r"\bauchan\b", r"\bbiedronka\b", r"\blidl\b", r"\bnetto\b",
-    # Słowa kategorii sklepowych
+    # Shop category words
     r"\bowoce\b", r"\bwarzywa\b", r"\bnabiał\b", r"\bpieczywo\b",
-    # Standalone jednostki bez liczby (pozostałość po usunięciu "1 kg" itp.)
+    # Standalone units without a number (leftover after removing "1 kg" etc.)
     r"\bkg\b", r"\bszt\b", r"\bg\b", r"\bml\b",
-    # "opak." leftover po usunięciu gramatury
+    # "opak." leftover after package size removal
     r"\bopak\.?\b",
 ]
 
@@ -687,7 +687,7 @@ _TRAILING_PL = re.compile(r"\s+\b(z|ze|i|oraz|do|na|w|od|po|przy|dla|lub)\s*$", 
 
 # ── Meat canonicalization (PL) ────────────────────────────────────────────────
 
-# Dopasuj zwierzę → polska nazwa mięsa
+# Match animal → canonical Polish meat name
 _ANIMAL_PL = [
     (re.compile(r"\bwoł\w+\b"),             "wołowina"),
     (re.compile(r"\bwieprzo\w+\b"),         "wieprzowina"),
@@ -701,11 +701,11 @@ _ANIMAL_PL = [
 
 _POULTRY = {"kurczak", "kaczka", "gęś", "indyk"}
 
-# Części ciała drobiu — substring match (unikamy problemów z \b i polskimi znakami)
-# Uwaga: "pierś" (mianownik) ≠ "piersi" (dopełniacz) — to różne znaki ('ś' vs 'si')
+# Poultry body parts — substring match (avoids \b issues with Polish characters)
+# Note: "pierś" (nominative) ≠ "piersi" (genitive) — different chars ('ś' vs 'si')
 _POULTRY_PARTS = [
-    (re.compile(r"piersi|pierś"),   "pierś"),       # z piersi / pierś z
-    (re.compile(r"\bfilet\w*\b"),   "pierś"),       # filet = pierś
+    (re.compile(r"piersi|pierś"),   "pierś"),       # z piersi / pierś z (breast)
+    (re.compile(r"\bfilet\w*\b"),   "pierś"),       # filet = breast
     (re.compile(r"szyja"),          "szyja"),       # szyja z indyka/kurczaka → szyja (nie indyk)
     (re.compile(r"udka|udziec"),    "udka"),
     (re.compile(r"skrzydełk"),      "skrzydełka"),
@@ -713,13 +713,13 @@ _POULTRY_PARTS = [
     (re.compile(r"polędwiczk"),     "polędwiczka"),
 ]
 
-# Organy — NIE są mięśniem, nie przechodzą przez canonicalizację
+# Organ meats — NOT muscle, skip canonicalization
 _ORGAN_MEATS_PL = re.compile(
     r"\b(wątrob\w+|wątróbk\w+|serc\w+|nerk\w+|flak\w*|podróbk\w+|"
     r"żołąd\w+|ozór\w*|móżdżek)\b"
 )
 
-# Słowa-wskaźniki że to produkt mięsny (nie warzywny czy inny)
+# Indicator words confirming a meat product (not vegetable or other)
 _MEAT_INDICATORS = re.compile(
     r"\b(mięso|mięs\w+|schab|żeberek|żeberka|szynka|polędwic\w+|karkówka|"
     r"boczek|łopatka|udziec|filet|pierś|udka|skrzydełka|nóżki|"
@@ -730,23 +730,23 @@ _MEAT_INDICATORS = re.compile(
 
 def _canonicalize_meat_pl(name: str) -> str:
     """
-    Jeśli nazwa dotyczy mięsa — sprowadź do kanonicznej formy:
-      - organy (wątroba, serce, nerki): zwróć bez zmian
-      - drób: [pierś/udka/skrzydełka/nóżki/polędwiczka] z [kurczaka/...]
-      - inne: [mielona]? + [wołowina/wieprzowina/...]
+    If the name refers to meat, reduce to canonical form:
+      - organ meats (liver, heart, kidneys): return unchanged
+      - poultry: [breast/thighs/wings/feet/tenderloin] z [chicken/...]
+      - other: [ground]? + [beef/pork/...]
     """
     if not _MEAT_INDICATORS.search(name):
         return name
 
-    # Organy — zwróć TYLKO nazwę organu (bez "z kurczaka" itp.)
-    # żeby "żołądki z kurczaka" nie matchowało "filet z kurczaka" przy fuzzy
+    # Organs — return ONLY the organ name (without "z kurczaka" etc.)
+    # so "żołądki z kurczaka" doesn't fuzzy-match "filet z kurczaka"
     m = _ORGAN_MEATS_PL.search(name)
     if m:
-        return m.group(0)  # np. "żołądki", "wątroba", "serce"
+        return m.group(0)  # e.g. "żołądki", "wątroba", "serce"
 
     is_ground = bool(re.search(r"\bmielon\w+\b", name))
 
-    # Wykryj zwierzę
+    # Detect animal
     animal = None
     for pattern, canonical in _ANIMAL_PL:
         if pattern.search(name):
@@ -754,7 +754,7 @@ def _canonicalize_meat_pl(name: str) -> str:
             break
 
     if not animal:
-        return name  # nie rozpoznano — nie zmieniaj
+        return name  # unrecognised — leave unchanged
 
     if animal in _POULTRY:
         if is_ground:
@@ -762,19 +762,19 @@ def _canonicalize_meat_pl(name: str) -> str:
         genitive = {"kurczak": "kurczaka", "kaczka": "kaczki",
                     "gęś": "gęsi", "indyk": "indyka"}
         gen = genitive.get(animal, animal)
-        # Szukaj części ciała
+        # Look for body part
         for pattern, part in _POULTRY_PARTS:
             if pattern.search(name):
                 return f"{part} z {gen}"
-        # Brak konkretnej części — sam drób
+        # No specific part — just the poultry name
         return animal
     else:
-        # Wołowina, wieprzowina itd. — zachowaj konkretny kawałek jeśli wymieniony
+        # Beef, pork etc. — keep the specific cut if named
         if is_ground:
             return f"mielona {animal}"
-        # Kawałki mięsne — nie sprowadzaj do nazwy zwierzęcia
+        # Meat cuts — don't collapse to just the animal name
         _MEAT_CUTS = [
-            (re.compile(r"\bporcja\s+rosołow\w*\b"),     "porcja rosołowa"),  # nie generic mięso!
+            (re.compile(r"\bporcja\s+rosołow\w*\b"),     "porcja rosołowa"),  # not generic meat!
             (re.compile(r"\bżeberek|żeberka\b"),         "żeberka"),
             (re.compile(r"\bschab\b"),                   "schab"),
             (re.compile(r"\bkarkówk\w*|karkow\w*"),      "karkówka"),
@@ -782,7 +782,7 @@ def _canonicalize_meat_pl(name: str) -> str:
             (re.compile(r"\budzi\w+\b"),                 "udziec"),
             (re.compile(r"\brostbef\w*|rostbeef\w*"),    "rostbef"),
             (re.compile(r"\bantryk\w+\b"),                "antrykot"),
-            (re.compile(r"\bnogi\b"),                    "nogi wieprzowe"),  # nie "wieprzowina"
+            (re.compile(r"\bnogi\b"),                    "nogi wieprzowe"),  # not generic "wieprzowina"
             (re.compile(r"\bgolonk\w+\b"),               "golonka"),
         ]
         for pattern, cut in _MEAT_CUTS:
@@ -792,7 +792,7 @@ def _canonicalize_meat_pl(name: str) -> str:
 
 
 def normalize_name_pl(name: str) -> str:
-    """Best-effort normalizacja polskiej nazwy produktu."""
+    """Best-effort normalisation of a Polish product name."""
 
     # 1. Remove "ok. N", "na wagę", package size, bare "sztuka"
     n = re.sub(r"\bok\.?\s*\d+", " ", name, flags=re.I)
@@ -803,7 +803,7 @@ def normalize_name_pl(name: str) -> str:
     # 2. Remove % patterns (brak \b po % bo % to nie word-char — "100% jabłko" → " jabłko")
     n = re.sub(r"\b\d+(?:[.,]\d+)?\s*%", " ", n)
 
-    # 3. Substitutions (diminutywy, synonimy)
+    # 3. Substitutions (diminutives, synonyms)
     for pattern, repl in _SUBSTITUTIONS_PL:
         n = re.sub(pattern, repl, n, flags=re.I)
 
@@ -849,7 +849,7 @@ def normalize_name_pl(name: str) -> str:
 
     n = " ".join(cleaned).lower()
 
-    # 6. Mięso — sprowadź do: [mielona] + zwierzę (+ część ciała dla drobiu)
+    # 6. Meat — reduce to: [mielona] + animal (+ body part for poultry)
     n = _canonicalize_meat_pl(n)
 
     # 7. Remove culinary/geographic descriptions
@@ -872,10 +872,10 @@ def normalize_name_pl(name: str) -> str:
     return n
 
 
-# ── 2e. Deduplikacja ──────────────────────────────────────────────────────────
+# ── 2e. Deduplication ────────────────────────────────────────────────────────
 
 def deduplicate(products: list[dict]) -> list[dict]:
-    """Dla każdego generic_name zostaw najtańszy po price_per_100 (lub price_per_unit)."""
+    """For each generic_name keep the cheapest by price_per_100 (or price_per_unit)."""
     best: dict[str, dict] = {}
     for p in products:
         key = p["generic_name"]
@@ -896,7 +896,7 @@ def deduplicate(products: list[dict]) -> list[dict]:
     return list(best.values())
 
 
-# ── Budowanie rekordów wynikowych ─────────────────────────────────────────────
+# ── Building output records ───────────────────────────────────────────────────
 
 def build_aldi_records(products: list[dict]) -> list[dict]:
     records = []
@@ -911,7 +911,7 @@ def build_aldi_records(products: list[dict]) -> list[dict]:
         pkg   = extract_package_aldi(p)
         names = normalize_name_en(p.get("name", ""), p.get("brand"))
 
-        # Fallback: dla produktów bez price_per_100, sprawdź znane rozmiary opakowań
+        # Fallback: for products without price_per_100, check known package sizes
         if pkg["price_per_100"] is None and p.get("price") is not None:
             for generic in names:
                 size_info = _PRODUCT_SIZE_DEFAULTS_EN.get(generic)
@@ -940,7 +940,7 @@ def build_aldi_records(products: list[dict]) -> list[dict]:
                 "standard_category": p.get("standard_category"),
             })
     if filtered:
-        log.info(f"ALDI: odfiltrowano {filtered} gotowych dań")
+        log.info(f"ALDI: filtered out {filtered} ready-to-eat items")
     return records
 
 
@@ -972,7 +972,7 @@ def build_pl_records(products: list[dict], shop: str) -> list[dict]:
             "standard_category": p.get("standard_category"),
         })
     if filtered:
-        log.info(f"{shop}: odfiltrowano {filtered} gotowych dań")
+        log.info(f"{shop}: filtered out {filtered} ready-to-eat items")
     return records
 
 
@@ -999,7 +999,7 @@ def _write_debug(aldi_raw, auchan_raw, biedronka_raw,
 
     sections = [
         {
-            "title": "Statystyki normalizacji",
+            "title": "Normalisation stats",
             "stats": {
                 "Aldi (raw)":                 len(aldi_raw),
                 "Auchan (raw)":               len(auchan_raw),
@@ -1007,22 +1007,22 @@ def _write_debug(aldi_raw, auchan_raw, biedronka_raw,
                 "Aldi → records":             len(aldi_records),
                 "Auchan → records":           len(auchan_records),
                 "Biedronka → records":        len(biedronka_records),
-                "shops_en (po dedup)":        len(shops_en),
-                "shops_pl (po dedup)":        len(shops_pl),
-                "EN z ceną (price_per_100)":  en_with,
-                "EN bez ceny":                len(aldi_records) - en_with,
-                "PL z ceną (price_per_100)":  pl_with,
-                "PL bez ceny":                len(pl_records) - pl_with,
+                "shops_en (after dedup)":     len(shops_en),
+                "shops_pl (after dedup)":     len(shops_pl),
+                "EN with price (per_100)":    en_with,
+                "EN without price":           len(aldi_records) - en_with,
+                "PL with price (per_100)":    pl_with,
+                "PL without price":           len(pl_records) - pl_with,
             },
             "rows": [],
         },
         {
-            "title": "EN — produkty Aldi (original_name | generic_name | unit | price_per_100)",
+            "title": "EN — Aldi products (original_name | generic_name | unit | price_per_100)",
             "rows": [row_en(r) for r in sorted(aldi_records, key=lambda x: x.get("generic_name", ""))],
             "limit": 500,
         },
         {
-            "title": "PL — produkty (shop | original_name | generic_name | unit | price_per_100)",
+            "title": "PL — products (shop | original_name | generic_name | unit | price_per_100)",
             "rows": [row_pl(r) for r in sorted(pl_records, key=lambda x: x.get("generic_name", ""))],
             "limit": 500,
         },
@@ -1041,7 +1041,7 @@ def main():
         DATA / "shops_pl.json",
     ]
     if all(f.exists() for f in outputs):
-        log.info("Wszystkie pliki wynikowe już istnieją. Pomijam krok 2.")
+        log.info("All output files already exist. Skipping step 2.")
         return
 
     aldi      = json.loads((DATA / "aldi_products.json").read_text("utf-8"))
@@ -1054,12 +1054,12 @@ def main():
     auchan_records    = build_pl_records(auchan, "auchan")
     biedronka_records = build_pl_records(biedronka, "biedronka")
 
-    log.info(f"Po normalizacji — Aldi: {len(aldi_records)}, "
+    log.info(f"After normalisation — Aldi: {len(aldi_records)}, "
              f"Auchan: {len(auchan_records)}, Biedronka: {len(biedronka_records)}")
 
     def save(path, data):
         path.write_text(json.dumps(data, ensure_ascii=False, indent=2), "utf-8")
-        log.info(f"Zapisano {len(data)} → {path.name}")
+        log.info(f"Saved {len(data)} → {path.name}")
 
     save(DATA / "aldi_normalized.json",      aldi_records)
     save(DATA / "auchan_normalized.json",    auchan_records)
@@ -1070,7 +1070,7 @@ def main():
     save(DATA / "shops_en.json", shops_en)
     save(DATA / "shops_pl.json", shops_pl)
 
-    log.info(f"shops_en: {len(shops_en)} unikalnych, shops_pl: {len(shops_pl)} unikalnych")
+    log.info(f"shops_en: {len(shops_en)} unique, shops_pl: {len(shops_pl)} unique")
 
     _write_debug(aldi, auchan, biedronka,
                  aldi_records, auchan_records, biedronka_records,

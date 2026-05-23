@@ -1,7 +1,7 @@
 """
-Wspólny moduł do generowania raportów debugowania dla każdego kroku pipeline'u.
-Każdy krok woła write_report(step, name, sections) na końcu main().
-Wynik ląduje w scraper/debugging/stepN_name.txt
+Shared module for generating debug reports for each pipeline step.
+Each step calls write_report(step, name, sections) at the end of main().
+Output lands in scraper/debugging/stepN_name.txt
 """
 
 import json
@@ -13,20 +13,20 @@ DEBUG_DIR = Path(__file__).parent.parent / "debugging"
 
 def write_report(step: int, name: str, sections: list[dict]) -> Path:
     """
-    Zapisuje raport do debugging/stepN_name.txt.
+    Write a report to debugging/stepN_name.txt.
 
-    sections: lista słowników z kluczami:
-      title   str          — nagłówek sekcji
-      stats   dict|None    — statystyki key→value wypisane na górze
-      rows    list[str]    — linie do wypisania
-      limit   int|None     — max wierszy w rows (None = wszystkie)
+    sections: list of dicts with keys:
+      title   str          — section heading
+      stats   dict|None    — key→value stats printed at the top
+      rows    list[str]    — lines to print
+      limit   int|None     — max rows to show (None = all)
     """
     DEBUG_DIR.mkdir(parents=True, exist_ok=True)
     out = DEBUG_DIR / f"step{step}_{name}.txt"
 
     lines = []
-    lines.append(f"# Krok {step}: {name.replace('_', ' ')}")
-    lines.append(f"# Wygenerowano: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    lines.append(f"# Step {step}: {name.replace('_', ' ')}")
+    lines.append(f"# Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     lines.append("")
 
     for sec in sections:

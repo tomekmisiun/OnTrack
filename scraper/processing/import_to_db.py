@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Importuje przepisy i produkty z pipeline'u do bazy danych aplikacji.
+Import recipes and products from the pipeline into the application database.
 
-Uruchomienie (przez Docker):
+Usage (via Docker):
     docker exec mealprep-app-1 python /app/scraper/processing/import_to_db.py --user-id 2
     docker exec mealprep-app-1 python /app/scraper/processing/import_to_db.py --user-id 2 --lang pl
     docker exec mealprep-app-1 python /app/scraper/processing/import_to_db.py --list-users
@@ -33,13 +33,13 @@ app = create_app()
 def load(filename: str) -> list:
     path = DATA / filename
     if not path.exists():
-        print(f"Brak pliku: {path}")
+        print(f"File not found: {path}")
         return []
     return json.loads(path.read_text("utf-8"))
 
 
 def strip_accents(s: str) -> str:
-    """Usuwa polskie akcenty dla porównania: żryżowy → ryzowy."""
+    """Remove diacritics for accent-insensitive comparison: żryżowy → ryzowy."""
     return "".join(
         c for c in unicodedata.normalize("NFKD", s)
         if not unicodedata.combining(c)
@@ -47,7 +47,7 @@ def strip_accents(s: str) -> str:
 
 
 def dedup_key(name: str) -> str:
-    """Klucz deduplicacji: lowercase + bez akcentów + oczyszczony."""
+    """Deduplication key: lowercase + no diacritics + collapsed whitespace."""
     return re.sub(r"\s+", " ", strip_accents(name.lower().strip()))
 
 
@@ -59,19 +59,19 @@ _PL_LETTERS = re.compile(r"[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]")
 
 
 def is_english_name(name: str) -> bool:
-    """Zwraca True jeśli nazwa wygląda na angielską (nie powinna być w PL DB)."""
+    """Returns True if the name looks English (should not appear in the PL database)."""
     return bool(_EN_WORDS.search(name)) and not _PL_LETTERS.search(name)
 
 
-# Kolaps rodzin produktów — wiele wariantów → jedna prosta nazwa
+# Product family collapse — many variants → one canonical name
 _FAMILY_RULES: list[tuple[re.Pattern, str]] = [
-    # Makarony — wszystko to "makaron"
+    # Pasta — all variants collapse to "makaron"
     (re.compile(r"^makaron\b"),                "makaron"),
-    # Ryż
+    # Rice
     (re.compile(r"^ryż\b"),                    "ryż"),
-    # Płatki
+    # Oats
     (re.compile(r"^płatki owsiane|^owsian"),   "płatki owsiane"),
-    # Warzywa i owoce — prefix match (bez \b na końcu, działa dla polskich deklinacji)
+    # Vegetables & fruit — prefix match (no \b at end; handles Polish declensions)
     (re.compile(r"^cebula(?! dymka)"),         "cebula"),
     (re.compile(r"^czosnek"),                  "czosnek"),
     (re.compile(r"^pomidor(?! suszony)"),      "pomidor"),
@@ -92,76 +92,76 @@ _FAMILY_RULES: list[tuple[re.Pattern, str]] = [
     (re.compile(r"^malina|^maliny"),           "maliny"),
     (re.compile(r"^borówka|^borówki"),         "borówki"),
     (re.compile(r"^winogrona|^winogrono"),     "winogrona"),
-    # Nabiał — upraszczamy
+    # Dairy — collapse to base form
     (re.compile(r"^mleko\b(?! kokosowe| migdałowe| owsiane)"), "mleko"),
     (re.compile(r"^jogurt\b(?! grecki)"),      "jogurt naturalny"),
     (re.compile(r"^ser\b(?!\s+(?:feta|parmezan|cheddar|mozzarella|twaróg|kozi|ricotta|halloumi|pleśniowy|dojrzewający|długodojrzewający|roquefort))"), "ser"),
     (re.compile(r"^śmietana\b"),               "śmietana"),
     (re.compile(r"^twaróg\b(?! kremowy)"),     "twaróg"),
-    # Mięso i drób
+    # Meat & poultry
     (re.compile(r"^kurczak\b(?! mielony)"),    "kurczak"),
     (re.compile(r"^wieprzowina\b"),            "wieprzowina"),
     (re.compile(r"^wołowina\b"),               "wołowina"),
-    # Mięso — aliasy i sprowadzanie organów do prostej nazwy (bez "z kurczaka")
+    # Meat aliases — collapse organ/cut names to simple form
     (re.compile(r"^filet\w*\s+z\s+kurczaka"), "pierś z kurczaka"),
     (re.compile(r"^żołądk\w+"),               "żołądki z kurczaka"),
     (re.compile(r"^wątrob\w+"),               "wątroba"),
     (re.compile(r"^serce\b"),                 "serce"),
-    # Warzywa — merge form deklinacyjnych
+    # Vegetables — merge declined forms
     (re.compile(r"^brokuł"),                   "brokuł"),
     (re.compile(r"^ciecierzyca"),              "ciecierzyca"),
-    # Rośliny strączkowe
+    # Legumes
     (re.compile(r"^fasola\b(?!\s+(?:czerwona|edamame))"), "fasola biała"),
     (re.compile(r"^czerwona fasola|^fasola czerwona"), "fasola czerwona"),
     (re.compile(r"^soczewica\b"),              "soczewica"),
-    # Słodziki — każdy to jedna nazwa
+    # Sweeteners — each one is a single canonical name
     (re.compile(r"^stewia\b|^stevia\b"),       "stewia"),
     (re.compile(r"^erytrytol\b|^erytrol\b"),   "erytrytol"),
     (re.compile(r"^ksylitol\b|^xylitol\b"),    "ksylitol"),
-    # Oleje — upraszczamy DO podstawowej nazwy
+    # Oils — collapse to base name
     (re.compile(r"^olej z awokado"),               "olej z awokado"),
     (re.compile(r"^olej sezamowy"),                "olej sezamowy"),
     (re.compile(r"^olej kokosowy"),                "olej kokosowy"),
     (re.compile(r"^oliwa"),                        "oliwa z oliwek"),
     (re.compile(r"^olej roślinny|^olej rzepakowy|^olej słonecznikowy"), "olej roślinny"),
-    # Buliony
+    # Stocks & broths
     (re.compile(r"^bulion drobiowy\b|^rosół\b(?! wołowy)"), "bulion drobiowy"),
     (re.compile(r"^bulion wołowy\b"),          "bulion wołowy"),
     (re.compile(r"^bulion warzywny\b"),        "bulion warzywny"),
-    # Wędliny i mięso przetworzone — wszystkie warianty → prosta nazwa
+    # Processed meat — all variants → simple name
     (re.compile(r"^kiełbas\w*\b|^kielbas\w*\b"), "kiełbasa"),
     (re.compile(r"^boczek\b"),                 "boczek"),
     (re.compile(r"^szynka\b"),                 "szynka"),
     (re.compile(r"^bekon\b|^boczek\s+boczek"), "bekon"),
-    # Sól — wszystkie typy to "sól"
+    # Salt — all types collapse to "sól"
     (re.compile(r"^sól\b|^sol\b"),             "sól"),
-    # Pieczywo — wszystko to "chleb" (bez rozróżniania rodzaju)
+    # Bread — collapse type variants to base form
     (re.compile(r"^chleb"),                    "chleb"),
     (re.compile(r"^bułka|^bułki"),             "bułka"),
     (re.compile(r"^tortilla"),                 "tortilla"),
     (re.compile(r"^wrap"),                     "wrap"),
     (re.compile(r"^krakersy"),                 "krakersy"),
-    # Pasty i sosy — usuń markę, zostaw bazowy składnik
+    # Pastes & sauces — strip brand, keep base ingredient
     (re.compile(r"^tahini"),                   "tahini"),
     (re.compile(r"^hummus"),                   "hummus"),
     (re.compile(r"^harissa"),                  "harissa"),
     (re.compile(r"^orzeszki ziemne|^orzechy ziemne"), "orzeszki ziemne"),
     (re.compile(r"^sok z limonki|^limonka"),   "sok z limonki"),
     (re.compile(r"^sok z cytryny|^cytryna"),   "sok z cytryny"),
-    # Nasiona i ziarna — tylko bazowa nazwa
+    # Seeds & grains — base name only
     (re.compile(r"^nasiona chia"),             "nasiona chia"),
     (re.compile(r"^siemię lniane"),            "siemię lniane"),
     (re.compile(r"^nasiona konopi"),           "nasiona konopi"),
     (re.compile(r"^pestki dyni"),              "pestki dyni"),
     (re.compile(r"^pestki słonecznika"),       "pestki słonecznika"),
     (re.compile(r"^sezam"),                    "sezam"),
-    # Płatki i wafle
+    # Flakes & rice cakes
     (re.compile(r"^wafle kukurydziane"),       "wafle kukurydziane"),
     (re.compile(r"^wafle ryżowe"),             "wafle ryżowe"),
     (re.compile(r"^granola"),                  "granola"),
-    # Owoce mieszane
+    # Mixed fruit
     (re.compile(r"^świeże owoce|^owoce mieszan|^mix owoc"),  "owoce mieszane"),
-    # Sery
+    # Cheeses
     (re.compile(r"^parmezan|^ser\s+parmezan|^parmigiano"),    "parmezan"),
     (re.compile(r"^mozzarella"),               "mozzarella"),
     (re.compile(r"^ser\s+feta|^feta"),         "ser feta"),
@@ -169,31 +169,31 @@ _FAMILY_RULES: list[tuple[re.Pattern, str]] = [
     (re.compile(r"^brie"),                     "brie"),
     (re.compile(r"^ricotta"),                  "ricotta"),
     (re.compile(r"^mascarpone"),               "mascarpone"),
-    # Czekolada
+    # Chocolate
     (re.compile(r"^czekolada"),                "czekolada"),
-    # Miód — wszystkie typy (wielokwiatowy, gryczany itp.) to "miód"
+    # Honey — all types (multiflower, buckwheat, etc.) collapse to "miód"
     (re.compile(r"^miód"),                     "miód"),
-    # Ryby — upraszczamy do gatunku
+    # Fish — collapse to species name
     (re.compile(r"^łosoś(?! wędzony)"),        "łosoś"),
     (re.compile(r"^filet z łososia"),           "łosoś"),
     (re.compile(r"^dorsz"),                    "dorsz"),
     (re.compile(r"^tuńczyk"),                  "tuńczyk"),
     (re.compile(r"^krewetki"),                 "krewetki"),
-    # Superfoods / pseudozboża
+    # Superfoods / pseudocereals
     (re.compile(r"^maca\b"),                   "maca"),
     (re.compile(r"^spirulina\b"),              "spirulina"),
     (re.compile(r"^komosa\b|^quinoa\b"),       "komosa ryżowa"),
-    # Mąki
+    # Flours
     (re.compile(r"^mąka\b(?! migdałowa| kokosowa| owsiana| z ciecierzycy)"), "mąka"),
     (re.compile(r"^mąka migdałowa\b"),         "mąka migdałowa"),
     (re.compile(r"^mąka kokosowa\b"),          "mąka kokosowa"),
-    # Orzechy i nasiona
+    # Nuts & seeds
     (re.compile(r"^orzech\w*\s+włosk\w*\b"),   "orzechy włoskie"),
     (re.compile(r"^orzech\w*\s+nerkowc\w*\b"),  "orzechy nerkowca"),
     (re.compile(r"^orzech\w*\s+laskow\w*\b"),   "orzechy laskowe"),
     (re.compile(r"^orzech\w*\s+ziemn\w*\b|^masło orzechowe\b"), "masło orzechowe"),
     (re.compile(r"^migdał\w*\b"),              "migdały"),
-    # Octy — rozróżniamy bo ceny różne
+    # Vinegars — keep distinct because prices differ
     (re.compile(r"^ocet jabłkowy\b"),          "ocet jabłkowy"),
     (re.compile(r"^ocet balsamiczny\b"),       "ocet balsamiczny"),
     (re.compile(r"^ocet\b(?! jabłkowy| balsamiczny| winny| ryżowy)"), "ocet"),
@@ -201,7 +201,7 @@ _FAMILY_RULES: list[tuple[re.Pattern, str]] = [
 
 
 def collapse_family(name: str) -> str:
-    """Sprowadza warianty produktu do prostej nazwy rodzinnej."""
+    """Collapse product name variants to a single canonical family name."""
     for pattern, canonical in _FAMILY_RULES:
         if pattern.match(name):
             return canonical
@@ -209,7 +209,7 @@ def collapse_family(name: str) -> str:
 
 
 def build_macro_map(macros: list, key: str) -> dict:
-    """Buduje słownik name_en/name_pl → makro (z wariantem bez akcentów)."""
+    """Build a name_en/name_pl → macro dict (with accent-stripped variant as fallback)."""
     result = {}
     for m in macros:
         if not m.get(key):
@@ -225,7 +225,7 @@ def build_macro_map(macros: list, key: str) -> dict:
     return result
 
 
-# Statyczne makro dla produktów które nie mają odpowiednika w ingredients_macros.json
+# Static macros for products that have no entry in ingredients_macros.json
 _STATIC_MACROS: dict[str, dict] = {
     "bułka":             {"kcal": 267, "protein": 9.0,  "fat": 3.0,  "carbs": 50.0},
     "chleb":             {"kcal": 265, "protein": 9.0,  "fat": 3.2,  "carbs": 49.0},
@@ -249,8 +249,8 @@ _STATIC_MACROS: dict[str, dict] = {
 
 
 def fuzzy_macro(name: str, macro_map: dict) -> dict:
-    """Szuka makro po fuzzy match. Priorytet: statyczny dict → exact → partial_ratio."""
-    # 1. Statyczny dict dla znanych produktów
+    """Look up macros via fuzzy match. Priority: static dict → exact → partial_ratio."""
+    # 1. Static dict for known products
     static = _STATIC_MACROS.get(name.lower())
     if static:
         return static
@@ -260,17 +260,16 @@ def fuzzy_macro(name: str, macro_map: dict) -> dict:
     except ImportError:
         return {}
 
-    # 2. partial_ratio ale z kontrolą na false positives:
-    #    wybierz najlepszy wynik tylko jeśli pasujące słowo jest PREFIXEM składnika
+    # 2. partial_ratio with false-positive guard:
+    #    only accept the best result if a matched word is actually a token of the ingredient
     candidates = process.extract(
         name, macro_map.keys(),
         scorer=fuzz.partial_ratio, score_cutoff=90, limit=5
     )
-    # Preferuj klucze które zawierają query jako token, nie przypadkowe podciągi
     name_tokens = set(name.lower().split())
     for key, score, _ in sorted(candidates, key=lambda x: -x[1]):
         key_tokens = set(key.lower().split())
-        if name_tokens & key_tokens:   # mają wspólny token
+        if name_tokens & key_tokens:   # share at least one token
             return macro_map[key]
 
     return {}
@@ -282,18 +281,18 @@ def unit_to_app(unit: str | None) -> str:
     return unit or "g"
 
 
-# Średnie wagi składników sprzedawanych na sztuki (pcs/szt → g)
-# Źródło: średnie wagi warzyw i owoców dostępnych w polskich sklepach
+# Default weights (grams) for ingredients sold by piece (pcs/szt → g)
+# Source: average weights of vegetables and fruit available in Polish shops
 _PCS_WEIGHT = {
-    # Warzywa
+    # Vegetables
     "batat": 200,        "bataty": 200,       "słodki ziemniak": 200,
     "ziemniak": 150,     "ziemniaki": 150,
     "cebula": 100,       "cebula biała": 100, "cebula czerwona": 100,
     "cebula dymka": 15,  "szalotka": 20,
-    "czosnek": 5,        # cały główka ~40g, ale w przepisach "1 ząbek" = 5g
+    "czosnek": 5,        # whole head ~40g, but recipes use "1 clove" = 5g
     "por": 150,
     "marchew": 80,       "marchewka": 80,
-    "seler": 320,        "seler naciowy": 320, "łodyga selera": 40,  # 1 łodyga ≈ 40g
+    "seler": 320,        "seler naciowy": 320, "łodyga selera": 40,  # 1 stalk ≈ 40g
     "pietruszka": 80,    "korzeń pietruszki": 80,
     "burak": 150,        "buraki": 150,
     "pomidor": 120,      "pomidory": 120,
@@ -301,17 +300,17 @@ _PCS_WEIGHT = {
     "ogórek": 250,       "ogórek świeży": 250,
     "cukinia": 300,      "kabaczek": 300,
     "bakłażan": 250,
-    "dynia": 1500,       # kawałek dyni
+    "dynia": 1500,       # wedge of pumpkin
     "kapusta": 1000,     "kapusta głowiasta": 1000,
     "brokuł": 400,       "kalafior": 600,
-    "brukselka": 20,     # 1 różyczka
-    "szpinak": 30,       # garść liści ≈ 30g
+    "brukselka": 20,     # 1 sprout
+    "szpinak": 30,       # 1 handful of leaves ≈ 30g
     "jarmuż": 30,
-    "sałata": 200,       "mix sałat": 50,     # garść
-    "kukurydza": 300,    # kolba
+    "sałata": 200,       "mix sałat": 50,     # 1 handful
+    "kukurydza": 300,    # 1 cob
     "jalapeño": 15,      "jalapeno": 15,      "chili": 10,
     "awokado": 200,      "avocado": 200,
-    # Owoce
+    # Fruit
     "banan": 120,
     "jabłko": 150,       "jabłka": 150,
     "gruszka": 150,
@@ -332,10 +331,10 @@ _PCS_WEIGHT = {
     "morela": 40,
     "brzoskwinia": 150,
     "truskawka": 15,
-    # Inne
+    # Misc
     "jajko": 60,         "jajka": 60,         "egg": 60, "eggs": 60,
     "liść laurowy": 1,   "bay leaf": 1,
-    "puszka": 400,       "can": 400,          # standardowa puszka
+    "puszka": 400,       "can": 400,          # standard tin
     "ziarnko pieprzu": 0.05,
 }
 
@@ -347,53 +346,53 @@ def convert_weight(amount: float | None, ing_unit: str | None,
     iu = (ing_unit or "g").lower()
     pu = prod_unit.lower()
 
-    # pcs → szt (countable items): zaokrąglaj w górę (0.5 jajka → 1 jajko)
+    # pcs → szt (countable items): round up (0.5 egg → 1 egg)
     if iu in ("pcs", "szt") and pu == "szt":
         import math
         return math.ceil(float(amount))
 
-    # pcs → g: użyj domyślnej wagi jeśli produkt w gramach
+    # pcs → g: use default weight when product is stored in grams
     if iu in ("pcs", "szt") and pu == "g":
         key = ing_name.lower().strip()
         default_g = _PCS_WEIGHT.get(key, 100)
         return float(amount) * default_g
 
-    # g → szt: przelicz gramy na sztuki przez domyślną wagę; zaokrąglaj w górę (0.5 → 1)
+    # g → szt: convert grams to pieces via default weight; round up (0.5 → 1)
     if iu in ("g", "ml") and pu == "szt":
         key = ing_name.lower().strip()
         default_g = _PCS_WEIGHT.get(key, 100)
         import math
         return math.ceil(float(amount) / default_g) if default_g else float(amount)
 
-    # g ↔ ml: traktujemy 1:1 dla płynów
+    # g ↔ ml: treat as 1:1 for liquids
     if {iu, pu} <= {"g", "ml"}:
         return float(amount)
 
     return float(amount)
 
 
-# ── Import produktów ──────────────────────────────────────────────────────────
+# ── Product import ───────────────────────────────────────────────────────────
 
 def import_products(user_id: int, lang: str) -> dict[str, int]:
-    """Importuje produkty — 1 produkt na unikalną nazwę (deduplikacja po akcentach)."""
+    """Import products — 1 product per unique name (deduplicated by accent-stripped key)."""
     db_file   = "ingredient_db_en.json" if lang == "en" else "ingredient_db_pl.json"
     macro_key = "name_en"               if lang == "en" else "name_pl"
 
     ingredients = load(db_file)
-    # Sortuj: produkty z price_per_100 najpierw (najtańsze), potem bez ceny
-    # Dzięki temu kolaps rodzin bierze najtańszy produkt, nie pierwszy
+    # Sort: products with price_per_100 first (cheapest), then those without price.
+    # This ensures family collapse picks the cheapest product, not just the first one.
     ingredients.sort(key=lambda x: (
-        x.get("price_per_100") is None,   # None idzie na koniec
+        x.get("price_per_100") is None,   # None goes last
         x.get("price_per_100") or 9999,
     ))
     macro_map   = build_macro_map(load("ingredients_macros.json"), macro_key)
 
-    # Grupuj po generic_name (nazwa produktu sklepowego) — to jest właściwy klucz
-    # ingredient_name = specyficzna nazwa z przepisu ("makaron angel hair")
-    # generic_name    = znormalizowana nazwa sklepowa ("makaron")
-    # Chcemy 1 produkt per generic_name, ale product_map musi mapować OBA warianty
+    # Group by generic_name (the shop product name) — this is the authoritative key.
+    # ingredient_name = specific recipe name ("makaron angel hair")
+    # generic_name    = normalised shop name ("makaron")
+    # We want 1 product per generic_name, but product_map must cover BOTH variants.
 
-    seen: set[str] = set()   # dedup po generic_name key
+    seen: set[str] = set()   # dedup by generic_name key
     added = skipped_dup = skipped_en = 0
     product_map: dict[str, int] = {}
 
@@ -404,20 +403,20 @@ def import_products(user_id: int, lang: str) -> dict[str, int]:
         if not ing_name:
             continue
 
-        # Pomiń angielskie nazwy w PL imporcie (bez polskich liter + typowe EN słowa)
+        # Skip English names in PL import (no Polish letters + typical EN words)
         if lang == "pl" and is_english_name(ing_name) and is_english_name(generic_name):
             skipped_en += 1
             continue
 
-        # Dla EN: używaj ingredient_name (czysta nazwa składnika z przepisu, np. "sausage")
-        # Dla PL: generic_name (znormalizowana nazwa sklepowa, np. "makaron") + collapse_family
-        # EN generic_name pochodzi z Aldi i jest często śmieciowa ("sausage rolls 6 pack")
+        # EN: use ingredient_name (clean recipe ingredient name, e.g. "sausage")
+        # PL: use generic_name (normalised shop name, e.g. "makaron") + collapse_family
+        # EN generic_name comes from Aldi and is often noisy ("sausage rolls 6 pack")
         name_base = ing_name if lang == "en" else generic_name
         prod_name = collapse_family(name_base)
         prod_key  = dedup_key(prod_name)
 
         if prod_key in seen:
-            # Produkt już istnieje — dodaj tylko mapowanie ingredient_name → prod_id
+            # Product already exists — just add ingredient_name → prod_id mapping
             existing_id = product_map.get(prod_key)
             if existing_id:
                 product_map[ing_name.lower()]    = existing_id
@@ -431,7 +430,7 @@ def import_products(user_id: int, lang: str) -> dict[str, int]:
         unit          = unit_to_app(item.get("unit"))
         sold_by_wt    = bool(item.get("sold_by_weight", False))
 
-        # Makro: szukaj po generic_name, ingredient_name, bez akcentów, potem fuzzy
+        # Macros: look up by generic_name, ingredient_name, accent-stripped, then fuzzy
         macro = (macro_map.get(prod_name)
               or macro_map.get(dedup_key(prod_name))
               or macro_map.get(ing_name)
@@ -455,19 +454,19 @@ def import_products(user_id: int, lang: str) -> dict[str, int]:
         db.session.add(prod)
         db.session.flush()
 
-        # Mapuj OBA warianty nazwy → ten sam product_id
+        # Map BOTH name variants → the same product_id
         for k in (prod_name.lower(), prod_key, ing_name.lower(), dedup_key(ing_name)):
             product_map[k] = prod.id
 
         added += 1
 
     db.session.commit()
-    print(f"  Produkty ({lang.upper()}): dodano {added}, "
-          f"duplikaty={skipped_dup}, angielskie={skipped_en}")
+    print(f"  Products ({lang.upper()}): added {added}, "
+          f"duplicates={skipped_dup}, skipped_english={skipped_en}")
     return product_map
 
 
-# ── Import przepisów ──────────────────────────────────────────────────────────
+# ── Recipe import ────────────────────────────────────────────────────────────
 
 def import_recipes(user_id: int, lang: str, product_map: dict[str, int], macro_map: dict = None):
     if lang == "en":
@@ -507,11 +506,11 @@ def import_recipes(user_id: int, lang: str, product_map: dict[str, int], macro_m
             amount   = ing.get("amount")
             unit     = ing.get("unit")
 
-            # Szukaj produktu — najpierw dokładnie, potem bez akcentów
+            # Look up product — exact match first, then accent-stripped fallback
             prod_id = product_map.get(ing_name) or product_map.get(dedup_key(ing_name))
 
             if not prod_id:
-                # Utwórz placeholder — szukaj makro przez fuzzy match
+                # Create placeholder — look up macros via fuzzy match
                 ph_macro = fuzzy_macro(ing_name, macro_map or {}) or {}
                 placeholder = Product(
                     user_id=user_id, name=ing_name[:200],
@@ -541,8 +540,8 @@ def import_recipes(user_id: int, lang: str, product_map: dict[str, int], macro_m
         added += 1
 
     db.session.commit()
-    print(f"  Przepisy ({lang.upper()}): dodano {added}, pominięto {skipped}, "
-          f"placeholdery {placeholder_count}")
+    print(f"  Recipes ({lang.upper()}): added {added}, skipped {skipped}, "
+          f"placeholders {placeholder_count}")
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
@@ -552,7 +551,7 @@ def main():
     ap.add_argument("--user-id",     type=int, default=None)
     ap.add_argument("--lang",        default="en", choices=["en", "pl"])
     ap.add_argument("--clear",       action="store_true",
-                    help="Usuń istniejące produkty i przepisy użytkownika przed importem")
+                    help="Delete existing products and recipes for this user before importing")
     ap.add_argument("--list-users",  action="store_true")
     args = ap.parse_args()
 
@@ -562,11 +561,11 @@ def main():
             for u in User.query.all():
                 prods   = Product.query.filter_by(user_id=u.id).count()
                 recipes = Recipe.query.filter_by(user_id=u.id).count()
-                print(f"  id={u.id}  {u.email:<35}  {prods} produktów, {recipes} przepisów")
+                print(f"  id={u.id}  {u.email:<35}  {prods} products, {recipes} recipes")
             return
 
         if not args.user_id:
-            print("Podaj --user-id N lub --list-users")
+            print("Provide --user-id N or --list-users")
             sys.exit(1)
 
         uid = args.user_id
@@ -574,7 +573,7 @@ def main():
         if args.clear:
             r_count = Recipe.query.filter_by(user_id=uid).count()
             p_count = Product.query.filter_by(user_id=uid).count()
-            # Kolejność: meal_plans → recipe_ingredients → recipes → products (FK cascade)
+            # Order matters due to FK constraints: meal_plans → recipe_ingredients → recipes → products
             MealPlan.query.filter_by(user_id=uid).delete()
             recipe_ids = [r.id for r in Recipe.query.filter_by(user_id=uid).all()]
             if recipe_ids:
@@ -584,14 +583,14 @@ def main():
             Recipe.query.filter_by(user_id=uid).delete()
             Product.query.filter_by(user_id=uid).delete()
             db.session.commit()
-            print(f"Usunięto: {r_count} przepisów, {p_count} produktów")
+            print(f"Deleted: {r_count} recipes, {p_count} products")
 
-        print(f"Importuję dla user_id={uid}, lang={args.lang}...")
+        print(f"Importing for user_id={uid}, lang={args.lang}...")
         macro_key   = "name_en" if args.lang == "en" else "name_pl"
         macro_map   = build_macro_map(load("ingredients_macros.json"), macro_key)
         product_map = import_products(uid, args.lang)
         import_recipes(uid, args.lang, product_map, macro_map)
-        print("Gotowe!")
+        print("Done!")
 
 
 if __name__ == "__main__":

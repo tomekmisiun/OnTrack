@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-Krok 4: Buduje bazę składników i przepisów z dopasowań.
-- ingredient_db_en/pl.json: składniki z dopasowaniem
-- recipes_en/pl.json: tylko przepisy z 100% pokryciem składników + szacowany koszt
-- debugging/step4_build_database.txt: niedopasowane składniki z top kandydatami
+Step 4: Builds ingredient database and recipe list from matches.
+- ingredient_db_en/pl.json: matched ingredients
+- recipes_en/pl.json: recipes with 100% ingredient coverage + estimated cost
+- debugging/step4_build_database.txt: unmatched ingredients with top candidates
 
-Wejście:  data/matches_en.json, data/matches_pl.json,
-          data/recipes_normalized.json,
-          data/shops_en.json, data/shops_pl.json
-Wyjście:  data/ingredient_db_en.json, data/ingredient_db_pl.json,
-          data/recipes_en.json, data/recipes_pl.json
+Input:  data/matches_en.json, data/matches_pl.json,
+        data/recipes_normalized.json,
+        data/shops_en.json, data/shops_pl.json
+Output: data/ingredient_db_en.json, data/ingredient_db_pl.json,
+        data/recipes_en.json, data/recipes_pl.json
 """
 
 import json, logging
@@ -23,10 +23,10 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 log = logging.getLogger(__name__)
 
 
-# ── Konwersja jednostek ───────────────────────────────────────────────────────
+# ── Unit conversion ──────────────────────────────────────────────────────────
 
 def to_base(amount, unit: str) -> tuple:
-    """Normalizuje do g lub ml. Zwraca (value, base_unit)."""
+    """Normalize to g or ml. Returns (value, base_unit)."""
     if amount is None or unit is None:
         return None, None
     u = unit.lower().strip()
@@ -36,14 +36,14 @@ def to_base(amount, unit: str) -> tuple:
         return float(amount) * 1000, "g"
     if u == "l":
         return float(amount) * 1000, "ml"
-    # pcs — zostawiamy bez konwersji
+    # pcs — no conversion
     if u in ("pcs", "szt"):
         return float(amount), "pcs"
     return None, None
 
 
 def calc_ingredient_cost(ing_amount, ing_unit: str, product: dict) -> float | None:
-    """Koszt składnika na podstawie ilości i produktu ze sklepu."""
+    """Ingredient cost based on quantity and shop product."""
     pkg_val  = product.get("package_size_value")
     pkg_unit = (product.get("unit") or "").lower()
     price    = product.get("price_package")
@@ -51,7 +51,7 @@ def calc_ingredient_cost(ing_amount, ing_unit: str, product: dict) -> float | No
     if not price or not pkg_val or pkg_val <= 0:
         return None
 
-    # pcs — przelicz na sztuki
+    # pcs — convert by count
     if pkg_unit == "pcs":
         if ing_unit not in ("pcs", "szt", None):
             return None
@@ -64,23 +64,23 @@ def calc_ingredient_cost(ing_amount, ing_unit: str, product: dict) -> float | No
     if ing_base is None:
         return None
 
-    # g ↔ ml: traktujemy 1:1 dla wody/bulionu/mleka
+    # g ↔ ml: treat 1:1 for water/stock/milk
     if ing_base_unit != pkg_unit:
-        # Dopuść tylko jeśli oba to masa/objętość
+        # Allow only if both are mass/volume
         if not ({ing_base_unit, pkg_unit} <= {"g", "ml"}):
             return None
-        # 1:1 przeliczenie (gęstość ~1 dla wody/bulionów)
+        # 1:1 conversion (density ~1 for water/broths)
 
     return round(ing_base / pkg_val * price, 4)
 
 
-# ── Budowanie ingredient_db ───────────────────────────────────────────────────
+# ── Building ingredient_db ────────────────────────────────────────────────────
 
 def build_ingredient_db(matches: list[dict]) -> dict[str, dict]:
     return {m["ingredient_name"]: m for m in matches}
 
 
-# ── Budowanie unmatched ───────────────────────────────────────────────────────
+# ── Building unmatched list ───────────────────────────────────────────────────
 
 def build_unmatched(
     unmatched_raw: list[str],
@@ -101,7 +101,7 @@ def build_unmatched(
     return results
 
 
-# ── Budowanie recipes ─────────────────────────────────────────────────────────
+# ── Building recipes ─────────────────────────────────────────────────────────
 
 def build_recipes(
     recipes: list[dict],
@@ -122,7 +122,7 @@ def build_recipes(
             unit   = ing.get("unit")
 
             if amount is None:
-                # Składnik "do smaku" — nie blokuje przepisu, ale koszt niekompletny
+                # "to taste" ingredient — doesn't block the recipe but cost is incomplete
                 cost_complete = False
                 continue
 
@@ -140,7 +140,7 @@ def build_recipes(
         if not available:
             continue
 
-        # Odrzuć przepisy bez żadnego składnika z wagą (same przyprawy do smaku)
+        # Reject recipes with no ingredient that has a weight (all "to taste" spices)
         matched_with_amount = sum(
             1 for i in ings
             if i.get("amount") is not None and i.get("name") in db
@@ -183,28 +183,28 @@ def _write_debug(db_en, db_pl, unmatched_en, unmatched_pl,
     def recipe_row_en(r):
         cost = r.get("estimated_cost_gbp")
         n_ing = len(r.get("ingredients_en", []))
-        return f"{r.get('name_en', ''):<55} | {n_ing} sk. | koszt={cost if cost is not None else '—'}"
+        return f"{r.get('name_en', ''):<55} | {n_ing} ing. | cost={cost if cost is not None else '—'}"
 
     def recipe_row_pl(r):
         cost = r.get("estimated_cost_pln")
         n_ing = len(r.get("ingredients_pl", []))
-        return f"{r.get('name_pl', ''):<55} | {n_ing} sk. | koszt={cost if cost is not None else '—'}"
+        return f"{r.get('name_pl', ''):<55} | {n_ing} ing. | cost={cost if cost is not None else '—'}"
 
     sections = [
         {
-            "title": "Statystyki budowania bazy",
+            "title": "Database build stats",
             "stats": {
                 "Ingredient DB EN":               len(db_en),
                 "Ingredient DB PL":               len(db_pl),
-                "Niedopasowane EN":               len(unmatched_en),
-                "Niedopasowane PL":               len(unmatched_pl),
-                "Przepisy wejściowe":             total_recipes,
-                "Przepisy EN (100% pokrycie)":    len(recipes_en),
-                "Przepisy PL (100% pokrycie)":    len(recipes_pl),
-                "% akceptacji EN":                f"{len(recipes_en)/max(1,total_recipes)*100:.1f}%",
-                "% akceptacji PL":                f"{len(recipes_pl)/max(1,total_recipes)*100:.1f}%",
-                "EN z pełnym kosztem":            sum(1 for r in recipes_en if r.get("cost_complete")),
-                "PL z pełnym kosztem":            sum(1 for r in recipes_pl if r.get("cost_complete")),
+                "Unmatched EN":                   len(unmatched_en),
+                "Unmatched PL":                   len(unmatched_pl),
+                "Input recipes":                  total_recipes,
+                "Recipes EN (100% coverage)":     len(recipes_en),
+                "Recipes PL (100% coverage)":     len(recipes_pl),
+                "% accepted EN":                  f"{len(recipes_en)/max(1,total_recipes)*100:.1f}%",
+                "% accepted PL":                  f"{len(recipes_pl)/max(1,total_recipes)*100:.1f}%",
+                "EN with full cost":              sum(1 for r in recipes_en if r.get("cost_complete")),
+                "PL with full cost":              sum(1 for r in recipes_pl if r.get("cost_complete")),
             },
             "rows": [],
         },
@@ -213,7 +213,7 @@ def _write_debug(db_en, db_pl, unmatched_en, unmatched_pl,
             "rows": [db_row(k, v) for k, v in sorted(db_en.items())],
         },
         {
-            "title": "EN — niedopasowane składniki (top 3 kandydaci)",
+            "title": "EN — unmatched ingredients (top 3 candidates)",
             "rows": [unmatch_row(u) for u in sorted(unmatched_en, key=lambda x: x["ingredient_name"])],
         },
         {
@@ -221,15 +221,15 @@ def _write_debug(db_en, db_pl, unmatched_en, unmatched_pl,
             "rows": [db_row(k, v) for k, v in sorted(db_pl.items())],
         },
         {
-            "title": "PL — niedopasowane składniki (top 3 kandydaci)",
+            "title": "PL — unmatched ingredients (top 3 candidates)",
             "rows": [unmatch_row(u) for u in sorted(unmatched_pl, key=lambda x: x["ingredient_name"])],
         },
         {
-            "title": "EN — zaakceptowane przepisy (name | n_ing | koszt GBP)",
+            "title": "EN — accepted recipes (name | n_ing | cost GBP)",
             "rows": [recipe_row_en(r) for r in sorted(recipes_en, key=lambda x: x.get("name_en", ""))],
         },
         {
-            "title": "PL — zaakceptowane przepisy (name | n_ing | koszt PLN)",
+            "title": "PL — accepted recipes (name | n_ing | cost PLN)",
             "rows": [recipe_row_pl(r) for r in sorted(recipes_pl, key=lambda x: x.get("name_pl", ""))],
         },
     ]
@@ -246,7 +246,7 @@ def main():
         DATA / "recipes_pl.json",
     ]
     if all(f.exists() for f in outputs):
-        log.info("Wszystkie pliki wynikowe już istnieją. Pomijam krok 4.")
+        log.info("All output files already exist. Skipping step 4.")
         return
 
     matches_en = json.loads((DATA / "matches_en.json").read_text("utf-8"))
@@ -264,7 +264,7 @@ def main():
     db_en = build_ingredient_db(matches_en)
     db_pl = build_ingredient_db(matches_pl)
 
-    # Unmatched z top kandydatami
+    # Unmatched with top candidates
     unmatched_en = build_unmatched(unmatched_en_raw, shops_en)
     unmatched_pl = build_unmatched(unmatched_pl_raw, shops_pl)
 
@@ -274,7 +274,7 @@ def main():
 
     def save(path, data):
         path.write_text(json.dumps(data, ensure_ascii=False, indent=2), "utf-8")
-        log.info(f"Zapisano {len(data)} → {path.name}")
+        log.info(f"Saved {len(data)} → {path.name}")
 
     save(DATA / "ingredient_db_en.json", list(db_en.values()))
     save(DATA / "ingredient_db_pl.json", list(db_pl.values()))

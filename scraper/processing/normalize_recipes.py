@@ -291,12 +291,12 @@ _EN_KEYWORDS = re.compile(
     r"meal prep|whole30|paleo|keto|aip|diy|low.carb|high.protein|sugar.free)\b", re.I
 )
 
-# Listicle / roundup — nie są przepisami
-# RECIPE (zostaw): "20 Minute...", "10-Ingredient...", "3 Serving...", "30-Minute..."
+# Listicle / roundup — not actual recipes
+# RECIPE (keep): "20 Minute...", "10-Ingredient...", "3 Serving...", "30-Minute..."
 _RECIPE_PREFIX = re.compile(
     r"^\d{1,3}[\s-]+(minute|min|second|ingredient|serving|day meal)", re.I
 )
-# ROUNDUP (usuń): zaczyna się od liczby + zawiera słowo wskazujące na listę artykułów
+# ROUNDUP (remove): starts with a number + contains a word indicating a list article
 _ROUNDUP_BODY = re.compile(
     r"\b(recipes?|ideas?|ways?|lunches?|dinners?|breakfasts?|snacks?|"
     r"desserts?|meals?|bowls?|options?|favorites?|favourites?)\b",
@@ -311,13 +311,13 @@ _STARTS_WITH_NUMBER = re.compile(r"^\d{1,3}[\s-]")
 
 
 def _is_roundup(name: str) -> bool:
-    """Zwraca True jeśli to artykuł-listicle, nie przepis."""
+    """Return True if the name looks like a listicle/roundup, not a recipe."""
     if not _STARTS_WITH_NUMBER.match(name):
         return False
-    # Wyraźnie PRZEPIS: "20 Minute", "10-Ingredient", "3 Serving"
+    # Clearly a RECIPE: "20 Minute", "10-Ingredient", "3 Serving"
     if _RECIPE_PREFIX.match(name):
         return False
-    # Wyraźnie ROUNDUP
+    # Clearly a ROUNDUP
     if _ROUNDUP_ADJECTIVE.match(name):
         return True
     if _ROUNDUP_DAYS.match(name):
@@ -328,7 +328,7 @@ def _is_roundup(name: str) -> bool:
 
 
 def _is_untranslated(name_en: str, name_pl: str) -> bool:
-    """Sprawdza czy name_pl to w rzeczywistości nieprzetłumaczone name_en."""
+    """Return True if name_pl is the untranslated English title."""
     if not name_pl:
         return True
     if name_pl.lower().strip() == name_en.lower().strip():
@@ -339,7 +339,7 @@ def _is_untranslated(name_en: str, name_pl: str) -> bool:
 
 
 def _fix_translation(client, recipe: dict) -> dict:
-    """Ponawia tłumaczenie tylko dla name_pl (szybkie, bez pełnej normalizacji)."""
+    """Retry translation for name_pl only (fast, no full normalisation)."""
     prompt = (
         f"Translate this English recipe title to Polish. "
         f"Use natural Polish, drop marketing words like 'Easy', 'Simple', 'Meal Prep'. "
@@ -355,14 +355,14 @@ def _fix_translation(client, recipe: dict) -> dict:
         pl = resp.choices[0].message.content.strip().strip('"\'')
         if pl:
             recipe["name_pl"] = pl
-            log.info(f"  Przetłumaczono: {recipe['name_en'][:40]} → {pl}")
+            log.info(f"  Translated: {recipe['name_en'][:40]} → {pl}")
     except Exception as e:
-        log.warning(f"  Fix translation nieudany: {e}")
+        log.warning(f"  Fix translation failed: {e}")
     return recipe
 
 
 def _validate_and_fix(client, results: list, originals: list) -> list:
-    """Sprawdza wyniki i naprawia brakujące tłumaczenia name_pl."""
+    """Check results and fix missing name_pl translations."""
     fixed = []
     for i, r in enumerate(results):
         if r is None:
@@ -386,7 +386,7 @@ def _parse_response(content: str) -> list:
     for v in parsed.values():
         if isinstance(v, list):
             return v
-    raise ValueError(f"Odpowiedź nie jest listą: {content[:200]}")
+    raise ValueError(f"Response is not a list: {content[:200]}")
 
 
 def _call_api(client, recipes_batch: list) -> list:
@@ -402,7 +402,7 @@ def _call_api(client, recipes_batch: list) -> list:
 
 
 def normalize_batch(client, recipes: list) -> list:
-    """Batch z retry. Przy niepowodzeniu — per-recipe fallback. Waliduje tłumaczenia."""
+    """Batch with retry. On failure — per-recipe fallback. Validates translations."""
     last_err = None
     for attempt in range(MAX_RETRIES + 1):
         try:
@@ -411,13 +411,13 @@ def normalize_batch(client, recipes: list) -> list:
         except Exception as e:
             last_err = e
             if "429" in str(e) or "rate" in str(e).lower():
-                log.warning("Rate limit — czekam 10s")
+                log.warning("Rate limit — waiting 10s")
                 time.sleep(10)
             elif attempt < MAX_RETRIES:
-                log.warning(f"Batch próba {attempt + 1} nieudana: {e}")
+                log.warning(f"Batch attempt {attempt + 1} failed: {e}")
                 time.sleep(2)
 
-    log.warning(f"Batch nieudany ({last_err}), fallback per-recipe")
+    log.warning(f"Batch failed ({last_err}), falling back to per-recipe")
     results = []
     for recipe in recipes:
         try:
@@ -425,7 +425,7 @@ def normalize_batch(client, recipes: list) -> list:
             r = _validate_and_fix(client, [r], [recipe])[0]
             results.append(r)
         except Exception as e:
-            log.error(f"Przepis '{recipe.get('name', '?')}' nieudany: {e}")
+            log.error(f"Recipe '{recipe.get('name', '?')}' failed: {e}")
             results.append(None)
     return results
 
@@ -434,36 +434,36 @@ def normalize_batch(client, recipes: list) -> list:
 
 def main():
     if OUTPUT_FILE.exists():
-        log.info(f"Plik wyjściowy już istnieje: {OUTPUT_FILE}. Pomijam krok 1.")
+        log.info(f"Output file already exists: {OUTPUT_FILE}. Skipping step 1.")
         return
 
     all_recipes = json.loads(INPUT_FILE.read_text("utf-8"))
-    # Odfiltruj listicle / roundup articles
+    # Filter out listicle / roundup articles
     recipes = [r for r in all_recipes if not _is_roundup(r.get("name", "") or "")]
     if len(recipes) < len(all_recipes):
-        log.info(f"Odfiltrowano {len(all_recipes) - len(recipes)} roundup articles")
-    log.info(f"Wczytano {len(recipes)} przepisów")
+        log.info(f"Filtered out {len(all_recipes) - len(recipes)} roundup articles")
+    log.info(f"Loaded {len(recipes)} recipes")
 
-    # Wczytaj checkpoint
+    # Load checkpoint
     done: dict[int, dict] = {}
     if PARTIAL_FILE.exists():
         try:
             partial = json.loads(PARTIAL_FILE.read_text("utf-8"))
             done = {p["_idx"]: p for p in partial if p and "_idx" in p}
-            log.info(f"Checkpoint: {len(done)} przepisów już gotowych")
+            log.info(f"Checkpoint: {len(done)} recipes already done")
         except Exception:
             pass
 
-    # Podziel na batche
+    # Split into batches
     batches: list[list[tuple[int, dict]]] = []
     for i in range(0, len(recipes), BATCH_SIZE):
         chunk = list(enumerate(recipes[i:i + BATCH_SIZE], start=i))
         if not all(idx in done for idx, _ in chunk):
             batches.append(chunk)
 
-    log.info(f"Batche do przetworzenia: {len(batches)}")
+    log.info(f"Batches to process: {len(batches)}")
     if not batches:
-        log.info("Wszystko gotowe.")
+        log.info("All done.")
 
     completed = 0
 
@@ -482,14 +482,14 @@ def main():
                         result["_idx"] = idx
                         done[idx] = result
             except Exception as e:
-                log.error(f"Batch nieudany: {e}")
+                log.error(f"Batch failed: {e}")
             completed += 1
             if completed % SAVE_EVERY == 0:
                 checkpoint = [done[k] for k in sorted(done)]
                 PARTIAL_FILE.write_text(
                     json.dumps(checkpoint, ensure_ascii=False, indent=2), "utf-8"
                 )
-                log.info(f"Checkpoint zapisany: {len(done)}/{len(recipes)}")
+                log.info(f"Checkpoint saved: {len(done)}/{len(recipes)}")
 
     final = []
     for k in sorted(done):
@@ -497,14 +497,14 @@ def main():
         final.append(r)
 
     OUTPUT_FILE.write_text(json.dumps(final, ensure_ascii=False, indent=2), "utf-8")
-    log.info(f"Zapisano {len(final)} przepisów → {OUTPUT_FILE}")
+    log.info(f"Saved {len(final)} recipes → {OUTPUT_FILE}")
 
     if PARTIAL_FILE.exists():
         PARTIAL_FILE.unlink()
 
     skipped = len(recipes) - len(final)
     if skipped:
-        log.warning(f"{skipped} przepisów nie udało się znormalizować (None)")
+        log.warning(f"{skipped} recipes failed to normalise (None)")
 
     _write_debug(all_recipes, recipes, final)
 
@@ -514,36 +514,36 @@ def _write_debug(all_input: list, after_filter: list, normalized: list):
 
     roundups = [r for r in all_input if r not in after_filter]
 
-    # Sekcja 1: statystyki
+    # Section 1: stats
     stats_rows = [
-        f"Przepisy wejściowe (mealpreponfleek):   {len(all_input)}",
-        f"Odfiltrowane roundup-articles:          {len(roundups)}",
-        f"Po filtrowaniu:                         {len(after_filter)}",
-        f"Znormalizowane przez DeepSeek:          {len(normalized)}",
-        f"Nieudane (błąd API / None):             {len(after_filter) - len(normalized)}",
+        f"Input recipes (mealpreponfleek):        {len(all_input)}",
+        f"Filtered roundup articles:              {len(roundups)}",
+        f"After filtering:                        {len(after_filter)}",
+        f"Normalised by DeepSeek:                 {len(normalized)}",
+        f"Failed (API error / None):              {len(after_filter) - len(normalized)}",
     ]
 
-    # Sekcja 2: odfiltrowane roundupy
+    # Section 2: filtered roundups
     roundup_rows = [r.get("name", "?") for r in roundups]
 
-    # Sekcja 3: każdy znormalizowany przepis — składniki EN
+    # Section 3: each normalised recipe — EN+PL ingredients
     recipe_rows = []
     for r in normalized:
         recipe_rows.append(f"[{r.get('name_en')}] / [{r.get('name_pl')}]  (servings={r.get('servings','?')})")
         for ing in r.get("ingredients_en", []):
             amt  = ing.get("amount")
             unit = ing.get("unit") or ""
-            recipe_rows.append(f"    EN  {ing['name']:<35} {str(amt)+' '+unit if amt else '(do smaku)'}")
+            recipe_rows.append(f"    EN  {ing['name']:<35} {str(amt)+' '+unit if amt else '(to taste)'}")
         for ing in r.get("ingredients_pl", []):
             amt  = ing.get("amount")
             unit = ing.get("unit") or ""
-            recipe_rows.append(f"    PL  {ing['name']:<35} {str(amt)+' '+unit if amt else '(do smaku)'}")
+            recipe_rows.append(f"    PL  {ing['name']:<35} {str(amt)+' '+unit if amt else '(to taste)'}")
         recipe_rows.append("")
 
     write_report(1, "normalize_recipes", [
-        {"title": "STATYSTYKI",                     "rows": stats_rows},
-        {"title": f"ODFILTROWANE ROUNDUPY ({len(roundups)})",  "rows": roundup_rows},
-        {"title": f"ZNORMALIZOWANE PRZEPISY ({len(normalized)}) — składniki EN+PL z ilościami",
+        {"title": "STATS",                              "rows": stats_rows},
+        {"title": f"FILTERED ROUNDUPS ({len(roundups)})", "rows": roundup_rows},
+        {"title": f"NORMALISED RECIPES ({len(normalized)}) — EN+PL ingredients with amounts",
          "rows": recipe_rows},
     ])
 
