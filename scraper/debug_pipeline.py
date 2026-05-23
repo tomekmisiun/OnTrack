@@ -464,11 +464,10 @@ def debug_api():
   Nagłówek:  Authorization: Bearer <JWT_TOKEN>
 
   Jak przetestować (curl):
-    # 1. Zaloguj się i pobierz token:
-    TOKEN=$(curl -s -X POST http://localhost:5001/api/auth/login \\
-      -H "Content-Type: application/json" \\
-      -d '{"email":"tomek.misiun@gmail.com","password":"TWOJE_HASŁO"}' \\
-      | python3 -c "import sys,json; print(json.load(sys.stdin)['access_token'])")
+    # 1. Zaloguj się przez Google w przeglądarce (http://localhost:3000),
+    #    potem skopiuj token z DevTools → Application → Local Storage → token
+
+    TOKEN="<JWT_TOKEN_Z_LOCALSTORAGE>"
 
     # 2. Pobierz produkty:
     curl -H "Authorization: Bearer $TOKEN" http://localhost:5001/api/products/

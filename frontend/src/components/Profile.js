@@ -80,7 +80,7 @@ export default function Profile({ onClose, onStartTour }) {
         {/* Language */}
         <div style={{ marginBottom: 24 }}>
           <div style={{ fontSize: 11, color: '#0d9488', fontWeight: 700, letterSpacing: '0.5px', marginBottom: 10 }}>
-            {t('password_lbl') === 'HASŁO' ? 'JĘZYK KONTA' : 'ACCOUNT LANGUAGE'}
+            {t('account_language')}
           </div>
           <div style={{ display: 'flex', gap: 10 }}>
             {['pl', 'en'].map(code => (

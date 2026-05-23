@@ -126,54 +126,6 @@ def delete_product(id):
     return jsonify({'message': 'Product deleted'}), 200
 
 
-@products_bp.route('/ingredient-mapping', methods=['GET'])
-@jwt_required()
-def ingredient_mapping():
-    """Table: recipe ingredient → matched shop product with price and macros."""
-    import json
-    from pathlib import Path
-
-    data_path = Path(__file__).parent.parent.parent / 'scraper' / 'data' / 'ingredient_db_pl.json'
-    if not data_path.exists():
-        return jsonify([])
-
-    db_items = json.loads(data_path.read_text('utf-8'))
-
-    # Group by generic_name — collect all ingredient names that map to each product
-    from collections import defaultdict
-    product_map: dict[str, dict] = {}
-    product_ingredients: dict[str, list[str]] = defaultdict(list)
-
-    for item in db_items:
-        ing   = item.get('ingredient_name', '')
-        prod  = item.get('generic_name') or ing
-        if not prod:
-            continue
-
-        if prod not in product_map:
-            product_map[prod] = {
-                'product_name':   prod,
-                'shop':           item.get('shop', ''),
-                'original_name':  item.get('original_name', ''),
-                'package_weight': item.get('package_size_value'),
-                'unit':           item.get('unit', 'g'),
-                'price_per_100':  round(item.get('price_per_100') or 0, 2),
-                'price_package':  round(item.get('price_package') or 0, 2),
-                'fuzzy_score':    item.get('fuzzy_score'),
-            }
-
-        if ing and ing != prod and ing not in product_ingredients[prod]:
-            product_ingredients[prod].append(ing)
-
-    result = []
-    for prod, data in sorted(product_map.items(), key=lambda x: x[0]):
-        row = dict(data)
-        row['ingredient_aliases'] = sorted(product_ingredients.get(prod, []))
-        result.append(row)
-
-    return jsonify(result)
-
-
 @products_bp.route('/all', methods=['DELETE'])
 @jwt_required()
 def delete_all_products():

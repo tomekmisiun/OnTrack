@@ -48,22 +48,6 @@ export function AuthProvider({ children, onLangChange }) {
     }
   }, []);
 
-  const login = async (email, password) => {
-    const res = await API.post('/api/auth/login', { email, password });
-    const { access_token, user } = res.data;
-    localStorage.setItem('token', access_token);
-    API.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
-    applyUser(user);
-  };
-
-  const register = async (email, password, lang) => {
-    const res = await API.post('/api/auth/register', { email, password, lang });
-    const { access_token, user } = res.data;
-    localStorage.setItem('token', access_token);
-    API.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
-    applyUser(user);
-  };
-
   const logout = () => {
     localStorage.removeItem('token');
     delete API.defaults.headers.common['Authorization'];
@@ -80,7 +64,7 @@ export function AuthProvider({ children, onLangChange }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, deleteAccount, updateUserLang }}>
+    <AuthContext.Provider value={{ user, loading, logout, deleteAccount, updateUserLang }}>
       {children}
     </AuthContext.Provider>
   );

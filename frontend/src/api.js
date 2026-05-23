@@ -29,7 +29,6 @@ export const products = {
   update:           (id, data) => API.put(`/api/products/${id}`, data),
   delete:           (id)       => API.delete(`/api/products/${id}`),
   deleteAll:        ()         => API.delete('/api/products/all'),
-  ingredientMapping: ()        => API.get('/api/products/ingredient-mapping'),
 };
 
 export const recipes = {

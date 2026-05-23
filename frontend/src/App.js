@@ -22,7 +22,6 @@ const TAB_ICONS = {
   calendar: 'heroicons:calendar-days',
   recipes:  'heroicons:book-open',
   products: 'heroicons:shopping-cart',
-  mapping:  'heroicons:arrow-path',
   summary:  'heroicons:banknotes',
   export:   'heroicons:arrow-down-tray',
 };

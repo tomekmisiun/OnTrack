@@ -3,13 +3,10 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identi
 from authlib.integrations.flask_client import OAuth
 from app import db
 from app.models.user import User
-import re
 import os
 
 auth_bp = Blueprint('auth', __name__)
 oauth = OAuth()
-
-EMAIL_RE = re.compile(r'^[^@\s]+@[^@\s]+\.[^@\s]+$')
 
 
 def init_oauth(app):
@@ -24,16 +21,6 @@ def init_oauth(app):
         )
 
 
-def _validate(email, password):
-    if not email or not password:
-        return 'Email and password are required'
-    if not EMAIL_RE.match(email):
-        return 'Invalid email format'
-    if len(password) < 8:
-        return 'Password must be at least 8 characters'
-    return None
-
-
 def _find_or_create_oauth_user(email):
     user = User.query.filter_by(email=email).first()
     if not user:
@@ -42,52 +29,6 @@ def _find_or_create_oauth_user(email):
         db.session.add(user)
         db.session.commit()
     return user
-
-
-# ---- Email/password ----
-
-@auth_bp.route('/register', methods=['POST'])
-def register():
-    data = request.get_json() or {}
-    email = (data.get('email') or '').strip().lower()
-    password = data.get('password') or ''
-    lang = data.get('lang', 'pl') if data.get('lang') in ('pl', 'en') else 'pl'
-
-    err = _validate(email, password)
-    if err:
-        return jsonify({'error': err}), 400
-    if User.query.filter_by(email=email).first():
-        return jsonify({'error': 'An account with this email already exists'}), 409
-
-    user = User(email=email, lang=lang)
-    user.set_password(password)
-    db.session.add(user)
-    db.session.commit()
-
-    from app.seeds import seed_user
-    seed_user(user.id, lang=lang)
-
-    from app.models.household_member import HouseholdMember
-    primary = HouseholdMember(user_id=user.id, name='Me' if lang == 'en' else 'Ja', is_primary=True)
-    db.session.add(primary)
-    db.session.commit()
-
-    token = create_access_token(identity=str(user.id))
-    return jsonify({'access_token': token, 'user': user.to_dict()}), 201
-
-
-@auth_bp.route('/login', methods=['POST'])
-def login():
-    data = request.get_json() or {}
-    email = (data.get('email') or '').strip().lower()
-    password = data.get('password') or ''
-
-    user = User.query.filter_by(email=email).first()
-    if not user or not user.check_password(password):
-        return jsonify({'error': 'Invalid email or password'}), 401
-
-    token = create_access_token(identity=str(user.id))
-    return jsonify({'access_token': token, 'user': user.to_dict()})
 
 
 @auth_bp.route('/me', methods=['GET'])
@@ -105,7 +46,6 @@ def me():
 def google_login():
     if not current_app.config.get('GOOGLE_CLIENT_ID'):
         return jsonify({'error': 'Google OAuth is not configured'}), 503
-    callback_url = current_app.config['FRONTEND_URL'].rstrip('/') + '/api/auth/google/callback'
     redirect_uri = f"http://localhost:5001/api/auth/google/callback"
     return oauth.google.authorize_redirect(redirect_uri)
 
@@ -183,12 +123,3 @@ def delete_me():
     db.session.delete(user)
     db.session.commit()
     return jsonify({'message': 'Account deleted'}), 200
-
-
-@auth_bp.route('/providers')
-def providers():
-    """Returns which OAuth providers are configured."""
-    available = []
-    if current_app.config.get('GOOGLE_CLIENT_ID'):
-        available.append('google')
-    return jsonify({'providers': available})
