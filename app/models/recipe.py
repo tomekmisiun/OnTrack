@@ -59,7 +59,7 @@ class Recipe(db.Model):
         )
 
     def _calc_macros(self):
-        # Jeśli mamy makra per 100g z przepisu (aniagotuje), użyj ich × łączna waga
+        # If we have per-100g macros from the scraped recipe, use them × total weight
         if self.kcal_100g is not None:
             total = self._total_weight()
             factor = total / 100.0
@@ -69,7 +69,7 @@ class Recipe(db.Model):
                 round((self.fat_100g    or 0) * factor, 1),
                 round((self.carbs_100g  or 0) * factor, 1),
             )
-        # Fallback: suma makr ze składników
+        # Fallback: sum macros from individual ingredients
         kcal = protein = fat = carbs = 0.0
         for ing in self.ingredients:
             p = ing.product
@@ -83,7 +83,7 @@ class Recipe(db.Model):
         return round(kcal), round(protein, 1), round(fat, 1), round(carbs, 1)
 
     def _quick_cost(self) -> float:
-        """Koszt bez pełnego to_dict() — używane w liście przepisów."""
+        """Cost without a full to_dict() — used in the recipe list view."""
         total = 0.0
         for ing in self.ingredients:
             p = ing.product
@@ -97,7 +97,7 @@ class Recipe(db.Model):
         return round(total, 2)
 
     def to_dict_summary(self):
-        """Nagłówek przepisu z kosztem i makro."""
+        """Recipe header with cost and macros."""
         kcal, protein, fat, carbs = self._calc_macros()
         return {
             'id': self.id,

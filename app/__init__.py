@@ -19,15 +19,15 @@ def create_app():
 
     @jwt.unauthorized_loader
     def unauthorized(_err):
-        return jsonify({'error': 'Wymagane logowanie'}), 401
+        return jsonify({'error': 'Authentication required'}), 401
 
     @jwt.invalid_token_loader
     def invalid_token(_err):
-        return jsonify({'error': 'Nieprawidłowy token'}), 401
+        return jsonify({'error': 'Invalid token'}), 401
 
     @jwt.expired_token_loader
     def expired_token(_jwt_header, _jwt_data):
-        return jsonify({'error': 'Sesja wygasła — zaloguj się ponownie'}), 401
+        return jsonify({'error': 'Session expired — please log in again'}), 401
 
     from prometheus_flask_exporter import PrometheusMetrics
     PrometheusMetrics(app)

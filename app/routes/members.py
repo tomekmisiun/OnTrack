@@ -27,12 +27,12 @@ def list_members():
 def create_member():
     uid = current_uid()
     if HouseholdMember.query.filter_by(user_id=uid).count() >= MAX_MEMBERS:
-        return jsonify({'error': f'Maksymalna liczba członków: {MAX_MEMBERS}'}), 400
+        return jsonify({'error': f'Maximum number of members: {MAX_MEMBERS}'}), 400
 
     data = request.get_json() or {}
     name = str(data.get('name', '')).strip()[:MAX_NAME]
     if not name:
-        return jsonify({'error': 'Nazwa wymagana'}), 400
+        return jsonify({'error': 'Name is required'}), 400
 
     member = HouseholdMember(user_id=uid, name=name, is_primary=False)
     db.session.add(member)
@@ -48,7 +48,7 @@ def rename_member(mid):
     data = request.get_json() or {}
     name = str(data.get('name', '')).strip()[:MAX_NAME]
     if not name:
-        return jsonify({'error': 'Nazwa wymagana'}), 400
+        return jsonify({'error': 'Name is required'}), 400
     member.name = name
     db.session.commit()
     return jsonify(member.to_dict())
@@ -60,10 +60,10 @@ def delete_member(mid):
     uid = current_uid()
     member = _own_member(mid, uid)
     if member.is_primary:
-        return jsonify({'error': 'Nie można usunąć głównego członka'}), 403
+        return jsonify({'error': 'Cannot delete the primary member'}), 403
     db.session.delete(member)
     db.session.commit()
-    return jsonify({'message': 'Usunięto'}), 200
+    return jsonify({'message': 'Deleted'}), 200
 
 
 @members_bp.route('/<int:mid>/profile', methods=['PATCH'])

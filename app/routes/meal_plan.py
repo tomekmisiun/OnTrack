@@ -41,7 +41,7 @@ def get_day(date_str):
     try:
         day = date.fromisoformat(date_str)
     except ValueError:
-        return jsonify({'error': 'Nieprawidłowy format daty'}), 400
+        return jsonify({'error': 'Invalid date format'}), 400
 
     ids_str = request.args.get('member_ids')
     mid = request.args.get('member_id')
@@ -65,7 +65,7 @@ def get_range(start, end):
         start_date = date.fromisoformat(start)
         end_date = date.fromisoformat(end)
     except ValueError:
-        return jsonify({'error': 'Nieprawidłowy format daty'}), 400
+        return jsonify({'error': 'Invalid date format'}), 400
 
     ids_str = request.args.get('member_ids')
     mid = request.args.get('member_id')
@@ -93,22 +93,22 @@ def add_meal():
     uid = current_uid()
     data = request.get_json()
     if not data or not all(k in data for k in ['date', 'position', 'recipe_id']):
-        return jsonify({'error': 'Wymagane pola: date, position, recipe_id'}), 400
+        return jsonify({'error': 'Required fields: date, position, recipe_id'}), 400
     if not 1 <= data['position'] <= 5:
-        return jsonify({'error': 'Pozycja musi być między 1 a 5'}), 400
+        return jsonify({'error': 'Position must be between 1 and 5'}), 400
     try:
         day = date.fromisoformat(data['date'])
     except ValueError:
-        return jsonify({'error': 'Nieprawidłowy format daty'}), 400
+        return jsonify({'error': 'Invalid date format'}), 400
 
     mid = resolve_member_id(uid, data.get('member_id'))
     if not mid:
-        return jsonify({'error': 'Brak skonfigurowanego profilu'}), 400
+        return jsonify({'error': 'No profile configured'}), 400
 
     if not Recipe.query.filter_by(id=data['recipe_id'], user_id=uid).first():
-        return jsonify({'error': 'Przepis nie istnieje'}), 404
+        return jsonify({'error': 'Recipe not found'}), 404
     if MealPlan.query.filter_by(member_id=mid, date=day, position=data['position']).first():
-        return jsonify({'error': f'Pozycja {data["position"]} w tym dniu jest już zajęta'}), 409
+        return jsonify({'error': f'Position {data["position"]} on this day is already taken'}), 409
 
     meal = MealPlan(user_id=uid, member_id=mid, date=day, position=data['position'], recipe_id=data['recipe_id'])
     db.session.add(meal)
@@ -122,17 +122,17 @@ def copy_range():
     uid = current_uid()
     data = request.get_json()
     if not data or not all(k in data for k in ['source_start', 'source_end', 'target_start']):
-        return jsonify({'error': 'Wymagane pola: source_start, source_end, target_start'}), 400
+        return jsonify({'error': 'Required fields: source_start, source_end, target_start'}), 400
     try:
         source_start = date.fromisoformat(data['source_start'])
         source_end = date.fromisoformat(data['source_end'])
         target_start = date.fromisoformat(data['target_start'])
     except ValueError:
-        return jsonify({'error': 'Nieprawidłowy format daty'}), 400
+        return jsonify({'error': 'Invalid date format'}), 400
 
     mid = resolve_member_id(uid, data.get('member_id'))
     if not mid:
-        return jsonify({'error': 'Brak skonfigurowanego profilu'}), 400
+        return jsonify({'error': 'No profile configured'}), 400
 
     meals = MealPlan.query.filter(
         MealPlan.member_id == mid,
@@ -151,7 +151,7 @@ def copy_range():
         new_date = target_start + (meal.date - source_start)
         db.session.add(MealPlan(user_id=uid, member_id=mid, date=new_date, position=meal.position, recipe_id=meal.recipe_id))
     db.session.commit()
-    return jsonify({'message': f'Skopiowano {len(meals)} posiłków'}), 201
+    return jsonify({'message': f'Copied {len(meals)} meals'}), 201
 
 
 @meal_plan_bp.route('/<int:id>', methods=['DELETE'])
@@ -163,12 +163,12 @@ def delete_meal(id):
     if meal.member_id:
         member = HouseholdMember.query.filter_by(id=meal.member_id, user_id=uid).first()
         if not member:
-            return jsonify({'error': 'Brak dostępu'}), 403
+            return jsonify({'error': 'Access denied'}), 403
     elif meal.user_id != uid:
-        return jsonify({'error': 'Brak dostępu'}), 403
+        return jsonify({'error': 'Access denied'}), 403
     db.session.delete(meal)
     db.session.commit()
-    return jsonify({'message': 'Posiłek usunięty'}), 200
+    return jsonify({'message': 'Meal deleted'}), 200
 
 
 @meal_plan_bp.route('/summary/<string:start>/<string:end>', methods=['GET'])
@@ -179,7 +179,7 @@ def get_summary(start, end):
         start_date = date.fromisoformat(start)
         end_date = date.fromisoformat(end)
     except ValueError:
-        return jsonify({'error': 'Nieprawidłowy format daty'}), 400
+        return jsonify({'error': 'Invalid date format'}), 400
 
     ids_str = request.args.get('member_ids')
     mid = request.args.get('member_id')

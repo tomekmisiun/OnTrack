@@ -12,7 +12,7 @@ OFF_URL = 'https://world.openfoodfacts.org/cgi/search.pl'
 def lookup():
     name = (request.args.get('name') or '').strip()
     if not name:
-        return jsonify({'error': 'Brak nazwy produktu'}), 400
+        return jsonify({'error': 'Product name is required'}), 400
 
     try:
         resp = requests.get(OFF_URL, params={
@@ -28,18 +28,18 @@ def lookup():
         resp.raise_for_status()
         data = resp.json()
     except Exception:
-        return jsonify({'error': 'Błąd połączenia z Open Food Facts'}), 502
+        return jsonify({'error': 'Failed to connect to Open Food Facts'}), 502
 
     products = data.get('products', [])
     if not products:
         return jsonify({'found': False})
 
-    # Wybierz pierwszy produkt który ma dane odżywcze
+    # Pick first product that has nutritional data
     for p in products:
         n = p.get('nutriments', {})
         kcal = n.get('energy-kcal_100g') or n.get('energy_100g')
         if kcal:
-            if kcal > 900:  # energia w kJ - przelicz
+            if kcal > 900:  # energy in kJ — convert to kcal
                 kcal = round(kcal / 4.184, 1)
             return jsonify({
                 'found': True,

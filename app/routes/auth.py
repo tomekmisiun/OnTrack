@@ -26,11 +26,11 @@ def init_oauth(app):
 
 def _validate(email, password):
     if not email or not password:
-        return 'Email i hasło są wymagane'
+        return 'Email and password are required'
     if not EMAIL_RE.match(email):
-        return 'Nieprawidłowy format email'
+        return 'Invalid email format'
     if len(password) < 8:
-        return 'Hasło musi mieć co najmniej 8 znaków'
+        return 'Password must be at least 8 characters'
     return None
 
 
@@ -38,7 +38,7 @@ def _find_or_create_oauth_user(email):
     user = User.query.filter_by(email=email).first()
     if not user:
         user = User(email=email)
-        user.set_password(os.urandom(32).hex())  # losowe hasło — tylko OAuth
+        user.set_password(os.urandom(32).hex())  # random password — OAuth-only account
         db.session.add(user)
         db.session.commit()
     return user
@@ -57,7 +57,7 @@ def register():
     if err:
         return jsonify({'error': err}), 400
     if User.query.filter_by(email=email).first():
-        return jsonify({'error': 'Konto z tym adresem już istnieje'}), 409
+        return jsonify({'error': 'An account with this email already exists'}), 409
 
     user = User(email=email, lang=lang)
     user.set_password(password)
@@ -84,7 +84,7 @@ def login():
 
     user = User.query.filter_by(email=email).first()
     if not user or not user.check_password(password):
-        return jsonify({'error': 'Nieprawidłowy email lub hasło'}), 401
+        return jsonify({'error': 'Invalid email or password'}), 401
 
     token = create_access_token(identity=str(user.id))
     return jsonify({'access_token': token, 'user': user.to_dict()})
@@ -95,7 +95,7 @@ def login():
 def me():
     user = User.query.get(int(get_jwt_identity()))
     if not user:
-        return jsonify({'error': 'Nie znaleziono użytkownika'}), 404
+        return jsonify({'error': 'User not found'}), 404
     return jsonify(user.to_dict())
 
 
@@ -104,7 +104,7 @@ def me():
 @auth_bp.route('/google')
 def google_login():
     if not current_app.config.get('GOOGLE_CLIENT_ID'):
-        return jsonify({'error': 'Google OAuth nie jest skonfigurowane'}), 503
+        return jsonify({'error': 'Google OAuth is not configured'}), 503
     callback_url = current_app.config['FRONTEND_URL'].rstrip('/') + '/api/auth/google/callback'
     redirect_uri = f"http://localhost:5001/api/auth/google/callback"
     return oauth.google.authorize_redirect(redirect_uri)
@@ -118,10 +118,10 @@ def google_callback():
         user_info = token.get('userinfo') or oauth.google.userinfo()
         email = user_info.get('email', '').lower()
         if not email:
-            return redirect(f'{frontend_url}?auth_error=Brak+adresu+email+od+Google')
+            return redirect(f'{frontend_url}?auth_error=No+email+returned+from+Google')
 
         is_new = not User.query.filter_by(email=email).first()
-        # Odczytaj pending_lang z sesji (ustawiony przez frontend przed OAuth)
+        # Read pending_lang from cookie (set by frontend before OAuth redirect)
         pending_lang = request.cookies.get('pending_lang') or 'pl'
         user = _find_or_create_oauth_user(email)
         if is_new:
@@ -137,7 +137,7 @@ def google_callback():
         jwt_token = create_access_token(identity=str(user.id))
         return redirect(f'{frontend_url}?token={jwt_token}')
     except Exception as e:
-        return redirect(f'{frontend_url}?auth_error=Błąd+logowania')
+        return redirect(f'{frontend_url}?auth_error=Login+error')
 
 
 @auth_bp.route('/language', methods=['PATCH'])
@@ -147,10 +147,10 @@ def change_language():
     data = request.get_json() or {}
     lang = data.get('lang')
     if lang not in ('pl', 'en'):
-        return jsonify({'error': 'Nieprawidłowy język'}), 400
+        return jsonify({'error': 'Invalid language'}), 400
     user = User.query.get(uid)
     if not user:
-        return jsonify({'error': 'Nie znaleziono użytkownika'}), 404
+        return jsonify({'error': 'User not found'}), 404
     user.lang = lang
     db.session.commit()
     return jsonify(user.to_dict())
@@ -162,7 +162,7 @@ def delete_me():
     uid = int(get_jwt_identity())
     user = User.query.get(uid)
     if not user:
-        return jsonify({'error': 'Nie znaleziono użytkownika'}), 404
+        return jsonify({'error': 'User not found'}), 404
 
     from app.models.meal_plan import MealPlan
     from app.models.recipe import Recipe, RecipeIngredient
@@ -182,12 +182,12 @@ def delete_me():
     RecipeParseLog.query.filter_by(user_id=uid).delete()
     db.session.delete(user)
     db.session.commit()
-    return jsonify({'message': 'Konto usunięte'}), 200
+    return jsonify({'message': 'Account deleted'}), 200
 
 
 @auth_bp.route('/providers')
 def providers():
-    """Frontend pyta które providery są dostępne."""
+    """Returns which OAuth providers are configured."""
     available = []
     if current_app.config.get('GOOGLE_CLIENT_ID'):
         available.append('google')

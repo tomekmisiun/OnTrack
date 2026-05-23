@@ -1,10 +1,10 @@
 """
-Seeding domyślnych produktów i przepisów dla nowych użytkowników.
+Seed default products and recipes for new users.
 
-Pliki seed generujesz po scrapowaniu:
+Generate seed files after scraping:
   cd scraper && python dump_seed.py
 
-Jeśli plik seed nie istnieje — nowy użytkownik zaczyna z pustą listą.
+If a seed file doesn't exist, new users start with an empty list.
 """
 
 import json
@@ -18,7 +18,7 @@ DATA_DIR = Path(__file__).parent / "data"
 
 
 def _load_json(fname: str, lang: str) -> list[dict]:
-    """Wczytuje plik seed dla języka, fallback do PL."""
+    """Load seed file for the given language, fall back to PL."""
     for name in (fname.replace("_pl.", f"_{lang}."), fname):
         path = DATA_DIR / name
         if path.exists():
@@ -32,7 +32,7 @@ def _load_json(fname: str, lang: str) -> list[dict]:
 
 
 def seed_user(user_id: int, lang: str = "pl"):
-    """Tworzy domyślne produkty i przepisy dla nowego użytkownika."""
+    """Create default products and recipes for a new user."""
     _seed_products(user_id, lang)
     _seed_recipes(user_id, lang)
 
@@ -67,7 +67,7 @@ def _seed_recipes(user_id: int, lang: str):
     if not recipes:
         return
 
-    # Buduj mapę nazwa→id dla właśnie dodanych produktów
+    # Build name→id map from newly seeded products
     product_map: dict[str, int] = {
         p.name.lower(): p.id
         for p in Product.query.filter_by(user_id=user_id).all()
@@ -92,14 +92,14 @@ def _seed_recipes(user_id: int, lang: str):
             carbs_100g=r.get("carbs_100g"),
         )
         db.session.add(recipe)
-        db.session.flush()  # żeby dostać recipe.id
+        db.session.flush()  # get recipe.id before inserting ingredients
 
         for ing in r.get("ingredients", []):
             pname = (ing.get("product_name") or "").strip().lower()
             weight = float(ing.get("weight") or 1)
             product_id = product_map.get(pname)
             if not product_id:
-                # Stwórz placeholder jeśli brak w katalogu
+                # Create placeholder if the product is not in the catalogue
                 placeholder = Product(
                     user_id=user_id,
                     name=ing["product_name"].strip()[:200],

@@ -16,8 +16,8 @@ import_bp = Blueprint('import', __name__)
 DAILY_LIMIT = 2
 MAX_FILE_SIZE = 5 * 1024 * 1024  # 5 MB
 MAX_TEXT_CHARS = 8000
-MAX_IMAGE_PIXELS = 4096 * 4096   # odrzuć obrazy > ~16 Mpx
-MAX_IMAGE_SIDE = 8000            # odrzuć obrazy o boku > 8000 px
+MAX_IMAGE_PIXELS = 4096 * 4096   # reject images > ~16 Mpx
+MAX_IMAGE_SIDE = 8000            # reject images with a side > 8000 px
 
 IMAGE_MAGIC = {
     b'\xff\xd8\xff': 'image/jpeg',
@@ -27,7 +27,7 @@ IMAGE_MAGIC = {
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp', 'txt', 'csv'}
 
-# Wzorce prompt injection w plikach tekstowych
+# Prompt injection patterns in text files
 INJECTION_PATTERNS = re.compile(
     r'ignore (previous|all|above)|you are now|new (role|persona|instruction)|'
     r'system prompt|forget (everything|all)|act as|jailbreak|DAN mode|'
@@ -56,26 +56,26 @@ def _detect_image_mime(data: bytes):
 
 def _sanitize_image(data: bytes):
     """
-    Re-enkoduje obraz przez PIL:
-    - usuwa EXIF i wszystkie metadane (główna droga przemytu prompt injection)
-    - weryfikuje że plik faktycznie jest obrazem (nie przebranym skryptem)
-    - odrzuca obrazy podejrzanych rozmiarów (decompression bombs)
-    Zwraca (clean_bytes, mime) lub rzuca ValueError.
+    Re-encode image through PIL:
+    - strips EXIF and all metadata (primary vector for prompt injection smuggling)
+    - verifies the file is actually an image (not a disguised script)
+    - rejects suspiciously sized images (decompression bombs)
+    Returns (clean_bytes, mime) or raises ValueError.
     """
     try:
         img = Image.open(io.BytesIO(data))
-        img.verify()                        # sprawdza integralność bez dekodowania pikseli
-        img = Image.open(io.BytesIO(data))  # otwórz ponownie po verify (verify zamyka plik)
+        img.verify()                        # checks integrity without decoding pixels
+        img = Image.open(io.BytesIO(data))  # re-open after verify (verify closes the file)
     except Exception:
-        raise ValueError('Plik nie jest prawidłowym obrazem')
+        raise ValueError('File is not a valid image')
 
     w, h = img.size
     if w > MAX_IMAGE_SIDE or h > MAX_IMAGE_SIDE:
-        raise ValueError(f'Obraz zbyt duży ({w}x{h}). Max {MAX_IMAGE_SIDE}px na bok')
+        raise ValueError(f'Image too large ({w}x{h}). Max {MAX_IMAGE_SIDE}px per side')
     if w * h > MAX_IMAGE_PIXELS:
-        raise ValueError(f'Obraz ma zbyt wiele pikseli ({w*h}). Max {MAX_IMAGE_PIXELS}')
+        raise ValueError(f'Image has too many pixels ({w*h}). Max {MAX_IMAGE_PIXELS}')
 
-    # Konwertuj do RGB (usuwa kanał alfa i inne tryby) i zapisz jako JPEG bez metadanych
+    # Convert to RGB (drops alpha and other modes) and save as JPEG without metadata
     out = io.BytesIO()
     img.convert('RGB').save(out, format='JPEG', quality=85)
     return out.getvalue(), 'image/jpeg'
@@ -83,9 +83,8 @@ def _sanitize_image(data: bytes):
 
 def _safe_text(raw: str) -> str:
     text = raw[:MAX_TEXT_CHARS]
-    # Usuń potencjalnie szkodliwe wzorce
+    # Strip potentially malicious patterns — Claude is still constrained by the system prompt
     if INJECTION_PATTERNS.search(text):
-        # Zamiast blokować, oznaczamy — Claude i tak jest ograniczony system promptem
         text = re.sub(INJECTION_PATTERNS, '[REMOVED]', text)
     return text
 
@@ -96,7 +95,7 @@ def _extract_json(text: str):
         return None
     try:
         data = json.loads(match.group())
-        # Walidacja struktury
+        # Validate structure
         if not isinstance(data.get('products'), list):
             return None
         validated = []
@@ -146,35 +145,35 @@ def _match_product(name, db_products):
 def parse_receipt():
     user_id = int(get_jwt_identity())
 
-    # Sprawdź dzienny limit
+    # Check daily limit
     today_count = ImportLog.get_today_count(user_id)
     if today_count >= DAILY_LIMIT:
-        return jsonify({'error': f'Dzienny limit {DAILY_LIMIT} importów wyczerpany. Spróbuj jutro.'}), 429
+        return jsonify({'error': f'Daily limit of {DAILY_LIMIT} imports reached. Try again tomorrow.'}), 429
 
     if 'file' not in request.files:
-        return jsonify({'error': 'Brak pliku'}), 400
+        return jsonify({'error': 'No file provided'}), 400
 
     file = request.files['file']
     ext = (file.filename or '').rsplit('.', 1)[-1].lower()
     if ext not in ALLOWED_EXTENSIONS:
-        return jsonify({'error': f'Niedozwolony format: {ext}'}), 400
+        return jsonify({'error': f'Unsupported format: {ext}'}), 400
 
     file_data = file.read(MAX_FILE_SIZE + 1)
     if len(file_data) > MAX_FILE_SIZE:
-        return jsonify({'error': 'Plik za duży (max 5 MB)'}), 400
+        return jsonify({'error': 'File too large (max 5 MB)'}), 400
 
     api_key = os.environ.get('ANTHROPIC_API_KEY')
     if not api_key:
-        return jsonify({'error': 'Brak klucza ANTHROPIC_API_KEY po stronie serwera'}), 500
+        return jsonify({'error': 'ANTHROPIC_API_KEY is not configured on the server'}), 500
 
     client = anthropic.Anthropic(api_key=api_key)
     is_image = ext in ('png', 'jpg', 'jpeg', 'webp')
 
     if is_image:
-        # Wstępna weryfikacja magic bytes
+        # Initial magic-bytes verification
         if not _detect_image_mime(file_data):
-            return jsonify({'error': 'Plik nie jest prawidłowym obrazem'}), 400
-        # Re-enkodowanie przez PIL: usuwa EXIF/metadane i waliduje wymiary
+            return jsonify({'error': 'File is not a valid image'}), 400
+        # Re-encode through PIL: strips EXIF/metadata and validates dimensions
         try:
             clean_data, mime = _sanitize_image(file_data)
         except ValueError as e:
@@ -188,7 +187,7 @@ def parse_receipt():
         try:
             raw_text = file_data.decode('utf-8', errors='replace')
         except Exception:
-            return jsonify({'error': 'Nie można odczytać pliku tekstowego'}), 400
+            return jsonify({'error': 'Could not read text file'}), 400
         safe_text = _safe_text(raw_text)
         user_content = f'Parse this price list and return the JSON:\n\n{safe_text}'
 
@@ -200,13 +199,13 @@ def parse_receipt():
             messages=[{'role': 'user', 'content': user_content}],
         )
     except anthropic.APIError as e:
-        return jsonify({'error': f'Błąd API: {str(e)}'}), 502
+        return jsonify({'error': f'API error: {str(e)}'}), 502
 
     parsed = _extract_json(msg.content[0].text)
     if not parsed:
-        return jsonify({'error': 'Nie udało się przetworzyć odpowiedzi — spróbuj ponownie'}), 500
+        return jsonify({'error': 'Failed to process response — please try again'}), 500
 
-    # Zapisz użycie
+    # Log usage
     ImportLog.increment(user_id)
 
     db_products = Product.query.all()
@@ -220,9 +219,9 @@ def parse_receipt():
         if match and qty and price:
             unit = match.unit or 'g'
             if unit == 'szt':
-                suggested = round(price / qty, 2)      # zł/szt
+                suggested = round(price / qty, 2)      # price per piece
             else:
-                suggested = round((price / qty) * 100, 2)  # zł/100g lub zł/100ml
+                suggested = round((price / qty) * 100, 2)  # price per 100g or 100ml
         elif match and price and not qty:
             suggested = round(price, 2)
 
@@ -242,24 +241,24 @@ def parse_receipt():
 @import_bp.route('/parse-free', methods=['POST'])
 @jwt_required()
 def parse_csv():
-    """Darmowe parsowanie plików CSV/TXT — bez AI, bez limitu."""
+    """Free CSV/TXT parsing — no AI, no daily limit."""
     uid = int(get_jwt_identity())
     if 'file' not in request.files:
-        return jsonify({'error': 'Brak pliku'}), 400
+        return jsonify({'error': 'No file provided'}), 400
 
     file = request.files['file']
     ext = (file.filename or '').rsplit('.', 1)[-1].lower()
     if ext not in ('txt', 'csv'):
-        return jsonify({'error': 'Ten endpoint obsługuje tylko pliki .txt i .csv'}), 400
+        return jsonify({'error': 'This endpoint only accepts .txt and .csv files'}), 400
 
     file_data = file.read(MAX_FILE_SIZE + 1)
     if len(file_data) > MAX_FILE_SIZE:
-        return jsonify({'error': 'Plik za duży (max 5 MB)'}), 400
+        return jsonify({'error': 'File too large (max 5 MB)'}), 400
 
     try:
         text = file_data.decode('utf-8', errors='replace')
     except Exception:
-        return jsonify({'error': 'Nie można odczytać pliku'}), 400
+        return jsonify({'error': 'Could not read file'}), 400
 
     db_products = Product.query.filter_by(user_id=uid).all()
     results = []
@@ -269,14 +268,14 @@ def parse_csv():
         if not line or line.startswith('#'):
             continue
 
-        # Próbuj CSV: sep , lub ; lub \t
+        # Try CSV: separator , or ; or \t
         parts = None
         for sep in (',', ';', '\t'):
             if sep in line:
                 parts = [p.strip() for p in line.split(sep)]
                 break
 
-        # Próbuj "nazwa - cena" lub "nazwa: cena"
+        # Try "name - price" or "name: price" format
         if not parts:
             m = re.search(r'^(.+?)\s*[-–:]\s*(\d+[.,]\d*|\d+)\s*(?:zł|pln|zl)?$', line, re.IGNORECASE)
             if m:
@@ -287,7 +286,7 @@ def parse_csv():
 
         name = parts[0].strip()
 
-        # Cena — ostatnia numeryczna kolumna
+        # Price — last numeric column
         price = None
         for part in reversed(parts):
             pm = re.search(r'(\d+[.,]\d*|\d+)', part)
@@ -301,7 +300,7 @@ def parse_csv():
         if not name or price is None:
             continue
 
-        # Opcjonalne: waga i jednostka (format 4-kolumnowy: nazwa,waga,jednostka,cena)
+        # Optional: weight and unit (4-column format: name,weight,unit,price)
         qty, unit = None, None
         if len(parts) >= 4:
             try:
@@ -347,7 +346,7 @@ def apply_prices():
     data = request.get_json() or {}
     updates = data.get('updates', [])
     if not isinstance(updates, list) or len(updates) > 200:
-        return jsonify({'error': 'Nieprawidłowe dane'}), 400
+        return jsonify({'error': 'Invalid data'}), 400
 
     updated = 0
     for u in updates:
@@ -365,4 +364,4 @@ def apply_prices():
             updated += 1
 
     db.session.commit()
-    return jsonify({'message': f'Zaktualizowano {updated} produktów'})
+    return jsonify({'message': f'Updated {updated} products'})

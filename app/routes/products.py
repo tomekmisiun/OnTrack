@@ -16,42 +16,42 @@ MAX_PRICE = 9999
 
 def validate_product_data(data, require_all=True):
     if require_all and not all(k in data for k in ['name', 'package_weight', 'price']):
-        return 'Wymagane pola: name, package_weight, price'
+        return 'Required fields: name, package_weight, price'
     if 'name' in data:
         name = str(data['name']).strip()
         if not name:
-            return 'Nazwa produktu nie może być pusta'
+            return 'Product name cannot be empty'
         if len(name) > MAX_NAME:
-            return f'Nazwa produktu max {MAX_NAME} znaków'
+            return f'Product name max {MAX_NAME} characters'
     if 'package_weight' in data:
         try:
             w = float(data['package_weight'])
         except (TypeError, ValueError):
-            return 'Nieprawidłowa gramatura opakowania'
+            return 'Invalid package weight'
         if w <= 0 or w > MAX_NUM:
-            return f'Gramatura musi być między 0 a {MAX_NUM}'
+            return f'Package weight must be between 0 and {MAX_NUM}'
     if 'price' in data:
         try:
             p = float(data['price'])
         except (TypeError, ValueError):
-            return 'Nieprawidłowa cena'
+            return 'Invalid price'
         if p < 0 or p > MAX_PRICE:
-            return f'Cena musi być między 0 a {MAX_PRICE}'
+            return f'Price must be between 0 and {MAX_PRICE}'
     if 'kcal' in data and data['kcal'] is not None:
         try:
             v = float(data['kcal'])
         except (TypeError, ValueError):
-            return 'Nieprawidłowa wartość kcal'
+            return 'Invalid kcal value'
         if v < 0 or v > MAX_KCAL:
-            return f'Kcal musi być między 0 a {MAX_KCAL}'
+            return f'Kcal must be between 0 and {MAX_KCAL}'
     for macro in ('protein', 'fat', 'carbs'):
         if macro in data and data[macro] is not None:
             try:
                 v = float(data[macro])
             except (TypeError, ValueError):
-                return f'Nieprawidłowa wartość {macro}'
+                return f'Invalid {macro} value'
             if v < 0 or v > MAX_MACRO:
-                return f'{macro} musi być między 0 a {MAX_MACRO}'
+                return f'{macro} must be between 0 and {MAX_MACRO}'
     return None
 
 
@@ -123,24 +123,23 @@ def delete_product(id):
     product = Product.query.filter_by(id=id, user_id=current_uid()).first_or_404()
     db.session.delete(product)
     db.session.commit()
-    return jsonify({'message': 'Produkt usunięty'}), 200
+    return jsonify({'message': 'Product deleted'}), 200
 
 
 @products_bp.route('/ingredient-mapping', methods=['GET'])
 @jwt_required()
 def ingredient_mapping():
-    """Tabela: składnik z przepisu → dopasowany produkt sklepowy z ceną i makro."""
+    """Table: recipe ingredient → matched shop product with price and macros."""
     import json
     from pathlib import Path
 
-    # Wczytaj ingredient_db_pl (dane pipeline)
     data_path = Path(__file__).parent.parent.parent / 'scraper' / 'data' / 'ingredient_db_pl.json'
     if not data_path.exists():
         return jsonify([])
 
     db_items = json.loads(data_path.read_text('utf-8'))
 
-    # Grupuj po generic_name — dla każdego produktu zbierz składniki które na niego wskazują
+    # Group by generic_name — collect all ingredient names that map to each product
     from collections import defaultdict
     product_map: dict[str, dict] = {}
     product_ingredients: dict[str, list[str]] = defaultdict(list)
@@ -181,4 +180,4 @@ def delete_all_products():
     uid = current_uid()
     count = Product.query.filter_by(user_id=uid).delete()
     db.session.commit()
-    return jsonify({'message': f'Usunięto {count} produktów'}), 200
+    return jsonify({'message': f'Deleted {count} products'}), 200

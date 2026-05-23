@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
 """
-Zastępuje niedziałające URL-e zdjęć przepisów (np. mealpreponfleek.com)
-obrazkami z Pexels API.
+Replaces broken recipe image URLs (e.g. mealpreponfleek.com) with images from Pexels API.
 
-Uruchomienie (przez Docker):
+Usage (via Docker):
     docker exec mealprep-app-1 python /app/app/scripts/fix_recipe_images.py --user-id 2
     docker exec mealprep-app-1 python /app/app/scripts/fix_recipe_images.py --user-id 2 --all
     docker exec mealprep-app-1 python /app/app/scripts/fix_recipe_images.py --user-id 2 --dry-run
 
-Opcje:
-    --user-id N   ID użytkownika (wymagane)
-    --all         Zastąp też te które mają działające URL-e (nie tylko broken)
-    --dry-run     Pokaż co by zostało zrobione, bez zapisu
+Options:
+    --user-id N   User ID (required)
+    --all         Replace all URLs, not just broken ones
+    --dry-run     Show what would be changed without saving
 """
 
 import argparse
@@ -47,29 +46,29 @@ def fetch_pexels_image(recipe_name: str, api_key: str) -> str | None:
         if photos:
             return photos[0]["src"]["medium"]
     except Exception as e:
-        print(f"    Pexels error dla '{recipe_name}': {e}")
+        print(f"    Pexels error for '{recipe_name}': {e}")
     return None
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--user-id", type=int, required=True)
-    ap.add_argument("--all",     action="store_true", help="Zastąp wszystkie URL-e, nie tylko broken")
-    ap.add_argument("--dry-run", action="store_true", help="Nie zapisuj zmian")
+    ap.add_argument("--all",     action="store_true", help="Replace all URLs, not just broken ones")
+    ap.add_argument("--dry-run", action="store_true", help="Show changes without saving")
     args = ap.parse_args()
 
     pexels_key = os.environ.get("PEXELS_API_KEY")
     if not pexels_key:
-        print("Brak PEXELS_API_KEY w zmiennych środowiskowych.")
+        print("PEXELS_API_KEY not set in environment.")
         sys.exit(1)
 
     with app.app_context():
         recipes = Recipe.query.filter_by(user_id=args.user_id).all()
         to_fix = [r for r in recipes if args.all or is_broken_url(r.image_url)]
 
-        print(f"Przepisy użytkownika {args.user_id}: {len(recipes)} łącznie, {len(to_fix)} do naprawy")
+        print(f"User {args.user_id} recipes: {len(recipes)} total, {len(to_fix)} to fix")
         if args.dry_run:
-            print("(dry-run — zmiany nie zostaną zapisane)")
+            print("(dry-run — no changes will be saved)")
         print()
 
         updated = 0
@@ -85,10 +84,10 @@ def main():
                     recipe.image_url = new_url
                 updated += 1
             else:
-                print(f"    ✗ brak wyniku Pexels")
+                print("    ✗ no Pexels result")
                 failed += 1
 
-            time.sleep(0.3)  # nie przeciążaj API
+            time.sleep(0.3)  # avoid rate-limiting the API
 
         if not args.dry_run:
             db.session.commit()

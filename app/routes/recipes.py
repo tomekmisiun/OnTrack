@@ -33,12 +33,12 @@ def create_recipe():
     uid = current_uid()
     data = request.get_json()
     if not data or 'name' not in data:
-        return jsonify({'error': 'Wymagane pole: name'}), 400
+        return jsonify({'error': 'Required field: name'}), 400
     if len(str(data['name'])) > 200:
-        return jsonify({'error': 'Nazwa przepisu max 200 znaków'}), 400
+        return jsonify({'error': 'Recipe name max 200 characters'}), 400
     notes = data.get('notes') or ''
     if len(notes) > 5000:
-        return jsonify({'error': 'Notatki max 5000 znaków'}), 400
+        return jsonify({'error': 'Notes max 5000 characters'}), 400
 
     existing = Recipe.query.filter_by(name=data['name'], user_id=uid).first()
     if existing:
@@ -52,16 +52,16 @@ def create_recipe():
 
     for ingredient in data.get('ingredients', []):
         if not all(k in ingredient for k in ['product_id', 'weight']):
-            return jsonify({'error': 'Składnik wymaga: product_id, weight'}), 400
+            return jsonify({'error': 'Ingredient requires: product_id, weight'}), 400
         try:
             weight = float(ingredient['weight'])
         except (TypeError, ValueError):
-            return jsonify({'error': 'Nieprawidłowa waga składnika'}), 400
+            return jsonify({'error': 'Invalid ingredient weight'}), 400
         if weight <= 0 or weight > 99999:
-            return jsonify({'error': 'Waga składnika musi być między 0 a 99999'}), 400
+            return jsonify({'error': 'Ingredient weight must be between 0 and 99999'}), 400
         product = Product.query.filter_by(id=ingredient['product_id'], user_id=uid).first()
         if not product:
-            return jsonify({'error': f'Produkt {ingredient["product_id"]} nie istnieje'}), 404
+            return jsonify({'error': f'Product {ingredient["product_id"]} not found'}), 404
         db.session.add(RecipeIngredient(recipe_id=recipe.id, product_id=ingredient['product_id'], weight=weight))
 
     db.session.commit()
@@ -86,12 +86,12 @@ def update_recipe(id):
             try:
                 weight = float(ingredient['weight'])
             except (TypeError, ValueError):
-                return jsonify({'error': 'Nieprawidłowa waga składnika'}), 400
+                return jsonify({'error': 'Invalid ingredient weight'}), 400
             if weight <= 0 or weight > 99999:
-                return jsonify({'error': 'Waga składnika musi być między 0 a 99999'}), 400
+                return jsonify({'error': 'Ingredient weight must be between 0 and 99999'}), 400
             product = Product.query.filter_by(id=ingredient['product_id'], user_id=uid).first()
             if not product:
-                return jsonify({'error': f'Produkt {ingredient["product_id"]} nie istnieje'}), 404
+                return jsonify({'error': f'Product {ingredient["product_id"]} not found'}), 404
             db.session.add(RecipeIngredient(recipe_id=id, product_id=ingredient['product_id'], weight=weight))
     db.session.commit()
     return jsonify(recipe.to_dict())
@@ -124,7 +124,7 @@ def delete_recipe(id):
     MealPlan.query.filter_by(recipe_id=id).delete()
     db.session.delete(recipe)
     db.session.commit()
-    return jsonify({'message': 'Przepis usunięty'}), 200
+    return jsonify({'message': 'Recipe deleted'}), 200
 
 
 @recipes_bp.route('/all', methods=['DELETE'])
@@ -137,7 +137,7 @@ def delete_all_recipes():
         RecipeIngredient.query.filter(RecipeIngredient.recipe_id.in_(recipe_ids)).delete(synchronize_session=False)
     count = Recipe.query.filter_by(user_id=uid).delete()
     db.session.commit()
-    return jsonify({'message': f'Usunięto {count} przepisów'}), 200
+    return jsonify({'message': f'Deleted {count} recipes'}), 200
 
 
 PARSE_DAILY_LIMIT = 2
@@ -159,16 +159,16 @@ def parse_recipe_text():
 
     today_count = RecipeParseLog.get_today_count(uid)
     if today_count >= PARSE_DAILY_LIMIT:
-        return jsonify({'error': f'Dzienny limit {PARSE_DAILY_LIMIT} parsowań przepisów wyczerpany. Spróbuj jutro.'}), 429
+        return jsonify({'error': f'Daily limit of {PARSE_DAILY_LIMIT} recipe parses reached. Try again tomorrow.'}), 429
 
     data = request.get_json() or {}
     recipe_text = (data.get('text') or '').strip()
     if not recipe_text:
-        return jsonify({'error': 'Brak tekstu przepisu'}), 400
+        return jsonify({'error': 'Recipe text is required'}), 400
     if len(recipe_text) > 5000:
-        return jsonify({'error': 'Tekst przepisu max 5000 znaków'}), 400
+        return jsonify({'error': 'Recipe text max 5000 characters'}), 400
 
-    # Heurystyczna walidacja — tekst musi wyglądać jak przepis
+    # Heuristic validation — text must look like a recipe
     FOOD_UNITS = re.compile(
         r'\b(\d+|pół|ćwierć|kilka)\s*(g|kg|ml|l|łyżk|łyżeczk|szklank|pęczek|sztuk|szt|dag|dkg)\b'
         r'|\b(składnik|ingredient|gotuj|ugotuj|smażyć|mieszaj|dodaj|wlej|wsyp|pokrój|posiekaj'
@@ -177,11 +177,11 @@ def parse_recipe_text():
         re.IGNORECASE
     )
     if not FOOD_UNITS.search(recipe_text):
-        return jsonify({'error': 'Tekst nie wygląda jak przepis kulinarny. Wklej listę składników lub treść przepisu.'}), 400
+        return jsonify({'error': 'Text does not look like a recipe. Paste an ingredient list or recipe body.'}), 400
 
     api_key = os.environ.get('GEMINI_API_KEY')
     if not api_key:
-        return jsonify({'error': 'Brak klucza GEMINI_API_KEY'}), 500
+        return jsonify({'error': 'GEMINI_API_KEY is not configured'}), 500
 
     products = Product.query.filter_by(user_id=uid).order_by(Product.name).all()
     product_lines = '\n'.join(f"{p.id} | {p.name} | {p.unit}" for p in products)
@@ -235,15 +235,15 @@ Rules:
         )
         raw = response.text
     except Exception as e:
-        return jsonify({'error': f'Błąd Gemini API: {str(e)}'}), 502
+        return jsonify({'error': f'Gemini API error: {str(e)}'}), 502
     match = re.search(r'\{.*\}', raw, re.DOTALL)
     if not match:
-        return jsonify({'error': 'AI nie zwróciło poprawnego JSON'}), 500
+        return jsonify({'error': 'AI did not return valid JSON'}), 500
 
     try:
         result = json.loads(match.group())
         if result.get('recipe_name') is None and not result.get('ingredients'):
-            return jsonify({'error': 'Wklej tekst przepisu kulinarnego ze składnikami.'}), 400
+            return jsonify({'error': 'Paste a culinary recipe with ingredient list.'}), 400
         ingredients = []
         for ing in result.get('ingredients', []):
             if not isinstance(ing, dict):
@@ -257,7 +257,7 @@ Rules:
                 'unit': str(ing.get('unit', 'g'))[:5],
             })
     except (json.JSONDecodeError, ValueError, TypeError) as e:
-        return jsonify({'error': 'Błąd przetwarzania odpowiedzi AI'}), 500
+        return jsonify({'error': 'Failed to parse AI response'}), 500
 
     RecipeParseLog.increment(uid)
 
@@ -282,7 +282,7 @@ def fetch_recipe_image(recipe_id):
 
     import requests as req
 
-    # Przetłumacz nazwę przepisu na angielski za pomocą Gemini
+    # Translate recipe name to English using Gemini for better Pexels search results
     search_term = recipe.name
     gemini_key = os.environ.get('GEMINI_API_KEY')
     if gemini_key:
@@ -297,7 +297,7 @@ def fetch_recipe_image(recipe_id):
         except Exception:
             pass
 
-    # Szukaj zdjęcia w Pexels
+    # Search for image on Pexels
     image_url = None
     pexels_key = os.environ.get('PEXELS_API_KEY')
     if pexels_key:
