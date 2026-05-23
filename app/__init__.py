@@ -14,7 +14,9 @@ def create_app():
 
     db.init_app(app)
     migrate.init_app(app, db)
-    CORS(app)
+    frontend_url = app.config.get('FRONTEND_URL', 'http://localhost:3000')
+    cors_origins = [o.strip() for o in frontend_url.split(',') if o.strip()]
+    CORS(app, origins=cors_origins)
     jwt.init_app(app)
 
     @jwt.unauthorized_loader
@@ -43,6 +45,10 @@ def create_app():
     from app.routes.import_prices import import_bp
     from app.routes.members import members_bp
     from app.routes.fuel import fuel_bp
+
+    @app.route('/health')
+    def health():
+        return jsonify({'status': 'ok'}), 200
 
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(products_bp, url_prefix='/api/products')
