@@ -336,11 +336,13 @@ export default function Products() {
   const fl = { fontSize: 10, color: '#6b7280', marginBottom: 3 };
   const sec = { fontSize: 11, fontWeight: 700, color: '#0d9488', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 10, marginTop: 4 };
 
+  const displayUnit = u => u === 'szt' ? t('unit_pcs') : u;
+
   const UnitSelect = ({ value, onChange, style }) => (
     <select value={value} onChange={onChange} style={style}>
       <option value="g">g</option>
       <option value="ml">ml</option>
-      <option value="szt">szt</option>
+      <option value="szt">{t('unit_pcs')}</option>
     </select>
   );
 
@@ -522,7 +524,7 @@ export default function Products() {
                           style={{ padding: '0 7px', border: '1px solid #374151', borderRadius: 6, fontSize: 11, fontWeight: 700, cursor: 'pointer', flexShrink: 0,
                             background: form.unit === u ? '#1e3a3a' : '#111827',
                             color: form.unit === u ? '#2dd4bf' : '#6b7280' }}>
-                          {u}
+                          {displayUnit(u)}
                         </button>
                       ))}
                     </div>
@@ -751,7 +753,7 @@ export default function Products() {
                               style={{ padding: '4px 8px', border: 'none', borderRight: idx < 2 ? '1px solid #374151' : 'none', cursor: 'pointer', fontSize: 11, fontWeight: 600, transition: 'all 0.15s',
                                 background: item.unit === u ? '#1e3a3a' : 'transparent',
                                 color: item.unit === u ? '#2dd4bf' : '#6b7280' }}>
-                              {u}
+                              {displayUnit(u)}
                             </button>
                           ))}
                         </div>
@@ -877,7 +879,7 @@ export default function Products() {
                     <tr className="edit-body-row">
                       {/* Nazwa */}
                       <td style={{ verticalAlign: 'top', padding: '8px 6px 8px 12px', borderLeft: '3px solid #0d9488' }}>
-                        <div style={fl}>Nazwa</div>
+                        <div style={fl}>{t('col_name')}</div>
                         <input value={editForm.name} maxLength={50}
                           onChange={e => setEditForm({ ...editForm, name: e.target.value.slice(0, 50) })}
                           style={{ width: '100%', boxSizing: 'border-box', ...s }} />
@@ -893,19 +895,19 @@ export default function Products() {
                       <td style={{ verticalAlign: 'top', padding: '8px 6px' }}>
                         <div style={{ display: 'flex', gap: 4, marginBottom: 4 }}>
                           <div>
-                            <div style={fl}>B</div>
+                            <div style={fl}>{t('macro_p')}</div>
                             <input type="number" className="no-spin" step="0.1" min="0" max="100" value={editForm.protein}
                               onChange={e => setEditForm({ ...editForm, protein: numClamp(e.target.value, 100) })}
                               style={{ ...s, width: 52 }} />
                           </div>
                           <div>
-                            <div style={fl}>T</div>
+                            <div style={fl}>{t('macro_f')}</div>
                             <input type="number" className="no-spin" step="0.1" min="0" max="100" value={editForm.fat}
                               onChange={e => setEditForm({ ...editForm, fat: numClamp(e.target.value, 100) })}
                               style={{ ...s, width: 52 }} />
                           </div>
                           <div>
-                            <div style={fl}>W</div>
+                            <div style={fl}>{t('macro_c')}</div>
                             <input type="number" className="no-spin" step="0.1" min="0" max="100" value={editForm.carbs}
                               onChange={e => setEditForm({ ...editForm, carbs: numClamp(e.target.value, 100) })}
                               style={{ ...s, width: 52 }} />
@@ -922,7 +924,7 @@ export default function Products() {
                           <button type="button" onClick={() => setEditForm(f => ({ ...f, sold_by_weight: false }))}
                             style={{ padding: '4px 8px', border: 'none', borderRight: '1px solid #374151', cursor: 'pointer', fontSize: 10, fontWeight: 600,
                               background: !editForm.sold_by_weight ? '#0d9488' : '#2d3748', color: !editForm.sold_by_weight ? '#1f2937' : '#9ca3af' }}>
-                            W op.
+                            {t('pkg_op_btn')}
                           </button>
                           <button type="button" onClick={() => setEditForm(f => ({ ...f, sold_by_weight: true, unit: 'g', package_weight: 1000 }))}
                             style={{ padding: '4px 8px', border: 'none', cursor: 'pointer', fontSize: 10, fontWeight: 600,

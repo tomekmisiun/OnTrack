@@ -144,6 +144,7 @@ const CAT_COLORS = { breakfast: '#f59e0b', lunch: '#10b981', dinner: '#6366f1', 
 
 export default function Recipes() {
   const { t, lang } = useLanguage();
+  const displayUnit = u => u === 'szt' ? t('unit_pcs') : u;
   const CATEGORIES = [
     { value: 'breakfast', label: t('cat_breakfast'), color: CAT_COLORS.breakfast },
     { value: 'lunch',     label: t('cat_lunch'),     color: CAT_COLORS.lunch },
@@ -488,7 +489,7 @@ export default function Recipes() {
                 {t('ingredients_lbl')(parsed.ingredients.filter(i => i.product_id).length, parsed.ingredients.length)}
               </span>
               <span></span>
-              <span style={{ fontSize: 11, fontWeight: 600, color: '#0d9488', textTransform: 'uppercase', letterSpacing: '0.5px' }}>g / ml / szt</span>
+              <span style={{ fontSize: 11, fontWeight: 600, color: '#0d9488', textTransform: 'uppercase', letterSpacing: '0.5px' }}>g / ml / {t('unit_pcs')}</span>
               <span style={{ fontSize: 11, fontWeight: 600, color: '#0d9488', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{t('matched_product_col')}</span>
               <span></span>
             </div>
@@ -556,7 +557,7 @@ export default function Recipes() {
                                     background: quickForm.unit === u ? '#0d9488' : '#1c3534',
                                     borderColor: quickForm.unit === u ? '#0d9488' : '#374151',
                                     color: quickForm.unit === u ? '#fff' : '#6b7280' }}>
-                                  {u}
+                                  {displayUnit(u)}
                                 </button>
                               ))}
                             </div>
@@ -769,7 +770,7 @@ export default function Recipes() {
               )}
             </td>
             <td style={{ whiteSpace: 'nowrap', textAlign: 'right', ...(expanded === r.id ? { background: '#0d948818', borderTop: '1px solid #0d948860', borderBottom: '1px solid #0d948860' } : {}) }}>
-              <span style={{ color: '#0d9488', fontWeight: 600 }}>{r.total_cost.toFixed(2)} zł</span>
+              <span style={{ color: '#0d9488', fontWeight: 600 }}>{r.total_cost.toFixed(2)} {t('currency')}</span>
               {r.source_url && (
                 <div style={{ marginTop: 2 }}>
                   <a href={r.source_url} target="_blank" rel="noreferrer"
@@ -858,7 +859,7 @@ export default function Recipes() {
               <tr style={ingStyle}>
                 <th style={{ ...blStyle, fontSize: 11, color: '#6b7280', fontWeight: 700, letterSpacing: '0.5px', padding: '6px 8px' }}>{t('col_product')}</th>
                 <th style={{ textAlign: 'left', fontSize: 11, color: '#6b7280', fontWeight: 700, letterSpacing: '0.5px', width: 100 }}>{t('col_weight')}</th>
-                <th style={{ textAlign: 'center', fontSize: 11, color: '#6b7280', fontWeight: 700, letterSpacing: '0.5px' }}>{t('col_macro')}</th>
+                <th colSpan={2} style={{ textAlign: 'center', fontSize: 11, color: '#6b7280', fontWeight: 700, letterSpacing: '0.5px' }}>{t('col_macro')}</th>
                 <th style={{ textAlign: 'right', fontSize: 11, color: '#6b7280', fontWeight: 700, letterSpacing: '0.5px', whiteSpace: 'nowrap' }}>{t('col_cost')}</th>
                 <th style={{ textAlign: 'center', fontSize: 11, color: '#6b7280', fontWeight: 700, letterSpacing: '0.5px', width: 60 }}>{t('delete')}</th>
               </tr>
@@ -901,17 +902,17 @@ export default function Recipes() {
                       ) : <span style={{ fontSize: 12, color: '#e2e8f0' }}>{ing.weight} {ing.unit}</span>}
                     </td>
                     {/* Kcal/Makro — klik = edycja makro */}
-                    <td style={{ textAlign: 'center', cursor: 'pointer' }} onClick={() => noEdit && setEditingIngCell({ key: cellKey, field: 'macro', vals: { kcal: ing.kcal != null ? String(ing.kcal) : '', protein: ing.protein != null ? String(ing.protein) : '', fat: ing.fat != null ? String(ing.fat) : '', carbs: ing.carbs != null ? String(ing.carbs) : '' } })}>
+                    <td colSpan={2} style={{ textAlign: 'center', cursor: 'pointer' }} onClick={() => noEdit && setEditingIngCell({ key: cellKey, field: 'macro', vals: { kcal: ing.kcal != null ? String(ing.kcal) : '', protein: ing.protein != null ? String(ing.protein) : '', fat: ing.fat != null ? String(ing.fat) : '', carbs: ing.carbs != null ? String(ing.carbs) : '' } })}>
                       {isEditM ? (
                         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 2 }}
                              onKeyDown={e => { if (e.key === 'Enter') saveIngMacro(ing, editingIngCell.vals); if (e.key === 'Escape') setEditingIngCell(null); }}>
                           <span style={{ fontSize: 10, color: '#6b7280' }}>kcal</span>
                           <input autoFocus style={inpS} value={editingIngCell.vals.kcal}    onChange={e => setEditingIngCell(c => ({ ...c, vals: { ...c.vals, kcal:    e.target.value } }))} placeholder="—" />
-                          <span style={{ fontSize: 10, color: '#6b7280' }}>B</span>
+                          <span style={{ fontSize: 10, color: '#6b7280' }}>{t('macro_p')}</span>
                           <input style={inpS} value={editingIngCell.vals.protein} onChange={e => setEditingIngCell(c => ({ ...c, vals: { ...c.vals, protein: e.target.value } }))} placeholder="—" />
-                          <span style={{ fontSize: 10, color: '#6b7280' }}>T</span>
+                          <span style={{ fontSize: 10, color: '#6b7280' }}>{t('macro_f')}</span>
                           <input style={inpS} value={editingIngCell.vals.fat}     onChange={e => setEditingIngCell(c => ({ ...c, vals: { ...c.vals, fat:     e.target.value } }))} placeholder="—" />
-                          <span style={{ fontSize: 10, color: '#6b7280' }}>W</span>
+                          <span style={{ fontSize: 10, color: '#6b7280' }}>{t('macro_c')}</span>
                           <input style={inpS} value={editingIngCell.vals.carbs}   onChange={e => setEditingIngCell(c => ({ ...c, vals: { ...c.vals, carbs:   e.target.value } }))} placeholder="—" />
                           <button onClick={() => saveIngMacro(ing, editingIngCell.vals)} style={{ padding: '1px 5px', fontSize: 11, background: '#0d9488', color: '#fff', border: 'none', borderRadius: 3, cursor: 'pointer', marginLeft: 2 }}>✓</button>
                           <button onClick={() => setEditingIngCell(null)} style={{ padding: '1px 5px', fontSize: 11, background: '#374151', color: '#9ca3af', border: 'none', borderRadius: 3, cursor: 'pointer' }}>✕</button>
@@ -920,7 +921,7 @@ export default function Recipes() {
                         ? <span style={{ fontSize: 11, color: '#9ca3af' }}>{kcal} kcal · {t('macro_p')}{protein} {t('macro_f')}{fat} {t('macro_c')}{carbs}</span>
                         : <span style={{ fontSize: 11, color: '#9ca3af' }}>+ {t('col_macro').toLowerCase()}</span>}
                     </td>
-                    <td style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>{ing.cost.toFixed(2)} zł</td>
+                    <td style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>{ing.cost.toFixed(2)} {t('currency')}</td>
                     <td style={{ textAlign: 'center' }}>
                       <button onClick={() => showConfirm({ title: t('del_ing_title'), message: t('del_ing_confirm')(ing.product_name), confirmLabel: t('btn_delete'), onConfirm: () => deleteIng(ing) })}
                         style={{ background: '#2d1515', border: '1px solid #4b1515', color: '#f87171', borderRadius: 4, cursor: 'pointer', padding: '2px 8px', fontSize: 11, fontWeight: 600 }}>{t('btn_delete')}</button>
@@ -935,7 +936,7 @@ export default function Recipes() {
                   {/* Nazwa: wyszukiwarka */}
                   <td style={blStyle}>
                     <div style={{ position: 'relative' }}>
-                      <input autoFocus placeholder="Szukaj produktu..." value={addingIng.search} maxLength={200}
+                      <input autoFocus placeholder={t('search_product_ph')} value={addingIng.search} maxLength={200}
                         onChange={e => setAddingIng(a => ({ ...a, search: e.target.value, product: null, showDrop: true, kcal: '', protein: '', fat: '', carbs: '' }))}
                         onKeyDown={e => { if (e.key === 'Escape') setAddingIng(null); }}
                         style={{ width: '100%', maxWidth: 320, boxSizing: 'border-box', padding: '3px 7px', fontSize: 12, background: '#111827', border: '1px solid #0d9488', borderRadius: 5, color: '#f1f5f9' }} />
@@ -954,7 +955,7 @@ export default function Recipes() {
                               style={{ padding: '5px 10px', fontSize: 12, color: '#0d9488', cursor: 'pointer', borderTop: '1px solid #374151' }}
                               onMouseEnter={e => e.currentTarget.style.background = '#374151'}
                               onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-                              + Utwórz nowy: „{addingIng.search.trim()}"
+                              {t('create_new_option')(addingIng.search.trim())}
                             </div>
                           )}
                         </div>
@@ -964,7 +965,7 @@ export default function Recipes() {
                   {/* Potrzebuje */}
                   <td style={{ textAlign: 'left', width: 100 }}>
                     <div style={{ display: 'inline-flex', alignItems: 'center', gap: 3 }}>
-                      <input type="number" className="no-spin" min="0.1" max="99999" placeholder="ilość" value={addingIng.weight}
+                      <input type="number" className="no-spin" min="0.1" max="99999" placeholder={t('quantity_ph')} value={addingIng.weight}
                         onChange={e => setAddingIng(a => ({ ...a, weight: e.target.value }))}
                         onKeyDown={e => { if (e.key === 'Enter') confirmAddIng(); if (e.key === 'Escape') setAddingIng(null); }}
                         style={{ width: 55, padding: '3px 4px', fontSize: 12, background: '#111827', border: '1px solid #374151', borderRadius: 4, color: '#f1f5f9', textAlign: 'center' }} />
@@ -972,15 +973,15 @@ export default function Recipes() {
                     </div>
                   </td>
                   {/* Kcal/Makro — auto-fill z produktu lub puste */}
-                  <td style={{ textAlign: 'center' }}>
+                  <td colSpan={2} style={{ textAlign: 'center' }}>
                     <div style={{ display: 'inline-flex', alignItems: 'center', gap: 2 }}>
                       <span style={{ fontSize: 10, color: '#6b7280' }}>kcal</span>
                       <input style={inpS} value={addingIng.kcal}    onChange={e => setAddingIng(a => ({ ...a, kcal:    e.target.value }))} placeholder="—" />
-                      <span style={{ fontSize: 10, color: '#6b7280' }}>B</span>
+                      <span style={{ fontSize: 10, color: '#6b7280' }}>{t('macro_p')}</span>
                       <input style={inpS} value={addingIng.protein} onChange={e => setAddingIng(a => ({ ...a, protein: e.target.value }))} placeholder="—" />
-                      <span style={{ fontSize: 10, color: '#6b7280' }}>T</span>
+                      <span style={{ fontSize: 10, color: '#6b7280' }}>{t('macro_f')}</span>
                       <input style={inpS} value={addingIng.fat}     onChange={e => setAddingIng(a => ({ ...a, fat:     e.target.value }))} placeholder="—" />
-                      <span style={{ fontSize: 10, color: '#6b7280' }}>W</span>
+                      <span style={{ fontSize: 10, color: '#6b7280' }}>{t('macro_c')}</span>
                       <input style={inpS} value={addingIng.carbs}   onChange={e => setAddingIng(a => ({ ...a, carbs:   e.target.value }))} placeholder="—" />
                     </div>
                   </td>
@@ -995,38 +996,38 @@ export default function Recipes() {
                             <button key={u} onClick={() => setAddingIng(a => ({ ...a, unit: u, soldByWeight: false }))}
                               style={{ padding: '1px 6px', fontSize: 11, borderRadius: 3, cursor: 'pointer', border: '1px solid', fontWeight: addingIng.unit === u ? 700 : 400,
                                 background: addingIng.unit === u ? '#0d9488' : '#1f2937', color: addingIng.unit === u ? '#fff' : '#9ca3af', borderColor: addingIng.unit === u ? '#0d9488' : '#374151' }}>
-                              {u}
+                              {displayUnit(u)}
                             </button>
                           ))}
                           {addingIng.unit !== 'szt' && (
                             <button onClick={() => setAddingIng(a => ({ ...a, soldByWeight: !a.soldByWeight }))}
                               style={{ padding: '1px 6px', fontSize: 11, borderRadius: 3, cursor: 'pointer', border: '1px solid', fontWeight: addingIng.soldByWeight ? 700 : 400,
                                 background: addingIng.soldByWeight ? '#6366f1' : '#1f2937', color: addingIng.soldByWeight ? '#fff' : '#9ca3af', borderColor: addingIng.soldByWeight ? '#6366f1' : '#374151' }}>
-                              na wagę
+                              {t('weight_btn')}
                             </button>
                           )}
                         </div>
                       );
                       const priceRow = addingIng.unit === 'szt' ? (
                         <div style={{ display: 'flex', gap: 3, alignItems: 'center', justifyContent: 'flex-end' }}>
-                          <input placeholder="cena" type="number" className="no-spin" min="0" max="99999" value={addingIng.priceSzt} onChange={e => setAddingIng(a => ({ ...a, priceSzt: e.target.value }))}
+                          <input placeholder={t('price_input_ph')} type="number" className="no-spin" min="0" max="99999" value={addingIng.priceSzt} onChange={e => setAddingIng(a => ({ ...a, priceSzt: e.target.value }))}
                             style={{ flex: 1, minWidth: 0, padding: '2px 4px', fontSize: 11, background: '#111827', border: '1px solid #374151', borderRadius: 3, color: '#e2e8f0' }} />
-                          <span style={{ fontSize: 10, color: '#6b7280', flexShrink: 0 }}>zł/szt</span>
+                          <span style={{ fontSize: 10, color: '#6b7280', flexShrink: 0 }}>{t('currency')}/{t('unit_pcs')}</span>
                         </div>
                       ) : addingIng.soldByWeight ? (
                         <div style={{ display: 'flex', gap: 3, alignItems: 'center', justifyContent: 'flex-end' }}>
-                          <input placeholder="cena" type="number" className="no-spin" min="0" max="99999" value={addingIng.priceKg} onChange={e => setAddingIng(a => ({ ...a, priceKg: e.target.value }))}
+                          <input placeholder={t('price_input_ph')} type="number" className="no-spin" min="0" max="99999" value={addingIng.priceKg} onChange={e => setAddingIng(a => ({ ...a, priceKg: e.target.value }))}
                             style={{ flex: 1, minWidth: 0, padding: '2px 4px', fontSize: 11, background: '#111827', border: '1px solid #374151', borderRadius: 3, color: '#e2e8f0' }} />
-                          <span style={{ fontSize: 10, color: '#6b7280', flexShrink: 0 }}>zł/kg</span>
+                          <span style={{ fontSize: 10, color: '#6b7280', flexShrink: 0 }}>{t('currency')}/kg</span>
                         </div>
                       ) : (
                         <div style={{ display: 'flex', gap: 3, alignItems: 'center', justifyContent: 'flex-end' }}>
-                          <input placeholder="cena" type="number" className="no-spin" min="0" max="99999" value={addingIng.priceOpak} onChange={e => setAddingIng(a => ({ ...a, priceOpak: e.target.value }))}
+                          <input placeholder={t('price_input_ph')} type="number" className="no-spin" min="0" max="99999" value={addingIng.priceOpak} onChange={e => setAddingIng(a => ({ ...a, priceOpak: e.target.value }))}
                             style={{ flex: 1, minWidth: 0, padding: '2px 4px', fontSize: 11, background: '#111827', border: '1px solid #374151', borderRadius: 3, color: '#e2e8f0' }} />
-                          <span style={{ fontSize: 10, color: '#6b7280', flexShrink: 0 }}>zł /</span>
-                          <input placeholder="opak." type="number" className="no-spin" min="0" max="99999" value={addingIng.pkgWeight} onChange={e => setAddingIng(a => ({ ...a, pkgWeight: e.target.value }))}
+                          <span style={{ fontSize: 10, color: '#6b7280', flexShrink: 0 }}>{t('currency')} /</span>
+                          <input placeholder={t('pkg_input_ph')} type="number" className="no-spin" min="0" max="99999" value={addingIng.pkgWeight} onChange={e => setAddingIng(a => ({ ...a, pkgWeight: e.target.value }))}
                             style={{ flex: 1, minWidth: 0, padding: '2px 4px', fontSize: 11, background: '#111827', border: '1px solid #374151', borderRadius: 3, color: '#e2e8f0' }} />
-                          <span style={{ fontSize: 10, color: '#6b7280', flexShrink: 0 }}>{addingIng.unit}</span>
+                          <span style={{ fontSize: 10, color: '#6b7280', flexShrink: 0 }}>{addingIng.unit === 'szt' ? t('unit_pcs') : addingIng.unit}</span>
                         </div>
                       );
                       return (
@@ -1041,9 +1042,9 @@ export default function Recipes() {
                   <td style={{ textAlign: 'center', whiteSpace: 'nowrap', width: 60 }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 3, alignItems: 'center' }}>
                       <button onClick={confirmAddIng} disabled={!addingIng.search.trim() || !addingIng.weight}
-                        style={{ padding: '3px 8px', fontSize: 12, background: '#0d9488', color: '#fff', border: 'none', borderRadius: 5, cursor: 'pointer', fontWeight: 600 }}>Dodaj</button>
+                        style={{ padding: '3px 8px', fontSize: 12, background: '#0d9488', color: '#fff', border: 'none', borderRadius: 5, cursor: 'pointer', fontWeight: 600 }}>{t('add_btn')}</button>
                       <button onClick={() => setAddingIng(null)}
-                        style={{ padding: '3px 8px', fontSize: 12, background: '#374151', color: '#9ca3af', border: 'none', borderRadius: 5, cursor: 'pointer' }}>Anuluj</button>
+                        style={{ padding: '3px 8px', fontSize: 12, background: '#374151', color: '#9ca3af', border: 'none', borderRadius: 5, cursor: 'pointer' }}>{t('cancel')}</button>
                     </div>
                   </td>
                 </tr>

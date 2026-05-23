@@ -148,7 +148,7 @@ function RecipePreviewModal({ recipe, onClose }) {
                 <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 10px', background: '#111827', borderRadius: 7, minWidth: 0 }}>
                   {/* Ilość */}
                   <span style={{ fontSize: 12, color: '#9ca3af', flexShrink: 0, minWidth: 50, textAlign: 'right' }}>
-                    {ing.weight} {ing.unit}
+                    {ing.weight} {ing.unit === 'szt' ? t('unit_pcs') : ing.unit}
                   </span>
                   {/* Nazwa */}
                   <span style={{ fontSize: 13, color: '#e2e8f0', flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{ing.product_name}</span>
@@ -158,11 +158,11 @@ function RecipePreviewModal({ recipe, onClose }) {
                          onKeyDown={e => { if (e.key === 'Enter') saveEdit(ing); if (e.key === 'Escape') setEditingIdx(null); }}>
                       <span style={{ fontSize: 10, color: '#6b7280' }}>kcal</span>
                       <input autoFocus style={inpStyle} value={editVals.kcal}    onChange={e => setEditVals(v => ({ ...v, kcal:    e.target.value }))} placeholder="—" />
-                      <span style={{ fontSize: 10, color: '#6b7280' }}>B</span>
+                      <span style={{ fontSize: 10, color: '#6b7280' }}>{t('macro_p')}</span>
                       <input style={inpStyle} value={editVals.protein} onChange={e => setEditVals(v => ({ ...v, protein: e.target.value }))} placeholder="—" />
-                      <span style={{ fontSize: 10, color: '#6b7280' }}>T</span>
+                      <span style={{ fontSize: 10, color: '#6b7280' }}>{t('macro_f')}</span>
                       <input style={inpStyle} value={editVals.fat}     onChange={e => setEditVals(v => ({ ...v, fat:     e.target.value }))} placeholder="—" />
-                      <span style={{ fontSize: 10, color: '#6b7280' }}>W</span>
+                      <span style={{ fontSize: 10, color: '#6b7280' }}>{t('macro_c')}</span>
                       <input style={inpStyle} value={editVals.carbs}   onChange={e => setEditVals(v => ({ ...v, carbs:   e.target.value }))} placeholder="—" />
                       <button onClick={() => saveEdit(ing)} style={{ padding: '2px 5px', fontSize: 11, background: '#0d9488', color: '#fff', border: 'none', borderRadius: 4, cursor: 'pointer', marginLeft: 2, flexShrink: 0 }}>✓</button>
                       <button onClick={() => setEditingIdx(null)} style={{ padding: '2px 5px', fontSize: 11, background: '#374151', color: '#9ca3af', border: 'none', borderRadius: 4, cursor: 'pointer', flexShrink: 0 }}>✕</button>
@@ -175,7 +175,7 @@ function RecipePreviewModal({ recipe, onClose }) {
                       onMouseEnter={e => e.currentTarget.style.background = '#1f2937'}
                       onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                     >
-                      {kcal != null ? `${kcal} kcal · B${protein} T${fat} W${carbs}` : '+ makro'}
+                      {kcal != null ? `${kcal} kcal · ${t('macro_p')}${protein} ${t('macro_f')}${fat} ${t('macro_c')}${carbs}` : t('plus_macro')}
                     </span>
                   )}
                 </div>
@@ -183,12 +183,12 @@ function RecipePreviewModal({ recipe, onClose }) {
             })}
           </div>
           <div style={{ marginTop: 12, fontSize: 12, color: '#6b7280' }}>
-            <span>Szac. koszt przepisu: <span style={{ color: '#0d9488', fontWeight: 700 }}>{recipe.total_cost?.toFixed(2)} zł</span></span>
+            <span>{t('recipe_cost_lbl')}: <span style={{ color: '#0d9488', fontWeight: 700 }}>{recipe.total_cost?.toFixed(2)} {t('currency')}</span></span>
             {recipe.source_url && (
               <div style={{ marginTop: 4 }}>
                 <a href={recipe.source_url} target="_blank" rel="noreferrer"
                    style={{ color: '#9ca3af', textDecoration: 'none', fontSize: 12, fontWeight: 600 }}>
-                  Przejdź na stronę z przepisem ↗
+                  {t('see_recipe')}
                 </a>
               </div>
             )}
