@@ -437,8 +437,31 @@ _FISH_KW = re.compile(r"\b(salmon|haddock|mackerel|trout|herring|kipper|cod)\b")
 _BEEF_KW = re.compile(r"\b(beef|rump|sirloin|ribeye|rib-eye)\b")
 
 
+# Nazwy produktów, które są normalizowane błędnie (zbyt agresywne usunięcie brandu lub
+# konwersja mince→ground powoduje zbyt generyczny wynik). Klucz = lowercased original name.
+_NORMALIZE_OVERRIDES_EN: dict[str, str] = {
+    "quorn mince": "quorn mince",
+}
+
+# Znane rozmiary opakowań dla produktów, których Aldi nie wyświetla per-kg/per-L na stronie.
+# Klucz = generic_name po normalizacji. Wartość = (rozmiar, jednostka)
+_PRODUCT_SIZE_DEFAULTS_EN: dict[str, tuple[float, str]] = {
+    "extra virgin olive oil": (500.0,  "ml"),
+    "vegetable oil":          (1000.0, "ml"),
+    "coconut water":          (1000.0, "ml"),
+    "quorn mince":            (300.0,  "g"),
+    "panko breadcrumbs":      (200.0,  "g"),
+}
+
+
 def normalize_name_en(name: str, brand: str = None) -> list[str]:
-    n = name.lower()
+    # Direct overrides — some product names normalise too aggressively (brand removal +
+    # mince→ground leave a single generic token that causes false-positive matches).
+    n_key = name.lower().strip()
+    if n_key in _NORMALIZE_OVERRIDES_EN:
+        return [_NORMALIZE_OVERRIDES_EN[n_key]]
+
+    n = n_key
 
     if brand:
         n = n.replace(brand.lower(), "")
@@ -885,8 +908,20 @@ def build_aldi_records(products: list[dict]) -> list[dict]:
             filtered += 1
             continue
 
-        pkg = extract_package_aldi(p)
+        pkg   = extract_package_aldi(p)
         names = normalize_name_en(p.get("name", ""), p.get("brand"))
+
+        # Fallback: dla produktów bez price_per_100, sprawdź znane rozmiary opakowań
+        if pkg["price_per_100"] is None and p.get("price") is not None:
+            for generic in names:
+                size_info = _PRODUCT_SIZE_DEFAULTS_EN.get(generic)
+                if size_info:
+                    size_val, size_unit = size_info
+                    pkg = dict(pkg)
+                    pkg["package_size_value"] = size_val
+                    pkg["unit"]               = size_unit
+                    pkg["price_per_100"]      = round(p["price"] / size_val * 100, 4)
+                    break
 
         for generic in names:
             if not generic:

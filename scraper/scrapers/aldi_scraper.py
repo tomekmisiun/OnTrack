@@ -201,8 +201,9 @@ def extract_product(content: str, url: str) -> dict | None:
             if u == "kg":  val *= 1000; u = "g"
             if u == "l":   val *= 1000; u = "ml"
             if u == "cl":  val *= 10;   u = "ml"
-            pack_volume      = val
-            pack_volume_unit = u
+            if val > 0:
+                pack_volume      = val
+                pack_volume_unit = u
         except ValueError:
             pass
 

@@ -488,11 +488,15 @@ def import_recipes(user_id: int, lang: str, product_map: dict[str, int], macro_m
             skipped += 1
             continue
 
+        raw_cat  = r.get("category") or ""
+        category = {"snacks": "snack", "desserts": "dessert"}.get(raw_cat, raw_cat) or None
+
         recipe = Recipe(
             user_id   = user_id,
             name      = name[:100],
             image_url = r.get("image_url"),
             source_url= r.get("url"),
+            category  = category,
             lang      = lang,
         )
         db.session.add(recipe)

@@ -72,9 +72,10 @@ _INGREDIENT_CANONICAL_EN: dict[str, str] = {
     "tuna":                 "tuna chunks in spring water",
     "applesauce":           "apple sauce",
     "apple sauce":          "apple sauce",
-    "beef broth":           "chicken stock",   # ALDI nie ma beef broth → chicken stock jako substytut
+    "beef broth":           "chicken stock",   # ALDI nie ma beef/veg broth → chicken stock jako substytut
     "beef stock":           "chicken stock",
-    "vegetable broth":      "vegetable stock",
+    "vegetable broth":      "chicken stock",   # ALDI nie ma veg stock → chicken stock jako substytut
+    "vegetable stock":      "chicken stock",
     "chicken broth":        "chicken stock",
     "ground beef":          "beef mince",
     "ground pork":          "pork mince",
@@ -230,6 +231,17 @@ _INGREDIENT_CANONICAL_EN: dict[str, str] = {
     # Suszone owoce — ALDI ma freeze-dried slices, nie świeże
     "freeze dried strawberries": "strawberry slices",
     "freeze dried strawberry":   "strawberry slices",
+    # Quorn — roślinne substytuty mięsa
+    "plant-based ground":   "quorn mince",   # roślinne mince = Quorn Mince
+    "ground sausage":       "sausages",       # kruszone kiełbaski → sausages
+    # Len — ALDI ma Flaxseed
+    "ground flax":          "flaxseed",
+    "ground flax meal":     "flaxseed",
+    "ground flaxseed":      "flaxseed",
+    # Kumin mielony = kumin (ALDI ma Cumin)
+    "ground cumin":         "cumin",
+    # Coconut wrap — ALDI nie ma → unmatch
+    "coconut wrap":         "coconut wrap niematch",
     # Śmietana — nie dip z cebulką
     "dairy free sour cream": "sour cream",
     "vegan sour cream":    "sour cream",
