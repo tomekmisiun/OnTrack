@@ -107,9 +107,8 @@ def _ensure_primary_member(user, lang: str):
 
 @auth_bp.route('/google/callback')
 def google_callback():
-    redirect_uri = current_app.config['GOOGLE_REDIRECT_URI']
     try:
-        token = oauth.google.authorize_access_token(redirect_uri=redirect_uri)
+        token = oauth.google.authorize_access_token()
         user_info = token.get('userinfo') or oauth.google.userinfo()
         email = user_info.get('email', '').lower()
         if not email:
