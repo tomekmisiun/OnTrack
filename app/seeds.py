@@ -37,6 +37,14 @@ def seed_user(user_id: int, lang: str = "pl"):
     _seed_recipes(user_id, lang)
 
 
+def ensure_user_seeded(user_id: int, lang: str):
+    """Seed default data for a language if the user has none yet."""
+    if not Product.query.filter_by(user_id=user_id, lang=lang).first():
+        _seed_products(user_id, lang)
+    if not Recipe.query.filter_by(user_id=user_id, lang=lang).first():
+        _seed_recipes(user_id, lang)
+
+
 def _seed_products(user_id: int, lang: str):
     products = _load_json("products_seed_pl.json", lang)
     if not products:
@@ -70,7 +78,7 @@ def _seed_recipes(user_id: int, lang: str):
     # Build name→id map from newly seeded products
     product_map: dict[str, int] = {
         p.name.lower(): p.id
-        for p in Product.query.filter_by(user_id=user_id).all()
+        for p in Product.query.filter_by(user_id=user_id, lang=lang).all()
     }
 
     for r in recipes:
@@ -104,6 +112,7 @@ def _seed_recipes(user_id: int, lang: str):
                     user_id=user_id,
                     name=ing["product_name"].strip()[:200],
                     price=0, package_weight=100, unit="g", sold_by_weight=False,
+                    lang=lang,
                 )
                 db.session.add(placeholder)
                 db.session.flush()

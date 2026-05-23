@@ -4,7 +4,7 @@ from app import db
 from app.models.meal_plan import MealPlan
 from app.models.recipe import Recipe
 from app.models.household_member import HouseholdMember
-from app.utils import current_uid
+from app.utils import current_uid, current_user_lang
 from datetime import date, timedelta
 import math
 
@@ -38,6 +38,7 @@ def member_ids_for_user(uid, ids_str=None):
 @jwt_required()
 def get_day(date_str):
     uid = current_uid()
+    lang = current_user_lang()
     try:
         day = date.fromisoformat(date_str)
     except ValueError:
@@ -50,9 +51,10 @@ def get_day(date_str):
     else:
         mids = [resolve_member_id(uid, mid)]
 
-    meals = MealPlan.query.filter(
+    meals = MealPlan.query.join(Recipe).filter(
         MealPlan.member_id.in_(mids),
         MealPlan.date == day,
+        Recipe.lang == lang,
     ).order_by(MealPlan.position).all()
     return jsonify([m.to_dict() for m in meals])
 
@@ -61,6 +63,7 @@ def get_day(date_str):
 @jwt_required()
 def get_range(start, end):
     uid = current_uid()
+    lang = current_user_lang()
     try:
         start_date = date.fromisoformat(start)
         end_date = date.fromisoformat(end)
@@ -74,10 +77,11 @@ def get_range(start, end):
     else:
         mids = [resolve_member_id(uid, mid)]
 
-    meals = MealPlan.query.filter(
+    meals = MealPlan.query.join(Recipe).filter(
         MealPlan.member_id.in_(mids),
         MealPlan.date >= start_date,
         MealPlan.date <= end_date,
+        Recipe.lang == lang,
     ).order_by(MealPlan.date, MealPlan.position).all()
 
     result = {}
@@ -105,7 +109,7 @@ def add_meal():
     if not mid:
         return jsonify({'error': 'No profile configured'}), 400
 
-    if not Recipe.query.filter_by(id=data['recipe_id'], user_id=uid).first():
+    if not Recipe.query.filter_by(id=data['recipe_id'], user_id=uid, lang=current_user_lang()).first():
         return jsonify({'error': 'Recipe not found'}), 404
     if MealPlan.query.filter_by(member_id=mid, date=day, position=data['position']).first():
         return jsonify({'error': f'Position {data["position"]} on this day is already taken'}), 409
@@ -134,10 +138,12 @@ def copy_range():
     if not mid:
         return jsonify({'error': 'No profile configured'}), 400
 
-    meals = MealPlan.query.filter(
+    lang = current_user_lang()
+    meals = MealPlan.query.join(Recipe).filter(
         MealPlan.member_id == mid,
         MealPlan.date >= source_start,
         MealPlan.date <= source_end,
+        Recipe.lang == lang,
     ).all()
     span = (source_end - source_start).days
     target_end = target_start + timedelta(days=span)
@@ -175,6 +181,7 @@ def delete_meal(id):
 @jwt_required()
 def get_summary(start, end):
     uid = current_uid()
+    lang = current_user_lang()
     try:
         start_date = date.fromisoformat(start)
         end_date = date.fromisoformat(end)
@@ -188,10 +195,11 @@ def get_summary(start, end):
     else:
         mids = [resolve_member_id(uid, mid)]
 
-    meals = MealPlan.query.filter(
+    meals = MealPlan.query.join(Recipe).filter(
         MealPlan.member_id.in_(mids),
         MealPlan.date >= start_date,
         MealPlan.date <= end_date,
+        Recipe.lang == lang,
     ).all()
 
     products = {}

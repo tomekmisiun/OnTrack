@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Icon } from '@iconify/react';
 import { products as api, importPrices } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../contexts/ToastContext';
 import { fuzzySearch } from '../utils/search';
 
@@ -38,6 +39,7 @@ const MacroDisplay = ({ p }) => {
 
 export default function Products() {
   const { t, lang } = useLanguage();
+  const { user } = useAuth();
   const { showError, showSuccess, showToast: globalToast, showConfirm } = useToast();
   const [productList, setProductList] = useState([]);
   const [pasteText, setPasteText] = useState('');
@@ -96,7 +98,7 @@ export default function Products() {
   const isImageFile = (file) => file && /\.(jpe?g|png|webp)$/i.test(file.name);
   const isTextFile  = (file) => file && /\.(txt|csv)$/i.test(file.name);
 
-  useEffect(() => { loadProducts(); }, []);
+  useEffect(() => { loadProducts(); }, [user?.lang]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const filteredProducts = useMemo(() => {
     const q = search.trim();

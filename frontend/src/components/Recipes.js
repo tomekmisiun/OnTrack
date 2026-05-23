@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { Icon } from '@iconify/react';
 import { recipes as api, products as productsApi } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../contexts/ToastContext';
 import { fuzzySearch } from '../utils/search';
 import axios from 'axios';
@@ -144,6 +145,7 @@ const CAT_COLORS = { breakfast: '#f59e0b', lunch: '#10b981', dinner: '#6366f1', 
 
 export default function Recipes() {
   const { t, lang } = useLanguage();
+  const { user } = useAuth();
   const displayUnit = u => u === 'szt' ? t('unit_pcs') : u;
   const CATEGORIES = [
     { value: 'breakfast', label: t('cat_breakfast'), color: CAT_COLORS.breakfast },
@@ -211,7 +213,7 @@ export default function Recipes() {
     el.style.height = el.scrollHeight + 'px';
   }, []);
 
-  useEffect(() => { loadRecipes(); loadProducts(); loadParseLimit(); }, []);
+  useEffect(() => { loadRecipes(); loadProducts(); loadParseLimit(); }, [user?.lang]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const filteredRecipes = useMemo(() => {
     const q = search.trim();

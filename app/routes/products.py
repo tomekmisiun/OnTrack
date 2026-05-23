@@ -3,7 +3,7 @@ from flask_jwt_extended import jwt_required
 from app import db
 from app.models.product import Product
 from app.models.user import User
-from app.utils import current_uid
+from app.utils import current_uid, current_user_lang
 
 products_bp = Blueprint('products', __name__)
 
@@ -59,7 +59,8 @@ def validate_product_data(data, require_all=True):
 @jwt_required()
 def get_products():
     uid = current_uid()
-    products = Product.query.filter_by(user_id=uid).order_by(Product.name).all()
+    lang = current_user_lang()
+    products = Product.query.filter_by(user_id=uid, lang=lang).order_by(Product.name).all()
     return jsonify([p.to_dict() for p in products])
 
 
@@ -94,7 +95,7 @@ def create_product():
 @products_bp.route('/<int:id>', methods=['PUT'])
 @jwt_required()
 def update_product(id):
-    product = Product.query.filter_by(id=id, user_id=current_uid()).first_or_404()
+    product = Product.query.filter_by(id=id, user_id=current_uid(), lang=current_user_lang()).first_or_404()
     data = request.get_json()
     err = validate_product_data(data, require_all=False)
     if err:
@@ -120,7 +121,7 @@ def update_product(id):
 @products_bp.route('/<int:id>', methods=['DELETE'])
 @jwt_required()
 def delete_product(id):
-    product = Product.query.filter_by(id=id, user_id=current_uid()).first_or_404()
+    product = Product.query.filter_by(id=id, user_id=current_uid(), lang=current_user_lang()).first_or_404()
     db.session.delete(product)
     db.session.commit()
     return jsonify({'message': 'Product deleted'}), 200
@@ -130,6 +131,7 @@ def delete_product(id):
 @jwt_required()
 def delete_all_products():
     uid = current_uid()
-    count = Product.query.filter_by(user_id=uid).delete()
+    lang = current_user_lang()
+    count = Product.query.filter_by(user_id=uid, lang=lang).delete()
     db.session.commit()
     return jsonify({'message': f'Deleted {count} products'}), 200

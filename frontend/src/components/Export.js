@@ -3,6 +3,7 @@ import { mealPlan as api, recipes as recipesApi } from '../api';
 import { useMember } from '../contexts/MemberContext';
 import { useToast } from '../contexts/ToastContext';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
 import { dateToStr, toEU, getCurrentWeek, getCurrentMonth, getCalGrid } from '../utils/dates';
 import { fuzzySearch } from '../utils/search';
 
@@ -581,6 +582,7 @@ export default function Export({ onGoToTab }) {
   const { members, activeMember } = useMember();
   const { showError } = useToast();
   const { t, lang } = useLanguage();
+  const { user } = useAuth();
 
   const handleExportMacro = () => {
     let formData = null;
@@ -642,7 +644,7 @@ export default function Export({ onGoToTab }) {
   }, [activeMember?.id]); // eslint-disable-line
 
   const [recipes, setRecipes] = useState([]);
-  useEffect(() => { recipesApi.getAll().then(r => setRecipes(r.data)).catch(()=>{}); }, []);
+  useEffect(() => { recipesApi.getAll().then(r => setRecipes(r.data)).catch(()=>{}); }, [user?.lang]);
 
   const [previewMeals, setPreviewMeals] = useState({});
   const [previewLoading, setPreviewLoading] = useState(false);

@@ -93,6 +93,10 @@ def change_language():
         return jsonify({'error': 'User not found'}), 404
     user.lang = lang
     db.session.commit()
+
+    from app.seeds import ensure_user_seeded
+    ensure_user_seeded(user.id, lang)
+
     return jsonify(user.to_dict())
 
 

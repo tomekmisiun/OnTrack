@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from app.utils import current_uid, current_user_lang
 from app import db
 from app.models.product import Product
 from app.models.import_log import ImportLog
@@ -208,7 +209,7 @@ def parse_receipt():
     # Log usage
     ImportLog.increment(user_id)
 
-    db_products = Product.query.all()
+    db_products = Product.query.filter_by(user_id=user_id, lang=current_user_lang()).all()
     results = []
     for item in parsed['products']:
         qty, unit = _normalize(item['quantity'], item['unit'])
@@ -260,7 +261,7 @@ def parse_csv():
     except Exception:
         return jsonify({'error': 'Could not read file'}), 400
 
-    db_products = Product.query.filter_by(user_id=uid).all()
+    db_products = Product.query.filter_by(user_id=uid, lang=current_user_lang()).all()
     results = []
 
     for line in text.splitlines():
@@ -343,6 +344,7 @@ def parse_csv():
 @import_bp.route('/apply', methods=['POST'])
 @jwt_required()
 def apply_prices():
+    uid = current_uid()
     data = request.get_json() or {}
     updates = data.get('updates', [])
     if not isinstance(updates, list) or len(updates) > 200:
@@ -358,7 +360,7 @@ def apply_prices():
             continue
         if price < 0 or price > 99999:
             continue
-        product = Product.query.get(pid)
+        product = Product.query.filter_by(id=pid, user_id=uid, lang=current_user_lang()).first()
         if product:
             product.price = round(float(price), 2)
             updated += 1

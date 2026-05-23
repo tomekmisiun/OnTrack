@@ -5,6 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Icon } from '@iconify/react';
 import { mealPlan as api, recipes as recipesApi, products as productsApi } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../contexts/ToastContext';
 import { useMember } from '../contexts/MemberContext';
 import { dateToStr, toEU, getCurrentWeek, getCurrentMonth } from '../utils/dates';
@@ -84,6 +85,7 @@ function PeriodContent({ range, summary, loading, scrollToWeek, onGoToTab, drink
 
 function Summary({ onGoToTab }) {
   const { t } = useLanguage();
+  const { user } = useAuth();
   const { showError } = useToast();
   const { members, activeMember } = useMember();
 
@@ -176,7 +178,7 @@ function Summary({ onGoToTab }) {
       setProductList(pRes.data);
     }).catch(() => showError(t('err_load_summary')))
       .finally(() => { setWeekLoading(false); setMonthLoading(false); });
-  }, [loadMids.join(','), week.start, week.end]); // eslint-disable-line
+  }, [loadMids.join(','), week.start, week.end, user?.lang]); // eslint-disable-line
 
   const handleCustomLoad = async () => {
     if (!customRange.start || !customRange.end) { showError(t('err_select_range')); return; }

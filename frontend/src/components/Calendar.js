@@ -6,6 +6,7 @@ import {
 import { Icon } from '@iconify/react';
 import { mealPlan as api, recipes as recipesApi, products as productsApi } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../contexts/ToastContext';
 import { useMember } from '../contexts/MemberContext';
 import { dateToStr, addDays, toEU, getUpcomingMondays, getCalGrid as getMonthGrid } from '../utils/dates';
@@ -873,6 +874,7 @@ function CarouselList({ recipes, search, visible, setVisible, scrollRef, dragRef
 
 export default function Calendar({ onGoToTab }) {
   const { t } = useLanguage();
+  const { user } = useAuth();
   const { showError, showSuccess, showConfirm } = useToast();
   const { activeMember } = useMember();
   const todayMidnight = new Date(); todayMidnight.setHours(0,0,0,0);
@@ -949,7 +951,7 @@ export default function Calendar({ onGoToTab }) {
 
   useEffect(()=>{
     recipesApi.getAll().then(r=>setRecipes(r.data)).catch(()=>showError(t('err_load_recipes')));
-  },[]);
+  },[user?.lang]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const loadMonth = useCallback(async(y,m)=>{
     const grid = getMonthGrid(y,m);
@@ -958,7 +960,7 @@ export default function Calendar({ onGoToTab }) {
     const mid = activeMember?.id;
     try { setMealsByDate((await api.getRange(start,end,mid?[mid]:[])).data); }
     catch { showError(t('err_load_plan')); }
-  },[activeMember?.id]);
+  },[activeMember?.id, user?.lang]);
 
   useEffect(()=>{ loadMonth(year,month); },[year,month,loadMonth]);
 
