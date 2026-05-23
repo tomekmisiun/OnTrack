@@ -6,6 +6,8 @@ from flask_jwt_extended import create_access_token
 # Secrets required before create_app() loads config.
 os.environ.setdefault("FLASK_SECRET_KEY", "test-flask-secret-key-for-pytest")
 os.environ.setdefault("JWT_SECRET_KEY", "test-jwt-secret-key-for-pytest")
+os.environ.setdefault("GOOGLE_CLIENT_ID", "test-google-client-id")
+os.environ.setdefault("GOOGLE_CLIENT_SECRET", "test-google-client-secret")
 
 from app import create_app, db  # noqa: E402
 from app.models.auth_code import AuthCode  # noqa: E402, F401
