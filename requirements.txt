@@ -9,4 +9,6 @@ flask-jwt-extended
 google-genai
 authlib
 requests
+rapidfuzz
 Pillow>=10.0.0
+gunicorn

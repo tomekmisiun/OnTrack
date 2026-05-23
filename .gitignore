@@ -11,7 +11,7 @@ frontend/build/
 # Docker
 postgres_data/
 
-# Migracje (generowane automatycznie)
-migrations/
+# Migracje — wersje muszą być w repo (deploy Railway)
+migrations/__pycache__/
 # Claude
 CLAUDE.md
