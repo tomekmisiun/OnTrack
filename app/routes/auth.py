@@ -39,13 +39,18 @@ def _frontend_redirect(path_query: str):
     return redirect(f'{frontend_url}/{path_query.lstrip("/")}')
 
 
+def _auth_error_redirect(message: str):
+    return _frontend_redirect(f'?{urlencode({"auth_error": message[:220]})}')
+
+
 @auth_bp.route('/me', methods=['GET'])
 @jwt_required()
 def me():
     user = User.query.get(int(get_jwt_identity()))
     if not user:
         return jsonify({'error': 'User not found'}), 404
-    from app.seeds import catalog_needs_repair, import_lang_from_pipeline
+    from app.seeds import catalog_needs_repair, import_lang_from_pipeline, ensure_user_seeded
+    ensure_user_seeded(user.id, user.lang)
     if catalog_needs_repair(user.id, user.lang):
         import_lang_from_pipeline(user.id, user.lang, replace=True)
     sync_primary_member_name(user)
@@ -78,8 +83,26 @@ def google_login():
     if pending_lang not in ('pl', 'en'):
         pending_lang = 'pl'
     resp = oauth.google.authorize_redirect(redirect_uri)
-    resp.set_cookie('pending_lang', pending_lang, max_age=300, httponly=True, samesite='Lax')
+    secure = not current_app.config.get('FLASK_DEBUG')
+    resp.set_cookie(
+        'pending_lang', pending_lang, max_age=300, httponly=True,
+        samesite='None' if secure else 'Lax', secure=secure,
+    )
     return resp
+
+
+def _ensure_primary_member(user, lang: str):
+    from app.models.household_member import HouseholdMember
+    if HouseholdMember.query.filter_by(user_id=user.id, is_primary=True).first():
+        return
+    db.session.add(
+        HouseholdMember(
+            user_id=user.id,
+            name=default_primary_member_name(lang),
+            is_primary=True,
+        )
+    )
+    db.session.commit()
 
 
 @auth_bp.route('/google/callback')
@@ -90,30 +113,39 @@ def google_callback():
         user_info = token.get('userinfo') or oauth.google.userinfo()
         email = user_info.get('email', '').lower()
         if not email:
-            return _frontend_redirect(f'?{urlencode({"auth_error": "No email returned from Google"})}')
+            return _auth_error_redirect('No email returned from Google')
 
-        is_new = not User.query.filter_by(email=email).first()
         pending_lang = request.cookies.get('pending_lang') or 'pl'
+        lang = pending_lang if pending_lang in ('pl', 'en') else 'pl'
+        is_new = not User.query.filter_by(email=email).first()
         user = _find_or_create_oauth_user(email)
         if is_new:
-            from app.seeds import _seed_products, _seed_recipes
-            from app.models.household_member import HouseholdMember
-            lang = pending_lang if pending_lang in ('pl', 'en') else 'pl'
             user.lang = lang
             db.session.commit()
-            # Quick JSON seeds only — full pipeline import runs lazily via /me
-            _seed_products(user.id, lang=lang)
-            _seed_recipes(user.id, lang=lang)
-            primary = HouseholdMember(user_id=user.id, name=default_primary_member_name(lang), is_primary=True)
-            db.session.add(primary)
-            db.session.commit()
+            _ensure_primary_member(user, lang)
+            try:
+                from app.seeds import _seed_products, _seed_recipes
+                _seed_products(user.id, lang=lang)
+                _seed_recipes(user.id, lang=lang)
+            except Exception:
+                current_app.logger.exception('Seed failed during OAuth signup')
+                db.session.rollback()
+        else:
+            _ensure_primary_member(user, user.lang or lang)
 
         ttl = current_app.config.get('AUTH_CODE_TTL_SECONDS', 120)
         code = AuthCode.issue(user.id, ttl_seconds=ttl)
         return _frontend_redirect(f'?{urlencode({"code": code})}')
-    except Exception:
+    except Exception as e:
         current_app.logger.exception('Google OAuth callback failed')
-        return _frontend_redirect(f'?{urlencode({"auth_error": "Login error"})}')
+        try:
+            from authlib.integrations.base_client.errors import OAuthError
+            if isinstance(e, OAuthError):
+                desc = getattr(e, 'description', None) or str(getattr(e, 'error', e))
+                return _auth_error_redirect(f'Google OAuth: {desc}')
+        except ImportError:
+            pass
+        return _auth_error_redirect(f'{type(e).__name__}: {e}')
 
 
 @auth_bp.route('/language', methods=['PATCH'])

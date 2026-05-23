@@ -47,7 +47,8 @@ class Config:
     FLASK_DEBUG = _env_bool('FLASK_DEBUG')
     SESSION_COOKIE_SECURE = not FLASK_DEBUG
     SESSION_COOKIE_HTTPONLY = True
-    SESSION_COOKIE_SAMESITE = 'Lax'
+    # None + Secure — session must survive redirect from accounts.google.com
+    SESSION_COOKIE_SAMESITE = 'None' if not FLASK_DEBUG else 'Lax'
     PREFERRED_URL_SCHEME = 'https' if not FLASK_DEBUG else 'http'
     SECRET_KEY = _require_secret('FLASK_SECRET_KEY', 'dev-only-flask-secret')
     JWT_SECRET_KEY = _require_secret('JWT_SECRET_KEY', 'dev-only-jwt-secret')
