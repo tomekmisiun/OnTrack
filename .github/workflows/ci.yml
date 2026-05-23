@@ -24,7 +24,10 @@ jobs:
           pip install pytest
 
       - name: Uruchom testy
-        run: pytest tests/ -v || echo "Brak testów - OK"
+        run: pytest tests/ -v
+        env:
+          FLASK_SECRET_KEY: ci-test-flask-secret-key-0123456789abcdef
+          JWT_SECRET_KEY: ci-test-jwt-secret-key-0123456789abcdef
 
   build-and-push:
     needs: test

@@ -12,3 +12,4 @@ requests
 rapidfuzz
 Pillow>=10.0.0
 gunicorn
+pytest>=8.0.0
