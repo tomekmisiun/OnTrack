@@ -27,7 +27,14 @@ def _require_secret(name: str, dev_fallback: str) -> str:
 
 
 def _database_url() -> str:
-    url = os.environ.get('DATABASE_URL', 'postgresql://user:password@db:5432/mealplanner')
+    url = os.environ.get('DATABASE_URL')
+    if not url:
+        if os.environ.get('RAILWAY_ENVIRONMENT') or os.environ.get('RAILWAY_PROJECT_ID'):
+            raise RuntimeError(
+                'DATABASE_URL is not set. Connect Postgres to the backend service in Railway '
+                '(Variables → DATABASE_URL → ${{Postgres.DATABASE_URL}}).'
+            )
+        url = 'postgresql://user:password@db:5432/mealplanner'
     # Railway Postgres uses postgres:// — SQLAlchemy needs postgresql://
     if url.startswith('postgres://'):
         url = url.replace('postgres://', 'postgresql://', 1)
