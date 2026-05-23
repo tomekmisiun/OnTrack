@@ -25,16 +25,16 @@ function PeriodContent({ range, summary, loading, scrollToWeek, onGoToTab, drink
     const foodTotal = adjustedTotal !== null ? adjustedTotal : summary.total_cost;
     const drinkKeys = new Set(['kawa','herbata','napoje','woda','sodaStream']);
     const napojTotal = drinkItems.filter(d => drinkKeys.has(d._dk)).reduce((s,i)=>s+i.total,0);
-    const otherGroups = OTHER_TYPES.flatMap((t,i) => {
-      if (t.key === 'lekarze') {
-        return drinkItems.filter(d => d._dk === 'lekarze').map(d => d.total > 0 ? { label: d.name, value: d.total, color: COLORS[(i+3)%COLORS.length] } : null).filter(Boolean);
+    const otherGroups = OTHER_TYPES.flatMap((ot,i) => {
+      if (ot.key === 'lekarze') {
+        return drinkItems.filter(d => d._dk === 'lekarze').map(d => d.total > 0 ? { label: d._tkey ? t(d._tkey) : d.name, value: d.total, color: COLORS[(i+3)%COLORS.length] } : null).filter(Boolean);
       }
-      const val = drinkItems.filter(d => d._dk === t.key).reduce((s,d)=>s+d.total,0);
-      return val > 0 ? [{ label: t.label, value: val, color: COLORS[(i+3)%COLORS.length] }] : [];
+      const val = drinkItems.filter(d => d._dk === ot.key).reduce((s,d)=>s+d.total,0);
+      return val > 0 ? [{ label: t('exp_' + ot.key) || ot.label, value: val, color: COLORS[(i+3)%COLORS.length] }] : [];
     });
     return [
-      { label:'Jedzenie', value: foodTotal, color: COLORS[0] },
-      ...(napojTotal > 0 ? [{ label:'Napoje', value: napojTotal, color: COLORS[1] }] : []),
+      { label: t('food_label'), value: foodTotal, color: COLORS[0] },
+      ...(napojTotal > 0 ? [{ label: t('drinks_label'), value: napojTotal, color: COLORS[1] }] : []),
       ...otherGroups,
     ];
   }, [summary, adjustedTotal, drinkItems]); // eslint-disable-line
@@ -53,7 +53,7 @@ function PeriodContent({ range, summary, loading, scrollToWeek, onGoToTab, drink
               onClick={() => { onGoToTab?.('calendar'); if (scrollToWeek) setTimeout(() => document.getElementById('calendar-today')?.scrollIntoView({ behavior:'smooth', block:'center' }), 200); }}
               style={{ background:'#0d948820', border:'1px solid #0d9488', borderRadius:6, padding:'3px 10px', cursor:'pointer', fontSize:11, fontWeight:600, color:'#2dd4bf', display:'inline-flex', alignItems:'center' }}
             >
-              Idź do kalendarza
+              {t('btn_go_calendar')}
             </button>
           </div>
         </div>
@@ -65,7 +65,7 @@ function PeriodContent({ range, summary, loading, scrollToWeek, onGoToTab, drink
           <button onClick={() => setProductsOpen(o => !o)}
             style={{ width:'100%', padding:'10px 20px', background:'none', border:'none', cursor:'pointer', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
             <div style={{ textAlign:'left' }}>
-              <div style={{ fontSize:11, fontWeight:700, color:'#6b7280', textTransform:'uppercase', letterSpacing:'0.6px', marginBottom:2 }}>Wydatki na jedzenie</div>
+              <div style={{ fontSize:11, fontWeight:700, color:'#6b7280', textTransform:'uppercase', letterSpacing:'0.6px', marginBottom:2 }}>{t('food_expenses_label')}</div>
               <div style={{ fontSize:13, fontWeight:600, color:'#0d9488' }}>{productsOpen ? t('hide_product_list') : t('show_product_list')}</div>
             </div>
             <Icon icon="heroicons:chevron-down" style={{width:20,height:20,transition:'transform 0.25s',transform:productsOpen?'rotate(180deg)':'rotate(0deg)',color:'#0d9488'}}/>
@@ -130,7 +130,7 @@ function Summary({ onGoToTab }) {
     if (expandedTpl === idx) setExpandedTpl(null);
   };
 
-  const DAY_NAMES = ['Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob', 'Nd'];
+  const DAY_NAMES = t('day_short');
   const [recipeList, setRecipeList] = useState([]);
   const [productList, setProductList] = useState([]);
   const [drinkItems, setDrinkItems] = useState([]);
@@ -205,7 +205,7 @@ function Summary({ onGoToTab }) {
       {/* ─── Member selector (tylko gdy > 1 osoba) ─── */}
       {members.length > 1 && (
         <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:12, flexWrap:'wrap' }}>
-          <span style={{ fontSize:11, fontWeight:700, color:'#6b7280', textTransform:'uppercase', letterSpacing:'0.6px', marginRight:2 }}>Uwzględnij:</span>
+          <span style={{ fontSize:11, fontWeight:700, color:'#6b7280', textTransform:'uppercase', letterSpacing:'0.6px', marginRight:2 }}>{t('include_label')}</span>
           {members.map((m, idx) => {
             const checked = selectedMemberIds.includes(m.id);
             const color = ['#0d9488','#6366f1','#f59e0b','#ec4899','#22c55e','#ef4444'][idx % 6];
@@ -277,7 +277,7 @@ function Summary({ onGoToTab }) {
                   <button onClick={() => setProductsOpenCustom(o => !o)}
                     style={{ width:'100%', padding:'10px 20px', background:'none', border:'none', cursor:'pointer', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
                     <div style={{ textAlign:'left' }}>
-                      <div style={{ fontSize:11, fontWeight:700, color:'#6b7280', textTransform:'uppercase', letterSpacing:'0.6px', marginBottom:2 }}>Wydatki na jedzenie</div>
+                      <div style={{ fontSize:11, fontWeight:700, color:'#6b7280', textTransform:'uppercase', letterSpacing:'0.6px', marginBottom:2 }}>{t('food_expenses_label')}</div>
                       <div style={{ fontSize:13, fontWeight:600, color:'#0d9488' }}>{productsOpenCustom ? t('hide_product_list') : t('show_product_list')}</div>
                     </div>
                     <Icon icon="heroicons:chevron-down" style={{width:20,height:20,transition:'transform 0.25s',transform:productsOpenCustom?'rotate(180deg)':'rotate(0deg)',color:'#0d9488'}}/>
@@ -312,18 +312,18 @@ function Summary({ onGoToTab }) {
                       <div key={i} style={{ display:'flex', alignItems:'center', gap:8, marginBottom:6 }}>
                         <span style={{ width:10, height:10, borderRadius:2, background:cat.color, flexShrink:0 }} />
                         <span style={{ fontSize:11, color:'#9ca3af', flex:1, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{cat.label}</span>
-                        <span style={{ fontSize:12, fontWeight:600, color:'#e2e8f0', whiteSpace:'nowrap' }}>{cat.value.toFixed(2)} zł</span>
+                        <span style={{ fontSize:12, fontWeight:600, color:'#e2e8f0', whiteSpace:'nowrap' }}>{cat.value.toFixed(2)} {t('currency')}</span>
                       </div>
                     ))}
                     <div style={{ borderTop:'1px solid #374151', paddingTop:10, marginTop:4, display:'flex', justifyContent:'space-between', alignItems:'baseline' }}>
-                      <span style={{ fontSize:13, color:'#9ca3af', fontWeight:700 }}>Łącznie</span>
-                      <span style={{ fontSize:22, fontWeight:800, color:'#0d9488' }}>{pieCategories.reduce((s,c)=>s+c.value,0).toFixed(2)} zł</span>
+                      <span style={{ fontSize:13, color:'#9ca3af', fontWeight:700 }}>{t('expenses_total')}</span>
+                      <span style={{ fontSize:22, fontWeight:800, color:'#0d9488' }}>{pieCategories.reduce((s,c)=>s+c.value,0).toFixed(2)} {t('currency')}</span>
                     </div>
                   </div>
                 </>
               )}
               {pieCategories.length === 0 && (
-                <div style={{ color:'#4b5563', fontSize:12, textAlign:'center', marginTop:40 }}>Brak danych</div>
+                <div style={{ color:'#4b5563', fontSize:12, textAlign:'center', marginTop:40 }}>{t('no_data_label')}</div>
               )}
 
               {/* Sekcja okresu na dole */}
@@ -332,7 +332,7 @@ function Summary({ onGoToTab }) {
                   <>
                     <div style={{ display:'flex', gap:8 }}>
                       <div style={{ flex:1 }}>
-                        <div style={{ fontSize:10, color:'#6b7280', marginBottom:3 }}>Od</div>
+                        <div style={{ fontSize:10, color:'#6b7280', marginBottom:3 }}>{t('date_from')}</div>
                         <DatePicker
                           locale="pl"
                           dateFormat="dd.MM.yyyy"
@@ -344,7 +344,7 @@ function Summary({ onGoToTab }) {
                         />
                       </div>
                       <div style={{ flex:1 }}>
-                        <div style={{ fontSize:10, color:'#6b7280', marginBottom:3 }}>Do</div>
+                        <div style={{ fontSize:10, color:'#6b7280', marginBottom:3 }}>{t('date_to')}</div>
                         <DatePicker
                           locale="pl"
                           dateFormat="dd.MM.yyyy"
@@ -365,13 +365,13 @@ function Summary({ onGoToTab }) {
                 ) : (
                   <div style={{ display:'flex', gap:8 }}>
                     <div style={{ flex:1 }}>
-                      <div style={{ fontSize:10, color:'#6b7280', marginBottom:3 }}>Od</div>
+                      <div style={{ fontSize:10, color:'#6b7280', marginBottom:3 }}>{t('date_from')}</div>
                       <div style={{ padding:'7px 10px', border:'1px solid #374151', borderRadius:6, fontSize:12, color:'#9ca3af', background:'#111827', textAlign:'center' }}>
                         {activePeriod === 'month' && month ? toEU(month.start) : activePeriod === 'week' && week ? toEU(week.start) : '—'}
                       </div>
                     </div>
                     <div style={{ flex:1 }}>
-                      <div style={{ fontSize:10, color:'#6b7280', marginBottom:3 }}>Do</div>
+                      <div style={{ fontSize:10, color:'#6b7280', marginBottom:3 }}>{t('date_to')}</div>
                       <div style={{ padding:'7px 10px', border:'1px solid #374151', borderRadius:6, fontSize:12, color:'#9ca3af', background:'#111827', textAlign:'center' }}>
                         {activePeriod === 'month' && month ? toEU(month.end) : activePeriod === 'week' && week ? toEU(week.end) : '—'}
                       </div>
@@ -394,13 +394,13 @@ function Summary({ onGoToTab }) {
               onClick={() => { onGoToTab?.('calendar'); setTimeout(() => window.dispatchEvent(new Event('open-template')), 250); }}
               style={{ background:'#0d948820', border:'1px solid #0d9488', borderRadius:6, padding:'3px 10px', cursor:'pointer', fontSize:11, fontWeight:600, color:'#2dd4bf', display:'inline-flex', alignItems:'center' }}
             >
-              + Stwórz szablon
+              {t('btn_create_template')}
             </button>
             <button
               onClick={() => onGoToTab?.('calendar')}
               style={{ background:'#0d948820', border:'1px solid #0d9488', borderRadius:6, padding:'3px 10px', cursor:'pointer', fontSize:11, fontWeight:600, color:'#2dd4bf', display:'inline-flex', alignItems:'center' }}
             >
-              Idź do kalendarza
+              {t('btn_go_calendar')}
             </button>
           </div>
         </div>
@@ -429,13 +429,13 @@ function Summary({ onGoToTab }) {
                     <div style={{ display:'flex', alignItems:'center', gap:16 }}>
                       <div style={{ textAlign:'right' }}>
                         <div style={{ fontSize:11, color:'#6b7280' }}>{t('est_weekly_cost')}</div>
-                        <div style={{ fontSize:18, fontWeight:700, color:'#0d9488' }}>~{tpl.estimatedCost.toFixed(2)} zł</div>
+                        <div style={{ fontSize:18, fontWeight:700, color:'#0d9488' }}>~{tpl.estimatedCost.toFixed(2)} {t('currency')}</div>
                       </div>
                       <button
                         className="btn btn-danger"
                         onClick={e => { e.stopPropagation(); deleteTemplate(i); }}
                       >
-                        Usuń
+                        {t('delete')}
                       </button>
                     </div>
                   </div>

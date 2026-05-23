@@ -8,6 +8,7 @@ Kroki:
   3  match_ingredients   — rapidfuzz + DeepSeek dla niejednoznacznych
   4  build_database      — ingredient_db, unmatched, recipes z kosztem
   5  get_macros          — makroskładniki przez DeepSeek
+  6  dump_seeds          — generuje products_seed_en.json + recipes_seed_en.json do app/data/
 
 Użycie:
     python run_pipeline.py               # wszystkie kroki
@@ -43,6 +44,7 @@ STEPS = [
     (3, "match_ingredients",   PROC / "match_ingredients.py"),
     (4, "build_database",      PROC / "build_database.py"),
     (5, "get_macros",          PROC / "get_macros.py"),
+    (6, "dump_seeds",          PROC / "dump_seeds.py"),
 ]
 
 # ── Logging ───────────────────────────────────────────────────────────────────
@@ -133,9 +135,12 @@ def main():
         "shops_en.json", "shops_pl.json",
         "matches_en.json", "matches_pl.json",
         "ingredient_db_en.json", "ingredient_db_pl.json",
-        "unmatched_en.json", "unmatched_pl.json",
         "recipes_en.json", "recipes_pl.json",
         "ingredients_macros.json",
+    ]
+    seed_files = [
+        Path(__file__).parent.parent / "app" / "data" / "products_seed_en.json",
+        Path(__file__).parent.parent / "app" / "data" / "recipes_seed_en.json",
     ]
     log.info("\nPliki wynikowe:")
     import json
@@ -149,6 +154,16 @@ def main():
                 log.info(f"  ✓  {fname}")
         else:
             log.info(f"  -  {fname:<35} brak")
+    log.info("\nSeed pliki (app/data/):")
+    for p in seed_files:
+        if p.exists():
+            try:
+                count = len(json.loads(p.read_text("utf-8")))
+                log.info(f"  ✓  {p.name:<35} {count:>5} rekordów")
+            except Exception:
+                log.info(f"  ✓  {p.name}")
+        else:
+            log.info(f"  -  {p.name:<35} brak")
 
 
 if __name__ == "__main__":

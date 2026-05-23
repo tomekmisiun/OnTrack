@@ -91,12 +91,153 @@ _INGREDIENT_CANONICAL_EN: dict[str, str] = {
     "walnut":              "walnuts",
     "hazelnut":            "hazelnuts",
     "pecan":               "pecans",
-    # Owoce — liczba mnoga
+    "nuts":                "mixed nuts",     # nie Cadbury Fruit & Nut
+    # Owoce i warzywa — liczba mnoga / właściwy produkt
     "cranberry":           "cranberries",
     "blueberry":           "blueberries",
     "strawberry":          "strawberries",
     "raspberry":           "raspberries",
     "blackberry":          "blackberries",
+    "lime":                "limes",          # nie "pineapple & lime" drink
+    "lemon":               "lemons",
+    "orange zest":         "oranges",        # zest = skórka → dopasuj do owocu
+    "lemon zest":          "lemons",
+    "lime zest":           "limes",
+    "onion":               "brown onions",   # nie "cheese & onion pasty"
+    # Zioła i przyprawy — nie cukierki/gotowe dania
+    "mint":                "cut mint",       # nie "mint humbugs"
+    "jalapeño":            "green jalapeños", # nie "jalapeño fusions tuna"
+    "jalapeno":            "green jalapeños",
+    "jalapeños":           "green jalapeños",
+    "lemon pepper":        "lemon pepper seasoning niematch",  # ALDI nie ma → unmatch
+    # Warzywa — singular/plural i specyfika
+    "lentil":              "red lentils",    # nie "lentil chips"
+    "mushroom":            "mushrooms",      # nie "mushroom stir fry"
+    # Kimchi — ALDI nie ma czystego kimchi
+    "kimchi":              "kimchi jar niematch",  # → unmatch
+    # Sosy makaron — dopasuj do konkretnych słoikowych sosów, nie ready-to-cook kits
+    "pasta sauce":         "bolognese pasta sauce",
+    "tomato sauce":        "bolognese pasta sauce",
+    # Przyprawy bez odpowiednika w ALDI
+    "lemon pepper":        "lemon pepper seasoning niematch",  # → unmatch
+    "orange zest":         "oranges",
+    "lemon zest":          "lemons",
+    "lime zest":           "limes",
+    # Miód — "clear honey" lub "runny honey", nie "cereal hoops"
+    # Nabiał — bezsmakowy jogurt naturalny
+    "yogurt":              "fat free natural yogurt",
+    "plain yogurt":        "fat free natural yogurt",
+    "natural yogurt":      "fat free natural yogurt",
+    "greek yogurt":        "greek style yogurt",
+    "plain greek yogurt":  "greek style yogurt",
+    # Kokos — desiccated, nie jogurt z kokosem
+    "coconut":             "desiccated coconut",
+    # Wino do gotowania — ALDI nie scrape'uje win, unmatch
+    "white cooking wine":  "white cooking wine niematch",
+    "red cooking wine":    "red cooking wine niematch",
+    "cooking wine":        "cooking wine niematch",
+    "dry white wine":      "dry white wine niematch",
+    "dry red wine":        "dry red wine niematch",
+    # Miód — "clear honey" lub "runny honey", nie "cereal hoops"
+    "honey":               "clear honey",
+    # Brzoskwinia — ALDI ma w puszce, nie świeże
+    "peach":               "peach slices in juice",
+    # Ziemniaki — nie "dauphinoise" ready meal
+    "potato":              "potatoes",
+    "potatoes":            "potatoes",
+    # Rodzynki — nie "brioche swirls"
+    "raisin":              "raisins",
+    "raisins":             "raisins",
+    # Kiełbasa/salceson — nie gotowe danie z purée
+    "andouille sausage":   "sausages",
+    "andouille":           "sausages",
+    # Dynia — ALDI ma butternut squash, nie pestki
+    "pumpkin":             "butternut squash",
+    # Pie crust — ALDI nie ma → unmatch
+    "pie crust":           "pie crust niematch",
+    "pie shell":           "pie crust niematch",
+    # Olive oil
+    "olive oil":             "extra virgin olive oil",
+    "evoo":                  "extra virgin olive oil",
+    # Cilantro = coriander (EN/US vs UK naming)
+    "cilantro":              "cut coriander",
+    "fresh cilantro":        "cut coriander",
+    "fresh coriander":       "cut coriander",
+    # Zucchini = courgette
+    "zucchini":              "courgettes",
+    "zucchinis":             "courgettes",
+    # Parmesan — ALDI nie ma samego → feta jako substytut twardego sera
+    "parmesan":              "greek feta",
+    "parmesan cheese":       "greek feta",
+    # Feta
+    "feta":                  "greek feta",
+    "feta cheese":           "greek feta",
+    # Green onion / spring onion
+    "green onion":           "spring onion",
+    "green onions":          "spring onion",
+    "scallion":              "spring onion",
+    "scallions":             "spring onion",
+    # Turmeric
+    "turmeric":              "ground turmeric",
+    # Oregano — ALDI nie ma osobno → unmatch
+    "oregano":               "oregano niematch",
+    "dried oregano":         "oregano niematch",
+    # Almond milk, ghee, hot sauce, salsa — ALDI nie ma → unmatch
+    "almond milk":           "almond milk niematch",
+    "almond flour":          "almond flour niematch",
+    "coconut sugar":         "coconut sugar niematch",
+    "almond butter":         "almond butter niematch",
+    "ghee":                  "ghee niematch",
+    "hot sauce":             "hot sauce niematch",
+    "salsa":                 "salsa niematch",
+    "sesame oil":            "sesame oil niematch",
+    # Jasmine rice — ALDI ma ready-to-heat (nie surowy) → unmatch
+    "jasmine rice":          "jasmine rice niematch",
+    "extra virgin olive oil":"extra virgin olive oil",
+    "light olive oil":       "extra virgin olive oil",
+    # Pepper (spice) → ground black pepper
+    "pepper":                "ground black pepper",
+    "black pepper":          "ground black pepper",
+    "ground pepper":         "ground black pepper",
+    "freshly ground pepper": "ground black pepper",
+    # Bell pepper → red pepper
+    "bell pepper":           "red pepper",
+    "red bell pepper":       "red pepper",
+    "green bell pepper":     "red pepper",
+    "yellow bell pepper":    "red pepper",
+    "capsicum":              "red pepper",
+    # Water — darmowe
+    "water":                 "water",
+    "warm water":            "water",
+    "cold water":            "water",
+    # Warzywa — generyczne → konkretny produkt ALDI
+    "tomato":                "salad tomatoes",       # nie pizza
+    "tomatoes":              "salad tomatoes",
+    "vegetable":             "carrots",              # zbyt generyczne → marchew jako neutralne warzywo
+    # Fasola — ALDI nie ma white/mixed beans, najbliższy = red kidney beans in water
+    "white beans":           "red kidney beans in water",
+    "white bean":            "red kidney beans in water",
+    "cannellini beans":      "red kidney beans in water",
+    "cannellini bean":       "red kidney beans in water",
+    "navy beans":            "red kidney beans in water",
+    "great northern beans":  "red kidney beans in water",
+    "mixed beans":           "red kidney beans in water",
+    "tomato paste":          "tomatoes in tomato juice",   # ALDI nie ma paste → canned tomatoes
+    "tomato puree":          "tomatoes in tomato juice",
+    "canned tomatoes":       "tomatoes in tomato juice",
+    "crushed tomatoes":      "tomatoes in tomato juice",
+    "diced tomatoes":        "tomatoes in tomato juice",
+    # Suszone owoce — ALDI ma freeze-dried slices, nie świeże
+    "freeze dried strawberries": "strawberry slices",
+    "freeze dried strawberry":   "strawberry slices",
+    # Śmietana — nie dip z cebulką
+    "dairy free sour cream": "sour cream",
+    "vegan sour cream":    "sour cream",
+    # Chorizo wegańskie / sojowe — ALDI nie ma → unmatch
+    "soy chorizo":         "soy chorizo niematch",
+    "beyond meat spicy italian sausage": "beyond meat niematch",
+    # Sriracha — ALDI nie ma samego sosu → unmatch
+    "sriracha":            "sriracha niematch",
 }
 
 SCORE_AUTO      = 85
@@ -356,6 +497,67 @@ def _pick_cheapest(products: list[dict]) -> dict:
     return min(products, key=key)
 
 
+# ── Debug report ──────────────────────────────────────────────────────────────
+
+def _write_debug():
+    from debug_writer import write_report
+
+    matches_en = json.loads(OUT_EN.read_text("utf-8"))
+    matches_pl = json.loads(OUT_PL.read_text("utf-8"))
+    unmatched_en_raw_f = DATA / "unmatched_en_raw.json"
+    unmatched_pl_raw_f = DATA / "unmatched_pl_raw.json"
+    unmatched_en = json.loads(unmatched_en_raw_f.read_text("utf-8")) if unmatched_en_raw_f.exists() else []
+    unmatched_pl = json.loads(unmatched_pl_raw_f.read_text("utf-8")) if unmatched_pl_raw_f.exists() else []
+
+    total_en = len(matches_en) + len(unmatched_en)
+    total_pl = len(matches_pl) + len(unmatched_pl)
+
+    def match_row(m):
+        score = m.get("fuzzy_score", "?")
+        mtype = m.get("match_type", "?")
+        price = m.get("price_per_100")
+        return (f"{m['ingredient_name']:<35} → {m.get('original_name', ''):<50} "
+                f"| score={str(score):<5} | {mtype:<16} | {price if price is not None else '—'}")
+
+    sections = [
+        {
+            "title": "Statystyki dopasowania",
+            "stats": {
+                "Unikalne składniki EN":       total_en,
+                "Dopasowane EN":               len(matches_en),
+                "Niedopasowane EN":            len(unmatched_en),
+                "% dopasowania EN":            f"{len(matches_en)/max(1,total_en)*100:.1f}%",
+                "MATCH_AUTO EN":               sum(1 for m in matches_en if m.get("match_type") == "MATCH_AUTO"),
+                "MATCH_UNCERTAIN EN":          sum(1 for m in matches_en if m.get("match_type") == "MATCH_UNCERTAIN"),
+                "Unikalne składniki PL":       total_pl,
+                "Dopasowane PL":               len(matches_pl),
+                "Niedopasowane PL":            len(unmatched_pl),
+                "% dopasowania PL":            f"{len(matches_pl)/max(1,total_pl)*100:.1f}%",
+                "MATCH_AUTO PL":               sum(1 for m in matches_pl if m.get("match_type") == "MATCH_AUTO"),
+                "MATCH_UNCERTAIN PL":          sum(1 for m in matches_pl if m.get("match_type") == "MATCH_UNCERTAIN"),
+            },
+            "rows": [],
+        },
+        {
+            "title": "EN — dopasowania (ingredient_name → original_name | score | type | price_per_100)",
+            "rows": [match_row(m) for m in sorted(matches_en, key=lambda x: x["ingredient_name"])],
+        },
+        {
+            "title": "EN — niedopasowane składniki",
+            "rows": sorted(unmatched_en),
+        },
+        {
+            "title": "PL — dopasowania (ingredient_name → original_name | score | type | price_per_100)",
+            "rows": [match_row(m) for m in sorted(matches_pl, key=lambda x: x["ingredient_name"])],
+        },
+        {
+            "title": "PL — niedopasowane składniki",
+            "rows": sorted(unmatched_pl),
+        },
+    ]
+    write_report(3, "match_ingredients", sections)
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
@@ -399,6 +601,8 @@ def main():
             json.dumps(unmatched_pl, ensure_ascii=False, indent=2), "utf-8"
         )
         log.info(f"matches_pl: {len(matches_pl)} → {OUT_PL}")
+
+    _write_debug()
 
 
 if __name__ == "__main__":

@@ -3,20 +3,14 @@ import { Icon } from '@iconify/react';
 import { useToast } from '../contexts/ToastContext';
 import { useMember } from '../contexts/MemberContext';
 import { members as membersApi } from '../api';
+import { useLanguage } from '../contexts/LanguageContext';
 
-const ACTIVITY = [
-  { value: 1.2,   label: 'Siedzący (biurko, brak ćwiczeń)' },
-  { value: 1.375, label: 'Lekka aktywność (1–3x/tydzień)' },
-  { value: 1.55,  label: 'Umiarkowana (3–5x/tydzień)' },
-  { value: 1.725, label: 'Wysoka (6–7x/tydzień)' },
-  { value: 1.9,   label: 'Bardzo wysoka (sportowiec / praca fizyczna)' },
-];
-
-const GOALS = [
-  { value: 'lose',     label: 'Redukcja',      adj:  -500, proteinPerKg: 2.2, fatPct: 0.25, warn: false },
-  { value: 'maintain', label: 'Utrzymanie',     adj:     0, proteinPerKg: 1.8, fatPct: 0.27, warn: false },
-  { value: 'extreme',  label: 'Ostra redukcja', adj: -1000, proteinPerKg: 2.2, fatPct: 0.25, warn: true  },
-  { value: 'gain',     label: 'Masa',            adj:  +300, proteinPerKg: 2.0, fatPct: 0.25, warn: false },
+const ACTIVITY_VALUES = [1.2, 1.375, 1.55, 1.725, 1.9];
+const GOAL_VALUES = [
+  { value: 'lose',     adj:  -500, proteinPerKg: 2.2, fatPct: 0.25, warn: false },
+  { value: 'maintain', adj:     0, proteinPerKg: 1.8, fatPct: 0.27, warn: false },
+  { value: 'extreme',  adj: -1000, proteinPerKg: 2.2, fatPct: 0.25, warn: true  },
+  { value: 'gain',     adj:  +300, proteinPerKg: 2.0, fatPct: 0.25, warn: false },
 ];
 
 const FORM_KEY = 'macroFormState';
@@ -26,11 +20,11 @@ function loadForm() {
 }
 
 function bmi(w, h) { const hm = h / 100; return w / (hm * hm); }
-function bmiCat(b) {
-  if (b < 18.5) return { label: 'Niedowaga', color: '#3b82f6' };
-  if (b < 25)   return { label: 'Norma',     color: '#22c55e' };
-  if (b < 30)   return { label: 'Nadwaga',   color: '#eab308' };
-  return               { label: 'Otyłość',   color: '#ef4444' };
+function bmiCat(b, t) {
+  if (b < 18.5) return { label: t('macro_underweight'), color: '#3b82f6' };
+  if (b < 25)   return { label: t('macro_normal'),      color: '#22c55e' };
+  if (b < 30)   return { label: t('macro_overweight'),  color: '#eab308' };
+  return               { label: t('macro_obese'),       color: '#ef4444' };
 }
 function bmr(w, h, age, gender) {
   const base = 10 * w + 6.25 * h - 5 * age;
@@ -66,19 +60,22 @@ const row = { marginBottom: 10 };
 
 // ── BMI gauge ────────────────────────────────────────────────────────────────
 const BMI_MIN = 10, BMI_MAX = 45;
-const ZONES = [
-  { from: 10,   to: 18.5, color: '#3b82f6', label: 'Niedowaga' },
-  { from: 18.5, to: 25,   color: '#22c55e', label: 'Norma' },
-  { from: 25,   to: 30,   color: '#eab308', label: 'Nadwaga' },
-  { from: 30,   to: 45,   color: '#ef4444', label: 'Otyłość' },
-];
+const ZONE_COLORS = ['#3b82f6','#22c55e','#eab308','#ef4444'];
+const ZONE_RANGES = [[10,18.5],[18.5,25],[25,30],[30,45]];
 function bmiPos(val) {
   return Math.min(100, Math.max(0, (val - BMI_MIN) / (BMI_MAX - BMI_MIN) * 100));
 }
 
 function BmiGauge({ bmiVal }) {
+  const { t } = useLanguage();
+  const ZONES = [
+    { from: 10,   to: 18.5, color: ZONE_COLORS[0], label: t('macro_underweight') },
+    { from: 18.5, to: 25,   color: ZONE_COLORS[1], label: t('macro_normal') },
+    { from: 25,   to: 30,   color: ZONE_COLORS[2], label: t('macro_overweight') },
+    { from: 30,   to: 45,   color: ZONE_COLORS[3], label: t('macro_obese') },
+  ];
   const pos = bmiPos(bmiVal);
-  const cat = bmiCat(bmiVal);
+  const cat = bmiCat(bmiVal, t);
   return (
     <div style={{ marginTop: 12 }}>
       {/* colour bar + marker line overlay */}
@@ -122,13 +119,14 @@ function BmiGauge({ bmiVal }) {
 // ── Macro legend card ────────────────────────────────────────────────────────
 function MacroLegend({ goalOpt, weight, adjPW }) {
   const [open, setOpen] = React.useState(false);
+  const { t } = useLanguage();
   const pw = adjPW?.pw ?? weight;
   const proteinG = pw > 0 ? Math.round(pw * goalOpt.proteinPerKg) : null;
   return (
     <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8 }}>
       <button onClick={() => setOpen(o => !o)}
         style={{ width:'100%', padding:'12px 16px', background:'none', border:'none', cursor:'pointer', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
-        <span style={{ fontSize: 14, fontWeight: 700, color: '#0d9488' }}>Jak liczymy makro?</span>
+        <span style={{ fontSize: 14, fontWeight: 700, color: '#0d9488' }}>{t('macro_how_title')}</span>
         <Icon icon="heroicons:chevron-down" style={{ width:18, height:18, color:'#0d9488', transition:'transform 0.25s', transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }} />
       </button>
       {open && (
@@ -137,30 +135,30 @@ function MacroLegend({ goalOpt, weight, adjPW }) {
         {/* Obesity adjustment notice */}
         {adjPW?.adjusted && (
           <div style={{ background: '#1c1917', border: '1px solid #78350f', borderRadius: 8, padding: '10px 12px', fontSize: 12, color: '#fcd34d', lineHeight: 1.6 }}>
-            <strong>Korekta dla nadwagi / otyłości:</strong> białko liczone od masy skorygowanej{' '}
-            <strong>{adjPW.pw} kg</strong> (nie od rzeczywistej {weight} kg), żeby uniknąć zawyżonych wartości.{' '}
-            Wzór: idealna waga ({adjPW.ibw} kg) + 25% nadwyżki.
+            <strong>{t('legend_obesity_title')}</strong> {t('legend_obesity_body1')}{' '}
+            <strong>{adjPW.pw} kg</strong> {t('legend_obesity_body2')(weight)}.{' '}
+            {t('legend_obesity_formula')(adjPW.ibw)}
           </div>
         )}
 
         <div style={{ display: 'flex', gap: 10 }}>
           <span style={{ width: 10, height: 10, borderRadius: 2, background: '#0d9488', flexShrink: 0, marginTop: 3 }} />
           <div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: '#e2e8f0', marginBottom: 3 }}>Białko</div>
+            <div style={{ fontSize: 13, fontWeight: 700, color: '#e2e8f0', marginBottom: 3 }}>{t('macro_protein')}</div>
             <div style={{ fontSize: 12, color: '#9ca3af', lineHeight: 1.6 }}>
-              Ilość białka zależy od celu:{' '}
+              {t('legend_protein_by_goal')}{' '}
               <span style={{ color: '#2dd4bf' }}>
-                {goalOpt.value === 'lose' && '2,2 g × kg (redukcja - ochrona mięśni)'}
-                {goalOpt.value === 'maintain' && '1,8 g × kg (utrzymanie)'}
-                {goalOpt.value === 'gain' && '2,0 g × kg (masa - budowa mięśni)'}
-                {goalOpt.value === 'extreme' && '2,2 g × kg (ostra redukcja - ochrona mięśni)'}
+                {goalOpt.value === 'lose' && t('legend_protein_lose')}
+                {goalOpt.value === 'maintain' && t('legend_protein_maintain')}
+                {goalOpt.value === 'gain' && t('legend_protein_gain')}
+                {goalOpt.value === 'extreme' && t('legend_protein_extreme')}
               </span>.
               {proteinG && (
                 <span style={{ color: '#6b7280' }}>
-                  {' '}Podstawa obliczeń: <strong style={{ color: '#2dd4bf' }}>{pw} kg</strong> → <strong style={{ color: '#2dd4bf' }}>{proteinG} g</strong>.
+                  {' '}{t('legend_protein_basis')}: <strong style={{ color: '#2dd4bf' }}>{pw} kg</strong> → <strong style={{ color: '#2dd4bf' }}>{proteinG} g</strong>.
                 </span>
               )}
-              {' '}1 g białka = 4 kcal.
+              {' '}{t('legend_1g_protein')}
             </div>
           </div>
         </div>
@@ -168,11 +166,11 @@ function MacroLegend({ goalOpt, weight, adjPW }) {
         <div style={{ display: 'flex', gap: 10 }}>
           <span style={{ width: 10, height: 10, borderRadius: 2, background: '#f59e0b', flexShrink: 0, marginTop: 3 }} />
           <div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: '#e2e8f0', marginBottom: 3 }}>Tłuszcze</div>
+            <div style={{ fontSize: 13, fontWeight: 700, color: '#e2e8f0', marginBottom: 3 }}>{t('macro_fat')}</div>
             <div style={{ fontSize: 12, color: '#9ca3af', lineHeight: 1.6 }}>
-              Stały udział{' '}
-              <span style={{ color: '#f59e0b' }}>{Math.round(goalOpt.fatPct * 100)}% kalorii docelowych</span> podzielony przez 9 kcal/g.
-              Tłuszcze są niezbędne dla hormonów i wchłaniania witamin - poniżej 20% nie jest zalecane.
+              {t('legend_fat_fixed')}{' '}
+              <span style={{ color: '#f59e0b' }}>{Math.round(goalOpt.fatPct * 100)}% {t('legend_fat_of_kcal')}</span> {t('legend_fat_div9')}.
+              {' '}{t('legend_fat_note')}
             </div>
           </div>
         </div>
@@ -180,18 +178,18 @@ function MacroLegend({ goalOpt, weight, adjPW }) {
         <div style={{ display: 'flex', gap: 10 }}>
           <span style={{ width: 10, height: 10, borderRadius: 2, background: '#6366f1', flexShrink: 0, marginTop: 3 }} />
           <div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: '#e2e8f0', marginBottom: 3 }}>Węglowodany</div>
+            <div style={{ fontSize: 13, fontWeight: 700, color: '#e2e8f0', marginBottom: 3 }}>{t('macro_carbs')}</div>
             <div style={{ fontSize: 12, color: '#9ca3af', lineHeight: 1.6 }}>
-              Reszta kalorii po odjęciu białka i tłuszczów, podzielona przez 4 kcal/g.
-              Wzór: <span style={{ color: '#6366f1' }}>(cel kcal − białko×4 − tłuszcz×9) ÷ 4</span>.
+              {t('legend_carbs_desc')}
+              {' '}{t('legend_formula')}: <span style={{ color: '#6366f1' }}>{t('legend_carbs_formula')}</span>.
             </div>
           </div>
         </div>
 
         <div style={{ borderTop: '1px solid #374151', paddingTop: 12, fontSize: 11, color: '#9ca3af', lineHeight: 1.6 }}>
-          <strong style={{ color: '#e2e8f0' }}>BMR</strong> (podstawowa przemiana materii) - Mifflin-St Jeor:{' '}
-          <span style={{ color: '#9ca3af' }}>10×waga + 6,25×wzrost − 5×wiek + 5 (M) / −161 (K)</span>.{' '}
-          <strong style={{ color: '#e2e8f0' }}>TDEE</strong> = BMR × współczynnik aktywności.
+          <strong style={{ color: '#e2e8f0' }}>BMR</strong> {t('legend_bmr_desc')}{' '}
+          <span style={{ color: '#9ca3af' }}>10×{t('legend_bmr_formula')}</span>.{' '}
+          <strong style={{ color: '#e2e8f0' }}>TDEE</strong> = BMR × {t('legend_tdee_desc')}.
         </div>
       </div>
       )}
@@ -200,6 +198,7 @@ function MacroLegend({ goalOpt, weight, adjPW }) {
 }
 
 function MacroBar({ kcal, protein, fat, carbs }) {
+  const { t } = useLanguage();
   const proteinKcal = protein * 4, fatKcal = fat * 9, carbsKcal = carbs * 4;
   const total = proteinKcal + fatKcal + carbsKcal || 1;
   return (
@@ -210,7 +209,7 @@ function MacroBar({ kcal, protein, fat, carbs }) {
         <div style={{ width: `${(carbsKcal/total)*100}%`, background: '#6366f1' }} />
       </div>
       <div style={{ display: 'flex', gap: 10, marginTop: 4 }}>
-        {[['#0d9488','Białko'],['#f59e0b','Tłuszcz'],['#6366f1','Węgle']].map(([c,lbl]) => (
+        {[['#0d9488',t('macro_protein')],['#f59e0b',t('macro_fat')],['#6366f1',t('macro_carbs')]].map(([c,lbl]) => (
           <span key={lbl} style={{ display:'flex', alignItems:'center', gap:3, fontSize:10, color:'#9ca3af' }}>
             <span style={{ width:8, height:8, borderRadius:2, background:c, display:'inline-block' }} />{lbl}
           </span>
@@ -239,6 +238,21 @@ function MacroRow({ label: lbl, value, unit, kcalVal, totalKcal, color }) {
 export default function MacroCalculator() {
   const { showSuccess } = useToast();
   const { activeMember, reload: reloadMembers } = useMember();
+  const { t } = useLanguage();
+
+  const ACTIVITY = [
+    { value: 1.2,   label: t('macro_act_sedentary') },
+    { value: 1.375, label: t('macro_act_light') },
+    { value: 1.55,  label: t('macro_act_moderate') },
+    { value: 1.725, label: t('macro_act_active') },
+    { value: 1.9,   label: t('macro_act_very_active') },
+  ];
+  const GOALS = [
+    { value: 'lose',     label: t('macro_cut'),       adj:  -500, proteinPerKg: 2.2, fatPct: 0.25, warn: false },
+    { value: 'maintain', label: t('macro_maintain'),  adj:     0, proteinPerKg: 1.8, fatPct: 0.27, warn: false },
+    { value: 'extreme',  label: t('macro_aggr_cut'),  adj: -1000, proteinPerKg: 2.2, fatPct: 0.25, warn: true  },
+    { value: 'gain',     label: t('macro_bulk'),       adj:  +300, proteinPerKg: 2.0, fatPct: 0.25, warn: false },
+  ];
 
   // Init form from active member profile, fallback to localStorage
   const saved = activeMember
@@ -297,7 +311,7 @@ export default function MacroCalculator() {
     showSuccess('Cele makro zapisane! Kolory pojawią się w kalendarzu.');
   }
 
-  const bmiInfo = bmiVal ? bmiCat(bmiVal) : null;
+  const bmiInfo = bmiVal ? bmiCat(bmiVal, t) : null;
 
   return (
     <div style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -307,12 +321,12 @@ export default function MacroCalculator() {
 
         {/* Karta 1: Twoje dane */}
         <div className="card" style={{ padding: 14 }}>
-          <h2 style={{ margin: '0 0 12px', fontSize: 15, color: '#f1f5f9' }}>Twoje dane</h2>
+          <h2 style={{ margin: '0 0 12px', fontSize: 15, color: '#f1f5f9' }}>{t('macro_your_data')}</h2>
 
           <div style={row}>
-            <span style={labelSt}>Płeć</span>
+            <span style={labelSt}>{t('macro_gender')}</span>
             <div style={{ display: 'flex', gap: 6 }}>
-              {[['m','Mężczyzna'],['f','Kobieta']].map(([v,l]) => (
+              {[['m', t('macro_male')],['f', t('macro_female')]].map(([v,l]) => (
                 <button key={v} onClick={() => setGender(v)}
                   style={{ flex:1, padding:'6px 0', borderRadius:6, cursor:'pointer', fontSize:12, fontWeight:600, border:'1px solid #374151', transition:'all 0.15s',
                     background: gender===v ? '#1e3a3a' : 'transparent', color: gender===v ? '#2dd4bf' : '#6b7280' }}>{l}</button>
@@ -322,27 +336,27 @@ export default function MacroCalculator() {
 
           <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:8, marginBottom:10 }}>
             <div>
-              <label style={labelSt}>Wiek (lata)</label>
+              <label style={labelSt}>{t('macro_age')}</label>
               <input type="number" className="no-spin" style={inp} value={age} onChange={e=>{const v=e.target.value;if(v==='')return setAge('');const n=parseFloat(v);if(!isNaN(n))setAge(String(Math.min(99,Math.max(1,n))));}} placeholder="np. 28" min={1} max={99} />
             </div>
             <div>
-              <label style={labelSt}>Masa ciała (kg)</label>
+              <label style={labelSt}>{t('macro_weight')}</label>
               <input type="number" className="no-spin" style={inp} value={weight} onChange={e=>{const v=e.target.value;if(v==='')return setWeight('');const n=parseFloat(v);if(!isNaN(n))setWeight(String(Math.min(500,Math.max(1,n))));}} placeholder="np. 75" min={1} max={500} />
             </div>
           </div>
 
           <div style={row}>
-            <label style={labelSt}>Wzrost (cm)</label>
+            <label style={labelSt}>{t('macro_height')}</label>
             <input type="number" className="no-spin" style={inp} value={height} onChange={e=>{const v=e.target.value;if(v==='')return setHeight('');const n=parseFloat(v);if(!isNaN(n))setHeight(String(Math.min(300,Math.max(1,n))));}} placeholder="np. 178" min={1} max={300} />
           </div>
           <div style={row}>
-            <label style={labelSt}>Poziom aktywności</label>
+            <label style={labelSt}>{t('macro_activity')}</label>
             <select style={sel} value={activity} onChange={e=>setActivity(e.target.value)}>
               {ACTIVITY.map(a => <option key={a.value} value={a.value}>{a.label}</option>)}
             </select>
           </div>
           <div style={{ ...row, marginBottom: 0 }}>
-            <span style={labelSt}>Cel</span>
+            <span style={labelSt}>{t('macro_goal')}</span>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
               {GOALS.map(g => {
                 const isActive = goal === g.value;
@@ -356,7 +370,7 @@ export default function MacroCalculator() {
                       background: isActive ? activeBg : 'transparent',
                       color: isActive ? activeFg : g.warn ? '#f87171' : '#6b7280' }}>
                     {g.label}
-                    {g.warn && <div style={{ fontSize:9, fontWeight:400, marginTop:1, opacity:0.8 }}>(niezalecane)</div>}
+                    {g.warn && <div style={{ fontSize:9, fontWeight:400, marginTop:1, opacity:0.8 }}>{t('macro_aggr_not_rec')}</div>}
                   </button>
                 );
               })}
@@ -368,29 +382,29 @@ export default function MacroCalculator() {
               background: macros ? '#1e3a3a' : 'transparent',
               color: macros ? '#2dd4bf' : '#4b5563',
               fontSize:13, fontWeight:700, cursor: macros ? 'pointer' : 'default' }}>
-            Zapisz jako cel i pokaż w kalendarzu
+            {t('macro_save_goal')}
           </button>
         </div>
 
         {/* Karta 2: Cel dzienny makro */}
         <div className="card" style={{ padding: 14, display:'flex', flexDirection:'column' }}>
-          <h2 style={{ margin:'0 0 10px', fontSize:15, color:'#f1f5f9' }}>Cel dzienny makro</h2>
+          <h2 style={{ margin:'0 0 10px', fontSize:15, color:'#f1f5f9' }}>{t('macro_daily_goal')}</h2>
           {macros ? (
             <>
               <div style={{ fontSize:28, fontWeight:800, color:'#2dd4bf', marginBottom:4 }}>
-                {macros.kcal} <span style={{ fontSize:13, color:'#6b7280', fontWeight:400 }}>kcal/dzień</span>
+                {macros.kcal} <span style={{ fontSize:13, color:'#6b7280', fontWeight:400 }}>{t('macro_kcal_day')}</span>
               </div>
               <MacroBar {...macros} />
               <div style={{ marginTop:10 }}>
-                <MacroRow label="Białko"      value={macros.protein} unit="g" kcalVal={macros.protein*4} totalKcal={macros.kcal} color="#0d9488" />
-                <MacroRow label="Tłuszcze"    value={macros.fat}     unit="g" kcalVal={macros.fat*9}     totalKcal={macros.kcal} color="#f59e0b" />
-                <MacroRow label="Węglowodany" value={macros.carbs}   unit="g" kcalVal={macros.carbs*4}   totalKcal={macros.kcal} color="#6366f1" />
+                <MacroRow label={t('macro_protein')} value={macros.protein} unit="g" kcalVal={macros.protein*4} totalKcal={macros.kcal} color="#0d9488" />
+                <MacroRow label={t('macro_fat')}     value={macros.fat}     unit="g" kcalVal={macros.fat*9}     totalKcal={macros.kcal} color="#f59e0b" />
+                <MacroRow label={t('macro_carbs')}   value={macros.carbs}   unit="g" kcalVal={macros.carbs*4}   totalKcal={macros.kcal} color="#6366f1" />
               </div>
               <div style={{ marginTop:'auto', paddingTop:14, display:'flex', alignItems:'baseline', gap:5 }}>
                 {goalOpt.adj === 0 ? (
                   <>
-                    <span style={{ fontSize:20, fontWeight:800, color:'#9ca3af' }}>Utrzymanie</span>
-                    <span style={{ fontSize:13, color:'#6b7280', marginLeft:4 }}>spożywaj TDEE</span>
+                    <span style={{ fontSize:20, fontWeight:800, color:'#9ca3af' }}>{t('macro_maintain')}</span>
+                    <span style={{ fontSize:13, color:'#6b7280', marginLeft:4 }}>TDEE</span>
                   </>
                 ) : (
                   <>
@@ -398,7 +412,7 @@ export default function MacroCalculator() {
                     <span style={{ fontSize:28, fontWeight:800, color: goalOpt.adj < 0 ? '#f87171' : '#4ade80' }}>
                       {goalOpt.adj > 0 ? '+' : ''}{goalOpt.adj}
                     </span>
-                    <span style={{ fontSize:13, color:'#6b7280' }}>kcal / dzień</span>
+                    <span style={{ fontSize:13, color:'#6b7280' }}>{t('macro_kcal_day')}</span>
                   </>
                 )}
               </div>
@@ -411,15 +425,15 @@ export default function MacroCalculator() {
           {activeMember?.macro_goals && (
             <div style={{ marginTop:'auto', paddingTop:12, borderTop:'1px solid #374151' }}>
               <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom:8 }}>
-                <div style={{ fontSize:10, color:'#0d9488', fontWeight:600, letterSpacing:'0.05em' }}>AKTYWNY CEL W KALENDARZU</div>
-                {activeMember.macro_goals.goalLabel && (
+                <div style={{ fontSize:10, color:'#0d9488', fontWeight:600, letterSpacing:'0.05em' }}>{t('macro_active_goal')}</div>
+                {activeMember.goal && (
                   <span style={{ fontSize:10, fontWeight:700, color:'#2dd4bf', background:'#0d948822', borderRadius:5, padding:'2px 7px' }}>
-                    {activeMember.macro_goals.goalLabel}
+                    {GOALS.find(g => g.value === activeMember.goal)?.label || activeMember.macro_goals.goalLabel}
                   </span>
                 )}
               </div>
               <div style={{ display:'flex', gap:14, flexWrap:'wrap' }}>
-                {[['Kcal', activeMember.macro_goals.kcal, '#2dd4bf'],['Białko',`${activeMember.macro_goals.protein}g`,'#0d9488'],['Tłuszcze',`${activeMember.macro_goals.fat}g`,'#f59e0b'],['Węgle',`${activeMember.macro_goals.carbs}g`,'#6366f1']].map(([lbl,val,color]) => (
+                {[['Kcal', activeMember.macro_goals.kcal, '#2dd4bf'],[t('macro_p'),`${activeMember.macro_goals.protein}g`,'#0d9488'],[t('macro_f'),`${activeMember.macro_goals.fat}g`,'#f59e0b'],[t('macro_c'),`${activeMember.macro_goals.carbs}g`,'#6366f1']].map(([lbl,val,color]) => (
                   <div key={lbl}>
                     <div style={{ fontSize:10, color:'#6b7280' }}>{lbl}</div>
                     <div style={{ fontSize:14, fontWeight:700, color }}>{val}</div>
@@ -439,7 +453,7 @@ export default function MacroCalculator() {
                 <span style={{ fontSize:32, fontWeight:800, color:bmiInfo.color, lineHeight:1 }}>{bmiVal.toFixed(1)}</span>
                 <div>
                   <span style={{ display:'inline-block', background:bmiInfo.color+'22', color:bmiInfo.color, borderRadius:6, padding:'2px 8px', fontSize:12, fontWeight:700 }}>{bmiInfo.label}</span>
-                  <div style={{ fontSize:10, color:'#6b7280', marginTop:2 }}>Norma: 18,5 – 24,9</div>
+                  <div style={{ fontSize:10, color:'#6b7280', marginTop:2 }}>{t('macro_bmi_normal')} 18,5 – 24,9</div>
                 </div>
               </div>
               <BmiGauge bmiVal={bmiVal} />
@@ -450,22 +464,22 @@ export default function MacroCalculator() {
 
           <div style={{ borderTop:'1px solid #374151' }} />
 
-          <div style={{ fontSize:11, color:'#6b7280', fontWeight:600, textTransform:'uppercase', letterSpacing:'0.05em' }}>Zapotrzebowanie kaloryczne</div>
+          <div style={{ fontSize:11, color:'#6b7280', fontWeight:600, textTransform:'uppercase', letterSpacing:'0.05em' }}>{t('macro_caloric_needs')}</div>
           {bmrVal ? (
             <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
               {[
-                { label: 'BMR', sub: 'podstawowe',     val: bmrVal,  color: '#e2e8f0' },
-                { label: 'TDEE', sub: 'z aktywnością', val: tdeeVal, color: '#2dd4bf' },
+                { label: 'BMR', sub: t('macro_bmr_label'),  val: bmrVal,  color: '#e2e8f0' },
+                { label: 'TDEE', sub: t('macro_tdee_label'), val: tdeeVal, color: '#2dd4bf' },
               ].map(({ label, sub, val, color }) => (
                 <div key={label} style={{ display:'flex', alignItems:'baseline', gap:5 }}>
                   <span style={{ fontSize:12, fontWeight:700, color:'#9ca3af', width:36 }}>{label}</span>
                   <span style={{ fontSize:20, fontWeight:700, color }}>{val}</span>
-                  <span style={{ fontSize:11, color:'#6b7280' }}>kcal / {sub}</span>
+                  <span style={{ fontSize:11, color:'#6b7280' }}>{sub}</span>
                 </div>
               ))}
               {bmrVal && (
                 <div style={{ background:'#2d1515', border:'1px solid #7f1d1d', borderRadius:6, padding:'6px 8px', fontSize:11, color:'#fca5a5', lineHeight:1.5, marginTop:2 }}>
-                  ⚠ Nie schodź poniżej BMR ({bmrVal} kcal)
+                  ⚠ {t('macro_bmr_warning')(bmrVal)}
                 </div>
               )}
             </div>
@@ -481,8 +495,8 @@ export default function MacroCalculator() {
       {/* ── ROW 3: Cytaty — pełna szerokość ── */}
       <div className="card" style={{ padding: '12px 16px', display: 'flex', gap: 16 }}>
         {[
-          { quote: 'Perfekcjonizm jest wrogiem postępu.', author: 'Winston Churchill' },
-          { quote: 'Jesteśmy tym, co regularnie robimy. Doskonałość nie jest więc czynem, lecz nawykiem.', author: 'Arystoteles' },
+          { quote: t('quote_1'), author: t('quote_1_author') },
+          { quote: t('quote_2'), author: t('quote_2_author') },
         ].map(({ quote, author }) => (
           <div key={author} style={{ flex: 1, borderLeft: '3px solid #0d9488', paddingLeft: 12 }}>
             <div style={{ fontSize: 13, color: '#e2e8f0', lineHeight: 1.6, fontStyle: 'italic' }}>„{quote}"</div>

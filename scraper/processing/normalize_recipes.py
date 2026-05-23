@@ -506,6 +506,47 @@ def main():
     if skipped:
         log.warning(f"{skipped} przepisów nie udało się znormalizować (None)")
 
+    _write_debug(all_recipes, recipes, final)
+
+
+def _write_debug(all_input: list, after_filter: list, normalized: list):
+    from debug_writer import write_report
+
+    roundups = [r for r in all_input if r not in after_filter]
+
+    # Sekcja 1: statystyki
+    stats_rows = [
+        f"Przepisy wejściowe (mealpreponfleek):   {len(all_input)}",
+        f"Odfiltrowane roundup-articles:          {len(roundups)}",
+        f"Po filtrowaniu:                         {len(after_filter)}",
+        f"Znormalizowane przez DeepSeek:          {len(normalized)}",
+        f"Nieudane (błąd API / None):             {len(after_filter) - len(normalized)}",
+    ]
+
+    # Sekcja 2: odfiltrowane roundupy
+    roundup_rows = [r.get("name", "?") for r in roundups]
+
+    # Sekcja 3: każdy znormalizowany przepis — składniki EN
+    recipe_rows = []
+    for r in normalized:
+        recipe_rows.append(f"[{r.get('name_en')}] / [{r.get('name_pl')}]  (servings={r.get('servings','?')})")
+        for ing in r.get("ingredients_en", []):
+            amt  = ing.get("amount")
+            unit = ing.get("unit") or ""
+            recipe_rows.append(f"    EN  {ing['name']:<35} {str(amt)+' '+unit if amt else '(do smaku)'}")
+        for ing in r.get("ingredients_pl", []):
+            amt  = ing.get("amount")
+            unit = ing.get("unit") or ""
+            recipe_rows.append(f"    PL  {ing['name']:<35} {str(amt)+' '+unit if amt else '(do smaku)'}")
+        recipe_rows.append("")
+
+    write_report(1, "normalize_recipes", [
+        {"title": "STATYSTYKI",                     "rows": stats_rows},
+        {"title": f"ODFILTROWANE ROUNDUPY ({len(roundups)})",  "rows": roundup_rows},
+        {"title": f"ZNORMALIZOWANE PRZEPISY ({len(normalized)}) — składniki EN+PL z ilościami",
+         "rows": recipe_rows},
+    ])
+
 
 if __name__ == "__main__":
     main()

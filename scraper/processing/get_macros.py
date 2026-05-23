@@ -135,6 +135,39 @@ def fetch_macros_pl(client, names_pl: list[str]) -> list[dict]:
     return []
 
 
+def _write_debug(names_en, final, missing):
+    from debug_writer import write_report
+
+    def macro_row(m):
+        return (
+            f"{m.get('name_en', ''):<30} | PL: {m.get('name_pl', ''):<30} | "
+            f"kcal={str(m.get('kcal', '?')):<6} prot={str(m.get('protein_g', '?')):<5} "
+            f"fat={str(m.get('fat_g', '?')):<5} carb={m.get('carbs_g', '?')}"
+        )
+
+    sections = [
+        {
+            "title": "Statystyki makroskładników",
+            "stats": {
+                "Składniki EN (wejście)":   len(names_en),
+                "Makro pobrane łącznie":    len(final),
+                "Brak makro EN":            len(missing),
+            },
+            "rows": [],
+        },
+        {
+            "title": "Makroskładniki (name_en | name_pl | kcal | protein | fat | carbs)",
+            "rows": [macro_row(m) for m in sorted(final, key=lambda x: (x.get("name_en") or "").lower())],
+        },
+    ]
+    if missing:
+        sections.append({
+            "title": "Brak makro dla składników EN",
+            "rows": sorted(missing),
+        })
+    write_report(5, "get_macros", sections)
+
+
 def main():
     if OUTPUT_FILE.exists():
         log.info(f"Plik {OUTPUT_FILE.name} już istnieje. Pomijam krok 5.")
@@ -200,6 +233,8 @@ def main():
     missing = set(names_en) - set(done)
     if missing:
         log.warning(f"Brak makro EN dla {len(missing)} składników: {sorted(missing)[:10]}...")
+
+    _write_debug(names_en, final, missing)
 
 
 if __name__ == "__main__":

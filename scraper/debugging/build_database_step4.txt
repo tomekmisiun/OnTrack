@@ -1,0 +1,2262 @@
+# build_database.py — krok 4: co zostało zrobione
+#
+# Zadanie: wziąć matches_en.json (ingredient → sklep) + recipes_normalized.json
+# i złożyć z tego ingredient_db_en.json + recipes_en.json
+#
+# Reguła akceptacji przepisu:
+#   KAŻDY składnik musi być w ingredient_db (matches_en).
+#   Jeden brakujący → ODRZUĆ cały przepis.
+#
+
+======================================================================
+STATYSTYKI
+======================================================================
+  Przepisy po normalize_recipes:    615
+  Zaakceptowane (recipes_en.json):   41  (6.7%)
+  Odrzucone:                        574  (93.3%)
+
+  ingredient_db_en.json:            356 składników
+  Składników bez ceny:              136 (dopasowane ale brak gramatury/pcs)
+
+  Przepisy z pełnym kosztem:          0
+  Przepisy bez kosztu (pcs/brak):    41
+
+======================================================================
+TRZY NAZWY JEDNEGO PRODUKTU — przykłady z ingredient_db_en.json
+======================================================================
+  ingredient_name                generic_name                        original_name                                 price/100g
+  -----------------------------------------------------------------------------------------------------------------------------
+  Dijon mustard                  dijon mustard                       Dijon Mustard                                  0.245 GBP
+  almond                         whole almonds                       Whole Almonds                                  0.845 GBP
+  andouille sausage              sausages                            Quorn Sausages                                         —
+  apple                          apple                               Large Bramley Apple                                    —
+  apple cider                    apple cider vinegar                 Organic Apple Cider Vinegar                            —
+  apple cider vinegar            apple cider vinegar                 Organic Apple Cider Vinegar                            —
+  applesauce                     apple sauce                         Bramley Apple Sauce                                    —
+  avocado                        avocado                             Avocado                                        0.290 GBP
+  avocado oil                    avocado                             Avocado                                        0.290 GBP
+  avocado oil spray              avocado                             Avocado                                        0.290 GBP
+  baby corn                      corn                                Baby Corn                                      0.752 GBP
+  baby red potatoes              red potatoes                        British Red Potatoes                           0.078 GBP
+  baby spinach                   spinach                             British Baby Spinach                           0.353 GBP
+  bacon                          bacon lardons                       Smoked Bacon Lardons                           0.895 GBP
+  baking powder                  baking powder                       Baking Powder                                  0.325 GBP
+  balsamic vinegar               balsamic vinegar of modena          Balsamic Vinegar of Modena                             —
+  banana                         banana                              Banana                                                 —
+  basil                          basil                               Basil                                                  —
+  basmati rice                   basmati rice                        Basmati Rice                                   0.179 GBP
+  bay leaf                       bay leaf                            Bay Leaf                                               —
+  bbq sauce                      bbq sauce                           BBQ Sauce                                              —
+  beef                           beef steak                          100% British Beef Wagyu Fillet Steak           6.465 GBP
+  beef broth                     chicken stock cubes                 Chicken Stock Cubes                                    —
+  beef chuck                     beef                                British Diced Beef                             1.084 GBP
+  beef ribs                      beef                                British Diced Beef                             1.084 GBP
+  beef sirloin                   beef sirloin steak                  100% British Beef Wagyu Sirloin Steak          3.960 GBP
+  beef steak                     beef steak                          100% British Beef Wagyu Fillet Steak           6.465 GBP
+  beef stew meat                 beef steak                          100% British Beef Wagyu Fillet Steak           6.465 GBP
+  beef stock                     chicken stock cubes                 Chicken Stock Cubes                                    —
+  bell pepper                    red pepper                          Red Pepper                                             —
+  berries                        blueberries                         Blueberries                                    0.793 GBP
+  black beans                    black beans/green lentils           Tinned Black Beans/Green Lentils               0.123 GBP
+  black olive                    black olives with feta              Pitted Green & Black Olives With Feta                  —
+  black olives                   black olives with feta              Pitted Green & Black Olives With Feta                  —
+  black pepper                   ground black pepper                 Ground Black Pepper                            1.590 GBP
+  black sesame seeds             sesame seeds                        Sesame Seeds                                           —
+  blackberries                   blackberries                        Wonky Blackberries                             1.260 GBP
+  blackberry                     blackberries                        Wonky Blackberries                             1.260 GBP
+  blueberries                    blueberries                         Blueberries                                    0.793 GBP
+  blueberry                      blueberries                         Blueberries                                    0.793 GBP
+
+======================================================================
+ZAAKCEPTOWANE PRZEPISY (41) — wszystkie składniki w ingredient_db
+======================================================================
+
+  [~] Air Fryer Rosemary Sweet Potato Wedges with Garlic Aioli  →  koszt niekompletny
+        [✓] sweet potato                             113.5 g  →  brak ceny
+        [✓] olive oil                                3.75 ml  →  brak ceny
+        [✓] rosemary                                     1 g  →  2.500
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] garlic powder                                1 g  →  brak ceny
+        [✓] mayonnaise                                  20 g  →  brak ceny
+        [✓] garlic                                       5 g  →  brak ceny
+        [✓] lemon juice                              3.75 ml  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] pepper                                       1 g  →  1.590
+
+  [~] Air-Fried Chickpeas  →  koszt niekompletny
+        [✓] chickpeas                                  100 g  →  brak ceny
+        [✓] olive oil                                 7.5 ml  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] paprika                                      1 g  →  1.725
+        [✓] pepper                                       1 g  →  1.590
+
+  [~] Avocado And Mango Sushi Roll  →  koszt niekompletny
+        [✓] avocado                                     40 g  →  0.290
+        [✓] cucumber                                    50 g  →  brak ceny
+        [✓] cauliflower                                100 g  →  brak ceny
+        [✓] purple cabbage                             100 g  →  brak ceny
+        [✓] mango                                       60 g  →  0.871
+        [✓] carrot                                      16 g  →  0.300
+
+  [~] Bacon Egg Bites  →  koszt niekompletny
+        [✓] egg                                         50 g  →  0.315
+        [✓] bacon                                       19 g  →  0.895
+        [✓] cheese                                      39 g  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] pepper                                       1 g  →  1.590
+        [✓] italian seasoning                            1 g  →  brak ceny
+        [✓] red pepper flakes                            1 g  →  brak ceny
+
+  [~] Baked Breakfast Quinoa And Spinach Bites  →  koszt niekompletny
+        [✓] quinoa                                      15 g  →  0.396
+        [✓] egg                                         15 g  →  0.315
+        [✓] mozzarella                                  20 g  →  0.552
+        [✓] spinach                                     20 g  →  0.353
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] pepper                                       1 g  →  1.590
+        [✓] garlic powder                                1 g  →  brak ceny
+        [✓] italian seasoning                            1 g  →  brak ceny
+
+  [~] Baked Salmon with Blackberry Quinoa Salad  →  koszt niekompletny
+        [✓] salmon                                     113 g  →  1.140
+        [✓] quinoa                                     185 g  →  0.396
+        [✓] blackberry                                  19 g  →  1.260
+        [✓] red cabbage                                 10 g  →  brak ceny
+        [✓] celery                                      40 g  →  brak ceny
+        [✓] avocado oil                                15 ml  →  0.290
+        [✓] dijon mustard                               15 g  →  0.245
+        [✓] honey                                      15 ml  →  0.218
+        [✓] coconut aminos                             15 ml  →  0.188
+        [✓] garlic powder                                1 g  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] black pepper                                 1 g  →  1.590
+
+  [~] Bbq Pulled Chicken Stuffed Sweet Potatoes  →  koszt niekompletny
+        [✓] chicken breast                             227 g  →  0.425
+        [✓] bbq sauce                                  60 ml  →  brak ceny
+        [✓] sweet potato                               200 g  →  brak ceny
+        [✓] bbq sauce                                  20 ml  →  brak ceny
+        [✓] coleslaw mix                               250 g  →  brak ceny
+        [✓] mayonnaise                                  11 g  →  brak ceny
+        [✓] dijon mustard                                1 g  →  0.245
+        [✓] lemon juice                                 8 ml  →  brak ceny
+        [✓] honey                                        4 g  →  0.218
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] pepper                                       1 g  →  1.590
+
+  [~] Beef Patties-Sweet Corn Rice and Sautéed Veggies  →  koszt niekompletny
+        [✓] ground beef                                113 g  →  1.084
+        [✓] onion                                       25 g  →  0.080
+        [✓] garlic                                       5 g  →  brak ceny
+        [✓] parsley                                      1 g  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] cumin                                        1 g  →  brak ceny
+        [✓] brown rice                                  90 g  →  0.139
+        [✓] sweet corn                                  15 g  →  0.752
+        [✓] mushrooms                                   19 g  →  0.198
+        [✓] spinach                                     30 g  →  0.353
+        [✓] cherry tomatoes                             30 g  →  0.248
+        [✓] coconut oil                            None None  →  0.188
+
+  [~] Breakfast Beef Sausage  →  koszt niekompletny
+        [✓] ground beef                              113.5 g  →  1.084
+        [✓] maple syrup                              3.75 ml  →  brak ceny
+        [?] seasoning                              None None  →  brak ceny
+        [✓] black pepper                                 1 g  →  1.590
+        [✓] sweet potato                               200 g  →  brak ceny
+        [✓] olive oil                                 7.5 ml  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] garlic powder                                1 g  →  brak ceny
+        [✓] kiwi                                     0.5 pcs  →  brak ceny
+        [✓] raspberries                                 30 g  →  1.196
+        [✓] blueberries                                 30 g  →  0.793
+        [✓] spinach                                     30 g  →  0.353
+
+  [~] Breakfast Bowls  →  koszt niekompletny
+        [✓] egg                                        180 g  →  0.315
+        [✓] red potato                                 114 g  →  0.078
+        [✓] avocado                                     50 g  →  0.290
+        [✓] cheese                                      30 g  →  brak ceny
+        [✓] onion                                       13 g  →  0.080
+
+  [~] Breakfast Pro Power Bowl  →  koszt niekompletny
+        [✓] egg                                        120 g  →  0.315
+        [✓] quinoa                                     157 g  →  0.396
+        [✓] lentil                                      83 g  →  0.198
+        [✓] red cabbage                                 10 g  →  brak ceny
+        [✓] carrot                                      27 g  →  0.300
+        [✓] avocado                                     67 g  →  0.290
+        [✓] garlic powder                                1 g  →  brak ceny
+        [✓] cumin                                        1 g  →  brak ceny
+
+  [~] Broccoli Cheddar Stuffed Chicken Breast & Rice Pilaf  →  koszt niekompletny
+        [✓] chicken breast                             180 g  →  0.425
+        [✓] paprika                                      1 g  →  1.725
+        [✓] garlic powder                                1 g  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] black pepper                                 1 g  →  1.590
+        [✓] broccoli                                    30 g  →  0.219
+        [✓] cream cheese                                21 g  →  1.460
+        [✓] cheese                                      40 g  →  brak ceny
+        [✓] thyme                                        1 g  →  4.333
+        [✓] olive oil                                   8 ml  →  brak ceny
+        [✓] basmati rice                                35 g  →  0.179
+        [✓] bell pepper                                 13 g  →  brak ceny
+        [✓] peas                                        13 g  →  brak ceny
+        [✓] carrot                                      13 g  →  0.300
+        [✓] onion                                        6 g  →  0.080
+        [✓] butter                                       8 g  →  0.442
+        [✓] chicken broth                             118 ml  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] black pepper                                 1 g  →  1.590
+        [✓] parsley                                      1 g  →  brak ceny
+
+  [~] Chicken Apple Sausage and Veggies  →  koszt niekompletny
+        [✓] chicken apple sausage                      1 pcs  →  0.615
+        [✓] quinoa                                      68 g  →  0.396
+        [✓] tomato                                      30 g  →  brak ceny
+        [✓] green beans                                 30 g  →  0.386
+        [✓] sweet corn                                  30 g  →  0.752
+        [✓] honey mustard dressing                     13 ml  →  brak ceny
+        [✓] avocado oil                                 4 ml  →  0.290
+        [✓] olive oil                                  11 ml  →  brak ceny
+        [✓] honey                                       7 ml  →  0.218
+        [✓] dijon mustard                               7 ml  →  0.245
+        [✓] apple cider vinegar                         7 ml  →  brak ceny
+        [✓] garlic powder                                1 g  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] pepper                                       1 g  →  1.590
+
+  [~] Chimichurri Steak Meal Prep - Two Ways (Bowls and Tacos)  →  koszt niekompletny
+        [✓] beef steak                                 113 g  →  6.465
+        [✓] sweet potato                               200 g  →  brak ceny
+        [✓] cherry tomatoes                             60 g  →  0.248
+        [✓] cucumber                                    60 g  →  brak ceny
+        [✓] olive oil                                   4 ml  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] pepper                                       1 g  →  1.590
+        [✓] parsley                                     30 g  →  brak ceny
+        [✓] thyme                                        5 g  →  4.333
+        [✓] olive oil                                  11 ml  →  brak ceny
+        [✓] red wine vinegar                           11 ml  →  brak ceny
+        [✓] lemon juice                                15 ml  →  brak ceny
+        [✓] garlic                                       5 g  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] paprika                                      1 g  →  1.725
+        [✓] red chili flakes                             1 g  →  0.846
+
+  [~] Crockpot Breakfast Casserole  →  koszt niekompletny
+        [✓] potato                                      50 g  →  0.105
+        [✓] egg                                         80 g  →  0.315
+        [✓] coconut milk                               10 ml  →  0.188
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] black pepper                                 1 g  →  1.590
+        [✓] chicken sausage                             76 g  →  0.615
+        [✓] mushroom                                    25 g  →  0.198
+        [✓] red bell pepper                             25 g  →  brak ceny
+        [✓] spinach                                     20 g  →  0.353
+
+  [~] Egg Sweet Potato And Sausage Breakfast Meal Prep  →  koszt niekompletny
+        [✓] sweet potato                               150 g  →  brak ceny
+        [✓] chicken sausage                            1 pcs  →  0.615
+        [✓] egg                                        2 pcs  →  0.315
+        [✓] spinach                                     35 g  →  0.353
+        [✓] olive oil                                   4 ml  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] pepper                                       1 g  →  1.590
+
+  [~] Gazpacho Meal Prep  →  koszt niekompletny
+        [✓] tomato                                     227 g  →  brak ceny
+        [✓] cucumber                                  62.5 g  →  brak ceny
+        [✓] lemon                                      30 ml  →  brak ceny
+        [✓] red bell pepper                           37.5 g  →  brak ceny
+        [✓] garlic                                      10 g  →  brak ceny
+        [✓] white onion                               12.5 g  →  0.198
+        [✓] olive oil                                  60 ml  →  brak ceny
+        [✓] basil                                        4 g  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] black pepper                                 1 g  →  1.590
+
+  [~] Grilled Steak and Garlic Roasted Potato Meal Prep  →  koszt niekompletny
+        [✓] beef steak                                 113 g  →  6.465
+        [✓] potato                                     113 g  →  0.105
+        [✓] olive oil                                  15 ml  →  brak ceny
+        [✓] garlic powder                                1 g  →  brak ceny
+        [✓] thyme                                        1 g  →  4.333
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] pepper                                       1 g  →  1.590
+        [✓] broccoli                                   118 g  →  0.219
+
+  [~] Hawaiian Chicken Teriyaki Skewer Meal Prep  →  koszt niekompletny
+        [✓] coconut aminos                             12 ml  →  0.188
+        [✓] rice wine vinegar                          12 ml  →  brak ceny
+        [✓] pineapple juice                             8 ml  →  0.463
+        [✓] honey                                       5 ml  →  0.218
+        [✓] garlic                                       1 g  →  brak ceny
+        [✓] ginger                                       1 g  →  0.792
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] black pepper                                 1 g  →  1.590
+        [✓] chicken breast                             113 g  →  0.425
+        [✓] bell pepper                                 15 g  →  brak ceny
+        [✓] bell pepper                                 15 g  →  brak ceny
+        [✓] avocado oil                            None None  →  0.290
+
+  [~] Keto Cashew Cheesecake Bites  →  koszt niekompletny
+        [✓] cream cheese                                19 g  →  1.460
+        [✓] cashew butter                               20 g  →  0.845
+        [✓] cinnamon                                     1 g  →  brak ceny
+        [✓] cashews                                None None  →  0.995
+
+  [~] Lemon Herb Chicken and Potato Sheet Pan  →  koszt niekompletny
+        [✓] chicken breast                             113 g  →  0.425
+        [✓] rosemary                                     1 g  →  2.500
+        [✓] thyme                                        1 g  →  4.333
+        [✓] lemon juice                                 8 ml  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] pepper                                       1 g  →  1.590
+        [✓] olive oil                                   4 ml  →  brak ceny
+        [✓] red potatoes                               113 g  →  0.078
+        [✓] onion                                       25 g  →  0.080
+        [✓] broccoli                                   120 g  →  0.219
+        [✓] lemon                                       20 g  →  brak ceny
+
+  [~] Lemon-Pepper Chicken Drumstick Recipe  →  koszt niekompletny
+        [✓] chicken drumstick                          1 pcs  →  0.215
+        [✓] green beans                                 85 g  →  0.386
+        [✓] quinoa                                      93 g  →  0.396
+        [?] seasoning                              None None  →  brak ceny
+
+  [~] Low-Carb Lettuce Wrap Sliders  →  koszt niekompletny
+        [✓] ground beef                                113 g  →  1.084
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] black pepper                                 1 g  →  1.590
+        [✓] olive oil                                   4 ml  →  brak ceny
+        [✓] tomato                                      30 g  →  brak ceny
+        [✓] red onion                                   13 g  →  0.095
+        [✓] romaine lettuce                             30 g  →  brak ceny
+        [✓] mayonnaise                             None None  →  brak ceny
+
+  [~] My Favorite Pesto Beef Kabob Meal Prep  →  koszt niekompletny
+        [✓] sirloin steak                              170 g  →  3.960
+        [✓] bell pepper                                 75 g  →  brak ceny
+        [✓] onion                                       50 g  →  0.080
+        [✓] basil                                       16 g  →  brak ceny
+        [✓] olive oil                                  59 ml  →  brak ceny
+        [✓] pine nuts                                   40 g  →  2.817
+        [✓] garlic                                       8 g  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+
+  [~] One Pan Sausage And Veggie Meal Prep  →  koszt niekompletny
+        [✓] potato                                     170 g  →  0.105
+        [✓] green beans                                 85 g  →  0.386
+        [✓] chicken apple sausage                      113 g  →  0.615
+        [✓] olive oil                                  21 ml  →  brak ceny
+        [✓] carrot                                     100 g  →  0.300
+        [✓] cherry tomatoes                             43 g  →  0.248
+        [✓] cauliflower                                 75 g  →  brak ceny
+        [✓] bell pepper                                 38 g  →  brak ceny
+
+  [~] Peanut Butter Protein Squares  →  koszt niekompletny
+        [✓] peanut butter                              7.5 g  →  0.291
+        [✓] honey                                     7.5 ml  →  0.218
+        [✓] crispy rice cereal                          15 g  →  0.521
+        [?] protein powder                         None None  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+
+  [~] Pulled Pork Lettuce Wrap Meal Prep  →  koszt niekompletny
+        [✓] pork shoulder                              151 g  →  0.379
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] black pepper                                 1 g  →  1.590
+        [?] seasoning                              None None  →  brak ceny
+        [✓] onion                                       33 g  →  0.080
+        [✓] garlic powder                                1 g  →  brak ceny
+        [✓] chicken broth                              79 ml  →  brak ceny
+        [?] butter lettuce                         None None  →  brak ceny
+        [✓] cherry tomatoes                        None None  →  0.248
+        [?] mustard                                None None  →  brak ceny
+
+  [~] Sausage Grill Packet Meal Prep  →  koszt niekompletny
+        [✓] sausage                                    113 g  →  brak ceny
+        [✓] olive oil                                   8 ml  →  brak ceny
+        [✓] onion                                       25 g  →  0.080
+        [✓] bell pepper                                 38 g  →  brak ceny
+        [✓] cherry tomatoes                             59 g  →  0.248
+        [✓] green beans                                 85 g  →  0.386
+        [✓] mushroom                                    35 g  →  0.198
+        [?] herb sprigs                            None None  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] pepper                                       1 g  →  1.590
+
+  [~] Sheet Pan Breakfast Hash And Eggs  →  koszt niekompletny
+        [✓] potato                                     188 g  →  0.105
+        [✓] green bell pepper                           38 g  →  brak ceny
+        [✓] red bell pepper                             38 g  →  brak ceny
+        [✓] onion                                       25 g  →  0.080
+        [✓] olive oil                                   4 ml  →  brak ceny
+        [✓] paprika                                      1 g  →  1.725
+        [✓] thyme                                        1 g  →  4.333
+        [✓] garlic powder                                1 g  →  brak ceny
+        [✓] bacon                                       28 g  →  0.895
+        [✓] egg                                         60 g  →  0.315
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] pepper                                       1 g  →  1.590
+        [✓] parsley                                      4 g  →  brak ceny
+
+  [~] Sheet Pan Bruschetta Chicken  →  koszt niekompletny
+        [✓] chicken breast                             113 g  →  0.425
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] basil                                        1 g  →  brak ceny
+        [✓] mozzarella                                  30 g  →  0.552
+        [✓] tomato                                     118 g  →  brak ceny
+        [✓] red onion                                   25 g  →  0.095
+        [✓] basil                                        5 g  →  brak ceny
+        [✓] garlic                                       3 g  →  brak ceny
+        [✓] balsamic vinegar                           11 ml  →  brak ceny
+        [✓] olive oil                                   8 ml  →  brak ceny
+        [✓] honey                                        4 g  →  0.218
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] spinach                                     60 g  →  0.353
+        [✓] butter                                       8 g  →  0.442
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] pepper                                       1 g  →  1.590
+
+  [~] Sheet Pan Sweet Potato Breakfast Hash  →  koszt niekompletny
+        [✓] sweet potato                               295 g  →  brak ceny
+        [✓] bell pepper                                 38 g  →  brak ceny
+        [✓] mushrooms                                  118 g  →  0.198
+        [✓] onion                                       13 g  →  0.080
+        [✓] olive oil                                   8 ml  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] cumin                                        1 g  →  brak ceny
+        [✓] chili powder                                 1 g  →  brak ceny
+        [✓] black pepper                                 1 g  →  1.590
+        [✓] egg                                        2 pcs  →  0.315
+        [✓] avocado                                None None  →  0.290
+        [✓] fruit                                  None None  →  brak ceny
+
+  [~] Slow Cooker Lemon Garlic Chicken Meal Prep  →  koszt niekompletny
+        [✓] chicken                                    454 g  →  0.425
+        [✓] olive oil                                   4 ml  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] black pepper                                 1 g  →  1.590
+        [✓] lemon                                       40 g  →  brak ceny
+        [✓] garlic                                      10 g  →  brak ceny
+        [✓] thyme                                        1 g  →  4.333
+        [?] vegetables                             None None  →  brak ceny
+
+  [~] Smoked Salmon & Lentil Breakfast Salad  →  koszt niekompletny
+        [✓] lentils                                    200 g  →  0.198
+        [✓] spinach                                    106 g  →  0.353
+        [✓] onion                                       13 g  →  0.080
+        [✓] tomato                                     120 g  →  brak ceny
+        [✓] smoked salmon                               57 g  →  2.245
+        [?] capers                                 None None  →  brak ceny
+        [✓] avocado oil                                15 ml  →  0.290
+        [✓] balsamic vinegar                           15 ml  →  brak ceny
+        [✓] dijon mustard                               15 g  →  0.245
+        [✓] lemon juice                                15 ml  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] pepper                                       1 g  →  1.590
+
+  [~] Steak, Sweet Potato and Apple Hash  →  koszt niekompletny
+        [✓] beef steak                               113.5 g  →  6.465
+        [✓] sweet potato                               100 g  →  brak ceny
+        [✓] apple                                       75 g  →  brak ceny
+        [✓] avocado oil                               7.5 ml  →  0.290
+        [✓] thyme                                        1 g  →  4.333
+        [✓] sage                                         1 g  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] pepper                                       1 g  →  1.590
+
+  [~] Sun Dried Tomato, Mozzarella And Basil Stuffed Chicken  →  koszt niekompletny
+        [✓] chicken breast                             113 g  →  0.425
+        [✓] sun dried tomatoes                          30 g  →  0.411
+        [✓] mozzarella                                  18 g  →  0.552
+        [✓] basil                                        1 g  →  brak ceny
+        [✓] coriander                                    1 g  →  1.667
+        [✓] olive oil                                   6 ml  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] black pepper                                 1 g  →  1.590
+        [?] zucchini noodles                       None None  →  brak ceny
+
+  [~] The Perfect Air Fryer Turkey Breast  →  koszt niekompletny
+        [✓] turkey breast                              567 g  →  0.957
+        [✓] butter                                       8 g  →  0.442
+        [✓] rosemary                                     1 g  →  2.500
+        [✓] thyme                                        1 g  →  4.333
+        [✓] garlic powder                                1 g  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+        [✓] pepper                                       1 g  →  1.590
+
+  [~] Turkey Bacon Ranch Pinwheel Snack Boxes  →  koszt niekompletny
+        [✓] turkey breast                              1 pcs  →  0.957
+        [✓] cream cheese                                28 g  →  1.460
+        [?] ranch seasoning                        None None  →  brak ceny
+        [✓] bacon                                      1 pcs  →  0.895
+        [✓] baby spinach                                15 g  →  0.353
+        [✓] mandarin orange                        None None  →  brak ceny
+        [✓] vegetable                              None None  →  0.053
+
+  [~] Turkey Wrap  →  koszt niekompletny
+        [✓] spinach tortilla                           1 pcs  →  0.353
+        [✓] turkey breast                            56.75 g  →  0.957
+        [✓] mayonnaise                                7.5 ml  →  brak ceny
+        [✓] cheese                                   28.35 g  →  brak ceny
+        [✓] spinach                                     15 g  →  0.353
+
+  [~] Vegan Chopped Chickpea Greek Salad Meal Prep  →  koszt niekompletny
+        [✓] spinach                                     60 g  →  0.353
+        [✓] chickpeas                                  100 g  →  brak ceny
+        [✓] cucumber                                   250 g  →  brak ceny
+        [✓] bell pepper                                150 g  →  brak ceny
+        [✓] cherry tomatoes                             75 g  →  0.248
+        [✓] red onion                                   25 g  →  0.095
+        [✓] black olives                                30 g  →  brak ceny
+        [✓] avocado                                     50 g  →  0.290
+        [✓] olive oil                                  15 ml  →  brak ceny
+        [✓] balsamic vinegar                           11 ml  →  brak ceny
+        [✓] lemon juice                                15 ml  →  brak ceny
+        [✓] honey                                        5 g  →  0.218
+        [✓] dijon mustard                                5 g  →  0.245
+        [✓] italian seasoning                            1 g  →  brak ceny
+        [✓] salt                                         1 g  →  brak ceny
+
+  [~] Vegan Dark Chocolate Cinnamon Roasted Chickpea Bark  →  koszt niekompletny
+        [✓] chickpeas                                83.33 g  →  brak ceny
+        [✓] coconut oil                               1.25 g  →  0.188
+        [✓] cinnamon                                     1 g  →  brak ceny
+        [✓] chocolate chips                          19.67 g  →  1.190
+
+  [~] Whole30 Breakfast Snack Boxes Meal Prep  →  koszt niekompletny
+        [✓] egg                                        2 pcs  →  0.315
+        [✓] strawberry                                  60 g  →  0.588
+        [✓] avocado                                    100 g  →  0.290
+        [✓] sweet potato                               200 g  →  brak ceny
+
+======================================================================
+ODRZUCONE PRZEPISY (574) — brakuje >=1 składnika w ingredient_db
+======================================================================
+(Brakujący = nie ma dopasowania do żadnego produktu Aldi)
+
+  Bacon Wrapped Asparagus Breakfast Bowls
+    brakuje (2): ['asparagus', 'arugula']
+    dopasowane (4): ['bacon', 'egg', 'berries', 'lemon']
+  Portable Chocolate Chip Pancakes
+    brakuje (3): ['pancake mix', 'water', 'oil']
+    dopasowane (2): ['egg', 'dairy free chocolate chips']
+  Steak & Egg White Salsa Verde Breakfast Wraps
+    brakuje (8): ['tomatillo', 'jalapeño', 'cilantro', 'lime juice', 'egg white', 'flank steak', 'wrap', 'seasoning']
+    dopasowane (4): ['olive oil', 'onion', 'garlic', 'salt']
+  High-Protein Gluten-Free Cottage Cheese Pancakes
+    brakuje (2): ['rolled oats', 'collagen powder']
+    dopasowane (4): ['banana', 'cottage cheese', 'egg', 'maple syrup']
+  Sweet Potato Hash Brown Breakfast Waffles
+    brakuje (3): ['seasoning', 'cooking oil spray', 'egg white']
+    dopasowane (7): ['sweet potato', 'salt', 'egg', 'egg', 'salt']...
+  Sweet Potato Waffle Meal Prep With Veggies And Protein
+    brakuje (1): ['almond milk']
+    dopasowane (9): ['sweet potato', 'egg', 'salt', 'pepper', 'egg']...
+  Diy Fruit And Protein Snack Boxes Under 4
+    brakuje (2): ['walnuts', 'green grapes']
+    dopasowane (3): ['cheese', 'strawberries', 'blackberries']
+  Sheet Pan Meal Prep Breakfast French Toast Sticks And Sausage
+    brakuje (3): ['gluten free bread', 'vanilla extract', 'breakfast sausage']
+    dopasowane (5): ['egg', 'milk', 'cinnamon', 'fruit', 'maple syrup']
+  Kabocha Squash Waffle Meal Prep Gluten Free Paleo Friendly
+    brakuje (3): ['kabocha squash', 'coconut flour', 'sweetener']
+    dopasowane (4): ['egg', 'cinnamon', 'baking powder', 'salt']
+  Apple Bacon Onion And Cheddar Breakfast Squares Gf Low Carb
+    brakuje (3): ['egg white', 'almond milk', 'herbs']
+    dopasowane (9): ['egg', 'bacon', 'apple', 'onion', 'garlic']...
+  Banana Oat Breakfast Bars
+    brakuje (5): ['egg white', 'almond milk', 'vanilla extract', 'rolled oats', 'coconut sugar']
+    dopasowane (5): ['banana', 'coconut oil', 'baking powder', 'cinnamon', 'dairy free chocolate chips']
+  Low Carb Cinnamon Apple Muffins
+    brakuje (4): ['almond flour', 'coconut flour', 'monkfruit sweetener', 'vanilla extract']
+    dopasowane (9): ['cinnamon', 'baking powder', 'salt', 'egg', 'milk']...
+  Pumpkin Scones With Maple Glaze
+    brakuje (6): ['almond flour', 'coconut flour', 'pumpkin puree', 'pumpkin spice liquid monk fruit sweetener', 'powdered erythritol', 'maple extract']
+    dopasowane (9): ['pumpkin spice', 'baking powder', 'salt', 'coconut oil', 'coconut milk']...
+  Chickpea Frittata Meal Prep
+    brakuje (4): ['chickpea flour', 'nutritional yeast', 'water', 'mandarin orange segments']
+    dopasowane (8): ['baking powder', 'salt', 'italian seasoning', 'garlic powder', 'olive oil']...
+  Gluten-Free Fall Breakfast Granola
+    brakuje (3): ['rolled oats', 'pepitas', 'agave']
+    dopasowane (4): ['pecans', 'raisins', 'coconut oil', 'cinnamon']
+  Lemon Poppy Seed Oatmeal Bars
+    brakuje (10): ['water', 'vanilla extract', 'rolled oats', 'almond flour', 'monk fruit sweetener', 'poppy seeds', 'monk fruit sweetener', 'almond milk', 'cornstarch', 'cantaloupe']
+    dopasowane (7): ['lemon juice', 'coconut oil', 'lemon zest', 'salt', 'lemon juice']...
+  Morning Glory Muffins
+    brakuje (4): ['almond flour', 'nutmeg', 'monk fruit sweetener', 'walnuts']
+    dopasowane (9): ['cinnamon', 'baking powder', 'salt', 'eggs', 'vegetable oil']...
+  Overnight Oats With Almond Butter
+    brakuje (4): ['hemp hearts', 'almond milk', 'almond butter', 'chia seeds']
+    dopasowane (0): []
+  Carrot Cake Pancakes
+    brakuje (6): ['flour', 'nutmeg', 'almond milk', 'water', 'vanilla extract', 'molasses']
+    dopasowane (9): ['baking powder', 'salt', 'cinnamon', 'apple cider vinegar', 'ground flax']...
+  Cajun Sausage Breakfast Scramble
+    brakuje (1): ['half and half']
+    dopasowane (8): ['butter', 'sausage', 'onion', 'celery', 'bell pepper']...
+  Cocoa Hazelnut Energy Bites
+    brakuje (1): ['rolled oats']
+    dopasowane (5): ['cocoa hazelnut spread', 'coconut oil', 'honey', 'ground flax', 'salt']
+  Grain Free Granola
+    brakuje (3): ['almonds', 'coconut flakes', 'vanilla extract']
+    dopasowane (8): ['cashews', 'strawberries', 'pumpkin seeds', 'coconut oil', 'honey']...
+  Summer Breakfast Salad
+    brakuje (3): ['mixed greens', 'walnuts', 'lime juice']
+    dopasowane (8): ['egg', 'sunflower seeds', 'berries', 'avocado', 'garlic']...
+  Turmeric Scrambled Eggs For Breakfast
+    brakuje (1): ['turmeric']
+    dopasowane (7): ['egg', 'milk', 'parsley', 'salt', 'pepper']...
+  Overnight Oats With Berries
+    brakuje (2): ['oats', 'almond milk']
+    dopasowane (5): ['blueberry', 'strawberry', 'almond', 'cinnamon', 'banana']
+  Sheet Pan Omelet
+    brakuje (1): ['tortilla']
+    dopasowane (8): ['egg', 'milk', 'onion', 'bell pepper', 'spinach']...
+  Sausage Lover'S Hashbrown Casserole
+    brakuje (2): ['egg white', 'oil']
+    dopasowane (6): ['sausage', 'egg', 'potato', 'spinach', 'salt']...
+  Pork Breakfast Hash
+    brakuje (3): ['brussels sprout', 'kale', 'seasoning']
+    dopasowane (5): ['olive oil', 'sweet potato', 'ground pork', 'cherry', 'pineapple']
+  Cran-Blackberry Overnight French Toast
+    brakuje (4): ['bread', 'egg whites', 'vanilla extract', 'collagen']
+    dopasowane (5): ['egg', 'milk', 'cinnamon', 'cranberry', 'blackberry']
+  Breakfast Burrito
+    brakuje (3): ['tortilla', 'breakfast sausage', 'salsa']
+    dopasowane (2): ['egg', 'cheese']
+  French Toast Breakfast Berry Casserole
+    brakuje (4): ['bread', 'almond milk', 'brown sugar', 'vanilla extract']
+    dopasowane (3): ['egg', 'mixed berries', 'maple syrup']
+  Meal Prep Breakfast Sandwich - Freezer Friendly
+    brakuje (2): ['kale', 'breakfast sandwich bun']
+    dopasowane (6): ['egg', 'bell pepper', 'onion', 'chicken sausage', 'salt']...
+  Low Carb Sun Dried Tomato Egg Cups
+    brakuje (1): ['sun dried tomato']
+    dopasowane (5): ['cauliflower rice', 'egg', 'cheese', 'salt', 'pepper']
+  Yes, You CAN Meal Prep Pancakes!
+    brakuje (3): ['coconut flour', 'almond milk', 'almond butter']
+    dopasowane (4): ['egg', 'coconut oil', 'strawberry', 'maple syrup']
+  Pizza Chicken Meal Prep Recipe (Low Carb, High Flavor)
+    brakuje (2): ['pizza sauce', 'seasoning']
+    dopasowane (4): ['chicken breast', 'mozzarella', 'pepperoni', 'broccoli']
+  Gluten Free Caesar Pasta Salad Meal Prep
+    brakuje (4): ['pasta', 'parmesan', 'ranch dressing', 'croutons']
+    dopasowane (4): ['romaine lettuce', 'red onion', 'cherry tomatoes', 'lemon']
+  Sheet Pan Paleo Protein Pancakes
+    brakuje (2): ['pancake mix', 'egg white']
+    dopasowane (1): ['fruit']
+  Cinnamon Almond Butter Protein Balls
+    brakuje (4): ['oats', 'almonds', 'almond butter', 'vanilla extract']
+    dopasowane (3): ['coconut', 'dark chocolate chips', 'honey']
+  Protein Peanut Butter Energy Bites
+    brakuje (6): ['oats', 'flax', 'agave nectar', 'protein powder', 'chia seeds', 'water']
+    dopasowane (2): ['cocoa powder', 'peanut butter']
+  Pineapple Coconut Overnight Oats
+    brakuje (6): ['rolled oats', 'chia seeds', 'shredded coconut', 'lime juice', 'vanilla protein powder', 'granola']
+    dopasowane (3): ['pineapple', 'coconut milk', 'maple syrup']
+  Sheet Pan Marmalade Sausage
+    brakuje (4): ['breakfast sausage', 'brussels sprouts', 'purple onion', 'apricot preserves']
+    dopasowane (6): ['carrot', 'baby red potatoes', 'olive oil', 'salt', 'pepper']...
+  Apple Walnut Toffee Crisp
+    brakuje (7): ['coconut sugar', 'arrowroot powder', 'vanilla extract', 'almond butter', 'stevia extract', 'rolled oats', 'walnuts']
+    dopasowane (4): ['apple', 'coconut oil', 'cinnamon', 'sea salt']
+  Sweet Potato Latkes
+    brakuje (2): ['seasoning', 'chives']
+    dopasowane (8): ['sweet potato', 'egg', 'olive oil', 'egg', 'sea salt']...
+  Cauliflower Mash Breakfast Bowls
+    brakuje (2): ['almond milk', 'seasoning']
+    dopasowane (6): ['cauliflower', 'butter', 'bacon', 'mushroom', 'egg']...
+  Savory Breakfast Muffins
+    brakuje (7): ['turkey sausage', 'almond flour', 'egg white', 'almond milk', 'green onion', 'grapes', 'cantaloupe']
+    dopasowane (2): ['egg', 'blueberries']
+  Breakfast Taco Bowls
+    brakuje (2): ['cilantro', 'lime juice']
+    dopasowane (10): ['egg', 'ground turkey', 'cumin', 'chili powder', 'salt']...
+  Gluten Free Cinnamon Roll Meal Prep
+    brakuje (6): ['gluten free flour blend', 'oat flour', 'psyllium husk', 'coconut sugar', 'water', 'coconut sugar']
+    dopasowane (7): ['yeast', 'salt', 'coconut oil', 'egg', 'coconut oil spray']...
+  Egg Muffins
+    brakuje (1): ['jalapeño']
+    dopasowane (5): ['egg', 'mushroom', 'bell pepper', 'onion', 'tomato']
+  Paleo Blueberry Muffins
+    brakuje (4): ['almond butter', 'vanilla extract', 'coconut flour', 'baking soda']
+    dopasowane (7): ['egg', 'banana', 'butter', 'cinnamon', 'baking powder']...
+  High Protein Breakfast Oats
+    brakuje (4): ['oats', 'protein powder', 'coconut flakes', 'almond butter']
+    dopasowane (3): ['flax seeds', 'almond', 'blueberry']
+  Taco Seasoned Ground Beef and Sweet Potato Hash
+    brakuje (3): ['salsa', 'cilantro', 'almond milk']
+    dopasowane (12): ['olive oil', 'sweet potato', 'red onion', 'ground beef', 'cumin']...
+  Bacon Wrapped Omelets
+    brakuje (1): ['kale']
+    dopasowane (9): ['bacon', 'egg', 'bell pepper', 'olive oil', 'salt']...
+  Whole30 Bacon and Strawberry Breakfast Salad
+    brakuje (4): ['arugula', 'tahini', 'water', 'dill']
+    dopasowane (11): ['strawberry', 'bacon', 'egg', 'avocado', 'lemon juice']...
+  Prosciutto Egg Cups
+    brakuje (2): ['prosciutto', 'arugula']
+    dopasowane (3): ['egg', 'salt', 'black pepper']
+  Nutty Keto Pancakes
+    brakuje (4): ['almond flour', 'baking soda', 'hazelnut', 'almond butter']
+    dopasowane (3): ['cinnamon', 'egg', 'milk']
+  Blueberry Pie French Toast
+    brakuje (2): ['gluten free bread', 'egg white']
+    dopasowane (7): ['avocado oil', 'milk', 'cinnamon', 'blueberry', 'orange juice']...
+  Cinnamon Roll Coffee Cake
+    brakuje (7): ['coffee', 'gluten free all purpose flour', 'coconut sugar', 'coconut sugar', 'gluten free flour', 'coconut butter', 'coconut sugar']
+    dopasowane (6): ['egg', 'coconut oil', 'milk', 'baking powder', 'coconut oil']...
+  Scrambled Egg Stuffed Sweet Potato
+    brakuje (1): ['hot sauce']
+    dopasowane (7): ['sweet potato', 'olive oil', 'egg', 'coconut milk', 'salt']...
+  Sheet Pan No-Bake Paleo Energy Bars
+    brakuje (2): ['shredded unsweetened coconut', 'cacao nib']
+    dopasowane (7): ['almond', 'pecan', 'dried pitted date', 'sunflower seed', 'coconut oil']...
+  Freezer Friendly Chocolate Waffles
+    brakuje (3): ['gluten-free flour', 'unsweetened cacao powder', 'almond milk']
+    dopasowane (7): ['egg', 'coconut oil', 'maple syrup', 'baking powder', 'strawberry']...
+  Eggnog French Toast Bake
+    brakuje (4): ['gluten free bread', 'eggnog', 'liquid egg whites', 'vanilla monk fruit sweetener']
+    dopasowane (3): ['cinnamon', 'maple syrup', 'fig']
+  Donut Holes
+    brakuje (7): ['erythritol', 'vanilla extract', 'almond flour', 'coconut flour', 'coconut butter', 'almond milk', "confectioner's erythritol"]
+    dopasowane (9): ['butter', 'egg', 'baking powder', 'sea salt', 'coconut oil']...
+  Low Carb Pumpkin Spice Bagel
+    brakuje (4): ['almond flour', 'seasoning', 'vanilla extract', 'seasoning']
+    dopasowane (11): ['cinnamon', 'baking powder', 'salt', 'milk', 'butter']...
+  Berry Protein Pancake Bites
+    brakuje (3): ['gluten free flour', 'whey protein powder', 'sweetener']
+    dopasowane (7): ['baking powder', 'salt', 'milk', 'egg', 'mixed berries']...
+  Peanut Butter Chocolate Muffins
+    brakuje (4): ['almond flour', 'sweetener', 'egg white', 'vanilla extract']
+    dopasowane (9): ['cocoa powder', 'baking powder', 'salt', 'egg', 'butter']...
+  Vegan Blueberry Breakfast Bars
+    brakuje (6): ['rolled oats', 'sweetener', 'vanilla extract', 'sweetener', 'cornstarch', 'dairy free yogurt']
+    dopasowane (5): ['ground flaxseed', 'coconut oil', 'salt', 'blueberries', 'kiwi']
+  One Dish Baked Blueberry Oatmeal
+    brakuje (6): ['rolled oats', 'oat bran', 'oat flour', 'collagen', 'almond milk', 'egg white']
+    dopasowane (6): ['salt', 'baking powder', 'egg', 'coconut oil', 'stevia']...
+  Vegan Shakshuka Meal Prep
+    brakuje (3): ['canned diced fire roasted tomatoes', 'vegan ricotta cheese', 'bread']
+    dopasowane (9): ['cannellini beans', 'red onion', 'garlic', 'harissa', 'parsley']...
+  Middle Eastern Breakfast Salad Bowls
+    brakuje (5): ['fennel', 'olives', 'water', 'dill', 'hummus']
+    dopasowane (15): ['romaine', 'cucumber', 'lemon', 'quinoa', 'radish']...
+  Double Chocolate Donuts
+    brakuje (11): ['almond flour', 'oat flour', 'coconut sugar', 'baking soda', 'almond milk', 'vanilla extract', 'powdered coconut sugar', 'almond butter', 'almond milk', 'pepitas', 'shredded coconut']
+    dopasowane (6): ['cocoa powder', 'sea salt', 'ground flax meal', 'coconut oil', 'cocoa powder']...
+  Collard Wrap Breakfast Burritos
+    brakuje (5): ['collard greens', 'lime juice', 'italian sausage', 'cilantro', 'salsa']
+    dopasowane (6): ['sweet potato', 'sea salt', 'cumin', 'egg', 'avocado']...
+  Vegan Mushroom Quinoa Breakfast Hash
+    brakuje (2): ['kale', 'dried sage']
+    dopasowane (8): ['quinoa', 'diced tomatoes', 'mushrooms', 'white wine vinegar', 'olive oil']...
+  Stuffed French Toast Meal Prep
+    brakuje (5): ['bread', 'egg whites', 'almond milk', 'vanilla extract', 'vanilla extract']
+    dopasowane (6): ['cinnamon', 'greek yogurt', 'egg', 'stevia', 'raspberries']...
+  High Protein Breakfast Egg Muffin Meal Prep
+    brakuje (1): ['almond milk']
+    dopasowane (7): ['egg', 'chicken breast', 'spinach', 'tomato', 'black pepper']...
+  Quinoa Stuffed Sweet Potato Meal Prep - 3 Ways!
+    brakuje (7): ['almond butter', 'green olives', 'feta cheese', 'salsa', 'guacamole', 'taco seasoning', 'cilantro']
+    dopasowane (16): ['sweet potato', 'quinoa', 'mixed berries', 'sweet potato', 'quinoa']...
+  Cinnamon Roll Muffin Meal Prep
+    brakuje (8): ['almond flour', 'coconut flour', 'dairy free yogurt', 'vanilla extract', 'monk fruit', 'erythritol', 'macadamia nuts', 'almonds']
+    dopasowane (5): ['baking powder', 'egg', 'coconut oil', 'cinnamon', 'strawberries']
+  Loaded Sausage And Bacon Breakfast Casserole
+    brakuje (1): ['smoked sausage']
+    dopasowane (10): ['bacon', 'onion', 'sweet potato', 'quinoa', 'cheese']...
+  Tuscan Chickpea Scramble
+    brakuje (4): ['turmeric', 'kale', 'pepitas', 'blood orange']
+    dopasowane (12): ['chickpeas', 'red onion', 'sweet potato', 'olive oil', 'sun dried tomatoes']...
+  Strawberry Chocolate Almond Granola Squares
+    brakuje (4): ['rolled oats', 'almond butter', 'sliced almonds', 'vanilla extract']
+    dopasowane (4): ['honey', 'freeze dried strawberries', 'semi sweet chocolate chips', 'salt']
+  Beef Breakfast Sausage Egg Cups
+    brakuje (4): ['onion powder', 'scallions', 'granola', 'mixed fruit']
+    dopasowane (10): ['ground beef', 'sage', 'garlic powder', 'salt', 'red pepper flakes']...
+  Healthy Oatmeal Muffins
+    brakuje (4): ['rolled oats', 'almond milk', 'protein powder', 'allspice']
+    dopasowane (7): ['eggs', 'banana', 'cinnamon', 'honey', 'coconut oil']...
+  Philly Cheesesteak Breakfast Casserole
+    brakuje (3): ['Italian seasoning', 'egg white', 'persimmon']
+    dopasowane (9): ['ground beef', 'mushroom', 'bell pepper', 'onion', 'garlic powder']...
+  Sausage, Kale & Pomegranate Hash Meal Prep
+    brakuje (1): ['kale']
+    dopasowane (13): ['carrot', 'parsnip', 'olive oil', 'red onion', 'pomegranate seeds']...
+  Pepperoni Pizza Egg Cups
+    brakuje (4): ['grape', 'pizza sauce', 'oregano', 'parmesan']
+    dopasowane (8): ['egg', 'mozzarella', 'pepperoni', 'basil', 'salt']...
+  Gluten-Free Healthy-Ish Pop Tarts
+    brakuje (10): ['pie crust', 'cantaloupe', 'coconut butter', 'powdered sugar', 'chia seeds', 'vanilla extract', 'water', 'gluten free flour', 'freeze-dried berries', 'food coloring']
+    dopasowane (4): ['egg', 'peanut butter', 'raspberry', 'sprinkles']
+  Pancake Bread
+    brakuje (9): ['oat flour', 'oat milk', 'vanilla extract', 'baking soda', 'coconut sugar', 'coconut butter', 'almond flour', 'oat flour', 'vanilla extract']
+    dopasowane (11): ['maple syrup', 'cinnamon', 'baking powder', 'apple cider vinegar', 'salt']...
+  Air Fryer Breakfast Sausage
+    brakuje (2): ['kale', 'ghee']
+    dopasowane (12): ['ground pork', 'maple syrup', 'thyme', 'sage', 'paprika']...
+  Savory Waffles With Kale And Bacon
+    brakuje (6): ['almond flour', 'arrowroot flour', 'almond milk', 'ghee', 'seasoning', 'kale']
+    dopasowane (3): ['egg', 'baking powder', 'bacon']
+  Watercress, Leek, And Butternut Squash Quiche
+    brakuje (4): ['almond flour', 'egg white', 'almond milk', 'grapes']
+    dopasowane (18): ['egg', 'butter', 'salt', 'butter', 'butternut squash']...
+  The Best Paleo Blueberry Muffins
+    brakuje (4): ['pancake mix', 'water', 'vanilla extract', 'cooking spray']
+    dopasowane (1): ['blueberries']
+  Quinoa-Oat Bars (Vegan, Gf)
+    brakuje (7): ['almond butter', 'agave nectar', 'oats', 'pistachios', 'pepitas', 'chia seeds', 'clementine']
+    dopasowane (2): ['quinoa', 'salt']
+  Cheesy Mexican Cauliflower Fritter Meal Prep
+    brakuje (3): ['almond flour', 'coconut flour', 'jalapeño']
+    dopasowane (5): ['cauliflower', 'egg', 'cheese', 'salt', 'coconut oil']
+  Protein Freezer Waffles
+    brakuje (4): ['protein powder', 'rolled oats', 'vanilla extract', 'almond butter']
+    dopasowane (6): ['cottage cheese', 'egg', 'maple syrup', 'baking powder', 'berries']...
+  Coffee Almond Quinoa Breakfast Bowl
+    brakuje (5): ['almond milk', 'coffee', 'hemp seeds', 'almonds', 'sweetener']
+    dopasowane (2): ['quinoa', 'raspberries']
+  Tofu Breakfast Scramble
+    brakuje (3): ['kale', 'turmeric', 'grapes']
+    dopasowane (12): ['olive oil', 'red bell pepper', 'tofu', 'garlic powder', 'salt']...
+  Sausage And Egg Breakfast Bake
+    brakuje (2): ['pork breakfast sausage', 'green onion']
+    dopasowane (8): ['egg', 'milk', 'cheese', 'bell pepper', 'parsley']...
+  Vegetarian Italian Sausage Egg Cups
+    brakuje (3): ['beyond meat spicy italian sausage', 'parmesan', 'cantaloupe']
+    dopasowane (6): ['egg', 'spinach', 'sun-dried tomatoes', 'pepper', 'avocado oil']...
+  Greek Egg Bake
+    brakuje (2): ['kale', 'oregano']
+    dopasowane (5): ['egg', 'sun-dried tomatoes', 'feta', 'salt', 'pepper']
+  Paleo Maple Pecan Banana Bread Muffins
+    brakuje (2): ['maple extract', 'almond flour']
+    dopasowane (7): ['banana', 'coconut oil', 'egg', 'stevia', 'baking powder']...
+  Cinnamon Apple Protein Bites
+    brakuje (5): ['walnuts', 'whey protein powder', 'medjool dates', 'dried apple rings', 'water']
+    dopasowane (4): ['cashews', 'pecans', 'cinnamon', 'salt']
+  Oatmeal Bowls With Sauteed Cinnamon Apples
+    brakuje (5): ['rolled oats', 'water', 'almond milk', 'vegan butter', 'hemp seeds']
+    dopasowane (4): ['apple', 'maple syrup', 'cinnamon', 'pecans']
+  Cinnamon Apple Banana Snack Bread
+    brakuje (5): ['oat flour', 'coconut sugar', 'almond milk', 'baking soda', 'walnuts']
+    dopasowane (7): ['apple', 'banana', 'greek yogurt', 'coconut oil', 'egg']...
+  Cinnamon Raisin Granola
+    brakuje (4): ['almonds', 'shredded coconut', 'allspice', 'vanilla extract']
+    dopasowane (9): ['pumpkin seeds', 'pecans', 'sunflower seeds', 'raisins', 'coconut oil']...
+  Whole30 Zucchini & Sweet Potato Hashbrown Meal Prep
+    brakuje (2): ['zucchini', 'microgreens']
+    dopasowane (6): ['egg', 'sweet potato', 'bacon', 'avocado', 'salt']...
+  Egg Potato And Broccoli Breakfast Meal Prep
+    brakuje (1): ['duck fat']
+    dopasowane (7): ['egg', 'broccoli', 'red potato', 'salt', 'pepper']...
+  Butternut Squash Cranberry Skillet Meal Prep
+    brakuje (1): ['nutmeg']
+    dopasowane (7): ['butternut squash', 'cranberry', 'sausage', 'sage', 'thyme']...
+  Broccoli Rice Red Pepper Egg Muffins
+    brakuje (1): ['egg white']
+    dopasowane (7): ['egg', 'coconut milk', 'broccoli', 'roasted red pepper', 'garlic powder']...
+  Coconut Oat Breakfast Cookies
+    brakuje (5): ['water', 'brown sugar', 'vanilla extract', 'oats', 'coconut flakes']
+    dopasowane (6): ['coconut milk powder', 'egg', 'baking powder', 'salt', 'mixed berries']...
+  Keto Pizza Frittata Meal Prep
+    brakuje (2): ['almond milk', 'oregano']
+    dopasowane (7): ['egg', 'garlic powder', 'rosemary', 'black pepper', 'salt']...
+  Portobello Mushroom Bacon and Feta Egg Cups
+    brakuje (2): ['portobello mushroom', 'feta cheese']
+    dopasowane (6): ['egg', 'basil', 'salt', 'black pepper', 'bacon']...
+  Thai Basil Chicken Meal Prep | Thai Larb
+    brakuje (4): ['sesame oil', 'thai bird chili', 'fish sauce', 'arrowroot']
+    dopasowane (7): ['chicken breast', 'shallot', 'garlic', 'coconut aminos', 'honey']...
+  Instant Pot Chicken Enchilada Soup
+    brakuje (7): ['canned diced tomatoes', 'canned black beans', 'red enchilada sauce', 'water', 'poblano pepper', 'cilantro', 'oregano']
+    dopasowane (9): ['chicken breast', 'chicken broth', 'corn', 'greek yogurt', 'onion']...
+  Sheet Pan Sriracha Honey Glazed Salmon
+    brakuje (5): ['scallion', 'sriracha', 'sesame oil', 'onion powder', 'liquid smoke']
+    dopasowane (11): ['salmon', 'quinoa', 'strawberry', 'green beans', 'honey']...
+  Slow Cooker Taco Meatballs
+    brakuje (5): ['almond flour breading', 'green chiles', 'salsa', 'tortilla chips', 'salsa']
+    dopasowane (4): ['ground chicken', 'egg', 'cheese', 'cumin']
+  Freezer Friendly Hawaiian Chicken Tenders
+    brakuje (4): ['sesame oil', 'flour', 'green onion', 'jasmine rice']
+    dopasowane (6): ['chicken breast', 'pineapple', 'pineapple juice', 'coconut aminos', 'broccoli']...
+  Southwestern Chicken Bake Meal Prep
+    brakuje (5): ['poblano pepper', 'lime juice', 'oregano', 'green onion', 'cilantro']
+    dopasowane (12): ['chicken breast', 'black beans', 'corn', 'cheese', 'quinoa']...
+  Chicken Fajita Veggie Meal Prep
+    brakuje (4): ['cilantro', 'scallion', 'fajita seasoning', 'salsa verde']
+    dopasowane (11): ['red bell pepper', 'yellow bell pepper', 'green bell pepper', 'red onion', 'cauliflower']...
+  Homemade Traditional Greek Meatballs
+    brakuje (6): ['dill', 'oregano', 'feta cheese', 'grape tomatoes', 'kalamata olives', 'oregano']
+    dopasowane (23): ['ground beef', 'egg', 'breadcrumbs', 'mint', 'garlic powder']...
+  Cauliflower Steak With Quinoa And Tahini Meal Prep
+    brakuje (3): ['mixed greens', 'tahini', 'water']
+    dopasowane (7): ['cauliflower', 'avocado oil', 'salt', 'pepper', 'quinoa']...
+  Air Fryer Pork Rind Coated Pork Chops
+    brakuje (3): ['pork rinds', 'onion powder', 'chives']
+    dopasowane (17): ['pork chop', 'egg', 'thyme', 'paprika', 'salt']...
+  African Peanut Stew
+    brakuje (4): ['fire-roasted tomatoes with green chilies', 'lime juice', 'kale', 'cilantro']
+    dopasowane (11): ['olive oil', 'sweet potato', 'celery', 'onion', 'garlic']...
+  Air Fryer Garlic Parmesan Chicken Wings With Herb Potatoes And Swiss Chard
+    brakuje (4): ['parmesan', 'cooking spray', 'onion powder', 'swiss chard']
+    dopasowane (13): ['chicken wing', 'garlic', 'salt', 'potato', 'olive oil']...
+  High Protein Griddle Steak Fried Rice Meal Prep
+    brakuje (2): ['jasmine rice', 'stir-fry vegetables']
+    dopasowane (6): ['beef steak', 'onion', 'egg', 'butter', 'olive oil']...
+  Greek Arugula Power Salad
+    brakuje (6): ['lemon-herb dressing', 'arugula', 'grape tomatoes', 'green olives', 'feta cheese', 'lemon-herb dressing']
+    dopasowane (11): ['olive oil', 'lemon juice', 'parsley', 'honey', 'basil']...
+  Salsa Verde Chicken Enchiladas Meal Prep (Gluten-Free)
+    brakuje (5): ['corn tortillas', 'zucchini', 'cilantro', 'salsa verde', 'cilantro']
+    dopasowane (9): ['chicken', 'cheese', 'corn', 'salt', 'pepper']...
+  Cheesy Keto Chicken Meatballs (High-Protein, Freezer-Friendly)
+    brakuje (2): ['marinara sauce', 'marinara sauce']
+    dopasowane (6): ['ground chicken', 'garlic', 'italian seasoning', 'mozzarella cheese', 'salt']...
+  20 Minute Meatballs (Super Simple Base)
+    brakuje (2): ['onion powder', 'seasoning']
+    dopasowane (5): ['ground beef', 'garlic powder', 'parsley', 'salt', 'pepper']
+  Maple Roasted Kabocha Squash & Quinoa Salad
+    brakuje (4): ['kabocha squash', 'pistachios', 'scallions', 'kabocha squash']
+    dopasowane (10): ['olive oil', 'maple syrup', 'salt', 'pepper', 'quinoa']...
+  Chicken Bacon Ranch Meal Prep
+    brakuje (3): ['oil', 'ranch dressing', 'chives']
+    dopasowane (7): ['sweet potato', 'onion', 'bacon', 'chicken breast', 'salt']...
+  Instant Pot Cashew Chicken
+    brakuje (4): ['ketchup', 'sesame oil', 'arrowroot powder', 'scallions']
+    dopasowane (10): ['chicken breast', 'cauliflower rice', 'broccoli florets', 'cashews', 'coconut aminos']...
+  Freeze Friendly Sheet Pan Sweet and Sour Tempeh
+    brakuje (3): ['tempeh', 'ketchup', 'cilantro']
+    dopasowane (7): ['pineapple', 'bell pepper', 'onion', 'pineapple juice', 'coconut aminos']...
+  Watercress and Feta Stuffed Flank Steak
+    brakuje (4): ['flank steak', 'feta cheese', 'dill', 'oregano']
+    dopasowane (14): ['olive oil', 'salt', 'pepper', 'watercress', 'garlic']...
+  Savory Almond Butter Chicken Thigh Skillet
+    brakuje (6): ['almond butter', 'lime juice', 'monk fruit sweetener', 'turmeric', 'cilantro', 'almonds']
+    dopasowane (15): ['coconut milk', 'coconut aminos', 'coriander', 'ginger', 'salt']...
+  Hot Honey Ground Beef and Sweet Potato Bowls
+    brakuje (1): ['taco seasoning']
+    dopasowane (10): ['sweet potato', 'olive oil', 'salt', 'pepper', 'ground beef']...
+  Grilled Spicy Salmon Rice Bowl
+    brakuje (2): ['sriracha', 'everything bagel seasoning']
+    dopasowane (5): ['salmon', 'basmati rice', 'mayonnaise', 'carrot', 'cucumber']
+  Watercress and Artichoke Stuffed Chicken Breasts
+    brakuje (1): ['artichoke hearts']
+    dopasowane (12): ['chicken breast', 'olive oil', 'garlic powder', 'paprika', 'salt']...
+  Vegan Meatballs With Lemon Dijon Sauce
+    brakuje (6): ['hemp protein', 'nutritional yeast', 'plant-based milk', 'dill', 'cornstarch', 'zucchini noodles']
+    dopasowane (13): ['instant brown rice', 'olive oil', 'parsley', 'basil', 'garlic']...
+  Vegan Lasagna Soup
+    brakuje (3): ['vegan ricotta cheese', 'water', 'vegan parmesan']
+    dopasowane (12): ['plant-based ground', 'pasta sauce', 'vegetable broth', 'chickpea fusilli pasta', 'onion']...
+  Low Carb Crockpot Beef Ragu Meal Prep
+    brakuje (2): ['chuck roast', 'zucchini noodles']
+    dopasowane (14): ['carrot', 'celery', 'green bell pepper', 'garlic', 'onion']...
+  Fall Harvest Power Salad
+    brakuje (2): ['walnuts', 'lemon herb dressing']
+    dopasowane (11): ['olive oil', 'lemon juice', 'parsley', 'honey', 'basil']...
+  Kale And Steak Power Salad
+    brakuje (5): ['brussels sprouts', 'kale', 'fennel', 'blue cheese', 'lemon herb dressing']
+    dopasowane (14): ['olive oil', 'lemon juice', 'parsley', 'honey', 'basil']...
+  Jamaican Beef Stew Meal Prep
+    brakuje (6): ['ghee', 'fire roasted tomatoes with chiles', 'coconut sugar', 'hot sauce', 'allspice', 'green onion']
+    dopasowane (11): ['beef stew meat', 'onion', 'carrot', 'bell pepper', 'garlic']...
+  Low Carb Philly Cheesesteak Meal Prep
+    brakuje (3): ['portobello mushroom', 'worcestershire sauce', 'provolone cheese']
+    dopasowane (6): ['sirloin steak', 'olive oil', 'bell pepper', 'onion', 'salt']...
+  Sun Dried Tomato Meatloaf
+    brakuje (7): ['sun dried tomato', 'oregano', 'gluten free breadcrumbs', 'arugula', 'grape tomato', 'agave nectar', 'parmesan']
+    dopasowane (16): ['olive oil', 'garlic', 'white button mushroom', 'celery', 'carrot']...
+  Brazilian Style Skirt Steak Meal Prep
+    brakuje (2): ['skirt steak', 'ghee']
+    dopasowane (10): ['garlic', 'salt', 'black pepper', 'olive oil', 'parsley']...
+  Chilled Avocado Soup Meal Prep
+    brakuje (5): ['dairy free yogurt', 'lime juice', 'cilantro', 'water', 'cilantro']
+    dopasowane (5): ['avocado', 'cucumber', 'salt', 'black pepper', 'red onion']
+  Cauliflower Rice Salmon Poke Bowl Meal Prep
+    brakuje (1): ['green onion']
+    dopasowane (7): ['avocado oil', 'cauliflower', 'salmon', 'carrot', 'avocado']...
+  Garlic and Thyme Chicken Meal Prep
+    brakuje (1): ['brussels sprouts']
+    dopasowane (8): ['chicken breast', 'sweet potato', 'olive oil', 'garlic', 'thyme']...
+  Sweet and Sour Mushrooms
+    brakuje (4): ['jasmine rice', 'green onion', 'sesame oil', 'tapioca starch']
+    dopasowane (11): ['olive oil', 'mushroom', 'bell pepper', 'pineapple', 'onion']...
+  Pesto Noodles with Crispy Chicken Bites
+    brakuje (4): ['gluten-free breadcrumbs', 'oregano', 'palmini noodles', 'parmesan']
+    dopasowane (18): ['chicken breast', 'egg', 'basil', 'paprika', 'salt']...
+  Mexican Whole Grain Rice & Quinoa Casserole Meal Prep
+    brakuje (6): ['whole grain rice and quinoa', 'enchilada sauce', 'refried beans', 'chives', 'mixed greens', 'plantain chips']
+    dopasowane (2): ['chicken breast', 'cheese']
+  Chicken Tikka Masala Meal Prep
+    brakuje (6): ['lime juice', 'serrano pepper', 'white rice', 'cilantro', 'fenugreek', 'turmeric']
+    dopasowane (14): ['chicken breast', 'tomato sauce', 'coconut milk', 'onion', 'greek yogurt']...
+  Healthier Kung Pao Chicken Meal Prep
+    brakuje (4): ['green onion', 'sesame oil', 'monk fruit sweetener', 'cornstarch']
+    dopasowane (8): ['olive oil', 'chicken breast', 'bell pepper', 'dried red chiles', 'peanuts']...
+  Instant Pot Beef Barbacoa Meal Prep Bowls
+    brakuje (8): ['chuck roast beef', 'chipotle pepper in adobo sauce', 'lime juice', 'oregano', 'onion powder', 'adobo sauce', 'clove', 'cilantro']
+    dopasowane (11): ['garlic', 'bay leaf', 'lime', 'beef broth', 'cumin']...
+  Mediterranean Pasta Bake Meal Prep
+    brakuje (6): ['chickpea pasta', 'artichoke hearts', 'kalamata olives', 'feta cheese', 'oregano', 'cantaloupe']
+    dopasowane (11): ['olive oil', 'salt', 'black pepper', 'sirloin beef', 'spinach']...
+  Thai Chili Tofu Sheet Pan Meal Prep
+    brakuje (4): ['extra firm tofu', 'sesame oil', 'arrowroot flour', 'cilantro']
+    dopasowane (10): ['coconut aminos', 'salt', 'broccoli', 'baby corn', 'pineapple']...
+  Apple Bbq Meatloaf & Mashed Potato Meal Prep
+    brakuje (3): ['onion powder', 'almond flour', 'almond milk']
+    dopasowane (12): ['ground beef', 'egg', 'red onion', 'apple', 'paprika']...
+  Thai Inspired Tenderloin: Thai Sweet Chili Pork Meal Prep
+    brakuje (4): ['pork tenderloin', 'sesame oil', 'water', 'arrowroot powder']
+    dopasowane (9): ['coconut aminos', 'salt', 'rice', 'green beans', 'red chili']...
+  Garlic Shrimp And Broccoli Meal Prep (Whole30 & Takeout-Inspired)
+    brakuje (5): ['shrimp', 'sesame oil', 'sesame oil', 'date', 'arrowroot powder']
+    dopasowane (9): ['broccoli', 'coconut aminos', 'ginger', 'white wine vinegar', 'red chili']...
+  The Best Beet Hummus - Plus A Veggie Dipper Snacks
+    brakuje (3): ['tahini', 'beets', 'assorted vegetables']
+    dopasowane (5): ['lemon juice', 'olive oil', 'garlic', 'salt', 'chickpeas']
+  Vegan 'Cheesy' Spaghetti Squash Meal Prep
+    brakuje (2): ['coconut flour', 'nutritional yeast']
+    dopasowane (8): ['spaghetti squash', 'broccoli', 'coconut oil', 'cashews', 'coconut milk']...
+  Plantain Taco Bowl Meal Prep (Whole30 Friendly)
+    brakuje (5): ['plantain', 'onion powder', 'oregano', 'lettuce', 'salsa']
+    dopasowane (9): ['coconut oil', 'ground beef', 'bell pepper', 'bell pepper', 'chili powder']...
+  Baked Salmon Meatballs with Avocado Crema
+    brakuje (4): ['egg white', 'oregano', 'lime juice', 'water']
+    dopasowane (12): ['salmon', 'onion', 'breadcrumbs', 'watercress', 'garlic']...
+  Grilled Halloumi And Summer Squash Kabob Meal Prep
+    brakuje (4): ['halloumi', 'zucchini', 'orzo', 'scallion']
+    dopasowane (10): ['shallot', 'garlic', 'lemon', 'olive oil', 'salt']...
+  Avocado And Chicken Summer Rolls
+    brakuje (2): ['rice paper wrapper', 'lettuce']
+    dopasowane (7): ['chicken breast', 'carrot', 'cucumber', 'avocado', 'lime']...
+  Peach Summer Rolls With Tahini Dipping Sauce
+    brakuje (3): ['rice paper wrapper', 'tahini', 'sriracha']
+    dopasowane (10): ['peach', 'cucumber', 'purple cabbage', 'basil', 'mint']...
+  Watercress Spring Rolls
+    brakuje (5): ['rice paper wrapper', 'cilantro', 'sesame oil', 'water', 'sriracha']
+    dopasowane (8): ['watercress', 'purple cabbage', 'carrot', 'tofu', 'coconut aminos']...
+  Teriyaki Chicken And Vegetables
+    brakuje (9): ['zucchini', 'white rice', 'snow peas', 'water', 'tamari', 'coconut sugar', 'sesame oil', 'arrowroot powder', 'onion powder']
+    dopasowane (7): ['chicken thighs', 'broccoli', 'carrot', 'rice vinegar', 'garlic powder']...
+  Spaghetti Squash With Ground Turkey
+    brakuje (2): ['onion powder', 'sriracha']
+    dopasowane (5): ['spaghetti squash', 'ground turkey', 'garlic powder', 'salt', 'pepper']
+  Chicken Penne With Asparagus And Pistachios
+    brakuje (3): ['asparagus', 'parmesan', 'pistachios']
+    dopasowane (8): ['penne pasta', 'chicken breast', 'shallot', 'garlic', 'olive oil']...
+  Steakhouse Chili
+    brakuje (5): ['green pepper', 'pinto beans', 'worcestershire sauce', 'oregano', 'green onion']
+    dopasowane (14): ['olive oil', 'beef stew meat', 'onion', 'celery', 'diced tomatoes']...
+  Creamy Sweet Potato And Sausage Pasta
+    brakuje (3): ['bowtie pasta', 'goat cheese', 'parmesan']
+    dopasowane (10): ['sweet potato', 'onion', 'garlic', 'chicken sausage', 'italian seasoning']...
+  Asian-Inspired Brothy Beef Soup
+    brakuje (3): ['lemongrass', 'cilantro', 'fish sauce']
+    dopasowane (6): ['ground beef', 'salt', 'pepper', 'olive oil', 'shallot']...
+  Easy Beef Lasagna Casserole
+    brakuje (4): ['cavatappi pasta', 'arugula', 'ricotta', 'parmesan']
+    dopasowane (13): ['ground beef', 'pasta sauce', 'spinach', 'mozzarella', 'tomato']...
+  Cauliflower Fried Rice with Legumes and Chicken Shish Kabobs
+    brakuje (1): ['onion powder']
+    dopasowane (11): ['cauliflower', 'lentils', 'chickpeas', 'onion', 'avocado oil']...
+  Sheet Pan Philly Cheesesteak
+    brakuje (3): ['provolone', 'potato chips', 'worcestershire sauce']
+    dopasowane (9): ['beef steak', 'bell pepper', 'onion', 'mushroom', 'avocado oil']...
+  Creamy Spinach Turkey Meatballs
+    brakuje (3): ['beef bouillon cube', 'heavy cream', 'parmesan']
+    dopasowane (12): ['ground turkey', 'mozzarella', 'garlic', 'red pepper flakes', 'salt']...
+  Air Fried Crispy Chicken
+    brakuje (2): ['seasoning', 'brussels sprouts']
+    dopasowane (6): ['chicken breast', 'egg', 'olive oil', 'salt', 'pepper']...
+  Cajun Dirty Rice With Shrimp
+    brakuje (2): ['shrimp', 'collard greens']
+    dopasowane (11): ['butter', 'bell pepper', 'onion', 'celery', 'ground beef']...
+  Creamy Garlic Zoodles With Chicken
+    brakuje (2): ['zucchini', 'water']
+    dopasowane (6): ['chicken breast', 'sour cream', 'garlic', 'avocado oil', 'salt']...
+  White Chicken Chili
+    brakuje (5): ['oregano', 'lime juice', 'cilantro', 'jalapeño', 'pepitas']
+    dopasowane (13): ['avocado oil', 'onion', 'bell pepper', 'celery', 'garlic']...
+  Easy Low Carb Beef And Broccoli Stir Fry
+    brakuje (3): ['ghee', 'green onion', 'tapioca flour']
+    dopasowane (8): ['beef', 'broccoli', 'garlic', 'ginger', 'olive oil']...
+  One Pan Asian Turkey Meatballs
+    brakuje (5): ['gluten-free breadcrumbs', 'cilantro', 'pea pods', 'lime juice', 'white rice']
+    dopasowane (9): ['ground turkey', 'egg', 'garlic', 'ginger', 'red pepper flakes']...
+  Asian Crunch Buddha Bowl - Flavorful Lunch Bowl
+    brakuje (3): ['napa cabbage', 'cilantro', 'sesame oil']
+    dopasowane (7): ['brown rice', 'chicken breast', 'red bell pepper', 'peanuts', 'rice vinegar']...
+  Extra Tender Slow Cooker Asian Beef Stew
+    brakuje (4): ['cornstarch', 'water', 'cilantro', 'jasmine rice']
+    dopasowane (11): ['beef', 'olive oil', 'beef broth', 'coconut aminos', 'honey']...
+  Slow Cooker Asian Pot Roast Meal Prep
+    brakuje (3): ['oil', 'five-spice powder', 'brown sugar']
+    dopasowane (8): ['beef', 'beef broth', 'soy sauce', 'garlic', 'onion']...
+  Pulled Pork Sliders With Sweet Potato Buns
+    brakuje (3): ['water', 'pickle', 'toppings']
+    dopasowane (7): ['pork shoulder', 'salt', 'pepper', 'tomato', 'red onion']...
+  Bacon Wrapped Chicken Meal Prep
+    brakuje (1): ['onion powder']
+    dopasowane (6): ['chicken breast', 'bacon', 'paprika', 'thyme', 'salt']...
+  Korean Beef Bowl (Sticky Beef) - Easy 15 Minute Meal Prep
+    brakuje (5): ['jasmine rice', 'brown sugar', 'sesame oil', 'chili oil', 'green onion']
+    dopasowane (4): ['ground beef', 'soy sauce', 'vegetable oil', 'garlic']
+  Sweet Potato Chicken Poppers (AIP friendly)
+    brakuje (3): ['cassava flour', 'chives', 'ketchup']
+    dopasowane (5): ['ground chicken', 'sweet potato', 'olive oil', 'broccoli', 'salt']
+  Cheeseburger Pizza Chicken Meal Prep
+    brakuje (2): ['special sauce', 'pickle']
+    dopasowane (7): ['chicken breast', 'cheese', 'ground beef', 'red onion', 'salt']...
+  Pad Thai Zoodles
+    brakuje (7): ['water', 'almond butter', 'hot sauce', 'coconut sugar', 'lime juice', 'scallions', 'zucchini']
+    dopasowane (6): ['coconut aminos', 'garlic', 'avocado oil', 'egg', 'onion']...
+  Mushroom Q-Cup Stuffing
+    brakuje (3): ['mushroom q-cups', 'cranberry sauce', 'turkey gravy']
+    dopasowane (11): ['celery', 'onion', 'dried cranberries', 'rosemary', 'chicken stock']...
+  Pork Fried Rice
+    brakuje (5): ['sesame oil', 'pork tenderloin', 'snap peas', 'sriracha', 'green onion']
+    dopasowane (7): ['egg', 'carrots', 'cauliflower', 'coconut aminos', 'salt']...
+  Simple Lunch Container
+    brakuje (2): ['grapes', 'hummus']
+    dopasowane (5): ['egg', 'bell pepper', 'chicken fajita', 'cucumber', 'cheese']
+  Mushroom Pomegranate Feta Wild Rice
+    brakuje (4): ['ghee', 'wild rice', 'green onions', 'feta cheese']
+    dopasowane (7): ['mushrooms', 'garlic', 'onion', 'chicken stock', 'pomegranate seeds']...
+  Cilantro Lime Cauliflower Rice
+    brakuje (2): ['cilantro', 'lime juice']
+    dopasowane (4): ['olive oil', 'cauliflower', 'lime zest', 'salt']
+  Baked Buffalo Chicken Casserole
+    brakuje (5): ['ghee', 'buffalo sauce', 'egg whites', 'ranch dressing', 'chives']
+    dopasowane (6): ['chicken breast', 'cauliflower', 'onion', 'carrot', 'garlic']...
+  Sheet Pan Chipotle Eye Round Roast Meal Prep
+    brakuje (3): ['brown sugar', 'ground chipotle chile pepper', 'brussels sprouts']
+    dopasowane (8): ['paprika', 'cumin', 'salt', 'black pepper', 'beef']...
+  Pot Roast with Au Jus
+    brakuje (1): ['beef chuck roast']
+    dopasowane (12): ['potato', 'carrot', 'onion', 'beef broth', 'coconut aminos']...
+  Instant Pot Roast with Mashed Potatoes
+    brakuje (4): ['beef chuck roast', 'oat milk', 'arrowroot powder', 'water']
+    dopasowane (12): ['rosemary', 'garlic', 'onion', 'carrot', 'beef broth']...
+  Salmon Cakes With Mango Salsa
+    brakuje (8): ['zucchini', 'parmesan', 'flour', 'cilantro', 'cilantro', 'jalapeño', 'lime juice', 'brussels sprouts']
+    dopasowane (14): ['salmon', 'egg', 'panko breadcrumbs', 'garlic', 'chili powder']...
+  Steak And Brussels Sprout Stir-Fry Meal Prep
+    brakuje (4): ['jasmine rice', 'brussels sprouts', 'scallion', 'jalapeño']
+    dopasowane (6): ['carrot', 'ginger', 'lemon', 'beef steak', 'soy sauce']...
+  One Pan Roasted Salmon, Asparagus And Potatoes Recipe
+    brakuje (1): ['asparagus']
+    dopasowane (4): ['salmon', 'potato', 'olive oil', 'garlic powder']
+  Hawaiian Pizza Chicken Meal Prep
+    brakuje (2): ['pizza sauce', 'parmesan']
+    dopasowane (9): ['chicken breast', 'italian seasoning', 'salt', 'black pepper', 'mozzarella']...
+  Easy Steak And Potato Bites
+    brakuje (1): ['chives']
+    dopasowane (12): ['olive oil', 'butter', 'potato', 'beef steak', 'garlic']...
+  Air Fryer Molasses Dijon Ham With Roasted Vegetables
+    brakuje (2): ['molasses', 'brussels sprouts']
+    dopasowane (14): ['ham', 'butter', 'apple cider vinegar', 'dijon mustard', 'ground clove']...
+  Garlic Pepper Beef
+    brakuje (3): ['flank steak', 'parmesan', 'chili flakes']
+    dopasowane (9): ['spinach', 'butter', 'cream cheese', 'olive oil', 'milk']...
+  Tomato And Chickpea Rice With Beef Patties And Steamed Broccoli
+    brakuje (2): ['white rice', 'ghee']
+    dopasowane (10): ['ground beef', 'onion', 'parsley', 'salt', 'black pepper']...
+  Easy Pan-Roasted Chicken Meal Prep
+    brakuje (2): ['whole wheat israeli couscous', 'arugula']
+    dopasowane (8): ['mushroom', 'garlic', 'chicken breast', 'chicken stock concentrate', 'sour cream']...
+  Zoodles With Tomato Oregano Sauce And Grilled Chicken Breast
+    brakuje (2): ['zucchini', 'oregano']
+    dopasowane (7): ['chicken breast', 'salt', 'black pepper', 'tomato', 'garlic']...
+  Beef Stroganoff
+    brakuje (5): ['portobello mushroom', 'dairy free yogurt', 'tapioca flour', 'worcestershire sauce', 'onion powder']
+    dopasowane (10): ['beef steak', 'onion', 'beef broth', 'garlic', 'paprika']...
+  Salmon Tacos
+    brakuje (4): ['canola oil', 'dill', 'beet', 'corn tortilla']
+    dopasowane (9): ['salmon', 'cumin', 'paprika', 'salt', 'pepper']...
+  Apricot Sesame Chicken And Shrimp
+    brakuje (3): ['shrimp', 'apricot preserves', 'onion powder']
+    dopasowane (6): ['chicken breast', 'coconut aminos', 'garlic', 'sesame seed', 'broccoli']...
+  Veggie Supreme Pizza Chicken
+    brakuje (2): ['pizza sauce', 'feta cheese']
+    dopasowane (11): ['chicken breast', 'mozzarella', 'red onion', 'black olive', 'bell pepper']...
+  Angel Hair Pasta With Shrimp
+    brakuje (2): ['angel hair pasta', 'shrimp']
+    dopasowane (8): ['butter', 'garlic', 'lime', 'red pepper flakes', 'parsley']...
+  Sheet Pan Crispy Tofu and Broccoli
+    brakuje (4): ['sesame oil', 'arrowroot flour', 'sriracha', 'green onions']
+    dopasowane (13): ['tofu', 'coconut aminos', 'broccoli', 'sesame', 'salt']...
+  Crispy Fish Sticks
+    brakuje (3): ['tapioca flour', 'seasoning', 'ketchup']
+    dopasowane (8): ['cod', 'eggs', 'sea salt', 'sweet potato', 'olive oil']...
+  Crispy Sheet Pan Tofu
+    brakuje (6): ['gluten-free flour', 'seasoning', 'dairy free milk', 'water', 'lime juice', 'agave nectar']
+    dopasowane (6): ['tofu', 'broccoli', 'olive oil', 'sea salt', 'peanut butter']...
+  Chicken Carnitas Nachos
+    brakuje (3): ['chipotle powder', 'dried oregano', 'cilantro']
+    dopasowane (10): ['chicken breast', 'ground cumin', 'chicken stock', 'garlic powder', 'sea salt']...
+  Cremini Mushroom Meatloaf
+    brakuje (5): ['almond flour', 'dried oregano', 'ghee', 'dried chives', 'ghee']
+    dopasowane (15): ['ground beef', 'eggs', 'cremini mushrooms', 'onion', 'garlic']...
+  Bacon Ranch Chicken And Veggies Foil Packets
+    brakuje (2): ['seasoning', 'corn on the cob']
+    dopasowane (9): ['chicken breast', 'bacon', 'cauliflower', 'broccoli', 'cheese']...
+  High Protein Vegetarian Meal Prep
+    brakuje (1): ['white rice']
+    dopasowane (8): ['egg', 'spinach', 'red onion', 'black beans', 'avocado']...
+  Instant Pot Beef Barbacoa
+    brakuje (4): ['beef chuck roast', 'oregano', 'chipotle powder', 'cilantro']
+    dopasowane (10): ['olive oil', 'white onion', 'beef broth', 'tomato paste', 'cumin']...
+  Cajun Stuffed Peppers
+    brakuje (4): ['ghee', 'hot sauce', 'oregano', 'onion powder']
+    dopasowane (13): ['bell pepper', 'white onion', 'celery', 'carrot', 'ground beef']...
+  Tempeh Burrito Bowls
+    brakuje (7): ['tempeh', 'water', 'oregano', 'lime juice', 'cilantro', 'cilantro', 'jalapeño']
+    dopasowane (13): ['olive oil', 'tomato paste', 'cumin', 'chili powder', 'salt']...
+  Sesame Chicken And Broccoli Stir Fry
+    brakuje (4): ['sesame oil', 'monk fruit sweetener', 'xanthan gum', 'water']
+    dopasowane (9): ['chicken breast', 'salt', 'avocado oil', 'broccoli', 'soy sauce']...
+  Gluten Free Thai Peanut Stir Fry Meal Prep
+    brakuje (4): ['sesame oil', 'lime juice', 'cilantro', 'chili flakes']
+    dopasowane (8): ['brown rice', 'beef', 'broccoli', 'bell pepper', 'garlic']...
+  Shish Tawook Meal Prep
+    brakuje (1): ['sumac']
+    dopasowane (16): ['chicken breast', 'greek yogurt', 'lemon juice', 'avocado oil', 'tomato paste']...
+  Vegetarian Jambalaya
+    brakuje (4): ['hot sauce', 'seasoning', 'oregano', 'okra']
+    dopasowane (13): ['olive oil', 'vegetarian sausage', 'celery', 'bell pepper', 'carrot']...
+  Chicken Zucchini Burgers
+    brakuje (5): ['zucchini', 'almond flour coating', 'lettuce', 'ketchup', 'mustard']
+    dopasowane (5): ['ground chicken', 'parsley', 'sweet potato', 'avocado oil', 'salt']
+  Thai Chicken Tenders With Creamy Almond Dipping Sauce
+    brakuje (7): ['seasoning', 'cilantro', 'sesame oil', 'lime juice', 'almond butter', 'lime juice', 'sriracha']
+    dopasowane (6): ['chicken breast', 'egg', 'coleslaw mix', 'honey', 'salt']...
+  Instant Pot Beef Bbq Ribs
+    brakuje (3): ['seasoning', 'coconut sugar', 'arugula']
+    dopasowane (18): ['beef ribs', 'bbq sauce', 'apple cider vinegar', 'beef broth', 'avocado oil']...
+  Chicken Adobo Meal Prep
+    brakuje (2): ['water', 'peppercorns']
+    dopasowane (8): ['chicken legs', 'garlic', 'coconut aminos', 'olive oil', 'bay leaf']...
+  Caprese Pesto Sausage Pasta
+    brakuje (2): ['chickpea pasta', 'grape tomatoes']
+    dopasowane (5): ['chicken sausage', 'pesto', 'mozzarella', 'spinach', 'basil']
+  Italian Sausage Pasta Salad Meal Prep
+    brakuje (4): ['chickpea pasta', 'italian sausage', 'parmesan', 'italian dressing']
+    dopasowane (5): ['black olives', 'red onion', 'cherry tomatoes', 'spinach', 'mozzarella']
+  One Skillet Spaghetti Squash And Meatballs
+    brakuje (1): ['egg whites']
+    dopasowane (4): ['spaghetti squash', 'pasta sauce', 'meatballs', 'mozzarella']
+  Beef And Vegetable Fried Rice
+    brakuje (4): ['pea pods', 'tamari', 'sesame oil', 'green onions']
+    dopasowane (5): ['ground beef', 'garlic', 'ginger', 'bell pepper', 'rice']
+  Watercress Pesto Spaghetti
+    brakuje (2): ['walnuts', 'parmesan']
+    dopasowane (9): ['olive oil', 'watercress', 'garlic', 'salt', 'spaghetti']...
+  Chicken Finger And French Fry Meal Prep
+    brakuje (7): ['mustard powder', 'almond flour', 'coconut flakes', 'arrowroot', 'mustard powder', 'dill', 'onion powder']
+    dopasowane (19): ['chicken breast', 'olive oil', 'salt', 'thyme', 'egg']...
+  Greek Rice & Turkey Meal Prep Bowls
+    brakuje (1): ['oregano']
+    dopasowane (13): ['ground turkey', 'brown rice', 'chicken broth', 'olive oil', 'lemon juice']...
+  Chipotle Brown Rice Grain Bowl
+    brakuje (7): ['lime juice', 'agave nectar', 'cilantro', 'chipotle powder', 'kale', 'cilantro', 'dressing']
+    dopasowane (13): ['olive oil', 'basil', 'garlic', 'salt', 'chicken breast']...
+  Mexican Zucchini Boats
+    brakuje (4): ['zucchini', 'oregano', 'salsa', 'cilantro']
+    dopasowane (10): ['olive oil', 'ground beef', 'cumin', 'chili powder', 'garlic powder']...
+  Chicken Pot Pie Stew
+    brakuje (3): ['poultry seasoning', 'flour', 'crackers']
+    dopasowane (9): ['butter', 'celery', 'carrot', 'chicken stock', 'chicken breast']...
+  Honey Garlic Chicken
+    brakuje (2): ['sesame oil', 'jasmine rice']
+    dopasowane (5): ['chicken breast', 'garlic powder', 'soy sauce', 'honey', 'coleslaw mix']
+  Shrimp Spring Roll Bowl
+    brakuje (3): ['shrimp', 'edamame', 'sesame oil']
+    dopasowane (7): ['bell pepper', 'purple cabbage', 'cucumber', 'rice noodles', 'garlic']...
+  Chicken Shawarma Bowl
+    brakuje (4): ['turmeric', 'dill', 'hummus', 'feta cheese']
+    dopasowane (19): ['chicken breast', 'lemon juice', 'garlic', 'salt', 'pepper']...
+  Sheet Pan Salmon Fajitas
+    brakuje (5): ['lime juice', 'onion powder', 'tortilla', 'cilantro', 'salsa']
+    dopasowane (12): ['salmon', 'olive oil', 'cumin', 'chili powder', 'salt']...
+  Lemon Chicken and Pasta
+    brakuje (1): ['oregano']
+    dopasowane (7): ['chicken breast', 'lemon juice', 'garlic', 'thyme', 'brown rice pasta']...
+  Sweet 'N Spicy Jalapeno Sausage Fried Rice
+    brakuje (1): ['cilantro']
+    dopasowane (12): ['bell pepper', 'bell pepper', 'onion', 'pineapple', 'sausage']...
+  Egg Roll in a Bowl
+    brakuje (5): ['chicken bouillon seasoning', 'onion powder', 'sriracha', 'green onion', 'chili paste']
+    dopasowane (8): ['ground turkey', 'rice', 'onion', 'garlic', 'cabbage and carrots']...
+  Yummy Bacon Burger Bowls
+    brakuje (3): ['bacon fat', 'chipotle powder', 'pickles']
+    dopasowane (6): ['ground beef', 'bacon', 'onion', 'salt', 'garlic powder']...
+  Steak and Avocado Salad
+    brakuje (2): ['green onion', 'jalapeño']
+    dopasowane (11): ['sirloin steak', 'avocado', 'cucumber', 'lemon', 'romaine lettuce']...
+  Instant Pot Honey Sesame Chicken
+    brakuje (4): ['sesame oil', 'green onion', 'flour', 'white rice']
+    dopasowane (6): ['chicken breast', 'coconut aminos', 'chicken stock', 'honey', 'garlic']...
+  20 Minute Paleo Thai Almond Butter Turkey Meatballs
+    brakuje (5): ['onion powder', 'almond butter', 'coconut vinegar', 'liquid stevia', 'lime juice']
+    dopasowane (6): ['ground turkey breast', 'garlic powder', 'ground ginger', 'coconut milk', 'red curry paste']...
+  One Pot Bacon Cheeseburger Pasta
+    brakuje (5): ['ketchup', 'yellow mustard', 'worcestershire sauce', 'pasta', 'pickles']
+    dopasowane (7): ['ground beef', 'olive oil', 'onion', 'garlic powder', 'bacon']...
+  Mediterranean Salmon Bowl
+    brakuje (4): ['turmeric', 'feta cheese', 'hummus', 'kalamata olives']
+    dopasowane (9): ['salmon', 'salt', 'black pepper', 'lemon', 'rice']...
+  Salmon Cobb Salad Meal Prep
+    brakuje (1): ['grape tomatoes']
+    dopasowane (9): ['egg', 'bacon', 'salmon', 'romaine lettuce', 'avocado']...
+  Ahi Tuna and Watercress Poke Bowl
+    brakuje (3): ['white rice', 'edamame', 'sesame oil']
+    dopasowane (9): ['tuna', 'watercress', 'purple cabbage', 'carrot', 'cucumber']...
+  Sweet Potato Pizza Meal Prep
+    brakuje (5): ['almond flour', 'arrowroot flour', 'Italian seasoning', 'pizza sauce', 'parmesan']
+    dopasowane (8): ['sweet potato puree', 'egg', 'olive oil', 'white wine vinegar', 'salt']...
+  Ropa Vieja Meal Prep
+    brakuje (3): ['flank steak', 'oregano', 'green olives']
+    dopasowane (12): ['olive oil', 'salt', 'black pepper', 'garlic', 'onion']...
+  Falafel Meal Prep
+    brakuje (3): ['tahini', 'oat flour', 'lettuce']
+    dopasowane (12): ['chickpeas', 'parsley', 'garlic powder', 'onion', 'cumin']...
+  Sweet Potato Black Bean Veggie Burger Meal Prep
+    brakuje (6): ['cilantro', 'flax meal', 'roll', 'lettuce', 'pickles', 'special sauce']
+    dopasowane (15): ['pumpkin seeds', 'olive oil', 'onion', 'coconut aminos', 'cumin']...
+  BBQ Jackfruit Avocado Slaw Meal Prep
+    brakuje (6): ['jackfruit', 'water', 'BBQ sauce', 'almond milk yogurt', 'cilantro', 'lime juice']
+    dopasowane (10): ['avocado oil', 'smoked paprika', 'garlic powder', 'salt', 'black pepper']...
+  Crockpot Golden Lentil Soup
+    brakuje (3): ['turmeric', 'lime juice', 'cilantro']
+    dopasowane (13): ['red lentils', 'olive oil', 'onion', 'garlic', 'cumin']...
+  Eggplant Meatballs and Zoodle Meal Prep
+    brakuje (4): ['eggplant', 'almond flour', 'Italian seasoning', 'zucchini']
+    dopasowane (8): ['onion', 'garlic', 'olive oil', 'salt', 'pepper']...
+  Slow Cooker Lentil Soup
+    brakuje (2): ['oregano', 'kale']
+    dopasowane (14): ['vegetable stock', 'coconut aminos', 'lentils', 'celery', 'diced tomatoes']...
+  Korean Beef Bowls
+    brakuje (4): ['sesame oil', 'assorted vegetables', 'kimchi', 'green onion']
+    dopasowane (3): ['beef steak', 'coconut aminos', 'brown rice']
+  Italian Sub Lettuce Wrap Meal Prep
+    brakuje (1): ['provolone']
+    dopasowane (8): ['romaine lettuce', 'salami', 'ham', 'tomato', 'olive oil']...
+  Apricot Salmon Meal Prep
+    brakuje (2): ['apricot', 'jasmine rice']
+    dopasowane (7): ['salmon', 'maple syrup', 'coconut aminos', 'avocado oil', 'garlic powder']...
+  Beef Zucchini Enchilada Meal Prep
+    brakuje (2): ['red sauce', 'zucchini']
+    dopasowane (8): ['olive oil', 'beef chuck', 'salt', 'pepper', 'garlic powder']...
+  Chickpea Curry With Jasmine Rice Meal Prep
+    brakuje (3): ['jasmine rice', 'sriracha', 'cilantro']
+    dopasowane (10): ['avocado oil', 'onion', 'salt', 'pepper', 'curry powder']...
+  Slow Cooker Thai Yellow Curry Meal Prep
+    brakuje (3): ['lemongrass', 'turmeric', 'cilantro']
+    dopasowane (11): ['olive oil', 'garlic', 'ginger', 'cumin', 'chili powder']...
+  One Skillet Chicken Thighs With Roasted Grapes and Blue Cheese
+    brakuje (3): ['star anise', 'blue cheese', 'arugula']
+    dopasowane (8): ['chicken thighs', 'red grapes', 'olive oil', 'cinnamon', 'salt']...
+  Buffalo Chicken Stuffed Pepper Meal Prep
+    brakuje (2): ['hot sauce', 'ranch dressing']
+    dopasowane (9): ['chicken breast', 'chicken broth', 'avocado oil', 'salt', 'garlic powder']...
+  Chicken Pad Thai Zoodles
+    brakuje (7): ['fish sauce', 'sambal oelek', 'lime juice', 'zucchini', 'sesame oil', 'scallion', 'cilantro']
+    dopasowane (9): ['rice vinegar', 'peanut butter', 'coconut aminos', 'sugar', 'chicken breast']...
+  Sweet and Sour Cauliflower Bites Meal Prep
+    brakuje (4): ['gluten free flour', 'jasmine rice', 'ketchup', 'water']
+    dopasowane (7): ['cauliflower', 'mixed vegetables', 'avocado oil', 'maple syrup', 'coconut aminos']...
+  Mushroom Carnitas Burrito Bowls
+    brakuje (4): ['portobello mushroom', 'oregano', 'jalapeño', 'vegan cheese']
+    dopasowane (15): ['olive oil', 'orange juice', 'lemon juice', 'garlic', 'salt']...
+  Sheet Pan Butter Herb Shrimp Corn and Potato Bake
+    brakuje (2): ['shrimp', 'chives']
+    dopasowane (8): ['potato', 'corn', 'watercress', 'butter', 'lemon juice']...
+  Mediterranean Chicken Salad
+    brakuje (6): ['oregano', 'mixed greens', 'artichoke hearts', 'feta cheese', 'pistachios', 'balsamic vinaigrette']
+    dopasowane (10): ['chicken breast', 'lemon juice', 'olive oil', 'lemon zest', 'garlic']...
+  Garlic Coconut Butter Chicken Thighs And Zoodles
+    brakuje (4): ['zucchini', 'coconut butter', 'hot sauce', 'coconut butter']
+    dopasowane (11): ['chicken thighs', 'cherry tomatoes', 'garlic', 'olive oil', 'italian seasoning']...
+  Nutty Peanut Noodles
+    brakuje (5): ['water', 'rice bran oil', 'chili flakes', 'cabbage carrot mix', 'cilantro']
+    dopasowane (7): ['rice noodles', 'peanut butter', 'coconut aminos', 'rice vinegar', 'honey']...
+  Simple Stuffed Enjoya Bell Peppers
+    brakuje (3): ['italian sausage', 'white rice', 'marinara sauce']
+    dopasowane (7): ['bell pepper', 'olive oil', 'ground beef', 'onion', 'red kidney beans']...
+  Baked Fish And Chips Meal Prep
+    brakuje (3): ['gluten free all purpose flour', 'dill', 'arugula']
+    dopasowane (9): ['cod', 'potato', 'eggs', 'lemon', 'peas']...
+  General Tso's Cauliflower Bowls
+    brakuje (4): ['coconut sugar', 'sesame oil', 'sriracha', 'tahini']
+    dopasowane (14): ['cauliflower', 'avocado oil', 'corn starch', 'coconut aminos', 'dried red chiles']...
+  Thai Chili Garlic Noodles
+    brakuje (4): ['sesame oil', 'sesame oil', 'cilantro', 'scallions']
+    dopasowane (12): ['sweet potato', 'coconut oil', 'garlic', 'coconut aminos', 'garlic granules']...
+  Chicken Ramen Meal Prep
+    brakuje (4): ['ramen noodles', 'scallions', 'white miso paste', 'sriracha']
+    dopasowane (11): ['chicken thighs', 'chicken stock', 'radish', 'egg', 'garlic']...
+  Vegetarian Cobb Salad Meal Prep
+    brakuje (3): ['butter lettuce', 'asparagus', 'scallions']
+    dopasowane (12): ['radish', 'golden beet', 'carrot', 'cucumber', 'garlic']...
+  Macrobiotic Bowl
+    brakuje (3): ['collard greens', 'tahini', 'water']
+    dopasowane (8): ['quinoa', 'corn', 'broccoli', 'olive oil', 'shallot']...
+  Oven Baked BBQ Chicken And Veggies Meal Prep
+    brakuje (3): ['asparagus', 'grape tomatoes', 'seasoning']
+    dopasowane (11): ['chicken thighs', 'russet potato', 'carrot', 'garlic', 'green beans']...
+  Sheet Pan Chimichurri Chicken And Veggies
+    brakuje (3): ['gold potato', 'cilantro', 'lime juice']
+    dopasowane (12): ['chicken thighs', 'green beans', 'avocado oil', 'black pepper', 'salt']...
+  Leftover Turkey Sweet Potato Shepherd'S Pie
+    brakuje (1): ['arrowroot flour']
+    dopasowane (17): ['sweet potato', 'coconut milk', 'salt', 'pepper', 'olive oil']...
+  Chicken Buddha Bowl Meal Prep
+    brakuje (2): ['jasmine rice', 'seasoning']
+    dopasowane (6): ['chicken breast', 'mixed vegetables', 'avocado oil', 'salt', 'black pepper']...
+  Cold Veggie Pizza Meal Prep
+    brakuje (4): ['pizza dough', 'water', 'dill', 'arugula']
+    dopasowane (7): ['apple cider vinegar', 'avocado oil', 'cream cheese', 'cucumber', 'cherry tomatoes']...
+  Pulled Pork Stuffed Sweet Potatoes
+    brakuje (3): ['jalapeño', 'pickles', 'seasoning']
+    dopasowane (4): ['pork loin', 'sweet potato', 'white onion', 'bbq sauce']
+  Tofu Tikka Masala
+    brakuje (5): ['sesame oil', 'turmeric', 'nutmeg', 'cilantro', 'sesame oil']
+    dopasowane (15): ['tofu', 'salt', 'black pepper', 'red onion', 'ginger']...
+  Apricot Cucumber Tofu Steak Meal Prep
+    brakuje (1): ['apricot']
+    dopasowane (9): ['tofu', 'rice wine vinegar', 'balsamic vinegar', 'maple syrup', 'cucumber']...
+  Pesto Chicken Meal Prep
+    brakuje (3): ['asparagus', 'walnuts', 'walnuts']
+    dopasowane (10): ['chicken breast', 'sun-dried tomatoes', 'black olives', 'olive oil', 'cherry tomatoes']...
+  Popcorn Chicken With Rice Noodles And Gochujang Sauce
+    brakuje (6): ['tapioca flour', 'sesame oil', 'green onion', 'ketchup', 'coconut sugar', 'korean chili paste']
+    dopasowane (10): ['chicken breast', 'brown rice noodles', 'rice wine vinegar', 'paprika', 'ginger']...
+  Greek Salad
+    brakuje (2): ['feta cheese', 'dressing']
+    dopasowane (6): ['cherry tomatoes', 'bell pepper', 'red onion', 'cucumber', 'romaine lettuce']...
+  Vegan Chickpea Curry And Basmati Rice Meal Prep
+    brakuje (3): ['coconut sugar', 'lime juice', 'fresh herbs']
+    dopasowane (7): ['tomato sauce', 'coconut milk', 'red curry paste', 'salt', 'pepper']...
+  Slow Cooker Beef Ragu Pasta Meal Prep
+    brakuje (2): ['chickpea pasta', 'parmesan']
+    dopasowane (12): ['beef steak', 'olive oil', 'salt', 'pepper', 'crushed tomatoes']...
+  Keto Bacon Sausage Meatballs
+    brakuje (2): ['italian sausage', 'oregano']
+    dopasowane (3): ['bacon', 'garlic', 'onion']
+  10 Minute Chili Meal Prep
+    brakuje (4): ['chili seasoning', 'pumpkin puree', 'cilantro', 'chives']
+    dopasowane (6): ['ground beef', 'tomato sauce', 'black beans', 'portobello mushrooms', 'sour cream']...
+  Crockpot Pumpkin Chili Meal Prep
+    brakuje (1): ['pumpkin puree']
+    dopasowane (13): ['ground beef', 'diced tomatoes', 'crushed tomatoes', 'green bell pepper', 'onion']...
+  Instant Pot Moroccan Chicken Meal Prep
+    brakuje (3): ['almond butter', 'cilantro', 'almonds']
+    dopasowane (15): ['chicken thighs', 'salt', 'pepper', 'olive oil', 'onion']...
+  Grilled Halloumi and Watermelon Salad
+    brakuje (2): ['halloumi cheese', 'balsamic glaze']
+    dopasowane (5): ['olive oil', 'watermelon', 'spinach', 'avocado', 'lemon']
+  Kimchi Buddha Bowl Meal Prep
+    brakuje (4): ['mixed greens', 'kimchi', 'tamari', 'sesame oil']
+    dopasowane (10): ['cannellini beans', 'cauliflower', 'sweet potato', 'watermelon radish', 'lime']...
+  Sausage and Mashed Potato Meal Prep
+    brakuje (3): ['ghee', 'arrowroot', 'water']
+    dopasowane (11): ['sausage', 'olive oil', 'cauliflower', 'potato', 'salt']...
+  Orange Chicken Meal Prep
+    brakuje (2): ['almond flour', 'arrowroot']
+    dopasowane (12): ['chicken breast', 'egg', 'salt', 'orange juice', 'honey']...
+  Gumbo Meal Prep
+    brakuje (1): ['okra']
+    dopasowane (13): ['olive oil', 'garlic', 'onion', 'thyme', 'salt']...
+  Buffalo Chicken Mac & Cheese
+    brakuje (4): ['hot sauce', 'arrowroot', 'mustard powder', 'parmesan']
+    dopasowane (10): ['olive oil', 'chicken breast', 'salt', 'pepper', 'butter']...
+  Mozzarella Stuffed Meatballs
+    brakuje (3): ['parmesan', 'zucchini', 'marinara sauce']
+    dopasowane (7): ['mozzarella', 'ground beef', 'egg', 'italian seasoning', 'sea salt']...
+  Roasted Mediterranean Cauliflower Gnocchi & Veggies
+    brakuje (3): ['zucchini', 'summer squash', 'grape tomatoes']
+    dopasowane (7): ['cauliflower gnocchi', 'bell pepper', 'red onion', 'lemon juice', 'avocado oil']...
+  Zuppa Pomodoro Meal Prep
+    brakuje (3): ['gluten free sourdough bread', 'orzo pasta', 'hemp hearts']
+    dopasowane (10): ['olive oil', 'onion', 'carrot', 'salt', 'pepper']...
+  Sheet Pan Teriyaki Chicken and Pineapple Fried Rice
+    brakuje (2): ['sesame oil', 'mixed greens']
+    dopasowane (10): ['chicken breast', 'brown rice', 'teriyaki sauce', 'pineapple', 'ham']...
+  Indonesian Grain Bowl
+    brakuje (4): ['palm sugar', 'thai chiles', 'tempeh', 'bean sprouts']
+    dopasowane (6): ['coconut aminos', 'ginger', 'garlic', 'olive oil', 'green beans']...
+  One Pan Mushroom Tetrazzini
+    brakuje (3): ['gluten-free all purpose flour', 'plant based milk', 'nutritional yeast']
+    dopasowane (10): ['butter', 'mushroom', 'salt', 'shallot', 'garlic']...
+  Mole Tempeh Enchiladas
+    brakuje (10): ['dried fruit medley', 'dates', 'oregano', 'fennel seed', 'allspice', 'brown sugar', 'corn tortilla', 'tempeh', 'canned green chiles', 'corn tortillas']
+    dopasowane (15): ['olive oil', 'onion', 'garlic', 'cumin', 'salt']...
+  Sheet Pan Thyme Pork Chops and Marinated Salad
+    brakuje (4): ['lemon pepper seasoning', 'lemon pepper seasoning', 'oregano', 'arugula']
+    dopasowane (17): ['pork chop', 'avocado oil', 'shallot', 'thyme', 'garlic']...
+  Coconut Sugar Sriracha Shrimp Meal Prep
+    brakuje (4): ['coconut sugar', 'sriracha', 'shrimp', 'chives']
+    dopasowane (4): ['olive oil', 'garlic', 'riced cauliflower', 'broccoli']
+  Fruity Quinoa And Grilled Salmon
+    brakuje (1): ['scallion']
+    dopasowane (9): ['salmon', 'cauliflower', 'quinoa', 'lemon', 'blueberry']...
+  Sheet Pan Steak And Veggies Meal Prep
+    brakuje (1): ['yellow onion']
+    dopasowane (4): ['beef steak', 'green beans', 'sweet potato', 'mushroom']
+  Carrot Meatballs With Mint Cauliflower Rice
+    brakuje (1): ['water']
+    dopasowane (13): ['ground beef', 'egg', 'carrot', 'italian seasoning', 'red pepper flakes']...
+  Chicken Quinoa Salad
+    brakuje (1): ['scallion']
+    dopasowane (7): ['chicken breast', 'quinoa', 'salt', 'butternut squash', 'celery']...
+  Air Fried Parmesan Broccoli
+    brakuje (2): ['parmesan', 'lemon pepper']
+    dopasowane (3): ['broccoli', 'butter', 'garlic powder']
+  Shrimp Bowtie Pasta
+    brakuje (1): ['shrimp']
+    dopasowane (4): ['gluten free pasta', 'garlic pasta sauce', 'garlic', 'spinach']
+  Tuna Poke Bowl Meal Prep
+    brakuje (2): ['coconut vinegar', 'sesame oil']
+    dopasowane (12): ['coconut aminos', 'maple syrup', 'sesame seeds', 'red pepper flakes', 'garlic powder']...
+  Skillet Shrimp With Tomato And Avocado
+    brakuje (6): ['ghee', 'shrimp', 'scallion', 'chipotle pepper in adobo sauce', 'lime juice', 'cilantro']
+    dopasowane (6): ['parsley', 'salt', 'pepper', 'tomato', 'garlic']...
+  One Pan Paleo Sticky Sesame Chicken Thighs
+    brakuje (3): ['ketchup', 'sesame oil', 'coconut flour']
+    dopasowane (5): ['chicken thighs', 'honey', 'coconut aminos', 'garlic powder', 'sesame seed']
+  Sheet Pan Salmon And Veggies Meal Prep
+    brakuje (3): ['seasoning', 'zucchini', 'yellow squash']
+    dopasowane (4): ['salmon', 'avocado oil', 'red onion', 'red bell pepper']
+  Change Up Your Meal Prep Protein Game With A Shrimp Meal Prep
+    brakuje (4): ['shrimp', 'beet hummus', 'ghee', 'seasoning']
+    dopasowane (3): ['cauliflower rice', 'avocado', 'blueberry']
+  Packing A Bunch Of Protein Into Your Meal Prep Has Never Been Easier!
+    brakuje (1): ['onion powder']
+    dopasowane (12): ['salmon', 'lentil', 'broccoli', 'olive oil', 'salt']...
+  Spaghetti Squash And Spicy Bbq Chicken Drumsticks
+    brakuje (1): ['hot sauce']
+    dopasowane (3): ['spaghetti squash', 'chicken drumsticks', 'bbq sauce']
+  Molasses Bourbon Bbq Glazed Chicken Meatballs
+    brakuje (2): ['bourbon whisky', 'molasses']
+    dopasowane (18): ['ground chicken', 'egg', 'gluten free panko breadcrumbs', 'salt', 'black pepper']...
+  Balsamic Caprese Chicken
+    brakuje (4): ['zoodles', 'grape tomatoes', 'coconut sugar', 'oregano']
+    dopasowane (8): ['chicken breast', 'mozzarella', 'balsamic vinegar', 'basil', 'olive oil']...
+  Sheet Pan Caribbean Chicken Thighs
+    brakuje (7): ['allspice', 'onion powder', 'plantain', 'coconut sugar', 'cilantro', 'lime juice', 'jalapeño']
+    dopasowane (13): ['chicken thighs', 'olive oil', 'cumin', 'cinnamon', 'salt']...
+  Chicken Enchiladas
+    brakuje (9): ['lime juice', 'poblano pepper', 'cassava flour tortillas', 'red enchilada sauce', 'refried beans', 'white rice', 'pico de gallo', 'cilantro', 'oregano']
+    dopasowane (8): ['chicken breast', 'avocado', 'cheese', 'chicken broth', 'cumin']...
+  Turkey Stuffed Sweet Potatoes
+    brakuje (6): ['green onion', 'cilantro', 'feta cheese', 'brussels sprouts', 'lime juice', 'hot sauce']
+    dopasowane (11): ['sweet potato', 'ground turkey', 'tomato sauce', 'avocado oil', 'cumin']...
+  Stir Fry Chicken and Veggies
+    brakuje (3): ['asparagus', 'tapioca flour', 'sesame oil']
+    dopasowane (14): ['chicken breast', 'red bell pepper', 'coconut aminos', 'chicken broth', 'coconut oil']...
+  Broiled Cod with Mango Relish
+    brakuje (4): ['white rice', 'asparagus', 'cilantro', 'lime juice']
+    dopasowane (9): ['cod', 'avocado oil', 'mango', 'garlic', 'red onion']...
+  Instant Pot Minestrone Soup
+    brakuje (3): ['zucchini', 'kale', 'canned diced tomatoes']
+    dopasowane (12): ['celery', 'white onion', 'red bell pepper', 'tomato paste', 'vegetable broth']...
+  Beef and Cheese Taquitos
+    brakuje (7): ['tortilla', 'oregano', 'salsa', 'cilantro', 'jalapeño', 'lime juice', 'cojita cheese']
+    dopasowane (13): ['ground beef', 'cumin', 'smoked paprika', 'garlic powder', 'salt']...
+  Spicy Italian Sausage And Tortellini Soup
+    brakuje (7): ['spicy italian pork sausage', 'cheese tortellini', 'fire roasted tomatoes', 'oregano', 'kale', 'heavy cream', 'parmesan']
+    dopasowane (6): ['red bell pepper', 'onion', 'chicken stock', 'tomato paste', 'salt']...
+  Pork Fried Cauliflower Rice
+    brakuje (2): ['sesame oil', 'green onion']
+    dopasowane (9): ['pork chop', 'garlic', 'ginger', 'onion', 'carrot']...
+  One Pan Baked Pasta Primavera
+    brakuje (3): ['rotini pasta', 'zucchini', 'almond milk']
+    dopasowane (5): ['pasta sauce', 'carrot', 'green peas', 'mozzarella', 'basil']
+  Moroccan Farro Grain Bowl
+    brakuje (10): ['lime juice', 'agave nectar', 'cilantro', 'kale', 'farro', 'feta cheese', 'dried apricots', 'pistachios', 'cilantro', 'dressing']
+    dopasowane (8): ['olive oil', 'basil', 'garlic', 'salt', 'olive oil']...
+  Eggplant Lasagna
+    brakuje (2): ['eggplant', 'oregano']
+    dopasowane (15): ['olive oil', 'ricotta cheese', 'egg', 'salt', 'basil']...
+  Taco Wontons
+    brakuje (4): ['wonton wrapper', 'salsa', 'cilantro', 'lime juice']
+    dopasowane (10): ['ground beef', 'black beans', 'ground cumin', 'chili powder', 'salt']...
+  Vegetarian Chorizo And Quinoa Stuffed Peppers
+    brakuje (4): ['soy chorizo', 'plant-based shredded cheese', 'salsa', 'cilantro']
+    dopasowane (6): ['bell pepper', 'olive oil', 'onion', 'quinoa', 'corn']...
+  Spicy Turkey Meatballs And Rice
+    brakuje (3): ['white rice', 'bouillon cube', 'sriracha']
+    dopasowane (7): ['ground turkey', 'cheese', 'garlic', 'black pepper', 'red pepper flakes']...
+  Tuna Snack Box
+    brakuje (1): ['almonds']
+    dopasowane (3): ['tuna', 'cucumber', 'cheese stick']
+  Avocado Egg Salad Meal Prep
+    brakuje (1): ['chives']
+    dopasowane (6): ['avocado', 'egg', 'mayonnaise', 'lemon juice', 'salt']...
+  Keto Parmesan Chicken Patties
+    brakuje (3): ['parmesan', 'marinara sauce', 'chard']
+    dopasowane (10): ['ground chicken', 'egg', 'italian seasoning', 'garlic powder', 'sea salt']...
+  Slow Cooker Keto Pork Carnitas Bowls
+    brakuje (6): ['lime juice', 'oregano', 'lime juice', 'baby greens', 'salsa', 'jalapeño']
+    dopasowane (15): ['pork', 'orange juice', 'olive oil', 'tomato paste', 'coconut aminos']...
+  Keto Lamb Meatball Meal Prep
+    brakuje (3): ['oregano', 'marinara sauce', 'zucchini noodles']
+    dopasowane (12): ['ground lamb', 'egg', 'garlic', 'onion', 'salt']...
+  Firecracker Beef
+    brakuje (4): ['brussels sprouts', 'poblano pepper', 'hot sauce', 'cornstarch']
+    dopasowane (6): ['ground beef', 'onion', 'garlic', 'red pepper flakes', 'apple cider vinegar']...
+  Chicken Fried Rice
+    brakuje (3): ['cornstarch', 'baking soda', 'jasmine rice']
+    dopasowane (12): ['chicken breast', 'soy sauce', 'olive oil', 'egg', 'olive oil']...
+  Spicy Air Fryer Shrimp
+    brakuje (2): ['shrimp', 'hot sauce']
+    dopasowane (3): ['butter', 'paprika', 'olive oil']
+  Sheet Pan Pork Tenderloin Meal Prep
+    brakuje (1): ['pork tenderloin']
+    dopasowane (7): ['carrot', 'potato', 'olive oil', 'thyme', 'paprika']...
+  BBQ Pulled Mushrooms
+    brakuje (2): ['polenta', 'onion powder']
+    dopasowane (15): ['shiitake mushrooms', 'portobello mushrooms', 'tomato sauce', 'coconut aminos', 'maple syrup']...
+  Caribbean Drumsticks
+    brakuje (7): ['allspice', 'water', 'plantain', 'grape tomatoes', 'jalapeño', 'cilantro', 'lime juice']
+    dopasowane (15): ['chicken drumsticks', 'red onion', 'garlic', 'coconut oil', 'dried cranberries']...
+  Slow Cooker Stuffed Cabbage Soup
+    brakuje (1): ['yellow onion']
+    dopasowane (14): ['ground beef', 'brown rice', 'green bell pepper', 'celery', 'carrot']...
+  Teriyaki Salmon & Pineapple Skewer Meal Prep
+    brakuje (3): ['date', 'arrowroot', 'water']
+    dopasowane (10): ['salmon', 'pineapple', 'bell pepper', 'red onion', 'coconut aminos']...
+  BBQ Lentil Taco Meal Prep
+    brakuje (12): ['water', 'water', 'date syrup', 'molasses', 'onion powder', 'lime juice', 'water', 'cilantro', 'masa harina', 'arrowroot', 'corn tortilla', 'lettuce']
+    dopasowane (13): ['lentils', 'tomato paste', 'white wine vinegar', 'garlic powder', 'salt']...
+  Five-Spice Beef and Broccoli
+    brakuje (5): ['sesame oil', 'sesame oil', 'gluten-free flour', 'coconut sugar', 'five-spice powder']
+    dopasowane (8): ['cauliflower rice', 'avocado oil', 'beef sirloin', 'broccoli', 'sesame seeds']...
+  Red Pepper and Parmesan Quinoa Pasta
+    brakuje (1): ['parmesan']
+    dopasowane (11): ['quinoa pasta', 'olive oil', 'chicken breast', 'garlic', 'salt']...
+  Mongolian Beef Meatballs
+    brakuje (4): ['seasoning', 'green onion', 'coconut sugar', 'arrowroot']
+    dopasowane (9): ['ground beef', 'coconut aminos', 'olive oil', 'beef stock', 'coconut aminos']...
+  Firecracker Tofu
+    brakuje (6): ['vegan butter', 'hot sauce', 'brown sugar', 'chili flakes', 'gluten-free flour', 'white rice']
+    dopasowane (5): ['tofu', 'coconut aminos', 'garlic powder', 'vegetable oil', 'broccoli']
+  Thai Red Curry Chicken
+    brakuje (3): ['coconut cream', 'coconut sugar', 'lime juice']
+    dopasowane (11): ['coconut oil', 'chicken breast', 'garlic', 'ginger', 'red bell pepper']...
+  Air Fryer Chicken Parmesan
+    brakuje (5): ['gluten-free breadcrumbs', 'parmesan', 'oregano', 'marinara sauce', 'zucchini']
+    dopasowane (10): ['chicken breast', 'egg', 'basil', 'garlic powder', 'salt']...
+  Vegan Sweet Potato Chipotle Bowl
+    brakuje (5): ['chipotle powder', 'kale', 'cilantro', 'lime juice', 'agave nectar']
+    dopasowane (12): ['sweet potato', 'cumin', 'salt', 'olive oil', 'black beans']...
+  Sheet Pan Asian Chicken
+    brakuje (4): ['cilantro', 'lime juice', 'sesame oil', 'coconut sugar']
+    dopasowane (9): ['chicken breast', 'broccoli', 'red bell pepper', 'brown rice', 'sesame seeds']...
+  Air Fryer Egg Rolls
+    brakuje (7): ['green onion', 'sesame oil', 'sesame oil', 'lime juice', 'snap peas', 'sesame oil', 'chili flakes']
+    dopasowane (12): ['coconut wrap', 'chicken breast', 'green cabbage', 'carrot', 'coconut aminos']...
+  Orange Sesame Tofu And Snap Peas
+    brakuje (6): ['coconut sugar', 'sesame oil', 'chili flakes', 'jasmine rice', 'snap peas', 'green onion']
+    dopasowane (6): ['orange juice', 'coconut aminos', 'orange zest', 'garlic', 'tofu']...
+  Low Carb Lasagna Meal Prep
+    brakuje (3): ['zucchini', 'ricotta', 'parmesan']
+    dopasowane (12): ['ground beef', 'olive oil', 'onion', 'garlic', 'italian seasoning']...
+  Shrimp Quinoa Broccoli Meal Prep | Garlic Shrimp Recipe
+    brakuje (2): ['sesame oil', 'shrimp']
+    dopasowane (7): ['soy sauce', 'honey', 'black pepper', 'olive oil', 'garlic']...
+  Sheet Pan Chicken Fajitas
+    brakuje (1): ['taco seasoning']
+    dopasowane (5): ['chicken breast', 'olive oil', 'bell pepper', 'onion', 'lime']
+  Pumpkin Mustard Stuffed Cabbage
+    brakuje (5): ['cabbage leaves', 'ghee', 'nutmeg', 'pumpkin mustard', 'hemp seeds']
+    dopasowane (8): ['cauliflower', 'onion', 'ground beef', 'egg', 'salt']...
+  One Pan Baked Cod and Veggies
+    brakuje (2): ['oil', 'seasoning']
+    dopasowane (3): ['cod', 'cherry tomatoes', 'purple potatoes']
+  Parmesan Chicken Tenders | Meal Prep
+    brakuje (4): ['bread crumbs', 'parmesan', 'oregano', 'grape tomatoes']
+    dopasowane (8): ['chicken breast', 'basil', 'thyme', 'rosemary', 'salt']...
+  Sheet Pan Pineapple Chicken
+    brakuje (3): ['white rice', 'parmesan', 'oregano']
+    dopasowane (11): ['chicken breast', 'pineapple', 'broccoli', 'cauliflower', 'mozzarella']...
+  Mediterranean Style Meal Prep Bowls
+    brakuje (4): ['zucchini', 'feta cheese', 'olives', 'tzatziki sauce']
+    dopasowane (6): ['beef steak', 'red bell pepper', 'lemon juice', 'salt', 'quinoa']...
+  Air Fryer Popcorn Chicken
+    brakuje (1): ['almond flour']
+    dopasowane (14): ['chicken breast', 'egg', 'salt', 'garlic powder', 'black pepper']...
+  Fall Harvest Sheet Pan Dinner Meal Prep
+    brakuje (2): ['brussels sprouts', 'seasoning']
+    dopasowane (4): ['chicken thighs', 'sweet potato', 'red onion', 'olive oil']
+  Cilantro Lime Rice
+    brakuje (1): ['cilantro']
+    dopasowane (5): ['rice', 'red pepper flakes', 'lime', 'onion', 'vegetable broth']
+  Loaded Mediterranean Bowl Meal Prep
+    brakuje (3): ['kale', 'hummus', 'turmeric']
+    dopasowane (6): ['sweet potato', 'chickpeas', 'avocado', 'quinoa', 'olive oil']...
+  Lighter Mango Chicken Sticky Rice Meal Prep
+    brakuje (2): ['chili paste', 'scallions']
+    dopasowane (9): ['rice', 'mango', 'chicken breast', 'olive oil', 'rice wine vinegar']...
+  One Pot Jambalaya Meal Prep
+    brakuje (1): ['shrimp']
+    dopasowane (13): ['avocado oil', 'onion', 'celery', 'bell pepper', 'andouille sausage']...
+  Tuna Quinoa Salad In Endive Wraps
+    brakuje (2): ['dill', 'endive']
+    dopasowane (8): ['quinoa', 'tuna', 'greek yogurt', 'lemon juice', 'radish']...
+  Chicken Salad
+    brakuje (2): ['walnuts', 'cilantro']
+    dopasowane (5): ['chicken breast', 'celery', 'red onion', 'mayonnaise', 'dijon mustard']
+  Cold Chicken Soba Noodle Meal Prep
+    brakuje (5): ['cilantro', 'lime juice', 'water', 'cilantro', 'lime juice']
+    dopasowane (10): ['chicken breast', 'salt', 'pepper', 'soba noodles', 'carrot']...
+  Spicy Mustard Thyme Chicken & Coconut Roasted Brussels Sprouts
+    brakuje (2): ['brussels sprouts', 'spicy brown mustard']
+    dopasowane (6): ['chicken breast', 'lemon juice', 'thyme', 'salt', 'pepper']...
+  Jalapeno Sliders With Sweet Potato Bun Meal Prep
+    brakuje (1): ['jalapeño']
+    dopasowane (7): ['sweet potato', 'ground beef', 'garlic powder', 'cumin', 'olive oil']...
+  Mediterranean Roasted Eggplant Salad
+    brakuje (3): ['eggplant', 'pita', 'agave nectar']
+    dopasowane (10): ['olive oil', 'chickpeas', 'cucumber', 'tomato', 'parsley']...
+  Air Fryer Coconut Shrimp
+    brakuje (8): ['shrimp', 'coconut flour', 'shredded coconut', 'lime juice', 'cilantro', 'sesame oil', 'lime juice', 'monk fruit sweetener']
+    dopasowane (11): ['egg', 'salt', 'lime', 'cauliflower', 'avocado oil']...
+  Autumn Sheet Pan Chicken Recipe
+    brakuje (1): ['brussels sprouts']
+    dopasowane (12): ['apple', 'sweet potato', 'shallot', 'chicken breast', 'bacon']...
+  Sheet Pan Shrimp Fajitas
+    brakuje (6): ['shrimp', 'oregano', 'onion powder', 'cilantro', 'lime juice', 'corn tortilla']
+    dopasowane (11): ['bell pepper', 'onion', 'olive oil', 'cumin', 'paprika']...
+  Cranberry Turkey Pinwheels
+    brakuje (2): ['cranberry sauce', 'walnuts']
+    dopasowane (4): ['spinach wrap', 'cream cheese', 'turkey', 'spinach']
+  Maple Crusted Air Fryer Salmon
+    brakuje (2): ['coconut sugar', 'walnuts']
+    dopasowane (9): ['salmon', 'paprika', 'salt', 'garlic powder', 'maple syrup']...
+  Jalapeño Buffalo Chicken Casserole
+    brakuje (4): ['jalapeño', 'coconut cream', 'buffalo sauce', 'ranch']
+    dopasowane (8): ['chicken breast', 'cauliflower rice', 'onion', 'red bell pepper', 'broccoli']...
+  Spaghetti Squash Shrimp Scampi
+    brakuje (3): ['shrimp', 'artichoke', 'diced tomato']
+    dopasowane (4): ['spaghetti squash', 'mushroom', 'spinach', 'garlic']
+  Chicken Jambalaya
+    brakuje (2): ['oregano', 'white rice']
+    dopasowane (11): ['chicken breast', 'chicken sausage', 'olive oil', 'onion', 'celery']...
+  Gorgeous Greek Salad
+    brakuje (3): ['lettuce', 'feta cheese', 'greek dressing']
+    dopasowane (3): ['cherry tomatoes', 'red onion', 'cucumber']
+  Taco Bowls
+    brakuje (2): ['white rice', 'taco seasoning']
+    dopasowane (7): ['ground beef', 'tomato', 'avocado', 'corn', 'black beans']...
+  Sheet Pan Italian Sausage and Peppers
+    brakuje (1): ['italian sausage']
+    dopasowane (4): ['bell pepper', 'olive oil', 'italian seasoning', 'brown rice']
+  Roasted Vegetable Vegan Stew
+    brakuje (1): ['rice bran oil']
+    dopasowane (14): ['butternut squash', 'sweet potato', 'onion', 'garlic', 'salt']...
+  Korean BBQ Chicken Thighs
+    brakuje (3): ['white rice', 'green onion', 'sesame oil']
+    dopasowane (6): ['chicken thighs', 'broccoli', 'korean bbq sauce', 'sesame seeds', 'garlic powder']...
+  Sheet Pan Spicy Peanut Tempeh and Sesame Vegetables
+    brakuje (4): ['tempeh', 'lime juice', 'garlic-chili sauce', 'sesame oil']
+    dopasowane (6): ['coconut aminos', 'peanut butter', 'broccoli', 'bell pepper', 'carrot']...
+  Sheet Pan Zesty Stuffed Poblano Peppers
+    brakuje (3): ['poblano pepper', 'oregano', 'cilantro']
+    dopasowane (9): ['ground beef', 'tomato sauce', 'cumin', 'chili powder', 'salt']...
+  Buffalo Chicken Stuffed Sweet Potato Skins
+    brakuje (3): ['hot sauce', 'green onion', 'blue cheese dressing']
+    dopasowane (7): ['sweet potato', 'chicken', 'butter', 'mayonnaise', 'garlic powder']...
+  Air Fryer Firecracker Chicken
+    brakuje (5): ['gluten-free flour', 'hot sauce', 'green onion', 'white rice', 'edamame']
+    dopasowane (5): ['chicken breast', 'honey', 'coconut aminos', 'red pepper flakes', 'salt']
+  Sun Dried Tomato, Broccoli & Portobello Mushroom Mac & Cheese
+    brakuje (3): ['macaroni and cheese', 'ghee', 'portobello mushroom']
+    dopasowane (3): ['milk', 'broccoli', 'sun-dried tomato']
+  Honey Garlic Mushroom Meatballs
+    brakuje (4): ['zucchini', 'green onion', 'cremini mushroom', 'almond flour']
+    dopasowane (10): ['avocado oil', 'sesame seeds', 'ground turkey', 'egg', 'ginger']...
+  Fall Harvest Sausage Salad
+    brakuje (6): ['mixed greens', 'goat cheese', 'scallion', 'slivered almonds', 'lime juice', 'onion powder']
+    dopasowane (11): ['chicken sausage', 'quinoa', 'butternut squash', 'dried cranberries', 'avocado oil']...
+  One Skillet Honey Dijon Pork Chops With Apples And Onions
+    brakuje (1): ['fresh herbs']
+    dopasowane (8): ['pork chop', 'olive oil', 'apple', 'onion', 'honey mustard']...
+  Instant Pot Ranch Chicken Lettuce Wraps (Keto Tex-Mex Meal Prep)
+    brakuje (5): ['seasoning', 'cilantro', 'lettuce', 'guacamole', 'salsa']
+    dopasowane (8): ['chicken broth', 'chicken thighs', 'olive oil', 'cumin', 'chili powder']...
+  Sheet Pan Chicken And Asparagus Bowl
+    brakuje (3): ['oil spray', 'asparagus', 'oyster sauce']
+    dopasowane (2): ['chicken thigh', 'garlic']
+  Easy Lemon Pepper Sheet Pan Salmon With Chive Yogurt Sauce
+    brakuje (3): ['asparagus', 'lemon herb seasoning', 'chives']
+    dopasowane (8): ['salmon', 'green beans', 'lemon', 'olive oil', 'plain yogurt']...
+  Marry Me Tortellini - A Tasty Twist On Marry Me Chicken
+    brakuje (3): ['tortellini', 'goat cheese', 'parmesan']
+    dopasowane (9): ['chicken breast', 'sun dried tomatoes', 'basil', 'chicken broth', 'garlic']...
+  Crockpot Beef With Sugar Snap Peas
+    brakuje (5): ['coconut brown sugar', 'sesame oil', 'cornstarch', 'water', 'white rice']
+    dopasowane (6): ['beef chuck', 'beef broth', 'coconut aminos', 'garlic', 'sugar snap peas']...
+  The Most Flavorful Asian Air Fryer Salmon
+    brakuje (3): ['sesame oil', 'green onion', 'jasmine rice']
+    dopasowane (9): ['avocado oil', 'salmon', 'coconut aminos', 'honey', 'garlic']...
+  One Pan Salmon With Creamed Spinach Farro
+    brakuje (1): ['farro']
+    dopasowane (10): ['salmon', 'olive oil', 'salt', 'black pepper', 'red onion']...
+  Sheet Pan Salmon Burgers
+    brakuje (5): ['almond flour', 'chives', 'dill', 'lettuce', 'roasted red bell peppers']
+    dopasowane (13): ['salmon', 'egg', 'lemon zest', 'garlic', 'salt']...
+  Balsamic Sausage And Veggie Meal Prep
+    brakuje (5): ['italian sausage', 'zucchini', 'yellow squash', 'roma tomato', 'balsamic glaze']
+    dopasowane (8): ['avocado oil', 'garlic', 'italian seasoning', 'parsley', 'basil']...
+  Steak Fajita Meal Prep
+    brakuje (8): ['cassava tortilla', 'skirt steak', 'cilantro', 'tamari', 'lime juice', 'coconut sugar', 'oregano', 'salsa']
+    dopasowane (15): ['red bell pepper', 'yellow bell pepper', 'green bell pepper', 'white onion', 'lime']...
+  Chicken Marsala Meatballs
+    brakuje (5): ['parmesan', 'almond flour', 'onion powder', 'arrowroot powder', 'marsala wine']
+    dopasowane (11): ['ground chicken', 'garlic', 'parsley', 'salt', 'black pepper']...
+  Crockpot Chicken Piccata and Green Beans
+    brakuje (3): ['Italian dressing seasoning', 'capers', 'white cooking wine']
+    dopasowane (5): ['chicken thighs', 'lemon juice', 'green beans', 'butter', 'garlic powder']
+  Kofta Kebab Meal Prep
+    brakuje (3): ['cilantro', 'turmeric', 'grapeseed oil']
+    dopasowane (10): ['onion', 'garlic', 'salt', 'black pepper', 'mint']...
+  Cranberry BBQ Vegan Meatballs
+    brakuje (5): ['water', 'rolled oats', 'garbanzo beans', 'hemp seeds', 'onion powder']
+    dopasowane (7): ['ground flax', 'garlic powder', 'salt', 'black pepper', 'bbq sauce']...
+  Turmeric Ginger Salmon in Foil Meal Prep
+    brakuje (2): ['oil', 'turmeric']
+    dopasowane (5): ['salmon', 'sweet potato', 'broccoli florets', 'ginger', 'black pepper']
+  Crockpot Mississippi Chicken Thighs With Noodles
+    brakuje (4): ['ranch dressing mix', 'onion soup mix', 'pepperoncini peppers', 'pepperoncini juice']
+    dopasowane (2): ['chicken thighs', 'egg noodles']
+  Skillet Bacon Broccoli Pork Chops Meal Prep
+    brakuje (2): ['flour', 'half and half']
+    dopasowane (11): ['pork chop', 'olive oil', 'salt', 'black pepper', 'bacon']...
+  Crockpot French Onion Stuffed Shells Meal Prep
+    brakuje (5): ['jumbo pasta shells', 'gruyere cheese', 'parmesan cheese', 'heavy cream', 'seasoned breadcrumbs']
+    dopasowane (13): ['ricotta cheese', 'egg', 'dried thyme', 'garlic', 'salt']...
+  Sheet Pan Lemon Ricotta Chicken And Roasted Broccoli
+    brakuje (3): ['parmesan cheese', 'pasta', 'parmesan cheese']
+    dopasowane (15): ['chicken breast', 'broccoli florets', 'olive oil', 'salt', 'black pepper']...
+  Sheet Pan Salmon With Capers And Broccolini Pasta
+    brakuje (3): ['pasta', 'capers', 'heavy cream']
+    dopasowane (9): ['salmon', 'broccolini', 'olive oil', 'salt', 'black pepper']...
+  Taco Skillet Meal Prep
+    brakuje (4): ['lettuce', 'taco seasoning', 'salsa verde', 'tortilla chips']
+    dopasowane (7): ['ground beef', 'red onion', 'cheese', 'tomato', 'plain yogurt']...
+  Quinoa Chickpea Taco Bowls
+    brakuje (5): ['lime juice', 'onion powder', 'cilantro', 'lime juice', 'jalapeño']
+    dopasowane (10): ['quinoa', 'chickpeas', 'olive oil', 'cumin', 'chili powder']...
+  Cauliflower Tabouli and Salmon Meal Prep
+    brakuje (1): ['green onion']
+    dopasowane (14): ['salmon', 'cauliflower', 'parsley', 'lemon', 'lemon juice']...
+  One-Pan Chicken and Orzo Recipe
+    brakuje (5): ['orzo', 'water', 'oregano', 'seasoned salt', 'bocconcini']
+    dopasowane (6): ['chicken thighs', 'cherry tomatoes', 'shallot', 'butter', 'basil']...
+  Sesame Salmon with Baby Bok Choy and Mushrooms
+    brakuje (4): ['portobello mushroom', 'baby bok choy', 'green onion', 'sesame oil']
+    dopasowane (8): ['salmon', 'sesame seeds', 'olive oil', 'coconut aminos', 'ginger']...
+  Paleo Chicken Soup With Kale
+    brakuje (3): ['kale', 'oregano', 'water']
+    dopasowane (9): ['avocado oil', 'onion', 'carrot', 'celery', 'salt']...
+  Vegan Minestrone Soup
+    brakuje (3): ['cilantro', 'oregano', 'elbow pasta']
+    dopasowane (10): ['olive oil', 'garlic', 'onion', 'celery', 'carrot']...
+  Minute Rice Buffalo Chicken Meatballs Recipes
+    brakuje (4): ['buffalo sauce', 'green onion', 'ranch dressing', 'white rice']
+    dopasowane (7): ['ground chicken', 'garlic', 'onion', 'egg', 'black pepper']...
+  Sheet Pan Arugula Pesto Shrimp Meal Prep
+    brakuje (4): ['shrimp', 'arugula', 'macadamia nuts', 'zucchini']
+    dopasowane (4): ['olive oil', 'garlic powder', 'salt', 'black pepper']
+  Pork Burger Meal Prep
+    brakuje (5): ['walnuts', 'eggplant', 'zucchini', 'lettuce', 'olives']
+    dopasowane (16): ['basil', 'olive oil', 'lemon juice', 'garlic', 'salt']...
+  Baked Lentil Sweet Potato Falafel With Avocado Cream Sauce
+    brakuje (1): ['coconut flour']
+    dopasowane (10): ['lentils', 'sweet potato puree', 'garlic', 'cumin', 'paprika']...
+  Arugula Pesto Pasta Meal Prep
+    brakuje (6): ['pasta', 'zucchini', 'arugula pesto', 'walnuts', 'arugula', 'nutritional yeast']
+    dopasowane (8): ['avocado oil', 'peas', 'broccoli', 'garlic', 'olive oil']...
+  Moroccan Turmeric Chicken Stew
+    brakuje (1): ['turmeric']
+    dopasowane (15): ['chicken breast', 'olive oil', 'garlic', 'diced tomatoes', 'carrots']...
+  Sheet Pan Chicken And Veggies
+    brakuje (1): ['zucchini']
+    dopasowane (9): ['chicken breast', 'red onion', 'broccoli', 'cherry tomato', 'garlic']...
+  Sheet Pan Greek Chicken And Vegetables
+    brakuje (5): ['oregano', 'dill', 'artichoke hearts', 'zucchini', 'mixed greens']
+    dopasowane (9): ['olive oil', 'lemon juice', 'mint', 'garlic', 'salt']...
+  Snickers Protein Bars (Vegan, GF)
+    brakuje (5): ['flour', 'vegan protein powder', 'agave nectar', 'almond milk', 'dates']
+    dopasowane (5): ['coconut oil', 'peanut butter', 'peanuts', 'dark chocolate chips', 'strawberries']
+  Candied Pecans
+    brakuje (3): ['egg whites', 'monkfruit sweetener', 'vanilla extract']
+    dopasowane (3): ['pecans', 'cinnamon', 'greek yogurt']
+  Air-Fried Apple Chips
+    brakuje (1): ['nutmeg']
+    dopasowane (6): ['apple', 'cinnamon', 'cream cheese', 'greek yogurt', 'honey']...
+  Keto Chocolate Snack Boxes
+    brakuje (5): ['cacao powder', 'hemp seeds', 'monkfruit sweetener', 'vanilla monkfruit sweetener', 'nut butter']
+    dopasowane (3): ['coconut oil', 'cottage cheese', 'mixed berries']
+  Pecan Pie Bars
+    brakuje (6): ['almond flour', 'vanilla extract', 'monk fruit sweetener', 'vanilla extract', 'maple extract', 'monk fruit sweetener']
+    dopasowane (8): ['coconut oil', 'milk', 'coconut oil', 'butter', 'salt']...
+  Mint Oreo Cookies
+    brakuje (8): ['almond flour', 'arrowroot flour', 'coconut sugar', 'date syrup', 'date syrup', 'vanilla extract', 'mint extract', 'green food coloring']
+    dopasowane (4): ['cocoa powder', 'salt', 'coconut oil', 'cream cheese']
+  Greek Yogurt Cookie Dough Fruit Dip
+    brakuje (4): ['oat flour', 'almond butter', 'coconut sugar', 'vanilla extract']
+    dopasowane (5): ['greek yogurt', 'salt', 'chocolate chips', 'strawberries', 'mixed berries']
+  Snowball Cookies
+    brakuje (6): ['almond flour', 'walnuts', 'erythritol', 'vanilla extract', 'erythritol', 'macadamia nuts']
+    dopasowane (3): ['butter', 'salt', 'chocolate']
+  Vanilla Chia Pudding
+    brakuje (4): ['almond milk', 'vanilla bean', 'chia seeds', 'swerve']
+    dopasowane (3): ['coconut milk', 'greek yogurt', 'berries']
+  Low Sugar Chocolate Peanut Butter Cups
+    brakuje (2): ['unsweetened chocolate', 'cacao nibs']
+    dopasowane (3): ['dark chocolate', 'coconut oil', 'peanut butter']
+  Brown Rice Pudding
+    brakuje (4): ['water', 'oat milk powder', 'brown sugar', 'vanilla extract']
+    dopasowane (4): ['brown rice', 'cinnamon', 'salt', 'mixed berries']
+  Ab And J Fat Bombs Meal Prep
+    brakuje (3): ['water', 'almond butter', 'sweetener']
+    dopasowane (2): ['blackberries', 'coconut oil']
+  No Bake Collagen Brownie Cups
+    brakuje (3): ['almond flour', 'collagen peptides', 'almond milk']
+    dopasowane (4): ['dairy free chocolate chips', 'cocoa powder', 'maple syrup', 'peanut butter']
+  Brownie Batter Hummus
+    brakuje (3): ['water', 'cacao nibs', 'graham cracker']
+    dopasowane (5): ['chickpeas', 'maple syrup', 'cocoa powder', 'salt', 'strawberries']
+  Cream Cheese Fruit Dip Snack Box
+    brakuje (2): ['powdered erythritol', 'vanilla extract']
+    dopasowane (6): ['cream cheese', 'greek yogurt', 'pineapple', 'nectarine', 'strawberries']...
+  Peanut Butter Cheesecake Cups
+    brakuje (5): ['almond flour', 'monk fruit sweetener', 'monk fruit sweetener', 'vanilla extract', 'monk fruit sweetener']
+    dopasowane (7): ['peanut butter', 'cinnamon', 'cream cheese', 'sour cream', 'egg']...
+  Keto Chocolate Mug Cake
+    brakuje (2): ['almond flour', 'brown sugar']
+    dopasowane (6): ['cocoa powder', 'chocolate chips', 'egg', 'butter', 'baking powder']...
+  Tasty Churro Meal Prep
+    brakuje (4): ['gluten free all purpose flour', 'water', 'egg replacer', 'vanilla extract']
+    dopasowane (10): ['sugar', 'avocado oil', 'coconut oil', 'cinnamon', 'baking powder']...
+  Chocolate Chocolate Chip Protein Cookie Dough
+    brakuje (4): ['medjool dates', 'protein powder', 'vanilla extract', 'pretzels']
+    dopasowane (6): ['chickpeas', 'cashew butter', 'salt', 'chocolate chips', 'fruit']...
+  Chocolate Almond Butter Bark
+    brakuje (4): ['cacao', 'almond butter', 'sweetener', 'almonds']
+    dopasowane (0): []
+  Vegan Triple Chocolate Brownie Cake
+    brakuje (7): ['coconut flour', 'chocolate nut butter', 'dairy free yogurt', 'vanilla extract', 'chia seeds', 'almond milk', 'almond milk']
+    dopasowane (7): ['cocoa powder', 'baking powder', 'coconut oil', 'maple syrup', 'salt']...
+  Funfetti Protein Puppy Chow
+    brakuje (3): ['chex cereal', 'almond butter', 'protein powder']
+    dopasowane (3): ['white chocolate chips', 'sprinkles', 'fruit']
+  Protein Almond Butter Cups
+    brakuje (1): ['almond butter']
+    dopasowane (4): ['chocolate protein powder', 'dark chocolate chips', 'coconut oil', 'coconut oil']
+  Gluten Free Gingerbread Cookies
+    brakuje (10): ['almond flour', 'molasses', 'coconut sugar', 'vanilla extract', 'cloves', 'nutmeg', 'allspice', 'baking soda', 'powdered sugar', 'water']
+    dopasowane (6): ['coconut oil', 'ginger', 'cinnamon', 'salt', 'mixed nuts']...
+  Berry Almond Chia Pudding Meal Prep
+    brakuje (3): ['chia seeds', 'almond milk', 'sliced almonds']
+    dopasowane (3): ['mixed berries', 'honey', 'salt']
+  Dark Chocolate Gingerbread Spice Pumpkin Bars
+    brakuje (3): ['almond butter', 'pumpkin puree', 'vanilla extract']
+    dopasowane (4): ['maple syrup', 'egg', 'baking powder', 'dark chocolate chips']
+  10 Minute Raw Vegan Brownies
+    brakuje (3): ['dates', 'date syrup', 'cacao nibs']
+    dopasowane (6): ['cashews', 'cocoa powder', 'coconut oil', 'salt', 'coconut oil']...
+  Keto Raspberry Cheesecake
+    brakuje (4): ['almond flour', 'monk fruit sweetener', 'monk fruit sweetener', 'vanilla extract']
+    dopasowane (9): ['cinnamon', 'salt', 'butter', 'cream cheese', 'sour cream']...
+  Gluten Free Brownies
+    brakuje (3): ['coconut sugar', 'almond butter', 'hemp seeds']
+    dopasowane (8): ['cocoa powder', 'applesauce', 'semi-sweet chocolate chips', 'maple syrup', 'baking powder']...
+  Nutty Peanut Butter Trail Mix Bars
+    brakuje (3): ['rolled oats', 'dried fruit medley', 'pepitas']
+    dopasowane (7): ['almond', 'cashew', 'ground flax', 'sunflower seed', 'peanut butter']...
+  No Bake Chocolate Peanut Butter Bars
+    brakuje (1): ['coconut flour']
+    dopasowane (3): ['peanut butter', 'chocolate chips', 'coconut oil']
+  Chia Pudding
+    brakuje (5): ['almond milk', 'chia seed', 'vanilla extract', 'coconut flakes', 'freeze dried blueberry']
+    dopasowane (2): ['maple syrup', 'freeze dried strawberry']
+  Air Fryer Cinnamon Sugar Chickpeas
+    brakuje (4): ['oil spray', 'coconut sugar', 'almonds', 'jerky']
+    dopasowane (3): ['chickpeas', 'cinnamon', 'cheese']
+  Peanut Butter Chocolate Chip Granola
+    brakuje (2): ['rolled oats', 'vanilla extract']
+    dopasowane (4): ['peanut butter', 'honey', 'salt', 'chocolate chips']
+  Cranberry Turkey Lettuce Wrap
+    brakuje (3): ['lettuce', 'provolone cheese', 'cranberry sauce']
+    dopasowane (7): ['turkey', 'spinach', 'bacon', 'avocado', 'pear']...
+  Sweet Potato Wedges With Tahini
+    brakuje (1): ['tahini']
+    dopasowane (7): ['sweet potato', 'olive oil', 'chili powder', 'cumin', 'smoked paprika']...
+  Buffalo Chicken Mini Bell Peppers
+    brakuje (2): ['hot sauce', 'chives']
+    dopasowane (6): ['bell pepper', 'chicken breast', 'cream cheese', 'mayonnaise', 'garlic powder']...
+  Candied Nut Mix
+    brakuje (3): ['egg white', 'water', 'brown sugar']
+    dopasowane (4): ['mixed nuts', 'sugar', 'cinnamon', 'salt']
+  Ranch Dressing
+    brakuje (5): ['chives', 'dill', 'onion powder', 'onion powder', 'water']
+    dopasowane (6): ['greek yogurt', 'parsley', 'lemon juice', 'rice vinegar', 'garlic powder']...
+  Keto Cracker Snack Boxes
+    brakuje (3): ['almond flour', 'water', 'macadamia nuts']
+    dopasowane (6): ['flaxseed meal', 'thyme', 'salt', 'cheese', 'cucumber']...
+  Cake Batter Oat Bars
+    brakuje (2): ['rolled oats', 'agave']
+    dopasowane (3): ['peanut butter', 'coconut oil', 'sprinkles']
+  Mint Chocolate Energy Bites
+    brakuje (5): ['almonds', 'hemp seeds', 'dates', 'almond butter', 'mint extract']
+    dopasowane (2): ['cocoa powder', 'honey']
+  Air Fryer Crispy Zucchini Chips
+    brakuje (5): ['zucchini', 'parmesan', 'flour', 'Italian seasoning', 'ranch dressing']
+    dopasowane (3): ['egg', 'breadcrumbs', 'salt']
+  Baked Breaded Zucchini Bites with Marinara
+    brakuje (3): ['zucchini', 'seasoning', 'marinara sauce']
+    dopasowane (1): ['egg']
+  Air Fryer Sweet and Spicy Mixed Nuts
+    brakuje (2): ['sriracha', 'brown sugar']
+    dopasowane (4): ['honey', 'avocado oil', 'salt', 'mixed nuts']
+  Our Favorite Tostones Recipe
+    brakuje (1): ['green plantain']
+    dopasowane (1): ['avocado oil']
+  Antipasto Skewer Snack Boxes
+    brakuje (4): ['toothpick', 'green olive', 'artichoke heart', 'grape tomato']
+    dopasowane (3): ['mozzarella', 'egg', 'pepperoni']
+  Air Fryer Ranch Carrot Fries
+    brakuje (1): ['ranch seasoning']
+    dopasowane (3): ['carrot', 'olive oil', 'salt']
+  Cinnamon Raisin Sweet Potato Snack Bread
+    brakuje (5): ['coconut flour', 'liquid egg white', 'coconut sugar', 'collagen', 'vanilla extract']
+    dopasowane (4): ['cinnamon', 'baking powder', 'sweet potato', 'raisin']
+  Bacon Wrapped Potato Wedges
+    brakuje (1): ['ranch dressing']
+    dopasowane (6): ['potato', 'bacon', 'avocado oil', 'black pepper', 'salt']...
+  Cinnamon Raisin Energy Bites
+    brakuje (4): ['almond butter', 'rolled oats', 'oat flour', 'whey protein powder']
+    dopasowane (3): ['honey', 'raisins', 'milk']
+  Protein Cheerios Trail Mix
+    brakuje (2): ['Cheerios', 'almonds']
+    dopasowane (5): ['cashews', 'raisins', 'peanut butter', 'honey', 'butter']
+  Superfoods Almond Butter Bars
+    brakuje (7): ['Rice Krispies', 'dried goji berries', 'mulberries', 'chia seeds', 'shredded coconut', 'almond butter', 'coconut sugar']
+    dopasowane (3): ['pumpkin seeds', 'honey', 'coconut oil']
+  Pretzel Bites
+    brakuje (8): ['active dry yeast', 'cane sugar', 'gluten-free flour', 'baking soda', 'egg whites', 'water', 'yellow mustard', 'gluten-free flour']
+    dopasowane (7): ['milk', 'sea salt', 'sea salt', 'milk', 'cheese']...
+  Bacon Jalapeño Poppers
+    brakuje (2): ['jalapeño', 'chives']
+    dopasowane (3): ['bacon', 'cream cheese', 'cheese']
+  Air Fryer Baked Apples
+    brakuje (3): ['vanilla extract', 'cooking spray', 'walnuts']
+    dopasowane (7): ['maple syrup', 'butter', 'cinnamon', 'ginger', 'salt']...
+  Mexican Street Corn Dip
+    brakuje (4): ['lime juice', 'cilantro', 'parmesan', 'tortilla chips']
+    dopasowane (5): ['corn', 'mayonnaise', 'sour cream', 'chili powder', 'garlic powder']
+  Zesty Gluten-free Chex Mix
+    brakuje (6): ['chex cereal', 'pretzels', 'almonds', 'buttermilk powder', 'chives', 'dill']
+    dopasowane (3): ['butter', 'salt', 'garlic powder']
+  Roasted Red Pepper Hummus Snack Boxes
+    brakuje (2): ['tahini', 'crackers']
+    dopasowane (10): ['chickpeas', 'roasted red peppers', 'olive oil', 'lemon juice', 'cumin']...
+  Garlic Sweet Potato Wedges With Hummus
+    brakuje (2): ['chives', 'hummus']
+    dopasowane (6): ['sweet potato', 'garlic', 'parsley', 'avocado oil', 'salt']...
+  Healthy Snack Box
+    brakuje (2): ['pretzels', 'almond butter']
+    dopasowane (3): ['celery', 'mandarin', 'strawberries']
+  Baba Ghanoush
+    brakuje (3): ['eggplant', 'tahini', 'pita bread']
+    dopasowane (7): ['olive oil', 'mint', 'garlic', 'salt', 'cumin']...
+  Everything Bagel Cashews
+    brakuje (4): ['egg whites', 'poppy seeds', 'dried onion', 'jerky']
+    dopasowane (4): ['cashews', 'sesame seeds', 'salt', 'garlic powder']
+  Spinach Artichoke Dip (Paleo, GF, Low Carb)
+    brakuje (3): ['ghee', 'artichoke hearts', 'nutritional yeast']
+    dopasowane (7): ['onion', 'spinach', 'garlic', 'black pepper', 'mayonnaise']...
+  Protein-Packed Breakfast Bagel Sandwiches for Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Warm Breakfast Frittata Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Memorial Day Grilling Recipes For Easy Summer Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  The Top 20 Chicken Meal Prep Recipes for 2026
+    brakuje (0): []
+    dopasowane (0): []
+  How I Read A Nutrition Label (Without Losing My Mind)
+    brakuje (0): []
+    dopasowane (0): []
+  Stuffed Delicata Squash Breakfast Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Egg, Sausage, Bell Pepper, And Avocado Breakfast Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Meal Prep Menu 2023: Week 32
+    brakuje (0): []
+    dopasowane (0): []
+  Meal Prep Menu 2023: Week 35
+    brakuje (0): []
+    dopasowane (0): []
+  Meal Prep Menu 2023 Week 33
+    brakuje (0): []
+    dopasowane (0): []
+  Meal Prep Menu 2023 Week 31
+    brakuje (0): []
+    dopasowane (0): []
+  Extra Crispy Pork Chops And Roasted Vegetables
+    brakuje (0): []
+    dopasowane (0): []
+  Homemade Chicken Doner Wraps
+    brakuje (0): []
+    dopasowane (0): []
+  Low Carb Hamburger Helper
+    brakuje (0): []
+    dopasowane (0): []
+  Crockpot Sweet Potatoes
+    brakuje (0): []
+    dopasowane (0): []
+  Cuban Pasta Salad
+    brakuje (0): []
+    dopasowane (0): []
+  Lean Beef Burger Bowls
+    brakuje (0): []
+    dopasowane (0): []
+  High Protein Pasta And Broccoli
+    brakuje (0): []
+    dopasowane (0): []
+  Green And Hot Bison Burger Bowl
+    brakuje (0): []
+    dopasowane (0): []
+  Hotdog Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Colorful Vegetable Lunch
+    brakuje (0): []
+    dopasowane (0): []
+  Easy Homemade Meatballs
+    brakuje (0): []
+    dopasowane (0): []
+  Spicy Meatball And Mashed Potato Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Meatloaf And Mashed Potato Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Chicken Bacon Ranch Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Chicken Sausage And Parsnip Fries Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Ghost Pepper And Tamarind Salmon Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Cauliflower And White Bean Soup With Shrimp Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Salmon And Bacon Rice Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Burger And Veggie Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Low Carb Meal Prep Shrimp Veggies And Cauliflower Rice
+    brakuje (0): []
+    dopasowane (0): []
+  Simple Low Carb Salmon Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Meal Prep On The Grill
+    brakuje (0): []
+    dopasowane (0): []
+  A Crockpot Roast Meal Prep To Make Your Week Easy
+    brakuje (0): []
+    dopasowane (0): []
+  Low Carb Cajun Steak Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Roasted Chicken and Winter Persimmons Make This Sweet & Savory Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Four Ingredient Pineapple Thai Turkey Meatball Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Feta Turkey Meatball Meal Prep + Two Tricks!
+    brakuje (0): []
+    dopasowane (0): []
+  Simple Fruit Salsa Salmon Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Bbq Chicken Meal Prep With Roasted Brussels Sprouts And Sweet Potato
+    brakuje (0): []
+    dopasowane (0): []
+  Vegetarian Salad In A Jar
+    brakuje (0): []
+    dopasowane (0): []
+  3 Ingredient Salmon Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Zoodle Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  One Pan Fajita Salmon Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Chicken Lemon Broccoli Pasta Skillet
+    brakuje (0): []
+    dopasowane (0): []
+  Low Carb Pizza Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Seared Scallops Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Lunch And Dinner Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Southwestern Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  The Ultimate Guide To Affordable Beef Recipes
+    brakuje (0): []
+    dopasowane (0): []
+  The Best Garlic Butter Steak Bites
+    brakuje (0): []
+    dopasowane (0): []
+  Olive Garden Chicken Gnocchi Soup (Copycat Recipe)
+    brakuje (0): []
+    dopasowane (0): []
+  Healthy Recipes To Make With Your Thanksgiving Leftovers
+    brakuje (0): []
+    dopasowane (0): []
+  Steak and Veggie Meal Prep
+    brakuje (0): []
+    dopasowane (0): []
+  Steak And Broccoli Stir Fry
+    brakuje (0): []
+    dopasowane (0): []
+  Almond Joy Cookies
+    brakuje (0): []
+    dopasowane (0): []
+  Keto Peanut Butter Cookies
+    brakuje (0): []
+    dopasowane (0): []
+  Frozen Yogurt Bark
+    brakuje (0): []
+    dopasowane (0): []
+  Keto Fat Bombs
+    brakuje (0): []
+    dopasowane (0): []

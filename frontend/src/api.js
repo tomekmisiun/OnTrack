@@ -24,11 +24,12 @@ API.interceptors.response.use(
 );
 
 export const products = {
-  getAll:    ()         => API.get('/api/products/'),
-  create:    (data)     => API.post('/api/products/', data),
-  update:    (id, data) => API.put(`/api/products/${id}`, data),
-  delete:    (id)       => API.delete(`/api/products/${id}`),
-  deleteAll: ()         => API.delete('/api/products/all'),
+  getAll:           ()         => API.get('/api/products/'),
+  create:           (data)     => API.post('/api/products/', data),
+  update:           (id, data) => API.put(`/api/products/${id}`, data),
+  delete:           (id)       => API.delete(`/api/products/${id}`),
+  deleteAll:        ()         => API.delete('/api/products/all'),
+  ingredientMapping: ()        => API.get('/api/products/ingredient-mapping'),
 };
 
 export const recipes = {
@@ -37,6 +38,7 @@ export const recipes = {
   create:        (data)     => API.post('/api/recipes/', data),
   update:        (id, data) => API.put(`/api/recipes/${id}`, data),
   toggleFavorite:(id)       => API.patch(`/api/recipes/${id}/favorite`),
+  updateCategory:(id, cat)  => API.patch(`/api/recipes/${id}/category`, { category: cat }),
   fetchImage:    (id)       => API.post(`/api/recipes/${id}/fetch-image`),
   delete:        (id)       => API.delete(`/api/recipes/${id}`),
   deleteAll:     ()         => API.delete('/api/recipes/all'),
@@ -83,5 +85,5 @@ export const importPrices = {
 };
 
 export const fuel = {
-  getPrices: () => API.get('/api/fuel/prices'),
+  getPrices: (lang = 'pl') => API.get(`/api/fuel/prices?lang=${lang}`),
 };

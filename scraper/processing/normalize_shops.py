@@ -39,19 +39,50 @@ READY_TO_EAT_EN = [
     "custard",                 # "banana & custard yogurt" = deser
     "cooked mussels", "cooked prawns", "cooked shrimp",
     "cooked beef", "cooked chicken", "cooked ham",  # deli meats — nie surowe
+    "honey ham", "honey roast ham", "honey glazed", "honey cured",  # deli meats, nie miód
+    "fusions tuna", "fusions",  # "jalapeño fusions tuna" = tuńczyk w smaku jalapeño
+    "vegetable burger", "veggie burger", "vegetable burgers",  # gotowe burgery
+    "lentil chip", "lentil bite", "kale chip", "pea chip",  # chipsy ze strączkowych = przekąska
+    "pineapple & lime", "pineapple and lime",  # napój, nie owoc
     "garlic bread",
     "elderflower",             # "apple & elderflower" = napój, nie jabłko
     "butter chicken",          # indyjskie danie — nie masło
     "mintoes", "mints pack",   # cukierki miętowe — nie masło
+    "humbugs",                 # "mint humbugs" = cukierki, nie zioło mint
+    "seal bars",               # "mint seal bars" = baton czekoladowy
+    "stir fry",                # "mushroom stir fry" = gotowe danie
+    "pasty", "pasties",        # "cheese & onion pasty" = gotowe ciasto/pieróg
+    "macaroni cheese",         # "pasta & sauce macaroni cheese" = gotowe danie
+    "mac & cheese",            # analogicznie
     "fromage frais",           # serki owocowe — nie pojedynczy owoc
     "flavour thick",           # "apricot flavour thick yogurt" = jogurt z smakiem, nie owoc
     "basted",                  # "butter basted chicken" = marynowany kurczak, nie masło
     "wheats", "wheat cereal",  # "apricot fruit wheats" = płatki, nie owoc
     "fruit wheats",
     "lolly", "lollies",        # "almond mono lolly" = lód na patyku
-    " squash",                 # "berries squash" = napój/syrop, nie owoce (ze spacją żeby nie łapać butternut squash)
+    "double strength",         # napoje squash: "double strength apple & blackcurrant squash"
+    "squirty squash",          # skoncentrowane napoje squash
+    "squashies",               # cukierki drumstick squashies
+    "mixed fruit squash",      # "mixed fruit squash" = napój
+    "fruit & barley",          # "fruit & barley squash" = napój
     "juice drink",             # "cranberry juice drink" = napój, nie składnik
-    "greek style yogurt",      # "coconut greek style yogurt" = jogurt, nie cukier/mąka kokosowa
+    "yogurt granola",          # "blueberry yogurt granola" = granola, nie jogurt
+    "yogurt bars", "yogurt bar",  # "yogurt & strawberry bars" = baton, nie jogurt
+    "caramel layered yogurt", "layered yogurt",  # jogurt z karmelem = deser
+    "kefir yogurt",            # kefir to nie zwykły jogurt
+    "cereal hoops",            # "honey cereal hoops" = płatki śniadaniowe, nie miód
+    "dauphinoise",             # "potato dauphinoise" = gotowe danie, nie ziemniaki
+    "brioche swirls", "brioche roll",  # "raisin brioche swirls" = ciasto, nie rodzynki
+    "sausage & mash",          # gotowe danie, nie kiełbasa
+    "rollitos",                # "Chorizo & Cheddar Rollitos" = przekąska, nie chorizo
+    "sourdough pizza", "wood fired pizza", "nduja",  # gotowa pizza
+    "chive dip", "cheese dip", "sour cream dip",  # gotowe dipy, nie śmietana
+    "complimints", "sugar free strawberry",  # cukierki, nie owoc
+    "breaded prawns", "breaded prawn",       # "sriracha breaded prawns" = gotowe danie
+    " pizza",                                # wszystkie pizze = gotowe danie (ze spacją żeby nie łapać "pizza sauce")
+    "jelly beans", "jelly bean",             # cukierki, nie fasola
+    "pasta bake",                            # "tomato & pesto pasta bake" = gotowe danie
+    "side salad",                            # "tomato & basil side salad" = gotowa sałatka
 ]
 
 # PL keywords (Auchan / Biedronka) — kompletne dania gotowe do spożycia
@@ -176,12 +207,42 @@ def _is_liquid(name: str, category: str) -> bool:
     )
 
 
+# ── Domyślne wagi dla produktów na sztuki ────────────────────────────────────
+
+def _load_default_weights() -> dict:
+    path = HERE.parent / "data" / "default_weights.json"
+    if path.exists():
+        data = json.loads(path.read_text("utf-8"))
+        return {k: v for k, v in data.items() if k != "_comment"}
+    return {}
+
+_DEFAULT_WEIGHTS = _load_default_weights()
+
+
+def _default_weight_for(name: str) -> int | None:
+    """Zwraca domyślną wagę (g) dla produktu na sztuki, szukając po słowach kluczowych."""
+    name_l = name.lower()
+    # Próbuj od najdłuższego dopasowania (np. "red grapefruit" przed "grapefruit")
+    best_key = None
+    best_len = 0
+    for key in _DEFAULT_WEIGHTS:
+        if key in name_l and len(key) > best_len:
+            best_key = key
+            best_len = len(key)
+    if best_key:
+        return _DEFAULT_WEIGHTS[best_key]
+    return _DEFAULT_WEIGHTS.get("default")
+
+
 # ── 2b. Gramatura ALDI ────────────────────────────────────────────────────────
 
 def extract_package_aldi(product: dict) -> dict:
     name        = product.get("name", "")
     price       = product.get("price")
     ppkg        = product.get("price_per_kg")
+    ppl         = product.get("price_per_litre")
+    pack_volume  = product.get("pack_volume")       # nowe pole ze scrapera (ml lub g)
+    pack_vol_unit = product.get("pack_volume_unit") # "ml" lub "g"
     pack_size   = product.get("pack_size") or ""
     description = product.get("description", "") or ""
     category    = product.get("category", "") or ""
@@ -200,24 +261,36 @@ def extract_package_aldi(product: dict) -> dict:
             pkg_val  = count
             unit     = "pcs"
             per_unit = product.get("price_per_unit")
-            per_100  = None  # no meaningful per-100g for pcs
+            per_100  = None
 
-    # 2. price_per_kg exists
+    # 2. price_per_kg exists → oblicz gramaturę
     elif ppkg and price is not None:
         if abs(price - ppkg) < 0.01:
-            # 3. Sold by weight (price == price_per_kg)
+            # Sold by weight (price == price_per_kg)
             pkg_val = 1000
             unit    = "ml" if _is_liquid(name, category) else "g"
             by_wt   = True
             per_100 = round(ppkg / 10, 4)
         else:
-            # 2. Calculate from price ratio
             grams   = round(price / ppkg * 1000, 0)
             pkg_val = grams
             unit    = "ml" if _is_liquid(name, category) else "g"
             per_100 = round(price / grams * 100, 4) if grams else None
 
-    # 4/5. Gramatura w description lub nazwie
+    # 3. pack_volume ze scrapera (np. "0.5 L (£4.38/1 L)" → pack_volume=500, unit="ml")
+    elif pack_volume and pack_vol_unit:
+        pkg_val = pack_volume
+        unit    = pack_vol_unit
+        per_100 = round(price / pack_volume * 100, 4) if (price and pack_volume) else None
+
+    # 4. price_per_litre → oblicz objętość
+    elif ppl and price is not None:
+        ml = round(price / ppl * 1000, 0)
+        pkg_val = ml
+        unit    = "ml"
+        per_100 = round(price / ml * 100, 4) if ml else None
+
+    # 5. Gramatura w description lub nazwie
     else:
         for text in (description, name):
             m = re.search(r"[Ww]eight[:\s]+(\d+(?:\.\d+)?)\s*(g|kg|ml|l)\b", text)
@@ -232,6 +305,32 @@ def extract_package_aldi(product: dict) -> dict:
                 unit    = u
                 per_100 = round(price / val * 100, 4) if (price and val) else None
                 break
+
+    # 6. pcs bez wagi → użyj default_weights.json
+    if unit == "pcs" and per_100 is None and price is not None:
+        default_g = _default_weight_for(name)
+        if default_g:
+            per_100 = round(price / pkg_val / default_g * 100, 4) if pkg_val else round(price / default_g * 100, 4)
+
+    # Produkty na wagę wg nazwy (świeże warzywa/owoce/ryby/mięso)
+    _PRODUCE_EN = {
+        "onion","potato","carrot","apple","banana","tomato","cucumber","pepper",
+        "broccoli","cauliflower","spinach","lettuce","kale","rocket","arugula",
+        "pear","plum","grapes","strawberr","raspberr","blackberr","blueberr",
+        "orange","lemon","lime","avocado","mango","pineapple","peach","nectarine",
+        "cabbage","leek","garlic","parsley","celery","beetroot","butternut",
+        "courgette","zucchini","aubergine","eggplant","radish","asparagus",
+        "mushroom","ginger","spring onion","shallot","sweet potato","turnip",
+        "salad tomato","cherry tomato","vine tomato","plum tomato",
+    }
+    _NOT_PRODUCE_EN = {
+        "sauce","vinegar","oil","juice","paste","puree","powder","extract",
+        "syrup","jam","pickle","chips","crisps","soup","dip","hummus","pesto",
+        "dressing","frozen","dried","tinned","canned","baked","cooked",
+    }
+    name_l = name.lower()
+    if not by_wt and any(kw in name_l for kw in _PRODUCE_EN) and not any(kw in name_l for kw in _NOT_PRODUCE_EN):
+        by_wt = True
 
     return {
         "package_size_value": pkg_val,
@@ -323,6 +422,9 @@ _NO_SPLIT_EN = {
     "macaroni & cheese", "mac & cheese", "fish & chips",
     "salt & vinegar", "bread & butter", "ham & cheese",
     "cookies & cream",
+    "fruit & nut",          # Cadbury Fruit & Nut = baton, nie "fruit" + "nut"
+    "nuts & raisins",       # trail mix
+    "cheese & onion",       # pasty filling — joined so "onion" nie staje sie osobnym produktem
 }
 
 # When the part AFTER & is a main protein, the & is a flavor separator, not a compound
@@ -839,6 +941,60 @@ def build_pl_records(products: list[dict], shop: str) -> list[dict]:
     return records
 
 
+# ── Debug report ──────────────────────────────────────────────────────────────
+
+def _write_debug(aldi_raw, auchan_raw, biedronka_raw,
+                 aldi_records, auchan_records, biedronka_records,
+                 shops_en, shops_pl):
+    from debug_writer import write_report
+
+    pl_records = auchan_records + biedronka_records
+    en_with = sum(1 for r in aldi_records if r.get("price_per_100") is not None)
+    pl_with = sum(1 for r in pl_records if r.get("price_per_100") is not None)
+
+    def row_en(r):
+        p = r.get("price_per_100")
+        return (f"{r['original_name']:<50} | {r['generic_name']:<35} "
+                f"| {str(r.get('unit', '')):<6} | {p if p is not None else '—'}")
+
+    def row_pl(r):
+        p = r.get("price_per_100")
+        return (f"{r.get('shop', ''):<12} | {r['original_name']:<50} "
+                f"| {r['generic_name']:<35} | {str(r.get('unit', '')):<6} | {p if p is not None else '—'}")
+
+    sections = [
+        {
+            "title": "Statystyki normalizacji",
+            "stats": {
+                "Aldi (raw)":                 len(aldi_raw),
+                "Auchan (raw)":               len(auchan_raw),
+                "Biedronka (raw)":            len(biedronka_raw),
+                "Aldi → records":             len(aldi_records),
+                "Auchan → records":           len(auchan_records),
+                "Biedronka → records":        len(biedronka_records),
+                "shops_en (po dedup)":        len(shops_en),
+                "shops_pl (po dedup)":        len(shops_pl),
+                "EN z ceną (price_per_100)":  en_with,
+                "EN bez ceny":                len(aldi_records) - en_with,
+                "PL z ceną (price_per_100)":  pl_with,
+                "PL bez ceny":                len(pl_records) - pl_with,
+            },
+            "rows": [],
+        },
+        {
+            "title": "EN — produkty Aldi (original_name | generic_name | unit | price_per_100)",
+            "rows": [row_en(r) for r in sorted(aldi_records, key=lambda x: x.get("generic_name", ""))],
+            "limit": 500,
+        },
+        {
+            "title": "PL — produkty (shop | original_name | generic_name | unit | price_per_100)",
+            "rows": [row_pl(r) for r in sorted(pl_records, key=lambda x: x.get("generic_name", ""))],
+            "limit": 500,
+        },
+    ]
+    write_report(2, "normalize_shops", sections)
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
@@ -880,6 +1036,10 @@ def main():
     save(DATA / "shops_pl.json", shops_pl)
 
     log.info(f"shops_en: {len(shops_en)} unikalnych, shops_pl: {len(shops_pl)} unikalnych")
+
+    _write_debug(aldi, auchan, biedronka,
+                 aldi_records, auchan_records, biedronka_records,
+                 shops_en, shops_pl)
 
 
 if __name__ == "__main__":

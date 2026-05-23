@@ -68,7 +68,7 @@ def register():
     seed_user(user.id, lang=lang)
 
     from app.models.household_member import HouseholdMember
-    primary = HouseholdMember(user_id=user.id, name='Ja', is_primary=True)
+    primary = HouseholdMember(user_id=user.id, name='Me' if lang == 'en' else 'Ja', is_primary=True)
     db.session.add(primary)
     db.session.commit()
 
@@ -121,10 +121,19 @@ def google_callback():
             return redirect(f'{frontend_url}?auth_error=Brak+adresu+email+od+Google')
 
         is_new = not User.query.filter_by(email=email).first()
+        # Odczytaj pending_lang z sesji (ustawiony przez frontend przed OAuth)
+        pending_lang = request.cookies.get('pending_lang') or 'pl'
         user = _find_or_create_oauth_user(email)
         if is_new:
             from app.seeds import seed_user
-            seed_user(user.id)
+            from app.models.household_member import HouseholdMember
+            lang = pending_lang if pending_lang in ('pl', 'en') else 'pl'
+            user.lang = lang
+            db.session.commit()
+            seed_user(user.id, lang=lang)
+            primary = HouseholdMember(user_id=user.id, name='Me' if lang == 'en' else 'Ja', is_primary=True)
+            db.session.add(primary)
+            db.session.commit()
         jwt_token = create_access_token(identity=str(user.id))
         return redirect(f'{frontend_url}?token={jwt_token}')
     except Exception as e:

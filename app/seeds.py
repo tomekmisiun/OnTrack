@@ -57,6 +57,7 @@ def _seed_products(user_id: int, lang: str):
             protein=p.get("protein"),
             fat=p.get("fat"),
             carbs=p.get("carbs"),
+            lang=lang,
         ))
     db.session.commit()
 
@@ -83,6 +84,8 @@ def _seed_recipes(user_id: int, lang: str):
             notes=r.get("notes"),
             image_url=r.get("image_url"),
             source_url=r.get("source_url"),
+            category=r.get("category"),
+            lang=lang,
             kcal_100g=r.get("kcal_100g"),
             protein_100g=r.get("protein_100g"),
             fat_100g=r.get("fat_100g"),

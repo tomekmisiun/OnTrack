@@ -28,7 +28,19 @@ export function AuthProvider({ children, onLangChange }) {
     if (token) {
       API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       API.get('/api/auth/me')
-        .then(r => applyUser(r.data))
+        .then(async r => {
+          const pendingLang = localStorage.getItem('pending_lang');
+          if (oauthToken && pendingLang && pendingLang !== r.data.lang) {
+            localStorage.removeItem('pending_lang');
+            try {
+              await API.patch('/api/auth/language', { lang: pendingLang });
+              applyUser({ ...r.data, lang: pendingLang });
+            } catch { applyUser(r.data); }
+          } else {
+            if (pendingLang) localStorage.removeItem('pending_lang');
+            applyUser(r.data);
+          }
+        })
         .catch(() => { localStorage.removeItem('token'); delete API.defaults.headers.common['Authorization']; })
         .finally(() => setLoading(false));
     } else {

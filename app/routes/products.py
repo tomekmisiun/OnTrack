@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
 from app import db
 from app.models.product import Product
+from app.models.user import User
 from app.utils import current_uid
 
 products_bp = Blueprint('products', __name__)
@@ -57,7 +58,8 @@ def validate_product_data(data, require_all=True):
 @products_bp.route('/', methods=['GET'])
 @jwt_required()
 def get_products():
-    products = Product.query.filter_by(user_id=current_uid()).order_by(Product.name).all()
+    uid = current_uid()
+    products = Product.query.filter_by(user_id=uid).order_by(Product.name).all()
     return jsonify([p.to_dict() for p in products])
 
 
@@ -69,8 +71,10 @@ def create_product():
     if err:
         return jsonify({'error': err}), 400
 
+    uid = current_uid()
+    user = User.query.get(uid)
     product = Product(
-        user_id=current_uid(),
+        user_id=uid,
         name=str(data['name']).strip()[:MAX_NAME],
         package_weight=float(data['package_weight']),
         price=float(data['price']),
@@ -80,6 +84,7 @@ def create_product():
         fat=float(data['fat']) if data.get('fat') is not None else None,
         carbs=float(data['carbs']) if data.get('carbs') is not None else None,
         sold_by_weight=bool(data.get('sold_by_weight', False)),
+        lang=user.lang if user else 'pl',
     )
     db.session.add(product)
     db.session.commit()
@@ -119,6 +124,55 @@ def delete_product(id):
     db.session.delete(product)
     db.session.commit()
     return jsonify({'message': 'Produkt usunięty'}), 200
+
+
+@products_bp.route('/ingredient-mapping', methods=['GET'])
+@jwt_required()
+def ingredient_mapping():
+    """Tabela: składnik z przepisu → dopasowany produkt sklepowy z ceną i makro."""
+    import json
+    from pathlib import Path
+
+    # Wczytaj ingredient_db_pl (dane pipeline)
+    data_path = Path(__file__).parent.parent.parent / 'scraper' / 'data' / 'ingredient_db_pl.json'
+    if not data_path.exists():
+        return jsonify([])
+
+    db_items = json.loads(data_path.read_text('utf-8'))
+
+    # Grupuj po generic_name — dla każdego produktu zbierz składniki które na niego wskazują
+    from collections import defaultdict
+    product_map: dict[str, dict] = {}
+    product_ingredients: dict[str, list[str]] = defaultdict(list)
+
+    for item in db_items:
+        ing   = item.get('ingredient_name', '')
+        prod  = item.get('generic_name') or ing
+        if not prod:
+            continue
+
+        if prod not in product_map:
+            product_map[prod] = {
+                'product_name':   prod,
+                'shop':           item.get('shop', ''),
+                'original_name':  item.get('original_name', ''),
+                'package_weight': item.get('package_size_value'),
+                'unit':           item.get('unit', 'g'),
+                'price_per_100':  round(item.get('price_per_100') or 0, 2),
+                'price_package':  round(item.get('price_package') or 0, 2),
+                'fuzzy_score':    item.get('fuzzy_score'),
+            }
+
+        if ing and ing != prod and ing not in product_ingredients[prod]:
+            product_ingredients[prod].append(ing)
+
+    result = []
+    for prod, data in sorted(product_map.items(), key=lambda x: x[0]):
+        row = dict(data)
+        row['ingredient_aliases'] = sorted(product_ingredients.get(prod, []))
+        result.append(row)
+
+    return jsonify(result)
 
 
 @products_bp.route('/all', methods=['DELETE'])

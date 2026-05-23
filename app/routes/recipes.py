@@ -5,6 +5,7 @@ from app.models.recipe import Recipe, RecipeIngredient
 from app.models.meal_plan import MealPlan
 from app.models.product import Product
 from app.models.recipe_parse_log import RecipeParseLog
+from app.models.user import User
 from app.utils import current_uid
 import json, re, os
 
@@ -14,7 +15,8 @@ recipes_bp = Blueprint('recipes', __name__)
 @recipes_bp.route('/', methods=['GET'])
 @jwt_required()
 def get_recipes():
-    recipes = Recipe.query.filter_by(user_id=current_uid()).order_by(Recipe.name).all()
+    uid = current_uid()
+    recipes = Recipe.query.filter_by(user_id=uid).order_by(Recipe.name).all()
     return jsonify([r.to_dict_summary() for r in recipes])
 
 
@@ -43,7 +45,8 @@ def create_recipe():
         db.session.delete(existing)
         db.session.flush()
 
-    recipe = Recipe(name=data['name'], user_id=uid, notes=data.get('notes'))
+    user = User.query.get(uid)
+    recipe = Recipe(name=data['name'], user_id=uid, notes=data.get('notes'), category=data.get('category') or None, lang=user.lang if user else 'pl')
     db.session.add(recipe)
     db.session.flush()
 
@@ -75,6 +78,8 @@ def update_recipe(id):
         recipe.name = data['name']
     if 'notes' in data:
         recipe.notes = data['notes'] or None
+    if 'category' in data:
+        recipe.category = data['category'] or None
     if 'ingredients' in data:
         RecipeIngredient.query.filter_by(recipe_id=id).delete()
         for ingredient in data['ingredients']:
@@ -90,6 +95,16 @@ def update_recipe(id):
             db.session.add(RecipeIngredient(recipe_id=id, product_id=ingredient['product_id'], weight=weight))
     db.session.commit()
     return jsonify(recipe.to_dict())
+
+
+@recipes_bp.route('/<int:id>/category', methods=['PATCH'])
+@jwt_required()
+def update_category(id):
+    recipe = Recipe.query.filter_by(id=id, user_id=current_uid()).first_or_404()
+    data = request.get_json() or {}
+    recipe.category = data.get('category') or None
+    db.session.commit()
+    return jsonify({'category': recipe.category})
 
 
 @recipes_bp.route('/<int:id>/favorite', methods=['PATCH'])
@@ -187,11 +202,19 @@ Available products (ID | Name | Unit):
 Return ONLY valid JSON (no markdown, no explanation):
 {{
   "recipe_name": "recipe name from first line",
+  "category": "breakfast|lunch|dinner|snack|dessert",
   "ingredients": [
     {{"ingredient_text": "original phrase", "product_id": 123, "weight": 50, "unit": "g"}},
     ...
   ]
 }}
+
+Category rules (pick one based on recipe name and ingredients):
+- breakfast: morning meals, oatmeal, eggs, pancakes, smoothies
+- lunch: main midday meals, soups, salads
+- dinner: evening meals, heavier dishes
+- snack: small bites, bars, dips
+- dessert: sweet dishes, cakes, cookies
 
 Rules:
 - ingredient_text: the original ingredient phrase from the recipe
@@ -238,8 +261,14 @@ Rules:
 
     RecipeParseLog.increment(uid)
 
+    valid_categories = {'breakfast', 'lunch', 'dinner', 'snack', 'dessert'}
+    category = result.get('category', '')
+    if category not in valid_categories:
+        category = None
+
     return jsonify({
         'recipe_name': str(result.get('recipe_name', ''))[:200],
+        'category': category,
         'ingredients': ingredients,
         'remaining_today': PARSE_DAILY_LIMIT - today_count - 1,
     })

@@ -1,10 +1,9 @@
-// Każdy krok może mieć pole `gotoTab` — App.js przełączy zakładkę przed wyświetleniem
 const CLOSE_AS_SKIP = { closeButtonAction: 'skip' };
 
-export const TOUR_STEPS = [
+const STEPS_PL = [
   {
     target: '.sidebar-logo',
-    title: 'Witaj w Meal Planner!',
+    title: 'Witaj w OnTrack!',
     content: 'Ten krótki samouczek pokaże Ci jak korzystać z aplikacji. Możesz go pominąć lub wrócić do niego z ustawień konta.',
     placement: 'right',
     disableBeacon: true,
@@ -74,14 +73,84 @@ export const TOUR_STEPS = [
   },
 ];
 
-export const TOUR_LOCALE = {
-  back: 'Wstecz',
-  close: 'Zamknij',
-  last: 'Zakończ',
-  next: 'Dalej',
-  open: 'Otwórz',
-  skip: 'Pomiń',
-};
+const STEPS_EN = [
+  {
+    target: '.sidebar-logo',
+    title: 'Welcome to OnTrack!',
+    content: 'This short tutorial will show you how to use the app. You can skip it or come back to it any time from your account settings.',
+    placement: 'right',
+    disableBeacon: true,
+    ...CLOSE_AS_SKIP,
+  },
+  {
+    target: '.sidebar-profile',
+    title: 'Profiles',
+    content: 'Select the active profile here. You can add household members — each has their own meal plan, but they share the same products and recipes.',
+    placement: 'right',
+    ...CLOSE_AS_SKIP,
+  },
+  {
+    target: '[data-tour="tab-macro"]',
+    title: 'Macro Calculator',
+    content: 'Enter your details (height, weight, age, activity level) to calculate your daily calorie needs and macros. Results are saved to your profile and can be exported as a Macro Card.',
+    placement: 'right',
+    ...CLOSE_AS_SKIP,
+    gotoTab: 'macro',
+  },
+  {
+    target: '[data-tour="tab-calendar"]',
+    title: 'Meal Planner',
+    content: 'The main view — a weekly calendar. Drag a recipe from the list on the right onto any day to plan a meal.',
+    placement: 'right',
+    ...CLOSE_AS_SKIP,
+    gotoTab: 'calendar',
+  },
+  {
+    target: '[data-tour="tab-recipes"]',
+    title: 'Recipes',
+    content: 'Your recipe list with costs and macros. Click a recipe to expand its ingredients; click any name, quantity or macro value to edit it.',
+    placement: 'right',
+    ...CLOSE_AS_SKIP,
+    gotoTab: 'recipes',
+  },
+  {
+    target: '[data-tour="tab-products"]',
+    title: 'Products',
+    content: 'Your product database with prices and nutritional values. Click any product in the list to edit its name, price, weight or macros.',
+    placement: 'right',
+    ...CLOSE_AS_SKIP,
+    gotoTab: 'products',
+  },
+  {
+    target: '[data-tour="tab-summary"]',
+    title: 'Expenses',
+    content: 'A summary of food costs from planned meals and fixed expenses. Select the categories you want to track (rent, electricity, gas…), fill them in once, and the app will automatically calculate their share for each period.',
+    placement: 'right',
+    ...CLOSE_AS_SKIP,
+    gotoTab: 'summary',
+  },
+  {
+    target: '[data-tour="tab-export"]',
+    title: 'Export',
+    content: 'Generate print-ready documents: expense summary, macro card, meal calendar, recipe ingredients or a shopping list from selected days.',
+    placement: 'right',
+    ...CLOSE_AS_SKIP,
+    gotoTab: 'export',
+  },
+  {
+    target: '.sidebar-footer',
+    title: 'Account & Settings',
+    content: 'From your account settings you can come back to this tutorial at any time. Good luck!',
+    placement: 'right',
+    ...CLOSE_AS_SKIP,
+  },
+];
+
+export const getTourSteps = (lang) => lang === 'en' ? STEPS_EN : STEPS_PL;
+
+export const getTourLocale = (lang) => lang === 'en'
+  ? { back: 'Back', close: 'Close', last: 'Finish', next: 'Next', open: 'Open', skip: 'Skip' }
+  : { back: 'Wstecz', close: 'Zamknij', last: 'Zakończ', next: 'Dalej', open: 'Otwórz', skip: 'Pomiń' };
 
 export const TOUR_STYLES = {
   options: {

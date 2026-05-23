@@ -1,0 +1,1029 @@
+# Krok 2: normalize shops
+# Wygenerowano: 2026-05-23 14:08:36
+
+======================================================================
+  Statystyki normalizacji
+======================================================================
+  Aldi (raw)                               2747
+  Auchan (raw)                             3553
+  Biedronka (raw)                          771
+  Aldi → records                           2295
+  Auchan → records                         3281
+  Biedronka → records                      707
+  shops_en (po dedup)                      2078
+  shops_pl (po dedup)                      2868
+  EN z ceną (price_per_100)                1677
+  EN bez ceny                              618
+  PL z ceną (price_per_100)                3922
+  PL bez ceny                              66
+
+
+======================================================================
+  EN — produkty Aldi (original_name | generic_name | unit | price_per_100)
+======================================================================
+  Skinless & Boneless Basa Fillets                   | & basa                              | g      | 0.5237
+  Skinless & Boneless Cod Loins 2 Pack               | & cod loins 2 pack                  | g      | 2.1115
+  Cooked & Peeled Coldwater Prawns                   | & peeled coldwater prawns           | ml     | 1.3267
+  Cooked & Peeled Extra Large King Prawns            | & peeled extra king prawns          | g      | 1.9933
+  Cooked & Peeled King Prawns                        | & peeled king prawns                | g      | 1.66
+  Cooked & Peeled Jumbo King Prawns                  | & peeled king prawns                | g      | 1.5824
+  Skinless & Boneless Yellowfin Tuna Steaks          | & yellowfin tuna                    | g      | 0.9694
+  Light & Zesty Green Tea with Lemon 40 Pack         | & zesty green tea with lemon 40 pack | ml     | 0.8553
+  British Reduced Fat* Beef Quarter Pounders 5% Fat 4 Pack | * beef quarter pounders 4 pack      | g      | 0.7687
+  45% Reduced Fat* Pork Sausages 8 Pack              | * pork sausages 8 pack              | g      | 0.3943
+  12 Richmond Thick Pork Sausages                    | 12 thick pork sausages              | g      | 0.259
+  Kit Kat 2 Finger 6 Pack Dark                       | 2 finger 6 pack dark                | g      | 1.2016
+  Kit Kat 2 Finger 6 Pack Orange                     | 2 finger 6 pack orange              | g      | 1.2016
+  Kit Kat 2 Finger Milk Chocolate Multipack          | 2 finger milk chocolate multipack   | None   | —
+  2 Step Balti Curry Sauce                           | 2 step balti curry sauce            | ml     | 0.4694
+  2 Step Jalfrezi Curry Sauce                        | 2 step jalfrezi curry sauce         | ml     | 0.4694
+  2 Step Korma Curry Sauce                           | 2 step korma curry sauce            | ml     | 0.4694
+  2 Step Madras Curry Sauce                          | 2 step madras curry sauce           | ml     | 0.4694
+  2 Step Rogan Josh Curry Sauce                      | 2 step rogan josh curry sauce       | ml     | 0.4694
+  2 Step Saag Masala Curry Sauce                     | 2 step saag masala curry sauce      | ml     | 0.4694
+  2 Step Tikka Masala Curry Sauce                    | 2 step tikka masala curry sauce     | ml     | 0.4694
+  100% British Fillet Steak 28 Day Matured           | 28 day matured                      | g      | 4.2882
+  30 Day Matured Rump Steaks with a Bone Marrow Melt 2 Pack | 30 day matured rump steaks with a bone marrow melt 2 pack | g      | 1.4975
+  30 Day Matured Rump Steaks with a Chimichurri Melt 2 Pack | 30 day matured rump steaks with a chimichurri melt 2 pack | g      | 1.4975
+  30 Day Matured Rump Steaks with a Peppercorn Melt 2 Pack | 30 day matured rump steaks with a peppercorn melt 2 pack | g      | 1.4975
+  6 Pack Mini Chocolate Chip Cookies                 | 6 pack chocolate chip cookies       | None   | —
+  Acacia Squeezy Honey                               | acacia squeezy honey                | g      | 0.6147
+  Active Cherry Yogurt 4 Pack                        | active cherry yogurt 4 pack         | g      | 0.3587
+  Active Peach Yogurt 4 Pack                         | active peach yogurt 4 pack          | g      | 0.3587
+  Active Rhubarb Yogurt 4 Pack                       | active rhubarb yogurt 4 pack        | g      | 0.3587
+  Active Strawberry Yogurt 4 Pack                    | active strawberry yogurt 4 pack     | g      | 0.3587
+  Airwaves Menthol & Eucalyptus Sugarfree Chewing Gum 3 Pack | airwaves menthol                    | g      | 3.8158
+  All Butter Scones                                  | all butter scones                   | pcs    | 0.2483
+  All Butter Shortbread Fingers                      | all butter shortbread fingers       | None   | —
+  All Butter Sultana Scones                          | all butter sultana scones           | pcs    | 0.2483
+  All Purpose Seasoning                              | all purpose seasoning               | None   | —
+  Alphabet Potato Letters                            | alphabet potato letters             | g      | 0.2181
+  American Style Buffalo Rice Pouch                  | american style buffalo rice pouch   | g      | 0.316
+  Anchovies in Extra Virgin Olive Oil                | anchovies in extra virgin olive oil | None   | —
+  Large Bramley Apple                                | apple                               | pcs    | 0.3242
+  Apple & Berry No Added Sugar Granola               | apple berry no added sugar granola  | g      | 0.238
+  Apple & Blackcurrant Kids Smoothies 4 Pack         | apple blackcurrant kids smoothies 4 pack | None   | —
+  Organic Apple Cider Vinegar                        | apple cider vinegar                 | None   | —
+  Bramley Apple Family Crumble                       | apple family crumble                | None   | —
+  Apple Fruit & Grain Bars 6 Pack                    | apple fruit                         | None   | —
+  Apple & Grape Snack Pack                           | apple grape snack pack              | g      | 0.4875
+  Apple Juice                                        | apple juice                         | None   | —
+  Apple Juice                                        | apple juice                         | None   | —
+  Apple Juice 1 Litre                                | apple juice 1 litre                 | None   | —
+  Apple Juice From Concentrate 6 Pack                | apple juice from concentrate 6 pack | ml     | 0.945
+  Apple & Mango Juice                                | apple mango juice                   | None   | —
+  Bramley Apple Pork Sausages 6 Pack                 | apple pork sausages 6 pack          | g      | 0.6225
+  Apple & Raisin Crispy Fruit Slices 5x3 Pack        | apple raisin crispy fruit slices 5x3 pack | None   | —
+  Apple & Raspberry Fruity Water Drink 8 Pack        | apple raspberry fruity water drink 8 pack | ml     | 0.845
+  Apple & Raspberry Vitamin Drink                    | apple raspberry vitamin drink       | None   | —
+  Bramley Apple Sauce                                | apple sauce                         | None   | —
+  XXL Bramley Apple Sausages                         | apple sausages                      | g      | 0.5532
+  Apple Slices                                       | apple slices                        | None   | —
+  Apple Snack Pack                                   | apple snack pack                    | g      | 0.4875
+  Apple, Pineapple & Grape                           | apple, pineapple grape              | g      | 0.495
+  Pink Lady Apples                                   | apples                              | pcs    | 0.1822
+  Granny Smith Apples                                | apples                              | pcs    | 0.1456
+  Golden Delicious Apples                            | apples                              | pcs    | 0.1456
+  Jazz Apples                                        | apples                              | pcs    | 0.1822
+  Braeburn Apples                                    | apples                              | pcs    | 0.1456
+  British Mini Apples                                | apples                              | pcs    | 0.0907
+  Wonky Apples                                       | apples                              | pcs    | 0.0907
+  Strawberries, Raspberries & Apples Kids Smoothies 4 Pack | apples kids smoothies 4 pack        | None   | —
+  Apples, Grapes & Cheese                            | apples, grapes cheese               | g      | 0.8476
+  Applewood Smoked Wiltshire Cured Ham 6 Slices      | applewood wiltshire cured ham       | None   | —
+  Apricot Conserve                                   | apricot conserve                    | g      | 0.3311
+  Apricot Jam                                        | apricot jam                         | g      | 0.196
+  Asia Inspired Noodles Cantonese Style Hoisin Duck  | asia inspired noodles cantonese style hoisin duck | None   | —
+  Asia Inspired Noodles Singapore Curry              | asia inspired noodles singapore curry | None   | —
+  Asia Inspired Noodles Thai Style Sweet Chilli      | asia inspired noodles thai style sweet chilli | None   | —
+  Asia Inspired Rice Japanese Katsu Curry            | asia inspired rice japanese katsu curry | None   | —
+  Asian Style Bang Bang Rice Pouch                   | asian style bang bang rice pouch    | g      | 0.316
+  Aspartame Sweetener Tablets                        | aspartame sweetener tablets         | pcs    | 0.3933
+  Aubergine                                          | aubergine                           | pcs    | 0.22
+  XL Ripe & Ready Avocado                            | avocado                             | pcs    | 0.645
+  Avocado                                            | avocado                             | g      | 0.29
+  Avocado Medium                                     | avocado                             | None   | —
+  Smoked Back Bacon 10 Pack                          | back bacon 10 pack                  | g      | 0.4967
+  Smoked Back Bacon 16 Pack                          | back bacon 16 pack                  | g      | 0.478
+  Smoked Back Bacon Rashers Family Pack              | back bacon rashers                  | g      | 0.469
+  Smoked Back Bacon Rashers                          | back bacon rashers                  | g      | 0.434
+  Bacon Double Cheese Burgers 4 Pack                 | bacon double cheese burgers 4 pack  | g      | 0.7247
+  Bacon & Garlic Cocktail Sausage                    | bacon garlic cocktail sausage       | None   | —
+  Smoked Bacon Lardons                               | bacon lardons                       | g      | 0.895
+  Bake at Home Stonebaked Baguettes with Sourdough   | bake at home stonebaked baguettes with sourdough | pcs    | 0.4633
+  Bake at Home White Baguettes                       | bake at home white baguettes        | pcs    | 0.2833
+  Bake at Home White Dinner Rolls                    | bake at home white dinner rolls     | pcs    | 0.1542
+  Bake at Home White Rolls                           | bake at home white rolls            | pcs    | 0.1417
+  Bake from Frozen All Butter Pains Au Chocolat 6 Pack | bake from frozen all butter pains au chocolat 6 pack | None   | —
+  Bake from Frozen Cinnamon Swirls 4 Pack            | bake from frozen cinnamon swirls 4 pack | None   | —
+  Bake from Frozen Maple & Pecan Plaits 4 Pack       | bake from frozen maple              | None   | —
+  Baked Beans in a Rich Tomato Sauce                 | baked beans in a rich tomato sauce  | None   | —
+  Baked Beans in Tomato Sauce                        | baked beans in tomato sauce         | None   | —
+  Baked Beans with Sausages                          | baked beans with sausages           | g      | 0.1375
+  Baked Camembert French Cheese                      | baked camembert french cheese       | g      | 1.036
+  Baked Rustic Pâté                                  | baked rustic pâté                   | g      | 0.9933
+  Steak Bakes 2 Pack                                 | bakes 2 pack                        | g      | 0.4107
+  Baking Potato                                      | baking potato                       | pcs    | 0.12
+  British Baking Potatoes                            | baking potatoes                     | g      | 0.084
+  British Baking Potatoes                            | baking potatoes                     | pcs    | 0.0988
+  Baking Powder                                      | baking powder                       | g      | 0.325
+  Balsamic Vinegar of Modena                         | balsamic vinegar of modena          | None   | —
+  Banana                                             | banana                              | pcs    | 0.1333
+  Banana Chips                                       | banana chips                        | None   | —
+  Banana Extra Thick Milkshake                       | banana extra thick milkshake        | None   | —
+  Bananas                                            | bananas                             | pcs    | 0.13
+  Mini Bananas                                       | bananas                             | pcs    | 0.1048
+  Bang Bang Chicken                                  | bang bang chicken                   | g      | 1.0185
+  Bang Bang Recipe Mix                               | bang bang recipe mix                | g      | 1.6857
+  Banoffee Flavour Summer Chouxnuts 2 Pack           | banoffee flavour summer chouxnuts 2 pack | g      | 2.7182
+  Barber's Cave Aged Extra Mature British Cheddar Cheese | barber's cave aged extra mature cheddar cheese | g      | 1.1136
+  Barista Style Oat Drink                            | barista style oat drink             | None   | —
+  Barrel Aged Feta Cheese                            | barrel aged feta cheese             | g      | 1.395
+  Smoked Basa Fillets 2 Pack                         | basa 2 pack                         | g      | 0.7458
+  Basil                                              | basil                               | None   | —
+  Basil Infused Olive Oil                            | basil infused olive oil             | None   | —
+  Basil & Oregano Passata Rustica                    | basil oregano passata rustica       | g      | 0.283
+  Basil Pesto                                        | basil pesto                         | g      | 0.4684
+  Chicken, Tomato & Basil Topped Pasta               | basil topped pasta                  | g      | 0.6633
+  Basmati Rice                                       | basmati rice                        | g      | 0.179
+  Basmati Rice Pouch                                 | basmati rice pouch                  | g      | 0.22
+  Battered Chicken Balls in a Light & Crispy Batter  | battered chicken balls in a         | g      | 0.7868
+  Battered Chunky Fish Fingers                       | battered chunky fish fingers        | g      | 0.6725
+  Battered Cod 4 Pack                                | battered cod 4 pack                 | g      | 0.678
+  Battered Fish Fillets                              | battered fish                       | g      | 0.4975
+  Battered Haddock 4 Pack                            | battered haddock 4 pack             | g      | 0.678
+  Battered No-Pork Sausages                          | battered no-pork sausages           | g      | 1.1056
+  Battered Onion Rings                               | battered onion rings                | g      | 0.265
+  Battered Pollock                                   | battered pollock                    | g      | 0.4983
+  Battered Poppin' Chicken                           | battered poppin' chicken            | g      | 0.5211
+  Bay Leaf                                           | bay leaf                            | None   | —
+  BBQ Beef Flavour Instant Noodles                   | bbq beef flavour instant noodles    | None   | —
+  BBQ Beef Flavour Potato Hoops 6 Pack               | bbq beef flavour potato hoops 6 pack | g      | 0.7933
+  5% Fat BBQ Beef Kebabs 4 Pack                      | bbq beef kebabs 4 pack              | g      | 1.0906
+  BBQ Brisket 10 Slices                              | bbq brisket                         | g      | 1.79
+  BBQ Chicken Topped Pasta                           | bbq chicken topped pasta            | g      | 0.6633
+  BBQ Coated Peanuts                                 | bbq coated peanuts                  | g      | 0.675
+  BBQ Flavoured Chicken Poppers Grazing Pack         | bbq flavoured chicken poppers grazing pack | None   | —
+  BBQ Flavoured Protein Chicken Skewers 10 Pack*     | bbq flavoured protein chicken skewers 10 pack* | g      | 1.59
+  BBQ Hot Dogs                                       | bbq hot dogs                        | g      | 0.625
+  BBQ Mini Ribs                                      | bbq ribs                            | g      | 0.8345
+  BBQ Sauce                                          | bbq sauce                           | None   | —
+  BBQ Sweet Potato Burgers 2 Pack                    | bbq sweet potato burgers 2 pack     | None   | —
+  BBQ Tempura Chicken Bites                          | bbq tempura chicken bites           | g      | 0.4971
+  Beanz in a Rich Tomato Sauce 3 Pack                | beanz in a rich tomato sauce 3 pack | ml     | 0.2211
+  Beautifully Buttery                                | beautifully buttery                 | g      | 0.178
+  Beautifully Buttery Light                          | beautifully buttery                 | g      | 0.178
+  British Diced Beef                                 | beef                                | g      | 1.1225
+  British Diced Beef                                 | beef                                | g      | 1.0843
+  100% British Beef 30 Day Matured 6oz Fillet Steak  | beef 30 day matured steak           | g      | 4.7
+  100% British Beef 30 Day Matured Aberdeen Angus 6oz Fillet Steak | beef 30 day matured steak           | g      | 4.7
+  Beef and Pork Mince XXL                            | beef and ground pork                | g      | 0.569
+  100% British Beef Brisket Joint                    | beef brisket                        | g      | 1.29
+  British Wagyu Beef Burgers                         | beef burgers                        | g      | 1.1735
+  Beef Burgers 6 Pack                                | beef burgers 6 pack                 | g      | 0.6988
+  Beef Burrito Protein Pot                           | beef burrito protein pot            | g      | 0.5
+  Beef Casserole Seasoning Mix                       | beef casserole seasoning mix        | None   | —
+  Beef Double Cheese Burgers 4 Pack                  | beef double cheese burgers 4 pack   | g      | 0.7247
+  Beef Dripping Roast Potatoes                       | beef dripping roast potatoes        | g      | 0.199
+  Beef Flavour Savoury Rice                          | beef flavour savoury rice           | None   | —
+  British Beef & Pork Mince                          | beef ground pork                    | g      | 0.5987
+  Beef Hot Pot                                       | beef hot pot                        | g      | 0.6975
+  Beef in Black Bean Sauce with Egg Fried Rice       | beef in black bean sauce with egg fried rice | ml     | 0.6975
+  Beef Jerky 35g                                     | beef jerky                          | g      | 4.1429
+  Wagyu Beef Kebabs                                  | beef kebabs                         | None   | —
+  5% Fat Beef Kebabs 4 Pack                          | beef kebabs 4 pack                  | g      | 1.0906
+  Beef Lasange                                       | beef lasange                        | g      | 0.6975
+  100% British Beef Lean Aberdeen Angus Steak Mince 5% Fat | beef lean ground steak              | g      | 1.098
+  British Beef Meatballs 12 Pack                     | beef meatballs 12 pack              | g      | 0.8794
+  British Beef Meatballs 24 Pack                     | beef meatballs 24 pack              | g      | 0.7338
+  Beef Paste                                         | beef paste                          | g      | 0.6267
+  British Beef Quarter Pounders 4 Pack               | beef quarter pounders 4 pack        | g      | 0.6366
+  Aberdeen Angus Beef Quarter Pounders 4 Pack        | beef quarter pounders 4 pack        | g      | 1.011
+  Beef Quarter Pounders 4 Pack                       | beef quarter pounders 4 pack        | g      | 0.7247
+  Beef Ragu Protein Pot                              | beef ragu protein pot               | g      | 0.5
+  100% British Beef Wagyu Ribeye Steak               | beef ribeye steak                   | g      | 4.1806
+  100% British Beef Roasted Topside of Beef 5 Slices | beef roasted topside of beef        | g      | 2.39
+  XXL Beef Roasting Joint                            | beef roasting                       | g      | 0.6188
+  British Beef Roasting Joint 21 Day Matured         | beef roasting 21 day matured        | g      | 0.998
+  British Beef Roasting Joint 30 Day Matured         | beef roasting 30 day matured        | g      | 1.3
+  Beef Rocket Racers                                 | beef rocket racers                  | g      | 1.4744
+  100% British Beef Wagyu Rump Steak                 | beef rump steak                     | g      | 3.5198
+  100% British Beef Salt Dry Aged Aberdeen Angus 8oz Ribeye Steak | beef salt dry aged ribeye steak     | g      | 3.2115
+  100% British Beef Salt Dry Aged Aberdeen Angus 8oz Rump Steak | beef salt dry aged rump steak       | g      | 2.6388
+  100% British Beef Salt Dry Aged Aberdeen Angus 8oz Sirloin Steak | beef salt dry aged sirloin steak    | g      | 3.0793
+  100% British Beef Wagyu Sirloin Steak              | beef sirloin steak                  | g      | 3.9604
+  Beef Smash Burgers 4 Pack                          | beef smash burgers 4 pack           | g      | 0.85
+  100% British Beef Wagyu Fillet Steak               | beef steak                          | g      | 6.4647
+  British Beef Steak 21 Day Matured                  | beef steak 21 day matured           | g      | 1.5374
+  100% British Beef Fillet Steaks 28 Day Matured 2 Pack | beef steaks 28 day matured 2 pack   | g      | 4.1147
+  Beef Stew & Dumplings                              | beef stew dumplings                 | g      | 0.6975
+  Beef & Tomato Flavour Snack Noodles Pot            | beef tomato flavour snack noodles pot | None   | —
+  Beer Battered Cod 2 Pack                           | beer battered cod 2 pack            | g      | 1.14
+  Cooked Beetroot                                    | beetroot                            | g      | 0.132
+  Red Lentil & Beetroot Fusilli                      | beetroot fusilli                    | g      | 0.276
+  Beetroot, Red Cabbage & Port Slaw                  | beetroot, red cabbage               | None   | —
+  Belgian Buns                                       | belgian buns                        | pcs    | 0.4967
+  Belgian Chocolate Ganache Lemons                   | belgian chocolate ganache lemons    | g      | 1.2375
+  Benefit Red Fruit Cereal                           | benefit red fruit cereal            | g      | 0.424
+  Berry Protein Granola                              | berry protein granola               | g      | 0.5975
+  White Chocolate & Berry Summer Tarts               | berry summer tarts                  | None   | —
+  Light  Fat Free Berry Yogurts 6 Pack               | berry yogurts 6 pack                | g      | 0.2701
+  Best of British Apples                             | best of apples                      | pcs    | 0.1364
+  Bicarbonate Of Soda                                | bicarbonate of soda                 | g      | 0.325
+  Biscuit Barrel Assortment                          | biscuit barrel assortment           | None   | —
+  Bistro Salad                                       | bistro salad                        | g      | 0.5563
+  Quorn Bites                                        | bites                               | None   | —
+  Bitesize Wheat Shreds                              | bitesize wheat shreds               | g      | 0.358
+  Tinned Black Beans/Green Lentils                   | black beans/green lentils           | g      | 0.1231
+  Tinned Black Beans/Green Lentils                   | black beans/green lentils           | g      | 0.1231
+  Black Cod                                          | black cod                           | None   | —
+  Black Forest Fruits                                | black forest fruits                 | g      | 0.398
+  Pitted Green & Black Olives With Feta              | black olives with feta              | None   | —
+  Black Pepper & Paprika Mini Roule Cheese           | black pepper                        | g      | 1.49
+  Sour Cream & Black Pepper Multigrain Waves 6 Pack  | black pepper multigrain waves 6 pack | ml     | 0.86
+  Black Seedless Grapes                              | black seedless grapes               | g      | 0.378
+  British Blackberries                               | blackberries                        | g      | 1.3267
+  Wonky Blackberries                                 | blackberries                        | g      | 1.26
+  Blackcurrant Conserve                              | blackcurrant conserve               | g      | 0.3311
+  Blackcurrant Curd                                  | blackcurrant curd                   | g      | 0.5906
+  Blackcurrant Fruit Rolls Multipack                 | blackcurrant fruit rolls multipack  | g      | 1.49
+  Blackcurrant Jam                                   | blackcurrant jam                    | g      | 0.196
+  Blondie Extra Thick Cream                          | blondie extra thick cream           | ml     | 0.116
+  Blossom Honey Roasted Wiltshire Cured Ham 6 Slices | blossom honey roasted wiltshire cured ham | None   | —
+  Blueberries                                        | blueberries                         | g      | 0.7933
+  Wonky Blueberries                                  | blueberries                         | g      | 0.952
+  Blueberries                                        | blueberries                         | g      | 0.798
+  Premium Blueberries                                | blueberries                         | g      | 1.1667
+  Blueberry Fruit & Grain Bars 6 Pack                | blueberry fruit                     | None   | —
+  Blueberry Soya Pot                                 | blueberry soya pot                  | None   | —
+  Bockwurst Sausages                                 | bockwurst sausages                  | None   | —
+  Boil In The Bag Rice 8 Pack                        | boil in the bag rice 8 pack         | ml     | 0.198
+  Bolognese Pasta Sauce                              | bolognese pasta sauce               | None   | —
+  Both In One Medium Sliced Loaf                     | both in one loaf                    | None   | —
+  Bourbon Creams                                     | bourbon creams                      | g      | 0.215
+  Braised Beef with Mash                             | braised beef with mash              | g      | 0.6975
+  Bran Flakes                                        | bran flakes                         | g      | 0.1667
+  Breaded Chicken Chunks                             | breaded chicken                     | g      | 0.7
+  Breaded Chicken Steaks 6 Pack                      | breaded chicken 6 pack              | g      | 0.5542
+  Breaded Boneless Chicken Platter                   | breaded chicken platter             | g      | 0.665
+  Breaded Chicken Tenders                            | breaded chicken tenders             | g      | 0.8492
+  Breaded Chunky Fish Fingers                        | breaded chunky fish fingers         | g      | 0.6725
+  Breaded Cod                                        | breaded cod                         | g      | 0.9967
+  Breaded Cod 4 Pack                                 | breaded cod 4 pack                  | g      | 0.678
+  Breaded Cod Fish Fingers 10 Pack                   | breaded cod fish fingers 10 pack    | g      | 0.6633
+  Breaded Fish Fillets                               | breaded fish                        | g      | 0.4975
+  Breaded Haddock                                    | breaded haddock                     | g      | 0.9967
+  British Breaded Ham 14 Slices                      | breaded ham                         | None   | —
+  Breaded Omega 3 Fish Fingers 15 Pack               | breaded omega 3 fish fingers 15 pack | g      | 0.3311
+  Breaded Pollock                                    | breaded pollock                     | g      | 0.4983
+  Breaded Wholetail Scampi                           | breaded wholetail scampi            | g      | 1.196
+  British Breaded Wiltshire Cured Ham 4 Slices       | breaded wiltshire cured ham         | g      | 1.7417
+  Breakfast Hash Browns 10 Pack                      | breakfast hash browns 10 pack       | g      | 0.338
+  Breakfast Pork Patties 6 Pack                      | breakfast pork patties 6 pack       | g      | 0.6988
+  Brie de Meaux A.O.P French Cheese                  | brie de meaux a.o.p french cheese   | g      | 1.5697
+  Sliced Brioche Burger Buns                         | brioche burger buns                 | pcs    | 0.1817
+  Sliced Brioche Hot Dog Rolls                       | brioche hot dog rolls               | pcs    | 0.1656
+  British Broccoli                                   | broccoli                            | g      | 0.2188
+  Broccoli                                           | broccoli                            | g      | 0.4167
+  British Broccoli & Cauliflower Florets             | broccoli cauliflower florets        | g      | 0.3383
+  Broccoli Cheese & Tomato Quiche                    | broccoli cheese                     | None   | —
+  Broccoli Florets                                   | broccoli florets                    | g      | 0.119
+  Brown Onions                                       | brown onions                        | g      | 0.099
+  British Wonky Brown Onions                         | brown onions                        | g      | 0.08
+  Large Brown Onions                                 | brown onions                        | pcs    | 0.1863
+  Brown Rice                                         | brown rice                          | g      | 0.139
+  Light Brown Soft Sugar                             | brown soft sugar                    | g      | 0.218
+  Brussel & Shallot Pâté                             | brussel shallot pâté                | g      | 0.9933
+  Bubblegum & Raspberry Flavour Mushrooms Sweets     | bubblegum raspberry flavour mushrooms sweets | g      | 0.6533
+  Bubbly Battered Cod 2 Pack                         | bubbly battered cod 2 pack          | g      | 1.14
+  Bucatini Pasta Di Gragnano P.G.I.                  | bucatini pasta di gragnano p.g.i.   | g      | 0.258
+  Buffalo Hot Chicken Wings                          | buffalo hot chicken wings           | g      | 0.615
+  Buffalo Milk Ricotta & Spinach Ravioli             | buffalo milk ricotta                | ml     | 0.996
+  Butterhead Salad                                   | butterhead salad                    | g      | 1.0625
+  Buttermilk Chicken Fillets 2 Pack                  | buttermilk chicken 2 pack           | ml     | 1.0543
+  Buttermilk Chicken Breast Fillet Burgers 4 Pack    | buttermilk chicken breast burgers 4 pack | ml     | 0.7975
+  Buttermilk Chicken Tenders                         | buttermilk chicken tenders          | ml     | 0.8492
+  Buttermilk Chicken Thigh Fillet Burgers 2 Pack     | buttermilk chicken thigh burgers 2 pack | ml     | 0.7967
+  Buttermilk Fish Burgers                            | buttermilk fish burgers             | ml     | 0.9912
+  Butternut Squash & Pine Nut Girasoli               | butternut squash                    | g      | 0.996
+  Butternut Squash Each                              | butternut squash each               | pcs    | 0.109
+  Flora Buttery                                      | buttery                             | g      | 0.4422
+  British Baby Button Mushrooms                      | button mushrooms                    | g      | 0.475
+  Caesar Chicken                                     | caesar chicken                      | g      | 0.9447
+  Caesar Potato Salad                                | caesar potato salad                 | g      | 0.53
+  Caesar Salad Kit                                   | caesar salad kit                    | g      | 0.645
+  Caeser Salad Dressing                              | caeser salad dressing               | None   | —
+  Cajun Chicken Breast Fillets 2 Pack                | cajun chicken breast 2 pack         | g      | 1.0873
+  Cajun Chicken Seasoning                            | cajun chicken seasoning             | None   | —
+  Cajun Marinated Chicken Sizzler                    | cajun marinated chicken sizzler     | g      | 0.8817
+  Cajun Seasoning                                    | cajun seasoning                     | None   | —
+  Cake Bars Choceur Cake                             | cake bars cake                      | pcs    | 0.0387
+  Cake Bars Dreemy                                   | cake bars dreemy                    | pcs    | 0.0387
+  Calabrese Salami Stonebaked Flatbread              | calabrese salami stonebaked flatbread | g      | 0.6083
+  Caramel Chocolate Crispy Chunks 4 Pack             | caramel chocolate crispy 4 pack     | None   | —
+  Caramelised Biscuits                               | caramelised biscuits                | None   | —
+  Caramelised Onion Cocktail Sausage                 | caramelised onion cocktail sausage  | None   | —
+  Caramelised Onion Houmous                          | caramelised onion houmous           | None   | —
+  Caramelised Onion Pork Sausages 6 Pack             | caramelised onion pork sausages 6 pack | g      | 0.6225
+  XXL Caramelised Onion Sausages                     | caramelised onion sausages          | g      | 0.5532
+  Caramelised Red Onion & Extra Mature Cheddar Flatbread | caramelised red onion               | g      | 0.7654
+  Caramelised Red Onion Chutney                      | caramelised red onion chutney       | None   | —
+  Caramelised Red Onion Flavoured Pork Burgers       | caramelised red onion flavoured pork burgers | g      | 0.6633
+  Caramelised Red Onion & Red Leicester Beef Burgers | caramelised red onion red leicester beef burgers | g      | 0.85
+  Carrot & Swede Mash                                | carrot swede mash                   | g      | 0.3
+  Carrot, Broccoli & Sweetcorn Steam Bags 4 Pack     | carrot, broccoli                    | g      | 0.2949
+  Carrot, Peas & Sweetcorn Steam Bags 4 Pack         | carrot, peas                        | g      | 0.2949
+  Carrots                                            | carrots                             | g      | 0.069
+  British Carrots                                    | carrots                             | g      | 0.088
+  British Wonky Carrots                              | carrots                             | g      | 0.053
+  Sliced Carrots in Water                            | carrots in water                    | None   | —
+  Cashew Nuts                                        | cashew nuts                         | g      | 0.845
+  Cashews Roasted and Salted                         | cashews roasted and salted          | g      | 0.995
+  Caster Sugar                                       | caster sugar                        | g      | 0.149
+  British Cauliflower                                | cauliflower                         | pcs    | 0.1487
+  Cauliflower Cheese                                 | cauliflower cheese                  | g      | 0.4475
+  Cauliflower Cheese                                 | cauliflower cheese                  | g      | 0.265
+  Cauliflower Cheese Grills 4 Pack                   | cauliflower cheese grills 4 pack    | None   | —
+  Cavolo Nero                                        | cavolo nero                         | g      | 0.6333
+  Cayenne Pepper                                     | cayenne pepper                      | None   | —
+  Celery                                             | celery                              | pcs    | 0.1875
+  Celery Sticks                                      | celery sticks                       | g      | 0.2829
+  Weetabix Cereal 36 Pack                            | cereal 36 pack                      | pcs    | 0.0739
+  British Chantenay Carrots                          | chantenay carrots                   | g      | 0.198
+  Chargrilled Chicken Caesar Salad                   | chargrilled chicken caesar salad    | g      | 1.145
+  Chargrilled Pulled Chicken                         | chargrilled pulled chicken          | g      | 1.6583
+  Chargrilled Spanish Chorizo                        | chargrilled spanish chorizo         | None   | —
+  Chicken, Parmesan & Cheddar Bites                  | cheddar bites                       | None   | —
+  Grated Cheddar Cheese                              | cheddar cheese                      | g      | 0.598
+  British Medium Cheddar Cheese                      | cheddar cheese                      | g      | 0.6225
+  British Cheddar Cheese with Black Pepper 5 Slices  | cheddar cheese with black pepper    | g      | 1.25
+  Cheddar & Cracked Black Pepper Flatbread Thins     | cheddar cracked black pepper flatbread thins | g      | 0.952
+  Grated Cheddar & Mozzarella Cheese Mix             | cheddar mozzarella cheese mix       | g      | 0.796
+  Cherrywood Smoked Bacon & Cheddar Quiche           | cheddar quiche                      | None   | —
+  British Cheddar with Pickled Onion Cheese          | cheddar with pickled onion cheese   | g      | 0.995
+  Mini Cheddars Original 14 Pack                     | cheddars original 14 pack           | g      | 0.8975
+  Mini Cheddars Red Leicester Flavour 14 Pack        | cheddars red leicester flavour 14 pack | g      | 0.8975
+  Cheese & Bacon Chicken En Croûte                   | cheese bacon chicken en croûte      | g      | 0.8842
+  Cheese & Bacon Crispbakes 2 Pack                   | cheese bacon crispbakes 2 pack      | g      | 0.6564
+  Cheese & Bacon Egg Bites                           | cheese bacon egg bites              | None   | —
+  Cheese & Bacon Hot Dogs                            | cheese bacon hot dogs               | g      | 0.625
+  Sausage, Bean & Cheese Bakes 2 Pack                | cheese bakes 2 pack                 | g      | 0.4513
+  Cheese & Caramelised Onion Rolls 4 Pack            | cheese caramelised onion rolls 4 pack | g      | 1.3245
+  Cheese & Chive Twists                              | cheese chive twists                 | g      | 0.632
+  Cheese Coleslaw                                    | cheese coleslaw                     | None   | —
+  Cheese Coleslaw                                    | cheese coleslaw                     | g      | 0.33
+  Cheese Cracker Sharing Tub                         | cheese cracker sharing tub          | g      | 0.516
+  Cheese & Dill Salmon Wellington                    | cheese dill salmon wellington       | g      | 0.7129
+  Cheese Mini Hash Brown Bites                       | cheese hash brown bites             | g      | 0.29
+  Cheese & Onion Bakes 2 Pack                        | cheese onion bakes 2 pack           | g      | 0.4826
+  Cheese & Onion Crispbakes 2 Pack                   | cheese onion crispbakes 2 pack      | g      | 0.6564
+  Cheese & Onion Crispbakes 4 Pack                   | cheese onion crispbakes 4 pack      | None   | —
+  Cheese & Onion Quarter Pounders 4 Pack             | cheese onion quarter pounders 4 pack | g      | 0.7467
+  Cheese & Onion Quiche                              | cheese onion quiche                 | None   | —
+  Cheese & Onion Rolls 6 Pack                        | cheese onion rolls 6 pack           | None   | —
+  Cheese & Onion Slices 2 Pack                       | cheese onion slices 2 pack          | None   | —
+  Cheese & Onion Twists                              | cheese onion twists                 | g      | 0.632
+  Cheese Sauce Mix                                   | cheese sauce mix                    | None   | —
+  Italian Meat & Cheese Select                       | cheese select                       | None   | —
+  Spanish Meat & Cheese Selection                    | cheese selection                    | None   | —
+  Puff Pastry Ham & Cheese Slices 2 Pack             | cheese slices 2 pack                | None   | —
+  Cheese Thins                                       | cheese thins                        | None   | —
+  Cheese Topped Rolls                                | cheese topped rolls                 | pcs    | 0.215
+  Cherries                                           | cherries                            | g      | 1.145
+  Cherry Bakewells                                   | cherry bakewells                    | pcs    | 0.1322
+  Cherry Farmhouse Yogurt                            | cherry farmhouse yogurt             | g      | 0.6
+  Low Fat Cherry Fruit Yogurt                        | cherry fruit yogurt                 | g      | 0.1982
+  Cherry Soya Pot                                    | cherry soya pot                     | None   | —
+  Cherry Tomatoes                                    | cherry tomatoes                     | g      | 0.2697
+  Cherry Tomatoes                                    | cherry tomatoes                     | g      | 0.248
+  Cherry Tomatoes in Rich Tomato Juice               | cherry tomatoes in rich tomato juice | g      | 0.1875
+  Cherrywood Smoked Bacon & Cheddar Quiche           | cherrywood bacon                    | None   | —
+  British Chestnut Mushrooms                         | chestnut mushrooms                  | g      | 0.38
+  Chicharricos Salted Scratchi                       | chicharricos salted scratchi        | g      | 1.6769
+  Free Range Chicken Fillets                         | chicken                             | g      | 1.3114
+  Chicken & Sweetcorn                                | chicken                             | None   | —
+  Cooked Sliced Chicken                              | chicken                             | g      | 0.6147
+  Cooked Diced Chicken                               | chicken                             | g      | 0.6147
+  Chicken Strips 4 Pack with BBQ Dip                 | chicken 4 pack with bbq dip         | g      | 1.0826
+  Chicken Strips 4 Pack with Sweet Chilli Dip        | chicken 4 pack with sweet chilli dip | g      | 1.0826
+  Chicken and Chorizo Paella                         | chicken and chorizo paella          | g      | 4.3824
+  Chicken Arrabbiata                                 | chicken arrabbiata                  | g      | 0.6975
+  Chicken & Bacon Layered Salad                      | chicken bacon layered salad         | g      | 0.4342
+  Chicken & Bacon Protein Poppers 5 Pack             | chicken bacon protein poppers 5 pack | g      | 1.3267
+  Chicken & Bacon Single Slices                      | chicken bacon single slices         | g      | 0.66
+  Chicken & Bacon Tortelloni                         | chicken bacon tortelloni            | g      | 0.5633
+  Chicken Bakes 2 Pack                               | chicken bakes 2 pack                | g      | 0.3758
+  Chicken Breast Mini Fillets                        | chicken breast                      | g      | 0.665
+  Chicken Breast Fillets                             | chicken breast                      | g      | 0.6908
+  Diced Chicken Breast                               | chicken breast                      | g      | 0.7475
+  Chicken Breast Mini Fillets                        | chicken breast                      | g      | 0.7475
+  Chicken Breast Fillets                             | chicken breast                      | g      | 0.6151
+  Chicken Breast Fillets                             | chicken breast                      | g      | 0.649
+  Diced Chicken Breast                               | chicken breast                      | g      | 0.665
+  Chicken Breast Fillets                             | chicken breast                      | g      | 0.425
+  Chicken Breast Fillets 2 Pack                      | chicken breast 2 pack               | g      | 0.73
+  Chicken Casserole & Dumplings                      | chicken casserole dumplings         | g      | 0.6975
+  Chicken Casserole Seasoning Mix                    | chicken casserole seasoning mix     | None   | —
+  Chicken & Chorizo Kebabs                           | chicken chorizo kebabs              | None   | —
+  Chicken & Chorizo Kebabs 4 Pack                    | chicken chorizo kebabs 4 pack       | g      | 1.2469
+  Chicken & Chorizo Paella Rice Meal                 | chicken chorizo paella rice meal    | g      | 0.3837
+  Chicken Chow Mein                                  | chicken chow mein                   | g      | 0.6975
+  Chicken Christmas Stars Shapes                     | chicken christmas stars shapes      | g      | 0.097
+  Chicken Christmas Tree Shapes                      | chicken christmas tree shapes       | g      | 0.0909
+  Chicken Curry with Rice                            | chicken curry with rice             | g      | 0.2481
+  Chicken Dippers in Batter 24 Pack                  | chicken dippers in batter 24 pack   | g      | 0.3667
+  Chicken Drum Fillets                               | chicken drum                        | g      | 0.4917
+  Chicken Drum Fillets                               | chicken drum                        | g      | 0.4428
+  Chicken Drumsticks                                 | chicken drumsticks                  | g      | 0.215
+  Chicken & Duck XL Selection Sushi                  | chicken duck selection sushi        | g      | 1.4049
+  Chicken Family Pie                                 | chicken family pie                  | g      | 0.598
+  Chicken Flavour Instant Noodles                    | chicken flavour instant noodles     | None   | —
+  Chicken Flavour Noodle Bowl                        | chicken flavour noodle bowl         | None   | —
+  Chicken Flavour Savoury Rice                       | chicken flavour savoury rice        | None   | —
+  Chicken Gravy Granules                             | chicken gravy granules              | None   | —
+  Chicken Gyozas 12 Pack                             | chicken gyozas 12 pack              | g      | 0.8292
+  Chicken Jalfrezi                                   | chicken jalfrezi                    | g      | 0.8674
+  Chicken Jalfrezi With Pilau Rice                   | chicken jalfrezi with pilau rice    | g      | 0.6975
+  Chicken Katsu Curry Protein Pot                    | chicken katsu curry protein pot     | g      | 0.5
+  Chicken King Kebab, Greek                          | chicken king kebab, greek           | g      | 0.5942
+  Chicken Korma                                      | chicken korma                       | g      | 0.3985
+  Chicken Korma With Pilau Rice                      | chicken korma with pilau rice       | g      | 0.6975
+  Chicken & Leek Egg Bites                           | chicken leek egg bites              | None   | —
+  Chicken Legs                                       | chicken legs                        | g      | 0.225
+  Chicken & Mango Stonebaked Flatbread               | chicken mango stonebaked flatbread  | g      | 0.5615
+  Chicken & Mushroom Flavour Snack Noodle            | chicken mushroom flavour snack noodle | None   | —
+  Chicken & Mushroom Slices 2 Pack                   | chicken mushroom slices 2 pack      | None   | —
+  Chicken & Pancetta Bake                            | chicken pancetta bake               | g      | 0.8975
+  Chicken Parmigiana                                 | chicken parmigiana                  | None   | —
+  Chicken Paste                                      | chicken paste                       | g      | 0.6267
+  Chicken Poppers                                    | chicken poppers                     | None   | —
+  Chicken Quarter Pounders 2 Pack                    | chicken quarter pounders 2 pack     | g      | 0.7445
+  Chicken Rogan Josh With Pilau Rice                 | chicken rogan josh with pilau rice  | g      | 0.6975
+  Chicken Satay Skewers                              | chicken satay skewers               | None   | —
+  Chicken Sausages 6 Pack                            | chicken sausages 6 pack             | g      | 0.6147
+  Chicken Seasoning                                  | chicken seasoning                   | None   | —
+  Chicken Shawarma                                   | chicken shawarma                    | g      | 1.0185
+  Chicken Stock Cubes                                | chicken stock cubes                 | None   | —
+  Chicken & Sweetcorn Deli Filler                    | chicken sweetcorn deli filler       | None   | —
+  Chicken Tagliatelle                                | chicken tagliatelle                 | g      | 0.6725
+  Chicken Thigh Fillets                              | chicken thigh                       | g      | 0.6322
+  Free Range Corn Fed Chicken Thigh Fillets          | chicken thigh                       | g      | 0.824
+  Chicken Thigh Fillets                              | chicken thigh                       | g      | 0.765
+  Chicken Thighs                                     | chicken thighs                      | g      | 0.299
+  Chicken Tikka Breast Slices                        | chicken tikka breast slices         | g      | 0.8292
+  Chicken Tikka Masala                               | chicken tikka masala                | g      | 0.8674
+  Chicken Tikka Masala                               | chicken tikka masala                | g      | 0.3985
+  Chicken Tikka Masala                               | chicken tikka masala                | g      | 0.498
+  Chicken Tikka Masala with Pilau Rice               | chicken tikka masala with pilau rice | g      | 0.6975
+  Chicken Tikka Slices 2 Pack                        | chicken tikka slices 2 pack         | None   | —
+  Chicken Vindaloo With Pilau Rice                   | chicken vindaloo with pilau rice    | g      | 0.6975
+  Chicken Wings                                      | chicken wings                       | g      | 0.215
+  Chicken Wings BBQ & Buffalo                        | chicken wings bbq buffalo           | g      | 0.4129
+  Chicken with Patatas Bravas                        | chicken with patatas bravas         | g      | 0.7113
+  Chicken, Bacon & Sweetcorn Topped Pasta            | chicken, bacon                      | g      | 0.6633
+  Chicken, Bacon & Leek Pie                          | chicken, bacon                      | None   | —
+  Chicken, Bacon & Leek Pie                          | chicken, bacon                      | g      | 0.998
+  Chicken, Parmesan & Cheddar Bites                  | chicken, parmesan                   | None   | —
+  Chicken, Tomato & Basil Topped Pasta               | chicken, tomato                     | g      | 0.6633
+  Chickpea Fusilli                                   | chickpea fusilli                    | g      | 0.276
+  Chickpeas                                          | chickpeas                           | None   | —
+  Chilli Chicken Miso Ramen Bowl                     | chilli chicken miso ramen bowl      | g      | 0.4972
+  Chilli Coated Peanuts                              | chilli coated peanuts               | g      | 0.675
+  Chilli Con Carne                                   | chilli con carne                    | None   | —
+  Chilli Con Carne Seasoning Mix                     | chilli con carne seasoning mix      | None   | —
+  Chilli Flavour Soba Noodles Pot                    | chilli flavour soba noodles pot     | g      | 1.2111
+  Chilli & Garlic Olives                             | chilli garlic olives                | None   | —
+  Chilli Grilling cheese                             | chilli grilling cheese              | g      | 0.795
+  Chilli Infused Olive Oil                           | chilli infused olive oil            | None   | —
+  Chilli Powder                                      | chilli powder                       | None   | —
+  Chilli Prawn                                       | chilli prawn                        | g      | 0.8975
+  Chilli Purée                                       | chilli purée                        | g      | 1.2143
+  Chilli Sweetcorn Parcels                           | chilli sweetcorn parcels            | None   | —
+  Chineese Inspired Air Fryer Bites                  | chineese inspired air fryer bites   | g      | 0.895
+  Chinese 5 Spice                                    | chinese 5 spice                     | None   | —
+  Chinese BBQ Mini Ribs                              | chinese bbq ribs                    | None   | —
+  Chinese Chicken Curry with Egg Fried Rice          | chinese chicken curry with egg fried rice | g      | 0.6975
+  Chinese Curry Sauce Mix                            | chinese curry sauce mix             | None   | —
+  Chinese Marinated Pork Loin Steaks                 | chinese marinated pork loin         | g      | 0.6716
+  Chinese Style Curry Cooking Sauce                  | chinese style curry cooking sauce   | ml     | 0.198
+  Chinese Style Salt & Chilli Pork Mini Ribs         | chinese style salt chilli pork ribs | None   | —
+  Chip Shop Style Extra Large Battered Cod Fillets 2 Pack | chip shop style extra battered cod 2 pack | g      | 1.1935
+  Chip Shop Style Extra Large Beer Battered Haddock Fillets 2 Pack | chip shop style extra beer battered haddock 2 pack | g      | 1.1935
+  Chipotle Chicken                                   | chipotle chicken                    | None   | —
+  Spicy Butternut Squash & Chipotle Feta Bakes 2 Pack | chipotle feta bakes 2 pack          | None   | —
+  Sour Cream & Chive Baked Pretzels 6 Pack           | chive baked pretzels 6 pack         | ml     | 0.9773
+  British Double Gloucester with Onion & Chive Cheese | chive cheese                        | g      | 0.995
+  Sour Cream & Chive Starry Night Mix                | chive starry night mix              | ml     | 1.032
+  Choc Chip Cookies                                  | choc chip cookies                   | None   | —
+  Mini Choc Chip Cookies                             | choc chip cookies                   | g      | 0.3267
+  Weetabix Choc Minis                                | choc minis                          | None   | —
+  Choco Hazelnut Flavour Filled Soft Bakes 5 Pack    | choco hazelnut flavour filled soft bakes 5 pack | g      | 0.596
+  Choco Pillows Cereal                               | choco pillows cereal                | None   | —
+  Choco Rice Cereal Bars 6 Pack                      | choco rice cereal bars 6 pack       | g      | 0.9083
+  Choco Wheaties Cereal                              | choco wheaties cereal               | None   | —
+  ... i 1795 więcej (truncated)
+
+======================================================================
+  PL — produkty (shop | original_name | generic_name | unit | price_per_100)
+======================================================================
+  auchan       | 20 ekologicznych jaj różnej wielkości Pewni Dobrego 20 sztuk | 20 jaj różnej                       | pcs    | —
+  auchan       | 7 Zbóż men jogurt z ananasem mandarynką i zbożami Bakoma 300 g | 7 zbóż men jogurt z ananasem mandarynką i zbożami | g      | 1.8267
+  auchan       | 7 Zbóż men jogurt z brzoskwinią gruszką i zbożami Bakoma 300 g | 7 zbóż men jogurt z brzoskwinią gruszką i zbożami | g      | 1.8267
+  auchan       | 7 Zbóż men jogurt z jabłkiem pomarańczą i zbożami Bakoma 300 g | 7 zbóż men jogurt z jabłkiem pomarańczą i zbożami | g      | 1.8267
+  auchan       | 7 zbóż men jogurt z jagodą czarną porzeczką i zbożami Bakoma 300 g | 7 zbóż men jogurt z jagodą czarną porzeczką i zbożami | g      | 1.8267
+  auchan       | Active mix sałat z rukolą Fit 150 g                | active mix sałat z rukolą           | g      | 4.5267
+  biedronka    | Activia Jogurt malina granat 280 g                 | activia jogurt malina granat        | g      | 1.7821
+  biedronka    | Adalbert's Tea Earl Grey Herbata czarna liściasta 100 g | adalbert's tea earl grey herbata czarna liściasta | g      | 18.99
+  biedronka    | Adalbert's Tea Herbata czarna liściasta tropikalna 100 g | adalbert's tea herbata czarna liściasta tropikalna | g      | 18.99
+  biedronka    | Adalbert's Tea Herbata zielona z wyciągiem z flaszowca miękkociernistego liściasta 100 g | adalbert's tea herbata zielona z wyciągiem z flaszowca miękkociernistego liściasta | g      | 18.99
+  auchan       | Akavi ser w stylu arabskim OSM Pszczyna 250 g      | akavi ser w stylu arabskim          | g      | 4.99
+  auchan       | Ale Pitny Jogurt o smaku truskawki i poziomki  Danone 270 g | ale pitny jogurt o smaku truskawki i poziomki | g      | 1.3933
+  biedronka    | Almette Puszysty serek twarogowy jogurtowy 150 g   | almette puszysty serek twarogowy jogurtowy | g      | 4.3267
+  biedronka    | Almette Puszysty serek twarogowy z chrzanem 150 g  | almette puszysty serek twarogowy z chrzanem | g      | 4.3267
+  biedronka    | Almette Puszysty serek twarogowy z pomidorami dojrzewającymi w słońcu 150 g | almette puszysty serek twarogowy z pomidorami dojrzewającymi w słońcu | g      | 4.3267
+  biedronka    | Almette Puszysty serek twarogowy z ziołami 150 g   | almette puszysty serek twarogowy z ziołami | g      | 4.3267
+  biedronka    | Almette Puszysty serek twarogowy ze szczypiorkiem i cebulą 150 g | almette puszysty serek twarogowy ze szczypiorkiem i cebulą | g      | 4.3267
+  biedronka    | Almette Puszysty serek twarogowy śmietankowy 150 g | almette puszysty serek twarogowy śmietankowy | g      | 4.3267
+  biedronka    | Alpro Sojowo-kokosowy 500 g                        | alpro                               | g      | 2.4975
+  biedronka    | Alpro Sojowo-kokosowy 500 g                        | alpro                               | g      | 2.4975
+  biedronka    | Alpro Plant Protein Napój sojowy o smaku czekoladowym 1 l | alpro plant protein napój sojowy o smaku czekoladowym | ml     | 1.259
+  biedronka    | Alpro Plant Protein Napój sojowy o smaku waniliowym 1 l | alpro plant protein napój sojowy o smaku waniliowym | ml     | 1.259
+  biedronka    | Alpro Skyr Alternative Produkt sojowy mango 400 g  | alpro skyr alternative produkt sojowy mango | g      | 2.4975
+  biedronka    | Alpro Skyr Alternative Produkt sojowy mango 400 g  | alpro skyr alternative produkt sojowy mango | g      | 2.4975
+  biedronka    | Alpro Skyr Style sojowy mango 150 g                | alpro skyr style sojowy mango       | g      | 3.3267
+  biedronka    | Alpro Skyr Style sojowy mango 150 g                | alpro skyr style sojowy mango       | g      | 3.3267
+  biedronka    | Alpro Skyr Style sojowy wanilia 400 g              | alpro skyr style sojowy wanilia     | g      | 2.4975
+  biedronka    | Alpro Skyr Style sojowy wanilia 400 g              | alpro skyr style sojowy wanilia     | g      | 2.4975
+  biedronka    | Alpro Skyr Style sojowy waniliowy 150 g            | alpro skyr style sojowy waniliowy   | g      | 3.3267
+  biedronka    | Alpro Skyr Style sojowy waniliowy 150 g            | alpro skyr style sojowy waniliowy   | g      | 3.3267
+  auchan       | BIO Amarantus EKO Alfabet 500 g                    | amarantus                           | g      | 2.678
+  auchan       | BIO Amarantus ekspandowany Dobra Kaloria 120 g     | amarantus ekspandowany              | g      | 7.4833
+  biedronka    | Amberfish Szproty wędzone w oleju 250 g            | amberfish szproty w oleju           | g      | 5.7086
+  biedronka    | Amino Zupa błyskawiczna barszcz czerwony z majerankiem 66 g | amino zupa błyskawiczna barszcz czerwony z majerankiem | g      | 4.5455
+  biedronka    | Amino Zupa błyskawiczna rosół z włoszczyzną i natką pietruszki 59 g | amino zupa błyskawiczna rosół z włoszczyzną i natką pietruszki | g      | 4.5424
+  auchan       | Ananas średni  kaliber 12 Owoce  Auchan sztuka     | ananas                              | g      | 11.49
+  auchan       | Ananas plastry Auchan 565 g                        | ananas                              | g      | 1.9971
+  biedronka    | Ananas                                             | ananas                              | g      | 0.7987
+  auchan       | Ananas kandyzowany Makar 1 kg                      | ananas kandyzowany                  | g      | 3.89
+  auchan       | Ananas kawałki Auchan 400 g                        | ananas kawałki                      | g      | 2.235
+  auchan       | Ananas kawałki w lekkim syropie  MK 565 g          | ananas kawałki w lekkim syropie     | g      | 2.1118
+  auchan       | Ananas kawałki w syropie  Auchan 560 g             | ananas kawałki w syropie            | g      | 1.85
+  auchan       | Ananas kawałki w syropie Auchan 565 g              | ananas kawałki w syropie            | g      | 2.0559
+  auchan       | Ananas liofilizowany KRESTO 15 g                   | ananas liofilizowany                | g      | 57.2667
+  auchan       | BIO Ananas suszony krążki BioLife 100 g            | ananas suszony krążki               | g      | 17.39
+  auchan       | Ananas suszony w kawałkach Auchan 100 g            | ananas suszony w kawałkach          | g      | 10.49
+  auchan       | Ananas w kostkach w syropie Sandra 340 g           | ananas w kostkach w syropie         | g      | 3.0559
+  auchan       | Ananas plastry w lekkim syropie MK 565 g           | ananas w lekkim syropie             | g      | 2.4941
+  auchan       | Ananas plastry w syropie Auchan 565 g              | ananas w syropie                    | g      | 2.0265
+  auchan       | Ananas Premium żółty duży  Owoce  Auchan sztuka    | ananas żółty duży                   | g      | 20.69
+  auchan       | Stek z antrykotu wołowego bez kości Pewni Dobrego na wagę ok. 400 g | antrykot                            | None   | 11.999
+  auchan       | Stek wołowy z antrykotu bez kości Łuków na wagę ok. 400 g | antrykot                            | None   | 7.999
+  auchan       | Stek z antrykotu wołowego bez kości Wołowina na wagę ok. 400 g | antrykot                            | None   | 10.999
+  auchan       | Stek z antrykotu wołowego bez kości Pewni Dobrego na wagę ok. 400 g | antrykot                            | None   | 11.999
+  auchan       | Antrykot wołowy stek bez kości ANGUS 300G Tender meat 300 g | antrykot                            | g      | 38.33
+  auchan       | Antrykot wołowy stek bez kości WAGYU   Tender meat 300 g | antrykot                            | g      | 68.6633
+  auchan       | Arbuz Owoce  Auchan na wagę ok. 4 kg               | arbuz                               | None   | 0.799
+  biedronka    | Arbuz                                              | arbuz                               | g      | 0.799
+  auchan       | Arbuz mini bezpestkowy Owoce  Auchan na wagę ok. 2 kg | arbuz mini bezpestkowy              | None   | 1.039
+  biedronka    | Asia Flavours Makaron Spaghetti Konjac 270 g       | asia                                | g      | 2.645
+  biedronka    | Asia Flavours Makaron Fettuccine Konjac 270 g      | asia                                | g      | 2.645
+  biedronka    | Asia Flavours Makaron ryżowy 5 mm 200g             | asia flavours makaron ryżowy 5 mm   | g      | 3.145
+  biedronka    | Awokado Hass 1 szt.                                | awokado                             | pcs    | —
+  biedronka    | Awokado 1 szt.                                     | awokado                             | pcs    | —
+  auchan       | BIO Awokado Hass kaliber 16 Owoce  Auchan sztuka   | awokado hass                        | g      | 7.75
+  auchan       | BIO Awokado Hass kaliber 24 - 26 Owoce  Auchan 2 sztuki | awokado hass - 26                   | g      | 13.79
+  auchan       | Awokado siatka kaliber 24-30 Owoce  Auchan 700 g   | awokado siatka -30                  | g      | 1.97
+  auchan       | Ayran Pewni Dobrego 330 g                          | ayran                               | g      | 0.8152
+  auchan       | Ayran Napój na bazie jogurtu o smaku mango 7gun 250 ml | ayran napój na bazie jogurtu o smaku mango 7gun | ml     | 1.796
+  auchan       | BA! Granola klasyczna z kokosem Bakalland 300 g    | ba! granola z kokosem               | g      | 2.9767
+  auchan       | BA! Granola z żurawiną  Bakalland 300 g            | ba! granola z żurawiną              | g      | 2.9767
+  auchan       | Babka płesznik nasiona Taheebo 100 g               | babka płesznik nasiona              | g      | 13.39
+  biedronka    | Bagietka czosnkowa 165 g                           | bagietka czosnkowa                  | g      | 1.8121
+  auchan       | Bagietka graham Pewni Dobrego 300 g                | bagietka graham                     | g      | 1.3967
+  auchan       | Bagietka pszenna Pewni Dobrego 300 g               | bagietka pszenna                    | g      | 1.3967
+  auchan       | Bagietka z masłem czosnkowym   Bread Basket 165 g  | bagietka z masłem czosnkowym        | g      | 2.9657
+  biedronka    | Baitz Rogalik z nadzieniem kakaowym 60 g           | baitz rogalik z nadzieniem kakaowym | g      | 3.8167
+  auchan       | Bakuś jogurt o smaku waniliowym z drażami Bakoma 135 g | bakuś jogurt o smaku waniliowym z drażami | g      | 2.7704
+  auchan       | Bakuś puszysty serek truskawkowy  Bakoma 90 g      | bakuś puszysty serek truskawkowy    | g      | 2.4889
+  auchan       | Bakuś serek biszkoptowy Bakoma 90 g                | bakuś serek biszkoptowy             | g      | 2.4889
+  auchan       | Bakuś serek czekoladowy Bakoma 90 g                | bakuś serek czekoladowy             | g      | 2.4889
+  auchan       | BIO Bakłażan Warzywa Auchan 500 g                  | bakłażan                            | g      | 1.998
+  biedronka    | Bakłażan                                           | bakłażan                            | g      | 2.0
+  auchan       | Bakłażan Warzywa Auchan 1 sztuka na wagę ok. 500 g | bakłażan 1                          | None   | 1.199
+  biedronka    | Banan                                              | banan                               | g      | 0.699
+  auchan       | BIO Banan suszony FARMER'S SNACK 150 g             | banan suszony                       | g      | 9.8533
+  auchan       | BIO Banany  Owoce  Auchan na wagę kiść 4-6 szt ok. 1,2 kg | banany kiść 4                       | None   | 0.999
+  auchan       | Banany Owoce  Auchan na wagę kiść 4-6 szt  ok 1 kg | banany kiść 4                       | None   | 0.598
+  auchan       | Mięso gulaszowe jagnięce Połonina Lesko na wagę ok. 530 g | baranina                            | None   | 10.799
+  auchan       | Łopatka jagnięca bez kości Połonina Lesko na wagę ok. 500 g | baranina                            | None   | 11.499
+  biedronka    | Barilla Makaron z pszenicy durum spaghetti 1000 g  | barilla makaron z pszenicy durum spaghetti | g      | 1.149
+  biedronka    | Barilla Pesto alla Genovese z bazylią 190 g        | barilla pesto alla                  | g      | 7.8895
+  biedronka    | Barilla Pesto Rosso z pomidorami serem i orzechami 200 g | barilla pesto rosso z pomidorami serem i orzechami | g      | 7.89
+  biedronka    | Go Vege Barista owies 1 l                          | barista owies                       | ml     | 0.679
+  auchan       | Bataty w kawałkach Auchan 600 g                    | bataty w kawałkach                  | g      | 1.4983
+  auchan       | BIO Bazylia   Pewni Dobrego sztuka                 | bazylia                             | g      | 7.99
+  auchan       | Bazylia Auchan sztuka                              | bazylia                             | g      | 2.796
+  auchan       | BIO Bazylia   Pewni Dobrego sztuka                 | bazylia                             | g      | 7.99
+  auchan       | BIO Bazylia XXL Pewni Dobrego sztuka               | bazylia                             | g      | 9.99
+  auchan       | Bazylia Kamis 8 g                                  | bazylia                             | g      | 31.0
+  biedronka    | Vital Fresh Bazylia XL 1 szt.                      | bazylia                             | pcs    | —
+  biedronka    | Kamis Bazylia 8 g                                  | bazylia                             | g      | 31.125
+  auchan       | Bazylia suszona Prymat 10 g                        | bazylia suszona                     | g      | 15.8
+  auchan       | Bazylia suszona Auchan 10 g                        | bazylia suszona                     | g      | 12.9
+  biedronka    | Berlinki Parówki classic 315 g                     | berlinki parówki classic            | g      | 2.2063
+  auchan       | Bez GMO z wolnego wybiegu rozmiar L Polskie Fermy 20 sztuk | bez gmo z wolnego wybiegu rozmiar l | pcs    | —
+  auchan       | Bezglutenowy makaron kukurydziany Fusilli 3x błonnik Civita 450 g | bezglutenowy makaron kukurydziany   | g      | 1.7311
+  auchan       | Bezglutenowy makaron kukurydziany Penne 3x błonnik Civita 450 g | bezglutenowy makaron kukurydziany   | g      | 1.7311
+  biedronka    | BezMięsny Bezmięsna kiełbasa suszona 100 g         | bezmięsny bezmięsna kiełbasa suszona | g      | 8.29
+  biedronka    | BezMięsny Bezmięsna szynka czosnkowa 120 g         | bezmięsny bezmięsna szynka czosnkowa | g      | 6.6583
+  biedronka    | BezMięsny Bezmięsny boczek 100 g                   | bezmięsny bezmięsny boczek          | g      | 7.99
+  auchan       | Biała fasola Cannellini Bonduelle 175 g            | biała fasola                        | g      | 4.384
+  biedronka    | Big-Active Herbata zielona Pure Green 100 g        | big-active herbata zielona          | g      | 5.99
+  biedronka    | Big-Active Herbata zielona z mango liść 100 g      | big-active herbata zielona z mango liść | g      | 5.99
+  biedronka    | Big-Active Zielona herbata z owocem pigwy liściasta 100 g | big-active zielona herbata z owocem pigwy liściasta | g      | 5.99
+  auchan       | Biszkopt z kremem mlecznym i czekoladowo orzechowym Zott 29 g | biszkopt z kremem mlecznym i czekoladowo orzechowym | g      | 7.8966
+  auchan       | Biszkopt z kremem mlecznym i czekoladowo-orzechowym Monte 4 x 29 g | biszkopt z kremem mlecznym i czekoladowo-orzechowym | g      | 6.4483
+  auchan       | Bita śmietana w sprayu Auchan 250 g                | bita śmietana w sprayu              | g      | 2.912
+  auchan       | Bleu dAuvergne plastry Jansen na wagę ok. 200 g    | bleu dauvergne                      | None   | 8.39
+  auchan       | Boczek wieprzowy bez kości ekstra VAC Auchan na wagę ok. 1 kg | boczek                              | None   | 2.098
+  auchan       | Boczek rolowany na Grill Auchan 300 g              | boczek rolowany                     | g      | 5.7633
+  auchan       | Boczek w marynacie meksykańskiej Auchan 600 g      | boczek w marynacie meksykańskiej    | g      | 3.6467
+  auchan       | Boczek w przyprawach do pieczenia Auchan na wagę ok. 800 g | boczek w przyprawach do pieczenia   | None   | 2.699
+  auchan       | Boczniak  Warzywa Auchan 250 g                     | boczniak                            | g      | 3.196
+  auchan       | Super body active wpc 80 banan Mlekovita 30 g      | body active wpc 80 banan            | g      | 19.3
+  auchan       | Super body active wpc 80 czekolada Mlekovita 30 g  | body active wpc 80 czekolada        | g      | 19.3
+  auchan       | Super body active wpc 80 truskawka Mlekovita 30 g  | body active wpc 80 truskawka        | g      | 19.3
+  auchan       | Super body active wpc80 czekolada Mlekovita 700 g  | body active wpc80 czekolada         | g      | 12.14
+  auchan       | Super body active wpc80 natual Mlekovita 700 g     | body active wpc80 natual            | g      | 12.14
+  auchan       | Super body active wpc80 wanilia Mlekovita 30 g     | body active wpc80 wanilia           | g      | 19.3
+  auchan       | bon bon. Czekoladki lodowe white chocolate & cookies Magnum 204 ml | bon bon                             | ml     | 13.5245
+  biedronka    | Bonduelle Kukurydza złocista (2 x 170 g) 340 g     | bonduelle kukurydza złocista (2 x ) | g      | 2.8179
+  biedronka    | Bonitki Herbatniki Petit Beurre 400 g              | bonitki                             | g      | 1.1375
+  biedronka    | Bonitki Ciastka listki kakaowe 260 g               | bonitki ciastka listki kakaowe      | g      | 2.8808
+  biedronka    | BONITKI O!KULKI w mlecznej czekoladzie 260 g       | bonitki o! w mlecznej czekoladzie   | g      | 2.6885
+  biedronka    | Bonitki Sezamki classic (3 x 27 g) 81 g            | bonitki sezamki classic (3 x )      | g      | 2.7037
+  biedronka    | Bonitki wafle kokosowe, 200 g                      | bonitki wafle kokosowe              | g      | 2.875
+  biedronka    | Bonitki wafle orzechowe, 200 g                     | bonitki wafle orzechowe             | g      | 2.875
+  auchan       | Borówka Amerykańska  Owoce  Auchan 250 g           | borówka                             | g      | 5.196
+  auchan       | Borówka amerykańska Owoce  Auchan 150 g            | borówka amerykańska                 | g      | 6.66
+  auchan       | BIO Borówka amerykańska Owoce  Auchan 125 g        | borówka amerykańska                 | g      | 11.032
+  auchan       | Borówki amerykańska Owoce  Auchan 250 g            | borówki amerykańska                 | g      | 5.516
+  biedronka    | Bounty Czekolada mleczna z nadzieniem z miękkiego kokosa (2 x 28,5 g) 57 g | bounty czekolada mleczna z nadzieniem z miękkiego kokosa (2 x ) | g      | 7.0
+  auchan       | BIO Brokuł Warzywa Auchan 500 g                    | brokuł                              | g      | 2.998
+  biedronka    | Brokuł 1 szt.                                      | brokuł                              | g      | 1.198
+  auchan       | Brokuły różyczki Hortex 450 g                      | brokuły                             | g      | 2.3067
+  auchan       | Brukselka mrożona Auchan 450 g                     | brukselka mrożona                   | g      | 1.2778
+  biedronka    | Brzoskwinia                                        | brzoskwinia                         | g      | 2.0
+  biedronka    | Brzoskwinia Paraguayo                              | brzoskwinia                         | g      | 2.5
+  auchan       | Bucatini Makaron w 100% z semoliny z pszenicy durum Primo Gusto 500 g | bucatini makaron w z semoliny z pszenicy durum | g      | 1.256
+  auchan       | Bukiet jarzyn Wiosenny Hortex 450 g                | bukiet jarzyn                       | g      | 1.7511
+  auchan       | Bukiet sałat z sałatą lodową Warzywa Auchan 140 g  | bukiet sałat z sałatą lodową        | g      | 3.4929
+  biedronka    | Winiary Bulion Drobiowy 160 g                      | bulion                              | g      | 4.8063
+  auchan       | Bulion drobiowy bez oleju palmowego Auchan 100 g   | bulion drobiowy bez oleju palmowego | g      | 3.49
+  auchan       | Bulion grzybowy z borowikami.  Winiary 60 g        | bulion grzybowy z borowikami        | g      | 6.8
+  auchan       | Bulion na włoszczyźnie Knorr 120 g                 | bulion na włoszczyźnie              | g      | 4.7333
+  auchan       | Bulion pieczeniowy Winiary 120 g                   | bulion pieczeniowy                  | g      | 4.0333
+  auchan       | BIO Ekologiczny Bulion warzywny EUREKO 100 g       | bulion warzywny                     | g      | 6.78
+  biedronka    | Winiary Bulion warzywny 160 g                      | bulion warzywny                     | g      | 4.8063
+  auchan       | Bulion warzywny kostka Winiary 60 g                | bulion warzywny kostka              | g      | 6.6333
+  auchan       | Bulion warzywny w kostkach Auchan 100 g            | bulion warzywny w kostkach          | g      | 3.49
+  auchan       | Bulionetka drobiowa Knorr sztuka                   | bulionetka drobiowa                 | g      | 6.1518
+  auchan       | Buraczki czerwone wiórki Dawtona 510 g             | buraczki czerwone wiórki            | g      | 0.9694
+  auchan       | Buraczki domowe tarte Z Babcinej spiżarni 280 g    | buraczki domowe tarte               | g      | 2.2107
+  biedronka    | Burak czerwony                                     | burak czerwony                      | g      | 0.25
+  auchan       | Burak podłużny Warzywa Auchan 800 g                | burak podłużny                      | g      | 0.6488
+  auchan       | Buraki Warzywa Auchan 1 kg                         | buraki                              | g      | 0.299
+  biedronka    | Buraki czerowne gotowane 500 g                     | buraki czerowne gotowane            | g      | 0.958
+  auchan       | Buraki czerwone Warzywa Auchan na wagę ok. 1kg     | buraki czerwone                     | None   | 0.249
+  auchan       | Buraki gotowane całe Auchan 500 g                  | buraki gotowane całe                | g      | 0.838
+  auchan       | BIO Buraki gotowane całe Witamina 500 g            | buraki gotowane całe                | g      | 1.258
+  auchan       | Buraki gotowane całe Pewni Dobrego 400 g           | buraki gotowane całe                | g      | 1.3225
+  auchan       | Buraki gotowane kostka Auchan 500 g                | buraki gotowane kostka              | g      | 0.838
+  auchan       | Buraki gotowane tarte  Auchan 500 g                | buraki gotowane tarte               | g      | 0.838
+  auchan       | Burger w stylu amerykańskim Łuków 280 g            | burger w stylu amerykańskim         | g      | 3.925
+  auchan       | Bułeczki maśłane z czekoladą Auchan 6 sztuk        | bułeczki maśłane z czekoladą        | g      | 3.5533
+  auchan       | Bułgarski ser szopski owczy Rosa 200 g             | bułgarski ser szopski owczy         | g      | 8.895
+  biedronka    | Bułka grahamka 70 g                                | bułka grahamka                      | g      | 1.1286
+  biedronka    | Bułka paryska 240 g                                | bułka paryska                       | g      | 1.2042
+  biedronka    | Bułka poranna 65 g                                 | bułka poranna                       | g      | 1.2769
+  biedronka    | Bułka poznańska 75 g                               | bułka poznańska                     | g      | 0.96
+  auchan       | Bułka pszenna dziewiątka Pewni Dobrego 450 g       | bułka pszenna dziewiątka            | g      | 1.3311
+  auchan       | Bułka pszenna szóstka Pewni Dobrego 300 g          | bułka pszenna szóstka               | g      | 1.3967
+  biedronka    | Bułka z mąki żytniej 55 g                          | bułka z mąki żytniej                | g      | 2.1636
+  biedronka    | Bułka śniadaniowa z ziarnami 80 g                  | bułka śniadaniowa z ziarnami        | g      | 1.6875
+  biedronka    | Pano Bułki do burgerów Master 320 g                | bułki do burgerów                   | g      | 1.7781
+  biedronka    | Pano Bułki do kanapki w stylu amerykańskim 228 g   | bułki do kanapki w stylu amerykańskim | g      | 2.2763
+  biedronka    | Pano Bułki pszenne hamburgerowe z sezamem 212 g    | bułki pszenne hamburgerowe z sezamem | g      | 2.2123
+  biedronka    | Pano Bułki typu hot dog 240 g                      | bułki typu hot dog                  | g      | 2.0792
+  auchan       | Byczki w sosie pomidorowym Graal 300 g             | byczki w sosie pomidorowym          | g      | 2.88
+  auchan       | Bób Warzywa Auchan 500 g                           | bób                                 | g      | 5.298
+  auchan       | Bób mrożony Auchan 450 g                           | bób mrożony                         | g      | 1.7444
+  auchan       | Błonnik aktywny witalny - łupiny babki jajowatej i babki plesznik Taheebo 200 g | błonnik aktywny witalny - łupiny babki jajowatej i babki plesznik | g      | 10.745
+  auchan       | Błonnik jabłkowy. Suplement diety Krüger 80 g      | błonnik jabłkowy                    | g      | 5.2375
+  auchan       | Caffe Latte napój o wysokiej zawartości protein Ehrmann 250 ml | caffe latte napój o wysokiej zawartości protein | ml     | 3.196
+  auchan       | Camembert -Ser dojrzewający  pleśniowy Glad 250 g  | camembert -ser dojrzewający pleśniowy | g      | 7.592
+  auchan       | Camembert lekki Auchan 120 g                       | camembert lekki                     | g      | 4.075
+  auchan       | Camembert na ciepło z sosem malinowym Turek 230 g  | camembert na ciepło z sosem         | g      | 8.195
+  auchan       | Camembert ser plaśniowy Auchan 250 g               | camembert ser plaśniowy             | g      | 4.18
+  auchan       | Camembert ser pleśniowy Ligueil 125 g              | camembert ser pleśniowy             | g      | 6.712
+  auchan       | Camembert naturalny z posypką paprykową BBQ Turek 205 g | camembert z posypką paprykową       | g      | 8.195
+  auchan       | Camembert naturalny z sosem mango chutney Turek 230 g | camembert z sosem mango chutney     | g      | 8.195
+  auchan       | Camembert z zielonym pieprzem Turek 120 g          | camembert z zielonym pieprzem       | g      | 6.0667
+  biedronka    | Candi Żelki nadziewane kable o smaku brzoskwiniowym 150 g | candi żelki nadziewane kable o smaku brzoskwiniowym | g      | 2.66
+  biedronka    | Candi Żelki nadziewane kable o smaku truskawkowym 150 g | candi żelki nadziewane kable o smaku truskawkowym | g      | 2.66
+  auchan       | Cannelloni Makaron w 100% z semoliny z pszenicy durum Primo Gusto 250 g | cannelloni makaron w z semoliny z pszenicy durum | g      | 2.396
+  auchan       | Cardio Optima 400 g                                | cardio                              | g      | 3.22
+  auchan       | Cardio o smaku masła Optima 400 g                  | cardio o smaku masła                | g      | 3.22
+  auchan       | Cardio potas Optima 400 g                          | cardio potas                        | g      | 3.22
+  auchan       | Cavatelli - Tradycyjny włoski makaron 100% z pszenicy twardej durum Di Carlo 500 g | cavatelli - tradycyjny włoski makaron z pszenicy twardej durum | g      | 2.678
+  auchan       | Cebula Pewni Dobrego 1 kg                          | cebula                              | g      | 0.399
+  auchan       | BIO Cebula ekologiczna Ekologiczny Stragan 500 g   | cebula                              | g      | 1.798
+  auchan       | Cebula biała Warzywa Auchan na wagę ok. 500 g      | cebula biała                        | None   | 0.799
+  auchan       | Cebula biała tuba Warzywa Auchan 350 g             | cebula biała tuba                   | g      | 2.2829
+  auchan       | Cebula czerwona Warzywa Auchan 500 g               | cebula czerwona                     | g      | 0.698
+  auchan       | Cebula czerwona Warzywa Auchan na wagę ok. 500 g   | cebula czerwona                     | None   | 0.459
+  auchan       | Cebula czerwona tuba Warzywa Auchan 350 g          | cebula czerwona tuba                | g      | 2.2829
+  biedronka    | Cebula dymka pęczek                                | cebula dymka                        | pcs    | —
+  auchan       | Cebula suszona Prymat 15 g                         | cebula suszona                      | g      | 10.5333
+  biedronka    | Cebula szalotka                                    | cebula szalotka                     | g      | 1.19
+  auchan       | Cebula słodka tuba Warzywa Auchan 600 g            | cebula słodka tuba                  | g      | 1.9983
+  auchan       | Cebula tacka Arvit 500 g                           | cebula tacka                        | g      | 1.198
+  auchan       | Cebula złota  Warzywa Auchan 1 kg                  | cebula złota                        | g      | 0.349
+  biedronka    | Cebula żółta 1 kg                                  | cebula żółta                        | g      | 0.499
+  auchan       | Cebulka prażona Diamond 500 g                      | cebulka prażona                     | g      | 3.998
+  auchan       | Cebulka smażona Kotányi 91 g                       | cebulka smażona                     | g      | 8.5273
+  auchan       | Cebulka smażona Makar 500 g                        | cebulka smażona                     | g      | 3.15
+  auchan       | Cenos Kasza gryczana biała Cenos 4 x 100 g         | cenos kasza gryczana biała          | g      | 1.445
+  biedronka    | Cheetos Chrupki kukurydziane o smaku pizzy 120 g   | cheetos chrupki kukurydziane o smaku pizzy | g      | 5.4083
+  biedronka    | Cheetos Spirals Chrupki kukurydziane o smaku serowo-ketchupowym 110 g | cheetos spirals chrupki kukurydziane o smaku serowo-ketchupowym | g      | 5.9
+  auchan       | BIO Ekologiczna chia - nasiona szałwii hiszpańskiej 100% EkoWital 200 g | chia - nasiona szałwii hiszpańskiej | g      | 8.895
+  auchan       | Chia nasiona Taheebo 1 kg                          | chia nasiona                        | g      | 2.84
+  auchan       | Chia nasiona Taheebo 1 kg                          | chia nasiona                        | g      | 2.84
+  auchan       | Chili jalapeno kruszone Kotányi 8 g                | chili jalapeno kruszone             | g      | 29.25
+  auchan       | Chili kruszone ostre Kamis 29 g                    | chili kruszone ostre                | g      | 28.5517
+  auchan       | Chili mieszanka przypraw Kotányi 35 g              | chili mieszanka przypraw            | g      | 21.8286
+  auchan       | Chiński makaron jajeczny Auchan 250 g              | chiński makaron jajeczny            | g      | 2.396
+  auchan       | Chiński makaron pszenny tomoshiraga somen Chunsi 400 g | chiński makaron pszenny tomoshiraga somen | g      | 2.6475
+  auchan       | Chleb jasny bezglutenowy mieszanka piekarnicza Grano 500 g | chleb jasny bezglutenowy mieszanka piekarnicza | g      | 2.698
+  auchan       | Chleb promnicki z ziarnami mieszanka piekarnicza Grano 500 g | chleb promnicki z ziarnami mieszanka piekarnicza | g      | 2.878
+  auchan       | Chleb pszenny Pewni Dobrego 300 g                  | chleb pszenny                       | g      | 1.3967
+  auchan       | Chleb razowy bez glutenu mieszanka piekarnicza Grano 500 g | chleb razowy bez glutenu mieszanka piekarnicza | g      | 2.878
+  biedronka    | Pano Chleb tostowy maślany 500 g                   | chleb tostowy maślany               | g      | 0.798
+  biedronka    | Pano Chleb wieloziarnisty Złoty łan z dodatkiem naturalnego zakwasu żytniego 400 g | chleb wieloziarnisty                | g      | 0.9375
+  biedronka    | Pano Chleb żytni 100% pełnoziarnisty 300 g         | chleb żytni pełnoziarnisty          | g      | 1.23
+  biedronka    | Pano Chleb żytni 100% pełnoziarnisty z dodatkiem amarantusa i komosy ryżowej 300 g | chleb żytni pełnoziarnisty z dodatkiem amarantusa i komosy ryżowej | g      | 1.23
+  auchan       | Owoce chlebowca suszone krojone Makar 500 g        | chlebowca suszone krojone           | g      | 7.118
+  auchan       | Chorizo picante extra Pewni Dobrego 280 g          | chorizo                             | g      | 6.7821
+  auchan       | Chrupiące płatki kukurydziane o smaku czekoladowym  Nestlé 450 g | chrupiące płatki kukurydziane o smaku czekoladowym | g      | 3.3311
+  auchan       | Chrupiące płatki owsiane w kształcie kółeczek Nestlé 400 g | chrupiące płatki owsiane w kształcie kółeczek | g      | 3.395
+  auchan       | Chrupiące płatki zbożowe Sante 350 g               | chrupiące płatki zbożowe            | g      | 1.7971
+  auchan       | Chrupiące płatki zbożowe z bananem i z czekoladą Sante 350 g | chrupiące płatki zbożowe z bananem i z czekoladą | g      | 1.7086
+  auchan       | Chrupiące płatki zbożowe z owocami Sante 350 g     | chrupiące płatki zbożowe z owocami  | g      | 1.7086
+  auchan       | Chrupki kukurydziane  Pewni Dobrego 70 g           | chrupki kukurydziane                | g      | 2.2143
+  auchan       | Pieczywo chrupkie kukurydziano-jaglane Pewni Dobrego 110 g | chrupkie kukurydziano-jaglane       | g      | 2.5364
+  auchan       | Ciecierzyca Auchan 400 g                           | ciecierzyca                         | g      | 1.2375
+  auchan       | Ciecierzyca Lestello 1 kg                          | ciecierzyca                         | g      | 1.35
+  auchan       | Ciecierzyca konserwowa Auchan 400 g                | ciecierzyca                         | g      | 1.2458
+  auchan       | BIO Ciecierzyca bezglutenowa    NaturaVena 400 g   | ciecierzyca bezglutenowa            | g      | 2.4225
+  auchan       | BIO Ciecierzyca w zalewie EkoWital 350 g           | ciecierzyca w zalewie               | g      | 3.2514
+  auchan       | Ciecierzyca w zalewie Auchan 540 g                 | ciecierzyca w zalewie               | g      | 1.6225
+  biedronka    | Plony Natury Ciecierzyca ziarno 500 g              | ciecierzyca ziarno                  | g      | 0.998
+  auchan       | Mięso cielęce na gulasz Cielęcina na wagę ok. 250 g | cielęcina                           | None   | 9.499
+  auchan       | Mięso cielęce na bulion Cielęcina na wagę ok. 300 g | cielęcina                           | None   | 4.999
+  auchan       | Cielęcina z górki bez kości pakowany próżniowo Sokołów na wagę ok. 180 g | cielęcina                           | None   | 10.599
+  auchan       | Cielęcina bez kości porcja Sokołów na wagę ok. 400 g | cielęcina                           | None   | 7.999
+  auchan       | Goleń cielęca z kością Sokołów na wagę ok. 300 g   | cielęcina                           | None   | 6.499
+  biedronka    | Sokołów Sokoliki Parówki drobiowo-cielęce 140 g    | cielęcina                           | g      | 2.9929
+  biedronka    | Tarczyński Gryzzale Kabanosy z szynki z cielęciną 90 g | cielęcina                           | g      | 6.6556
+  biedronka    | Tarczyński Exclusive Kabanosy cielęce z drobiem 90 g | cielęcina                           | g      | 7.5444
+  auchan       | Cini Minis Churros Płatki śniadaniowe Nestlé 400 g | cini minis churros płatki śniadaniowe | g      | 3.395
+  auchan       | Cini Minis minis kuleczki o smaku cynamonowym  Nestle 400 g | cini minis minis kuleczki o smaku cynamonowym | g      | 3.395
+  biedronka    | Nestlé Cini Minis Zbożowe kwadraciki o smaku cynamonowym 375 g | cini minis zbożowe kwadraciki o smaku cynamonowym | g      | 3.0107
+  auchan       | Classic Ser półtwardy z porostem niebieskiej pleśni Dorblu 100 g | classic ser półtwardy z porostem niebieskiej pleśni | g      | 12.39
+  auchan       | Cocoghurt typu greckiego    Auchan 400 g           | cocoghurt typu greckiego            | g      | 1.3725
+  auchan       | Coconut milk 82% ekstrakt z kokosa Suree 250 ml    | coconut milk ekstrakt z kokosa      | ml     | 2.796
+  auchan       | Comber króliczy świeży Auchan na wagę ok. 550 g    | comber króliczy                     | None   | 5.298
+  auchan       | Cooking coco 18% Auchan 180 g                      | cooking coco                        | g      | 2.4944
+  biedronka    | Nestlé Corn Flakes Chrupiące płatki kukurydziane miód i orzeszki 250 g | corn flakes chrupiące płatki kukurydziane miód i orzeszki | g      | 3.712
+  biedronka    | Nestlé Corn Flakes Chrupiące płatki kukurydziane z witaminami 500 g | corn flakes chrupiące płatki kukurydziane z witaminami | g      | 2.278
+  auchan       | Coś na ząb owsianka z czekoladą Kupiec 50 g        | coś na ząb owsianka z czekoladą     | g      | 4.28
+  auchan       | Coś na ząb owsianka z truskawkami Kupiec 50 g      | coś na ząb owsianka z truskawkami   | g      | 4.28
+  auchan       | Coś na ząb owsianka ze śliwkami  Kupiec 50 g       | coś na ząb owsianka ze śliwkami     | g      | 4.28
+  biedronka    | Croissant z nadzieniem orzechowo-kakaowym 85 g     | croissant z nadzieniem orzechowo-kakaowym | g      | 3.5176
+  auchan       | Cukier drobny Auchan 750 g                         | cukier                              | g      | 1.2653
+  auchan       | Cukier biały Diamant 2 kg                          | cukier biały                        | g      | 0.4745
+  auchan       | Cukier biały kostka Polski Cukier 500 g            | cukier biały kostka                 | g      | 1.458
+  auchan       | Cukier biały w kostkach Diamant 1 kg               | cukier biały w kostkach             | g      | 1.079
+  auchan       | Cukier biały w saszetkach Diamant 200 sztuk        | cukier biały w saszetkach           | g      | 1.589
+  auchan       | Cukier puder Polski Cukier 500 g                   | cukier puder                        | g      | 1.498
+  auchan       | Cukier puder w tubie Diamant 250 g                 | cukier puder w tubie                | g      | 2.516
+  auchan       | Cukier trzcinowy drobny Auchan 400 g               | cukier trzcinowy                    | g      | 1.2475
+  auchan       | Cukier trzcinowy Auchan 1 kg                       | cukier trzcinowy                    | g      | 0.949
+  auchan       | Cukier trzcinowy Diamant 1 kg                      | cukier trzcinowy                    | g      | 0.938
+  auchan       | Cukier trzcinowy Demerara kostka Polski Cukier 500 g | cukier trzcinowy                    | g      | 2.118
+  auchan       | Cukier trzcinowy Demerara Polski Cukier 500 g      | cukier trzcinowy                    | g      | 1.438
+  auchan       | Cukier trzcinowy nierafinowany Dry Demerara w saszetkach Diamant 1 kg | cukier trzcinowy nierafinowany      | g      | 2.398
+  auchan       | Cukier trzcinowy nierafinowany Dry Demerara drobny Diamant 500 g | cukier trzcinowy nierafinowany      | g      | 1.296
+  auchan       | Cukier trzcinowy nierafinowany Diamant 500 g       | cukier trzcinowy nierafinowany      | g      | 1.996
+  auchan       | Cukier trzcinowy nierafinowany typ: Dry Demerara Auchan 400 g | cukier trzcinowy nierafinowany typ: | g      | 1.2475
+  auchan       | BIO Ekologiczny cukier trzcinowy nierafinwany typ Demerara Ekologiko 500 g | cukier trzcinowy nierafinwany typ   | g      | 2.518
+  auchan       | BIO Cukinia Warzywa Auchan 750 g                   | cukinia                             | g      | 1.732
+  biedronka    | Cukinia                                            | cukinia                             | g      | 1.3
+  biedronka    | Culineo Sos Spaghetti 520 g                        | culineo                             | g      | 1.075
+  biedronka    | Culineo Cebulka smażona 200 g                      | culineo cebulka smażona             | g      | 2.875
+  biedronka    | Culineo Ocet spirytusowy 10 % kwasowości 750 ml    | culineo ocet spirytusowy            | ml     | 0.3587
+  biedronka    | Culineo Sól himalajska różowa drobnoziarnista 350 g | culineo sól himalajska różowa drobnoziarnista | g      | 0.7114
+  biedronka    | Culineo Sól himalajska różowa gruboziarnista 350 g | culineo sól himalajska różowa gruboziarnista | g      | 0.7114
+  biedronka    | Culineo Sól warzona spożywcza jodowana 1 kg        | culineo sól warzona spożywcza jodowana | g      | 0.175
+  biedronka    | Kamis Curry 20 g                                   | curry                               | g      | 12.45
+  auchan       | Curry mieszanka przypraw Kotányi 45 g              | curry mieszanka przypraw            | g      | 16.9778
+  auchan       | Curry mieszanka przyprawowa Auchan 25 g            | curry mieszanka przyprawowa         | g      | 5.16
+  auchan       | Cykoria Warzywa Auchan 500 g                       | cykoria                             | g      | 1.798
+  auchan       | Cynamon cały Kotányi 17 g                          | cynamon cały                        | g      | 25.7647
+  auchan       | Cynamon mielony Prymat 15 g                        | cynamon mielony                     | g      | 10.5333
+  auchan       | Cynamon mielony Auchan 15 g                        | cynamon mielony                     | g      | 8.6
+  auchan       | Cynamon mielony Kotányi 18 g                       | cynamon mielony                     | g      | 14.1111
+  auchan       | BIO Ekologiczny cynamon mielony To Naturalne 15 g  | cynamon mielony                     | g      | 23.2667
+  auchan       | BIO Ekologiczny cynamon mielony Dary Natury 50 g   | cynamon mielony                     | g      | 31.6
+  biedronka    | Cytryna 500 g                                      | cytryna                             | g      | 0.998
+  auchan       | Cytryny Owoce  Auchan 1 kg                         | cytryny                             | g      | 1.699
+  auchan       | BIO Cytryny Owoce  Auchan 400 g                    | cytryny                             | g      | 2.7475
+  biedronka    | Czaniecki Makaron 5 jajeczny krajanka 250 g        | czaniecki makaron 5 jajeczny krajanka | g      | 1.956
+  auchan       | 100% czarna porzeczka z regionu Łowicza Pewni Dobrego 230 g | czarna porzeczka                    | g      | 2.8217
+  auchan       | Czarna porzeczka Auchan 350 g                      | czarna porzeczka                    | g      | 3.2829
+  auchan       | 100% czarna porzeczka z regionu Łowicza Pewni Dobrego 230 g | czarna porzeczka                    | g      | 2.8217
+  auchan       | Czarnuszka Makar 1 kg                              | czarnuszka                          | g      | 2.82
+  auchan       | Czarnuszka nasiona Makar 200 g                     | czarnuszka nasiona                  | g      | 2.245
+  auchan       | Czarnuszka nasiona Makar 200 g                     | czarnuszka nasiona                  | g      | 2.245
+  auchan       | BIO Czekolada deserowa Pewni Dobrego 200 g         | czekolada deserowa                  | g      | 7.995
+  biedronka    | Czereśnia                                          | czereśnia                           | g      | 3.0
+  auchan       | Czerwona główka Warzywa Auchan na wagę ok. 1,5 kg  | czerwona główka                     | None   | 0.289
+  auchan       | Czerwona porzeczka Owoce  Auchan 125 g             | czerwona porzeczka                  | g      | 9.592
+  auchan       | Czerwona porzeczka Auchan 350 g                    | czerwona porzeczka                  | g      | 2.2829
+  auchan       | Czosnek ekstra Warzywa Auchan 1 sztuka             | czosnek                             | g      | 3.49
+  biedronka    | Czosnek 250 g                                      | czosnek                             | g      | 3.196
+  auchan       | Czosnek XL 3 sztuki Warzywa Auchan opakowanie      | czosnek 3 sztuki                    | g      | 10.39
+  auchan       | Czosnek granulowany Auchan 100 g                   | czosnek granulowany                 | g      | 4.49
+  auchan       | Czosnek granulowany Auchan 20 g                    | czosnek granulowany                 | g      | 6.45
+  auchan       | Czosnek granulowany Auchan 500 g                   | czosnek granulowany                 | g      | 3.8
+  auchan       | Czosnek granulowany Kamis 55 g                     | czosnek granulowany                 | g      | 15.0545
+  auchan       | Czosnek granulowany Galeo 16 g                     | czosnek granulowany                 | g      | 8.6875
+  biedronka    | Kamis Czosnek granulowany 20 g                     | czosnek granulowany                 | g      | 15.5625
+  auchan       | BIO Ekologiczny czosnek mielony To Naturalne 15 g  | czosnek mielony                     | g      | 23.2667
+  auchan       | Czosnek warkocz Warzywa Auchan 5 sztuk             | czosnek warkocz                     | pcs    | —
+  auchan       | Czosnek ząbki Warzywa Auchan 1 siatka              | czosnek ząbki                       | g      | 4.59
+  auchan       | Czysty syrop klonowy Maple Joe 250 g               | czysty syrop klonowy                | g      | 10.596
+  auchan       | Cząstki ziemniaków ze skórką Auchan 750 g          | cząstki ziemniaków ze skórką        | g      | 0.82
+  auchan       | Daktyle Medijule Jumbo Palma Deluxe 500 g          | daktyle                             | g      | 6.438
+  auchan       | BIO Daktyle sproszkowane Bio Planet 300 g          | daktyle sproszkowane                | g      | 6.2967
+  auchan       | BIO Daktyle suszone  Natura Vena 150 g             | daktyle suszone                     | g      | 5.7933
+  auchan       | Daktyle suszone Makar 1 kg                         | daktyle suszone                     | g      | 1.19
+  auchan       | BIO Daktyle Ekologiczne suszone  FARMER'S SNACK 130 g | daktyle suszone                     | g      | 8.8385
+  auchan       | Daktyle suszone Lux Helio 1 kg                     | daktyle suszone                     | g      | 3.19
+  auchan       | Daktyle suszone Makar 200 g                        | daktyle suszone                     | g      | 2.295
+  auchan       | Daktyle suszone Helio 1 kg                         | daktyle suszone                     | g      | 1.03
+  auchan       | BIO Daktyle suszone bez pestek Auchan 175 g        | daktyle suszone bez pestek          | g      | 4.5657
+  biedronka    | Dallmayr Kawa mielona classic intense 500 g        | dallmayr kawa mielona classic intense | g      | 8.998
+  auchan       | Danio extra czekolada Danone 4 x 130 g             | danio czekolada                     | g      | 1.6036
+  auchan       | Danio serek bananowy Danone 130 g                  | danio serek bananowy                | g      | 2.0615
+  auchan       | Danio serek czekoladowo orzechowy Danone 130 g     | danio serek czekoladowo orzechowy   | g      | 2.0615
+  auchan       | Danio serek mango Danone 130 g                     | danio serek mango                   | g      | 2.0615
+  auchan       | Danio Serek multipack waniliowy Danone 4 x 130 g   | danio serek multipack waniliowy     | g      | 1.7269
+  auchan       | Danio serek homogenizowany o smaku bananowym Danone 120 g | danio serek o smaku bananowym       | g      | 3.15
+  auchan       | Danio serek homogenizowany o smaku ciasteczkowym Danone 120 g | danio serek o smaku ciasteczkowym   | g      | 3.15
+  auchan       | Danio serek o smaku ciasteczkowym Danone 4 x 130 g | danio serek o smaku ciasteczkowym   | g      | 1.7269
+  auchan       | Danio serek o smaku truskawkowym Danone 120 g      | danio serek o smaku truskawkowym    | g      | 3.15
+  auchan       | Danio serek o smaku waniliowym Danone 120 g        | danio serek o smaku waniliowym      | g      | 3.15
+  auchan       | Danio Serek XXL o smaku waniliowym Danone 200 g    | danio serek o smaku waniliowym      | g      | 2.32
+  biedronka    | Danio Serek homogenizowany o smaku waniliowym 120 g | danio serek o smaku waniliowym      | g      | 3.1583
+  biedronka    | Danio Serek homogenizowany o smaku waniliowym 130 g | danio serek o smaku waniliowym      | g      | 1.9154
+  biedronka    | Danio Serek o smaku waniliowym (4 x 130 g) 520 g   | danio serek o smaku waniliowym (4 x ) | g      | 1.7288
+  auchan       | Danio serek truskawkowy Danone 130 g               | danio serek truskawkowy             | g      | 2.0615
+  auchan       | Danio serek truskawkowy Danone 4 x 130 g           | danio serek truskawkowy             | g      | 1.7269
+  biedronka    | Danio Serek homogenizowany truskawkowy 130 g       | danio serek truskawkowy             | g      | 1.9154
+  auchan       | Danio serek w saszetce brzoskwiniowo-gruszkowy Danone 120 g | danio serek w saszetce brzoskwiniowo-gruszkowy | g      | 3.15
+  auchan       | Danio serek homogenizowany z kawałkami czekolady Danone 120 g | danio serek z kawałkami czekolady   | g      | 3.15
+  biedronka    | Danio Serek homogenizowany z kawałkami czekolady 130 g | danio serek z kawałkami czekolady   | g      | 1.9154
+  biedronka    | Danone YoPro Jogurt pitny smak mango 270 g         | danone yopro jogurt pitny smak mango | g      | 2.2185
+  biedronka    | Danone YoPro Jogurt pitny smak stracciatella 270 g | danone yopro jogurt pitny smak stracciatella | g      | 2.2185
+  biedronka    | Danone YoPro Jogurt pitny smak truskawka-malina 270 g | danone yopro jogurt pitny smak truskawka-malina | g      | 2.2185
+  biedronka    | Danone YoPro Jogurt pitny smak wanilia-ciasteczko 270 g | danone yopro jogurt pitny smak wanilia-ciasteczko | g      | 2.2185
+  auchan       | Danonki jogurt truskawkowy Danone 70 g             | danonki jogurt truskawkowy          | g      | 4.9714
+  auchan       | Dar Pure Jogurt o smaku brzoskwinia banan Mlekovita 250 g | dar pure jogurt o smaku brzoskwinia banan | g      | 1.476
+  auchan       | Dar Pure jogurt o smaku mango banan Mlekovita 250 g | dar pure jogurt o smaku mango banan | g      | 1.476
+  auchan       | Dar Pure Jogurt o smaku truskawka banan Mlekovita 250 g | dar pure jogurt o smaku truskawka banan | g      | 1.476
+  biedronka    | Dega Paprykarz szczeciński 135 g                   | dega paprykarz szczeciński          | g      | 1.4444
+  biedronka    | Dega Paprykarz z dorszem 130 g                     | dega paprykarz z dorszem            | g      | 2.2231
+  biedronka    | Dega Paprykarz z łososia 135 g                     | dega paprykarz z łososia            | g      | 1.4444
+  biedronka    | Delicate Kozi serek twarogowy 125 g                | delicate kozi serek twarogowy       | g      | 5.032
+  auchan       | Delice z twarożku śmietankowego Kiri 140 g         | delice z twarożku śmietankowego     | g      | 5.9929
+  biedronka    | Delicje Szampańskie Biszkopty z galaretką pomarańczową oblewane czekoladą 147 g | delicje szampańskie biszkopty z galaretką pomarańczową oblewane czekoladą | g      | 3.7347
+  biedronka    | Delikate Kremowy bawarski ser łagodny 150 g        | delikate bawarski ser               | g      | 5.3267
+  biedronka    | Delikate Kremowy bawarski ser Caractere 150 g      | delikate bawarski ser               | g      | 5.3267
+  biedronka    | Delikate Kremowy bawarski ser blue 150 g           | delikate bawarski ser blue          | g      | 5.3267
+  biedronka    | Delikate Kremowy bawarski ser z zielonym pieprzem 150 g | delikate bawarski ser z zielonym pieprzem | g      | 5.3267
+  biedronka    | Delikate Mascarpone Ser śmietankowo-kremowy 250 g  | delikate mascarpone ser śmietankowo | g      | 2.796
+  biedronka    | Delikate Mozzarella light 200 g                    | delikate mozzarella                 | g      | 2.392
+  biedronka    | Delikate Mozzarella mini 270 g / 150 g             | delikate mozzarella mini            | g      | 3.4333
+  biedronka    | Delikate Serek wiejski bez laktozy 200 g           | delikate serek bez laktozy          | g      | 1.495
+  biedronka    | Delikate Serek wiejski wysokobiałkowy 200 g        | delikate serek wysokobiałkowy       | g      | 1.995
+  auchan       | Deska 3 serów hiszpańskich  Garcia Baquero 150 g   | deska 3 serów hiszpańskich          | g      | 19.2533
+  biedronka    | Diamant Cukier biały 1 kg                          | diamant cukier biały                | g      | 0.199
+  biedronka    | Diamant Cukier puder 500 g                         | diamant cukier puder                | g      | 0.498
+  biedronka    | Diamant Dry Demerara Cukier trzcinowy nierafinowany 500 g | diamant dry demerara cukier trzcinowy nierafinowany | g      | 1.098
+  biedronka    | Dilmah Czarna herbata Lemon Flavoured 20 torebek 30 g | dilmah czarna herbata               | pcs    | —
+  biedronka    | Dilmah Herbata czarna Mango & Strawberry Flavoured 20 torebek 30 g | dilmah herbata czarna               | pcs    | —
+  auchan       | Light dla zdrowego serca Flora 400 g               | dla zdrowego serca                  | g      | 2.345
+  biedronka    | Dobrusia Makaron świderki 1 kg                     | dobrusia makaron świderki           | g      | 0.489
+  auchan       | Dodatki do herbatki Pachnący Ogród Orzeszek 60 g   | dodatki do herbatki                 | g      | 23.9833
+  auchan       | Dodatki do herbatki Rajski Ogród Orzeszek 80 g     | dodatki do herbatki                 | g      | 17.9875
+  auchan       | Dodatki do herbatki Tajemniczy Ogród Orzeszek 60 g | dodatki do herbatki                 | g      | 23.9833
+  biedronka    | Donatello Antipasti nadziewane serkiem suszone pomidory 150 g | donatello antipasti nadziewane serkiem suszone pomidory | g      | 5.5933
+  biedronka    | Donatello Antipasti nadziewane serkiem wiśniowe papryczki 150 g | donatello antipasti nadziewane serkiem wiśniowe papryczki | g      | 5.5933
+  biedronka    | Donatello Antipasti pieczarki balsamico 150 g      | donatello antipasti pieczarki balsamico | g      | 5.5933
+  biedronka    | Marinero Dorsz atlantycki polędwica opak. ok. 500 g | dorsz                               | g      | 9.99
+  biedronka    | Dr. Oetker Śmietan-fix 9 g                         | dr                                  | g      | 11.0
+  biedronka    | Dr. Oetker Drożdże instant 7 g                     | dr. oetker drożdże instant          | g      | 24.1429
+  biedronka    | Dr. Oetker Ekstrakt naturalny pomarańcza z Brazylii 30 ml | dr. oetker ekstrakt pomarańcza      | ml     | 23.3
+  biedronka    | Dr. Oetker Ekstrakt naturalny wanilia bourbon z Madagaskaru 30 ml | dr. oetker ekstrakt wanilia bourbon | ml     | 23.3
+  biedronka    | Dr. Oetker Słodka Chwila Kisiel malinowy 30 g      | dr. oetker słodka chwila kisiel     | g      | 6.1667
+  biedronka    | Dr. Oetker Słodka Chwila Kisiel jabłkowy 30g       | dr. oetker słodka chwila kisiel jabłkowy | g      | 6.1667
+  auchan       | Drożdże piekarskie prasowane Drożdże Babuni 2 x 42 g | drożdże piekarskie prasowane        | g      | 2.6071
+  biedronka    | Bakello Drożdże suszone instant 8 g                | drożdże suszone instant             | g      | 12.375
+  auchan       | Drożdże tradycyjne  Drożdże Babuni 100 g           | drożdże tradycyjne                  | g      | 1.48
+  auchan       | Duet o smaku granat-acerola Jovi 350 g             | duet o smaku granat-acerola         | g      | 0.8514
+  auchan       | Duet o smaku kokos-migdał.  Jovi 350 g             | duet o smaku kokos-migdał           | g      | 0.8514
+  auchan       | Duet o smaku malina-czerwona porzeczka.  Jovi 350 g | duet o smaku malina-czerwona porzeczka | g      | 0.8514
+  auchan       | Duet o smaku melon - truskawka Jovi 350 g          | duet o smaku melon - truskawka      | g      | 0.8514
+  biedronka    | Duplo Wafel z orzechowym nadzieniem pokryty mleczną czekoladą (5 szt.) 91 g | duplo wafel z orzechowym nadzieniem pokryty mleczną czekoladą ( .) | g      | 10.2088
+  auchan       | Duńskie masło lekko solone 82% tłuszczu Lurpak 200 g | duńskie masło lekko solone tłuszczu | g      | 5.695
+  auchan       | Duńskie masło klasyczne 82% tłuszczu Lurpak 200 g  | duńskie masło tłuszczu              | g      | 5.695
+  auchan       | BIO Dynia  Warzywa Auchan sztuka                   | dynia                               | g      | 14.99
+  biedronka    | Dynia piżmowa                                      | dynia                               | g      | 0.6987
+  auchan       | Dynia kostka Hortex 450 g                          | dynia kostka                        | g      | 1.82
+  auchan       | Dynia odmiana Hokkaido Warzywa Auchan 1 sztuka     | dynia odmiana                       | g      | 9.99
+  auchan       | Dżem malinowy Herbapol 280 g                       | dżem                                | g      | 1.6714
+  auchan       | Dżem agrestowy Auchan 280 g                        | dżem agrestowy                      | g      | 1.3536
+  auchan       | Dżem aroniowy Auchan 280 g                         | dżem aroniowy                       | g      | 1.3536
+  auchan       | Dżem brzoskwiniowy Auchan 270 g                    | dżem brzoskwiniowy                  | g      | 1.1815
+  auchan       | Dżem brzoskwiniowy o obniżonej zawartości cukrów Auchan 280 g | dżem brzoskwiniowy o obniżonej zawartości cukrów | g      | 1.3536
+  auchan       | Dżem brzoskwiniowy o obniżonej zawartości cukrów Łowicz 280 g | dżem brzoskwiniowy o obniżonej zawartości cukrów | g      | 2.4571
+  auchan       | Dżem Cud ananas - pomarańcza & ananas Herbapol 280 g | dżem cud ananas - pomarańcza & ananas | g      | 2.4929
+  auchan       | Dżem czarna i czerwona porzeczka Łowicz 200 g      | dżem czarna i czerwona porzeczka    | g      | 3.99
+  auchan       | Dżem 100% figowy  Auchan 230 g                     | dżem figowy                         | g      | 2.5174
+  auchan       | Dżem jagodowy o obniżonej zawartości cukrów Łowicz 280 g | dżem jagodowy o obniżonej zawartości cukrów | g      | 2.4571
+  auchan       | Dżem jagodowy o obniżonej zawartości cukrów Auchan 280 g | dżem jagodowy o obniżonej zawartości cukrów | g      | 1.5321
+  auchan       | Dżem morelowy niskosłodzony Łowicz 280 g           | dżem morelowy niskosłodzony         | g      | 2.4571
+  auchan       | Dżem malinowy  o obniżonej zawartości cukrów Auchan 280 g | dżem o obniżonej zawartości cukrów  | g      | 1.5321
+  auchan       | Dżem malinowy o obniżonej zawartości cukrów Łowicz 280 g | dżem o obniżonej zawartości cukrów  | g      | 2.4571
+  auchan       | Dżem 100% owoców czarna porzeczka Auchan 230 g     | dżem owoców czarna porzeczka        | g      | 2.5174
+  auchan       | Dżem 100% owoców wiśniowy Auchan 230 g             | dżem owoców wiśniowy                | g      | 2.5174
+  auchan       | Dżem truskawka Łowicz 200 g                        | dżem truskawka                      | g      | 3.99
+  auchan       | Dżem truskawkowy  Herbapol 280 g                   | dżem truskawkowy                    | g      | 1.7643
+  auchan       | Dżem truskawkowy o obniżonej zawartości cukrów Łowicz 280 g | dżem truskawkowy o obniżonej zawartości cukrów | g      | 2.4571
+  auchan       | Dżem truskawkowy o obniżonej zawartości cukrów Auchan 280 g | dżem truskawkowy o obniżonej zawartości cukrów | g      | 1.3536
+  auchan       | Dżem truskawkowy o obniżonej zawartości cukrów Łowicz 450 g | dżem truskawkowy o obniżonej zawartości cukrów | g      | 1.9956
+  auchan       | Dżem wiśniowy  Łowicz 200 g                        | dżem wiśniowy                       | g      | 3.99
+  auchan       | Dżem wiśniowy Herbapol 280 g                       | dżem wiśniowy                       | g      | 1.8857
+  auchan       | Dżem wiśniowy niskosłodzony Auchan 270 g           | dżem wiśniowy niskosłodzony         | g      | 1.1815
+  auchan       | Dżem wiśniowy o obniżonej zawartości cukrów Łowicz 280 g | dżem wiśniowy o obniżonej zawartości cukrów | g      | 2.4571
+  auchan       | Dżem wiśniowy o obniżonej zawartości cukrów Łowicz 450 g | dżem wiśniowy o obniżonej zawartości cukrów | g      | 1.9956
+  auchan       | Dżem wiśniowy o obniżonej zawartości cukrów Auchan 280 g | dżem wiśniowy o obniżonej zawartości cukrów | g      | 1.3536
+  auchan       | Dżem z agrestu i kiwi o obniżonej zawartości cukrów Łowicz 280 g | dżem z agrestu i kiwi o obniżonej zawartości cukrów | g      | 2.7821
+  auchan       | Dżem z czarnej porzeczki Auchan 270 g              | dżem z czarnej porzeczki            | g      | 1.1815
+  auchan       | Dżem z czarnej porzeczki o obniżonej zawartości cukrów Auchan 280 g | dżem z czarnej porzeczki o obniżonej zawartości cukrów | g      | 1.3536
+  auchan       | Dżem z czarnych porzeczek o obniżonej zawartości cukrów Łowicz 450 g | dżem z czarnych porzeczek o obniżonej zawartości cukrów | g      | 1.9956
+  auchan       | Dżem ekstra z malin Bonne Maman 370 g              | dżem z malin                        | g      | 4.2676
+  auchan       | Dżem z owocami leśnymi Herbapol 280 g              | dżem z owocami leśnymi              | g      | 1.6714
+  auchan       | Dżem z owoców leśnych o obniżonej zawartości cukrów Łowicz 280 g | dżem z owoców leśnych o obniżonej zawartości cukrów | g      | 2.4571
+  auchan       | Dżem z płatków fiołków Don Gastronom 140 g         | dżem z płatków fiołków              | g      | 6.6357
+  auchan       | Dżem ekstra z truskawek Bonne Maman 370 g          | dżem z truskawek                    | g      | 4.2676
+  auchan       | Dżem z truskawek o obniżonej zawartości cukrów Łowicz 210 g | dżem z truskawek o obniżonej zawartości cukrów | g      | 4.2762
+  auchan       | Dżem z wiśni o obniżonej zawartości cukrów Łowicz 210 g | dżem z wiśni o obniżonej zawartości cukrów | g      | 4.2762
+  biedronka    | E. Wedel Baryłki klasyczne z alkoholem w czekoladzie deserowej 200 g | e. wedel baryłki z alkoholem w czekoladzie deserowej | g      | 11.995
+  biedronka    | E. Wedel Czekolada klasyczna gorzka 64% 90 g       | e. wedel czekolada gorzka           | g      | 11.1
+  biedronka    | E. Wedel Czekolada klasyczna mleczna 90 g          | e. wedel czekolada mleczna          | g      | 7.9889
+  biedronka    | E. Wedel Czekolada truskawkowa 100 g               | e. wedel czekolada truskawkowa      | g      | 7.99
+  biedronka    | E. Wedel Ptasie mleczko czekoladowe w czekoladzie deserowej 340 g | e. wedel ptasie mleczko czekoladowe w czekoladzie deserowej | g      | 6.4676
+  biedronka    | E. Wedel Ptasie Mleczko Waniliowe w czekoladzie deserowej 340 g | e. wedel ptasie mleczko waniliowe w czekoladzie deserowej | g      | 6.4676
+  biedronka    | E. Wedel WW Wafelki mleczna czekolada & krem orzechowy 45 g | e. wedel ww wafelki mleczna czekolada & krem orzechowy | g      | 7.7556
+  biedronka    | Eduscho Family Classic Kawa palona mielona 500 g   | eduscho family classic kawa palona mielona | g      | 7.598
+  auchan       | EisMocca Hochwald 250 ml                           | eismocca                            | ml     | 2.756
+  auchan       | EisSchoko Hochwald 250 ml                          | eisschoko                           | ml     | 2.756
+  auchan       | ekoJogurt naturalny typu greckiego EkoŁukta 200 g  | ekojogurt typu greckiego            | g      | 2.845
+  biedronka    | Ektos Oliwa z oliwek najwyższej jakości pierwszego tłoczenia Chania Kritis 500 ml | ektos oliwa z oliwek najwyższej jakości pierwszego tłoczenia | ml     | 4.998
+  biedronka    | El Toro Rojo Chorizo pikantne 280 g                | el toro rojo chorizo pikantne       | g      | 5.7107
+  biedronka    | El Toro Rojo Oliwki zielone drylowane nadziewane pastą cytrynową 340 g | el toro rojo oliwki zielone drylowane nadziewane pastą cytrynową | g      | 3.495
+  auchan       | Erytrytol Intenson 500 g                           | erytrytol                           | g      | 4.718
+  auchan       | Erytrytol Big Nature 1 kg                          | erytrytol                           | g      | 3.22
+  auchan       | Erytrytol   Natural Life 500 g                     | erytrytol                           | g      | 5.298
+  auchan       | Erytrytol  Vinet 500 g                             | erytrytol                           | g      | 5.698
+  auchan       | BIO Erytrytol   Pięć Przemian 500 g                | erytrytol                           | g      | 7.538
+  auchan       | Erytrytol   Big Nature 250 g                       | erytrytol                           | g      | 5.076
+  biedronka    | Bakello Erytrytol 250 g                            | erytrytol                           | g      | 3.996
+  auchan       | Espresso Macchiato napój mleczny z mieszanką kaw robusta-arabica Müller 250 ml | espresso macchiato napój mleczny z mieszanką kaw robusta-arabica | ml     | 2.552
+  biedronka    | Fantasia Jagoda 118 g                              | fantasia                            | g      | 2.7881
+  biedronka    | Fantasia Jogurt kremowy chrupiący słony karmel 99 g | fantasia jogurt chrupiący słony karmel | g      | 3.3232
+  biedronka    | Fantasia Jogurt karmelowy z mieszanką Twix 120 g   | fantasia jogurt karmelowy z mieszanką | g      | 4.8
+  biedronka    | Fantasia Jogurt o smaku waniliowym z drażetkami M&M's 120 g | fantasia jogurt o smaku waniliowym z drażetkami | g      | 4.8
+  ... i 3488 więcej (truncated)

@@ -46,7 +46,7 @@ export default function Login() {
         )}
 
         <button
-          onClick={() => { window.location.href = `${API_URL}/api/auth/google`; }}
+          onClick={() => { localStorage.setItem('pending_lang', uiLang); window.location.href = `${API_URL}/api/auth/google`; }}
           style={{
             width: '100%', padding: '12px', border: '2px solid #374151',
             borderRadius: 8, background: '#1f2937', cursor: 'pointer',

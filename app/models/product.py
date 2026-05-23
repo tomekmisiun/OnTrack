@@ -14,6 +14,7 @@ class Product(db.Model):
     fat = db.Column(db.Float, nullable=True)
     carbs = db.Column(db.Float, nullable=True)
     sold_by_weight = db.Column(db.Boolean, nullable=False, default=False)
+    lang = db.Column(db.String(5), nullable=True, default='pl')
 
     def to_dict(self):
         return {
@@ -27,4 +28,5 @@ class Product(db.Model):
             'fat': self.fat,
             'carbs': self.carbs,
             'sold_by_weight': bool(self.sold_by_weight),
+            'lang': self.lang or 'pl',
         }

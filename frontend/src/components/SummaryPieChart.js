@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 function PieChart({ slices, size = 100, interactive = false }) {
+  const { t } = useLanguage();
   const [hovered, setHovered] = useState(null);
   if (!slices || slices.length === 0) return null;
   const total = slices.reduce((s, sl) => s + sl.value, 0);
@@ -12,7 +14,7 @@ function PieChart({ slices, size = 100, interactive = false }) {
       <svg width={size} height={size}>
         <circle cx={cx} cy={cy} r={r} fill={slices[0].color} />
         <circle cx={cx} cy={cy} r={holeR} fill="#1c2433" />
-        {interactive && <text x={cx} y={cy+4} textAnchor="middle" fontSize={size*0.1} fill="#e2e8f0" fontWeight="700">{slices[0].value.toFixed(0)} zł</text>}
+        {interactive && <text x={cx} y={cy+4} textAnchor="middle" fontSize={size*0.1} fill="#e2e8f0" fontWeight="700">{slices[0].value.toFixed(0)} {t('currency')}</text>}
       </svg>
     );
   }
@@ -46,10 +48,10 @@ function PieChart({ slices, size = 100, interactive = false }) {
       {interactive && (
         <>
           <text x={cx} y={active ? cy - valSize*0.6 : cy - valSize*0.3} textAnchor="middle" fontSize={labelSize} fill={active ? active.color : '#6b7280'} fontWeight="700">
-            {active ? (active.label.length > 14 ? active.label.slice(0,13)+'…' : active.label) : 'Łącznie'}
+            {active ? (active.label.length > 14 ? active.label.slice(0,13)+'…' : active.label) : t('total_label')}
           </text>
           <text x={cx} y={active ? cy + valSize*0.9 : cy + valSize*0.7} textAnchor="middle" fontSize={valSize} fill="#e2e8f0" fontWeight="800">
-            {(active ? active.value : total).toFixed(2)} zł
+            {(active ? active.value : total).toFixed(2)} {t('currency')}
           </text>
         </>
       )}

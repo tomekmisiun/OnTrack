@@ -5985,36 +5985,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "sos włoski",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "biedronka",
-    "original_name": "Knorr Sos sałatkowy włoski 8 g",
-    "generic_name": "knorr sos włoski",
-    "package_size_value": 8.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 1.45,
-    "price_per_unit": null,
-    "price_per_100": 18.125,
-    "currency": "PLN"
-  },
-  {
-    "ingredient_name": "sos z indyka",
-    "match_type": "auto",
-    "fuzzy_score": 85.7,
-    "shop": "auchan",
-    "original_name": "Szyja z indyka Auchan na wagę ok. 600 g",
-    "generic_name": "szyja z indyka",
-    "package_size_value": null,
-    "unit": null,
-    "sold_by_weight": true,
-    "price_package": 7.14,
-    "price_per_unit": null,
-    "price_per_100": 1.19,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "stewia",
     "match_type": "auto",
     "fuzzy_score": 100.0,

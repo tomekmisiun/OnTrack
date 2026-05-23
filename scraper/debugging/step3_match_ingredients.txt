@@ -1,0 +1,1632 @@
+# Krok 3: match ingredients
+# Wygenerowano: 2026-05-23 14:08:43
+
+======================================================================
+  Statystyki dopasowania
+======================================================================
+  Unikalne składniki EN                    786
+  Dopasowane EN                            367
+  Niedopasowane EN                         419
+  % dopasowania EN                         46.7%
+  MATCH_AUTO EN                            0
+  MATCH_UNCERTAIN EN                       0
+  Unikalne składniki PL                    811
+  Dopasowane PL                            462
+  Niedopasowane PL                         349
+  % dopasowania PL                         57.0%
+  MATCH_AUTO PL                            0
+  MATCH_UNCERTAIN PL                       0
+
+
+======================================================================
+  EN — dopasowania (ingredient_name → original_name | score | type | price_per_100)
+======================================================================
+  Dijon mustard                       → Dijon Mustard                                      | score=96.0  | auto             | 0.245
+  almond                              → Whole Almonds                                      | score=100.0 | auto             | 0.845
+  andouille sausage                   → Quorn Sausages                                     | score=100.0 | auto             | —
+  apple                               → Large Bramley Apple                                | score=100.0 | auto             | 0.3242
+  apple cider                         → Organic Apple Cider Vinegar                        | score=100.0 | auto             | —
+  apple cider vinegar                 → Organic Apple Cider Vinegar                        | score=100.0 | auto             | —
+  applesauce                          → Bramley Apple Sauce                                | score=100.0 | auto             | —
+  avocado                             → Avocado                                            | score=100.0 | auto             | 0.29
+  avocado oil                         → Avocado                                            | score=100.0 | auto             | 0.29
+  avocado oil spray                   → Avocado                                            | score=100.0 | auto             | 0.29
+  baby corn                           → Baby Corn                                          | score=100.0 | auto             | 0.7517
+  baby red potatoes                   → British Red Potatoes                               | score=100.0 | auto             | 0.078
+  baby spinach                        → British Baby Spinach                               | score=100.0 | auto             | 0.3533
+  bacon                               → Smoked Bacon Lardons                               | score=100.0 | auto             | 0.895
+  baking powder                       → Baking Powder                                      | score=100.0 | auto             | 0.325
+  balsamic vinegar                    → Balsamic Vinegar of Modena                         | score=100.0 | auto             | —
+  banana                              → Banana                                             | score=100.0 | auto             | 0.1333
+  basil                               → Basil                                              | score=100.0 | auto             | —
+  basmati rice                        → Basmati Rice                                       | score=100.0 | auto             | 0.179
+  bay leaf                            → Bay Leaf                                           | score=100.0 | auto             | —
+  bbq sauce                           → BBQ Sauce                                          | score=100.0 | auto             | —
+  beef                                → 100% British Beef Wagyu Fillet Steak               | score=100.0 | auto             | 6.4647
+  beef broth                          → Chicken Stock Cubes                                | score=100.0 | auto             | —
+  beef chuck                          → British Diced Beef                                 | score=100.0 | auto             | 1.0843
+  beef ribs                           → British Diced Beef                                 | score=100.0 | auto             | 1.0843
+  beef sirloin                        → 100% British Beef Wagyu Sirloin Steak              | score=100.0 | auto             | 3.9604
+  beef steak                          → 100% British Beef Wagyu Fillet Steak               | score=100.0 | auto             | 6.4647
+  beef stew meat                      → 100% British Beef Wagyu Fillet Steak               | score=88.9  | auto             | 6.4647
+  beef stock                          → Chicken Stock Cubes                                | score=100.0 | auto             | —
+  bell pepper                         → Red Pepper                                         | score=100.0 | auto             | 0.4375
+  berries                             → Blueberries                                        | score=100.0 | auto             | 0.7933
+  black beans                         → Tinned Black Beans/Green Lentils                   | score=100.0 | auto             | 0.1231
+  black olive                         → Pitted Green & Black Olives With Feta              | score=100.0 | auto             | —
+  black olives                        → Pitted Green & Black Olives With Feta              | score=100.0 | auto             | —
+  black pepper                        → Ground Black Pepper                                | score=100.0 | auto             | 1.59
+  black sesame seeds                  → Sesame Seeds                                       | score=100.0 | auto             | —
+  blackberries                        → Wonky Blackberries                                 | score=100.0 | auto             | 1.26
+  blackberry                          → Wonky Blackberries                                 | score=100.0 | auto             | 1.26
+  blueberries                         → Blueberries                                        | score=100.0 | auto             | 0.7933
+  blueberry                           → Blueberries                                        | score=100.0 | auto             | 0.7933
+  breadcrumbs                         → Panko Breadcrumbs                                  | score=100.0 | auto             | —
+  broccoli                            → British Broccoli                                   | score=100.0 | auto             | 0.2188
+  broccoli florets                    → Broccoli Florets                                   | score=100.0 | auto             | 0.119
+  broccolini                          → British Broccoli                                   | score=88.9  | auto             | 0.2188
+  brown rice                          → Brown Rice                                         | score=100.0 | auto             | 0.139
+  brown rice noodles                  → Rice Noodles                                       | score=100.0 | auto             | 0.33
+  brown rice pasta                    → Brown Rice                                         | score=100.0 | auto             | 0.139
+  brown rice with quinoa              → Brown Rice                                         | score=100.0 | auto             | 0.139
+  butter                              → Flora Buttery                                      | score=92.3  | auto             | 0.4422
+  butternut squash                    → Butternut Squash & Pine Nut Girasoli               | score=100.0 | auto             | 0.996
+  cabbage                             → Red Cabbage                                        | score=100.0 | auto             | 0.0989
+  cabbage and carrots                 → British Wonky Carrots                              | score=100.0 | auto             | 0.053
+  cajun seasoning                     → Cajun Seasoning                                    | score=100.0 | auto             | —
+  cannellini beans                    → Red Kidney Beans in Water                          | score=100.0 | auto             | 0.0975
+  carrot                              → Carrot & Swede Mash                                | score=100.0 | auto             | 0.3
+  carrots                             → British Wonky Carrots                              | score=100.0 | auto             | 0.053
+  cashew                              → Cashews Roasted and Salted                         | score=100.0 | auto             | 0.995
+  cashew butter                       → Cashew Nuts                                        | score=85.7  | auto             | 0.845
+  cashews                             → Cashews Roasted and Salted                         | score=100.0 | auto             | 0.995
+  cauliflower                         → British Cauliflower                                | score=100.0 | auto             | 0.1487
+  cauliflower gnocchi                 → British Cauliflower                                | score=100.0 | auto             | 0.1487
+  cauliflower rice                    → British Cauliflower                                | score=100.0 | auto             | 0.1487
+  cayenne                             → Cayenne Pepper                                     | score=100.0 | auto             | —
+  cayenne pepper                      → Cayenne Pepper                                     | score=100.0 | auto             | —
+  celery                              → Celery                                             | score=100.0 | auto             | 0.1875
+  cheese                              → Italian Meat & Cheese Select                       | score=100.0 | auto             | —
+  cheese stick                        → Puff Pastry Ham & Cheese Slices 2 Pack             | score=87.0  | auto             | —
+  cherries                            → Cherries                                           | score=100.0 | auto             | 1.145
+  cherry                              → Cherry Tomatoes                                    | score=100.0 | auto             | 0.248
+  cherry tomato                       → Cherry Tomatoes in Rich Tomato Juice               | score=100.0 | auto             | 0.1875
+  cherry tomatoes                     → Cherry Tomatoes                                    | score=100.0 | auto             | 0.248
+  chicken                             → Chicken Breast Fillets                             | score=100.0 | auto             | 0.425
+  chicken apple sausage               → Cooked Sliced Chicken                              | score=100.0 | auto             | 0.6147
+  chicken breast                      → Chicken Breast Fillets                             | score=100.0 | auto             | 0.425
+  chicken broth                       → Chicken Stock Cubes                                | score=100.0 | auto             | —
+  chicken drumstick                   → Chicken Drumsticks                                 | score=100.0 | auto             | 0.215
+  chicken drumsticks                  → Chicken Drumsticks                                 | score=100.0 | auto             | 0.215
+  chicken fajita                      → Cooked Sliced Chicken                              | score=100.0 | auto             | 0.6147
+  chicken legs                        → Chicken Legs                                       | score=100.0 | auto             | 0.225
+  chicken sausage                     → Cooked Sliced Chicken                              | score=100.0 | auto             | 0.6147
+  chicken stock                       → Chicken Stock Cubes                                | score=100.0 | auto             | —
+  chicken stock concentrate           → Chicken Stock Cubes                                | score=88.2  | auto             | —
+  chicken thigh                       → Chicken Thigh Fillets                              | score=100.0 | auto             | 0.6322
+  chicken thighs                      → Chicken Thighs                                     | score=100.0 | auto             | 0.299
+  chicken wing                        → Chicken Wings                                      | score=100.0 | auto             | 0.215
+  chickpea                            → Chickpea Fusilli                                   | score=100.0 | auto             | 0.276
+  chickpea flour                      → Chickpea Fusilli                                   | score=88.0  | auto             | 0.276
+  chickpea fusilli pasta              → Fusilli Pasta 1kg                                  | score=100.0 | auto             | 0.119
+  chickpeas                           → Chickpeas                                          | score=100.0 | auto             | —
+  chili garlic sauce                  → Garlic                                             | score=100.0 | auto             | 0.3955
+  chili powder                        → Chilli Powder                                      | score=96.0  | auto             | —
+  chocolate                           → Chocolate Mini Rolls                               | score=100.0 | auto             | 0.106
+  chocolate chips                     → Milk Chocolate Chips                               | score=100.0 | auto             | 1.19
+  chocolate protein powder            → Chocolate Protein Porridge Sachet                  | score=93.3  | auto             | 0.4826
+  cilantro                            → British Cut Coriander                              | score=100.0 | auto             | 1.6667
+  cinnamon                            → Cinnamon Buns                                      | score=100.0 | auto             | 0.4967
+  cocoa hazelnut spread               → Hazelnut Spread                                    | score=100.0 | auto             | —
+  cocoa powder                        → Cocoa Powder 250g                                  | score=100.0 | auto             | 1.196
+  coconut                             → Desiccated Coconut                                 | score=100.0 | auto             | 0.66
+  coconut aminos                      → Coconut Milk 400ml Full Fat                        | score=87.0  | auto             | 0.1875
+  coconut milk                        → Coconut Milk 400ml Full Fat                        | score=100.0 | auto             | 0.1875
+  coconut milk powder                 → Coconut Milk 400ml Full Fat                        | score=100.0 | auto             | 0.1875
+  coconut oil                         → Coconut Milk 400ml Full Fat                        | score=90.9  | auto             | 0.1875
+  coconut oil spray                   → Coconut Milk 400ml Full Fat                        | score=87.0  | auto             | 0.1875
+  coconut wrap                        → Coconut Water                                      | score=90.9  | auto             | —
+  cod                                 → Cod Fillets                                        | score=100.0 | auto             | 1.0528
+  coleslaw mix                        → Reduced Fat Coleslaw                               | score=100.0 | auto             | —
+  coriander                           → British Cut Coriander                              | score=100.0 | auto             | 1.6667
+  corn                                → Baby Corn                                          | score=100.0 | auto             | 0.7517
+  corn starch                         → Baby Corn                                          | score=100.0 | auto             | 0.7517
+  cottage cheese                      → Low Fat Cottage Cheese                             | score=100.0 | auto             | 0.33
+  cranberries                         → Raisins & Cranberries                              | score=100.0 | auto             | 0.45
+  cranberry                           → Raisins & Cranberries                              | score=100.0 | auto             | 0.45
+  cream cheese                        → Cream Cheese Stuffed Cherry Bell Peppers           | score=100.0 | auto             | 1.46
+  cremini mushrooms                   → Sliced Mushrooms                                   | score=100.0 | auto             | 0.198
+  crispy rice cereal                  → Sweet & Crispy                                     | score=100.0 | auto             | 0.5211
+  crushed tomatoes                    → Chopped Tomatoes in Tomato Juice                   | score=100.0 | auto             | 0.108
+  cucumber                            → Cucumber                                           | score=100.0 | auto             | 0.2967
+  cumin                               → Cumin                                              | score=100.0 | auto             | —
+  curry powder                        → Medium Curry Powder                                | score=100.0 | auto             | 0.9889
+  dairy free chocolate chips          → Dark Chocolate Chips                               | score=88.9  | auto             | 1.19
+  dairy free sour cream               → Sour Cream & Black Pepper Multigrain Waves 6 Pack  | score=100.0 | auto             | 0.86
+  dark chocolate                      → Dark Chocolate 100g                                | score=100.0 | auto             | 0.65
+  dark chocolate chips                → Dark Chocolate Chips                               | score=100.0 | auto             | 1.19
+  diced tomatoes                      → Chopped Tomatoes in Tomato Juice                   | score=100.0 | auto             | 0.108
+  dijon mustard                       → Dijon Mustard                                      | score=100.0 | auto             | 0.245
+  distilled white vinegar             → Distilled Vinegar                                  | score=85.0  | auto             | —
+  dried basil                         → Basil                                              | score=100.0 | auto             | —
+  dried cherries                      → Cherries                                           | score=100.0 | auto             | 1.145
+  dried cranberries                   → Raisins & Cranberries                              | score=100.0 | auto             | 0.45
+  dried pitted date                   → Pitted Dates                                       | score=95.7  | auto             | 0.558
+  dried red chiles                    → Red Chillies                                       | score=90.9  | auto             | 0.8462
+  dried thyme                         → Thyme                                              | score=100.0 | auto             | 4.3333
+  egg                                 → Egg Noodles                                        | score=100.0 | auto             | 0.3146
+  egg noodles                         → Egg Noodles                                        | score=100.0 | auto             | 0.3146
+  eggs                                → Free Range Eggs 6 Pack                             | score=100.0 | auto             | 0.275
+  feta                                → Greek Feta                                         | score=100.0 | auto             | 0.845
+  feta cheese                         → Greek Feta                                         | score=100.0 | auto             | 0.845
+  fig                                 → Fig Rolls                                          | score=100.0 | auto             | —
+  flax seeds                          → Flaxseed                                           | score=88.9  | auto             | 0.895
+  flaxseed meal                       → Flaxseed                                           | score=100.0 | auto             | 0.895
+  freeze dried strawberries           → Strawberry Slices                                  | score=100.0 | auto             | —
+  freeze dried strawberry             → Strawberry Slices                                  | score=100.0 | auto             | —
+  fruit                               → Fruit Loaf                                         | score=100.0 | auto             | —
+  garam masala                        → Garam Malasa Powder                                | score=90.9  | auto             | 0.9889
+  garlic                              → Garlic                                             | score=100.0 | auto             | 0.3955
+  garlic granules                     → Garlic Granules                                    | score=100.0 | auto             | —
+  garlic pasta sauce                  → Onion & Garlic Pasta Sauce                         | score=100.0 | auto             | 0.138
+  garlic powder                       → Garlic                                             | score=100.0 | auto             | 0.3955
+  ginger                              → Ginger                                             | score=100.0 | auto             | 0.792
+  gluten free panko bread crumbs      → Panko Breadcrumbs                                  | score=94.1  | auto             | —
+  gluten free panko breadcrumbs       → Panko Breadcrumbs                                  | score=100.0 | auto             | —
+  gluten free pasta                   → Gluten Free Spaghetti                              | score=87.5  | auto             | 0.058
+  gluten free pita                    → Gluten Free Spaghetti                              | score=90.3  | auto             | 0.058
+  gluten free spaghetti               → Gluten Free Spaghetti                              | score=100.0 | auto             | 0.058
+  golden beet                         → Golden Breadcrumbs                                 | score=85.7  | auto             | —
+  graham crackers                     → Cream Crackers                                     | score=88.0  | auto             | —
+  greek yogurt                        → Fat Free Greek Style Yogurt                        | score=100.0 | auto             | 0.149
+  green beans                         → Green Beans                                        | score=100.0 | auto             | 0.3864
+  green bell pepper                   → Red Pepper                                         | score=100.0 | auto             | 0.4375
+  green cabbage                       → Red Cabbage                                        | score=85.7  | auto             | 0.0989
+  green onion                         → Jumbo Spring Onions                                | score=100.0 | auto             | 0.6846
+  green onions                        → Jumbo Spring Onions                                | score=100.0 | auto             | 0.6846
+  green peas                          → Green Pea Penne                                    | score=94.7  | auto             | 0.276
+  ground beef                         → British Diced Beef                                 | score=100.0 | auto             | 1.0843
+  ground chicken                      → Lean Chicken Mince 5% Fat                          | score=100.0 | auto             | 0.518
+  ground clove                        → Quorn Mince                                        | score=100.0 | auto             | —
+  ground cumin                        → Quorn Mince                                        | score=100.0 | auto             | —
+  ground flax                         → Quorn Mince                                        | score=100.0 | auto             | —
+  ground flax meal                    → Quorn Mince                                        | score=100.0 | auto             | —
+  ground flaxseed                     → Quorn Mince                                        | score=100.0 | auto             | —
+  ground ginger                       → Ginger                                             | score=100.0 | auto             | 0.792
+  ground lamb                         → British Lamb Mince 20% Fat                         | score=100.0 | auto             | 1.1558
+  ground pork                         → British Pork Smoked Ham Family Pack 14 Slices      | score=85.7  | auto             | 0.53
+  ground sausage                      → Quorn Mince                                        | score=100.0 | auto             | —
+  ground turkey                       → British Turkey Mince 7% Fat                        | score=100.0 | auto             | 0.598
+  ground turkey breast                → British Turkey Mince 7% Fat                        | score=100.0 | auto             | 0.598
+  ham                                 → Ham & Mushroom Tagliatelle                         | score=100.0 | auto             | 0.6975
+  harissa                             → Harissa Salads                                     | score=100.0 | auto             | 1.9933
+  hoisin sauce                        → Hoisin Sauce                                       | score=100.0 | auto             | —
+  honey                               → Clear Honey                                        | score=100.0 | auto             | 0.2181
+  honey mustard                       → Honey & Mustard Salad Dressing                     | score=100.0 | auto             | —
+  honey mustard dressing              → Honey & Mustard Salad Dressing                     | score=88.0  | auto             | —
+  instant brown rice                  → Brown Rice                                         | score=100.0 | auto             | 0.139
+  italian seasoning                   → Italian Meat & Cheese Select                       | score=87.0  | auto             | —
+  kidney beans                        → Red Kidney Beans                                   | score=100.0 | auto             | —
+  kiwi                                → Kiwis                                              | score=88.9  | auto             | 0.261
+  korean bbq sauce                    → BBQ Sauce                                          | score=100.0 | auto             | —
+  leek                                → Individual Cheddar & Leek Quiche                   | score=100.0 | auto             | —
+  lemon                               → Wonky Lemons                                       | score=100.0 | auto             | 0.2225
+  lemon juice                         → Lemon Juice                                        | score=100.0 | auto             | —
+  lemon zest                          → Wonky Lemons                                       | score=100.0 | auto             | 0.2225
+  lentil                              → Red Lentils                                        | score=100.0 | auto             | 0.198
+  lentils                             → Red Lentils                                        | score=100.0 | auto             | 0.198
+  lime                                → Limes                                              | score=100.0 | auto             | 0.2657
+  lime zest                           → Limes                                              | score=100.0 | auto             | 0.2657
+  long grain white rice               → Long Grain White Rice                              | score=100.0 | auto             | 0.052
+  mandarin                            → Mandarin Oranges in Juice                          | score=100.0 | auto             | —
+  mandarin orange                     → Mandarin Oranges in Juice                          | score=100.0 | auto             | —
+  mango                               → Large Mango                                        | score=100.0 | auto             | 0.44
+  maple syrup                         → Maple Syrup                                        | score=100.0 | auto             | —
+  mashed potatoes                     → Mashed Potato                                      | score=100.0 | auto             | 0.17
+  mayonnaise                          → Real Mayonnaise                                    | score=100.0 | auto             | —
+  meatballs                           → Meatballs                                          | score=100.0 | auto             | —
+  milk                                → Milk Chocolate 100g                                | score=100.0 | auto             | 0.65
+  mint                                → Cut Mint                                           | score=100.0 | auto             | 1.6667
+  mixed berries                       → Blueberries                                        | score=100.0 | auto             | 0.7933
+  mixed nuts                          → Mixed Nuts                                         | score=100.0 | auto             | 0.875
+  mixed vegetable                     → Mixed Vegetables                                   | score=100.0 | auto             | 0.099
+  mixed vegetables                    → Mixed Vegetables                                   | score=100.0 | auto             | 0.099
+  mozzarella                          → Classic Mozzarella                                 | score=100.0 | auto             | 0.552
+  mozzarella cheese                   → Grated Mozzarella Cheese                           | score=100.0 | auto             | 0.598
+  mushroom                            → Sliced Mushrooms                                   | score=100.0 | auto             | 0.198
+  mushrooms                           → Sliced Mushrooms                                   | score=100.0 | auto             | 0.198
+  nectarine                           → Nectarines                                         | score=94.7  | auto             | 0.3151
+  nuts                                → Mixed Nuts                                         | score=100.0 | auto             | 0.875
+  olive oil                           → Extra Virgin Olive Oil                             | score=100.0 | auto             | —
+  onion                               → British Wonky Brown Onions                         | score=100.0 | auto             | 0.08
+  onion granules                      → Onion Granules                                     | score=100.0 | auto             | —
+  orange juice                        → Smooth Orange Juice                                | score=100.0 | auto             | 0.115
+  orange marmalade                    → Fine Cut Orange Marmalade                          | score=100.0 | auto             | 0.1868
+  orange zest                         → Wonky Oranges                                      | score=100.0 | auto             | 0.1238
+  panko breadcrumbs                   → Panko Breadcrumbs                                  | score=100.0 | auto             | —
+  paprika                             → Smoked Paprika                                     | score=100.0 | auto             | 1.725
+  parmesan                            → Greek Feta                                         | score=100.0 | auto             | 0.845
+  parmesan cheese                     → Greek Feta                                         | score=100.0 | auto             | 0.845
+  parsley                             → Parsley                                            | score=100.0 | auto             | —
+  parsnip                             → British Parsnips                                   | score=93.3  | auto             | 0.148
+  pasta sauce                         → Bolognese Pasta Sauce                              | score=100.0 | auto             | —
+  peach                               → Peach Slices in Juice                              | score=100.0 | auto             | 0.34
+  peanut butter                       → Smooth Peanut Butter                               | score=100.0 | auto             | 0.2912
+  peanuts                             → Peanuts 200g                                       | score=100.0 | auto             | 0.745
+  pear                                → Ripe & Ready Conference Pears                      | score=88.9  | auto             | 0.2598
+  peas                                → Ripe & Ready Conference Pears                      | score=88.9  | auto             | 0.2598
+  pecan                               → Pecans                                             | score=100.0 | auto             | 1.9933
+  pecans                              → Pecans                                             | score=100.0 | auto             | 1.9933
+  penne pasta                         → Everyday Essentials Penne Pasta 500g               | score=100.0 | auto             | 0.082
+  pepper                              → Ground Black Pepper                                | score=100.0 | auto             | 1.59
+  pepperoni                           → Hot Pepperoni 24 Slices                            | score=100.0 | auto             | —
+  pesto                               → Pesto Rosso                                        | score=100.0 | auto             | 1.0474
+  pickled ginger                      → Ginger                                             | score=100.0 | auto             | 0.792
+  pine nuts                           → Pine Nuts                                          | score=100.0 | auto             | 2.8167
+  pineapple                           → Pineapple                                          | score=100.0 | auto             | 0.1225
+  pineapple juice                     → Pineapple                                          | score=100.0 | auto             | 0.1225
+  plain greek yogurt                  → Fat Free Greek Style Yogurt                        | score=100.0 | auto             | 0.149
+  plain yogurt                        → Fat Free Natural Yogurt                            | score=100.0 | auto             | 0.11
+  plant-based ground                  → Quorn Mince                                        | score=100.0 | auto             | —
+  pomegranate                         → Pomegranate Seeds                                  | score=100.0 | auto             | 0.945
+  pomegranate seeds                   → Pomegranate Seeds                                  | score=100.0 | auto             | 0.945
+  pork                                → British Pork Loin Joint                            | score=100.0 | auto             | 0.5788
+  pork chop                           → Pork Chops                                         | score=100.0 | auto             | 0.475
+  pork loin                           → British Pork Loin Joint                            | score=100.0 | auto             | 0.5788
+  pork shoulder                       → British Pork Shoulder Joint                        | score=100.0 | auto             | 0.3792
+  portobello mushrooms                → Sliced Mushrooms                                   | score=100.0 | auto             | 0.198
+  potato                              → British Baby Potatoes                              | score=100.0 | auto             | 0.105
+  pumpkin                             → Butternut Squash & Pine Nut Girasoli               | score=100.0 | auto             | 0.996
+  pumpkin seed oil                    → Pumpkin Seeds                                      | score=96.0  | auto             | 0.676
+  pumpkin seeds                       → Pumpkin Seeds                                      | score=100.0 | auto             | 0.676
+  pumpkin spice                       → Pumpkin Seeds                                      | score=87.0  | auto             | 0.676
+  purple cabbage                      → Red Cabbage                                        | score=90.0  | auto             | 0.0989
+  purple potatoes                     → British Baby Potatoes                              | score=100.0 | auto             | 0.105
+  quinoa                              → Quinoa & Grains                                    | score=100.0 | auto             | 0.396
+  quinoa pasta                        → Quinoa & Grains                                    | score=100.0 | auto             | 0.396
+  radish                              → British Radish                                     | score=100.0 | auto             | 0.275
+  raisin                              → Raisins                                            | score=100.0 | auto             | 0.338
+  raisins                             → Raisins                                            | score=100.0 | auto             | 0.338
+  raspberries                         → Raspberries                                        | score=100.0 | auto             | 1.1956
+  raspberry                           → Raspberries                                        | score=100.0 | auto             | 1.1956
+  red bell pepper                     → Red Pepper                                         | score=100.0 | auto             | 0.4375
+  red cabbage                         → Red Cabbage                                        | score=100.0 | auto             | 0.0989
+  red chili                           → Red Chillies                                       | score=94.1  | auto             | 0.8462
+  red chili flakes                    → Red Chillies                                       | score=85.7  | auto             | 0.8462
+  red curry paste                     → Thai Red Curry Paste                               | score=100.0 | auto             | 0.7167
+  red grapes                          → Red Grapefruit                                     | score=94.7  | auto             | 0.1571
+  red kidney beans                    → Red Kidney Beans                                   | score=100.0 | auto             | —
+  red lentils                         → Red Lentils                                        | score=100.0 | auto             | 0.198
+  red onion                           → Red Onions                                         | score=100.0 | auto             | 0.095
+  red pepper                          → Red Pepper                                         | score=100.0 | auto             | 0.4375
+  red pepper flakes                   → Red Pepper                                         | score=100.0 | auto             | 0.4375
+  red potato                          → British Red Potatoes                               | score=100.0 | auto             | 0.078
+  red potatoes                        → British Red Potatoes                               | score=100.0 | auto             | 0.078
+  red wine                            → Red Wine Vinegar                                   | score=100.0 | auto             | —
+  red wine vinegar                    → Red Wine Vinegar                                   | score=100.0 | auto             | —
+  rice                                → Rice Noodles                                       | score=100.0 | auto             | 0.33
+  rice noodles                        → Rice Noodles                                       | score=100.0 | auto             | 0.33
+  rice vinegar                        → Cider Vinegar                                      | score=85.7  | auto             | —
+  rice wine vinegar                   → Red Wine Vinegar                                   | score=93.3  | auto             | —
+  riced cauliflower                   → British Cauliflower                                | score=100.0 | auto             | 0.1487
+  ricotta cheese                      → Low Fat Cottage Cheese                             | score=92.3  | auto             | 0.33
+  roasted red pepper                  → Red Pepper                                         | score=100.0 | auto             | 0.4375
+  roasted red peppers                 → Red Pepper                                         | score=100.0 | auto             | 0.4375
+  romaine                             → British Romaine Lettuce                            | score=100.0 | auto             | 0.1917
+  romaine lettuce                     → British Romaine Lettuce                            | score=100.0 | auto             | 0.1917
+  rosemary                            → Cut Rosemary                                       | score=100.0 | auto             | 2.5
+  russet potato                       → Sweet Potato                                       | score=90.9  | auto             | 0.5308
+  sage                                → Sage & Onion Stuffing Mix                          | score=100.0 | auto             | —
+  salami                              → Salami and Smoked Cheese Selection                 | score=100.0 | auto             | —
+  salmon                              → Salmon Pieces                                      | score=100.0 | auto             | 1.14
+  salt                                → Salt Grinder                                       | score=100.0 | auto             | —
+  sausage                             → Sausage Rolls 6 Pack                               | score=100.0 | auto             | —
+  scallion                            → Jumbo Spring Onions                                | score=100.0 | auto             | 0.6846
+  scallions                           → Jumbo Spring Onions                                | score=100.0 | auto             | 0.6846
+  sea salt                            → Sea Salt Chocolate                                 | score=100.0 | auto             | 1.592
+  semi sweet chocolate chips          → Milk Chocolate Chips                               | score=88.9  | auto             | 1.19
+  semi-sweet chocolate chips          → Milk Chocolate Chips                               | score=88.9  | auto             | 1.19
+  sesame                              → Sesame Seeds                                       | score=100.0 | auto             | —
+  sesame seed                         → Sesame Seeds                                       | score=100.0 | auto             | —
+  sesame seeds                        → Sesame Seeds                                       | score=100.0 | auto             | —
+  shallot                             → British Shallots 400g                              | score=93.3  | auto             | 0.2882
+  shiitake mushrooms                  → Sliced Mushrooms                                   | score=100.0 | auto             | 0.198
+  sirloin beef                        → British Diced Beef                                 | score=100.0 | auto             | 1.0843
+  sirloin steak                       → 100% British Beef Wagyu Sirloin Steak              | score=100.0 | auto             | 3.9604
+  smoked paprika                      → Smoked Paprika                                     | score=100.0 | auto             | 1.725
+  smoked salmon                       → Smoked Salmon Slices                               | score=100.0 | auto             | 2.245
+  soba noodles                        → Classic Soba Noodles Pot                           | score=100.0 | auto             | 1.2111
+  sour cream                          → Sour Cream & Black Pepper Multigrain Waves 6 Pack  | score=100.0 | auto             | 0.86
+  soy sauce                           → Light Soy Sauce                                    | score=100.0 | auto             | —
+  spaghetti                           → Spaghetti                                          | score=100.0 | auto             | —
+  spaghetti squash                    → Spaghetti                                          | score=100.0 | auto             | —
+  spinach                             → British Baby Spinach                               | score=100.0 | auto             | 0.3533
+  spinach tortilla                    → British Baby Spinach                               | score=100.0 | auto             | 0.3533
+  spinach wrap                        → British Baby Spinach                               | score=100.0 | auto             | 0.3533
+  spring onions                       → Jumbo Spring Onions                                | score=100.0 | auto             | 0.6846
+  sprinkles                           → Sprinkles                                          | score=100.0 | auto             | 1.0421
+  stevia                              → Stevia Sweetener Tablets                           | score=100.0 | auto             | 0.3933
+  strawberries                        → Strawberries                                       | score=100.0 | auto             | 0.5875
+  strawberry                          → Strawberries                                       | score=100.0 | auto             | 0.5875
+  sugar                               → Sugar Mini Waffles                                 | score=100.0 | auto             | 0.1656
+  sugar snap peas                     → British Sugar Snap Peas                            | score=100.0 | auto             | 0.6188
+  sun dried tomatoes                  → Sundried Tomatoes                                  | score=94.1  | auto             | 0.4107
+  sun-dried tomato                    → Sun-dried Tomato Pesto                             | score=100.0 | auto             | 0.4684
+  sun-dried tomatoes                  → Sundried Tomatoes                                  | score=97.1  | auto             | 0.4107
+  sunflower seed                      → Sunflower Seeds                                    | score=100.0 | auto             | 0.46
+  sunflower seeds                     → Sunflower Seeds                                    | score=100.0 | auto             | 0.46
+  sweet corn                          → Baby Corn                                          | score=100.0 | auto             | 0.7517
+  sweet onion                         → Sweet & Crispy                                     | score=100.0 | auto             | 0.5211
+  sweet potato                        → Sweet Potato                                       | score=100.0 | auto             | 0.5308
+  sweet potato puree                  → Sweet Potato                                       | score=100.0 | auto             | 0.5308
+  teriyaki sauce                      → Teriyaki Sauce                                     | score=100.0 | auto             | —
+  thai basil                          → Basil                                              | score=100.0 | auto             | —
+  thai sweet chili sauce              → Sweet Chilli Sauce                                 | score=97.1  | auto             | —
+  thyme                               → Thyme                                              | score=100.0 | auto             | 4.3333
+  tofu                                → Organic Smoked Tofu                                | score=100.0 | auto             | 0.5278
+  tomato                              → Salad Tomatoes                                     | score=100.0 | auto             | 0.1341
+  tomato paste                        → Chopped Tomatoes in Tomato Juice                   | score=100.0 | auto             | 0.108
+  tomato sauce                        → Bolognese Pasta Sauce                              | score=100.0 | auto             | —
+  tuna                                → Tuna Chunks In Spring Water                        | score=90.0  | auto             | 0.4483
+  turkey                              → British Turkey Breast Steaks 2% Fat                | score=100.0 | auto             | 0.9573
+  turkey breast                       → British Turkey Breast Steaks 2% Fat                | score=100.0 | auto             | 0.9573
+  turmeric                            → Ground Turmeric                                    | score=100.0 | auto             | 1.875
+  vegetable                           → British Wonky Carrots                              | score=100.0 | auto             | 0.053
+  vegetable broth                     → Vegetable Oil                                      | score=87.0  | auto             | —
+  vegetable oil                       → Vegetable Oil                                      | score=100.0 | auto             | —
+  vegetable stock                     → Vegetable Oil                                      | score=87.0  | auto             | —
+  vegetarian sausage                  → Vegetarian Sushi Platter                           | score=87.5  | auto             | 1.4049
+  watercress                          → Watercress Spinach & Rocket Salad                  | score=100.0 | auto             | 0.9375
+  watermelon                          → Mini Watermelon                                    | score=100.0 | auto             | 0.1327
+  watermelon radish                   → Mini Watermelon                                    | score=100.0 | auto             | 0.1327
+  white beans                         → Red Kidney Beans in Water                          | score=100.0 | auto             | 0.0975
+  white button mushroom               → British Baby Button Mushrooms                      | score=96.8  | auto             | 0.475
+  white chocolate chips               → White Chocolate Chips                              | score=100.0 | auto             | 1.19
+  white onion                         → Diced White Onions                                 | score=100.0 | auto             | 0.198
+  white wine vinegar                  → White Wine Vinegar                                 | score=100.0 | auto             | —
+  yeast                               → Yeast                                              | score=100.0 | auto             | 1.5476
+  yellow bell pepper                  → Red Pepper                                         | score=100.0 | auto             | 0.4375
+  yogurt                              → Fat Free Natural Yogurt                            | score=100.0 | auto             | 0.11
+  zucchini                            → Courgettes                                         | score=100.0 | auto             | 0.278
+
+======================================================================
+  EN — niedopasowane składniki
+======================================================================
+  BBQ sauce
+  Cheerios
+  Italian dressing seasoning
+  Italian seasoning
+  Rice Krispies
+  active dry yeast
+  adobo sauce
+  agave
+  agave nectar
+  allspice
+  almond butter
+  almond flour
+  almond flour breading
+  almond flour coating
+  almond milk
+  almond milk yogurt
+  almonds
+  angel hair pasta
+  apricot
+  apricot preserves
+  arrowroot
+  arrowroot flour
+  arrowroot powder
+  artichoke
+  artichoke heart
+  artichoke hearts
+  arugula
+  arugula pesto
+  asparagus
+  assorted vegetables
+  baby bok choy
+  baby greens
+  bacon fat
+  baking soda
+  balsamic glaze
+  balsamic vinaigrette
+  bean sprouts
+  beef bouillon cube
+  beef chuck roast
+  beet
+  beet hummus
+  beets
+  beyond meat spicy italian sausage
+  blood orange
+  blue cheese
+  blue cheese dressing
+  bocconcini
+  bouillon cube
+  bourbon whisky
+  bowtie pasta
+  bread
+  bread crumbs
+  breakfast sandwich bun
+  breakfast sausage
+  brown sugar
+  brussels sprout
+  brussels sprouts
+  buffalo sauce
+  butter lettuce
+  buttermilk powder
+  cabbage carrot mix
+  cabbage leaves
+  cacao
+  cacao nib
+  cacao nibs
+  cacao powder
+  cane sugar
+  canned black beans
+  canned diced fire roasted tomatoes
+  canned diced tomatoes
+  canned green chiles
+  canola oil
+  cantaloupe
+  capers
+  cassava flour
+  cassava flour tortillas
+  cassava tortilla
+  cavatappi pasta
+  chard
+  cheese tortellini
+  chex cereal
+  chia seed
+  chia seeds
+  chicken bouillon seasoning
+  chickpea pasta
+  chili flakes
+  chili oil
+  chili paste
+  chili seasoning
+  chipotle pepper in adobo sauce
+  chipotle powder
+  chives
+  chocolate nut butter
+  chuck roast
+  chuck roast beef
+  clementine
+  clove
+  cloves
+  coconut brown sugar
+  coconut butter
+  coconut cream
+  coconut flakes
+  coconut flour
+  coconut sugar
+  coconut vinegar
+  coffee
+  cojita cheese
+  collagen
+  collagen peptides
+  collagen powder
+  collard greens
+  confectioner's erythritol
+  cooking oil spray
+  cooking spray
+  corn on the cob
+  corn tortilla
+  corn tortillas
+  cornstarch
+  crackers
+  cranberry sauce
+  cremini mushroom
+  croutons
+  dairy free milk
+  dairy free yogurt
+  date
+  date syrup
+  dates
+  diced tomato
+  dill
+  dressing
+  dried apple rings
+  dried apricots
+  dried chives
+  dried fruit medley
+  dried goji berries
+  dried onion
+  dried oregano
+  dried sage
+  duck fat
+  edamame
+  egg replacer
+  egg white
+  egg whites
+  eggnog
+  eggplant
+  elbow pasta
+  enchilada sauce
+  endive
+  erythritol
+  everything bagel seasoning
+  extra firm tofu
+  fajita seasoning
+  farro
+  fennel
+  fennel seed
+  fenugreek
+  fire roasted tomatoes
+  fire roasted tomatoes with chiles
+  fire-roasted tomatoes with green chilies
+  fish sauce
+  five-spice powder
+  flank steak
+  flax
+  flax meal
+  flour
+  food coloring
+  freeze dried blueberry
+  freeze-dried berries
+  fresh herbs
+  garbanzo beans
+  garlic-chili sauce
+  ghee
+  gluten free all purpose flour
+  gluten free bread
+  gluten free breadcrumbs
+  gluten free flour
+  gluten free flour blend
+  gluten free sourdough bread
+  gluten-free all purpose flour
+  gluten-free breadcrumbs
+  gluten-free flour
+  goat cheese
+  gold potato
+  graham cracker
+  granola
+  grape
+  grape tomato
+  grape tomatoes
+  grapes
+  grapeseed oil
+  greek dressing
+  green chiles
+  green food coloring
+  green grapes
+  green olive
+  green olives
+  green pepper
+  green plantain
+  ground chipotle chile pepper
+  gruyere cheese
+  guacamole
+  half and half
+  halloumi
+  halloumi cheese
+  hazelnut
+  heavy cream
+  hemp hearts
+  hemp protein
+  hemp seeds
+  herb sprigs
+  herbs
+  hot sauce
+  hummus
+  italian dressing
+  italian sausage
+  jackfruit
+  jalapeño
+  jasmine rice
+  jerky
+  jumbo pasta shells
+  kabocha squash
+  kalamata olives
+  kale
+  ketchup
+  kimchi
+  korean chili paste
+  lemon herb dressing
+  lemon herb seasoning
+  lemon pepper
+  lemon pepper seasoning
+  lemon-herb dressing
+  lemongrass
+  lettuce
+  lime juice
+  liquid egg white
+  liquid egg whites
+  liquid smoke
+  liquid stevia
+  macadamia nuts
+  macaroni and cheese
+  mandarin orange segments
+  maple extract
+  marinara sauce
+  marsala wine
+  masa harina
+  medjool dates
+  microgreens
+  mint extract
+  mixed fruit
+  mixed greens
+  molasses
+  monk fruit
+  monk fruit sweetener
+  monkfruit sweetener
+  mulberries
+  mushroom q-cups
+  mustard
+  mustard powder
+  napa cabbage
+  nut butter
+  nutmeg
+  nutritional yeast
+  oat bran
+  oat flour
+  oat milk
+  oat milk powder
+  oats
+  oil
+  oil spray
+  okra
+  olives
+  onion powder
+  onion soup mix
+  oregano
+  orzo
+  orzo pasta
+  oyster sauce
+  palm sugar
+  palmini noodles
+  pancake mix
+  pasta
+  pea pods
+  pepitas
+  peppercorns
+  pepperoncini juice
+  pepperoncini peppers
+  persimmon
+  pickle
+  pickles
+  pico de gallo
+  pie crust
+  pinto beans
+  pistachios
+  pita
+  pita bread
+  pizza dough
+  pizza sauce
+  plant based milk
+  plant-based milk
+  plant-based shredded cheese
+  plantain
+  plantain chips
+  poblano pepper
+  polenta
+  poppy seeds
+  pork breakfast sausage
+  pork rinds
+  pork tenderloin
+  portobello mushroom
+  potato chips
+  poultry seasoning
+  powdered coconut sugar
+  powdered erythritol
+  powdered sugar
+  pretzels
+  prosciutto
+  protein powder
+  provolone
+  provolone cheese
+  psyllium husk
+  pumpkin mustard
+  pumpkin puree
+  pumpkin spice liquid monk fruit sweetener
+  purple onion
+  ramen noodles
+  ranch
+  ranch dressing
+  ranch dressing mix
+  ranch seasoning
+  red enchilada sauce
+  red sauce
+  refried beans
+  rice bran oil
+  rice paper wrapper
+  ricotta
+  roasted red bell peppers
+  roll
+  rolled oats
+  roma tomato
+  rotini pasta
+  salsa
+  salsa verde
+  sambal oelek
+  seasoned breadcrumbs
+  seasoned salt
+  seasoning
+  serrano pepper
+  sesame oil
+  shredded coconut
+  shredded unsweetened coconut
+  shrimp
+  skirt steak
+  sliced almonds
+  slivered almonds
+  smoked sausage
+  snap peas
+  snow peas
+  soy chorizo
+  special sauce
+  spicy brown mustard
+  spicy italian pork sausage
+  sriracha
+  star anise
+  stevia extract
+  stir-fry vegetables
+  sumac
+  summer squash
+  sun dried tomato
+  sweetener
+  swerve
+  swiss chard
+  taco seasoning
+  tahini
+  tamari
+  tapioca flour
+  tapioca starch
+  tempeh
+  thai bird chili
+  thai chiles
+  tomatillo
+  toothpick
+  toppings
+  tortellini
+  tortilla
+  tortilla chips
+  turkey gravy
+  turkey sausage
+  tzatziki sauce
+  unsweetened cacao powder
+  unsweetened chocolate
+  vanilla bean
+  vanilla extract
+  vanilla monk fruit sweetener
+  vanilla monkfruit sweetener
+  vanilla protein powder
+  vegan butter
+  vegan cheese
+  vegan parmesan
+  vegan protein powder
+  vegan ricotta cheese
+  vegetables
+  walnuts
+  water
+  whey protein powder
+  white cooking wine
+  white miso paste
+  white rice
+  whole grain rice and quinoa
+  whole wheat israeli couscous
+  wild rice
+  wonton wrapper
+  worcestershire sauce
+  wrap
+  xanthan gum
+  yellow mustard
+  yellow onion
+  yellow squash
+  zoodles
+  zucchini noodles
+
+======================================================================
+  PL — dopasowania (ingredient_name → original_name | score | type | price_per_100)
+======================================================================
+   stewia                             → Stevia słodzik pochodzenia naturalnego z inuliną Zielony listek 140 g | score=100.0 | auto             | 8.9214
+  ananas                              → Ananas                                             | score=100.0 | auto             | 0.7987
+  arbuz                               → Arbuz Owoce  Auchan na wagę ok. 4 kg               | score=100.0 | auto             | 0.799
+  awokado                             → Awokado Hass 1 szt.                                | score=100.0 | auto             | —
+  bakłażan                            → BIO Bakłażan Warzywa Auchan 500 g                  | score=100.0 | auto             | 1.998
+  banan                               → Banan                                              | score=100.0 | auto             | 0.699
+  bazylia                             → Bazylia Auchan sztuka                              | score=100.0 | auto             | 2.796
+  bazylia suszona                     → Bazylia suszona Auchan 10 g                        | score=100.0 | auto             | 12.9
+  bazylia tajska                      → Bazylia Auchan sztuka                              | score=100.0 | auto             | 2.796
+  biała fasola                        → Fasola biała konserwowa Auchan 400 g               | score=100.0 | auto             | 1.2458
+  białko jaja                         → Jaja ekologiczne Pewni Dobrego 10 sztuk            | score=100.0 | auto             | —
+  boczek                              → Boczek wieprzowy bez kości ekstra VAC Auchan na wagę ok. 1 kg | score=100.0 | auto             | 2.098
+  borówka                             → Borówka Amerykańska  Owoce  Auchan 250 g           | score=100.0 | auto             | 5.196
+  borówki                             → Borówki amerykańska Owoce  Auchan 250 g            | score=100.0 | auto             | 5.516
+  brokuly                             → Brokuły różyczki Hortex 450 g                      | score=85.7  | auto             | 2.3067
+  brokuł                              → Brokuł 1 szt.                                      | score=100.0 | auto             | 1.198
+  brokuły                             → Brokuły różyczki Hortex 450 g                      | score=100.0 | auto             | 2.3067
+  brukselka                           → Brukselka mrożona Auchan 450 g                     | score=100.0 | auto             | 1.2778
+  brzoskwinia                         → Brzoskwinia                                        | score=100.0 | auto             | 2.0
+  brązowy cukier                      → Cukier trzcinowy Diamant 1 kg                      | score=100.0 | auto             | 0.938
+  brązowy ryż                         → Ryż brązowy długoziarnisty Auchan 4 x 100 g        | score=100.0 | auto             | 0.8225
+  bulion drobiowy                     → Bulion drobiowy bez oleju palmowego Auchan 100 g   | score=100.0 | auto             | 3.49
+  bulion warzywny                     → Winiary Bulion warzywny 160 g                      | score=100.0 | auto             | 4.8063
+  bulion wolowy                       → Winiary Bulion Drobiowy 160 g                      | score=100.0 | auto             | 4.8063
+  bulion wołowy                       → Winiary Bulion Drobiowy 160 g                      | score=100.0 | auto             | 4.8063
+  burak                               → Burak podłużny Warzywa Auchan 800 g                | score=100.0 | auto             | 0.6488
+  buraki                              → Buraki Warzywa Auchan 1 kg                         | score=100.0 | auto             | 0.299
+  bułka                               → Bułka poranna 65 g                                 | score=100.0 | auto             | 1.2769
+  bułka śniadaniowa                   → Bułka śniadaniowa z ziarnami 80 g                  | score=100.0 | auto             | 1.6875
+  cebula                              → Cebula Pewni Dobrego 1 kg                          | score=100.0 | auto             | 0.399
+  cebula biała                        → Cebula biała Warzywa Auchan na wagę ok. 500 g      | score=100.0 | auto             | 0.799
+  cebula czerwona                     → Cebula czerwona Warzywa Auchan na wagę ok. 500 g   | score=100.0 | auto             | 0.459
+  cebula granulowana                  → Cebula Pewni Dobrego 1 kg                          | score=100.0 | auto             | 0.399
+  cebula słodka                       → Cebula słodka tuba Warzywa Auchan 600 g            | score=100.0 | auto             | 1.9983
+  cebula w proszku                    → Cebula Pewni Dobrego 1 kg                          | score=100.0 | auto             | 0.399
+  cebula żółta                        → Cebula żółta 1 kg                                  | score=100.0 | auto             | 0.499
+  chili                               → Chili mieszanka przypraw Kotányi 35 g              | score=100.0 | auto             | 21.8286
+  chleb                               → Chleb pszenny Pewni Dobrego 300 g                  | score=100.0 | auto             | 1.3967
+  chorizo sojowe                      → Chorizo picante extra Pewni Dobrego 280 g          | score=100.0 | auto             | 6.7821
+  ciecierzyca                         → Ciecierzyca Auchan 400 g                           | score=100.0 | auto             | 1.2375
+  cukier                              → Cukier drobny Auchan 750 g                         | score=100.0 | auto             | 1.2653
+  cukier brązowy                      → Cukier drobny Auchan 750 g                         | score=100.0 | auto             | 1.2653
+  cukier kokosowy                     → Cukier drobny Auchan 750 g                         | score=100.0 | auto             | 1.2653
+  cukier palmowy                      → Cukier drobny Auchan 750 g                         | score=100.0 | auto             | 1.2653
+  cukier puder                        → Cukier puder Polski Cukier 500 g                   | score=100.0 | auto             | 1.498
+  cukier trzcinowy                    → Cukier trzcinowy Diamant 1 kg                      | score=100.0 | auto             | 0.938
+  cukinia                             → Cukinia                                            | score=100.0 | auto             | 1.3
+  curry                               → Kamis Curry 20 g                                   | score=100.0 | auto             | 12.45
+  curry w proszku                     → Kamis Curry 20 g                                   | score=100.0 | auto             | 12.45
+  cynamon                             → Cynamon mielony Auchan 15 g                        | score=100.0 | auto             | 8.6
+  cytryna                             → Cytryna 500 g                                      | score=100.0 | auto             | 0.998
+  czarna fasola                       → Fasola czarna   Dawtona 400 g                      | score=100.0 | auto             | 1.4083
+  czarny sezam                        → Sezam czarny Makar 500 g                           | score=100.0 | auto             | 2.85
+  czekolada                           → BIO Czekolada deserowa Pewni Dobrego 200 g         | score=100.0 | auto             | 7.995
+  czerwona cebula                     → Cebula czerwona Warzywa Auchan na wagę ok. 500 g   | score=100.0 | auto             | 0.459
+  czerwona kapusta                    → Kapusta czerwona Z Babcinej spiżarni 350 g         | score=100.0 | auto             | 2.54
+  czerwona papryka                    → Papryka czerwona                                   | score=100.0 | auto             | 1.9
+  czerwone winogrona                  → Winogrona Owoce  Auchan na wagę ok. 600 g          | score=100.0 | auto             | 1.999
+  czerwony ziemniak                   → Ziemniaki czerwone Warzywa Auchan 2 kg             | score=91.4  | auto             | 0.3995
+  czosnek                             → Czosnek 250 g                                      | score=100.0 | auto             | 3.196
+  czosnek granulowany                 → Czosnek granulowany Auchan 500 g                   | score=100.0 | auto             | 3.8
+  czosnek w proszku                   → Czosnek 250 g                                      | score=100.0 | auto             | 3.196
+  daktyl                              → Daktyle Medijule Jumbo Palma Deluxe 500 g          | score=92.3  | auto             | 6.438
+  daktyle                             → Daktyle Medijule Jumbo Palma Deluxe 500 g          | score=100.0 | auto             | 6.438
+  daktyle medjool                     → Daktyle Medijule Jumbo Palma Deluxe 500 g          | score=100.0 | auto             | 6.438
+  dodatki                             → Dodatki do herbatki Rajski Ogród Orzeszek 80 g     | score=100.0 | auto             | 17.9875
+  dorsz                               → Marinero Dorsz atlantycki polędwica opak. ok. 500 g | score=100.0 | auto             | 9.99
+  drożdże                             → Drożdże tradycyjne  Drożdże Babuni 100 g           | score=100.0 | auto             | 1.48
+  drożdże suszone                     → Bakello Drożdże suszone instant 8 g                | score=100.0 | auto             | 12.375
+  dynia                               → Dynia piżmowa                                      | score=100.0 | auto             | 0.6987
+  dynia kabocha                       → Dynia piżmowa                                      | score=100.0 | auto             | 0.6987
+  dynia letnia                        → Dynia piżmowa                                      | score=100.0 | auto             | 0.6987
+  dynia piżmowa                       → Dynia piżmowa                                      | score=100.0 | auto             | 0.6987
+  dynia spaghetti                     → Dynia piżmowa                                      | score=100.0 | auto             | 0.6987
+  dynia żółta                         → Dynia piżmowa                                      | score=100.0 | auto             | 0.6987
+  dziki ryż                           → Ryż długoziarnisty Sollana 1 kg                    | score=100.0 | auto             | 0.999
+  dżem morelowy                       → Dżem morelowy niskosłodzony Łowicz 280 g           | score=100.0 | auto             | 2.4571
+  erytrytol                           → Erytrytol Big Nature 1 kg                          | score=100.0 | auto             | 3.22
+  erytrytol pudrowy                   → Erytrytol Big Nature 1 kg                          | score=100.0 | auto             | 3.22
+  erytrytol w proszku                 → Erytrytol Big Nature 1 kg                          | score=100.0 | auto             | 3.22
+  fasola cannellini                   → Fasola Piękny Jaś  Cenos 400 g                     | score=100.0 | auto             | 2.1975
+  fasola czarna                       → Fasola czarna   Dawtona 400 g                      | score=100.0 | auto             | 1.4083
+  fasola czerwona                     → Fasola czerwona konserwowa Auchan 400 g            | score=100.0 | auto             | 1.2042
+  fasola pinto                        → Fasola Piękny Jaś  Cenos 400 g                     | score=100.0 | auto             | 2.1975
+  fasola refried                      → Fasola Piękny Jaś  Cenos 400 g                     | score=100.0 | auto             | 2.1975
+  fasola smażona                      → Fasola Piękny Jaś  Cenos 400 g                     | score=100.0 | auto             | 2.1975
+  fasolka szparagowa                  → BIO Fasolka szparagowa konserwowa  EkoWital 370 ml | score=100.0 | auto             | 3.3395
+  figi                                → Figi suszone Makar 500 g                           | score=100.0 | auto             | 4.5
+  filet z indyka                      → Kraina Wędlin Serdelki z filetem z indyka 300 g    | score=100.0 | auto             | 2.4967
+  filet z kurczaka                    → Kraina Mięs Filet z piersi kurczaka                | score=100.0 | auto             | 2.48
+  fioletowe ziemniaki                 → Ziemniaki sałatkowe Auchan 2 kg                    | score=100.0 | auto             | 0.2495
+  garam masala                        → Garam masala Kotányi 20 g                          | score=100.0 | auto             | 14.4
+  gałka muszkatołowa                  → Gałka muszkatołowa mielona Prymat 10 g             | score=100.0 | auto             | 15.8
+  goździki                            → Goździki mielone Kotányi 15 g                      | score=100.0 | auto             | 15.6
+  goździki mielone                    → Goździki mielone Kotányi 15 g                      | score=100.0 | auto             | 15.6
+  granat                              → Granat                                             | score=100.0 | auto             | 2.0
+  granola                             → Granola ChocoLove One Day More 400 g               | score=100.0 | auto             | 3.9533
+  groszek                             → Groszek konserwowy Auchan 400 g                    | score=100.0 | auto             | 1.1042
+  groszek cukrowy                     → Groszek cukrowy Auchan 450 g                       | score=100.0 | auto             | 2.2778
+  groszek zielony                     → Groszek zielony Hortex 450 g                       | score=100.0 | auto             | 1.82
+  gruszka                             → Gruszka Owoce  Auchan 1 kg                         | score=100.0 | auto             | 0.699
+  grzyby                              → Grzyby Shitake   Świeże Grzyby SPGJ 200 g          | score=100.0 | auto             | 6.49
+  grzyby portobello                   → Grzyby Shitake   Świeże Grzyby SPGJ 200 g          | score=100.0 | auto             | 6.49
+  grzyby shiitake                     → Grzyby Shiitake całe suszone House of Asia 30 g    | score=100.0 | auto             | 23.9333
+  halloumi                            → Elios Ser halloumi 225 g                           | score=100.0 | auto             | 5.24
+  harissa                             → Harissa mieszanka przypraw Kotányi 20 g            | score=100.0 | auto             | 11.7
+  imbir                               → Imbir korzeń Owoce  Auchan na wagę ok. 100 g       | score=100.0 | auto             | 2.189
+  imbir mielony                       → Imbir mielony Prymat 15 g                          | score=100.0 | auto             | 10.5333
+  indyk                               → Kraina Wędlin Serdelki z filetem z indyka 300 g    | score=100.0 | auto             | 2.4967
+  jabłko                              → Jabłko polskie 1,5 kg                              | score=100.0 | auto             | 0.3993
+  jagody                              → Jagody leśne  Hortex 280 g                         | score=100.0 | auto             | 5.9571
+  jajka                               → Jaja ekologiczne Pewni Dobrego 10 sztuk            | score=88.9  | auto             | —
+  jarmuż                              → Vital Fresh Jarmuż 200 g                           | score=100.0 | auto             | 3.495
+  jeżyna                              → Jeżyna mrożona Auchan 350 g                        | score=100.0 | auto             | 3.2829
+  jeżyny                              → Jeżyny Owoce  Auchan 125 g                         | score=100.0 | auto             | 12.792
+  jogurt grecki                       → Jogurt naturalny     Auchan 400 g                  | score=100.0 | auto             | 0.6225
+  jogurt naturalny                    → Jogurt naturalny     Auchan 400 g                  | score=100.0 | auto             | 0.6225
+  jogurt roslinny                     → Jogurt naturalny     Auchan 400 g                  | score=100.0 | auto             | 0.6225
+  jogurt roślinny                     → Jogurt naturalny     Auchan 400 g                  | score=100.0 | auto             | 0.6225
+  kakao                               → Bakello Kakao extra ciemne 200 g                   | score=100.0 | auto             | 5.495
+  kalafior                            → Kalafior                                           | score=100.0 | auto             | 0.9987
+  kalafior ryżowy                     → Kalafior                                           | score=100.0 | auto             | 0.9987
+  kapusta                             → Kapusta Kimchi Dongwon 160 g                       | score=100.0 | auto             | 7.4938
+  kapusta biała                       → Kapusta biała                                      | score=100.0 | auto             | 0.399
+  kapusta czerwona                    → Kapusta czerwona Z Babcinej spiżarni 350 g         | score=100.0 | auto             | 2.54
+  kapusta fioletowa                   → Kapusta Kimchi Dongwon 160 g                       | score=100.0 | auto             | 7.4938
+  kapusta i marchew                   → Marchew                                            | score=100.0 | auto             | 0.4
+  kapusta pekińska                    → Kapusta Pekińska Warzywa Auchan na wagę ok. 1 kg   | score=100.0 | auto             | 0.449
+  karkówka wołowa                     → Karkówka wieprzowa bez kości rasy Puławskiej MAP Pewni Dobrego na wagę ok. 600 g | score=100.0 | auto             | 3.599
+  kawa                                → Kawa mrożona Hochwald 250 ml                       | score=100.0 | auto             | 2.756
+  ketchup                             → Kotlin Ketchup łagodny 450 g                       | score=100.0 | auto             | 1.4333
+  kiełbasa                            → Kiełbasa Krakowska Spichlerz Rusiecki 280 g        | score=100.0 | auto             | 3.4964
+  kiełbasa andouille                  → Kiełbasa Krakowska Spichlerz Rusiecki 280 g        | score=100.0 | auto             | 3.4964
+  kiełbasa wegetariańska              → Kiełbasa Krakowska Spichlerz Rusiecki 280 g        | score=100.0 | auto             | 3.4964
+  kiełbasa wieprzowa śniadaniowa      → Śniadaniowa klasyczna Bielmar 450 g                | score=100.0 | auto             | 1.1978
+  kiełbasa wędzona                    → Kiełbasa Krakowska Spichlerz Rusiecki 280 g        | score=100.0 | auto             | 3.4964
+  kiełbasa włoska                     → Kiełbasa Krakowska Spichlerz Rusiecki 280 g        | score=100.0 | auto             | 3.4964
+  kiełbasa z indyka                   → Kiełbasa Krakowska Spichlerz Rusiecki 280 g        | score=100.0 | auto             | 3.4964
+  kiełbasa z kurczaka                 → Kiełbasa Krakowska Spichlerz Rusiecki 280 g        | score=100.0 | auto             | 3.4964
+  kiełbasa śniadaniowa                → Śniadaniowa klasyczna Bielmar 450 g                | score=100.0 | auto             | 1.1978
+  kiełbaski śniadaniowe               → Śniadaniowe z Łukowa 63% Lumiko 270 g              | score=100.0 | auto             | 1.4407
+  kiełki fasoli                       → Kiełki fasoli Mung w zalewie Diamond 330 g         | score=100.0 | auto             | 5.6514
+  kimchi                              → Kimchi Runoland 300 g                              | score=100.0 | auto             | 3.5967
+  kiwi                                → Kiwi 1 szt.                                        | score=100.0 | auto             | —
+  kmin rzymski                        → Kmin rzymski mielony Kotányi 15 g                  | score=100.0 | auto             | 15.6
+  kmin rzymski mielony                → Kmin rzymski mielony Kotányi 15 g                  | score=100.0 | auto             | 15.6
+  kokos                               → Kokos w łupinie Owoce  Auchan na wagę ok. 400 g    | score=100.0 | auto             | 1.029
+  kolendra                            → Kolendra Auchan sztuka                             | score=100.0 | auto             | 2.796
+  kolendra mielona                    → Kolendra Auchan sztuka                             | score=100.0 | auto             | 2.796
+  komosa ryzowa                       → Quinoa Komosa Ryżowa Intenson 250 g                | score=92.3  | auto             | 3.796
+  komosa ryżowa                       → Quinoa Komosa Ryżowa Intenson 250 g                | score=100.0 | auto             | 3.796
+  koncentrat pomidorowy               → Dawtona Koncentrat pomidorowy 190 g                | score=100.0 | auto             | 1.8158
+  koperek                             → Kamis Koperek 6 g                                  | score=100.0 | auto             | 41.5
+  krakersy                            → Top Krakersy solone mix 90 g                       | score=100.0 | auto             | 2.1
+  krewetki                            → Krewetki koktajlowe blanszowane Auchan 400 g       | score=100.0 | auto             | 8.7475
+  krojone pomidory                    → Pomidory malinowe polskie 500 g                    | score=100.0 | auto             | 2.598
+  kukurydza                           → Kukurydza konserwowa Auchan 400 g                  | score=100.0 | auto             | 1.4955
+  kukurydza mini                      → Kukurydza konserwowa Auchan 400 g                  | score=100.0 | auto             | 1.4955
+  kukurydza słodka                    → Kukurydza konserwowa słodka Dawtona 400 g          | score=100.0 | auto             | 2.1727
+  kur-kuma                            → Kurkuma korzeń Owoce  Auchan na wagę ok. 100 g     | score=93.3  | auto             | 5.179
+  kurczak                             → Kraina Mięs Filet z piersi kurczaka                | score=100.0 | auto             | 2.48
+  kurczak fajita                      → Kraina Mięs Select Kurczak farmerski porcja rosołowa z kurczaka kg | score=100.0 | auto             | 0.9983
+  kurkuma                             → Kurkuma korzeń Owoce  Auchan na wagę ok. 100 g     | score=100.0 | auto             | 5.179
+  limonka                             → Limonka Owoce  Auchan na wagę ok. 300 g            | score=100.0 | auto             | 1.499
+  liofilizowane truskawki             → Liofilizowane truskawki całe  Garden Tree 45 g     | score=100.0 | auto             | 42.2
+  majonez                             → Winiary Majonez lekki 300 ml                       | score=100.0 | auto             | 2.4967
+  mak                                 → Mak niebieski Auchan 500 g                         | score=100.0 | auto             | 2.298
+  makaron                             → Makaron Pipe Rigate Auchan 500 g                   | score=100.0 | auto             | 0.93
+  makaron angel hair                  → Makaron Pipe Rigate Auchan 500 g                   | score=100.0 | auto             | 0.93
+  makaron bezglutenowy                → Tonnarelli makaron bezglutenowy Incola 250 g       | score=100.0 | auto             | 4.156
+  makaron cavatappi                   → Makaron cavatappi z pszenicy durum Auchan 500 g    | score=100.0 | auto             | 0.838
+  makaron fusilli z ciecierzycy       → Makaron fusilli   Auchan 500 g                     | score=100.0 | auto             | 0.93
+  makaron jajeczny                    → Makaron jajeczny Agnesi 250 g                      | score=100.0 | auto             | 3.796
+  makaron kokardki                    → Makaron kokardki Auchan 500 g                      | score=100.0 | auto             | 0.93
+  makaron orzo                        → Makaron orzo medium Primo Gusto 500 g              | score=100.0 | auto             | 1.256
+  makaron palmini                     → Makaron Pipe Rigate Auchan 500 g                   | score=100.0 | auto             | 0.93
+  makaron penne                       → Makaron penne Podravka 500 g                       | score=100.0 | auto             | 1.196
+  makaron quinoa                      → Makaron Pipe Rigate Auchan 500 g                   | score=100.0 | auto             | 0.93
+  makaron ramen                       → BIO Makaron ramen  BioAsia 250 g                   | score=100.0 | auto             | 4.156
+  makaron rotini                      → Makaron Pipe Rigate Auchan 500 g                   | score=100.0 | auto             | 0.93
+  makaron ryżowy                      → Makaron ryżowy Vermicelli House of Asia 200 g      | score=100.0 | auto             | 3.07
+  makaron ryżowy brązowy              → Makaron ryżowy Vermicelli House of Asia 200 g      | score=100.0 | auto             | 3.07
+  makaron soba                        → Makaron soba Green Label 300 g                     | score=100.0 | auto             | 2.5967
+  makaron z ciecierzycy               → Makaron z ciecierzycy świderki Novelle 250 g       | score=100.0 | auto             | 2.472
+  makaron z cukinii                   → Makaron Pipe Rigate Auchan 500 g                   | score=100.0 | auto             | 0.93
+  makaron z serem                     → Makaron Pipe Rigate Auchan 500 g                   | score=100.0 | auto             | 0.93
+  makaron łokieć                      → Makaron Pipe Rigate Auchan 500 g                   | score=100.0 | auto             | 0.93
+  maliny                              → Maliny Owoce  Auchan 125 g                         | score=100.0 | auto             | 8.312
+  mandarynka                          → Mandarynka                                         | score=100.0 | auto             | 1.0
+  mango                               → Mango Owoce  Auchan sztuka                         | score=100.0 | auto             | 5.99
+  marchew                             → Marchew                                            | score=100.0 | auto             | 0.4
+  marmolada pomarańczowa              → Marmolada pomarańczowa Auchan 360 g                | score=100.0 | auto             | 1.8028
+  masło                               → Masło ekstra Łaciate 200 g                         | score=100.0 | auto             | 3.445
+  masło kokosowe                      → Masło ekstra Łaciate 200 g                         | score=100.0 | auto             | 3.445
+  masło migdałowe                     → Masło ekstra Łaciate 200 g                         | score=100.0 | auto             | 3.445
+  masło orzechowe                     → Go Vege Masło orzechowe smooth 945 g               | score=100.0 | auto             | 2.2212
+  masło roślinne                      → Masło ekstra Łaciate 200 g                         | score=100.0 | auto             | 3.445
+  maślanka w proszku                  → Maślanka naturalna            Pewni Dobrego 1 kg   | score=100.0 | auto             | 0.398
+  melasa                              → Melasa z owoców morwy Koska 380 g                  | score=100.0 | auto             | 4.9974
+  melon                               → Melon Galia                                        | score=100.0 | auto             | 1.2992
+  mielona kiełbasa                    → Kiełbasa Krakowska Spichlerz Rusiecki 280 g        | score=100.0 | auto             | 3.4964
+  mielona wieprzowina                 → Mięso mielone wieprzowe z szynki Pewni Dobrego 400 g | score=100.0 | auto             | 3.2475
+  mielona woowina                     → Mięso mielone wołowe Łuków 400 g                   | score=96.8  | auto             | 5.7475
+  mielona wołowina                    → Mięso mielone wołowe Łuków 400 g                   | score=100.0 | auto             | 5.7475
+  mielone siemię lniane               → Siemię lniane Auchan 1 kg                          | score=100.0 | auto             | 0.99
+  mielony indyk                       → Skrzydło z indyka Auchan na wagę ok. 600g          | score=100.0 | auto             | 1.59
+  mielony kurczak                     → Mięso mielone z nogi kurczaka Auchan 400 g         | score=100.0 | auto             | 3.6475
+  mieszanka coleslaw                  → Surówka colesław łagodna Auchan 300 g              | score=100.0 | auto             | 1.1967
+  mieszanka do coleslaw               → BIO Mieszanka Studencka  FARMER'S SNACK 150 g      | score=100.0 | auto             | 15.7267
+  mieszanka do colesław               → BIO Mieszanka Studencka  FARMER'S SNACK 150 g      | score=100.0 | auto             | 15.7267
+  mieszanka do colesława              → BIO Mieszanka Studencka  FARMER'S SNACK 150 g      | score=100.0 | auto             | 15.7267
+  mieszanka do naleśników             → BIO Mieszanka Studencka  FARMER'S SNACK 150 g      | score=100.0 | auto             | 15.7267
+  mieszanka kapusty i marchwi         → BIO Mieszanka Studencka  FARMER'S SNACK 150 g      | score=100.0 | auto             | 15.7267
+  mieszanka owoców leśnych            → BIO Mieszanka Studencka  FARMER'S SNACK 150 g      | score=100.0 | auto             | 15.7267
+  mieszanka sałat                     → Mix sałat z roszponką Warzywa Auchan 120 g         | score=100.0 | auto             | 4.075
+  mieszanka suszonych owoców          → Mieszanka owoców suszonych Helio 1 kg              | score=100.0 | auto             | 3.9
+  mieszanka warzyw                    → Mieszanka warzywna meksykańska Bonduelle 150 g     | score=100.0 | auto             | 3.5308
+  migdał                              → Migdały łuskane Auchan 500 g                       | score=92.3  | auto             | 4.798
+  migdały                             → Migdały łuskane Auchan 500 g                       | score=100.0 | auto             | 4.798
+  migdały w płatkach                  → Migdały łuskane Auchan 500 g                       | score=100.0 | auto             | 4.798
+  miód                                → Miód wielokwiatowy Huzar 1 kg                      | score=100.0 | auto             | 2.749
+  mięta                               → Mięta Auchan sztuka                                | score=100.0 | auto             | 7.29
+  mleko                               → Mleko UHT 3,2% Auchan 1l                           | score=100.0 | auto             | 0.328
+  mleko kokosowe                      → Mleko kokosowe House of Asia 400 ml                | score=100.0 | auto             | 1.57
+  mleko kokosowe w proszku            → Mleko kokosowe House of Asia 400 ml                | score=100.0 | auto             | 1.57
+  mleko migdałowe                     → Mleko UHT 3,2% Auchan 1l                           | score=100.0 | auto             | 0.328
+  mleko owsiane                       → Mleko UHT 3,2% Auchan 1l                           | score=100.0 | auto             | 0.328
+  mleko roślinne                      → Mleko UHT 3,2% Auchan 1l                           | score=100.0 | auto             | 0.328
+  morele suszone                      → Morele suszone Auchan 200 g                        | score=100.0 | auto             | 5.495
+  mozzarella                          → Mozzarella OSM Skierniewice 250 g                  | score=100.0 | auto             | 6.196
+  mus jabłkowy                        → Mus jabłkowy  Pewni Dobrego 700 g                  | score=100.0 | auto             | 1.1129
+  musztarda                           → Kamis Musztarda kremska 185 g                      | score=100.0 | auto             | 1.9946
+  musztarda dijon                     → Kamis Musztarda kremska 185 g                      | score=100.0 | auto             | 1.9946
+  musztarda dyniowa                   → Kamis Musztarda kremska 185 g                      | score=100.0 | auto             | 1.9946
+  musztarda miodowa                   → Kamis Musztarda kremska 185 g                      | score=100.0 | auto             | 1.9946
+  musztarda ostra                     → Kamis Musztarda kremska 185 g                      | score=100.0 | auto             | 1.9946
+  musztarda żółta                     → Kamis Musztarda kremska 185 g                      | score=100.0 | auto             | 1.9946
+  mąka                                → Mąka La Pasta 100%   Molino Casillo  1 kg          | score=100.0 | auto             | 0.819
+  mąka bezglutenowa                   → Mąka ryżowa bezglutenowa SemCo 500 g               | score=90.3  | auto             | 1.358
+  mąka bezglutenowa uniwersalna       → Mieszanka bezglutenowa ekstra uniwersalna Bezgluten 500 g | score=96.4  | auto             | 3.318
+  mąka maranta                        → Mąka La Pasta 100%   Molino Casillo  1 kg          | score=100.0 | auto             | 0.819
+  mąka migdałowa                      → BIO Mąka migdałowa Bio Planet 100 g                | score=100.0 | auto             | 16.59
+  mąka owsiana                        → Mąka owsiana   Młyn Niedźwiady 1 kg                | score=100.0 | auto             | 0.719
+  młode ziemniaki                     → Ziemniaki sałatkowe Auchan 2 kg                    | score=100.0 | auto             | 0.2495
+  nasiona chia                        → Nasiona chia KRESTO 100 g                          | score=100.0 | auto             | 5.99
+  nasiona konopi                      → BIO Nasiona konopii łuskane NaturaVena 200 g       | score=100.0 | auto             | 11.495
+  nasiona sezamu                      → Nasiona sezamu białego Thai Pride 100 g            | score=100.0 | auto             | 6.59
+  natka pietruszki                    → Natka pietruszki  Auchan 8 g                       | score=100.0 | auto             | 16.125
+  nerkowce                            → Nerkowce KRESTO 200 g                              | score=100.0 | auto             | 11.495
+  ocet balsamiczny                    → Ocet balsamiczny Gino Toschi 250 ml                | score=100.0 | auto             | 4.556
+  ocet jabłkowy                       → Ocet jabłkowy 6% Auchan 750 ml                     | score=100.0 | auto             | 0.7987
+  ocet ryzowy                         → Ocet ryżowy 3%  Diamond 610 ml                     | score=90.9  | auto             | 3.1787
+  ocet ryżowy                         → Ocet ryżowy 3%  Diamond 610 ml                     | score=100.0 | auto             | 3.1787
+  ocet spirytusowy                    → Ocet spirytusowy 10% kwasowości Auchan 500 ml      | score=100.0 | auto             | 0.358
+  ocet winny biały                    → Ocet winny biały Monini 500 ml                     | score=100.0 | auto             | 3.398
+  ocet winny czerwony                 → Ocet winny z czerwonego wina. 6% kwasowości Kamis 250 ml | score=89.5  | auto             | 3.672
+  odżywka białkowa                    → Odżywka białkowa Mass Up wanilia ACTIVLAB 1,2 kg   | score=100.0 | auto             | 4.165
+  odżywka białkowa czekoladowa        → Odżywka białkowa Mass Up wanilia ACTIVLAB 1,2 kg   | score=100.0 | auto             | 4.165
+  odżywka białkowa serwatkowa         → Odżywka białkowa Mass Up wanilia ACTIVLAB 1,2 kg   | score=100.0 | auto             | 4.165
+  odżywka białkowa waniliowa          → Odżywka białkowa Mass Up wanilia ACTIVLAB 1,2 kg   | score=100.0 | auto             | 4.165
+  ogórek                              → BIO Ogórek długi Warzywa Auchan sztuka             | score=100.0 | auto             | 5.79
+  ogórek kiszony                      → Ogórki kiszone Auchan 500 g                        | score=85.7  | auto             | 1.458
+  ogórki kiszone                      → Ogórki kiszone Auchan 500 g                        | score=100.0 | auto             | 1.458
+  olej                                → Olej rzepakowy Auchan 1 l                          | score=100.0 | auto             | 0.459
+  olej rzepakowy                      → Olej rzepakowy Auchan 1 l                          | score=100.0 | auto             | 0.459
+  olej sezamowy                       → Olej sezamowy nierafinowany Auchan Collection  250 ml | score=100.0 | auto             | 5.996
+  olej w sprayu z awokado             → Olej z awokado spray Fratelli Mantova 200 ml       | score=93.0  | auto             | 14.995
+  olej z awokado                      → Olej z awokado tłoczony na zimno Auchan Collection  250 ml | score=100.0 | auto             | 6.796
+  olej z pestek dyni                  → Olej z pestek dyni z witaminą D tłoczony na zimno Oleofarm 250 ml | score=100.0 | auto             | 10.596
+  olej z pestek winogron              → Olej z pestek winogron Monini 500 ml               | score=100.0 | auto             | 3.896
+  oliwa z oliwek                      → Oliwa z oliwek Drago Chef Coppini 1 l              | score=100.0 | auto             | 3.399
+  oliwki                              → Oliwki sycylijskie Nocellara bez pestek San Romano 150 g | score=100.0 | auto             | 8.6533
+  oliwki czarne                       → Oliwki czarne drylowane Figaro 340 g               | score=100.0 | auto             | 6.8
+  oliwki zielone                      → Oliwki zielone nadziewane migdałami Athina 170 g   | score=100.0 | auto             | 6.6263
+  oregano                             → BIO Oregano  Pewni Dobrego sztuka                  | score=100.0 | auto             | 7.99
+  oregano suszone                     → Oregano suszone Auchan 10 g                        | score=100.0 | auto             | 12.9
+  orzech laskowy                      → Orzechy laskowe łuskane Auchan 100g                | score=89.7  | auto             | 7.99
+  orzechy                             → Orzechy nerkowca Makar 1 kg                        | score=100.0 | auto             | 6.31
+  orzechy makadamia                   → BIO Orzechy makadamia  BioLife 100 g               | score=100.0 | auto             | 20.59
+  orzechy nerkowca                    → Orzechy nerkowca Makar 1 kg                        | score=100.0 | auto             | 6.31
+  orzechy pekan                       → BIO Orzechy pekan    BioLife 100 g                 | score=100.0 | auto             | 21.59
+  orzechy włoskie                     → Orzechy włoskie łuskane Makar 1 kg                 | score=100.0 | auto             | 4.84
+  orzeszki piniowe                    → Orzeszki pini Auchan 50 g                          | score=100.0 | auto             | 25.98
+  orzeszki ziemne                     → BIO Orzeszki ziemne   Bio Planet 350 g             | score=100.0 | auto             | 4.1114
+  papier ryżowy                       → Papier ryżowy z tapioką Ricefield 300 g            | score=100.0 | auto             | 4.7967
+  papryczki pepperoncini              → Papryczki peperoni ostre mix Warzywa Auchan 150 g  | score=90.0  | auto             | 9.1933
+  papryka                             → BIO  Papryka Palermo  Warzywa Auchan 180 g         | score=100.0 | auto             | 7.2167
+  papryka czerwona                    → Papryka czerwona                                   | score=100.0 | auto             | 1.9
+  papryka czerwona pieczona           → Papryka czerwona                                   | score=100.0 | auto             | 1.9
+  papryka ostra                       → Papryka ostra mielona Auchan 500 g                 | score=100.0 | auto             | 3.6
+  papryka poblano                     → BIO  Papryka Palermo  Warzywa Auchan 180 g         | score=100.0 | auto             | 7.2167
+  papryka słodka                      → Papryka wędzona słodka Kotányi 22 g                | score=100.0 | auto             | 10.6364
+  papryka w proszku                   → BIO  Papryka Palermo  Warzywa Auchan 180 g         | score=100.0 | auto             | 7.2167
+  papryka wędzona                     → BIO  Papryka Palermo  Warzywa Auchan 180 g         | score=100.0 | auto             | 7.2167
+  papryka zielona                     → Papryka zielona Warzywa Auchan na wagę ok. 500 g   | score=100.0 | auto             | 1.699
+  pasta chili                         → Pasta Gochujang   Sempio 170 g                     | score=100.0 | auto             | 4.9353
+  pałki z kurczaka                    → Kraina Mięs Filet z piersi kurczaka                | score=85.7  | auto             | 2.48
+  pestki dyni                         → Pestki dyni Auchan 500 g                           | score=100.0 | auto             | 3.198
+  pesto                               → Go Vege Pesto z tofu 190 g                         | score=100.0 | auto             | 3.6789
+  pesto rukolowe                      → Go Vege Pesto z tofu 190 g                         | score=100.0 | auto             | 3.6789
+  pieczarka                           → Pieczarka mini Warzywa Auchan 200 g                | score=100.0 | auto             | 2.795
+  pieczarki                           → Pieczarki świeże   Warzywa Auchan na wagę ok. 300 g | score=100.0 | auto             | 1.378
+  pieczarki cremini                   → Pieczarki świeże   Warzywa Auchan na wagę ok. 300 g | score=100.0 | auto             | 1.378
+  pieczarki portobello                → Pieczarki świeże   Warzywa Auchan na wagę ok. 300 g | score=100.0 | auto             | 1.378
+  pieprz                              → Pieprz czosnkowy Kamis 20 g                        | score=100.0 | auto             | 12.4
+  pieprz cayenne                      → Pieprz cayenne mielony  Kotányi 25 g               | score=100.0 | auto             | 11.7
+  pieprz cytrynowy                    → Pieprz cytrynowy mielony Prymat 20 g               | score=100.0 | auto             | 8.65
+  pieprz czarny                       → Pieprz czarny mielony Auchan 500 g                 | score=100.0 | auto             | 4.6
+  pierś z indyka                      → Kraina Wędlin Serdelki z filetem z indyka 300 g    | score=100.0 | auto             | 2.4967
+  pietruszka                          → Pietruszka Warzywa Auchan 500 g                    | score=100.0 | auto             | 1.598
+  pistacje                            → Pistacje prażone niesolone Auchan 250 g            | score=100.0 | auto             | 9.596
+  pomarańcza krwista                  → BIO Pomarańcza Owoce  Auchan 1 kg                  | score=100.0 | auto             | 1.299
+  pomidor                             → Pomidor malinowy XL Warzywa Auchan na wagę ok 500g | score=100.0 | auto             | 1.599
+  pomidor koktajlowy                  → Pomidor koktajlowy 400 g                           | score=100.0 | auto             | 2.9975
+  pomidor krojony                     → Pomidor malinowy XL Warzywa Auchan na wagę ok 500g | score=100.0 | auto             | 1.599
+  pomidor rzymski                     → Pomidor malinowy XL Warzywa Auchan na wagę ok 500g | score=100.0 | auto             | 1.599
+  pomidor suszony                     → Pomidor malinowy XL Warzywa Auchan na wagę ok 500g | score=100.0 | auto             | 1.599
+  pomidorek koktajlowy                → Pomidor koktajlowy 400 g                           | score=94.7  | auto             | 2.9975
+  pomidorki koktajlowe                → Pomidor koktajlowy 400 g                           | score=89.5  | auto             | 2.9975
+  pomidory krojone                    → Pomidory malinowe polskie 500 g                    | score=100.0 | auto             | 2.598
+  pomidory kruszone                   → Pomidory malinowe polskie 500 g                    | score=100.0 | auto             | 2.598
+  pomidory prażone                    → Pomidory malinowe polskie 500 g                    | score=100.0 | auto             | 2.598
+  pomidory prażone z chili            → Pomidory malinowe polskie 500 g                    | score=100.0 | auto             | 2.598
+  pomidory suszone                    → BIO Pomidory suszone Ekologiko 80 g                | score=100.0 | auto             | 8.2375
+  por                                 → Por Warzywa Auchan na wagę ok. 400 g               | score=100.0 | auto             | 0.799
+  przyprawa                           → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | score=100.0 | auto             | 6.392
+  przyprawa cajun                     → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | score=100.0 | auto             | 6.392
+  przyprawa chili                     → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | score=100.0 | auto             | 6.392
+  przyprawa cytrynowo-ziołowa         → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | score=100.0 | auto             | 6.392
+  przyprawa do bajgla                 → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | score=100.0 | auto             | 6.392
+  przyprawa do bulionu drobiowego     → BIO Ekologiczna przyprawa do ryb To Naturalne 20 g | score=93.3  | auto             | 17.45
+  przyprawa do drobiu                 → BIO Ekologiczna przyprawa do drobiu To Naturalne 20 g | score=100.0 | auto             | 17.45
+  przyprawa do dyni                   → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | score=100.0 | auto             | 6.392
+  przyprawa do sałatek włoska         → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | score=100.0 | auto             | 6.392
+  przyprawa do taco                   → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | score=100.0 | auto             | 6.392
+  przyprawa fajita                    → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | score=100.0 | auto             | 6.392
+  przyprawa kajunska                  → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | score=100.0 | auto             | 6.392
+  przyprawa pięciu smaków             → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | score=100.0 | auto             | 6.392
+  przyprawa ranch                     → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | score=100.0 | auto             | 6.392
+  przyprawa taco                      → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | score=100.0 | auto             | 6.392
+  przyprawa włoska                    → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | score=100.0 | auto             | 6.392
+  płatki chex                         → Płatki Chocapic XXL Nestle  600 g                  | score=100.0 | auto             | 3.065
+  płatki chili                        → Płatki Chocapic XXL Nestle  600 g                  | score=100.0 | auto             | 3.065
+  płatki drożdżowe                    → BIO Płatki drożdżowe BioLife 100 g                 | score=100.0 | auto             | 28.49
+  płatki owsiane                      → Płatki owsiane Auchan 400 g                        | score=100.0 | auto             | 0.6475
+  ricotta                             → Ricotta Auchan 250 g                               | score=100.0 | auto             | 2.38
+  rodzynki                            → Bakallino Rodzynki sułtańskie 400 g                | score=100.0 | auto             | 2.1225
+  rukola                              → Rukola Warzywa Auchan 150 g                        | score=100.0 | auto             | 3.66
+  ryż                                 → Ryż długoziarnisty Sollana 1 kg                    | score=100.0 | auto             | 0.999
+  ryż basmati                         → Plony Natury Ryż basmati długoziarnisty 400 g      | score=100.0 | auto             | 1.2475
+  ryż biały                           → Ryż biały długoziarnisty Auchan 500 g              | score=100.0 | auto             | 0.656
+  ryż biały długoziarnisty            → Ryż biały długoziarnisty Auchan 500 g              | score=100.0 | auto             | 0.656
+  ryż brązowy                         → Ryż brązowy długoziarnisty Auchan 4 x 100 g        | score=100.0 | auto             | 0.8225
+  ryż brązowy błyskawiczny            → Ryż brązowy długoziarnisty Auchan 4 x 100 g        | score=100.0 | auto             | 0.8225
+  ryż jaśminowy                       → Ryż jaśminowy Auchan 4 x 100 g                     | score=100.0 | auto             | 0.8225
+  ryż pełnoziarnisty i komosa ryżowa  → Quinoa Komosa Ryżowa Intenson 250 g                | score=100.0 | auto             | 3.796
+  rzodkiewka                          → Rzodkiewka pęczek                                  | score=100.0 | auto             | —
+  salami                              → Salami z pomidorami i bazylią Serenada 135 g       | score=100.0 | auto             | 4.7259
+  sałata                              → Sałata Pak Choi Warzywa Auchan sztuka              | score=100.0 | auto             | 9.19
+  sałata masłowa                      → Sałata masłowa Warzywa Auchan 1 sztuka             | score=100.0 | auto             | 3.99
+  sałata rzymska                      → Sałata rzymska               Warzywa Auchan 1sztuka | score=100.0 | auto             | 6.99
+  seler                               → Seler korzeń Warzywa Auchan na wagę ok. 800 g      | score=100.0 | auto             | 0.499
+  seler naciowy                       → BIO Seler naciowy  Naturally Organic 400 g         | score=100.0 | auto             | 2.245
+  ser                                 → Ser Mozzarella   Jager 125 g                       | score=100.0 | auto             | 2.68
+  ser feta                            → Ser Mozzarella   Jager 125 g                       | score=100.0 | auto             | 2.68
+  ser gruyere                         → Ser Gruyere dojrzewający twardy EntreMont 200 g    | score=100.0 | auto             | 12.49
+  ser halloumi                        → Elios Ser halloumi 225 g                           | score=100.0 | auto             | 5.24
+  ser kozi                            → Ser sałatkowy kozi Danmis 160 g                    | score=100.0 | auto             | 8.925
+  ser pleśniowy                       → Ser pleśniowy Złocisty Lazur 100 g                 | score=100.0 | auto             | 5.88
+  ser ricotta                         → Ser Ricotta Pecorina    Auchan na wagę ok. 130 g   | score=100.0 | auto             | 4.79
+  ser ricotta roślinny                → Ricotta Auchan 250 g                               | score=100.0 | auto             | 2.38
+  ser w kawałku                       → Ser Mimolette w kawałku Temar na wagę ok. 200 g    | score=91.7  | auto             | 6.79
+  ser wegański                        → Ser wegański kremowy cheddar bez laktozy Violife 150 g | score=100.0 | auto             | 8.26
+  serca karczochów                    → Karczochy krojone w ziołach Antico Casale 455 /285 g | score=100.0 | auto             | 7.8912
+  serce karczocha                     → Karczochy krojone w ziołach Antico Casale 455 /285 g | score=100.0 | auto             | 7.8912
+  sezam                               → Sezam Bakal 500 g                                  | score=100.0 | auto             | 3.358
+  siemię lniane                       → Siemię lniane Auchan 1 kg                          | score=100.0 | auto             | 0.99
+  siemię lniane mielone               → Siemię lniane Auchan 1 kg                          | score=100.0 | auto             | 0.99
+  skrobia kukurydziana                → BIO Ekologiczna skrobia kukurydziana NaturaVena 250 g | score=100.0 | auto             | 3.916
+  skrzydełko z kurczaka               → Piwoszki skrzydełka z kurczaka Morliny 900 g       | score=95.2  | auto             | 2.8767
+  skórka z cytryny                    → Cytryny Owoce  Auchan 1 kg                         | score=100.0 | auto             | 1.699
+  smietana                            → Smietana 18% ekstra kremowa Zott 330 g             | score=100.0 | auto             | 1.603
+  soczewica                           → Soczewica konserwowa Rolnik 400 g                  | score=100.0 | auto             | 1.5375
+  soczewica czerwona                  → Plony Natury Soczewica czerwona 500 g              | score=100.0 | auto             | 0.998
+  sok z cytryny                       → Sok z cytryny Limmi 200 ml                         | score=100.0 | auto             | 3.14
+  sok z limonki                       → Sok z limonki z soku zagęszczonego House of Asia 250 ml | score=100.0 | auto             | 2.696
+  sos                                 → Sos sałatkowy Tzatziki Kotányi 20 g                | score=100.0 | auto             | 9.4
+  sos BBQ                             → Sos sałatkowy Tzatziki Kotányi 20 g                | score=100.0 | auto             | 9.4
+  sos adobo                           → Sos sałatkowy Tzatziki Kotányi 20 g                | score=100.0 | auto             | 9.4
+  sos bbq                             → Sos sałatkowy Tzatziki Kotányi 20 g                | score=100.0 | auto             | 9.4
+  sos czosnkowy do makaronu           → Sos sałatkowy czosnkowy typ Cezar Prymat 9 g       | score=90.3  | auto             | 10.8889
+  sos do makaronu                     → Mutti Sos do makaronu Arrabbiata z papryczkami chili 400 g | score=100.0 | auto             | 2.9975
+  sos grecki                          → Sos sałatkowy grecki  Knorr 9 g                    | score=100.0 | auto             | 16.0
+  sos ostry                           → Sos sałatkowy Tzatziki Kotányi 20 g                | score=100.0 | auto             | 9.4
+  sos pomidorowy                      → Sos pomidorowy Winiary 34 g                        | score=100.0 | auto             | 8.7576
+  sos pomidorowy do makaronu          → Sos pomidorowy Winiary 34 g                        | score=100.0 | auto             | 8.7576
+  sos pomidorowy do pizzy             → Sos pomidorowy Winiary 34 g                        | score=100.0 | auto             | 8.7576
+  sos ranch                           → Sos sałatkowy Tzatziki Kotányi 20 g                | score=100.0 | auto             | 9.4
+  sos rybny                           → Sos sałatkowy Tzatziki Kotányi 20 g                | score=100.0 | auto             | 9.4
+  stewia                              → Stevia słodzik pochodzenia naturalnego z inuliną Zielony listek 140 g | score=100.0 | auto             | 8.9214
+  suszone daktyle bez pestek          → BIO Daktyle suszone bez pestek Auchan 175 g        | score=100.0 | auto             | 4.5657
+  suszone jabłka                      → Jabłka suszone Kresto 35g                          | score=100.0 | auto             | 1.7086
+  suszone jagody goji                 → Jagody goji suszone Makar 1 kg                     | score=100.0 | auto             | 7.07
+  suszone żurawiny                    → Żurawina suszona Auchan 500 g                      | score=87.5  | auto             | 3.198
+  syrop daktylowy                     → BIO Syrop daktylowy  BioLife 345 g                 | score=100.0 | auto             | 5.0406
+  syrop klonowy                       → BIO Syrop klonowy Auchan 250 g                     | score=100.0 | auto             | 7.996
+  syrop z agawy                       → BIO syrop z agawy jasny NaturaVena 250 g           | score=100.0 | auto             | 4.8898
+  szalotka                            → Szalotka Warzywa Auchan 250 g                      | score=100.0 | auto             | 2.596
+  szałwia suszona                     → Żurawina suszona Auchan 500 g                      | score=85.7  | auto             | 3.198
+  szczypiorek                         → Szczypiorek Auchan sztuka                          | score=100.0 | auto             | 2.796
+  szczypiorek suszony                 → Szczypiorek Auchan sztuka                          | score=100.0 | auto             | 2.796
+  szparagi                            → Szparagi Pewni Dobrego 400 g                       | score=100.0 | auto             | 3.7475
+  szpinak                             → Szpinak Warzywa Auchan 100 g                       | score=100.0 | auto             | 3.89
+  szpinak baby                        → BIO szpinak baby Fit & Easy 150 g                  | score=100.0 | auto             | 6.1267
+  szynka                              → Szynka konserwowa premium Krakus 300 g             | score=100.0 | auto             | 3.8267
+  sól                                 → Sól czosnkowa Kamis 35 g                           | score=100.0 | auto             | 8.2286
+  sól morska                          → Sól morska jodowana Prymat 110 g                   | score=100.0 | auto             | 5.7091
+  tahini                              → Elios Tahini klasyczne 300 g                       | score=100.0 | auto             | 3.33
+  tortilla                            → Pano Tortilla Wraps Placki wieloziarniste 306 g    | score=100.0 | auto             | 1.6176
+  truskawka                           → 100% truskawka z regionu Łowicza Pewni Dobrego 230 g | score=100.0 | auto             | 2.8217
+  truskawki                           → Truskawki Owoce  Auchan 250 g                      | score=100.0 | auto             | 4.396
+  truskawki liofilizowane             → Truskawki Owoce  Auchan 250 g                      | score=100.0 | auto             | 4.396
+  tuńczyk                             → Tuńczyk kawałki w sosie własnym Auchan 170 g       | score=100.0 | auto             | 5.1583
+  twaróg                              → Twaróg chudy Auchan 250 g                          | score=100.0 | auto             | 1.46
+  twaróg kremowy                      → Twaróg chudy Auchan 250 g                          | score=100.0 | auto             | 1.46
+  tymianek                            → BIO Tymianek  Pewni Dobrego sztuka                 | score=100.0 | auto             | 9.49
+  tymianek suszony                    → BIO Tymianek  Pewni Dobrego sztuka                 | score=100.0 | auto             | 9.49
+  udka z kurczaka                     → Piwoszki skrzydełka z kurczaka Morliny 900 g       | score=92.9  | auto             | 2.8767
+  wegański ser ricotta                → Ricotta Auchan 250 g                               | score=100.0 | auto             | 2.38
+  wieprzowina                         → Karkówka wieprzowa bez kości rasy Puławskiej MAP Pewni Dobrego na wagę ok. 600 g | score=100.0 | auto             | 3.599
+  winogrona                           → Winogrona Owoce  Auchan na wagę ok. 600 g          | score=100.0 | auto             | 1.999
+  winogrona zielone                   → Winogrona Owoce  Auchan na wagę ok. 600 g          | score=100.0 | auto             | 1.999
+  wiórki kokosowe                     → Bakello Wiórki kokosowe 200 g                      | score=100.0 | auto             | 2.495
+  wiórki kokosowe niesłodzone         → Bakello Wiórki kokosowe 200 g                      | score=100.0 | auto             | 2.495
+  wołowina                            → Rosół wołowy Kucharek 120 g                        | score=100.0 | auto             | 3.2
+  wołowina na fajitas                 → Rosół wołowy Kucharek 120 g                        | score=100.0 | auto             | 3.2
+  wołowina w kawałkach                → Rosół wołowy Kucharek 120 g                        | score=100.0 | auto             | 3.2
+  wędzona papryka                     → BIO  Papryka Palermo  Warzywa Auchan 180 g         | score=100.0 | auto             | 7.2167
+  wędzony łosoś                       → Marinero Łosoś Norweski wędzony plastry 150 g      | score=100.0 | auto             | 11.9933
+  zamiennik jajka                     → Zamiennik jajek w proszku vEGGs 64 g               | score=93.3  | auto             | 22.049
+  ziele angielskie                    → Ziele angielskie  Auchan 15 g                      | score=100.0 | auto             | 8.6
+  zielona fasolka                     → BIO Fasolka Adzuki   EUREKO 400 g                  | score=100.0 | auto             | 4.4475
+  zielona papryka                     → Papryka zielona Warzywa Auchan na wagę ok. 500 g   | score=100.0 | auto             | 1.699
+  zielone oliwki                      → Zielone oliwki nadziewane migdałami Auchan 100 g   | score=100.0 | auto             | 6.39
+  zielony banan                       → Banan                                              | score=100.0 | auto             | 0.699
+  ziemniak                            → Ziemniaki sałatkowe Auchan 2 kg                    | score=94.1  | auto             | 0.2495
+  ziemniak czerwony                   → Ziemniaki czerwone Warzywa Auchan 2 kg             | score=91.4  | auto             | 0.3995
+  ziemniaki                           → Ziemniaki sałatkowe Auchan 2 kg                    | score=100.0 | auto             | 0.2495
+  ziemniaki czerwone                  → Ziemniaki czerwone Warzywa Auchan 2 kg             | score=100.0 | auto             | 0.3995
+  zioła                               → Zioła Prowansalskie   Auchan 10 g                  | score=100.0 | auto             | 12.9
+  łopatka wieprzowa                   → Łopatka bez kości Auchan na wagę ok. 1 kg          | score=100.0 | auto             | 1.899
+  łosoś                               → Marinero Łosoś Norweski wędzony plastry 150 g      | score=100.0 | auto             | 11.9933
+  śmietana                            → Śmietana 12%  Auchan 330 g                         | score=100.0 | auto             | 0.903
+  śmietana 30%                        → Śmietana 12%  Auchan 330 g                         | score=100.0 | auto             | 0.903
+  śmietana roślinna                   → Śmietana 12%  Auchan 330 g                         | score=100.0 | auto             | 0.903
+  śmietanka 30%                       → Śmietanka UHT 18% Auchan 250 ml                    | score=100.0 | auto             | 1.352
+  śmietanka kokosowa                  → Śmietanka UHT 18% Auchan 250 ml                    | score=100.0 | auto             | 1.352
+  świeże zioła                        → Zioła Prowansalskie   Auchan 10 g                  | score=100.0 | auto             | 12.9
+  żeberka wołowe                      → Żeberka wędzone Mościbrody na wagę ok. 900 g       | score=100.0 | auto             | 1.599
+  żurawina                            → Żurawina Pewni Dobrego 200 g                       | score=100.0 | auto             | 4.49
+  żurawina suszona                    → Żurawina suszona Auchan 500 g                      | score=100.0 | auto             | 3.198
+  żółta papryka                       → Papryka żółta Warzywa Auchan na wagę od 500 g      | score=100.0 | auto             | 1.698
+
+======================================================================
+  PL — niedopasowane składniki
+======================================================================
+  Cheerios
+  Rice Krispies
+  amino kokosowe
+  anyż gwiazdkowaty
+  babka plantain
+  barwnik spożywczy
+  batat
+  bekon
+  białe kawałki czekolady
+  białe wino kuchenne
+  białka jaj
+  białka jaj w płynie
+  białko jajka
+  białko konopne
+  białko roślinne
+  białko serwatkowe
+  bocconcini
+  bok choy
+  bourbon whisky
+  boćwina
+  broccolini
+  brązowy ryz z quinoa
+  burak złoty
+  bułka tarta
+  bułka tarta bezglutenowa
+  bułka tarta bezglutenowa panko
+  bułka tarta panko
+  bułka tarta panko bezglutenowa
+  cayenne
+  chili w proszku
+  chipotle
+  chipotle w proszku
+  chipotle w sosie adobo
+  chipsy tortilla
+  chipsy z bananów
+  chipsy ziemniaczane
+  chleb bezglutenowy
+  chleb na zakwasie bezglutenowy
+  chleb pita
+  chrupki ryżowe
+  ciasto do pizzy
+  ciasto wonton
+  ciemna czekolada
+  ciemne kropelki czekolady
+  cukier kokosowy puder
+  cydr jabłkowy
+  czarna fasola w puszce
+  czarne nasiona sezamu
+  czarne oliwki
+  czekolada półsłodka
+  czekoladowe kropelki
+  czerwone chili
+  dressing
+  dressing cytrynowo-ziołowy
+  drożdże nieaktywne
+  duże muszle makaronowe
+  dym w płynie
+  dynia makaronowa
+  edamame
+  ekstrakt klonowy
+  ekstrakt miętowy
+  ekstrakt stewii
+  ekstrakt waniliowy
+  endywia
+  fajita z kurczaka
+  farro
+  gałązki ziół
+  ghee
+  glazura balsamiczna
+  gnocchi kalafiorowe
+  gorzka czekolada
+  goździk
+  granulat cebulowy
+  granulat czosnkowy
+  grzanki
+  grzybowe q-cups
+  guacamole
+  guma ksantanowa
+  herbatnik graham
+  herbatniki graham
+  hummus
+  hummus z buraków
+  imbir marynowany
+  jackfruit
+  jagoda
+  jagody mieszane
+  jajeczny poncz
+  jajko
+  jalapeño
+  jarmuz
+  jerky
+  jogurt z mleka migdałowego
+  kakao niesłodzone
+  kapary
+  karczoch
+  kawałki czekolady
+  kawałki czekolady bez nabiału
+  kiełbasa beyond meat spicy italian
+  kiełbasa z kurczaka i jabłkiem
+  klementynka
+  klopsiki
+  kolagen
+  kolagen w proszku
+  koncentrat bulionu drobiowego
+  konfitura morelowa
+  koper
+  koper włoski
+  kostka bulionowa
+  kostka bulionu wolowego
+  kotlet wieprzowy
+  kozieradka
+  krem kakaowo-orzechowy
+  krojone pomidory z puszki
+  kropelki ciemnej czekolady
+  kropelki czekolady
+  kropelki czekolady bez nabiału
+  kur kuma
+  kuskus izraelski pełnoziarnisty
+  laska wanilii
+  liofilizowane jagody
+  liofilizowane owoce
+  lisc laurowy
+  liście jarmużu
+  liście kapusty
+  liść laurowy
+  losos
+  maka z maranty
+  maka z tapioki
+  makaron z brązowego ryżu
+  masa harina
+  maslo
+  maslo migdalowe
+  masło czekoladowo-orzechowe
+  masło z nerkowców
+  masło z orzechów nerkowca
+  mielona jagnięcina
+  mielone chili chipotle
+  mielone roślinne
+  mieszane jagody
+  mieszane warzywa
+  mieszanka do sosu ranczerskiego
+  mieszanka warzyw do stir-fry
+  mikroliście
+  mięso wołowe do gulaszu
+  mleko owsiane w proszku
+  mnich
+  morela
+  morwy
+  mąka arrowroot
+  mąka kokosowa
+  mąka z ciecierzycy
+  mąka z manioku
+  mąka z maranty
+  mąka z tapioki
+  młode liście
+  nasiona granatu
+  nasiona kakaowca
+  nasiona słonecznika
+  nektar z agawy
+  nektarynka
+  niesłodzona czekolada
+  ocet kokosowy
+  okra
+  olej chili
+  olej kokosowy
+  olej kokosowy w sprayu
+  olej roślinny
+  olej w sprayu
+  olej z otrąb ryżowych
+  oliwka zielona
+  oliwki kalamata
+  orzechy mieszane
+  orzo
+  otręby owsiane
+  owoce
+  owoce mieszane
+  panierka z mąki migdałowej
+  papryczka chili tajska
+  papryczka chipotle w sosie adobo
+  papryczka serrano
+  papryczki tajskie
+  parmezan
+  parmezan roślinny
+  pasta curry czerwona
+  pasta curry czerwone
+  pasta miso biała
+  pasta z papryki koreańska
+  pasternak
+  pekan
+  pepperoni
+  peptydy kolagenowe
+  persymona
+  pico de gallo
+  pieczarka biała
+  pieczarka portobello
+  pieczona czerwona papryka
+  pieprz w ziarnach
+  pikantna włoska kiełbasa wieprzowa
+  pita
+  pita bezglutenowa
+  platki chili
+  polenta
+  polędwica wieprzowa
+  polędwica wołowa
+  polędwiczka wieprzowa
+  pomidory krojone w puszce
+  pomidory krojone z puszki
+  pomidory z zielonym chili
+  posypka
+  posypki
+  precle
+  prosciutto
+  proszek cebulowy
+  proszek chipotle
+  proszek czosnkowy
+  proszek do pieczenia
+  proszek musztardowy
+  provolone
+  przecier pomidorowy
+  przyprawa cytrynowo-pieprzowa
+  puree dyniowe
+  puree z batata
+  puree z dyni
+  puree ziemniaczane
+  purée dyniowe
+  pół na pół
+  płynne białko jajka
+  płynny słodzik dyniowy z mnicha
+  quinoa
+  rozmaryn
+  rukiew wodna
+  ryz bialy
+  ryz brazowy
+  ryz brązowy instant
+  ryż kalafiorowy
+  ryż z kalafiora
+  rzeżucha
+  rzodkiew arbuzowa
+  różyczki brokuła
+  salsa
+  salsa verde
+  sambal oelek
+  ser cojita
+  ser provolone
+  ser roślinny
+  skrobia maranty
+  skrobia strzałki
+  skrobia strzałkowata
+  skrobia tapiokowa
+  skrobia z maranty
+  skrobia z tapioki
+  skwarki
+  skórka cytrynowa
+  skórka pomarańczowa
+  skórka z limonki
+  slodzik z mnicha
+  slodzik z owocu mnicha
+  smietanka 30%
+  soda oczyszczona
+  sok ananasowy
+  sok pomarańczowy
+  sok z papryczek pepperoncini
+  sol
+  sos Worcestershire
+  sos barbecue
+  sos buffalo
+  sos chili czosnkowy
+  sos cytrynowo-ziołowy
+  sos czerwony
+  sos czosnkowo-chili
+  sos do pizzy
+  sos enchilada
+  sos enchilada czerwony
+  sos hoisin
+  sos koreański BBQ
+  sos marinara
+  sos musztardowo-miodowy
+  sos ostrygowy
+  sos ranczerski
+  sos sałatkowy
+  sos sojowy
+  sos specjalny
+  sos teriyaki
+  sos tzatziki
+  sos worcestershire
+  sos włoski
+  sos z indyka
+  sos z serem pleśniowym
+  sos żurawinowy
+  spaghetti
+  spray do gotowania
+  spray do pieczenia
+  spód do tarty
+  sriracha
+  stek boczny wołowy
+  stek wolowy
+  stek wołowy
+  stek z antrykotu
+  stek z polędwicy wołowej
+  stek z wołowiny
+  stevia w płynie
+  sumak
+  suszone czerwone chili
+  suszone czerwone papryczki chili
+  suszone wiśnie
+  suszonej cebuli
+  swerve
+  szałwia
+  sól przyprawiona
+  słodzik
+  słodzik mnich
+  słodzik waniliowy mnich
+  słodzik waniliowy z mnicha
+  słodzik z mnicha
+  tajski slodki sos chili
+  tamari
+  tempeh
+  tofu
+  tofu ekstra twarde
+  tomatillo
+  tortellini
+  tortellini serowe
+  tortilla kukurydziana
+  tortilla szpinakowa
+  tortilla z manioku
+  tortille kukurydziane
+  tortille z mąki z manioku
+  trawa cytrynowa
+  tłuszcz z boczku
+  tłuszcz z kaczki
+  udko z kurczaka
+  vinaigrette balsamiczny
+  warzywa
+  warzywa mieszane
+  wegańskie kropelki czekoladowe
+  wino czerwone
+  wino marsala
+  wiśnie
+  woda
+  wrap
+  wrap kokosowy
+  wykałaczka
+  ziarna kakaowca
+  ziarna kakaowe
+  zielone chiles
+  zielone chili z puszki
+  zielony barwnik spożywczy
+  zupa cebulowa w proszku
+  łuski babki płesznik

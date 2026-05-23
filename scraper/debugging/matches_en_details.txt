@@ -1,0 +1,794 @@
+# matches_en — co do czego zostało dopasowane w kroku 3
+# Łącznie: 356 dopasowań
+# auto (rapidfuzz >= 85): 356, AI (DeepSeek): 0
+# Format: ingredient_name (z przepisu) → original_name (Aldi) | score | price_per_100 GBP
+
+# ── AUTO (rapidfuzz, score >= 85) — 356 dopasowań ──────────────
+Dijon mustard                       → Dijon Mustard                                      | score=96.0 | 0.245
+almond                              → Whole Almonds                                      | score=100.0 | 0.845
+andouille sausage                   → Quorn Sausages                                     | score=100.0 | —
+apple                               → Large Bramley Apple                                | score=100.0 | —
+apple cider                         → Organic Apple Cider Vinegar                        | score=100.0 | —
+apple cider vinegar                 → Organic Apple Cider Vinegar                        | score=100.0 | —
+applesauce                          → Bramley Apple Sauce                                | score=100.0 | —
+avocado                             → Avocado                                            | score=100.0 | 0.290
+avocado oil                         → Avocado                                            | score=100.0 | 0.290
+avocado oil spray                   → Avocado                                            | score=100.0 | 0.290
+baby corn                           → Baby Corn                                          | score=100.0 | 0.752
+baby red potatoes                   → British Red Potatoes                               | score=100.0 | 0.078
+baby spinach                        → British Baby Spinach                               | score=100.0 | 0.353
+bacon                               → Smoked Bacon Lardons                               | score=100.0 | 0.895
+baking powder                       → Baking Powder                                      | score=100.0 | 0.325
+balsamic vinegar                    → Balsamic Vinegar of Modena                         | score=100.0 | —
+banana                              → Banana                                             | score=100.0 | —
+basil                               → Basil                                              | score=100.0 | —
+basmati rice                        → Basmati Rice                                       | score=100.0 | 0.179
+bay leaf                            → Bay Leaf                                           | score=100.0 | —
+bbq sauce                           → BBQ Sauce                                          | score=100.0 | —
+beef                                → 100% British Beef Wagyu Fillet Steak               | score=100.0 | 6.465
+beef broth                          → Chicken Stock Cubes                                | score=100.0 | —
+beef chuck                          → British Diced Beef                                 | score=100.0 | 1.084
+beef ribs                           → British Diced Beef                                 | score=100.0 | 1.084
+beef sirloin                        → 100% British Beef Wagyu Sirloin Steak              | score=100.0 | 3.960
+beef steak                          → 100% British Beef Wagyu Fillet Steak               | score=100.0 | 6.465
+beef stew meat                      → 100% British Beef Wagyu Fillet Steak               | score=88.9 | 6.465
+beef stock                          → Chicken Stock Cubes                                | score=100.0 | —
+bell pepper                         → Red Pepper                                         | score=100.0 | —
+berries                             → Blueberries                                        | score=100.0 | 0.793
+black beans                         → Tinned Black Beans/Green Lentils                   | score=100.0 | 0.123
+black olive                         → Pitted Green & Black Olives With Feta              | score=100.0 | —
+black olives                        → Pitted Green & Black Olives With Feta              | score=100.0 | —
+black pepper                        → Ground Black Pepper                                | score=100.0 | 1.590
+black sesame seeds                  → Sesame Seeds                                       | score=100.0 | —
+blackberries                        → Wonky Blackberries                                 | score=100.0 | 1.260
+blackberry                          → Wonky Blackberries                                 | score=100.0 | 1.260
+blueberries                         → Blueberries                                        | score=100.0 | 0.793
+blueberry                           → Blueberries                                        | score=100.0 | 0.793
+breadcrumbs                         → Panko Breadcrumbs                                  | score=100.0 | —
+broccoli                            → British Broccoli                                   | score=100.0 | 0.219
+broccoli florets                    → Broccoli Florets                                   | score=100.0 | 0.119
+broccolini                          → British Broccoli                                   | score=88.9 | 0.219
+brown rice                          → Brown Rice                                         | score=100.0 | 0.139
+brown rice noodles                  → Rice Noodles                                       | score=100.0 | 0.330
+brown rice pasta                    → Brown Rice                                         | score=100.0 | 0.139
+brown rice with quinoa              → Brown Rice                                         | score=100.0 | 0.139
+butter                              → Flora Buttery                                      | score=92.3 | 0.442
+butternut squash                    → Butternut Squash & Pine Nut Girasoli               | score=100.0 | 0.996
+cabbage                             → Red Cabbage                                        | score=100.0 | —
+cabbage and carrots                 → British Wonky Carrots                              | score=100.0 | 0.053
+cajun seasoning                     → Cajun Seasoning                                    | score=100.0 | —
+cannellini beans                    → Red Kidney Beans in Water                          | score=100.0 | 0.098
+carrot                              → Carrot & Swede Mash                                | score=100.0 | 0.300
+carrots                             → British Wonky Carrots                              | score=100.0 | 0.053
+cashew                              → Cashews Roasted and Salted                         | score=100.0 | 0.995
+cashew butter                       → Cashew Nuts                                        | score=85.7 | 0.845
+cashews                             → Cashews Roasted and Salted                         | score=100.0 | 0.995
+cauliflower                         → British Cauliflower                                | score=100.0 | —
+cauliflower gnocchi                 → British Cauliflower                                | score=100.0 | —
+cauliflower rice                    → British Cauliflower                                | score=100.0 | —
+cayenne                             → Cayenne Pepper                                     | score=100.0 | —
+cayenne pepper                      → Cayenne Pepper                                     | score=100.0 | —
+celery                              → Celery                                             | score=100.0 | —
+cheese                              → Italian Meat & Cheese Select                       | score=100.0 | —
+cheese stick                        → Puff Pastry Ham & Cheese Slices 2 Pack             | score=87.0 | —
+cherries                            → Cherries                                           | score=100.0 | 1.145
+cherry                              → Cherry Tomatoes                                    | score=100.0 | 0.248
+cherry tomato                       → Cherry Tomatoes in Rich Tomato Juice               | score=100.0 | 0.188
+cherry tomatoes                     → Cherry Tomatoes                                    | score=100.0 | 0.248
+chicken                             → Chicken Breast Fillets                             | score=100.0 | 0.425
+chicken apple sausage               → Cooked Sliced Chicken                              | score=100.0 | 0.615
+chicken breast                      → Chicken Breast Fillets                             | score=100.0 | 0.425
+chicken broth                       → Chicken Stock Cubes                                | score=100.0 | —
+chicken drumstick                   → Chicken Drumsticks                                 | score=100.0 | 0.215
+chicken drumsticks                  → Chicken Drumsticks                                 | score=100.0 | 0.215
+chicken fajita                      → Cooked Sliced Chicken                              | score=100.0 | 0.615
+chicken legs                        → Chicken Legs                                       | score=100.0 | 0.225
+chicken sausage                     → Cooked Sliced Chicken                              | score=100.0 | 0.615
+chicken stock                       → Chicken Stock Cubes                                | score=100.0 | —
+chicken stock concentrate           → Chicken Stock Cubes                                | score=88.2 | —
+chicken thigh                       → Chicken Thigh Fillets                              | score=100.0 | 0.632
+chicken thighs                      → Chicken Thighs                                     | score=100.0 | 0.299
+chicken wing                        → Chicken Wings                                      | score=100.0 | 0.215
+chickpea                            → Chickpeas                                          | score=94.1 | —
+chickpea fusilli pasta              → Fusilli Pasta 1kg                                  | score=100.0 | 0.119
+chickpeas                           → Chickpeas                                          | score=100.0 | —
+chili garlic sauce                  → Garlic                                             | score=100.0 | —
+chili powder                        → Chilli Powder                                      | score=96.0 | —
+chocolate                           → Chocolate Mini Rolls                               | score=100.0 | —
+chocolate chips                     → Milk Chocolate Chips                               | score=100.0 | 1.190
+chocolate protein powder            → Chocolate Protein Porridge Sachet                  | score=93.3 | 0.483
+cinnamon                            → Cinnamon Buns                                      | score=100.0 | —
+cocoa hazelnut spread               → Hazelnut Spread                                    | score=100.0 | —
+cocoa powder                        → Cocoa Powder 250g                                  | score=100.0 | 1.196
+coconut                             → Desiccated Coconut                                 | score=100.0 | 0.660
+coconut aminos                      → Coconut Milk 400ml Full Fat                        | score=87.0 | 0.188
+coconut milk                        → Coconut Milk 400ml Full Fat                        | score=100.0 | 0.188
+coconut milk powder                 → Coconut Milk 400ml Full Fat                        | score=100.0 | 0.188
+coconut oil                         → Coconut Milk 400ml Full Fat                        | score=90.9 | 0.188
+coconut oil spray                   → Coconut Milk 400ml Full Fat                        | score=87.0 | 0.188
+coconut wrap                        → Coconut Water                                      | score=90.9 | —
+cod                                 → Cod Fillets                                        | score=100.0 | 1.053
+coleslaw mix                        → Reduced Fat Coleslaw                               | score=100.0 | —
+coriander                           → British Cut Coriander                              | score=100.0 | 1.667
+corn                                → Baby Corn                                          | score=100.0 | 0.752
+corn starch                         → Baby Corn                                          | score=100.0 | 0.752
+cottage cheese                      → Low Fat Cottage Cheese                             | score=100.0 | 0.330
+cranberries                         → Raisins & Cranberries                              | score=100.0 | 0.450
+cranberry                           → Raisins & Cranberries                              | score=100.0 | 0.450
+cream cheese                        → Cream Cheese Stuffed Cherry Bell Peppers           | score=100.0 | 1.460
+cremini mushrooms                   → Sliced Mushrooms                                   | score=100.0 | 0.198
+crispy rice cereal                  → Sweet & Crispy                                     | score=100.0 | 0.521
+crushed tomatoes                    → Chopped Tomatoes in Tomato Juice                   | score=100.0 | 0.108
+cucumber                            → Cucumber                                           | score=100.0 | —
+cumin                               → Cumin                                              | score=100.0 | —
+curry powder                        → Medium Curry Powder                                | score=100.0 | 0.989
+dairy free chocolate chips          → Dark Chocolate Chips                               | score=88.9 | 1.190
+dairy free sour cream               → Sour Cream & Black Pepper Multigrain Waves 6 Pack  | score=100.0 | 0.860
+dark chocolate                      → Dark Chocolate 100g                                | score=100.0 | 0.650
+dark chocolate chips                → Dark Chocolate Chips                               | score=100.0 | 1.190
+diced tomatoes                      → Chopped Tomatoes in Tomato Juice                   | score=100.0 | 0.108
+dijon mustard                       → Dijon Mustard                                      | score=100.0 | 0.245
+distilled white vinegar             → Distilled Vinegar                                  | score=85.0 | —
+dried basil                         → Basil                                              | score=100.0 | —
+dried cherries                      → Cherries                                           | score=100.0 | 1.145
+dried cranberries                   → Raisins & Cranberries                              | score=100.0 | 0.450
+dried pitted date                   → Pitted Dates                                       | score=95.7 | 0.558
+dried red chiles                    → Red Chillies                                       | score=90.9 | 0.846
+dried thyme                         → Thyme                                              | score=100.0 | 4.333
+egg                                 → Egg Noodles                                        | score=100.0 | 0.315
+egg noodles                         → Egg Noodles                                        | score=100.0 | 0.315
+eggs                                → Free Range Eggs 6 Pack                             | score=100.0 | —
+feta                                → Feta & Grain Salad                                 | score=100.0 | 1.145
+fig                                 → Fig Rolls                                          | score=100.0 | —
+flax seeds                          → Flaxseed                                           | score=88.9 | 0.895
+flaxseed meal                       → Flaxseed                                           | score=100.0 | 0.895
+freeze dried strawberries           → Strawberry Slices                                  | score=100.0 | —
+freeze dried strawberry             → Strawberry Slices                                  | score=100.0 | —
+fruit                               → Fruit Loaf                                         | score=100.0 | —
+garam masala                        → Garam Malasa Powder                                | score=90.9 | 0.989
+garlic                              → Garlic                                             | score=100.0 | —
+garlic granules                     → Garlic Granules                                    | score=100.0 | —
+garlic pasta sauce                  → Onion & Garlic Pasta Sauce                         | score=100.0 | 0.138
+garlic powder                       → Garlic                                             | score=100.0 | —
+ginger                              → Ginger                                             | score=100.0 | 0.792
+gluten free panko bread crumbs      → Panko Breadcrumbs                                  | score=94.1 | —
+gluten free panko breadcrumbs       → Panko Breadcrumbs                                  | score=100.0 | —
+gluten free pasta                   → Gluten Free Spaghetti                              | score=87.5 | 0.058
+gluten free pita                    → Gluten Free Spaghetti                              | score=90.3 | 0.058
+gluten free spaghetti               → Gluten Free Spaghetti                              | score=100.0 | 0.058
+golden beet                         → Golden Breadcrumbs                                 | score=85.7 | —
+graham crackers                     → Cream Crackers                                     | score=88.0 | —
+greek yogurt                        → Fat Free Greek Style Yogurt                        | score=100.0 | 0.149
+green beans                         → Green Beans                                        | score=100.0 | 0.386
+green bell pepper                   → Red Pepper                                         | score=100.0 | —
+green cabbage                       → Red Cabbage                                        | score=85.7 | —
+green peas                          → Garden Peas                                        | score=85.7 | 0.128
+ground beef                         → British Diced Beef                                 | score=100.0 | 1.084
+ground chicken                      → Lean Chicken Mince 5% Fat                          | score=100.0 | 0.518
+ground clove                        → Quorn Mince                                        | score=100.0 | —
+ground cumin                        → Quorn Mince                                        | score=100.0 | —
+ground flax                         → Quorn Mince                                        | score=100.0 | —
+ground flax meal                    → Quorn Mince                                        | score=100.0 | —
+ground flaxseed                     → Quorn Mince                                        | score=100.0 | —
+ground ginger                       → Ginger                                             | score=100.0 | 0.792
+ground lamb                         → British Lamb Mince 20% Fat                         | score=100.0 | 1.156
+ground pork                         → British Pork Smoked Ham Family Pack 14 Slices      | score=85.7 | 0.530
+ground sausage                      → Quorn Mince                                        | score=100.0 | —
+ground turkey                       → British Turkey Mince 7% Fat                        | score=100.0 | 0.598
+ground turkey breast                → British Turkey Mince 7% Fat                        | score=100.0 | 0.598
+ham                                 → Ham & Mushroom Tagliatelle                         | score=100.0 | 0.698
+harissa                             → Harissa Salads                                     | score=100.0 | —
+hoisin sauce                        → Hoisin Sauce                                       | score=100.0 | —
+honey                               → Clear Honey                                        | score=100.0 | 0.218
+honey mustard                       → Honey & Mustard Salad Dressing                     | score=100.0 | —
+honey mustard dressing              → Honey & Mustard Salad Dressing                     | score=88.0 | —
+instant brown rice                  → Brown Rice                                         | score=100.0 | 0.139
+italian seasoning                   → Italian Meat & Cheese Select                       | score=87.0 | —
+kidney beans                        → Red Kidney Beans                                   | score=100.0 | —
+kiwi                                → Kiwis                                              | score=88.9 | —
+korean bbq sauce                    → BBQ Sauce                                          | score=100.0 | —
+leek                                → Individual Cheddar & Leek Quiche                   | score=100.0 | —
+lemon                               → Wonky Lemons                                       | score=100.0 | —
+lemon juice                         → Lemon Juice                                        | score=100.0 | —
+lemon zest                          → Wonky Lemons                                       | score=100.0 | —
+lentil                              → Red Lentils                                        | score=100.0 | 0.198
+lentils                             → Red Lentils                                        | score=100.0 | 0.198
+lime                                → Limes                                              | score=100.0 | —
+lime zest                           → Limes                                              | score=100.0 | —
+long grain white rice               → Long Grain White Rice                              | score=100.0 | 0.052
+mandarin                            → Mandarin Oranges in Juice                          | score=100.0 | —
+mandarin orange                     → Mandarin Oranges in Juice                          | score=100.0 | —
+mango                               → Mango Chunks                                       | score=100.0 | 0.871
+maple syrup                         → Maple Syrup                                        | score=100.0 | —
+mashed potatoes                     → Mashed Potato                                      | score=100.0 | 0.170
+mayonnaise                          → Real Mayonnaise                                    | score=100.0 | —
+meatballs                           → Meatballs                                          | score=100.0 | —
+milk                                → Milk Chocolate 100g                                | score=100.0 | 0.650
+mint                                → Cut Mint                                           | score=100.0 | 1.667
+mixed berries                       → Blueberries                                        | score=100.0 | 0.793
+mixed nuts                          → Mixed Nuts                                         | score=100.0 | 0.875
+mixed vegetable                     → Mixed Vegetables                                   | score=100.0 | 0.099
+mixed vegetables                    → Mixed Vegetables                                   | score=100.0 | 0.099
+mozzarella                          → Classic Mozzarella                                 | score=100.0 | 0.552
+mozzarella cheese                   → Grated Mozzarella Cheese                           | score=100.0 | 0.598
+mushroom                            → Sliced Mushrooms                                   | score=100.0 | 0.198
+mushrooms                           → Sliced Mushrooms                                   | score=100.0 | 0.198
+nectarine                           → Nectarines                                         | score=94.7 | —
+nuts                                → Mixed Nuts                                         | score=100.0 | 0.875
+olive oil                           → Extra Virgin Olive Oil                             | score=100.0 | —
+onion                               → British Wonky Brown Onions                         | score=100.0 | 0.080
+onion granules                      → Onion Granules                                     | score=100.0 | —
+orange juice                        → Smooth Orange Juice                                | score=100.0 | 0.115
+orange marmalade                    → Fine Cut Orange Marmalade                          | score=100.0 | 0.187
+orange zest                         → Wonky Oranges                                      | score=100.0 | —
+panko breadcrumbs                   → Panko Breadcrumbs                                  | score=100.0 | —
+paprika                             → Smoked Paprika                                     | score=100.0 | 1.725
+parsley                             → Parsley                                            | score=100.0 | —
+parsnip                             → British Parsnips                                   | score=93.3 | 0.148
+pasta sauce                         → Bolognese Pasta Sauce                              | score=100.0 | —
+peach                               → Peach Slices in Juice                              | score=100.0 | 0.340
+peanut butter                       → Smooth Peanut Butter                               | score=100.0 | 0.291
+peanuts                             → Peanuts 200g                                       | score=100.0 | 0.745
+pear                                → Ripe & Ready Conference Pears                      | score=88.9 | —
+peas                                → Ripe & Ready Conference Pears                      | score=88.9 | —
+pecan                               → Pecans                                             | score=100.0 | 1.993
+pecans                              → Pecans                                             | score=100.0 | 1.993
+penne pasta                         → Everyday Essentials Penne Pasta 500g               | score=100.0 | 0.082
+pepper                              → Ground Black Pepper                                | score=100.0 | 1.590
+pepperoni                           → Hot Pepperoni 24 Slices                            | score=100.0 | —
+pesto                               → Pesto Rosso                                        | score=100.0 | 1.047
+pickled ginger                      → Ginger                                             | score=100.0 | 0.792
+pine nuts                           → Pine Nuts                                          | score=100.0 | 2.817
+pineapple                           → Pineapple Chunks                                   | score=100.0 | 0.463
+pineapple juice                     → Pineapple Chunks                                   | score=100.0 | 0.463
+plain greek yogurt                  → Fat Free Greek Style Yogurt                        | score=100.0 | 0.149
+plain yogurt                        → Fat Free Natural Yogurt                            | score=100.0 | 0.110
+plant-based ground                  → Quorn Mince                                        | score=100.0 | —
+pomegranate                         → Pomegranate Seeds                                  | score=100.0 | 0.945
+pomegranate seeds                   → Pomegranate Seeds                                  | score=100.0 | 0.945
+pork                                → British Pork Loin Joint                            | score=100.0 | 0.579
+pork chop                           → Pork Chops                                         | score=100.0 | 0.475
+pork loin                           → British Pork Loin Joint                            | score=100.0 | 0.579
+pork shoulder                       → British Pork Shoulder Joint                        | score=100.0 | 0.379
+portobello mushrooms                → Sliced Mushrooms                                   | score=100.0 | 0.198
+potato                              → British Baby Potatoes                              | score=100.0 | 0.105
+pumpkin                             → Butternut Squash & Pine Nut Girasoli               | score=100.0 | 0.996
+pumpkin seed oil                    → Pumpkin Seeds                                      | score=96.0 | 0.676
+pumpkin seeds                       → Pumpkin Seeds                                      | score=100.0 | 0.676
+pumpkin spice                       → Pumpkin Seeds                                      | score=87.0 | 0.676
+purple cabbage                      → Red Cabbage                                        | score=90.0 | —
+purple potatoes                     → British Baby Potatoes                              | score=100.0 | 0.105
+quinoa                              → Quinoa & Grains                                    | score=100.0 | 0.396
+quinoa pasta                        → Quinoa & Grains                                    | score=100.0 | 0.396
+radish                              → British Radish                                     | score=100.0 | 0.275
+raisin                              → Raisins                                            | score=100.0 | 0.338
+raisins                             → Raisins                                            | score=100.0 | 0.338
+raspberries                         → Raspberries                                        | score=100.0 | 1.196
+raspberry                           → Raspberries                                        | score=100.0 | 1.196
+red bell pepper                     → Red Pepper                                         | score=100.0 | —
+red cabbage                         → Red Cabbage                                        | score=100.0 | —
+red chili                           → Red Chillies                                       | score=94.1 | 0.846
+red chili flakes                    → Red Chillies                                       | score=85.7 | 0.846
+red curry paste                     → Thai Red Curry Paste                               | score=100.0 | 0.717
+red grapes                          → Red Grapefruit                                     | score=94.7 | —
+red kidney beans                    → Red Kidney Beans                                   | score=100.0 | —
+red lentils                         → Red Lentils                                        | score=100.0 | 0.198
+red onion                           → Red Onions                                         | score=100.0 | 0.095
+red pepper                          → Red Pepper                                         | score=100.0 | —
+red pepper flakes                   → Red Pepper                                         | score=100.0 | —
+red potato                          → British Red Potatoes                               | score=100.0 | 0.078
+red potatoes                        → British Red Potatoes                               | score=100.0 | 0.078
+red wine                            → Red Wine Vinegar                                   | score=100.0 | —
+red wine vinegar                    → Red Wine Vinegar                                   | score=100.0 | —
+rice                                → Rice Noodles                                       | score=100.0 | 0.330
+rice noodles                        → Rice Noodles                                       | score=100.0 | 0.330
+rice vinegar                        → Cider Vinegar                                      | score=85.7 | —
+rice wine vinegar                   → Red Wine Vinegar                                   | score=93.3 | —
+riced cauliflower                   → British Cauliflower                                | score=100.0 | —
+ricotta cheese                      → Low Fat Cottage Cheese                             | score=92.3 | 0.330
+roasted red pepper                  → Red Pepper                                         | score=100.0 | —
+roasted red peppers                 → Red Pepper                                         | score=100.0 | —
+romaine                             → British Romaine Lettuce                            | score=100.0 | —
+romaine lettuce                     → British Romaine Lettuce                            | score=100.0 | —
+rosemary                            → Cut Rosemary                                       | score=100.0 | 2.500
+russet potato                       → Sweet Potato                                       | score=90.9 | —
+sage                                → Sage & Onion Stuffing Mix                          | score=100.0 | —
+salami                              → Salami and Smoked Cheese Selection                 | score=100.0 | —
+salmon                              → Salmon Pieces                                      | score=100.0 | 1.140
+salt                                → Salt Grinder                                       | score=100.0 | —
+sausage                             → Sausage Rolls 6 Pack                               | score=100.0 | —
+sea salt                            → Sea Salt Chocolate                                 | score=100.0 | 1.592
+semi sweet chocolate chips          → Milk Chocolate Chips                               | score=88.9 | 1.190
+semi-sweet chocolate chips          → Milk Chocolate Chips                               | score=88.9 | 1.190
+sesame                              → Sesame Seeds                                       | score=100.0 | —
+sesame seed                         → Sesame Seeds                                       | score=100.0 | —
+sesame seeds                        → Sesame Seeds                                       | score=100.0 | —
+shallot                             → British Shallots 400g                              | score=93.3 | 0.288
+shiitake mushrooms                  → Sliced Mushrooms                                   | score=100.0 | 0.198
+sirloin beef                        → British Diced Beef                                 | score=100.0 | 1.084
+sirloin steak                       → 100% British Beef Wagyu Sirloin Steak              | score=100.0 | 3.960
+smoked paprika                      → Smoked Paprika                                     | score=100.0 | 1.725
+smoked salmon                       → Smoked Salmon Slices                               | score=100.0 | 2.245
+soba noodles                        → Classic Soba Noodles Pot                           | score=100.0 | 1.211
+sour cream                          → Sour Cream & Black Pepper Multigrain Waves 6 Pack  | score=100.0 | 0.860
+soy sauce                           → Light Soy Sauce                                    | score=100.0 | —
+spaghetti                           → Spaghetti                                          | score=100.0 | —
+spaghetti squash                    → Spaghetti                                          | score=100.0 | —
+spinach                             → British Baby Spinach                               | score=100.0 | 0.353
+spinach tortilla                    → British Baby Spinach                               | score=100.0 | 0.353
+spinach wrap                        → British Baby Spinach                               | score=100.0 | 0.353
+spring onions                       → Jumbo Spring Onions                                | score=100.0 | 0.685
+sprinkles                           → Sprinkles                                          | score=100.0 | 1.042
+stevia                              → Stevia Sweetener Tablets                           | score=100.0 | —
+strawberries                        → Strawberries                                       | score=100.0 | 0.588
+strawberry                          → Strawberries                                       | score=100.0 | 0.588
+sugar                               → Sugar Mini Waffles                                 | score=100.0 | —
+sugar snap peas                     → British Sugar Snap Peas                            | score=100.0 | 0.619
+sun dried tomatoes                  → Sundried Tomatoes                                  | score=94.1 | 0.411
+sun-dried tomato                    → Sun-dried Tomato Pesto                             | score=100.0 | 0.468
+sun-dried tomatoes                  → Sundried Tomatoes                                  | score=97.1 | 0.411
+sunflower seed                      → Sunflower Seeds                                    | score=100.0 | 0.460
+sunflower seeds                     → Sunflower Seeds                                    | score=100.0 | 0.460
+sweet corn                          → Baby Corn                                          | score=100.0 | 0.752
+sweet onion                         → Sweet & Crispy                                     | score=100.0 | 0.521
+sweet potato                        → Sweet Potato                                       | score=100.0 | —
+sweet potato puree                  → Sweet Potato                                       | score=100.0 | —
+teriyaki sauce                      → Teriyaki Sauce                                     | score=100.0 | —
+thai basil                          → Basil                                              | score=100.0 | —
+thai sweet chili sauce              → Sweet Chilli Sauce                                 | score=97.1 | —
+thyme                               → Thyme                                              | score=100.0 | 4.333
+tofu                                → Organic Smoked Tofu                                | score=100.0 | 0.528
+tomato                              → Salad Tomatoes                                     | score=100.0 | —
+tomato paste                        → Chopped Tomatoes in Tomato Juice                   | score=100.0 | 0.108
+tomato sauce                        → Bolognese Pasta Sauce                              | score=100.0 | —
+tuna                                → Tuna Chunks In Spring Water                        | score=90.0 | 0.448
+turkey                              → British Turkey Breast Steaks 2% Fat                | score=100.0 | 0.957
+turkey breast                       → British Turkey Breast Steaks 2% Fat                | score=100.0 | 0.957
+vegetable                           → British Wonky Carrots                              | score=100.0 | 0.053
+vegetable broth                     → Vegetable Oil                                      | score=87.0 | —
+vegetable oil                       → Vegetable Oil                                      | score=100.0 | —
+vegetable stock                     → Vegetable Oil                                      | score=87.0 | —
+vegetarian sausage                  → Vegetarian Sushi Platter                           | score=87.5 | 1.405
+watercress                          → Watercress Spinach & Rocket Salad                  | score=100.0 | 0.938
+watermelon                          → Mini Watermelon                                    | score=100.0 | —
+watermelon radish                   → Mini Watermelon                                    | score=100.0 | —
+white beans                         → Red Kidney Beans in Water                          | score=100.0 | 0.098
+white button mushroom               → British Baby Button Mushrooms                      | score=96.8 | 0.475
+white chocolate chips               → White Chocolate Chips                              | score=100.0 | 1.190
+white onion                         → Diced White Onions                                 | score=100.0 | 0.198
+white wine vinegar                  → White Wine Vinegar                                 | score=100.0 | —
+yeast                               → Yeast                                              | score=100.0 | 1.548
+yellow bell pepper                  → Red Pepper                                         | score=100.0 | —
+yogurt                              → Fat Free Natural Yogurt                            | score=100.0 | 0.110
+
+# ── NIEDOPASOWANE — 430 składników bez odpowiednika ──────────────────
+BBQ sauce
+Cheerios
+Italian dressing seasoning
+Italian seasoning
+Rice Krispies
+active dry yeast
+adobo sauce
+agave
+agave nectar
+allspice
+almond butter
+almond flour
+almond flour breading
+almond flour coating
+almond milk
+almond milk yogurt
+almonds
+angel hair pasta
+apricot
+apricot preserves
+arrowroot
+arrowroot flour
+arrowroot powder
+artichoke
+artichoke heart
+artichoke hearts
+arugula
+arugula pesto
+asparagus
+assorted vegetables
+baby bok choy
+baby greens
+bacon fat
+baking soda
+balsamic glaze
+balsamic vinaigrette
+bean sprouts
+beef bouillon cube
+beef chuck roast
+beet
+beet hummus
+beets
+beyond meat spicy italian sausage
+blood orange
+blue cheese
+blue cheese dressing
+bocconcini
+bouillon cube
+bourbon whisky
+bowtie pasta
+bread
+bread crumbs
+breakfast sandwich bun
+breakfast sausage
+brown sugar
+brussels sprout
+brussels sprouts
+buffalo sauce
+butter lettuce
+buttermilk powder
+cabbage carrot mix
+cabbage leaves
+cacao
+cacao nib
+cacao nibs
+cacao powder
+cane sugar
+canned black beans
+canned diced fire roasted tomatoes
+canned diced tomatoes
+canned green chiles
+canola oil
+cantaloupe
+capers
+cassava flour
+cassava flour tortillas
+cassava tortilla
+cavatappi pasta
+chard
+cheese tortellini
+chex cereal
+chia seed
+chia seeds
+chicken bouillon seasoning
+chickpea flour
+chickpea pasta
+chili flakes
+chili oil
+chili paste
+chili seasoning
+chipotle pepper in adobo sauce
+chipotle powder
+chives
+chocolate nut butter
+chuck roast
+chuck roast beef
+cilantro
+clementine
+clove
+cloves
+coconut brown sugar
+coconut butter
+coconut cream
+coconut flakes
+coconut flour
+coconut sugar
+coconut vinegar
+coffee
+cojita cheese
+collagen
+collagen peptides
+collagen powder
+collard greens
+confectioner's erythritol
+cooking oil spray
+cooking spray
+corn on the cob
+corn tortilla
+corn tortillas
+cornstarch
+crackers
+cranberry sauce
+cremini mushroom
+croutons
+dairy free milk
+dairy free yogurt
+date
+date syrup
+dates
+diced tomato
+dill
+dressing
+dried apple rings
+dried apricots
+dried chives
+dried fruit medley
+dried goji berries
+dried onion
+dried oregano
+dried sage
+duck fat
+edamame
+egg replacer
+egg white
+egg whites
+eggnog
+eggplant
+elbow pasta
+enchilada sauce
+endive
+erythritol
+everything bagel seasoning
+extra firm tofu
+fajita seasoning
+farro
+fennel
+fennel seed
+fenugreek
+feta cheese
+fire roasted tomatoes
+fire roasted tomatoes with chiles
+fire-roasted tomatoes with green chilies
+fish sauce
+five-spice powder
+flank steak
+flax
+flax meal
+flour
+food coloring
+freeze dried blueberry
+freeze-dried berries
+fresh herbs
+garbanzo beans
+garlic-chili sauce
+ghee
+gluten free all purpose flour
+gluten free bread
+gluten free breadcrumbs
+gluten free flour
+gluten free flour blend
+gluten free sourdough bread
+gluten-free all purpose flour
+gluten-free breadcrumbs
+gluten-free flour
+goat cheese
+gold potato
+graham cracker
+granola
+grape
+grape tomato
+grape tomatoes
+grapes
+grapeseed oil
+greek dressing
+green chiles
+green food coloring
+green grapes
+green olive
+green olives
+green onion
+green onions
+green pepper
+green plantain
+ground chipotle chile pepper
+gruyere cheese
+guacamole
+half and half
+halloumi
+halloumi cheese
+hazelnut
+heavy cream
+hemp hearts
+hemp protein
+hemp seeds
+herb sprigs
+herbs
+hot sauce
+hummus
+italian dressing
+italian sausage
+jackfruit
+jalapeño
+jasmine rice
+jerky
+jumbo pasta shells
+kabocha squash
+kalamata olives
+kale
+ketchup
+kimchi
+korean chili paste
+lemon herb dressing
+lemon herb seasoning
+lemon pepper
+lemon pepper seasoning
+lemon-herb dressing
+lemongrass
+lettuce
+lime juice
+liquid egg white
+liquid egg whites
+liquid smoke
+liquid stevia
+macadamia nuts
+macaroni and cheese
+mandarin orange segments
+maple extract
+marinara sauce
+marsala wine
+masa harina
+medjool dates
+microgreens
+mint extract
+mixed fruit
+mixed greens
+molasses
+monk fruit
+monk fruit sweetener
+monkfruit sweetener
+mulberries
+mushroom q-cups
+mustard
+mustard powder
+napa cabbage
+nut butter
+nutmeg
+nutritional yeast
+oat bran
+oat flour
+oat milk
+oat milk powder
+oats
+oil
+oil spray
+okra
+olives
+onion powder
+onion soup mix
+oregano
+orzo
+orzo pasta
+oyster sauce
+palm sugar
+palmini noodles
+pancake mix
+parmesan
+parmesan cheese
+pasta
+pea pods
+pepitas
+peppercorns
+pepperoncini juice
+pepperoncini peppers
+persimmon
+pickle
+pickles
+pico de gallo
+pie crust
+pinto beans
+pistachios
+pita
+pita bread
+pizza dough
+pizza sauce
+plant based milk
+plant-based milk
+plant-based shredded cheese
+plantain
+plantain chips
+poblano pepper
+polenta
+poppy seeds
+pork breakfast sausage
+pork rinds
+pork tenderloin
+portobello mushroom
+potato chips
+poultry seasoning
+powdered coconut sugar
+powdered erythritol
+powdered sugar
+pretzels
+prosciutto
+protein powder
+provolone
+provolone cheese
+psyllium husk
+pumpkin mustard
+pumpkin puree
+pumpkin spice liquid monk fruit sweetener
+purple onion
+ramen noodles
+ranch
+ranch dressing
+ranch dressing mix
+ranch seasoning
+red enchilada sauce
+red sauce
+refried beans
+rice bran oil
+rice paper wrapper
+ricotta
+roasted red bell peppers
+roll
+rolled oats
+roma tomato
+rotini pasta
+salsa
+salsa verde
+sambal oelek
+scallion
+scallions
+seasoned breadcrumbs
+seasoned salt
+seasoning
+serrano pepper
+sesame oil
+shredded coconut
+shredded unsweetened coconut
+shrimp
+skirt steak
+sliced almonds
+slivered almonds
+smoked sausage
+snap peas
+snow peas
+soy chorizo
+special sauce
+spicy brown mustard
+spicy italian pork sausage
+sriracha
+star anise
+stevia extract
+stir-fry vegetables
+sumac
+summer squash
+sun dried tomato
+sweetener
+swerve
+swiss chard
+taco seasoning
+tahini
+tamari
+tapioca flour
+tapioca starch
+tempeh
+thai bird chili
+thai chiles
+tomatillo
+toothpick
+toppings
+tortellini
+tortilla
+tortilla chips
+turkey gravy
+turkey sausage
+turmeric
+tzatziki sauce
+unsweetened cacao powder
+unsweetened chocolate
+vanilla bean
+vanilla extract
+vanilla monk fruit sweetener
+vanilla monkfruit sweetener
+vanilla protein powder
+vegan butter
+vegan cheese
+vegan parmesan
+vegan protein powder
+vegan ricotta cheese
+vegetables
+walnuts
+water
+whey protein powder
+white cooking wine
+white miso paste
+white rice
+whole grain rice and quinoa
+whole wheat israeli couscous
+wild rice
+wonton wrapper
+worcestershire sauce
+wrap
+xanthan gum
+yellow mustard
+yellow onion
+yellow squash
+zoodles
+zucchini
+zucchini noodles

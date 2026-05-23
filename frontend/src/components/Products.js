@@ -3,6 +3,7 @@ import { Icon } from '@iconify/react';
 import { products as api, importPrices } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useToast } from '../contexts/ToastContext';
+import { fuzzySearch } from '../utils/search';
 
 const toUnitPrice = (packagePrice, packageWeight, unit) => {
   const pkg = parseFloat(packageWeight) || 1;
@@ -15,30 +16,28 @@ const toPackagePrice = (unitPrice, packageWeight, unit) => {
   return unit === 'szt' ? unitPrice * pkg : unitPrice * pkg / 100;
 };
 
-const priceLabel = (unit) =>
-  unit === 'szt' ? 'zł/szt' : unit === 'ml' ? 'zł/100ml' : 'zł/100g';
-
-const displayPrice = (p) => {
+const displayPrice = (p, currency) => {
   if (!p.price) return '-';
-  if (p.sold_by_weight) return `${toPackagePrice(p.price, 1000, 'g').toFixed(2)} zł/kg`;
-  return `${toPackagePrice(p.price, p.package_weight, p.unit || 'g').toFixed(2)} zł`;
+  if (p.sold_by_weight) return `${toPackagePrice(p.price, 1000, 'g').toFixed(2)} ${currency}/kg`;
+  return `${toPackagePrice(p.price, p.package_weight, p.unit || 'g').toFixed(2)} ${currency}`;
 };
 
 const EMPTY_FORM = { name: '', package_weight: '', package_price: '', unit: 'g', sold_by_weight: false };
 
 const MacroDisplay = ({ p }) => {
+  const { t } = useLanguage();
   if (!p.protein && !p.fat && !p.carbs) return <span style={{ color: '#4b5563' }}>-</span>;
   return (
     <div style={{ fontSize: 13, color: '#9ca3af' }}>
-      {p.protein != null && <span style={{ marginRight: 6 }}>B: {p.protein}g</span>}
-      {p.fat     != null && <span style={{ marginRight: 6 }}>T: {p.fat}g</span>}
-      {p.carbs   != null && <span>W: {p.carbs}g</span>}
+      {p.protein != null && <span style={{ marginRight: 6 }}>{t('macro_p')}: {p.protein}g</span>}
+      {p.fat     != null && <span style={{ marginRight: 6 }}>{t('macro_f')}: {p.fat}g</span>}
+      {p.carbs   != null && <span>{t('macro_c')}: {p.carbs}g</span>}
     </div>
   );
 };
 
 export default function Products() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const { showError, showSuccess, showToast: globalToast, showConfirm } = useToast();
   const [productList, setProductList] = useState([]);
   const [pasteText, setPasteText] = useState('');
@@ -70,16 +69,16 @@ export default function Products() {
 
   const handleDeleteSelected = () => {
     showConfirm({
-      title: 'Usuń zaznaczone produkty',
+      title: t('del_sel_products_title'),
       message: `Czy na pewno chcesz usunąć ${selectedIds.size} zaznaczonych produktów?`,
-      confirmLabel: 'Usuń',
+      confirmLabel: t('btn_delete'),
       onConfirm: async () => {
         try {
           await Promise.all([...selectedIds].map(id => api.delete(id)));
           showSuccess(`Usunięto ${selectedIds.size} produktów`);
           exitSelection();
           loadProducts();
-        } catch { showError('Błąd podczas usuwania'); }
+        } catch { showError(t('del_during_err')); }
       },
     });
   };
@@ -100,8 +99,8 @@ export default function Products() {
   useEffect(() => { loadProducts(); }, []);
 
   const filteredProducts = useMemo(() => {
-    const q = search.trim().toLowerCase();
-    return q ? productList.filter(p => p.name.toLowerCase().includes(q)) : productList;
+    const q = search.trim();
+    return q ? productList.filter(p => fuzzySearch(q, p.name)) : productList;
   }, [productList, search]);
 
   useEffect(() => { setVisibleCount(50); }, [search]);
@@ -148,7 +147,7 @@ export default function Products() {
       });
       setForm(EMPTY_FORM);
       setPasteText('');
-      showSuccess('Produkt dodany');
+      showSuccess(t('product_added_ok'));
       const macro = await fetchMacroFromOFF(form.name);
       if (macro) await api.update(created.data.id, macro);
       loadProducts();
@@ -189,7 +188,7 @@ export default function Products() {
         fat:     editForm.fat     !== '' ? parseFloat(editForm.fat)     : null,
         carbs:   editForm.carbs   !== '' ? parseFloat(editForm.carbs)   : null,
       });
-      setEditId(null); showSuccess('Zapisano zmiany'); loadProducts();
+      setEditId(null); showSuccess(t('save_changes_label')); loadProducts();
     } catch (e) { showError(e.response?.data?.error || t('save_btn')); }
   };
 
@@ -217,11 +216,11 @@ export default function Products() {
 
   const handleDelete = (id, name) => {
     showConfirm({
-      title: 'Usuń produkt',
+      title: t('confirm_del_product'),
       message: `Czy na pewno chcesz usunąć „${name}"? Tej operacji nie można cofnąć.`,
-      confirmLabel: 'Usuń',
+      confirmLabel: t('btn_delete'),
       onConfirm: async () => {
-        try { await api.delete(id); showSuccess('Produkt usunięty'); loadProducts(); }
+        try { await api.delete(id); showSuccess(t('product_deleted')); loadProducts(); }
         catch { showError(t('del_btn')); }
       },
     });
@@ -269,15 +268,15 @@ export default function Products() {
     const selected = importItems.filter(i => i.selected && i.price !== '' && i.price !== null);
     if (!selected.length) { showError(t('at_least_one')); return; }
     const invalid = selected.filter(i => isNaN(parseFloat(i.price)) || parseFloat(i.price) < 0);
-    if (invalid.length) { showError('Wprowadź prawidłową cenę dla zaznaczonych produktów'); return; }
+    if (invalid.length) { showError(t('valid_price_err')); return; }
     const overPrice = selected.filter(i => parseFloat(i.price) > 99999);
-    if (overPrice.length) { showError('Cena nie może przekraczać 99999 zł'); return; }
+    if (overPrice.length) { showError(t('price_max_err')); return; }
     const overWeight = selected.filter(i => parseFloat(i.weight) > 99999);
-    if (overWeight.length) { showError('Gramatura nie może przekraczać 99999'); return; }
+    if (overWeight.length) { showError(t('weight_max_err')); return; }
     const longName = selected.filter(i => (i.receipt_name || '').trim().length > 200);
-    if (longName.length) { showError('Nazwa produktu max 200 znaków'); return; }
+    if (longName.length) { showError(t('name_max_err')); return; }
     const emptyName = selected.filter(i => !i.matched_product && !(i.receipt_name || '').trim());
-    if (emptyName.length) { showError('Uzupełnij nazwę dla nowych produktów'); return; }
+    if (emptyName.length) { showError(t('fill_name_err')); return; }
 
     const toUpdate = selected.filter(i => i.matched_product);
     const toCreate = selected.filter(i => !i.matched_product && i.receipt_name?.trim());
@@ -329,7 +328,7 @@ export default function Products() {
       ].filter(Boolean).join(', ') + ' produktów · Makro zaktualizowane';
       showSuccess(msg);
       loadProducts();
-    } catch { showError('Błąd przy zapisywaniu produktów');  }
+    } catch { showError(t('save_products_err'));  }
   };
 
 
@@ -372,7 +371,7 @@ export default function Products() {
       }
       const name = stripWeight(firstLine.replace(/na\s+wagę/gi, ''));
       // Ostatnia samodzielna cena w zł (nie zł/kg)
-      const allPrices = [...text.matchAll(/(\d+[,.]?\d+)\s*zł(?!\/|\s*\/)/gi)];
+      const allPrices = [...text.matchAll(/(\d+[,.]?\d*)\s*zł(?!\/|\s*\/)/gi)];
       const price = allPrices.length ? String(num(allPrices[allPrices.length - 1][1]).toFixed(2)) : '';
       return { name, package_price: price, package_weight: weight, unit, sold_by_weight };
     }
@@ -419,10 +418,17 @@ export default function Products() {
       const m = text.match(/(\d+[,.]?\d*)\s*zł\/kg/i);
       if (m) price = String(num(m[1]).toFixed(2));
     } else {
-      const m = text.match(/(\d+[,.]?\d+)\s*zł(?!\/)/i);
-      if (m) price = String(num(m[1]).toFixed(2));
       const wm = text.match(/(\d+(?:[,.]?\d+)?)\s*(kg|g|ml|l)\b/i);
       if (wm) { const r = toG(wm[1], wm[2].toLowerCase()); weight = String(r.w); unit = r.unit; }
+      // Cena z "zł" lub "£" lub samotna liczba na końcu (po wadze)
+      const mZl = text.match(/(\d+[,.]?\d*)\s*(zł|£|GBP)(?!\/)/i);
+      if (mZl) {
+        price = String(num(mZl[1]).toFixed(2));
+      } else {
+        // Ostatnia samotna liczba w linii = cena (jeśli waga już znaleziona)
+        const mBare = text.replace(/(\d+(?:[,.]?\d+)?)\s*(kg|g|ml|l)\b/i, '').match(/(\d+[,.]?\d*)(?:\s*)$/);
+        if (mBare && weight) price = String(num(mBare[1]).toFixed(2));
+      }
     }
     const name = stripWeight((lines[0] || '').replace(/na\s+wagę/gi, '').replace(/kiść/gi, ''));
     return { name, package_price: price, package_weight: weight, unit, sold_by_weight: isByWeight };
@@ -436,13 +442,17 @@ export default function Products() {
 
         {/* Szukasz produktów */}
         <div style={{ marginBottom: 16 }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.7px', marginBottom: 8 }}>Szukasz produktów?</div>
+          <div style={{ fontSize: 11, fontWeight: 600, color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.7px', marginBottom: 8 }}>{t('search_products_hint')}</div>
           <div style={{ display: 'flex', gap: 8 }}>
-            {[
+            {(lang === 'en' ? [
+              { domain: 'www.tesco.com',  url: 'https://www.tesco.com/',        label: 'Tesco' },
+              { domain: 'www.aldi.co.uk', url: 'https://www.aldi.co.uk/',       label: 'Aldi' },
+              { domain: 'groceries.asda.com', url: 'https://groceries.asda.com/', label: 'Asda' },
+            ] : [
               { domain: 'zakupy.auchan.pl',    url: 'https://zakupy.auchan.pl/',    label: 'Auchan' },
               { domain: 'zakupy.biedronka.pl', url: 'https://zakupy.biedronka.pl/', label: 'Biedronka' },
               { domain: 'carrefour.pl',        url: 'https://www.carrefour.pl/',    label: 'Carrefour' },
-            ].map(({ domain, url, label }) => (
+            ]).map(({ domain, url, label }) => (
               <a key={label} href={url} target="_blank" rel="noreferrer"
                 style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 6, textDecoration: 'none', background: '#111827', border: '1px solid #374151', borderRadius: 8, padding: '10px 8px', transition: 'border-color 0.15s', minWidth: 0 }}
                 onMouseEnter={e => e.currentTarget.style.borderColor = '#0d9488'}
@@ -466,46 +476,46 @@ export default function Products() {
               if (parsed) setForm(f => ({ ...f, ...parsed }));
               else if (!txt.trim()) setForm(EMPTY_FORM);
             }}
-            placeholder={'Wklej produkt ze strony sklepu lub sam wpisz np:\n\nBanany Premium Owoce Auchan na wagę kiść 4-6 szt ok. 1 kg\nSprzedawcą jest Auchan Polska Sp. z o.o.\n1kg ~szacunkowa porcja 6,98 zł/kg\n1kg\n~szacunkowa porcja\n(6,98 zł/kg)\n6,98 zł\n~szacunkowa porcja\n\nBanan 1kg 7zł'}
+            placeholder={t('product_paste_ph')}
             style={{ width: '100%', boxSizing: 'border-box', minHeight: 250, padding: '8px 10px', fontSize: 12, fontFamily: 'inherit', lineHeight: 1.6, resize: 'none', background: '#111827', border: '1px solid #374151', color: '#e2e8f0', borderRadius: 7, outline: 'none' }}
             onFocus={e => e.target.style.borderColor = '#0d9488'}
             onBlur={e => e.target.style.borderColor = '#374151'}
           />
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              <div style={{ fontSize: 13, color: '#e2e8f0', fontWeight: 600 }}>Sprawdź czy dane są poprawne:</div>
+              <div style={{ fontSize: 13, color: '#e2e8f0', fontWeight: 600 }}>{t('check_data_label')}</div>
               <div>
-                <div style={fl}>Nazwa produktu</div>
+                <div style={fl}>{t('product_name_lbl')}</div>
                 <input value={form.name} maxLength={50} onChange={e => setForm({ ...form, name: e.target.value.slice(0, 50) })}
                   style={{ width: '100%', boxSizing: 'border-box' }} />
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 8, alignItems: 'end' }}>
                 <div>
-                  <div style={fl}>Cena / kg (zł)</div>
+                  <div style={fl}>{t('price_per_kg_lbl')}</div>
                   <input type="number" className="no-spin" step="0.01" min="0" max="9999" value={form.package_price}
                     onChange={e => setForm({ ...form, package_price: numClamp(e.target.value, 9999) })}
-                    placeholder="np. 3.49" style={{ width: '100%', boxSizing: 'border-box' }} />
+                    placeholder={t('price_ph')} style={{ width: '100%', boxSizing: 'border-box' }} />
                 </div>
                 <div style={{ display: 'flex', borderRadius: 7, overflow: 'hidden', border: '1px solid #374151' }}>
                   <button type="button" onClick={() => setForm(f => ({ ...f, sold_by_weight: false }))}
                     style={{ padding: '9px 10px', border: 'none', borderRight: '1px solid #374151', cursor: 'pointer', fontSize: 11, fontWeight: 600, transition: 'all 0.15s', whiteSpace: 'nowrap',
                       background: !form.sold_by_weight ? '#1e3a3a' : 'transparent', color: !form.sold_by_weight ? '#2dd4bf' : '#6b7280' }}>
-                    W opak.
+                    {t('pkg_btn')}
                   </button>
                   <button type="button" onClick={() => setForm(f => ({ ...f, sold_by_weight: true, unit: 'g', package_weight: '' }))}
                     style={{ padding: '9px 10px', border: 'none', cursor: 'pointer', fontSize: 11, fontWeight: 600, transition: 'all 0.15s', whiteSpace: 'nowrap',
                       background: !!form.sold_by_weight ? '#1e3a3a' : 'transparent', color: !!form.sold_by_weight ? '#2dd4bf' : '#6b7280' }}>
-                    Na wagę
+                    {t('weight_btn')}
                   </button>
                 </div>
               </div>
               {!form.sold_by_weight && (
                 <div>
-                  <div style={fl}>Pojemność opakowania</div>
+                  <div style={fl}>{t('pkg_capacity_lbl')}</div>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 8, alignItems: 'stretch' }}>
                     <input type="number" className="no-spin" min="0" max="99999" value={form.package_weight}
                       onChange={e => setForm({ ...form, package_weight: numClamp(e.target.value) })}
-                      placeholder="np. 1000" style={{ width: '100%', boxSizing: 'border-box' }} />
+                      placeholder={t('pkg_ph')} style={{ width: '100%', boxSizing: 'border-box' }} />
                     <div style={{ display: 'flex', gap: 4, alignItems: 'stretch' }}>
                       {['g', 'kg', 'ml', 'l', 'szt'].map(u => (
                         <button key={u} type="button" onClick={() => setForm(f => ({ ...f, unit: u }))}
@@ -520,9 +530,9 @@ export default function Products() {
                 </div>
               )}
               <div style={{ display: 'flex', gap: 8, marginTop: 'auto' }}>
-                <button className="btn btn-primary" onClick={handleSubmit} style={{ flex: 1 }}>Zapisz</button>
+                <button className="btn btn-primary" onClick={handleSubmit} style={{ flex: 1 }}>{t('save_btn')}</button>
                 <button className="btn" onClick={() => { setPasteText(''); setForm(EMPTY_FORM); }}
-                  style={{ background: '#374151', color: '#9ca3af' }}>Anuluj</button>
+                  style={{ background: '#374151', color: '#9ca3af' }}>{t('cancel')}</button>
               </div>
             </div>
         </div>
@@ -544,7 +554,7 @@ export default function Products() {
                   {selectedFile ? (
                     <>
                       <div style={{ fontWeight: 600, color: '#2dd4bf', marginBottom: 2 }}>
-                        {isImageFile(selectedFile) ? 'Opcja 1: ' : 'Opcja 2: '}{selectedFile.name}
+                        {isImageFile(selectedFile) ? t('opt1_short') + ' ' : t('opt2_short') + ' '}{selectedFile.name}
                       </div>
                       <div style={{ fontSize: 11, color: '#6b7280' }}>{t('click_change')}</div>
                     </>
@@ -579,11 +589,11 @@ export default function Products() {
 
           <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: '12px 14px', fontSize: 12, color: '#9ca3af', lineHeight: 1.6 }}>
             <div style={{ fontSize: 14, fontWeight: 700, color: '#0d9488', marginBottom: 4 }}>{t('macro_auto_title')}</div>
-            Po dodaniu produktu wartości Kcal, Białka, Tłuszczów i Węglowodanów automatycznie zostaną pobrane z bazy{' '}
+            {t('macro_auto_desc')}{' '}
             <a href="https://world.openfoodfacts.org/" target="_blank" rel="noreferrer"
               style={{ color: '#2dd4bf', textDecoration: 'underline', cursor: 'pointer' }}>Open Food Facts</a>.
             <div style={{ marginTop: 6, color: '#6b7280' }}>
-              Chcesz je zmienić? Kliknij w produkt na liście poniżej, żeby otworzyć edycję.
+              {t('macro_edit_hint')}
             </div>
           </div>
         </div>
@@ -601,21 +611,21 @@ export default function Products() {
               <div style={{ fontWeight: 700, fontSize: 12, color: '#e2e8f0', marginBottom: 8 }}>{t('opt1_title')}</div>
               <ol style={{ margin: '0 0 8px', paddingLeft: 18, color: '#9ca3af', fontSize: 12, lineHeight: 1.8 }}>
                 <li>{t('opt1_s1')}</li>
-                <li>Kliknij{' '}
-                  <span style={{ display:'inline-flex', alignItems:'center', background:'#1e3a3a', color:'#2dd4bf', border:'1px solid #374151', borderRadius:4, padding:'2px 7px', fontSize:11, fontWeight:700, verticalAlign:'middle', margin:'0 2px' }}>Zastosuj przez AI</span>
+                <li>{t('opt1_s2_pre')}{' '}
+                  <span style={{ display:'inline-flex', alignItems:'center', background:'#1e3a3a', color:'#2dd4bf', border:'1px solid #374151', borderRadius:4, padding:'2px 7px', fontSize:11, fontWeight:700, verticalAlign:'middle', margin:'0 2px' }}>{t('apply_ai_label')}</span>
                   {' '}-{' '}
                   <a href="https://gemini.google.com/app" target="_blank" rel="noreferrer" style={{ color:'#2dd4bf', textDecoration:'underline' }}>Gemini</a>
-                  {' '}wyciągnie produkty i ceny
+                  {' '}{t('opt1_s2_suf')}
                 </li>
-                <li>Sprawdź dopasowania i kliknij{' '}
-                  <span style={{ display:'inline-flex', alignItems:'center', background:'#1e3a3a', color:'#2dd4bf', border:'1px solid #374151', borderRadius:4, padding:'2px 7px', fontSize:11, fontWeight:700, verticalAlign:'middle', margin:'0 2px' }}>Zastosuj zmiany</span>
+                <li>{t('opt1_s3_pre')}{' '}
+                  <span style={{ display:'inline-flex', alignItems:'center', background:'#1e3a3a', color:'#2dd4bf', border:'1px solid #374151', borderRadius:4, padding:'2px 7px', fontSize:11, fontWeight:700, verticalAlign:'middle', margin:'0 2px' }}>{t('apply_changes_label')}</span>
                 </li>
               </ol>
               <div style={{ fontSize: 11, color: '#ca8a04', marginBottom: 6 }}>
                 {t('ai_daily_lim')}{remainingImports !== null && <span>{t('ai_rem')(remainingImports)}</span>}
               </div>
               <div style={{ fontSize: 11, color: '#2dd4bf', background: '#111827', border: '1px solid #374151', borderRadius: 5, padding: '6px 10px' }}>
-                Zgubiłeś paragon? Otwórz paragon w aplikacji sklepu, zrób screenshot i wgraj
+                {t('lost_receipt_hint')}
               </div>
             </div>
 
@@ -624,15 +634,15 @@ export default function Products() {
               <div style={{ fontWeight: 700, fontSize: 12, color: '#e2e8f0', marginBottom: 8 }}>{t('opt2_title')}</div>
               <ol style={{ margin: '0 0 8px', paddingLeft: 18, color: '#9ca3af', fontSize: 12, lineHeight: 1.8 }}>
                 <li>
-                  Wymagany format:{' '}
-                  <code style={{ background: '#1e293b', color: '#2dd4bf', padding: '1px 6px', borderRadius: 3, fontFamily: 'monospace' }}>nazwa,gramatura,jednostka,cena</code>
+                  {t('opt2_required_fmt')}{' '}
+                  <code style={{ background: '#1e293b', color: '#2dd4bf', padding: '1px 6px', borderRadius: 3, fontFamily: 'monospace' }}>{t('csv_format_full')}</code>
                   <br />
-                  lub:{' '}
-                  <code style={{ background: '#1e293b', color: '#2dd4bf', padding: '1px 6px', borderRadius: 3, fontFamily: 'monospace' }}>nazwa,cena</code>
-                  {' '}<span style={{ color: '#6b7280', fontSize: 11 }}>(ręcznie wprowadź gramaturę i jednostkę)</span>
+                  {t('opt2_or')}{' '}
+                  <code style={{ background: '#1e293b', color: '#2dd4bf', padding: '1px 6px', borderRadius: 3, fontFamily: 'monospace' }}>{t('csv_format_short')}</code>
+                  {' '}<span style={{ color: '#6b7280', fontSize: 11 }}>({t('opt2_manually')})</span>
                 </li>
-                <li>Wgraj plik i kliknij{' '}
-                  <span style={{ display:'inline-flex', alignItems:'center', background:'#1e3a3a', color:'#2dd4bf', border:'1px solid #374151', borderRadius:4, padding:'2px 7px', fontSize:11, fontWeight:700, verticalAlign:'middle', margin:'0 2px' }}>Zastosuj plik</span>
+                <li>{t('opt2_upload_pre')}{' '}
+                  <span style={{ display:'inline-flex', alignItems:'center', background:'#1e3a3a', color:'#2dd4bf', border:'1px solid #374151', borderRadius:4, padding:'2px 7px', fontSize:11, fontWeight:700, verticalAlign:'middle', margin:'0 2px' }}>{t('apply_file_label')}</span>
                 </li>
               </ol>
               <div style={{ fontSize: 11, color: '#2dd4bf' }}>{t('no_lim')}</div>
@@ -643,45 +653,35 @@ export default function Products() {
           {/* Prompt box — pełna szerokość pod oboma opcjami */}
           <div style={{ marginTop: 12, fontSize: 11, color: '#2dd4bf', background: '#111827', border: '1px solid #374151', borderRadius: 5, padding: '10px 12px' }}>
             <div style={{ marginBottom: 8, color: '#9ca3af', fontSize: 12, fontWeight: 600 }}>
-              Chcesz szybko uzupełnić / zaktualizować listę produktów?
+              {t('quick_update_hint')}
             </div>
             <div style={{ marginBottom: 6, color: '#9ca3af', fontSize: 12 }}>
-              <strong style={{ color: '#e2e8f0' }}>1.</strong> Przejdź na{' '}
+              <strong style={{ color: '#e2e8f0' }}>1.</strong> {t('go_to_ai_pre')}{' '}
               <a href="https://claude.ai/" target="_blank" rel="noreferrer" style={{ color: '#2dd4bf', textDecoration: 'underline' }}>Claude</a>
               {' / '}
               <a href="https://gemini.google.com/app" target="_blank" rel="noreferrer" style={{ color: '#2dd4bf', textDecoration: 'underline' }}>Gemini</a>
               {' / '}
               <a href="https://chatgpt.com/" target="_blank" rel="noreferrer" style={{ color: '#2dd4bf', textDecoration: 'underline' }}>ChatGPT</a>
-              {' '}i wklej następujący prompt:
+              {' '}{t('go_to_ai_suf')}
             </div>
             <div style={{ position: 'relative' }}>
-              <pre style={{ background: '#1e293b', color: '#e2e8f0', borderRadius: 5, padding: '8px 10px', paddingBottom: 32, fontSize: 10, lineHeight: 1.6, whiteSpace: 'pre-wrap', wordBreak: 'break-word', margin: 0 }}>{`Jesteś asystentem do formatowania list produktów. Gdy wkleję Ci listę produktów w dowolnym formacie, zwróć TYLKO gotowy CSV w formacie:
-nazwa,gramatura,jednostka,cena
-Zasady:
-- Pierwsza linia to zawsze nagłówek: nazwa,gramatura,jednostka,cena
-- gramatura = liczba (np. 1, 0.5, 200)
-- jednostka = kg / g / l / ml / szt
-- cena = liczba z kropką (np. 4.50)
-- Jeśli czegoś brakuje: gramatura = 1, jednostka = szt, cena = 0.00
-- Żadnego komentarza -- tylko sam CSV
-
-Czekam na moją listę.`}</pre>
+              <pre style={{ background: '#1e293b', color: '#e2e8f0', borderRadius: 5, padding: '8px 10px', paddingBottom: 32, fontSize: 10, lineHeight: 1.6, whiteSpace: 'pre-wrap', wordBreak: 'break-word', margin: 0 }}>{t('products_prompt')}</pre>
               <button
                 onClick={() => {
-                  navigator.clipboard.writeText(`Jesteś asystentem do formatowania list produktów. Gdy wkleję Ci listę produktów w dowolnym formacie, zwróć TYLKO gotowy CSV w formacie:\nnazwa,gramatura,jednostka,cena\nZasady:\n- Pierwsza linia to zawsze nagłówek: nazwa,gramatura,jednostka,cena\n- gramatura = liczba (np. 1, 0.5, 200)\n- jednostka = kg / g / l / ml / szt\n- cena = liczba z kropką (np. 4.50)\n- Jeśli czegoś brakuje: gramatura = 1, jednostka = szt, cena = 0.00\n- Żadnego komentarza -- tylko sam CSV\n\nCzekam na moją listę.`);
+                  navigator.clipboard.writeText(t('products_prompt'));
                   setPromptCopied(true);
                   setTimeout(() => setPromptCopied(false), 2000);
                 }}
                 style={{ position: 'absolute', bottom: 6, right: 6, padding: '3px 10px', fontSize: 10, fontWeight: 600, background: promptCopied ? '#0d9488' : '#374151', color: promptCopied ? '#1f2937' : '#9ca3af', border: 'none', borderRadius: 4, cursor: 'pointer', transition: 'all 0.2s' }}
               >
-                {promptCopied ? '✓ Skopiowano!' : 'Kopiuj prompt'}
+                {promptCopied ? t('btn_copied') : t('copy_prompt_btn')}
               </button>
             </div>
-            <div style={{ marginTop: 6, color: '#9ca3af', fontSize: 12 }}><strong style={{ color: '#e2e8f0' }}>2.</strong> Wklej listę produktów / podaj produkty</div>
-            <div style={{ marginTop: 4, color: '#9ca3af', fontSize: 12 }}><strong style={{ color: '#e2e8f0' }}>3.</strong> Utwórz nowy dokument tekstowy</div>
-            <div style={{ marginTop: 4, color: '#9ca3af', fontSize: 12 }}><strong style={{ color: '#e2e8f0' }}>4.</strong> Skopiuj odpowiedź z Claude / Gemini / ChatGPT do dokumentu</div>
-            <div style={{ marginTop: 4, color: '#9ca3af', fontSize: 12 }}><strong style={{ color: '#e2e8f0' }}>5.</strong> Zapisz dokument z odpowiedzią jako <code style={{ background: '#1e293b', color: '#2dd4bf', padding: '1px 5px', borderRadius: 3 }}>twojanazwa.txt</code></div>
-            <div style={{ marginTop: 4, color: '#9ca3af', fontSize: 12 }}><strong style={{ color: '#e2e8f0' }}>6.</strong> Zapisany dokument następnie przeciągnij w okno <strong>Kliknij lub przeciągnij plik</strong></div>
+            <div style={{ marginTop: 6, color: '#9ca3af', fontSize: 12 }}><strong style={{ color: '#e2e8f0' }}>2.</strong> {t('paste_products_step')}</div>
+            <div style={{ marginTop: 4, color: '#9ca3af', fontSize: 12 }}><strong style={{ color: '#e2e8f0' }}>3.</strong> {t('create_doc_step')}</div>
+            <div style={{ marginTop: 4, color: '#9ca3af', fontSize: 12 }}><strong style={{ color: '#e2e8f0' }}>4.</strong> {t('copy_response_step')}</div>
+            <div style={{ marginTop: 4, color: '#9ca3af', fontSize: 12 }}><strong style={{ color: '#e2e8f0' }}>5.</strong> {t('save_doc_step_pre')} <code style={{ background: '#1e293b', color: '#2dd4bf', padding: '1px 5px', borderRadius: 3 }}>{lang === 'en' ? 'yourname.txt' : 'twojanazwa.txt'}</code></div>
+            <div style={{ marginTop: 4, color: '#9ca3af', fontSize: 12 }}><strong style={{ color: '#e2e8f0' }}>6.</strong> {t('drag_doc_step')} <strong>{t('click_drag_file')}</strong></div>
           </div>
         </div>
       </div>}
@@ -690,7 +690,7 @@ Czekam na moją listę.`}</pre>
           <div style={{ padding: '20px 24px' }}>
             <p style={{ fontSize: 13, color: '#9ca3af', marginBottom: 12 }}>
               Sprawdź dopasowania i uzupełnij dane. Zaznacz{' '}
-              <strong style={{ color: '#e2e8f0' }}>Na wagę</strong> dla warzyw, owoców i mięsa, podaj wtedy cenę za kg.
+              <strong style={{ color: '#e2e8f0' }}>{t('weight_btn')}</strong> dla warzyw, owoców i mięsa, podaj wtedy cenę za kg.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
               {importItems.map((item, i) => {
@@ -729,9 +729,9 @@ Czekam na moją listę.`}</pre>
                           {productList.map(p => <option key={p.id} value={String(p.id)}>{p.name}</option>)}
                         </select>
                       </div>
-                      {/* W opak. / Na wagę */}
+                      {/* {t('pkg_btn')} / {t('weight_btn')} */}
                       <div style={{ display: 'flex', borderRadius: 6, overflow: 'hidden', border: '1px solid #374151', flexShrink: 0 }}>
-                        {[['W opak.', false], ['Na wagę', true]].map(([label, val]) => (
+                        {[[t('pkg_btn'), false], [t('weight_btn'), true]].map(([label, val]) => (
                           <button key={label} type="button" onClick={() => upd({ sold_by_weight: val })}
                             style={{ padding: '4px 10px', border: 'none', borderRight: !val ? '1px solid #374151' : 'none', cursor: 'pointer', fontSize: 11, fontWeight: 600, whiteSpace: 'nowrap', transition: 'all 0.15s',
                               background: sbw === val ? '#1e3a3a' : 'transparent',
@@ -740,7 +740,7 @@ Czekam na moją listę.`}</pre>
                           </button>
                         ))}
                       </div>
-                      {/* Pojemność + jednostka (tylko W opak.) */}
+                      {/* Pojemność + jednostka (tylko {t('pkg_btn')}) */}
                       {!sbw && <>
                         <input type="number" step="1" min="0" max="99999" value={item.weight}
                           onChange={e => upd({ weight: Math.min(99999, parseFloat(e.target.value) || 0) })}
@@ -761,7 +761,7 @@ Czekam na moją listę.`}</pre>
                         onChange={e => upd({ price: Math.min(99999, parseFloat(e.target.value) || 0) })}
                         className="no-spin" style={{ ...inputSt, width: 50, flex: '0 0 50px', boxSizing: 'border-box' }} />
                       <span style={{ fontSize: 11, color: sbw ? '#2dd4bf' : '#6b7280', whiteSpace: 'nowrap', flexShrink: 0 }}>
-                        {sbw ? 'zł / kg' : 'zł / opak.'}
+                        {sbw ? `${t('currency')} / kg` : `${t('currency')} / opak.`}
                       </span>
                     </div>
                     {isNew && <div style={{ fontSize: 10, color: '#6b7280', marginTop: 5 }}>Brak przypisania — przypisz do podobnego produktu lub zostaw <span style={{ color: '#2dd4bf' }}>Utwórz nowy produkt</span>, a zostanie on dodany do listy Produkty.</div>}
@@ -792,7 +792,7 @@ Czekam na moją listę.`}</pre>
             onClick={() => selectionMode ? exitSelection() : (setSelectionMode(true), setEditId(null))}
             style={{ padding: '5px 11px', background: selectionMode ? '#1e3a3a' : 'transparent', border: `1px solid ${selectionMode ? '#0d9488' : '#374151'}`, borderRadius: 6, cursor: 'pointer', fontSize: 12, fontWeight: 600, color: selectionMode ? '#2dd4bf' : '#6b7280', transition: 'all 0.15s', whiteSpace: 'nowrap' }}
           >
-            {selectionMode ? 'Odznacz' : 'Zaznacz'}
+            {selectionMode ? t('deselect_label') : t('select_label')}
           </button>
 
           {/* Usuń wszystkie / Usuń wybrane */}
@@ -802,12 +802,12 @@ Czekam na moją listę.`}</pre>
                 if (selectedIds.size > 0) handleDeleteSelected();
               } else {
                 showConfirm({
-                  title: 'Usuń wszystkie produkty',
+                  title: t('del_all_products_title'),
                   message: `Czy na pewno chcesz usunąć wszystkie ${productList.length} produktów? Tej operacji nie można cofnąć.`,
-                  confirmLabel: 'Usuń wszystkie',
+                  confirmLabel: t('del_all_products'),
                   onConfirm: async () => {
-                    try { await api.deleteAll(); showSuccess('Wszystkie produkty usunięte'); loadProducts(); }
-                    catch { showError('Błąd podczas usuwania produktów'); }
+                    try { await api.deleteAll(); showSuccess(t('all_products_deleted')); loadProducts(); }
+                    catch { showError(t('del_during_err')); }
                   },
                 });
               }
@@ -817,7 +817,7 @@ Czekam na moją listę.`}</pre>
             onMouseEnter={e => { if (!(selectionMode && selectedIds.size === 0)) { e.currentTarget.style.borderColor = '#ef4444'; e.currentTarget.style.color = '#ef4444'; } }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = '#374151'; e.currentTarget.style.color = selectionMode && selectedIds.size === 0 ? '#374151' : '#6b7280'; }}
           >
-            {selectionMode && selectedIds.size > 0 ? `Usuń wybrane (${selectedIds.size})` : 'Usuń wszystkie'}
+            {selectionMode && selectedIds.size > 0 ? `Usuń wybrane (${selectedIds.size})` : t('del_all_products')}
           </button>
 
           {/* Chevron */}
@@ -832,7 +832,7 @@ Czekam na moją listę.`}</pre>
             type="text"
             value={search}
             onChange={e => setSearch(e.target.value)}
-            placeholder="Szukaj produktu..."
+            placeholder={t('search_product_ph')}
             style={{ width: '100%', padding: '7px 12px', border: '1px solid #374151', borderRadius: 6, fontSize: 13, boxSizing: 'border-box', outline: 'none' }}
             onFocus={e => e.target.style.borderColor = '#0d9488'}
             onBlur={e => e.target.style.borderColor = '#374151'}
@@ -840,7 +840,7 @@ Czekam na moją listę.`}</pre>
         </div>
         <table style={{ borderCollapse: 'separate', borderSpacing: '0 3px' }}>
           <thead>
-            <tr><th>{t('col_name')}</th><th>{t('col_kcal')}</th><th>{t('col_macro')}</th><th>Pojemność Opakowania</th><th>Cena (opak/kg)</th><th></th></tr>
+            <tr><th>{t('col_name')}</th><th>{t('col_kcal')}</th><th>{t('col_macro')}</th><th>{t('col_pkg_capacity')}</th><th>{t('col_price_opak_kg')}</th><th></th></tr>
           </thead>
           <tbody>
             {filteredProducts.slice(0, visibleCount).map(p => {
@@ -866,9 +866,9 @@ Czekam na moją listę.`}</pre>
                     <td style={{ fontSize: 13, color: p.kcal ? '#9ca3af' : '#4b5563' }}>{p.kcal != null ? `${p.kcal} kcal` : '-'}</td>
                     <td><MacroDisplay p={p} /></td>
                     <td style={{ fontSize: 13, color: '#9ca3af' }}>
-                      {p.sold_by_weight ? 'Na wagę' : p.package_weight ? `${p.package_weight} ${p.unit || 'g'}` : '-'}
+                      {p.sold_by_weight ? t('weight_btn') : p.package_weight ? `${p.package_weight} ${p.unit || 'g'}` : '-'}
                     </td>
-                    <td style={{ fontSize: 13, color: p.price > 0 ? '#9ca3af' : '#4b5563' }}>{displayPrice(p)}</td>
+                    <td style={{ fontSize: 13, color: p.price > 0 ? '#9ca3af' : '#4b5563' }}>{displayPrice(p, t('currency'))}</td>
                     <td style={{ display: 'flex', gap: 6, justifyContent: 'flex-end' }} onClick={e => e.stopPropagation()}>
                       <button className="btn btn-danger" style={{ padding: '5px 12px', fontSize: 13 }} onClick={() => handleDelete(p.id, p.name)}>{t('del_btn')}</button>
                     </td>
@@ -913,7 +913,7 @@ Czekam na moją listę.`}</pre>
                         </div>
                         <button onClick={handleAutoFill} disabled={lookingUp === editId}
                           style={{ padding: '3px 7px', fontSize: 10, background: '#0d9488', color: '#1f2937', border: 'none', borderRadius: 5, cursor: 'pointer', whiteSpace: 'nowrap' }}>
-                          {lookingUp === editId ? '⏳...' : 'Pobierz makra'}
+                          {lookingUp === editId ? '⏳...' : t('fetch_macro_btn')}
                         </button>
                       </td>
                       {/* Pojemność / typ */}
@@ -927,7 +927,7 @@ Czekam na moją listę.`}</pre>
                           <button type="button" onClick={() => setEditForm(f => ({ ...f, sold_by_weight: true, unit: 'g', package_weight: 1000 }))}
                             style={{ padding: '4px 8px', border: 'none', cursor: 'pointer', fontSize: 10, fontWeight: 600,
                               background: !!editForm.sold_by_weight ? '#0d9488' : '#2d3748', color: !!editForm.sold_by_weight ? '#1f2937' : '#9ca3af' }}>
-                            Na wagę
+                            {t('weight_btn')}
                           </button>
                         </div>
                         {!editForm.sold_by_weight && (
@@ -941,7 +941,7 @@ Czekam na moją listę.`}</pre>
                       </td>
                       {/* Cena */}
                       <td style={{ verticalAlign: 'top', padding: '8px 6px' }}>
-                        <div style={fl}>{editForm.sold_by_weight ? 'Cena/kg' : 'Cena/op.'}</div>
+                        <div style={fl}>{editForm.sold_by_weight ? t('price_per_kg_lbl') : t('price_per_opak_lbl')}</div>
                         <input type="number" className="no-spin" step="0.01" min="0" max="9999" value={editForm.package_price}
                           onChange={e => setEditForm({ ...editForm, package_price: numClamp(e.target.value, 9999) })}
                           style={{ ...s, width: '100%', boxSizing: 'border-box' }} />

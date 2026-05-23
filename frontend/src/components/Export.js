@@ -2,52 +2,68 @@ import React, { useState, useEffect } from 'react';
 import { mealPlan as api, recipes as recipesApi } from '../api';
 import { useMember } from '../contexts/MemberContext';
 import { useToast } from '../contexts/ToastContext';
-import { dateToStr, toEU, getCurrentWeek, getCurrentMonth, getCalGrid, MONTH_NAMES_PL } from '../utils/dates';
+import { useLanguage } from '../contexts/LanguageContext';
+import { dateToStr, toEU, getCurrentWeek, getCurrentMonth, getCalGrid } from '../utils/dates';
+import { fuzzySearch } from '../utils/search';
 
 // ─── Drinks recalc from localStorage ─────────────────────────────────────────
-function calcDrinks(days) {
+function calcDrinks(days, lang) {
   try {
     const saved = JSON.parse(localStorage.getItem('drinksConfig') || '{}');
     const cukierPrice = parseFloat(localStorage.getItem('drinksCukierPrice')) || 3.5;
     const slodzikPrice = parseFloat(localStorage.getItem('drinksSlodzikPrice')) || 15;
     const n = v => parseFloat(v) || 0;
     const priceForType = t => (3/1000) * (t === 'cukier' ? cukierPrice : slodzikPrice);
+    const L = lang === 'en';
+    const sugar = L ? 'Sugar' : 'Cukier';
+    const sweetener = L ? 'Sweetener' : 'Słodzik';
     const list = [];
     const d = saved;
     if (d.kawa?.enabled) {
       const gPerDay = n(d.kawa.cupsPerDay)*n(d.kawa.spoonsPerCup)*3;
       const daily = (gPerDay/Math.max(1,n(d.kawa.pkgG)))*n(d.kawa.pkgPrice);
-      list.push({ name:'Kawa', daily, total: daily*days });
-      if (d.kawa.sugarType) { const sd = n(d.kawa.cupsPerDay)*n(d.kawa.sugarSpoons)*priceForType(d.kawa.sugarType); list.push({ name:`${d.kawa.sugarType==='cukier'?'Cukier':'Słodzik'} (kawa)`, daily:sd, total:sd*days }); }
+      list.push({ name: L?'Coffee':'Kawa', daily, total: daily*days });
+      if (d.kawa.sugarType) { const sd = n(d.kawa.cupsPerDay)*n(d.kawa.sugarSpoons)*priceForType(d.kawa.sugarType); list.push({ name:`${d.kawa.sugarType==='cukier'?sugar:sweetener} (${L?'coffee':'kawa'})`, daily:sd, total:sd*days }); }
     }
     if (d.herbata?.enabled) {
       const daily = (n(d.herbata.cupsPerDay)/Math.max(1,n(d.herbata.sachetPerPkg)))*n(d.herbata.pkgPrice);
-      list.push({ name:'Herbata', daily, total: daily*days });
-      if (d.herbata.sugarType) { const sd = n(d.herbata.cupsPerDay)*n(d.herbata.sugarSpoons)*priceForType(d.herbata.sugarType); list.push({ name:`${d.herbata.sugarType==='cukier'?'Cukier':'Słodzik'} (herbata)`, daily:sd, total:sd*days }); }
+      list.push({ name: L?'Tea':'Herbata', daily, total: daily*days });
+      if (d.herbata.sugarType) { const sd = n(d.herbata.cupsPerDay)*n(d.herbata.sugarSpoons)*priceForType(d.herbata.sugarType); list.push({ name:`${d.herbata.sugarType==='cukier'?sugar:sweetener} (${L?'tea':'herbata'})`, daily:sd, total:sd*days }); }
     }
-    if (d.napoje?.enabled) { const daily=(n(d.napoje.litersPerDay)/Math.max(0.001,n(d.napoje.pkgL)))*n(d.napoje.pkgPrice); list.push({name:'Napoje',daily,total:daily*days}); }
-    if (d.woda?.enabled)   { const daily=(n(d.woda.litersPerDay)/Math.max(0.001,n(d.woda.pkgL)))*n(d.woda.pkgPrice); list.push({name:'Woda',daily,total:daily*days}); }
+    if (d.napoje?.enabled) { const daily=(n(d.napoje.litersPerDay)/Math.max(0.001,n(d.napoje.pkgL)))*n(d.napoje.pkgPrice); list.push({name:L?'Soft drinks':'Napoje',daily,total:daily*days}); }
+    if (d.woda?.enabled)   { const daily=(n(d.woda.litersPerDay)/Math.max(0.001,n(d.woda.pkgL)))*n(d.woda.pkgPrice); list.push({name:L?'Water':'Woda',daily,total:daily*days}); }
     if (d.sodaStream?.enabled) {
       const syrupDaily = n(d.sodaStream.litersPerDay)*(n(d.sodaStream.mlPer1L)/Math.max(1,n(d.sodaStream.syrupMl)))*n(d.sodaStream.syrupPrice);
       const cylDaily = n(d.sodaStream.cylinderDays) > 0 ? n(d.sodaStream.cylinderCost)/n(d.sodaStream.cylinderDays) : 0;
       const daily = syrupDaily + cylDaily;
-      list.push({name:'Syrop Soda Stream', daily, total:daily*days});
+      list.push({name:L?'SodaStream syrup':'Syrop Soda Stream', daily, total:daily*days});
     }
     return list;
   } catch { return []; }
 }
 
 // ─── Other expenses summary (reads from localStorage, monthly→daily) ──────────
-function calcOtherSummary(days) {
+function calcOtherSummary(days, lang) {
   try {
     const n = v => parseFloat(v) || 0;
     const saved = JSON.parse(localStorage.getItem('otherExpenses') || '{}');
+    const L = lang === 'en';
     const ORDER = [
-      ['czynsz','Czynsz'],['prad','Prąd'],['gaz_oplata','Gaz'],['media','Media'],
-      ['ogrzewanie','Ogrzewanie'],['kredyt','Kredyt'],['dziecko','Dziecko'],
-      ['zwierze','Zwierzę'],['lekarze','Lekarze i leki'],['paliwo','Paliwo'],
-      ['pranie','Pranie'],['zmywanie','Zmywanie'],['sprzatan','Sprzątanie'],
-      ['higiena','Higiena'],['biurowe','Art. biurowe'],
+      ['czynsz',    L?'Rent':'Czynsz'],
+      ['prad',      L?'Electricity':'Prąd'],
+      ['gaz_oplata',L?'Gas':'Gaz'],
+      ['media',     L?'Utilities':'Media'],
+      ['ogrzewanie',L?'Heating':'Ogrzewanie'],
+      ['kredyt',    L?'Loan':'Kredyt'],
+      ['dziecko',   L?'Child':'Dziecko'],
+      ['zwierze',   L?'Pet':'Zwierzę'],
+      ['lekarze',   L?'Medical':'Lekarze i leki'],
+      ['paliwo',    L?'Fuel':'Paliwo'],
+      ['pranie',    L?'Laundry':'Pranie'],
+      ['zmywanie',  L?'Dishwashing':'Zmywanie'],
+      ['sprzatan',  L?'Cleaning':'Sprzątanie'],
+      ['higiena',   L?'Hygiene':'Higiena'],
+      ['biurowe',   L?'Office supplies':'Art. biurowe'],
     ];
     return ORDER.map(([key, label]) => {
       const o = saved[key];
@@ -91,17 +107,26 @@ function mBmr(w,h,age,g) { const b=10*w+6.25*h-5*age; return g==='m'?b+5:b-161; 
 function mAdj(w,h)       { const hm=h/100,ibw=25*hm*hm; if(w<=ibw) return{pw:w,adjusted:false,ibw:null}; const adj=ibw+0.25*(w-ibw); return{pw:Math.round(adj),adjusted:true,ibw:Math.round(ibw)}; }
 function mCalc(w,h,tdee,g) { const{pw}=mAdj(w,h); const kcal=Math.round(tdee+g.adj); const protein=Math.round(pw*g.proteinPerKg); const fat=Math.round((g.fatPct*kcal)/9); const carbs=Math.max(0,Math.round((kcal-protein*4-fat*9)/4)); return{kcal,protein,fat,carbs}; }
 
-function generateMacroHTML({ gender, age, weight, height, activity, goal, macros, memberName }) {
+function generateMacroHTML({ gender, age, weight, height, activity, goal, macros, memberName, lang }) {
   const w=parseFloat(weight), h=parseFloat(height), a=parseInt(age), act=parseFloat(activity);
   if(!(w>0&&h>0&&a>0)||!macros) return null;
+  const L = lang === 'en';
   const bmiVal  = mBmi(w,h);
-  const bmiInfo = mBmiCat(bmiVal);
+  const bmiCat  = (() => {
+    if(bmiVal<18.5) return{label:L?'Underweight':'Niedowaga',color:'#3b82f6'};
+    if(bmiVal<25)   return{label:L?'Normal':'Norma',color:'#22c55e'};
+    if(bmiVal<30)   return{label:L?'Overweight':'Nadwaga',color:'#eab308'};
+    return{label:L?'Obese':'Otyłość',color:'#ef4444'};
+  })();
   const bmrVal  = Math.round(mBmr(w,h,a,gender));
   const tdeeVal = Math.round(bmrVal*act);
   const goalOpt = MACRO_GOALS.find(g=>g.value===goal) || MACRO_GOALS[1];
   const adjPW   = mAdj(w,h);
-  const actLabel= MACRO_ACTIVITY.find(x=>String(x.value)===String(activity))?.label || String(activity);
-  const gLabel  = gender==='m'?'Mężczyzna':'Kobieta';
+  const ACT_LABELS_EN = {'1.2':'Sedentary (desk, no exercise)','1.375':'Light activity (1–3x/week)','1.55':'Moderate (3–5x/week)','1.725':'High (6–7x/week)','1.9':'Very high (athlete / physical job)'};
+  const GOAL_LABELS_EN = {lose:'Fat loss',maintain:'Maintenance',extreme:'Aggressive cut',gain:'Muscle gain'};
+  const actLabel= L ? (ACT_LABELS_EN[String(activity)] || String(activity)) : (MACRO_ACTIVITY.find(x=>String(x.value)===String(activity))?.label || String(activity));
+  const goalLabel= L ? (GOAL_LABELS_EN[goal] || goalOpt.label) : goalOpt.label;
+  const gLabel  = gender==='m'?(L?'Male':'Mężczyzna'):(L?'Female':'Kobieta');
   const now     = new Date();
   const dateStr = `${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
   const totalKcal   = macros.kcal||1;
@@ -109,10 +134,14 @@ function generateMacroHTML({ gender, age, weight, height, activity, goal, macros
   const proteinPct  = Math.round(proteinKcal/totalKcal*100);
   const fatPct      = Math.round(fatKcal/totalKcal*100);
   const carbsPct    = 100-proteinPct-fatPct;
+  const cur = L ? '£' : 'zł';
+  const goalNote = goalOpt.adj===0
+    ? (L ? `Weight maintenance — eat as much as your TDEE (${tdeeVal} kcal)` : `Utrzymanie wagi — spożywaj tyle co TDEE (${tdeeVal} kcal)`)
+    : `${goalLabel}: ${goalOpt.adj>0?'+':''}${goalOpt.adj} ${L?'kcal/day relative to TDEE':'kcal/dzień względem TDEE'} (${tdeeVal} kcal)`;
 
   return `<!DOCTYPE html>
-<html lang="pl"><head><meta charset="UTF-8">
-<title>Karta Makro${memberName?' – '+memberName:''}</title>
+<html lang="${L?'en':'pl'}"><head><meta charset="UTF-8">
+<title>${L?'Macro Card':'Karta Makro'}${memberName?' – '+memberName:''}</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:#fff;color:#111827;padding:32px 40px;max-width:800px;margin:0 auto}
@@ -153,72 +182,74 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#fff;color:#111827;p
 .print-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 auto 24px;padding:10px 32px;background:#0d9488;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer}
 @media print{.print-btn{display:none!important}body{padding:12px}.card{break-inside:avoid}}
 </style></head><body>
-<button class="print-btn" onclick="window.print()">🖨️ Drukuj / Zapisz PDF</button>
+<button class="print-btn" onclick="window.print()">🖨️ ${L?'Print / Save as PDF':'Drukuj / Zapisz PDF'}</button>
 <div class="header">
   <div class="header-left">
-    <h1>Karta Makro</h1>
+    <h1>${L?'Macro Card':'Karta Makro'}</h1>
     ${memberName?`<div class="member">${memberName}</div>`:''}
   </div>
-  <div class="header-right">Wygenerowano: ${dateStr}<br>Cel: ${goalOpt.label}</div>
+  <div class="header-right">${L?'Generated':'Wygenerowano'}: ${dateStr}<br>${L?'Goal':'Cel'}: ${goalLabel}</div>
 </div>
 <div class="grid-2">
   <div class="card">
-    <div class="card-title">Dane osobowe</div>
-    <div class="info-row"><span class="info-label">Płeć</span><span class="info-value">${gLabel}</span></div>
-    <div class="info-row"><span class="info-label">Wiek</span><span class="info-value">${age} lat</span></div>
-    <div class="info-row"><span class="info-label">Masa ciała</span><span class="info-value">${weight} kg</span></div>
-    <div class="info-row"><span class="info-label">Wzrost</span><span class="info-value">${height} cm</span></div>
-    <div class="info-row"><span class="info-label">Aktywność</span><span class="info-value">${actLabel}</span></div>
-    <div class="info-row"><span class="info-label">Cel</span><span class="info-value">${goalOpt.label}</span></div>
+    <div class="card-title">${L?'Personal data':'Dane osobowe'}</div>
+    <div class="info-row"><span class="info-label">${L?'Gender':'Płeć'}</span><span class="info-value">${gLabel}</span></div>
+    <div class="info-row"><span class="info-label">${L?'Age':'Wiek'}</span><span class="info-value">${age} ${L?'yrs':'lat'}</span></div>
+    <div class="info-row"><span class="info-label">${L?'Weight':'Masa ciała'}</span><span class="info-value">${weight} kg</span></div>
+    <div class="info-row"><span class="info-label">${L?'Height':'Wzrost'}</span><span class="info-value">${height} cm</span></div>
+    <div class="info-row"><span class="info-label">${L?'Activity':'Aktywność'}</span><span class="info-value">${actLabel}</span></div>
+    <div class="info-row"><span class="info-label">${L?'Goal':'Cel'}</span><span class="info-value">${goalLabel}</span></div>
   </div>
   <div class="card">
-    <div class="card-title">BMI i zapotrzebowanie kaloryczne</div>
+    <div class="card-title">${L?'BMI and caloric needs':'BMI i zapotrzebowanie kaloryczne'}</div>
     <div class="bmi-row">
-      <div class="bmi-number" style="color:${bmiInfo.color}">${bmiVal.toFixed(1)}</div>
+      <div class="bmi-number" style="color:${bmiCat.color}">${bmiVal.toFixed(1)}</div>
       <div>
-        <div class="bmi-badge" style="background:${bmiInfo.color}22;color:${bmiInfo.color}">${bmiInfo.label}</div>
-        <div class="bmi-norm">Norma: 18,5 – 24,9</div>
+        <div class="bmi-badge" style="background:${bmiCat.color}22;color:${bmiCat.color}">${bmiCat.label}</div>
+        <div class="bmi-norm">${L?'Normal: 18.5 – 24.9':'Norma: 18,5 – 24,9'}</div>
       </div>
     </div>
-    <div class="energy-row"><span class="energy-label">BMR</span><span class="energy-val" style="color:#374151">${bmrVal}</span><span class="energy-unit">kcal / podstawowe</span></div>
-    <div class="energy-row"><span class="energy-label">TDEE</span><span class="energy-val" style="color:#0d9488">${tdeeVal}</span><span class="energy-unit">kcal / z aktywnością (×${act})</span></div>
-    <div class="warn-red" style="margin-top:10px">⚠ Nie schodź poniżej BMR (${bmrVal} kcal/dzień)</div>
+    <div class="energy-row"><span class="energy-label">BMR</span><span class="energy-val" style="color:#374151">${bmrVal}</span><span class="energy-unit">kcal / ${L?'basal':'podstawowe'}</span></div>
+    <div class="energy-row"><span class="energy-label">TDEE</span><span class="energy-val" style="color:#0d9488">${tdeeVal}</span><span class="energy-unit">kcal / ${L?'with activity':'z aktywnością'} (×${act})</span></div>
+    <div class="warn-red" style="margin-top:10px">⚠ ${L?`Don't go below BMR (${bmrVal} kcal/day)`:`Nie schodź poniżej BMR (${bmrVal} kcal/dzień)`}</div>
   </div>
 </div>
 <div class="card">
-  <div class="card-title">Cel dzienny makro</div>
-  <div class="kcal-big">${macros.kcal} <span class="kcal-unit">kcal/dzień</span></div>
-  <div class="goal-note">${goalOpt.adj===0?'Utrzymanie wagi — spożywaj tyle co TDEE ('+tdeeVal+' kcal)':goalOpt.label+': '+(goalOpt.adj>0?'+':'')+goalOpt.adj+' kcal/dzień względem TDEE ('+tdeeVal+' kcal)'}</div>
+  <div class="card-title">${L?'Daily macro goal':'Cel dzienny makro'}</div>
+  <div class="kcal-big">${macros.kcal} <span class="kcal-unit">${L?'kcal/day':'kcal/dzień'}</span></div>
+  <div class="goal-note">${goalNote}</div>
   <div class="macro-bar">
     <div style="width:${proteinPct}%;background:#0d9488"></div>
     <div style="width:${fatPct}%;background:#f59e0b"></div>
     <div style="width:${carbsPct}%;background:#6366f1"></div>
   </div>
   <div class="macro-grid">
-    <div class="macro-item"><span class="macro-dot" style="background:#0d9488"></span><div class="macro-name">Białko</div><div class="macro-g" style="color:#0d9488">${macros.protein}g</div><div class="macro-sub">${proteinPct}% · ${proteinKcal} kcal</div></div>
-    <div class="macro-item"><span class="macro-dot" style="background:#f59e0b"></span><div class="macro-name">Tłuszcze</div><div class="macro-g" style="color:#f59e0b">${macros.fat}g</div><div class="macro-sub">${fatPct}% · ${fatKcal} kcal</div></div>
-    <div class="macro-item"><span class="macro-dot" style="background:#6366f1"></span><div class="macro-name">Węglowodany</div><div class="macro-g" style="color:#6366f1">${macros.carbs}g</div><div class="macro-sub">${carbsPct}% · ${carbsKcal} kcal</div></div>
+    <div class="macro-item"><span class="macro-dot" style="background:#0d9488"></span><div class="macro-name">${L?'Protein':'Białko'}</div><div class="macro-g" style="color:#0d9488">${macros.protein}g</div><div class="macro-sub">${proteinPct}% · ${proteinKcal} kcal</div></div>
+    <div class="macro-item"><span class="macro-dot" style="background:#f59e0b"></span><div class="macro-name">${L?'Fat':'Tłuszcze'}</div><div class="macro-g" style="color:#f59e0b">${macros.fat}g</div><div class="macro-sub">${fatPct}% · ${fatKcal} kcal</div></div>
+    <div class="macro-item"><span class="macro-dot" style="background:#6366f1"></span><div class="macro-name">${L?'Carbs':'Węglowodany'}</div><div class="macro-g" style="color:#6366f1">${macros.carbs}g</div><div class="macro-sub">${carbsPct}% · ${carbsKcal} kcal</div></div>
   </div>
-  ${adjPW.adjusted?`<div class="adj-note">ℹ Białko liczone od masy skorygowanej <strong>${adjPW.pw} kg</strong> (protokół dla nadwagi: idealna waga ${adjPW.ibw} kg + 25% nadwyżki), nie od rzeczywistych ${weight} kg.</div>`:''}
-  ${goalOpt.warn?`<div class="warn-red">⚠ Ostra redukcja (−1000 kcal/dzień) jest podejściem ekstremalnym i nie jest zalecana bez nadzoru specjalisty.</div>`:''}
+  ${adjPW.adjusted?`<div class="adj-note">ℹ ${L?`Protein calculated from adjusted body weight <strong>${adjPW.pw} kg</strong> (overweight protocol: ideal weight ${adjPW.ibw} kg + 25% of excess), not from actual ${weight} kg.`:`Białko liczone od masy skorygowanej <strong>${adjPW.pw} kg</strong> (protokół dla nadwagi: idealna waga ${adjPW.ibw} kg + 25% nadwyżki), nie od rzeczywistych ${weight} kg.`}</div>`:''}
+  ${goalOpt.warn?`<div class="warn-red">⚠ ${L?'Aggressive cut (−1000 kcal/day) is an extreme approach and is not recommended without specialist supervision.':'Ostra redukcja (−1000 kcal/dzień) jest podejściem ekstremalnym i nie jest zalecana bez nadzoru specjalisty.'}</div>`:''}
 </div>
-<div class="footer">Wygenerowano przez aplikację Meal Planner · ${dateStr}</div>
+<div class="footer">${L?'Generated by OnTrack':'Wygenerowano przez aplikację OnTrack'} · ${dateStr}</div>
 </body></html>`;
 }
 
 // ─── Wydatki HTML generator (podsumowanie kategorii) ─────────────────────────
-function generateWydatkiHTML({ categories, total, periodLabel, memberLabel }) {
+function generateWydatkiHTML({ categories, total, periodLabel, memberLabel, lang }) {
+  const L = lang === 'en';
+  const cur = L ? '£' : 'zł';
   const now = new Date();
   const dateStr = `${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
   const rows = categories.map((cat, i) =>
     `<div class="cat-row ${i % 2 === 1 ? 'cat-alt' : ''}">
       <span class="cat-label">${cat.label}</span>
-      <span class="cat-value">${cat.value.toFixed(2)} zł</span>
+      <span class="cat-value">${cat.value.toFixed(2)} ${cur}</span>
     </div>`
   ).join('');
   return `<!DOCTYPE html>
-<html lang="pl"><head><meta charset="UTF-8">
-<title>Podsumowanie wydatków</title>
+<html lang="${L?'en':'pl'}"><head><meta charset="UTF-8">
+<title>${L?'Expense Summary':'Podsumowanie wydatków'}</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:#fff;color:#111827;padding:32px 40px;max-width:600px;margin:0 auto}
@@ -238,26 +269,27 @@ h1{font-size:22px;font-weight:800;color:#0d9488}
 .footer{margin-top:24px;padding-top:10px;border-top:1px solid #f3f4f6;font-size:10px;color:#d1d5db;text-align:center}
 @media print{.print-btn{display:none!important}body{padding:12px}}
 </style></head><body>
-<button class="print-btn" onclick="window.print()">Drukuj / Zapisz PDF</button>
+<button class="print-btn" onclick="window.print()">${L?'Print / Save as PDF':'Drukuj / Zapisz PDF'}</button>
 <div class="hdr">
   <div>
-    <h1>Podsumowanie wydatków</h1>
+    <h1>${L?'Expense Summary':'Podsumowanie wydatków'}</h1>
     <div class="period">${periodLabel}</div>
     ${memberLabel ? `<div class="member">${memberLabel}</div>` : ''}
   </div>
-  <div class="meta">Wygenerowano: ${dateStr}</div>
+  <div class="meta">${L?'Generated':'Wygenerowano'}: ${dateStr}</div>
 </div>
 ${rows}
 <div class="cat-total">
-  <span class="cat-total-label">Łącznie</span>
-  <span class="cat-total-value">${total.toFixed(2)} zł</span>
+  <span class="cat-total-label">${L?'Total':'Łącznie'}</span>
+  <span class="cat-total-value">${total.toFixed(2)} ${cur}</span>
 </div>
-<div class="footer">Wygenerowano przez aplikację Meal Planner · ${dateStr}</div>
+<div class="footer">${L?'Generated by OnTrack':'Wygenerowano przez aplikację OnTrack'} · ${dateStr}</div>
 </body></html>`;
 }
 
 // ─── Karta Kalendarza HTML generator ─────────────────────────────────────────
-function generateKalendarzHTML({ mealsByDate, start, end, periodLabel, memberName }) {
+function generateKalendarzHTML({ mealsByDate, start, end, periodLabel, memberName, lang }) {
+  const L = lang === 'en';
   const now = new Date();
   const dateStr = `${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
   const todayStr = dateToStr(now);
@@ -273,10 +305,14 @@ function generateKalendarzHTML({ mealsByDate, start, end, periodLabel, memberNam
   const cur = new Date(gridStart);
   while (cur <= gridEnd) { days.push(new Date(cur)); cur.setDate(cur.getDate() + 1); }
 
-  const SLOT_NAMES  = ['Śniadanie','II śniadanie','Obiad','Podwieczorek','Kolacja'];
+  const SLOT_NAMES  = L
+    ? ['Breakfast','2nd Breakfast','Lunch','Snack','Dinner']
+    : ['Śniadanie','II śniadanie','Obiad','Podwieczorek','Kolacja'];
   const SLOT_COLORS = ['#4a6fa5','#93c5fd','#fcd34d','#c2410c','#6366f1'];
-  const DAY_SHORT   = ['Pn','Wt','Śr','Cz','Pt','So','Nd'];
-  const DAY_FULL    = ['Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota','Niedziela'];
+  const DAY_SHORT   = L ? ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'] : ['Pn','Wt','Śr','Cz','Pt','So','Nd'];
+  const DAY_FULL    = L
+    ? ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
+    : ['Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota','Niedziela'];
 
   const weeks = [];
   for (let i = 0; i < days.length; i += 7) weeks.push(days.slice(i, i + 7));
@@ -311,7 +347,7 @@ function generateKalendarzHTML({ mealsByDate, start, end, periodLabel, memberNam
 
       return `<div style="border:${isToday ? '2px solid #0d9488' : '1px solid #e5e7eb'};border-radius:7px;padding:7px;background:${isToday ? '#f0fdf4' : '#fff'};opacity:${inRange ? 1 : 0.45};min-height:72px;display:flex;flex-direction:column">
         <div style="font-size:11px;font-weight:${isToday ? 700 : 600};color:${isToday ? '#0d9488' : '#374151'};margin-bottom:5px;padding-bottom:4px;border-bottom:1px solid #f3f4f6">
-          ${DAY_SHORT[dow]} ${day.getDate()}${isToday ? ' (dziś)' : ''}
+          ${DAY_SHORT[dow]} ${day.getDate()}${isToday ? ` (${L?'today':'dziś'})` : ''}
         </div>
         <div style="flex:1">
           ${mealsHTML || '<div style="font-size:10px;color:#e5e7eb;text-align:center;padding:5px 0">—</div>'}
@@ -333,8 +369,8 @@ function generateKalendarzHTML({ mealsByDate, start, end, periodLabel, memberNam
   ).join('');
 
   return `<!DOCTYPE html>
-<html lang="pl"><head><meta charset="UTF-8">
-<title>Karta Kalendarza</title>
+<html lang="${L?'en':'pl'}"><head><meta charset="UTF-8">
+<title>${L?'Calendar Card':'Karta Kalendarza'}</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:#fff;color:#111827;padding:24px 32px;max-width:1100px;margin:0 auto}
@@ -355,35 +391,37 @@ body.hide-kcal.hide-macro .day-footer{display:none}
   body{padding:8px}
 }
 </style></head><body>
-<button class="print-btn" onclick="window.print()">Drukuj / Zapisz PDF</button>
+<button class="print-btn" onclick="window.print()">${L?'Print / Save as PDF':'Drukuj / Zapisz PDF'}</button>
 <div class="options-bar no-print">
-  <span class="opt-title">Opcje widoku:</span>
+  <span class="opt-title">${L?'View options:':'Opcje widoku:'}</span>
   <label class="opt-label">
     <input type="checkbox" id="show-kcal" checked onchange="document.body.classList.toggle('hide-kcal',!this.checked)">
-    kcal w dniach
+    ${L?'kcal per day':'kcal w dniach'}
   </label>
   <label class="opt-label">
     <input type="checkbox" id="show-macro" checked onchange="document.body.classList.toggle('hide-macro',!this.checked)">
-    Makro B/T/W w dniach
+    ${L?'Macro P/F/C per day':'Makro B/T/W w dniach'}
   </label>
 </div>
 <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid #0d9488">
   <div>
-    <div style="font-size:22px;font-weight:800;color:#0d9488">Karta Kalendarza</div>
+    <div style="font-size:22px;font-weight:800;color:#0d9488">${L?'Calendar Card':'Karta Kalendarza'}</div>
     <div style="font-size:13px;color:#374151;margin-top:4px">${periodLabel}</div>
     ${memberName ? `<div style="font-size:12px;color:#6b7280;margin-top:2px">${memberName}</div>` : ''}
   </div>
-  <div style="font-size:11px;color:#9ca3af;text-align:right;line-height:1.7">Wygenerowano: ${dateStr}</div>
+  <div style="font-size:11px;color:#9ca3af;text-align:right;line-height:1.7">${L?'Generated':'Wygenerowano'}: ${dateStr}</div>
 </div>
 <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px">${legendHTML}</div>
 <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:5px">${headerRowHTML}</div>
 ${weeksHTML}
-<div class="footer">Wygenerowano przez aplikację Meal Planner · ${dateStr}</div>
+<div class="footer">${L?'Generated by OnTrack':'Wygenerowano przez aplikację OnTrack'} · ${dateStr}</div>
 </body></html>`;
 }
 
 // ─── Składniki przepisu HTML generator ───────────────────────────────────────
-function generateSkladnikiHTML(recipe) {
+function generateSkladnikiHTML(recipe, lang) {
+  const L = lang === 'en';
+  const cur = L ? '£' : 'zł';
   const now = new Date();
   const dateStr = `${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
   const rows = (recipe.ingredients || []).map(ing =>
@@ -391,16 +429,16 @@ function generateSkladnikiHTML(recipe) {
       <td>${ing.product_name}</td>
       <td class="num">${ing.weight}</td>
       <td>${ing.unit || 'g'}</td>
-      <td class="cost">${ing.cost != null ? ing.cost.toFixed(2) + ' zł' : '—'}</td>
+      <td class="cost">${ing.cost != null ? ing.cost.toFixed(2) + ' ' + cur : '—'}</td>
     </tr>`
   ).join('');
 
   const hasKcal = recipe.total_kcal > 0;
   const macroHTML = hasKcal ? `<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px">
-    ${[['Kalorie', recipe.total_kcal, 'kcal', '#0d9488'],
-       ['Białko',  Math.round(recipe.total_protein), 'g', '#0d9488'],
-       ['Tłuszcze',Math.round(recipe.total_fat),     'g', '#f59e0b'],
-       ['Węglowodany',Math.round(recipe.total_carbs),'g', '#6366f1']].map(([l,v,u,c]) =>
+    ${[[L?'Calories':'Kalorie', recipe.total_kcal, 'kcal', '#0d9488'],
+       [L?'Protein':'Białko',  Math.round(recipe.total_protein), 'g', '#0d9488'],
+       [L?'Fat':'Tłuszcze',    Math.round(recipe.total_fat),     'g', '#f59e0b'],
+       [L?'Carbs':'Węglowodany',Math.round(recipe.total_carbs),  'g', '#6366f1']].map(([l,v,u,c]) =>
       `<div style="border:1px solid #e5e7eb;border-radius:8px;padding:10px 16px;text-align:center">
         <div style="font-size:10px;color:#9ca3af;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">${l}</div>
         <div style="font-size:20px;font-weight:800;color:${c}">${v}</div>
@@ -409,8 +447,8 @@ function generateSkladnikiHTML(recipe) {
   </div>` : '';
 
   return `<!DOCTYPE html>
-<html lang="pl"><head><meta charset="UTF-8">
-<title>Składniki: ${recipe.name}</title>
+<html lang="${L?'en':'pl'}"><head><meta charset="UTF-8">
+<title>${L?'Ingredients':'Składniki'}: ${recipe.name}</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:#fff;color:#111827;padding:32px 40px;max-width:700px;margin:0 auto}
@@ -431,51 +469,53 @@ tfoot td{font-weight:700;border-top:2px solid #0d9488;background:#f0fdf4;padding
 .footer{margin-top:24px;padding-top:10px;border-top:1px solid #f3f4f6;font-size:10px;color:#d1d5db;text-align:center}
 @media print{.print-btn{display:none!important}body{padding:12px}}
 </style></head><body>
-<button class="print-btn" onclick="window.print()">Drukuj / Zapisz PDF</button>
+<button class="print-btn" onclick="window.print()">${L?'Print / Save as PDF':'Drukuj / Zapisz PDF'}</button>
 <div class="hdr">
   <h1>${recipe.name}</h1>
-  <div class="sub">Wygenerowano: ${dateStr} · ${recipe.ingredients?.length || 0} składników</div>
+  <div class="sub">${L?'Generated':'Wygenerowano'}: ${dateStr} · ${recipe.ingredients?.length || 0} ${L?'ingredients':'składników'}</div>
 </div>
 <table>
 <thead><tr>
-  <th>Składnik</th><th class="num">Ilość</th><th>Jednostka</th><th class="cost">Koszt</th>
+  <th>${L?'Ingredient':'Składnik'}</th><th class="num">${L?'Qty':'Ilość'}</th><th>${L?'Unit':'Jednostka'}</th><th class="cost">${L?'Cost':'Koszt'}</th>
 </tr></thead>
 <tbody>${rows}</tbody>
 ${recipe.total_cost != null ? `<tfoot><tr>
-  <td colspan="3" class="tlabel">Łączny koszt przepisu</td>
-  <td class="tval">${recipe.total_cost.toFixed(2)} zł</td>
+  <td colspan="3" class="tlabel">${L?'Total recipe cost':'Łączny koszt przepisu'}</td>
+  <td class="tval">${recipe.total_cost.toFixed(2)} ${cur}</td>
 </tr></tfoot>` : ''}
 </table>
 ${macroHTML}
-<div class="footer">Wygenerowano przez aplikację Meal Planner · ${dateStr}</div>
+<div class="footer">${L?'Generated by OnTrack':'Wygenerowano przez aplikację OnTrack'} · ${dateStr}</div>
 </body></html>`;
 }
 
 // ─── Lista zakupów HTML generator ────────────────────────────────────────────
-function generateShopListHTML({ items, total, selectedDays, memberLabel }) {
+function generateShopListHTML({ items, total, selectedDays, memberLabel, lang }) {
+  const L = lang === 'en';
+  const cur = L ? '£' : 'zł';
   const now = new Date();
   const dateStr = `${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
   const daysStr = selectedDays.map(d => toEU(d)).join(', ');
 
   const rows = items.map(item => {
     const pkgStr = item.sold_by_weight
-      ? 'na wagę'
-      : `${item.packages_rounded} szt.`;
+      ? (L ? 'by weight' : 'na wagę')
+      : `${item.packages_rounded} ${L ? 'pcs' : 'szt.'}`;
     return `<tr>
       <td class="no-print del-cell">
-        <button class="del-btn" onclick="this.closest('tr').remove()">Usuń</button>
+        <button class="del-btn" onclick="this.closest('tr').remove()">${L?'Remove':'Usuń'}</button>
       </td>
       <td>${item.product_name}</td>
       <td class="num">${item.total_weight} ${item.unit || 'g'}</td>
       <td>${pkgStr}</td>
-      <td class="num">${item.price_per_package?.toFixed(2)} zł</td>
+      <td class="num">${item.price_per_package?.toFixed(2)} ${cur}</td>
       <td class="check"><input type="checkbox" /></td>
     </tr>`;
   }).join('');
 
   return `<!DOCTYPE html>
-<html lang="pl"><head><meta charset="UTF-8">
-<title>Lista zakupów</title>
+<html lang="${L?'en':'pl'}"><head><meta charset="UTF-8">
+<title>${L?'Shopping list':'Lista zakupów'}</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:#fff;color:#111827;padding:32px 40px;max-width:900px;margin:0 auto}
@@ -508,31 +548,31 @@ input[type="checkbox"]{width:16px;height:16px;cursor:pointer;accent-color:#0d948
   input[type="checkbox"]{appearance:none;-webkit-appearance:none;width:14px;height:14px;border:1.5px solid #9ca3af;border-radius:3px;display:inline-block;vertical-align:middle}
 }
 </style></head><body>
-<button class="print-btn" onclick="window.print()">Drukuj / Zapisz PDF</button>
+<button class="print-btn" onclick="window.print()">${L?'Print / Save as PDF':'Drukuj / Zapisz PDF'}</button>
 <div class="hdr">
   <div>
-    <h1>Lista zakupów</h1>
-    <div class="days-label">Dni: ${daysStr}</div>
+    <h1>${L?'Shopping list':'Lista zakupów'}</h1>
+    <div class="days-label">${L?'Days':'Dni'}: ${daysStr}</div>
     ${memberLabel ? `<div class="member">${memberLabel}</div>` : ''}
     <div class="badges">
-      <span class="badge">${items.length} produktów</span>
-      <span class="cost-badge">Szac. koszt: ${total.toFixed(2)} zł</span>
+      <span class="badge">${items.length} ${L?'products':'produktów'}</span>
+      <span class="cost-badge">${L?'Est. cost':'Szac. koszt'}: ${total.toFixed(2)} ${cur}</span>
     </div>
   </div>
-  <div class="meta">Wygenerowano: ${dateStr}</div>
+  <div class="meta">${L?'Generated':'Wygenerowano'}: ${dateStr}</div>
 </div>
 <table>
 <thead><tr>
   <th class="no-print"></th>
-  <th>Produkt</th>
-  <th class="num">Potrzebne</th>
-  <th>Opakowania</th>
-  <th class="num">Szac. cena/opak.</th>
-  <th class="check-col">W koszyku?</th>
+  <th>${L?'Product':'Produkt'}</th>
+  <th class="num">${L?'Needed':'Potrzebne'}</th>
+  <th>${L?'Packages':'Opakowania'}</th>
+  <th class="num">${L?'Est. price/pkg':'Szac. cena/opak.'}</th>
+  <th class="check-col">${L?'In basket?':'W koszyku?'}</th>
 </tr></thead>
 <tbody>${rows}</tbody>
 </table>
-<div class="footer">Wygenerowano przez aplikację Meal Planner · ${dateStr}</div>
+<div class="footer">${L?'Generated by OnTrack':'Wygenerowano przez aplikację OnTrack'} · ${dateStr}</div>
 </body></html>`;
 }
 
@@ -540,6 +580,7 @@ input[type="checkbox"]{width:16px;height:16px;cursor:pointer;accent-color:#0d948
 export default function Export({ onGoToTab }) {
   const { members, activeMember } = useMember();
   const { showError } = useToast();
+  const { t, lang } = useLanguage();
 
   const handleExportMacro = () => {
     let formData = null;
@@ -553,7 +594,7 @@ export default function Export({ onGoToTab }) {
     if (!macros)   { try { macros   = JSON.parse(localStorage.getItem('macroGoals')||'null'); } catch {} }
 
     if (!formData || !(parseFloat(formData.weight)>0 && parseFloat(formData.height)>0 && parseInt(formData.age)>0)) {
-      showError('Uzupełnij dane w Kalkulatorze Makro i zapisz je przed eksportem.');
+      showError(t('export_macro_err'));
       return;
     }
     if (!macros) {
@@ -564,8 +605,8 @@ export default function Export({ onGoToTab }) {
       macros = mCalc(w, h, tdeeV, goalOpt);
     }
 
-    const html = generateMacroHTML({ ...formData, macros, memberName: activeMember?.name || '' });
-    if (!html) { showError('Nie udało się wygenerować karty — sprawdź dane w kalkulatorze.'); return; }
+    const html = generateMacroHTML({ ...formData, macros, memberName: activeMember?.name || '', lang });
+    if (!html) { showError(t('export_macro_gen_err')); return; }
     const win = window.open('', '_blank');
     win.document.write(html);
     win.document.close();
@@ -643,7 +684,7 @@ export default function Export({ onGoToTab }) {
     setShopDays(s);
   };
   const handleGenShopList = async () => {
-    if (shopDays.size === 0) { showError('Zaznacz co najmniej jeden dzień'); return; }
+    if (shopDays.size === 0) { showError(t('select_at_least_one_day')); return; }
     setShopLoading(true);
     try {
       const days = [...shopDays].sort();
@@ -662,9 +703,9 @@ export default function Export({ onGoToTab }) {
         return { ...item, packages_exact: exact, packages_rounded: rounded, total_cost: cost, actual_cost: Math.round(exact * item.price_per_package * 100) / 100 };
       }).sort((a, b) => a.product_name.localeCompare(b.product_name, 'pl'));
       const total = mergedItems.reduce((s, i) => s + i.total_cost, 0);
-      const html = generateShopListHTML({ items: mergedItems, total, selectedDays: days, memberLabel: shopMemberLabel });
+      const html = generateShopListHTML({ items: mergedItems, total, selectedDays: days, memberLabel: shopMemberLabel, lang });
       const win = window.open('', '_blank'); win.document.write(html); win.document.close();
-    } catch { showError('Nie udało się wygenerować listy zakupów'); }
+    } catch { showError(t('export_shop_list_err')); }
     finally { setShopLoading(false); }
   };
 
@@ -674,52 +715,52 @@ export default function Export({ onGoToTab }) {
     return htmlCustom;
   };
   const getHtmlPeriodLabel = () => {
-    if (htmlPeriod === 'week')  return `Bieżący tydzień (${toEU(week.start)} – ${toEU(week.end)})`;
-    if (htmlPeriod === 'month') return `Bieżący miesiąc (${toEU(month.start)} – ${toEU(month.end)})`;
+    if (htmlPeriod === 'week')  return `${lang==='en'?'Current week':'Bieżący tydzień'} (${toEU(week.start)} – ${toEU(week.end)})`;
+    if (htmlPeriod === 'month') return `${lang==='en'?'Current month':'Bieżący miesiąc'} (${toEU(month.start)} – ${toEU(month.end)})`;
     const r = htmlCustom;
     return r.start && r.end ? `${toEU(r.start)} – ${toEU(r.end)}` : '';
   };
 
   const handleGenWydatki = async () => {
     const range = getHtmlRange();
-    if (!range.start || !range.end) { showError('Wybierz okres'); return; }
+    if (!range.start || !range.end) { showError(t('export_select_period')); return; }
     setHtmlWLoading(true);
     try {
       const res = await api.getSummary(range.start, range.end, mids);
       const d = res.data;
       const days = Math.round((new Date(range.end) - new Date(range.start)) / 86400000) + 1;
-      const categories = [{ label: 'Jedzenie', value: d.total_cost }];
-      const drinkItems = calcDrinks(days);
+      const categories = [{ label: t('food_label'), value: d.total_cost }];
+      const drinkItems = calcDrinks(days, lang);
       const drinkTotal = drinkItems.reduce((s, i) => s + i.total, 0);
-      if (drinkTotal > 0) categories.push({ label: 'Napoje', value: drinkTotal });
-      calcOtherSummary(days).forEach(item => categories.push({ label: item.label, value: item.total }));
+      if (drinkTotal > 0) categories.push({ label: t('drinks_label'), value: drinkTotal });
+      calcOtherSummary(days, lang).forEach(item => categories.push({ label: item.label, value: item.total }));
       const total = categories.reduce((s, c) => s + c.value, 0);
-      const html = generateWydatkiHTML({ categories, total, periodLabel: getHtmlPeriodLabel(), memberLabel });
+      const html = generateWydatkiHTML({ categories, total, periodLabel: getHtmlPeriodLabel(), memberLabel, lang });
       const win = window.open('', '_blank');
       win.document.write(html);
       win.document.close();
-    } catch { showError('Nie udało się pobrać danych wydatków'); }
+    } catch { showError(t('export_wydatki_err')); }
     finally { setHtmlWLoading(false); }
   };
 
   const handleGenKalendar = async () => {
     const range = getHtmlRange();
-    if (!range.start || !range.end) { showError('Wybierz okres'); return; }
+    if (!range.start || !range.end) { showError(t('export_select_period')); return; }
     setHtmlKLoading(true);
     try {
       const res = await api.getRange(range.start, range.end, mids);
-      const html = generateKalendarzHTML({ mealsByDate: res.data, start: range.start, end: range.end, periodLabel: getHtmlPeriodLabel(), memberName: memberLabel });
+      const html = generateKalendarzHTML({ mealsByDate: res.data, start: range.start, end: range.end, periodLabel: getHtmlPeriodLabel(), memberName: memberLabel, lang });
       const win = window.open('', '_blank');
       win.document.write(html);
       win.document.close();
-    } catch { showError('Nie udało się pobrać kalendarza'); }
+    } catch { showError(t('export_calendar_err')); }
     finally { setHtmlKLoading(false); }
   };
 
   const handleGenSkladniki = () => {
     const recipe = recipes.find(r => String(r.id) === htmlRecipeId);
-    if (!recipe) { showError('Wybierz przepis'); return; }
-    const html = generateSkladnikiHTML(recipe);
+    if (!recipe) { showError(t('export_select_recipe')); return; }
+    const html = generateSkladnikiHTML(recipe, lang);
     const win = window.open('', '_blank');
     win.document.write(html);
     win.document.close();
@@ -735,18 +776,18 @@ export default function Export({ onGoToTab }) {
         <div style={{ flexShrink:0 }}>
 
         {/* ── Generuj dokumenty ─────────────────────────── */}
-        <h2 style={{ marginBottom:12 }}>Generuj dokumenty</h2>
+        <h2 style={{ marginBottom:12 }}>{t('export_generate_title')}</h2>
 
         <div style={{ marginBottom:12 }}>
-          <div style={LBL}>Okres (wydatki i kalendarz)</div>
+          <div style={LBL}>{t('export_period_label')}</div>
           <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
-            <ToggleChip active={htmlPeriod==='week'}   onClick={()=>setHtmlPeriod('week')}>Bieżący tydzień</ToggleChip>
-            <ToggleChip active={htmlPeriod==='month'}  onClick={()=>setHtmlPeriod('month')}>Bieżący miesiąc</ToggleChip>
-            <ToggleChip active={htmlPeriod==='custom'} onClick={()=>setHtmlPeriod('custom')}>Własny</ToggleChip>
+            <ToggleChip active={htmlPeriod==='week'}   onClick={()=>setHtmlPeriod('week')}>{t('this_week')}</ToggleChip>
+            <ToggleChip active={htmlPeriod==='month'}  onClick={()=>setHtmlPeriod('month')}>{t('this_month')}</ToggleChip>
+            <ToggleChip active={htmlPeriod==='custom'} onClick={()=>setHtmlPeriod('custom')}>{t('custom_period')}</ToggleChip>
           </div>
           {htmlPeriod === 'custom' && (
             <div style={{ marginTop:10, display:'flex', gap:12, flexWrap:'wrap' }}>
-              {[{key:'start',label:'Od'},{key:'end',label:'Do'}].map(({key,label}) => (
+              {[{key:'start',label:t('date_from')},{key:'end',label:t('date_to')}].map(({key,label}) => (
                 <div key={key}>
                   <div style={{ fontSize:11, color:'#6b7280', marginBottom:3 }}>{label}</div>
                   <div style={{ position:'relative' }}>
@@ -765,7 +806,7 @@ export default function Export({ onGoToTab }) {
 
         {members.length > 1 && (
           <div style={{ marginBottom:14 }}>
-            <div style={LBL}>Kogo uwzględniamy</div>
+            <div style={LBL}>{t('export_who_label')}</div>
             <div style={{ display:'flex', gap:8, flexWrap:'wrap', width:0, minWidth:'100%' }}>
               {members.map((m, idx) => {
                 const checked = selectedMemberIds.includes(m.id);
@@ -786,21 +827,21 @@ export default function Export({ onGoToTab }) {
         <div style={{ display:'flex', flexDirection:'column', gap:6, alignItems:'stretch', width:'100%' }}>
           <button className="btn btn-primary" onClick={handleGenWydatki} disabled={htmlWLoading}
             style={{ padding:'8px 12px', fontSize:13, fontWeight:700 }}>
-            {htmlWLoading ? 'Generuję...' : 'Podsumowanie wydatków'}
+            {htmlWLoading ? t('generating') : t('export_btn_summary')}
           </button>
           <button className="btn btn-primary" onClick={handleExportMacro}
             style={{ padding:'8px 12px', fontSize:13, fontWeight:700 }}>
-            Karta Makro
+            {t('export_btn_macro')}
           </button>
           <button className="btn btn-primary" onClick={handleGenKalendar} disabled={htmlKLoading}
             style={{ padding:'8px 12px', fontSize:13, fontWeight:700 }}>
-            {htmlKLoading ? 'Generuję...' : 'Karta Kalendarza'}
+            {htmlKLoading ? t('generating') : t('export_btn_calendar')}
           </button>
           <div style={{ position:'relative' }}>
             <button type="button" className="btn btn-primary"
               onClick={() => { setSkladnikiOpen(v => !v); setSkladnikiSearch(''); setHtmlRecipeId(''); }}
               style={{ padding:'8px 12px', fontSize:13, fontWeight:700, width:'100%' }}>
-              Składniki przepisu
+              {t('export_btn_ingredients')}
             </button>
             {skladnikiOpen && (
               <div style={{
@@ -809,12 +850,12 @@ export default function Export({ onGoToTab }) {
                 background:'#1c2433', border:'1px solid #374151', borderRadius:10,
                 padding:'12px', zIndex:100, boxShadow:'0 8px 24px rgba(0,0,0,0.5)',
               }}>
-                <input type="text" placeholder="Wyszukaj przepis..." autoFocus
+                <input type="text" placeholder={t('export_recipe_search')} autoFocus
                   value={skladnikiSearch} onChange={e => { setSkladnikiSearch(e.target.value); setHtmlRecipeId(''); }}
                   style={{ width:'100%', padding:'8px 12px', fontSize:13, border:'1px solid #374151', borderRadius:8, background:'#111827', color:'#e2e8f0', marginBottom:8, boxSizing:'border-box' }} />
                 {skladnikiSearch.trim() && (
                   <div style={{ maxHeight:200, overflowY:'auto', border:'1px solid #374151', borderRadius:8, marginBottom:10 }}>
-                    {recipes.filter(r => r.name.toLowerCase().includes(skladnikiSearch.toLowerCase())).slice(0, 20).map(r => (
+                    {recipes.filter(r => fuzzySearch(skladnikiSearch, r.name)).slice(0, 20).map(r => (
                       <div key={r.id} onClick={() => { setHtmlRecipeId(String(r.id)); setSkladnikiSearch(''); }}
                         style={{ padding:'8px 12px', cursor:'pointer', fontSize:13, transition:'background 0.1s',
                           color:'#e2e8f0', borderBottom:'1px solid #1f2937' }}
@@ -823,8 +864,8 @@ export default function Export({ onGoToTab }) {
                         {r.name}
                       </div>
                     ))}
-                    {recipes.filter(r => r.name.toLowerCase().includes(skladnikiSearch.toLowerCase())).length === 0 && (
-                      <div style={{ padding:'12px', fontSize:12, color:'#6b7280', textAlign:'center' }}>Brak wyników</div>
+                    {recipes.filter(r => fuzzySearch(skladnikiSearch, r.name)).length === 0 && (
+                      <div style={{ padding:'12px', fontSize:12, color:'#6b7280', textAlign:'center' }}>{t('export_no_results')}</div>
                     )}
                   </div>
                 )}
@@ -835,7 +876,7 @@ export default function Export({ onGoToTab }) {
                     </div>
                     <button className="btn btn-primary" onClick={handleGenSkladniki}
                       style={{ width:'100%', padding:'9px', fontSize:14, fontWeight:700 }}>
-                      Eksportuj składniki
+                      {t('export_do_export')}
                     </button>
                   </div>
                 )}
@@ -851,16 +892,16 @@ export default function Export({ onGoToTab }) {
         {/* ── Lista zakupów (obok przycisków) ──────────────  */}
         <div style={{ flexShrink:0, width:280 }}>
           <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:6 }}>
-            <h2 style={{ margin:0, fontSize:15 }}>Lista zakupów</h2>
+            <h2 style={{ margin:0, fontSize:15 }}>{t('shopping_list_title')}</h2>
             {onGoToTab && (
               <button onClick={() => onGoToTab('calendar')}
                 style={{ background:'#0d948820', border:'1px solid #0d9488', borderRadius:6, color:'#2dd4bf', fontSize:11, fontWeight:600, padding:'3px 10px', cursor:'pointer', whiteSpace:'nowrap', flexShrink:0 }}>
-                Idź do kalendarza
+                {t('btn_go_calendar')}
               </button>
             )}
           </div>
           <p style={{ fontSize:12, color:'#6b7280', margin:'0 0 10px', lineHeight:1.4 }}>
-            Zaznacz dni — lista produktów z przepisów przeliczona na opakowania.
+            {t('export_shopping_hint')}
           </p>
 
           <div style={{ display:'flex', alignItems:'center', gap:6, marginBottom:8 }}>
@@ -869,7 +910,7 @@ export default function Export({ onGoToTab }) {
               ‹
             </button>
             <span style={{ flex:1, textAlign:'center', fontWeight:700, fontSize:13, color:'#e2e8f0' }}>
-              {MONTH_NAMES_PL[shopMonth]} {shopYear}
+              {t('month_names')[shopMonth]} {shopYear}
             </span>
             <button onClick={nextShopMonth}
               style={{ background:'#1f2937', border:'1px solid #374151', borderRadius:6, color:'#9ca3af', width:26, height:26, cursor:'pointer', fontSize:15, display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
@@ -878,7 +919,7 @@ export default function Export({ onGoToTab }) {
           </div>
 
           <div style={{ display:'grid', gridTemplateColumns:'repeat(7,1fr)', gap:2, marginBottom:2 }}>
-            {['Pn','Wt','Śr','Cz','Pt','So','Nd'].map(d => (
+            {t('day_short').map(d => (
               <div key={d} style={{ textAlign:'center', fontSize:9, fontWeight:700, color:'#6b7280', padding:'2px 0' }}>{d}</div>
             ))}
           </div>
@@ -906,20 +947,20 @@ export default function Export({ onGoToTab }) {
           </div>
 
           <div style={{ display:'flex', gap:5, flexWrap:'wrap', marginBottom:8 }}>
-            <ToggleChip active={false} onClick={selectShopWeek}>Bieżący tydzień</ToggleChip>
-            <ToggleChip active={false} onClick={selectShopMonth}>Ten miesiąc</ToggleChip>
-            {shopDays.size > 0 && <ToggleChip active={false} onClick={() => setShopDays(new Set())}>Wyczyść</ToggleChip>}
+            <ToggleChip active={false} onClick={selectShopWeek}>{t('this_week')}</ToggleChip>
+            <ToggleChip active={false} onClick={selectShopMonth}>{t('this_month')}</ToggleChip>
+            {shopDays.size > 0 && <ToggleChip active={false} onClick={() => setShopDays(new Set())}>{t('clear')}</ToggleChip>}
           </div>
 
           {shopDays.size > 0 && (
             <div style={{ fontSize:11, color:'#0d9488', fontWeight:600, marginBottom:8 }}>
-              Zaznaczono: {shopDays.size} {shopDays.size === 1 ? 'dzień' : 'dni'}
+              {t('selected_days')(shopDays.size)}
             </div>
           )}
 
           {members.length > 1 && (
             <div style={{ marginBottom:10 }}>
-              <div style={{ ...LBL, fontSize:10, marginBottom:6 }}>Uwzględnij profile</div>
+              <div style={{ ...LBL, fontSize:10, marginBottom:6 }}>{t('export_include_profiles')}</div>
               <div style={{ display:'flex', gap:6, flexWrap:'wrap' }}>
                 {members.map((m, idx) => {
                   const checked = shopMemberIds.includes(m.id);
@@ -940,7 +981,7 @@ export default function Export({ onGoToTab }) {
           <button className="btn btn-primary" onClick={handleGenShopList}
             disabled={shopLoading || shopDays.size === 0}
             style={{ width:'100%', padding:'8px', fontSize:13, fontWeight:700 }}>
-            {shopLoading ? 'Generuję...' : `Generuj listę zakupów${shopDays.size > 0 ? ` (${shopDays.size} ${shopDays.size === 1 ? 'dzień' : 'dni'})` : ''}`}
+            {shopLoading ? t('generating') : `${t('export_generate_list')}${shopDays.size > 0 ? ` (${shopDays.size})` : ''}`}
           </button>
         </div>
 
@@ -979,15 +1020,15 @@ export default function Export({ onGoToTab }) {
           return (
             <div style={{ flex:1, minWidth:0 }}>
               <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:8 }}>
-                <span style={{ fontSize:13, fontWeight:700, color:'#e2e8f0' }}>Podgląd</span>
+                <span style={{ fontSize:13, fontWeight:700, color:'#e2e8f0' }}>{t('export_preview_title')}</span>
                 <span style={{ fontSize:11, color:'#6b7280' }}>{previewLabel}</span>
               </div>
               {previewLoading ? (
-                <div style={{ fontSize:12, color:'#6b7280', textAlign:'center', padding:'20px 0' }}>Ładowanie...</div>
+                <div style={{ fontSize:12, color:'#6b7280', textAlign:'center', padding:'20px 0' }}>{t('loading_preview')}</div>
               ) : (
                 <>
                   <div style={{ display:'grid', gridTemplateColumns:'repeat(7,1fr)', gap:3, marginBottom:3 }}>
-                    {['Pn','Wt','Śr','Cz','Pt','So','Nd'].map(d => (
+                    {t('day_short').map(d => (
                       <div key={d} style={{ textAlign:'center', fontSize:10, fontWeight:700, color:'#6b7280', paddingBottom:3 }}>{d}</div>
                     ))}
                   </div>
@@ -1004,6 +1045,7 @@ export default function Export({ onGoToTab }) {
                             border: `1px solid ${isToday ? '#0d9488' : '#374151'}`,
                             borderRadius:6, padding:'4px 3px', minHeight:64,
                             opacity: inRange ? 1 : 0.3,
+                            minWidth:0, overflow:'hidden',
                           }}>
                             <div style={{ textAlign:'center', fontSize:11, fontWeight: isToday?700:500, color: isToday?'#2dd4bf':'#94a3b8', marginBottom:2 }}>
                               {day.getDate()}
@@ -1030,8 +1072,10 @@ export default function Export({ onGoToTab }) {
                   ))}
                   <div style={{ fontSize:11, color: totalMeals > 0 ? '#6b7280' : '#374151', textAlign:'center', marginTop:2 }}>
                     {totalMeals === 0
-                      ? 'Brak zaplanowanych posiłków'
-                      : `${daysWithMeals.length} ${daysWithMeals.length === 1 ? 'dzień' : 'dni'} z posiłkami · ${totalMeals} ${totalMeals === 1 ? 'posiłek' : totalMeals < 5 ? 'posiłki' : 'posiłków'}`}
+                      ? t('export_no_meals')
+                      : lang === 'en'
+                        ? `${daysWithMeals.length} ${daysWithMeals.length === 1 ? 'day with meals' : 'days with meals'} · ${totalMeals} ${totalMeals === 1 ? 'meal' : 'meals'}`
+                        : `${daysWithMeals.length} ${daysWithMeals.length === 1 ? 'dzień z posiłkami' : 'dni z posiłkami'} · ${totalMeals} ${totalMeals === 1 ? 'posiłek' : totalMeals < 5 ? 'posiłki' : 'posiłków'}`}
                   </div>
                 </>
               )}
@@ -1044,33 +1088,33 @@ export default function Export({ onGoToTab }) {
 
       {/* ── Karta pomocy ── */}
       <div className="card" style={{ marginTop: 12, background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: '14px 16px', fontSize: 13, lineHeight: 1.7 }}>
-        <div style={{ fontSize: 14, fontWeight: 700, color: '#0d9488', marginBottom: 12 }}>Jak działa eksport?</div>
+        <div style={{ fontSize: 14, fontWeight: 700, color: '#0d9488', marginBottom: 12 }}>{t('export_how_title')}</div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
 
           {[
             {
-              label: 'Podsumowanie wydatków',
-              desc: 'Wydatki na jedzenie + koszty stałe zaznaczone w zakładce Wydatki (czynsz, prąd, gaz…), przeliczone proporcjonalnie na liczbę dni.',
+              label: t('export_btn_summary'),
+              desc: lang === 'en' ? 'Food expenses + fixed costs selected in the Expenses tab (rent, electricity, gas…), prorated by number of days.' : 'Wydatki na jedzenie + koszty stałe zaznaczone w zakładce Wydatki (czynsz, prąd, gaz…), przeliczone proporcjonalnie na liczbę dni.',
             },
             {
-              label: 'Karta Makro',
-              desc: 'Eksport danych z Kalkulatora Makro — dane osobowe, BMI, zapotrzebowanie kaloryczne i docelowe makroskładniki.',
+              label: t('export_btn_macro'),
+              desc: lang === 'en' ? 'Export from the Macro Calculator — personal data, BMI, caloric needs and macro goals.' : 'Eksport danych z Kalkulatora Makro — dane osobowe, BMI, zapotrzebowanie kaloryczne i docelowe makroskładniki.',
             },
             {
-              label: 'Karta Kalendarza',
-              desc: 'Wydruk planu posiłków. Przed wydrukiem możesz włączyć lub wyłączyć widoczność kcal i makro przy każdym dniu.',
+              label: t('export_btn_calendar'),
+              desc: lang === 'en' ? 'Meal plan printout. You can toggle kcal and macro visibility per day before printing.' : 'Wydruk planu posiłków. Przed wydrukiem możesz włączyć lub wyłączyć widoczność kcal i makro przy każdym dniu.',
             },
             {
-              label: 'Składniki przepisu',
-              desc: 'Wyszukaj przepis wpisując jego nazwę, a następnie wyeksportuj listę składników z ilościami i cenami gotową do wydruku.',
+              label: t('export_btn_ingredients'),
+              desc: lang === 'en' ? 'Search for a recipe by name, then export the ingredient list with quantities and prices ready to print.' : 'Wyszukaj przepis wpisując jego nazwę, a następnie wyeksportuj listę składników z ilościami i cenami gotową do wydruku.',
             },
             {
-              label: 'Lista zakupów',
-              desc: 'Zaznacz dni, lista produktów z przepisów przeliczona na opakowania. Przed wydrukiem możesz usunąć pozycje z listy zakupów.',
+              label: t('shopping_list_title'),
+              desc: lang === 'en' ? 'Select days, product list from recipes calculated in packages. You can remove items before printing.' : 'Zaznacz dni, lista produktów z przepisów przeliczona na opakowania. Przed wydrukiem możesz usunąć pozycje z listy zakupów.',
             },
             {
-              label: 'Podgląd tygodnia',
-              desc: 'Miniaturowy widok kalendarza reagujący na wybrany okres (bieżący tydzień / miesiąc / zakres własny). Pokazuje jakie posiłki są zaplanowane w danym dniu.',
+              label: lang === 'en' ? 'Week preview' : 'Podgląd tygodnia',
+              desc: lang === 'en' ? 'Mini calendar view reacting to the selected period. Shows meals planned for each day.' : 'Miniaturowy widok kalendarza reagujący na wybrany okres (bieżący tydzień / miesiąc / zakres własny). Pokazuje jakie posiłki są zaplanowane w danym dniu.',
             },
           ].map(({ label, desc }) => (
             <div key={label} style={{ background: '#111827', border: '1px solid #374151', borderRadius: 6, padding: '8px 12px', display: 'flex', flexDirection: 'column', gap: 4 }}>

@@ -23,6 +23,7 @@ sys.path.insert(0, "/app")
 from app import create_app, db
 from app.models.product import Product
 from app.models.recipe import Recipe, RecipeIngredient
+from app.models.meal_plan import MealPlan
 
 app = create_app()
 
@@ -408,9 +409,11 @@ def import_products(user_id: int, lang: str) -> dict[str, int]:
             skipped_en += 1
             continue
 
-        # Produkt tworzony na podstawie generic_name, dalej upraszczany do rodziny
-        # "makaron angel hair" → generic "makaron" → family "makaron" ✓
-        prod_name = collapse_family(generic_name)
+        # Dla EN: używaj ingredient_name (czysta nazwa składnika z przepisu, np. "sausage")
+        # Dla PL: generic_name (znormalizowana nazwa sklepowa, np. "makaron") + collapse_family
+        # EN generic_name pochodzi z Aldi i jest często śmieciowa ("sausage rolls 6 pack")
+        name_base = ing_name if lang == "en" else generic_name
+        prod_name = collapse_family(name_base)
         prod_key  = dedup_key(prod_name)
 
         if prod_key in seen:
@@ -443,6 +446,7 @@ def import_products(user_id: int, lang: str) -> dict[str, int]:
             package_weight = round(float(pkg_val), 1)       if pkg_val        else 100.0,
             unit           = unit,
             sold_by_weight = sold_by_wt,
+            lang           = lang,
             kcal           = macro.get("kcal"),
             protein        = macro.get("protein"),
             fat            = macro.get("fat"),
@@ -489,6 +493,7 @@ def import_recipes(user_id: int, lang: str, product_map: dict[str, int], macro_m
             name      = name[:100],
             image_url = r.get("image_url"),
             source_url= r.get("url"),
+            lang      = lang,
         )
         db.session.add(recipe)
         db.session.flush()
@@ -565,7 +570,8 @@ def main():
         if args.clear:
             r_count = Recipe.query.filter_by(user_id=uid).count()
             p_count = Product.query.filter_by(user_id=uid).count()
-            # Kolejność: najpierw recipe_ingredients (FK), potem recipes, potem products
+            # Kolejność: meal_plans → recipe_ingredients → recipes → products (FK cascade)
+            MealPlan.query.filter_by(user_id=uid).delete()
             recipe_ids = [r.id for r in Recipe.query.filter_by(user_id=uid).all()]
             if recipe_ids:
                 RecipeIngredient.query.filter(

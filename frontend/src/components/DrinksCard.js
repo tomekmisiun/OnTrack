@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Icon } from '@iconify/react';
 import { fuel as fuelApi } from '../api';
+import { useLanguage } from '../contexts/LanguageContext';
 
 function FieldBox({ label, children }) {
   return (
@@ -121,11 +122,11 @@ const OTHER_DEFAULTS = {
 };
 
 const DRINK_TYPES = [
-  { key:'kawa',       label:'Kawa',             emoji:'☕', gradient:'linear-gradient(135deg,#2d1000,#7a3800)' },
-  { key:'herbata',    label:'Herbata',           emoji:'🍵', gradient:'linear-gradient(135deg,#0a1f0a,#1a5a1a)' },
-  { key:'napoje',     label:'Napoje',            emoji:'🥤', gradient:'linear-gradient(135deg,#0a1040,#1a3a8a)' },
-  { key:'woda',       label:'Woda',              emoji:'💧', gradient:'linear-gradient(135deg,#001828,#006080)' },
-  { key:'sodaStream', label:'Soda Stream',       emoji:'🫧', gradient:'linear-gradient(135deg,#100a30,#3a0a6a)' },
+  { key:'kawa',       emoji:'☕', gradient:'linear-gradient(135deg,#2d1000,#7a3800)' },
+  { key:'herbata',    emoji:'🍵', gradient:'linear-gradient(135deg,#0a1f0a,#1a5a1a)' },
+  { key:'napoje',     emoji:'🥤', gradient:'linear-gradient(135deg,#0a1040,#1a3a8a)' },
+  { key:'woda',       emoji:'💧', gradient:'linear-gradient(135deg,#001828,#006080)' },
+  { key:'sodaStream', emoji:'🫧', gradient:'linear-gradient(135deg,#100a30,#3a0a6a)' },
 ];
 
 const DRINKS_DEFAULTS = {
@@ -147,6 +148,12 @@ function loadDrinksFromLS() {
 }
 
 function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = [] }) {
+  const { t, lang } = useLanguage();
+  const eg = lang === 'en' ? 'e.g.' : 'np.';
+  const _itemLabel = (name) => {
+    const map = { 'Cukier': t('dc_sugar'), 'Słodzik': t('dc_sweetener'), 'Mleko': t('dc_milk'), 'Śmietanka': t('dc_cream') };
+    return map[name] || name;
+  };
   const [drinks, setDrinks] = useState(loadDrinksFromLS);
   const [expandedDrink, setExpandedDrink] = useState(null);
   const [otherExpenses, setOtherExpenses] = useState(() => {
@@ -321,8 +328,8 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
       } else if (t.key === 'lekarze') {
         const wizD = n(o.wizyty) / 30;
         const lekD = n(o.leki) / 30;
-        if (wizD > 0) list.push({ name:'Wizyty lekarskie', daily:wizD, total:wizD*days, _dk:'lekarze' });
-        if (lekD > 0) list.push({ name:'Leki', daily:lekD, total:lekD*days, _dk:'lekarze' });
+        if (wizD > 0) list.push({ name:'Wizyty lekarskie', _tkey:'dc_doctors', daily:wizD, total:wizD*days, _dk:'lekarze' });
+        if (lekD > 0) list.push({ name:'Leki', _tkey:'dc_medicine', daily:lekD, total:lekD*days, _dk:'lekarze' });
         return;
       } else if (t.key === 'biurowe') {
         if (o.papierA4E) daily += n(o.papierA4) / 30;
@@ -356,7 +363,7 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
           background: cur === type ? '#0d9488' : '#2d3748',
           borderColor: cur === type ? '#0d9488' : '#374151',
           color: cur === type ? 'white' : '#9ca3af' }}>
-        {type === 'cukier' ? 'Cukier' : 'Słodzik'}
+        {type === 'cukier' ? t('dc_sugar') : t('dc_sweetener')}
       </button>
     );
   };
@@ -388,20 +395,20 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
             borderRadius:5, padding:'3px 6px',
           }}>
             <Icon icon="heroicons:users-solid" style={{ width:11, height:11, color:'#2dd4bf', flexShrink:0 }} />
-            <span style={{ fontSize:10, fontWeight:700, color:'#2dd4bf', letterSpacing:'0.3px', lineHeight:1 }}>wspólne</span>
+            <span style={{ fontSize:10, fontWeight:700, color:'#2dd4bf', letterSpacing:'0.3px', lineHeight:1 }}>{t('expenses_shared')}</span>
           </div>
         )}
         <span style={{ fontSize:16, lineHeight:1, position:'relative', zIndex:1 }}>{emoji}</span>
-        <span style={{ fontSize:9, fontWeight:700, color:'#fff', textAlign:'center', position:'relative', zIndex:1, textShadow:'0 1px 3px rgba(0,0,0,0.8)', padding:'0 3px', lineHeight:1.3 }}>{label}</span>
-        {(() => { const t = otherTilePreview(key); return t>0 ? <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'rgba(0,0,0,0.6)', padding:'3px 4px', textAlign:'center', fontSize:10, fontWeight:800, color:'#2dd4bf', zIndex:2, opacity: enabled?1:0.7 }}>{t.toFixed(2)} zł</div> : null; })()}
+        <span style={{ fontSize:9, fontWeight:700, color:'#fff', textAlign:'center', position:'relative', zIndex:1, textShadow:'0 1px 3px rgba(0,0,0,0.8)', padding:'0 3px', lineHeight:1.3 }}>{t('exp_' + key) || label}</span>
+        {(() => { const pv = otherTilePreview(key); return pv>0 ? <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'rgba(0,0,0,0.6)', padding:'3px 4px', textAlign:'center', fontSize:10, fontWeight:800, color:'#2dd4bf', zIndex:2, opacity: enabled?1:0.7 }}>{pv.toFixed(2)} {t('currency')}</div> : null; })()}
       </div>
       {expanded && (() => {
         const o = otherExpenses[key];
         const tot = items.filter(i=>i._dk===key).reduce((s,i)=>s+i.total,0);
         const Summary = () => (
           <div style={{ borderTop:'1px solid #1a3a38', marginTop:6, paddingTop:5 }}>
-            <div style={{ fontSize:9, color:'#6b7280' }}>× {days} dni</div>
-            <div style={{ fontSize:13, fontWeight:800, color:'#0d9488' }}>{tot.toFixed(2)} zł</div>
+            <div style={{ fontSize:9, color:'#6b7280' }}>{t('dc_days_label')(days)}</div>
+            <div style={{ fontSize:13, fontWeight:800, color:'#0d9488' }}>{tot.toFixed(2)} {t('currency')}</div>
           </div>
         );
         const inp2 = { ...fi, width:'100%' };
@@ -413,18 +420,18 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
           return (
           <div style={{ background:'#111827', border:'1px solid #374151', borderRadius:8, padding:'12px', marginTop:4 }}>
             <div style={{ borderLeft:'2px solid #2dd4bf', paddingLeft:10, display:'flex', flexDirection:'column', gap:6 }}>
-              <FieldBox label="Dzienne zużycie (rolki)"><input type="number" className="no-spin" min="0" max="99999" step="0.1" style={inp2} value={o.dailyRolls} placeholder="0.5" onChange={e=>updOther(key,{dailyRolls:cl2(e.target.value)})} /></FieldBox>
-              <FieldBox label="Liczba rolek w op."><input type="number" className="no-spin" min="0" max="99999" style={inp2} value={o.rollsPerPkg} placeholder="16" onChange={e=>updOther(key,{rollsPerPkg:cl2(e.target.value)})} /></FieldBox>
-              <FieldBox label="Cena opakowania (zł)"><input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2} value={o.pkgPrice} placeholder="23" onChange={e=>updOther(key,{pkgPrice:cl2(e.target.value)})} /></FieldBox>
+              <FieldBox label={t('dc_rolls_per_day')}><input type="number" className="no-spin" min="0" max="99999" step="0.1" style={inp2} value={o.dailyRolls} placeholder="0.5" onChange={e=>updOther(key,{dailyRolls:cl2(e.target.value)})} /></FieldBox>
+              <FieldBox label={t('dc_rolls_in_pkg')}><input type="number" className="no-spin" min="0" max="99999" style={inp2} value={o.rollsPerPkg} placeholder="16" onChange={e=>updOther(key,{rollsPerPkg:cl2(e.target.value)})} /></FieldBox>
+              <FieldBox label={t('dc_pkg_price_full2')}><input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2} value={o.pkgPrice} placeholder="23" onChange={e=>updOther(key,{pkgPrice:cl2(e.target.value)})} /></FieldBox>
             </div>
             <div style={{ borderTop:'1px solid #1a3a38', marginTop:6, paddingTop:5, display:'flex', flexDirection:'column', gap:2 }}>
               <div style={{ display:'flex', justifyContent:'space-between', fontSize:10 }}>
-                <span style={{ color:'#6b7280' }}>Rolki ({rollsUsed.toFixed(1)} szt.)</span>
-                <span style={{ color:'#9ca3af', fontWeight:600 }}>{papierCost.toFixed(2)} zł</span>
+                <span style={{ color:'#6b7280' }}>{t('dc_rolls_used')(rollsUsed.toFixed(1))}</span>
+                <span style={{ color:'#9ca3af', fontWeight:600 }}>{papierCost.toFixed(2)} {t('currency')}</span>
               </div>
               <div style={{ borderTop:'1px solid #1a3a38', paddingTop:4, marginTop:2, display:'flex', justifyContent:'space-between', fontSize:12, fontWeight:800 }}>
-                <span style={{ color:'#6b7280' }}>× {days} dni</span>
-                <span style={{ color:'#0d9488' }}>{papierCost.toFixed(2)} zł</span>
+                <span style={{ color:'#6b7280' }}>{t('dc_days_label')(days)}</span>
+                <span style={{ color:'#0d9488' }}>{papierCost.toFixed(2)} {t('currency')}</span>
               </div>
             </div>
           </div>
@@ -435,72 +442,72 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
           const washesTotal = (nn(o.washesPerWeek) / 7) * days;
           let detDaily = 0;
           let detLabel = '';
-          if (o.detergentType === 'proszek')   { detDaily = (nn(o.proszekPerWash) / Math.max(1, nn(o.proszekPkgKg)*1000)) * nn(o.proszekPkgPrice); detLabel = 'Proszek'; }
-          else if (o.detergentType === 'plyn') { detDaily = (nn(o.plynPerWash) / Math.max(1, nn(o.plynPkgL)*1000)) * nn(o.plynPkgPrice); detLabel = 'Płyn'; }
-          else                                  { detDaily = nn(o.kapsulkiPkgPrice) / Math.max(1, nn(o.kapsulkiPerPkg)); detLabel = 'Kapsułki'; }
+          if (o.detergentType === 'proszek')   { detDaily = (nn(o.proszekPerWash) / Math.max(1, nn(o.proszekPkgKg)*1000)) * nn(o.proszekPkgPrice); detLabel = t('dc_powder'); }
+          else if (o.detergentType === 'plyn') { detDaily = (nn(o.plynPerWash) / Math.max(1, nn(o.plynPkgL)*1000)) * nn(o.plynPkgPrice); detLabel = t('dc_liquid'); }
+          else                                  { detDaily = nn(o.kapsulkiPkgPrice) / Math.max(1, nn(o.kapsulkiPerPkg)); detLabel = t('dc_capsules'); }
           const detCost = detDaily * washesTotal;
           let pluCost = 0;
           if (o.plukanie) pluCost = (nn(o.plukaniePerWash) / Math.max(1, nn(o.plukanieL)*1000)) * nn(o.plukaniePkgPrice) * washesTotal;
           return (
           <div style={{ background:'#111827', border:'1px solid #374151', borderRadius:8, padding:'12px', marginTop:4 }}>
-            <InnerSec title="Pranie">
-              <FieldBox label="Ilość prań / tydzień"><input type="number" className="no-spin" min="0" max="99999" step="0.5" style={inp2} value={o.washesPerWeek} placeholder="5" onChange={e=>updOther(key,{washesPerWeek:cl2(e.target.value)})} /></FieldBox>
+            <InnerSec title={t('exp_pranie')}>
+              <FieldBox label={t('dc_washes_per_week')}><input type="number" className="no-spin" min="0" max="99999" step="0.5" style={inp2} value={o.washesPerWeek} placeholder="5" onChange={e=>updOther(key,{washesPerWeek:cl2(e.target.value)})} /></FieldBox>
             </InnerSec>
-            <InnerSec title="Środek piorący">
+            <InnerSec title={t('dc_detergent')}>
             <div style={{ display:'flex', borderRadius:6, overflow:'hidden', border:'1px solid #374151' }}>
               {['proszek','plyn','kapsulki'].map((type,i) => (
                 <button key={type} type="button" onClick={()=>updOther(key,{detergentType:type})}
                   style={{ flex:1, padding:'5px 4px', border:'none', borderRight:i<2?'1px solid #374151':'none', cursor:'pointer', fontSize:10, fontWeight:600, transition:'all 0.15s',
                     background:o.detergentType===type?'#1e3a3a':'transparent', color:o.detergentType===type?'#2dd4bf':'#6b7280' }}>
-                  {type==='proszek'?'Proszek':type==='plyn'?'Płyn':'Kapsułki'}
+                  {type==='proszek'?t('dc_powder'):type==='plyn'?t('dc_liquid'):t('dc_capsules')}
                 </button>
               ))}
             </div>
             {o.detergentType === 'proszek' && <div style={{ marginTop:8, borderLeft:'2px solid #2dd4bf', paddingLeft:8, display:'flex', flexDirection:'column', gap:6 }}>
-              <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>Proszek</div>
-              <FieldBox label="Gramów na pranie"><input type="number" className="no-spin" min="0" max="99999" style={inp2} value={o.proszekPerWash} placeholder="75" onChange={e=>updOther(key,{proszekPerWash:cl2(e.target.value)})} /></FieldBox>
-              <FieldBox label="Pojemność op. (kg)"><input type="number" className="no-spin" min="0" max="99999" step="0.1" style={inp2} value={o.proszekPkgKg} placeholder="3" onChange={e=>updOther(key,{proszekPkgKg:cl2(e.target.value)})} /></FieldBox>
-              <FieldBox label="Cena op. (zł)"><input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2} value={o.proszekPkgPrice} placeholder="40" onChange={e=>updOther(key,{proszekPkgPrice:cl2(e.target.value)})} /></FieldBox>
+              <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>{t('dc_powder')}</div>
+              <FieldBox label={t('dc_grams_per_wash')}><input type="number" className="no-spin" min="0" max="99999" style={inp2} value={o.proszekPerWash} placeholder="75" onChange={e=>updOther(key,{proszekPerWash:cl2(e.target.value)})} /></FieldBox>
+              <FieldBox label={t('dc_pkg_capacity_kg')}><input type="number" className="no-spin" min="0" max="99999" step="0.1" style={inp2} value={o.proszekPkgKg} placeholder="3" onChange={e=>updOther(key,{proszekPkgKg:cl2(e.target.value)})} /></FieldBox>
+              <FieldBox label={t('dc_pkg_price')}><input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2} value={o.proszekPkgPrice} placeholder="40" onChange={e=>updOther(key,{proszekPkgPrice:cl2(e.target.value)})} /></FieldBox>
             </div>}
             {o.detergentType === 'plyn' && <div style={{ marginTop:8, borderLeft:'2px solid #2dd4bf', paddingLeft:8, display:'flex', flexDirection:'column', gap:6 }}>
-              <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>Płyn</div>
-              <FieldBox label="ml na pranie"><input type="number" className="no-spin" min="0" max="99999" style={inp2} value={o.plynPerWash} onChange={e=>updOther(key,{plynPerWash:cl2(e.target.value)})} /></FieldBox>
-              <FieldBox label="Pojemność op. (l)"><input type="number" className="no-spin" min="0" max="99999" step="0.1" style={inp2} value={o.plynPkgL} onChange={e=>updOther(key,{plynPkgL:cl2(e.target.value)})} /></FieldBox>
-              <FieldBox label="Cena op. (zł)"><input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2} value={o.plynPkgPrice} onChange={e=>updOther(key,{plynPkgPrice:cl2(e.target.value)})} /></FieldBox>
+              <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>{t('dc_liquid')}</div>
+              <FieldBox label="ml / wash"><input type="number" className="no-spin" min="0" max="99999" style={inp2} value={o.plynPerWash} onChange={e=>updOther(key,{plynPerWash:cl2(e.target.value)})} /></FieldBox>
+              <FieldBox label={t('dc_pkg_capacity_l')}><input type="number" className="no-spin" min="0" max="99999" step="0.1" style={inp2} value={o.plynPkgL} onChange={e=>updOther(key,{plynPkgL:cl2(e.target.value)})} /></FieldBox>
+              <FieldBox label={t('dc_pkg_price')}><input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2} value={o.plynPkgPrice} onChange={e=>updOther(key,{plynPkgPrice:cl2(e.target.value)})} /></FieldBox>
             </div>}
             {o.detergentType === 'kapsulki' && <div style={{ marginTop:8, borderLeft:'2px solid #2dd4bf', paddingLeft:8, display:'flex', flexDirection:'column', gap:6 }}>
-              <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>Kapsułki</div>
-              <FieldBox label="Szt. w opakowaniu"><input type="number" className="no-spin" min="0" max="99999" style={inp2} value={o.kapsulkiPerPkg} onChange={e=>updOther(key,{kapsulkiPerPkg:cl2(e.target.value)})} /></FieldBox>
-              <FieldBox label="Cena op. (zł)"><input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2} value={o.kapsulkiPkgPrice} onChange={e=>updOther(key,{kapsulkiPkgPrice:cl2(e.target.value)})} /></FieldBox>
+              <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>{t('dc_capsules')}</div>
+              <FieldBox label={t('dc_capsules_per_pkg')}><input type="number" className="no-spin" min="0" max="99999" style={inp2} value={o.kapsulkiPerPkg} onChange={e=>updOther(key,{kapsulkiPerPkg:cl2(e.target.value)})} /></FieldBox>
+              <FieldBox label={t('dc_pkg_price')}><input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2} value={o.kapsulkiPkgPrice} onChange={e=>updOther(key,{kapsulkiPkgPrice:cl2(e.target.value)})} /></FieldBox>
             </div>}
             </InnerSec>
-            <InnerSec title="Płyn do płukania">
+            <InnerSec title={t('dc_fabric_softener_section')}>
               <button type="button" onClick={()=>updOther(key,{plukanie:!o.plukanie})}
                 style={{ width:'100%', padding:'5px 8px', border:'1px solid', borderRadius:6, cursor:'pointer', fontSize:10, fontWeight:600, transition:'all 0.15s',
                   background:o.plukanie?'#1e3a3a':'transparent', borderColor:'#374151', color:o.plukanie?'#2dd4bf':'#6b7280' }}>
-                Płyn do płukania
+                {t('dc_fabric_softener')}
               </button>
               {o.plukanie && <div style={{ marginTop:6, borderLeft:'2px solid #2dd4bf', paddingLeft:8, display:'flex', flexDirection:'column', gap:6 }}>
-                <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>Płyn do płukania</div>
-                <FieldBox label="ml na pranie"><input type="number" className="no-spin" min="0" max="99999" style={inp2} value={o.plukaniePerWash} placeholder="25" onChange={e=>updOther(key,{plukaniePerWash:cl2(e.target.value)})} /></FieldBox>
-                <FieldBox label="Pojemność op. (l)"><input type="number" className="no-spin" min="0" max="99999" step="0.1" style={inp2} value={o.plukanieL} placeholder="1.5" onChange={e=>updOther(key,{plukanieL:cl2(e.target.value)})} /></FieldBox>
-                <FieldBox label="Cena op. (zł)"><input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2} value={o.plukaniePkgPrice} placeholder="15" onChange={e=>updOther(key,{plukaniePkgPrice:cl2(e.target.value)})} /></FieldBox>
+                <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>{t('dc_fabric_softener')}</div>
+                <FieldBox label="ml / wash"><input type="number" className="no-spin" min="0" max="99999" style={inp2} value={o.plukaniePerWash} placeholder="25" onChange={e=>updOther(key,{plukaniePerWash:cl2(e.target.value)})} /></FieldBox>
+                <FieldBox label={t('dc_pkg_capacity_l')}><input type="number" className="no-spin" min="0" max="99999" step="0.1" style={inp2} value={o.plukanieL} placeholder="1.5" onChange={e=>updOther(key,{plukanieL:cl2(e.target.value)})} /></FieldBox>
+                <FieldBox label={t('dc_pkg_price')}><input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2} value={o.plukaniePkgPrice} placeholder="15" onChange={e=>updOther(key,{plukaniePkgPrice:cl2(e.target.value)})} /></FieldBox>
               </div>}
             </InnerSec>
             <div style={{ borderTop:'1px solid #1a3a38', marginTop:6, paddingTop:5, display:'flex', flexDirection:'column', gap:2 }}>
               <div style={{ display:'flex', justifyContent:'space-between', fontSize:10 }}>
-                <span style={{ color:'#6b7280' }}>{detLabel} ({Math.round(washesTotal)} prań)</span>
-                <span style={{ color:'#9ca3af', fontWeight:600 }}>{detCost.toFixed(2)} zł</span>
+                <span style={{ color:'#6b7280' }}>{detLabel} ({Math.round(washesTotal)} washes)</span>
+                <span style={{ color:'#9ca3af', fontWeight:600 }}>{detCost.toFixed(2)} {t('currency')}</span>
               </div>
               {o.plukanie && pluCost > 0 && (
                 <div style={{ display:'flex', justifyContent:'space-between', fontSize:10 }}>
-                  <span style={{ color:'#6b7280' }}>Płyn do płukania</span>
-                  <span style={{ color:'#9ca3af', fontWeight:600 }}>{pluCost.toFixed(2)} zł</span>
+                  <span style={{ color:'#6b7280' }}>{t('dc_fabric_softener')}</span>
+                  <span style={{ color:'#9ca3af', fontWeight:600 }}>{pluCost.toFixed(2)} {t('currency')}</span>
                 </div>
               )}
               <div style={{ borderTop:'1px solid #1a3a38', paddingTop:4, marginTop:2, display:'flex', justifyContent:'space-between', fontSize:12, fontWeight:800 }}>
-                <span style={{ color:'#6b7280' }}>× {days} dni</span>
-                <span style={{ color:'#0d9488' }}>{(detCost + pluCost).toFixed(2)} zł</span>
+                <span style={{ color:'#6b7280' }}>{t('dc_days_label')(days)}</span>
+                <span style={{ color:'#0d9488' }}>{(detCost + pluCost).toFixed(2)} {t('currency')}</span>
               </div>
             </div>
           </div>
@@ -518,89 +525,89 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
           const totalH = zbCost+wlCost+kapCost+inneCost+papierCostH;
           return (
           <div style={{ background:'#111827', border:'1px solid #374151', borderRadius:8, padding:'12px', marginTop:4 }}>
-            <InnerSec title="Mycie zębów">
+            <InnerSec title={t('dc_toothbrushing')}>
               <div style={{ display:'flex', flexDirection:'column', gap:5 }}>
-                <FI label="Razy dziennie" val={h.zbRazDzien} onChange={v=>updH({zbRazDzien:v})} max="50" ph="2" />
-                <FI label="Pasty na raz (g)" val={h.zbPastaG} onChange={v=>updH({zbPastaG:v})} step="0.5" ph="1" />
-                <FI label="Pojemność tubki (ml)" val={h.zbTubkaMl} onChange={v=>updH({zbTubkaMl:v})} ph="75" />
-                <FI label="Cena tubki (zł)" val={h.zbTubkaPrice} onChange={v=>updH({zbTubkaPrice:v})} step="0.01" ph="8" />
-                <FI label="Cena szczoteczki (zł) — co 3 mies." val={h.zbSzczetokaPrice} onChange={v=>updH({zbSzczetokaPrice:v})} step="0.01" ph="15" />
+                <FI label={t('dc_brushing_times')} val={h.zbRazDzien} onChange={v=>updH({zbRazDzien:v})} max="50" ph="2" />
+                <FI label={t('dc_toothpaste_g')} val={h.zbPastaG} onChange={v=>updH({zbPastaG:v})} step="0.5" ph="1" />
+                <FI label={t('dc_tube_ml')} val={h.zbTubkaMl} onChange={v=>updH({zbTubkaMl:v})} ph="75" />
+                <FI label={t('dc_tube_price')} val={h.zbTubkaPrice} onChange={v=>updH({zbTubkaPrice:v})} step="0.01" ph="8" />
+                <FI label={t('dc_toothbrush_price')} val={h.zbSzczetokaPrice} onChange={v=>updH({zbSzczetokaPrice:v})} step="0.01" ph="15" />
               </div>
             </InnerSec>
-            <InnerSec title="Mycie włosów">
-              <FI label="Razy w tygodniu" val={h.wlRazW} onChange={v=>updH({wlRazW:v})} max="14" ph="3" />
+            <InnerSec title={t('dc_hairwashing')}>
+              <FI label={t('dc_hair_times_week')} val={h.wlRazW} onChange={v=>updH({wlRazW:v})} max="14" ph="3" />
               <div style={{ display:'flex', gap:4, marginTop:5 }}>
-                <TogBtn active={h.wlSzampon} onClick={()=>updH({wlSzampon:!h.wlSzampon})} label="Szampon" />
-                <TogBtn active={h.wlOdzywka} onClick={()=>updH({wlOdzywka:!h.wlOdzywka})} label="Odżywka" />
+                <TogBtn active={h.wlSzampon} onClick={()=>updH({wlSzampon:!h.wlSzampon})} label={t('dc_shampoo')} />
+                <TogBtn active={h.wlOdzywka} onClick={()=>updH({wlOdzywka:!h.wlOdzywka})} label={t('dc_conditioner')} />
               </div>
               {h.wlSzampon && <div style={{ display:'flex', flexDirection:'column', gap:5, marginTop:6, borderLeft:'2px solid #2dd4bf', paddingLeft:8 }}>
-                <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>Szampon</div>
-                <FI label="Wyciśnięcia (1=5ml)" val={h.wlSzamponWyc} onChange={v=>updH({wlSzamponWyc:v})} ph="2" />
-                <FI label="Pojemność op. (ml)" val={h.wlSzamponMl} onChange={v=>updH({wlSzamponMl:v})} ph="400" />
-                <FI label="Cena (zł)" val={h.wlSzamponPrice} onChange={v=>updH({wlSzamponPrice:v})} step="0.01" ph="18" />
+                <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>{t('dc_shampoo')}</div>
+                <FI label={t('dc_pumps')} val={h.wlSzamponWyc} onChange={v=>updH({wlSzamponWyc:v})} ph="2" />
+                <FI label={t('dc_pkg_capacity_ml')} val={h.wlSzamponMl} onChange={v=>updH({wlSzamponMl:v})} ph="400" />
+                <FI label={t('dc_pkg_price')} val={h.wlSzamponPrice} onChange={v=>updH({wlSzamponPrice:v})} step="0.01" ph="18" />
               </div>}
               {h.wlOdzywka && <div style={{ display:'flex', flexDirection:'column', gap:5, marginTop:6, borderLeft:'2px solid #2dd4bf', paddingLeft:8 }}>
-                <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>Odżywka</div>
-                <FI label="Wyciśnięcia (1=5ml)" val={h.wlOdzywkaWyc} onChange={v=>updH({wlOdzywkaWyc:v})} ph="2" />
-                <FI label="Pojemność op. (ml)" val={h.wlOdzywkaMl} onChange={v=>updH({wlOdzywkaMl:v})} ph="300" />
-                <FI label="Cena (zł)" val={h.wlOdzywkaPrice} onChange={v=>updH({wlOdzywkaPrice:v})} step="0.01" ph="20" />
+                <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>{t('dc_conditioner')}</div>
+                <FI label={t('dc_pumps')} val={h.wlOdzywkaWyc} onChange={v=>updH({wlOdzywkaWyc:v})} ph="2" />
+                <FI label={t('dc_pkg_capacity_ml')} val={h.wlOdzywkaMl} onChange={v=>updH({wlOdzywkaMl:v})} ph="300" />
+                <FI label={t('dc_pkg_price')} val={h.wlOdzywkaPrice} onChange={v=>updH({wlOdzywkaPrice:v})} step="0.01" ph="20" />
               </div>}
             </InnerSec>
-            <InnerSec title="Kąpiel / prysznic">
-              <FI label="Razy w tygodniu" val={h.kapRazW} onChange={v=>updH({kapRazW:v})} max="14" ph="7" />
+            <InnerSec title={t('dc_bathing')}>
+              <FI label={t('dc_hair_times_week')} val={h.kapRazW} onChange={v=>updH({kapRazW:v})} max="14" ph="7" />
               <div style={{ display:'flex', gap:4, marginTop:5 }}>
-                <TogBtn active={h.kapZel} onClick={()=>updH({kapZel:!h.kapZel})} label="Żel" />
-                <TogBtn active={h.kapMydlo} onClick={()=>updH({kapMydlo:!h.kapMydlo})} label="Mydło" />
+                <TogBtn active={h.kapZel} onClick={()=>updH({kapZel:!h.kapZel})} label={t('dc_gel')} />
+                <TogBtn active={h.kapMydlo} onClick={()=>updH({kapMydlo:!h.kapMydlo})} label={t('dc_soap')} />
               </div>
               {h.kapZel && <div style={{ display:'flex', flexDirection:'column', gap:5, marginTop:6, borderLeft:'2px solid #2dd4bf', paddingLeft:8 }}>
-                <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>Żel</div>
-                <FI label="Wyciśnięcia (1=5ml)" val={h.kapZelWyc} onChange={v=>updH({kapZelWyc:v})} ph="3" />
-                <FI label="Pojemność op. (ml)" val={h.kapZelMl} onChange={v=>updH({kapZelMl:v})} ph="400" />
-                <FI label="Cena (zł)" val={h.kapZelPrice} onChange={v=>updH({kapZelPrice:v})} step="0.01" ph="12" />
+                <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>{t('dc_gel')}</div>
+                <FI label={t('dc_pumps')} val={h.kapZelWyc} onChange={v=>updH({kapZelWyc:v})} ph="3" />
+                <FI label={t('dc_pkg_capacity_ml')} val={h.kapZelMl} onChange={v=>updH({kapZelMl:v})} ph="400" />
+                <FI label={t('dc_pkg_price')} val={h.kapZelPrice} onChange={v=>updH({kapZelPrice:v})} step="0.01" ph="12" />
               </div>}
               {h.kapMydlo && <div style={{ display:'flex', flexDirection:'column', gap:5, marginTop:6, borderLeft:'2px solid #2dd4bf', paddingLeft:8 }}>
-                <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>Mydło <span style={{ fontWeight:400, color:'#6b7280' }}>(5g / mycie)</span></div>
-                <FI label="Wielkość kostki (g)" val={h.kapMydloG} onChange={v=>updH({kapMydloG:v})} ph="100" />
-                <FI label="Cena (zł)" val={h.kapMydloPrice} onChange={v=>updH({kapMydloPrice:v})} step="0.01" ph="5" />
+                <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>{t('dc_soap')} <span style={{ fontWeight:400, color:'#6b7280' }}>(5g / use)</span></div>
+                <FI label={t('dc_bar_size_g')} val={h.kapMydloG} onChange={v=>updH({kapMydloG:v})} ph="100" />
+                <FI label={t('dc_pkg_price')} val={h.kapMydloPrice} onChange={v=>updH({kapMydloPrice:v})} step="0.01" ph="5" />
               </div>}
             </InnerSec>
-            <InnerSec title="Papier toaletowy">
+            <InnerSec title={t('dc_toilet_paper')}>
               <div style={{ display:'flex', flexDirection:'column', gap:5 }}>
-                <FI label="Dzienne zużycie (rolki)" val={h.papierDailyRolls} onChange={v=>updH({papierDailyRolls:v})} step="0.1" ph="0.5" />
-                <FI label="Rolek w opakowaniu" val={h.papierRollsPerPkg} onChange={v=>updH({papierRollsPerPkg:v})} ph="16" />
-                <FI label="Cena opakowania (zł)" val={h.papierPkgPrice} onChange={v=>updH({papierPkgPrice:v})} step="0.01" ph="23" />
+                <FI label={t('dc_rolls_per_day')} val={h.papierDailyRolls} onChange={v=>updH({papierDailyRolls:v})} step="0.1" ph="0.5" />
+                <FI label={t('dc_rolls_in_pkg')} val={h.papierRollsPerPkg} onChange={v=>updH({papierRollsPerPkg:v})} ph="16" />
+                <FI label={t('dc_pkg_price_full2')} val={h.papierPkgPrice} onChange={v=>updH({papierPkgPrice:v})} step="0.01" ph="23" />
               </div>
             </InnerSec>
-            <InnerSec title="Inne">
+            <InnerSec title={t('dc_other_lbl')}>
               <div style={{ display:'flex', flexDirection:'column', gap:5, overflow:'hidden' }}>
                 {(h.inneItems||[]).map((ci,idx) => (
                   <div key={ci.id||idx} style={{ background:'#111827', borderRadius:6, padding:'6px 8px', display:'flex', flexDirection:'column', gap:4, overflow:'hidden' }}>
                     <div style={{ display:'flex', gap:4, alignItems:'center', minWidth:0 }}>
-                      <input value={ci.name} maxLength={30} placeholder="np. Dezodorant"
+                      <input value={ci.name} maxLength={30} placeholder={t('dc_deodorant_ph')}
                         onChange={e=>{const a=[...h.inneItems];a[idx]={...a[idx],name:e.target.value};updInne(a);}}
                         style={{ fontSize:11, flex:1, minWidth:0, padding:'5px 6px', boxSizing:'border-box' }} />
                       <button onClick={()=>updInne(h.inneItems.filter((_,i)=>i!==idx))}
                         style={{ background:'#ef444420', border:'none', borderRadius:4, color:'#ef4444', cursor:'pointer', padding:'3px 7px', fontSize:12, fontWeight:700 }}>×</button>
                     </div>
-                    <FieldBox label="Szt./mies."><input type="number" className="no-spin" min="0" max="999" style={{ width:52, boxSizing:'border-box', padding:'5px 4px', fontSize:12 }} value={ci.perMonth} onChange={e=>{const a=[...h.inneItems];a[idx]={...a[idx],perMonth:cl(e.target.value,999)};updInne(a);}} /></FieldBox>
-                    <FieldBox label="Cena/opak. (zł)"><input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2} value={ci.pkgPrice} onChange={e=>{const a=[...h.inneItems];a[idx]={...a[idx],pkgPrice:cl2(e.target.value)};updInne(a);}} /></FieldBox>
+                    <FieldBox label={t('dc_pcs_per_month')}><input type="number" className="no-spin" min="0" max="999" style={{ width:52, boxSizing:'border-box', padding:'5px 4px', fontSize:12 }} value={ci.perMonth} onChange={e=>{const a=[...h.inneItems];a[idx]={...a[idx],perMonth:cl(e.target.value,999)};updInne(a);}} /></FieldBox>
+                    <FieldBox label={t('dc_price_per_pkg2')}><input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2} value={ci.pkgPrice} onChange={e=>{const a=[...h.inneItems];a[idx]={...a[idx],pkgPrice:cl2(e.target.value)};updInne(a);}} /></FieldBox>
                   </div>
                 ))}
                 <button type="button" onClick={()=>updInne([...(h.inneItems||[]),{id:Date.now(),name:'',perMonth:'1',pkgPrice:''}])}
                   style={{ padding:'5px 8px', borderRadius:6, border:'1px solid #374151', background:'#1e3a3a', color:'#2dd4bf', cursor:'pointer', fontSize:10, fontWeight:600, transition:'all 0.15s' }}>
-                  + Dodaj produkt
+                  {t('dc_add_item')}
                 </button>
               </div>
             </InnerSec>
             <div style={{ borderTop:'1px solid #1a3a38', paddingTop:6 }}>
-              {zbCost>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Zęby</span><span style={{ color:'#9ca3af' }}>{zbCost.toFixed(2)} zł</span></div>}
-              {wlCost>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Włosy</span><span style={{ color:'#9ca3af' }}>{wlCost.toFixed(2)} zł</span></div>}
-              {kapCost>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Kąpiel</span><span style={{ color:'#9ca3af' }}>{kapCost.toFixed(2)} zł</span></div>}
-              {papierCostH>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Papier toa.</span><span style={{ color:'#9ca3af' }}>{papierCostH.toFixed(2)} zł</span></div>}
-              {inneCost>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Inne</span><span style={{ color:'#9ca3af' }}>{inneCost.toFixed(2)} zł</span></div>}
+              {zbCost>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{t('dc_teeth_lbl')}</span><span style={{ color:'#9ca3af' }}>{zbCost.toFixed(2)} {t('currency')}</span></div>}
+              {wlCost>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{t('dc_hair_lbl')}</span><span style={{ color:'#9ca3af' }}>{wlCost.toFixed(2)} {t('currency')}</span></div>}
+              {kapCost>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{t('dc_bath_lbl')}</span><span style={{ color:'#9ca3af' }}>{kapCost.toFixed(2)} {t('currency')}</span></div>}
+              {papierCostH>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{t('dc_toilet_paper_short')}</span><span style={{ color:'#9ca3af' }}>{papierCostH.toFixed(2)} {t('currency')}</span></div>}
+              {inneCost>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{t('dc_other_lbl')}</span><span style={{ color:'#9ca3af' }}>{inneCost.toFixed(2)} {t('currency')}</span></div>}
               <div style={{ display:'flex', justifyContent:'space-between', fontSize:12, fontWeight:800, borderTop:'1px solid #1a3a38', paddingTop:4, marginTop:2 }}>
-                <span style={{ color:'#6b7280' }}>× {days} dni</span>
-                <span style={{ color:'#0d9488' }}>{totalH.toFixed(2)} zł</span>
+                <span style={{ color:'#6b7280' }}>{t('dc_days_label')(days)}</span>
+                <span style={{ color:'#0d9488' }}>{totalH.toFixed(2)} {t('currency')}</span>
               </div>
             </div>
           </div>
@@ -613,40 +620,40 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
           const updItems = newItems => updOther(key, { cleaningItems: newItems });
           return (
           <div style={{ background:'#111827', border:'1px solid #374151', borderRadius:8, padding:'12px', marginTop:4 }}>
-            <InnerSec title="Śmieci">
+            <InnerSec title={t('dc_trash')}>
               <div style={{ display:'flex', flexDirection:'column', gap:6 }}>
-                <FieldBox label="Worków w tygodniu"><input type="number" className="no-spin" min="0" max="99999" style={inp2} value={o.bagsPerWeek} placeholder="4" onChange={e=>updOther(key,{bagsPerWeek:cl2(e.target.value)})} /></FieldBox>
-                <FieldBox label="Worków w opakowaniu"><input type="number" className="no-spin" min="0" max="99999" style={inp2} placeholder="20" value={o.bagsPerPkg} onChange={e=>updOther(key,{bagsPerPkg:cl2(e.target.value)})} /></FieldBox>
-                <FieldBox label="Cena opakowania (zł)"><input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2} placeholder="12" value={o.bagsPkgPrice} onChange={e=>updOther(key,{bagsPkgPrice:cl2(e.target.value)})} /></FieldBox>
+                <FieldBox label={t('dc_bags_per_week')}><input type="number" className="no-spin" min="0" max="99999" style={inp2} value={o.bagsPerWeek} placeholder="4" onChange={e=>updOther(key,{bagsPerWeek:cl2(e.target.value)})} /></FieldBox>
+                <FieldBox label={t('dc_bags_in_pkg')}><input type="number" className="no-spin" min="0" max="99999" style={inp2} placeholder="20" value={o.bagsPerPkg} onChange={e=>updOther(key,{bagsPerPkg:cl2(e.target.value)})} /></FieldBox>
+                <FieldBox label={t('dc_pkg_price_full2')}><input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2} placeholder="12" value={o.bagsPkgPrice} onChange={e=>updOther(key,{bagsPkgPrice:cl2(e.target.value)})} /></FieldBox>
               </div>
             </InnerSec>
-            <InnerSec title="Płyny i akcesoria">
+            <InnerSec title={t('dc_cleaning_fluids')}>
               <div style={{ display:'flex', flexDirection:'column', gap:6, overflow:'hidden' }}>
                 {(o.cleaningItems || []).map((ci, idx) => (
                   <div key={ci.id || idx} style={{ background:'#111827', borderRadius:6, padding:'6px 8px', display:'flex', flexDirection:'column', gap:4, overflow:'hidden' }}>
                     <div style={{ display:'flex', gap:4, alignItems:'center', minWidth:0 }}>
-                      <input value={ci.name} maxLength={30} placeholder="np. Płyn uniwersalny"
+                      <input value={ci.name} maxLength={30} placeholder={t('dc_cleaning_fluid_ph')}
                         onChange={e => { const a=[...o.cleaningItems]; a[idx]={...a[idx],name:e.target.value}; updItems(a); }}
                         style={{ fontSize:11, flex:1, minWidth:0, padding:'5px 6px', boxSizing:'border-box' }} />
                       <button onClick={() => updItems(o.cleaningItems.filter((_,i)=>i!==idx))}
                         style={{ background:'#ef444420', border:'none', borderRadius:4, color:'#ef4444', cursor:'pointer', padding:'3px 7px', fontSize:12, fontWeight:700 }}>×</button>
                     </div>
-                    <FieldBox label="Szt./mies."><input type="number" className="no-spin" min="0" max="999" style={{ width:52, boxSizing:'border-box', padding:'6px 8px', fontSize:13 }} value={ci.perMonth} onChange={e=>{const a=[...o.cleaningItems];a[idx]={...a[idx],perMonth:cl(e.target.value,999)};updItems(a);}} /></FieldBox>
-                    <FieldBox label="Cena/opak. (zł)"><input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2} value={ci.pkgPrice} onChange={e=>{const a=[...o.cleaningItems];a[idx]={...a[idx],pkgPrice:cl2(e.target.value)};updItems(a);}} /></FieldBox>
+                    <FieldBox label={t('dc_pcs_per_month')}><input type="number" className="no-spin" min="0" max="999" style={{ width:52, boxSizing:'border-box', padding:'6px 8px', fontSize:13 }} value={ci.perMonth} onChange={e=>{const a=[...o.cleaningItems];a[idx]={...a[idx],perMonth:cl(e.target.value,999)};updItems(a);}} /></FieldBox>
+                    <FieldBox label={t('dc_price_per_pkg2')}><input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2} value={ci.pkgPrice} onChange={e=>{const a=[...o.cleaningItems];a[idx]={...a[idx],pkgPrice:cl2(e.target.value)};updItems(a);}} /></FieldBox>
                   </div>
                 ))}
                 <button type="button" onClick={() => updItems([...(o.cleaningItems||[]), { id:Date.now(), name:'', perMonth:'1', pkgPrice:'' }])}
                   style={{ padding:'5px 8px', borderRadius:6, border:'1px solid #374151', background:'#1e3a3a', color:'#2dd4bf', cursor:'pointer', fontSize:10, fontWeight:600, transition:'all 0.15s' }}>
-                  + Dodaj produkt
+                  {t('dc_add_item')}
                 </button>
               </div>
             </InnerSec>
             <div style={{ borderTop:'1px solid #1a3a38', paddingTop:6 }}>
-              {bagCost > 0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Worki na śmieci</span><span style={{ color:'#9ca3af' }}>{bagCost.toFixed(2)} zł</span></div>}
-              {cleanCost > 0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Płyny i akcesoria</span><span style={{ color:'#9ca3af' }}>{cleanCost.toFixed(2)} zł</span></div>}
+              {bagCost > 0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{t('dc_rubbish_bags_lbl')}</span><span style={{ color:'#9ca3af' }}>{bagCost.toFixed(2)} {t('currency')}</span></div>}
+              {cleanCost > 0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{t('dc_cleaning_fluids')}</span><span style={{ color:'#9ca3af' }}>{cleanCost.toFixed(2)} {t('currency')}</span></div>}
               <div style={{ display:'flex', justifyContent:'space-between', fontSize:12, fontWeight:800, borderTop:'1px solid #1a3a38', paddingTop:4, marginTop:2 }}>
-                <span style={{ color:'#6b7280' }}>× {days} dni</span>
-                <span style={{ color:'#0d9488' }}>{(bagCost + cleanCost).toFixed(2)} zł</span>
+                <span style={{ color:'#6b7280' }}>{t('dc_days_label')(days)}</span>
+                <span style={{ color:'#0d9488' }}>{(bagCost + cleanCost).toFixed(2)} {t('currency')}</span>
               </div>
             </div>
           </div>
@@ -660,7 +667,7 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
           return (
           <div style={{ background:'#111827', border:'1px solid #374151', borderRadius:8, padding:'8px', marginTop:4 }}>
             <div style={{ display:'flex', gap:6, marginBottom:8 }}>
-              {[['useReczne','Ręcznie'],['useZmywarka','Zmywarka']].map(([field, lbl]) => (
+              {[['useReczne', t('dc_hand_wash')],['useZmywarka', t('dc_dishwasher')]].map(([field, lbl]) => (
                 <button key={field} type="button" onClick={()=>updOther(key,{[field]:!o[field]})}
                   style={{ flex:1, padding:'5px 4px', border:'1px solid #374151', borderRadius:6, cursor:'pointer', fontSize:10, fontWeight:600, transition:'all 0.15s',
                     background:o[field]?'#1e3a3a':'transparent', color:o[field]?'#2dd4bf':'#6b7280' }}>
@@ -669,35 +676,35 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
               ))}
             </div>
             {o.useReczne && <div style={{ marginTop:6, borderLeft:'2px solid #2dd4bf', paddingLeft:8, display:'flex', flexDirection:'column', gap:6 }}>
-              <div style={{ fontSize:10, fontWeight:700, color:'#0d9488' }}>Ręcznie</div>
+              <div style={{ fontSize:10, fontWeight:700, color:'#0d9488' }}>{t('dc_hand_wash')}</div>
               <div>
-                <div style={{ fontSize:10, color:'#6b7280', marginBottom:3 }}>Na ile wystarcza pojemnik?</div>
+                <div style={{ fontSize:10, color:'#6b7280', marginBottom:3 }}>{t('dc_how_long_lasts')}</div>
                 <div style={{ display:'flex', flexDirection:'column', gap:4, marginBottom:4 }}>
                   {['dni','miesiace'].map(u => (
                     <button key={u} type="button" onClick={()=>updOther(key,{durationUnit:u})}
                       style={{ width:'100%', padding:'5px 8px', border:'1px solid', borderRadius:5, cursor:'pointer', fontSize:10, fontWeight:600, transition:'all 0.15s',
                         background:o.durationUnit===u?'#1e3a3a':'transparent', borderColor:'#374151', color:o.durationUnit===u?'#2dd4bf':'#6b7280' }}>
-                      {u==='dni'?'Dni':'Miesiące'}
+                      {u==='dni'?t('dc_days_unit'):t('dc_months_unit')}
                     </button>
                   ))}
                 </div>
                 <input type="number" className="no-spin" min="0" max="99999" style={inp2} placeholder="30" value={o.pkgDuration} onChange={e=>updOther(key,{pkgDuration:cl2(e.target.value)})} />
               </div>
-              <FieldBox label="Cena opakowania (zł)"><input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2} placeholder="9" value={o.pkgPrice} onChange={e=>updOther(key,{pkgPrice:cl2(e.target.value)})} /></FieldBox>
+              <FieldBox label={t('dc_pkg_price_full2')}><input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2} placeholder="9" value={o.pkgPrice} onChange={e=>updOther(key,{pkgPrice:cl2(e.target.value)})} /></FieldBox>
             </div>}
             {o.useZmywarka && <div style={{ marginTop:6, borderLeft:'2px solid #2dd4bf', paddingLeft:8, display:'flex', flexDirection:'column', gap:6 }}>
-              <div style={{ fontSize:10, fontWeight:700, color:'#0d9488' }}>Zmywarka</div>
-              <FieldBox label="Użyć na tydzień"><input type="number" className="no-spin" min="0" max="99999" style={inp2} placeholder="7" value={o.usesPerWeek} onChange={e=>updOther(key,{usesPerWeek:cl2(e.target.value)})} /></FieldBox>
-              <FieldBox label="Kapsułek w opakowaniu"><input type="number" className="no-spin" min="0" max="99999" style={inp2} placeholder="30" value={o.kapsPerPkg} onChange={e=>updOther(key,{kapsPerPkg:cl2(e.target.value)})} /></FieldBox>
-              <FieldBox label="Cena opakowania (zł)"><input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2} placeholder="25" value={o.kapsulkiPkgPrice} onChange={e=>updOther(key,{kapsulkiPkgPrice:cl2(e.target.value)})} /></FieldBox>
+              <div style={{ fontSize:10, fontWeight:700, color:'#0d9488' }}>{t('dc_dishwasher')}</div>
+              <FieldBox label={t('dc_uses_per_week')}><input type="number" className="no-spin" min="0" max="99999" style={inp2} placeholder="7" value={o.usesPerWeek} onChange={e=>updOther(key,{usesPerWeek:cl2(e.target.value)})} /></FieldBox>
+              <FieldBox label={t('dc_pods_in_pkg')}><input type="number" className="no-spin" min="0" max="99999" style={inp2} placeholder="30" value={o.kapsPerPkg} onChange={e=>updOther(key,{kapsPerPkg:cl2(e.target.value)})} /></FieldBox>
+              <FieldBox label={t('dc_pkg_price_full2')}><input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2} placeholder="25" value={o.kapsulkiPkgPrice} onChange={e=>updOther(key,{kapsulkiPkgPrice:cl2(e.target.value)})} /></FieldBox>
             </div>}
             {(o.useReczne || o.useZmywarka) && (
               <div style={{ borderTop:'1px solid #1a3a38', marginTop:8, paddingTop:6 }}>
-                {recznyCost > 0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Ręcznie</span><span style={{ color:'#9ca3af' }}>{recznyCost.toFixed(2)} zł</span></div>}
-                {zmywarkaCost > 0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Zmywarka</span><span style={{ color:'#9ca3af' }}>{zmywarkaCost.toFixed(2)} zł</span></div>}
+                {recznyCost > 0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{t('dc_hand_wash')}</span><span style={{ color:'#9ca3af' }}>{recznyCost.toFixed(2)} {t('currency')}</span></div>}
+                {zmywarkaCost > 0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{t('dc_dishwasher')}</span><span style={{ color:'#9ca3af' }}>{zmywarkaCost.toFixed(2)} {t('currency')}</span></div>}
                 <div style={{ display:'flex', justifyContent:'space-between', fontSize:12, fontWeight:800, borderTop:'1px solid #1a3a38', paddingTop:4, marginTop:2 }}>
-                  <span style={{ color:'#6b7280' }}>× {days} dni</span>
-                  <span style={{ color:'#0d9488' }}>{(recznyCost + zmywarkaCost).toFixed(2)} zł</span>
+                  <span style={{ color:'#6b7280' }}>{t('dc_days_label')(days)}</span>
+                  <span style={{ color:'#0d9488' }}>{(recznyCost + zmywarkaCost).toFixed(2)} {t('currency')}</span>
                 </div>
               </div>
             )}
@@ -717,16 +724,16 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
           return (
           <div style={{ background:'#111827', border:'1px solid #374151', borderRadius:8, padding:'12px', marginTop:4 }}>
             {[
-              ['przedszkoleE','przedszkole','Przedszkole / Żłobek','1200'],
-              ['obiadE','obiad','Obiad w szkole / Żłobku','150'],
-              ['zajeciaE','zajecia','Zajęcia dodatkowe','200'],
-              ['korepetycjeE','korepetycje','Korepetycje','300'],
-              ['materialyE','materialy','Materiały szkolne','80'],
-              ['dojazdyE','dojazdy','Dojazdy do szkoły','150'],
-              ['odziezdE','odziez','Odzież i obuwie','200'],
-              ['kieszonkoweE','kieszonkowe','Kieszonkowe','200'],
-              ['zabawkiE','zabawki','Zabawki','100'],
-              ['kosmetykiE','kosmetyki','Kosmetyki','50'],
+              ['przedszkoleE','przedszkole', t('dc_nursery'),'1200'],
+              ['obiadE','obiad', t('dc_school_lunch'),'150'],
+              ['zajeciaE','zajecia', t('dc_activities'),'200'],
+              ['korepetycjeE','korepetycje', t('dc_tutoring'),'300'],
+              ['materialyE','materialy', t('dc_school_supplies'),'80'],
+              ['dojazdyE','dojazdy', t('dc_school_transport'),'150'],
+              ['odziezdE','odziez', t('dc_clothing'),'200'],
+              ['kieszonkoweE','kieszonkowe', t('dc_pocket_money'),'200'],
+              ['zabawkiE','zabawki', t('dc_toys'),'100'],
+              ['kosmetykiE','kosmetyki', t('dc_cosmetics_lbl'),'50'],
             ].map(([eKey, vKey, label, ph]) => (
               <div key={eKey} style={{ marginBottom:8 }}>
                 <button type="button" onClick={()=>updD({[eKey]:!d[eKey]})}
@@ -735,7 +742,7 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
                   {label}
                 </button>
                 {d[eKey] && <div style={{ marginTop:6, borderLeft:'2px solid #2dd4bf', paddingLeft:10 }}>
-                  <MI label="zł / miesiąc" val={d[vKey]} onChange={v=>updD({[vKey]:v})} ph={ph} />
+                  <MI label={t('dc_per_month_lbl')} val={d[vKey]} onChange={v=>updD({[vKey]:v})} ph={ph} />
                 </div>}
               </div>
             ))}
@@ -743,38 +750,38 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
               <button type="button" onClick={()=>updD({pieluchyEnabled:!d.pieluchyEnabled})}
                 style={{ width:'100%', padding:'5px 8px', border:'1px solid #374151', borderRadius:6, cursor:'pointer', fontSize:10, fontWeight:600, transition:'all 0.15s',
                   background:d.pieluchyEnabled?'#1e3a3a':'transparent', color:d.pieluchyEnabled?'#2dd4bf':'#6b7280' }}>
-                Pieluchy
+                {t('dc_nappies')}
               </button>
               {d.pieluchyEnabled && <div style={{ marginTop:6, borderLeft:'2px solid #2dd4bf', paddingLeft:10, display:'flex', flexDirection:'column', gap:5 }}>
-                <MI label="Ile dziennie (szt.)" val={d.pieluchyPerDay} onChange={v=>updD({pieluchyPerDay:v})} step="1" ph="8" />
-                <MI label="Ilość w opakowaniu" val={d.pieluchyPerPkg} onChange={v=>updD({pieluchyPerPkg:v})} step="1" ph="50" />
-                <MI label="Cena opakowania (zł)" val={d.pieluchyPrice} onChange={v=>updD({pieluchyPrice:v})} ph="60" />
+                <MI label={t('dc_nappies_per_day')} val={d.pieluchyPerDay} onChange={v=>updD({pieluchyPerDay:v})} step="1" ph="8" />
+                <MI label={t('dc_nappies_in_pkg')} val={d.pieluchyPerPkg} onChange={v=>updD({pieluchyPerPkg:v})} step="1" ph="50" />
+                <MI label={t('dc_pkg_price_full2')} val={d.pieluchyPrice} onChange={v=>updD({pieluchyPrice:v})} ph="60" />
               </div>}
             </div>
             <div style={{ marginBottom:10 }}>
               <button type="button" onClick={()=>updD({mlekoEnabled:!d.mlekoEnabled})}
                 style={{ width:'100%', padding:'5px 8px', border:'1px solid #374151', borderRadius:6, cursor:'pointer', fontSize:10, fontWeight:600, transition:'all 0.15s',
                   background:d.mlekoEnabled?'#1e3a3a':'transparent', color:d.mlekoEnabled?'#2dd4bf':'#6b7280' }}>
-                Mleko modyfikowane
+                {t('dc_formula')}
               </button>
               {d.mlekoEnabled && <div style={{ marginTop:6, borderLeft:'2px solid #2dd4bf', paddingLeft:10, display:'flex', flexDirection:'column', gap:5 }}>
-                <MI label="Ile porcji dziennie" val={d.mlekoPerDay} onChange={v=>updD({mlekoPerDay:v})} step="1" ph="5" />
-                <MI label="Porcji w opakowaniu" val={d.mlekoPkgScoops} onChange={v=>updD({mlekoPkgScoops:v})} step="1" ph="21" />
-                <MI label="Cena opakowania (zł)" val={d.mlekoPrice} onChange={v=>updD({mlekoPrice:v})} ph="90" />
+                <MI label={t('dc_servings_per_day')} val={d.mlekoPerDay} onChange={v=>updD({mlekoPerDay:v})} step="1" ph="5" />
+                <MI label={t('dc_servings_in_pkg')} val={d.mlekoPkgScoops} onChange={v=>updD({mlekoPkgScoops:v})} step="1" ph="21" />
+                <MI label={t('dc_pkg_price_full2')} val={d.mlekoPrice} onChange={v=>updD({mlekoPrice:v})} ph="90" />
               </div>}
             </div>
-            <InnerSec title="Inne">
+            <InnerSec title={t('dc_other_lbl')}>
               <div style={{ display:'flex', flexDirection:'column', gap:5 }}>
                 {(d.extraItems||[]).map((ci,idx) => (
                   <div key={ci.id||idx} style={{ background:'#1a2433', borderRadius:6, padding:'6px 8px', display:'flex', flexDirection:'column', gap:4 }}>
                     <div style={{ display:'flex', gap:4, alignItems:'center' }}>
-                      <input value={ci.name} maxLength={30} placeholder="np. Kolonia"
+                      <input value={ci.name} maxLength={30} placeholder={t('dc_holiday_ph')}
                         onChange={e=>{const a=[...d.extraItems];a[idx]={...a[idx],name:e.target.value};updExtra(a);}}
                         style={{ fontSize:11, flex:1, minWidth:0, padding:'5px 6px', boxSizing:'border-box' }} />
                       <button onClick={()=>updExtra(d.extraItems.filter((_,i)=>i!==idx))}
                         style={{ background:'#ef444420', border:'none', borderRadius:4, color:'#ef4444', cursor:'pointer', padding:'3px 7px', fontSize:12, fontWeight:700 }}>×</button>
                     </div>
-                    <input type="number" className="no-spin" min="0" max="99999" step="0.01" placeholder="zł/mies."
+                    <input type="number" className="no-spin" min="0" max="99999" step="0.01" placeholder={t('dc_per_month_ph')}
                       value={ci.price}
                       onChange={e=>{const a=[...d.extraItems];a[idx]={...a[idx],price:cl2(e.target.value)};updExtra(a);}}
                       style={{ ...inp2, width:'100%' }} />
@@ -782,18 +789,18 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
                 ))}
                 <button type="button" onClick={()=>updExtra([...(d.extraItems||[]),{id:Date.now(),name:'',price:''}])}
                   style={{ padding:'5px 8px', borderRadius:6, border:'1px solid #374151', background:'#1e3a3a', color:'#2dd4bf', cursor:'pointer', fontSize:10, fontWeight:600, transition:'all 0.15s' }}>
-                  + Dodaj ekstra wydatek
+                  {t('dc_add_expense')}
                 </button>
               </div>
             </InnerSec>
             <div style={{ borderTop:'1px solid #1a3a38', paddingTop:6 }}>
-              {totalFixed>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Stałe</span><span style={{ color:'#9ca3af' }}>{totalFixed.toFixed(2)} zł</span></div>}
-              {totalPieluchy>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Pieluchy</span><span style={{ color:'#9ca3af' }}>{totalPieluchy.toFixed(2)} zł</span></div>}
-              {totalMleko>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Mleko</span><span style={{ color:'#9ca3af' }}>{totalMleko.toFixed(2)} zł</span></div>}
-              {totalExtra>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Inne</span><span style={{ color:'#9ca3af' }}>{totalExtra.toFixed(2)} zł</span></div>}
+              {totalFixed>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{t('dc_fixed_lbl')}</span><span style={{ color:'#9ca3af' }}>{totalFixed.toFixed(2)} {t('currency')}</span></div>}
+              {totalPieluchy>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{t('dc_nappies_lbl')}</span><span style={{ color:'#9ca3af' }}>{totalPieluchy.toFixed(2)} {t('currency')}</span></div>}
+              {totalMleko>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{t('dc_formula_lbl')}</span><span style={{ color:'#9ca3af' }}>{totalMleko.toFixed(2)} {t('currency')}</span></div>}
+              {totalExtra>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{t('dc_other_lbl')}</span><span style={{ color:'#9ca3af' }}>{totalExtra.toFixed(2)} {t('currency')}</span></div>}
               <div style={{ display:'flex', justifyContent:'space-between', fontSize:12, fontWeight:800, borderTop:'1px solid #1a3a38', paddingTop:4, marginTop:2 }}>
-                <span style={{ color:'#6b7280' }}>× {days} dni</span>
-                <span style={{ color:'#0d9488' }}>{totalAll.toFixed(2)} zł</span>
+                <span style={{ color:'#6b7280' }}>{t('dc_days_label')(days)}</span>
+                <span style={{ color:'#0d9488' }}>{totalAll.toFixed(2)} {t('currency')}</span>
               </div>
             </div>
           </div>
@@ -824,49 +831,49 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
           const tAll = tSucha+tMokra+tZwierek+tMies/30*days+tExtra;
           return (
           <div style={{ background:'#111827', border:'1px solid #374151', borderRadius:8, padding:'12px', marginTop:4 }}>
-            {Tog({eKey:"suchaE", label:"Sucha karma"})}
-            {z.suchaE && <InnerSec mb={6} flex title="Sucha karma">
-              {ZI({label:"Dzienne spożycie (g)", field:"suchaG", ph:"50"})}
-              {ZI({label:"Wielkość opakowania (g)", field:"suchaPkgG", ph:"2000"})}
-              {ZI({label:"Cena opakowania (zł)", field:"suchaPrice", step:"0.01", ph:"60"})}
+            {Tog({eKey:"suchaE", label:t('dc_dry_food')})}
+            {z.suchaE && <InnerSec mb={6} flex title={t('dc_dry_food')}>
+              {ZI({label:t('dc_dry_g_per_day'), field:"suchaG", ph:"50"})}
+              {ZI({label:t('dc_pkg_size_g'), field:"suchaPkgG", ph:"2000"})}
+              {ZI({label:t('dc_pkg_price_full2'), field:"suchaPrice", step:"0.01", ph:"60"})}
             </InnerSec>}
-            {Tog({eKey:"mokraE", label:"Mokra karma"})}
-            {z.mokraE && <InnerSec mb={6} flex title="Mokra karma">
-              {ZI({label:"Puszek / saszetek dziennie", field:"mokraSzt", ph:"2"})}
-              {ZI({label:"Gramatura puszki / saszetki (g)", field:"mokraGram", ph:"400"})}
-              {ZI({label:"Cena puszki / saszetki (zł)", field:"mokraPrice", step:"0.01", ph:"2.50"})}
+            {Tog({eKey:"mokraE", label:t('dc_wet_food')})}
+            {z.mokraE && <InnerSec mb={6} flex title={t('dc_wet_food')}>
+              {ZI({label:t('dc_cans_per_day'), field:"mokraSzt", ph:"2"})}
+              {ZI({label:t('dc_can_weight_g'), field:"mokraGram", ph:"400"})}
+              {ZI({label:t('dc_can_price'), field:"mokraPrice", step:"0.01", ph:"2.50"})}
             </InnerSec>}
-            {Tog({eKey:"zwierekE", label:"Żwirek / ściółka"})}
-            {z.zwierekE && <InnerSec mb={6} flex title="Żwirek / ściółka">
-              {ZI({label:"Wymiana co ile dni", field:"zwierekDni", ph:"7"})}
-              {ZI({label:"Ilość na wymianę (l)", field:"zwierekL", step:"0.5", ph:"3"})}
-              {ZI({label:"Wielkość opakowania (l)", field:"zwierekPkgL", step:"0.5", ph:"5"})}
-              {ZI({label:"Cena opakowania (zł)", field:"zwierekPrice", step:"0.01", ph:"20"})}
+            {Tog({eKey:"zwierekE", label:t('dc_litter')})}
+            {z.zwierekE && <InnerSec mb={6} flex title={t('dc_litter')}>
+              {ZI({label:t('dc_change_days'), field:"zwierekDni", ph:"7"})}
+              {ZI({label:t('dc_litter_per_change'), field:"zwierekL", step:"0.5", ph:"3"})}
+              {ZI({label:t('dc_pkg_size_l'), field:"zwierekPkgL", step:"0.5", ph:"5"})}
+              {ZI({label:t('dc_pkg_price_full2'), field:"zwierekPrice", step:"0.01", ph:"20"})}
             </InnerSec>}
-            {Tog({eKey:"wetE", label:"Weterynarz"})}
-            {z.wetE && <InnerSec mb={6} flex title="Weterynarz">
-              {ZI({label:"Miesięcznie (zł)", field:"wet", step:"0.01", ph:"50"})}
+            {Tog({eKey:"wetE", label:t('dc_vet')})}
+            {z.wetE && <InnerSec mb={6} flex title={t('dc_vet')}>
+              {ZI({label:t('dc_per_month_lbl'), field:"wet", step:"0.01", ph:"50"})}
             </InnerSec>}
-            {Tog({eKey:"pielegnacjaE", label:"Pielęgnacja"})}
-            {z.pielegnacjaE && <InnerSec mb={6} flex title="Pielęgnacja">
-              {ZI({label:"Miesięcznie (zł)", field:"pielegnacja", step:"0.01", ph:"50"})}
+            {Tog({eKey:"pielegnacjaE", label:t('dc_grooming')})}
+            {z.pielegnacjaE && <InnerSec mb={6} flex title={t('dc_grooming')}>
+              {ZI({label:t('dc_per_month_lbl'), field:"pielegnacja", step:"0.01", ph:"50"})}
             </InnerSec>}
-            {Tog({eKey:"akcesoriaE", label:"Akcesoria / zabawki"})}
-            {z.akcesoriaE && <InnerSec mb={6} flex title="Akcesoria / zabawki">
-              {ZI({label:"Miesięcznie (zł)", field:"akcesoria", step:"0.01", ph:"30"})}
+            {Tog({eKey:"akcesoriaE", label:t('dc_accessories')})}
+            {z.akcesoriaE && <InnerSec mb={6} flex title={t('dc_accessories')}>
+              {ZI({label:t('dc_per_month_lbl'), field:"akcesoria", step:"0.01", ph:"30"})}
             </InnerSec>}
-            <InnerSec mb={6} flex title="Inne">
+            <InnerSec mb={6} flex title={t('dc_other_lbl')}>
               <div style={{ display:'flex', flexDirection:'column', gap:5 }}>
                 {(z.extraItems||[]).map((ci,idx) => (
                   <div key={ci.id||idx} style={{ background:'#1a2433', borderRadius:6, padding:'6px 8px', display:'flex', flexDirection:'column', gap:4 }}>
                     <div style={{ display:'flex', gap:4, alignItems:'center' }}>
-                      <input value={ci.name} maxLength={30} placeholder="np. Zabawki"
+                      <input value={ci.name} maxLength={30} placeholder={t('dc_pet_toy_ph')}
                         onChange={e=>{const a=[...z.extraItems];a[idx]={...a[idx],name:e.target.value};updZ({extraItems:a});}}
                         style={{ fontSize:11, flex:1, minWidth:0, padding:'5px 6px', boxSizing:'border-box' }} />
                       <button onClick={()=>updZ({extraItems:z.extraItems.filter((_,i)=>i!==idx)})}
                         style={{ background:'#ef444420', border:'none', borderRadius:4, color:'#ef4444', cursor:'pointer', padding:'3px 7px', fontSize:12, fontWeight:700 }}>×</button>
                     </div>
-                    <input type="number" className="no-spin" min="0" max="99999" step="0.01" placeholder="zł/mies."
+                    <input type="number" className="no-spin" min="0" max="99999" step="0.01" placeholder={t('dc_per_month_ph')}
                       value={ci.price}
                       onChange={e=>{const a=[...z.extraItems];a[idx]={...a[idx],price:cl2(e.target.value)};updZ({extraItems:a});}}
                       style={{ ...inp2, width:'100%' }} />
@@ -874,19 +881,19 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
                 ))}
                 <button type="button" onClick={()=>updZ({extraItems:[...(z.extraItems||[]),{id:Date.now(),name:'',price:''}]})}
                   style={{ padding:'5px 8px', borderRadius:6, border:'1px solid #374151', background:'#1e3a3a', color:'#2dd4bf', cursor:'pointer', fontSize:10, fontWeight:600, transition:'all 0.15s' }}>
-                  + Dodaj ekstra wydatek
+                  {t('dc_add_expense')}
                 </button>
               </div>
             </InnerSec>
             <div style={{ borderTop:'1px solid #1a3a38', paddingTop:6, marginTop:4 }}>
-              {tSucha>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Sucha karma</span><span style={{ color:'#9ca3af' }}>{tSucha.toFixed(2)} zł</span></div>}
-              {tMokra>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Mokra karma</span><span style={{ color:'#9ca3af' }}>{tMokra.toFixed(2)} zł</span></div>}
-              {tZwierek>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Żwirek / ściółka</span><span style={{ color:'#9ca3af' }}>{tZwierek.toFixed(2)} zł</span></div>}
-              {tMies>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Wet. / piel. / akc.</span><span style={{ color:'#9ca3af' }}>{(tMies/30*days).toFixed(2)} zł</span></div>}
-              {tExtra>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Inne</span><span style={{ color:'#9ca3af' }}>{tExtra.toFixed(2)} zł</span></div>}
+              {tSucha>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{t('dc_dry_food')}</span><span style={{ color:'#9ca3af' }}>{tSucha.toFixed(2)} {t('currency')}</span></div>}
+              {tMokra>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{t('dc_wet_food')}</span><span style={{ color:'#9ca3af' }}>{tMokra.toFixed(2)} {t('currency')}</span></div>}
+              {tZwierek>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{t('dc_litter')}</span><span style={{ color:'#9ca3af' }}>{tZwierek.toFixed(2)} {t('currency')}</span></div>}
+              {tMies>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{t('dc_vet_short')}</span><span style={{ color:'#9ca3af' }}>{(tMies/30*days).toFixed(2)} {t('currency')}</span></div>}
+              {tExtra>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{t('dc_other_lbl')}</span><span style={{ color:'#9ca3af' }}>{tExtra.toFixed(2)} {t('currency')}</span></div>}
               <div style={{ display:'flex', justifyContent:'space-between', fontSize:12, fontWeight:800, borderTop:'1px solid #1a3a38', paddingTop:4, marginTop:2 }}>
-                <span style={{ color:'#6b7280' }}>× {days} dni</span>
-                <span style={{ color:'#0d9488' }}>{tAll.toFixed(2)} zł</span>
+                <span style={{ color:'#6b7280' }}>{t('dc_days_label')(days)}</span>
+                <span style={{ color:'#0d9488' }}>{tAll.toFixed(2)} {t('currency')}</span>
               </div>
             </div>
           </div>
@@ -897,24 +904,24 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
           const total = (nn(o.wizyty) + nn(o.leki)) / 30 * days;
           return (
           <div style={{ background:'#111827', border:'1px solid #374151', borderRadius:8, padding:'12px', marginTop:4 }}>
-            <InnerSec title="Wizyty lekarskie" mb={8}>
-              <FieldBox label="zł / miesiąc">
+            <InnerSec title={t('dc_doctors')} mb={8}>
+              <FieldBox label={t('dc_per_month_lbl')}>
                 <input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2}
                   placeholder="100" value={o.wizyty} onChange={e=>updOther(key,{wizyty:cl2(e.target.value)})} />
               </FieldBox>
             </InnerSec>
-            <InnerSec title="Leki" mb={6}>
-              <FieldBox label="zł / miesiąc">
+            <InnerSec title={t('dc_medicine')} mb={6}>
+              <FieldBox label={t('dc_per_month_lbl')}>
                 <input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2}
                   placeholder="50" value={o.leki} onChange={e=>updOther(key,{leki:cl2(e.target.value)})} />
               </FieldBox>
             </InnerSec>
             <div style={{ borderTop:'1px solid #1a3a38', marginTop:8, paddingTop:6 }}>
-              <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Wizyty lekarskie</span><span style={{ color:'#9ca3af' }}>{(nn(o.wizyty)/30*days).toFixed(2)} zł</span></div>
-              <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Leki</span><span style={{ color:'#9ca3af' }}>{(nn(o.leki)/30*days).toFixed(2)} zł</span></div>
+              <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{t('dc_doctors')}</span><span style={{ color:'#9ca3af' }}>{(nn(o.wizyty)/30*days).toFixed(2)} {t('currency')}</span></div>
+              <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{t('dc_medicine')}</span><span style={{ color:'#9ca3af' }}>{(nn(o.leki)/30*days).toFixed(2)} {t('currency')}</span></div>
               <div style={{ display:'flex', justifyContent:'space-between', fontSize:12, fontWeight:800, borderTop:'1px solid #1a3a38', paddingTop:4, marginTop:2 }}>
-                <span style={{ color:'#6b7280' }}>× {days} dni</span>
-                <span style={{ color:'#0d9488' }}>{total.toFixed(2)} zł</span>
+                <span style={{ color:'#6b7280' }}>{t('dc_days_label')(days)}</span>
+                <span style={{ color:'#0d9488' }}>{total.toFixed(2)} {t('currency')}</span>
               </div>
             </div>
           </div>
@@ -931,10 +938,10 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
           return (
           <div style={{ background:'#111827', border:'1px solid #374151', borderRadius:8, padding:'12px', marginTop:4 }}>
             {[
-              ['papierA4E','papierA4','Papier A4 (ryza 500 ark.)','25'],
-              ['tuszE','tusz','Tusz / toner do drukarki','60'],
-              ['notatnikE','notatnik','Notatnik / Zeszyty','20'],
-              ['dlugopisyE','dlugopisy','Długopisy','10'],
+              ['papierA4E','papierA4', t('dc_paper_a4'),'25'],
+              ['tuszE','tusz', t('dc_ink'),'60'],
+              ['notatnikE','notatnik', t('dc_notebook'),'20'],
+              ['dlugopisyE','dlugopisy', t('dc_pens'),'10'],
             ].map(([eKey, vKey, label, ph]) => (
               <div key={eKey} style={{ marginBottom:8 }}>
                 <button type="button" onClick={()=>updB({[eKey]:!b[eKey]})}
@@ -943,7 +950,7 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
                   {label}
                 </button>
                 {b[eKey] && <div style={{ marginTop:6, borderLeft:'2px solid #2dd4bf', paddingLeft:10 }}>
-                  <FieldBox label="zł / miesiąc">
+                  <FieldBox label={t('dc_per_month_lbl')}>
                     <input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2}
                       placeholder={ph} value={b[vKey]} onChange={e=>updB({[vKey]:cl2(e.target.value)})} />
                   </FieldBox>
@@ -951,18 +958,18 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
               </div>
             ))}
             <div style={{ borderLeft:'2px solid #2dd4bf', paddingLeft:10, marginBottom:10 }}>
-              <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf', textTransform:'uppercase', letterSpacing:'0.5px', marginBottom:6 }}>Inne</div>
+              <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf', textTransform:'uppercase', letterSpacing:'0.5px', marginBottom:6 }}>{t('dc_other_lbl')}</div>
               <div style={{ display:'flex', flexDirection:'column', gap:5 }}>
                 {(b.extraItems||[]).map((ci,idx) => (
                   <div key={ci.id||idx} style={{ background:'#1a2433', borderRadius:6, padding:'6px 8px', display:'flex', flexDirection:'column', gap:4 }}>
                     <div style={{ display:'flex', gap:4, alignItems:'center' }}>
-                      <input value={ci.name} maxLength={30} placeholder="np. Kredki"
+                      <input value={ci.name} maxLength={30} placeholder={t('dc_pencils_ph')}
                         onChange={e=>{const a=[...b.extraItems];a[idx]={...a[idx],name:e.target.value};updExtra(a);}}
                         style={{ fontSize:11, flex:1, minWidth:0, padding:'5px 6px', boxSizing:'border-box' }} />
                       <button onClick={()=>updExtra(b.extraItems.filter((_,i)=>i!==idx))}
                         style={{ background:'#ef444420', border:'none', borderRadius:4, color:'#ef4444', cursor:'pointer', padding:'3px 7px', fontSize:12, fontWeight:700 }}>×</button>
                     </div>
-                    <input type="number" className="no-spin" min="0" max="99999" step="0.01" placeholder="zł/mies."
+                    <input type="number" className="no-spin" min="0" max="99999" step="0.01" placeholder={t('dc_per_month_ph')}
                       value={ci.price}
                       onChange={e=>{const a=[...b.extraItems];a[idx]={...a[idx],price:cl2(e.target.value)};updExtra(a);}}
                       style={{ ...inp2, width:'100%' }} />
@@ -970,17 +977,17 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
                 ))}
                 <button type="button" onClick={()=>updExtra([...(b.extraItems||[]),{id:Date.now(),name:'',price:''}])}
                   style={{ padding:'5px 8px', borderRadius:6, border:'1px solid #374151', background:'#1e3a3a', color:'#2dd4bf', cursor:'pointer', fontSize:10, fontWeight:600, transition:'all 0.15s' }}>
-                  + Dodaj produkt
+                  {t('dc_add_item')}
                 </button>
               </div>
             </div>
             {(totalFixed > 0 || totalExtra > 0) && (
               <div style={{ borderTop:'1px solid #1a3a38', paddingTop:6 }}>
-                {totalFixed>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Artykuły</span><span style={{ color:'#9ca3af' }}>{totalFixed.toFixed(2)} zł</span></div>}
-                {totalExtra>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Inne</span><span style={{ color:'#9ca3af' }}>{totalExtra.toFixed(2)} zł</span></div>}
+                {totalFixed>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{t('dc_supplies_lbl')}</span><span style={{ color:'#9ca3af' }}>{totalFixed.toFixed(2)} {t('currency')}</span></div>}
+                {totalExtra>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{t('dc_other_lbl')}</span><span style={{ color:'#9ca3af' }}>{totalExtra.toFixed(2)} {t('currency')}</span></div>}
                 <div style={{ display:'flex', justifyContent:'space-between', fontSize:12, fontWeight:800, borderTop:'1px solid #1a3a38', paddingTop:4, marginTop:2 }}>
-                  <span style={{ color:'#6b7280' }}>× {days} dni</span>
-                  <span style={{ color:'#0d9488' }}>{totalAll.toFixed(2)} zł</span>
+                  <span style={{ color:'#6b7280' }}>{t('dc_days_label')(days)}</span>
+                  <span style={{ color:'#0d9488' }}>{totalAll.toFixed(2)} {t('currency')}</span>
                 </div>
               </div>
             )}
@@ -994,17 +1001,17 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
           const fetchPrices = async () => {
             setFetchingFuelPrices(true); setFetchFuelError('');
             try {
-              const res = await fuelApi.getPrices();
+              const res = await fuelApi.getPrices(lang);
               const fp = res.data;
               updP({ fetchedPrices: fp, fuelPrice: String(fp[p.fuelType] || '') });
             } catch {
-              setFetchFuelError('Nie udało się pobrać cen');
+              setFetchFuelError(t('dc_fetch_fuel_error'));
             } finally {
               setFetchingFuelPrices(false);
             }
           };
           const dailyCost = (nn(p.kmPerDay) / 100) * nn(p.consumption) * nn(p.fuelPrice) * days;
-          const FUEL_LABELS = { diesel: 'Diesel', benzyna: 'Benzyna', gaz: 'LPG' };
+          const FUEL_LABELS = { diesel: 'Diesel', benzyna: lang === 'en' ? 'Petrol' : 'Benzyna', gaz: 'LPG' };
           return (
           <div style={{ background:'#111827', border:'1px solid #374151', borderRadius:8, padding:'12px', marginTop:4 }}>
             <div style={{ display:'flex', borderRadius:6, overflow:'hidden', border:'1px solid #374151', marginBottom:10 }}>
@@ -1018,40 +1025,40 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
               ))}
             </div>
             <div style={{ borderLeft:'2px solid #2dd4bf', paddingLeft:10, display:'flex', flexDirection:'column', gap:6 }}>
-              <FieldBox label="Cena paliwa (zł/l)">
+              <FieldBox label={t('dc_fuel_price_lbl')}>
                 <input type="number" className="no-spin" min="0" max="99" step="0.01" style={inp2}
-                  placeholder="np. 6.20" value={p.fuelPrice} onChange={e=>updP({fuelPrice:cl2(e.target.value)})} />
+                  placeholder={`${eg} 6.20`} value={p.fuelPrice} onChange={e=>updP({fuelPrice:cl2(e.target.value)})} />
               </FieldBox>
               <button type="button" onClick={fetchPrices} disabled={fetchingFuelPrices}
                 style={{ width:'100%', padding:'5px 8px', borderRadius:6, border:'1px solid #374151', background:'#1e3a3a', color:'#2dd4bf', cursor:'pointer', fontSize:10, fontWeight:600 }}>
-                {fetchingFuelPrices ? '...' : '↻ Pobierz cenę z internetu'}
+                {fetchingFuelPrices ? '...' : t('dc_fetch_fuel')}
               </button>
               {fetchFuelError && <div style={{ fontSize:10, color:'#ef4444' }}>{fetchFuelError}</div>}
               {p.fetchedPrices && Object.keys(p.fetchedPrices).length > 0 && (
                 <div style={{ display:'flex', gap:8, fontSize:10, color:'#6b7280' }}>
                   {Object.entries(FUEL_LABELS).map(([k,lbl]) => p.fetchedPrices[k] &&
-                    <span key={k}>{lbl}: <span style={{ color:'#9ca3af' }}>{p.fetchedPrices[k]} zł</span></span>
+                    <span key={k}>{lbl}: <span style={{ color:'#9ca3af' }}>{p.fetchedPrices[k]} {t('currency')}</span></span>
                   )}
                 </div>
               )}
-              <FieldBox label="Km dziennie">
+              <FieldBox label={t('dc_km_per_day')}>
                 <input type="number" className="no-spin" min="0" max="99999" step="1" style={inp2}
-                  placeholder="np. 40" value={p.kmPerDay} onChange={e=>updP({kmPerDay:cl2(e.target.value)})} />
+                  placeholder={`${eg} 40`} value={p.kmPerDay} onChange={e=>updP({kmPerDay:cl2(e.target.value)})} />
               </FieldBox>
-              <FieldBox label="Spalanie (l/100km)">
+              <FieldBox label={t('dc_consumption_lbl')}>
                 <input type="number" className="no-spin" min="0" max="99" step="0.1" style={inp2}
-                  placeholder="np. 6.5" value={p.consumption} onChange={e=>updP({consumption:cl2(e.target.value)})} />
+                  placeholder={`${eg} 6.5`} value={p.consumption} onChange={e=>updP({consumption:cl2(e.target.value)})} />
               </FieldBox>
             </div>
             {dailyCost > 0 && (
               <div style={{ borderTop:'1px solid #1a3a38', marginTop:8, paddingTop:6 }}>
                 <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}>
                   <span style={{ color:'#6b7280' }}>{FUEL_LABELS[p.fuelType]} ({(nn(p.kmPerDay)*days).toFixed(0)} km)</span>
-                  <span style={{ color:'#9ca3af' }}>{dailyCost.toFixed(2)} zł</span>
+                  <span style={{ color:'#9ca3af' }}>{dailyCost.toFixed(2)} {t('currency')}</span>
                 </div>
                 <div style={{ display:'flex', justifyContent:'space-between', fontSize:12, fontWeight:800, borderTop:'1px solid #1a3a38', paddingTop:4, marginTop:2 }}>
-                  <span style={{ color:'#6b7280' }}>× {days} dni</span>
-                  <span style={{ color:'#0d9488' }}>{dailyCost.toFixed(2)} zł</span>
+                  <span style={{ color:'#6b7280' }}>{t('dc_days_label')(days)}</span>
+                  <span style={{ color:'#0d9488' }}>{dailyCost.toFixed(2)} {t('currency')}</span>
                 </div>
               </div>
             )}
@@ -1065,7 +1072,7 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
           const total = ((m.internetE?nn(m.internet):0)+(m.telefonE?nn(m.telefon):0)+(m.tvE?nn(m.tv):0))/30*days;
           return (
           <div style={{ background:'#111827', border:'1px solid #374151', borderRadius:8, padding:'12px', marginTop:4 }}>
-            {[['internetE','internet','Internet','60'],['telefonE','telefon','Telefon','50'],['tvE','tv','TV','40']].map(([eKey,vKey,label,ph]) => (
+            {[['internetE','internet','Internet','60'],['telefonE','telefon',lang === 'en' ? 'Phone' : 'Telefon','50'],['tvE','tv','TV','40']].map(([eKey,vKey,label,ph]) => (
               <div key={eKey} style={{ marginBottom:8 }}>
                 <button type="button" onClick={()=>updM({[eKey]:!m[eKey]})}
                   style={{ width:'100%', padding:'5px 8px', border:'1px solid #374151', borderRadius:6, cursor:'pointer', fontSize:10, fontWeight:600, transition:'all 0.15s',
@@ -1073,7 +1080,7 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
                   {label}
                 </button>
                 {m[eKey] && <div style={{ marginTop:6, borderLeft:'2px solid #2dd4bf', paddingLeft:10 }}>
-                  <FieldBox label="zł / miesiąc">
+                  <FieldBox label={t('dc_per_month_lbl')}>
                     <input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2}
                       placeholder={ph} value={m[vKey]} onChange={e=>updM({[vKey]:cl2(e.target.value)})} />
                   </FieldBox>
@@ -1082,12 +1089,12 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
             ))}
             {total > 0 && (
               <div style={{ borderTop:'1px solid #1a3a38', marginTop:4, paddingTop:6 }}>
-                {m.internetE&&nn(m.internet)>0&&<div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Internet</span><span style={{ color:'#9ca3af' }}>{(nn(m.internet)/30*days).toFixed(2)} zł</span></div>}
-                {m.telefonE&&nn(m.telefon)>0&&<div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Telefon</span><span style={{ color:'#9ca3af' }}>{(nn(m.telefon)/30*days).toFixed(2)} zł</span></div>}
-                {m.tvE&&nn(m.tv)>0&&<div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>TV</span><span style={{ color:'#9ca3af' }}>{(nn(m.tv)/30*days).toFixed(2)} zł</span></div>}
+                {m.internetE&&nn(m.internet)>0&&<div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Internet</span><span style={{ color:'#9ca3af' }}>{(nn(m.internet)/30*days).toFixed(2)} {t('currency')}</span></div>}
+                {m.telefonE&&nn(m.telefon)>0&&<div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Phone</span><span style={{ color:'#9ca3af' }}>{(nn(m.telefon)/30*days).toFixed(2)} {t('currency')}</span></div>}
+                {m.tvE&&nn(m.tv)>0&&<div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>TV</span><span style={{ color:'#9ca3af' }}>{(nn(m.tv)/30*days).toFixed(2)} {t('currency')}</span></div>}
                 <div style={{ display:'flex', justifyContent:'space-between', fontSize:12, fontWeight:800, borderTop:'1px solid #1a3a38', paddingTop:4, marginTop:2 }}>
-                  <span style={{ color:'#6b7280' }}>× {days} dni</span>
-                  <span style={{ color:'#0d9488' }}>{total.toFixed(2)} zł</span>
+                  <span style={{ color:'#6b7280' }}>{t('dc_days_label')(days)}</span>
+                  <span style={{ color:'#0d9488' }}>{total.toFixed(2)} {t('currency')}</span>
                 </div>
               </div>
             )}
@@ -1097,7 +1104,7 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
         const OPLATY_PH = { czynsz:'1500', prad:'200', gaz_oplata:'80', ogrzewanie:'300', kredyt:'800' };
         return (
           <div style={{ background:'#111827', border:'1px solid #374151', borderRadius:8, padding:'8px', marginTop:4 }}>
-            <FieldBox label="Miesięcznie (zł)"><input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2} placeholder={OPLATY_PH[key]||''} value={o.monthlyAmount} onChange={e=>updOther(key,{monthlyAmount:cl2(e.target.value)})} /></FieldBox>
+            <FieldBox label={t('dc_per_month_lbl')}><input type="number" className="no-spin" min="0" max="99999" step="0.01" style={inp2} placeholder={OPLATY_PH[key]||''} value={o.monthlyAmount} onChange={e=>updOther(key,{monthlyAmount:cl2(e.target.value)})} /></FieldBox>
             {Summary()}
           </div>
         );
@@ -1105,7 +1112,7 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
       {expanded && (
         <button type="button" onClick={e => { e.stopPropagation(); updOther(key, {...OTHER_DEFAULTS[key], enabled: true}); }}
           className="btn btn-danger" style={{ width:'100%', marginTop:4, fontSize:10 }}>
-          Wyczyść
+          {t('clear')}
         </button>
       )}
     </div>
@@ -1116,7 +1123,7 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
     <div ref={cardRef}>
 
       <div style={{ fontSize:11, fontWeight:700, color:'#6b7280', textTransform:'uppercase', letterSpacing:'0.6px', marginBottom:8 }}>
-        Wybierz wydatki które chcesz sumować
+        {t('expenses_select_title')}
       </div>
 
       <div style={{ display:'grid', gridTemplateColumns:'repeat(5, 1fr)', gap:4, marginBottom:4 }}>
@@ -1143,8 +1150,8 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
                 }}>
                 <div style={{ position:'absolute', inset:0, background: enabled ? 'transparent' : 'rgba(0,0,0,0.2)' }} />
                 <span style={{ fontSize:24, lineHeight:1, position:'relative', zIndex:1 }}>{emoji}</span>
-                <span style={{ fontSize:11, fontWeight:700, color:'#fff', textAlign:'center', position:'relative', zIndex:1, textShadow:'0 1px 3px rgba(0,0,0,0.8)', padding:'0 4px' }}>{label}</span>
-                {(() => { const t = drinkTilePreview(key); return t>0 ? <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'rgba(0,0,0,0.6)', padding:'4px 6px', textAlign:'center', fontSize:12, fontWeight:800, color:'#2dd4bf', zIndex:2, letterSpacing:'0.2px', opacity: enabled?1:0.7 }}>{t.toFixed(2)} zł</div> : null; })()}
+                <span style={{ fontSize:11, fontWeight:700, color:'#fff', textAlign:'center', position:'relative', zIndex:1, textShadow:'0 1px 3px rgba(0,0,0,0.8)', padding:'0 4px' }}>{t('drink_' + key)}</span>
+                {(() => { const pv = drinkTilePreview(key); return pv>0 ? <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'rgba(0,0,0,0.6)', padding:'4px 6px', textAlign:'center', fontSize:12, fontWeight:800, color:'#2dd4bf', zIndex:2, letterSpacing:'0.2px', opacity: enabled?1:0.7 }}>{pv.toFixed(2)} {t('currency')}</div> : null; })()}
               </div>
 
               {/* Panel konfiguracji — szerokość tile'a */}
@@ -1152,17 +1159,17 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
                 const tileTotal = items.filter(i=>i._dk===key).reduce((s,i)=>s+i.total,0);
                 if (key === 'kawa') return (
                   <div style={{ ...cfg }}>
-                      <InnerSec title="Zużycie">
-                        <FieldBox label="Kubków / dzień"><input type="number" className="no-spin" min="0" style={fi} placeholder="2" value={drinks.kawa.cupsPerDay} onChange={e => upd('kawa',{cupsPerDay:cl(e.target.value,50)})} /></FieldBox>
-                        <div style={{ marginTop:8 }}><FieldBox label={`Łyżek kawy / kubek (=${(parseFloat(drinks.kawa.spoonsPerCup)||0)*3}g)`}><input type="number" className="no-spin" min="0" style={fi} placeholder="2" value={drinks.kawa.spoonsPerCup} onChange={e => upd('kawa',{spoonsPerCup:cl(e.target.value,20)})} /></FieldBox></div>
-                        <div style={{ marginTop:8 }}><FieldBox label="Słodzi?"><div style={{ display:'flex', gap:4 }}>{btnSugar('kawa','cukier')}{btnSugar('kawa','slodzik')}</div></FieldBox></div>
+                      <InnerSec title={t('dc_consumption_sec')}>
+                        <FieldBox label={t('dc_cups_per_day2')}><input type="number" className="no-spin" min="0" style={fi} placeholder="2" value={drinks.kawa.cupsPerDay} onChange={e => upd('kawa',{cupsPerDay:cl(e.target.value,50)})} /></FieldBox>
+                        <div style={{ marginTop:8 }}><FieldBox label={t('dc_spoons_per_cup2')((parseFloat(drinks.kawa.spoonsPerCup)||0)*3)}><input type="number" className="no-spin" min="0" style={fi} placeholder="2" value={drinks.kawa.spoonsPerCup} onChange={e => upd('kawa',{spoonsPerCup:cl(e.target.value,20)})} /></FieldBox></div>
+                        <div style={{ marginTop:8 }}><FieldBox label={t('dc_sweetener_q')}><div style={{ display:'flex', gap:4 }}>{btnSugar('kawa','cukier')}{btnSugar('kawa','slodzik')}</div></FieldBox></div>
                         {drinks.kawa.sugarType && <div style={{ marginTop:8, borderLeft:'2px solid #2dd4bf', paddingLeft:8, display:'flex', flexDirection:'column', gap:6 }}>
-                          <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>{drinks.kawa.sugarType==='cukier'?'Cukier':'Słodzik'}</div>
-                          <FieldBox label={`Łyżek / kubek (=${(parseFloat(drinks.kawa.sugarSpoons)||0)*3}g)`}><input type="number" className="no-spin" min="0" style={fi} placeholder="1" value={drinks.kawa.sugarSpoons} onChange={e => upd('kawa',{sugarSpoons:cl(e.target.value,20)})} /></FieldBox>
-                          <div><div style={{ fontSize:10, color:'#6b7280', marginBottom:3 }}>Cena (zł/kg)</div><input type="number" className="no-spin" min="0" step="0.1" style={fi} placeholder={drinks.kawa.sugarType==='cukier'?'3.50':'15'} value={drinks.kawa.sugarType==='cukier'?effCukierPrice:effSlodzikPrice} onChange={e=>{const v=cl(e.target.value,9999);drinks.kawa.sugarType==='cukier'?setCukierPrice(v):setSlodzikPrice(v);}} /></div>
+                          <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>{drinks.kawa.sugarType==='cukier'?t('dc_sugar'):t('dc_sweetener')}</div>
+                          <FieldBox label={t('dc_spoons_s')((parseFloat(drinks.kawa.sugarSpoons)||0)*3)}><input type="number" className="no-spin" min="0" style={fi} placeholder="1" value={drinks.kawa.sugarSpoons} onChange={e => upd('kawa',{sugarSpoons:cl(e.target.value,20)})} /></FieldBox>
+                          <div><div style={{ fontSize:10, color:'#6b7280', marginBottom:3 }}>{t('dc_price_per_kg')}</div><input type="number" className="no-spin" min="0" step="0.1" style={fi} placeholder={drinks.kawa.sugarType==='cukier'?'3.50':'15'} value={drinks.kawa.sugarType==='cukier'?effCukierPrice:effSlodzikPrice} onChange={e=>{const v=cl(e.target.value,9999);drinks.kawa.sugarType==='cukier'?setCukierPrice(v):setSlodzikPrice(v);}} /></div>
                         </div>}
                         <div style={{ marginTop:8 }}>
-                          <FieldBox label="Mleko / Śmietanka?">
+                          <FieldBox label={t('dc_milk_q')}>
                             <div style={{ display:'flex', gap:4 }}>
                               {['mleko','smietanka'].map(mt => (
                                 <button key={mt} type="button" onClick={() => upd('kawa',{milkType: drinks.kawa.milkType===mt ? null : mt})}
@@ -1170,42 +1177,42 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
                                     background: drinks.kawa.milkType===mt?'#0d9488':'#2d3748',
                                     borderColor: drinks.kawa.milkType===mt?'#0d9488':'#374151',
                                     color: drinks.kawa.milkType===mt?'white':'#9ca3af' }}>
-                                  {mt==='mleko'?'Mleko':'Śmietanka'}
+                                  {mt==='mleko'?t('dc_milk'):t('dc_cream')}
                                 </button>
                               ))}
                             </div>
                           </FieldBox>
                           {drinks.kawa.milkType && <div style={{ marginTop:8, borderLeft:'2px solid #2dd4bf', paddingLeft:8, display:'flex', flexDirection:'column', gap:6 }}>
-                            <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>{drinks.kawa.milkType==='mleko'?'Mleko':'Śmietanka'}</div>
-                            <FieldBox label="ml / kubek"><input type="number" className="no-spin" min="0" style={fi} placeholder="30" value={drinks.kawa.milkMlPerCup} onChange={e => upd('kawa',{milkMlPerCup:cl(e.target.value,500)})} /></FieldBox>
-                            <FieldBox label="Pojemność op. (ml)"><input type="number" className="no-spin" min="0" style={fi} placeholder="1000" value={drinks.kawa.milkPkgMl} onChange={e => upd('kawa',{milkPkgMl:cl(e.target.value,9999)})} /></FieldBox>
-                            <FieldBox label="Cena op. (zł)"><input type="number" className="no-spin" min="0" step="0.01" style={fi} placeholder="3.50" value={drinks.kawa.milkPrice} onChange={e => upd('kawa',{milkPrice:cl(e.target.value,9999)})} /></FieldBox>
+                            <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>{drinks.kawa.milkType==='mleko'?t('dc_milk'):t('dc_cream')}</div>
+                            <FieldBox label="ml / cup"><input type="number" className="no-spin" min="0" style={fi} placeholder="30" value={drinks.kawa.milkMlPerCup} onChange={e => upd('kawa',{milkMlPerCup:cl(e.target.value,500)})} /></FieldBox>
+                            <FieldBox label={t('dc_pkg_capacity_ml')}><input type="number" className="no-spin" min="0" style={fi} placeholder="1000" value={drinks.kawa.milkPkgMl} onChange={e => upd('kawa',{milkPkgMl:cl(e.target.value,9999)})} /></FieldBox>
+                            <FieldBox label={t('dc_pkg_price')}><input type="number" className="no-spin" min="0" step="0.01" style={fi} placeholder="3.50" value={drinks.kawa.milkPrice} onChange={e => upd('kawa',{milkPrice:cl(e.target.value,9999)})} /></FieldBox>
                           </div>}
                         </div>
                       </InnerSec>
-                      <InnerSec title="Opakowanie">
-                        <FieldBox label="Waga op. (g)"><input type="number" className="no-spin" min="0" style={fi} placeholder="250" value={drinks.kawa.pkgG} onChange={e => upd('kawa',{pkgG:cl(e.target.value,9999)})} /></FieldBox>
-                        <div style={{ marginTop:8 }}><FieldBox label="Cena op. (zł)"><input type="number" className="no-spin" min="0" step="0.01" style={fi} placeholder="18" value={drinks.kawa.pkgPrice} onChange={e => upd('kawa',{pkgPrice:cl(e.target.value,9999)})} /></FieldBox></div>
+                      <InnerSec title={t('dc_packaging_sec')}>
+                        <FieldBox label={t('dc_pkg_weight_g')}><input type="number" className="no-spin" min="0" style={fi} placeholder="250" value={drinks.kawa.pkgG} onChange={e => upd('kawa',{pkgG:cl(e.target.value,9999)})} /></FieldBox>
+                        <div style={{ marginTop:8 }}><FieldBox label={t('dc_pkg_price')}><input type="number" className="no-spin" min="0" step="0.01" style={fi} placeholder="18" value={drinks.kawa.pkgPrice} onChange={e => upd('kawa',{pkgPrice:cl(e.target.value,9999)})} /></FieldBox></div>
                       </InnerSec>
                     <div style={{ borderTop:'1px solid #1a3a38', marginTop:8, paddingTop:6, display:'flex', flexDirection:'column', gap:3 }}>
-                      {[`${parseFloat(drinks.kawa.cupsPerDay)||0} kub./dzień`,`× ${days} dni`,`= ${(parseFloat(drinks.kawa.cupsPerDay)||0)*days} kubków`].map((l,i)=><div key={i} style={{ fontSize:10, color:'#6b7280' }}>{l}</div>)}
-                      {[{label:'Kawa',val:items.filter(i=>i._dk==='kawa'&&i.name==='Kawa').reduce((s,i)=>s+i.total,0)},...items.filter(i=>i._dk==='kawa'&&i.name!=='Kawa').map(i=>({label:i.name.replace(' (kawa)',''),val:i.total}))].filter(b=>b.val>0).map((b,i)=><div key={i} style={{ display:'flex', justifyContent:'space-between', fontSize:10 }}><span style={{ color:'#6b7280' }}>{b.label}</span><span style={{ color:'#9ca3af', fontWeight:600 }}>{b.val.toFixed(2)} zł</span></div>)}
-                      <div style={{ fontSize:13, fontWeight:800, color:'#0d9488', marginTop:2 }}>{tileTotal.toFixed(2)} zł</div>
+                      {[t('dc_cups_summary')(parseFloat(drinks.kawa.cupsPerDay)||0), t('dc_days_label')(days), t('dc_cups_total')((parseFloat(drinks.kawa.cupsPerDay)||0)*days)].map((l,i)=><div key={i} style={{ fontSize:10, color:'#6b7280' }}>{l}</div>)}
+                      {[{label:t('drink_kawa'),val:items.filter(i=>i._dk==='kawa'&&i.name==='Kawa').reduce((s,i)=>s+i.total,0)},...items.filter(i=>i._dk==='kawa'&&i.name!=='Kawa').map(i=>({label:_itemLabel(i.name.replace(' (kawa)','')),val:i.total}))].filter(b=>b.val>0).map((b,i)=><div key={i} style={{ display:'flex', justifyContent:'space-between', fontSize:10 }}><span style={{ color:'#6b7280' }}>{b.label}</span><span style={{ color:'#9ca3af', fontWeight:600 }}>{b.val.toFixed(2)} {t('currency')}</span></div>)}
+                      <div style={{ fontSize:13, fontWeight:800, color:'#0d9488', marginTop:2 }}>{tileTotal.toFixed(2)} {t('currency')}</div>
                     </div>
                   </div>
                 );
                 if (key === 'herbata') return (
                   <div style={{ ...cfg }}>
-                      <InnerSec title="Zużycie">
-                        <FieldBox label="Kubków / dzień"><input type="number" className="no-spin" min="0" style={fi} placeholder="3" value={drinks.herbata.cupsPerDay} onChange={e => upd('herbata',{cupsPerDay:cl(e.target.value,50)})} /></FieldBox>
-                        <div style={{ marginTop:8 }}><FieldBox label="Słodzi?"><div style={{ display:'flex', gap:4 }}>{btnSugar('herbata','cukier')}{btnSugar('herbata','slodzik')}</div></FieldBox></div>
+                      <InnerSec title={t('dc_consumption_sec')}>
+                        <FieldBox label={t('dc_cups_per_day2')}><input type="number" className="no-spin" min="0" style={fi} placeholder="3" value={drinks.herbata.cupsPerDay} onChange={e => upd('herbata',{cupsPerDay:cl(e.target.value,50)})} /></FieldBox>
+                        <div style={{ marginTop:8 }}><FieldBox label={t('dc_sweetener_q')}><div style={{ display:'flex', gap:4 }}>{btnSugar('herbata','cukier')}{btnSugar('herbata','slodzik')}</div></FieldBox></div>
                         {drinks.herbata.sugarType && <div style={{ marginTop:8, borderLeft:'2px solid #2dd4bf', paddingLeft:8, display:'flex', flexDirection:'column', gap:6 }}>
-                          <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>{drinks.herbata.sugarType==='cukier'?'Cukier':'Słodzik'}</div>
-                          <FieldBox label={`Łyżek / kubek (=${(parseFloat(drinks.herbata.sugarSpoons)||0)*3}g)`}><input type="number" className="no-spin" min="0" style={fi} placeholder="1" value={drinks.herbata.sugarSpoons} onChange={e => upd('herbata',{sugarSpoons:cl(e.target.value,20)})} /></FieldBox>
-                          <div><div style={{ fontSize:10, color:'#6b7280', marginBottom:3 }}>Cena (zł/kg)</div><input type="number" className="no-spin" min="0" step="0.1" style={fi} placeholder={drinks.herbata.sugarType==='cukier'?'3.50':'15'} value={drinks.herbata.sugarType==='cukier'?effCukierPrice:effSlodzikPrice} onChange={e=>{const v=cl(e.target.value,9999);drinks.herbata.sugarType==='cukier'?setCukierPrice(v):setSlodzikPrice(v);}} /></div>
+                          <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>{drinks.herbata.sugarType==='cukier'?t('dc_sugar'):t('dc_sweetener')}</div>
+                          <FieldBox label={t('dc_spoons_s')((parseFloat(drinks.herbata.sugarSpoons)||0)*3)}><input type="number" className="no-spin" min="0" style={fi} placeholder="1" value={drinks.herbata.sugarSpoons} onChange={e => upd('herbata',{sugarSpoons:cl(e.target.value,20)})} /></FieldBox>
+                          <div><div style={{ fontSize:10, color:'#6b7280', marginBottom:3 }}>{t('dc_price_per_kg')}</div><input type="number" className="no-spin" min="0" step="0.1" style={fi} placeholder={drinks.herbata.sugarType==='cukier'?'3.50':'15'} value={drinks.herbata.sugarType==='cukier'?effCukierPrice:effSlodzikPrice} onChange={e=>{const v=cl(e.target.value,9999);drinks.herbata.sugarType==='cukier'?setCukierPrice(v):setSlodzikPrice(v);}} /></div>
                         </div>}
                         <div style={{ marginTop:8 }}>
-                          <FieldBox label="Mleko / Śmietanka?">
+                          <FieldBox label={t('dc_milk_q')}>
                             <div style={{ display:'flex', gap:4 }}>
                               {['mleko','smietanka'].map(mt => (
                                 <button key={mt} type="button" onClick={() => upd('herbata',{milkType: drinks.herbata.milkType===mt ? null : mt})}
@@ -1213,62 +1220,62 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
                                     background: drinks.herbata.milkType===mt?'#0d9488':'#2d3748',
                                     borderColor: drinks.herbata.milkType===mt?'#0d9488':'#374151',
                                     color: drinks.herbata.milkType===mt?'white':'#9ca3af' }}>
-                                  {mt==='mleko'?'Mleko':'Śmietanka'}
+                                  {mt==='mleko'?t('dc_milk'):t('dc_cream')}
                                 </button>
                               ))}
                             </div>
                           </FieldBox>
                           {drinks.herbata.milkType && <div style={{ marginTop:8, borderLeft:'2px solid #2dd4bf', paddingLeft:8, display:'flex', flexDirection:'column', gap:6 }}>
-                            <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>{drinks.herbata.milkType==='mleko'?'Mleko':'Śmietanka'}</div>
-                            <FieldBox label="ml / kubek"><input type="number" className="no-spin" min="0" style={fi} placeholder="30" value={drinks.herbata.milkMlPerCup} onChange={e => upd('herbata',{milkMlPerCup:cl(e.target.value,500)})} /></FieldBox>
-                            <FieldBox label="Pojemność op. (ml)"><input type="number" className="no-spin" min="0" style={fi} placeholder="1000" value={drinks.herbata.milkPkgMl} onChange={e => upd('herbata',{milkPkgMl:cl(e.target.value,9999)})} /></FieldBox>
-                            <FieldBox label="Cena op. (zł)"><input type="number" className="no-spin" min="0" step="0.01" style={fi} placeholder="3.50" value={drinks.herbata.milkPrice} onChange={e => upd('herbata',{milkPrice:cl(e.target.value,9999)})} /></FieldBox>
+                            <div style={{ fontSize:10, fontWeight:700, color:'#2dd4bf' }}>{drinks.herbata.milkType==='mleko'?t('dc_milk'):t('dc_cream')}</div>
+                            <FieldBox label="ml / cup"><input type="number" className="no-spin" min="0" style={fi} placeholder="30" value={drinks.herbata.milkMlPerCup} onChange={e => upd('herbata',{milkMlPerCup:cl(e.target.value,500)})} /></FieldBox>
+                            <FieldBox label={t('dc_pkg_capacity_ml')}><input type="number" className="no-spin" min="0" style={fi} placeholder="1000" value={drinks.herbata.milkPkgMl} onChange={e => upd('herbata',{milkPkgMl:cl(e.target.value,9999)})} /></FieldBox>
+                            <FieldBox label={t('dc_pkg_price')}><input type="number" className="no-spin" min="0" step="0.01" style={fi} placeholder="3.50" value={drinks.herbata.milkPrice} onChange={e => upd('herbata',{milkPrice:cl(e.target.value,9999)})} /></FieldBox>
                           </div>}
                         </div>
                       </InnerSec>
-                      <InnerSec title="Opakowanie">
-                        <FieldBox label="Saszetek w op."><input type="number" className="no-spin" min="0" style={fi} placeholder="100" value={drinks.herbata.sachetPerPkg} onChange={e => upd('herbata',{sachetPerPkg:cl(e.target.value,9999)})} /></FieldBox>
-                        <div style={{ marginTop:8 }}><FieldBox label="Cena op. (zł)"><input type="number" className="no-spin" min="0" step="0.01" style={fi} placeholder="8" value={drinks.herbata.pkgPrice} onChange={e => upd('herbata',{pkgPrice:cl(e.target.value,9999)})} /></FieldBox></div>
+                      <InnerSec title={t('dc_packaging_sec')}>
+                        <FieldBox label={t('dc_sachets_in_pkg')}><input type="number" className="no-spin" min="0" style={fi} placeholder="100" value={drinks.herbata.sachetPerPkg} onChange={e => upd('herbata',{sachetPerPkg:cl(e.target.value,9999)})} /></FieldBox>
+                        <div style={{ marginTop:8 }}><FieldBox label={t('dc_pkg_price')}><input type="number" className="no-spin" min="0" step="0.01" style={fi} placeholder="8" value={drinks.herbata.pkgPrice} onChange={e => upd('herbata',{pkgPrice:cl(e.target.value,9999)})} /></FieldBox></div>
                       </InnerSec>
                     <div style={{ borderTop:'1px solid #1a3a38', marginTop:8, paddingTop:6, display:'flex', flexDirection:'column', gap:3 }}>
-                      {[`${parseFloat(drinks.herbata.cupsPerDay)||0} kub./dzień`,`× ${days} dni`,`= ${(parseFloat(drinks.herbata.cupsPerDay)||0)*days} kubków`].map((l,i)=><div key={i} style={{ fontSize:10, color:'#6b7280' }}>{l}</div>)}
-                      {[{label:'Herbata',val:items.filter(i=>i._dk==='herbata'&&i.name==='Herbata').reduce((s,i)=>s+i.total,0)},...items.filter(i=>i._dk==='herbata'&&i.name!=='Herbata').map(i=>({label:i.name.replace(' (herbata)',''),val:i.total}))].filter(b=>b.val>0).map((b,i)=><div key={i} style={{ display:'flex', justifyContent:'space-between', fontSize:10 }}><span style={{ color:'#6b7280' }}>{b.label}</span><span style={{ color:'#9ca3af', fontWeight:600 }}>{b.val.toFixed(2)} zł</span></div>)}
-                      <div style={{ fontSize:13, fontWeight:800, color:'#0d9488', marginTop:2 }}>{tileTotal.toFixed(2)} zł</div>
+                      {[t('dc_cups_summary')(parseFloat(drinks.herbata.cupsPerDay)||0), t('dc_days_label')(days), t('dc_cups_total')((parseFloat(drinks.herbata.cupsPerDay)||0)*days)].map((l,i)=><div key={i} style={{ fontSize:10, color:'#6b7280' }}>{l}</div>)}
+                      {[{label:t('drink_herbata'),val:items.filter(i=>i._dk==='herbata'&&i.name==='Herbata').reduce((s,i)=>s+i.total,0)},...items.filter(i=>i._dk==='herbata'&&i.name!=='Herbata').map(i=>({label:_itemLabel(i.name.replace(' (herbata)','')),val:i.total}))].filter(b=>b.val>0).map((b,i)=><div key={i} style={{ display:'flex', justifyContent:'space-between', fontSize:10 }}><span style={{ color:'#6b7280' }}>{b.label}</span><span style={{ color:'#9ca3af', fontWeight:600 }}>{b.val.toFixed(2)} {t('currency')}</span></div>)}
+                      <div style={{ fontSize:13, fontWeight:800, color:'#0d9488', marginTop:2 }}>{tileTotal.toFixed(2)} {t('currency')}</div>
                     </div>
                   </div>
                 );
                 if (key === 'napoje') return (
                   <div style={{ ...cfg }}>
-                      <InnerSec title="Opakowanie">
-                        <FieldBox label="Litrów / dzień"><input type="number" className="no-spin" min="0" step="0.1" style={fi} placeholder="1" value={drinks.napoje.litersPerDay} onChange={e => upd('napoje',{litersPerDay:cl(e.target.value,50)})} /></FieldBox>
-                        <div style={{ marginTop:8 }}><FieldBox label="Pojemność op. (l)"><input type="number" className="no-spin" min="0" step="0.1" style={fi} placeholder="2" value={drinks.napoje.pkgL} onChange={e => upd('napoje',{pkgL:cl(e.target.value,9999)})} /></FieldBox></div>
-                        <div style={{ marginTop:8 }}><FieldBox label="Cena op. (zł)"><input type="number" className="no-spin" min="0" step="0.01" style={fi} placeholder="4" value={drinks.napoje.pkgPrice} onChange={e => upd('napoje',{pkgPrice:cl(e.target.value,9999)})} /></FieldBox></div>
+                      <InnerSec title={t('dc_packaging_sec')}>
+                        <FieldBox label={t('dc_liters_per_day')}><input type="number" className="no-spin" min="0" step="0.1" style={fi} placeholder="1" value={drinks.napoje.litersPerDay} onChange={e => upd('napoje',{litersPerDay:cl(e.target.value,50)})} /></FieldBox>
+                        <div style={{ marginTop:8 }}><FieldBox label={t('dc_pkg_capacity_l2')}><input type="number" className="no-spin" min="0" step="0.1" style={fi} placeholder="2" value={drinks.napoje.pkgL} onChange={e => upd('napoje',{pkgL:cl(e.target.value,9999)})} /></FieldBox></div>
+                        <div style={{ marginTop:8 }}><FieldBox label={t('dc_pkg_price')}><input type="number" className="no-spin" min="0" step="0.01" style={fi} placeholder="4" value={drinks.napoje.pkgPrice} onChange={e => upd('napoje',{pkgPrice:cl(e.target.value,9999)})} /></FieldBox></div>
                       </InnerSec>
                     <div style={{ borderTop:'1px solid #1a3a38', marginTop:8, paddingTop:6, display:'flex', flexDirection:'column', gap:3 }}>
-                      {[`${parseFloat(drinks.napoje.litersPerDay)||0} l/dzień`,`× ${days} dni`,`= ${((parseFloat(drinks.napoje.litersPerDay)||0)*days).toFixed(1)} l`].map((l,i)=><div key={i} style={{ fontSize:10, color:'#6b7280' }}>{l}</div>)}
-                      <div style={{ fontSize:13, fontWeight:800, color:'#0d9488', marginTop:2 }}>{tileTotal.toFixed(2)} zł</div>
+                      {[t('dc_liters_summary')(parseFloat(drinks.napoje.litersPerDay)||0), t('dc_days_label')(days), t('dc_liters_total')(((parseFloat(drinks.napoje.litersPerDay)||0)*days).toFixed(1))].map((l,i)=><div key={i} style={{ fontSize:10, color:'#6b7280' }}>{l}</div>)}
+                      <div style={{ fontSize:13, fontWeight:800, color:'#0d9488', marginTop:2 }}>{tileTotal.toFixed(2)} {t('currency')}</div>
                     </div>
                   </div>
                 );
                 if (key === 'woda') return (
                   <div style={{ ...cfg }}>
-                      <InnerSec title="Opakowanie">
-                        <FieldBox label="Litrów / dzień"><input type="number" className="no-spin" min="0" step="0.1" style={fi} placeholder="1.5" value={drinks.woda.litersPerDay} onChange={e => upd('woda',{litersPerDay:cl(e.target.value,50)})} /></FieldBox>
-                        <div style={{ marginTop:8 }}><FieldBox label="Pojemność op. (l)"><input type="number" className="no-spin" min="0" step="0.1" style={fi} placeholder="5" value={drinks.woda.pkgL} onChange={e => upd('woda',{pkgL:cl(e.target.value,9999)})} /></FieldBox></div>
-                        <div style={{ marginTop:8 }}><FieldBox label="Cena op. (zł)"><input type="number" className="no-spin" min="0" step="0.01" style={fi} placeholder="3" value={drinks.woda.pkgPrice} onChange={e => upd('woda',{pkgPrice:cl(e.target.value,9999)})} /></FieldBox></div>
+                      <InnerSec title={t('dc_packaging_sec')}>
+                        <FieldBox label={t('dc_liters_per_day')}><input type="number" className="no-spin" min="0" step="0.1" style={fi} placeholder="1.5" value={drinks.woda.litersPerDay} onChange={e => upd('woda',{litersPerDay:cl(e.target.value,50)})} /></FieldBox>
+                        <div style={{ marginTop:8 }}><FieldBox label={t('dc_pkg_capacity_l2')}><input type="number" className="no-spin" min="0" step="0.1" style={fi} placeholder="5" value={drinks.woda.pkgL} onChange={e => upd('woda',{pkgL:cl(e.target.value,9999)})} /></FieldBox></div>
+                        <div style={{ marginTop:8 }}><FieldBox label={t('dc_pkg_price')}><input type="number" className="no-spin" min="0" step="0.01" style={fi} placeholder="3" value={drinks.woda.pkgPrice} onChange={e => upd('woda',{pkgPrice:cl(e.target.value,9999)})} /></FieldBox></div>
                       </InnerSec>
                     <div style={{ borderTop:'1px solid #1a3a38', marginTop:8, paddingTop:6, display:'flex', flexDirection:'column', gap:3 }}>
-                      {[`${parseFloat(drinks.woda.litersPerDay)||0} l/dzień`,`× ${days} dni`,`= ${((parseFloat(drinks.woda.litersPerDay)||0)*days).toFixed(1)} l`].map((l,i)=><div key={i} style={{ fontSize:10, color:'#6b7280' }}>{l}</div>)}
-                      <div style={{ fontSize:13, fontWeight:800, color:'#0d9488', marginTop:2 }}>{tileTotal.toFixed(2)} zł</div>
+                      {[t('dc_liters_summary')(parseFloat(drinks.woda.litersPerDay)||0), t('dc_days_label')(days), t('dc_liters_total')(((parseFloat(drinks.woda.litersPerDay)||0)*days).toFixed(1))].map((l,i)=><div key={i} style={{ fontSize:10, color:'#6b7280' }}>{l}</div>)}
+                      <div style={{ fontSize:13, fontWeight:800, color:'#0d9488', marginTop:2 }}>{tileTotal.toFixed(2)} {t('currency')}</div>
                     </div>
                   </div>
                 );
                 if (key === 'sodaStream') return (
                   <div style={{ ...cfg }}>
-                      <InnerSec title="Zużycie">
-                        <FieldBox label="Litrów / dzień"><input type="number" className="no-spin" min="0" step="0.1" style={fi} placeholder="1" value={drinks.sodaStream.litersPerDay} onChange={e => upd('sodaStream',{litersPerDay:cl(e.target.value,50)})} /></FieldBox>
+                      <InnerSec title={t('dc_consumption_sec')}>
+                        <FieldBox label={t('dc_liters_per_day')}><input type="number" className="no-spin" min="0" step="0.1" style={fi} placeholder="1" value={drinks.sodaStream.litersPerDay} onChange={e => upd('sodaStream',{litersPerDay:cl(e.target.value,50)})} /></FieldBox>
                         <div style={{ marginTop:8 }}>
-                          <div style={{ fontSize:10, color:'#6b7280', marginBottom:4 }}>Słodkość</div>
+                          <div style={{ fontSize:10, color:'#6b7280', marginBottom:4 }}>{t('dc_sweetness')}</div>
                           <div style={{ display:'flex', gap:4 }}>
                             {[{label:'Light',ml:30},{label:'Sweet',ml:45},{label:'Very Sweet',ml:55}].map(({label:lbl,ml}) => (
                               <button key={ml} type="button" onClick={() => upd('sodaStream',{mlPer1L:ml})}
@@ -1280,17 +1287,17 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
                           </div>
                         </div>
                       </InnerSec>
-                      <InnerSec title="Syrop">
-                        <FieldBox label="Pojemność syropu (ml)"><input type="number" className="no-spin" min="0" style={fi} placeholder="440" value={drinks.sodaStream.syrupMl} onChange={e => upd('sodaStream',{syrupMl:cl(e.target.value,9999)})} /></FieldBox>
-                        <div style={{ marginTop:8 }}><FieldBox label="Cena syropu (zł)"><input type="number" className="no-spin" min="0" step="0.01" style={fi} placeholder="25" value={drinks.sodaStream.syrupPrice} onChange={e => upd('sodaStream',{syrupPrice:cl(e.target.value,9999)})} /></FieldBox></div>
+                      <InnerSec title={t('dc_syrup_sec')}>
+                        <FieldBox label={t('dc_syrup_ml')}><input type="number" className="no-spin" min="0" style={fi} placeholder="440" value={drinks.sodaStream.syrupMl} onChange={e => upd('sodaStream',{syrupMl:cl(e.target.value,9999)})} /></FieldBox>
+                        <div style={{ marginTop:8 }}><FieldBox label={t('dc_syrup_price')}><input type="number" className="no-spin" min="0" step="0.01" style={fi} placeholder="25" value={drinks.sodaStream.syrupPrice} onChange={e => upd('sodaStream',{syrupPrice:cl(e.target.value,9999)})} /></FieldBox></div>
                       </InnerSec>
-                      <InnerSec title="Butla gazowa">
-                        <FieldBox label="Wymiana co (dni)"><input type="number" className="no-spin" min="0" style={fi} placeholder="np. 30" value={drinks.sodaStream.cylinderDays} onChange={e => upd('sodaStream',{cylinderDays:cl(e.target.value,3650)})} /></FieldBox>
-                        <div style={{ marginTop:8 }}><FieldBox label="Koszt wymiany (zł)"><input type="number" className="no-spin" min="0" step="0.01" style={fi} placeholder="np. 50" value={drinks.sodaStream.cylinderCost} onChange={e => upd('sodaStream',{cylinderCost:cl(e.target.value,9999)})} /></FieldBox></div>
+                      <InnerSec title={t('dc_gas_cylinder')}>
+                        <FieldBox label={t('dc_exchange_days')}><input type="number" className="no-spin" min="0" style={fi} placeholder={`${eg} 30`} value={drinks.sodaStream.cylinderDays} onChange={e => upd('sodaStream',{cylinderDays:cl(e.target.value,3650)})} /></FieldBox>
+                        <div style={{ marginTop:8 }}><FieldBox label={t('dc_exchange_cost')}><input type="number" className="no-spin" min="0" step="0.01" style={fi} placeholder={`${eg} 50`} value={drinks.sodaStream.cylinderCost} onChange={e => upd('sodaStream',{cylinderCost:cl(e.target.value,9999)})} /></FieldBox></div>
                       </InnerSec>
                     <div style={{ borderTop:'1px solid #1a3a38', marginTop:8, paddingTop:6, display:'flex', flexDirection:'column', gap:3 }}>
-                      {[`${parseFloat(drinks.sodaStream.litersPerDay)||0} l/dzień`,`× ${days} dni`,`= ${((parseFloat(drinks.sodaStream.litersPerDay)||0)*days).toFixed(1)} l`].map((l,i)=><div key={i} style={{ fontSize:10, color:'#6b7280' }}>{l}</div>)}
-                      <div style={{ fontSize:13, fontWeight:800, color:'#0d9488', marginTop:2 }}>{tileTotal.toFixed(2)} zł</div>
+                      {[t('dc_liters_summary')(parseFloat(drinks.sodaStream.litersPerDay)||0), t('dc_days_label')(days), t('dc_liters_total')(((parseFloat(drinks.sodaStream.litersPerDay)||0)*days).toFixed(1))].map((l,i)=><div key={i} style={{ fontSize:10, color:'#6b7280' }}>{l}</div>)}
+                      <div style={{ fontSize:13, fontWeight:800, color:'#0d9488', marginTop:2 }}>{tileTotal.toFixed(2)} {t('currency')}</div>
                     </div>
                   </div>
                 );
@@ -1299,7 +1306,7 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
               {expanded && (
                 <button type="button" onClick={e => { e.stopPropagation(); upd(key, {...DRINKS_DEFAULTS[key], enabled: true}); }}
                   className="btn btn-danger" style={{ width:'100%', marginTop:4, fontSize:10 }}>
-                  Wyczyść
+                  {t('clear')}
                 </button>
               )}
             </div>

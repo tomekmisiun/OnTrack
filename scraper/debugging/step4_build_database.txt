@@ -1,0 +1,1772 @@
+# Krok 4: build database
+# Wygenerowano: 2026-05-23 14:08:48
+
+======================================================================
+  Statystyki budowania bazy
+======================================================================
+  Ingredient DB EN                         367
+  Ingredient DB PL                         462
+  Niedopasowane EN                         419
+  Niedopasowane PL                         349
+  Przepisy wejściowe                       615
+  Przepisy EN (100% pokrycie)              54
+  Przepisy PL (100% pokrycie)              79
+  % akceptacji EN                          8.8%
+  % akceptacji PL                          12.8%
+  EN z pełnym kosztem                      0
+  PL z pełnym kosztem                      24
+
+
+======================================================================
+  EN ingredient_db (ingredient_name → original_name | shop | price_per_100)
+======================================================================
+  Dijon mustard                       → Dijon Mustard                                      | aldi         | 0.245
+  almond                              → Whole Almonds                                      | aldi         | 0.845
+  andouille sausage                   → Quorn Sausages                                     | aldi         | —
+  apple                               → Large Bramley Apple                                | aldi         | 0.3242
+  apple cider                         → Organic Apple Cider Vinegar                        | aldi         | —
+  apple cider vinegar                 → Organic Apple Cider Vinegar                        | aldi         | —
+  applesauce                          → Bramley Apple Sauce                                | aldi         | —
+  avocado                             → Avocado                                            | aldi         | 0.29
+  avocado oil                         → Avocado                                            | aldi         | 0.29
+  avocado oil spray                   → Avocado                                            | aldi         | 0.29
+  baby corn                           → Baby Corn                                          | aldi         | 0.7517
+  baby red potatoes                   → British Red Potatoes                               | aldi         | 0.078
+  baby spinach                        → British Baby Spinach                               | aldi         | 0.3533
+  bacon                               → Smoked Bacon Lardons                               | aldi         | 0.895
+  baking powder                       → Baking Powder                                      | aldi         | 0.325
+  balsamic vinegar                    → Balsamic Vinegar of Modena                         | aldi         | —
+  banana                              → Banana                                             | aldi         | 0.1333
+  basil                               → Basil                                              | aldi         | —
+  basmati rice                        → Basmati Rice                                       | aldi         | 0.179
+  bay leaf                            → Bay Leaf                                           | aldi         | —
+  bbq sauce                           → BBQ Sauce                                          | aldi         | —
+  beef                                → 100% British Beef Wagyu Fillet Steak               | aldi         | 6.4647
+  beef broth                          → Chicken Stock Cubes                                | aldi         | —
+  beef chuck                          → British Diced Beef                                 | aldi         | 1.0843
+  beef ribs                           → British Diced Beef                                 | aldi         | 1.0843
+  beef sirloin                        → 100% British Beef Wagyu Sirloin Steak              | aldi         | 3.9604
+  beef steak                          → 100% British Beef Wagyu Fillet Steak               | aldi         | 6.4647
+  beef stew meat                      → 100% British Beef Wagyu Fillet Steak               | aldi         | 6.4647
+  beef stock                          → Chicken Stock Cubes                                | aldi         | —
+  bell pepper                         → Red Pepper                                         | aldi         | 0.4375
+  berries                             → Blueberries                                        | aldi         | 0.7933
+  black beans                         → Tinned Black Beans/Green Lentils                   | aldi         | 0.1231
+  black olive                         → Pitted Green & Black Olives With Feta              | aldi         | —
+  black olives                        → Pitted Green & Black Olives With Feta              | aldi         | —
+  black pepper                        → Ground Black Pepper                                | aldi         | 1.59
+  black sesame seeds                  → Sesame Seeds                                       | aldi         | —
+  blackberries                        → Wonky Blackberries                                 | aldi         | 1.26
+  blackberry                          → Wonky Blackberries                                 | aldi         | 1.26
+  blueberries                         → Blueberries                                        | aldi         | 0.7933
+  blueberry                           → Blueberries                                        | aldi         | 0.7933
+  breadcrumbs                         → Panko Breadcrumbs                                  | aldi         | —
+  broccoli                            → British Broccoli                                   | aldi         | 0.2188
+  broccoli florets                    → Broccoli Florets                                   | aldi         | 0.119
+  broccolini                          → British Broccoli                                   | aldi         | 0.2188
+  brown rice                          → Brown Rice                                         | aldi         | 0.139
+  brown rice noodles                  → Rice Noodles                                       | aldi         | 0.33
+  brown rice pasta                    → Brown Rice                                         | aldi         | 0.139
+  brown rice with quinoa              → Brown Rice                                         | aldi         | 0.139
+  butter                              → Flora Buttery                                      | aldi         | 0.4422
+  butternut squash                    → Butternut Squash & Pine Nut Girasoli               | aldi         | 0.996
+  cabbage                             → Red Cabbage                                        | aldi         | 0.0989
+  cabbage and carrots                 → British Wonky Carrots                              | aldi         | 0.053
+  cajun seasoning                     → Cajun Seasoning                                    | aldi         | —
+  cannellini beans                    → Red Kidney Beans in Water                          | aldi         | 0.0975
+  carrot                              → Carrot & Swede Mash                                | aldi         | 0.3
+  carrots                             → British Wonky Carrots                              | aldi         | 0.053
+  cashew                              → Cashews Roasted and Salted                         | aldi         | 0.995
+  cashew butter                       → Cashew Nuts                                        | aldi         | 0.845
+  cashews                             → Cashews Roasted and Salted                         | aldi         | 0.995
+  cauliflower                         → British Cauliflower                                | aldi         | 0.1487
+  cauliflower gnocchi                 → British Cauliflower                                | aldi         | 0.1487
+  cauliflower rice                    → British Cauliflower                                | aldi         | 0.1487
+  cayenne                             → Cayenne Pepper                                     | aldi         | —
+  cayenne pepper                      → Cayenne Pepper                                     | aldi         | —
+  celery                              → Celery                                             | aldi         | 0.1875
+  cheese                              → Italian Meat & Cheese Select                       | aldi         | —
+  cheese stick                        → Puff Pastry Ham & Cheese Slices 2 Pack             | aldi         | —
+  cherries                            → Cherries                                           | aldi         | 1.145
+  cherry                              → Cherry Tomatoes                                    | aldi         | 0.248
+  cherry tomato                       → Cherry Tomatoes in Rich Tomato Juice               | aldi         | 0.1875
+  cherry tomatoes                     → Cherry Tomatoes                                    | aldi         | 0.248
+  chicken                             → Chicken Breast Fillets                             | aldi         | 0.425
+  chicken apple sausage               → Cooked Sliced Chicken                              | aldi         | 0.6147
+  chicken breast                      → Chicken Breast Fillets                             | aldi         | 0.425
+  chicken broth                       → Chicken Stock Cubes                                | aldi         | —
+  chicken drumstick                   → Chicken Drumsticks                                 | aldi         | 0.215
+  chicken drumsticks                  → Chicken Drumsticks                                 | aldi         | 0.215
+  chicken fajita                      → Cooked Sliced Chicken                              | aldi         | 0.6147
+  chicken legs                        → Chicken Legs                                       | aldi         | 0.225
+  chicken sausage                     → Cooked Sliced Chicken                              | aldi         | 0.6147
+  chicken stock                       → Chicken Stock Cubes                                | aldi         | —
+  chicken stock concentrate           → Chicken Stock Cubes                                | aldi         | —
+  chicken thigh                       → Chicken Thigh Fillets                              | aldi         | 0.6322
+  chicken thighs                      → Chicken Thighs                                     | aldi         | 0.299
+  chicken wing                        → Chicken Wings                                      | aldi         | 0.215
+  chickpea                            → Chickpea Fusilli                                   | aldi         | 0.276
+  chickpea flour                      → Chickpea Fusilli                                   | aldi         | 0.276
+  chickpea fusilli pasta              → Fusilli Pasta 1kg                                  | aldi         | 0.119
+  chickpeas                           → Chickpeas                                          | aldi         | —
+  chili garlic sauce                  → Garlic                                             | aldi         | 0.3955
+  chili powder                        → Chilli Powder                                      | aldi         | —
+  chocolate                           → Chocolate Mini Rolls                               | aldi         | 0.106
+  chocolate chips                     → Milk Chocolate Chips                               | aldi         | 1.19
+  chocolate protein powder            → Chocolate Protein Porridge Sachet                  | aldi         | 0.4826
+  cilantro                            → British Cut Coriander                              | aldi         | 1.6667
+  cinnamon                            → Cinnamon Buns                                      | aldi         | 0.4967
+  cocoa hazelnut spread               → Hazelnut Spread                                    | aldi         | —
+  cocoa powder                        → Cocoa Powder 250g                                  | aldi         | 1.196
+  coconut                             → Desiccated Coconut                                 | aldi         | 0.66
+  coconut aminos                      → Coconut Milk 400ml Full Fat                        | aldi         | 0.1875
+  coconut milk                        → Coconut Milk 400ml Full Fat                        | aldi         | 0.1875
+  coconut milk powder                 → Coconut Milk 400ml Full Fat                        | aldi         | 0.1875
+  coconut oil                         → Coconut Milk 400ml Full Fat                        | aldi         | 0.1875
+  coconut oil spray                   → Coconut Milk 400ml Full Fat                        | aldi         | 0.1875
+  coconut wrap                        → Coconut Water                                      | aldi         | —
+  cod                                 → Cod Fillets                                        | aldi         | 1.0528
+  coleslaw mix                        → Reduced Fat Coleslaw                               | aldi         | —
+  coriander                           → British Cut Coriander                              | aldi         | 1.6667
+  corn                                → Baby Corn                                          | aldi         | 0.7517
+  corn starch                         → Baby Corn                                          | aldi         | 0.7517
+  cottage cheese                      → Low Fat Cottage Cheese                             | aldi         | 0.33
+  cranberries                         → Raisins & Cranberries                              | aldi         | 0.45
+  cranberry                           → Raisins & Cranberries                              | aldi         | 0.45
+  cream cheese                        → Cream Cheese Stuffed Cherry Bell Peppers           | aldi         | 1.46
+  cremini mushrooms                   → Sliced Mushrooms                                   | aldi         | 0.198
+  crispy rice cereal                  → Sweet & Crispy                                     | aldi         | 0.5211
+  crushed tomatoes                    → Chopped Tomatoes in Tomato Juice                   | aldi         | 0.108
+  cucumber                            → Cucumber                                           | aldi         | 0.2967
+  cumin                               → Cumin                                              | aldi         | —
+  curry powder                        → Medium Curry Powder                                | aldi         | 0.9889
+  dairy free chocolate chips          → Dark Chocolate Chips                               | aldi         | 1.19
+  dairy free sour cream               → Sour Cream & Black Pepper Multigrain Waves 6 Pack  | aldi         | 0.86
+  dark chocolate                      → Dark Chocolate 100g                                | aldi         | 0.65
+  dark chocolate chips                → Dark Chocolate Chips                               | aldi         | 1.19
+  diced tomatoes                      → Chopped Tomatoes in Tomato Juice                   | aldi         | 0.108
+  dijon mustard                       → Dijon Mustard                                      | aldi         | 0.245
+  distilled white vinegar             → Distilled Vinegar                                  | aldi         | —
+  dried basil                         → Basil                                              | aldi         | —
+  dried cherries                      → Cherries                                           | aldi         | 1.145
+  dried cranberries                   → Raisins & Cranberries                              | aldi         | 0.45
+  dried pitted date                   → Pitted Dates                                       | aldi         | 0.558
+  dried red chiles                    → Red Chillies                                       | aldi         | 0.8462
+  dried thyme                         → Thyme                                              | aldi         | 4.3333
+  egg                                 → Egg Noodles                                        | aldi         | 0.3146
+  egg noodles                         → Egg Noodles                                        | aldi         | 0.3146
+  eggs                                → Free Range Eggs 6 Pack                             | aldi         | 0.275
+  feta                                → Greek Feta                                         | aldi         | 0.845
+  feta cheese                         → Greek Feta                                         | aldi         | 0.845
+  fig                                 → Fig Rolls                                          | aldi         | —
+  flax seeds                          → Flaxseed                                           | aldi         | 0.895
+  flaxseed meal                       → Flaxseed                                           | aldi         | 0.895
+  freeze dried strawberries           → Strawberry Slices                                  | aldi         | —
+  freeze dried strawberry             → Strawberry Slices                                  | aldi         | —
+  fruit                               → Fruit Loaf                                         | aldi         | —
+  garam masala                        → Garam Malasa Powder                                | aldi         | 0.9889
+  garlic                              → Garlic                                             | aldi         | 0.3955
+  garlic granules                     → Garlic Granules                                    | aldi         | —
+  garlic pasta sauce                  → Onion & Garlic Pasta Sauce                         | aldi         | 0.138
+  garlic powder                       → Garlic                                             | aldi         | 0.3955
+  ginger                              → Ginger                                             | aldi         | 0.792
+  gluten free panko bread crumbs      → Panko Breadcrumbs                                  | aldi         | —
+  gluten free panko breadcrumbs       → Panko Breadcrumbs                                  | aldi         | —
+  gluten free pasta                   → Gluten Free Spaghetti                              | aldi         | 0.058
+  gluten free pita                    → Gluten Free Spaghetti                              | aldi         | 0.058
+  gluten free spaghetti               → Gluten Free Spaghetti                              | aldi         | 0.058
+  golden beet                         → Golden Breadcrumbs                                 | aldi         | —
+  graham crackers                     → Cream Crackers                                     | aldi         | —
+  greek yogurt                        → Fat Free Greek Style Yogurt                        | aldi         | 0.149
+  green beans                         → Green Beans                                        | aldi         | 0.3864
+  green bell pepper                   → Red Pepper                                         | aldi         | 0.4375
+  green cabbage                       → Red Cabbage                                        | aldi         | 0.0989
+  green onion                         → Jumbo Spring Onions                                | aldi         | 0.6846
+  green onions                        → Jumbo Spring Onions                                | aldi         | 0.6846
+  green peas                          → Green Pea Penne                                    | aldi         | 0.276
+  ground beef                         → British Diced Beef                                 | aldi         | 1.0843
+  ground chicken                      → Lean Chicken Mince 5% Fat                          | aldi         | 0.518
+  ground clove                        → Quorn Mince                                        | aldi         | —
+  ground cumin                        → Quorn Mince                                        | aldi         | —
+  ground flax                         → Quorn Mince                                        | aldi         | —
+  ground flax meal                    → Quorn Mince                                        | aldi         | —
+  ground flaxseed                     → Quorn Mince                                        | aldi         | —
+  ground ginger                       → Ginger                                             | aldi         | 0.792
+  ground lamb                         → British Lamb Mince 20% Fat                         | aldi         | 1.1558
+  ground pork                         → British Pork Smoked Ham Family Pack 14 Slices      | aldi         | 0.53
+  ground sausage                      → Quorn Mince                                        | aldi         | —
+  ground turkey                       → British Turkey Mince 7% Fat                        | aldi         | 0.598
+  ground turkey breast                → British Turkey Mince 7% Fat                        | aldi         | 0.598
+  ham                                 → Ham & Mushroom Tagliatelle                         | aldi         | 0.6975
+  harissa                             → Harissa Salads                                     | aldi         | 1.9933
+  hoisin sauce                        → Hoisin Sauce                                       | aldi         | —
+  honey                               → Clear Honey                                        | aldi         | 0.2181
+  honey mustard                       → Honey & Mustard Salad Dressing                     | aldi         | —
+  honey mustard dressing              → Honey & Mustard Salad Dressing                     | aldi         | —
+  instant brown rice                  → Brown Rice                                         | aldi         | 0.139
+  italian seasoning                   → Italian Meat & Cheese Select                       | aldi         | —
+  kidney beans                        → Red Kidney Beans                                   | aldi         | —
+  kiwi                                → Kiwis                                              | aldi         | 0.261
+  korean bbq sauce                    → BBQ Sauce                                          | aldi         | —
+  leek                                → Individual Cheddar & Leek Quiche                   | aldi         | —
+  lemon                               → Wonky Lemons                                       | aldi         | 0.2225
+  lemon juice                         → Lemon Juice                                        | aldi         | —
+  lemon zest                          → Wonky Lemons                                       | aldi         | 0.2225
+  lentil                              → Red Lentils                                        | aldi         | 0.198
+  lentils                             → Red Lentils                                        | aldi         | 0.198
+  lime                                → Limes                                              | aldi         | 0.2657
+  lime zest                           → Limes                                              | aldi         | 0.2657
+  long grain white rice               → Long Grain White Rice                              | aldi         | 0.052
+  mandarin                            → Mandarin Oranges in Juice                          | aldi         | —
+  mandarin orange                     → Mandarin Oranges in Juice                          | aldi         | —
+  mango                               → Large Mango                                        | aldi         | 0.44
+  maple syrup                         → Maple Syrup                                        | aldi         | —
+  mashed potatoes                     → Mashed Potato                                      | aldi         | 0.17
+  mayonnaise                          → Real Mayonnaise                                    | aldi         | —
+  meatballs                           → Meatballs                                          | aldi         | —
+  milk                                → Milk Chocolate 100g                                | aldi         | 0.65
+  mint                                → Cut Mint                                           | aldi         | 1.6667
+  mixed berries                       → Blueberries                                        | aldi         | 0.7933
+  mixed nuts                          → Mixed Nuts                                         | aldi         | 0.875
+  mixed vegetable                     → Mixed Vegetables                                   | aldi         | 0.099
+  mixed vegetables                    → Mixed Vegetables                                   | aldi         | 0.099
+  mozzarella                          → Classic Mozzarella                                 | aldi         | 0.552
+  mozzarella cheese                   → Grated Mozzarella Cheese                           | aldi         | 0.598
+  mushroom                            → Sliced Mushrooms                                   | aldi         | 0.198
+  mushrooms                           → Sliced Mushrooms                                   | aldi         | 0.198
+  nectarine                           → Nectarines                                         | aldi         | 0.3151
+  nuts                                → Mixed Nuts                                         | aldi         | 0.875
+  olive oil                           → Extra Virgin Olive Oil                             | aldi         | —
+  onion                               → British Wonky Brown Onions                         | aldi         | 0.08
+  onion granules                      → Onion Granules                                     | aldi         | —
+  orange juice                        → Smooth Orange Juice                                | aldi         | 0.115
+  orange marmalade                    → Fine Cut Orange Marmalade                          | aldi         | 0.1868
+  orange zest                         → Wonky Oranges                                      | aldi         | 0.1238
+  panko breadcrumbs                   → Panko Breadcrumbs                                  | aldi         | —
+  paprika                             → Smoked Paprika                                     | aldi         | 1.725
+  parmesan                            → Greek Feta                                         | aldi         | 0.845
+  parmesan cheese                     → Greek Feta                                         | aldi         | 0.845
+  parsley                             → Parsley                                            | aldi         | —
+  parsnip                             → British Parsnips                                   | aldi         | 0.148
+  pasta sauce                         → Bolognese Pasta Sauce                              | aldi         | —
+  peach                               → Peach Slices in Juice                              | aldi         | 0.34
+  peanut butter                       → Smooth Peanut Butter                               | aldi         | 0.2912
+  peanuts                             → Peanuts 200g                                       | aldi         | 0.745
+  pear                                → Ripe & Ready Conference Pears                      | aldi         | 0.2598
+  peas                                → Ripe & Ready Conference Pears                      | aldi         | 0.2598
+  pecan                               → Pecans                                             | aldi         | 1.9933
+  pecans                              → Pecans                                             | aldi         | 1.9933
+  penne pasta                         → Everyday Essentials Penne Pasta 500g               | aldi         | 0.082
+  pepper                              → Ground Black Pepper                                | aldi         | 1.59
+  pepperoni                           → Hot Pepperoni 24 Slices                            | aldi         | —
+  pesto                               → Pesto Rosso                                        | aldi         | 1.0474
+  pickled ginger                      → Ginger                                             | aldi         | 0.792
+  pine nuts                           → Pine Nuts                                          | aldi         | 2.8167
+  pineapple                           → Pineapple                                          | aldi         | 0.1225
+  pineapple juice                     → Pineapple                                          | aldi         | 0.1225
+  plain greek yogurt                  → Fat Free Greek Style Yogurt                        | aldi         | 0.149
+  plain yogurt                        → Fat Free Natural Yogurt                            | aldi         | 0.11
+  plant-based ground                  → Quorn Mince                                        | aldi         | —
+  pomegranate                         → Pomegranate Seeds                                  | aldi         | 0.945
+  pomegranate seeds                   → Pomegranate Seeds                                  | aldi         | 0.945
+  pork                                → British Pork Loin Joint                            | aldi         | 0.5788
+  pork chop                           → Pork Chops                                         | aldi         | 0.475
+  pork loin                           → British Pork Loin Joint                            | aldi         | 0.5788
+  pork shoulder                       → British Pork Shoulder Joint                        | aldi         | 0.3792
+  portobello mushrooms                → Sliced Mushrooms                                   | aldi         | 0.198
+  potato                              → British Baby Potatoes                              | aldi         | 0.105
+  pumpkin                             → Butternut Squash & Pine Nut Girasoli               | aldi         | 0.996
+  pumpkin seed oil                    → Pumpkin Seeds                                      | aldi         | 0.676
+  pumpkin seeds                       → Pumpkin Seeds                                      | aldi         | 0.676
+  pumpkin spice                       → Pumpkin Seeds                                      | aldi         | 0.676
+  purple cabbage                      → Red Cabbage                                        | aldi         | 0.0989
+  purple potatoes                     → British Baby Potatoes                              | aldi         | 0.105
+  quinoa                              → Quinoa & Grains                                    | aldi         | 0.396
+  quinoa pasta                        → Quinoa & Grains                                    | aldi         | 0.396
+  radish                              → British Radish                                     | aldi         | 0.275
+  raisin                              → Raisins                                            | aldi         | 0.338
+  raisins                             → Raisins                                            | aldi         | 0.338
+  raspberries                         → Raspberries                                        | aldi         | 1.1956
+  raspberry                           → Raspberries                                        | aldi         | 1.1956
+  red bell pepper                     → Red Pepper                                         | aldi         | 0.4375
+  red cabbage                         → Red Cabbage                                        | aldi         | 0.0989
+  red chili                           → Red Chillies                                       | aldi         | 0.8462
+  red chili flakes                    → Red Chillies                                       | aldi         | 0.8462
+  red curry paste                     → Thai Red Curry Paste                               | aldi         | 0.7167
+  red grapes                          → Red Grapefruit                                     | aldi         | 0.1571
+  red kidney beans                    → Red Kidney Beans                                   | aldi         | —
+  red lentils                         → Red Lentils                                        | aldi         | 0.198
+  red onion                           → Red Onions                                         | aldi         | 0.095
+  red pepper                          → Red Pepper                                         | aldi         | 0.4375
+  red pepper flakes                   → Red Pepper                                         | aldi         | 0.4375
+  red potato                          → British Red Potatoes                               | aldi         | 0.078
+  red potatoes                        → British Red Potatoes                               | aldi         | 0.078
+  red wine                            → Red Wine Vinegar                                   | aldi         | —
+  red wine vinegar                    → Red Wine Vinegar                                   | aldi         | —
+  rice                                → Rice Noodles                                       | aldi         | 0.33
+  rice noodles                        → Rice Noodles                                       | aldi         | 0.33
+  rice vinegar                        → Cider Vinegar                                      | aldi         | —
+  rice wine vinegar                   → Red Wine Vinegar                                   | aldi         | —
+  riced cauliflower                   → British Cauliflower                                | aldi         | 0.1487
+  ricotta cheese                      → Low Fat Cottage Cheese                             | aldi         | 0.33
+  roasted red pepper                  → Red Pepper                                         | aldi         | 0.4375
+  roasted red peppers                 → Red Pepper                                         | aldi         | 0.4375
+  romaine                             → British Romaine Lettuce                            | aldi         | 0.1917
+  romaine lettuce                     → British Romaine Lettuce                            | aldi         | 0.1917
+  rosemary                            → Cut Rosemary                                       | aldi         | 2.5
+  russet potato                       → Sweet Potato                                       | aldi         | 0.5308
+  sage                                → Sage & Onion Stuffing Mix                          | aldi         | —
+  salami                              → Salami and Smoked Cheese Selection                 | aldi         | —
+  salmon                              → Salmon Pieces                                      | aldi         | 1.14
+  salt                                → Salt Grinder                                       | aldi         | —
+  sausage                             → Sausage Rolls 6 Pack                               | aldi         | —
+  scallion                            → Jumbo Spring Onions                                | aldi         | 0.6846
+  scallions                           → Jumbo Spring Onions                                | aldi         | 0.6846
+  sea salt                            → Sea Salt Chocolate                                 | aldi         | 1.592
+  semi sweet chocolate chips          → Milk Chocolate Chips                               | aldi         | 1.19
+  semi-sweet chocolate chips          → Milk Chocolate Chips                               | aldi         | 1.19
+  sesame                              → Sesame Seeds                                       | aldi         | —
+  sesame seed                         → Sesame Seeds                                       | aldi         | —
+  sesame seeds                        → Sesame Seeds                                       | aldi         | —
+  shallot                             → British Shallots 400g                              | aldi         | 0.2882
+  shiitake mushrooms                  → Sliced Mushrooms                                   | aldi         | 0.198
+  sirloin beef                        → British Diced Beef                                 | aldi         | 1.0843
+  sirloin steak                       → 100% British Beef Wagyu Sirloin Steak              | aldi         | 3.9604
+  smoked paprika                      → Smoked Paprika                                     | aldi         | 1.725
+  smoked salmon                       → Smoked Salmon Slices                               | aldi         | 2.245
+  soba noodles                        → Classic Soba Noodles Pot                           | aldi         | 1.2111
+  sour cream                          → Sour Cream & Black Pepper Multigrain Waves 6 Pack  | aldi         | 0.86
+  soy sauce                           → Light Soy Sauce                                    | aldi         | —
+  spaghetti                           → Spaghetti                                          | aldi         | —
+  spaghetti squash                    → Spaghetti                                          | aldi         | —
+  spinach                             → British Baby Spinach                               | aldi         | 0.3533
+  spinach tortilla                    → British Baby Spinach                               | aldi         | 0.3533
+  spinach wrap                        → British Baby Spinach                               | aldi         | 0.3533
+  spring onions                       → Jumbo Spring Onions                                | aldi         | 0.6846
+  sprinkles                           → Sprinkles                                          | aldi         | 1.0421
+  stevia                              → Stevia Sweetener Tablets                           | aldi         | 0.3933
+  strawberries                        → Strawberries                                       | aldi         | 0.5875
+  strawberry                          → Strawberries                                       | aldi         | 0.5875
+  sugar                               → Sugar Mini Waffles                                 | aldi         | 0.1656
+  sugar snap peas                     → British Sugar Snap Peas                            | aldi         | 0.6188
+  sun dried tomatoes                  → Sundried Tomatoes                                  | aldi         | 0.4107
+  sun-dried tomato                    → Sun-dried Tomato Pesto                             | aldi         | 0.4684
+  sun-dried tomatoes                  → Sundried Tomatoes                                  | aldi         | 0.4107
+  sunflower seed                      → Sunflower Seeds                                    | aldi         | 0.46
+  sunflower seeds                     → Sunflower Seeds                                    | aldi         | 0.46
+  sweet corn                          → Baby Corn                                          | aldi         | 0.7517
+  sweet onion                         → Sweet & Crispy                                     | aldi         | 0.5211
+  sweet potato                        → Sweet Potato                                       | aldi         | 0.5308
+  sweet potato puree                  → Sweet Potato                                       | aldi         | 0.5308
+  teriyaki sauce                      → Teriyaki Sauce                                     | aldi         | —
+  thai basil                          → Basil                                              | aldi         | —
+  thai sweet chili sauce              → Sweet Chilli Sauce                                 | aldi         | —
+  thyme                               → Thyme                                              | aldi         | 4.3333
+  tofu                                → Organic Smoked Tofu                                | aldi         | 0.5278
+  tomato                              → Salad Tomatoes                                     | aldi         | 0.1341
+  tomato paste                        → Chopped Tomatoes in Tomato Juice                   | aldi         | 0.108
+  tomato sauce                        → Bolognese Pasta Sauce                              | aldi         | —
+  tuna                                → Tuna Chunks In Spring Water                        | aldi         | 0.4483
+  turkey                              → British Turkey Breast Steaks 2% Fat                | aldi         | 0.9573
+  turkey breast                       → British Turkey Breast Steaks 2% Fat                | aldi         | 0.9573
+  turmeric                            → Ground Turmeric                                    | aldi         | 1.875
+  vegetable                           → British Wonky Carrots                              | aldi         | 0.053
+  vegetable broth                     → Vegetable Oil                                      | aldi         | —
+  vegetable oil                       → Vegetable Oil                                      | aldi         | —
+  vegetable stock                     → Vegetable Oil                                      | aldi         | —
+  vegetarian sausage                  → Vegetarian Sushi Platter                           | aldi         | 1.4049
+  watercress                          → Watercress Spinach & Rocket Salad                  | aldi         | 0.9375
+  watermelon                          → Mini Watermelon                                    | aldi         | 0.1327
+  watermelon radish                   → Mini Watermelon                                    | aldi         | 0.1327
+  white beans                         → Red Kidney Beans in Water                          | aldi         | 0.0975
+  white button mushroom               → British Baby Button Mushrooms                      | aldi         | 0.475
+  white chocolate chips               → White Chocolate Chips                              | aldi         | 1.19
+  white onion                         → Diced White Onions                                 | aldi         | 0.198
+  white wine vinegar                  → White Wine Vinegar                                 | aldi         | —
+  yeast                               → Yeast                                              | aldi         | 1.5476
+  yellow bell pepper                  → Red Pepper                                         | aldi         | 0.4375
+  yogurt                              → Fat Free Natural Yogurt                            | aldi         | 0.11
+  zucchini                            → Courgettes                                         | aldi         | 0.278
+
+======================================================================
+  EN — niedopasowane składniki (top 3 kandydaci)
+======================================================================
+  BBQ sauce                           | top: mustard sauce(80.0), scottish mussels with white wine sauce(80.0), salmon in teriyaki sauce(80.0)
+  Cheerios                            | top: cherries(66.7), back bacon rashers(66.7), unsmoked back bacon rashers(66.7)
+  Italian dressing seasoning          | top: cajun seasoning(81.5), chicken seasoning(80.0), peri peri seasoning(72.2)
+  Italian seasoning                   | top: cajun seasoning(88.9), chicken seasoning(80.0), mediterranean chicken seasoning(78.6)
+  Rice Krispies                       | top: pie(100.0), limes(75.0), bites(75.0)
+  active dry yeast                    | top: yeast(100.0), active strawberry yogurt 4 pack(72.0), active cherry yogurt 4 pack(71.0)
+  adobo sauce                         | top: soy sauce(87.5), bbq sauce(82.4), mustard sauce(80.0)
+  agave                               | top: savoy cabbage(75.0), sweetheart cabbage(75.0), roast in the bag pork, sage(75.0)
+  agave nectar                        | top: nectarines(75.0), vegetarian sushi platter(63.2), vegetarian ham slices(63.2)
+  allspice                            | top: spice infusion cous cous(76.9), chinese 5 spice(76.9), mixed spice(76.9)
+  almond butter                       | top: buttery(92.3), salmon(90.9), west country salted butter(80.0)
+  almond flour                        | top: salmon(90.9), strong white bread flour(80.0), lemon(80.0)
+  almond flour breading               | top: salmon(90.9), lemon(80.0), cornflour(77.8)
+  almond flour coating                | top: salmon(90.9), lemon(80.0), cornflour(77.8)
+  almond milk                         | top: salmon(90.9), lemon(80.0), dairy milk(75.0)
+  almond milk yogurt                  | top: salmon(90.9), lemon(80.0), greek yoghurt(76.2)
+  almonds                             | top: whole almonds(100.0), ground almonds(100.0), flaked almonds(100.0)
+  angel hair pasta                    | top: pastrami(76.9), mango(75.0), mangoes(72.7)
+  apricot                             | top: yogurt & fruit compote strawberry and peach & apricot splitpots 6 pack(100.0), apricot jam(100.0), apricot conserve(100.0)
+  apricot preserves                   | top: apricot jam(84.2), apricot conserve(81.2), garlic(72.7)
+  arrowroot                           | top: carrots(72.7), beetroot(66.7), chantenay carrots(66.7)
+  arrowroot flour                     | top: carrots(72.7), cornflour(71.4), plain flour(70.6)
+  arrowroot powder                    | top: cocoa powder(81.8), curry powder(73.7), carrots(72.7)
+  artichoke                           | top: hake(75.0), garlic(72.7), chicken(66.7)
+  artichoke heart                     | top: hake(75.0), garlic(72.7), pears(66.7)
+  artichoke hearts                    | top: pears(80.0), hake(75.0), garlic(72.7)
+  arugula                             | top: loaf(66.7), mozzarella(61.5), tagliatelle pasta(61.5)
+  arugula pesto                       | top: basil pesto(77.8), apples(66.7), tofu(66.7)
+  asparagus                           | top: aspartame sweetener tablets(75.0), oranges(66.7), washed ready to cook straight to wok beansprouts(66.7)
+  assorted vegetables                 | top: mixed vegetables(89.7), roasted vegetable cous cous(83.3), ready to roast mediterranean style vegetables(80.0)
+  baby bok choy                       | top: pak choi(71.4), pork chops(70.6), cod(66.7)
+  baby greens                         | top: spring greens(77.8), chicken king kebab, greek(76.2), green beans(72.7)
+  bacon fat                           | top: bacon lardons(82.4), bacon garlic cocktail sausage(82.4), bacon double cheese burgers 4 pack(80.0)
+  baking soda                         | top: baking potato(81.8), baking potatoes(81.8), baking powder(81.8)
+  balsamic glaze                      | top: balsamic vinegar of modena(78.3), basil(75.0), & basa(72.7)
+  balsamic vinaigrette                | top: balsamic vinegar of modena(78.8), basil(75.0), & basa(72.7)
+  bean sprouts                        | top: washed ready to cook straight to wok beansprouts(95.7), trimmed brussel sprouts(81.8), lean pork(70.6)
+  beef bouillon cube                  | top: beef(100.0), ice cubes(71.4), beef kebabs(70.6)
+  beef chuck roast                    | top: beef(100.0), beef roasting 30 day matured(76.9), beef roasting 21 day matured(76.9)
+  beet                                | top: beetroot(100.0), beetroot, red cabbage(100.0), pickled beetroot(100.0)
+  beet hummus                         | top: beef(85.7), beetroot(66.7), sweet(66.7)
+  beets                               | top: beetroot(88.9), beetroot, red cabbage(88.9), veggie worms sweets(88.9)
+  beyond meat spicy italian sausage   | top: sausages(93.3), ultimate sausages(75.9), apple sausages(75.0)
+  blood orange                        | top: oranges(92.3), pressed orange(80.0), rosorange(80.0)
+  blue cheese                         | top: beef double cheese burgers 4 pack(90.9), bacon double cheese burgers 4 pack(90.9), garlic herbs roule cheese(90.0)
+  blue cheese dressing                | top: four cheese(72.7), house salad dressing(71.0), beef double cheese burgers 4 pack(70.0)
+  bocconcini                          | top: broccoli(76.9), corn(75.0), choc minis(70.6)
+  bouillon cube                       | top: ice cubes(71.4), cucumber(66.7), beef(66.7)
+  bourbon whisky                      | top: bourbon creams(72.7), kiwis(60.0), crispy(60.0)
+  bowtie pasta                        | top: spaghetti pasta(80.0), penne pasta(77.8), pastrami(76.9)
+  bread                               | top: hot honey breaded tenders(100.0), breaded chicken 6 pack(100.0), breaded chicken tenders(100.0)
+  bread crumbs                        | top: salmon watercress topped with crunchy breadcrumbs(95.7), natural breadcrumbs(95.7), golden breadcrumbs(95.7)
+  breakfast sandwich bun              | top: breakfast hash browns 10 pack(73.7), honey chocolate chip breakfast biscuits(65.0), bran flakes(63.2)
+  breakfast sausage                   | top: sausages(93.3), breakfast hash browns 10 pack(80.0), bockwurst sausages(75.9)
+  brown sugar                         | top: tropical blast zero sugar(84.2), orange zero sugar(84.2), zx cherry cola zero sugar(84.2)
+  brussels sprout                     | top: trimmed brussel sprouts(93.3), smooth brussels pâté(78.6), brussel shallot pâté(75.0)
+  brussels sprouts                    | top: trimmed brussel sprouts(96.8), smooth brussels pâté(75.9), brussel shallot pâté(72.0)
+  buffalo sauce                       | top: soy sauce(87.5), apple sauce(80.0), bbq sauce(80.0)
+  butter lettuce                      | top: buttery(92.3), iceberg lettuce(84.6), romaine lettuce(78.3)
+  buttermilk powder                   | top: buttery(92.3), buttermilk chicken tenders(78.6), buttermilk chicken 2 pack(78.6)
+  cabbage carrot mix                  | top: carrots(85.7), red cabbage(77.8), savoy cabbage(70.0)
+  cabbage leaves                      | top: peas, cabbage(81.5), red cabbage(77.8), bay leaf(75.0)
+  cacao                               | top: gluten free coconut macaroons(80.0), jamaica cake(80.0), macaroni pasta(80.0)
+  cacao nib                           | top: macaroni pasta(70.6), avocado(66.7), cod(66.7)
+  cacao nibs                          | top: avocado(66.7), cod(66.7), gluten free coconut macaroons(66.7)
+  cacao powder                        | top: cocoa powder(83.3), garam malasa powder(81.8), baking powder(73.7)
+  cane sugar                          | top: demerara sugar(82.4), less sugar(82.4), zero sugar(82.4)
+  canned black beans                  | top: pecans(80.0), black beans/green lentils(75.9), peanuts(72.7)
+  canned diced fire roasted tomatoes  | top: salad tomatoes(83.3), marinated tomatoes(82.4), plum tomatoes(81.8)
+  canned diced tomatoes               | top: sundried tomatoes(83.9), salad tomatoes(83.3), plum tomatoes(81.8)
+  canned green chiles                 | top: red chillies(78.3), limes(75.0), leeks(75.0)
+  canola oil                          | top: cola ice coolers(75.0), strawberry granola top protein(70.0), vanilla granola top protein(70.0)
+  cantaloupe                          | top: pie(80.0), picanha(66.7), pecans(66.7)
+  capers                              | top: pears(88.9), white seedless grapes(80.0), mixed seedless grapes(80.0)
+  cassava flour                       | top: plain flour(77.8), cornflour(71.4), ss flavoured salads, chilli cheese p(69.6)
+  cassava flour tortillas             | top: deltas chilli flavour tortilla chips(69.8), pecans(66.7), plain flour(63.6)
+  cassava tortilla                    | top: lightly salted tortilla chips(68.8), deltas cool tortilla chips(68.8), deltas tangy cheese tortilla chips(68.8)
+  cavatappi pasta                     | top: pastrami(76.9), pepperoni pasta(75.0), fusili pasta(73.7)
+  chard                               | top: chargrilled pulled chicken(88.9), chargrilled chicken caesar salad(88.9), hard goats' cheese(88.9)
+  cheese tortellini                   | top: cheese thins(80.0), cherries(76.9), deltas tangy cheese tortilla chips(76.5)
+  chex cereal                         | top: crisp rice cereal(90.0), low sugar choco rice cereal(90.0), fruit fibre cereal(84.2)
+  chia seed                           | top: whole chia seeds(100.0), white seedless grapes(77.8), white seedless grapes snack pack(77.8)
+  chia seeds                          | top: whole chia seeds(100.0), pumpkin seeds(77.8), pomegranate seeds(75.0)
+  chicken bouillon seasoning          | top: chicken(100.0), cajun seasoning(84.6), chicken, bacon(83.3)
+  chickpea pasta                      | top: chickpeas(94.1), chicken(85.7), chicken paste(84.6)
+  chili flakes                        | top: chilli flavour soba noodles pot(81.8), bran flakes(77.8), hake(75.0)
+  chili oil                           | top: chilli infused olive oil(82.4), the ultimate honey chilli pork sausages(77.8), ginger, chilli lime infused salmon 2 pack(77.8)
+  chili paste                         | top: fusili pasta(80.0), gnocchi pasta(80.0), chilli sweetcorn parcels(76.2)
+  chili seasoning                     | top: peri peri seasoning(84.6), chicken seasoning(81.2), mediterranean chicken seasoning(80.0)
+  chipotle pepper in adobo sauce      | top: soy sauce(87.5), bbq sauce(82.4), red pepper(80.0)
+  chipotle powder                     | top: chilli powder(78.6), chipotle feta bakes 2 pack(76.9), chipotle chicken(75.0)
+  chives                              | top: double gloucester cheese with onion chive(90.9), chive cheese(90.9), chive starry night mix(90.9)
+  chocolate nut butter                | top: buttery(92.3), chocolate rolls(80.0), dark chocolate butter biscuits(80.0)
+  chuck roast                         | top: yeast(75.0), chicken(66.7), cut rosemary(66.7)
+  chuck roast beef                    | top: beef(100.0), chicken breast(72.0), beef roasting(69.0)
+  clementine                          | top: lemon(80.0), ginger(66.7), lemons(66.7)
+  clove                               | top: closed cup mushrooms(80.0), chocolate covered frozen strawberries(80.0), chocolate covered frozen raspberries(80.0)
+  cloves                              | top: closed cup mushrooms(80.0), walnut halves(80.0), coleslaw(72.7)
+  coconut brown sugar                 | top: brown soft sugar(81.5), cod(80.0), coconut milk(80.0)
+  coconut butter                      | top: buttery(92.3), smooth peanut butter(83.3), crunchy peanut butter(83.3)
+  coconut cream                       | top: coconut greek style yogurt(83.3), coconut chilli chicken ramen bowl(81.8), sour cream(80.0)
+  coconut flakes                      | top: coconut milk(83.3), cod(80.0), corn flakes cereal(80.0)
+  coconut flour                       | top: coconut milk(81.8), cod(80.0), coconut greek style yogurt(78.3)
+  coconut sugar                       | top: coconut greek style yogurt(87.0), cod(80.0), coconut milk(80.0)
+  coconut vinegar                     | top: malt vinegar(85.7), coconut milk(81.8), coconut vanilla greek style yogurt 4 pack(80.0)
+  coffee                              | top: espresso macchiato coffee(100.0), protein latte coffee(100.0), protein caramel coffee(100.0)
+  cojita cheese                       | top: broccoli cheese(83.3), flavoured pork burgers west co cheese(81.8), barrel aged feta cheese(81.8)
+  collagen                            | top: cod(80.0), coleslaw(76.9), pesto alla genovese(75.0)
+  collagen peptides                   | top: cod(80.0), coleslaw(76.9), cottage pie(72.7)
+  collagen powder                     | top: cod(80.0), coleslaw(76.9), baking powder(76.2)
+  collard greens                      | top: cod(80.0), coleslaw(76.9), spring greens(72.7)
+  confectioner's erythritol           | top: corn(85.7), cod(80.0), confectionery 6 pack(75.0)
+  cooking oil spray                   | top: cod(80.0), spray olive oil(68.8), corn(66.7)
+  cooking spray                       | top: cod(80.0), hot chilli con carne cooking sauce(76.9), mild chilli con carne cooking sauce(76.9)
+  corn on the cob                     | top: corn(100.0), corn cobs(80.0), cod(80.0)
+  corn tortilla                       | top: corn(100.0), deltas cool tortilla chips(84.6), deltas chilli flavour tortilla chips(84.6)
+  corn tortillas                      | top: corn(100.0), cod(80.0), deltas cool tortilla chips(78.6)
+  cornstarch                          | top: corn(100.0), cod(80.0), corn cobs(71.4)
+  crackers                            | top: lightly salted savoury crackers(100.0), cream crackers(100.0), multigrain crackers(100.0)
+  cranberry sauce                     | top: curry sauce(90.0), soy sauce(87.5), strawberry sauce gateau(86.7)
+  cremini mushroom                    | top: mushrooms(94.1), flat mushrooms(78.3), pasta & sauce chicken & mushroom(77.4)
+  croutons                            | top: gluten free coconut macaroons(80.0), trimmed brussel sprouts(76.9), washed ready to cook straight to wok beansprouts(76.9)
+  dairy free milk                     | top: lactose free milk(80.0), dairy milk(80.0), spanish inspired air fryer bites(66.7)
+  dairy free yogurt                   | top: greek yoghurt(87.0), toffee yogurt(83.3), cherry fruit yogurt(75.0)
+  date                                | top: pitted dates(100.0), white chocolate(85.7), craze milk chocolate(85.7)
+  date syrup                          | top: golden syrup(84.2), maple syrup(82.4), peach slices in a syrup(82.4)
+  dates                               | top: pitted dates(100.0), sweet potatoes(80.0), plum tomatoes(80.0)
+  diced tomato                        | top: sundried tomatoes(91.7), sun-dried tomato stir-in pasta sauce(91.7), sun-dried tomato pesto(91.7)
+  dill                                | top: cheese dill salmon wellington(100.0), pork loin medallions(75.0), lean pork loin medallions(75.0)
+  dressing                            | top: caeser salad dressing(100.0), honey mustard salad dressing(100.0), house salad dressing(100.0)
+  dried apple rings                   | top: apple(100.0), apples(83.3), pineapple(77.8)
+  dried apricots                      | top: dried prunes(76.2), apricot jam(73.7), carrots(72.7)
+  dried chives                        | top: red chillies(78.3), southern fried chicken 6 pack(75.0), southern fried chicken tenders(75.0)
+  dried fruit medley                  | top: dried prunes(76.2), melon medley(73.7), red fruits yogurt 6 pack(73.3)
+  dried goji berries                  | top: cherries(85.7), blueberries(77.8), raspberries(77.8)
+  dried onion                         | top: caramelised red onion red leicester beef burgers(90.9), caramelised red onion flavoured pork burgers(90.9), caramelised red onion(90.9)
+  dried oregano                       | top: dried prunes(76.2), mango(75.0), sundried tomatoes(69.2)
+  dried sage                          | top: red seedless grapes snack pack(75.0), dried prunes(75.0), dried black peppercorn grinder(75.0)
+  duck fat                            | top: duck bao buns 6 pack(80.0), duck chicken sushi selection(76.9), duck orange pâté(76.9)
+  edamame                             | top: unsmoked gammon typically(71.4), unsmoked gammon(71.4), unsmoked gammon 2 pack(71.4)
+  egg replacer                        | top: celery(66.7), eggs 6 pack(66.7), pickled onion rocket racers(66.7)
+  egg white                           | top: mature white cheddar cheese(77.8), spinach pepper egg bites(77.8), cheese bacon egg bites(77.8)
+  egg whites                          | top: bites(88.9), spinach pepper egg bites(84.2), cheese bacon egg bites(84.2)
+  eggnog                              | top: egg noodles(83.3), protein egg noodles(83.3), eggs 6 pack(66.7)
+  eggplant                            | top: parmigiano reggiano(66.7), plain toasting egg waffles(66.7), peanuts(66.7)
+  elbow pasta                         | top: tagliatelle pasta(77.8), mezzelune pasta(77.8), pesto style pasta(77.8)
+  enchilada sauce                     | top: bbq sauce(80.0), soy sauce(80.0), satay sauce(80.0)
+  endive                              | top: tenderstem broccoli(72.7), denver(72.7), individual cheddar(72.7)
+  erythritol                          | top: strawberry trifle(70.0), strawberry trifles 3 pack(70.0), raspberry trifles 3 pack(70.0)
+  everything bagel seasoning          | top: denver(80.0), cajun seasoning(80.0), thigh(80.0)
+  extra firm tofu                     | top: tofu(100.0), super firm tofu(88.9), extra mature cheddar cheese(72.0)
+  fajita seasoning                    | top: cajun seasoning(84.6), fajita kit(82.4), peri peri seasoning(81.5)
+  farro                               | top: washed ready to cook carrot batons(80.0), carrots(80.0), chantenay carrots(80.0)
+  fennel                              | top: green pea penne(80.0), finely wiltshire ham(72.7), penne pasta(72.7)
+  fennel seed                         | top: wholemeal seeded loaf(72.7), flaxseed(71.4), swede(66.7)
+  fenugreek                           | top: coconut greek style yogurt(77.8), protein greek style kebabs with tzatziki dip(77.8), leeks(75.0)
+  fire roasted tomatoes               | top: salad tomatoes(83.3), marinated tomatoes(82.4), plum tomatoes(81.8)
+  fire roasted tomatoes with chiles   | top: salad tomatoes(78.6), marinated tomatoes(77.8), limes(75.0)
+  fire-roasted tomatoes with green chilies | top: limes(88.9), red chillies(83.3), salad tomatoes(78.6)
+  fish sauce                          | top: horseradish sauce(94.7), fish snacking sushi pack(84.2), salmon in teriyaki sauce(82.4)
+  five-spice powder                   | top: cocoa powder(76.2), curry powder(76.2), chilli powder(72.7)
+  flank steak                         | top: beef sirloin steak(77.8), beef salt dry aged sirloin steak(77.8), scotch beef salt dry aged sirloin steak(77.8)
+  flax                                | top: flaxseed(100.0), flavoured pork burgers west co cheese(85.7), flat mushrooms(85.7)
+  flax meal                           | top: oriental noodle meal(75.0), flame grilled beef burger(71.4), chicken chorizo paella rice meal(71.4)
+  flour                               | top: plain flour(100.0), self raising flour(100.0), strong white bread flour(100.0)
+  food coloring                       | top: corn(75.0), ginger(66.7), oranges(66.7)
+  freeze dried blueberry              | top: blueberries(80.0), frozen blueberries(75.0), blueberry fruit(75.0)
+  freeze-dried berries                | top: cherries(85.7), blueberries(77.8), raspberries(77.8)
+  fresh herbs                         | top: cornichons with herbs(77.8), mixed herbs(73.7), italian mixed herbs(73.7)
+  garbanzo beans                      | top: pecans(80.0), peanuts(72.7), green beans(72.0)
+  garlic-chili sauce                  | top: garlic(100.0), lime sauce(88.9), mint sauce(82.4)
+  ghee                                | top: flavoured pork burgers west co cheese(75.0), green beans(75.0), spring greens(75.0)
+  gluten free all purpose flour       | top: glutenfree fusilli(78.8), gluten free spaghetti(76.5), cornflour(71.4)
+  gluten free bread                   | top: gluten free coconut macaroons(82.8), gluten free spaghetti(82.8), glutenfree fusilli(78.6)
+  gluten free breadcrumbs             | top: golden breadcrumbs(83.9), panko breadcrumbs(82.8), natural breadcrumbs(77.4)
+  gluten free flour                   | top: glutenfree fusilli(86.7), gluten free coconut macaroons(83.9), gluten free spaghetti(82.8)
+  gluten free flour blend             | top: glutenfree fusilli(81.2), beef(75.0), gluten free spaghetti(72.7)
+  gluten free sourdough bread         | top: white bread(77.8), glutenfree fusilli(77.4), sourdough mix(76.9)
+  gluten-free all purpose flour       | top: glutenfree fusilli(78.8), cornflour(71.4), plain flour(70.6)
+  gluten-free breadcrumbs             | top: golden breadcrumbs(83.9), panko breadcrumbs(82.8), natural breadcrumbs(77.4)
+  gluten-free flour                   | top: glutenfree fusilli(86.7), gluten free coconut macaroons(77.4), gluten free spaghetti(75.9)
+  goat cheese                         | top: mature coconut oil based vegan cheese(85.7), mature cocnut oil based vegan cheese(85.7), flavoured pork burgers west co cheese(84.2)
+  gold potato                         | top: potatoes(85.7), baking potato(84.2), mashed potato(84.2)
+  graham cracker                      | top: cream crackers(83.3), multigrain crackers(78.6), wheat multigrain crackers(78.6)
+  granola                             | top: strawberry granola top protein(100.0), vanilla granola top protein(100.0), honey granola bars 5 pack(100.0)
+  grape                               | top: red grapefruit(100.0), white seedless grapes(100.0), mixed seedless grapes(100.0)
+  grape tomato                        | top: paprika, tomato(76.2), vine ripened tomatoes(75.0), san marzano tomatoes(75.0)
+  grape tomatoes                      | top: plum tomatoes(83.3), regal vine tomatoes(83.3), marinated tomatoes(81.5)
+  grapes                              | top: white seedless grapes(100.0), mixed seedless grapes(100.0), seedless red grapes(100.0)
+  grapeseed oil                       | top: rapeseed oil(100.0), slightly salted spreadable butter blended with rapeseed oil(96.0), lighter spreadable butter blended with rapeseed oil(96.0)
+  greek dressing                      | top: caeser salad dressing(78.3), honey mustard salad dressing(78.3), house salad dressing(78.3)
+  green chiles                        | top: red chillies(78.3), limes(75.0), leeks(75.0)
+  green food coloring                 | top: corn(75.0), green beans(70.6), greek feta(70.6)
+  green grapes                        | top: seedless red grapes(81.8), seedless sable grapes(80.0), apples(80.0)
+  green olive                         | top: pitted green olives with cheddar(100.0), green beans(73.7), green goddess air fryer bites(73.7)
+  green olives                        | top: pitted green olives with cheddar(100.0), limes(80.0), lemon herb olives(76.2)
+  green pepper                        | top: red pepper(84.2), green pea penne(83.3), red pepper houmous(81.8)
+  green plantain                      | top: green beans(76.2), black beans/green lentils(74.1), green pea penne(71.4)
+  ground chipotle chile pepper        | top: ground(100.0), red pepper(88.9), chipotle chicken(81.2)
+  gruyere cheese                      | top: four cheese(80.0), chive cheese(80.0), cauliflower cheese(78.3)
+  guacamole                           | top: lamb leg(61.5), garlic(60.0), apple(60.0)
+  half and half                       | top: salt and chilli chicken(69.2), salt and chilli hot chicken wings(69.2), salt and chilli ribs(69.2)
+  halloumi                            | top: shallots(76.9), cumin(75.0), echalion shallots(66.7)
+  halloumi cheese                     | top: four cheese(81.8), chive cheese(80.0), shallots(76.9)
+  hazelnut                            | top: chocolate hazelnut tiramisu 2 pack(100.0), spirals hazelnut 7 pack(100.0), hazelnut crisp milk chocolate sticks 11 pack(100.0)
+  heavy cream                         | top: single cream(77.8), double cream(77.8), sour cream(75.0)
+  hemp hearts                         | top: pears(80.0), carrots(72.7), ripen at home pears(66.7)
+  hemp protein                        | top: strawberry granola top protein(85.7), vanilla granola top protein(85.7), garlic herb protein chicken poppers 5 pack(83.3)
+  hemp seeds                          | top: pomegranate seeds(82.4), sesame seeds(82.4), sunflower seeds(77.8)
+  herb sprigs                         | top: lemon herb peri peri chicken wings(72.7), garlic herb protein chicken poppers 5 pack(72.7), lemon & herb peri peri sauce & marinade(72.7)
+  herbs                               | top: garlic herbs roule cheese(100.0), soft cheese garlic herbs(100.0), chunky tomatoes with herbs in tomato juice(100.0)
+  hot sauce                           | top: high protein king prawns in a creamy pesto sauce(87.5), mackerel in tomato sauce(87.5), mint sauce(87.5)
+  hummus                              | top: red pepper houmous(72.7), caramelised onion houmous(72.7), sweet chilli houmous(72.7)
+  italian dressing                    | top: caeser salad dressing(82.8), honey mustard salad dressing(82.8), house salad dressing(82.8)
+  italian sausage                     | top: sausages(93.3), italian meat(81.8), bacon garlic cocktail sausage(81.5)
+  jackfruit                           | top: red grapefruit(71.4), fruit yogurt squidgy pouches 4 pack(71.4), fruity moroccan inspired couscous(71.4)
+  jalapeño                            | top: jalapeño chilli jam(100.0), fully loaded jalapeño peanuts(100.0), jalapeno beef burgers(87.5)
+  jasmine rice                        | top: ready-to-heat sticky jasmine rice(100.0), easy cook long grain rice(80.0), special wholegrain rice(80.0)
+  jerky                               | top: beef jerky(100.0), honey beef jerky(100.0), jerk chicken(88.9)
+  jumbo pasta shells                  | top: shallots(71.4), & basa(66.7), smooth tomato pasta sauce(64.7)
+  kabocha squash                      | top: radish(66.7), butternut squash(66.7), spicy butternut squash(66.7)
+  kalamata olives                     | top: limes(80.0), tomato olive stir through sauce(69.0), salad(66.7)
+  kale                                | top: scottish kale(100.0), ginger ale(85.7), seedless sable grapes(75.0)
+  ketchup                             | top: sugar ketchup(100.0), tomato ketchup(100.0), salt tomato ketchup(100.0)
+  kimchi                              | top: chicken wings(66.7), chicken breast(66.7), chicken legs(66.7)
+  korean chili paste                  | top: chicken paste(77.4), fusili pasta(76.2), beef paste(75.0)
+  lemon herb dressing                 | top: lemon(100.0), lemons(90.9), lemon herb olives(81.2)
+  lemon herb seasoning                | top: lemon(100.0), lemons(90.9), garlic herb seasoning(85.7)
+  lemon pepper                        | top: lemon pepper smoked salmon(100.0), lemon(100.0), lemons(90.9)
+  lemon pepper seasoning              | top: lemon(100.0), lemons(90.9), salt pepper seasoning(89.5)
+  lemon-herb dressing                 | top: lemon(100.0), lemons(90.9), lemonade(76.9)
+  lemongrass                          | top: lemon(100.0), lemons(90.9), lemon greek style yogurt 4 pack(77.8)
+  lettuce                             | top: iceberg lettuce(100.0), little gem lettuce 2 pack(100.0), romaine lettuce(100.0)
+  lime juice                          | top: limes(88.9), apple juice(88.9), pressed apple juice(88.9)
+  liquid egg white                    | top: bites(75.0), pie(66.7), white fish(66.7)
+  liquid egg whites                   | top: bites(88.9), white fish(75.0), white rolls(70.6)
+  liquid smoke                        | top: pork dry cured unsmoked back bacon 8 pack(66.7), mild delicate smoked salmon(66.7), pork dry cured unsmoked streaky bacon 14 pack(66.7)
+  liquid stevia                       | top: lean beef ground steak(63.6), scotch beef lean ground steak(63.6), beef lean ground steak(63.6)
+  macadamia nuts                      | top: macadamias(94.7), mixed nuts(77.8), peanuts(76.9)
+  macaroni and cheese                 | top: macaroni pasta(83.3), mascarpone(82.4), four cheese(77.8)
+  mandarin orange segments            | top: oranges(85.7), mandarin oranges in juice(80.0), mango(75.0)
+  maple extract                       | top: madagascan vanilla extract(81.8), apple(80.0), mighty yeast extract(76.2)
+  marinara sauce                      | top: tartare sauce(81.8), bbq sauce(80.0), soy sauce(80.0)
+  marsala wine                        | top: salad(80.0), hot chicken tikka masala with pilau rice(75.0), chicken tikka masala with pilau rice(75.0)
+  masa harina                         | top: marinated tomatoes(70.6), safari snacks 7 pack(66.7), quinoa(66.7)
+  medjool dates                       | top: bites(75.0), potatoes(66.7), pitted dates(66.7)
+  microgreens                         | top: green beans(70.6), spring greens(70.6), lemons(66.7)
+  mint extract                        | top: mighty yeast extract(85.7), madagascan vanilla extract(80.0), original extra thick cream(75.0)
+  mixed fruit                         | top: twisted fruits zero sugar 6 pack(81.8), twisted fruits(81.8), red fruits yogurt 6 pack(80.0)
+  mixed greens                        | top: pitted green(80.0), mixed seedless grapes(76.2), pitted green olives with cheddar(75.0)
+  molasses                            | top: strawberry mousse(71.4), chocolate flavour protein mousse(71.4), salted caramel flavour protein mousse(71.4)
+  monk fruit                          | top: dragonfruit(82.4), passion fruit yogurt(80.0), peach & passion fruit thick & creamy yogurt 4 pack(80.0)
+  monk fruit sweetener                | top: sweet(100.0), swede(80.0), denver(80.0)
+  monkfruit sweetener                 | top: sweet(100.0), swede(80.0), denver(80.0)
+  mulberries                          | top: cherries(85.7), blueberries(84.2), frozen blueberries(84.2)
+  mushroom q-cups                     | top: mushrooms(94.1), button mushrooms(75.0), chestnut mushrooms(75.0)
+  mustard                             | top: mustard sauce(100.0), wholegrain mustard(100.0), english mustard(100.0)
+  mustard powder                      | top: garam malasa powder(78.3), mustard sauce(76.2), curry powder(76.2)
+  napa cabbage                        | top: red cabbage(84.2), savoy cabbage(80.0), sweetheart cabbage(80.0)
+  nut butter                          | top: smooth peanut butter(100.0), crunchy peanut butter(100.0), creamy peanut butter(100.0)
+  nutmeg                              | top: chestnut mushrooms(66.7), mango coconut marinated chicken breast sizzlers(66.7), pine nut girasoli(66.7)
+  nutritional yeast                   | top: yeast(100.0), traditional cornish clotted cream(69.0), pears(66.7)
+  oat bran                            | top: washed ready to cook carrot batons(75.0), barista style oat drink(75.0), no sugars oat drink(75.0)
+  oat flour                           | top: strong white bread flour(82.4), plain flour(80.0), self raising flour(80.0)
+  oat milk                            | top: skimmed uht milk(85.7), semi skimmed uht milk(85.7), coconut milk(85.7)
+  oat milk powder                     | top: chilli powder(78.3), baking powder(76.2), cocoa powder(73.7)
+  oats                                | top: french goats' cheese(100.0), hard goats' cheese(100.0), porridge oats(100.0)
+  oil                                 | top: slightly salted spreadable butter blended with rapeseed oil(100.0), lighter spreadable butter blended with rapeseed oil(100.0), mature coconut oil based vegan cheese block(100.0)
+  oil spray                           | top: spray olive oil(75.0), spray sunflower oil(71.4), pil pil prawns(66.7)
+  okra                                | top: oranges(85.7), orange ice coolers(85.7), orange blossom squeezy honey(85.7)
+  olives                              | top: lemon herb olives(100.0), chilli garlic olives(100.0), black olives with feta(100.0)
+  onion powder                        | top: baking powder(81.8), onion deli filler(80.0), chilli powder(80.0)
+  onion soup mix                      | top: red onions(70.6), onion stuffed whole chicken(69.6), spaghetti bolognese seasoning mix(69.6)
+  oregano                             | top: basil oregano passata rustica(100.0), korean gochujang marinated pork belly slices(76.9), korean bbq marinated shoulder(76.9)
+  orzo                                | top: ready to roast mediterranean style vegetables(75.0), chicken chorizo kebabs 4 pack(75.0), chicken chorizo kebabs(75.0)
+  orzo pasta                          | top: pepperoni pasta(80.0), macaroni pasta(80.0), chunky mushroom pasta sauce(80.0)
+  oyster sauce                        | top: bbq sauce(80.0), dark soy sauce(80.0), soy sauce(80.0)
+  palm sugar                          | top: demerara sugar(82.4), less sugar(77.8), icing sugar(75.0)
+  palmini noodles                     | top: rice noodles(85.7), egg noodles(84.2), chicken flavour instant noodles(76.9)
+  pancake mix                         | top: seed mix(76.9), hake(75.0), crispy aromatic half duck with pancakes(73.7)
+  pasta                               | top: fusili pasta(100.0), gnocchi pasta(100.0), tagliatelle pasta(100.0)
+  pea pods                            | top: pie(80.0), pea shoot salad(76.9), pears(75.0)
+  pepitas                             | top: pie(80.0), petits pois(76.9), sugar snap peas(72.7)
+  peppercorns                         | top: corn(100.0), rainbow peppercorns(100.0), whole black peppercorns(100.0)
+  pepperoncini juice                  | top: pie(80.0), hot pepperoni(78.3), spicy pepperoni slices(76.5)
+  pepperoncini peppers                | top: pears(88.9), mixed peppers(81.8), pie(80.0)
+  persimmon                           | top: pears(88.9), gammon(80.0), pie(80.0)
+  pickle                              | top: cheddar with pickled onion cheese(100.0), pickled pink onions(100.0), pickled onion rocket racers(100.0)
+  pickles                             | top: pickled pink onions(92.3), pickled onion rocket racers(92.3), pickled beetroot(92.3)
+  pico de gallo                       | top: pie(80.0), shallots(66.7), cod(66.7)
+  pie crust                           | top: pie(100.0), the great crusty tiger bloomer(77.8), pine nut girasoli(70.6)
+  pinto beans                         | top: pie(80.0), pecans(80.0), green beans(77.8)
+  pistachios                          | top: roasted salted pistachios(100.0), raspberry pistachio summer chouxnuts 2 pack(90.0), pie(80.0)
+  pita                                | top: italian style salad(85.7), italian style chicken chipolatas 10 pack(85.7), italian milano salami(85.7)
+  pita bread                          | top: white pitta bread(90.0), white bread(84.2), pie(80.0)
+  pizza dough                         | top: pie(80.0), part baked bloomer with sourdough(62.5), protein sourdough(62.5)
+  pizza sauce                         | top: pie(80.0), bbq sauce(80.0), soy sauce(80.0)
+  plant based milk                    | top: milk chocolate malted milk biscuits(75.0), seed mix(75.0), dairy milk(75.0)
+  plant-based milk                    | top: seed mix(75.0), dairy milk(75.0), milk chocolate malted milk biscuits(68.8)
+  plant-based shredded cheese         | top: cheddar cheese(78.6), four cheese(77.8), chive cheese(76.2)
+  plantain                            | top: plain cottage cheese(76.9), plain soya pot(76.9), plain chicken(76.9)
+  plantain chips                      | top: banana chips(83.3), cut chips(80.0), skin on beef dripping chips(75.0)
+  poblano pepper                      | top: black pepper(83.3), red pepper(82.4), cheddar cheese with black pepper(76.9)
+  polenta                             | top: potatoes(72.7), potatoes mashed potato(72.7), potato au gratin(72.7)
+  poppy seeds                         | top: pomegranate seeds(70.6), pumpkin seeds(70.6), sunflower seeds(70.6)
+  pork breakfast sausage              | top: sausages(93.3), pork ham(76.9), pork lard(75.0)
+  pork rinds                          | top: slow bbq pork ribs(84.2), teriyaki pork ribs(84.2), mexican pork ribs(84.2)
+  pork tenderloin                     | top: pork ham(76.9), pork loin medallions(75.0), chinese marinated pork loin(75.0)
+  portobello mushroom                 | top: mushrooms(94.1), flat mushrooms(80.0), button mushrooms(76.9)
+  potato chips                        | top: potatoes(85.7), bbq beef flavour potato hoops 6 pack(83.3), salt vinegar flavour potato hoops 6 pack(83.3)
+  poultry seasoning                   | top: salt pepper seasoning(80.0), cajun seasoning(80.0), peri peri seasoning(77.4)
+  powdered coconut sugar              | top: coconut water(76.9), corn(75.0), less sugar(75.0)
+  powdered erythritol                 | top: celery(66.7), cod(66.7), cocoa powder(66.7)
+  powdered sugar                      | top: zero sugar(80.0), less sugar(77.8), caster sugar(72.7)
+  pretzels                            | top: chive baked pretzels 6 pack(100.0), salted baked pretzels 6 pack(100.0), easy peelers(66.7)
+  prosciutto                          | top: italian proscuitto(90.0), pears(66.7), roast topside of beef(66.7)
+  protein powder                      | top: chicken bacon protein poppers 5 pack(85.7), protein peach(81.8), baking powder(81.8)
+  provolone                           | top: cavolo nero(66.7), lemonade(66.7), lemon(66.7)
+  provolone cheese                    | top: chive cheese(80.0), garlic herbs roule cheese(78.6), pineapple almond roule cheese(78.6)
+  psyllium husk                       | top: limes(60.0), parsley(60.0), sweet chilli houmous(58.3)
+  pumpkin mustard                     | top: dijon mustard(87.0), wholegrain mustard(80.0), pumpkin seeds(76.2)
+  pumpkin puree                       | top: pumpkin seeds(83.3), special quinoa, pumpkin(70.0), ginger purée(70.0)
+  pumpkin spice liquid monk fruit sweetener | top: sweet(100.0), pumpkin seeds(81.8), swede(80.0)
+  purple onion                        | top: red onions(82.4), lemon(80.0), caramelised red onion(76.2)
+  ramen noodles                       | top: protein singapore noodles(87.0), korean style chicken noodles(87.0), egg noodles(85.7)
+  ranch                               | top: anchovies in extra virgin olive oil(88.9), tempura chicken bites(80.0), tempura chicken tenders(80.0)
+  ranch dressing                      | top: caeser salad dressing(80.0), honey mustard salad dressing(80.0), house salad dressing(80.0)
+  ranch dressing mix                  | top: french fries(72.7), caeser salad dressing(69.0), honey mustard salad dressing(69.0)
+  ranch seasoning                     | top: mediterranean chicken seasoning(84.6), cajun chicken seasoning(84.6), salt pepper seasoning(84.6)
+  red enchilada sauce                 | top: bbq sauce(80.0), soy sauce(80.0), satay sauce(80.0)
+  red sauce                           | top: mustard sauce(94.1), tartare sauce(94.1), scottish mussels with white wine sauce(87.5)
+  refried beans                       | top: pecans(80.0), whole green beans(78.3), green beans(76.2)
+  rice bran oil                       | top: brown rice(69.6), chicken bacon layered salad(69.2), three bean chilli(69.2)
+  rice paper wrapper                  | top: apple(80.0), pears(75.0), apples(72.7)
+  ricotta                             | top: spinach ricotta tortelloni(100.0), buffalo milk ricotta(100.0), spinach ricotta cannelloni(100.0)
+  roasted red bell peppers            | top: pears(88.9), red pepper(80.0), grilled peppers(80.0)
+  roll                                | top: sausage rolls 6 pack(100.0), sausage rolls 8 pack(100.0), cheese onion rolls 6 pack(100.0)
+  rolled oats                         | top: ready rolled shortcrust pastry(72.7), porridge oats(70.6), red potatoes(70.0)
+  roma tomato                         | top: paprika, tomato(80.0), chicken, tomato(77.8), plum tomatoes(76.2)
+  rotini pasta                        | top: pepperoni pasta(90.9), macaroni pasta(90.9), bucatini pasta di gragnano p.g.i.(83.3)
+  salsa                               | top: salad tomatoes(88.9), salad potatoes(88.9), salad(88.9)
+  salsa verde                         | top: salad(80.0), swede(66.7), salmon(66.7)
+  sambal oelek                        | top: leeks(75.0), salmon(66.7), lamb leg(62.5)
+  seasoned breadcrumbs                | top: golden breadcrumbs(83.9), panko breadcrumbs(82.8), natural breadcrumbs(77.4)
+  seasoned salt                       | top: cashews roasted and salted(76.9), seasonal pears(76.2), sea salt chocolate(76.2)
+  seasoning                           | top: mediterranean chicken seasoning(100.0), cajun chicken seasoning(100.0), garlic herb seasoning(100.0)
+  serrano pepper                      | top: red pepper(82.4), german peppered salami(81.5), rainbow peppercorns(78.6)
+  sesame oil                          | top: sesame bagels 5 pack(82.4), sesame seeds(82.4), slightly salted spreadable butter blended with rapeseed oil(77.8)
+  shredded coconut                    | top: desiccated coconut(76.9), corn(75.0), coconut milk(73.7)
+  shredded unsweetened coconut        | top: sweet(100.0), swede(80.0), corn(75.0)
+  shrimp                              | top: shrimps sweets(100.0), ripen at home plums(66.7), ripen at home pears 5 pack(66.7)
+  skirt steak                         | top: beef steak(75.0), rump steaks(73.7), beef sirloin steak(73.7)
+  sliced almonds                      | top: lemons(83.3), salmon(83.3), flaked almonds(83.3)
+  slivered almonds                    | top: lemons(83.3), salmon(83.3), flaked almonds(83.3)
+  smoked sausage                      | top: sausages(93.3), smashed sausage patty(78.6), smoked salmon slices(78.3)
+  snap peas                           | top: sugar snap peas(100.0), pears(88.9), apple(80.0)
+  snow peas                           | top: pears(88.9), garden peas(80.0), pecans(80.0)
+  soy chorizo                         | top: spanish chorizo(85.7), chargrilled spanish chorizo(85.7), spanish chorizo ring(81.8)
+  special sauce                       | top: apple sauce(84.2), lime sauce(82.4), special coconut rice pouch(81.8)
+  spicy brown mustard                 | top: dijon mustard(83.3), english mustard(75.0), spinach(72.7)
+  spicy italian pork sausage          | top: sausages(93.3), lean pork(88.9), the ultimate pork sausages(75.6)
+  sriracha                            | top: extra smooth houmous with sriracha(100.0), spinach(71.4), watercress spinach(66.7)
+  star anise                          | top: chive starry night mix(70.0), salt vinegar starry night mix(70.0), werther's original butter candies(70.0)
+  stevia extract                      | top: mighty yeast extract(83.3), madagascan vanilla extract(78.3), mighty yeast extract almonds cashews(71.4)
+  stir-fry vegetables                 | top: mixed vegetables(81.5), ready to roast mediterranean style vegetables(80.0), vegetable oil(78.3)
+  sumac                               | top: prosecco spumante docg valdobbiadene(80.0), smash burgers 4 pack(75.0), smash burger(75.0)
+  summer squash                       | top: summer fruits(76.2), butternut squash(72.7), spicy butternut squash(72.7)
+  sun dried tomato                    | top: sundried tomatoes(96.8), sun-dried tomato stir-in pasta sauce(93.8), sun-dried tomato pesto(93.8)
+  sweetener                           | top: sweet(100.0), aspartame sweetener tablets(100.0), stevia sweetener tablets(100.0)
+  swerve                              | top: strawberry conserve(90.9), raspberry conserve(90.9), blackcurrant conserve(90.9)
+  swiss chard                         | top: kiwis(66.7), sicilian lemon swiss roll(66.7), strawberry clotted cream flavour swiss roll(66.7)
+  taco seasoning                      | top: mediterranean chicken seasoning(83.3), cajun chicken seasoning(83.3), garlic herb seasoning(83.3)
+  tahini                              | top: original bagel thins(72.7), high protein bagel thins(72.7), cheese thins(72.7)
+  tamari                              | top: mango coconut marinated chicken breast sizzlers(83.3), maris piper potatoes(80.0), marie rose king prawn cocktail(80.0)
+  tapioca flour                       | top: plain flour(77.8), cornflour(71.4), italian flavoured chicken poppers grazing pack(69.2)
+  tapioca starch                      | top: pie(66.7), spinach(61.5), caesar chicken(60.9)
+  tempeh                              | top: tempura chicken bites(80.0), tempura chicken tenders(80.0), tempura fish burgers(80.0)
+  thai bird chili                     | top: red chillies(80.0), thai red curry kit(72.0), thai red curry paste(72.0)
+  thai chiles                         | top: scotch bonnet chillies(76.2), limes(75.0), leeks(75.0)
+  tomatillo                           | top: paprika, tomato(80.0), chicken, tomato(80.0), tomato feta topped pasta(80.0)
+  toothpick                           | top: thick cut unsmoked back bacon 10 pack(71.4), thick cut back bacon 10 pack(71.4), thick cut big daddy rump steak 30 day matured(71.4)
+  toppings                            | top: beef stew dumplings(71.4), chicken casserole dumplings(71.4), washed ready to cook carrot batons(66.7)
+  tortellini                          | top: spinach ricotta tortelloni(90.0), chicken bacon tortelloni(90.0), spicy sausage tortelloni(90.0)
+  tortilla                            | top: lightly salted tortilla chips(100.0), deltas cool tortilla chips(100.0), deltas tangy cheese tortilla chips(100.0)
+  tortilla chips                      | top: lightly salted tortilla chips(100.0), deltas cool tortilla chips(100.0), deltas tangy cheese tortilla chips(100.0)
+  turkey gravy                        | top: turkey breast(78.3), slow lamb shanks with mint gravy(73.7), ground turkey(72.0)
+  turkey sausage                      | top: sausages(93.3), the ultimate honey chilli pork sausages(80.0), the ultimate pork sausages(80.0)
+  tzatziki sauce                      | top: lime sauce(82.4), mint sauce(82.4), bbq sauce(80.0)
+  unsweetened cacao powder            | top: sweet(100.0), cocoa powder(83.3), swede(80.0)
+  unsweetened chocolate               | top: sweet(100.0), dark chocolate(88.0), milk chocolate(83.3)
+  vanilla bean                        | top: vanilla and strawberry yogurt with biscuit split pots 6 pack(90.9), vanilla granola top protein(83.3), vanilla luxurious dessert(80.0)
+  vanilla extract                     | top: madagascan vanilla extract(100.0), vanilla granola top protein(76.9), vanilla and strawberry yogurt with biscuit split pots 6 pack(75.0)
+  vanilla monk fruit sweetener        | top: sweet(100.0), swede(80.0), denver(80.0)
+  vanilla monkfruit sweetener         | top: sweet(100.0), swede(80.0), denver(80.0)
+  vanilla protein powder              | top: vanilla protein yogurt(85.0), baking powder(81.8), vanilla yogurt(76.9)
+  vegan butter                        | top: buttery(92.3), smooth peanut butter(83.3), crunchy peanut butter(83.3)
+  vegan cheese                        | top: mature coconut oil based vegan cheese block(100.0), mature coconut oil based vegan cheese(100.0), mature cocnut oil based vegan cheese(100.0)
+  vegan parmesan                      | top: chicken, parmesan(84.6), vegan bacon(73.7), vegan melt bakes 2 pack(72.7)
+  vegan protein powder                | top: baking powder(81.8), protein peach(76.9), peri peri chicken protein pot(76.5)
+  vegan ricotta cheese                | top: cottage cheese(92.3), plain cottage cheese(81.1), four cheese(77.8)
+  vegetables                          | top: ready to roast mediterranean style vegetables(100.0), mixed vegetables(100.0), vegetable sushi snack(94.7)
+  walnuts                             | top: walnut cake(92.3), walnut halves(92.3), dry roasted peanuts(83.3)
+  water                               | top: watermelon(100.0), watercress spinach(100.0), & peeled coldwater prawns(100.0)
+  whey protein powder                 | top: baking powder(81.8), protein peach(76.9), chicken katsu curry protein pot(75.0)
+  white cooking wine                  | top: white cooking chocolate(87.5), white wine vinegar(77.8), white onions(76.2)
+  white miso paste                    | top: white fish(84.2), salmon paste(80.0), white onions(76.2)
+  white rice                          | top: long grain white rice(100.0), thai green curry with rice(84.2), chicken curry with rice(84.2)
+  whole grain rice and quinoa         | top: quinoa(100.0), wholegrain rice pouch(84.2), grains(83.3)
+  whole wheat israeli couscous        | top: whole chicken(72.7), garlic(66.7), whole salmon(66.7)
+  wild rice                           | top: wild rocket(82.4), sweet sour chicken with egg fried rice(82.4), beef in black bean sauce with egg fried rice(82.4)
+  wonton wrapper                      | top: apple(80.0), pears(75.0), apples(72.7)
+  worcestershire sauce                | top: lime sauce(84.2), bbq sauce(80.0), soy sauce(80.0)
+  wrap                                | top: rapeseed oil(85.7), red grapefruit(75.0), white seedless grapes(75.0)
+  xanthan gum                         | top: banana(66.7), picanha(61.5), mango(60.0)
+  yellow mustard                      | top: dijon mustard(78.3), wholegrain mustard(72.7), english mustard(72.7)
+  yellow onion                        | top: brown onions(80.0), yellowfin tuna(76.2), red onions(75.0)
+  yellow squash                       | top: yellow peach luxury yogurt(72.0), butternut squash(70.0), yellow fruits yogurt 6 pack(70.0)
+  zoodles                             | top: egg noodles(92.3), protein egg noodles(92.3), rice noodles(92.3)
+  zucchini noodles                    | top: rice noodles(85.7), egg noodles(84.2), korean style chicken noodles(77.4)
+
+======================================================================
+  PL ingredient_db (ingredient_name → original_name | shop | price_per_100)
+======================================================================
+   stewia                             → Stevia słodzik pochodzenia naturalnego z inuliną Zielony listek 140 g | auchan       | 8.9214
+  ananas                              → Ananas                                             | biedronka    | 0.7987
+  arbuz                               → Arbuz Owoce  Auchan na wagę ok. 4 kg               | auchan       | 0.799
+  awokado                             → Awokado Hass 1 szt.                                | biedronka    | —
+  bakłażan                            → BIO Bakłażan Warzywa Auchan 500 g                  | auchan       | 1.998
+  banan                               → Banan                                              | biedronka    | 0.699
+  bazylia                             → Bazylia Auchan sztuka                              | auchan       | 2.796
+  bazylia suszona                     → Bazylia suszona Auchan 10 g                        | auchan       | 12.9
+  bazylia tajska                      → Bazylia Auchan sztuka                              | auchan       | 2.796
+  biała fasola                        → Fasola biała konserwowa Auchan 400 g               | auchan       | 1.2458
+  białko jaja                         → Jaja ekologiczne Pewni Dobrego 10 sztuk            | auchan       | —
+  boczek                              → Boczek wieprzowy bez kości ekstra VAC Auchan na wagę ok. 1 kg | auchan       | 2.098
+  borówka                             → Borówka Amerykańska  Owoce  Auchan 250 g           | auchan       | 5.196
+  borówki                             → Borówki amerykańska Owoce  Auchan 250 g            | auchan       | 5.516
+  brokuly                             → Brokuły różyczki Hortex 450 g                      | auchan       | 2.3067
+  brokuł                              → Brokuł 1 szt.                                      | biedronka    | 1.198
+  brokuły                             → Brokuły różyczki Hortex 450 g                      | auchan       | 2.3067
+  brukselka                           → Brukselka mrożona Auchan 450 g                     | auchan       | 1.2778
+  brzoskwinia                         → Brzoskwinia                                        | biedronka    | 2.0
+  brązowy cukier                      → Cukier trzcinowy Diamant 1 kg                      | auchan       | 0.938
+  brązowy ryż                         → Ryż brązowy długoziarnisty Auchan 4 x 100 g        | auchan       | 0.8225
+  bulion drobiowy                     → Bulion drobiowy bez oleju palmowego Auchan 100 g   | auchan       | 3.49
+  bulion warzywny                     → Winiary Bulion warzywny 160 g                      | biedronka    | 4.8063
+  bulion wolowy                       → Winiary Bulion Drobiowy 160 g                      | biedronka    | 4.8063
+  bulion wołowy                       → Winiary Bulion Drobiowy 160 g                      | biedronka    | 4.8063
+  burak                               → Burak podłużny Warzywa Auchan 800 g                | auchan       | 0.6488
+  buraki                              → Buraki Warzywa Auchan 1 kg                         | auchan       | 0.299
+  bułka                               → Bułka poranna 65 g                                 | biedronka    | 1.2769
+  bułka śniadaniowa                   → Bułka śniadaniowa z ziarnami 80 g                  | biedronka    | 1.6875
+  cebula                              → Cebula Pewni Dobrego 1 kg                          | auchan       | 0.399
+  cebula biała                        → Cebula biała Warzywa Auchan na wagę ok. 500 g      | auchan       | 0.799
+  cebula czerwona                     → Cebula czerwona Warzywa Auchan na wagę ok. 500 g   | auchan       | 0.459
+  cebula granulowana                  → Cebula Pewni Dobrego 1 kg                          | auchan       | 0.399
+  cebula słodka                       → Cebula słodka tuba Warzywa Auchan 600 g            | auchan       | 1.9983
+  cebula w proszku                    → Cebula Pewni Dobrego 1 kg                          | auchan       | 0.399
+  cebula żółta                        → Cebula żółta 1 kg                                  | biedronka    | 0.499
+  chili                               → Chili mieszanka przypraw Kotányi 35 g              | auchan       | 21.8286
+  chleb                               → Chleb pszenny Pewni Dobrego 300 g                  | auchan       | 1.3967
+  chorizo sojowe                      → Chorizo picante extra Pewni Dobrego 280 g          | auchan       | 6.7821
+  ciecierzyca                         → Ciecierzyca Auchan 400 g                           | auchan       | 1.2375
+  cukier                              → Cukier drobny Auchan 750 g                         | auchan       | 1.2653
+  cukier brązowy                      → Cukier drobny Auchan 750 g                         | auchan       | 1.2653
+  cukier kokosowy                     → Cukier drobny Auchan 750 g                         | auchan       | 1.2653
+  cukier palmowy                      → Cukier drobny Auchan 750 g                         | auchan       | 1.2653
+  cukier puder                        → Cukier puder Polski Cukier 500 g                   | auchan       | 1.498
+  cukier trzcinowy                    → Cukier trzcinowy Diamant 1 kg                      | auchan       | 0.938
+  cukinia                             → Cukinia                                            | biedronka    | 1.3
+  curry                               → Kamis Curry 20 g                                   | biedronka    | 12.45
+  curry w proszku                     → Kamis Curry 20 g                                   | biedronka    | 12.45
+  cynamon                             → Cynamon mielony Auchan 15 g                        | auchan       | 8.6
+  cytryna                             → Cytryna 500 g                                      | biedronka    | 0.998
+  czarna fasola                       → Fasola czarna   Dawtona 400 g                      | auchan       | 1.4083
+  czarny sezam                        → Sezam czarny Makar 500 g                           | auchan       | 2.85
+  czekolada                           → BIO Czekolada deserowa Pewni Dobrego 200 g         | auchan       | 7.995
+  czerwona cebula                     → Cebula czerwona Warzywa Auchan na wagę ok. 500 g   | auchan       | 0.459
+  czerwona kapusta                    → Kapusta czerwona Z Babcinej spiżarni 350 g         | auchan       | 2.54
+  czerwona papryka                    → Papryka czerwona                                   | biedronka    | 1.9
+  czerwone winogrona                  → Winogrona Owoce  Auchan na wagę ok. 600 g          | auchan       | 1.999
+  czerwony ziemniak                   → Ziemniaki czerwone Warzywa Auchan 2 kg             | auchan       | 0.3995
+  czosnek                             → Czosnek 250 g                                      | biedronka    | 3.196
+  czosnek granulowany                 → Czosnek granulowany Auchan 500 g                   | auchan       | 3.8
+  czosnek w proszku                   → Czosnek 250 g                                      | biedronka    | 3.196
+  daktyl                              → Daktyle Medijule Jumbo Palma Deluxe 500 g          | auchan       | 6.438
+  daktyle                             → Daktyle Medijule Jumbo Palma Deluxe 500 g          | auchan       | 6.438
+  daktyle medjool                     → Daktyle Medijule Jumbo Palma Deluxe 500 g          | auchan       | 6.438
+  dodatki                             → Dodatki do herbatki Rajski Ogród Orzeszek 80 g     | auchan       | 17.9875
+  dorsz                               → Marinero Dorsz atlantycki polędwica opak. ok. 500 g | biedronka    | 9.99
+  drożdże                             → Drożdże tradycyjne  Drożdże Babuni 100 g           | auchan       | 1.48
+  drożdże suszone                     → Bakello Drożdże suszone instant 8 g                | biedronka    | 12.375
+  dynia                               → Dynia piżmowa                                      | biedronka    | 0.6987
+  dynia kabocha                       → Dynia piżmowa                                      | biedronka    | 0.6987
+  dynia letnia                        → Dynia piżmowa                                      | biedronka    | 0.6987
+  dynia piżmowa                       → Dynia piżmowa                                      | biedronka    | 0.6987
+  dynia spaghetti                     → Dynia piżmowa                                      | biedronka    | 0.6987
+  dynia żółta                         → Dynia piżmowa                                      | biedronka    | 0.6987
+  dziki ryż                           → Ryż długoziarnisty Sollana 1 kg                    | auchan       | 0.999
+  dżem morelowy                       → Dżem morelowy niskosłodzony Łowicz 280 g           | auchan       | 2.4571
+  erytrytol                           → Erytrytol Big Nature 1 kg                          | auchan       | 3.22
+  erytrytol pudrowy                   → Erytrytol Big Nature 1 kg                          | auchan       | 3.22
+  erytrytol w proszku                 → Erytrytol Big Nature 1 kg                          | auchan       | 3.22
+  fasola cannellini                   → Fasola Piękny Jaś  Cenos 400 g                     | auchan       | 2.1975
+  fasola czarna                       → Fasola czarna   Dawtona 400 g                      | auchan       | 1.4083
+  fasola czerwona                     → Fasola czerwona konserwowa Auchan 400 g            | auchan       | 1.2042
+  fasola pinto                        → Fasola Piękny Jaś  Cenos 400 g                     | auchan       | 2.1975
+  fasola refried                      → Fasola Piękny Jaś  Cenos 400 g                     | auchan       | 2.1975
+  fasola smażona                      → Fasola Piękny Jaś  Cenos 400 g                     | auchan       | 2.1975
+  fasolka szparagowa                  → BIO Fasolka szparagowa konserwowa  EkoWital 370 ml | auchan       | 3.3395
+  figi                                → Figi suszone Makar 500 g                           | auchan       | 4.5
+  filet z indyka                      → Kraina Wędlin Serdelki z filetem z indyka 300 g    | biedronka    | 2.4967
+  filet z kurczaka                    → Kraina Mięs Filet z piersi kurczaka                | biedronka    | 2.48
+  fioletowe ziemniaki                 → Ziemniaki sałatkowe Auchan 2 kg                    | auchan       | 0.2495
+  garam masala                        → Garam masala Kotányi 20 g                          | auchan       | 14.4
+  gałka muszkatołowa                  → Gałka muszkatołowa mielona Prymat 10 g             | auchan       | 15.8
+  goździki                            → Goździki mielone Kotányi 15 g                      | auchan       | 15.6
+  goździki mielone                    → Goździki mielone Kotányi 15 g                      | auchan       | 15.6
+  granat                              → Granat                                             | biedronka    | 2.0
+  granola                             → Granola ChocoLove One Day More 400 g               | auchan       | 3.9533
+  groszek                             → Groszek konserwowy Auchan 400 g                    | auchan       | 1.1042
+  groszek cukrowy                     → Groszek cukrowy Auchan 450 g                       | auchan       | 2.2778
+  groszek zielony                     → Groszek zielony Hortex 450 g                       | auchan       | 1.82
+  gruszka                             → Gruszka Owoce  Auchan 1 kg                         | auchan       | 0.699
+  grzyby                              → Grzyby Shitake   Świeże Grzyby SPGJ 200 g          | auchan       | 6.49
+  grzyby portobello                   → Grzyby Shitake   Świeże Grzyby SPGJ 200 g          | auchan       | 6.49
+  grzyby shiitake                     → Grzyby Shiitake całe suszone House of Asia 30 g    | auchan       | 23.9333
+  halloumi                            → Elios Ser halloumi 225 g                           | biedronka    | 5.24
+  harissa                             → Harissa mieszanka przypraw Kotányi 20 g            | auchan       | 11.7
+  imbir                               → Imbir korzeń Owoce  Auchan na wagę ok. 100 g       | auchan       | 2.189
+  imbir mielony                       → Imbir mielony Prymat 15 g                          | auchan       | 10.5333
+  indyk                               → Kraina Wędlin Serdelki z filetem z indyka 300 g    | biedronka    | 2.4967
+  jabłko                              → Jabłko polskie 1,5 kg                              | biedronka    | 0.3993
+  jagody                              → Jagody leśne  Hortex 280 g                         | auchan       | 5.9571
+  jajka                               → Jaja ekologiczne Pewni Dobrego 10 sztuk            | auchan       | —
+  jarmuż                              → Vital Fresh Jarmuż 200 g                           | biedronka    | 3.495
+  jeżyna                              → Jeżyna mrożona Auchan 350 g                        | auchan       | 3.2829
+  jeżyny                              → Jeżyny Owoce  Auchan 125 g                         | auchan       | 12.792
+  jogurt grecki                       → Jogurt naturalny     Auchan 400 g                  | auchan       | 0.6225
+  jogurt naturalny                    → Jogurt naturalny     Auchan 400 g                  | auchan       | 0.6225
+  jogurt roslinny                     → Jogurt naturalny     Auchan 400 g                  | auchan       | 0.6225
+  jogurt roślinny                     → Jogurt naturalny     Auchan 400 g                  | auchan       | 0.6225
+  kakao                               → Bakello Kakao extra ciemne 200 g                   | biedronka    | 5.495
+  kalafior                            → Kalafior                                           | biedronka    | 0.9987
+  kalafior ryżowy                     → Kalafior                                           | biedronka    | 0.9987
+  kapusta                             → Kapusta Kimchi Dongwon 160 g                       | auchan       | 7.4938
+  kapusta biała                       → Kapusta biała                                      | biedronka    | 0.399
+  kapusta czerwona                    → Kapusta czerwona Z Babcinej spiżarni 350 g         | auchan       | 2.54
+  kapusta fioletowa                   → Kapusta Kimchi Dongwon 160 g                       | auchan       | 7.4938
+  kapusta i marchew                   → Marchew                                            | biedronka    | 0.4
+  kapusta pekińska                    → Kapusta Pekińska Warzywa Auchan na wagę ok. 1 kg   | auchan       | 0.449
+  karkówka wołowa                     → Karkówka wieprzowa bez kości rasy Puławskiej MAP Pewni Dobrego na wagę ok. 600 g | auchan       | 3.599
+  kawa                                → Kawa mrożona Hochwald 250 ml                       | auchan       | 2.756
+  ketchup                             → Kotlin Ketchup łagodny 450 g                       | biedronka    | 1.4333
+  kiełbasa                            → Kiełbasa Krakowska Spichlerz Rusiecki 280 g        | auchan       | 3.4964
+  kiełbasa andouille                  → Kiełbasa Krakowska Spichlerz Rusiecki 280 g        | auchan       | 3.4964
+  kiełbasa wegetariańska              → Kiełbasa Krakowska Spichlerz Rusiecki 280 g        | auchan       | 3.4964
+  kiełbasa wieprzowa śniadaniowa      → Śniadaniowa klasyczna Bielmar 450 g                | auchan       | 1.1978
+  kiełbasa wędzona                    → Kiełbasa Krakowska Spichlerz Rusiecki 280 g        | auchan       | 3.4964
+  kiełbasa włoska                     → Kiełbasa Krakowska Spichlerz Rusiecki 280 g        | auchan       | 3.4964
+  kiełbasa z indyka                   → Kiełbasa Krakowska Spichlerz Rusiecki 280 g        | auchan       | 3.4964
+  kiełbasa z kurczaka                 → Kiełbasa Krakowska Spichlerz Rusiecki 280 g        | auchan       | 3.4964
+  kiełbasa śniadaniowa                → Śniadaniowa klasyczna Bielmar 450 g                | auchan       | 1.1978
+  kiełbaski śniadaniowe               → Śniadaniowe z Łukowa 63% Lumiko 270 g              | auchan       | 1.4407
+  kiełki fasoli                       → Kiełki fasoli Mung w zalewie Diamond 330 g         | auchan       | 5.6514
+  kimchi                              → Kimchi Runoland 300 g                              | auchan       | 3.5967
+  kiwi                                → Kiwi 1 szt.                                        | biedronka    | —
+  kmin rzymski                        → Kmin rzymski mielony Kotányi 15 g                  | auchan       | 15.6
+  kmin rzymski mielony                → Kmin rzymski mielony Kotányi 15 g                  | auchan       | 15.6
+  kokos                               → Kokos w łupinie Owoce  Auchan na wagę ok. 400 g    | auchan       | 1.029
+  kolendra                            → Kolendra Auchan sztuka                             | auchan       | 2.796
+  kolendra mielona                    → Kolendra Auchan sztuka                             | auchan       | 2.796
+  komosa ryzowa                       → Quinoa Komosa Ryżowa Intenson 250 g                | auchan       | 3.796
+  komosa ryżowa                       → Quinoa Komosa Ryżowa Intenson 250 g                | auchan       | 3.796
+  koncentrat pomidorowy               → Dawtona Koncentrat pomidorowy 190 g                | biedronka    | 1.8158
+  koperek                             → Kamis Koperek 6 g                                  | biedronka    | 41.5
+  krakersy                            → Top Krakersy solone mix 90 g                       | biedronka    | 2.1
+  krewetki                            → Krewetki koktajlowe blanszowane Auchan 400 g       | auchan       | 8.7475
+  krojone pomidory                    → Pomidory malinowe polskie 500 g                    | biedronka    | 2.598
+  kukurydza                           → Kukurydza konserwowa Auchan 400 g                  | auchan       | 1.4955
+  kukurydza mini                      → Kukurydza konserwowa Auchan 400 g                  | auchan       | 1.4955
+  kukurydza słodka                    → Kukurydza konserwowa słodka Dawtona 400 g          | auchan       | 2.1727
+  kur-kuma                            → Kurkuma korzeń Owoce  Auchan na wagę ok. 100 g     | auchan       | 5.179
+  kurczak                             → Kraina Mięs Filet z piersi kurczaka                | biedronka    | 2.48
+  kurczak fajita                      → Kraina Mięs Select Kurczak farmerski porcja rosołowa z kurczaka kg | biedronka    | 0.9983
+  kurkuma                             → Kurkuma korzeń Owoce  Auchan na wagę ok. 100 g     | auchan       | 5.179
+  limonka                             → Limonka Owoce  Auchan na wagę ok. 300 g            | auchan       | 1.499
+  liofilizowane truskawki             → Liofilizowane truskawki całe  Garden Tree 45 g     | auchan       | 42.2
+  majonez                             → Winiary Majonez lekki 300 ml                       | biedronka    | 2.4967
+  mak                                 → Mak niebieski Auchan 500 g                         | auchan       | 2.298
+  makaron                             → Makaron Pipe Rigate Auchan 500 g                   | auchan       | 0.93
+  makaron angel hair                  → Makaron Pipe Rigate Auchan 500 g                   | auchan       | 0.93
+  makaron bezglutenowy                → Tonnarelli makaron bezglutenowy Incola 250 g       | auchan       | 4.156
+  makaron cavatappi                   → Makaron cavatappi z pszenicy durum Auchan 500 g    | auchan       | 0.838
+  makaron fusilli z ciecierzycy       → Makaron fusilli   Auchan 500 g                     | auchan       | 0.93
+  makaron jajeczny                    → Makaron jajeczny Agnesi 250 g                      | auchan       | 3.796
+  makaron kokardki                    → Makaron kokardki Auchan 500 g                      | auchan       | 0.93
+  makaron orzo                        → Makaron orzo medium Primo Gusto 500 g              | auchan       | 1.256
+  makaron palmini                     → Makaron Pipe Rigate Auchan 500 g                   | auchan       | 0.93
+  makaron penne                       → Makaron penne Podravka 500 g                       | auchan       | 1.196
+  makaron quinoa                      → Makaron Pipe Rigate Auchan 500 g                   | auchan       | 0.93
+  makaron ramen                       → BIO Makaron ramen  BioAsia 250 g                   | auchan       | 4.156
+  makaron rotini                      → Makaron Pipe Rigate Auchan 500 g                   | auchan       | 0.93
+  makaron ryżowy                      → Makaron ryżowy Vermicelli House of Asia 200 g      | auchan       | 3.07
+  makaron ryżowy brązowy              → Makaron ryżowy Vermicelli House of Asia 200 g      | auchan       | 3.07
+  makaron soba                        → Makaron soba Green Label 300 g                     | auchan       | 2.5967
+  makaron z ciecierzycy               → Makaron z ciecierzycy świderki Novelle 250 g       | auchan       | 2.472
+  makaron z cukinii                   → Makaron Pipe Rigate Auchan 500 g                   | auchan       | 0.93
+  makaron z serem                     → Makaron Pipe Rigate Auchan 500 g                   | auchan       | 0.93
+  makaron łokieć                      → Makaron Pipe Rigate Auchan 500 g                   | auchan       | 0.93
+  maliny                              → Maliny Owoce  Auchan 125 g                         | auchan       | 8.312
+  mandarynka                          → Mandarynka                                         | biedronka    | 1.0
+  mango                               → Mango Owoce  Auchan sztuka                         | auchan       | 5.99
+  marchew                             → Marchew                                            | biedronka    | 0.4
+  marmolada pomarańczowa              → Marmolada pomarańczowa Auchan 360 g                | auchan       | 1.8028
+  masło                               → Masło ekstra Łaciate 200 g                         | auchan       | 3.445
+  masło kokosowe                      → Masło ekstra Łaciate 200 g                         | auchan       | 3.445
+  masło migdałowe                     → Masło ekstra Łaciate 200 g                         | auchan       | 3.445
+  masło orzechowe                     → Go Vege Masło orzechowe smooth 945 g               | biedronka    | 2.2212
+  masło roślinne                      → Masło ekstra Łaciate 200 g                         | auchan       | 3.445
+  maślanka w proszku                  → Maślanka naturalna            Pewni Dobrego 1 kg   | auchan       | 0.398
+  melasa                              → Melasa z owoców morwy Koska 380 g                  | auchan       | 4.9974
+  melon                               → Melon Galia                                        | biedronka    | 1.2992
+  mielona kiełbasa                    → Kiełbasa Krakowska Spichlerz Rusiecki 280 g        | auchan       | 3.4964
+  mielona wieprzowina                 → Mięso mielone wieprzowe z szynki Pewni Dobrego 400 g | auchan       | 3.2475
+  mielona woowina                     → Mięso mielone wołowe Łuków 400 g                   | auchan       | 5.7475
+  mielona wołowina                    → Mięso mielone wołowe Łuków 400 g                   | auchan       | 5.7475
+  mielone siemię lniane               → Siemię lniane Auchan 1 kg                          | auchan       | 0.99
+  mielony indyk                       → Skrzydło z indyka Auchan na wagę ok. 600g          | auchan       | 1.59
+  mielony kurczak                     → Mięso mielone z nogi kurczaka Auchan 400 g         | auchan       | 3.6475
+  mieszanka coleslaw                  → Surówka colesław łagodna Auchan 300 g              | auchan       | 1.1967
+  mieszanka do coleslaw               → BIO Mieszanka Studencka  FARMER'S SNACK 150 g      | auchan       | 15.7267
+  mieszanka do colesław               → BIO Mieszanka Studencka  FARMER'S SNACK 150 g      | auchan       | 15.7267
+  mieszanka do colesława              → BIO Mieszanka Studencka  FARMER'S SNACK 150 g      | auchan       | 15.7267
+  mieszanka do naleśników             → BIO Mieszanka Studencka  FARMER'S SNACK 150 g      | auchan       | 15.7267
+  mieszanka kapusty i marchwi         → BIO Mieszanka Studencka  FARMER'S SNACK 150 g      | auchan       | 15.7267
+  mieszanka owoców leśnych            → BIO Mieszanka Studencka  FARMER'S SNACK 150 g      | auchan       | 15.7267
+  mieszanka sałat                     → Mix sałat z roszponką Warzywa Auchan 120 g         | auchan       | 4.075
+  mieszanka suszonych owoców          → Mieszanka owoców suszonych Helio 1 kg              | auchan       | 3.9
+  mieszanka warzyw                    → Mieszanka warzywna meksykańska Bonduelle 150 g     | auchan       | 3.5308
+  migdał                              → Migdały łuskane Auchan 500 g                       | auchan       | 4.798
+  migdały                             → Migdały łuskane Auchan 500 g                       | auchan       | 4.798
+  migdały w płatkach                  → Migdały łuskane Auchan 500 g                       | auchan       | 4.798
+  miód                                → Miód wielokwiatowy Huzar 1 kg                      | auchan       | 2.749
+  mięta                               → Mięta Auchan sztuka                                | auchan       | 7.29
+  mleko                               → Mleko UHT 3,2% Auchan 1l                           | auchan       | 0.328
+  mleko kokosowe                      → Mleko kokosowe House of Asia 400 ml                | auchan       | 1.57
+  mleko kokosowe w proszku            → Mleko kokosowe House of Asia 400 ml                | auchan       | 1.57
+  mleko migdałowe                     → Mleko UHT 3,2% Auchan 1l                           | auchan       | 0.328
+  mleko owsiane                       → Mleko UHT 3,2% Auchan 1l                           | auchan       | 0.328
+  mleko roślinne                      → Mleko UHT 3,2% Auchan 1l                           | auchan       | 0.328
+  morele suszone                      → Morele suszone Auchan 200 g                        | auchan       | 5.495
+  mozzarella                          → Mozzarella OSM Skierniewice 250 g                  | auchan       | 6.196
+  mus jabłkowy                        → Mus jabłkowy  Pewni Dobrego 700 g                  | auchan       | 1.1129
+  musztarda                           → Kamis Musztarda kremska 185 g                      | biedronka    | 1.9946
+  musztarda dijon                     → Kamis Musztarda kremska 185 g                      | biedronka    | 1.9946
+  musztarda dyniowa                   → Kamis Musztarda kremska 185 g                      | biedronka    | 1.9946
+  musztarda miodowa                   → Kamis Musztarda kremska 185 g                      | biedronka    | 1.9946
+  musztarda ostra                     → Kamis Musztarda kremska 185 g                      | biedronka    | 1.9946
+  musztarda żółta                     → Kamis Musztarda kremska 185 g                      | biedronka    | 1.9946
+  mąka                                → Mąka La Pasta 100%   Molino Casillo  1 kg          | auchan       | 0.819
+  mąka bezglutenowa                   → Mąka ryżowa bezglutenowa SemCo 500 g               | auchan       | 1.358
+  mąka bezglutenowa uniwersalna       → Mieszanka bezglutenowa ekstra uniwersalna Bezgluten 500 g | auchan       | 3.318
+  mąka maranta                        → Mąka La Pasta 100%   Molino Casillo  1 kg          | auchan       | 0.819
+  mąka migdałowa                      → BIO Mąka migdałowa Bio Planet 100 g                | auchan       | 16.59
+  mąka owsiana                        → Mąka owsiana   Młyn Niedźwiady 1 kg                | auchan       | 0.719
+  młode ziemniaki                     → Ziemniaki sałatkowe Auchan 2 kg                    | auchan       | 0.2495
+  nasiona chia                        → Nasiona chia KRESTO 100 g                          | auchan       | 5.99
+  nasiona konopi                      → BIO Nasiona konopii łuskane NaturaVena 200 g       | auchan       | 11.495
+  nasiona sezamu                      → Nasiona sezamu białego Thai Pride 100 g            | auchan       | 6.59
+  natka pietruszki                    → Natka pietruszki  Auchan 8 g                       | auchan       | 16.125
+  nerkowce                            → Nerkowce KRESTO 200 g                              | auchan       | 11.495
+  ocet balsamiczny                    → Ocet balsamiczny Gino Toschi 250 ml                | auchan       | 4.556
+  ocet jabłkowy                       → Ocet jabłkowy 6% Auchan 750 ml                     | auchan       | 0.7987
+  ocet ryzowy                         → Ocet ryżowy 3%  Diamond 610 ml                     | auchan       | 3.1787
+  ocet ryżowy                         → Ocet ryżowy 3%  Diamond 610 ml                     | auchan       | 3.1787
+  ocet spirytusowy                    → Ocet spirytusowy 10% kwasowości Auchan 500 ml      | auchan       | 0.358
+  ocet winny biały                    → Ocet winny biały Monini 500 ml                     | auchan       | 3.398
+  ocet winny czerwony                 → Ocet winny z czerwonego wina. 6% kwasowości Kamis 250 ml | auchan       | 3.672
+  odżywka białkowa                    → Odżywka białkowa Mass Up wanilia ACTIVLAB 1,2 kg   | auchan       | 4.165
+  odżywka białkowa czekoladowa        → Odżywka białkowa Mass Up wanilia ACTIVLAB 1,2 kg   | auchan       | 4.165
+  odżywka białkowa serwatkowa         → Odżywka białkowa Mass Up wanilia ACTIVLAB 1,2 kg   | auchan       | 4.165
+  odżywka białkowa waniliowa          → Odżywka białkowa Mass Up wanilia ACTIVLAB 1,2 kg   | auchan       | 4.165
+  ogórek                              → BIO Ogórek długi Warzywa Auchan sztuka             | auchan       | 5.79
+  ogórek kiszony                      → Ogórki kiszone Auchan 500 g                        | auchan       | 1.458
+  ogórki kiszone                      → Ogórki kiszone Auchan 500 g                        | auchan       | 1.458
+  olej                                → Olej rzepakowy Auchan 1 l                          | auchan       | 0.459
+  olej rzepakowy                      → Olej rzepakowy Auchan 1 l                          | auchan       | 0.459
+  olej sezamowy                       → Olej sezamowy nierafinowany Auchan Collection  250 ml | auchan       | 5.996
+  olej w sprayu z awokado             → Olej z awokado spray Fratelli Mantova 200 ml       | auchan       | 14.995
+  olej z awokado                      → Olej z awokado tłoczony na zimno Auchan Collection  250 ml | auchan       | 6.796
+  olej z pestek dyni                  → Olej z pestek dyni z witaminą D tłoczony na zimno Oleofarm 250 ml | auchan       | 10.596
+  olej z pestek winogron              → Olej z pestek winogron Monini 500 ml               | auchan       | 3.896
+  oliwa z oliwek                      → Oliwa z oliwek Drago Chef Coppini 1 l              | auchan       | 3.399
+  oliwki                              → Oliwki sycylijskie Nocellara bez pestek San Romano 150 g | auchan       | 8.6533
+  oliwki czarne                       → Oliwki czarne drylowane Figaro 340 g               | auchan       | 6.8
+  oliwki zielone                      → Oliwki zielone nadziewane migdałami Athina 170 g   | auchan       | 6.6263
+  oregano                             → BIO Oregano  Pewni Dobrego sztuka                  | auchan       | 7.99
+  oregano suszone                     → Oregano suszone Auchan 10 g                        | auchan       | 12.9
+  orzech laskowy                      → Orzechy laskowe łuskane Auchan 100g                | auchan       | 7.99
+  orzechy                             → Orzechy nerkowca Makar 1 kg                        | auchan       | 6.31
+  orzechy makadamia                   → BIO Orzechy makadamia  BioLife 100 g               | auchan       | 20.59
+  orzechy nerkowca                    → Orzechy nerkowca Makar 1 kg                        | auchan       | 6.31
+  orzechy pekan                       → BIO Orzechy pekan    BioLife 100 g                 | auchan       | 21.59
+  orzechy włoskie                     → Orzechy włoskie łuskane Makar 1 kg                 | auchan       | 4.84
+  orzeszki piniowe                    → Orzeszki pini Auchan 50 g                          | auchan       | 25.98
+  orzeszki ziemne                     → BIO Orzeszki ziemne   Bio Planet 350 g             | auchan       | 4.1114
+  papier ryżowy                       → Papier ryżowy z tapioką Ricefield 300 g            | auchan       | 4.7967
+  papryczki pepperoncini              → Papryczki peperoni ostre mix Warzywa Auchan 150 g  | auchan       | 9.1933
+  papryka                             → BIO  Papryka Palermo  Warzywa Auchan 180 g         | auchan       | 7.2167
+  papryka czerwona                    → Papryka czerwona                                   | biedronka    | 1.9
+  papryka czerwona pieczona           → Papryka czerwona                                   | biedronka    | 1.9
+  papryka ostra                       → Papryka ostra mielona Auchan 500 g                 | auchan       | 3.6
+  papryka poblano                     → BIO  Papryka Palermo  Warzywa Auchan 180 g         | auchan       | 7.2167
+  papryka słodka                      → Papryka wędzona słodka Kotányi 22 g                | auchan       | 10.6364
+  papryka w proszku                   → BIO  Papryka Palermo  Warzywa Auchan 180 g         | auchan       | 7.2167
+  papryka wędzona                     → BIO  Papryka Palermo  Warzywa Auchan 180 g         | auchan       | 7.2167
+  papryka zielona                     → Papryka zielona Warzywa Auchan na wagę ok. 500 g   | auchan       | 1.699
+  pasta chili                         → Pasta Gochujang   Sempio 170 g                     | auchan       | 4.9353
+  pałki z kurczaka                    → Kraina Mięs Filet z piersi kurczaka                | biedronka    | 2.48
+  pestki dyni                         → Pestki dyni Auchan 500 g                           | auchan       | 3.198
+  pesto                               → Go Vege Pesto z tofu 190 g                         | biedronka    | 3.6789
+  pesto rukolowe                      → Go Vege Pesto z tofu 190 g                         | biedronka    | 3.6789
+  pieczarka                           → Pieczarka mini Warzywa Auchan 200 g                | auchan       | 2.795
+  pieczarki                           → Pieczarki świeże   Warzywa Auchan na wagę ok. 300 g | auchan       | 1.378
+  pieczarki cremini                   → Pieczarki świeże   Warzywa Auchan na wagę ok. 300 g | auchan       | 1.378
+  pieczarki portobello                → Pieczarki świeże   Warzywa Auchan na wagę ok. 300 g | auchan       | 1.378
+  pieprz                              → Pieprz czosnkowy Kamis 20 g                        | auchan       | 12.4
+  pieprz cayenne                      → Pieprz cayenne mielony  Kotányi 25 g               | auchan       | 11.7
+  pieprz cytrynowy                    → Pieprz cytrynowy mielony Prymat 20 g               | auchan       | 8.65
+  pieprz czarny                       → Pieprz czarny mielony Auchan 500 g                 | auchan       | 4.6
+  pierś z indyka                      → Kraina Wędlin Serdelki z filetem z indyka 300 g    | biedronka    | 2.4967
+  pietruszka                          → Pietruszka Warzywa Auchan 500 g                    | auchan       | 1.598
+  pistacje                            → Pistacje prażone niesolone Auchan 250 g            | auchan       | 9.596
+  pomarańcza krwista                  → BIO Pomarańcza Owoce  Auchan 1 kg                  | auchan       | 1.299
+  pomidor                             → Pomidor malinowy XL Warzywa Auchan na wagę ok 500g | auchan       | 1.599
+  pomidor koktajlowy                  → Pomidor koktajlowy 400 g                           | biedronka    | 2.9975
+  pomidor krojony                     → Pomidor malinowy XL Warzywa Auchan na wagę ok 500g | auchan       | 1.599
+  pomidor rzymski                     → Pomidor malinowy XL Warzywa Auchan na wagę ok 500g | auchan       | 1.599
+  pomidor suszony                     → Pomidor malinowy XL Warzywa Auchan na wagę ok 500g | auchan       | 1.599
+  pomidorek koktajlowy                → Pomidor koktajlowy 400 g                           | biedronka    | 2.9975
+  pomidorki koktajlowe                → Pomidor koktajlowy 400 g                           | biedronka    | 2.9975
+  pomidory krojone                    → Pomidory malinowe polskie 500 g                    | biedronka    | 2.598
+  pomidory kruszone                   → Pomidory malinowe polskie 500 g                    | biedronka    | 2.598
+  pomidory prażone                    → Pomidory malinowe polskie 500 g                    | biedronka    | 2.598
+  pomidory prażone z chili            → Pomidory malinowe polskie 500 g                    | biedronka    | 2.598
+  pomidory suszone                    → BIO Pomidory suszone Ekologiko 80 g                | auchan       | 8.2375
+  por                                 → Por Warzywa Auchan na wagę ok. 400 g               | auchan       | 0.799
+  przyprawa                           → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | auchan       | 6.392
+  przyprawa cajun                     → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | auchan       | 6.392
+  przyprawa chili                     → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | auchan       | 6.392
+  przyprawa cytrynowo-ziołowa         → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | auchan       | 6.392
+  przyprawa do bajgla                 → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | auchan       | 6.392
+  przyprawa do bulionu drobiowego     → BIO Ekologiczna przyprawa do ryb To Naturalne 20 g | auchan       | 17.45
+  przyprawa do drobiu                 → BIO Ekologiczna przyprawa do drobiu To Naturalne 20 g | auchan       | 17.45
+  przyprawa do dyni                   → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | auchan       | 6.392
+  przyprawa do sałatek włoska         → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | auchan       | 6.392
+  przyprawa do taco                   → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | auchan       | 6.392
+  przyprawa fajita                    → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | auchan       | 6.392
+  przyprawa kajunska                  → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | auchan       | 6.392
+  przyprawa pięciu smaków             → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | auchan       | 6.392
+  przyprawa ranch                     → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | auchan       | 6.392
+  przyprawa taco                      → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | auchan       | 6.392
+  przyprawa włoska                    → Przyprawa z Octem Balsamicznym z Modeny Monini 250 g | auchan       | 6.392
+  płatki chex                         → Płatki Chocapic XXL Nestle  600 g                  | auchan       | 3.065
+  płatki chili                        → Płatki Chocapic XXL Nestle  600 g                  | auchan       | 3.065
+  płatki drożdżowe                    → BIO Płatki drożdżowe BioLife 100 g                 | auchan       | 28.49
+  płatki owsiane                      → Płatki owsiane Auchan 400 g                        | auchan       | 0.6475
+  ricotta                             → Ricotta Auchan 250 g                               | auchan       | 2.38
+  rodzynki                            → Bakallino Rodzynki sułtańskie 400 g                | biedronka    | 2.1225
+  rukola                              → Rukola Warzywa Auchan 150 g                        | auchan       | 3.66
+  ryż                                 → Ryż długoziarnisty Sollana 1 kg                    | auchan       | 0.999
+  ryż basmati                         → Plony Natury Ryż basmati długoziarnisty 400 g      | biedronka    | 1.2475
+  ryż biały                           → Ryż biały długoziarnisty Auchan 500 g              | auchan       | 0.656
+  ryż biały długoziarnisty            → Ryż biały długoziarnisty Auchan 500 g              | auchan       | 0.656
+  ryż brązowy                         → Ryż brązowy długoziarnisty Auchan 4 x 100 g        | auchan       | 0.8225
+  ryż brązowy błyskawiczny            → Ryż brązowy długoziarnisty Auchan 4 x 100 g        | auchan       | 0.8225
+  ryż jaśminowy                       → Ryż jaśminowy Auchan 4 x 100 g                     | auchan       | 0.8225
+  ryż pełnoziarnisty i komosa ryżowa  → Quinoa Komosa Ryżowa Intenson 250 g                | auchan       | 3.796
+  rzodkiewka                          → Rzodkiewka pęczek                                  | biedronka    | —
+  salami                              → Salami z pomidorami i bazylią Serenada 135 g       | auchan       | 4.7259
+  sałata                              → Sałata Pak Choi Warzywa Auchan sztuka              | auchan       | 9.19
+  sałata masłowa                      → Sałata masłowa Warzywa Auchan 1 sztuka             | auchan       | 3.99
+  sałata rzymska                      → Sałata rzymska               Warzywa Auchan 1sztuka | auchan       | 6.99
+  seler                               → Seler korzeń Warzywa Auchan na wagę ok. 800 g      | auchan       | 0.499
+  seler naciowy                       → BIO Seler naciowy  Naturally Organic 400 g         | auchan       | 2.245
+  ser                                 → Ser Mozzarella   Jager 125 g                       | auchan       | 2.68
+  ser feta                            → Ser Mozzarella   Jager 125 g                       | auchan       | 2.68
+  ser gruyere                         → Ser Gruyere dojrzewający twardy EntreMont 200 g    | auchan       | 12.49
+  ser halloumi                        → Elios Ser halloumi 225 g                           | biedronka    | 5.24
+  ser kozi                            → Ser sałatkowy kozi Danmis 160 g                    | auchan       | 8.925
+  ser pleśniowy                       → Ser pleśniowy Złocisty Lazur 100 g                 | auchan       | 5.88
+  ser ricotta                         → Ser Ricotta Pecorina    Auchan na wagę ok. 130 g   | auchan       | 4.79
+  ser ricotta roślinny                → Ricotta Auchan 250 g                               | auchan       | 2.38
+  ser w kawałku                       → Ser Mimolette w kawałku Temar na wagę ok. 200 g    | auchan       | 6.79
+  ser wegański                        → Ser wegański kremowy cheddar bez laktozy Violife 150 g | auchan       | 8.26
+  serca karczochów                    → Karczochy krojone w ziołach Antico Casale 455 /285 g | auchan       | 7.8912
+  serce karczocha                     → Karczochy krojone w ziołach Antico Casale 455 /285 g | auchan       | 7.8912
+  sezam                               → Sezam Bakal 500 g                                  | auchan       | 3.358
+  siemię lniane                       → Siemię lniane Auchan 1 kg                          | auchan       | 0.99
+  siemię lniane mielone               → Siemię lniane Auchan 1 kg                          | auchan       | 0.99
+  skrobia kukurydziana                → BIO Ekologiczna skrobia kukurydziana NaturaVena 250 g | auchan       | 3.916
+  skrzydełko z kurczaka               → Piwoszki skrzydełka z kurczaka Morliny 900 g       | auchan       | 2.8767
+  skórka z cytryny                    → Cytryny Owoce  Auchan 1 kg                         | auchan       | 1.699
+  smietana                            → Smietana 18% ekstra kremowa Zott 330 g             | auchan       | 1.603
+  soczewica                           → Soczewica konserwowa Rolnik 400 g                  | auchan       | 1.5375
+  soczewica czerwona                  → Plony Natury Soczewica czerwona 500 g              | biedronka    | 0.998
+  sok z cytryny                       → Sok z cytryny Limmi 200 ml                         | auchan       | 3.14
+  sok z limonki                       → Sok z limonki z soku zagęszczonego House of Asia 250 ml | auchan       | 2.696
+  sos                                 → Sos sałatkowy Tzatziki Kotányi 20 g                | auchan       | 9.4
+  sos BBQ                             → Sos sałatkowy Tzatziki Kotányi 20 g                | auchan       | 9.4
+  sos adobo                           → Sos sałatkowy Tzatziki Kotányi 20 g                | auchan       | 9.4
+  sos bbq                             → Sos sałatkowy Tzatziki Kotányi 20 g                | auchan       | 9.4
+  sos czosnkowy do makaronu           → Sos sałatkowy czosnkowy typ Cezar Prymat 9 g       | auchan       | 10.8889
+  sos do makaronu                     → Mutti Sos do makaronu Arrabbiata z papryczkami chili 400 g | biedronka    | 2.9975
+  sos grecki                          → Sos sałatkowy grecki  Knorr 9 g                    | auchan       | 16.0
+  sos ostry                           → Sos sałatkowy Tzatziki Kotányi 20 g                | auchan       | 9.4
+  sos pomidorowy                      → Sos pomidorowy Winiary 34 g                        | auchan       | 8.7576
+  sos pomidorowy do makaronu          → Sos pomidorowy Winiary 34 g                        | auchan       | 8.7576
+  sos pomidorowy do pizzy             → Sos pomidorowy Winiary 34 g                        | auchan       | 8.7576
+  sos ranch                           → Sos sałatkowy Tzatziki Kotányi 20 g                | auchan       | 9.4
+  sos rybny                           → Sos sałatkowy Tzatziki Kotányi 20 g                | auchan       | 9.4
+  stewia                              → Stevia słodzik pochodzenia naturalnego z inuliną Zielony listek 140 g | auchan       | 8.9214
+  suszone daktyle bez pestek          → BIO Daktyle suszone bez pestek Auchan 175 g        | auchan       | 4.5657
+  suszone jabłka                      → Jabłka suszone Kresto 35g                          | auchan       | 1.7086
+  suszone jagody goji                 → Jagody goji suszone Makar 1 kg                     | auchan       | 7.07
+  suszone żurawiny                    → Żurawina suszona Auchan 500 g                      | auchan       | 3.198
+  syrop daktylowy                     → BIO Syrop daktylowy  BioLife 345 g                 | auchan       | 5.0406
+  syrop klonowy                       → BIO Syrop klonowy Auchan 250 g                     | auchan       | 7.996
+  syrop z agawy                       → BIO syrop z agawy jasny NaturaVena 250 g           | auchan       | 4.8898
+  szalotka                            → Szalotka Warzywa Auchan 250 g                      | auchan       | 2.596
+  szałwia suszona                     → Żurawina suszona Auchan 500 g                      | auchan       | 3.198
+  szczypiorek                         → Szczypiorek Auchan sztuka                          | auchan       | 2.796
+  szczypiorek suszony                 → Szczypiorek Auchan sztuka                          | auchan       | 2.796
+  szparagi                            → Szparagi Pewni Dobrego 400 g                       | auchan       | 3.7475
+  szpinak                             → Szpinak Warzywa Auchan 100 g                       | auchan       | 3.89
+  szpinak baby                        → BIO szpinak baby Fit & Easy 150 g                  | auchan       | 6.1267
+  szynka                              → Szynka konserwowa premium Krakus 300 g             | auchan       | 3.8267
+  sól                                 → Sól czosnkowa Kamis 35 g                           | auchan       | 8.2286
+  sól morska                          → Sól morska jodowana Prymat 110 g                   | auchan       | 5.7091
+  tahini                              → Elios Tahini klasyczne 300 g                       | biedronka    | 3.33
+  tortilla                            → Pano Tortilla Wraps Placki wieloziarniste 306 g    | biedronka    | 1.6176
+  truskawka                           → 100% truskawka z regionu Łowicza Pewni Dobrego 230 g | auchan       | 2.8217
+  truskawki                           → Truskawki Owoce  Auchan 250 g                      | auchan       | 4.396
+  truskawki liofilizowane             → Truskawki Owoce  Auchan 250 g                      | auchan       | 4.396
+  tuńczyk                             → Tuńczyk kawałki w sosie własnym Auchan 170 g       | auchan       | 5.1583
+  twaróg                              → Twaróg chudy Auchan 250 g                          | auchan       | 1.46
+  twaróg kremowy                      → Twaróg chudy Auchan 250 g                          | auchan       | 1.46
+  tymianek                            → BIO Tymianek  Pewni Dobrego sztuka                 | auchan       | 9.49
+  tymianek suszony                    → BIO Tymianek  Pewni Dobrego sztuka                 | auchan       | 9.49
+  udka z kurczaka                     → Piwoszki skrzydełka z kurczaka Morliny 900 g       | auchan       | 2.8767
+  wegański ser ricotta                → Ricotta Auchan 250 g                               | auchan       | 2.38
+  wieprzowina                         → Karkówka wieprzowa bez kości rasy Puławskiej MAP Pewni Dobrego na wagę ok. 600 g | auchan       | 3.599
+  winogrona                           → Winogrona Owoce  Auchan na wagę ok. 600 g          | auchan       | 1.999
+  winogrona zielone                   → Winogrona Owoce  Auchan na wagę ok. 600 g          | auchan       | 1.999
+  wiórki kokosowe                     → Bakello Wiórki kokosowe 200 g                      | biedronka    | 2.495
+  wiórki kokosowe niesłodzone         → Bakello Wiórki kokosowe 200 g                      | biedronka    | 2.495
+  wołowina                            → Rosół wołowy Kucharek 120 g                        | auchan       | 3.2
+  wołowina na fajitas                 → Rosół wołowy Kucharek 120 g                        | auchan       | 3.2
+  wołowina w kawałkach                → Rosół wołowy Kucharek 120 g                        | auchan       | 3.2
+  wędzona papryka                     → BIO  Papryka Palermo  Warzywa Auchan 180 g         | auchan       | 7.2167
+  wędzony łosoś                       → Marinero Łosoś Norweski wędzony plastry 150 g      | biedronka    | 11.9933
+  zamiennik jajka                     → Zamiennik jajek w proszku vEGGs 64 g               | auchan       | 22.049
+  ziele angielskie                    → Ziele angielskie  Auchan 15 g                      | auchan       | 8.6
+  zielona fasolka                     → BIO Fasolka Adzuki   EUREKO 400 g                  | auchan       | 4.4475
+  zielona papryka                     → Papryka zielona Warzywa Auchan na wagę ok. 500 g   | auchan       | 1.699
+  zielone oliwki                      → Zielone oliwki nadziewane migdałami Auchan 100 g   | auchan       | 6.39
+  zielony banan                       → Banan                                              | biedronka    | 0.699
+  ziemniak                            → Ziemniaki sałatkowe Auchan 2 kg                    | auchan       | 0.2495
+  ziemniak czerwony                   → Ziemniaki czerwone Warzywa Auchan 2 kg             | auchan       | 0.3995
+  ziemniaki                           → Ziemniaki sałatkowe Auchan 2 kg                    | auchan       | 0.2495
+  ziemniaki czerwone                  → Ziemniaki czerwone Warzywa Auchan 2 kg             | auchan       | 0.3995
+  zioła                               → Zioła Prowansalskie   Auchan 10 g                  | auchan       | 12.9
+  łopatka wieprzowa                   → Łopatka bez kości Auchan na wagę ok. 1 kg          | auchan       | 1.899
+  łosoś                               → Marinero Łosoś Norweski wędzony plastry 150 g      | biedronka    | 11.9933
+  śmietana                            → Śmietana 12%  Auchan 330 g                         | auchan       | 0.903
+  śmietana 30%                        → Śmietana 12%  Auchan 330 g                         | auchan       | 0.903
+  śmietana roślinna                   → Śmietana 12%  Auchan 330 g                         | auchan       | 0.903
+  śmietanka 30%                       → Śmietanka UHT 18% Auchan 250 ml                    | auchan       | 1.352
+  śmietanka kokosowa                  → Śmietanka UHT 18% Auchan 250 ml                    | auchan       | 1.352
+  świeże zioła                        → Zioła Prowansalskie   Auchan 10 g                  | auchan       | 12.9
+  żeberka wołowe                      → Żeberka wędzone Mościbrody na wagę ok. 900 g       | auchan       | 1.599
+  żurawina                            → Żurawina Pewni Dobrego 200 g                       | auchan       | 4.49
+  żurawina suszona                    → Żurawina suszona Auchan 500 g                      | auchan       | 3.198
+  żółta papryka                       → Papryka żółta Warzywa Auchan na wagę od 500 g      | auchan       | 1.698
+
+======================================================================
+  PL — niedopasowane składniki (top 3 kandydaci)
+======================================================================
+  Cheerios                            | top: sos(80.0), ser(66.7), cheetos spirals chrupki kukurydziane o smaku serowo-ketchupowym(66.7)
+  Rice Krispies                       | top: ice(100.0), płatki cookie crisp(66.7), pesto(66.7)
+  amino kokosowe                      | top: mleko kokosowe(83.3), mleczko kokosowe(83.3), wiórki kokosowe(83.3)
+  anyż gwiazdkowaty                   | top: makaron gwiazdki(71.4), makaron 5 jajeczny gniazdko(71.4), maliny(66.7)
+  babka plantain                      | top: tahini(80.0), jabłka(72.7), fantasia(71.4)
+  barwnik spożywczy                   | top: baranina(71.4), culineo sól warzona spożywcza jodowana(70.6), mlekovita mleko spożywcze(69.0)
+  batat                               | top: bataty w kawałkach(100.0), dilmah czarna herbata(88.9), sałata batawska(80.0)
+  bekon                               | top: smalec bekonowy(100.0), riazenka - pieczone mleko napój mleczny fermentowany(80.0), konserwa luncheon meat(75.0)
+  białe kawałki czekolady             | top: serek straciatella z kawałkami czekolady(83.7), danio serek z kawałkami czekolady(83.7), fantasia jogurt smak malina, czerwona porzeczka z kawałkami czekolady(83.7)
+  białe wino kuchenne                 | top: ice(66.7), ocet winny biały(62.9), winogrono ciemne(62.1)
+  białka jaj                          | top: jaja(85.7), biała fasola(77.8), serek wysokobiałkowy białka(75.0)
+  białka jaj w płynie                 | top: ice(80.0), jaja(75.0), jabłka(66.7)
+  białko jajka                        | top: jaja(75.0), jabłka(72.7), jaja kl.a(71.4)
+  białko konopne                      | top: jabłko(66.7), krewetki białe gotowane 31-40(64.3), odżywka białkowa sojowa(64.3)
+  białko roślinne                     | top: tarczyński kabanosy roślinne o smaku piri-piri(80.0), tarczyński kabanosy roślinne 3 ziarna(80.0), tarczyński kabanosy roślinne oryginalne(80.0)
+  białko serwatkowe                   | top: ser(100.0), koncentrat białka serwatkowego(94.1), koktajl z białkiem serwatkowym malina granat(82.4)
+  bocconcini                          | top: cukinia(72.7), wiśnia(66.7), boczek(66.7)
+  bok choy                            | top: brokuł(66.7), boczek(66.7), rożek cytrynowo - truskawkowy z zieloną polewą i kawałkami suszonej truskawki(62.5)
+  bourbon whisky                      | top: bon bon(71.4), por(66.7), brokuł(66.7)
+  boćwina                             | top: wołowina(83.3), wieprzowina(83.3), mielona wieprzowina(83.3)
+  broccolini                          | top: leibniz(72.7), wiśnia(66.7), brokuł(66.7)
+  brązowy ryz z quinoa                | top: ryż brązowy(77.8), cukinia(66.7), ryż(66.7)
+  burak złoty                         | top: buraki(90.9), cebula złota(76.2), buraki gotowane całe(76.2)
+  bułka tarta                         | top: bułka paryska(80.0), bułka grahamka(80.0), mozzarella tarta(77.8)
+  bułka tarta bezglutenowa            | top: mąka ryżowa bezglutenowa(80.0), gluten free mąka owsiana bezglutenowa(76.6), mąka jaglana bezglutenowa(76.6)
+  bułka tarta bezglutenowa panko      | top: kakaowe bezglutenowe(75.0), mąka ryżowa bezglutenowa(75.0), bułka paryska(75.0)
+  bułka tarta panko                   | top: bułka paryska(75.0), jabłka(72.7), antrykot(66.7)
+  bułka tarta panko bezglutenowa      | top: kakaowe bezglutenowe(81.1), mąka ryżowa bezglutenowa(76.9), mąka kasztanowa bezglutenowa(76.4)
+  cayenne                             | top: pieprz chili cayenne(100.0), pieprz cayenne mielony(100.0), cannelloni makaron w z semoliny z pszenicy durum(83.3)
+  chili w proszku                     | top: ksylitol w proszku(84.6), serwatka demineralizowana w proszku(80.0), kozie mleko w proszku(80.0)
+  chipotle                            | top: filety z makreli w sosie pomidorowym po meksykańsku o smaku chipotle(100.0), toczony z nerkowców z chipolte(87.5), mullermilch protein o smaku ciasteczkowym(75.0)
+  chipotle w proszku                  | top: ksylitol w proszku(81.2), groszek(76.9), kozie mleko w proszku(75.9)
+  chipotle w sosie adobo              | top: sos(100.0), gobio(75.0), filety śledziowe w sosie pomidorowym(68.2)
+  chipsy tortilla                     | top: tortilla wraps placki wieloziarniste(69.6), por(66.7), kimchi(66.7)
+  chipsy z bananów                    | top: banan(100.0), owsianka na jogurcie z bananem(69.0), ananas(66.7)
+  chipsy ziemniaczane                 | top: ziemniaki(77.8), ziemniaki czerwone(73.3), wiśnia(66.7)
+  chleb bezglutenowy                  | top: makaron penne rigate bezglutenowy(87.5), makaron penne bezglutenowy(87.5), makaron fusilli bezglutenowy(84.8)
+  chleb na zakwasie bezglutenowy      | top: kakaowe bezglutenowe(80.0), nasza(80.0), ryż basmati bezglutenowy(78.0)
+  chleb pita                          | top: chleb pszenny(82.4), chleb promnicki z ziarnami mieszanka piekarnicza(82.4), chleb tostowy maślany(82.4)
+  chrupki ryżowe                      | top: ryż(100.0), płatki ryżowe(87.0), płatki ryżowe błyskawiczne(74.1)
+  ciasto do pizzy                     | top: mąka pszenna do pizzy(80.0), roleski ketchup sycylijski do pizzy(80.0), mąka pszenna do pizzy typ 00(66.7)
+  ciasto wonton                       | top: bon bon(66.7), sos(66.7), łaciata(66.7)
+  ciemna czekolada                    | top: danio czekolada(84.6), whey protein complex odżywka białkowa czekolada(81.5), high protein mus biała czekolada(81.5)
+  ciemne kropelki czekolady           | top: serek czekoladowy(77.4), danio czekolada(76.9), góralki z czekoladą(75.0)
+  cukier kokosowy puder               | top: cukier(100.0), krem kokosowy(84.6), ser(80.0)
+  cydr jabłkowy                       | top: jabłko(100.0), dr(100.0), mus jabłkowy(85.7)
+  czarna fasola w puszce              | top: fasola(100.0), fasolka(85.7), ice(80.0)
+  czarne nasiona sezamu               | top: sezam(100.0), czarnuszka nasiona(81.2), olej sezamowy z prażonych nasion sezamu(81.1)
+  czarne oliwki                       | top: zielone i czarne oliwki w marynacie czosnkowo-ziołowej(100.0), oliwa(80.0), kiwi(75.0)
+  czekolada półsłodka                 | top: boczek(80.0), danio czekolada(75.0), e. wedel czekolada gorzka(74.3)
+  czekoladowe kropelki                | top: boczek(80.0), mullermilch o smaku ciasteczkowa czekoladowa karmel(78.9), płatki czekoladowe(78.9)
+  czerwone chili                      | top: buraki czerwone(72.7), ziemniaki czerwone(72.7), jabłka czerwone(72.7)
+  dressing                            | top: dr(100.0), makaron świderki express(66.7), makaron rurki express(66.7)
+  dressing cytrynowo-ziołowy          | top: dr(100.0), cytryny(85.7), cytryna(85.7)
+  drożdże nieaktywne                  | top: dr(100.0), dżem(75.0), drożdże piekarskie prasowane(73.3)
+  duże muszle makaronowe              | top: makaron(100.0), makaron duża muszla(82.9), musli(80.0)
+  dym w płynie                        | top: ice(80.0), przyprawa z płynie(76.2), przyprawa w płynie z wyciągiem z lubczyku(75.0)
+  dynia makaronowa                    | top: dynia(100.0), makaron(100.0), makaron soba(81.8)
+  edamame                             | top: soja edamame(100.0), radamer(66.7), ser mazdamer(66.7)
+  ekstrakt klonowy                    | top: syrop klonowy(76.2), coconut milk ekstrakt z kokosa(75.0), czysty syrop klonowy(69.0)
+  ekstrakt miętowy                    | top: mięta(80.0), ser(66.7), whey(66.7)
+  ekstrakt stewii                     | top: stewia(83.3), dr. oetker ekstrakt wanilia bourbon(80.0), mleczko kokosowe tłuszczu ekstrakt(69.6)
+  ekstrakt waniliowy                  | top: dr. oetker ekstrakt wanilia bourbon(83.3), serek waniliowy(82.8), rolmlecz serek waniliowy(81.2)
+  endywia                             | top: dynia(80.0), margaryna do pieczenia i smażenia(72.7), margaryna doskonała do pieczenia, gotowania i smażenia(72.7)
+  fajita z kurczaka                   | top: kurczak(100.0), polędwiczka z kurczaka(82.8), skrzydełka z kurczaka(82.8)
+  farro                               | top: fasolka szparagowa zielona(66.7), fasolka szparagowa zielona cięta(66.7), ferrero kinder maxi king(66.7)
+  gałązki ziół                        | top: zioła(66.7), migdały(60.0), jogurt jabłko i ziarna(58.3)
+  ghee                                | top: makaron spaghetti(75.0), makaron pełnoziarnisty spaghetti(75.0), makaron spaghetti pełne ziarno(75.0)
+  glazura balsamiczna                 | top: ocet balsamiczny(78.6), asia(75.0), krem na bazie octu balsamicznego(70.6)
+  gnocchi kalafiorowe                 | top: kalafior(100.0), mix brokuł i kalafior(69.0), por(66.7)
+  gorzka czekolada                    | top: danio czekolada(84.6), whey protein complex odżywka białkowa czekolada(82.8), high protein mus biała czekolada(81.5)
+  goździk                             | top: goździki mielone(100.0), szynka z dzika(66.7), propolis w miodzie(66.7)
+  granulat cebulowy                   | top: grana(88.9), granola(85.7), cebula(83.3)
+  granulat czosnkowy                  | top: grana(88.9), czosnek(85.7), granola(85.7)
+  grzanki                             | top: knorr gorący kubek grochowa z grzankami(85.7), knorr gorący kubek pieczarkowa z grzankami(85.7), makaron łazanki(83.3)
+  grzybowe q-cups                     | top: grzyby(90.9), sos grzybowy(73.7), zupa z grzybowa(66.7)
+  guacamole                           | top: mleko(66.7), camembert z zielonym pieprzem(61.5), camembert lekki(61.5)
+  guma ksantanowa                     | top: banan(80.0), oliwa(75.0), mąka kasztanowa bezglutenowa(73.3)
+  herbatnik graham                    | top: grana(80.0), bagietka graham(78.6), lotus biscoff herbatniki karmelizowane(75.0)
+  herbatniki graham                   | top: grana(80.0), lotus biscoff herbatniki karmelizowane(76.5), bagietka graham(75.9)
+  hummus                              | top: musli(75.0), mus jabłkowy(66.7), mus czekoladowy z dużą zawartością protein(66.7)
+  hummus z buraków                    | top: buraki(83.3), sok z buraków kiszonych(75.9), surówka z buraczków(71.4)
+  imbir marynowany                    | top: imbir(100.0), podgrzybki marynowane(80.0), imbir kandyzowany(78.8)
+  jackfruit                           | top: grapefruit czerwony(66.7), grapefruit tacka(66.7), grapefruit biały(66.7)
+  jagoda                              | top: skyr jogurt jagoda(100.0), jogurt jagoda(100.0), serek z jagodami(100.0)
+  jagody mieszane                     | top: mieszanka(82.4), jagody inkaskie suszone(75.0), jagody leśne(74.1)
+  jajeczny poncz                      | top: jaja(85.7), makaron 5 jajeczny popularny z dodatkiem przyprawy kurkumy(78.6), makaron 5 jajeczny niteczka walcowana(78.6)
+  jajko                               | top: jaja(85.7), zamiennik jajek w proszku veggs(80.0), veggs wegański zamiennik jajek(80.0)
+  jalapeño                            | top: serek z jalapeno(87.5), chili jalapeno kruszone(87.5), jaja(75.0)
+  jarmuz                              | top: jarmuż myty(90.9), jarmuż cięty(90.9), jarmuż(90.9)
+  jerky                               | top: veggs wegański zamiennik jajek(75.0), erytrytol(75.0), makaron mie bez jajek(75.0)
+  jogurt z mleka migdałowego          | top: jogurt(100.0), mąka migdałowa(85.7), migdały(85.7)
+  kakao niesłodzone                   | top: mleko zagęszczone niesłodzone(82.8), kaczka(80.0), kaszka(80.0)
+  kapary                              | top: kaparów w zalewie octowej(90.9), pomidor kampari(83.3), bułka paryska(83.3)
+  karczoch                            | top: karczochy krojone w ziołach(100.0), makaron chiński szklisty ryżowy(75.0), makaron chiński vermicelli ryżowy(75.0)
+  kawałki czekolady                   | top: serek straciatella z kawałkami czekolady(88.2), danio serek z kawałkami czekolady(88.2), fantasia jogurt smak malina, czerwona porzeczka z kawałkami czekolady(88.2)
+  kawałki czekolady bez nabiału       | top: milka sensations cookies ciastka z kawałkami czekolady i nadzieniem z czekoladą mleczną(75.9), asia(75.0), fantasia jogurt z kawałkami czekolady mlecznej(73.7)
+  kiełbasa beyond meat spicy italian  | top: kiełbasa(100.0), kiełbaski(87.5), kiełbasa biała(83.3)
+  kiełbasa z kurczaka i jabłkiem      | top: kurczak(100.0), kiełbasa(100.0), kiełbaski(87.5)
+  klementynka                         | top: szynka(80.0), natka(75.0), śmietanka(70.6)
+  klopsiki                            | top: kluski kładzione ze szpinakiem(71.4), kostki warzywne(71.4), ser krowi orzech włoski(66.7)
+  kolagen                             | top: kolendra(83.3), kolanka makaron w semoliny pszenicy durum(83.3), kolendra liście(83.3)
+  kolagen w proszku                   | top: kozie mleko w proszku(82.8), ksylitol w proszku(82.8), serwatka demineralizowana w proszku(81.2)
+  koncentrat bulionu drobiowego       | top: dr(100.0), bulion(100.0), robico(83.3)
+  konfitura morelowa                  | top: konfitura figowa(78.6), konfitura jagodowa o obniżonej zawartości cukrów(77.8), konfitura o obniżonej zawartości cukrów(77.4)
+  koper                               | top: zupa kalafiorowa z koperkiem(100.0), na patelnię z koperkiem i grzybami(100.0), serek kanapkowy z ogórkiem i koperkiem(100.0)
+  koper włoski                        | top: koperek(83.3), knorr sos włoski(76.2), serek włoski mascarpone śmietankowo(75.0)
+  kostka bulionowa                    | top: bulion(100.0), oliwa(75.0), golonkowa(75.0)
+  kostka bulionu wolowego             | top: bulion(100.0), bulion warzywny kostka(71.1), musli owocowe(69.2)
+  kotlet wieprzowy                    | top: wieprzowina(80.0), nogi wieprzowe(75.0), pieprz ziołowy(72.7)
+  kozieradka                          | top: ser z kozieradką(90.0), ser kozi z kolendrą i kozieradką(90.0), delicate kozi serek twarogowy(70.0)
+  krem kakaowo-orzechowy              | top: krem czekoladowo-orzechowy(83.3), krem kakaowy z orzechami laskowymi(79.1), e. wedel ww wafelki mleczna czekolada & krem orzechowy(77.8)
+  krojone pomidory z puszki           | top: pomidor(100.0), pomidory(100.0), gruszki(83.3)
+  kropelki ciemnej czekolady          | top: śliwki ciemne(76.9), serek czekoladowy(75.9), danio czekolada(72.0)
+  kropelki czekolady                  | top: płatki lion o smaku karmelu i czekolady(80.0), bakuś serek czekoladowy(78.8), pudding protein czekoladowy(77.8)
+  kropelki czekolady bez nabiału      | top: serek czekoladowy(76.5), asia(75.0), płatki czekoladowe(72.2)
+  kur kuma                            | top: kurkuma mielona(93.3), kurkuma(85.7), makaron rurki z kurkumą(80.0)
+  kuskus izraelski pełnoziarnisty     | top: ryż pełnoziarnisty(90.9), kasza kuskus pełnoziarnisty(82.8), makaron pełnoziarnisty(82.1)
+  laska wanilii                       | top: serek waniliowy z laską wanilii(92.3), serek waniliowy z dodatkiem pokruszonej laski wanilii(92.3), whey protein complex odżywka białkowa wanilia(76.9)
+  liofilizowane jagody                | top: liofilizowane brzoskwinie(82.4), liofilizowane truskawki całe(82.4), granola proteinowa z czekoladą i wiśnią liofilizowana(78.8)
+  liofilizowane owoce                 | top: liofilizowane brzoskwinie(84.8), liofilizowane truskawki całe(84.8), ice(80.0)
+  lisc laurowy                        | top: ice(66.7), whey(66.7), makaron chiński szklisty ryżowy(66.7)
+  liście jarmużu                      | top: jarmuż(100.0), jarmuż myty(66.7), ice(66.7)
+  liście kapusty                      | top: kapusta(85.7), liście limonki(72.7), pasztecik z pieczarkami i kapustą(72.0)
+  liść laurowy                        | top: liść lubczyku suszony(73.7), whey(66.7), makaron chiński vermicelli ryżowy(66.7)
+  losos                               | top: sos(100.0), filet z łososia jurajskiego w zalewie cytrynowej(80.0), serek śmietankowy z łososiem i koperkiem(80.0)
+  maka z maranty                      | top: ayran(80.0), amarantus(75.0), mąka(75.0)
+  maka z tapioki                      | top: makaron z tapioką i zieloną herbatą bezglutenowy(78.6), mąka(75.0), papier ryżowy z tapioką(75.0)
+  makaron z brązowego ryżu            | top: makaron(100.0), ryż(100.0), macaroni(80.0)
+  masa harina                         | top: baranina(76.9), masło(75.0), asia(75.0)
+  maslo                               | top: masło(80.0), sałata masłowa(80.0), zupa fasolowa(80.0)
+  maslo migdalowe                     | top: masło(80.0), płatki migdałowe(72.0), mąka migdałowa(71.4)
+  masło czekoladowo-orzechowe         | top: masło(100.0), krem czekoladowo-orzechowy(87.5), biszkopt z kremem mlecznym i czekoladowo-orzechowym(84.0)
+  masło z nerkowców                   | top: masło(100.0), nerkowce(87.5), vermezan z nerkowców(83.9)
+  masło z orzechów nerkowca           | top: masło(100.0), go active krem z orzechów nerkowca(91.3), orzechy nerkowca(87.5)
+  mielona jagnięcina                  | top: cielęcina(80.0), melon(80.0), mielona baranina(76.5)
+  mielone chili chipotle              | top: melon(80.0), len mielony(70.6), mak mielony(70.6)
+  mielone roślinne                    | top: melon(80.0), zielone oliwki drylowane w marynacie ziołowej z chili(74.1), zielone oliwki nadziewane migdałami(74.1)
+  mieszane jagody                     | top: mieszanka(87.5), jagody leśne(74.1), mieszanka rodzynek i orzechów(73.3)
+  mieszane warzywa                    | top: mix fasolek mieszanka warzywna(87.5), mieszanka warzywna marchewka z groszkiem(87.5), mieszanka warzywna kalafior, brokuł i kapusty romanesco(87.5)
+  mieszanka do sosu ranczerskiego     | top: sos(100.0), mieszanka(100.0), szynka(83.3)
+  mieszanka warzyw do stir-fry        | top: mieszanka(100.0), mieszanka grzybów(84.8), szynka(83.3)
+  mikroliście                         | top: ice(80.0), milky(75.0), szpinak liście(73.7)
+  mięso wołowe do gulaszu             | top: mięta(75.0), przyprawa do gulaszu(72.7), mielona wołowina(66.7)
+  mleko owsiane w proszku             | top: mleko(100.0), mleczko(83.3), mleko w proszku pełne(81.8)
+  mnich                               | top: mullermilch o smaku czekoladowym(80.0), mullermilch zero o smaku czekoladowym(80.0), mullermilch protein o smaku ciasteczkowym(80.0)
+  morela                              | top: jogurt z morelami(100.0), morele suszone(90.9), morele suszone, miękkie(90.9)
+  morwy                               | top: melasa z owoców morwy(100.0), twarożek domowy(88.9), morwa biała suszona(88.9)
+  mąka arrowroot                      | top: mąka(100.0), por(66.7), mąka orkiszowa jasna typ 650(66.7)
+  mąka kokosowa                       | top: mąka(100.0), krem kokosowy(78.3), wegańska chia kokosowa z wsadem wiśniowym(76.9)
+  mąka z ciecierzycy                  | top: mąka(100.0), ciecierzyca(90.9), makaron z ciecierzycy świderki(83.3)
+  mąka z manioku                      | top: mąka(100.0), mango(80.0), mąka szymanowska chlebowa pszenna typ 750(76.9)
+  mąka z maranty                      | top: mąka(100.0), ayran(80.0), amarantus(75.0)
+  mąka z tapioki                      | top: mąka(100.0), makaron z tapioką i zieloną herbatą bezglutenowy(78.6), papier ryżowy z tapioką(75.0)
+  młode liście                        | top: ice(80.0), masło(75.0), szpinak liście(73.7)
+  nasiona granatu                     | top: granat(100.0), grana(100.0), koktajl z białkiem serwatkowym malina granat(81.5)
+  nasiona kakaowca                    | top: nasiona chia(81.8), natka(80.0), owsianka kakaowa(80.0)
+  nasiona słonecznika                 | top: słonecznik(100.0), ziarna słonecznika(88.2), mieszanka do wypieku chleba pszenno-żytniego z ziarnami słonecznika(85.7)
+  nektar z agawy                      | top: nerki(75.0), miód wielokwiatowy pszczeli nektarowy(69.6), miód pszczeli akacjowy nektarowy(69.6)
+  nektarynka                          | top: skyr jogurt nektarynka & malina(100.0), piątnica skyr jogurt pitny nektarynka & malina(100.0), szynka(80.0)
+  niesłodzona czekolada               | top: danio czekolada(84.6), granola czekoladowa(77.4), high protein mus biała czekolada(74.3)
+  ocet kokosowy                       | top: krem kokosowy(83.3), płatki jaśki z kremem o smaku kokosowym(78.3), mleko kokosowe(78.3)
+  okra                                | top: krasnystaw(85.7), kraina wędlin select szynka z wędzarni(85.7), kraina wędlin select schab z wędzarni(85.7)
+  olej chili                          | top: ser typu śródziemnomorskiego w zalewie olejowej z chili(80.0), zielone oliwki drylowane w marynacie ziołowej z chili(80.0), olej lniany z wit. d(77.8)
+  olej kokosowy                       | top: krem kokosowy(83.3), jeżyki herbatniki w czekoladzie mlecznej kokosowe(83.3), bonitki wafle kokosowe(83.3)
+  olej kokosowy w sprayu              | top: mleko kokosowe(76.9), krem kokosowy(76.9), mleczko kokosowe(71.4)
+  olej roślinny                       | top: tuńczyk kawałki w oleju roślinnym(92.3), tuńczyk w kawałkach w oleju roślinnym(92.3), sardynki w oleju roślinnym(92.3)
+  olej w sprayu                       | top: bita śmietana w sprayu(81.8), olej ryżowy(70.6), oliwa vergine spray(70.0)
+  olej z otrąb ryżowych               | top: ryż(100.0), zott(75.0), olej z awokado(72.7)
+  oliwka zielona                      | top: oliwki zielone nadziewane pastą paprykową w zalewie(88.9), oliwki zielone nadziewane pastą paprykową(88.9), oliwki zielone nadziewane pastą anchois(88.9)
+  oliwki kalamata                     | top: oliwa(88.9), natka(75.0), pasta(75.0)
+  orzechy mieszane                    | top: mieszanka orzechów(82.4), mieszanka(82.4), orzechy pini(81.8)
+  orzo                                | top: makaron orzo medium(100.0), makaron orzo z pszenicy durum(100.0), rzodkiewki główki(85.7)
+  otręby owsiane                      | top: owsianka(80.0), asia(75.0), płatki owsiane(72.7)
+  owoce                               | top: big-active zielona herbata z owocem pigwy liściasta(100.0), owocowa rapsodia figa królewska(88.9), nerkowce(88.9)
+  owoce mieszane                      | top: mieszanka(82.4), mix fasolek mieszanka warzywna(71.4), chleb jasny bezglutenowy mieszanka piekarnicza(71.4)
+  panierka z mąki migdałowej          | top: mąka migdałowa(85.7), migdały(85.7), płatki migdałowe(82.8)
+  papryczka chili tajska              | top: papryka(83.3), papryka mix(76.2), ogórki z papryczką chili(75.7)
+  papryczka chipotle w sosie adobo    | top: sos(100.0), papryka(83.3), papryka mix(76.2)
+  papryczka serrano                   | top: ser(100.0), papryka(83.3), serca(80.0)
+  papryczki tajskie                   | top: papryka(83.3), ice(80.0), papryczki peperoni ostre mix(75.9)
+  parmezan                            | top: ser parmezan parmigiano reggiano(100.0), vermezan z nerkowców(75.0), kiełbasa biała parzona(66.7)
+  parmezan roślinny                   | top: maliny(72.7), margaryna roślinna z kwasami(70.6), por(66.7)
+  pasta curry czerwona                | top: pasta(100.0), curry(100.0), pastani(83.3)
+  pasta curry czerwone                | top: pasta(100.0), curry(100.0), pastani(83.3)
+  pasta miso biała                    | top: pasta(100.0), pastani(83.3), pasta miso shiro(82.8)
+  pasta z papryki koreańska           | top: pasta(100.0), papryka(85.7), pasztet z papryką(83.9)
+  pasternak                           | top: pasta(88.9), pasztet(83.3), natka(75.0)
+  pekan                               | top: orzechy pekan(100.0), drożdże piekarskie prasowane(80.0), śniadaniowe kanapkowe(80.0)
+  pepperoni                           | top: papryczki peperoni ostre mix(88.9), orbit peppermint bezcukrowa guma do żucia ( .)(77.8), tradycyjny włoski makaron maccheroni(71.4)
+  peptydy kolagenowe                  | top: rukola(66.7), whey(66.7), nerkowce(66.7)
+  persymona                           | top: limonka(72.7), cebula czerwona(66.7), por(66.7)
+  pico de gallo                       | top: ice(66.7), alpro(66.7), tic(66.7)
+  pieczarka biała                     | top: pieczarki(94.1), pieczarka mini(84.6), pieczarka krojona(80.0)
+  pieczarka portobello                | top: por(100.0), pieczarki(94.1), pieczarka mini(83.3)
+  pieczona czerwona papryka           | top: papryka(100.0), papryka czerwona podłużna(84.0), grillowana czerwona papryka ostopulos(84.0)
+  pieprz w ziarnach                   | top: pieprz czarny mielony(75.9), pieprz czarny ziarnisty(75.9), pieprz czarny ziarnisty w młynku(75.9)
+  pikantna włoska kiełbasa wieprzowa  | top: kiełbasa(100.0), wieprzowina(90.0), kapusta włoska(78.6)
+  pita                                | top: makaron spaghetti al nero di seppia(85.7), śmietana(75.0), mięta(75.0)
+  pita bezglutenowa                   | top: ciecierzyca bezglutenowa(90.3), gluten free mąka owsiana bezglutenowa(90.3), mąka ryżowa bezglutenowa(90.3)
+  platki chili                        | top: kimchi(83.3), płatki(83.3), flaki(80.0)
+  polenta                             | top: por(80.0), fasola flażoletka(76.9), natka(75.0)
+  polędwica wieprzowa                 | top: wieprzowina(90.0), por(80.0), polędwiczka w przyprawach do pieczenia(77.8)
+  polędwica wołowa                    | top: wołowina(85.7), por(80.0), polędwiczka w przyprawach do pieczenia(75.9)
+  polędwiczka wieprzowa               | top: wieprzowina(90.0), polędwiczka w przyprawach do pieczenia(84.2), por(80.0)
+  pomidory krojone w puszce           | top: pomidor(100.0), pomidory(100.0), pomidory suszone w oleju krojone(80.7)
+  pomidory krojone z puszki           | top: pomidor(100.0), pomidory(100.0), gruszki(83.3)
+  pomidory z zielonym chili           | top: pomidor(100.0), pomidory(100.0), por(80.0)
+  posypka                             | top: camembert z posypką paprykową(85.7), por(80.0), kapusta włoska(72.7)
+  posypki                             | top: camembert z posypką paprykową(85.7), por(80.0), ser krowi orzech włoski(72.7)
+  precle                              | top: por(80.0), przecier ogórkowy do zupy(72.7), serecek(72.7)
+  prosciutto                          | top: por(80.0), alpro(75.0), sos(66.7)
+  proszek cebulowy                    | top: groszek(85.7), cebula(83.3), por(80.0)
+  proszek chipotle                    | top: groszek(85.7), por(80.0), filety z makreli w sosie pomidorowym po meksykańsku o smaku chipotle(75.0)
+  proszek czosnkowy                   | top: czosnek(85.7), groszek(85.7), ser czosnek(81.8)
+  proszek do pieczenia                | top: groszek(85.7), por(80.0), czereśnia(80.0)
+  proszek musztardowy                 | top: musztarda(88.9), groszek(85.7), por(80.0)
+  provolone                           | top: por(80.0), alpro(75.0), pistacje prażone niesolone(71.4)
+  przecier pomidorowy                 | top: pomidor(100.0), sos pomidorowy(88.0), pomidory(87.5)
+  przyprawa cytrynowo-pieprzowa       | top: przyprawa(100.0), cytryny(85.7), cytryna(85.7)
+  puree dyniowe                       | top: dynia(80.0), por(66.7), zupa dyniowa z marchewką(66.7)
+  puree z batata                      | top: natka(75.0), pasta(75.0), sałata(72.7)
+  puree z dyni                        | top: dynia(88.9), olej z pestek dyni(69.6), por(66.7)
+  puree ziemniaczane                  | top: ziemniaki(77.8), ziemniaki czerwone(73.3), wiśnia(66.7)
+  purée dyniowe                       | top: dynia(80.0), por(66.7), zupa dyniowa z marchewką(66.7)
+  pół na pół                          | top: napój(80.0), pomysł na(66.7), penne na patelnię(60.0)
+  płynne białko jajka                 | top: jaja(75.0), jabłka(72.7), jaja kl.a(71.4)
+  płynny słodzik dyniowy z mnicha     | top: dynia(80.0), schab(75.0), ice(66.7)
+  quinoa                              | top: mozzarella wysokoproteinowa(72.7), owsianka żurawinowa(72.7), wołowina(66.7)
+  rozmaryn                            | top: wafle kukurydziane z rozmarynem(100.0), marynata pikantna do mięs i drobiu(76.9), marynata staropolska do mięs i drobiu(76.9)
+  rukiew wodna                        | top: dynia(75.0), kiwi(75.0), gruszki(72.7)
+  ryz bialy                           | top: ryż(80.0), ryż biały średnioziarnisty(77.8), ryż biały(77.8)
+  ryz brazowy                         | top: ryż brązowy(81.8), ryż brązowy 4x100(81.8), ryż(80.0)
+  ryz brązowy instant                 | top: ryż brązowy(90.9), ryż(80.0), ryż brązowy 4x100(75.9)
+  ryż kalafiorowy                     | top: kalafior(100.0), ryż(100.0), mix brokuł i kalafior(75.0)
+  ryż z kalafiora                     | top: kalafior(100.0), ryż(100.0), mix brokuł i kalafior(76.9)
+  rzeżucha                            | top: yopro pudding o smaku czekolada-orzech(76.9), schab(75.0), rożek śmietankowo - orzechowy z sosem czekoladowym i orzechami laskowymi(75.0)
+  rzodkiew arbuzowa                   | top: arbuz(100.0), rzodkiewka(90.0), oliwa(75.0)
+  różyczki brokuła                    | top: brokuł(100.0), brokuły(85.7), kiełki brokułu(75.0)
+  salsa                               | top: salami z pomidorami i bazylią(88.9), garam masala(88.9), masło z czosnkiem i ziołami prowansalskimi(80.0)
+  salsa verde                         | top: asia(75.0), ser(66.7), serek(66.7)
+  sambal oelek                        | top: mleko(75.0), sezam(75.0), schab(66.7)
+  ser cojita                          | top: ser(100.0), serca(80.0), ser comte wiórkowany o orzechowym aromacie(77.8)
+  ser provolone                       | top: ser(100.0), ser ser(76.9), ser pack(76.9)
+  ser roślinny                        | top: ser(100.0), ser ser(83.3), tuńczyk kawałki w oleju roślinnym(83.3)
+  skrobia maranty                     | top: ayran(80.0), amarantus(77.8), granat(72.7)
+  skrobia strzałki                    | top: skrobia kukurydziana(72.0), buraki(66.7), ser(66.7)
+  skrobia strzałkowata                | top: natka(75.0), pasta(75.0), łopatka(71.4)
+  skrobia tapiokowa                   | top: oliwa(75.0), golonkowa(71.4), skrobia kukurydziana(69.2)
+  skrobia z maranty                   | top: ayran(80.0), amarantus(75.0), granat(72.7)
+  skrobia z tapioki                   | top: makaron z tapioką i zieloną herbatą bezglutenowy(76.5), jogurt skyr z tapioką mango i liczi(70.6), jogurt skyr z tapioką malina(70.6)
+  skwarki                             | top: smalec staropolski ze skwarkami(85.7), truskawki(76.9), rożek cytrynowo - truskawkowy z zieloną polewą i kawałkami suszonej truskawki(76.9)
+  skórka cytrynowa                    | top: skórki cytrynowe kandyzowane(90.3), cytryny(85.7), cytryna(85.7)
+  skórka pomarańczowa                 | top: pomarańcze(90.0), pomarańcza(90.0), marmolada pomarańczowa(84.8)
+  skórka z limonki                    | top: limonka(85.7), sok z limonki z soku zagęszczonego(82.8), kurka(80.0)
+  slodzik z mnicha                    | top: schab(75.0), ice(66.7), sos(66.7)
+  slodzik z owocu mnicha              | top: schab(75.0), ice(66.7), sos(66.7)
+  smietanka 30%                       | top: smietana(93.3), śmietanka(88.9), śmietana(87.5)
+  soda oczyszczona                    | top: sos(80.0), włoszczyzna(66.7), czosnek(66.7)
+  sok ananasowy                       | top: ananas(100.0), sos(80.0), banan(80.0)
+  sok pomarańczowy                    | top: pomarańcze(90.0), pomarańcza(90.0), galaretka pomarańczowy smak(87.5)
+  sok z papryczek pepperoncini        | top: sos(80.0), papryczki peperoni ostre mix(73.9), cukinia(72.7)
+  sol                                 | top: wafle kukurydziane z solą morską(100.0), ogórki małosolne(100.0), fasolka szparagowa zielona(100.0)
+  sos Worcestershire                  | top: sos(100.0), ser hit(71.4), por(66.7)
+  sos barbecue                        | top: sos(100.0), sos grecki(70.0), ice(66.7)
+  sos buffalo                         | top: sos(100.0), sos balsamiczny z ziołami(77.8), alpro(75.0)
+  sos chili czosnkowy                 | top: sos(100.0), czosnek(85.7), pieprz czosnkowy(81.5)
+  sos cytrynowo-ziołowy               | top: sos(100.0), cytryny(85.7), cytryna(85.7)
+  sos czerwony                        | top: sos(100.0), grapefruit czerwony(85.7), burak czerwony(85.7)
+  sos czosnkowo-chili                 | top: sos(100.0), czosnek(85.7), sos czosnkowy typ(82.8)
+  sos do pizzy                        | top: sos(100.0), mąka pszenna do pizzy(85.7), roleski ketchup sycylijski do pizzy(85.7)
+  sos enchilada                       | top: sos(100.0), sos grecki(73.7), ser(66.7)
+  sos enchilada czerwony              | top: sos(100.0), burak czerwony(83.3), jabłka czerwone(74.1)
+  sos hoisin                          | top: sos(100.0), sos czosnkowy typ(73.7), roleski sos czosnkowy aioli(70.0)
+  sos koreański BBQ                   | top: sos(100.0), orzeszki(75.0), por(66.7)
+  sos marinara                        | top: sos(100.0), malina(83.3), ayran(75.0)
+  sos musztardowo-miodowy             | top: sos(100.0), musztarda(88.9), sos miodowo-musztardowy(75.7)
+  sos ostrygowy                       | top: sos(100.0), sos grzybowy(72.0), ocet ryżowy(70.0)
+  sos ranczerski                      | top: sos(100.0), nerki(80.0), gruszki(72.7)
+  sos sałatkowy                       | top: sos(100.0), sałatka(85.7), sałata(83.3)
+  sos sojowy                          | top: sos(100.0), odżywka białkowa sojowa(70.6), fisherking pstrąg łososiowy(70.6)
+  sos specjalny                       | top: sos(100.0), maliny(80.0), sos pieczarkowy(69.6)
+  sos teriyaki                        | top: sos(100.0), flaki(75.0), buraki(66.7)
+  sos tzatziki                        | top: sos(100.0), przyprawa do sosu tzatziki(91.7), płatki(66.7)
+  sos worcestershire                  | top: sos(100.0), ser hit(71.4), por(66.7)
+  sos włoski                          | top: sos(100.0), knorr sos włoski(100.0), ser krowi orzech włoski(82.4)
+  sos z indyka                        | top: indyk(100.0), sos(100.0), pierś z indyka(85.7)
+  sos z serem pleśniowym              | top: ser(100.0), sos(100.0), ser pleśniowy(84.6)
+  sos żurawinowy                      | top: ser camembert do zapiekania + sos żurawinowy(100.0), sos(100.0), żurawina nasączona sokiem żurawinowy(88.0)
+  spaghetti                           | top: makaron spaghetti(100.0), makaron pełnoziarnisty spaghetti(100.0), makaron spaghetti pełne ziarno(100.0)
+  spray do gotowania                  | top: oliwa z oliwek do smażenia i gotowania(77.4), kukurydza gotowana(75.0), dynia(75.0)
+  spray do pieczenia                  | top: polędwiczka w przyprawach do pieczenia(83.9), schab w przyprawach do pieczenia(83.9), karkówka w przyprawach do pieczenia(83.9)
+  spód do tarty                       | top: ryż(66.7), sól do przetworów niejodowana(64.0), ogórki tarte(63.2)
+  sriracha                            | top: ser(80.0), schab(75.0), schab w przyprawach do pieczenia(66.7)
+  stek boczny wołowy                  | top: wołowina(71.4), ser(66.7), serek(66.7)
+  stek wolowy                         | top: kaszka z sosem owocowym mix smaków(72.7), boczek rolowany(72.7), kitkat chunky peanut butter paluszek waflowy w mlecznej czekoladzie(72.7)
+  stek wołowy                         | top: kaszka z sosem owocowym mix smaków(72.7), kortos ser ziołowy(72.7), wołowina(71.4)
+  stek z antrykotu                    | top: antrykot(100.0), ser(66.7), serek(66.7)
+  stek z polędwicy wołowej            | top: wołowina(66.7), por(66.7), ice(66.7)
+  stek z wołowiny                     | top: wołowina(87.5), indyk(75.0), kortos ser ziołowy(69.2)
+  stevia w płynie                     | top: stewia(83.3), ice(80.0), przyprawa z płynie(72.0)
+  sumak                               | top: margaryna maślany smak(88.9), galaretka truskawkowy smak(88.9), galaretka pomarańczowy smak(88.9)
+  suszone czerwone chili              | top: suszone grzyby(75.0), figi suszone(73.7), mango suszone(70.0)
+  suszone czerwone papryczki chili    | top: kimchi(83.3), ser w kostkach z czerwoną papryką i chili(79.3), suszone grzyby(75.0)
+  suszone wiśnie                      | top: wiśnia(83.3), ice(80.0), figi suszone(73.7)
+  suszonej cebuli                     | top: cebula(83.3), cebula suszona(82.8), bulion(80.0)
+  swerve                              | top: serek truskawkowy(80.0), serek wysokobiałkowy białka(80.0), serek lekki(80.0)
+  szałwia                             | top: nasiona chia szałwia hiszpańska(100.0), chia - nasiona szałwii hiszpańskiej(85.7), sezam(75.0)
+  sól przyprawiona                    | top: przyprawa(88.9), żurawina(80.0), przyprawa karkówka grill - suszona mieszanka przyprawowa(78.6)
+  słodzik                             | top: słodkie ziemniaki(83.3), słodka śmietanka do deserów i zup(83.3), słodki ziemniak(83.3)
+  słodzik mnich                       | top: masło(75.0), słonecznik(70.6), słodka śmietanka do deserów i zup(69.6)
+  słodzik waniliowy mnich             | top: masło(75.0), serek waniliowy(73.3), słonecznik(70.6)
+  słodzik waniliowy z mnicha          | top: schab(75.0), masło(75.0), serek waniliowy(73.3)
+  słodzik z mnicha                    | top: schab(75.0), masło(75.0), słodki ziemniak(71.4)
+  tajski slodki sos chili             | top: sos(100.0), filety z makreli w sosie pomidorowym ze słodkim chili(64.9), korniszony z chilli(64.5)
+  tamari                              | top: pomidor kampari(83.3), amarantus ekspandowany(80.0), amarantus(80.0)
+  tempeh                              | top: krewetki w tempurze(66.7), tort lodowy waniliowy z sorbetem(66.7), jogurt pitny z maliną i granatem(66.7)
+  tofu                                | top: mieszanka warzywna na ratatouille(75.0), milker toffi(75.0), płatki corn flakes kukurydziane o smaku toffi(75.0)
+  tofu ekstra twarde                  | top: ser twardy(80.0), ser(66.7), twaróg(66.7)
+  tomatillo                           | top: tortilla wraps placki wieloziarniste(75.0), mieszanka warzywna na ratatouille(66.7), omega(66.7)
+  tortellini                          | top: leibniz(72.7), protein(71.4), tortilla wraps placki wieloziarniste(70.6)
+  tortellini serowe                   | top: ser(100.0), nerkowce(76.9), protein(71.4)
+  tortilla kukurydziana               | top: mąka kukurydziana(90.3), kukurydza(88.9), kasza kukurydziana(87.5)
+  tortilla szpinakowa                 | top: szpinak(100.0), oliwa(75.0), szpinak baby(72.7)
+  tortilla z manioku                  | top: mango(80.0), por(66.7), brokuł(66.7)
+  tortille kukurydziane               | top: kukurydza(88.9), płatki kukurydziane(81.2), mąka kukurydziana(80.0)
+  tortille z mąki z manioku           | top: mango(80.0), mąka(75.0), por(66.7)
+  trawa cytrynowa                     | top: cytryny(85.7), cytryna(85.7), oliwa(75.0)
+  tłuszcz z boczku                    | top: boczek(83.3), boczniak(71.4), tłuszcz roślinny do smarowania(69.2)
+  tłuszcz z kaczki                    | top: kaczka(83.3), pierś z kaczki(78.3), jogurt tłuszczu lekki(73.3)
+  udko z kurczaka                     | top: kurczak(100.0), polędwiczka z kurczaka(85.7), skrzydełka z kurczaka(85.7)
+  vinaigrette balsamiczny             | top: ocet balsamiczny(89.7), asia(75.0), krem z octem balsamicznym(71.8)
+  warzywa                             | top: przekąski z ciasta z warzywami(100.0), serek krem fromage serek z warzywami i ziołami(100.0), mutti sos pomidorowy z grillowanymi warzywami(100.0)
+  warzywa mieszane                    | top: mieszanka(82.4), mieszanka warzywna meksykańska(75.0), grill karkówka mieszanka przypraw(75.0)
+  wegańskie kropelki czekoladowe      | top: mleko czekoladowe(87.5), płatki czekoladowe(87.5), serek czekoladowy(78.8)
+  wino czerwone                       | top: buraki czerwone(87.0), ziemniaki czerwone(87.0), makaron z soczewicy czerwonej świderki(84.6)
+  wino marsala                        | top: asia(75.0), garam masala(73.7), makrela(71.4)
+  wiśnie                              | top: owsianka z fińskimi płatkami – śliwki. wiśnie(100.0), wiśnia(90.9), kaszka z sosem z wiśni(90.9)
+  woda                                | top: włoszczyzna młoda(85.7), skyr jogurt jagoda(85.7), jogurt jagoda(85.7)
+  wrap                                | top: tortilla wraps placki wieloziarniste(100.0), rapsodia owoców czarna porzeczka(85.7), rapsodia(85.7)
+  wrap kokosowy                       | top: krem kokosowy(81.8), płatki jaśki z kremem o smaku kokosowym(78.3), jogurt kokosowy bez glutenu(76.9)
+  wykałaczka                          | top: kaczka(90.9), kaszka(72.7), sałatka(71.4)
+  ziarna kakaowca                     | top: owsianka kakaowa(85.7), natka(80.0), zioła(75.0)
+  ziarna kakaowe                      | top: owsianka kakaowa(81.5), natka(80.0), milka oreo sandwich ciastka kakaowe z nadzieniem waniliowym(78.6)
+  zielone chiles                      | top: melon(80.0), zielone i czarne oliwki w marynacie czosnkowo-ziołowej(78.3), zielone oliwki drylowane w marynacie ziołowej z chili(75.0)
+  zielone chili z puszki              | top: gruszki(83.3), melon(80.0), oliwki zielone bez pestki(70.0)
+  zielony barwnik spożywczy           | top: melon(80.0), mielona baranina(73.3), por(66.7)
+  zupa cebulowa w proszku             | top: cebula(83.3), groszek(76.9), ksylitol w proszku(75.0)
+  łuski babki płesznik                | top: błonnik aktywny witalny - łupiny babki jajowatej i babki plesznik(83.3), babka płesznik nasiona(76.5), szynka(72.7)
+
+======================================================================
+  EN — zaakceptowane przepisy (name | n_ing | koszt GBP)
+======================================================================
+  Air Fryer Rosemary Sweet Potato Wedges with Garlic Aioli | 10 sk. | koszt=—
+  Air-Fried Chickpeas                                     | 5 sk. | koszt=—
+  Avocado And Mango Sushi Roll                            | 6 sk. | koszt=—
+  Bacon Egg Bites                                         | 7 sk. | koszt=—
+  Baked Breakfast Quinoa And Spinach Bites                | 8 sk. | koszt=—
+  Baked Salmon with Blackberry Quinoa Salad               | 12 sk. | koszt=—
+  Bbq Pulled Chicken Stuffed Sweet Potatoes               | 11 sk. | koszt=—
+  Beef Patties-Sweet Corn Rice and Sautéed Veggies        | 12 sk. | koszt=—
+  Breakfast Beef Sausage                                  | 12 sk. | koszt=—
+  Breakfast Bowls                                         | 5 sk. | koszt=—
+  Breakfast Pro Power Bowl                                | 8 sk. | koszt=—
+  Broccoli Cheddar Stuffed Chicken Breast & Rice Pilaf    | 20 sk. | koszt=—
+  Cauliflower Rice Salmon Poke Bowl Meal Prep             | 8 sk. | koszt=—
+  Cauliflower Tabouli and Salmon Meal Prep                | 15 sk. | koszt=—
+  Chicken Apple Sausage and Veggies                       | 14 sk. | koszt=—
+  Chicken Quinoa Salad                                    | 8 sk. | koszt=—
+  Chimichurri Steak Meal Prep - Two Ways (Bowls and Tacos) | 16 sk. | koszt=—
+  Cilantro Lime Rice                                      | 6 sk. | koszt=—
+  Crockpot Breakfast Casserole                            | 9 sk. | koszt=—
+  Egg Sweet Potato And Sausage Breakfast Meal Prep        | 7 sk. | koszt=—
+  Fruity Quinoa And Grilled Salmon                        | 10 sk. | koszt=—
+  Gazpacho Meal Prep                                      | 10 sk. | koszt=—
+  Greek Salad                                             | 8 sk. | koszt=—
+  Grilled Steak and Garlic Roasted Potato Meal Prep       | 8 sk. | koszt=—
+  Hawaiian Chicken Teriyaki Skewer Meal Prep              | 12 sk. | koszt=—
+  Keto Cashew Cheesecake Bites                            | 4 sk. | koszt=—
+  Lemon Herb Chicken and Potato Sheet Pan                 | 11 sk. | koszt=—
+  Lemon-Pepper Chicken Drumstick Recipe                   | 4 sk. | koszt=—
+  Low-Carb Lettuce Wrap Sliders                           | 8 sk. | koszt=—
+  Moroccan Turmeric Chicken Stew                          | 16 sk. | koszt=—
+  Mozzarella Stuffed Meatballs                            | 10 sk. | koszt=—
+  My Favorite Pesto Beef Kabob Meal Prep                  | 8 sk. | koszt=—
+  One Pan Sausage And Veggie Meal Prep                    | 8 sk. | koszt=—
+  Peanut Butter Protein Squares                           | 5 sk. | koszt=—
+  Pulled Pork Lettuce Wrap Meal Prep                      | 10 sk. | koszt=—
+  Red Pepper and Parmesan Quinoa Pasta                    | 12 sk. | koszt=—
+  Sausage Grill Packet Meal Prep                          | 10 sk. | koszt=—
+  Sheet Pan Breakfast Hash And Eggs                       | 13 sk. | koszt=—
+  Sheet Pan Bruschetta Chicken                            | 16 sk. | koszt=—
+  Sheet Pan Chicken And Veggies                           | 10 sk. | koszt=—
+  Sheet Pan Sweet Potato Breakfast Hash                   | 12 sk. | koszt=—
+  Slow Cooker Lemon Garlic Chicken Meal Prep              | 8 sk. | koszt=—
+  Smoked Salmon & Lentil Breakfast Salad                  | 12 sk. | koszt=—
+  Steak, Sweet Potato and Apple Hash                      | 8 sk. | koszt=—
+  Sun Dried Tomato, Mozzarella And Basil Stuffed Chicken  | 9 sk. | koszt=—
+  Sweet 'N Spicy Jalapeno Sausage Fried Rice              | 13 sk. | koszt=—
+  The Perfect Air Fryer Turkey Breast                     | 7 sk. | koszt=—
+  Turkey Bacon Ranch Pinwheel Snack Boxes                 | 7 sk. | koszt=—
+  Turkey Wrap                                             | 5 sk. | koszt=—
+  Turmeric Scrambled Eggs For Breakfast                   | 8 sk. | koszt=—
+  Vegan Chopped Chickpea Greek Salad Meal Prep            | 15 sk. | koszt=—
+  Vegan Dark Chocolate Cinnamon Roasted Chickpea Bark     | 4 sk. | koszt=—
+  Whole30 Breakfast Snack Boxes Meal Prep                 | 4 sk. | koszt=—
+  Whole30 Zucchini & Sweet Potato Hashbrown Meal Prep     | 8 sk. | koszt=—
+
+======================================================================
+  PL — zaakceptowane przepisy (name | n_ing | koszt PLN)
+======================================================================
+  Chipsy Jabłkowe z Frytkownicy Powietrznej               | 7 sk. | koszt=1.53
+  Chrupiacy Kurczak z Frytkownicy Powietrznej             | 8 sk. | koszt=—
+  Ciecierzyca z Air Fryer                                 | 5 sk. | koszt=1.77
+  Dorsz Pieczony z Warzywami z Jednej Blachy              | 5 sk. | koszt=15.23
+  Falafel na zapas                                        | 15 sk. | koszt=—
+  Frytki z Marchewki Ranch z Air Fryera                   | 4 sk. | koszt=1.37
+  Gazpacho na wynos                                       | 10 sk. | koszt=—
+  Grecka Zapiekanka Jajeczna                              | 7 sk. | koszt=—
+  Gulasz z kurczakiem w stylu pot pie                     | 12 sk. | koszt=—
+  Jajecznica Z Kurkumą Na Śniadanie                       | 8 sk. | koszt=—
+  Jambalaya z Kurczakiem                                  | 13 sk. | koszt=—
+  Jesienna sałatka z kiełbasą                             | 17 sk. | koszt=17.24
+  Kebab z kofty                                           | 13 sk. | koszt=—
+  Keto Pulpety z Boczkiem i Kiełbasą                      | 5 sk. | koszt=—
+  Komosa Ryżowa Z Grillowanym Łososiem                    | 10 sk. | koszt=27.29
+  Krewetki Z Pesto Rukolowym Z Blachy                     | 8 sk. | koszt=18.6
+  Kulki Energetyczne Cynamonowo-Rodzynkowe                | 7 sk. | koszt=0.45
+  Kulki Energetyczne Miętowo-Czekoladowe                  | 7 sk. | koszt=—
+  Kurczak Bruschetta Z Blachy                             | 16 sk. | koszt=—
+  Kurczak Caprese Z Balsamico                             | 12 sk. | koszt=11.34
+  Kurczak Faszerowany Suszonymi Pomidorami, Mozzarellą i Bazylią | 9 sk. | koszt=—
+  Kurczak fajitas z blachy                                | 6 sk. | koszt=—
+  Kurczak i Warzywa z Blachy                              | 10 sk. | koszt=—
+  Kurczak w Boczku                                        | 7 sk. | koszt=—
+  Kurczak z Boczkiem i Warzywami w Foliowych Pakietach    | 11 sk. | koszt=—
+  Kurczak z Cytryną i Czosnkiem z Wolnowaru               | 8 sk. | koszt=—
+  Kurczak z chimichurri i warzywami z blachy              | 15 sk. | koszt=—
+  Letnie Rolki z Awokado i Kurczakiem                     | 9 sk. | koszt=—
+  Lżejsze Mango z Kurczakiem i Ryżem                      | 11 sk. | koszt=—
+  Makaron Kokardki z Krewetkami                           | 5 sk. | koszt=28.72
+  Makaron Z Kiełbasą Pesto Caprese                        | 7 sk. | koszt=17.65
+  Makaron primavera zapiekany z jednej patelni            | 8 sk. | koszt=21.26
+  Makaron z Cukinii z Sosem Pomidorowo-Oregano i Grillowanym Filetem z Kurczaka | 9 sk. | koszt=—
+  Mini Papryki z Kurczakiem Buffalo                       | 8 sk. | koszt=14.37
+  Miska buddy z kurczakiem                                | 8 sk. | koszt=21.66
+  Miski Poke z Ryżem Kalafiorowym i Łososiem              | 8 sk. | koszt=—
+  Miski Taco                                              | 9 sk. | koszt=—
+  Najlepsze Hummus Burakowy Z Warzywami Do Maczania       | 8 sk. | koszt=—
+  Nasz Ulubiony Przepis na Tostones                       | 2 sk. | koszt=—
+  Niskowęglowodanowe Sałatkowe Slidery                    | 8 sk. | koszt=—
+  Omlet Z Blachy                                          | 9 sk. | koszt=—
+  Ostre Krewetki z Frytkownicy Powietrznej                | 5 sk. | koszt=10.98
+  Owsianka Białkowa na Śniadanie                          | 7 sk. | koszt=6.83
+  Owsianka Kokosowo-Ananasowa na Noc                      | 9 sk. | koszt=—
+  Owsianka Na Zimno Z Jagodami                            | 7 sk. | koszt=7.22
+  Owsianka na Noc z Masłem Migdałowym                     | 4 sk. | koszt=3.25
+  Pakiet grillowy z kiełbasą                              | 10 sk. | koszt=—
+  Pieczony Łosoś z Szparagami i Ziemniakami               | 5 sk. | koszt=22.75
+  Pierś z kurczaka faszerowana brokułami i cheddarem z pilawem ryżowym | 20 sk. | koszt=13.27
+  Placki wołowe z ryżem i kukurydzą oraz smażonymi warzywami | 12 sk. | koszt=—
+  Pudełka Z Owocami I Białkiem                            | 5 sk. | koszt=—
+  Pudełko Przekąsek z Tuńczykiem                          | 4 sk. | koszt=—
+  Pulpety w 20 Minut                                      | 7 sk. | koszt=—
+  Roladki z Indykiem, Bekonem i Ranch w Pudełkach         | 7 sk. | koszt=—
+  Rolka Sushi z Awokado i Mango                           | 6 sk. | koszt=—
+  Ryż Kalafiorowy z Roślinami Strączkowymi i Szaszłykami z Kurczaka | 12 sk. | koszt=7.84
+  Ryż z Kolendrą i Limonką                                | 6 sk. | koszt=—
+  Sałatka Grecka                                          | 8 sk. | koszt=—
+  Sałatka Grecka                                          | 6 sk. | koszt=—
+  Sałatka Jajeczna z Awokado na Zapas                     | 7 sk. | koszt=—
+  Sałatka Z Kurczakiem I Komosą Ryżową                    | 8 sk. | koszt=—
+  Sałatka z Kurczakiem                                    | 7 sk. | koszt=—
+  Sałatka z pulled pork w liściach sałaty                 | 10 sk. | koszt=—
+  Sałatka Śniadaniowa z Wędzonym Łososiem i Soczewicą     | 12 sk. | koszt=—
+  Szynka z Melasą i Musztardą Dijon z Pieczonymi Warzywami w Air Fryer | 16 sk. | koszt=17.87
+  Talerz z kalafiorem tabbouleh i łososiem                | 15 sk. | koszt=—
+  Udka z Kurczaka w Maśle Kokosowym z Czosnkiem i Zoodles | 15 sk. | koszt=—
+  Wegańska Sałatka Grecka z Ciecierzycą Meal Prep         | 15 sk. | koszt=—
+  Wegański Hash z Grzybami i Quinoa na Śniadanie          | 10 sk. | koszt=—
+  Wołowina Firecracker                                    | 10 sk. | koszt=14.92
+  Włoska Kiełbasa z Papryką z Blachy                      | 5 sk. | koszt=11.22
+  Zapiekanka z Kurczakiem po Południowo-Zachodnim         | 17 sk. | koszt=—
+  Ziemniaczane Łódeczki w Boczku                          | 7 sk. | koszt=—
+  Zimna zupa z awokado                                    | 10 sk. | koszt=—
+  Zupa Gołąbkowa z Wolnowaru                              | 15 sk. | koszt=—
+  Zupa z soczewicy w wolnowarze                           | 16 sk. | koszt=—
+  Łosoś Z Soczewicą I Brokułami                           | 13 sk. | koszt=—
+  Łosoś Z Warzywami Z Blachy                              | 7 sk. | koszt=—
+  Żeberka Wołowe Bbq Z Instant Pot                        | 21 sk. | koszt=—

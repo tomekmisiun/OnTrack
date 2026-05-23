@@ -41,6 +41,8 @@ class Recipe(db.Model):
     is_favorite = db.Column(db.Boolean, nullable=False, default=False)
     image_url = db.Column(db.Text, nullable=True)
     source_url = db.Column(db.Text, nullable=True)
+    category = db.Column(db.String(20), nullable=True)
+    lang = db.Column(db.String(5), nullable=True, default='pl')
     kcal_100g = db.Column(db.Float, nullable=True)
     protein_100g = db.Column(db.Float, nullable=True)
     fat_100g = db.Column(db.Float, nullable=True)
@@ -95,7 +97,8 @@ class Recipe(db.Model):
         return round(total, 2)
 
     def to_dict_summary(self):
-        """Nagłówek przepisu z kosztem — bez pełnych danych składników."""
+        """Nagłówek przepisu z kosztem i makro."""
+        kcal, protein, fat, carbs = self._calc_macros()
         return {
             'id': self.id,
             'name': self.name,
@@ -103,16 +106,18 @@ class Recipe(db.Model):
             'is_favorite': bool(self.is_favorite),
             'ingredients': [],
             'total_cost': self._quick_cost(),
-            'total_kcal': 0,
-            'total_protein': 0,
-            'total_fat': 0,
-            'total_carbs': 0,
+            'total_kcal': kcal,
+            'total_protein': protein,
+            'total_fat': fat,
+            'total_carbs': carbs,
             'kcal_100g': self.kcal_100g,
             'protein_100g': self.protein_100g,
             'fat_100g': self.fat_100g,
             'carbs_100g': self.carbs_100g,
             'image_url': self.image_url,
             'source_url': self.source_url,
+            'category': self.category,
+            'lang': self.lang,
         }
 
     def to_dict(self):
@@ -130,4 +135,6 @@ class Recipe(db.Model):
             'total_carbs': carbs,
             'image_url': self.image_url,
             'source_url': self.source_url,
+            'category': self.category,
+            'lang': self.lang,
         }

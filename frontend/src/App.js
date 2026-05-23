@@ -14,7 +14,7 @@ import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { ToastProvider } from './contexts/ToastContext';
 import { MemberProvider } from './contexts/MemberContext';
 import { Icon } from '@iconify/react';
-import { TOUR_STEPS, TOUR_LOCALE, TOUR_STYLES } from './tour-steps';
+import { getTourSteps, getTourLocale, TOUR_STYLES } from './tour-steps';
 import './App.css';
 
 const TAB_ICONS = {
@@ -22,6 +22,7 @@ const TAB_ICONS = {
   calendar: 'heroicons:calendar-days',
   recipes:  'heroicons:book-open',
   products: 'heroicons:shopping-cart',
+  mapping:  'heroicons:arrow-path',
   summary:  'heroicons:banknotes',
   export:   'heroicons:arrow-down-tray',
 };
@@ -76,7 +77,7 @@ function AppInner({ onStartTour }) {
         </div>
 
         <div className="sidebar-profile">
-          <span className="sidebar-profile-label">Obecny profil</span>
+          <span className="sidebar-profile-label">{t('current_profile')}</span>
           <MemberPicker />
         </div>
 
@@ -124,7 +125,7 @@ function AppInner({ onStartTour }) {
 }
 
 function AppWithTour() {
-  const { switchLang } = useLanguage();
+  const { switchLang, lang } = useLanguage();
   const [tourRun, setTourRun] = useState(false);
 
   useEffect(() => {
@@ -144,7 +145,7 @@ function AppWithTour() {
       return;
     }
     if (type === EVENTS.STEP_BEFORE) {
-      const step = TOUR_STEPS[index];
+      const step = getTourSteps(lang)[index];
       if (step?.gotoTab) {
         window.dispatchEvent(new CustomEvent('tour-goto-tab', { detail: { tab: step.gotoTab } }));
       }
@@ -160,14 +161,14 @@ function AppWithTour() {
     <AuthProvider onLangChange={switchLang}>
       <MemberProvider>
         <Joyride
-          steps={TOUR_STEPS}
+          steps={getTourSteps(lang)}
           run={tourRun}
           continuous
           showSkipButton
           showProgress
           scrollToFirstStep
           disableScrolling={false}
-          locale={TOUR_LOCALE}
+          locale={getTourLocale(lang)}
           styles={TOUR_STYLES}
           callback={handleTourCallback}
         />

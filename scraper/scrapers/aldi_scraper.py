@@ -177,6 +177,35 @@ def extract_product(content: str, url: str) -> dict | None:
         except ValueError:
             pass
 
+    # Cena za litr z treści strony (np. "£4.38/1 L") — osobno bo normalize_shops tego potrzebuje
+    price_per_litre = None
+    per_l_m = re.search(r'£([\d.]+)/1\s*L\b', content, re.IGNORECASE)
+    if per_l_m:
+        try:
+            price_per_litre = float(per_l_m.group(1))
+        except ValueError:
+            pass
+
+    # Rozmiar opakowania z podtytułu produktu (np. "0.5 L (£4.38/1 L)", "500g (£3.00/1 KG)")
+    # Ten format pojawia się jako subtitle na stronie produktu Aldi
+    pack_volume     = None   # np. 500 (ml) lub 400 (g)
+    pack_volume_unit = None  # "ml" lub "g"
+    vol_m = re.search(
+        r'(\d+(?:\.\d+)?)\s*(g|kg|ml|l|cl)\s*\(£[\d.]+/\d+\s*(?:g|kg|ml|l|cl)\)',
+        content, re.IGNORECASE
+    )
+    if vol_m:
+        try:
+            val = float(vol_m.group(1))
+            u   = vol_m.group(2).lower()
+            if u == "kg":  val *= 1000; u = "g"
+            if u == "l":   val *= 1000; u = "ml"
+            if u == "cl":  val *= 10;   u = "ml"
+            pack_volume      = val
+            pack_volume_unit = u
+        except ValueError:
+            pass
+
     # Wielkość opakowania i cena jednostkowa (np. "4 Each (£0.46/1 Each)", "6 Pack (£0.25/1 Pack)")
     pack_size    = None
     price_per_unit = None
@@ -203,17 +232,20 @@ def extract_product(content: str, url: str) -> dict | None:
     brand = (product_data.get("brand") or {}).get("name", "")
 
     return {
-        "name":           name,
-        "url":            url,
-        "image_url":      image_url,
-        "price":          price,
-        "price_per_kg":   price_per_kg,
-        "pack_size":      pack_size,
-        "price_per_unit": price_per_unit,
-        "currency":       currency,
-        "category":       category,
-        "brand":          brand,
-        "description":    description,
+        "name":             name,
+        "url":              url,
+        "image_url":        image_url,
+        "price":            price,
+        "price_per_kg":     price_per_kg,
+        "price_per_litre":  price_per_litre,
+        "pack_volume":      pack_volume,
+        "pack_volume_unit": pack_volume_unit,
+        "pack_size":        pack_size,
+        "price_per_unit":   price_per_unit,
+        "currency":         currency,
+        "category":         category,
+        "brand":            brand,
+        "description":      description,
     }
 
 

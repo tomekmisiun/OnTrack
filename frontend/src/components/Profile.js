@@ -122,7 +122,7 @@ export default function Profile({ onClose, onStartTour }) {
           </button>
           {onStartTour && (
             <button onClick={onStartTour} style={{ width: '100%', padding: '10px', border: '1px solid #0d9488', borderRadius: 8, background: 'none', cursor: 'pointer', fontSize: 14, color: '#0d9488', fontWeight: 600, marginBottom: 8 }}>
-              ▶ Pokaż samouczek
+              ▶ {t('show_tutorial')}
             </button>
           )}
           <button onClick={onClose} style={{ width: '100%', padding: '10px', border: '1px solid #e0e0e0', borderRadius: 8, background: 'none', cursor: 'pointer', fontSize: 14, color: '#9ca3af' }}>
@@ -141,7 +141,7 @@ export default function Profile({ onClose, onStartTour }) {
             <h3 style={{ fontSize: 16, color: '#f1f5f9', marginBottom: 12, textAlign: 'center' }}>
               {lang === 'en' ? 'Change account language?' : 'Zmienić język konta?'}
             </h3>
-            <div style={{ fontSize: 13, color: '#9ca3af', lineHeight: 1.7, marginBottom: 20, background: '#fff9f0', border: '1px solid #ffd9a0', borderRadius: 8, padding: '12px 14px' }}>
+            <div style={{ fontSize: 13, color: '#e2e8f0', lineHeight: 1.7, marginBottom: 20, background: '#111827', border: '1px solid #f59e0b55', borderRadius: 8, padding: '12px 14px' }}>
               {lang === 'en' ? (
                 <>
                   <b>Important:</b> The data you have in <b>{langName(user.lang)}</b> (products, recipes, meal plan) <b>will not be available</b> after switching to <b>{langName(pendingLang)}</b>.<br /><br />
@@ -164,7 +164,7 @@ export default function Profile({ onClose, onStartTour }) {
               </button>
               <button
                 onClick={() => { setShowLangWarning(false); setPendingLang(null); }}
-                style={{ flex: 1, padding: '11px', border: '1px solid #e0e0e0', borderRadius: 8, background: 'none', color: '#9ca3af', fontSize: 14, cursor: 'pointer' }}
+                style={{ flex: 1, padding: '11px', border: '1px solid #374151', borderRadius: 8, background: 'none', color: '#9ca3af', fontSize: 14, cursor: 'pointer' }}
               >
                 {t('cancel')}
               </button>

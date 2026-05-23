@@ -2,14 +2,13 @@
 """
 Krok 4: Buduje bazę składników i przepisów z dopasowań.
 - ingredient_db_en/pl.json: składniki z dopasowaniem
-- unmatched_en/pl.json: składniki bez dopasowania + top kandydaci
 - recipes_en/pl.json: tylko przepisy z 100% pokryciem składników + szacowany koszt
+- debugging/step4_build_database.txt: niedopasowane składniki z top kandydatami
 
 Wejście:  data/matches_en.json, data/matches_pl.json,
           data/recipes_normalized.json,
           data/shops_en.json, data/shops_pl.json
 Wyjście:  data/ingredient_db_en.json, data/ingredient_db_pl.json,
-          data/unmatched_en.json, data/unmatched_pl.json,
           data/recipes_en.json, data/recipes_pl.json
 """
 
@@ -165,14 +164,84 @@ def build_recipes(
     return output
 
 
+# ── Debug report ──────────────────────────────────────────────────────────────
+
+def _write_debug(db_en, db_pl, unmatched_en, unmatched_pl,
+                 recipes_en, recipes_pl, total_recipes):
+    from debug_writer import write_report
+
+    def db_row(name, m):
+        price = m.get("price_per_100")
+        return (f"{name:<35} → {m.get('original_name', ''):<50} "
+                f"| {m.get('shop', ''):<12} | {price if price is not None else '—'}")
+
+    def unmatch_row(u):
+        top = u.get("top_candidates", [])[:3]
+        top_str = ", ".join(f"{c['product']}({c['score']})" for c in top)
+        return f"{u['ingredient_name']:<35} | top: {top_str}"
+
+    def recipe_row_en(r):
+        cost = r.get("estimated_cost_gbp")
+        n_ing = len(r.get("ingredients_en", []))
+        return f"{r.get('name_en', ''):<55} | {n_ing} sk. | koszt={cost if cost is not None else '—'}"
+
+    def recipe_row_pl(r):
+        cost = r.get("estimated_cost_pln")
+        n_ing = len(r.get("ingredients_pl", []))
+        return f"{r.get('name_pl', ''):<55} | {n_ing} sk. | koszt={cost if cost is not None else '—'}"
+
+    sections = [
+        {
+            "title": "Statystyki budowania bazy",
+            "stats": {
+                "Ingredient DB EN":               len(db_en),
+                "Ingredient DB PL":               len(db_pl),
+                "Niedopasowane EN":               len(unmatched_en),
+                "Niedopasowane PL":               len(unmatched_pl),
+                "Przepisy wejściowe":             total_recipes,
+                "Przepisy EN (100% pokrycie)":    len(recipes_en),
+                "Przepisy PL (100% pokrycie)":    len(recipes_pl),
+                "% akceptacji EN":                f"{len(recipes_en)/max(1,total_recipes)*100:.1f}%",
+                "% akceptacji PL":                f"{len(recipes_pl)/max(1,total_recipes)*100:.1f}%",
+                "EN z pełnym kosztem":            sum(1 for r in recipes_en if r.get("cost_complete")),
+                "PL z pełnym kosztem":            sum(1 for r in recipes_pl if r.get("cost_complete")),
+            },
+            "rows": [],
+        },
+        {
+            "title": "EN ingredient_db (ingredient_name → original_name | shop | price_per_100)",
+            "rows": [db_row(k, v) for k, v in sorted(db_en.items())],
+        },
+        {
+            "title": "EN — niedopasowane składniki (top 3 kandydaci)",
+            "rows": [unmatch_row(u) for u in sorted(unmatched_en, key=lambda x: x["ingredient_name"])],
+        },
+        {
+            "title": "PL ingredient_db (ingredient_name → original_name | shop | price_per_100)",
+            "rows": [db_row(k, v) for k, v in sorted(db_pl.items())],
+        },
+        {
+            "title": "PL — niedopasowane składniki (top 3 kandydaci)",
+            "rows": [unmatch_row(u) for u in sorted(unmatched_pl, key=lambda x: x["ingredient_name"])],
+        },
+        {
+            "title": "EN — zaakceptowane przepisy (name | n_ing | koszt GBP)",
+            "rows": [recipe_row_en(r) for r in sorted(recipes_en, key=lambda x: x.get("name_en", ""))],
+        },
+        {
+            "title": "PL — zaakceptowane przepisy (name | n_ing | koszt PLN)",
+            "rows": [recipe_row_pl(r) for r in sorted(recipes_pl, key=lambda x: x.get("name_pl", ""))],
+        },
+    ]
+    write_report(4, "build_database", sections)
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
     outputs = [
         DATA / "ingredient_db_en.json",
         DATA / "ingredient_db_pl.json",
-        DATA / "unmatched_en.json",
-        DATA / "unmatched_pl.json",
         DATA / "recipes_en.json",
         DATA / "recipes_pl.json",
     ]
@@ -209,8 +278,6 @@ def main():
 
     save(DATA / "ingredient_db_en.json", list(db_en.values()))
     save(DATA / "ingredient_db_pl.json", list(db_pl.values()))
-    save(DATA / "unmatched_en.json", unmatched_en)
-    save(DATA / "unmatched_pl.json", unmatched_pl)
     save(DATA / "recipes_en.json",   recipes_en)
     save(DATA / "recipes_pl.json",   recipes_pl)
 
@@ -220,6 +287,9 @@ def main():
         f"recipes EN: {len(recipes_en)}/{len(recipes)}, "
         f"PL: {len(recipes_pl)}/{len(recipes)}"
     )
+
+    _write_debug(db_en, db_pl, unmatched_en, unmatched_pl,
+                 recipes_en, recipes_pl, len(recipes))
 
 
 if __name__ == "__main__":

@@ -9,6 +9,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useToast } from '../contexts/ToastContext';
 import { useMember } from '../contexts/MemberContext';
 import { dateToStr, addDays, toEU, getUpcomingMondays, getCalGrid as getMonthGrid } from '../utils/dates';
+import { fuzzySearch } from '../utils/search';
 
 
 const COLORS = ['#4a6fa5', '#93c5fd', '#fcd34d', '#c2410c', '#6366f1'];
@@ -23,6 +24,7 @@ function plPrzepis(n) {
 // ─── Recipe preview modal ─────────────────────────────────────────────────────
 function RecipePreviewModal({ recipe, onClose }) {
   const { showError } = useToast();
+  const { t } = useLanguage();
   const [fullRecipe, setFullRecipe] = useState(null);
   const [localIngredients, setLocalIngredients] = useState([]);
   const [editingIdx, setEditingIdx] = useState(null);
@@ -61,7 +63,7 @@ function RecipePreviewModal({ recipe, onClose }) {
         j === editingIdx ? { ...x, ...payload } : x
       ));
     } catch (e) {
-      showError('Błąd zapisu makro');
+      showError(t('err_save_notes'));
     }
     setEditingIdx(null);
   };
@@ -111,7 +113,7 @@ function RecipePreviewModal({ recipe, onClose }) {
                     <span style={{ fontSize: 22, fontWeight: 800, color: '#fff' }}>{Math.round(kcal)}</span>
                     <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.8)', marginLeft: 3 }}>kcal{per100 ? '/100g' : ''}</span>
                   </div>
-                  {[['Białko', per100 ? r.protein_100g : r.total_protein], ['Tłuszcz', per100 ? r.fat_100g : r.total_fat], ['Węglowodany', per100 ? r.carbs_100g : r.total_carbs]].map(([lbl, val]) => val != null && (
+                  {[[t('macro_protein'), per100 ? r.protein_100g : r.total_protein], [t('macro_fat'), per100 ? r.fat_100g : r.total_fat], [t('macro_carbs'), per100 ? r.carbs_100g : r.total_carbs]].map(([lbl, val]) => val != null && (
                     <div key={lbl} style={{ background: 'rgba(0,0,0,0.55)', borderRadius: 8, padding: '4px 10px', textAlign: 'center' }}>
                       <div style={{ fontSize: 9, color: 'rgba(255,255,255,0.7)', marginBottom: 1 }}>{lbl}</div>
                       <div style={{ fontSize: 13, fontWeight: 700, color: '#fff' }}>{Math.round(val)}g</div>
@@ -126,13 +128,13 @@ function RecipePreviewModal({ recipe, onClose }) {
         <div className="dark-scroll" style={{ background: '#1c2433', overflowY: 'auto', padding: '16px 20px' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
             <div style={{ fontSize: 11, fontWeight: 700, color: '#0d9488', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-              Składniki
+              {t('show_ingredients')}
             </div>
             <div style={{ fontSize: 10, color: '#9ca3af', textAlign: 'right' }}>
-              Uzupełnij / Edytuj
+              {t('edit_notes')}
             </div>
           </div>
-          {!fullRecipe && <div style={{ textAlign: 'center', color: '#6b7280', fontSize: 12, padding: '12px 0' }}>Ładowanie składników…</div>}
+          {!fullRecipe && <div style={{ textAlign: 'center', color: '#6b7280', fontSize: 12, padding: '12px 0' }}>{t('loading')}</div>}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             {localIngredients.map((ing, i) => {
               const factor  = (ing.unit === 'szt') ? ing.weight : (ing.weight / 100);
@@ -270,7 +272,10 @@ const DraggableRecipe = React.memo(function DraggableRecipe({ recipe, onToggleFa
               </span>
             </div>
             <div style={{display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:3}}>
-              {[['B', displayProtein], ['T', displayFat], ['W', displayCarbs]].map(([lbl, val]) => (
+              {(recipe.lang === 'en'
+                ? [['P', displayProtein], ['F', displayFat], ['C', displayCarbs]]
+                : [['B', displayProtein], ['T', displayFat], ['W', displayCarbs]]
+              ).map(([lbl, val]) => (
                 <div key={lbl} style={{
                   background:'rgba(0,0,0,0.45)', borderRadius:5,
                   padding:'3px 0', textAlign:'center',
@@ -295,10 +300,10 @@ const DraggableRecipe = React.memo(function DraggableRecipe({ recipe, onToggleFa
         flexShrink:0, position:'relative', zIndex:1,
       }}>
         <span style={{ fontSize:8.5, fontWeight:500, color:'rgba(255,255,255,0.5)', letterSpacing:'0.2px' }}>
-          szac. koszt
+          {recipe.lang === 'en' ? 'est. cost' : 'szac. koszt'}
         </span>
         <span style={{ fontSize:10.5, fontWeight:700, color:'rgba(255,255,255,0.9)' }}>
-          {recipe.total_cost.toFixed(2)} zł
+          {recipe.lang === 'en' ? `£${recipe.total_cost.toFixed(2)}` : `${recipe.total_cost.toFixed(2)} zł`}
         </span>
       </div>
     </div>
@@ -326,6 +331,7 @@ function DraggableMeal({ meal, onDelete }) {
 
 // ─── Drag handle for template day ─────────────────────────────────────────────
 function DraggableTplDayHandle({ dayIndex, slots }) {
+  const { t } = useLanguage();
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: `tpl-day-${dayIndex}`, data: { type: 'tpl-day', dayIndex, slots },
   });
@@ -334,7 +340,7 @@ function DraggableTplDayHandle({ dayIndex, slots }) {
       style={{cursor:'grab',opacity:isDragging?0.4:1,userSelect:'none',touchAction:'none',
         background:'#374151',border:'none',borderRadius:4,padding:'3px 7px',
         fontSize:10,fontWeight:700,color:'#9ca3af',lineHeight:1.3,display:'inline-flex',alignItems:'center'}}>
-      Chwyć
+      {t('btn_grab')}
     </span>
   );
 }
@@ -361,7 +367,7 @@ function DraggableDayHandle({ dateStr, meals }) {
       style={{cursor:'grab',opacity:isDragging?0.4:1,marginLeft:3,userSelect:'none',touchAction:'none',
         background:'#374151',borderRadius:4,padding:'3px 8px',
         fontSize:10,fontWeight:700,color:'#9ca3af',display:'inline-flex',alignItems:'center',verticalAlign:'middle',lineHeight:1.3}}>
-      Chwyć
+      {t('btn_grab')}
     </span>
   );
 }
@@ -456,7 +462,7 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
                   border:'none', borderRadius:4, cursor:'pointer',
                   fontSize:10, fontWeight:700, padding:'3px 7px', lineHeight:1.3,
                 }}>
-                {copiedDay===dateStr ? 'Skopiowano' : 'Kopiuj'}
+                {copiedDay===dateStr ? t('btn_copied') : t('btn_copy')}
               </button>
             )}
             {canPaste && (
@@ -467,7 +473,7 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
                   border:'none', borderRadius:4, cursor:'pointer',
                   fontSize:10, fontWeight:700, padding:'3px 7px', lineHeight:1.3,
                 }}>
-                Wklej
+                {t('btn_paste')}
               </button>
             )}
             {hasMeals && (
@@ -478,7 +484,7 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
                   border:'none', borderRadius:4, cursor:'pointer',
                   fontSize:10, fontWeight:700, padding:'3px 7px', lineHeight:1.3,
                 }}>
-                Usuń
+                {t('btn_delete')}
               </button>
             )}
           </span>
@@ -508,13 +514,13 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
               </div>
               {totalCost > 0 && (
                 <div style={{flexShrink:0,textAlign:'right'}}>
-                  <div style={{color:'#6b7280',fontSize:8,fontWeight:500,lineHeight:1}}>szac. koszt</div>
-                  <div style={{color:'#0d9488',fontWeight:700,fontSize:11,lineHeight:1.2}}>{totalCost.toFixed(2)} zł</div>
+                  <div style={{color:'#6b7280',fontSize:8,fontWeight:500,lineHeight:1}}>{t('est_cost')}</div>
+                  <div style={{color:'#0d9488',fontWeight:700,fontSize:11,lineHeight:1.2}}>{totalCost.toFixed(2)} {t('currency')}</div>
                 </div>
               )}
             </div>
             <div style={{fontSize:11,whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>
-              {[['B',Math.round(totalProtein),macroGoals?.protein],['T',Math.round(totalFat),macroGoals?.fat],['W',Math.round(totalCarbs),macroGoals?.carbs]].map(([lbl,val,tgt],i)=>(
+              {[[t('macro_p'),Math.round(totalProtein),macroGoals?.protein],[t('macro_f'),Math.round(totalFat),macroGoals?.fat],[t('macro_c'),Math.round(totalCarbs),macroGoals?.carbs]].map(([lbl,val,tgt],i)=>(
                 <span key={lbl} style={{marginLeft:i>0?4:0}}>
                   <span style={{color:'#6b7280'}}>{lbl}:</span>
                   <span style={{color: tgt ? macroColor(val,tgt) : '#9ca3af'}}>{val}</span>
@@ -630,7 +636,7 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
                     {dayHasContent && (
                       <button onClick={()=>handleCopyTplDay(di)}
                         style={{background:copiedTplDay===di?'#0d9488':'#1e3a3a',color:copiedTplDay===di?'white':'#2dd4bf',border:'none',borderRadius:4,cursor:'pointer',fontSize:10,fontWeight:700,padding:'3px 7px',lineHeight:1.3}}>
-                        {copiedTplDay===di?'Skopiowano':'Kopiuj'}
+                        {copiedTplDay===di?t('btn_copied'):t('btn_copy')}
                       </button>
                     )}
                     {copiedTplDay!==null && copiedTplDay!==di && (
@@ -781,7 +787,7 @@ function OverlayContent({ dragData }) {
   const isTplDay = dragData.type === 'tpl-day';
   const label = isDay
     ? `${dragData.dateStr} (${dragData.meals?.length||0} ${t('meals_count')(dragData.meals?.length||0).replace(/^\d+ /,'')})`
-    : isTplDay ? 'Przeciągnij dzień szablonu'
+    : isTplDay ? t('drag_day_title')
     : dragData.type==='recipe' ? dragData.recipe.name : dragData.meal.recipe.name;
   const bg = isDay || isTplDay ? 'linear-gradient(135deg,#0d9488,#0f766e)'
     : dragData.type==='recipe' ? 'linear-gradient(135deg,#0d9488,#0f766e)'
@@ -821,9 +827,9 @@ const PAGE    = 20;
 
 function CarouselList({ recipes, search, visible, setVisible, scrollRef, dragRef, onPreview, onToggleFavorite, t }) {
   const filtered = useMemo(() => {
-    const q = search.trim().toLowerCase();
+    const q = search.trim();
     const sorted = [...recipes].sort((a, b) => (b.is_favorite ? 1 : 0) - (a.is_favorite ? 1 : 0));
-    return q ? sorted.filter(r => r.name.toLowerCase().includes(q)) : sorted;
+    return q ? sorted.filter(r => fuzzySearch(q, r.name)) : sorted;
   }, [recipes, search]);
 
   // reset okna gdy zmienia się wyszukiwanie
@@ -883,7 +889,9 @@ export default function Calendar({ onGoToTab }) {
   const [howToOpen,setHowToOpen]     = useState(false);
   const [carouselOpen,setCarouselOpen] = useState(true);
   const [recipeSearch, setRecipeSearch] = useState('');
+  const [carouselCatFilter, setCarouselCatFilter] = useState(null);
   const [carouselVisible, setCarouselVisible] = useState(30);
+  const handleCarouselCatFilter = (val) => { setCarouselCatFilter(val); setCarouselVisible(30); };
   const carouselScrollRef = useRef(null);
   const carouselDrag = useRef({ active: false, startX: 0, scrollLeft: 0 });
   const handleToggleFavorite = useCallback(async (id) => {
@@ -966,11 +974,11 @@ export default function Calendar({ onGoToTab }) {
     const meals = mealsByDate[dateStr]||[];
     if (!meals.length) return;
     showConfirm({
-      title: 'Usuń cały dzień',
+      title: t('del_day_title'),
       message: `Usunąć wszystkie posiłki (${meals.length}) z dnia ${toEU(dateStr)}?`,
-      confirmLabel: 'Usuń',
+      confirmLabel: t('btn_delete'),
       onConfirm: async () => {
-        try { await Promise.all(meals.map(m=>api.deleteMeal(m.id))); showSuccess('Dzień usunięty'); await loadMonth(year,month); }
+        try { await Promise.all(meals.map(m=>api.deleteMeal(m.id))); showSuccess(t('day_deleted_ok')); await loadMonth(year,month); }
         catch { showError(t('err_del_meals')); }
       },
     });
@@ -994,11 +1002,11 @@ export default function Calendar({ onGoToTab }) {
     }
     if (!allMeals.length) return;
     showConfirm({
-      title: 'Usuń cały tydzień',
+      title: t('del_week_title'),
       message: `Usunąć wszystkie posiłki tego tygodnia (${allMeals.length})?`,
-      confirmLabel: 'Usuń',
+      confirmLabel: t('btn_delete'),
       onConfirm: async () => {
-        try { await Promise.all(allMeals.map(m=>api.deleteMeal(m.id))); showSuccess('Tydzień usunięty'); await loadMonth(year, month); }
+        try { await Promise.all(allMeals.map(m=>api.deleteMeal(m.id))); showSuccess(t('week_deleted_ok')); await loadMonth(year, month); }
         catch { showError(t('err_del_week')); }
       },
     });
@@ -1151,12 +1159,12 @@ export default function Calendar({ onGoToTab }) {
             <button
               onClick={e=>{e.stopPropagation();onGoToTab?.('recipes');}}
               style={{background:'#0d948820',border:'1px solid #0d9488',borderRadius:6,padding:'3px 10px',fontSize:11,fontWeight:600,color:'#2dd4bf',cursor:'pointer',lineHeight:1.4}}>
-              + Stwórz przepis
+              {t('btn_create_recipe')}
             </button>
             <button
               onClick={e=>{e.stopPropagation();setTplOpen(true);setTimeout(()=>document.getElementById('template-section')?.scrollIntoView({behavior:'smooth',block:'start'}),100);}}
               style={{background:'#0d948820',border:'1px solid #0d9488',borderRadius:6,padding:'3px 10px',fontSize:11,fontWeight:600,color:'#2dd4bf',cursor:'pointer',lineHeight:1.4}}>
-              + Stwórz szablon
+              {t('btn_create_template')}
             </button>
             {!carouselOpen && <span style={{fontSize:11,color:'#6b7280'}}>{plPrzepis(recipes.length)}</span>}
           </div>
@@ -1164,19 +1172,31 @@ export default function Calendar({ onGoToTab }) {
         </div>
         {carouselOpen && (
           <div style={{padding:'0 16px 14px',borderTop:'1px solid #374151'}}>
-            <div style={{display:'flex',alignItems:'center',gap:12,marginBottom:10,marginTop:10}}>
+            <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:8,marginTop:10,flexWrap:'wrap'}}>
               <input
                 value={recipeSearch}
                 onChange={e => setRecipeSearch(e.target.value)}
-                placeholder="Szukaj przepisu..."
-                style={{flex:1,maxWidth:240,padding:'4px 10px',fontSize:12,background:'#111827',border:'1px solid #374151',borderRadius:6,color:'#f1f5f9',outline:'none'}}
+                placeholder={t('search_recipe_ph')}
+                style={{flex:'0 0 200px',padding:'4px 10px',fontSize:12,background:'#111827',border:'1px solid #374151',borderRadius:6,color:'#f1f5f9',outline:'none'}}
                 onFocus={e => e.target.style.borderColor='#0d9488'}
                 onBlur={e => e.target.style.borderColor='#374151'}
               />
-              <span style={{fontSize:11,color:'#6b7280',flexShrink:0}}>{t('drag_to_cal')}</span>
+              {[{value:null,label:t('cat_all')},...[
+                {value:'breakfast',label:t('cat_breakfast')},
+                {value:'lunch',label:t('cat_lunch')},
+                {value:'dinner',label:t('cat_dinner')},
+                {value:'snack',label:t('cat_snack')},
+                {value:'dessert',label:t('cat_dessert')},
+              ]].map(cat => (
+                <button key={cat.value ?? 'all'} onClick={() => handleCarouselCatFilter(cat.value)}
+                  style={{padding:'3px 10px',border:`1.5px solid ${carouselCatFilter===cat.value?'#0d9488':'#374151'}`,borderRadius:20,fontSize:11,cursor:'pointer',background:carouselCatFilter===cat.value?'#0d948822':'transparent',color:carouselCatFilter===cat.value?'#2dd4bf':'#6b7280',fontWeight:carouselCatFilter===cat.value?700:400,transition:'all 0.15s',whiteSpace:'nowrap'}}>
+                  {cat.label}
+                </button>
+              ))}
+              <span style={{fontSize:11,color:'#6b7280',flexShrink:0,marginLeft:'auto'}}>{t('drag_to_cal')}</span>
             </div>
             <CarouselList
-              recipes={recipes}
+              recipes={carouselCatFilter ? recipes.filter(r => r.category === carouselCatFilter) : recipes}
               search={recipeSearch}
               visible={carouselVisible}
               setVisible={setCarouselVisible}
@@ -1215,19 +1235,19 @@ export default function Calendar({ onGoToTab }) {
                 {weekHasMeals && (
                   <button onClick={()=>handleCopyWeek(mondayStr)} title={t('copy_week_title')}
                     style={{...wBtn, background:isCopied?'#0d9488':'#1e3a3a', color:isCopied?'white':'#2dd4bf', border:'1px solid #374151'}}>
-                    {isCopied ? 'Skopiowano' : 'Kopiuj'}
+                    {isCopied ? t('btn_copied') : t('btn_copy')}
                   </button>
                 )}
                 {copiedWeek && copiedWeek!==mondayStr && (
                   <button onClick={()=>handlePasteWeek(mondayStr)} title={t('paste_week_title')}
                     style={{...wBtn, background:'#1e3358', color:'#93c5fd', border:'1px solid #374151'}}>
-                    Wklej
+                    {t('btn_paste')}
                   </button>
                 )}
                 {weekHasMeals && (
                   <button onClick={()=>handleDeleteWeek(mondayStr)} title={t('del_week_title')}
                     style={{...wBtn, background:'#2d1515', color:'#f87171', border:'1px solid #4b1515'}}>
-                    Usuń
+                    {t('btn_delete')}
                   </button>
                 )}
               </div>
@@ -1273,37 +1293,35 @@ export default function Calendar({ onGoToTab }) {
               <div>
                 <div style={{fontWeight:700,color:'#0d9488',marginBottom:6}}>{t('ht_meals_title')}</div>
                 <ul style={{margin:0,paddingLeft:16,color:'#9ca3af'}}>
-                  <li>Chwyć przepis z karuzeli na górze i przeciągnij na wybrany slot w dniu</li>
-                  <li>Posiłek możesz przenieść między dniami przeciągając go za nazwę</li>
-                  <li>Kliknij{' '}<Btn>✕</Btn>{' '}przy posiłku żeby go usunąć, lub{' '}<Btn danger>Usuń</Btn>{' '}w nagłówku dnia żeby wyczyścić cały dzień</li>
+                  <li>{t('ht_meals_1')}</li>
+                  <li>{t('ht_meals_2')}</li>
+                  <li>{t('ht_meals_3')}</li>
                 </ul>
               </div>
               <div>
                 <div style={{fontWeight:700,color:'#0d9488',marginBottom:6}}>{t('ht_copy_title')}</div>
                 <ul style={{margin:0,paddingLeft:16,color:'#9ca3af'}}>
-                  <li><Btn>Kopiuj</Btn> w nagłówku dnia kopiuje dzień do schowka</li>
-                  <li><Btn paste>Wklej</Btn> w nagłówku dnia wkleja schowek na inny dzień</li>
-                  <li>Przeciągaj dzień na inny dzień żeby skopiować go bezpośrednio</li>
-                  <li>Kopiuj, wklej lub usuń cały tydzień przyciskami po lewej każdego wiersza</li>
+                  <li>{t('ht_copy_1')}</li>
+                  <li>{t('ht_copy_2')}</li>
+                  <li>{t('ht_copy_3')}</li>
+                  <li>{t('ht_copy_4')}</li>
                 </ul>
               </div>
               <div>
                 <div style={{fontWeight:700,color:'#0d9488',marginBottom:6}}>{t('ht_tpl_title')}</div>
                 <ul style={{margin:0,paddingLeft:16,color:'#9ca3af'}}>
-                  <li>Kliknij <Btn>Kopiuj</Btn> obok tygodnia — załaduje posiłki do edytora szablonu</li>
-                  <li>W edytorze przeciągaj przepisy na dni tygodnia, wpisz nazwę i kliknij <Btn>Zapisz szablon</Btn></li>
-                  <li>Szablon możesz zastosować na dowolny przyszły tydzień</li>
+                  <li>{t('ht_tpl_1')}</li>
+                  <li>{t('ht_tpl_2')}</li>
+                  <li>{t('ht_tpl_3')}</li>
+                  <li>{t('ht_tpl_4')}</li>
                 </ul>
               </div>
             </div>
             <div style={{marginTop:14,paddingTop:12,borderTop:'1px solid #374151'}}>
               <div style={{fontWeight:700,color:'#0d9488',marginBottom:6}}>{t('ht_macro_title')}</div>
               <ul style={{margin:0,paddingLeft:16,color:'#9ca3af'}}>
-                <li>Zapisz cele makro w zakładce{' '}
-                  <button onClick={()=>onGoToTab?.('macro')} style={{background:'none',border:'none',color:'#2dd4bf',cursor:'pointer',padding:0,fontSize:12,textDecoration:'underline'}}>Kalkulator Makro</button>
-                  {' '}(kcal, białko, tłuszcze, węgle)
-                </li>
-                <li>Pod każdym dniem z posiłkami pojawi się podsumowanie: aktualna / cel</li>
+                <li>{t('ht_macro_1')}</li>
+                <li>{t('ht_macro_2')}</li>
                 <li>
                   {t('ht_macro_3').split('·').map((part, i, arr) => {
                     const colors = ['#22c55e','#eab308','#ef4444'];
