@@ -95,12 +95,14 @@ def google_callback():
         pending_lang = request.cookies.get('pending_lang') or 'pl'
         user = _find_or_create_oauth_user(email)
         if is_new:
-            from app.seeds import seed_user
+            from app.seeds import _seed_products, _seed_recipes
             from app.models.household_member import HouseholdMember
             lang = pending_lang if pending_lang in ('pl', 'en') else 'pl'
             user.lang = lang
             db.session.commit()
-            seed_user(user.id, lang=lang)
+            # Quick JSON seeds only — full pipeline import runs lazily via /me
+            _seed_products(user.id, lang=lang)
+            _seed_recipes(user.id, lang=lang)
             primary = HouseholdMember(user_id=user.id, name=default_primary_member_name(lang), is_primary=True)
             db.session.add(primary)
             db.session.commit()
@@ -109,6 +111,7 @@ def google_callback():
         code = AuthCode.issue(user.id, ttl_seconds=ttl)
         return _frontend_redirect(f'?{urlencode({"code": code})}')
     except Exception:
+        current_app.logger.exception('Google OAuth callback failed')
         return _frontend_redirect(f'?{urlencode({"auth_error": "Login error"})}')
 
 
