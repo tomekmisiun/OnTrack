@@ -7,6 +7,7 @@ from app.models.auth_code import AuthCode
 from app.utils import default_primary_member_name, sync_primary_member_name
 from urllib.parse import urlencode
 import os
+import threading
 
 auth_bp = Blueprint('auth', __name__)
 oauth = OAuth()
@@ -43,16 +44,30 @@ def _auth_error_redirect(message: str):
     return _frontend_redirect(f'?{urlencode({"auth_error": message[:220]})}')
 
 
+def _schedule_catalog_seed(user_id: int, lang: str):
+    """Run heavy catalog import in background so /me stays fast."""
+    app = current_app._get_current_object()
+
+    def _run():
+        with app.app_context():
+            try:
+                from app.seeds import catalog_needs_repair, ensure_user_seeded, import_lang_from_pipeline
+                ensure_user_seeded(user_id, lang)
+                if catalog_needs_repair(user_id, lang):
+                    import_lang_from_pipeline(user_id, lang, replace=True)
+            except Exception:
+                app.logger.exception('Background catalog seed failed for user %s', user_id)
+
+    threading.Thread(target=_run, daemon=True, name=f'seed-{user_id}').start()
+
+
 @auth_bp.route('/me', methods=['GET'])
 @jwt_required()
 def me():
     user = User.query.get(int(get_jwt_identity()))
     if not user:
         return jsonify({'error': 'User not found'}), 404
-    from app.seeds import catalog_needs_repair, import_lang_from_pipeline, ensure_user_seeded
-    ensure_user_seeded(user.id, user.lang)
-    if catalog_needs_repair(user.id, user.lang):
-        import_lang_from_pipeline(user.id, user.lang, replace=True)
+    _schedule_catalog_seed(user.id, user.lang)
     sync_primary_member_name(user)
     return jsonify(user.to_dict())
 
@@ -160,11 +175,8 @@ def change_language():
         return jsonify({'error': 'User not found'}), 404
     user.lang = lang
     db.session.commit()
-
-    from app.seeds import ensure_user_seeded
-    ensure_user_seeded(user.id, lang)
+    _schedule_catalog_seed(user.id, lang)
     sync_primary_member_name(user)
-
     return jsonify(user.to_dict())
 
 

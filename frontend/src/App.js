@@ -26,10 +26,8 @@ const TAB_ICONS = {
   export:   'heroicons:arrow-down-tray',
 };
 
-const TOUR_KEY = 'mealplanner_tour_done';
-
 function AppInner({ onStartTour }) {
-  const { user, loading, logout } = useAuth();
+  const { user, logout } = useAuth();
   const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('calendar');
   const [showProfile, setShowProfile] = useState(false);
@@ -50,14 +48,6 @@ function AppInner({ onStartTour }) {
     { id: 'summary',  label: t('tab_summary') },
     { id: 'export',   label: t('tab_export') },
   ];
-
-  if (loading) {
-    return (
-      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #0d9488 0%, #0f766e 100%)' }}>
-        <div style={{ color: '#1f2937', fontSize: 18 }}>{t('loading')}</div>
-      </div>
-    );
-  }
 
   if (!user) return <Login />;
 
@@ -126,16 +116,6 @@ function AppInner({ onStartTour }) {
 function AppWithTour() {
   const { switchLang, lang } = useLanguage();
   const [tourRun, setTourRun] = useState(false);
-
-  useEffect(() => {
-    if (!localStorage.getItem(TOUR_KEY)) {
-      const t = setTimeout(() => {
-        localStorage.setItem(TOUR_KEY, '1');
-        setTourRun(true);
-      }, 800);
-      return () => clearTimeout(t);
-    }
-  }, []);
 
   const handleTourCallback = useCallback((data) => {
     const { status, type, action, index } = data;
