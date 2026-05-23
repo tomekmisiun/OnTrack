@@ -78,14 +78,14 @@ def resolve_recipe_image_url(
     fallback_url: str | None = None,
     api_key: str | None = None,
 ) -> str | None:
-    """Prefer Pexels; never keep broken meal-prep blog URLs as fallback."""
+    """Prefer Pexels when configured; otherwise use the source recipe thumbnail."""
     term = pexels_search_term(
         recipe_name, name_en, lang=lang, source_url=source_url,
     )
     url = fetch_pexels_image(term, api_key)
     if url:
         return url
-    if fallback_url and not is_source_recipe_image(fallback_url):
+    if fallback_url:
         return fallback_url
     return None
 

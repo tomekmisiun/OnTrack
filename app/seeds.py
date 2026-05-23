@@ -119,6 +119,39 @@ def import_lang_from_pipeline(user_id: int, lang: str, replace: bool = False) ->
     return True
 
 
+def backfill_recipe_images(user_id: int, lang: str) -> int:
+    """Set image_url from pipeline JSON for recipes missing thumbnails."""
+    recipes_file = SCRAPER_DATA / f"recipes_{lang}.json"
+    if not recipes_file.exists():
+        return 0
+
+    raw = json.loads(recipes_file.read_text(encoding="utf-8"))
+    name_key = "name_en" if lang == "en" else "name_pl"
+    by_source = {
+        (r.get("url") or "").strip(): r.get("image_url")
+        for r in raw if r.get("image_url")
+    }
+    by_name = {
+        (r.get(name_key) or "").strip().lower(): r.get("image_url")
+        for r in raw if r.get("image_url")
+    }
+
+    updated = 0
+    for recipe in Recipe.query.filter_by(user_id=user_id, lang=lang).all():
+        if recipe.image_url:
+            continue
+        url = by_source.get((recipe.source_url or "").strip())
+        if not url:
+            url = by_name.get(recipe.name.strip().lower())
+        if url:
+            recipe.image_url = url
+            updated += 1
+
+    if updated:
+        db.session.commit()
+    return updated
+
+
 def seed_user(user_id: int, lang: str = "pl"):
     """Create default products and recipes for a new user."""
     if import_lang_from_pipeline(user_id, lang):
@@ -128,20 +161,23 @@ def seed_user(user_id: int, lang: str = "pl"):
 
 
 def ensure_user_seeded(user_id: int, lang: str):
-    """Ensure the user has a healthy catalog for the given language."""
-    if _pipeline_available(lang):
-        if (
-            catalog_needs_repair(user_id, lang)
-            or _catalog_product_count(user_id, lang) == 0
-            or not Recipe.query.filter_by(user_id=user_id, lang=lang).first()
-        ):
-            import_lang_from_pipeline(user_id, lang, replace=True)
-        return
+    """Ensure the user has a catalog for the given language (fast JSON seeds first)."""
+    has_products = Product.query.filter_by(user_id=user_id, lang=lang).filter(Product.price > 0).first()
+    has_recipes = Recipe.query.filter_by(user_id=user_id, lang=lang).first()
 
-    if not Product.query.filter_by(user_id=user_id, lang=lang).filter(Product.price > 0).first():
+    if not has_products:
         _seed_products(user_id, lang)
-    if not Recipe.query.filter_by(user_id=user_id, lang=lang).first():
+    if not has_recipes:
         _seed_recipes(user_id, lang)
+
+    # Heavy pipeline import only when JSON seeds left the catalog empty.
+    if _pipeline_available(lang):
+        if not Product.query.filter_by(user_id=user_id, lang=lang).filter(Product.price > 0).first():
+            import_lang_from_pipeline(user_id, lang, replace=False)
+        elif not Recipe.query.filter_by(user_id=user_id, lang=lang).first():
+            import_lang_from_pipeline(user_id, lang, replace=False)
+
+    backfill_recipe_images(user_id, lang)
 
 
 def _seed_products(user_id: int, lang: str):
@@ -196,6 +232,7 @@ def _seed_recipes(user_id: int, lang: str):
                 name_en=r.get("name_en"),
                 lang=lang,
                 source_url=r.get("source_url"),
+                fallback_url=r.get("image_url"),
             ),
             source_url=r.get("source_url"),
             category=category,

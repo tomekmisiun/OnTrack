@@ -118,7 +118,7 @@ def build_recipes_seed(lang: str) -> list[dict]:
             "name": r[name_key],
             "name_en": r.get("name_en") if lang == "pl" else None,
             "source_url": r.get("url"),
-            "image_url": None,
+            "image_url": r.get("image_url"),
             "category": category,
             "notes": None,
             "ingredients": ingredients_out,

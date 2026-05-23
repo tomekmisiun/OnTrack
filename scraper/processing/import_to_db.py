@@ -36,12 +36,14 @@ def _resolve_import_image(
     name_en: str | None,
     source_url: str | None,
     lang: str,
+    fallback_url: str | None = None,
 ) -> str | None:
     return resolve_recipe_image_url(
         recipe_name,
         name_en=name_en,
         lang=lang,
         source_url=source_url,
+        fallback_url=fallback_url,
     )
 
 
@@ -1131,7 +1133,7 @@ def import_recipes(user_id: int, lang: str, product_map: dict[str, int], macro_m
             user_id   = user_id,
             name      = name[:100],
             image_url = _resolve_import_image(
-                name, r.get("name_en"), r.get("url"), lang,
+                name, r.get("name_en"), r.get("url"), lang, r.get("image_url"),
             ),
             source_url= r.get("url"),
             category  = category,
