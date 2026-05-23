@@ -1,19 +1,19 @@
 # Krok 2: normalize shops
-# Wygenerowano: 2026-05-23 14:08:36
+# Wygenerowano: 2026-05-23 17:10:32
 
 ======================================================================
   Statystyki normalizacji
 ======================================================================
-  Aldi (raw)                               2747
+  Aldi (raw)                               2742
   Auchan (raw)                             3553
   Biedronka (raw)                          771
-  Aldi → records                           2295
+  Aldi → records                           2292
   Auchan → records                         3281
   Biedronka → records                      707
-  shops_en (po dedup)                      2078
+  shops_en (po dedup)                      2076
   shops_pl (po dedup)                      2868
-  EN z ceną (price_per_100)                1677
-  EN bez ceny                              618
+  EN z ceną (price_per_100)                2242
+  EN bez ceny                              50
   PL z ceną (price_per_100)                3922
   PL bez ceny                              66
 
@@ -34,7 +34,7 @@
   12 Richmond Thick Pork Sausages                    | 12 thick pork sausages              | g      | 0.259
   Kit Kat 2 Finger 6 Pack Dark                       | 2 finger 6 pack dark                | g      | 1.2016
   Kit Kat 2 Finger 6 Pack Orange                     | 2 finger 6 pack orange              | g      | 1.2016
-  Kit Kat 2 Finger Milk Chocolate Multipack          | 2 finger milk chocolate multipack   | None   | —
+  Kit Kat 2 Finger Milk Chocolate Multipack          | 2 finger milk chocolate multipack   | g      | 1.1997
   2 Step Balti Curry Sauce                           | 2 step balti curry sauce            | ml     | 0.4694
   2 Step Jalfrezi Curry Sauce                        | 2 step jalfrezi curry sauce         | ml     | 0.4694
   2 Step Korma Curry Sauce                           | 2 step korma curry sauce            | ml     | 0.4694
@@ -46,7 +46,7 @@
   30 Day Matured Rump Steaks with a Bone Marrow Melt 2 Pack | 30 day matured rump steaks with a bone marrow melt 2 pack | g      | 1.4975
   30 Day Matured Rump Steaks with a Chimichurri Melt 2 Pack | 30 day matured rump steaks with a chimichurri melt 2 pack | g      | 1.4975
   30 Day Matured Rump Steaks with a Peppercorn Melt 2 Pack | 30 day matured rump steaks with a peppercorn melt 2 pack | g      | 1.4975
-  6 Pack Mini Chocolate Chip Cookies                 | 6 pack chocolate chip cookies       | None   | —
+  6 Pack Mini Chocolate Chip Cookies                 | 6 pack chocolate chip cookies       | g      | 0.665
   Acacia Squeezy Honey                               | acacia squeezy honey                | g      | 0.6147
   Active Cherry Yogurt 4 Pack                        | active cherry yogurt 4 pack         | g      | 0.3587
   Active Peach Yogurt 4 Pack                         | active peach yogurt 4 pack          | g      | 0.3587
@@ -54,49 +54,49 @@
   Active Strawberry Yogurt 4 Pack                    | active strawberry yogurt 4 pack     | g      | 0.3587
   Airwaves Menthol & Eucalyptus Sugarfree Chewing Gum 3 Pack | airwaves menthol                    | g      | 3.8158
   All Butter Scones                                  | all butter scones                   | pcs    | 0.2483
-  All Butter Shortbread Fingers                      | all butter shortbread fingers       | None   | —
+  All Butter Shortbread Fingers                      | all butter shortbread fingers       | g      | 0.4524
   All Butter Sultana Scones                          | all butter sultana scones           | pcs    | 0.2483
-  All Purpose Seasoning                              | all purpose seasoning               | None   | —
+  All Purpose Seasoning                              | all purpose seasoning               | g      | 0.7927
   Alphabet Potato Letters                            | alphabet potato letters             | g      | 0.2181
   American Style Buffalo Rice Pouch                  | american style buffalo rice pouch   | g      | 0.316
-  Anchovies in Extra Virgin Olive Oil                | anchovies in extra virgin olive oil | None   | —
+  Anchovies in Extra Virgin Olive Oil                | anchovies in extra virgin olive oil | g      | 1.58
   Large Bramley Apple                                | apple                               | pcs    | 0.3242
   Apple & Berry No Added Sugar Granola               | apple berry no added sugar granola  | g      | 0.238
-  Apple & Blackcurrant Kids Smoothies 4 Pack         | apple blackcurrant kids smoothies 4 pack | None   | —
-  Organic Apple Cider Vinegar                        | apple cider vinegar                 | None   | —
-  Bramley Apple Family Crumble                       | apple family crumble                | None   | —
-  Apple Fruit & Grain Bars 6 Pack                    | apple fruit                         | None   | —
+  Apple & Blackcurrant Kids Smoothies 4 Pack         | apple blackcurrant kids smoothies 4 pack | ml     | 0.265
+  Organic Apple Cider Vinegar                        | apple cider vinegar                 | ml     | 0.438
+  Bramley Apple Family Crumble                       | apple family crumble                | g      | 0.598
+  Apple Fruit & Grain Bars 6 Pack                    | apple fruit                         | g      | 0.518
   Apple & Grape Snack Pack                           | apple grape snack pack              | g      | 0.4875
   Apple Juice                                        | apple juice                         | None   | —
   Apple Juice                                        | apple juice                         | None   | —
   Apple Juice 1 Litre                                | apple juice 1 litre                 | None   | —
-  Apple Juice From Concentrate 6 Pack                | apple juice from concentrate 6 pack | ml     | 0.945
-  Apple & Mango Juice                                | apple mango juice                   | None   | —
+  Apple Juice From Concentrate 6 Pack                | apple juice from concentrate 6 pack | ml     | 0.1575
+  Apple & Mango Juice                                | apple mango juice                   | ml     | 0.175
   Bramley Apple Pork Sausages 6 Pack                 | apple pork sausages 6 pack          | g      | 0.6225
-  Apple & Raisin Crispy Fruit Slices 5x3 Pack        | apple raisin crispy fruit slices 5x3 pack | None   | —
-  Apple & Raspberry Fruity Water Drink 8 Pack        | apple raspberry fruity water drink 8 pack | ml     | 0.845
-  Apple & Raspberry Vitamin Drink                    | apple raspberry vitamin drink       | None   | —
-  Bramley Apple Sauce                                | apple sauce                         | None   | —
+  Apple & Raisin Crispy Fruit Slices 5x3 Pack        | apple raisin crispy fruit slices 5x3 pack | g      | 0.4541
+  Apple & Raspberry Fruity Water Drink 8 Pack        | apple raspberry fruity water drink 8 pack | ml     | 0.1056
+  Apple & Raspberry Vitamin Drink                    | apple raspberry vitamin drink       | ml     | 0.158
+  Bramley Apple Sauce                                | apple sauce                         | g      | 0.2407
   XXL Bramley Apple Sausages                         | apple sausages                      | g      | 0.5532
-  Apple Slices                                       | apple slices                        | None   | —
+  Apple Slices                                       | apple slices                        | g      | 5.8529
   Apple Snack Pack                                   | apple snack pack                    | g      | 0.4875
   Apple, Pineapple & Grape                           | apple, pineapple grape              | g      | 0.495
   Pink Lady Apples                                   | apples                              | pcs    | 0.1822
-  Granny Smith Apples                                | apples                              | pcs    | 0.1456
   Golden Delicious Apples                            | apples                              | pcs    | 0.1456
+  Granny Smith Apples                                | apples                              | pcs    | 0.1456
   Jazz Apples                                        | apples                              | pcs    | 0.1822
   Braeburn Apples                                    | apples                              | pcs    | 0.1456
   British Mini Apples                                | apples                              | pcs    | 0.0907
   Wonky Apples                                       | apples                              | pcs    | 0.0907
-  Strawberries, Raspberries & Apples Kids Smoothies 4 Pack | apples kids smoothies 4 pack        | None   | —
+  Strawberries, Raspberries & Apples Kids Smoothies 4 Pack | apples kids smoothies 4 pack        | ml     | 0.265
   Apples, Grapes & Cheese                            | apples, grapes cheese               | g      | 0.8476
-  Applewood Smoked Wiltshire Cured Ham 6 Slices      | applewood wiltshire cured ham       | None   | —
+  Applewood Smoked Wiltshire Cured Ham 6 Slices      | applewood wiltshire cured ham       | g      | 1.825
   Apricot Conserve                                   | apricot conserve                    | g      | 0.3311
   Apricot Jam                                        | apricot jam                         | g      | 0.196
-  Asia Inspired Noodles Cantonese Style Hoisin Duck  | asia inspired noodles cantonese style hoisin duck | None   | —
-  Asia Inspired Noodles Singapore Curry              | asia inspired noodles singapore curry | None   | —
-  Asia Inspired Noodles Thai Style Sweet Chilli      | asia inspired noodles thai style sweet chilli | None   | —
-  Asia Inspired Rice Japanese Katsu Curry            | asia inspired rice japanese katsu curry | None   | —
+  Asia Inspired Noodles Cantonese Style Hoisin Duck  | asia inspired noodles cantonese style hoisin duck | g      | 0.9615
+  Asia Inspired Noodles Singapore Curry              | asia inspired noodles singapore curry | g      | 0.9615
+  Asia Inspired Noodles Thai Style Sweet Chilli      | asia inspired noodles thai style sweet chilli | g      | 0.9615
+  Asia Inspired Rice Japanese Katsu Curry            | asia inspired rice japanese katsu curry | g      | 0.9615
   Asian Style Bang Bang Rice Pouch                   | asian style bang bang rice pouch    | g      | 0.316
   Aspartame Sweetener Tablets                        | aspartame sweetener tablets         | pcs    | 0.3933
   Aubergine                                          | aubergine                           | pcs    | 0.22
@@ -114,11 +114,11 @@
   Bake at Home White Baguettes                       | bake at home white baguettes        | pcs    | 0.2833
   Bake at Home White Dinner Rolls                    | bake at home white dinner rolls     | pcs    | 0.1542
   Bake at Home White Rolls                           | bake at home white rolls            | pcs    | 0.1417
-  Bake from Frozen All Butter Pains Au Chocolat 6 Pack | bake from frozen all butter pains au chocolat 6 pack | None   | —
-  Bake from Frozen Cinnamon Swirls 4 Pack            | bake from frozen cinnamon swirls 4 pack | None   | —
-  Bake from Frozen Maple & Pecan Plaits 4 Pack       | bake from frozen maple              | None   | —
-  Baked Beans in a Rich Tomato Sauce                 | baked beans in a rich tomato sauce  | None   | —
-  Baked Beans in Tomato Sauce                        | baked beans in tomato sauce         | None   | —
+  Bake from Frozen All Butter Pains Au Chocolat 6 Pack | bake from frozen all butter pains au chocolat 6 pack | g      | 0.775
+  Bake from Frozen Cinnamon Swirls 4 Pack            | bake from frozen cinnamon swirls 4 pack | g      | 0.4864
+  Bake from Frozen Maple & Pecan Plaits 4 Pack       | bake from frozen maple              | g      | 0.5085
+  Baked Beans in a Rich Tomato Sauce                 | baked beans in a rich tomato sauce  | g      | 0.0976
+  Baked Beans in Tomato Sauce                        | baked beans in tomato sauce         | g      | 0.0659
   Baked Beans with Sausages                          | baked beans with sausages           | g      | 0.1375
   Baked Camembert French Cheese                      | baked camembert french cheese       | g      | 1.036
   Baked Rustic Pâté                                  | baked rustic pâté                   | g      | 0.9933
@@ -127,21 +127,21 @@
   British Baking Potatoes                            | baking potatoes                     | g      | 0.084
   British Baking Potatoes                            | baking potatoes                     | pcs    | 0.0988
   Baking Powder                                      | baking powder                       | g      | 0.325
-  Balsamic Vinegar of Modena                         | balsamic vinegar of modena          | None   | —
+  Balsamic Vinegar of Modena                         | balsamic vinegar of modena          | ml     | 0.298
   Banana                                             | banana                              | pcs    | 0.1333
   Banana Chips                                       | banana chips                        | None   | —
-  Banana Extra Thick Milkshake                       | banana extra thick milkshake        | None   | —
+  Banana Extra Thick Milkshake                       | banana extra thick milkshake        | ml     | 0.1667
   Bananas                                            | bananas                             | pcs    | 0.13
   Mini Bananas                                       | bananas                             | pcs    | 0.1048
   Bang Bang Chicken                                  | bang bang chicken                   | g      | 1.0185
   Bang Bang Recipe Mix                               | bang bang recipe mix                | g      | 1.6857
   Banoffee Flavour Summer Chouxnuts 2 Pack           | banoffee flavour summer chouxnuts 2 pack | g      | 2.7182
   Barber's Cave Aged Extra Mature British Cheddar Cheese | barber's cave aged extra mature cheddar cheese | g      | 1.1136
-  Barista Style Oat Drink                            | barista style oat drink             | None   | —
+  Barista Style Oat Drink                            | barista style oat drink             | ml     | 0.125
   Barrel Aged Feta Cheese                            | barrel aged feta cheese             | g      | 1.395
   Smoked Basa Fillets 2 Pack                         | basa 2 pack                         | g      | 0.7458
-  Basil                                              | basil                               | None   | —
-  Basil Infused Olive Oil                            | basil infused olive oil             | None   | —
+  Basil                                              | basil                               | g      | 5.0
+  Basil Infused Olive Oil                            | basil infused olive oil             | ml     | 0.996
   Basil & Oregano Passata Rustica                    | basil oregano passata rustica       | g      | 0.283
   Basil Pesto                                        | basil pesto                         | g      | 0.4684
   Chicken, Tomato & Basil Topped Pasta               | basil topped pasta                  | g      | 0.6633
@@ -156,19 +156,19 @@
   Battered Onion Rings                               | battered onion rings                | g      | 0.265
   Battered Pollock                                   | battered pollock                    | g      | 0.4983
   Battered Poppin' Chicken                           | battered poppin' chicken            | g      | 0.5211
-  Bay Leaf                                           | bay leaf                            | None   | —
-  BBQ Beef Flavour Instant Noodles                   | bbq beef flavour instant noodles    | None   | —
+  Bay Leaf                                           | bay leaf                            | g      | 24.5
+  BBQ Beef Flavour Instant Noodles                   | bbq beef flavour instant noodles    | g      | 0.39
   BBQ Beef Flavour Potato Hoops 6 Pack               | bbq beef flavour potato hoops 6 pack | g      | 0.7933
   5% Fat BBQ Beef Kebabs 4 Pack                      | bbq beef kebabs 4 pack              | g      | 1.0906
   BBQ Brisket 10 Slices                              | bbq brisket                         | g      | 1.79
   BBQ Chicken Topped Pasta                           | bbq chicken topped pasta            | g      | 0.6633
   BBQ Coated Peanuts                                 | bbq coated peanuts                  | g      | 0.675
-  BBQ Flavoured Chicken Poppers Grazing Pack         | bbq flavoured chicken poppers grazing pack | None   | —
+  BBQ Flavoured Chicken Poppers Grazing Pack         | bbq flavoured chicken poppers grazing pack | g      | 1.3267
   BBQ Flavoured Protein Chicken Skewers 10 Pack*     | bbq flavoured protein chicken skewers 10 pack* | g      | 1.59
   BBQ Hot Dogs                                       | bbq hot dogs                        | g      | 0.625
   BBQ Mini Ribs                                      | bbq ribs                            | g      | 0.8345
-  BBQ Sauce                                          | bbq sauce                           | None   | —
-  BBQ Sweet Potato Burgers 2 Pack                    | bbq sweet potato burgers 2 pack     | None   | —
+  BBQ Sauce                                          | bbq sauce                           | g      | 0.163
+  BBQ Sweet Potato Burgers 2 Pack                    | bbq sweet potato burgers 2 pack     | g      | 0.7709
   BBQ Tempura Chicken Bites                          | bbq tempura chicken bites           | g      | 0.4971
   Beanz in a Rich Tomato Sauce 3 Pack                | beanz in a rich tomato sauce 3 pack | ml     | 0.2211
   Beautifully Buttery                                | beautifully buttery                 | g      | 0.178
@@ -182,10 +182,10 @@
   British Wagyu Beef Burgers                         | beef burgers                        | g      | 1.1735
   Beef Burgers 6 Pack                                | beef burgers 6 pack                 | g      | 0.6988
   Beef Burrito Protein Pot                           | beef burrito protein pot            | g      | 0.5
-  Beef Casserole Seasoning Mix                       | beef casserole seasoning mix        | None   | —
+  Beef Casserole Seasoning Mix                       | beef casserole seasoning mix        | g      | 0.875
   Beef Double Cheese Burgers 4 Pack                  | beef double cheese burgers 4 pack   | g      | 0.7247
   Beef Dripping Roast Potatoes                       | beef dripping roast potatoes        | g      | 0.199
-  Beef Flavour Savoury Rice                          | beef flavour savoury rice           | None   | —
+  Beef Flavour Savoury Rice                          | beef flavour savoury rice           | g      | 0.4917
   British Beef & Pork Mince                          | beef ground pork                    | g      | 0.5987
   Beef Hot Pot                                       | beef hot pot                        | g      | 0.6975
   Beef in Black Bean Sauce with Egg Fried Rice       | beef in black bean sauce with egg fried rice | ml     | 0.6975
@@ -217,28 +217,28 @@
   British Beef Steak 21 Day Matured                  | beef steak 21 day matured           | g      | 1.5374
   100% British Beef Fillet Steaks 28 Day Matured 2 Pack | beef steaks 28 day matured 2 pack   | g      | 4.1147
   Beef Stew & Dumplings                              | beef stew dumplings                 | g      | 0.6975
-  Beef & Tomato Flavour Snack Noodles Pot            | beef tomato flavour snack noodles pot | None   | —
+  Beef & Tomato Flavour Snack Noodles Pot            | beef tomato flavour snack noodles pot | g      | 0.7667
   Beer Battered Cod 2 Pack                           | beer battered cod 2 pack            | g      | 1.14
   Cooked Beetroot                                    | beetroot                            | g      | 0.132
   Red Lentil & Beetroot Fusilli                      | beetroot fusilli                    | g      | 0.276
-  Beetroot, Red Cabbage & Port Slaw                  | beetroot, red cabbage               | None   | —
+  Beetroot, Red Cabbage & Port Slaw                  | beetroot, red cabbage               | g      | 0.9045
   Belgian Buns                                       | belgian buns                        | pcs    | 0.4967
   Belgian Chocolate Ganache Lemons                   | belgian chocolate ganache lemons    | g      | 1.2375
   Benefit Red Fruit Cereal                           | benefit red fruit cereal            | g      | 0.424
   Berry Protein Granola                              | berry protein granola               | g      | 0.5975
-  White Chocolate & Berry Summer Tarts               | berry summer tarts                  | None   | —
+  White Chocolate & Berry Summer Tarts               | berry summer tarts                  | g      | 0.9523
   Light  Fat Free Berry Yogurts 6 Pack               | berry yogurts 6 pack                | g      | 0.2701
   Best of British Apples                             | best of apples                      | pcs    | 0.1364
   Bicarbonate Of Soda                                | bicarbonate of soda                 | g      | 0.325
-  Biscuit Barrel Assortment                          | biscuit barrel assortment           | None   | —
+  Biscuit Barrel Assortment                          | biscuit barrel assortment           | g      | 0.2214
   Bistro Salad                                       | bistro salad                        | g      | 0.5563
-  Quorn Bites                                        | bites                               | None   | —
+  Quorn Bites                                        | bites                               | g      | 0.5788
   Bitesize Wheat Shreds                              | bitesize wheat shreds               | g      | 0.358
   Tinned Black Beans/Green Lentils                   | black beans/green lentils           | g      | 0.1231
   Tinned Black Beans/Green Lentils                   | black beans/green lentils           | g      | 0.1231
   Black Cod                                          | black cod                           | None   | —
   Black Forest Fruits                                | black forest fruits                 | g      | 0.398
-  Pitted Green & Black Olives With Feta              | black olives with feta              | None   | —
+  Pitted Green & Black Olives With Feta              | black olives with feta              | g      | 1.3267
   Black Pepper & Paprika Mini Roule Cheese           | black pepper                        | g      | 1.49
   Sour Cream & Black Pepper Multigrain Waves 6 Pack  | black pepper multigrain waves 6 pack | ml     | 0.86
   Black Seedless Grapes                              | black seedless grapes               | g      | 0.378
@@ -249,17 +249,17 @@
   Blackcurrant Fruit Rolls Multipack                 | blackcurrant fruit rolls multipack  | g      | 1.49
   Blackcurrant Jam                                   | blackcurrant jam                    | g      | 0.196
   Blondie Extra Thick Cream                          | blondie extra thick cream           | ml     | 0.116
-  Blossom Honey Roasted Wiltshire Cured Ham 6 Slices | blossom honey roasted wiltshire cured ham | None   | —
-  Blueberries                                        | blueberries                         | g      | 0.7933
+  Blossom Honey Roasted Wiltshire Cured Ham 6 Slices | blossom honey roasted wiltshire cured ham | g      | 1.825
   Wonky Blueberries                                  | blueberries                         | g      | 0.952
+  Blueberries                                        | blueberries                         | g      | 0.7933
   Blueberries                                        | blueberries                         | g      | 0.798
   Premium Blueberries                                | blueberries                         | g      | 1.1667
-  Blueberry Fruit & Grain Bars 6 Pack                | blueberry fruit                     | None   | —
-  Blueberry Soya Pot                                 | blueberry soya pot                  | None   | —
-  Bockwurst Sausages                                 | bockwurst sausages                  | None   | —
+  Blueberry Fruit & Grain Bars 6 Pack                | blueberry fruit                     | g      | 0.518
+  Blueberry Soya Pot                                 | blueberry soya pot                  | g      | 0.198
+  Bockwurst Sausages                                 | bockwurst sausages                  | g      | 0.5528
   Boil In The Bag Rice 8 Pack                        | boil in the bag rice 8 pack         | ml     | 0.198
-  Bolognese Pasta Sauce                              | bolognese pasta sauce               | None   | —
-  Both In One Medium Sliced Loaf                     | both in one loaf                    | None   | —
+  Bolognese Pasta Sauce                              | bolognese pasta sauce               | g      | 0.138
+  Both In One Medium Sliced Loaf                     | both in one loaf                    | g      | 0.0938
   Bourbon Creams                                     | bourbon creams                      | g      | 0.215
   Braised Beef with Mash                             | braised beef with mash              | g      | 0.6975
   Bran Flakes                                        | bran flakes                         | g      | 0.1667
@@ -273,7 +273,7 @@
   Breaded Cod Fish Fingers 10 Pack                   | breaded cod fish fingers 10 pack    | g      | 0.6633
   Breaded Fish Fillets                               | breaded fish                        | g      | 0.4975
   Breaded Haddock                                    | breaded haddock                     | g      | 0.9967
-  British Breaded Ham 14 Slices                      | breaded ham                         | None   | —
+  British Breaded Ham 14 Slices                      | breaded ham                         | g      | 0.53
   Breaded Omega 3 Fish Fingers 15 Pack               | breaded omega 3 fish fingers 15 pack | g      | 0.3311
   Breaded Pollock                                    | breaded pollock                     | g      | 0.4983
   Breaded Wholetail Scampi                           | breaded wholetail scampi            | g      | 1.196
@@ -281,12 +281,12 @@
   Breakfast Hash Browns 10 Pack                      | breakfast hash browns 10 pack       | g      | 0.338
   Breakfast Pork Patties 6 Pack                      | breakfast pork patties 6 pack       | g      | 0.6988
   Brie de Meaux A.O.P French Cheese                  | brie de meaux a.o.p french cheese   | g      | 1.5697
-  Sliced Brioche Burger Buns                         | brioche burger buns                 | pcs    | 0.1817
+  Sliced Brioche Burger Buns                         | brioche burger buns                 | pcs    | 0.165
   Sliced Brioche Hot Dog Rolls                       | brioche hot dog rolls               | pcs    | 0.1656
   British Broccoli                                   | broccoli                            | g      | 0.2188
   Broccoli                                           | broccoli                            | g      | 0.4167
   British Broccoli & Cauliflower Florets             | broccoli cauliflower florets        | g      | 0.3383
-  Broccoli Cheese & Tomato Quiche                    | broccoli cheese                     | None   | —
+  Broccoli Cheese & Tomato Quiche                    | broccoli cheese                     | g      | 0.4975
   Broccoli Florets                                   | broccoli florets                    | g      | 0.119
   Brown Onions                                       | brown onions                        | g      | 0.099
   British Wonky Brown Onions                         | brown onions                        | g      | 0.08
@@ -312,22 +312,22 @@
   Caesar Chicken                                     | caesar chicken                      | g      | 0.9447
   Caesar Potato Salad                                | caesar potato salad                 | g      | 0.53
   Caesar Salad Kit                                   | caesar salad kit                    | g      | 0.645
-  Caeser Salad Dressing                              | caeser salad dressing               | None   | —
+  Caeser Salad Dressing                              | caeser salad dressing               | ml     | 0.396
   Cajun Chicken Breast Fillets 2 Pack                | cajun chicken breast 2 pack         | g      | 1.0873
-  Cajun Chicken Seasoning                            | cajun chicken seasoning             | None   | —
+  Cajun Chicken Seasoning                            | cajun chicken seasoning             | g      | 1.3721
   Cajun Marinated Chicken Sizzler                    | cajun marinated chicken sizzler     | g      | 0.8817
-  Cajun Seasoning                                    | cajun seasoning                     | None   | —
+  Cajun Seasoning                                    | cajun seasoning                     | g      | 1.4681
   Cake Bars Choceur Cake                             | cake bars cake                      | pcs    | 0.0387
   Cake Bars Dreemy                                   | cake bars dreemy                    | pcs    | 0.0387
   Calabrese Salami Stonebaked Flatbread              | calabrese salami stonebaked flatbread | g      | 0.6083
-  Caramel Chocolate Crispy Chunks 4 Pack             | caramel chocolate crispy 4 pack     | None   | —
-  Caramelised Biscuits                               | caramelised biscuits                | None   | —
+  Caramel Chocolate Crispy Chunks 4 Pack             | caramel chocolate crispy 4 pack     | g      | 1.1042
+  Caramelised Biscuits                               | caramelised biscuits                | g      | 0.396
   Caramelised Onion Cocktail Sausage                 | caramelised onion cocktail sausage  | None   | —
-  Caramelised Onion Houmous                          | caramelised onion houmous           | None   | —
+  Caramelised Onion Houmous                          | caramelised onion houmous           | g      | 0.495
   Caramelised Onion Pork Sausages 6 Pack             | caramelised onion pork sausages 6 pack | g      | 0.6225
   XXL Caramelised Onion Sausages                     | caramelised onion sausages          | g      | 0.5532
   Caramelised Red Onion & Extra Mature Cheddar Flatbread | caramelised red onion               | g      | 0.7654
-  Caramelised Red Onion Chutney                      | caramelised red onion chutney       | None   | —
+  Caramelised Red Onion Chutney                      | caramelised red onion chutney       | g      | 0.6097
   Caramelised Red Onion Flavoured Pork Burgers       | caramelised red onion flavoured pork burgers | g      | 0.6633
   Caramelised Red Onion & Red Leicester Beef Burgers | caramelised red onion red leicester beef burgers | g      | 0.85
   Carrot & Swede Mash                                | carrot swede mash                   | g      | 0.3
@@ -336,16 +336,16 @@
   Carrots                                            | carrots                             | g      | 0.069
   British Carrots                                    | carrots                             | g      | 0.088
   British Wonky Carrots                              | carrots                             | g      | 0.053
-  Sliced Carrots in Water                            | carrots in water                    | None   | —
+  Sliced Carrots in Water                            | carrots in water                    | g      | 0.1633
   Cashew Nuts                                        | cashew nuts                         | g      | 0.845
   Cashews Roasted and Salted                         | cashews roasted and salted          | g      | 0.995
   Caster Sugar                                       | caster sugar                        | g      | 0.149
   British Cauliflower                                | cauliflower                         | pcs    | 0.1487
   Cauliflower Cheese                                 | cauliflower cheese                  | g      | 0.4475
   Cauliflower Cheese                                 | cauliflower cheese                  | g      | 0.265
-  Cauliflower Cheese Grills 4 Pack                   | cauliflower cheese grills 4 pack    | None   | —
+  Cauliflower Cheese Grills 4 Pack                   | cauliflower cheese grills 4 pack    | g      | 0.5013
   Cavolo Nero                                        | cavolo nero                         | g      | 0.6333
-  Cayenne Pepper                                     | cayenne pepper                      | None   | —
+  Cayenne Pepper                                     | cayenne pepper                      | g      | 1.8056
   Celery                                             | celery                              | pcs    | 0.1875
   Celery Sticks                                      | celery sticks                       | g      | 0.2829
   Weetabix Cereal 36 Pack                            | cereal 36 pack                      | pcs    | 0.0739
@@ -353,13 +353,13 @@
   Chargrilled Chicken Caesar Salad                   | chargrilled chicken caesar salad    | g      | 1.145
   Chargrilled Pulled Chicken                         | chargrilled pulled chicken          | g      | 1.6583
   Chargrilled Spanish Chorizo                        | chargrilled spanish chorizo         | None   | —
-  Chicken, Parmesan & Cheddar Bites                  | cheddar bites                       | None   | —
+  Chicken, Parmesan & Cheddar Bites                  | cheddar bites                       | g      | 1.3819
   Grated Cheddar Cheese                              | cheddar cheese                      | g      | 0.598
   British Medium Cheddar Cheese                      | cheddar cheese                      | g      | 0.6225
   British Cheddar Cheese with Black Pepper 5 Slices  | cheddar cheese with black pepper    | g      | 1.25
   Cheddar & Cracked Black Pepper Flatbread Thins     | cheddar cracked black pepper flatbread thins | g      | 0.952
   Grated Cheddar & Mozzarella Cheese Mix             | cheddar mozzarella cheese mix       | g      | 0.796
-  Cherrywood Smoked Bacon & Cheddar Quiche           | cheddar quiche                      | None   | —
+  Cherrywood Smoked Bacon & Cheddar Quiche           | cheddar quiche                      | g      | 0.8725
   British Cheddar with Pickled Onion Cheese          | cheddar with pickled onion cheese   | g      | 0.995
   Mini Cheddars Original 14 Pack                     | cheddars original 14 pack           | g      | 0.8975
   Mini Cheddars Red Leicester Flavour 14 Pack        | cheddars red leicester flavour 14 pack | g      | 0.8975
@@ -370,38 +370,38 @@
   Sausage, Bean & Cheese Bakes 2 Pack                | cheese bakes 2 pack                 | g      | 0.4513
   Cheese & Caramelised Onion Rolls 4 Pack            | cheese caramelised onion rolls 4 pack | g      | 1.3245
   Cheese & Chive Twists                              | cheese chive twists                 | g      | 0.632
-  Cheese Coleslaw                                    | cheese coleslaw                     | None   | —
+  Cheese Coleslaw                                    | cheese coleslaw                     | g      | 0.5633
   Cheese Coleslaw                                    | cheese coleslaw                     | g      | 0.33
   Cheese Cracker Sharing Tub                         | cheese cracker sharing tub          | g      | 0.516
   Cheese & Dill Salmon Wellington                    | cheese dill salmon wellington       | g      | 0.7129
   Cheese Mini Hash Brown Bites                       | cheese hash brown bites             | g      | 0.29
   Cheese & Onion Bakes 2 Pack                        | cheese onion bakes 2 pack           | g      | 0.4826
   Cheese & Onion Crispbakes 2 Pack                   | cheese onion crispbakes 2 pack      | g      | 0.6564
-  Cheese & Onion Crispbakes 4 Pack                   | cheese onion crispbakes 4 pack      | None   | —
+  Cheese & Onion Crispbakes 4 Pack                   | cheese onion crispbakes 4 pack      | g      | 0.4383
   Cheese & Onion Quarter Pounders 4 Pack             | cheese onion quarter pounders 4 pack | g      | 0.7467
-  Cheese & Onion Quiche                              | cheese onion quiche                 | None   | —
-  Cheese & Onion Rolls 6 Pack                        | cheese onion rolls 6 pack           | None   | —
-  Cheese & Onion Slices 2 Pack                       | cheese onion slices 2 pack          | None   | —
+  Cheese & Onion Quiche                              | cheese onion quiche                 | g      | 0.4975
+  Cheese & Onion Rolls 6 Pack                        | cheese onion rolls 6 pack           | g      | 0.4861
+  Cheese & Onion Slices 2 Pack                       | cheese onion slices 2 pack          | g      | 0.55
   Cheese & Onion Twists                              | cheese onion twists                 | g      | 0.632
-  Cheese Sauce Mix                                   | cheese sauce mix                    | None   | —
-  Italian Meat & Cheese Select                       | cheese select                       | None   | —
-  Spanish Meat & Cheese Selection                    | cheese selection                    | None   | —
-  Puff Pastry Ham & Cheese Slices 2 Pack             | cheese slices 2 pack                | None   | —
-  Cheese Thins                                       | cheese thins                        | None   | —
+  Cheese Sauce Mix                                   | cheese sauce mix                    | g      | 0.725
+  Italian Meat & Cheese Select                       | cheese select                       | g      | 1.575
+  Spanish Meat & Cheese Selection                    | cheese selection                    | g      | 1.4
+  Puff Pastry Ham & Cheese Slices 2 Pack             | cheese slices 2 pack                | g      | 0.55
+  Cheese Thins                                       | cheese thins                        | g      | 0.6333
   Cheese Topped Rolls                                | cheese topped rolls                 | pcs    | 0.215
   Cherries                                           | cherries                            | g      | 1.145
   Cherry Bakewells                                   | cherry bakewells                    | pcs    | 0.1322
   Cherry Farmhouse Yogurt                            | cherry farmhouse yogurt             | g      | 0.6
   Low Fat Cherry Fruit Yogurt                        | cherry fruit yogurt                 | g      | 0.1982
-  Cherry Soya Pot                                    | cherry soya pot                     | None   | —
+  Cherry Soya Pot                                    | cherry soya pot                     | g      | 0.198
   Cherry Tomatoes                                    | cherry tomatoes                     | g      | 0.2697
   Cherry Tomatoes                                    | cherry tomatoes                     | g      | 0.248
   Cherry Tomatoes in Rich Tomato Juice               | cherry tomatoes in rich tomato juice | g      | 0.1875
-  Cherrywood Smoked Bacon & Cheddar Quiche           | cherrywood bacon                    | None   | —
+  Cherrywood Smoked Bacon & Cheddar Quiche           | cherrywood bacon                    | g      | 0.8725
   British Chestnut Mushrooms                         | chestnut mushrooms                  | g      | 0.38
   Chicharricos Salted Scratchi                       | chicharricos salted scratchi        | g      | 1.6769
   Free Range Chicken Fillets                         | chicken                             | g      | 1.3114
-  Chicken & Sweetcorn                                | chicken                             | None   | —
+  Chicken & Sweetcorn                                | chicken                             | g      | 0.6591
   Cooked Sliced Chicken                              | chicken                             | g      | 0.6147
   Cooked Diced Chicken                               | chicken                             | g      | 0.6147
   Chicken Strips 4 Pack with BBQ Dip                 | chicken 4 pack with bbq dip         | g      | 1.0826
@@ -418,12 +418,12 @@
   Diced Chicken Breast                               | chicken breast                      | g      | 0.7475
   Chicken Breast Mini Fillets                        | chicken breast                      | g      | 0.7475
   Chicken Breast Fillets                             | chicken breast                      | g      | 0.6151
-  Chicken Breast Fillets                             | chicken breast                      | g      | 0.649
   Diced Chicken Breast                               | chicken breast                      | g      | 0.665
+  Chicken Breast Fillets                             | chicken breast                      | g      | 0.649
   Chicken Breast Fillets                             | chicken breast                      | g      | 0.425
   Chicken Breast Fillets 2 Pack                      | chicken breast 2 pack               | g      | 0.73
   Chicken Casserole & Dumplings                      | chicken casserole dumplings         | g      | 0.6975
-  Chicken Casserole Seasoning Mix                    | chicken casserole seasoning mix     | None   | —
+  Chicken Casserole Seasoning Mix                    | chicken casserole seasoning mix     | g      | 0.875
   Chicken & Chorizo Kebabs                           | chicken chorizo kebabs              | None   | —
   Chicken & Chorizo Kebabs 4 Pack                    | chicken chorizo kebabs 4 pack       | g      | 1.2469
   Chicken & Chorizo Paella Rice Meal                 | chicken chorizo paella rice meal    | g      | 0.3837
@@ -437,10 +437,10 @@
   Chicken Drumsticks                                 | chicken drumsticks                  | g      | 0.215
   Chicken & Duck XL Selection Sushi                  | chicken duck selection sushi        | g      | 1.4049
   Chicken Family Pie                                 | chicken family pie                  | g      | 0.598
-  Chicken Flavour Instant Noodles                    | chicken flavour instant noodles     | None   | —
-  Chicken Flavour Noodle Bowl                        | chicken flavour noodle bowl         | None   | —
-  Chicken Flavour Savoury Rice                       | chicken flavour savoury rice        | None   | —
-  Chicken Gravy Granules                             | chicken gravy granules              | None   | —
+  Chicken Flavour Instant Noodles                    | chicken flavour instant noodles     | g      | 0.39
+  Chicken Flavour Noodle Bowl                        | chicken flavour noodle bowl         | g      | 1.1647
+  Chicken Flavour Savoury Rice                       | chicken flavour savoury rice        | g      | 0.4917
+  Chicken Gravy Granules                             | chicken gravy granules              | g      | 0.33
   Chicken Gyozas 12 Pack                             | chicken gyozas 12 pack              | g      | 0.8292
   Chicken Jalfrezi                                   | chicken jalfrezi                    | g      | 0.8674
   Chicken Jalfrezi With Pilau Rice                   | chicken jalfrezi with pilau rice    | g      | 0.6975
@@ -451,20 +451,20 @@
   Chicken & Leek Egg Bites                           | chicken leek egg bites              | None   | —
   Chicken Legs                                       | chicken legs                        | g      | 0.225
   Chicken & Mango Stonebaked Flatbread               | chicken mango stonebaked flatbread  | g      | 0.5615
-  Chicken & Mushroom Flavour Snack Noodle            | chicken mushroom flavour snack noodle | None   | —
-  Chicken & Mushroom Slices 2 Pack                   | chicken mushroom slices 2 pack      | None   | —
+  Chicken & Mushroom Flavour Snack Noodle            | chicken mushroom flavour snack noodle | g      | 0.7667
+  Chicken & Mushroom Slices 2 Pack                   | chicken mushroom slices 2 pack      | g      | 0.55
   Chicken & Pancetta Bake                            | chicken pancetta bake               | g      | 0.8975
   Chicken Parmigiana                                 | chicken parmigiana                  | None   | —
   Chicken Paste                                      | chicken paste                       | g      | 0.6267
-  Chicken Poppers                                    | chicken poppers                     | None   | —
+  Chicken Poppers                                    | chicken poppers                     | g      | 0.8765
   Chicken Quarter Pounders 2 Pack                    | chicken quarter pounders 2 pack     | g      | 0.7445
   Chicken Rogan Josh With Pilau Rice                 | chicken rogan josh with pilau rice  | g      | 0.6975
-  Chicken Satay Skewers                              | chicken satay skewers               | None   | —
+  Chicken Satay Skewers                              | chicken satay skewers               | g      | 1.33
   Chicken Sausages 6 Pack                            | chicken sausages 6 pack             | g      | 0.6147
-  Chicken Seasoning                                  | chicken seasoning                   | None   | —
+  Chicken Seasoning                                  | chicken seasoning                   | g      | 1.7115
   Chicken Shawarma                                   | chicken shawarma                    | g      | 1.0185
-  Chicken Stock Cubes                                | chicken stock cubes                 | None   | —
-  Chicken & Sweetcorn Deli Filler                    | chicken sweetcorn deli filler       | None   | —
+  Chicken Stock Cubes                                | chicken stock cubes                 | g      | 0.575
+  Chicken & Sweetcorn Deli Filler                    | chicken sweetcorn deli filler       | g      | 0.6591
   Chicken Tagliatelle                                | chicken tagliatelle                 | g      | 0.6725
   Chicken Thigh Fillets                              | chicken thigh                       | g      | 0.6322
   Free Range Corn Fed Chicken Thigh Fillets          | chicken thigh                       | g      | 0.824
@@ -475,32 +475,32 @@
   Chicken Tikka Masala                               | chicken tikka masala                | g      | 0.3985
   Chicken Tikka Masala                               | chicken tikka masala                | g      | 0.498
   Chicken Tikka Masala with Pilau Rice               | chicken tikka masala with pilau rice | g      | 0.6975
-  Chicken Tikka Slices 2 Pack                        | chicken tikka slices 2 pack         | None   | —
+  Chicken Tikka Slices 2 Pack                        | chicken tikka slices 2 pack         | g      | 0.55
   Chicken Vindaloo With Pilau Rice                   | chicken vindaloo with pilau rice    | g      | 0.6975
   Chicken Wings                                      | chicken wings                       | g      | 0.215
   Chicken Wings BBQ & Buffalo                        | chicken wings bbq buffalo           | g      | 0.4129
   Chicken with Patatas Bravas                        | chicken with patatas bravas         | g      | 0.7113
   Chicken, Bacon & Sweetcorn Topped Pasta            | chicken, bacon                      | g      | 0.6633
-  Chicken, Bacon & Leek Pie                          | chicken, bacon                      | None   | —
+  Chicken, Bacon & Leek Pie                          | chicken, bacon                      | g      | 1.196
   Chicken, Bacon & Leek Pie                          | chicken, bacon                      | g      | 0.998
-  Chicken, Parmesan & Cheddar Bites                  | chicken, parmesan                   | None   | —
+  Chicken, Parmesan & Cheddar Bites                  | chicken, parmesan                   | g      | 1.3819
   Chicken, Tomato & Basil Topped Pasta               | chicken, tomato                     | g      | 0.6633
   Chickpea Fusilli                                   | chickpea fusilli                    | g      | 0.276
-  Chickpeas                                          | chickpeas                           | None   | —
+  Chickpeas                                          | chickpeas                           | g      | 0.1708
   Chilli Chicken Miso Ramen Bowl                     | chilli chicken miso ramen bowl      | g      | 0.4972
   Chilli Coated Peanuts                              | chilli coated peanuts               | g      | 0.675
-  Chilli Con Carne                                   | chilli con carne                    | None   | —
-  Chilli Con Carne Seasoning Mix                     | chilli con carne seasoning mix      | None   | —
+  Chilli Con Carne                                   | chilli con carne                    | g      | 0.6975
+  Chilli Con Carne Seasoning Mix                     | chilli con carne seasoning mix      | g      | 0.7
   Chilli Flavour Soba Noodles Pot                    | chilli flavour soba noodles pot     | g      | 1.2111
-  Chilli & Garlic Olives                             | chilli garlic olives                | None   | —
+  Chilli & Garlic Olives                             | chilli garlic olives                | g      | 1.3214
   Chilli Grilling cheese                             | chilli grilling cheese              | g      | 0.795
-  Chilli Infused Olive Oil                           | chilli infused olive oil            | None   | —
-  Chilli Powder                                      | chilli powder                       | None   | —
+  Chilli Infused Olive Oil                           | chilli infused olive oil            | ml     | 0.996
+  Chilli Powder                                      | chilli powder                       | g      | 1.975
   Chilli Prawn                                       | chilli prawn                        | g      | 0.8975
   Chilli Purée                                       | chilli purée                        | g      | 1.2143
   Chilli Sweetcorn Parcels                           | chilli sweetcorn parcels            | None   | —
   Chineese Inspired Air Fryer Bites                  | chineese inspired air fryer bites   | g      | 0.895
-  Chinese 5 Spice                                    | chinese 5 spice                     | None   | —
+  Chinese 5 Spice                                    | chinese 5 spice                     | g      | 1.0536
   Chinese BBQ Mini Ribs                              | chinese bbq ribs                    | None   | —
   Chinese Chicken Curry with Egg Fried Rice          | chinese chicken curry with egg fried rice | g      | 0.6975
   Chinese Curry Sauce Mix                            | chinese curry sauce mix             | None   | —
@@ -509,19 +509,19 @@
   Chinese Style Salt & Chilli Pork Mini Ribs         | chinese style salt chilli pork ribs | None   | —
   Chip Shop Style Extra Large Battered Cod Fillets 2 Pack | chip shop style extra battered cod 2 pack | g      | 1.1935
   Chip Shop Style Extra Large Beer Battered Haddock Fillets 2 Pack | chip shop style extra beer battered haddock 2 pack | g      | 1.1935
-  Chipotle Chicken                                   | chipotle chicken                    | None   | —
-  Spicy Butternut Squash & Chipotle Feta Bakes 2 Pack | chipotle feta bakes 2 pack          | None   | —
+  Chipotle Chicken                                   | chipotle chicken                    | g      | 0.6975
+  Spicy Butternut Squash & Chipotle Feta Bakes 2 Pack | chipotle feta bakes 2 pack          | g      | 0.9045
   Sour Cream & Chive Baked Pretzels 6 Pack           | chive baked pretzels 6 pack         | ml     | 0.9773
   British Double Gloucester with Onion & Chive Cheese | chive cheese                        | g      | 0.995
   Sour Cream & Chive Starry Night Mix                | chive starry night mix              | ml     | 1.032
-  Choc Chip Cookies                                  | choc chip cookies                   | None   | —
+  Choc Chip Cookies                                  | choc chip cookies                   | g      | 0.375
   Mini Choc Chip Cookies                             | choc chip cookies                   | g      | 0.3267
-  Weetabix Choc Minis                                | choc minis                          | None   | —
+  Weetabix Choc Minis                                | choc minis                          | g      | 0.55
   Choco Hazelnut Flavour Filled Soft Bakes 5 Pack    | choco hazelnut flavour filled soft bakes 5 pack | g      | 0.596
-  Choco Pillows Cereal                               | choco pillows cereal                | None   | —
+  Choco Pillows Cereal                               | choco pillows cereal                | g      | 0.23
   Choco Rice Cereal Bars 6 Pack                      | choco rice cereal bars 6 pack       | g      | 0.9083
-  Choco Wheaties Cereal                              | choco wheaties cereal               | None   | —
-  ... i 1795 więcej (truncated)
+  Choco Wheaties Cereal                              | choco wheaties cereal               | g      | 0.37
+  ... i 1792 więcej (truncated)
 
 ======================================================================
   PL — produkty (shop | original_name | generic_name | unit | price_per_100)

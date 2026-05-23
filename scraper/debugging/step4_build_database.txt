@@ -1,5 +1,5 @@
 # Krok 4: build database
-# Wygenerowano: 2026-05-23 14:08:48
+# Wygenerowano: 2026-05-23 17:10:44
 
 ======================================================================
   Statystyki budowania bazy
@@ -13,7 +13,7 @@
   Przepisy PL (100% pokrycie)              79
   % akceptacji EN                          8.8%
   % akceptacji PL                          12.8%
-  EN z pełnym kosztem                      0
+  EN z pełnym kosztem                      2
   PL z pełnym kosztem                      24
 
 
@@ -22,11 +22,11 @@
 ======================================================================
   Dijon mustard                       → Dijon Mustard                                      | aldi         | 0.245
   almond                              → Whole Almonds                                      | aldi         | 0.845
-  andouille sausage                   → Quorn Sausages                                     | aldi         | —
+  andouille sausage                   → Quorn Sausages                                     | aldi         | 0.5595
   apple                               → Large Bramley Apple                                | aldi         | 0.3242
-  apple cider                         → Organic Apple Cider Vinegar                        | aldi         | —
-  apple cider vinegar                 → Organic Apple Cider Vinegar                        | aldi         | —
-  applesauce                          → Bramley Apple Sauce                                | aldi         | —
+  apple cider                         → Organic Apple Cider Vinegar                        | aldi         | 0.438
+  apple cider vinegar                 → Organic Apple Cider Vinegar                        | aldi         | 0.438
+  applesauce                          → Bramley Apple Sauce                                | aldi         | 0.2407
   avocado                             → Avocado                                            | aldi         | 0.29
   avocado oil                         → Avocado                                            | aldi         | 0.29
   avocado oil spray                   → Avocado                                            | aldi         | 0.29
@@ -35,32 +35,32 @@
   baby spinach                        → British Baby Spinach                               | aldi         | 0.3533
   bacon                               → Smoked Bacon Lardons                               | aldi         | 0.895
   baking powder                       → Baking Powder                                      | aldi         | 0.325
-  balsamic vinegar                    → Balsamic Vinegar of Modena                         | aldi         | —
+  balsamic vinegar                    → Balsamic Vinegar of Modena                         | aldi         | 0.298
   banana                              → Banana                                             | aldi         | 0.1333
-  basil                               → Basil                                              | aldi         | —
+  basil                               → Basil                                              | aldi         | 5.0
   basmati rice                        → Basmati Rice                                       | aldi         | 0.179
-  bay leaf                            → Bay Leaf                                           | aldi         | —
-  bbq sauce                           → BBQ Sauce                                          | aldi         | —
+  bay leaf                            → Bay Leaf                                           | aldi         | 24.5
+  bbq sauce                           → BBQ Sauce                                          | aldi         | 0.163
   beef                                → 100% British Beef Wagyu Fillet Steak               | aldi         | 6.4647
-  beef broth                          → Chicken Stock Cubes                                | aldi         | —
+  beef broth                          → Chicken Stock Cubes                                | aldi         | 0.575
   beef chuck                          → British Diced Beef                                 | aldi         | 1.0843
   beef ribs                           → British Diced Beef                                 | aldi         | 1.0843
   beef sirloin                        → 100% British Beef Wagyu Sirloin Steak              | aldi         | 3.9604
   beef steak                          → 100% British Beef Wagyu Fillet Steak               | aldi         | 6.4647
   beef stew meat                      → 100% British Beef Wagyu Fillet Steak               | aldi         | 6.4647
-  beef stock                          → Chicken Stock Cubes                                | aldi         | —
+  beef stock                          → Chicken Stock Cubes                                | aldi         | 0.575
   bell pepper                         → Red Pepper                                         | aldi         | 0.4375
   berries                             → Blueberries                                        | aldi         | 0.7933
   black beans                         → Tinned Black Beans/Green Lentils                   | aldi         | 0.1231
-  black olive                         → Pitted Green & Black Olives With Feta              | aldi         | —
-  black olives                        → Pitted Green & Black Olives With Feta              | aldi         | —
+  black olive                         → Pitted Green & Black Olives With Feta              | aldi         | 1.3267
+  black olives                        → Pitted Green & Black Olives With Feta              | aldi         | 1.3267
   black pepper                        → Ground Black Pepper                                | aldi         | 1.59
-  black sesame seeds                  → Sesame Seeds                                       | aldi         | —
+  black sesame seeds                  → Sesame Seeds                                       | aldi         | 2.0238
   blackberries                        → Wonky Blackberries                                 | aldi         | 1.26
   blackberry                          → Wonky Blackberries                                 | aldi         | 1.26
   blueberries                         → Blueberries                                        | aldi         | 0.7933
   blueberry                           → Blueberries                                        | aldi         | 0.7933
-  breadcrumbs                         → Panko Breadcrumbs                                  | aldi         | —
+  breadcrumbs                         → Panko Breadcrumbs                                  | aldi         | 0.595
   broccoli                            → British Broccoli                                   | aldi         | 0.2188
   broccoli florets                    → Broccoli Florets                                   | aldi         | 0.119
   broccolini                          → British Broccoli                                   | aldi         | 0.2188
@@ -72,8 +72,8 @@
   butternut squash                    → Butternut Squash & Pine Nut Girasoli               | aldi         | 0.996
   cabbage                             → Red Cabbage                                        | aldi         | 0.0989
   cabbage and carrots                 → British Wonky Carrots                              | aldi         | 0.053
-  cajun seasoning                     → Cajun Seasoning                                    | aldi         | —
-  cannellini beans                    → Red Kidney Beans in Water                          | aldi         | 0.0975
+  cajun seasoning                     → Cajun Seasoning                                    | aldi         | 1.4681
+  cannellini beans                    → Red Kidney Beans in Water                          | aldi         | 0.1625
   carrot                              → Carrot & Swede Mash                                | aldi         | 0.3
   carrots                             → British Wonky Carrots                              | aldi         | 0.053
   cashew                              → Cashews Roasted and Salted                         | aldi         | 0.995
@@ -82,11 +82,11 @@
   cauliflower                         → British Cauliflower                                | aldi         | 0.1487
   cauliflower gnocchi                 → British Cauliflower                                | aldi         | 0.1487
   cauliflower rice                    → British Cauliflower                                | aldi         | 0.1487
-  cayenne                             → Cayenne Pepper                                     | aldi         | —
-  cayenne pepper                      → Cayenne Pepper                                     | aldi         | —
+  cayenne                             → Cayenne Pepper                                     | aldi         | 1.8056
+  cayenne pepper                      → Cayenne Pepper                                     | aldi         | 1.8056
   celery                              → Celery                                             | aldi         | 0.1875
-  cheese                              → Italian Meat & Cheese Select                       | aldi         | —
-  cheese stick                        → Puff Pastry Ham & Cheese Slices 2 Pack             | aldi         | —
+  cheese                              → Spanish Meat & Cheese Selection                    | aldi         | 1.4
+  cheese stick                        → Puff Pastry Ham & Cheese Slices 2 Pack             | aldi         | 0.55
   cherries                            → Cherries                                           | aldi         | 1.145
   cherry                              → Cherry Tomatoes                                    | aldi         | 0.248
   cherry tomato                       → Cherry Tomatoes in Rich Tomato Juice               | aldi         | 0.1875
@@ -94,29 +94,29 @@
   chicken                             → Chicken Breast Fillets                             | aldi         | 0.425
   chicken apple sausage               → Cooked Sliced Chicken                              | aldi         | 0.6147
   chicken breast                      → Chicken Breast Fillets                             | aldi         | 0.425
-  chicken broth                       → Chicken Stock Cubes                                | aldi         | —
+  chicken broth                       → Chicken Stock Cubes                                | aldi         | 0.575
   chicken drumstick                   → Chicken Drumsticks                                 | aldi         | 0.215
   chicken drumsticks                  → Chicken Drumsticks                                 | aldi         | 0.215
   chicken fajita                      → Cooked Sliced Chicken                              | aldi         | 0.6147
   chicken legs                        → Chicken Legs                                       | aldi         | 0.225
   chicken sausage                     → Cooked Sliced Chicken                              | aldi         | 0.6147
-  chicken stock                       → Chicken Stock Cubes                                | aldi         | —
-  chicken stock concentrate           → Chicken Stock Cubes                                | aldi         | —
+  chicken stock                       → Chicken Stock Cubes                                | aldi         | 0.575
+  chicken stock concentrate           → Chicken Stock Cubes                                | aldi         | 0.575
   chicken thigh                       → Chicken Thigh Fillets                              | aldi         | 0.6322
   chicken thighs                      → Chicken Thighs                                     | aldi         | 0.299
   chicken wing                        → Chicken Wings                                      | aldi         | 0.215
   chickpea                            → Chickpea Fusilli                                   | aldi         | 0.276
   chickpea flour                      → Chickpea Fusilli                                   | aldi         | 0.276
   chickpea fusilli pasta              → Fusilli Pasta 1kg                                  | aldi         | 0.119
-  chickpeas                           → Chickpeas                                          | aldi         | —
+  chickpeas                           → Chickpeas                                          | aldi         | 0.1708
   chili garlic sauce                  → Garlic                                             | aldi         | 0.3955
-  chili powder                        → Chilli Powder                                      | aldi         | —
+  chili powder                        → Chilli Powder                                      | aldi         | 1.975
   chocolate                           → Chocolate Mini Rolls                               | aldi         | 0.106
   chocolate chips                     → Milk Chocolate Chips                               | aldi         | 1.19
   chocolate protein powder            → Chocolate Protein Porridge Sachet                  | aldi         | 0.4826
   cilantro                            → British Cut Coriander                              | aldi         | 1.6667
   cinnamon                            → Cinnamon Buns                                      | aldi         | 0.4967
-  cocoa hazelnut spread               → Hazelnut Spread                                    | aldi         | —
+  cocoa hazelnut spread               → Hazelnut Spread                                    | aldi         | 0.4125
   cocoa powder                        → Cocoa Powder 250g                                  | aldi         | 1.196
   coconut                             → Desiccated Coconut                                 | aldi         | 0.66
   coconut aminos                      → Coconut Milk 400ml Full Fat                        | aldi         | 0.1875
@@ -124,9 +124,9 @@
   coconut milk powder                 → Coconut Milk 400ml Full Fat                        | aldi         | 0.1875
   coconut oil                         → Coconut Milk 400ml Full Fat                        | aldi         | 0.1875
   coconut oil spray                   → Coconut Milk 400ml Full Fat                        | aldi         | 0.1875
-  coconut wrap                        → Coconut Water                                      | aldi         | —
+  coconut wrap                        → Coconut Water                                      | aldi         | 0.199
   cod                                 → Cod Fillets                                        | aldi         | 1.0528
-  coleslaw mix                        → Reduced Fat Coleslaw                               | aldi         | —
+  coleslaw mix                        → Reduced Fat Coleslaw                               | aldi         | 0.2633
   coriander                           → British Cut Coriander                              | aldi         | 1.6667
   corn                                → Baby Corn                                          | aldi         | 0.7517
   corn starch                         → Baby Corn                                          | aldi         | 0.7517
@@ -138,16 +138,16 @@
   crispy rice cereal                  → Sweet & Crispy                                     | aldi         | 0.5211
   crushed tomatoes                    → Chopped Tomatoes in Tomato Juice                   | aldi         | 0.108
   cucumber                            → Cucumber                                           | aldi         | 0.2967
-  cumin                               → Cumin                                              | aldi         | —
+  cumin                               → Cumin                                              | aldi         | 1.625
   curry powder                        → Medium Curry Powder                                | aldi         | 0.9889
   dairy free chocolate chips          → Dark Chocolate Chips                               | aldi         | 1.19
-  dairy free sour cream               → Sour Cream & Black Pepper Multigrain Waves 6 Pack  | aldi         | 0.86
+  dairy free sour cream               → Reduced Fat Sour Cream                             | aldi         | 0.495
   dark chocolate                      → Dark Chocolate 100g                                | aldi         | 0.65
   dark chocolate chips                → Dark Chocolate Chips                               | aldi         | 1.19
   diced tomatoes                      → Chopped Tomatoes in Tomato Juice                   | aldi         | 0.108
   dijon mustard                       → Dijon Mustard                                      | aldi         | 0.245
-  distilled white vinegar             → Distilled Vinegar                                  | aldi         | —
-  dried basil                         → Basil                                              | aldi         | —
+  distilled white vinegar             → Distilled Vinegar                                  | aldi         | 0.0616
+  dried basil                         → Basil                                              | aldi         | 5.0
   dried cherries                      → Cherries                                           | aldi         | 1.145
   dried cranberries                   → Raisins & Cranberries                              | aldi         | 0.45
   dried pitted date                   → Pitted Dates                                       | aldi         | 0.558
@@ -158,25 +158,25 @@
   eggs                                → Free Range Eggs 6 Pack                             | aldi         | 0.275
   feta                                → Greek Feta                                         | aldi         | 0.845
   feta cheese                         → Greek Feta                                         | aldi         | 0.845
-  fig                                 → Fig Rolls                                          | aldi         | —
+  fig                                 → Fig Rolls                                          | aldi         | 0.295
   flax seeds                          → Flaxseed                                           | aldi         | 0.895
   flaxseed meal                       → Flaxseed                                           | aldi         | 0.895
-  freeze dried strawberries           → Strawberry Slices                                  | aldi         | —
-  freeze dried strawberry             → Strawberry Slices                                  | aldi         | —
-  fruit                               → Fruit Loaf                                         | aldi         | —
+  freeze dried strawberries           → Strawberry Slices                                  | aldi         | 7.1071
+  freeze dried strawberry             → Strawberry Slices                                  | aldi         | 7.1071
+  fruit                               → Fruit Loaf                                         | aldi         | 0.3225
   garam masala                        → Garam Malasa Powder                                | aldi         | 0.9889
   garlic                              → Garlic                                             | aldi         | 0.3955
-  garlic granules                     → Garlic Granules                                    | aldi         | —
+  garlic granules                     → Garlic Granules                                    | aldi         | 1.3269
   garlic pasta sauce                  → Onion & Garlic Pasta Sauce                         | aldi         | 0.138
   garlic powder                       → Garlic                                             | aldi         | 0.3955
   ginger                              → Ginger                                             | aldi         | 0.792
-  gluten free panko bread crumbs      → Panko Breadcrumbs                                  | aldi         | —
-  gluten free panko breadcrumbs       → Panko Breadcrumbs                                  | aldi         | —
+  gluten free panko bread crumbs      → Panko Breadcrumbs                                  | aldi         | 0.595
+  gluten free panko breadcrumbs       → Panko Breadcrumbs                                  | aldi         | 0.595
   gluten free pasta                   → Gluten Free Spaghetti                              | aldi         | 0.058
   gluten free pita                    → Gluten Free Spaghetti                              | aldi         | 0.058
   gluten free spaghetti               → Gluten Free Spaghetti                              | aldi         | 0.058
-  golden beet                         → Golden Breadcrumbs                                 | aldi         | —
-  graham crackers                     → Cream Crackers                                     | aldi         | —
+  golden beet                         → Golden Breadcrumbs                                 | aldi         | 0.5657
+  graham crackers                     → Cream Crackers                                     | aldi         | 0.1633
   greek yogurt                        → Fat Free Greek Style Yogurt                        | aldi         | 0.149
   green beans                         → Green Beans                                        | aldi         | 0.3864
   green bell pepper                   → Red Pepper                                         | aldi         | 0.4375
@@ -186,44 +186,44 @@
   green peas                          → Green Pea Penne                                    | aldi         | 0.276
   ground beef                         → British Diced Beef                                 | aldi         | 1.0843
   ground chicken                      → Lean Chicken Mince 5% Fat                          | aldi         | 0.518
-  ground clove                        → Quorn Mince                                        | aldi         | —
-  ground cumin                        → Quorn Mince                                        | aldi         | —
-  ground flax                         → Quorn Mince                                        | aldi         | —
-  ground flax meal                    → Quorn Mince                                        | aldi         | —
-  ground flaxseed                     → Quorn Mince                                        | aldi         | —
+  ground clove                        → Ground Coriander                                   | aldi         | 2.2414
+  ground cumin                        → Cumin                                              | aldi         | 1.625
+  ground flax                         → Flaxseed                                           | aldi         | 0.895
+  ground flax meal                    → Flaxseed                                           | aldi         | 0.895
+  ground flaxseed                     → Flaxseed                                           | aldi         | 0.895
   ground ginger                       → Ginger                                             | aldi         | 0.792
   ground lamb                         → British Lamb Mince 20% Fat                         | aldi         | 1.1558
   ground pork                         → British Pork Smoked Ham Family Pack 14 Slices      | aldi         | 0.53
-  ground sausage                      → Quorn Mince                                        | aldi         | —
+  ground sausage                      → Quorn Sausages                                     | aldi         | 0.5595
   ground turkey                       → British Turkey Mince 7% Fat                        | aldi         | 0.598
   ground turkey breast                → British Turkey Mince 7% Fat                        | aldi         | 0.598
   ham                                 → Ham & Mushroom Tagliatelle                         | aldi         | 0.6975
   harissa                             → Harissa Salads                                     | aldi         | 1.9933
-  hoisin sauce                        → Hoisin Sauce                                       | aldi         | —
+  hoisin sauce                        → Hoisin Sauce                                       | aldi         | 0.4712
   honey                               → Clear Honey                                        | aldi         | 0.2181
-  honey mustard                       → Honey & Mustard Salad Dressing                     | aldi         | —
-  honey mustard dressing              → Honey & Mustard Salad Dressing                     | aldi         | —
+  honey mustard                       → Honey & Mustard Salad Dressing                     | aldi         | 0.396
+  honey mustard dressing              → Honey & Mustard Salad Dressing                     | aldi         | 0.396
   instant brown rice                  → Brown Rice                                         | aldi         | 0.139
-  italian seasoning                   → Italian Meat & Cheese Select                       | aldi         | —
-  kidney beans                        → Red Kidney Beans                                   | aldi         | —
+  italian seasoning                   → Italian Meat & Cheese Select                       | aldi         | 1.575
+  kidney beans                        → Red Kidney Beans                                   | aldi         | 0.1294
   kiwi                                → Kiwis                                              | aldi         | 0.261
-  korean bbq sauce                    → BBQ Sauce                                          | aldi         | —
-  leek                                → Individual Cheddar & Leek Quiche                   | aldi         | —
+  korean bbq sauce                    → BBQ Sauce                                          | aldi         | 0.163
+  leek                                → Individual Cheddar & Leek Quiche                   | aldi         | 0.9267
   lemon                               → Wonky Lemons                                       | aldi         | 0.2225
-  lemon juice                         → Lemon Juice                                        | aldi         | —
+  lemon juice                         → Lemon Juice                                        | aldi         | 0.276
   lemon zest                          → Wonky Lemons                                       | aldi         | 0.2225
   lentil                              → Red Lentils                                        | aldi         | 0.198
   lentils                             → Red Lentils                                        | aldi         | 0.198
   lime                                → Limes                                              | aldi         | 0.2657
   lime zest                           → Limes                                              | aldi         | 0.2657
   long grain white rice               → Long Grain White Rice                              | aldi         | 0.052
-  mandarin                            → Mandarin Oranges in Juice                          | aldi         | —
-  mandarin orange                     → Mandarin Oranges in Juice                          | aldi         | —
+  mandarin                            → Mandarin Oranges in Juice                          | aldi         | 0.3943
+  mandarin orange                     → Mandarin Oranges in Juice                          | aldi         | 0.3943
   mango                               → Large Mango                                        | aldi         | 0.44
-  maple syrup                         → Maple Syrup                                        | aldi         | —
+  maple syrup                         → Maple Syrup                                        | aldi         | 1.596
   mashed potatoes                     → Mashed Potato                                      | aldi         | 0.17
-  mayonnaise                          → Real Mayonnaise                                    | aldi         | —
-  meatballs                           → Meatballs                                          | aldi         | —
+  mayonnaise                          → Real Mayonnaise                                    | aldi         | 0.178
+  meatballs                           → Meatballs                                          | aldi         | 0.558
   milk                                → Milk Chocolate 100g                                | aldi         | 0.65
   mint                                → Cut Mint                                           | aldi         | 1.6667
   mixed berries                       → Blueberries                                        | aldi         | 0.7933
@@ -236,19 +236,19 @@
   mushrooms                           → Sliced Mushrooms                                   | aldi         | 0.198
   nectarine                           → Nectarines                                         | aldi         | 0.3151
   nuts                                → Mixed Nuts                                         | aldi         | 0.875
-  olive oil                           → Extra Virgin Olive Oil                             | aldi         | —
+  olive oil                           → Extra Virgin Olive Oil                             | aldi         | 1.218
   onion                               → British Wonky Brown Onions                         | aldi         | 0.08
-  onion granules                      → Onion Granules                                     | aldi         | —
+  onion granules                      → Onion Granules                                     | aldi         | 1.8056
   orange juice                        → Smooth Orange Juice                                | aldi         | 0.115
   orange marmalade                    → Fine Cut Orange Marmalade                          | aldi         | 0.1868
   orange zest                         → Wonky Oranges                                      | aldi         | 0.1238
-  panko breadcrumbs                   → Panko Breadcrumbs                                  | aldi         | —
-  paprika                             → Smoked Paprika                                     | aldi         | 1.725
+  panko breadcrumbs                   → Panko Breadcrumbs                                  | aldi         | 0.595
+  paprika                             → Paprika                                            | aldi         | 1.725
   parmesan                            → Greek Feta                                         | aldi         | 0.845
   parmesan cheese                     → Greek Feta                                         | aldi         | 0.845
-  parsley                             → Parsley                                            | aldi         | —
+  parsley                             → Parsley                                            | aldi         | 8.125
   parsnip                             → British Parsnips                                   | aldi         | 0.148
-  pasta sauce                         → Bolognese Pasta Sauce                              | aldi         | —
+  pasta sauce                         → Bolognese Pasta Sauce                              | aldi         | 0.138
   peach                               → Peach Slices in Juice                              | aldi         | 0.34
   peanut butter                       → Smooth Peanut Butter                               | aldi         | 0.2912
   peanuts                             → Peanuts 200g                                       | aldi         | 0.745
@@ -258,7 +258,7 @@
   pecans                              → Pecans                                             | aldi         | 1.9933
   penne pasta                         → Everyday Essentials Penne Pasta 500g               | aldi         | 0.082
   pepper                              → Ground Black Pepper                                | aldi         | 1.59
-  pepperoni                           → Hot Pepperoni 24 Slices                            | aldi         | —
+  pepperoni                           → Hot Pepperoni 24 Slices                            | aldi         | 0.9083
   pesto                               → Pesto Rosso                                        | aldi         | 1.0474
   pickled ginger                      → Ginger                                             | aldi         | 0.792
   pine nuts                           → Pine Nuts                                          | aldi         | 2.8167
@@ -266,7 +266,7 @@
   pineapple juice                     → Pineapple                                          | aldi         | 0.1225
   plain greek yogurt                  → Fat Free Greek Style Yogurt                        | aldi         | 0.149
   plain yogurt                        → Fat Free Natural Yogurt                            | aldi         | 0.11
-  plant-based ground                  → Quorn Mince                                        | aldi         | —
+  plant-based ground                  → Quorn Mince                                        | aldi         | 0.7833
   pomegranate                         → Pomegranate Seeds                                  | aldi         | 0.945
   pomegranate seeds                   → Pomegranate Seeds                                  | aldi         | 0.945
   pork                                → British Pork Loin Joint                            | aldi         | 0.5788
@@ -294,19 +294,19 @@
   red chili flakes                    → Red Chillies                                       | aldi         | 0.8462
   red curry paste                     → Thai Red Curry Paste                               | aldi         | 0.7167
   red grapes                          → Red Grapefruit                                     | aldi         | 0.1571
-  red kidney beans                    → Red Kidney Beans                                   | aldi         | —
+  red kidney beans                    → Red Kidney Beans                                   | aldi         | 0.1294
   red lentils                         → Red Lentils                                        | aldi         | 0.198
   red onion                           → Red Onions                                         | aldi         | 0.095
   red pepper                          → Red Pepper                                         | aldi         | 0.4375
   red pepper flakes                   → Red Pepper                                         | aldi         | 0.4375
   red potato                          → British Red Potatoes                               | aldi         | 0.078
   red potatoes                        → British Red Potatoes                               | aldi         | 0.078
-  red wine                            → Red Wine Vinegar                                   | aldi         | —
-  red wine vinegar                    → Red Wine Vinegar                                   | aldi         | —
+  red wine                            → Red Wine Vinegar                                   | aldi         | 0.33
+  red wine vinegar                    → Red Wine Vinegar                                   | aldi         | 0.33
   rice                                → Rice Noodles                                       | aldi         | 0.33
   rice noodles                        → Rice Noodles                                       | aldi         | 0.33
-  rice vinegar                        → Cider Vinegar                                      | aldi         | —
-  rice wine vinegar                   → Red Wine Vinegar                                   | aldi         | —
+  rice vinegar                        → Cider Vinegar                                      | aldi         | 0.33
+  rice wine vinegar                   → Red Wine Vinegar                                   | aldi         | 0.33
   riced cauliflower                   → British Cauliflower                                | aldi         | 0.1487
   ricotta cheese                      → Low Fat Cottage Cheese                             | aldi         | 0.33
   roasted red pepper                  → Red Pepper                                         | aldi         | 0.4375
@@ -315,30 +315,30 @@
   romaine lettuce                     → British Romaine Lettuce                            | aldi         | 0.1917
   rosemary                            → Cut Rosemary                                       | aldi         | 2.5
   russet potato                       → Sweet Potato                                       | aldi         | 0.5308
-  sage                                → Sage & Onion Stuffing Mix                          | aldi         | —
-  salami                              → Salami and Smoked Cheese Selection                 | aldi         | —
+  sage                                → Sage & Onion Stuffing Mix                          | aldi         | 0.2647
+  salami                              → Salami and Smoked Cheese Selection                 | aldi         | 1.3034
   salmon                              → Salmon Pieces                                      | aldi         | 1.14
-  salt                                → Salt Grinder                                       | aldi         | —
-  sausage                             → Sausage Rolls 6 Pack                               | aldi         | —
+  salt                                → Salt Grinder                                       | aldi         | 1.6273
+  sausage                             → Sausage Rolls 6 Pack                               | aldi         | 0.4306
   scallion                            → Jumbo Spring Onions                                | aldi         | 0.6846
   scallions                           → Jumbo Spring Onions                                | aldi         | 0.6846
   sea salt                            → Sea Salt Chocolate                                 | aldi         | 1.592
   semi sweet chocolate chips          → Milk Chocolate Chips                               | aldi         | 1.19
   semi-sweet chocolate chips          → Milk Chocolate Chips                               | aldi         | 1.19
-  sesame                              → Sesame Seeds                                       | aldi         | —
-  sesame seed                         → Sesame Seeds                                       | aldi         | —
-  sesame seeds                        → Sesame Seeds                                       | aldi         | —
+  sesame                              → Sesame Seeds                                       | aldi         | 2.0238
+  sesame seed                         → Sesame Seeds                                       | aldi         | 2.0238
+  sesame seeds                        → Sesame Seeds                                       | aldi         | 2.0238
   shallot                             → British Shallots 400g                              | aldi         | 0.2882
   shiitake mushrooms                  → Sliced Mushrooms                                   | aldi         | 0.198
   sirloin beef                        → British Diced Beef                                 | aldi         | 1.0843
   sirloin steak                       → 100% British Beef Wagyu Sirloin Steak              | aldi         | 3.9604
-  smoked paprika                      → Smoked Paprika                                     | aldi         | 1.725
+  smoked paprika                      → Paprika                                            | aldi         | 1.725
   smoked salmon                       → Smoked Salmon Slices                               | aldi         | 2.245
   soba noodles                        → Classic Soba Noodles Pot                           | aldi         | 1.2111
-  sour cream                          → Sour Cream & Black Pepper Multigrain Waves 6 Pack  | aldi         | 0.86
-  soy sauce                           → Light Soy Sauce                                    | aldi         | —
-  spaghetti                           → Spaghetti                                          | aldi         | —
-  spaghetti squash                    → Spaghetti                                          | aldi         | —
+  sour cream                          → Reduced Fat Sour Cream                             | aldi         | 0.495
+  soy sauce                           → Light Soy Sauce                                    | aldi         | 0.3667
+  spaghetti                           → Spaghetti                                          | aldi         | 0.15
+  spaghetti squash                    → Spaghetti                                          | aldi         | 0.15
   spinach                             → British Baby Spinach                               | aldi         | 0.3533
   spinach tortilla                    → British Baby Spinach                               | aldi         | 0.3533
   spinach wrap                        → British Baby Spinach                               | aldi         | 0.3533
@@ -358,31 +358,31 @@
   sweet onion                         → Sweet & Crispy                                     | aldi         | 0.5211
   sweet potato                        → Sweet Potato                                       | aldi         | 0.5308
   sweet potato puree                  → Sweet Potato                                       | aldi         | 0.5308
-  teriyaki sauce                      → Teriyaki Sauce                                     | aldi         | —
-  thai basil                          → Basil                                              | aldi         | —
-  thai sweet chili sauce              → Sweet Chilli Sauce                                 | aldi         | —
+  teriyaki sauce                      → Teriyaki Sauce                                     | aldi         | 0.4877
+  thai basil                          → Basil                                              | aldi         | 5.0
+  thai sweet chili sauce              → Sweet Chilli Sauce                                 | aldi         | 0.63
   thyme                               → Thyme                                              | aldi         | 4.3333
   tofu                                → Organic Smoked Tofu                                | aldi         | 0.5278
   tomato                              → Salad Tomatoes                                     | aldi         | 0.1341
   tomato paste                        → Chopped Tomatoes in Tomato Juice                   | aldi         | 0.108
-  tomato sauce                        → Bolognese Pasta Sauce                              | aldi         | —
-  tuna                                → Tuna Chunks In Spring Water                        | aldi         | 0.4483
+  tomato sauce                        → Bolognese Pasta Sauce                              | aldi         | 0.138
+  tuna                                → Tuna Chunks In Spring Water                        | aldi         | 0.6373
   turkey                              → British Turkey Breast Steaks 2% Fat                | aldi         | 0.9573
   turkey breast                       → British Turkey Breast Steaks 2% Fat                | aldi         | 0.9573
   turmeric                            → Ground Turmeric                                    | aldi         | 1.875
   vegetable                           → British Wonky Carrots                              | aldi         | 0.053
-  vegetable broth                     → Vegetable Oil                                      | aldi         | —
-  vegetable oil                       → Vegetable Oil                                      | aldi         | —
-  vegetable stock                     → Vegetable Oil                                      | aldi         | —
+  vegetable broth                     → Chicken Stock Cubes                                | aldi         | 0.575
+  vegetable oil                       → Vegetable Oil                                      | aldi         | 0.145
+  vegetable stock                     → Chicken Stock Cubes                                | aldi         | 0.575
   vegetarian sausage                  → Vegetarian Sushi Platter                           | aldi         | 1.4049
   watercress                          → Watercress Spinach & Rocket Salad                  | aldi         | 0.9375
   watermelon                          → Mini Watermelon                                    | aldi         | 0.1327
   watermelon radish                   → Mini Watermelon                                    | aldi         | 0.1327
-  white beans                         → Red Kidney Beans in Water                          | aldi         | 0.0975
+  white beans                         → Red Kidney Beans in Water                          | aldi         | 0.1625
   white button mushroom               → British Baby Button Mushrooms                      | aldi         | 0.475
   white chocolate chips               → White Chocolate Chips                              | aldi         | 1.19
   white onion                         → Diced White Onions                                 | aldi         | 0.198
-  white wine vinegar                  → White Wine Vinegar                                 | aldi         | —
+  white wine vinegar                  → White Wine Vinegar                                 | aldi         | 0.33
   yeast                               → Yeast                                              | aldi         | 1.5476
   yellow bell pepper                  → Red Pepper                                         | aldi         | 0.4375
   yogurt                              → Fat Free Natural Yogurt                            | aldi         | 0.11
@@ -430,9 +430,9 @@
   bean sprouts                        | top: washed ready to cook straight to wok beansprouts(95.7), trimmed brussel sprouts(81.8), lean pork(70.6)
   beef bouillon cube                  | top: beef(100.0), ice cubes(71.4), beef kebabs(70.6)
   beef chuck roast                    | top: beef(100.0), beef roasting 30 day matured(76.9), beef roasting 21 day matured(76.9)
-  beet                                | top: beetroot(100.0), beetroot, red cabbage(100.0), pickled beetroot(100.0)
+  beet                                | top: beetroot(100.0), beetroot, red cabbage(100.0), beetroot fusilli(100.0)
   beet hummus                         | top: beef(85.7), beetroot(66.7), sweet(66.7)
-  beets                               | top: beetroot(88.9), beetroot, red cabbage(88.9), veggie worms sweets(88.9)
+  beets                               | top: beetroot(88.9), beetroot, red cabbage(88.9), beetroot fusilli(88.9)
   beyond meat spicy italian sausage   | top: sausages(93.3), ultimate sausages(75.9), apple sausages(75.0)
   blood orange                        | top: oranges(92.3), pressed orange(80.0), rosorange(80.0)
   blue cheese                         | top: beef double cheese burgers 4 pack(90.9), bacon double cheese burgers 4 pack(90.9), garlic herbs roule cheese(90.0)
@@ -445,7 +445,7 @@
   bread crumbs                        | top: salmon watercress topped with crunchy breadcrumbs(95.7), natural breadcrumbs(95.7), golden breadcrumbs(95.7)
   breakfast sandwich bun              | top: breakfast hash browns 10 pack(73.7), honey chocolate chip breakfast biscuits(65.0), bran flakes(63.2)
   breakfast sausage                   | top: sausages(93.3), breakfast hash browns 10 pack(80.0), bockwurst sausages(75.9)
-  brown sugar                         | top: tropical blast zero sugar(84.2), orange zero sugar(84.2), zx cherry cola zero sugar(84.2)
+  brown sugar                         | top: orange zero sugar(84.2), tropical blast zero sugar(84.2), zx cherry cola zero sugar(84.2)
   brussels sprout                     | top: trimmed brussel sprouts(93.3), smooth brussels pâté(78.6), brussel shallot pâté(75.0)
   brussels sprouts                    | top: trimmed brussel sprouts(96.8), smooth brussels pâté(75.9), brussel shallot pâté(72.0)
   buffalo sauce                       | top: soy sauce(87.5), apple sauce(80.0), bbq sauce(80.0)
@@ -464,10 +464,10 @@
   canned green chiles                 | top: red chillies(78.3), limes(75.0), leeks(75.0)
   canola oil                          | top: cola ice coolers(75.0), strawberry granola top protein(70.0), vanilla granola top protein(70.0)
   cantaloupe                          | top: pie(80.0), picanha(66.7), pecans(66.7)
-  capers                              | top: pears(88.9), white seedless grapes(80.0), mixed seedless grapes(80.0)
+  capers                              | top: pears(88.9), white seedless grapes(80.0), seedless red grapes(80.0)
   cassava flour                       | top: plain flour(77.8), cornflour(71.4), ss flavoured salads, chilli cheese p(69.6)
   cassava flour tortillas             | top: deltas chilli flavour tortilla chips(69.8), pecans(66.7), plain flour(63.6)
-  cassava tortilla                    | top: lightly salted tortilla chips(68.8), deltas cool tortilla chips(68.8), deltas tangy cheese tortilla chips(68.8)
+  cassava tortilla                    | top: lightly salted tortilla chips(68.8), deltas cool tortilla chips(68.8), deltas chilli flavour tortilla chips(68.8)
   cavatappi pasta                     | top: pastrami(76.9), pepperoni pasta(75.0), fusili pasta(73.7)
   chard                               | top: chargrilled pulled chicken(88.9), chargrilled chicken caesar salad(88.9), hard goats' cheese(88.9)
   cheese tortellini                   | top: cheese thins(80.0), cherries(76.9), deltas tangy cheese tortilla chips(76.5)
@@ -504,7 +504,7 @@
   collard greens                      | top: cod(80.0), coleslaw(76.9), spring greens(72.7)
   confectioner's erythritol           | top: corn(85.7), cod(80.0), confectionery 6 pack(75.0)
   cooking oil spray                   | top: cod(80.0), spray olive oil(68.8), corn(66.7)
-  cooking spray                       | top: cod(80.0), hot chilli con carne cooking sauce(76.9), mild chilli con carne cooking sauce(76.9)
+  cooking spray                       | top: cod(80.0), mild chilli con carne cooking sauce(76.9), hot chilli con carne cooking sauce(76.9)
   corn on the cob                     | top: corn(100.0), corn cobs(80.0), cod(80.0)
   corn tortilla                       | top: corn(100.0), deltas cool tortilla chips(84.6), deltas chilli flavour tortilla chips(84.6)
   corn tortillas                      | top: corn(100.0), cod(80.0), deltas cool tortilla chips(78.6)
@@ -532,15 +532,15 @@
   duck fat                            | top: duck bao buns 6 pack(80.0), duck chicken sushi selection(76.9), duck orange pâté(76.9)
   edamame                             | top: unsmoked gammon typically(71.4), unsmoked gammon(71.4), unsmoked gammon 2 pack(71.4)
   egg replacer                        | top: celery(66.7), eggs 6 pack(66.7), pickled onion rocket racers(66.7)
-  egg white                           | top: mature white cheddar cheese(77.8), spinach pepper egg bites(77.8), cheese bacon egg bites(77.8)
-  egg whites                          | top: bites(88.9), spinach pepper egg bites(84.2), cheese bacon egg bites(84.2)
+  egg white                           | top: mature white cheddar cheese(77.8), spinach pepper egg bites(77.8), chicken leek egg bites(77.8)
+  egg whites                          | top: bites(88.9), spinach pepper egg bites(84.2), chicken leek egg bites(84.2)
   eggnog                              | top: egg noodles(83.3), protein egg noodles(83.3), eggs 6 pack(66.7)
   eggplant                            | top: parmigiano reggiano(66.7), plain toasting egg waffles(66.7), peanuts(66.7)
   elbow pasta                         | top: tagliatelle pasta(77.8), mezzelune pasta(77.8), pesto style pasta(77.8)
   enchilada sauce                     | top: bbq sauce(80.0), soy sauce(80.0), satay sauce(80.0)
   endive                              | top: tenderstem broccoli(72.7), denver(72.7), individual cheddar(72.7)
   erythritol                          | top: strawberry trifle(70.0), strawberry trifles 3 pack(70.0), raspberry trifles 3 pack(70.0)
-  everything bagel seasoning          | top: denver(80.0), cajun seasoning(80.0), thigh(80.0)
+  everything bagel seasoning          | top: thigh(80.0), denver(80.0), cajun seasoning(80.0)
   extra firm tofu                     | top: tofu(100.0), super firm tofu(88.9), extra mature cheddar cheese(72.0)
   fajita seasoning                    | top: cajun seasoning(84.6), fajita kit(82.4), peri peri seasoning(81.5)
   farro                               | top: washed ready to cook carrot batons(80.0), carrots(80.0), chantenay carrots(80.0)
@@ -576,23 +576,23 @@
   gold potato                         | top: potatoes(85.7), baking potato(84.2), mashed potato(84.2)
   graham cracker                      | top: cream crackers(83.3), multigrain crackers(78.6), wheat multigrain crackers(78.6)
   granola                             | top: strawberry granola top protein(100.0), vanilla granola top protein(100.0), honey granola bars 5 pack(100.0)
-  grape                               | top: red grapefruit(100.0), white seedless grapes(100.0), mixed seedless grapes(100.0)
+  grape                               | top: red grapefruit(100.0), white seedless grapes(100.0), seedless red grapes(100.0)
   grape tomato                        | top: paprika, tomato(76.2), vine ripened tomatoes(75.0), san marzano tomatoes(75.0)
   grape tomatoes                      | top: plum tomatoes(83.3), regal vine tomatoes(83.3), marinated tomatoes(81.5)
-  grapes                              | top: white seedless grapes(100.0), mixed seedless grapes(100.0), seedless red grapes(100.0)
+  grapes                              | top: white seedless grapes(100.0), seedless red grapes(100.0), black seedless grapes(100.0)
   grapeseed oil                       | top: rapeseed oil(100.0), slightly salted spreadable butter blended with rapeseed oil(96.0), lighter spreadable butter blended with rapeseed oil(96.0)
   greek dressing                      | top: caeser salad dressing(78.3), honey mustard salad dressing(78.3), house salad dressing(78.3)
   green chiles                        | top: red chillies(78.3), limes(75.0), leeks(75.0)
   green food coloring                 | top: corn(75.0), green beans(70.6), greek feta(70.6)
-  green grapes                        | top: seedless red grapes(81.8), seedless sable grapes(80.0), apples(80.0)
+  green grapes                        | top: seedless red grapes(81.8), apples(80.0), white grapes(80.0)
   green olive                         | top: pitted green olives with cheddar(100.0), green beans(73.7), green goddess air fryer bites(73.7)
   green olives                        | top: pitted green olives with cheddar(100.0), limes(80.0), lemon herb olives(76.2)
   green pepper                        | top: red pepper(84.2), green pea penne(83.3), red pepper houmous(81.8)
   green plantain                      | top: green beans(76.2), black beans/green lentils(74.1), green pea penne(71.4)
-  ground chipotle chile pepper        | top: ground(100.0), red pepper(88.9), chipotle chicken(81.2)
+  ground chipotle chile pepper        | top: red pepper(88.9), chipotle chicken(81.2), grilled peppers(80.0)
   gruyere cheese                      | top: four cheese(80.0), chive cheese(80.0), cauliflower cheese(78.3)
   guacamole                           | top: lamb leg(61.5), garlic(60.0), apple(60.0)
-  half and half                       | top: salt and chilli chicken(69.2), salt and chilli hot chicken wings(69.2), salt and chilli ribs(69.2)
+  half and half                       | top: salt and chilli hot chicken wings(69.2), salt and chilli ribs(69.2), salt and chilli chicken(69.2)
   halloumi                            | top: shallots(76.9), cumin(75.0), echalion shallots(66.7)
   halloumi cheese                     | top: four cheese(81.8), chive cheese(80.0), shallots(76.9)
   hazelnut                            | top: chocolate hazelnut tiramisu 2 pack(100.0), spirals hazelnut 7 pack(100.0), hazelnut crisp milk chocolate sticks 11 pack(100.0)
@@ -605,15 +605,15 @@
   hot sauce                           | top: high protein king prawns in a creamy pesto sauce(87.5), mackerel in tomato sauce(87.5), mint sauce(87.5)
   hummus                              | top: red pepper houmous(72.7), caramelised onion houmous(72.7), sweet chilli houmous(72.7)
   italian dressing                    | top: caeser salad dressing(82.8), honey mustard salad dressing(82.8), house salad dressing(82.8)
-  italian sausage                     | top: sausages(93.3), italian meat(81.8), bacon garlic cocktail sausage(81.5)
+  italian sausage                     | top: sausages(93.3), italian meat(81.8), caramelised onion cocktail sausage(81.5)
   jackfruit                           | top: red grapefruit(71.4), fruit yogurt squidgy pouches 4 pack(71.4), fruity moroccan inspired couscous(71.4)
   jalapeño                            | top: jalapeño chilli jam(100.0), fully loaded jalapeño peanuts(100.0), jalapeno beef burgers(87.5)
   jasmine rice                        | top: ready-to-heat sticky jasmine rice(100.0), easy cook long grain rice(80.0), special wholegrain rice(80.0)
-  jerky                               | top: beef jerky(100.0), honey beef jerky(100.0), jerk chicken(88.9)
+  jerky                               | top: honey beef jerky(100.0), beef jerky(100.0), jerk chicken(88.9)
   jumbo pasta shells                  | top: shallots(71.4), & basa(66.7), smooth tomato pasta sauce(64.7)
   kabocha squash                      | top: radish(66.7), butternut squash(66.7), spicy butternut squash(66.7)
   kalamata olives                     | top: limes(80.0), tomato olive stir through sauce(69.0), salad(66.7)
-  kale                                | top: scottish kale(100.0), ginger ale(85.7), seedless sable grapes(75.0)
+  kale                                | top: scottish kale(100.0), ginger ale(85.7), ready to roast mediterranean style vegetables(75.0)
   ketchup                             | top: sugar ketchup(100.0), tomato ketchup(100.0), salt tomato ketchup(100.0)
   kimchi                              | top: chicken wings(66.7), chicken breast(66.7), chicken legs(66.7)
   korean chili paste                  | top: chicken paste(77.4), fusili pasta(76.2), beef paste(75.0)
@@ -647,7 +647,7 @@
   monkfruit sweetener                 | top: sweet(100.0), swede(80.0), denver(80.0)
   mulberries                          | top: cherries(85.7), blueberries(84.2), frozen blueberries(84.2)
   mushroom q-cups                     | top: mushrooms(94.1), button mushrooms(75.0), chestnut mushrooms(75.0)
-  mustard                             | top: mustard sauce(100.0), wholegrain mustard(100.0), english mustard(100.0)
+  mustard                             | top: mustard sauce(100.0), english mustard(100.0), dijon mustard(100.0)
   mustard powder                      | top: garam malasa powder(78.3), mustard sauce(76.2), curry powder(76.2)
   napa cabbage                        | top: red cabbage(84.2), savoy cabbage(80.0), sweetheart cabbage(80.0)
   nut butter                          | top: smooth peanut butter(100.0), crunchy peanut butter(100.0), creamy peanut butter(100.0)
@@ -720,7 +720,7 @@
   ranch dressing                      | top: caeser salad dressing(80.0), honey mustard salad dressing(80.0), house salad dressing(80.0)
   ranch dressing mix                  | top: french fries(72.7), caeser salad dressing(69.0), honey mustard salad dressing(69.0)
   ranch seasoning                     | top: mediterranean chicken seasoning(84.6), cajun chicken seasoning(84.6), salt pepper seasoning(84.6)
-  red enchilada sauce                 | top: bbq sauce(80.0), soy sauce(80.0), satay sauce(80.0)
+  red enchilada sauce                 | top: bbq sauce(80.0), soy sauce(80.0), red lentil(80.0)
   red sauce                           | top: mustard sauce(94.1), tartare sauce(94.1), scottish mussels with white wine sauce(87.5)
   refried beans                       | top: pecans(80.0), whole green beans(78.3), green beans(76.2)
   rice bran oil                       | top: brown rice(69.6), chicken bacon layered salad(69.2), three bean chilli(69.2)
@@ -735,7 +735,7 @@
   salsa verde                         | top: salad(80.0), swede(66.7), salmon(66.7)
   sambal oelek                        | top: leeks(75.0), salmon(66.7), lamb leg(62.5)
   seasoned breadcrumbs                | top: golden breadcrumbs(83.9), panko breadcrumbs(82.8), natural breadcrumbs(77.4)
-  seasoned salt                       | top: cashews roasted and salted(76.9), seasonal pears(76.2), sea salt chocolate(76.2)
+  seasoned salt                       | top: cashews roasted and salted(76.9), sea salt 2 pack(76.2), seasonal pears(76.2)
   seasoning                           | top: mediterranean chicken seasoning(100.0), cajun chicken seasoning(100.0), garlic herb seasoning(100.0)
   serrano pepper                      | top: red pepper(82.4), german peppered salami(81.5), rainbow peppercorns(78.6)
   sesame oil                          | top: sesame bagels 5 pack(82.4), sesame seeds(82.4), slightly salted spreadable butter blended with rapeseed oil(77.8)
@@ -760,7 +760,7 @@
   summer squash                       | top: summer fruits(76.2), butternut squash(72.7), spicy butternut squash(72.7)
   sun dried tomato                    | top: sundried tomatoes(96.8), sun-dried tomato stir-in pasta sauce(93.8), sun-dried tomato pesto(93.8)
   sweetener                           | top: sweet(100.0), aspartame sweetener tablets(100.0), stevia sweetener tablets(100.0)
-  swerve                              | top: strawberry conserve(90.9), raspberry conserve(90.9), blackcurrant conserve(90.9)
+  swerve                              | top: strawberry conserve(90.9), apricot conserve(90.9), raspberry conserve(90.9)
   swiss chard                         | top: kiwis(66.7), sicilian lemon swiss roll(66.7), strawberry clotted cream flavour swiss roll(66.7)
   taco seasoning                      | top: mediterranean chicken seasoning(83.3), cajun chicken seasoning(83.3), garlic herb seasoning(83.3)
   tahini                              | top: original bagel thins(72.7), high protein bagel thins(72.7), cheese thins(72.7)
@@ -773,9 +773,9 @@
   tomatillo                           | top: paprika, tomato(80.0), chicken, tomato(80.0), tomato feta topped pasta(80.0)
   toothpick                           | top: thick cut unsmoked back bacon 10 pack(71.4), thick cut back bacon 10 pack(71.4), thick cut big daddy rump steak 30 day matured(71.4)
   toppings                            | top: beef stew dumplings(71.4), chicken casserole dumplings(71.4), washed ready to cook carrot batons(66.7)
-  tortellini                          | top: spinach ricotta tortelloni(90.0), chicken bacon tortelloni(90.0), spicy sausage tortelloni(90.0)
-  tortilla                            | top: lightly salted tortilla chips(100.0), deltas cool tortilla chips(100.0), deltas tangy cheese tortilla chips(100.0)
-  tortilla chips                      | top: lightly salted tortilla chips(100.0), deltas cool tortilla chips(100.0), deltas tangy cheese tortilla chips(100.0)
+  tortellini                          | top: spinach ricotta tortelloni(90.0), spicy sausage tortelloni(90.0), chicken bacon tortelloni(90.0)
+  tortilla                            | top: lightly salted tortilla chips(100.0), deltas cool tortilla chips(100.0), deltas chilli flavour tortilla chips(100.0)
+  tortilla chips                      | top: lightly salted tortilla chips(100.0), deltas cool tortilla chips(100.0), deltas chilli flavour tortilla chips(100.0)
   turkey gravy                        | top: turkey breast(78.3), slow lamb shanks with mint gravy(73.7), ground turkey(72.0)
   turkey sausage                      | top: sausages(93.3), the ultimate honey chilli pork sausages(80.0), the ultimate pork sausages(80.0)
   tzatziki sauce                      | top: lime sauce(82.4), mint sauce(82.4), bbq sauce(80.0)
@@ -792,7 +792,7 @@
   vegan protein powder                | top: baking powder(81.8), protein peach(76.9), peri peri chicken protein pot(76.5)
   vegan ricotta cheese                | top: cottage cheese(92.3), plain cottage cheese(81.1), four cheese(77.8)
   vegetables                          | top: ready to roast mediterranean style vegetables(100.0), mixed vegetables(100.0), vegetable sushi snack(94.7)
-  walnuts                             | top: walnut cake(92.3), walnut halves(92.3), dry roasted peanuts(83.3)
+  walnuts                             | top: walnut cake(92.3), walnut halves(92.3), salted peanuts(83.3)
   water                               | top: watermelon(100.0), watercress spinach(100.0), & peeled coldwater prawns(100.0)
   whey protein powder                 | top: baking powder(81.8), protein peach(76.9), chicken katsu curry protein pot(75.0)
   white cooking wine                  | top: white cooking chocolate(87.5), white wine vinegar(77.8), white onions(76.2)
@@ -805,7 +805,7 @@
   worcestershire sauce                | top: lime sauce(84.2), bbq sauce(80.0), soy sauce(80.0)
   wrap                                | top: rapeseed oil(85.7), red grapefruit(75.0), white seedless grapes(75.0)
   xanthan gum                         | top: banana(66.7), picanha(61.5), mango(60.0)
-  yellow mustard                      | top: dijon mustard(78.3), wholegrain mustard(72.7), english mustard(72.7)
+  yellow mustard                      | top: dijon mustard(78.3), english mustard(72.7), wholegrain mustard(72.7)
   yellow onion                        | top: brown onions(80.0), yellowfin tuna(76.2), red onions(75.0)
   yellow squash                       | top: yellow peach luxury yogurt(72.0), butternut squash(70.0), yellow fruits yogurt 6 pack(70.0)
   zoodles                             | top: egg noodles(92.3), protein egg noodles(92.3), rice noodles(92.3)
@@ -1634,7 +1634,7 @@
   EN — zaakceptowane przepisy (name | n_ing | koszt GBP)
 ======================================================================
   Air Fryer Rosemary Sweet Potato Wedges with Garlic Aioli | 10 sk. | koszt=—
-  Air-Fried Chickpeas                                     | 5 sk. | koszt=—
+  Air-Fried Chickpeas                                     | 5 sk. | koszt=0.31
   Avocado And Mango Sushi Roll                            | 6 sk. | koszt=—
   Bacon Egg Bites                                         | 7 sk. | koszt=—
   Baked Breakfast Quinoa And Spinach Bites                | 8 sk. | koszt=—
@@ -1642,7 +1642,7 @@
   Bbq Pulled Chicken Stuffed Sweet Potatoes               | 11 sk. | koszt=—
   Beef Patties-Sweet Corn Rice and Sautéed Veggies        | 12 sk. | koszt=—
   Breakfast Beef Sausage                                  | 12 sk. | koszt=—
-  Breakfast Bowls                                         | 5 sk. | koszt=—
+  Breakfast Bowls                                         | 5 sk. | koszt=1.23
   Breakfast Pro Power Bowl                                | 8 sk. | koszt=—
   Broccoli Cheddar Stuffed Chicken Breast & Rice Pilaf    | 20 sk. | koszt=—
   Cauliflower Rice Salmon Poke Bowl Meal Prep             | 8 sk. | koszt=—

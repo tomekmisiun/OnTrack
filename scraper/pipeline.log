@@ -1555,3 +1555,85 @@ Pliki wynikowe:
 Seed pliki (app/data/):
 14:08:49 INFO   ✓  products_seed_en.json                 366 rekordów
 14:08:49 INFO   ✓  recipes_seed_en.json                   54 rekordów
+16:57:13 INFO Uruchamiam kroki: [2, 3, 4, 5, 6]
+16:57:13 INFO ============================================================
+16:57:13 INFO KROK 2: normalize_shops
+16:57:13 INFO ============================================================
+16:57:14 INFO ✓ Krok 2 zakończony — 0.9s
+16:57:14 INFO ============================================================
+16:57:14 INFO KROK 3: match_ingredients
+16:57:14 INFO ============================================================
+16:57:20 INFO ✓ Krok 3 zakończony — 6.7s
+16:57:20 INFO ============================================================
+16:57:20 INFO KROK 4: build_database
+16:57:20 INFO ============================================================
+16:57:26 INFO ✓ Krok 4 zakończony — 5.5s
+16:57:26 INFO ============================================================
+16:57:26 INFO KROK 5: get_macros
+16:57:26 INFO ============================================================
+16:57:26 INFO ✓ Krok 5 zakończony — 0.4s
+16:57:26 INFO ============================================================
+16:57:26 INFO KROK 6: dump_seeds
+16:57:26 INFO ============================================================
+16:57:26 INFO ✓ Krok 6 zakończony — 0.0s
+16:57:26 INFO 
+============================================================
+16:57:26 INFO Pipeline zakończony pomyślnie — łączny czas: 13.6s
+16:57:26 INFO ============================================================
+16:57:26 INFO 
+Pliki wynikowe:
+16:57:26 INFO   ✓  recipes_normalized.json               615 rekordów
+16:57:26 INFO   ✓  shops_en.json                        2076 rekordów
+16:57:26 INFO   ✓  shops_pl.json                        2868 rekordów
+16:57:26 INFO   ✓  matches_en.json                       367 rekordów
+16:57:26 INFO   ✓  matches_pl.json                       462 rekordów
+16:57:26 INFO   ✓  ingredient_db_en.json                 367 rekordów
+16:57:26 INFO   ✓  ingredient_db_pl.json                 462 rekordów
+16:57:26 INFO   ✓  recipes_en.json                        54 rekordów
+16:57:26 INFO   ✓  recipes_pl.json                        79 rekordów
+16:57:26 INFO   ✓  ingredients_macros.json               534 rekordów
+16:57:26 INFO 
+Seed pliki (app/data/):
+16:57:26 INFO   ✓  products_seed_en.json                 366 rekordów
+16:57:26 INFO   ✓  recipes_seed_en.json                   54 rekordów
+17:10:31 INFO Uruchamiam kroki: [2, 3, 4, 5, 6]
+17:10:31 INFO ============================================================
+17:10:31 INFO KROK 2: normalize_shops
+17:10:31 INFO ============================================================
+17:10:32 INFO ✓ Krok 2 zakończony — 0.9s
+17:10:32 INFO ============================================================
+17:10:32 INFO KROK 3: match_ingredients
+17:10:32 INFO ============================================================
+17:10:39 INFO ✓ Krok 3 zakończony — 6.4s
+17:10:39 INFO ============================================================
+17:10:39 INFO KROK 4: build_database
+17:10:39 INFO ============================================================
+17:10:44 INFO ✓ Krok 4 zakończony — 5.2s
+17:10:44 INFO ============================================================
+17:10:44 INFO KROK 5: get_macros
+17:10:44 INFO ============================================================
+17:10:44 INFO ✓ Krok 5 zakończony — 0.4s
+17:10:44 INFO ============================================================
+17:10:44 INFO KROK 6: dump_seeds
+17:10:44 INFO ============================================================
+17:10:44 INFO ✓ Krok 6 zakończony — 0.0s
+17:10:44 INFO 
+============================================================
+17:10:44 INFO Pipeline zakończony pomyślnie — łączny czas: 13.0s
+17:10:44 INFO ============================================================
+17:10:44 INFO 
+Pliki wynikowe:
+17:10:44 INFO   ✓  recipes_normalized.json               615 rekordów
+17:10:44 INFO   ✓  shops_en.json                        2076 rekordów
+17:10:44 INFO   ✓  shops_pl.json                        2868 rekordów
+17:10:44 INFO   ✓  matches_en.json                       367 rekordów
+17:10:44 INFO   ✓  matches_pl.json                       462 rekordów
+17:10:44 INFO   ✓  ingredient_db_en.json                 367 rekordów
+17:10:44 INFO   ✓  ingredient_db_pl.json                 462 rekordów
+17:10:44 INFO   ✓  recipes_en.json                        54 rekordów
+17:10:44 INFO   ✓  recipes_pl.json                        79 rekordów
+17:10:44 INFO   ✓  ingredients_macros.json               534 rekordów
+17:10:44 INFO 
+Seed pliki (app/data/):
+17:10:44 INFO   ✓  products_seed_en.json                 366 rekordów
+17:10:44 INFO   ✓  recipes_seed_en.json                   54 rekordów

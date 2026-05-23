@@ -630,8 +630,8 @@
       }
     ],
     "available": true,
-    "estimated_cost_gbp": null,
-    "cost_complete": false
+    "estimated_cost_gbp": 1.23,
+    "cost_complete": true
   },
   {
     "name_en": "Baked Breakfast Quinoa And Spinach Bites",
@@ -5872,7 +5872,7 @@
       }
     ],
     "available": true,
-    "estimated_cost_gbp": null,
-    "cost_complete": false
+    "estimated_cost_gbp": 0.31,
+    "cost_complete": true
   }
 ]
