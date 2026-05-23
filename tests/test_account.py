@@ -1,3 +1,5 @@
+from datetime import date
+
 from app.models.household_member import HouseholdMember
 from app.models.meal_plan import MealPlan
 from app.models.product import Product
@@ -10,7 +12,7 @@ def test_delete_account_removes_user_data(client, auth_headers, user, product, r
     meal = MealPlan(
         user_id=user.id,
         member_id=member.id,
-        date="2026-05-23",
+        date=date.fromisoformat("2026-05-23"),
         position=1,
         recipe_id=recipe.id,
     )
