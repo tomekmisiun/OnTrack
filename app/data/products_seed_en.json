@@ -24,8 +24,8 @@
   {
     "name": "apple",
     "price": 0.3242,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 52.0,
     "protein": 0.3,
@@ -167,8 +167,8 @@
   {
     "name": "banana",
     "price": 0.1333,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 89.0,
     "protein": 1.1,
@@ -189,7 +189,7 @@
   {
     "name": "basmati rice",
     "price": 0.179,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 357.0,
@@ -310,8 +310,8 @@
   {
     "name": "bell pepper",
     "price": 0.4375,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 31.0,
     "protein": 1.0,
@@ -453,7 +453,7 @@
   {
     "name": "broccoli florets",
     "price": 0.119,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 34.0,
@@ -475,7 +475,7 @@
   {
     "name": "brown rice",
     "price": 0.139,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 111.0,
@@ -497,7 +497,7 @@
   {
     "name": "brown rice pasta",
     "price": 0.139,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 364.0,
@@ -508,7 +508,7 @@
   {
     "name": "brown rice with quinoa",
     "price": 0.139,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 120.0,
@@ -541,8 +541,8 @@
   {
     "name": "cabbage",
     "price": 0.0989,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 25.0,
     "protein": 1.3,
@@ -640,8 +640,8 @@
   {
     "name": "cauliflower",
     "price": 0.1487,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 25.0,
     "protein": 1.9,
@@ -651,8 +651,8 @@
   {
     "name": "cauliflower gnocchi",
     "price": 0.1487,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 118.0,
     "protein": 3.5,
@@ -662,8 +662,8 @@
   {
     "name": "cauliflower rice",
     "price": 0.1487,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 25.0,
     "protein": 1.9,
@@ -695,8 +695,8 @@
   {
     "name": "celery",
     "price": 0.1875,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 16.0,
     "protein": 0.7,
@@ -772,7 +772,7 @@
   {
     "name": "chicken",
     "price": 0.425,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 239.0,
@@ -794,7 +794,7 @@
   {
     "name": "chicken breast",
     "price": 0.425,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 165.0,
@@ -816,7 +816,7 @@
   {
     "name": "chicken drumstick",
     "price": 0.215,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 172.0,
@@ -827,7 +827,7 @@
   {
     "name": "chicken drumsticks",
     "price": 0.215,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 172.0,
@@ -849,7 +849,7 @@
   {
     "name": "chicken legs",
     "price": 0.225,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 184.0,
@@ -904,7 +904,7 @@
   {
     "name": "chicken thighs",
     "price": 0.299,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 209.0,
@@ -915,7 +915,7 @@
   {
     "name": "chicken wing",
     "price": 0.215,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 203.0,
@@ -948,7 +948,7 @@
   {
     "name": "chickpea fusilli pasta",
     "price": 0.119,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 357.0,
@@ -970,8 +970,8 @@
   {
     "name": "chili garlic sauce",
     "price": 0.3955,
-    "package_weight": 4,
-    "unit": "pcs",
+    "package_weight": 4.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 50.0,
     "protein": 1.0,
@@ -992,8 +992,8 @@
   {
     "name": "chocolate",
     "price": 0.106,
-    "package_weight": 10,
-    "unit": "pcs",
+    "package_weight": 10.0,
+    "unit": "szt",
     "sold_by_weight": false,
     "kcal": 546.0,
     "protein": 4.9,
@@ -1036,8 +1036,8 @@
   {
     "name": "cinnamon",
     "price": 0.4967,
-    "package_weight": 2,
-    "unit": "pcs",
+    "package_weight": 2.0,
+    "unit": "szt",
     "sold_by_weight": false,
     "kcal": 247.0,
     "protein": 3.9,
@@ -1131,17 +1131,6 @@
     "protein": 0.0,
     "fat": 100.0,
     "carbs": 0.0
-  },
-  {
-    "name": "coconut wrap",
-    "price": 0.199,
-    "package_weight": 1000.0,
-    "unit": "ml",
-    "sold_by_weight": false,
-    "kcal": 350.0,
-    "protein": 5.0,
-    "fat": 20.0,
-    "carbs": 40.0
   },
   {
     "name": "cod",
@@ -1278,8 +1267,8 @@
   {
     "name": "cucumber",
     "price": 0.2967,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 15.0,
     "protein": 0.7,
@@ -1476,8 +1465,8 @@
   {
     "name": "eggs",
     "price": 0.275,
-    "package_weight": 6,
-    "unit": "pcs",
+    "package_weight": 6.0,
+    "unit": "szt",
     "sold_by_weight": false,
     "kcal": 143.0,
     "protein": 12.6,
@@ -1586,8 +1575,8 @@
   {
     "name": "garlic",
     "price": 0.3955,
-    "package_weight": 4,
-    "unit": "pcs",
+    "package_weight": 4.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 149.0,
     "protein": 6.4,
@@ -1619,8 +1608,8 @@
   {
     "name": "garlic powder",
     "price": 0.3955,
-    "package_weight": 4,
-    "unit": "pcs",
+    "package_weight": 4.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 331.0,
     "protein": 16.6,
@@ -1718,7 +1707,7 @@
   {
     "name": "greek yogurt",
     "price": 0.149,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 97.0,
@@ -1740,8 +1729,8 @@
   {
     "name": "green bell pepper",
     "price": 0.4375,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 20.0,
     "protein": 0.9,
@@ -1751,8 +1740,8 @@
   {
     "name": "green cabbage",
     "price": 0.0989,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 25.0,
     "protein": 1.3,
@@ -1765,10 +1754,10 @@
     "package_weight": 130.0,
     "unit": "g",
     "sold_by_weight": true,
-    "kcal": null,
-    "protein": null,
-    "fat": null,
-    "carbs": null
+    "kcal": 32.0,
+    "protein": 1.8,
+    "fat": 0.2,
+    "carbs": 7.3
   },
   {
     "name": "green onions",
@@ -1776,10 +1765,10 @@
     "package_weight": 130.0,
     "unit": "g",
     "sold_by_weight": true,
-    "kcal": null,
-    "protein": null,
-    "fat": null,
-    "carbs": null
+    "kcal": 32.0,
+    "protein": 1.8,
+    "fat": 0.2,
+    "carbs": 7.3
   },
   {
     "name": "green peas",
@@ -1949,8 +1938,8 @@
   {
     "name": "harissa",
     "price": 1.9933,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": false,
     "kcal": 82.0,
     "protein": 2.0,
@@ -2004,7 +1993,7 @@
   {
     "name": "instant brown rice",
     "price": 0.139,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 370.0,
@@ -2037,8 +2026,8 @@
   {
     "name": "kiwi",
     "price": 0.261,
-    "package_weight": 6,
-    "unit": "pcs",
+    "package_weight": 6.0,
+    "unit": "szt",
     "sold_by_weight": false,
     "kcal": 61.0,
     "protein": 1.1,
@@ -2070,8 +2059,8 @@
   {
     "name": "lemon",
     "price": 0.2225,
-    "package_weight": 4,
-    "unit": "pcs",
+    "package_weight": 4.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 29.0,
     "protein": 1.1,
@@ -2092,8 +2081,8 @@
   {
     "name": "lemon zest",
     "price": 0.2225,
-    "package_weight": 4,
-    "unit": "pcs",
+    "package_weight": 4.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 47.0,
     "protein": 1.5,
@@ -2125,8 +2114,8 @@
   {
     "name": "lime",
     "price": 0.2657,
-    "package_weight": 5,
-    "unit": "pcs",
+    "package_weight": 5.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 30.0,
     "protein": 0.7,
@@ -2136,8 +2125,8 @@
   {
     "name": "lime zest",
     "price": 0.2657,
-    "package_weight": 5,
-    "unit": "pcs",
+    "package_weight": 5.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 30.0,
     "protein": 0.7,
@@ -2147,7 +2136,7 @@
   {
     "name": "long grain white rice",
     "price": 0.052,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 365.0,
@@ -2180,8 +2169,8 @@
   {
     "name": "mango",
     "price": 0.44,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 60.0,
     "protein": 0.8,
@@ -2279,7 +2268,7 @@
   {
     "name": "mixed vegetable",
     "price": 0.099,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 65.0,
@@ -2290,7 +2279,7 @@
   {
     "name": "mixed vegetables",
     "price": 0.099,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 65.0,
@@ -2345,8 +2334,8 @@
   {
     "name": "nectarine",
     "price": 0.3151,
-    "package_weight": 4,
-    "unit": "pcs",
+    "package_weight": 4.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 44.0,
     "protein": 1.1,
@@ -2378,7 +2367,7 @@
   {
     "name": "onion",
     "price": 0.08,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 40.0,
@@ -2422,8 +2411,8 @@
   {
     "name": "orange zest",
     "price": 0.1238,
-    "package_weight": 5,
-    "unit": "pcs",
+    "package_weight": 5.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 97.0,
     "protein": 1.5,
@@ -2543,8 +2532,8 @@
   {
     "name": "pear",
     "price": 0.2598,
-    "package_weight": 4,
-    "unit": "pcs",
+    "package_weight": 4.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 57.0,
     "protein": 0.4,
@@ -2554,8 +2543,8 @@
   {
     "name": "peas",
     "price": 0.2598,
-    "package_weight": 4,
-    "unit": "pcs",
+    "package_weight": 4.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 81.0,
     "protein": 5.4,
@@ -2653,8 +2642,8 @@
   {
     "name": "pineapple",
     "price": 0.1225,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 50.0,
     "protein": 0.5,
@@ -2664,8 +2653,8 @@
   {
     "name": "pineapple juice",
     "price": 0.1225,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 53.0,
     "protein": 0.4,
@@ -2675,7 +2664,7 @@
   {
     "name": "plain greek yogurt",
     "price": 0.149,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 97.0,
@@ -2785,7 +2774,7 @@
   {
     "name": "potato",
     "price": 0.105,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 77.0,
@@ -2840,8 +2829,8 @@
   {
     "name": "purple cabbage",
     "price": 0.0989,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 31.0,
     "protein": 1.4,
@@ -2851,7 +2840,7 @@
   {
     "name": "purple potatoes",
     "price": 0.105,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 77.0,
@@ -2939,8 +2928,8 @@
   {
     "name": "red bell pepper",
     "price": 0.4375,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 31.0,
     "protein": 1.0,
@@ -2950,8 +2939,8 @@
   {
     "name": "red cabbage",
     "price": 0.0989,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 31.0,
     "protein": 1.4,
@@ -2994,8 +2983,8 @@
   {
     "name": "red grapes",
     "price": 0.1571,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": false,
     "kcal": 69.0,
     "protein": 0.7,
@@ -3027,7 +3016,7 @@
   {
     "name": "red onion",
     "price": 0.095,
-    "package_weight": 1000,
+    "package_weight": 1000.0,
     "unit": "g",
     "sold_by_weight": true,
     "kcal": 40.0,
@@ -3038,8 +3027,8 @@
   {
     "name": "red pepper",
     "price": 0.4375,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 31.0,
     "protein": 1.0,
@@ -3049,8 +3038,8 @@
   {
     "name": "red pepper flakes",
     "price": 0.4375,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 318.0,
     "protein": 12.0,
@@ -3148,8 +3137,8 @@
   {
     "name": "riced cauliflower",
     "price": 0.1487,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 25.0,
     "protein": 1.9,
@@ -3170,8 +3159,8 @@
   {
     "name": "roasted red pepper",
     "price": 0.4375,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 31.0,
     "protein": 1.0,
@@ -3181,8 +3170,8 @@
   {
     "name": "roasted red peppers",
     "price": 0.4375,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 31.0,
     "protein": 1.0,
@@ -3192,8 +3181,8 @@
   {
     "name": "romaine",
     "price": 0.1917,
-    "package_weight": 2,
-    "unit": "pcs",
+    "package_weight": 2.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 17.0,
     "protein": 1.2,
@@ -3203,8 +3192,8 @@
   {
     "name": "romaine lettuce",
     "price": 0.1917,
-    "package_weight": 2,
-    "unit": "pcs",
+    "package_weight": 2.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 17.0,
     "protein": 1.2,
@@ -3225,8 +3214,8 @@
   {
     "name": "russet potato",
     "price": 0.5308,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 79.0,
     "protein": 2.1,
@@ -3294,10 +3283,10 @@
     "package_weight": 130.0,
     "unit": "g",
     "sold_by_weight": true,
-    "kcal": null,
-    "protein": null,
-    "fat": null,
-    "carbs": null
+    "kcal": 32.0,
+    "protein": 1.8,
+    "fat": 0.2,
+    "carbs": 7.3
   },
   {
     "name": "scallions",
@@ -3305,10 +3294,10 @@
     "package_weight": 130.0,
     "unit": "g",
     "sold_by_weight": true,
-    "kcal": null,
-    "protein": null,
-    "fat": null,
-    "carbs": null
+    "kcal": 32.0,
+    "protein": 1.8,
+    "fat": 0.2,
+    "carbs": 7.3
   },
   {
     "name": "sea salt",
@@ -3555,8 +3544,8 @@
   {
     "name": "stevia",
     "price": 0.3933,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": false,
     "kcal": 0.0,
     "protein": 0.0,
@@ -3588,8 +3577,8 @@
   {
     "name": "sugar",
     "price": 0.1656,
-    "package_weight": 6,
-    "unit": "pcs",
+    "package_weight": 6.0,
+    "unit": "szt",
     "sold_by_weight": false,
     "kcal": 387.0,
     "protein": 0.0,
@@ -3687,8 +3676,8 @@
   {
     "name": "sweet potato",
     "price": 0.5308,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 86.0,
     "protein": 1.6,
@@ -3698,8 +3687,8 @@
   {
     "name": "sweet potato puree",
     "price": 0.5308,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 86.0,
     "protein": 1.6,
@@ -3764,8 +3753,8 @@
   {
     "name": "tomato",
     "price": 0.1341,
-    "package_weight": 6,
-    "unit": "pcs",
+    "package_weight": 6.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 18.0,
     "protein": 0.9,
@@ -3907,8 +3896,8 @@
   {
     "name": "watermelon",
     "price": 0.1327,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": false,
     "kcal": 30.0,
     "protein": 0.6,
@@ -3918,8 +3907,8 @@
   {
     "name": "watermelon radish",
     "price": 0.1327,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": false,
     "kcal": 16.0,
     "protein": 0.7,
@@ -3995,8 +3984,8 @@
   {
     "name": "yellow bell pepper",
     "price": 0.4375,
-    "package_weight": 1,
-    "unit": "pcs",
+    "package_weight": 1.0,
+    "unit": "szt",
     "sold_by_weight": true,
     "kcal": 27.0,
     "protein": 1.0,

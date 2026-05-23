@@ -1,99 +1,47 @@
 #!/usr/bin/env python3
 """
-Replaces broken recipe image URLs (e.g. mealpreponfleek.com) with images from Pexels API.
+Replace recipe thumbnails with images from Pexels (drops mealpreponfleek.com URLs).
 
 Usage (via Docker):
     docker exec mealprep-app-1 python /app/app/scripts/fix_recipe_images.py --user-id 2
     docker exec mealprep-app-1 python /app/app/scripts/fix_recipe_images.py --user-id 2 --all
+    docker exec mealprep-app-1 python /app/app/scripts/fix_recipe_images.py --user-id 2 --lang pl
     docker exec mealprep-app-1 python /app/app/scripts/fix_recipe_images.py --user-id 2 --dry-run
-
-Options:
-    --user-id N   User ID (required)
-    --all         Replace all URLs, not just broken ones
-    --dry-run     Show what would be changed without saving
 """
 
 import argparse
 import os
 import sys
-import time
-import requests
 
 sys.path.insert(0, "/app")
-from app import create_app, db
-from app.models.recipe import Recipe
-
-BROKEN_DOMAINS = ("mealpreponfleek.com",)
+from app import create_app
+from app.pexels import apply_pexels_to_user_recipes
 
 app = create_app()
-
-
-def is_broken_url(url: str | None) -> bool:
-    if not url:
-        return True
-    return any(d in url for d in BROKEN_DOMAINS)
-
-
-def fetch_pexels_image(recipe_name: str, api_key: str) -> str | None:
-    try:
-        r = requests.get(
-            "https://api.pexels.com/v1/search",
-            params={"query": recipe_name, "per_page": 5, "orientation": "landscape"},
-            headers={"Authorization": api_key},
-            timeout=8,
-        )
-        photos = r.json().get("photos") or []
-        if photos:
-            return photos[0]["src"]["medium"]
-    except Exception as e:
-        print(f"    Pexels error for '{recipe_name}': {e}")
-    return None
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--user-id", type=int, required=True)
-    ap.add_argument("--all",     action="store_true", help="Replace all URLs, not just broken ones")
-    ap.add_argument("--dry-run", action="store_true", help="Show changes without saving")
+    ap.add_argument("--lang", default=None, choices=["en", "pl"])
+    ap.add_argument("--all", action="store_true", help="Replace all URLs, not just source/broken ones")
+    ap.add_argument("--dry-run", action="store_true", help="Show counts without saving")
     args = ap.parse_args()
 
-    pexels_key = os.environ.get("PEXELS_API_KEY")
-    if not pexels_key:
+    if not os.environ.get("PEXELS_API_KEY"):
         print("PEXELS_API_KEY not set in environment.")
         sys.exit(1)
 
     with app.app_context():
-        recipes = Recipe.query.filter_by(user_id=args.user_id).all()
-        to_fix = [r for r in recipes if args.all or is_broken_url(r.image_url)]
-
-        print(f"User {args.user_id} recipes: {len(recipes)} total, {len(to_fix)} to fix")
+        updated, failed, skipped = apply_pexels_to_user_recipes(
+            args.user_id,
+            args.lang,
+            replace_all=args.all,
+            dry_run=args.dry_run,
+        )
         if args.dry_run:
-            print("(dry-run — no changes will be saved)")
-        print()
-
-        updated = 0
-        failed = 0
-
-        for recipe in to_fix:
-            print(f"  [{updated+failed+1}/{len(to_fix)}] {recipe.name[:60]}")
-            new_url = fetch_pexels_image(recipe.name, pexels_key)
-
-            if new_url:
-                print(f"    ✓ {new_url[:80]}")
-                if not args.dry_run:
-                    recipe.image_url = new_url
-                updated += 1
-            else:
-                print("    ✗ no Pexels result")
-                failed += 1
-
-            time.sleep(0.3)  # avoid rate-limiting the API
-
-        if not args.dry_run:
-            db.session.commit()
-
-        print()
-        print(f"Gotowe: zaktualizowano {updated}, nieudane {failed}")
+            print("(dry-run — no changes saved)")
+        print(f"Done: updated={updated}, failed={failed}, skipped={skipped}")
 
 
 if __name__ == "__main__":

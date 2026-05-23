@@ -282,39 +282,34 @@ def fetch_recipe_image(recipe_id):
     uid = current_uid()
     recipe = Recipe.query.filter_by(id=recipe_id, user_id=uid, lang=current_user_lang()).first_or_404()
 
-    import requests as req
+    from app.pexels import fetch_pexels_image, pexels_search_term
+    from app.recipe_catalog import english_name_for_recipe
 
-    # Translate recipe name to English using Gemini for better Pexels search results
-    search_term = recipe.name
-    gemini_key = os.environ.get('GEMINI_API_KEY')
-    if gemini_key:
-        try:
-            from google import genai
-            client = genai.Client(api_key=gemini_key)
-            resp = client.models.generate_content(
-                model='gemini-2.5-flash',
-                contents=f"Translate this Polish dish name to 1-3 English words suitable for image search: '{recipe.name}'. Reply with English words only, no punctuation, no explanation.",
-            )
-            search_term = resp.text.strip()
-        except Exception:
-            pass
+    term = pexels_search_term(
+        recipe.name,
+        lang=recipe.lang,
+        source_url=recipe.source_url,
+    )
+    if recipe.lang == "pl" and not english_name_for_recipe(recipe.name, recipe.source_url, recipe.lang):
+        # Manual PL recipe without pipeline mapping — optional Gemini translate
+        gemini_key = os.environ.get('GEMINI_API_KEY')
+        if gemini_key:
+            try:
+                from google import genai
+                client = genai.Client(api_key=gemini_key)
+                resp = client.models.generate_content(
+                    model='gemini-2.5-flash',
+                    contents=(
+                        f"Translate this Polish dish name to 1-4 English words suitable for "
+                        f"food photo search: '{recipe.name}'. Reply with English words only."
+                    ),
+                )
+                term = pexels_search_term(resp.text.strip(), lang="en")
+            except Exception:
+                pass
 
-    # Search for image on Pexels
-    image_url = None
     pexels_key = os.environ.get('PEXELS_API_KEY')
-    if pexels_key:
-        try:
-            r = req.get(
-                'https://api.pexels.com/v1/search',
-                params={'query': search_term, 'per_page': 5, 'orientation': 'landscape'},
-                headers={'Authorization': pexels_key},
-                timeout=5,
-            )
-            photos = r.json().get('photos') or []
-            if photos:
-                image_url = photos[0]['src']['medium']
-        except Exception:
-            pass
+    image_url = fetch_pexels_image(term, pexels_key)
 
     if image_url:
         recipe.image_url = image_url

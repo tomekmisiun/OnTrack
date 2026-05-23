@@ -3165,21 +3165,6 @@
     "currency": "PLN"
   },
   {
-    "ingredient_name": "mieszanka do naleśników",
-    "match_type": "auto",
-    "fuzzy_score": 100.0,
-    "shop": "auchan",
-    "original_name": "BIO Mieszanka Studencka  FARMER'S SNACK 150 g",
-    "generic_name": "mieszanka",
-    "package_size_value": 150.0,
-    "unit": "g",
-    "sold_by_weight": false,
-    "price_package": 23.59,
-    "price_per_unit": null,
-    "price_per_100": 15.7267,
-    "currency": "PLN"
-  },
-  {
     "ingredient_name": "mieszanka kapusty i marchwi",
     "match_type": "auto",
     "fuzzy_score": 100.0,

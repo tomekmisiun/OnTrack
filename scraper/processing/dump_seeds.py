@@ -1,89 +1,150 @@
 """
-Step 6: Generate products_seed_en.json and recipes_seed_en.json for new EN users.
+Step 6: Generate products_seed_*.json and recipes_seed_*.json for new users.
 Run as part of the pipeline or standalone: python processing/dump_seeds.py
 """
 import json
 from pathlib import Path
 
-DATA = Path(__file__).parent.parent / "data"         # scraper/data
-OUT  = Path(__file__).parent.parent.parent / "app" / "data"  # app/data
+DATA = Path(__file__).parent.parent / "data"
+OUT  = Path(__file__).parent.parent.parent / "app" / "data"
+
 
 def load(fname):
     with open(DATA / fname, encoding="utf-8") as f:
         return json.load(f)
 
-ingredient_db  = load("ingredient_db_en.json")   # list of matched products
-macros_list    = load("ingredients_macros.json")  # list with name_en, kcal, protein_g, fat_g, carbs_g
-recipes_en     = load("recipes_en.json")          # list of EN recipes
 
-# ── macros lookup: name_en (lower) → macro dict ────────────────────────
-macros = {}
-for m in macros_list:
-    key = m["name_en"].lower().strip()
-    macros[key] = m
+def resolve_price(item: dict) -> tuple[float, str, float, bool]:
+    unit_raw = item.get("unit") or "g"
+    unit = "szt" if unit_raw == "pcs" else unit_raw
+    pkg_val = float(item.get("package_size_value") or (1.0 if unit == "szt" else 100.0))
+    sold_by_wt = bool(item.get("sold_by_weight", False))
+    price_per_100 = item.get("price_per_100")
+    price_package = item.get("price_package")
+    if price_per_100 is not None:
+        return round(float(price_per_100), 4), unit, round(pkg_val, 1), sold_by_wt
+    if price_package and pkg_val > 0:
+        if unit == "szt":
+            return round(float(price_package) / pkg_val, 4), unit, round(pkg_val, 1), sold_by_wt
+        return round(float(price_package) / pkg_val * 100, 4), unit, round(pkg_val, 1), sold_by_wt
+    return 0.0, unit, round(pkg_val, 1), sold_by_wt
 
-# ── products seed ─────────────────────────────────────────────────────
-seen_names = set()
-products_seed = []
 
-for item in ingredient_db:
-    name = item["ingredient_name"].strip()
-    key  = name.lower()
-    if key in seen_names:
-        continue
-    seen_names.add(key)
+def macro_for_item(item: dict, macros: dict) -> dict:
+    ing = item["ingredient_name"].strip()
+    generic = (item.get("generic_name") or ing).strip()
+    for key in (ing.lower(), generic.lower()):
+        hit = macros.get(key)
+        if hit:
+            return hit
+    return {}
 
-    macro = macros.get(key, {})
-    products_seed.append({
-        "name": name,
-        "price": round(item.get("price_per_100") or 0, 4),
-        "package_weight": item.get("package_size_value") or 100.0,
-        "unit": item.get("unit") or "g",
-        "sold_by_weight": bool(item.get("sold_by_weight", False)),
-        "kcal": macro.get("kcal"),
-        "protein": macro.get("protein_g"),
-        "fat": macro.get("fat_g"),
-        "carbs": macro.get("carbs_g"),
-    })
 
-products_seed.sort(key=lambda x: x["name"].lower())
-print(f"Products EN: {len(products_seed)}")
+def _unavailable_ingredients(lang: str) -> set[str]:
+    path = DATA / "ingredient_aliases.json"
+    if not path.exists():
+        return set()
+    aliases = json.loads(path.read_text("utf-8")).get(lang, {})
+    return {name for name, alias in aliases.items() if alias.endswith(" nomatch")}
 
-# ── recipes seed ──────────────────────────────────────────────────────
-recipes_seed = []
 
-for r in recipes_en:
-    if not r.get("available"):
-        continue
-    ingredients_out = []
-    for ing in r.get("ingredients_en", []):
-        unit = ing.get("unit", "g")
-        # convert tablespoon/teaspoon/cup to grams roughly
-        unit_map = {"tablespoon": "g", "teaspoon": "g", "cup": "g", "pinch": "g"}
-        unit = unit_map.get(unit, unit)
-        ingredients_out.append({
-            "product_name": ing["name"],
-            "weight": float(ing.get("amount") or 0),
+def build_products_seed(lang: str) -> list[dict]:
+    db_file = f"ingredient_db_{lang}.json"
+    macro_key = "name_en" if lang == "en" else "name_pl"
+    unavailable = _unavailable_ingredients(lang)
+    ingredient_db = [
+        item for item in load(db_file)
+        if item["ingredient_name"] not in unavailable
+    ]
+    macros_list = load("ingredients_macros.json")
+
+    macros = {}
+    for m in macros_list:
+        for field in (macro_key, "name_en", "name_pl"):
+            key = (m.get(field) or "").lower().strip()
+            if key:
+                macros[key] = m
+
+    seen_names = set()
+    products_seed = []
+    for item in ingredient_db:
+        name = item["ingredient_name"].strip()
+        key = name.lower()
+        if key in seen_names:
+            continue
+        seen_names.add(key)
+
+        unit_price, unit, pkg_val, sold_by_wt = resolve_price(item)
+        macro = macro_for_item(item, macros)
+        products_seed.append({
+            "name": name,
+            "price": unit_price,
+            "package_weight": pkg_val,
+            "unit": unit,
+            "sold_by_weight": sold_by_wt,
+            "kcal": macro.get("kcal"),
+            "protein": macro.get("protein_g"),
+            "fat": macro.get("fat_g"),
+            "carbs": macro.get("carbs_g"),
         })
-    recipes_seed.append({
-        "name": r["name_en"],
-        "source_url": r.get("url"),
-        "image_url": r.get("image_url"),
-        "category": r.get("category"),
-        "notes": None,
-        "ingredients": ingredients_out,
-    })
+    products_seed.sort(key=lambda x: x["name"].lower())
+    return products_seed
 
-print(f"Recipes EN: {len(recipes_seed)}")
 
-# ── write ──────────────────────────────────────────────────────────────
+def build_recipes_seed(lang: str) -> list[dict]:
+    recipes_file = f"recipes_{lang}.json"
+    name_key = "name_en" if lang == "en" else "name_pl"
+    ing_key = "ingredients_en" if lang == "en" else "ingredients_pl"
+    unavailable = _unavailable_ingredients(lang)
+    recipes_raw = load(recipes_file)
+
+    recipes_seed = []
+    for r in recipes_raw:
+        if not r.get("available"):
+            continue
+        if unavailable and any(
+            (ing.get("name") or "") in unavailable for ing in r.get(ing_key, [])
+        ):
+            continue
+        ingredients_out = []
+        for ing in r.get(ing_key, []):
+            ingredients_out.append({
+                "product_name": ing["name"],
+                "weight": float(ing.get("amount") or 0),
+            })
+        raw_cat = r.get("category") or ""
+        category = {"snacks": "snack", "desserts": "dessert"}.get(raw_cat, raw_cat) or None
+        recipes_seed.append({
+            "name": r[name_key],
+            "name_en": r.get("name_en") if lang == "pl" else None,
+            "source_url": r.get("url"),
+            "image_url": None,
+            "category": category,
+            "notes": None,
+            "ingredients": ingredients_out,
+        })
+    return recipes_seed
+
+
 OUT.mkdir(parents=True, exist_ok=True)
 
-with open(OUT / "products_seed_en.json", "w", encoding="utf-8") as f:
-    json.dump(products_seed, f, ensure_ascii=False, indent=2)
-
-with open(OUT / "recipes_seed_en.json", "w", encoding="utf-8") as f:
-    json.dump(recipes_seed, f, ensure_ascii=False, indent=2)
+all_products = {}
+all_recipes = {}
+for lang in ("en", "pl"):
+    try:
+        products_seed = build_products_seed(lang)
+        recipes_seed = build_recipes_seed(lang)
+    except FileNotFoundError as e:
+        print(f"Skip {lang}: {e}")
+        continue
+    all_products[lang] = products_seed
+    all_recipes[lang] = recipes_seed
+    print(f"Products {lang.upper()}: {len(products_seed)}")
+    print(f"Recipes {lang.upper()}: {len(recipes_seed)}")
+    with open(OUT / f"products_seed_{lang}.json", "w", encoding="utf-8") as f:
+        json.dump(products_seed, f, ensure_ascii=False, indent=2)
+    with open(OUT / f"recipes_seed_{lang}.json", "w", encoding="utf-8") as f:
+        json.dump(recipes_seed, f, ensure_ascii=False, indent=2)
 
 print(f"Written to {OUT}")
 
@@ -101,27 +162,24 @@ def _write_debug():
     def recipe_row(r):
         return f"{r['name']:<55} | {len(r['ingredients'])} ing."
 
-    sections = [
-        {
-            "title": "Seed data stats",
-            "stats": {
-                "Products seed EN":          len(products_seed),
-                "Recipes seed EN":           len(recipes_seed),
-                "Products with price > 0":   sum(1 for p in products_seed if p["price"] > 0),
-                "Products with macros":      sum(1 for p in products_seed if p.get("kcal") is not None),
-                "Recipes with URL":          sum(1 for r in recipes_seed if r.get("source_url")),
-            },
-            "rows": [],
+    sections = [{
+        "title": "Seed data stats",
+        "stats": {
+            **{f"Products seed {l.upper()}": len(all_products[l]) for l in all_products},
+            **{f"Recipes seed {l.upper()}": len(all_recipes[l]) for l in all_recipes},
         },
-        {
-            "title": "Products seed EN (name | price_per_100 | kcal | protein | fat | carbs)",
+        "rows": [],
+    }]
+    for lang, products_seed in all_products.items():
+        sections.append({
+            "title": f"Products seed {lang.upper()}",
             "rows": [prod_row(p) for p in products_seed],
-        },
-        {
-            "title": "Recipes seed EN (name | n_ingredients)",
+        })
+    for lang, recipes_seed in all_recipes.items():
+        sections.append({
+            "title": f"Recipes seed {lang.upper()}",
             "rows": [recipe_row(r) for r in recipes_seed],
-        },
-    ]
+        })
     write_report(6, "dump_seeds", sections)
 
 

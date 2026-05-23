@@ -3,7 +3,7 @@ from flask_jwt_extended import jwt_required
 from app import db
 from app.models.product import Product
 from app.models.user import User
-from app.utils import current_uid, current_user_lang
+from app.utils import current_uid, current_user_lang, looks_like_recipe_ingredient_line
 
 products_bp = Blueprint('products', __name__)
 
@@ -12,6 +12,19 @@ MAX_NAME = 50
 MAX_KCAL = 9999
 MAX_MACRO = 100
 MAX_PRICE = 9999
+
+
+def _is_catalog_product(p: Product) -> bool:
+    """Hide ingredient-line placeholders from the product list."""
+    if looks_like_recipe_ingredient_line(p.name):
+        return False
+    if p.price and p.price > 0:
+        return True
+    if p.kcal is not None or p.protein is not None:
+        return True
+    if len(p.name or '') <= 40:
+        return True
+    return False
 
 
 def validate_product_data(data, require_all=True):
@@ -60,7 +73,10 @@ def validate_product_data(data, require_all=True):
 def get_products():
     uid = current_uid()
     lang = current_user_lang()
-    products = Product.query.filter_by(user_id=uid, lang=lang).order_by(Product.name).all()
+    products = [
+        p for p in Product.query.filter_by(user_id=uid, lang=lang).order_by(Product.name).all()
+        if _is_catalog_product(p)
+    ]
     return jsonify([p.to_dict() for p in products])
 
 

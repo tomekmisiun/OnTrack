@@ -23,7 +23,7 @@ except ImportError:
 try:
     from openai import OpenAI
 except ImportError:
-    print("Missing openai. Install: pip install openai"); sys.exit(1)
+    OpenAI = None
 
 HERE = Path(__file__).parent
 DATA = HERE.parent / "data"
@@ -54,6 +54,22 @@ log = logging.getLogger(__name__)
 
 # Dietary qualifiers — vegan product ≠ regular product (when ingredient doesn't specify vegan)
 _DIETARY_QUALIFIERS = {"wegański", "wegańska", "wegańskie", "vegan"}
+
+
+# Stop-words ignored when comparing ingredient vs product specificity
+_TOKEN_SKIP = {"do", "na", "z", "i", "w", "o", "ze", "od", "po"}
+
+# Shop labels too vague to match multi-word ingredients (e.g. "mieszanka do coleslaw" → "mieszanka")
+_GENERIC_STANDALONE = {
+    "mieszanka", "przyprawa", "sos", "dodatki", "mix", "seasoning", "sauce", "dressing",
+}
+
+# Plain ingredient names must not match a more specific flavoured product
+_PLAIN_BASES = {"pieprz", "sól", "sol", "sos", "przyprawa", "cukier", "mleko"}
+
+
+def _meaningful_tokens(text: str) -> set[str]:
+    return {t for t in text.lower().split() if len(t) > 1 and t not in _TOKEN_SKIP}
 
 
 def score(ingredient: str, product_generic: str) -> float:
@@ -100,7 +116,43 @@ def score(ingredient: str, product_generic: str) -> float:
         if non_leading_i and not (non_leading_i & meaningful_p) and tsr < 50:
             return tsr  # e.g. "serca karczochów"→"serca" (tsr≈48)
 
-    return max(tsr, pr)
+    base = max(tsr, pr)
+    ing_l = ingredient.lower().strip()
+    prod_l = product_generic.lower().strip()
+    mt_i = _meaningful_tokens(ingredient)
+    mt_p = _meaningful_tokens(product_generic)
+
+    # "przyprawa cajun" must not match generic shop label "przyprawa"
+    if prod_l in _GENERIC_STANDALONE and ing_l != prod_l:
+        return min(base, tsr, 50)
+
+    if len(mt_p) == 1:
+        token = next(iter(mt_p))
+        if token in _GENERIC_STANDALONE and mt_i - {token}:
+            return min(base, tsr, 50)
+
+    # Plain "pieprz" must not match "pieprz czosnkowy"
+    if ing_l in _PLAIN_BASES and len(mt_p) > len(mt_i):
+        return min(base, tsr, 50)
+
+    if ing_l == "pieprz":
+        extra = mt_p - {"pieprz", "czarny", "mielony", "ziarnisty"}
+        if extra & {"czosnkowy", "cytrynowy", "cayenne", "kolorowy", "ziołowy", "zielony"}:
+            return min(base, tsr, 50)
+
+    if ing_l in {"sól", "sol"}:
+        extra = mt_p - {"sól", "sol", "jodowana", "niejodowana", "drobnoziarnista"}
+        if extra:
+            return min(base, tsr, 50)
+
+    # "kawa" in recipes = brewed coffee; not iced coffee drinks ("kawa mrożona")
+    if ing_l == "kawa":
+        if "mrożon" in prod_l:
+            return min(base, tsr, 50)
+        if len(mt_p) > 1 and not (mt_p & {"mielona", "ziarnista", "rozpuszczalna", "palona", "bezkofeinowa"}):
+            return min(base, tsr, 50)
+
+    return base
 
 
 def rank_candidates(ingredient: str, shop_products: list[dict]) -> list[tuple[float, dict]]:
@@ -155,6 +207,8 @@ def get_client():
     key = os.environ.get("DEEPSEEK_API_KEY")
     if not key:
         raise RuntimeError("DEEPSEEK_API_KEY is not set")
+    if OpenAI is None:
+        raise RuntimeError("openai package is not installed")
     return OpenAI(api_key=key, base_url="https://api.deepseek.com")
 
 
@@ -212,6 +266,9 @@ def build_matches(
         # Translate known aliases — use canonical name for matching,
         # but keep original as dict key (recipes reference original names)
         ing = _INGREDIENT_CANONICAL_PL.get(orig_ing, orig_ing) if lang == "PL" else _INGREDIENT_CANONICAL_EN.get(orig_ing, orig_ing)
+        if ing.endswith(" nomatch"):
+            no_match.append(orig_ing)
+            continue
         ranked = rank_candidates(ing, shops)
         top_score, top_product = ranked[0] if ranked else (0, None)
 

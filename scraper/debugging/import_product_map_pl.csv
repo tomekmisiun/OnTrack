@@ -1,0 +1,445 @@
+ui_name;ingredient;alias;shop;generic_name;original_name;package_weight;unit;price_per_100;price_package;match_type;fuzzy_score;dedup;kcal
+ananas;ananas;;biedronka;ananas;Ananas;1500.0;g;0.7987;11.98;auto;100.0;;50.0
+arbuz;arbuz;;auchan;arbuz;Arbuz Owoce  Auchan na wagę ok. 4 kg;100.0;g;0.799;31.96;auto;100.0;;30.0
+awokado;awokado;;biedronka;awokado;Awokado Hass 1 szt.;1.0;szt;6.99;6.99;auto;100.0;;160.0
+bakłażan;bakłażan;;auchan;bakłażan;BIO Bakłażan Warzywa Auchan 500 g;500.0;g;1.998;9.99;auto;100.0;;25.0
+banan;banan;;biedronka;banan;Banan;1000.0;g;0.699;6.99;auto;100.0;;89.0
+banan;zielony banan;;biedronka;banan;Banan;1000.0;g;0.699;6.99;auto;100.0;shop_sku;89.0
+bazylia;bazylia;;auchan;bazylia;Bazylia Auchan sztuka;250.0;g;2.796;6.99;auto;100.0;;44.0
+bazylia;bazylia tajska;;auchan;bazylia;Bazylia Auchan sztuka;250.0;g;2.796;6.99;auto;100.0;shop_sku;44.0
+bazylia;bazylia suszona;;auchan;bazylia suszona;Bazylia suszona Auchan 10 g;10.0;g;12.9;1.29;auto;100.0;canonical_name;233.0
+biała fasola;biała fasola;;auchan;fasola biała;Fasola biała konserwowa Auchan 400 g;240.0;g;1.2458;2.99;auto;100.0;;139.0
+białko jaja;białko jaja;;auchan;jaja;Jaja ekologiczne Pewni Dobrego 10 sztuk;10.0;szt;1.599;15.99;auto;100.0;;143.0
+białko jaja;jajka;;auchan;jaja;Jaja ekologiczne Pewni Dobrego 10 sztuk;10.0;szt;1.599;15.99;auto;88.9;shop_sku;143.0
+boczek;boczek;;auchan;boczek;Boczek wieprzowy bez kości ekstra VAC Auchan na wagę ok. 1 kg;100.0;g;2.098;20.98;auto;100.0;;541.0
+borówki;borówka;;auchan;borówka;Borówka Amerykańska  Owoce  Auchan 250 g;250.0;g;5.196;12.99;auto;100.0;;57.0
+borówki;borówki;;auchan;borówki amerykańska;Borówki amerykańska Owoce  Auchan 250 g;250.0;g;5.516;13.79;auto;100.0;canonical_name;57.0
+brokuł;brokuł;;biedronka;brokuł;Brokuł 1 szt.;500.0;g;1.198;5.99;auto;100.0;;34.0
+brokuły;brokuly;;auchan;brokuły;Brokuły różyczki Hortex 450 g;450.0;g;2.3067;10.38;auto;85.7;;34.0
+brokuły;brokuły;;auchan;brokuły;Brokuły różyczki Hortex 450 g;450.0;g;2.3067;10.38;auto;100.0;shop_sku;34.0
+brukselka;brukselka;;auchan;brukselka mrożona;Brukselka mrożona Auchan 450 g;450.0;g;1.2778;5.75;auto;100.0;;41.0
+brzoskwinia;brzoskwinia;;biedronka;brzoskwinia;Brzoskwinia;220.0;g;2.0;4.4;auto;100.0;;39.0
+brązowy cukier;brązowy cukier;cukier trzcinowy;auchan;cukier trzcinowy;Cukier trzcinowy Diamant 1 kg;1000.0;g;0.938;9.38;auto;100.0;;387.0
+brązowy cukier;cukier trzcinowy;;auchan;cukier trzcinowy;Cukier trzcinowy Diamant 1 kg;1000.0;g;0.938;9.38;auto;100.0;shop_sku;387.0
+brązowy ryż;brązowy ryż;ryż brązowy;auchan;ryż brązowy;Ryż brązowy długoziarnisty Auchan 4 x 100 g;400.0;g;0.8225;3.29;auto;100.0;;111.0
+brązowy ryż;ryż brązowy;;auchan;ryż brązowy;Ryż brązowy długoziarnisty Auchan 4 x 100 g;400.0;g;0.8225;3.29;auto;100.0;shop_sku;111.0
+brązowy ryż;ryż brązowy błyskawiczny;;auchan;ryż brązowy;Ryż brązowy długoziarnisty Auchan 4 x 100 g;400.0;g;0.8225;3.29;auto;100.0;shop_sku;111.0
+bulion drobiowy;bulion drobiowy;;auchan;bulion drobiowy bez oleju palmowego;Bulion drobiowy bez oleju palmowego Auchan 100 g;100.0;g;3.49;3.49;auto;100.0;;4.0
+bulion warzywny;bulion warzywny;;biedronka;bulion warzywny;Winiary Bulion warzywny 160 g;160.0;g;4.8063;7.69;auto;100.0;;4.0
+bulion wolowy;bulion wolowy;;biedronka;bulion;Winiary Bulion Drobiowy 160 g;160.0;g;4.8063;7.69;auto;100.0;;4.0
+bulion wolowy;bulion wołowy;;biedronka;bulion;Winiary Bulion Drobiowy 160 g;160.0;g;4.8063;7.69;auto;100.0;shop_sku;4.0
+burak;buraki;;auchan;buraki;Buraki Warzywa Auchan 1 kg;1000.0;g;0.299;2.99;auto;100.0;;43.0
+burak;burak;;auchan;burak podłużny;Burak podłużny Warzywa Auchan 800 g;800.0;g;0.6488;5.19;auto;100.0;canonical_name;43.0
+bułka;bułka;;biedronka;bułka poranna;Bułka poranna 65 g;65.0;g;1.2769;0.83;auto;100.0;;272.0
+bułka;bułka śniadaniowa;;biedronka;bułka śniadaniowa z ziarnami;Bułka śniadaniowa z ziarnami 80 g;80.0;g;1.6875;1.35;auto;100.0;canonical_name;272.0
+cebula;cebula;;auchan;cebula;Cebula Pewni Dobrego 1 kg;1000.0;g;0.399;3.99;auto;100.0;;40.0
+cebula;cebula granulowana;;auchan;cebula;Cebula Pewni Dobrego 1 kg;1000.0;g;0.399;3.99;auto;100.0;shop_sku;40.0
+cebula;cebula w proszku;;auchan;cebula;Cebula Pewni Dobrego 1 kg;1000.0;g;0.399;3.99;auto;100.0;shop_sku;40.0
+cebula;cebula czerwona;;auchan;cebula czerwona;Cebula czerwona Warzywa Auchan na wagę ok. 500 g;100.0;g;0.459;2.3;auto;100.0;canonical_name;40.0
+cebula;cebula żółta;;biedronka;cebula żółta;Cebula żółta 1 kg;1000.0;g;0.499;4.99;auto;100.0;canonical_name;40.0
+cebula;cebula biała;;auchan;cebula biała;Cebula biała Warzywa Auchan na wagę ok. 500 g;100.0;g;0.799;4.0;auto;100.0;canonical_name;40.0
+cebula;cebula słodka;;auchan;cebula słodka tuba;Cebula słodka tuba Warzywa Auchan 600 g;600.0;g;1.9983;11.99;auto;100.0;canonical_name;40.0
+chili;chili;;auchan;chili mieszanka przypraw;Chili mieszanka przypraw Kotányi 35 g;35.0;g;21.8286;7.64;auto;100.0;;282.0
+chleb;chleb;;auchan;chleb pszenny;Chleb pszenny Pewni Dobrego 300 g;300.0;g;1.3967;4.19;auto;100.0;;265.0
+chorizo sojowe;chorizo sojowe;;auchan;chorizo;Chorizo picante extra Pewni Dobrego 280 g;280.0;g;6.7821;18.99;auto;100.0;;455.0
+ciecierzyca;ciecierzyca;;auchan;ciecierzyca;Ciecierzyca Auchan 400 g;400.0;g;1.2375;4.95;auto;100.0;;139.0
+cukier;cukier;;auchan;cukier;Cukier drobny Auchan 750 g;750.0;g;1.2653;9.49;auto;100.0;;387.0
+cukier;cukier brązowy;;auchan;cukier;Cukier drobny Auchan 750 g;750.0;g;1.2653;9.49;auto;100.0;shop_sku;387.0
+cukier;cukier kokosowy;;auchan;cukier;Cukier drobny Auchan 750 g;750.0;g;1.2653;9.49;auto;100.0;shop_sku;387.0
+cukier;cukier palmowy;;auchan;cukier;Cukier drobny Auchan 750 g;750.0;g;1.2653;9.49;auto;100.0;shop_sku;387.0
+cukier puder;cukier puder;;auchan;cukier puder;Cukier puder Polski Cukier 500 g;500.0;g;1.498;7.49;auto;100.0;;389.0
+cukinia;cukinia;;biedronka;cukinia;Cukinia;400.0;g;1.3;5.2;auto;100.0;;17.0
+curry;curry;;biedronka;curry;Kamis Curry 20 g;20.0;g;12.45;2.49;auto;100.0;;325.0
+curry;curry w proszku;;biedronka;curry;Kamis Curry 20 g;20.0;g;12.45;2.49;auto;100.0;shop_sku;325.0
+cynamon;cynamon;;auchan;cynamon mielony;Cynamon mielony Auchan 15 g;15.0;g;8.6;1.29;auto;100.0;;247.0
+czarna fasola;czarna fasola;;auchan;fasola czarna;Fasola czarna   Dawtona 400 g;240.0;g;1.4083;3.38;auto;100.0;;132.0
+czarna fasola;fasola czarna;;auchan;fasola czarna;Fasola czarna   Dawtona 400 g;240.0;g;1.4083;3.38;auto;100.0;shop_sku;132.0
+czarny sezam;czarny sezam;;auchan;sezam czarny;Sezam czarny Makar 500 g;500.0;g;2.85;14.25;auto;100.0;;573.0
+czekolada;czekolada;;auchan;czekolada deserowa;BIO Czekolada deserowa Pewni Dobrego 200 g;200.0;g;7.995;15.99;auto;100.0;;546.0
+czerwona cebula;czerwona cebula;;auchan;cebula czerwona;Cebula czerwona Warzywa Auchan na wagę ok. 500 g;100.0;g;0.459;2.3;auto;100.0;;40.0
+czerwona kapusta;czerwona kapusta;;auchan;kapusta czerwona;Kapusta czerwona Z Babcinej spiżarni 350 g;350.0;g;2.54;8.89;auto;100.0;;31.0
+czerwona kapusta;kapusta czerwona;;auchan;kapusta czerwona;Kapusta czerwona Z Babcinej spiżarni 350 g;350.0;g;2.54;8.89;auto;100.0;shop_sku;31.0
+czerwona papryka;czerwona papryka;;biedronka;papryka czerwona;Papryka czerwona;300.0;g;1.9;5.7;auto;100.0;;31.0
+czerwona papryka;papryka czerwona;;biedronka;papryka czerwona;Papryka czerwona;300.0;g;1.9;5.7;auto;100.0;shop_sku;31.0
+czerwona papryka;papryka czerwona pieczona;;biedronka;papryka czerwona;Papryka czerwona;300.0;g;1.9;5.7;auto;100.0;shop_sku;31.0
+czerwone winogrona;czerwone winogrona;;auchan;winogrona;Winogrona Owoce  Auchan na wagę ok. 600 g;100.0;g;1.999;11.99;auto;100.0;;69.0
+czerwone winogrona;winogrona;;auchan;winogrona;Winogrona Owoce  Auchan na wagę ok. 600 g;100.0;g;1.999;11.99;auto;100.0;shop_sku;69.0
+czerwone winogrona;winogrona zielone;;auchan;winogrona;Winogrona Owoce  Auchan na wagę ok. 600 g;100.0;g;1.999;11.99;auto;100.0;shop_sku;69.0
+czerwony ziemniak;czerwony ziemniak;;auchan;ziemniaki czerwone;Ziemniaki czerwone Warzywa Auchan 2 kg;2000.0;g;0.3995;7.99;auto;91.4;;70.0
+czerwony ziemniak;ziemniak czerwony;;auchan;ziemniaki czerwone;Ziemniaki czerwone Warzywa Auchan 2 kg;2000.0;g;0.3995;7.99;auto;91.4;shop_sku;70.0
+czerwony ziemniak;ziemniaki czerwone;;auchan;ziemniaki czerwone;Ziemniaki czerwone Warzywa Auchan 2 kg;2000.0;g;0.3995;7.99;auto;100.0;shop_sku;70.0
+czosnek;czosnek;;biedronka;czosnek;Czosnek 250 g;250.0;g;3.196;7.99;auto;100.0;;149.0
+czosnek;czosnek w proszku;;biedronka;czosnek;Czosnek 250 g;250.0;g;3.196;7.99;auto;100.0;shop_sku;149.0
+czosnek;czosnek granulowany;;auchan;czosnek granulowany;Czosnek granulowany Auchan 500 g;500.0;g;3.8;19.0;auto;100.0;canonical_name;331.0
+daktyl;daktyl;;auchan;daktyle;Daktyle Medijule Jumbo Palma Deluxe 500 g;500.0;g;6.438;32.19;auto;92.3;;282.0
+daktyl;daktyle;;auchan;daktyle;Daktyle Medijule Jumbo Palma Deluxe 500 g;500.0;g;6.438;32.19;auto;100.0;shop_sku;282.0
+daktyl;daktyle medjool;;auchan;daktyle;Daktyle Medijule Jumbo Palma Deluxe 500 g;500.0;g;6.438;32.19;auto;100.0;shop_sku;282.0
+dorsz;dorsz;;biedronka;dorsz;Marinero Dorsz atlantycki polędwica opak. ok. 500 g;500.0;g;9.99;49.95;auto;100.0;;82.0
+drożdże;drożdże;;auchan;drożdże tradycyjne;Drożdże tradycyjne  Drożdże Babuni 100 g;100.0;g;1.48;1.48;auto;100.0;;105.0
+drożdże;drożdże suszone;;biedronka;drożdże suszone instant;Bakello Drożdże suszone instant 8 g;8.0;g;12.375;0.99;auto;100.0;canonical_name;325.0
+dynia;dynia;;biedronka;dynia;Dynia piżmowa;1500.0;g;0.6987;10.48;auto;100.0;;26.0
+dynia;dynia kabocha;;biedronka;dynia;Dynia piżmowa;1500.0;g;0.6987;10.48;auto;100.0;shop_sku;26.0
+dynia;dynia letnia;;biedronka;dynia;Dynia piżmowa;1500.0;g;0.6987;10.48;auto;100.0;shop_sku;26.0
+dynia;dynia piżmowa;;biedronka;dynia;Dynia piżmowa;1500.0;g;0.6987;10.48;auto;100.0;shop_sku;26.0
+dynia;dynia spaghetti;;biedronka;dynia;Dynia piżmowa;1500.0;g;0.6987;10.48;auto;100.0;shop_sku;26.0
+dynia;dynia żółta;;biedronka;dynia;Dynia piżmowa;1500.0;g;0.6987;10.48;auto;100.0;shop_sku;26.0
+dziki ryż;dziki ryż;;auchan;ryż;Ryż długoziarnisty Sollana 1 kg;1000.0;g;0.999;9.99;auto;100.0;;130.0
+dziki ryż;ryż;;auchan;ryż;Ryż długoziarnisty Sollana 1 kg;1000.0;g;0.999;9.99;auto;100.0;shop_sku;130.0
+dżem morelowy;dżem morelowy;;auchan;dżem morelowy niskosłodzony;Dżem morelowy niskosłodzony Łowicz 280 g;280.0;g;2.4571;6.88;auto;100.0;;120.0
+erytrytol;erytrytol;;auchan;erytrytol;Erytrytol Big Nature 1 kg;1000.0;g;3.22;32.2;auto;100.0;;0.2
+erytrytol;erytrytol pudrowy;;auchan;erytrytol;Erytrytol Big Nature 1 kg;1000.0;g;3.22;32.2;auto;100.0;shop_sku;0.2
+erytrytol;erytrytol w proszku;;auchan;erytrytol;Erytrytol Big Nature 1 kg;1000.0;g;3.22;32.2;auto;100.0;shop_sku;0.2
+fasola biała;fasola cannellini;;auchan;fasola;Fasola Piękny Jaś  Cenos 400 g;400.0;g;2.1975;8.79;auto;100.0;;132.0
+fasola biała;fasola pinto;;auchan;fasola;Fasola Piękny Jaś  Cenos 400 g;400.0;g;2.1975;8.79;auto;100.0;shop_sku;132.0
+fasola biała;fasola refried;;auchan;fasola;Fasola Piękny Jaś  Cenos 400 g;400.0;g;2.1975;8.79;auto;100.0;shop_sku;132.0
+fasola biała;fasola smażona;;auchan;fasola;Fasola Piękny Jaś  Cenos 400 g;400.0;g;2.1975;8.79;auto;100.0;shop_sku;132.0
+fasola czerwona;fasola czerwona;;auchan;fasola czerwona;Fasola czerwona konserwowa Auchan 400 g;240.0;g;1.2042;2.89;auto;100.0;;337.0
+fasolka szparagowa;fasolka szparagowa;;auchan;fasolka szparagowa;BIO Fasolka szparagowa konserwowa  EkoWital 370 ml;215.0;g;3.3395;7.18;auto;100.0;;31.0
+figi;figi;;auchan;figi suszone;Figi suszone Makar 500 g;500.0;g;4.5;22.5;auto;100.0;;249.0
+filet z indyka;filet z indyka;pierś z indyka;biedronka;pierś z indyka;Kraina Wędlin Serdelki z filetem z indyka 300 g;300.0;g;2.4967;7.49;auto;100.0;;135.0
+filet z indyka;indyk;pierś z indyka;biedronka;pierś z indyka;Kraina Wędlin Serdelki z filetem z indyka 300 g;300.0;g;2.4967;7.49;auto;100.0;shop_sku;135.0
+filet z indyka;pierś z indyka;;biedronka;pierś z indyka;Kraina Wędlin Serdelki z filetem z indyka 300 g;300.0;g;2.4967;7.49;auto;100.0;shop_sku;135.0
+fioletowe ziemniaki;fioletowe ziemniaki;;auchan;ziemniaki;Ziemniaki sałatkowe Auchan 2 kg;2000.0;g;0.2495;4.99;auto;100.0;;77.0
+fioletowe ziemniaki;młode ziemniaki;;auchan;ziemniaki;Ziemniaki sałatkowe Auchan 2 kg;2000.0;g;0.2495;4.99;auto;100.0;shop_sku;77.0
+fioletowe ziemniaki;ziemniak;;auchan;ziemniaki;Ziemniaki sałatkowe Auchan 2 kg;2000.0;g;0.2495;4.99;auto;94.1;shop_sku;77.0
+fioletowe ziemniaki;ziemniaki;;auchan;ziemniaki;Ziemniaki sałatkowe Auchan 2 kg;2000.0;g;0.2495;4.99;auto;100.0;shop_sku;77.0
+garam masala;garam masala;;auchan;garam masala;Garam masala Kotányi 20 g;20.0;g;14.4;2.88;auto;100.0;;307.0
+gałka muszkatołowa;gałka muszkatołowa;;auchan;gałka muszkatołowa mielona;Gałka muszkatołowa mielona Prymat 10 g;10.0;g;15.8;1.58;auto;100.0;;525.0
+goździki;goździki;;auchan;goździki mielone;Goździki mielone Kotányi 15 g;15.0;g;15.6;2.34;auto;100.0;;274.0
+goździki;goździki mielone;;auchan;goździki mielone;Goździki mielone Kotányi 15 g;15.0;g;15.6;2.34;auto;100.0;shop_sku;274.0
+granat;granat;;biedronka;granat;Granat;400.0;g;2.0;8.0;auto;100.0;;83.0
+granola;granola;;auchan;granola;Granola ChocoLove One Day More 400 g;450.0;g;3.9533;17.79;auto;100.0;;471.0
+groszek;groszek;;auchan;groszek;Groszek konserwowy Auchan 400 g;240.0;g;1.1042;2.65;auto;100.0;;81.0
+groszek cukrowy;groszek cukrowy;;auchan;groszek cukrowy;Groszek cukrowy Auchan 450 g;450.0;g;2.2778;10.25;auto;100.0;;42.0
+groszek zielony;groszek zielony;;auchan;groszek zielony;Groszek zielony Hortex 450 g;450.0;g;1.82;8.19;auto;100.0;;81.0
+gruszka;gruszka;;auchan;gruszka;Gruszka Owoce  Auchan 1 kg;1000.0;g;0.699;6.99;auto;100.0;;57.0
+grzyby;grzyby;;auchan;grzyby;Grzyby Shitake   Świeże Grzyby SPGJ 200 g;200.0;g;6.49;12.98;auto;100.0;;22.0
+grzyby;grzyby portobello;;auchan;grzyby;Grzyby Shitake   Świeże Grzyby SPGJ 200 g;200.0;g;6.49;12.98;auto;100.0;shop_sku;22.0
+grzyby shiitake;grzyby shiitake;;auchan;grzyby shiitake całe suszone;Grzyby Shiitake całe suszone House of Asia 30 g;30.0;g;23.9333;7.18;auto;100.0;;296.0
+halloumi;halloumi;;biedronka;ser halloumi;Elios Ser halloumi 225 g;225.0;g;5.24;11.79;auto;100.0;;321.0
+halloumi;ser halloumi;;biedronka;ser halloumi;Elios Ser halloumi 225 g;225.0;g;5.24;11.79;auto;100.0;shop_sku;321.0
+harissa;harissa;;auchan;harissa mieszanka przypraw;Harissa mieszanka przypraw Kotányi 20 g;20.0;g;11.7;2.34;auto;100.0;;200.0
+imbir;imbir;;auchan;imbir;Imbir korzeń Owoce  Auchan na wagę ok. 100 g;100.0;g;2.189;2.19;auto;100.0;;80.0
+imbir;imbir mielony;;auchan;imbir mielony;Imbir mielony Prymat 15 g;15.0;g;10.5333;1.58;auto;100.0;canonical_name;335.0
+jabłko;jabłko;;biedronka;jabłko;Jabłko polskie 1,5 kg;1500.0;g;0.3993;5.99;auto;100.0;;52.0
+jagody;jagody;;auchan;jagody leśne;Jagody leśne  Hortex 280 g;280.0;g;5.9571;16.68;auto;100.0;;57.0
+jagody;mieszanka owoców leśnych;jagody leśne;auchan;jagody leśne;Jagody leśne  Hortex 280 g;280.0;g;5.9571;16.68;repair;100.0;shop_sku;57.0
+jarmuż;jarmuż;;biedronka;jarmuż;Vital Fresh Jarmuż 200 g;200.0;g;3.495;6.99;auto;100.0;;49.0
+jeżyna;jeżyna;;auchan;jeżyna mrożona;Jeżyna mrożona Auchan 350 g;350.0;g;3.2829;11.49;auto;100.0;;64.0
+jeżyny;jeżyny;;auchan;jeżyny;Jeżyny Owoce  Auchan 125 g;125.0;g;12.792;15.99;auto;100.0;;43.0
+jogurt grecki;jogurt grecki;;auchan;jogurt;Jogurt naturalny     Auchan 400 g;400.0;g;0.6225;2.49;auto;100.0;;61.0
+jogurt grecki;jogurt naturalny;;auchan;jogurt;Jogurt naturalny     Auchan 400 g;400.0;g;0.6225;2.49;auto;100.0;shop_sku;61.0
+jogurt grecki;jogurt roslinny;;auchan;jogurt;Jogurt naturalny     Auchan 400 g;400.0;g;0.6225;2.49;auto;100.0;shop_sku;61.0
+jogurt grecki;jogurt roślinny;;auchan;jogurt;Jogurt naturalny     Auchan 400 g;400.0;g;0.6225;2.49;auto;100.0;shop_sku;61.0
+kakao;kakao;;biedronka;kakao ciemne;Bakello Kakao extra ciemne 200 g;200.0;g;5.495;10.99;auto;100.0;;228.0
+kalafior;kalafior;;biedronka;kalafior;Kalafior;1500.0;g;0.9987;14.98;auto;100.0;;25.0
+kalafior;kalafior ryżowy;;biedronka;kalafior;Kalafior;1500.0;g;0.9987;14.98;auto;100.0;shop_sku;25.0
+kapusta;kapusta;;auchan;kapusta;Kapusta Kimchi Dongwon 160 g;160.0;g;7.4938;11.99;auto;100.0;;25.0
+kapusta;kapusta fioletowa;;auchan;kapusta;Kapusta Kimchi Dongwon 160 g;160.0;g;7.4938;11.99;auto;100.0;shop_sku;25.0
+kapusta biała;kapusta biała;;biedronka;kapusta biała;Kapusta biała;3000.0;g;0.399;11.97;auto;100.0;;25.0
+kapusta i marchew;kapusta i marchew;;biedronka;marchew;Marchew;100.0;g;0.4;0.4;auto;100.0;;41.0
+kapusta i marchew;marchew;;biedronka;marchew;Marchew;100.0;g;0.4;0.4;auto;100.0;shop_sku;41.0
+kapusta pekińska;kapusta pekińska;;auchan;kapusta pekińska;Kapusta Pekińska Warzywa Auchan na wagę ok. 1 kg;100.0;g;0.449;4.49;auto;100.0;;12.0
+karkówka wołowa;karkówka wołowa;;auchan;karkówka;Karkówka wieprzowa bez kości rasy Puławskiej MAP Pewni Dobrego na wagę ok. 600 g;100.0;g;3.599;21.59;auto;100.0;;250.0
+karkówka wołowa;wieprzowina;karkówka;auchan;karkówka;Karkówka wieprzowa bez kości rasy Puławskiej MAP Pewni Dobrego na wagę ok. 600 g;100.0;g;3.599;21.59;auto;100.0;shop_sku;250.0
+kawa;kawa;mc cafe kawa mielona;biedronka;mc cafe kawa mielona;MC Cafe Premium kawa mielona 250 g;250.0;g;9.996;24.99;repair;100.0;;525.0
+ketchup;ketchup;;biedronka;ketchup;Kotlin Ketchup łagodny 450 g;450.0;g;1.4333;6.45;auto;100.0;;101.0
+kiełbasa;kiełbasa wieprzowa śniadaniowa;;auchan;śniadaniowa;Śniadaniowa klasyczna Bielmar 450 g;450.0;g;1.1978;5.39;auto;100.0;;100.0
+kiełbasa;kiełbasa śniadaniowa;;auchan;śniadaniowa;Śniadaniowa klasyczna Bielmar 450 g;450.0;g;1.1978;5.39;auto;100.0;shop_sku;100.0
+kiełbasa;kiełbaski śniadaniowe;;auchan;śniadaniowe;Śniadaniowe z Łukowa 63% Lumiko 270 g;270.0;g;1.4407;3.89;auto;100.0;canonical_name;100.0
+kiełbasa;kiełbasa;;auchan;kiełbasa;Kiełbasa Krakowska Spichlerz Rusiecki 280 g;280.0;g;3.4964;9.79;auto;100.0;canonical_name;299.0
+kiełbasa;kiełbasa andouille;;auchan;kiełbasa;Kiełbasa Krakowska Spichlerz Rusiecki 280 g;280.0;g;3.4964;9.79;auto;100.0;canonical_name;299.0
+kiełbasa;kiełbasa wegetariańska;;auchan;kiełbasa;Kiełbasa Krakowska Spichlerz Rusiecki 280 g;280.0;g;3.4964;9.79;auto;100.0;canonical_name;299.0
+kiełbasa;kiełbasa wędzona;;auchan;kiełbasa;Kiełbasa Krakowska Spichlerz Rusiecki 280 g;280.0;g;3.4964;9.79;auto;100.0;canonical_name;299.0
+kiełbasa;kiełbasa włoska;;auchan;kiełbasa;Kiełbasa Krakowska Spichlerz Rusiecki 280 g;280.0;g;3.4964;9.79;auto;100.0;canonical_name;299.0
+kiełbasa;kiełbasa z indyka;;auchan;kiełbasa;Kiełbasa Krakowska Spichlerz Rusiecki 280 g;280.0;g;3.4964;9.79;auto;100.0;canonical_name;299.0
+kiełbasa;kiełbasa z kurczaka;;auchan;kiełbasa;Kiełbasa Krakowska Spichlerz Rusiecki 280 g;280.0;g;3.4964;9.79;auto;100.0;canonical_name;299.0
+kiełki fasoli;kiełki fasoli;;auchan;kiełki fasoli;Kiełki fasoli Mung w zalewie Diamond 330 g;175.0;g;5.6514;9.89;auto;100.0;;30.0
+kimchi;kimchi;;auchan;kimchi;Kimchi Runoland 300 g;300.0;g;3.5967;10.79;auto;100.0;;24.0
+kiwi;kiwi;;biedronka;kiwi;Kiwi 1 szt.;1.0;szt;1.99;1.99;auto;100.0;;61.0
+kmin rzymski;kmin rzymski;;auchan;kmin rzymski mielony;Kmin rzymski mielony Kotányi 15 g;15.0;g;15.6;2.34;auto;100.0;;375.0
+kmin rzymski;kmin rzymski mielony;;auchan;kmin rzymski mielony;Kmin rzymski mielony Kotányi 15 g;15.0;g;15.6;2.34;auto;100.0;shop_sku;375.0
+kokos;kokos;;auchan;kokos w łupinie;Kokos w łupinie Owoce  Auchan na wagę ok. 400 g;100.0;g;1.029;4.12;auto;100.0;;354.0
+kolendra;kolendra;;auchan;kolendra;Kolendra Auchan sztuka;250.0;g;2.796;6.99;auto;100.0;;23.0
+kolendra;kolendra mielona;;auchan;kolendra;Kolendra Auchan sztuka;250.0;g;2.796;6.99;auto;100.0;shop_sku;23.0
+komosa ryżowa;komosa ryzowa;;auchan;komosa ryżowa;Quinoa Komosa Ryżowa Intenson 250 g;250.0;g;3.796;9.49;auto;92.3;;120.0
+komosa ryżowa;komosa ryżowa;;auchan;komosa ryżowa;Quinoa Komosa Ryżowa Intenson 250 g;250.0;g;3.796;9.49;auto;100.0;shop_sku;120.0
+komosa ryżowa;ryż pełnoziarnisty i komosa ryżowa;;auchan;komosa ryżowa;Quinoa Komosa Ryżowa Intenson 250 g;250.0;g;3.796;9.49;auto;100.0;shop_sku;120.0
+koncentrat pomidorowy;koncentrat pomidorowy;;biedronka;koncentrat pomidorowy;Dawtona Koncentrat pomidorowy 190 g;190.0;g;1.8158;3.45;auto;100.0;;82.0
+koperek;koperek;;biedronka;koperek;Kamis Koperek 6 g;6.0;g;41.5;2.49;auto;100.0;;43.0
+krakersy;krakersy;;biedronka;krakersy solone mix;Top Krakersy solone mix 90 g;90.0;g;2.1;1.89;auto;100.0;;480.0
+krewetki;krewetki;;auchan;krewetki koktajlowe;Krewetki koktajlowe blanszowane Auchan 400 g;400.0;g;8.7475;34.99;auto;100.0;;85.0
+krojone pomidory;krojone pomidory;;biedronka;pomidory;Pomidory malinowe polskie 500 g;500.0;g;2.598;12.99;auto;100.0;;18.0
+krojone pomidory;pomidory krojone;;biedronka;pomidory;Pomidory malinowe polskie 500 g;500.0;g;2.598;12.99;auto;100.0;shop_sku;18.0
+krojone pomidory;pomidory kruszone;;biedronka;pomidory;Pomidory malinowe polskie 500 g;500.0;g;2.598;12.99;auto;100.0;shop_sku;18.0
+krojone pomidory;pomidory prażone;;biedronka;pomidory;Pomidory malinowe polskie 500 g;500.0;g;2.598;12.99;auto;100.0;shop_sku;18.0
+krojone pomidory;pomidory prażone z chili;;biedronka;pomidory;Pomidory malinowe polskie 500 g;500.0;g;2.598;12.99;auto;100.0;shop_sku;18.0
+kukurydza;kukurydza;;auchan;kukurydza;Kukurydza konserwowa Auchan 400 g;220.0;g;1.4955;3.29;auto;100.0;;86.0
+kukurydza;kukurydza mini;;auchan;kukurydza;Kukurydza konserwowa Auchan 400 g;220.0;g;1.4955;3.29;auto;100.0;shop_sku;86.0
+kukurydza słodka;kukurydza słodka;;auchan;kukurydza słodka;Kukurydza konserwowa słodka Dawtona 400 g;220.0;g;2.1727;4.78;auto;100.0;;86.0
+kurczak;kurczak fajita;;biedronka;kurczak;Kraina Mięs Select Kurczak farmerski porcja rosołowa z kurczaka kg;600.0;g;0.9983;5.99;auto;100.0;;239.0
+kurkuma;kur-kuma;;auchan;kurkuma;Kurkuma korzeń Owoce  Auchan na wagę ok. 100 g;100.0;g;5.179;5.18;auto;93.3;;354.0
+kurkuma;kurkuma;;auchan;kurkuma;Kurkuma korzeń Owoce  Auchan na wagę ok. 100 g;100.0;g;5.179;5.18;auto;100.0;shop_sku;354.0
+liofilizowane truskawki;liofilizowane truskawki;;auchan;liofilizowane truskawki całe;Liofilizowane truskawki całe  Garden Tree 45 g;45.0;g;42.2;18.99;auto;100.0;;396.0
+majonez;majonez;winiary majonez lekki;biedronka;majonez lekki;Winiary Majonez lekki 300 ml;300.0;ml;2.4967;7.49;repair;100.0;;333.0
+mak;mak;;auchan;mak niebieski;Mak niebieski Auchan 500 g;500.0;g;2.298;11.49;auto;100.0;;525.0
+makaron;makaron cavatappi;;auchan;makaron cavatappi z pszenicy durum;Makaron cavatappi z pszenicy durum Auchan 500 g;500.0;g;0.838;4.19;auto;100.0;;131.0
+makaron;makaron;;auchan;makaron;Makaron Pipe Rigate Auchan 500 g;500.0;g;0.93;4.65;auto;100.0;canonical_name;131.0
+makaron;makaron angel hair;;auchan;makaron;Makaron Pipe Rigate Auchan 500 g;500.0;g;0.93;4.65;auto;100.0;canonical_name;131.0
+makaron;makaron fusilli z ciecierzycy;;auchan;makaron fusilli;Makaron fusilli   Auchan 500 g;500.0;g;0.93;4.65;auto;100.0;canonical_name;131.0
+makaron;makaron kokardki;;auchan;makaron kokardki;Makaron kokardki Auchan 500 g;500.0;g;0.93;4.65;auto;100.0;canonical_name;131.0
+makaron;makaron palmini;;auchan;makaron;Makaron Pipe Rigate Auchan 500 g;500.0;g;0.93;4.65;auto;100.0;canonical_name;131.0
+makaron;makaron quinoa;;auchan;makaron;Makaron Pipe Rigate Auchan 500 g;500.0;g;0.93;4.65;auto;100.0;canonical_name;131.0
+makaron;makaron rotini;;auchan;makaron;Makaron Pipe Rigate Auchan 500 g;500.0;g;0.93;4.65;auto;100.0;canonical_name;131.0
+makaron;makaron z cukinii;;auchan;makaron;Makaron Pipe Rigate Auchan 500 g;500.0;g;0.93;4.65;auto;100.0;canonical_name;131.0
+makaron;makaron z serem;;auchan;makaron;Makaron Pipe Rigate Auchan 500 g;500.0;g;0.93;4.65;auto;100.0;canonical_name;131.0
+makaron;makaron łokieć;;auchan;makaron;Makaron Pipe Rigate Auchan 500 g;500.0;g;0.93;4.65;auto;100.0;canonical_name;131.0
+makaron;makaron penne;;auchan;makaron penne;Makaron penne Podravka 500 g;500.0;g;1.196;5.98;auto;100.0;canonical_name;357.0
+makaron;makaron orzo;;auchan;makaron orzo medium;Makaron orzo medium Primo Gusto 500 g;500.0;g;1.256;6.28;auto;100.0;canonical_name;131.0
+makaron;makaron z ciecierzycy;;auchan;makaron z ciecierzycy świderki;Makaron z ciecierzycy świderki Novelle 250 g;250.0;g;2.472;6.18;auto;100.0;canonical_name;119.0
+makaron;makaron soba;;auchan;makaron soba;Makaron soba Green Label 300 g;300.0;g;2.5967;7.79;auto;100.0;canonical_name;99.0
+makaron;makaron ryżowy;;auchan;makaron ryżowy;Makaron ryżowy Vermicelli House of Asia 200 g;200.0;g;3.07;6.14;auto;100.0;canonical_name;109.0
+makaron;makaron ryżowy brązowy;;auchan;makaron ryżowy;Makaron ryżowy Vermicelli House of Asia 200 g;200.0;g;3.07;6.14;auto;100.0;canonical_name;109.0
+makaron;makaron jajeczny;;auchan;makaron jajeczny;Makaron jajeczny Agnesi 250 g;250.0;g;3.796;9.49;auto;100.0;canonical_name;138.0
+makaron;makaron bezglutenowy;;auchan;tonnarelli makaron bezglutenowy;Tonnarelli makaron bezglutenowy Incola 250 g;250.0;g;4.156;10.39;auto;100.0;canonical_name;350.0
+makaron;makaron ramen;;auchan;makaron ramen;BIO Makaron ramen  BioAsia 250 g;250.0;g;4.156;10.39;auto;100.0;canonical_name;138.0
+maliny;maliny;;auchan;maliny;Maliny Owoce  Auchan 125 g;125.0;g;8.312;10.39;auto;100.0;;52.0
+mandarynka;mandarynka;;biedronka;mandarynka;Mandarynka;100.0;g;1.0;1.0;auto;100.0;;53.0
+mango;mango;;auchan;mango;Mango Owoce  Auchan sztuka;100.0;g;5.99;5.99;auto;100.0;;60.0
+marmolada pomarańczowa;marmolada pomarańczowa;;auchan;marmolada pomarańczowa;Marmolada pomarańczowa Auchan 360 g;360.0;g;1.8028;6.49;auto;100.0;;246.0
+masło;masło;;auchan;masło;Masło ekstra Łaciate 200 g;200.0;g;3.445;6.89;auto;100.0;;717.0
+masło;masło kokosowe;;auchan;masło;Masło ekstra Łaciate 200 g;200.0;g;3.445;6.89;auto;100.0;shop_sku;717.0
+masło;masło migdałowe;;auchan;masło;Masło ekstra Łaciate 200 g;200.0;g;3.445;6.89;auto;100.0;shop_sku;717.0
+masło;masło roślinne;;auchan;masło;Masło ekstra Łaciate 200 g;200.0;g;3.445;6.89;auto;100.0;shop_sku;717.0
+masło orzechowe;masło orzechowe;;biedronka;masło orzechowe;Go Vege Masło orzechowe smooth 945 g;945.0;g;2.2212;20.99;auto;100.0;;588.0
+maślanka;maślanka w proszku;;auchan;maślanka;Maślanka naturalna            Pewni Dobrego 1 kg;1000.0;g;0.398;3.98;auto;100.0;;40.0
+melasa;melasa;;auchan;melasa z owoców morwy;Melasa z owoców morwy Koska 380 g;380.0;g;4.9974;18.99;auto;100.0;;290.0
+melon;melon;;biedronka;melon;Melon Galia;1200.0;g;1.2992;15.59;auto;100.0;;34.0
+mielona kiełbasa;mielona kiełbasa;;auchan;kiełbasa;Kiełbasa Krakowska Spichlerz Rusiecki 280 g;280.0;g;3.4964;9.79;auto;100.0;;299.0
+mielona wieprzowina;mielona wieprzowina;;auchan;mielona wieprzowina;Mięso mielone wieprzowe z szynki Pewni Dobrego 400 g;400.0;g;3.2475;12.99;auto;100.0;;263.0
+mielona wołowina;mielona woowina;mielona wołowina;auchan;mielona wołowina;Mięso mielone wołowe Łuków 400 g;400.0;g;5.7475;22.99;auto;96.8;;215.0
+mielona wołowina;mielona wołowina;;auchan;mielona wołowina;Mięso mielone wołowe Łuków 400 g;400.0;g;5.7475;22.99;auto;100.0;shop_sku;215.0
+mielone siemię lniane;mielone siemię lniane;;auchan;siemię lniane;Siemię lniane Auchan 1 kg;1000.0;g;0.99;9.9;auto;100.0;;534.0
+mielone siemię lniane;siemię lniane;;auchan;siemię lniane;Siemię lniane Auchan 1 kg;1000.0;g;0.99;9.9;auto;100.0;shop_sku;534.0
+mielone siemię lniane;siemię lniane mielone;;auchan;siemię lniane;Siemię lniane Auchan 1 kg;1000.0;g;0.99;9.9;auto;100.0;shop_sku;534.0
+mielony indyk;mielony indyk;;auchan;indyk;Skrzydło z indyka Auchan na wagę ok. 600g;100.0;g;1.59;9.54;auto;100.0;;135.0
+mielony kurczak;mielony kurczak;;auchan;mielony kurczak;Mięso mielone z nogi kurczaka Auchan 400 g;400.0;g;3.6475;14.59;auto;100.0;;143.0
+mieszanka sałat;mieszanka sałat;mix sałat z roszponką;auchan;mix sałat z roszponką;Mix sałat z roszponką Warzywa Auchan 120 g;120.0;g;4.075;4.89;auto;100.0;;17.0
+mieszanka suszonych owoców;mieszanka suszonych owoców;;auchan;mieszanka owoców suszonych;Mieszanka owoców suszonych Helio 1 kg;1000.0;g;3.9;39.0;auto;100.0;;250.0
+mieszanka warzyw;mieszanka warzyw;;auchan;mieszanka warzywna meksykańska;Mieszanka warzywna meksykańska Bonduelle 150 g;130.0;g;3.5308;4.59;auto;100.0;;50.0
+migdały;migdał;;auchan;migdały;Migdały łuskane Auchan 500 g;500.0;g;4.798;23.99;auto;92.3;;579.0
+migdały;migdały;;auchan;migdały;Migdały łuskane Auchan 500 g;500.0;g;4.798;23.99;auto;100.0;shop_sku;579.0
+migdały;migdały w płatkach;;auchan;migdały;Migdały łuskane Auchan 500 g;500.0;g;4.798;23.99;auto;100.0;shop_sku;579.0
+miód;miód;;auchan;miód wielokwiatowy;Miód wielokwiatowy Huzar 1 kg;1000.0;g;2.749;27.49;auto;100.0;;304.0
+mięta;mięta;;auchan;mięta;Mięta Auchan sztuka;100.0;g;7.29;7.29;auto;100.0;;70.0
+mleko;mleko;;auchan;mleko;Mleko UHT 3,2% Auchan 1l;1000.0;ml;0.328;3.28;auto;100.0;;61.0
+mleko;mleko migdałowe;;auchan;mleko;Mleko UHT 3,2% Auchan 1l;1000.0;ml;0.328;3.28;auto;100.0;shop_sku;61.0
+mleko;mleko owsiane;;auchan;mleko;Mleko UHT 3,2% Auchan 1l;1000.0;ml;0.328;3.28;auto;100.0;shop_sku;61.0
+mleko;mleko roślinne;;auchan;mleko;Mleko UHT 3,2% Auchan 1l;1000.0;ml;0.328;3.28;auto;100.0;shop_sku;61.0
+mleko kokosowe;mleko kokosowe;;auchan;mleko kokosowe;Mleko kokosowe House of Asia 400 ml;400.0;ml;1.57;6.28;auto;100.0;;230.0
+mleko kokosowe;mleko kokosowe w proszku;;auchan;mleko kokosowe;Mleko kokosowe House of Asia 400 ml;400.0;ml;1.57;6.28;auto;100.0;shop_sku;230.0
+morele;morele suszone;;auchan;morele suszone;Morele suszone Auchan 200 g;200.0;g;5.495;10.99;auto;100.0;;241.0
+mozzarella;mozzarella;;auchan;mozzarella;Mozzarella OSM Skierniewice 250 g;250.0;g;6.196;15.49;auto;100.0;;280.0
+mus jabłkowy;mus jabłkowy;;auchan;mus jabłkowy;Mus jabłkowy  Pewni Dobrego 700 g;700.0;g;1.1129;7.79;auto;100.0;;68.0
+musztarda;musztarda;;biedronka;musztarda;Kamis Musztarda kremska 185 g;185.0;g;1.9946;3.69;auto;100.0;;66.0
+musztarda;musztarda dijon;;biedronka;musztarda;Kamis Musztarda kremska 185 g;185.0;g;1.9946;3.69;auto;100.0;shop_sku;66.0
+musztarda;musztarda dyniowa;;biedronka;musztarda;Kamis Musztarda kremska 185 g;185.0;g;1.9946;3.69;auto;100.0;shop_sku;66.0
+musztarda;musztarda miodowa;;biedronka;musztarda;Kamis Musztarda kremska 185 g;185.0;g;1.9946;3.69;auto;100.0;shop_sku;66.0
+musztarda;musztarda ostra;;biedronka;musztarda;Kamis Musztarda kremska 185 g;185.0;g;1.9946;3.69;auto;100.0;shop_sku;66.0
+musztarda;musztarda żółta;;biedronka;musztarda;Kamis Musztarda kremska 185 g;185.0;g;1.9946;3.69;auto;100.0;shop_sku;66.0
+mąka;mąka;;auchan;mąka;Mąka La Pasta 100%   Molino Casillo  1 kg;1000.0;g;0.819;8.19;auto;100.0;;364.0
+mąka;mąka maranta;;auchan;mąka;Mąka La Pasta 100%   Molino Casillo  1 kg;1000.0;g;0.819;8.19;auto;100.0;shop_sku;364.0
+mąka;mąka bezglutenowa;;auchan;mąka ryżowa bezglutenowa;Mąka ryżowa bezglutenowa SemCo 500 g;500.0;g;1.358;6.79;auto;90.3;canonical_name;366.0
+mąka;mąka bezglutenowa uniwersalna;;auchan;mieszanka bezglutenowa uniwersalna;Mieszanka bezglutenowa ekstra uniwersalna Bezgluten 500 g;500.0;g;3.318;16.59;auto;96.4;canonical_name;357.0
+mąka migdałowa;mąka migdałowa;;auchan;mąka migdałowa;BIO Mąka migdałowa Bio Planet 100 g;100.0;g;16.59;16.59;auto;100.0;;579.0
+mąka owsiana;mąka owsiana;;auchan;mąka owsiana;Mąka owsiana   Młyn Niedźwiady 1 kg;1000.0;g;0.719;7.19;auto;100.0;;404.0
+nasiona chia;nasiona chia;;auchan;nasiona chia;Nasiona chia KRESTO 100 g;100.0;g;5.99;5.99;auto;100.0;;486.0
+nasiona konopi;nasiona konopi;;auchan;nasiona konopii;BIO Nasiona konopii łuskane NaturaVena 200 g;200.0;g;11.495;22.99;auto;100.0;;553.0
+nasiona sezamu;nasiona sezamu;;auchan;nasiona sezamu białego;Nasiona sezamu białego Thai Pride 100 g;100.0;g;6.59;6.59;auto;100.0;;573.0
+natka pietruszki;natka pietruszki;;auchan;natka pietruszki;Natka pietruszki  Auchan 8 g;8.0;g;16.125;1.29;auto;100.0;;36.0
+nerkowce;nerkowce;;auchan;nerkowce;Nerkowce KRESTO 200 g;200.0;g;11.495;22.99;auto;100.0;;553
+ocet;ocet spirytusowy;;auchan;ocet spirytusowy;Ocet spirytusowy 10% kwasowości Auchan 500 ml;500.0;ml;0.358;1.79;auto;100.0;;18.0
+ocet;ocet ryzowy;;auchan;ocet ryżowy;Ocet ryżowy 3%  Diamond 610 ml;610.0;ml;3.1787;19.39;auto;90.9;canonical_name;18.0
+ocet balsamiczny;ocet balsamiczny;;auchan;ocet balsamiczny;Ocet balsamiczny Gino Toschi 250 ml;250.0;ml;4.556;11.39;auto;100.0;;88.0
+ocet jabłkowy;ocet jabłkowy;;auchan;ocet jabłkowy;Ocet jabłkowy 6% Auchan 750 ml;750.0;ml;0.7987;5.99;auto;100.0;;21.0
+ocet ryżowy;ocet ryżowy;;auchan;ocet ryżowy;Ocet ryżowy 3%  Diamond 610 ml;610.0;ml;3.1787;19.39;auto;100.0;;18.0
+ocet winny biały;ocet winny biały;;auchan;ocet winny biały;Ocet winny biały Monini 500 ml;500.0;ml;3.398;16.99;auto;100.0;;18.0
+ocet winny czerwony;ocet winny czerwony;;auchan;ocet winny z czerwonego wina;Ocet winny z czerwonego wina. 6% kwasowości Kamis 250 ml;250.0;ml;3.672;9.18;auto;89.5;;19.0
+odżywka białkowa;odżywka białkowa;;auchan;odżywka białkowa;Odżywka białkowa Mass Up wanilia ACTIVLAB 1,2 kg;1200.0;g;4.165;49.98;auto;100.0;;400.0
+odżywka białkowa;odżywka białkowa czekoladowa;;auchan;odżywka białkowa;Odżywka białkowa Mass Up wanilia ACTIVLAB 1,2 kg;1200.0;g;4.165;49.98;auto;100.0;shop_sku;400.0
+odżywka białkowa;odżywka białkowa serwatkowa;;auchan;odżywka białkowa;Odżywka białkowa Mass Up wanilia ACTIVLAB 1,2 kg;1200.0;g;4.165;49.98;auto;100.0;shop_sku;400.0
+odżywka białkowa;odżywka białkowa waniliowa;;auchan;odżywka białkowa;Odżywka białkowa Mass Up wanilia ACTIVLAB 1,2 kg;1200.0;g;4.165;49.98;auto;100.0;shop_sku;400.0
+ogórek;ogórek;;auchan;ogórek długi;BIO Ogórek długi Warzywa Auchan sztuka;100.0;g;5.79;5.79;auto;100.0;;15.0
+ogórek kiszony;ogórek kiszony;;auchan;ogórki kiszone;Ogórki kiszone Auchan 500 g;500.0;g;1.458;7.29;auto;85.7;;11.0
+ogórek kiszony;ogórki kiszone;;auchan;ogórki kiszone;Ogórki kiszone Auchan 500 g;500.0;g;1.458;7.29;auto;100.0;shop_sku;11.0
+olej;olej;;auchan;olej rzepakowy;Olej rzepakowy Auchan 1 l;1000.0;ml;0.459;4.59;auto;100.0;;884.0
+olej;olej rzepakowy;;auchan;olej rzepakowy;Olej rzepakowy Auchan 1 l;1000.0;ml;0.459;4.59;auto;100.0;shop_sku;884.0
+olej sezamowy;olej sezamowy;;auchan;olej sezamowy nierafinowany;Olej sezamowy nierafinowany Auchan Collection  250 ml;250.0;ml;5.996;14.99;auto;100.0;;884.0
+olej w sprayu z awokado;olej w sprayu z awokado;;auchan;olej z awokado spray;Olej z awokado spray Fratelli Mantova 200 ml;200.0;ml;14.995;29.99;auto;93.0;;884.0
+olej z awokado;olej z awokado;;auchan;olej z awokado;Olej z awokado tłoczony na zimno Auchan Collection  250 ml;250.0;ml;6.796;16.99;auto;100.0;;884.0
+olej z pestek dyni;olej z pestek dyni;;auchan;olej z pestek dyni;Olej z pestek dyni z witaminą D tłoczony na zimno Oleofarm 250 ml;250.0;ml;10.596;26.49;auto;100.0;;884.0
+olej z pestek winogron;olej z pestek winogron;;auchan;olej z pestek winogron;Olej z pestek winogron Monini 500 ml;500.0;ml;3.896;19.48;auto;100.0;;884.0
+oliwa z oliwek;oliwa z oliwek;;auchan;oliwa z oliwek;Oliwa z oliwek Drago Chef Coppini 1 l;1000.0;ml;3.399;33.99;auto;100.0;;884.0
+oliwki;oliwki;;auchan;oliwki sycylijskie;Oliwki sycylijskie Nocellara bez pestek San Romano 150 g;150.0;g;8.6533;12.98;auto;100.0;;145.0
+oliwki czarne;oliwki czarne;;auchan;oliwki czarne drylowane;Oliwki czarne drylowane Figaro 340 g;160.0;g;6.8;10.88;auto;100.0;;115.0
+oliwki zielone;oliwki zielone;;auchan;oliwki zielone nadziewane migdałami;Oliwki zielone nadziewane migdałami Athina 170 g;190.0;g;6.6263;12.59;auto;100.0;;145.0
+oregano;oregano;;auchan;oregano;BIO Oregano  Pewni Dobrego sztuka;100.0;g;7.99;7.99;auto;100.0;;265.0
+oregano;oregano suszone;;auchan;oregano suszone;Oregano suszone Auchan 10 g;10.0;g;12.9;1.29;auto;100.0;canonical_name;265.0
+orzechy;orzechy;;auchan;orzechy nerkowca;Orzechy nerkowca Makar 1 kg;1000.0;g;6.31;63.1;auto;100.0;;553.0
+orzechy;orzechy nerkowca;;auchan;orzechy nerkowca;Orzechy nerkowca Makar 1 kg;1000.0;g;6.31;63.1;auto;100.0;shop_sku;553.0
+orzechy laskowe;orzech laskowy;;auchan;orzechy laskowe;Orzechy laskowe łuskane Auchan 100g;100.0;g;7.99;7.99;auto;89.7;;628.0
+orzechy makadamia;orzechy makadamia;;auchan;orzechy makadamia;BIO Orzechy makadamia  BioLife 100 g;100.0;g;20.59;20.59;auto;100.0;;718.0
+orzechy pekan;orzechy pekan;;auchan;orzechy pekan;BIO Orzechy pekan    BioLife 100 g;100.0;g;21.59;21.59;auto;100.0;;691.0
+orzechy włoskie;orzechy włoskie;;auchan;orzechy włoskie;Orzechy włoskie łuskane Makar 1 kg;1000.0;g;4.84;48.4;auto;100.0;;654.0
+orzeszki piniowe;orzeszki piniowe;;auchan;orzeszki pini;Orzeszki pini Auchan 50 g;50.0;g;25.98;12.99;auto;100.0;;673.0
+orzeszki ziemne;orzeszki ziemne;;auchan;orzeszki ziemne;BIO Orzeszki ziemne   Bio Planet 350 g;350.0;g;4.1114;14.39;auto;100.0;;567.0
+papier ryżowy;papier ryżowy;;auchan;papier ryżowy z tapioką;Papier ryżowy z tapioką Ricefield 300 g;300.0;g;4.7967;14.39;auto;100.0;;333.0
+papryczki pepperoncini;papryczki pepperoncini;;auchan;papryczki peperoni ostre mix;Papryczki peperoni ostre mix Warzywa Auchan 150 g;150.0;g;9.1933;13.79;auto;90.0;;40.0
+papryka;papryka zielona;;auchan;papryka zielona;Papryka zielona Warzywa Auchan na wagę ok. 500 g;100.0;g;1.699;8.5;auto;100.0;;20.0
+papryka;zielona papryka;;auchan;papryka zielona;Papryka zielona Warzywa Auchan na wagę ok. 500 g;100.0;g;1.699;8.5;auto;100.0;shop_sku;20.0
+papryka;papryka ostra;;auchan;papryka ostra mielona;Papryka ostra mielona Auchan 500 g;500.0;g;3.6;18.0;auto;100.0;canonical_name;318.0
+papryka;papryka;;auchan;papryka;BIO  Papryka Palermo  Warzywa Auchan 180 g;180.0;g;7.2167;12.99;auto;100.0;canonical_name;31.0
+papryka;papryka poblano;;auchan;papryka;BIO  Papryka Palermo  Warzywa Auchan 180 g;180.0;g;7.2167;12.99;auto;100.0;canonical_name;31.0
+papryka;papryka w proszku;;auchan;papryka;BIO  Papryka Palermo  Warzywa Auchan 180 g;180.0;g;7.2167;12.99;auto;100.0;canonical_name;31.0
+papryka;papryka wędzona;;auchan;papryka;BIO  Papryka Palermo  Warzywa Auchan 180 g;180.0;g;7.2167;12.99;auto;100.0;canonical_name;31.0
+papryka;papryka słodka;;auchan;papryka słodka;Papryka wędzona słodka Kotányi 22 g;22.0;g;10.6364;2.34;auto;100.0;canonical_name;282.0
+pasta chili;pasta chili;;auchan;pasta;Pasta Gochujang   Sempio 170 g;170.0;g;4.9353;8.39;auto;100.0;;131.0
+pestki dyni;pestki dyni;;auchan;pestki dyni;Pestki dyni Auchan 500 g;500.0;g;3.198;15.99;auto;100.0;;559.0
+pesto;pesto;;biedronka;pesto;Go Vege Pesto z tofu 190 g;190.0;g;3.6789;6.99;auto;100.0;;490.0
+pesto;pesto rukolowe;;biedronka;pesto;Go Vege Pesto z tofu 190 g;190.0;g;3.6789;6.99;auto;100.0;shop_sku;490.0
+pieczarka;pieczarka;;auchan;pieczarka mini;Pieczarka mini Warzywa Auchan 200 g;200.0;g;2.795;5.59;auto;100.0;;22.0
+pieczarki;pieczarki;;auchan;pieczarki;Pieczarki świeże   Warzywa Auchan na wagę ok. 300 g;100.0;g;1.378;4.13;auto;100.0;;22.0
+pieczarki;pieczarki cremini;;auchan;pieczarki;Pieczarki świeże   Warzywa Auchan na wagę ok. 300 g;100.0;g;1.378;4.13;auto;100.0;shop_sku;22.0
+pieczarki;pieczarki portobello;;auchan;pieczarki;Pieczarki świeże   Warzywa Auchan na wagę ok. 300 g;100.0;g;1.378;4.13;auto;100.0;shop_sku;22.0
+pieprz cayenne;pieprz cayenne;;auchan;pieprz cayenne mielony;Pieprz cayenne mielony  Kotányi 25 g;20.0;g;11.7;2.34;auto;100.0;;318.0
+pieprz cytrynowy;pieprz cytrynowy;;auchan;pieprz cytrynowy mielony;Pieprz cytrynowy mielony Prymat 20 g;20.0;g;8.65;1.73;auto;100.0;;255.0
+pieprz czarny;pieprz;pieprz czarny mielony;auchan;pieprz czarny mielony;Pieprz czarny mielony Auchan 500 g;500.0;g;4.6;23.0;repair;100.0;;251.0
+pieprz czarny;pieprz czarny;pieprz czarny mielony;auchan;pieprz czarny mielony;Pieprz czarny mielony Auchan 500 g;500.0;g;4.6;23.0;auto;100.0;shop_sku;251.0
+pierś z kurczaka;filet z kurczaka;pierś z kurczaka;biedronka;pierś z kurczaka;Kraina Mięs Filet z piersi kurczaka;500.0;g;2.48;12.4;auto;100.0;;165.0
+pierś z kurczaka;kurczak;pierś z kurczaka;biedronka;pierś z kurczaka;Kraina Mięs Filet z piersi kurczaka;500.0;g;2.48;12.4;auto;100.0;shop_sku;165.0
+pierś z kurczaka;pałki z kurczaka;;biedronka;pierś z kurczaka;Kraina Mięs Filet z piersi kurczaka;500.0;g;2.48;12.4;auto;85.7;shop_sku;165.0
+pietruszka;pietruszka;;auchan;pietruszka;Pietruszka Warzywa Auchan 500 g;500.0;g;1.598;7.99;auto;100.0;;36.0
+pistacje;pistacje;;auchan;pistacje prażone niesolone;Pistacje prażone niesolone Auchan 250 g;250.0;g;9.596;23.99;auto;100.0;;567.0
+pomarańcza krwista;pomarańcza krwista;;auchan;pomarańcza;BIO Pomarańcza Owoce  Auchan 1 kg;1000.0;g;1.299;12.99;auto;100.0;;49.0
+pomidor;pomidor;;auchan;pomidor;Pomidor malinowy XL Warzywa Auchan na wagę ok 500g;100.0;g;1.599;8.0;auto;100.0;;18.0
+pomidor;pomidor krojony;;auchan;pomidor;Pomidor malinowy XL Warzywa Auchan na wagę ok 500g;100.0;g;1.599;8.0;auto;100.0;shop_sku;18.0
+pomidor;pomidor rzymski;;auchan;pomidor;Pomidor malinowy XL Warzywa Auchan na wagę ok 500g;100.0;g;1.599;8.0;auto;100.0;shop_sku;18.0
+pomidor;pomidor suszony;;auchan;pomidor;Pomidor malinowy XL Warzywa Auchan na wagę ok 500g;100.0;g;1.599;8.0;auto;100.0;shop_sku;18.0
+pomidor;pomidor koktajlowy;;biedronka;pomidor koktajlowy;Pomidor koktajlowy 400 g;400.0;g;2.9975;11.99;auto;100.0;canonical_name;18.0
+pomidor;pomidorek koktajlowy;;biedronka;pomidor koktajlowy;Pomidor koktajlowy 400 g;400.0;g;2.9975;11.99;auto;94.7;canonical_name;18.0
+pomidor;pomidorki koktajlowe;;biedronka;pomidor koktajlowy;Pomidor koktajlowy 400 g;400.0;g;2.9975;11.99;auto;89.5;canonical_name;18.0
+pomidor;pomidory suszone;;auchan;pomidory suszone;BIO Pomidory suszone Ekologiko 80 g;80.0;g;8.2375;6.59;auto;100.0;canonical_name;258.0
+por;por;;auchan;por;Por Warzywa Auchan na wagę ok. 400 g;100.0;g;0.799;3.2;auto;100.0;;61.0
+przyprawa chili;przyprawa chili;papryka ostra mielona;auchan;papryka ostra mielona;Papryka ostra mielona Auchan 500 g;500.0;g;3.6;18.0;repair;100.0;;318.0
+przyprawa do drobiu;przyprawa do drobiu;;auchan;przyprawa do drobiu;BIO Ekologiczna przyprawa do drobiu To Naturalne 20 g;20.0;g;17.45;3.49;auto;100.0;;307.0
+przyprawa włoska;przyprawa włoska;przyprawa do potraw kuchni włoskiej;auchan;przyprawa do potraw kuchni włoskiej;Przyprawa do potraw kuchni włoskiej Kamis 20 g;20.0;g;12.4;2.48;repair;100.0;;250.0
+płatki chex;płatki chex;;auchan;płatki;Płatki Chocapic XXL Nestle  600 g;600.0;g;3.065;18.39;auto;100.0;;318.0
+płatki chex;płatki chili;;auchan;płatki;Płatki Chocapic XXL Nestle  600 g;600.0;g;3.065;18.39;auto;100.0;shop_sku;318.0
+płatki drożdżowe;płatki drożdżowe;;auchan;płatki drożdżowe;BIO Płatki drożdżowe BioLife 100 g;100.0;g;28.49;28.49;auto;100.0;;371.0
+płatki owsiane;płatki owsiane;;auchan;płatki owsiane;Płatki owsiane Auchan 400 g;400.0;g;0.6475;2.59;auto;100.0;;379.0
+ricotta;ricotta;;auchan;ricotta;Ricotta Auchan 250 g;250.0;g;2.38;5.95;auto;100.0;;174.0
+ricotta;ser ricotta roślinny;;auchan;ricotta;Ricotta Auchan 250 g;250.0;g;2.38;5.95;auto;100.0;shop_sku;174.0
+ricotta;wegański ser ricotta;;auchan;ricotta;Ricotta Auchan 250 g;250.0;g;2.38;5.95;auto;100.0;shop_sku;174.0
+rodzynki;rodzynki;;biedronka;rodzynki;Bakallino Rodzynki sułtańskie 400 g;400.0;g;2.1225;8.49;auto;100.0;;299.0
+rukola;rukola;;auchan;rukola;Rukola Warzywa Auchan 150 g;150.0;g;3.66;5.49;auto;100.0;;25.0
+ryż;ryż biały;;auchan;ryż biały;Ryż biały długoziarnisty Auchan 500 g;500.0;g;0.656;3.28;auto;100.0;;365.0
+ryż;ryż biały długoziarnisty;;auchan;ryż biały;Ryż biały długoziarnisty Auchan 500 g;500.0;g;0.656;3.28;auto;100.0;shop_sku;365.0
+ryż;ryż jaśminowy;;auchan;ryż jaśminowy;Ryż jaśminowy Auchan 4 x 100 g;400.0;g;0.8225;3.29;auto;100.0;canonical_name;365.0
+ryż;ryż basmati;;biedronka;ryż basmati;Plony Natury Ryż basmati długoziarnisty 400 g;400.0;g;1.2475;4.99;auto;100.0;canonical_name;357.0
+rzodkiewka;rzodkiewka;;biedronka;rzodkiewka;Rzodkiewka pęczek;1.0;szt;2.99;2.99;auto;100.0;;16.0
+salami;salami;;auchan;salami z pomidorami i bazylią;Salami z pomidorami i bazylią Serenada 135 g;135.0;g;4.7259;6.38;auto;100.0;;407.0
+sałata;sałata;;auchan;sałata;Sałata Pak Choi Warzywa Auchan sztuka;100.0;g;9.19;9.19;auto;100.0;;14.0
+sałata masłowa;sałata masłowa;;auchan;sałata masłowa;Sałata masłowa Warzywa Auchan 1 sztuka;100.0;g;3.99;3.99;auto;100.0;;13.0
+sałata rzymska;sałata rzymska;;auchan;sałata rzymska;Sałata rzymska               Warzywa Auchan 1sztuka;100.0;g;6.99;6.99;auto;100.0;;17.0
+seler;seler;;auchan;seler;Seler korzeń Warzywa Auchan na wagę ok. 800 g;100.0;g;0.499;3.99;auto;100.0;;16.0
+seler naciowy;seler naciowy;;auchan;seler naciowy;BIO Seler naciowy  Naturally Organic 400 g;400.0;g;2.245;8.98;auto;100.0;;16.0
+ser;ser;;auchan;ser;Ser Mozzarella   Jager 125 g;125.0;g;2.68;3.35;auto;100.0;;404.0
+ser;ser feta;;auchan;ser;Ser Mozzarella   Jager 125 g;125.0;g;2.68;3.35;auto;100.0;shop_sku;404.0
+ser;ser w kawałku;;auchan;ser mimolette w kawałku;Ser Mimolette w kawałku Temar na wagę ok. 200 g;100.0;g;6.79;13.58;auto;91.7;canonical_name;402.0
+ser;ser wegański;;auchan;ser wegański ser bez laktozy;Ser wegański kremowy cheddar bez laktozy Violife 150 g;150.0;g;8.26;12.39;auto;100.0;canonical_name;250.0
+ser;ser gruyere;;auchan;ser gruyere dojrzewający twardy;Ser Gruyere dojrzewający twardy EntreMont 200 g;200.0;g;12.49;24.98;auto;100.0;canonical_name;413.0
+ser kozi;ser kozi;;auchan;ser kozi;Ser sałatkowy kozi Danmis 160 g;160.0;g;8.925;14.28;auto;100.0;;264.0
+ser pleśniowy;ser pleśniowy;;auchan;ser pleśniowy;Ser pleśniowy Złocisty Lazur 100 g;100.0;g;5.88;5.88;auto;100.0;;353.0
+ser ricotta;ser ricotta;;auchan;ser ricotta pecorina;Ser Ricotta Pecorina    Auchan na wagę ok. 130 g;100.0;g;4.79;6.23;auto;100.0;;174.0
+serca karczochów;serca karczochów;karczochy;auchan;karczochy krojone w ziołach;Karczochy krojone w ziołach Antico Casale 455 /285 g;285.0;g;7.8912;22.49;repair;100.0;;50.0
+serca karczochów;serce karczocha;karczochy;auchan;karczochy krojone w ziołach;Karczochy krojone w ziołach Antico Casale 455 /285 g;285.0;g;7.8912;22.49;repair;100.0;shop_sku;50.0
+sezam;sezam;;auchan;sezam;Sezam Bakal 500 g;500.0;g;3.358;16.79;auto;100.0;;573.0
+skrobia kukurydziana;skrobia kukurydziana;;auchan;skrobia kukurydziana;BIO Ekologiczna skrobia kukurydziana NaturaVena 250 g;250.0;g;3.916;9.79;auto;100.0;;381.0
+skrzydełko z kurczaka;skrzydełko z kurczaka;;auchan;skrzydełka z kurczaka;Piwoszki skrzydełka z kurczaka Morliny 900 g;900.0;g;2.8767;25.89;auto;95.2;;222.0
+skrzydełko z kurczaka;udka z kurczaka;;auchan;skrzydełka z kurczaka;Piwoszki skrzydełka z kurczaka Morliny 900 g;900.0;g;2.8767;25.89;auto;92.9;shop_sku;222.0
+skórka z cytryny;skórka z cytryny;;auchan;cytryny;Cytryny Owoce  Auchan 1 kg;1000.0;g;1.699;16.99;auto;100.0;;29.0
+soczewica;soczewica czerwona;;biedronka;soczewica czerwona;Plony Natury Soczewica czerwona 500 g;500.0;g;0.998;4.99;auto;100.0;;358.0
+soczewica;soczewica;;auchan;soczewica;Soczewica konserwowa Rolnik 400 g;240.0;g;1.5375;3.69;auto;100.0;canonical_name;353.0
+sok z cytryny;cytryna;;biedronka;cytryna;Cytryna 500 g;500.0;g;0.998;4.99;auto;100.0;;29.0
+sok z cytryny;sok z cytryny;;auchan;sok z cytryny;Sok z cytryny Limmi 200 ml;200.0;ml;3.14;6.28;auto;100.0;canonical_name;22.0
+sok z limonki;limonka;;auchan;limonka;Limonka Owoce  Auchan na wagę ok. 300 g;100.0;g;1.499;4.5;auto;100.0;;30.0
+sok z limonki;sok z limonki;;auchan;sok z limonki z soku zagęszczonego;Sok z limonki z soku zagęszczonego House of Asia 250 ml;250.0;ml;2.696;6.74;auto;100.0;canonical_name;25.0
+sos BBQ;sos BBQ;sos miodowo-musztardowy;auchan;sos miodowo-musztardowy;Sos sałatkowy miodowo-musztardowy Knorr 8 g;8.0;g;18.0;1.44;repair;100.0;;42.0
+sos BBQ;sos bbq;sos miodowo-musztardowy;auchan;sos miodowo-musztardowy;Sos sałatkowy miodowo-musztardowy Knorr 8 g;8.0;g;18.0;1.44;repair;100.0;shop_sku;42.0
+sos czosnkowy do makaronu;sos czosnkowy do makaronu;;auchan;sos czosnkowy typ;Sos sałatkowy czosnkowy typ Cezar Prymat 9 g;9.0;g;10.8889;0.98;auto;90.3;;300.0
+sos czosnkowy do makaronu;sos ranch;sos czosnkowy typ;auchan;sos czosnkowy typ;Sos sałatkowy czosnkowy typ Cezar Prymat 9 g;9.0;g;10.8889;0.98;repair;100.0;shop_sku;300.0
+sos do makaronu;sos do makaronu;;biedronka;mutti sos do makaronu;Mutti Sos do makaronu Arrabbiata z papryczkami chili 400 g;400.0;g;2.9975;11.99;auto;100.0;;40.0
+sos grecki;sos grecki;;auchan;sos grecki;Sos sałatkowy grecki  Knorr 9 g;9.0;g;16.0;1.44;auto;100.0;;150.0
+sos ostry;sos ostry;sos curry;auchan;sos curry;Sos curry Winiary 29 g;29.0;g;9.9655;2.89;repair;100.0;;325.0
+sos pomidorowy;sos;sos pomidorowy;auchan;sos pomidorowy;Sos pomidorowy Winiary 34 g;33.0;g;8.7576;2.89;repair;100.0;;24.0
+sos pomidorowy;sos pomidorowy;;auchan;sos pomidorowy;Sos pomidorowy Winiary 34 g;33.0;g;8.7576;2.89;auto;100.0;shop_sku;24.0
+sos pomidorowy;sos pomidorowy do makaronu;;auchan;sos pomidorowy;Sos pomidorowy Winiary 34 g;33.0;g;8.7576;2.89;auto;100.0;shop_sku;24.0
+sos pomidorowy;sos pomidorowy do pizzy;;auchan;sos pomidorowy;Sos pomidorowy Winiary 34 g;33.0;g;8.7576;2.89;auto;100.0;shop_sku;24.0
+stewia;stewia;;auchan;stewia;Stevia słodzik pochodzenia naturalnego z inuliną Zielony listek 140 g;140.0;g;8.9214;12.49;auto;100.0;;
+stewia;stewia;;auchan;stewia;Stevia słodzik pochodzenia naturalnego z inuliną Zielony listek 140 g;140.0;g;8.9214;12.49;auto;100.0;shop_sku;
+surówka colesław;mieszanka coleslaw;surówka colesław łagodna;auchan;surówka colesław łagodna;Surówka colesław łagodna Auchan 300 g;300.0;g;1.1967;3.59;auto;100.0;;100.0
+surówka colesław;mieszanka do coleslaw;surówka colesław łagodna;auchan;surówka colesław łagodna;Surówka colesław łagodna Auchan 300 g;300.0;g;1.1967;3.59;repair;100.0;shop_sku;100.0
+surówka colesław;mieszanka do colesław;surówka colesław łagodna;auchan;surówka colesław łagodna;Surówka colesław łagodna Auchan 300 g;300.0;g;1.1967;3.59;repair;100.0;shop_sku;100.0
+surówka colesław;mieszanka kapusty i marchwi;surówka colesław łagodna;auchan;surówka colesław łagodna;Surówka colesław łagodna Auchan 300 g;300.0;g;1.1967;3.59;repair;100.0;shop_sku;100.0
+suszone daktyle bez pestek;suszone daktyle bez pestek;;auchan;daktyle suszone bez pestek;BIO Daktyle suszone bez pestek Auchan 175 g;175.0;g;4.5657;7.99;auto;100.0;;282.0
+suszone jabłka;suszone jabłka;;auchan;jabłka suszone;Jabłka suszone Kresto 35g;350.0;g;1.7086;5.98;auto;100.0;;243.0
+suszone jagody goji;suszone jagody goji;;auchan;jagody goji suszone;Jagody goji suszone Makar 1 kg;1000.0;g;7.07;70.7;auto;100.0;;349.0
+suszone żurawiny;suszone żurawiny;;auchan;żurawina suszona;Żurawina suszona Auchan 500 g;500.0;g;3.198;15.99;auto;87.5;;308.0
+suszone żurawiny;szałwia suszona;;auchan;żurawina suszona;Żurawina suszona Auchan 500 g;500.0;g;3.198;15.99;auto;85.7;shop_sku;308.0
+suszone żurawiny;żurawina suszona;;auchan;żurawina suszona;Żurawina suszona Auchan 500 g;500.0;g;3.198;15.99;auto;100.0;shop_sku;308.0
+syrop daktylowy;syrop daktylowy;;auchan;syrop;BIO Syrop daktylowy  BioLife 345 g;345.0;g;5.0406;17.39;auto;100.0;;300.0
+syrop klonowy;syrop klonowy;;auchan;syrop klonowy;BIO Syrop klonowy Auchan 250 g;250.0;g;7.996;19.99;auto;100.0;;260.0
+syrop z agawy;syrop z agawy;;auchan;syrop z agawy jasny;BIO syrop z agawy jasny NaturaVena 250 g;245.0;g;4.8898;11.98;auto;100.0;;310.0
+szalotka;szalotka;;auchan;szalotka;Szalotka Warzywa Auchan 250 g;250.0;g;2.596;6.49;auto;100.0;;72.0
+szczypiorek;szczypiorek;;auchan;szczypiorek;Szczypiorek Auchan sztuka;250.0;g;2.796;6.99;auto;100.0;;32.0
+szczypiorek;szczypiorek suszony;;auchan;szczypiorek;Szczypiorek Auchan sztuka;250.0;g;2.796;6.99;auto;100.0;shop_sku;32.0
+szparagi;szparagi;;auchan;szparagi;Szparagi Pewni Dobrego 400 g;400.0;g;3.7475;14.99;auto;100.0;;20.0
+szpinak;szpinak;;auchan;szpinak;Szpinak Warzywa Auchan 100 g;100.0;g;3.89;3.89;auto;100.0;;23.0
+szpinak;szpinak baby;;auchan;szpinak baby;BIO szpinak baby Fit & Easy 150 g;150.0;g;6.1267;9.19;auto;100.0;canonical_name;23.0
+szynka;szynka;;auchan;szynka;Szynka konserwowa premium Krakus 300 g;300.0;g;3.8267;11.48;auto;100.0;;145.0
+sól;sól;sól jodowana;auchan;sól jodowana;Sól jodowana Kotányi 1 kg;1000.0;g;0.548;5.48;repair;100.0;;31.0
+sól morska;sól morska;;auchan;sól morska jodowana;Sól morska jodowana Prymat 110 g;110.0;g;5.7091;6.28;auto;100.0;;
+tahini;tahini;;biedronka;tahini;Elios Tahini klasyczne 300 g;300.0;g;3.33;9.99;auto;100.0;;595.0
+tortilla;tortilla;;biedronka;tortilla wraps placki wieloziarniste;Pano Tortilla Wraps Placki wieloziarniste 306 g;306.0;g;1.6176;4.95;auto;100.0;;300.0
+truskawki;truskawka;;auchan;truskawka;100% truskawka z regionu Łowicza Pewni Dobrego 230 g;230.0;g;2.8217;6.49;auto;100.0;;32.0
+truskawki;truskawki;;auchan;truskawki;Truskawki Owoce  Auchan 250 g;250.0;g;4.396;10.99;auto;100.0;canonical_name;32.0
+truskawki;truskawki liofilizowane;;auchan;truskawki;Truskawki Owoce  Auchan 250 g;250.0;g;4.396;10.99;auto;100.0;canonical_name;32.0
+tuńczyk;tuńczyk;tuńczyk kawałki w sosie własnym;auchan;tuńczyk kawałki w sosie własnym;Tuńczyk kawałki w sosie własnym Auchan 170 g;120.0;g;5.1583;6.19;auto;100.0;;116.0
+twaróg;twaróg;;auchan;twaróg;Twaróg chudy Auchan 250 g;250.0;g;1.46;3.65;auto;100.0;;98.0
+twaróg;twaróg kremowy;;auchan;twaróg;Twaróg chudy Auchan 250 g;250.0;g;1.46;3.65;auto;100.0;shop_sku;98.0
+tymianek;tymianek;;auchan;tymianek;BIO Tymianek  Pewni Dobrego sztuka;100.0;g;9.49;9.49;auto;100.0;;101.0
+tymianek;tymianek suszony;;auchan;tymianek;BIO Tymianek  Pewni Dobrego sztuka;100.0;g;9.49;9.49;auto;100.0;shop_sku;101.0
+wiórki kokosowe;wiórki kokosowe;;biedronka;wiórki kokosowe;Bakello Wiórki kokosowe 200 g;200.0;g;2.495;4.99;auto;100.0;;660.0
+wiórki kokosowe;wiórki kokosowe niesłodzone;;biedronka;wiórki kokosowe;Bakello Wiórki kokosowe 200 g;200.0;g;2.495;4.99;auto;100.0;shop_sku;660.0
+wołowina;wołowina;wołowina;auchan;wołowina;Rosół wołowy Kucharek 120 g;120.0;g;3.2;3.84;auto;100.0;;250.0
+wołowina;wołowina na fajitas;;auchan;wołowina;Rosół wołowy Kucharek 120 g;120.0;g;3.2;3.84;auto;100.0;shop_sku;250.0
+wołowina;wołowina w kawałkach;;auchan;wołowina;Rosół wołowy Kucharek 120 g;120.0;g;3.2;3.84;auto;100.0;shop_sku;250.0
+wędzona papryka;wędzona papryka;;auchan;papryka;BIO  Papryka Palermo  Warzywa Auchan 180 g;180.0;g;7.2167;12.99;auto;100.0;;31.0
+wędzony łosoś;wędzony łosoś;;biedronka;łosoś;Marinero Łosoś Norweski wędzony plastry 150 g;150.0;g;11.9933;17.99;auto;100.0;;208.0
+wędzony łosoś;łosoś;;biedronka;łosoś;Marinero Łosoś Norweski wędzony plastry 150 g;150.0;g;11.9933;17.99;auto;100.0;shop_sku;208.0
+zamiennik jajka;zamiennik jajka;;auchan;zamiennik jajek w proszku veggs;Zamiennik jajek w proszku vEGGs 64 g;102.0;g;22.049;22.49;auto;93.3;;300.0
+ziele angielskie;ziele angielskie;;auchan;ziele angielskie;Ziele angielskie  Auchan 15 g;15.0;g;8.6;1.29;auto;100.0;;263.0
+zielona fasolka;zielona fasolka;;auchan;fasolka;BIO Fasolka Adzuki   EUREKO 400 g;400.0;g;4.4475;17.79;auto;100.0;;31.0
+zielone oliwki;zielone oliwki;;auchan;zielone oliwki nadziewane migdałami;Zielone oliwki nadziewane migdałami Auchan 100 g;100.0;g;6.39;6.39;auto;100.0;;150.0
+zioła;zioła;;auchan;zioła;Zioła Prowansalskie   Auchan 10 g;10.0;g;12.9;1.29;auto;100.0;;50.0
+zioła;świeże zioła;;auchan;zioła;Zioła Prowansalskie   Auchan 10 g;10.0;g;12.9;1.29;auto;100.0;shop_sku;50.0
+łopatka wieprzowa;łopatka wieprzowa;;auchan;łopatka;Łopatka bez kości Auchan na wagę ok. 1 kg;100.0;g;1.899;18.99;auto;100.0;;242.0
+śmietana;śmietana;;auchan;śmietana;Śmietana 12%  Auchan 330 g;330.0;g;0.903;2.98;auto;100.0;;198.0
+śmietana;śmietana 30%;;auchan;śmietana;Śmietana 12%  Auchan 330 g;330.0;g;0.903;2.98;auto;100.0;shop_sku;198.0
+śmietana;śmietana roślinna;;auchan;śmietana;Śmietana 12%  Auchan 330 g;330.0;g;0.903;2.98;auto;100.0;shop_sku;198.0
+śmietana;smietana;;auchan;smietana;Smietana 18% ekstra kremowa Zott 330 g;330.0;g;1.603;5.29;auto;100.0;canonical_name;198.0
+śmietanka 30%;śmietanka 30%;;auchan;śmietanka;Śmietanka UHT 18% Auchan 250 ml;250.0;ml;1.352;3.38;auto;100.0;;200.0
+śmietanka 30%;śmietanka kokosowa;;auchan;śmietanka;Śmietanka UHT 18% Auchan 250 ml;250.0;ml;1.352;3.38;auto;100.0;shop_sku;200.0
+żeberka wołowe;żeberka wołowe;żeberka;auchan;żeberka;Żeberka wędzone Mościbrody na wagę ok. 900 g;100.0;g;1.599;14.39;auto;100.0;;250.0
+żurawina;żurawina;;auchan;żurawina;Żurawina Pewni Dobrego 200 g;200.0;g;4.49;8.98;auto;100.0;;46.0
+żółta papryka;żółta papryka;;auchan;papryka żółta;Papryka żółta Warzywa Auchan na wagę od 500 g;100.0;g;1.698;8.49;auto;100.0;;27.0

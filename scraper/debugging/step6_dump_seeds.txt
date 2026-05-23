@@ -1,18 +1,17 @@
-# Krok 6: dump seeds
-# Wygenerowano: 2026-05-23 17:10:44
+# Step 6: dump seeds
+# Generated: 2026-05-23 20:00:28
 
 ======================================================================
-  Statystyki seed danych
+  Seed data stats
 ======================================================================
-  Products seed EN                         366
+  Products seed EN                         365
+  Products seed PL                         443
   Recipes seed EN                          54
-  Produkty z ceną > 0                      366
-  Produkty z makro (kcal)                  357
-  Przepisy z URL                           54
+  Recipes seed PL                          66
 
 
 ======================================================================
-  Products seed EN (name | price_per_100 | kcal | protein | fat | carbs)
+  Products seed EN
 ======================================================================
   almond                              | price=0.845    | kcal=579.0  prot=21.2  fat=49.9  carb=21.6
   andouille sausage                   | price=0.5595   | kcal=310.0  prot=16.0  fat=26.0  carb=2.0
@@ -117,7 +116,6 @@
   coconut milk powder                 | price=0.1875   | kcal=660.0  prot=10.0  fat=60.0  carb=25.0
   coconut oil                         | price=0.1875   | kcal=862.0  prot=?     fat=100.0 carb=?
   coconut oil spray                   | price=0.1875   | kcal=862.0  prot=?     fat=100.0 carb=?
-  coconut wrap                        | price=0.199    | kcal=350.0  prot=5.0   fat=20.0  carb=40.0
   cod                                 | price=1.0528   | kcal=82.0   prot=17.8  fat=0.7   carb=?
   coleslaw mix                        | price=0.2633   | kcal=23.0   prot=1.3   fat=0.1   carb=5.0
   coriander                           | price=1.6667   | kcal=23.0   prot=2.1   fat=0.5   carb=3.7
@@ -174,8 +172,8 @@
   green beans                         | price=0.3864   | kcal=31.0   prot=1.8   fat=0.2   carb=7.1
   green bell pepper                   | price=0.4375   | kcal=20.0   prot=0.9   fat=0.2   carb=4.6
   green cabbage                       | price=0.0989   | kcal=25.0   prot=1.3   fat=0.1   carb=5.8
-  green onion                         | price=0.6846   | kcal=?      prot=?     fat=?     carb=?
-  green onions                        | price=0.6846   | kcal=?      prot=?     fat=?     carb=?
+  green onion                         | price=0.6846   | kcal=32.0   prot=1.8   fat=0.2   carb=7.3
+  green onions                        | price=0.6846   | kcal=32.0   prot=1.8   fat=0.2   carb=7.3
   green peas                          | price=0.276    | kcal=81.0   prot=5.4   fat=0.4   carb=14.5
   ground beef                         | price=1.0843   | kcal=215.0  prot=18.6  fat=15.0  carb=?
   ground chicken                      | price=0.518    | kcal=143.0  prot=17.4  fat=8.1   carb=?
@@ -313,8 +311,8 @@
   salmon                              | price=1.14     | kcal=208.0  prot=20.4  fat=13.4  carb=?
   salt                                | price=1.6273   | kcal=?      prot=?     fat=?     carb=?
   sausage                             | price=0.4306   | kcal=299.0  prot=15.4  fat=25.7  carb=1.9
-  scallion                            | price=0.6846   | kcal=?      prot=?     fat=?     carb=?
-  scallions                           | price=0.6846   | kcal=?      prot=?     fat=?     carb=?
+  scallion                            | price=0.6846   | kcal=32.0   prot=1.8   fat=0.2   carb=7.3
+  scallions                           | price=0.6846   | kcal=32.0   prot=1.8   fat=0.2   carb=7.3
   sea salt                            | price=1.592    | kcal=?      prot=?     fat=?     carb=?
   semi sweet chocolate chips          | price=1.19     | kcal=476.0  prot=4.2   fat=29.7  carb=63.9
   semi-sweet chocolate chips          | price=1.19     | kcal=476.0  prot=4.2   fat=29.7  carb=63.9
@@ -382,59 +380,576 @@
   zucchini                            | price=0.278    | kcal=17.0   prot=1.2   fat=0.3   carb=3.1
 
 ======================================================================
-  Recipes seed EN (name | n_ingredients)
+  Products seed PL
 ======================================================================
-  Crockpot Breakfast Casserole                            | 9 sk.
-  Breakfast Beef Sausage                                  | 12 sk.
-  Turmeric Scrambled Eggs For Breakfast                   | 8 sk.
-  Sheet Pan Breakfast Hash And Eggs                       | 13 sk.
-  Breakfast Pro Power Bowl                                | 8 sk.
-  Breakfast Bowls                                         | 5 sk.
-  Baked Breakfast Quinoa And Spinach Bites                | 8 sk.
-  Steak, Sweet Potato and Apple Hash                      | 8 sk.
-  Whole30 Breakfast Snack Boxes Meal Prep                 | 4 sk.
-  Sheet Pan Sweet Potato Breakfast Hash                   | 12 sk.
-  Bacon Egg Bites                                         | 7 sk.
-  Smoked Salmon & Lentil Breakfast Salad                  | 12 sk.
-  Whole30 Zucchini & Sweet Potato Hashbrown Meal Prep     | 8 sk.
-  Egg Sweet Potato And Sausage Breakfast Meal Prep        | 7 sk.
-  Lemon Herb Chicken and Potato Sheet Pan                 | 11 sk.
-  The Perfect Air Fryer Turkey Breast                     | 7 sk.
-  Cauliflower Rice Salmon Poke Bowl Meal Prep             | 8 sk.
-  My Favorite Pesto Beef Kabob Meal Prep                  | 8 sk.
-  Vegan Chopped Chickpea Greek Salad Meal Prep            | 15 sk.
-  Chimichurri Steak Meal Prep - Two Ways (Bowls and Tacos) | 16 sk.
-  Avocado And Mango Sushi Roll                            | 6 sk.
-  Chicken Apple Sausage and Veggies                       | 14 sk.
-  Bbq Pulled Chicken Stuffed Sweet Potatoes               | 11 sk.
-  Sweet 'N Spicy Jalapeno Sausage Fried Rice              | 13 sk.
-  Low-Carb Lettuce Wrap Sliders                           | 8 sk.
-  Gazpacho Meal Prep                                      | 10 sk.
-  Greek Salad                                             | 8 sk.
-  Beef Patties-Sweet Corn Rice and Sautéed Veggies        | 12 sk.
-  Mozzarella Stuffed Meatballs                            | 10 sk.
-  Grilled Steak and Garlic Roasted Potato Meal Prep       | 8 sk.
-  Fruity Quinoa And Grilled Salmon                        | 10 sk.
-  Sheet Pan Bruschetta Chicken                            | 16 sk.
-  Chicken Quinoa Salad                                    | 8 sk.
-  Slow Cooker Lemon Garlic Chicken Meal Prep              | 8 sk.
-  Sun Dried Tomato, Mozzarella And Basil Stuffed Chicken  | 9 sk.
-  Red Pepper and Parmesan Quinoa Pasta                    | 12 sk.
-  Cilantro Lime Rice                                      | 6 sk.
-  Turkey Wrap                                             | 5 sk.
-  Broccoli Cheddar Stuffed Chicken Breast & Rice Pilaf    | 20 sk.
-  Pulled Pork Lettuce Wrap Meal Prep                      | 10 sk.
-  Baked Salmon with Blackberry Quinoa Salad               | 12 sk.
-  One Pan Sausage And Veggie Meal Prep                    | 8 sk.
-  Sausage Grill Packet Meal Prep                          | 10 sk.
-  Lemon-Pepper Chicken Drumstick Recipe                   | 4 sk.
-  Cauliflower Tabouli and Salmon Meal Prep                | 15 sk.
-  Moroccan Turmeric Chicken Stew                          | 16 sk.
-  Sheet Pan Chicken And Veggies                           | 10 sk.
-  Hawaiian Chicken Teriyaki Skewer Meal Prep              | 12 sk.
-  Keto Cashew Cheesecake Bites                            | 4 sk.
-  Vegan Dark Chocolate Cinnamon Roasted Chickpea Bark     | 4 sk.
-  Peanut Butter Protein Squares                           | 5 sk.
-  Turkey Bacon Ranch Pinwheel Snack Boxes                 | 7 sk.
-  Air Fryer Rosemary Sweet Potato Wedges with Garlic Aioli | 10 sk.
-  Air-Fried Chickpeas                                     | 5 sk.
+  ananas                              | price=0.7987   | kcal=50.0   prot=0.5   fat=0.1   carb=13.1
+  arbuz                               | price=0.799    | kcal=30.0   prot=0.6   fat=0.2   carb=7.6
+  awokado                             | price=6.99     | kcal=160.0  prot=2.0   fat=14.7  carb=8.5
+  bakłażan                            | price=1.998    | kcal=25.0   prot=1.0   fat=0.2   carb=5.9
+  banan                               | price=0.699    | kcal=89.0   prot=1.1   fat=0.3   carb=22.8
+  bazylia                             | price=2.796    | kcal=44.0   prot=3.2   fat=0.6   carb=4.3
+  bazylia suszona                     | price=12.9     | kcal=233.0  prot=22.8  fat=4.1   carb=47.8
+  bazylia tajska                      | price=2.796    | kcal=44.0   prot=4.9   fat=0.6   carb=6.1
+  biała fasola                        | price=1.2458   | kcal=139.0  prot=9.7   fat=0.4   carb=25.1
+  białko jaja                         | price=1.599    | kcal=143.0  prot=12.6  fat=9.5   carb=0.7
+  boczek                              | price=2.098    | kcal=541.0  prot=37.0  fat=42.0  carb=1.3
+  borówka                             | price=5.196    | kcal=57.0   prot=0.7   fat=0.3   carb=14.5
+  borówki                             | price=5.516    | kcal=57.0   prot=0.7   fat=0.3   carb=14.5
+  brokuly                             | price=2.3067   | kcal=34.0   prot=2.8   fat=0.4   carb=6.6
+  brokuł                              | price=1.198    | kcal=34.0   prot=2.8   fat=0.4   carb=6.6
+  brokuły                             | price=2.3067   | kcal=34.0   prot=2.8   fat=0.4   carb=6.6
+  brukselka                           | price=1.2778   | kcal=41.0   prot=3.6   fat=0.5   carb=7.9
+  brzoskwinia                         | price=2.0      | kcal=39.0   prot=0.9   fat=0.3   carb=9.5
+  brązowy cukier                      | price=0.938    | kcal=387.0  prot=?     fat=?     carb=100.0
+  brązowy ryż                         | price=0.8225   | kcal=111.0  prot=2.6   fat=0.9   carb=23.0
+  bulion drobiowy                     | price=3.49     | kcal=4.0    prot=0.6   fat=0.1   carb=0.4
+  bulion warzywny                     | price=4.8063   | kcal=4.0    prot=0.2   fat=0.1   carb=0.7
+  bulion wolowy                       | price=4.8063   | kcal=4.0    prot=0.3   fat=0.1   carb=0.4
+  bulion wołowy                       | price=4.8063   | kcal=7.0    prot=1.0   fat=0.2   carb=0.4
+  burak                               | price=0.6488   | kcal=43.0   prot=1.6   fat=0.2   carb=9.6
+  buraki                              | price=0.299    | kcal=43.0   prot=1.6   fat=0.2   carb=9.6
+  bułka                               | price=1.2769   | kcal=272.0  prot=9.5   fat=3.3   carb=51.0
+  bułka śniadaniowa                   | price=1.6875   | kcal=272.0  prot=9.5   fat=3.3   carb=51.0
+  cebula                              | price=0.399    | kcal=40.0   prot=1.1   fat=0.1   carb=9.3
+  cebula biała                        | price=0.799    | kcal=40.0   prot=1.1   fat=0.1   carb=9.3
+  cebula czerwona                     | price=0.459    | kcal=40.0   prot=1.1   fat=0.1   carb=9.3
+  cebula granulowana                  | price=0.399    | kcal=40.0   prot=1.1   fat=0.1   carb=9.3
+  cebula słodka                       | price=1.9983   | kcal=40.0   prot=1.1   fat=0.1   carb=9.3
+  cebula w proszku                    | price=0.399    | kcal=40.0   prot=1.1   fat=0.1   carb=9.3
+  cebula żółta                        | price=0.499    | kcal=40.0   prot=1.1   fat=0.1   carb=9.3
+  chili                               | price=21.8286  | kcal=282.0  prot=12.0  fat=14.0  carb=49.0
+  chleb                               | price=1.3967   | kcal=265.0  prot=9.0   fat=3.2   carb=49.0
+  chorizo sojowe                      | price=6.7821   | kcal=455.0  prot=24.0  fat=38.0  carb=2.0
+  ciecierzyca                         | price=1.2375   | kcal=139.0  prot=8.9   fat=2.6   carb=22.5
+  cukier                              | price=1.2653   | kcal=387.0  prot=?     fat=?     carb=100.0
+  cukier brązowy                      | price=1.2653   | kcal=387.0  prot=?     fat=?     carb=100.0
+  cukier kokosowy                     | price=1.2653   | kcal=387.0  prot=?     fat=?     carb=100.0
+  cukier palmowy                      | price=1.2653   | kcal=387.0  prot=?     fat=?     carb=100.0
+  cukier puder                        | price=1.498    | kcal=389.0  prot=?     fat=?     carb=99.8
+  cukier trzcinowy                    | price=0.938    | kcal=387.0  prot=?     fat=?     carb=100.0
+  cukinia                             | price=1.3      | kcal=17.0   prot=1.2   fat=0.3   carb=3.1
+  curry                               | price=12.45    | kcal=325.0  prot=14.0  fat=14.0  carb=55.0
+  curry w proszku                     | price=12.45    | kcal=325.0  prot=14.0  fat=14.0  carb=55.0
+  cynamon                             | price=8.6      | kcal=247.0  prot=3.9   fat=1.2   carb=80.6
+  cytryna                             | price=0.998    | kcal=29.0   prot=1.1   fat=0.3   carb=9.3
+  czarna fasola                       | price=1.4083   | kcal=132.0  prot=8.9   fat=0.5   carb=23.7
+  czarny sezam                        | price=2.85     | kcal=573.0  prot=17.7  fat=49.7  carb=23.4
+  czekolada                           | price=7.995    | kcal=546.0  prot=4.9   fat=31.3  carb=59.4
+  czerwona cebula                     | price=0.459    | kcal=40.0   prot=1.1   fat=0.1   carb=9.3
+  czerwona kapusta                    | price=2.54     | kcal=31.0   prot=1.4   fat=0.2   carb=7.4
+  czerwona papryka                    | price=1.9      | kcal=31.0   prot=1.0   fat=0.3   carb=6.0
+  czerwone winogrona                  | price=1.999    | kcal=69.0   prot=0.7   fat=0.2   carb=18.1
+  czerwony ziemniak                   | price=0.3995   | kcal=70.0   prot=1.9   fat=0.1   carb=15.9
+  czosnek                             | price=3.196    | kcal=149.0  prot=6.4   fat=0.5   carb=33.1
+  czosnek granulowany                 | price=3.8      | kcal=331.0  prot=16.6  fat=0.7   carb=72.7
+  czosnek w proszku                   | price=3.196    | kcal=331.0  prot=16.6  fat=0.7   carb=72.7
+  daktyl                              | price=6.438    | kcal=282.0  prot=2.5   fat=0.4   carb=75.0
+  daktyle                             | price=6.438    | kcal=282.0  prot=2.5   fat=0.4   carb=75.0
+  daktyle medjool                     | price=6.438    | kcal=282.0  prot=2.5   fat=0.4   carb=75.0
+  dorsz                               | price=9.99     | kcal=82.0   prot=17.8  fat=0.7   carb=?
+  drożdże                             | price=1.48     | kcal=105.0  prot=14.3  fat=1.9   carb=14.3
+  drożdże suszone                     | price=12.375   | kcal=325.0  prot=40.0  fat=5.0   carb=41.0
+  dynia                               | price=0.6987   | kcal=26.0   prot=1.0   fat=0.1   carb=6.5
+  dynia kabocha                       | price=0.6987   | kcal=26.0   prot=1.0   fat=0.1   carb=6.5
+  dynia letnia                        | price=0.6987   | kcal=26.0   prot=1.0   fat=0.1   carb=6.5
+  dynia piżmowa                       | price=0.6987   | kcal=45.0   prot=1.0   fat=0.1   carb=11.7
+  dynia spaghetti                     | price=0.6987   | kcal=26.0   prot=1.0   fat=0.1   carb=6.5
+  dynia żółta                         | price=0.6987   | kcal=26.0   prot=1.0   fat=0.1   carb=6.5
+  dziki ryż                           | price=0.999    | kcal=130.0  prot=2.7   fat=0.3   carb=28.2
+  dżem morelowy                       | price=2.4571   | kcal=120.0  prot=0.5   fat=0.1   carb=29.0
+  erytrytol                           | price=3.22     | kcal=0.2    prot=?     fat=?     carb=1.0
+  erytrytol pudrowy                   | price=3.22     | kcal=0.2    prot=?     fat=?     carb=1.0
+  erytrytol w proszku                 | price=3.22     | kcal=0.2    prot=?     fat=?     carb=1.0
+  fasola cannellini                   | price=2.1975   | kcal=132.0  prot=8.7   fat=0.5   carb=23.7
+  fasola czarna                       | price=1.4083   | kcal=132.0  prot=8.9   fat=0.5   carb=23.7
+  fasola czerwona                     | price=1.2042   | kcal=337.0  prot=22.5  fat=1.1   carb=61.3
+  fasola pinto                        | price=2.1975   | kcal=132.0  prot=8.7   fat=0.5   carb=23.7
+  fasola refried                      | price=2.1975   | kcal=132.0  prot=8.7   fat=0.5   carb=23.7
+  fasola smażona                      | price=2.1975   | kcal=132.0  prot=8.7   fat=0.5   carb=23.7
+  fasolka szparagowa                  | price=3.3395   | kcal=31.0   prot=1.8   fat=0.2   carb=7.1
+  figi                                | price=4.5      | kcal=249.0  prot=3.3   fat=0.9   carb=63.9
+  filet z indyka                      | price=2.4967   | kcal=135.0  prot=29.3  fat=1.5   carb=?
+  filet z kurczaka                    | price=2.48     | kcal=165.0  prot=31.0  fat=3.6   carb=?
+  fioletowe ziemniaki                 | price=0.2495   | kcal=77.0   prot=2.0   fat=0.1   carb=17.5
+  garam masala                        | price=14.4     | kcal=307.0  prot=10.9  fat=12.0  carb=55.0
+  gałka muszkatołowa                  | price=15.8     | kcal=525.0  prot=5.8   fat=36.3  carb=49.3
+  goździki                            | price=15.6     | kcal=274.0  prot=6.0   fat=13.0  carb=65.0
+  goździki mielone                    | price=15.6     | kcal=274.0  prot=6.0   fat=13.0  carb=65.0
+  granat                              | price=2.0      | kcal=83.0   prot=1.7   fat=1.2   carb=18.7
+  granola                             | price=3.9533   | kcal=471.0  prot=10.5  fat=20.9  carb=64.4
+  groszek                             | price=1.1042   | kcal=81.0   prot=5.4   fat=0.4   carb=14.5
+  groszek cukrowy                     | price=2.2778   | kcal=42.0   prot=2.8   fat=0.2   carb=7.6
+  groszek zielony                     | price=1.82     | kcal=81.0   prot=5.4   fat=0.4   carb=14.5
+  gruszka                             | price=0.699    | kcal=57.0   prot=0.4   fat=0.1   carb=15.2
+  grzyby                              | price=6.49     | kcal=22.0   prot=3.1   fat=0.3   carb=3.3
+  grzyby portobello                   | price=6.49     | kcal=22.0   prot=3.1   fat=0.3   carb=3.3
+  grzyby shiitake                     | price=23.9333  | kcal=34.0   prot=2.2   fat=0.5   carb=6.8
+  halloumi                            | price=5.24     | kcal=321.0  prot=21.6  fat=25.0  carb=2.0
+  harissa                             | price=11.7     | kcal=82.0   prot=2.0   fat=4.0   carb=10.0
+  imbir                               | price=2.189    | kcal=80.0   prot=1.8   fat=0.8   carb=17.8
+  imbir mielony                       | price=10.5333  | kcal=335.0  prot=9.0   fat=4.2   carb=71.6
+  indyk                               | price=2.4967   | kcal=135.0  prot=22.6  fat=4.6   carb=?
+  jabłko                              | price=0.3993   | kcal=52.0   prot=0.3   fat=0.2   carb=13.8
+  jagody                              | price=5.9571   | kcal=57.0   prot=0.7   fat=0.3   carb=14.5
+  jajka                               | price=1.599    | kcal=143.0  prot=12.6  fat=9.5   carb=0.7
+  jarmuż                              | price=3.495    | kcal=49.0   prot=4.3   fat=0.9   carb=8.8
+  jeżyna                              | price=3.2829   | kcal=43.0   prot=1.4   fat=0.5   carb=9.6
+  jeżyny                              | price=12.792   | kcal=43.0   prot=1.4   fat=0.5   carb=9.6
+  jogurt grecki                       | price=0.6225   | kcal=97.0   prot=9.0   fat=5.0   carb=3.6
+  jogurt naturalny                    | price=0.6225   | kcal=61.0   prot=3.5   fat=3.3   carb=4.7
+  jogurt roslinny                     | price=0.6225   | kcal=61.0   prot=3.5   fat=3.3   carb=4.7
+  jogurt roślinny                     | price=0.6225   | kcal=61.0   prot=3.5   fat=3.3   carb=4.7
+  kakao                               | price=5.495    | kcal=228.0  prot=19.6  fat=13.7  carb=57.9
+  kalafior                            | price=0.9987   | kcal=25.0   prot=1.9   fat=0.3   carb=5.0
+  kalafior ryżowy                     | price=0.9987   | kcal=25.0   prot=1.9   fat=0.3   carb=5.0
+  kapusta                             | price=7.4938   | kcal=25.0   prot=1.3   fat=0.1   carb=5.8
+  kapusta biała                       | price=0.399    | kcal=25.0   prot=1.3   fat=0.1   carb=5.8
+  kapusta czerwona                    | price=2.54     | kcal=31.0   prot=1.4   fat=0.2   carb=7.4
+  kapusta fioletowa                   | price=7.4938   | kcal=25.0   prot=1.3   fat=0.1   carb=5.8
+  kapusta i marchew                   | price=0.4      | kcal=41.0   prot=0.9   fat=0.2   carb=9.6
+  kapusta pekińska                    | price=0.449    | kcal=12.0   prot=1.1   fat=0.2   carb=2.2
+  karkówka wołowa                     | price=3.599    | kcal=288.0  prot=26.0  fat=20.0  carb=?
+  kawa                                | price=2.756    | kcal=40.0   prot=1.5   fat=1.0   carb=6.0
+  ketchup                             | price=1.4333   | kcal=101.0  prot=1.0   fat=0.1   carb=27.4
+  kiełbasa                            | price=3.4964   | kcal=299.0  prot=15.4  fat=25.7  carb=1.9
+  kiełbasa andouille                  | price=3.4964   | kcal=310.0  prot=16.0  fat=26.0  carb=2.0
+  kiełbasa wegetariańska              | price=3.4964   | kcal=200.0  prot=18.0  fat=10.0  carb=10.0
+  kiełbasa wieprzowa śniadaniowa      | price=1.1978   | kcal=100.0  prot=2.0   fat=5.0   carb=12.0
+  kiełbasa wędzona                    | price=3.4964   | kcal=299.0  prot=15.4  fat=25.7  carb=1.9
+  kiełbasa włoska                     | price=3.4964   | kcal=299.0  prot=15.4  fat=25.7  carb=1.9
+  kiełbasa z indyka                   | price=3.4964   | kcal=299.0  prot=15.4  fat=25.7  carb=1.9
+  kiełbasa z kurczaka                 | price=3.4964   | kcal=299.0  prot=15.4  fat=25.7  carb=1.9
+  kiełbasa śniadaniowa                | price=1.1978   | kcal=100.0  prot=2.0   fat=5.0   carb=12.0
+  kiełbaski śniadaniowe               | price=1.4407   | kcal=100.0  prot=2.0   fat=5.0   carb=12.0
+  kiełki fasoli                       | price=5.6514   | kcal=30.0   prot=3.0   fat=0.2   carb=5.9
+  kimchi                              | price=3.5967   | kcal=24.0   prot=1.1   fat=0.2   carb=4.5
+  kiwi                                | price=1.99     | kcal=61.0   prot=1.1   fat=0.5   carb=14.7
+  kmin rzymski                        | price=15.6     | kcal=375.0  prot=17.8  fat=22.3  carb=44.2
+  kmin rzymski mielony                | price=15.6     | kcal=375.0  prot=17.8  fat=22.3  carb=44.2
+  kokos                               | price=1.029    | kcal=354.0  prot=3.3   fat=33.5  carb=15.2
+  kolendra                            | price=2.796    | kcal=23.0   prot=2.1   fat=0.5   carb=3.7
+  kolendra mielona                    | price=2.796    | kcal=23.0   prot=2.1   fat=0.5   carb=3.7
+  komosa ryzowa                       | price=3.796    | kcal=120.0  prot=4.4   fat=1.9   carb=21.3
+  komosa ryżowa                       | price=3.796    | kcal=120.0  prot=4.4   fat=1.9   carb=21.3
+  koncentrat pomidorowy               | price=1.8158   | kcal=82.0   prot=4.3   fat=0.5   carb=18.9
+  koperek                             | price=41.5     | kcal=43.0   prot=3.5   fat=1.1   carb=7.0
+  krakersy                            | price=2.1      | kcal=480.0  prot=8.0   fat=20.0  carb=68.0
+  krewetki                            | price=8.7475   | kcal=85.0   prot=20.3  fat=0.5   carb=?
+  krojone pomidory                    | price=2.598    | kcal=18.0   prot=0.9   fat=0.2   carb=3.9
+  kukurydza                           | price=1.4955   | kcal=86.0   prot=3.3   fat=1.4   carb=18.7
+  kukurydza mini                      | price=1.4955   | kcal=86.0   prot=3.3   fat=1.4   carb=18.7
+  kukurydza słodka                    | price=2.1727   | kcal=86.0   prot=3.3   fat=1.4   carb=19.0
+  kur-kuma                            | price=5.179    | kcal=354.0  prot=7.8   fat=9.9   carb=64.9
+  kurczak                             | price=2.48     | kcal=239.0  prot=27.3  fat=13.6  carb=?
+  kurczak fajita                      | price=0.9983   | kcal=239.0  prot=27.3  fat=13.6  carb=?
+  kurkuma                             | price=5.179    | kcal=354.0  prot=7.8   fat=9.9   carb=64.9
+  limonka                             | price=1.499    | kcal=30.0   prot=0.7   fat=0.2   carb=10.5
+  liofilizowane truskawki             | price=42.2     | kcal=396.0  prot=4.0   fat=3.0   carb=84.0
+  majonez                             | price=2.4967   | kcal=717.0  prot=0.9   fat=79.0  carb=0.6
+  mak                                 | price=2.298    | kcal=525.0  prot=18.0  fat=41.6  carb=28.1
+  makaron                             | price=0.93     | kcal=131.0  prot=5.0   fat=1.1   carb=25.0
+  makaron angel hair                  | price=0.93     | kcal=131.0  prot=5.0   fat=1.1   carb=25.0
+  makaron bezglutenowy                | price=4.156    | kcal=350.0  prot=5.0   fat=1.0   carb=78.0
+  makaron cavatappi                   | price=0.838    | kcal=131.0  prot=5.0   fat=1.1   carb=25.0
+  makaron fusilli z ciecierzycy       | price=0.93     | kcal=357.0  prot=19.0  fat=6.0   carb=63.0
+  makaron jajeczny                    | price=3.796    | kcal=138.0  prot=4.5   fat=2.1   carb=25.2
+  makaron kokardki                    | price=0.93     | kcal=131.0  prot=5.0   fat=1.1   carb=25.0
+  makaron orzo                        | price=1.256    | kcal=131.0  prot=5.0   fat=1.1   carb=25.0
+  makaron palmini                     | price=0.93     | kcal=131.0  prot=5.0   fat=1.1   carb=25.0
+  makaron penne                       | price=1.196    | kcal=357.0  prot=12.5  fat=1.5   carb=71.0
+  makaron quinoa                      | price=0.93     | kcal=131.0  prot=5.0   fat=1.1   carb=25.0
+  makaron ramen                       | price=4.156    | kcal=138.0  prot=4.5   fat=5.0   carb=19.5
+  makaron rotini                      | price=0.93     | kcal=131.0  prot=5.0   fat=1.1   carb=25.0
+  makaron ryżowy                      | price=3.07     | kcal=109.0  prot=1.8   fat=0.2   carb=24.9
+  makaron ryżowy brązowy              | price=3.07     | kcal=109.0  prot=1.8   fat=0.2   carb=24.9
+  makaron soba                        | price=2.5967   | kcal=99.0   prot=5.1   fat=0.1   carb=21.4
+  makaron z ciecierzycy               | price=2.472    | kcal=119.0  prot=7.0   fat=1.5   carb=21.0
+  makaron z cukinii                   | price=0.93     | kcal=131.0  prot=5.0   fat=1.1   carb=25.0
+  makaron z serem                     | price=0.93     | kcal=131.0  prot=5.0   fat=1.1   carb=25.0
+  makaron łokieć                      | price=0.93     | kcal=131.0  prot=5.0   fat=1.1   carb=25.0
+  maliny                              | price=8.312    | kcal=52.0   prot=1.2   fat=0.7   carb=11.9
+  mandarynka                          | price=1.0      | kcal=53.0   prot=0.8   fat=0.3   carb=13.3
+  mango                               | price=5.99     | kcal=60.0   prot=0.8   fat=0.4   carb=15.0
+  marchew                             | price=0.4      | kcal=41.0   prot=0.9   fat=0.2   carb=9.6
+  marmolada pomarańczowa              | price=1.8028   | kcal=246.0  prot=0.3   fat=?     carb=60.8
+  masło                               | price=3.445    | kcal=717.0  prot=0.9   fat=81.1  carb=0.1
+  masło kokosowe                      | price=3.445    | kcal=717.0  prot=0.9   fat=81.1  carb=0.1
+  masło migdałowe                     | price=3.445    | kcal=717.0  prot=0.9   fat=81.1  carb=0.1
+  masło orzechowe                     | price=2.2212   | kcal=588.0  prot=25.1  fat=50.2  carb=20.0
+  masło roślinne                      | price=3.445    | kcal=717.0  prot=0.9   fat=81.1  carb=0.1
+  maślanka w proszku                  | price=0.398    | kcal=40.0   prot=3.3   fat=0.9   carb=4.8
+  melasa                              | price=4.9974   | kcal=290.0  prot=?     fat=?     carb=72.0
+  melon                               | price=1.2992   | kcal=34.0   prot=0.8   fat=0.2   carb=8.2
+  mielona kiełbasa                    | price=3.4964   | kcal=332.0  prot=14.0  fat=30.0  carb=1.0
+  mielona wieprzowina                 | price=3.2475   | kcal=263.0  prot=16.9  fat=21.2  carb=?
+  mielona woowina                     | price=5.7475   | kcal=215.0  prot=18.6  fat=15.0  carb=?
+  mielona wołowina                    | price=5.7475   | kcal=215.0  prot=18.6  fat=15.0  carb=?
+  mielone siemię lniane               | price=0.99     | kcal=534.0  prot=18.3  fat=42.2  carb=28.9
+  mielony indyk                       | price=1.59     | kcal=135.0  prot=22.6  fat=4.6   carb=?
+  mielony kurczak                     | price=3.6475   | kcal=143.0  prot=17.4  fat=8.1   carb=?
+  mieszanka coleslaw                  | price=1.1967   | kcal=100.0  prot=1.0   fat=7.0   carb=9.0
+  mieszanka do coleslaw               | price=15.7267  | kcal=?      prot=?     fat=?     carb=?
+  mieszanka do colesław               | price=15.7267  | kcal=23.0   prot=1.3   fat=0.1   carb=5.0
+  mieszanka do colesława              | price=15.7267  | kcal=?      prot=?     fat=?     carb=?
+  mieszanka kapusty i marchwi         | price=15.7267  | kcal=?      prot=?     fat=?     carb=?
+  mieszanka owoców leśnych            | price=15.7267  | kcal=?      prot=?     fat=?     carb=?
+  mieszanka sałat                     | price=4.075    | kcal=17.0   prot=1.5   fat=0.3   carb=3.0
+  mieszanka suszonych owoców          | price=3.9      | kcal=250.0  prot=3.0   fat=0.5   carb=60.0
+  mieszanka warzyw                    | price=3.5308   | kcal=50.0   prot=2.0   fat=0.5   carb=10.0
+  migdał                              | price=4.798    | kcal=579.0  prot=21.2  fat=49.9  carb=21.6
+  migdały                             | price=4.798    | kcal=579.0  prot=21.2  fat=49.9  carb=21.6
+  migdały w płatkach                  | price=4.798    | kcal=579.0  prot=21.2  fat=49.9  carb=21.6
+  miód                                | price=2.749    | kcal=304.0  prot=0.3   fat=?     carb=82.4
+  mięta                               | price=7.29     | kcal=70.0   prot=3.8   fat=0.9   carb=14.9
+  mleko                               | price=0.328    | kcal=61.0   prot=3.2   fat=3.3   carb=4.8
+  mleko kokosowe                      | price=1.57     | kcal=230.0  prot=2.3   fat=23.8  carb=5.5
+  mleko kokosowe w proszku            | price=1.57     | kcal=660.0  prot=10.0  fat=60.0  carb=25.0
+  mleko migdałowe                     | price=0.328    | kcal=61.0   prot=3.2   fat=3.3   carb=4.8
+  mleko owsiane                       | price=0.328    | kcal=61.0   prot=3.2   fat=3.3   carb=4.8
+  mleko roślinne                      | price=0.328    | kcal=61.0   prot=3.2   fat=3.3   carb=4.8
+  morele suszone                      | price=5.495    | kcal=241.0  prot=3.4   fat=0.5   carb=62.6
+  mozzarella                          | price=6.196    | kcal=280.0  prot=22.0  fat=21.0  carb=2.2
+  mus jabłkowy                        | price=1.1129   | kcal=68.0   prot=0.2   fat=0.1   carb=17.9
+  musztarda                           | price=1.9946   | kcal=66.0   prot=3.7   fat=3.3   carb=6.0
+  musztarda dijon                     | price=1.9946   | kcal=66.0   prot=4.4   fat=3.3   carb=5.0
+  musztarda dyniowa                   | price=1.9946   | kcal=66.0   prot=3.7   fat=3.3   carb=6.0
+  musztarda miodowa                   | price=1.9946   | kcal=160.0  prot=2.0   fat=6.0   carb=25.0
+  musztarda ostra                     | price=1.9946   | kcal=66.0   prot=3.7   fat=3.3   carb=6.0
+  musztarda żółta                     | price=1.9946   | kcal=66.0   prot=3.7   fat=3.3   carb=6.0
+  mąka                                | price=0.819    | kcal=364.0  prot=10.3  fat=1.0   carb=76.3
+  mąka bezglutenowa                   | price=1.358    | kcal=366.0  prot=5.9   fat=1.4   carb=80.1
+  mąka bezglutenowa uniwersalna       | price=3.318    | kcal=357.0  prot=5.0   fat=1.0   carb=80.0
+  mąka maranta                        | price=0.819    | kcal=364.0  prot=10.3  fat=1.0   carb=76.3
+  mąka migdałowa                      | price=16.59    | kcal=579.0  prot=21.4  fat=49.9  carb=21.6
+  mąka owsiana                        | price=0.719    | kcal=404.0  prot=14.7  fat=6.9   carb=65.7
+  młode ziemniaki                     | price=0.2495   | kcal=77.0   prot=2.0   fat=0.1   carb=17.5
+  nasiona chia                        | price=5.99     | kcal=486.0  prot=16.5  fat=30.7  carb=42.1
+  nasiona konopi                      | price=11.495   | kcal=553.0  prot=31.6  fat=48.8  carb=8.7
+  nasiona sezamu                      | price=6.59     | kcal=573.0  prot=17.7  fat=49.7  carb=23.5
+  natka pietruszki                    | price=16.125   | kcal=36.0   prot=3.0   fat=0.8   carb=6.3
+  nerkowce                            | price=11.495   | kcal=553.0  prot=18.2  fat=43.8  carb=30.2
+  ocet balsamiczny                    | price=4.556    | kcal=88.0   prot=0.5   fat=?     carb=17.0
+  ocet jabłkowy                       | price=0.7987   | kcal=21.0   prot=?     fat=?     carb=0.9
+  ocet ryzowy                         | price=3.1787   | kcal=18.0   prot=?     fat=?     carb=?
+  ocet ryżowy                         | price=3.1787   | kcal=18.0   prot=?     fat=?     carb=?
+  ocet spirytusowy                    | price=0.358    | kcal=18.0   prot=?     fat=?     carb=?
+  ocet winny biały                    | price=3.398    | kcal=18.0   prot=?     fat=?     carb=?
+  ocet winny czerwony                 | price=3.672    | kcal=19.0   prot=?     fat=?     carb=0.3
+  odżywka białkowa                    | price=4.165    | kcal=400.0  prot=80.0  fat=3.0   carb=10.0
+  odżywka białkowa czekoladowa        | price=4.165    | kcal=400.0  prot=80.0  fat=3.0   carb=10.0
+  odżywka białkowa serwatkowa         | price=4.165    | kcal=400.0  prot=80.0  fat=3.0   carb=10.0
+  odżywka białkowa waniliowa          | price=4.165    | kcal=400.0  prot=80.0  fat=3.0   carb=10.0
+  ogórek                              | price=5.79     | kcal=15.0   prot=0.7   fat=0.1   carb=3.6
+  ogórek kiszony                      | price=1.458    | kcal=11.0   prot=0.3   fat=0.2   carb=2.3
+  ogórki kiszone                      | price=1.458    | kcal=11.0   prot=0.3   fat=0.2   carb=2.3
+  olej                                | price=0.459    | kcal=884.0  prot=?     fat=100.0 carb=?
+  olej rzepakowy                      | price=0.459    | kcal=884.0  prot=?     fat=100.0 carb=?
+  olej sezamowy                       | price=5.996    | kcal=884.0  prot=?     fat=100.0 carb=?
+  olej w sprayu z awokado             | price=14.995   | kcal=884.0  prot=?     fat=100.0 carb=?
+  olej z awokado                      | price=6.796    | kcal=884.0  prot=?     fat=100.0 carb=?
+  olej z pestek dyni                  | price=10.596   | kcal=884.0  prot=?     fat=100.0 carb=?
+  olej z pestek winogron              | price=3.896    | kcal=884.0  prot=?     fat=100.0 carb=?
+  oliwa z oliwek                      | price=3.399    | kcal=884.0  prot=?     fat=100.0 carb=?
+  oliwki                              | price=8.6533   | kcal=145.0  prot=1.0   fat=15.0  carb=3.8
+  oliwki czarne                       | price=6.8      | kcal=115.0  prot=0.8   fat=10.7  carb=6.3
+  oliwki zielone                      | price=6.6263   | kcal=145.0  prot=1.5   fat=15.0  carb=3.0
+  oregano                             | price=7.99     | kcal=265.0  prot=9.0   fat=4.3   carb=68.9
+  oregano suszone                     | price=12.9     | kcal=265.0  prot=9.0   fat=4.3   carb=68.9
+  orzech laskowy                      | price=7.99     | kcal=628.0  prot=15.0  fat=60.8  carb=16.7
+  orzechy                             | price=6.31     | kcal=607.0  prot=20.0  fat=54.0  carb=21.0
+  orzechy makadamia                   | price=20.59    | kcal=718.0  prot=7.9   fat=75.8  carb=13.8
+  orzechy nerkowca                    | price=6.31     | kcal=553.0  prot=18.2  fat=43.8  carb=30.2
+  orzechy pekan                       | price=21.59    | kcal=691.0  prot=9.2   fat=72.0  carb=13.9
+  orzechy włoskie                     | price=4.84     | kcal=654.0  prot=15.2  fat=65.2  carb=13.7
+  orzeszki piniowe                    | price=25.98    | kcal=673.0  prot=13.7  fat=68.4  carb=13.1
+  orzeszki ziemne                     | price=4.1114   | kcal=567.0  prot=25.8  fat=49.2  carb=16.1
+  papier ryżowy                       | price=4.7967   | kcal=333.0  prot=0.3   fat=0.1   carb=82.0
+  papryczki pepperoncini              | price=9.1933   | kcal=40.0   prot=1.9   fat=0.4   carb=9.5
+  papryka                             | price=7.2167   | kcal=31.0   prot=1.0   fat=0.3   carb=6.0
+  papryka czerwona                    | price=1.9      | kcal=31.0   prot=1.0   fat=0.3   carb=6.0
+  papryka czerwona pieczona           | price=1.9      | kcal=31.0   prot=1.0   fat=0.3   carb=6.0
+  papryka ostra                       | price=3.6      | kcal=318.0  prot=12.0  fat=17.3  carb=56.6
+  papryka poblano                     | price=7.2167   | kcal=31.0   prot=1.0   fat=0.3   carb=6.0
+  papryka słodka                      | price=10.6364  | kcal=282.0  prot=14.1  fat=12.9  carb=53.9
+  papryka w proszku                   | price=7.2167   | kcal=282.0  prot=14.1  fat=12.9  carb=54.0
+  papryka wędzona                     | price=7.2167   | kcal=282.0  prot=14.1  fat=12.9  carb=54.0
+  papryka zielona                     | price=1.699    | kcal=20.0   prot=0.9   fat=0.2   carb=4.6
+  pasta chili                         | price=4.9353   | kcal=131.0  prot=5.0   fat=1.1   carb=25.0
+  pałki z kurczaka                    | price=2.48     | kcal=165.0  prot=31.0  fat=3.6   carb=?
+  pestki dyni                         | price=3.198    | kcal=559.0  prot=30.2  fat=49.1  carb=10.7
+  pesto                               | price=3.6789   | kcal=490.0  prot=8.0   fat=47.0  carb=8.0
+  pesto rukolowe                      | price=3.6789   | kcal=490.0  prot=8.0   fat=47.0  carb=8.0
+  pieczarka                           | price=2.795    | kcal=22.0   prot=3.1   fat=0.3   carb=3.3
+  pieczarki                           | price=1.378    | kcal=22.0   prot=3.1   fat=0.3   carb=3.3
+  pieczarki cremini                   | price=1.378    | kcal=22.0   prot=3.1   fat=0.3   carb=3.3
+  pieczarki portobello                | price=1.378    | kcal=22.0   prot=2.1   fat=0.3   carb=3.9
+  pieprz                              | price=12.4     | kcal=251.0  prot=10.4  fat=3.3   carb=64.0
+  pieprz cayenne                      | price=11.7     | kcal=318.0  prot=12.0  fat=17.3  carb=56.6
+  pieprz cytrynowy                    | price=8.65     | kcal=255.0  prot=10.4  fat=3.3   carb=64.8
+  pieprz czarny                       | price=4.6      | kcal=251.0  prot=10.4  fat=3.3   carb=64.0
+  pierś z indyka                      | price=2.4967   | kcal=135.0  prot=29.3  fat=1.5   carb=?
+  pietruszka                          | price=1.598    | kcal=36.0   prot=3.0   fat=0.8   carb=6.3
+  pistacje                            | price=9.596    | kcal=567.0  prot=20.6  fat=45.8  carb=27.2
+  pomarańcza krwista                  | price=1.299    | kcal=49.0   prot=0.9   fat=0.2   carb=12.5
+  pomidor                             | price=1.599    | kcal=18.0   prot=0.9   fat=0.2   carb=3.9
+  pomidor koktajlowy                  | price=2.9975   | kcal=18.0   prot=0.9   fat=0.2   carb=3.9
+  pomidor krojony                     | price=1.599    | kcal=18.0   prot=0.9   fat=0.2   carb=3.9
+  pomidor rzymski                     | price=1.599    | kcal=18.0   prot=0.9   fat=0.2   carb=3.9
+  pomidor suszony                     | price=1.599    | kcal=258.0  prot=14.1  fat=2.9   carb=55.8
+  pomidorek koktajlowy                | price=2.9975   | kcal=18.0   prot=0.9   fat=0.2   carb=3.9
+  pomidorki koktajlowe                | price=2.9975   | kcal=18.0   prot=0.9   fat=0.2   carb=3.9
+  pomidory krojone                    | price=2.598    | kcal=18.0   prot=0.9   fat=0.2   carb=3.9
+  pomidory kruszone                   | price=2.598    | kcal=32.0   prot=1.6   fat=0.2   carb=7.0
+  pomidory prażone                    | price=2.598    | kcal=18.0   prot=0.9   fat=0.2   carb=3.9
+  pomidory prażone z chili            | price=2.598    | kcal=18.0   prot=0.9   fat=0.2   carb=3.9
+  pomidory suszone                    | price=8.2375   | kcal=258.0  prot=14.1  fat=2.9   carb=55.8
+  por                                 | price=0.799    | kcal=61.0   prot=1.5   fat=0.3   carb=14.2
+  przyprawa chili                     | price=6.392    | kcal=251.0  prot=10.4  fat=3.3   carb=64.0
+  przyprawa do drobiu                 | price=17.45    | kcal=307.0  prot=9.7   fat=7.5   carb=65.6
+  przyprawa włoska                    | price=6.392    | kcal=250.0  prot=10.0  fat=5.0   carb=50.0
+  płatki chex                         | price=3.065    | kcal=?      prot=?     fat=?     carb=?
+  płatki chili                        | price=3.065    | kcal=318.0  prot=12.0  fat=17.0  carb=56.0
+  płatki drożdżowe                    | price=28.49    | kcal=371.0  prot=49.0  fat=5.0   carb=35.0
+  płatki owsiane                      | price=0.6475   | kcal=379.0  prot=13.2  fat=6.5   carb=67.7
+  ricotta                             | price=2.38     | kcal=174.0  prot=11.3  fat=13.0  carb=3.0
+  rodzynki                            | price=2.1225   | kcal=299.0  prot=3.1   fat=0.5   carb=79.2
+  rukola                              | price=3.66     | kcal=25.0   prot=2.6   fat=0.7   carb=3.7
+  ryż                                 | price=0.999    | kcal=130.0  prot=2.7   fat=0.3   carb=28.2
+  ryż basmati                         | price=1.2475   | kcal=357.0  prot=7.1   fat=0.7   carb=79.0
+  ryż biały                           | price=0.656    | kcal=365.0  prot=7.1   fat=0.7   carb=80.0
+  ryż biały długoziarnisty            | price=0.656    | kcal=365.0  prot=7.1   fat=0.7   carb=80.0
+  ryż brązowy                         | price=0.8225   | kcal=111.0  prot=2.6   fat=0.9   carb=23.0
+  ryż brązowy błyskawiczny            | price=0.8225   | kcal=370.0  prot=7.0   fat=3.0   carb=78.0
+  ryż jaśminowy                       | price=0.8225   | kcal=365.0  prot=7.1   fat=0.7   carb=80.0
+  ryż pełnoziarnisty i komosa ryżowa  | price=3.796    | kcal=120.0  prot=4.4   fat=1.9   carb=21.3
+  rzodkiewka                          | price=2.99     | kcal=16.0   prot=0.7   fat=0.1   carb=3.4
+  salami                              | price=4.7259   | kcal=407.0  prot=22.9  fat=33.7  carb=1.6
+  sałata                              | price=9.19     | kcal=14.0   prot=0.9   fat=0.1   carb=3.0
+  sałata masłowa                      | price=3.99     | kcal=13.0   prot=1.4   fat=0.2   carb=2.2
+  sałata rzymska                      | price=6.99     | kcal=17.0   prot=1.2   fat=0.3   carb=3.3
+  seler                               | price=0.499    | kcal=16.0   prot=0.7   fat=0.2   carb=3.0
+  seler naciowy                       | price=2.245    | kcal=16.0   prot=0.7   fat=0.2   carb=3.0
+  ser                                 | price=2.68     | kcal=404.0  prot=25.0  fat=33.1  carb=1.3
+  ser feta                            | price=2.68     | kcal=264.0  prot=14.2  fat=21.3  carb=4.1
+  ser gruyere                         | price=12.49    | kcal=413.0  prot=29.8  fat=32.3  carb=0.4
+  ser halloumi                        | price=5.24     | kcal=321.0  prot=21.6  fat=25.0  carb=2.0
+  ser kozi                            | price=8.925    | kcal=264.0  prot=18.5  fat=20.6  carb=1.2
+  ser pleśniowy                       | price=5.88     | kcal=353.0  prot=21.4  fat=28.7  carb=2.3
+  ser ricotta                         | price=4.79     | kcal=174.0  prot=11.3  fat=13.0  carb=3.0
+  ser ricotta roślinny                | price=2.38     | kcal=174.0  prot=11.3  fat=13.0  carb=3.0
+  ser w kawałku                       | price=6.79     | kcal=402.0  prot=25.0  fat=33.0  carb=?
+  ser wegański                        | price=8.26     | kcal=250.0  prot=1.0   fat=20.0  carb=15.0
+  serca karczochów                    | price=7.8912   | kcal=50.0   prot=2.0   fat=2.5   carb=6.0
+  serce karczocha                     | price=7.8912   | kcal=50.0   prot=2.0   fat=2.5   carb=6.0
+  sezam                               | price=3.358    | kcal=573.0  prot=17.7  fat=49.7  carb=23.5
+  siemię lniane                       | price=0.99     | kcal=534.0  prot=18.3  fat=42.2  carb=28.9
+  siemię lniane mielone               | price=0.99     | kcal=534.0  prot=18.3  fat=42.2  carb=28.9
+  skrobia kukurydziana                | price=3.916    | kcal=381.0  prot=0.3   fat=0.1   carb=91.3
+  skrzydełko z kurczaka               | price=2.8767   | kcal=222.0  prot=18.3  fat=15.8  carb=?
+  skórka z cytryny                    | price=1.699    | kcal=29.0   prot=1.1   fat=0.3   carb=9.3
+  smietana                            | price=1.603    | kcal=?      prot=?     fat=?     carb=?
+  soczewica                           | price=1.5375   | kcal=353.0  prot=25.8  fat=1.1   carb=60.1
+  soczewica czerwona                  | price=0.998    | kcal=358.0  prot=25.8  fat=2.2   carb=63.1
+  sok z cytryny                       | price=3.14     | kcal=22.0   prot=0.4   fat=0.2   carb=6.9
+  sok z limonki                       | price=2.696    | kcal=25.0   prot=0.4   fat=0.1   carb=8.4
+  sos                                 | price=9.4      | kcal=100.0  prot=1.0   fat=5.0   carb=12.0
+  sos BBQ                             | price=9.4      | kcal=100.0  prot=1.0   fat=5.0   carb=12.0
+  sos czosnkowy do makaronu           | price=10.8889  | kcal=42.0   prot=1.2   fat=1.5   carb=6.5
+  sos do makaronu                     | price=2.9975   | kcal=42.0   prot=1.2   fat=1.0   carb=7.0
+  sos grecki                          | price=16.0     | kcal=150.0  prot=2.0   fat=12.0  carb=8.0
+  sos ostry                           | price=9.4      | kcal=100.0  prot=1.0   fat=5.0   carb=12.0
+  sos pomidorowy                      | price=8.7576   | kcal=24.0   prot=1.2   fat=0.3   carb=5.3
+  sos pomidorowy do makaronu          | price=8.7576   | kcal=24.0   prot=1.2   fat=0.3   carb=5.3
+  sos pomidorowy do pizzy             | price=8.7576   | kcal=24.0   prot=1.2   fat=0.3   carb=5.3
+  sos ranch                           | price=9.4      | kcal=100.0  prot=1.0   fat=5.0   carb=12.0
+  stewia                              | price=8.9214   | kcal=?      prot=?     fat=?     carb=?
+  suszone daktyle bez pestek          | price=4.5657   | kcal=282.0  prot=2.5   fat=0.4   carb=75.0
+  suszone jabłka                      | price=1.7086   | kcal=243.0  prot=0.9   fat=0.3   carb=65.9
+  suszone jagody goji                 | price=7.07     | kcal=349.0  prot=14.3  fat=0.4   carb=77.1
+  suszone żurawiny                    | price=3.198    | kcal=308.0  prot=0.2   fat=0.1   carb=82.8
+  syrop daktylowy                     | price=5.0406   | kcal=300.0  prot=?     fat=?     carb=80.0
+  syrop klonowy                       | price=7.996    | kcal=260.0  prot=?     fat=0.1   carb=67.0
+  syrop z agawy                       | price=4.8898   | kcal=310.0  prot=0.1   fat=0.5   carb=76.0
+  szalotka                            | price=2.596    | kcal=72.0   prot=2.5   fat=0.1   carb=16.8
+  szałwia suszona                     | price=3.198    | kcal=308.0  prot=0.2   fat=1.1   carb=82.4
+  szczypiorek                         | price=2.796    | kcal=32.0   prot=1.8   fat=0.2   carb=7.3
+  szczypiorek suszony                 | price=2.796    | kcal=32.0   prot=1.8   fat=0.2   carb=7.3
+  szparagi                            | price=3.7475   | kcal=20.0   prot=2.2   fat=0.1   carb=3.9
+  szpinak                             | price=3.89     | kcal=23.0   prot=2.9   fat=0.4   carb=3.6
+  szpinak baby                        | price=6.1267   | kcal=23.0   prot=2.9   fat=0.4   carb=3.6
+  szynka                              | price=3.8267   | kcal=145.0  prot=20.0  fat=7.0   carb=1.5
+  sól                                 | price=8.2286   | kcal=?      prot=?     fat=?     carb=?
+  sól morska                          | price=5.7091   | kcal=?      prot=?     fat=?     carb=?
+  tahini                              | price=3.33     | kcal=595.0  prot=17.0  fat=53.0  carb=21.0
+  tortilla                            | price=1.6176   | kcal=300.0  prot=8.0   fat=7.0   carb=50.0
+  truskawka                           | price=2.8217   | kcal=32.0   prot=0.7   fat=0.3   carb=7.7
+  truskawki                           | price=4.396    | kcal=32.0   prot=0.7   fat=0.3   carb=7.7
+  truskawki liofilizowane             | price=4.396    | kcal=32.0   prot=0.7   fat=0.3   carb=7.7
+  tuńczyk                             | price=5.1583   | kcal=130.0  prot=29.1  fat=0.8   carb=?
+  twaróg                              | price=1.46     | kcal=98.0   prot=11.1  fat=4.3   carb=3.4
+  twaróg kremowy                      | price=1.46     | kcal=98.0   prot=11.1  fat=4.3   carb=3.4
+  tymianek                            | price=9.49     | kcal=101.0  prot=5.6   fat=1.7   carb=24.5
+  tymianek suszony                    | price=9.49     | kcal=101.0  prot=5.6   fat=1.7   carb=24.5
+  udka z kurczaka                     | price=2.8767   | kcal=172.0  prot=24.0  fat=8.0   carb=?
+  wegański ser ricotta                | price=2.38     | kcal=174.0  prot=11.3  fat=13.0  carb=3.0
+  wieprzowina                         | price=3.599    | kcal=242.0  prot=27.3  fat=14.4  carb=?
+  winogrona                           | price=1.999    | kcal=69.0   prot=0.7   fat=0.2   carb=18.1
+  winogrona zielone                   | price=1.999    | kcal=69.0   prot=0.7   fat=0.2   carb=18.1
+  wiórki kokosowe                     | price=2.495    | kcal=660.0  prot=6.9   fat=64.5  carb=23.7
+  wiórki kokosowe niesłodzone         | price=2.495    | kcal=660.0  prot=6.9   fat=64.5  carb=23.7
+  wołowina                            | price=3.2      | kcal=250.0  prot=26.0  fat=15.0  carb=?
+  wołowina na fajitas                 | price=3.2      | kcal=250.0  prot=26.0  fat=15.0  carb=?
+  wołowina w kawałkach                | price=3.2      | kcal=250.0  prot=26.0  fat=15.0  carb=?
+  wędzona papryka                     | price=7.2167   | kcal=31.0   prot=1.0   fat=0.3   carb=6.0
+  wędzony łosoś                       | price=11.9933  | kcal=208.0  prot=20.4  fat=13.4  carb=?
+  zamiennik jajka                     | price=22.049   | kcal=300.0  prot=?     fat=?     carb=75.0
+  ziele angielskie                    | price=8.6      | kcal=263.0  prot=6.1   fat=8.7   carb=72.1
+  zielona fasolka                     | price=4.4475   | kcal=?      prot=?     fat=?     carb=?
+  zielona papryka                     | price=1.699    | kcal=20.0   prot=0.9   fat=0.2   carb=4.6
+  zielone oliwki                      | price=6.39     | kcal=150.0  prot=2.0   fat=14.0  carb=5.0
+  zielony banan                       | price=0.699    | kcal=89.0   prot=1.1   fat=0.3   carb=22.8
+  ziemniak                            | price=0.2495   | kcal=77.0   prot=2.0   fat=0.1   carb=17.5
+  ziemniak czerwony                   | price=0.3995   | kcal=70.0   prot=1.9   fat=0.1   carb=15.9
+  ziemniaki                           | price=0.2495   | kcal=77.0   prot=2.0   fat=0.1   carb=17.5
+  ziemniaki czerwone                  | price=0.3995   | kcal=70.0   prot=1.9   fat=0.1   carb=15.9
+  zioła                               | price=12.9     | kcal=50.0   prot=2.0   fat=1.0   carb=8.0
+  łopatka wieprzowa                   | price=1.899    | kcal=242.0  prot=27.3  fat=14.4  carb=?
+  łosoś                               | price=11.9933  | kcal=208.0  prot=20.4  fat=13.4  carb=?
+  śmietana                            | price=0.903    | kcal=198.0  prot=2.4   fat=19.3  carb=4.6
+  śmietana 30%                        | price=0.903    | kcal=198.0  prot=2.4   fat=19.3  carb=4.6
+  śmietana roślinna                   | price=0.903    | kcal=198.0  prot=2.4   fat=19.3  carb=4.6
+  śmietanka 30%                       | price=1.352    | kcal=200.0  prot=2.0   fat=20.0  carb=3.0
+  śmietanka kokosowa                  | price=1.352    | kcal=200.0  prot=2.0   fat=20.0  carb=3.0
+  świeże zioła                        | price=12.9     | kcal=50.0   prot=2.0   fat=1.0   carb=8.0
+  żeberka wołowe                      | price=1.599    | kcal=388.0  prot=18.0  fat=35.0  carb=?
+  żurawina                            | price=4.49     | kcal=46.0   prot=0.4   fat=0.1   carb=12.2
+  żurawina suszona                    | price=3.198    | kcal=308.0  prot=0.2   fat=1.1   carb=82.4
+  żółta papryka                       | price=1.698    | kcal=27.0   prot=1.0   fat=0.2   carb=6.3
+
+======================================================================
+  Recipes seed EN
+======================================================================
+  Crockpot Breakfast Casserole                            | 9 ing.
+  Breakfast Beef Sausage                                  | 12 ing.
+  Turmeric Scrambled Eggs For Breakfast                   | 8 ing.
+  Sheet Pan Breakfast Hash And Eggs                       | 13 ing.
+  Breakfast Pro Power Bowl                                | 8 ing.
+  Breakfast Bowls                                         | 5 ing.
+  Baked Breakfast Quinoa And Spinach Bites                | 8 ing.
+  Steak, Sweet Potato and Apple Hash                      | 8 ing.
+  Whole30 Breakfast Snack Boxes Meal Prep                 | 4 ing.
+  Sheet Pan Sweet Potato Breakfast Hash                   | 12 ing.
+  Bacon Egg Bites                                         | 7 ing.
+  Smoked Salmon & Lentil Breakfast Salad                  | 12 ing.
+  Whole30 Zucchini & Sweet Potato Hashbrown Meal Prep     | 8 ing.
+  Egg Sweet Potato And Sausage Breakfast Meal Prep        | 7 ing.
+  Lemon Herb Chicken and Potato Sheet Pan                 | 11 ing.
+  The Perfect Air Fryer Turkey Breast                     | 7 ing.
+  Cauliflower Rice Salmon Poke Bowl Meal Prep             | 8 ing.
+  My Favorite Pesto Beef Kabob Meal Prep                  | 8 ing.
+  Vegan Chopped Chickpea Greek Salad Meal Prep            | 15 ing.
+  Chimichurri Steak Meal Prep - Two Ways (Bowls and Tacos) | 16 ing.
+  Avocado And Mango Sushi Roll                            | 6 ing.
+  Chicken Apple Sausage and Veggies                       | 14 ing.
+  Bbq Pulled Chicken Stuffed Sweet Potatoes               | 11 ing.
+  Sweet 'N Spicy Jalapeno Sausage Fried Rice              | 13 ing.
+  Low-Carb Lettuce Wrap Sliders                           | 8 ing.
+  Gazpacho Meal Prep                                      | 10 ing.
+  Greek Salad                                             | 8 ing.
+  Beef Patties-Sweet Corn Rice and Sautéed Veggies        | 12 ing.
+  Mozzarella Stuffed Meatballs                            | 10 ing.
+  Grilled Steak and Garlic Roasted Potato Meal Prep       | 8 ing.
+  Fruity Quinoa And Grilled Salmon                        | 10 ing.
+  Sheet Pan Bruschetta Chicken                            | 16 ing.
+  Chicken Quinoa Salad                                    | 8 ing.
+  Slow Cooker Lemon Garlic Chicken Meal Prep              | 8 ing.
+  Sun Dried Tomato, Mozzarella And Basil Stuffed Chicken  | 9 ing.
+  Red Pepper and Parmesan Quinoa Pasta                    | 12 ing.
+  Cilantro Lime Rice                                      | 6 ing.
+  Turkey Wrap                                             | 5 ing.
+  Broccoli Cheddar Stuffed Chicken Breast & Rice Pilaf    | 20 ing.
+  Pulled Pork Lettuce Wrap Meal Prep                      | 10 ing.
+  Baked Salmon with Blackberry Quinoa Salad               | 12 ing.
+  One Pan Sausage And Veggie Meal Prep                    | 8 ing.
+  Sausage Grill Packet Meal Prep                          | 10 ing.
+  Lemon-Pepper Chicken Drumstick Recipe                   | 4 ing.
+  Cauliflower Tabouli and Salmon Meal Prep                | 15 ing.
+  Moroccan Turmeric Chicken Stew                          | 16 ing.
+  Sheet Pan Chicken And Veggies                           | 10 ing.
+  Hawaiian Chicken Teriyaki Skewer Meal Prep              | 12 ing.
+  Keto Cashew Cheesecake Bites                            | 4 ing.
+  Vegan Dark Chocolate Cinnamon Roasted Chickpea Bark     | 4 ing.
+  Peanut Butter Protein Squares                           | 5 ing.
+  Turkey Bacon Ranch Pinwheel Snack Boxes                 | 7 ing.
+  Air Fryer Rosemary Sweet Potato Wedges with Garlic Aioli | 10 ing.
+  Air-Fried Chickpeas                                     | 5 ing.
+
+======================================================================
+  Recipes seed PL
+======================================================================
+  Pudełka Z Owocami I Białkiem                            | 5 ing.
+  Owsianka na Noc z Masłem Migdałowym                     | 4 ing.
+  Jajecznica Z Kurkumą Na Śniadanie                       | 8 ing.
+  Owsianka Na Zimno Z Jagodami                            | 7 ing.
+  Omlet Z Blachy                                          | 9 ing.
+  Owsianka Kokosowo-Ananasowa na Noc                      | 9 ing.
+  Owsianka Białkowa na Śniadanie                          | 7 ing.
+  Wegański Hash z Grzybami i Quinoa na Śniadanie          | 10 ing.
+  Grecka Zapiekanka Jajeczna                              | 7 ing.
+  Sałatka Śniadaniowa z Wędzonym Łososiem i Soczewicą     | 12 ing.
+  Zapiekanka z Kurczakiem po Południowo-Zachodnim         | 17 ing.
+  Zimna zupa z awokado                                    | 10 ing.
+  Miski Poke z Ryżem Kalafiorowym i Łososiem              | 8 ing.
+  Najlepsze Hummus Burakowy Z Warzywami Do Maczania       | 8 ing.
+  Wegańska Sałatka Grecka z Ciecierzycą Meal Prep         | 15 ing.
+  Rolka Sushi z Awokado i Mango                           | 6 ing.
+  Letnie Rolki z Awokado i Kurczakiem                     | 9 ing.
+  Ryż Kalafiorowy z Roślinami Strączkowymi i Szaszłykami z Kurczaka | 12 ing.
+  Kurczak w Boczku                                        | 7 ing.
+  Pieczony Łosoś z Szparagami i Ziemniakami               | 5 ing.
+  Szynka z Melasą i Musztardą Dijon z Pieczonymi Warzywami w Air Fryer | 16 ing.
+  Makaron z Cukinii z Sosem Pomidorowo-Oregano i Grillowanym Filetem z Kurczaka | 9 ing.
+  Makaron Z Kiełbasą Pesto Caprese                        | 7 ing.
+  Gulasz z kurczakiem w stylu pot pie                     | 12 ing.
+  Niskowęglowodanowe Sałatkowe Slidery                    | 8 ing.
+  Falafel na zapas                                        | 15 ing.
+  Zupa z soczewicy w wolnowarze                           | 16 ing.
+  Udka z Kurczaka w Maśle Kokosowym z Czosnkiem i Zoodles | 15 ing.
+  Gazpacho na wynos                                       | 10 ing.
+  Kurczak z chimichurri i warzywami z blachy              | 15 ing.
+  Sałatka Grecka                                          | 8 ing.
+  Keto Pulpety z Boczkiem i Kiełbasą                      | 5 ing.
+  Placki wołowe z ryżem i kukurydzą oraz smażonymi warzywami | 12 ing.
+  Komosa Ryżowa Z Grillowanym Łososiem                    | 10 ing.
+  Kurczak Bruschetta Z Blachy                             | 16 ing.
+  Sałatka Z Kurczakiem I Komosą Ryżową                    | 8 ing.
+  Makaron Kokardki z Krewetkami                           | 5 ing.
+  Kurczak z Cytryną i Czosnkiem z Wolnowaru               | 8 ing.
+  Kurczak Faszerowany Suszonymi Pomidorami, Mozzarellą i Bazylią | 9 ing.
+  Łosoś Z Soczewicą I Brokułami                           | 13 ing.
+  Kurczak Caprese Z Balsamico                             | 12 ing.
+  Makaron primavera zapiekany z jednej patelni            | 8 ing.
+  Pudełko Przekąsek z Tuńczykiem                          | 4 ing.
+  Sałatka Jajeczna z Awokado na Zapas                     | 7 ing.
+  Wołowina Firecracker                                    | 10 ing.
+  Ostre Krewetki z Frytkownicy Powietrznej                | 5 ing.
+  Zupa Gołąbkowa z Wolnowaru                              | 15 ing.
+  Ryż z Kolendrą i Limonką                                | 6 ing.
+  Lżejsze Mango z Kurczakiem i Ryżem                      | 11 ing.
+  Sałatka z Kurczakiem                                    | 7 ing.
+  Sałatka Grecka                                          | 6 ing.
+  Włoska Kiełbasa z Papryką z Blachy                      | 5 ing.
+  Pierś z kurczaka faszerowana brokułami i cheddarem z pilawem ryżowym | 20 ing.
+  Jesienna sałatka z kiełbasą                             | 17 ing.
+  Pakiet grillowy z kiełbasą                              | 10 ing.
+  Kebab z kofty                                           | 13 ing.
+  Talerz z kalafiorem tabbouleh i łososiem                | 15 ing.
+  Krewetki Z Pesto Rukolowym Z Blachy                     | 8 ing.
+  Kurczak i Warzywa z Blachy                              | 10 ing.
+  Chipsy Jabłkowe z Frytkownicy Powietrznej               | 7 ing.
+  Mini Papryki z Kurczakiem Buffalo                       | 8 ing.
+  Kulki Energetyczne Miętowo-Czekoladowe                  | 7 ing.
+  Nasz Ulubiony Przepis na Tostones                       | 2 ing.
+  Ziemniaczane Łódeczki w Boczku                          | 7 ing.
+  Kulki Energetyczne Cynamonowo-Rodzynkowe                | 7 ing.
+  Ciecierzyca z Air Fryer                                 | 5 ing.

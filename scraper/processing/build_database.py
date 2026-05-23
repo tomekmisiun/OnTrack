@@ -108,13 +108,18 @@ def build_recipes(
     db: dict[str, dict],
     ing_key: str,   # "ingredients_en" or "ingredients_pl"
     currency: str,
+    unavailable: set[str] | None = None,
 ) -> list[dict]:
+    unavailable = unavailable or set()
     output = []
     for r in recipes:
         ings        = r.get(ing_key, [])
         available   = True
         total_cost  = 0.0
         cost_complete = True
+
+        if any((i.get("name") or "").strip().lower() in unavailable for i in ings):
+            continue
 
         for ing in ings:
             name   = ing.get("name")
@@ -260,6 +265,18 @@ def main():
     unmatched_en_raw = json.loads(unmatched_en_raw_f.read_text("utf-8")) if unmatched_en_raw_f.exists() else []
     unmatched_pl_raw = json.loads(unmatched_pl_raw_f.read_text("utf-8")) if unmatched_pl_raw_f.exists() else []
 
+    aliases = json.loads((DATA / "ingredient_aliases.json").read_text("utf-8"))
+    unavailable_pl = {
+        name.lower()
+        for name, alias in aliases.get("pl", {}).items()
+        if alias.endswith(" nomatch")
+    }
+    unavailable_en = {
+        name.lower()
+        for name, alias in aliases.get("en", {}).items()
+        if alias.endswith(" nomatch")
+    }
+
     # Ingredient databases
     db_en = build_ingredient_db(matches_en)
     db_pl = build_ingredient_db(matches_pl)
@@ -269,8 +286,8 @@ def main():
     unmatched_pl = build_unmatched(unmatched_pl_raw, shops_pl)
 
     # Recipes
-    recipes_en = build_recipes(recipes, db_en, "ingredients_en", "GBP")
-    recipes_pl = build_recipes(recipes, db_pl, "ingredients_pl", "PLN")
+    recipes_en = build_recipes(recipes, db_en, "ingredients_en", "GBP", unavailable_en)
+    recipes_pl = build_recipes(recipes, db_pl, "ingredients_pl", "PLN", unavailable_pl)
 
     def save(path, data):
         path.write_text(json.dumps(data, ensure_ascii=False, indent=2), "utf-8")
