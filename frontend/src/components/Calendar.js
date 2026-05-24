@@ -16,6 +16,17 @@ import { fuzzySearch } from '../utils/search';
 const COLORS = ['#4a6fa5', '#93c5fd', '#fcd34d', '#c2410c', '#6366f1'];
 const getColor = (pos) => COLORS[(pos - 1) % 5];
 
+function resolveMealSlot(drop) {
+  if (!drop) return null;
+  if (drop.type === 'meal' && drop.meal) {
+    return { targetDate: drop.meal.date, targetPos: drop.meal.position };
+  }
+  if (drop.date != null && drop.position != null) {
+    return { targetDate: drop.date, targetPos: drop.position };
+  }
+  return null;
+}
+
 
 // ─── Recipe preview modal ─────────────────────────────────────────────────────
 function RecipePreviewModal({ recipe, onClose }) {
@@ -1112,27 +1123,19 @@ export default function Calendar({ onGoToTab }) {
 
     if (drop.type==='day-target') return;
 
-    const {date:targetDate, position:targetPos} = drop;
-    const slotOccupied = (mealsByDate[targetDate]||[]).some(m=>m.position===targetPos);
+    const slot = resolveMealSlot(drop);
+    if (!slot) return;
+    const { targetDate, targetPos } = slot;
 
     if (drag.type==='recipe') {
       try {
-        if (slotOccupied) {
-          const existing = (mealsByDate[targetDate]||[]).find(m=>m.position===targetPos);
-          if (existing) await api.deleteMeal(existing.id);
-        }
         await api.addMeal({date:targetDate,position:targetPos,recipe_id:drag.recipe.id,member_id:activeMember?.id});
         await loadMonth(year,month);
       } catch { showError(t('err_add_meal')); }
     } else if (drag.type==='meal') {
       const {meal} = drag;
-      const srcDate = Object.keys(mealsByDate).find(d=>(mealsByDate[d]||[]).some(m=>m.id===meal.id));
-      if (srcDate===targetDate && meal.position===targetPos) return;
+      if (meal.date===targetDate && meal.position===targetPos) return;
       try {
-        if (slotOccupied) {
-          const existing = (mealsByDate[targetDate]||[]).find(m=>m.position===targetPos);
-          if (existing && existing.id!==meal.id) await api.deleteMeal(existing.id);
-        }
         await api.deleteMeal(meal.id);
         await api.addMeal({date:targetDate,position:targetPos,recipe_id:meal.recipe.id,member_id:activeMember?.id});
         await loadMonth(year,month);

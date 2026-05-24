@@ -22,7 +22,7 @@ def test_add_meal_and_get_day(client, auth_headers, recipe, member):
     assert deleted.status_code == 200
 
 
-def test_add_meal_rejects_duplicate_slot(client, auth_headers, recipe, member):
+def test_add_meal_replaces_existing_slot(client, auth_headers, recipe, member):
     payload = {
         "date": "2026-05-24",
         "position": 2,
@@ -31,9 +31,12 @@ def test_add_meal_rejects_duplicate_slot(client, auth_headers, recipe, member):
     }
     first = client.post("/api/meal-plan/", headers=auth_headers, json=payload)
     assert first.status_code == 201
+    meal_id = first.get_json()["id"]
 
     second = client.post("/api/meal-plan/", headers=auth_headers, json=payload)
-    assert second.status_code == 409
+    assert second.status_code == 200
+    assert second.get_json()["id"] == meal_id
+    assert second.get_json()["recipe"]["id"] == recipe.id
 
 
 def test_meal_plan_range(client, auth_headers, recipe, member):

@@ -111,8 +111,12 @@ def add_meal():
 
     if not Recipe.query.filter_by(id=data['recipe_id'], user_id=uid, lang=current_user_lang()).first():
         return jsonify({'error': 'Recipe not found'}), 404
-    if MealPlan.query.filter_by(member_id=mid, date=day, position=data['position']).first():
-        return jsonify({'error': f'Position {data["position"]} on this day is already taken'}), 409
+
+    existing = MealPlan.query.filter_by(member_id=mid, date=day, position=data['position']).first()
+    if existing:
+        existing.recipe_id = data['recipe_id']
+        db.session.commit()
+        return jsonify(existing.to_dict()), 200
 
     meal = MealPlan(user_id=uid, member_id=mid, date=day, position=data['position'], recipe_id=data['recipe_id'])
     db.session.add(meal)
