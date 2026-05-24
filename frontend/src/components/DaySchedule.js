@@ -38,7 +38,7 @@ function formatRange(start, end, dayLabel) {
 export default function DaySchedule() {
   const { t } = useLanguage();
   const { activeMember } = useMember();
-  const { showError, showSuccess } = useToast();
+  const { showError, showSuccess, showConfirm } = useToast();
 
   const currentWeekStart = getCurrentWeek().start;
   const [weekStart, setWeekStart] = useState(currentWeekStart);
@@ -53,6 +53,7 @@ export default function DaySchedule() {
   const [workLabel, setWorkLabel] = useState('');
   const [workAllDays, setWorkAllDays] = useState(false);
   const [workLoading, setWorkLoading] = useState(false);
+  const [clearLoading, setClearLoading] = useState(false);
   const dragRef = useRef(null);
 
   const dayLabels = t('day_short');
@@ -197,6 +198,28 @@ export default function DaySchedule() {
     }
   };
 
+  const clearWeek = () => {
+    if (!blocks.length || !activeMember?.id) return;
+    showConfirm({
+      title: t('schedule_clear_week'),
+      message: t('schedule_clear_week_confirm')(blocks.length),
+      confirmLabel: t('schedule_clear_week'),
+      onConfirm: async () => {
+        setClearLoading(true);
+        try {
+          await api.clearWeek(activeMember.id, weekStart);
+          setBlocks([]);
+          showSuccess(t('schedule_clear_week_ok'));
+        } catch {
+          showError(t('schedule_clear_week_err'));
+          loadBlocks();
+        } finally {
+          setClearLoading(false);
+        }
+      },
+    });
+  };
+
   const deleteBlock = async (block) => {
     if (!window.confirm(t('schedule_delete_confirm'))) return;
     try {
@@ -338,14 +361,24 @@ export default function DaySchedule() {
                 </button>
               </div>
             </div>
-            <button
-              type="button"
-              className="btn btn-primary schedule-work-apply"
-              onClick={applyWorkHours}
-              disabled={workLoading}
-            >
-              {workLoading ? t('loading') : t('schedule_work_apply')}
-            </button>
+            <div className="schedule-work-actions">
+              <button
+                type="button"
+                className="btn schedule-work-clear"
+                onClick={clearWeek}
+                disabled={clearLoading || !blocks.length}
+              >
+                {clearLoading ? t('loading') : t('schedule_clear_week')}
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary schedule-work-apply"
+                onClick={applyWorkHours}
+                disabled={workLoading}
+              >
+                {workLoading ? t('loading') : t('schedule_work_apply')}
+              </button>
+            </div>
           </div>
         </div>
       </div>

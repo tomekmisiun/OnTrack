@@ -860,7 +860,7 @@ const T = {
     schedule_other_week_badge: 'Inny tydzień',
     schedule_back_to_current: 'Wróć do bieżącego tygodnia',
     schedule_work_hours: 'Godziny pracy',
-    schedule_work_desc: 'Szybko wypełnij ten sam przedział na wybrane dni wyświetlanego tygodnia.',
+    schedule_work_desc: 'Szybko wypełnij ten sam przedział na wybrane dni wyświetlanego tygodnia — np. godziny pracy.',
     schedule_work_from: 'Od',
     schedule_work_to: 'Do',
     schedule_work_label: 'Nazwa',
@@ -869,6 +869,10 @@ const T = {
     schedule_work_weekdays: 'Pn–Pt',
     schedule_work_all_days: 'Wszystkie dni',
     schedule_work_apply: 'Zastosuj na wyświetlany tydzień',
+    schedule_clear_week: 'Wyczyść wszystko',
+    schedule_clear_week_confirm: (n) => `Usunąć wszystkie ${n} zajęć z wyświetlanego tygodnia?`,
+    schedule_clear_week_ok: 'Tydzień wyczyszczony',
+    schedule_clear_week_err: 'Nie udało się wyczyścić tygodnia',
     schedule_work_applied: (n, skipped) => skipped > 0
       ? `Dodano ${n} bloków (pominięto ${skipped} — nakładają się z istniejącymi)`
       : `Dodano ${n} bloków`,
@@ -1740,7 +1744,7 @@ const T = {
     schedule_other_week_badge: 'Other week',
     schedule_back_to_current: 'Back to current week',
     schedule_work_hours: 'Work hours',
-    schedule_work_desc: 'Quickly fill the same time range on selected days of the displayed week.',
+    schedule_work_desc: 'Quickly fill the same time range on selected days of the displayed week — e.g. work hours.',
     schedule_work_from: 'From',
     schedule_work_to: 'To',
     schedule_work_label: 'Label',
@@ -1749,6 +1753,10 @@ const T = {
     schedule_work_weekdays: 'Mon–Fri',
     schedule_work_all_days: 'All days',
     schedule_work_apply: 'Apply to displayed week',
+    schedule_clear_week: 'Clear all',
+    schedule_clear_week_confirm: (n) => `Remove all ${n} activities from the displayed week?`,
+    schedule_clear_week_ok: 'Week cleared',
+    schedule_clear_week_err: 'Could not clear the week',
     schedule_work_applied: (n, skipped) => skipped > 0
       ? `Added ${n} blocks (skipped ${skipped} — overlap with existing)`
       : `Added ${n} blocks`,

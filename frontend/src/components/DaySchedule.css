@@ -310,7 +310,7 @@
     grid-template-columns: 1fr 1fr;
   }
 
-  .schedule-work-apply {
+  .schedule-work-actions {
     grid-column: 1 / -1;
     width: 100%;
   }
@@ -386,11 +386,31 @@
   color: #2dd4bf;
 }
 
+.schedule-work-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.schedule-work-clear {
+  padding: 9px 16px !important;
+  font-size: 12px !important;
+  white-space: nowrap;
+  background: #2d1515 !important;
+  color: #f87171 !important;
+  border: 1px solid #4b1515 !important;
+}
+
+.schedule-work-clear:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
 .schedule-work-apply {
   padding: 9px 16px !important;
   font-size: 12px !important;
   white-space: nowrap;
-  height: fit-content;
 }
 
 .schedule-wrap {

@@ -100,4 +100,7 @@ export const daySchedule = {
   createBulk: (data)  => API.post('/api/day-schedule/bulk', data),
   update:  (id, data) => API.patch(`/api/day-schedule/${id}`, data),
   delete:  (id)       => API.delete(`/api/day-schedule/${id}`),
+  clearWeek: (memberId, weekStart) => API.delete('/api/day-schedule/week', {
+    params: { member_id: memberId, week_start: weekStart },
+  }),
 };

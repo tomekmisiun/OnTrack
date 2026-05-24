@@ -174,6 +174,25 @@ def create_bulk():
     return jsonify({'created': [], 'skipped': skipped}), 200
 
 
+@day_schedule_bp.route('/week', methods=['DELETE'])
+@jwt_required()
+def delete_week_blocks():
+    uid = current_uid()
+    mid = resolve_member_id(uid, request.args.get('member_id'))
+    if not mid:
+        return jsonify({'error': 'Member not found'}), 404
+
+    week_start = parse_week_start(request.args.get('week_start'))
+    if not week_start:
+        return jsonify({'error': 'Invalid or missing week_start'}), 400
+
+    deleted = DayScheduleBlock.query.filter_by(
+        user_id=uid, member_id=mid, week_start=week_start
+    ).delete()
+    db.session.commit()
+    return jsonify({'ok': True, 'deleted': deleted})
+
+
 @day_schedule_bp.route('/<int:block_id>', methods=['PATCH'])
 @jwt_required()
 def update_block(block_id):
