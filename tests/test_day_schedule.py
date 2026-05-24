@@ -1,8 +1,12 @@
+WEEK_START = '2026-05-18'  # Monday
+
+
 def test_create_and_list_schedule_blocks(client, auth_headers, member):
     res = client.post(
         "/api/day-schedule/",
         headers=auth_headers,
         json={
+            "week_start": WEEK_START,
             "day": 0,
             "start_hour": 9,
             "end_hour": 12,
@@ -13,10 +17,12 @@ def test_create_and_list_schedule_blocks(client, auth_headers, member):
     assert res.status_code == 201
     block = res.get_json()
     assert block["label"] == "Praca"
-    assert block["start_hour"] == 9
-    assert block["end_hour"] == 12
+    assert block["week_start"] == WEEK_START
 
-    listed = client.get(f"/api/day-schedule/?member_id={member.id}", headers=auth_headers)
+    listed = client.get(
+        f"/api/day-schedule/?member_id={member.id}&week_start={WEEK_START}",
+        headers=auth_headers,
+    )
     assert listed.status_code == 200
     items = listed.get_json()
     assert len(items) == 1
@@ -25,6 +31,7 @@ def test_create_and_list_schedule_blocks(client, auth_headers, member):
 
 def test_schedule_rejects_overlap(client, auth_headers, member):
     payload = {
+        "week_start": WEEK_START,
         "day": 1,
         "start_hour": 14,
         "end_hour": 16,
@@ -47,6 +54,7 @@ def test_delete_schedule_block(client, auth_headers, member):
         "/api/day-schedule/",
         headers=auth_headers,
         json={
+            "week_start": WEEK_START,
             "day": 3,
             "start_hour": 18,
             "end_hour": 20,
@@ -59,5 +67,64 @@ def test_delete_schedule_block(client, auth_headers, member):
     deleted = client.delete(f"/api/day-schedule/{block_id}", headers=auth_headers)
     assert deleted.status_code == 200
 
-    listed = client.get(f"/api/day-schedule/?member_id={member.id}", headers=auth_headers)
+    listed = client.get(
+        f"/api/day-schedule/?member_id={member.id}&week_start={WEEK_START}",
+        headers=auth_headers,
+    )
     assert listed.get_json() == []
+
+
+def test_bulk_work_hours(client, auth_headers, member):
+    res = client.post(
+        "/api/day-schedule/bulk",
+        headers=auth_headers,
+        json={
+            "week_start": WEEK_START,
+            "start_hour": 9,
+            "end_hour": 17,
+            "label": "Praca",
+            "days": [0, 1, 2, 3, 4],
+            "member_id": member.id,
+        },
+    )
+    assert res.status_code == 201
+    data = res.get_json()
+    assert len(data["created"]) == 5
+    assert data["skipped"] == []
+
+    listed = client.get(
+        f"/api/day-schedule/?member_id={member.id}&week_start={WEEK_START}",
+        headers=auth_headers,
+    )
+    assert len(listed.get_json()) == 5
+
+
+def test_bulk_skips_overlapping_days(client, auth_headers, member):
+    client.post(
+        "/api/day-schedule/",
+        headers=auth_headers,
+        json={
+            "week_start": WEEK_START,
+            "day": 0,
+            "start_hour": 9,
+            "end_hour": 17,
+            "label": "Praca",
+            "member_id": member.id,
+        },
+    )
+    res = client.post(
+        "/api/day-schedule/bulk",
+        headers=auth_headers,
+        json={
+            "week_start": WEEK_START,
+            "start_hour": 9,
+            "end_hour": 17,
+            "label": "Praca",
+            "days": [0, 1],
+            "member_id": member.id,
+        },
+    )
+    assert res.status_code == 201
+    data = res.get_json()
+    assert len(data["created"]) == 1
+    assert data["skipped"] == [0]

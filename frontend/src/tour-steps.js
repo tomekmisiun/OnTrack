@@ -33,6 +33,14 @@ const STEPS_PL = [
     gotoTab: 'calendar',
   },
   {
+    target: '[data-tour="tab-schedule"]',
+    title: 'Rozkład dnia',
+    content: 'Tygodniowa siatka godzin dla każdego profilu. Przeciągnij po komórkach w jednym dniu, wpisz nazwę zajęcia (np. praca, siłownia) — kliknij blok, aby go usunąć. Wypełniony plan lub pusty szablon możesz wydrukować z zakładki Eksport.',
+    placement: 'right',
+    ...CLOSE_AS_SKIP,
+    gotoTab: 'schedule',
+  },
+  {
     target: '[data-tour="tab-recipes"]',
     title: 'Przepisy',
     content: 'Lista Twoich przepisów z kosztami i makro. Kliknij przepis aby rozwinąć składniki, kliknięcie w nazwę, ilość lub makro otwiera edycję.',
@@ -59,7 +67,7 @@ const STEPS_PL = [
   {
     target: '[data-tour="tab-export"]',
     title: 'Eksport',
-    content: 'Generuj gotowe dokumenty do wydruku: podsumowanie wydatków, kartę makro, kalendarz posiłków, składniki przepisu lub listę zakupów z zaznaczonych dni.',
+    content: 'Generuj gotowe dokumenty do wydruku: podsumowanie wydatków, kartę makro, kalendarz posiłków, rozkład dnia, składniki przepisu lub listę zakupów z zaznaczonych dni.',
     placement: 'right',
     ...CLOSE_AS_SKIP,
     gotoTab: 'export',
@@ -106,6 +114,14 @@ const STEPS_EN = [
     gotoTab: 'calendar',
   },
   {
+    target: '[data-tour="tab-schedule"]',
+    title: 'Daily schedule',
+    content: 'A weekly hour grid for each profile. Drag across cells on one day, enter an activity name (e.g. work, gym) — click a block to remove it. Print a filled plan or blank template from the Export tab.',
+    placement: 'right',
+    ...CLOSE_AS_SKIP,
+    gotoTab: 'schedule',
+  },
+  {
     target: '[data-tour="tab-recipes"]',
     title: 'Recipes',
     content: 'Your recipe list with costs and macros. Click a recipe to expand its ingredients; click any name, quantity or macro value to edit it.',
@@ -132,7 +148,7 @@ const STEPS_EN = [
   {
     target: '[data-tour="tab-export"]',
     title: 'Export',
-    content: 'Generate print-ready documents: expense summary, macro card, meal calendar, recipe ingredients or a shopping list from selected days.',
+    content: 'Generate print-ready documents: expense summary, macro card, meal calendar, daily schedule, recipe ingredients or a shopping list from selected days.',
     placement: 'right',
     ...CLOSE_AS_SKIP,
     gotoTab: 'export',

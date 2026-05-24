@@ -91,8 +91,11 @@ export const fuel = {
 };
 
 export const daySchedule = {
-  getAll:  (memberId) => API.get('/api/day-schedule/', { params: memberId ? { member_id: memberId } : {} }),
+  getAll:  (memberId, weekStart) => API.get('/api/day-schedule/', {
+    params: { member_id: memberId, week_start: weekStart },
+  }),
   create:  (data)     => API.post('/api/day-schedule/', data),
+  createBulk: (data)  => API.post('/api/day-schedule/bulk', data),
   update:  (id, data) => API.patch(`/api/day-schedule/${id}`, data),
   delete:  (id)       => API.delete(`/api/day-schedule/${id}`),
 };

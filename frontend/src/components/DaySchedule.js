@@ -1,15 +1,26 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { Icon } from '@iconify/react';
 import { daySchedule as api } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useMember } from '../contexts/MemberContext';
 import { useToast } from '../contexts/ToastContext';
+import { getCurrentWeek, addDays, toEU } from '../utils/dates';
 import './DaySchedule.css';
 
 const HOURS = Array.from({ length: 24 }, (_, i) => i);
+const HOUR_OPTIONS = Array.from({ length: 24 }, (_, i) => i);
+const END_HOUR_OPTIONS = Array.from({ length: 24 }, (_, i) => i + 1);
 const DAYS = [0, 1, 2, 3, 4, 5, 6];
+const WEEKDAYS = [0, 1, 2, 3, 4];
 const ROW_H = 28;
 const BLOCK_COLORS = ['#4a6fa5', '#6366f1', '#0d9488', '#c2410c', '#9333ea', '#ca8a04'];
+const WORK_COLOR = '#64748b';
+
+const STEPS = [
+  { icon: 'heroicons:cursor-arrow-rays', titleKey: 'schedule_step_1', descKey: 'schedule_step_1_desc' },
+  { icon: 'heroicons:pencil-square',       titleKey: 'schedule_step_2', descKey: 'schedule_step_2_desc' },
+  { icon: 'heroicons:trash',             titleKey: 'schedule_step_3', descKey: 'schedule_step_3_desc' },
+];
 
 function isSleepHour(hour) {
   return hour >= 23 || hour < 6;
@@ -24,26 +35,37 @@ function formatRange(start, end, dayLabel) {
   return `${dayLabel}, ${formatHour(start)}–${endDisplay}`;
 }
 
-const STEPS = [
-  { icon: 'heroicons:cursor-arrow-rays', titleKey: 'schedule_step_1', descKey: 'schedule_step_1_desc' },
-  { icon: 'heroicons:pencil-square',       titleKey: 'schedule_step_2', descKey: 'schedule_step_2_desc' },
-  { icon: 'heroicons:trash',             titleKey: 'schedule_step_3', descKey: 'schedule_step_3_desc' },
-];
-
 export default function DaySchedule() {
   const { t } = useLanguage();
   const { activeMember } = useMember();
   const { showError, showSuccess } = useToast();
 
+  const currentWeekStart = getCurrentWeek().start;
+  const [weekStart, setWeekStart] = useState(currentWeekStart);
   const [blocks, setBlocks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [dragging, setDragging] = useState(false);
   const [selection, setSelection] = useState(null);
   const [modal, setModal] = useState(null);
   const [labelInput, setLabelInput] = useState('');
+  const [workStart, setWorkStart] = useState(9);
+  const [workEnd, setWorkEnd] = useState(17);
+  const [workLabel, setWorkLabel] = useState('');
+  const [workAllDays, setWorkAllDays] = useState(false);
+  const [workLoading, setWorkLoading] = useState(false);
   const dragRef = useRef(null);
 
   const dayLabels = t('day_short');
+  const weekEnd = addDays(weekStart, 6);
+  const isCurrentWeek = weekStart === currentWeekStart;
+
+  useEffect(() => {
+    setWorkLabel(t('schedule_work_default'));
+  }, [t]);
+
+  useEffect(() => {
+    if (workEnd <= workStart) setWorkEnd(Math.min(workStart + 1, 24));
+  }, [workStart, workEnd]);
 
   const loadBlocks = useCallback(async () => {
     if (!activeMember?.id) {
@@ -53,21 +75,27 @@ export default function DaySchedule() {
     }
     setLoading(true);
     try {
-      const res = await api.getAll(activeMember.id);
+      const res = await api.getAll(activeMember.id, weekStart);
       setBlocks(res.data);
     } catch {
       showError(t('schedule_load_err'));
     } finally {
       setLoading(false);
     }
-  }, [activeMember?.id, showError, t]);
+  }, [activeMember?.id, weekStart, showError, t]);
 
   useEffect(() => { loadBlocks(); }, [loadBlocks]);
+
+  const dayDates = useMemo(
+    () => DAYS.map(d => addDays(weekStart, d)),
+    [weekStart]
+  );
 
   const blockAt = (day, hour) =>
     blocks.find(b => b.day === day && hour >= b.start_hour && hour < b.end_hour);
 
-  const blockColor = (blockId) => BLOCK_COLORS[blockId % BLOCK_COLORS.length];
+  const blockColor = (block) =>
+    block.label === t('schedule_work_default') ? WORK_COLOR : BLOCK_COLORS[block.id % BLOCK_COLORS.length];
 
   const startDrag = (day, hour) => {
     if (blockAt(day, hour)) return;
@@ -103,7 +131,7 @@ export default function DaySchedule() {
       }
     }
 
-    setModal({ day, start_hour: startHour, end_hour: endHour });
+    setModal({ day, start_hour: startHour, end_hour: endHour, week_start: weekStart });
     setLabelInput('');
     setSelection(null);
     dragRef.current = null;
@@ -135,6 +163,40 @@ export default function DaySchedule() {
     }
   };
 
+  const applyWorkHours = async () => {
+    const label = (workLabel || t('schedule_work_default')).trim();
+    if (workEnd <= workStart) {
+      showError(t('schedule_overlap_err'));
+      return;
+    }
+    setWorkLoading(true);
+    try {
+      const days = workAllDays ? DAYS : WEEKDAYS;
+      const res = await api.createBulk({
+        member_id: activeMember.id,
+        week_start: weekStart,
+        start_hour: workStart,
+        end_hour: workEnd,
+        label,
+        days,
+      });
+      const created = res.data.created || [];
+      const skipped = res.data.skipped || [];
+      if (created.length === 0) {
+        showError(t('schedule_work_none'));
+      } else {
+        setBlocks(prev => [...prev, ...created].sort((a, b) =>
+          a.day - b.day || a.start_hour - b.start_hour
+        ));
+        showSuccess(t('schedule_work_applied')(created.length, skipped.length));
+      }
+    } catch {
+      showError(t('schedule_save_err'));
+    } finally {
+      setWorkLoading(false);
+    }
+  };
+
   const deleteBlock = async (block) => {
     if (!window.confirm(t('schedule_delete_confirm'))) return;
     try {
@@ -151,6 +213,8 @@ export default function DaySchedule() {
     const hi = Math.max(selection.start, selection.end);
     return hour >= lo && hour <= hi;
   };
+
+  const shiftWeek = (delta) => setWeekStart(prev => addDays(prev, delta * 7));
 
   return (
     <div className="schedule-page">
@@ -186,6 +250,80 @@ export default function DaySchedule() {
         </div>
       </header>
 
+      <div className="card schedule-toolbar">
+        <div className="schedule-week-nav">
+          <button type="button" className="schedule-nav-btn" onClick={() => shiftWeek(-1)} title={t('schedule_prev_week')}>
+            <Icon icon="heroicons:chevron-left" width={18} />
+          </button>
+          <div className="schedule-week-label">
+            <span className="schedule-week-range">{toEU(weekStart)} – {toEU(weekEnd)}</span>
+            {!isCurrentWeek && (
+              <button type="button" className="schedule-today-btn" onClick={() => setWeekStart(currentWeekStart)}>
+                {t('schedule_this_week')}
+              </button>
+            )}
+          </div>
+          <button type="button" className="schedule-nav-btn" onClick={() => shiftWeek(1)} title={t('schedule_next_week')}>
+            <Icon icon="heroicons:chevron-right" width={18} />
+          </button>
+        </div>
+
+        <div className="schedule-work-bar">
+          <span className="schedule-work-title">
+            <Icon icon="heroicons:briefcase" width={16} />
+            {t('schedule_work_hours')}
+          </span>
+          <label className="schedule-work-field">
+            <span>{t('schedule_work_from')}</span>
+            <select value={workStart} onChange={e => setWorkStart(Number(e.target.value))}>
+              {HOUR_OPTIONS.map(h => <option key={h} value={h}>{formatHour(h)}</option>)}
+            </select>
+          </label>
+          <label className="schedule-work-field">
+            <span>{t('schedule_work_to')}</span>
+            <select value={workEnd} onChange={e => setWorkEnd(Number(e.target.value))}>
+              {END_HOUR_OPTIONS.filter(h => h > workStart).map(h => (
+                <option key={h} value={h}>{h === 24 ? '24:00' : formatHour(h)}</option>
+              ))}
+            </select>
+          </label>
+          <label className="schedule-work-field schedule-work-field--label">
+            <span>{t('schedule_work_label')}</span>
+            <input
+              type="text"
+              maxLength={120}
+              value={workLabel}
+              onChange={e => setWorkLabel(e.target.value)}
+              placeholder={t('schedule_work_default')}
+            />
+          </label>
+          <div className="schedule-work-days">
+            <button
+              type="button"
+              className={`schedule-day-chip ${!workAllDays ? 'active' : ''}`}
+              onClick={() => setWorkAllDays(false)}
+            >
+              {t('schedule_work_weekdays')}
+            </button>
+            <button
+              type="button"
+              className={`schedule-day-chip ${workAllDays ? 'active' : ''}`}
+              onClick={() => setWorkAllDays(true)}
+            >
+              {t('schedule_work_all_days')}
+            </button>
+          </div>
+          <button
+            type="button"
+            className="btn btn-primary schedule-work-apply"
+            onClick={applyWorkHours}
+            disabled={workLoading}
+          >
+            {workLoading ? t('loading') : t('schedule_work_apply')}
+          </button>
+        </div>
+      </div>
+
       <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
         {loading ? (
           <div className="schedule-loading">{t('loading')}</div>
@@ -194,7 +332,10 @@ export default function DaySchedule() {
             <div className="schedule-layout">
               <div className="schedule-corner" />
               {DAYS.map(d => (
-                <div key={`h-${d}`} className="schedule-day-head">{dayLabels[d]}</div>
+                <div key={`h-${d}`} className="schedule-day-head">
+                  <span className="schedule-day-name">{dayLabels[d]}</span>
+                  <span className="schedule-day-date">{toEU(dayDates[d]).slice(0, 5)}</span>
+                </div>
               ))}
 
               <div className="schedule-body">
@@ -231,7 +372,7 @@ export default function DaySchedule() {
                           style={{
                             top: block.start_hour * ROW_H + 1,
                             height: (block.end_hour - block.start_hour) * ROW_H - 2,
-                            background: blockColor(block.id),
+                            background: blockColor(block),
                           }}
                           onMouseDown={e => e.stopPropagation()}
                           onClick={() => deleteBlock(block)}

@@ -28,6 +28,18 @@ const TAB_ICONS = {
   export:   'heroicons:arrow-down-tray',
 };
 
+function tourStorageKey(userId) {
+  return `mealplanner_tour_done_${userId}`;
+}
+
+function isTourDone(userId) {
+  return Boolean(userId && localStorage.getItem(tourStorageKey(userId)) === '1');
+}
+
+function markTourDone(userId) {
+  if (userId) localStorage.setItem(tourStorageKey(userId), '1');
+}
+
 function AppInner({ onStartTour }) {
   const { user, logout } = useAuth();
   const { t } = useLanguage();
@@ -117,13 +129,21 @@ function AppInner({ onStartTour }) {
   );
 }
 
-function AppWithTour() {
-  const { switchLang, lang } = useLanguage();
+function TourHost() {
+  const { user } = useAuth();
+  const { lang } = useLanguage();
   const [tourRun, setTourRun] = useState(false);
+
+  useEffect(() => {
+    if (!user?.id || isTourDone(user.id)) return undefined;
+    const timer = setTimeout(() => setTourRun(true), 600);
+    return () => clearTimeout(timer);
+  }, [user?.id]);
 
   const handleTourCallback = useCallback((data) => {
     const { status, type, action, index } = data;
     if (status === STATUS.FINISHED || status === STATUS.SKIPPED || action === ACTIONS.CLOSE) {
+      if (user?.id) markTourDone(user.id);
       setTourRun(false);
       return;
     }
@@ -133,7 +153,7 @@ function AppWithTour() {
         window.dispatchEvent(new CustomEvent('tour-goto-tab', { detail: { tab: step.gotoTab } }));
       }
     }
-  }, []);
+  }, [lang, user?.id]);
 
   const startTour = useCallback(() => {
     setTourRun(false);
@@ -141,21 +161,31 @@ function AppWithTour() {
   }, []);
 
   return (
+    <>
+      <Joyride
+        steps={getTourSteps(lang)}
+        run={tourRun}
+        continuous
+        showSkipButton
+        showProgress
+        scrollToFirstStep={false}
+        disableScrolling
+        locale={getTourLocale(lang)}
+        styles={TOUR_STYLES}
+        callback={handleTourCallback}
+      />
+      <AppInner onStartTour={startTour} />
+    </>
+  );
+}
+
+function AppWithTour() {
+  const { switchLang } = useLanguage();
+
+  return (
     <AuthProvider onLangChange={switchLang}>
       <MemberProvider>
-        <Joyride
-          steps={getTourSteps(lang)}
-          run={tourRun}
-          continuous
-          showSkipButton
-          showProgress
-          scrollToFirstStep
-          disableScrolling={false}
-          locale={getTourLocale(lang)}
-          styles={TOUR_STYLES}
-          callback={handleTourCallback}
-        />
-        <AppInner onStartTour={startTour} />
+        <TourHost />
       </MemberProvider>
     </AuthProvider>
   );

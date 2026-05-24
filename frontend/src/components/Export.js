@@ -588,7 +588,7 @@ function escHtml(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-function generateDayScheduleHTML({ blocks, memberName, lang, emptyTemplate }) {
+function generateDayScheduleHTML({ blocks, memberName, lang, emptyTemplate, weekLabel }) {
   const L = lang === 'en';
   const now = new Date();
   const dateStr = `${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
@@ -634,7 +634,9 @@ function generateDayScheduleHTML({ blocks, memberName, lang, emptyTemplate }) {
     : (L ? 'Daily schedule' : 'Rozkład dnia');
   const subtitle = emptyTemplate
     ? (L ? 'Fill in activities by hand' : 'Wypełnij zajęcia ręcznie')
-    : (L ? 'Weekly activity plan' : 'Tygodniowy plan zajęć');
+    : weekLabel
+      ? (L ? `Week ${weekLabel}` : `Tydzień ${weekLabel}`)
+      : (L ? 'Weekly activity plan' : 'Tygodniowy plan zajęć');
 
   return `<!DOCTYPE html>
 <html lang="${L ? 'en' : 'pl'}"><head><meta charset="UTF-8">
@@ -867,8 +869,9 @@ export default function Export({ onGoToTab }) {
     setHtmlScheduleLoading(true);
     try {
       let blocks = [];
+      const { start, end } = getCurrentWeek();
       if (!emptyTemplate) {
-        const res = await scheduleApi.getAll(activeMember.id);
+        const res = await scheduleApi.getAll(activeMember.id, start);
         blocks = res.data || [];
       }
       const html = generateDayScheduleHTML({
@@ -876,6 +879,7 @@ export default function Export({ onGoToTab }) {
         memberName: activeMember.name,
         lang,
         emptyTemplate,
+        weekLabel: `${toEU(start)} – ${toEU(end)}`,
       });
       const win = window.open('', '_blank');
       win.document.write(html);
