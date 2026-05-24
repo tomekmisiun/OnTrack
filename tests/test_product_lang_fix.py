@@ -1,8 +1,10 @@
 import sys
+from pathlib import Path
 
 import pytest
 
-sys.path.insert(0, "/app/scraper")
+_SCRAPER = Path(__file__).resolve().parents[1] / "scraper"
+sys.path.insert(0, str(_SCRAPER))
 from processing.import_to_db import canonical_ingredient_name  # noqa: E402
 
 from app import db
