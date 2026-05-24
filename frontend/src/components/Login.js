@@ -391,13 +391,6 @@ export default function Login() {
             />
           ))}
         </div>
-
-        <footer className="login-footer">
-          <div className="login-footer-card">
-            <h2 className="login-footer-title">{t('showcase_more_title')}</h2>
-            <p className="login-footer-desc">{t('showcase_more_desc')}</p>
-          </div>
-        </footer>
       </main>
 
       <aside className="login-panel">
