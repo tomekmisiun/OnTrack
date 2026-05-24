@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout kod
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Ustaw Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
 
@@ -41,7 +41,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout kod
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Zaloguj do Docker Hub
         uses: docker/login-action@v3
