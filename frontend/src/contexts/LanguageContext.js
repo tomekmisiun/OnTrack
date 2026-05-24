@@ -51,7 +51,7 @@ const T = {
     showcase_calendar_title: 'Interaktywny Kalendarz',
     showcase_calendar_desc: 'Przestań się zastanawiać co jutro na obiad!\n\nW 5 minut zaplanuj cały tydzień albo nawet cały miesiąc i zobacz czy prawidłowo się odżywiasz w jednym!\n\nPlanuj śniadania, obiady i kolacje dla każdego domownika. Przeciągnij przepis na dzień — koszt i makra liczą się automatycznie.',
     showcase_schedule_title: 'Tygodniowy rozkład dnia',
-    showcase_schedule_desc: 'Uporządkuj dzień godzina po godzinie!\n\nTygodniowa siatka dla każdego profilu — zaznacz przedziały czasu i dodaj zajęcia: praca, trening, spotkania. Przełączaj tygodnie do przodu i planuj z wyprzedzeniem.\n\nWypełnij godziny pracy jednym kliknięciem (Pn–Pt lub cały tydzień) i wydrukuj plan albo pusty szablon z zakładki Eksport.',
+    showcase_schedule_desc: 'Lepiej gospodaruj czasem!\n\nTygodniowa siatka dla każdego profilu — zaznacz przedziały czasu i dodaj zajęcia: praca, trening, spotkania. Przełączaj tygodnie do przodu i planuj z wyprzedzeniem.\n\nWypełnij godziny pracy jednym kliknięciem (Pn–Pt lub cały tydzień) i wydrukuj plan albo pusty szablon z zakładki Eksport.',
     showcase_recipes_title: 'Przepisy z kosztem i makrami',
     showcase_recipes_desc: 'Oszczędzaj czas! Rozwiązaliśmy to za Ciebie!\n\nGotowa baza przepisów z ceną porcji, makroskładnikami. Filtruj po kategorii, oznacz ulubione, dodawaj własne.\n\nPrzepisy, które zobaczysz nad kalendarzem interaktywnym, będą już miały ilości składników i makro dostosowane do 1 porcji.',
     showcase_products_title: 'Produkty ze sklepu',
