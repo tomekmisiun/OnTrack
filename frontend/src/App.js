@@ -100,11 +100,17 @@ function AppInner({ onStartTour }) {
         </nav>
 
         <div className="sidebar-footer">
-          <button className="sidebar-btn" onClick={() => setShowProfile(true)}>
-            <Icon icon="heroicons:cog-6-tooth" width={15} /> {t('account')}
+          <button type="button" className="sidebar-btn sidebar-btn-account" onClick={() => setShowProfile(true)}>
+            <span className="sidebar-btn-icon" aria-hidden="true">
+              <Icon icon="heroicons:cog-6-tooth" width={18} />
+            </span>
+            {t('account')}
           </button>
-          <button className="sidebar-btn sidebar-btn-logout" onClick={logout}>
-            <Icon icon="heroicons:arrow-left-start-on-rectangle" width={15} /> {t('logout')}
+          <button type="button" className="sidebar-btn sidebar-btn-logout" onClick={logout}>
+            <span className="sidebar-btn-icon sidebar-btn-icon--logout" aria-hidden="true">
+              <Icon icon="heroicons:arrow-left-start-on-rectangle" width={18} />
+            </span>
+            {t('logout')}
           </button>
         </div>
       </aside>

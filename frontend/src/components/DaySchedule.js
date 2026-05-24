@@ -310,7 +310,7 @@ export default function DaySchedule() {
 
         <div className="schedule-work-section">
           <div className="schedule-section-head">
-            <Icon icon="heroicons:briefcase" width={18} className="schedule-section-icon" />
+            <Icon icon="heroicons:queue-list" width={18} className="schedule-section-icon" />
             <div>
               <span>{t('schedule_work_hours')}</span>
               <p className="schedule-section-desc">{t('schedule_work_desc')}</p>
