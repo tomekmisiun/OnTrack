@@ -24,6 +24,12 @@ function formatRange(start, end, dayLabel) {
   return `${dayLabel}, ${formatHour(start)}–${endDisplay}`;
 }
 
+const STEPS = [
+  { icon: 'heroicons:cursor-arrow-rays', titleKey: 'schedule_step_1', descKey: 'schedule_step_1_desc' },
+  { icon: 'heroicons:pencil-square',       titleKey: 'schedule_step_2', descKey: 'schedule_step_2_desc' },
+  { icon: 'heroicons:trash',             titleKey: 'schedule_step_3', descKey: 'schedule_step_3_desc' },
+];
+
 export default function DaySchedule() {
   const { t } = useLanguage();
   const { activeMember } = useMember();
@@ -148,16 +154,37 @@ export default function DaySchedule() {
 
   return (
     <div className="schedule-page">
-      <div className="card schedule-header">
-        <div>
-          <h2>{t('schedule_title')}</h2>
-          <p className="schedule-hint">{t('schedule_hint')}</p>
+      <header className="schedule-hero card">
+        <div className="schedule-hero-top">
+          <div className="schedule-hero-icon">
+            <Icon icon="heroicons:clock" width={26} />
+          </div>
+          <div className="schedule-hero-text">
+            <h2 className="schedule-hero-title">{t('schedule_title')}</h2>
+            <p className="schedule-hero-subtitle">{t('schedule_subtitle')}</p>
+          </div>
+          {activeMember && (
+            <div className="schedule-hero-meta">
+              {blocks.length > 0 && (
+                <span className="schedule-hero-count">{t('schedule_blocks_count')(blocks.length)}</span>
+              )}
+              <span className="schedule-hero-profile">{activeMember.name}</span>
+            </div>
+          )}
         </div>
-        <div className="schedule-legend">
-          <span className="schedule-legend-swatch" />
-          {t('schedule_sleep_legend')}
+        <div className="schedule-steps">
+          {STEPS.map((step, i) => (
+            <div key={step.titleKey} className="schedule-step">
+              <span className="schedule-step-num">{i + 1}</span>
+              <Icon icon={step.icon} className="schedule-step-icon" width={18} />
+              <div className="schedule-step-body">
+                <span className="schedule-step-title">{t(step.titleKey)}</span>
+                <span className="schedule-step-desc">{t(step.descKey)}</span>
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
+      </header>
 
       <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
         {loading ? (

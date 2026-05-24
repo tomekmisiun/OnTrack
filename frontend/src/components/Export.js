@@ -648,8 +648,6 @@ h1{font-size:22px;font-weight:800;color:#0d9488}
 .sub{font-size:13px;color:#374151;margin-top:4px}
 .member{font-size:12px;color:#6b7280;margin-top:2px}
 .meta{font-size:11px;color:#9ca3af;text-align:right}
-.legend{display:flex;align-items:center;gap:8px;font-size:11px;color:#6b7280;margin:10px 0 14px}
-.legend-swatch{width:14px;height:14px;background:#e5e7eb;border:1px solid #d1d5db;border-radius:2px}
 table{width:100%;border-collapse:collapse;table-layout:fixed}
 th{font-size:10px;font-weight:700;color:#0d9488;text-transform:uppercase;letter-spacing:.4px;padding:6px 4px;border:1px solid #e5e7eb;background:#f0fdf4}
 th.sub{font-size:9px;color:#6b7280;background:#fafafa;font-weight:600;text-transform:none;letter-spacing:0}
@@ -670,7 +668,6 @@ td.blank{min-height:22px}
   </div>
   <div class="meta">${L ? 'Generated' : 'Wygenerowano'}: ${dateStr}</div>
 </div>
-<div class="legend"><span class="legend-swatch"></span>${L ? 'Sleep hours (11 pm – 6 am)' : 'Pora snu (23:00–6:00)'}</div>
 <table>
 <thead>
   <tr><th style="width:46px"></th>${headerCells}</tr>
