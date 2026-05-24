@@ -8,6 +8,7 @@ def test_parse_limit_returns_remaining(client, auth_headers):
     data = res.get_json()
     assert data["daily_limit"] == 2
     assert data["remaining_today"] == 2
+    assert "ai_available" in data
 
 
 def test_parse_text_requires_recipe_body(client, auth_headers):
@@ -32,8 +33,8 @@ def test_parse_text_without_gemini_key(client, auth_headers, monkeypatch):
         headers=auth_headers,
         json={"text": "Owsianka\n200 g płatków owsianych\n300 ml mleka"},
     )
-    assert res.status_code == 500
-    assert "GEMINI_API_KEY" in res.get_json()["error"]
+    assert res.status_code == 503
+    assert res.get_json()["code"] == "gemini_not_configured"
 
 
 def test_parse_text_accepts_english_ingredients(client, auth_headers, monkeypatch):
@@ -51,8 +52,8 @@ def test_parse_text_accepts_english_ingredients(client, auth_headers, monkeypatc
             ),
         },
     )
-    assert res.status_code == 500
-    assert "GEMINI_API_KEY" in res.get_json()["error"]
+    assert res.status_code == 503
+    assert res.get_json()["code"] == "gemini_not_configured"
 
 
 def test_update_category(client, auth_headers, recipe):

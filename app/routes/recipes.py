@@ -239,6 +239,7 @@ def get_parse_limit():
     return jsonify({
         'remaining_today': max(0, PARSE_DAILY_LIMIT - today_count),
         'daily_limit': PARSE_DAILY_LIMIT,
+        'ai_available': bool(os.environ.get('GEMINI_API_KEY')),
     })
 
 @recipes_bp.route('/parse-text', methods=['POST'])
@@ -263,7 +264,10 @@ def parse_recipe_text():
 
     api_key = os.environ.get('GEMINI_API_KEY')
     if not api_key:
-        return jsonify({'error': 'GEMINI_API_KEY is not configured'}), 500
+        return jsonify({
+            'error': 'AI parsing is not configured on the server.',
+            'code': 'gemini_not_configured',
+        }), 503
 
     lang = current_user_lang()
     products = Product.query.filter_by(user_id=uid, lang=lang).order_by(Product.name).all()

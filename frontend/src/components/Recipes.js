@@ -190,6 +190,7 @@ export default function Recipes() {
   const [parsed, setParsed] = useState(null);
   const [parsing, setParsing] = useState(false);
   const [remaining, setRemaining] = useState(null);
+  const [aiAvailable, setAiAvailable] = useState(true);
   const [editingName, setEditingName] = useState(null);
   const [editingIngredients, setEditingIngredients] = useState(null);
   const [editingIngCell, setEditingIngCell] = useState(null); // { key, field: 'weight'|'macro'|'name', val/vals }
@@ -270,7 +271,11 @@ export default function Recipes() {
     try { setProductList((await productsApi.getAll()).data); } catch {}
   };
   const loadParseLimit = async () => {
-    try { setRemaining((await api.getParseLimit()).data.remaining_today); } catch {}
+    try {
+      const data = (await api.getParseLimit()).data;
+      setRemaining(data.remaining_today);
+      setAiAvailable(data.ai_available !== false);
+    } catch {}
   };
 
   const fetchMacroFromOFF = async (name) => {
@@ -321,7 +326,11 @@ export default function Recipes() {
       const res = await axios.post(`${API_URL}/api/recipes/parse-text`, { text: pasteText }, { headers: { Authorization: `Bearer ${token}` } });
       setRemaining(res.data.remaining_today);
       setParsed({ name: res.data.recipe_name, category: res.data.category || null, ingredients: res.data.ingredients.map(i => ({ rawName: i.ingredient_text, weight: i.weight, unit: i.unit, product_id: i.product_id })) });
-    } catch (e) { showError(e.response?.data?.error || t('err_save_recipe')); }
+    } catch (e) {
+      const code = e.response?.data?.code;
+      if (code === 'gemini_not_configured') showError(t('err_gemini_not_configured'));
+      else showError(e.response?.data?.error || t('err_save_recipe'));
+    }
     finally { setParsing(false); }
   };
 
@@ -474,12 +483,16 @@ export default function Recipes() {
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
                 <div>
-                  <button className="btn btn-primary" onClick={handleParseAI} disabled={!pasteText.trim() || parsing === 'ai'} style={{ width: '100%' }}>
+                  <button className="btn btn-primary" onClick={handleParseAI} disabled={!pasteText.trim() || parsing === 'ai' || !aiAvailable} style={{ width: '100%', opacity: aiAvailable ? 1 : 0.55 }}>
                     {parsing === 'ai' ? t('parsing_ai') : t('parse_ai_btn')}
                   </button>
-                  <div style={{ fontSize: 11, marginTop: 4, color: remaining === 0 ? '#f87171' : '#ca8a04' }}>
-                    {t('daily_limit_remaining')(remaining)}
-                  </div>
+                  {!aiAvailable ? (
+                    <div style={{ fontSize: 11, marginTop: 4, color: '#9ca3af', lineHeight: 1.45 }}>{t('ai_parse_unavailable')}</div>
+                  ) : (
+                    <div style={{ fontSize: 11, marginTop: 4, color: remaining === 0 ? '#f87171' : '#ca8a04' }}>
+                      {t('daily_limit_remaining')(remaining)}
+                    </div>
+                  )}
                 </div>
                 <div>
                   <button className="btn btn-primary" onClick={handleParseRegex} disabled={!pasteText.trim() || parsing === 'ai'}
