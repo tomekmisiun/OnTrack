@@ -437,6 +437,87 @@ function macroColor(actual, goal) {
   return pct <= 10 ? '#22c55e' : pct <= 25 ? '#eab308' : '#ef4444';
 }
 
+function pickRecipeMacros(recipe) {
+  return {
+    total_kcal: recipe.total_kcal || 0,
+    total_protein: recipe.total_protein || 0,
+    total_fat: recipe.total_fat || 0,
+    total_carbs: recipe.total_carbs || 0,
+    total_cost: recipe.total_cost || 0,
+  };
+}
+
+function toTplSlot(recipe) {
+  return { id: recipe.id, name: recipe.name, ...pickRecipeMacros(recipe) };
+}
+
+function resolveTplRecipe(slot, recipes) {
+  if (!slot) return null;
+  if (slot.total_kcal || slot.total_protein || slot.total_fat || slot.total_carbs) return slot;
+  const full = recipes.find(r => r.id === slot.id);
+  return full ? { ...slot, ...pickRecipeMacros(full) } : slot;
+}
+
+function sumDayMacros(items) {
+  return items.reduce((s, r) => ({
+    kcal: s.kcal + (r.total_kcal || 0),
+    protein: s.protein + (r.total_protein || 0),
+    fat: s.fat + (r.total_fat || 0),
+    carbs: s.carbs + (r.total_carbs || 0),
+    cost: s.cost + (r.total_cost || 0),
+  }), { kcal: 0, protein: 0, fat: 0, carbs: 0, cost: 0 });
+}
+
+function DayMacroFooter({ totals, hasMeals, macroGoals, emptyLabel, background = 'transparent' }) {
+  const { t } = useLanguage();
+  const { kcal: totalKcal, protein: totalProtein, fat: totalFat, carbs: totalCarbs, cost: totalCost } = totals;
+  const hasAnyMacro = totalKcal > 0 || totalProtein > 0 || totalFat > 0 || totalCarbs > 0;
+
+  return (
+    <div style={{
+      borderTop: '1px solid #374151',
+      background,
+      padding: '3px 5px',
+      height: 40,
+      boxSizing: 'border-box',
+      overflow: 'hidden',
+    }}>
+      {emptyLabel && !hasMeals && (
+        <span style={{ fontSize: 10, color: '#4b5563', width: '100%', textAlign: 'center', display: 'block', lineHeight: '34px', userSelect: 'none' }}>
+          {emptyLabel}
+        </span>
+      )}
+      {hasMeals && hasAnyMacro && (
+        <>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 2, overflow: 'hidden' }}>
+            <div style={{ fontSize: 12, fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', minWidth: 0 }}>
+              <span style={{ color: macroGoals ? macroColor(totalKcal, macroGoals.kcal) : '#2dd4bf' }}>{totalKcal}</span>
+              {macroGoals && <span style={{ color: '#6b7280', fontWeight: 400 }}>/{macroGoals.kcal}</span>}
+              <span style={{ color: '#6b7280', fontWeight: 400 }}> kcal</span>
+            </div>
+            {totalCost > 0 && (
+              <div style={{ flexShrink: 0, textAlign: 'right' }}>
+                <div style={{ color: '#6b7280', fontSize: 8, fontWeight: 500, lineHeight: 1 }}>{t('est_cost')}</div>
+                <div style={{ color: '#0d9488', fontWeight: 700, fontSize: 11, lineHeight: 1.2 }}>{totalCost.toFixed(2)} {t('currency')}</div>
+              </div>
+            )}
+          </div>
+          <div style={{ fontSize: 11, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            {[[t('macro_p'), Math.round(totalProtein), macroGoals?.protein], [t('macro_f'), Math.round(totalFat), macroGoals?.fat], [t('macro_c'), Math.round(totalCarbs), macroGoals?.carbs]].map(([lbl, val, tgt], i) => (
+              <span key={lbl} style={{ marginLeft: i > 0 ? 4 : 0 }}>
+                <span style={{ color: '#6b7280' }}>{lbl}:</span>
+                <span style={{ color: tgt ? macroColor(val, tgt) : '#9ca3af' }}>{val}</span>
+                {tgt && <span style={{ color: '#6b7280' }}>/{tgt}</span>}
+                <span style={{ color: '#6b7280' }}>g</span>
+              </span>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDelete, onDeleteAll, onCopy, onPaste, copiedDay, macroGoals }) {
   const { t } = useLanguage();
   const dayAbbr = t('day_short')[(date.getDay() + 6) % 7];
@@ -445,12 +526,7 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
   const hasMeals = meals.length > 0;
   const canPaste = copiedDay && copiedDay !== dateStr;
 
-  const totalKcal    = meals.reduce((s, m) => s + (m.recipe.total_kcal    || 0), 0);
-  const totalProtein = meals.reduce((s, m) => s + (m.recipe.total_protein || 0), 0);
-  const totalFat     = meals.reduce((s, m) => s + (m.recipe.total_fat     || 0), 0);
-  const totalCarbs   = meals.reduce((s, m) => s + (m.recipe.total_carbs   || 0), 0);
-  const totalCost    = meals.reduce((s, m) => s + (m.recipe.total_cost    || 0), 0);
-  const hasAnyMacro  = totalKcal > 0 || totalProtein > 0 || totalFat > 0 || totalCarbs > 0;
+  const dayMacros = sumDayMacros(meals.map(m => m.recipe));
 
   return (
     <div id={isToday ? 'calendar-today' : undefined} style={{
@@ -522,42 +598,13 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
             meal={mealsByPos[pos]} onDelete={onDelete} showLabel={isToday} />
         ))}
       </div>
-      <div style={{
-        borderTop:'1px solid #374151',
-        background: isPast ? '#161d2d' : isToday ? '#162626' : 'transparent',
-        padding:'3px 5px', height:40, boxSizing:'border-box', overflow:'hidden',
-      }}>
-        {isToday && !hasMeals && (
-          <span style={{fontSize:10,color:'#4b5563',width:'100%',textAlign:'center',display:'block',lineHeight:'34px',userSelect:'none'}}>{t('macro_day_label')}</span>
-        )}
-        {hasMeals && hasAnyMacro && (
-          <>
-            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',gap:2,overflow:'hidden'}}>
-              <div style={{fontSize:12,fontWeight:700,whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis',minWidth:0}}>
-                <span style={{color: macroGoals ? macroColor(totalKcal, macroGoals.kcal) : '#2dd4bf'}}>{totalKcal}</span>
-                {macroGoals && <span style={{color:'#6b7280',fontWeight:400}}>/{macroGoals.kcal}</span>}
-                <span style={{color:'#6b7280',fontWeight:400}}> kcal</span>
-              </div>
-              {totalCost > 0 && (
-                <div style={{flexShrink:0,textAlign:'right'}}>
-                  <div style={{color:'#6b7280',fontSize:8,fontWeight:500,lineHeight:1}}>{t('est_cost')}</div>
-                  <div style={{color:'#0d9488',fontWeight:700,fontSize:11,lineHeight:1.2}}>{totalCost.toFixed(2)} {t('currency')}</div>
-                </div>
-              )}
-            </div>
-            <div style={{fontSize:11,whiteSpace:'nowrap',overflow:'hidden',textOverflow:'ellipsis'}}>
-              {[[t('macro_p'),Math.round(totalProtein),macroGoals?.protein],[t('macro_f'),Math.round(totalFat),macroGoals?.fat],[t('macro_c'),Math.round(totalCarbs),macroGoals?.carbs]].map(([lbl,val,tgt],i)=>(
-                <span key={lbl} style={{marginLeft:i>0?4:0}}>
-                  <span style={{color:'#6b7280'}}>{lbl}:</span>
-                  <span style={{color: tgt ? macroColor(val,tgt) : '#9ca3af'}}>{val}</span>
-                  {tgt && <span style={{color:'#6b7280'}}>/{tgt}</span>}
-                  <span style={{color:'#6b7280'}}>g</span>
-                </span>
-              ))}
-            </div>
-          </>
-        )}
-      </div>
+      <DayMacroFooter
+        totals={dayMacros}
+        hasMeals={hasMeals}
+        macroGoals={macroGoals}
+        emptyLabel={isToday ? t('macro_day_label') : null}
+        background={isPast ? '#161d2d' : isToday ? '#162626' : 'transparent'}
+      />
     </div>
   );
 }
@@ -588,7 +635,7 @@ function TemplateSlot({ dayIndex, position, recipe, onRemove }) {
 }
 
 // ─── Template editor/viewer ───────────────────────────────────────────────────
-function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditSlots, onSave, onApply, onDelete, open, setOpen }) {
+function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditSlots, onSave, onApply, onDelete, open, setOpen, macroGoals, recipes }) {
   const { t } = useLanguage();
   const [editName, setEditName]       = useState('');
   const [applyWeek, setApplyWeek]     = useState({});
@@ -685,6 +732,15 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
                     recipe={editSlots[`${di}-${pos}`] || null}
                     onRemove={handleRemove} />
                 ))}
+                <DayMacroFooter
+                  totals={sumDayMacros(
+                    [1, 2, 3, 4, 5]
+                      .map(pos => resolveTplRecipe(editSlots[`${di}-${pos}`], recipes))
+                      .filter(Boolean)
+                  )}
+                  hasMeals={dayHasContent}
+                  macroGoals={macroGoals}
+                />
               </div>
             );
           })}
@@ -759,7 +815,12 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
                     <button className="btn btn-primary" style={{padding:'5px 12px',fontSize:12,background:'#1c3534',color:'#0d9488',border:'1px solid #374151'}}
                       onClick={()=>{
                         const slots = {};
-                        tpl.meals.forEach(m => { slots[`${m.dayOffset}-${m.position}`] = {id:m.recipe_id,name:m.recipe_name}; });
+                        tpl.meals.forEach(m => {
+                          const full = recipes.find(r => r.id === m.recipe_id);
+                          slots[`${m.dayOffset}-${m.position}`] = full
+                            ? toTplSlot(full)
+                            : { id: m.recipe_id, name: m.recipe_name };
+                        });
                         setEditSlots(slots);
                         setEditName(tpl.name);
                         onDelete(ti);
@@ -1070,7 +1131,7 @@ export default function Calendar({ onGoToTab }) {
     for (let i=0; i<7; i++) {
       const ds = addDays(mon, i);
       (mealsByDate[ds]||[]).forEach(m=>{
-        newSlots[`${i}-${m.position}`] = {id:m.recipe.id, name:m.recipe.name};
+        newSlots[`${i}-${m.position}`] = toTplSlot(m.recipe);
       });
     }
     setTplSlots(newSlots);
@@ -1136,7 +1197,7 @@ export default function Calendar({ onGoToTab }) {
     if (drop.type==='tpl-slot') {
       if (drag.type!=='recipe') return;
       const k = `${drop.dayIndex}-${drop.position}`;
-      setTplSlots(prev=>({...prev,[k]:{id:drag.recipe.id,name:drag.recipe.name}}));
+      setTplSlots(prev => ({ ...prev, [k]: toTplSlot(drag.recipe) }));
       return;
     }
 
@@ -1366,6 +1427,8 @@ export default function Calendar({ onGoToTab }) {
         onDelete={deleteTemplate}
         open={tplOpen}
         setOpen={setTplOpen}
+        macroGoals={macroGoals}
+        recipes={recipes}
       />
 
       {/* How to use — collapsible, na dole */}
