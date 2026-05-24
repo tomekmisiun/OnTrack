@@ -20,8 +20,15 @@ const POLISH_UNITS = [
   { re: /pęczk[iaó]?|pęczków/i,      g: 50  },
   { re: /kostek?|kostki|kostkę/i,    g: 200 },
 ];
-const PIECE_WORDS = /jajk[ao]|jajek|jaja?(?=\s)|jaj\b|sztuk[ia]?|szt\.?/i;
-const FRACTION_WORDS = { 'pół': 0.5, 'ćwierć': 0.25 };
+const ENGLISH_UNITS = [
+  { re: /\bcups?\b|\bc\b(?!\w)/i,              ml: 240, g: 240 },
+  { re: /tablespoons?|tbsp\.?/i,               g: 15 },
+  { re: /teaspoons?|tsp\.?/i,                  g: 5 },
+  { re: /(?:pounds?|lbs?\.?)/i,                g: 454 },
+  { re: /(?:ounces?|oz\.?)/i,                  g: 28 },
+];
+const PIECE_WORDS = /jajk[ao]|jajek|jaja?(?=\s)|jaj\b|sztuk[ia]?|szt\.?|\beggs?\b|\bcloves?\b|\bonions?\b|\bpieces?\b|\bpcs\b/i;
+const FRACTION_WORDS = { 'pół': 0.5, 'ćwierć': 0.25, 'half': 0.5, 'quarter': 0.25 };
 
 function parseNum(s) {
   if (!s) return null;
@@ -33,7 +40,7 @@ function parseNum(s) {
 }
 
 function parseWeight(text) {
-  const stdRe = /(\d+(?:[.,]\d+)?)\s*(kg|litr(?:[óo]w|a)?|ml|g|l\b)/gi;
+  const stdRe = /(\d+(?:[.,]\d+)?)\s*(kg|litr(?:[óo]w|a)?|ml|g|l\b|lb|lbs|pound|pounds|oz|ounce|ounces)/gi;
   let first = null, m;
   while ((m = stdRe.exec(text)) !== null) { if (!first) first = m; }
   if (first) {
@@ -41,7 +48,25 @@ function parseWeight(text) {
     const unit = first[2].toLowerCase();
     if (unit === 'kg') val *= 1000;
     if (unit.startsWith('litr') || unit === 'l') val *= 1000;
-    return { weight: Math.min(99999, Math.round(val)), unit: (unit === 'ml' || unit.startsWith('litr') || unit === 'l') ? 'ml' : 'g', matchIndex: first.index, matchEnd: first.index + first[0].length };
+    if (unit === 'lb' || unit === 'lbs' || unit === 'pound' || unit === 'pounds') val *= 454;
+    if (unit === 'oz' || unit === 'ounce' || unit === 'ounces') val *= 28;
+    const isVol = unit === 'ml' || unit.startsWith('litr') || unit === 'l';
+    return { weight: Math.min(99999, Math.round(val)), unit: isVol ? 'ml' : 'g', matchIndex: first.index, matchEnd: first.index + first[0].length };
+  }
+  for (const { re, g, ml } of ENGLISH_UNITS) {
+    const unitM = re.exec(text);
+    if (unitM) {
+      const beforeUnit = text.slice(0, unitM.index).trim();
+      const fracM = /(pół|half|quarter|ćwierć|\d+(?:[.,]\d+)?|\d+\/\d+)\s*$/i.exec(beforeUnit);
+      const count = fracM ? (parseNum(fracM[1]) ?? 1) : 1;
+      const perUnit = ml ?? g;
+      const useMl = Boolean(ml);
+      const nameBeforeUnit = beforeUnit.replace(/(pół|half|quarter|ćwierć|\d+(?:[.,]\d+)?|\d+\/\d+)\s*$/i, '').trim();
+      const matchEnd = unitM.index + unitM[0].length;
+      const afterUnit = text.slice(matchEnd).trim().split(/\s*[,(-]/)[0].trim();
+      const forcedName = nameBeforeUnit.length < 2 ? afterUnit : undefined;
+      return { weight: Math.min(99999, Math.round(count * perUnit)), unit: useMl ? 'ml' : 'g', matchIndex: fracM ? unitM.index - fracM[0].length : unitM.index, matchEnd, forcedName };
+    }
   }
   for (const { re, g } of POLISH_UNITS) {
     const unitM = re.exec(text);
@@ -66,9 +91,9 @@ function parseWeight(text) {
   return null;
 }
 
-const JUNK_PREFIX = /^[\d/.,\s]*(po\s+)?(pół|ćwierć|płask\w*|duż\w*|mał\w*|śwież\w*|ugotown\w*|młod\w*|klarowan\w*|słodk\w*|ostr\w*)?\s*/i;
-const JUNK_SUFFIX = /\s*(duże?|małe?|świeże?|ugotowane?|na\s+twardo|można\s+pominąć|klarowanego?|i\s+\w.*)$/i;
-const UNIT_WORDS = /\b(szklank\w+|łyżk\w+|łyżeczk\w+|pęczk\w+|garśc\w*|kostek?|kostki|kostkę)\b\s*/gi;
+const JUNK_PREFIX = /^[\d/.,\s]*(po\s+)?(pół|half|quarter|ćwierć|płask\w*|duż\w*|mał\w*|śwież\w*|ugotown\w*|młod\w*|klarowan\w*|słodk\w*|ostr\w*|fresh|grated|chopped|diced|minced|skinless)?\s*/i;
+const JUNK_SUFFIX = /\s*(duże?|małe?|świeże?|ugotowane?|na\s+twardo|można\s+pominąć|klarowanego?|optional|chopped|diced|minced|grated|skinless|fresh|i\s+\w.*)$/i;
+const UNIT_WORDS = /\b(szklank\w+|łyżk\w+|łyżeczk\w+|pęczk\w+|garśc\w*|kostek?|kostki|kostkę|cups?|tablespoons?|teaspoons?|tbsp\.?|tsp\.?|pounds?|ounces?)\b\s*/gi;
 
 function extractName(content, parsed) {
   if (parsed.forcedName) return parsed.forcedName;
@@ -112,7 +137,7 @@ function parseRecipeText(text) {
 function norm(s) {
   return s.toLowerCase().replace(/ą/g,'a').replace(/ę/g,'e').replace(/ó/g,'o').replace(/ś/g,'s').replace(/ź/g,'z').replace(/ż/g,'z').replace(/ć/g,'c').replace(/ł/g,'l').replace(/ń/g,'n');
 }
-const STOP_WORDS = new Set(['oraz','lub','albo','duze','male','duzy','maly','okolo','bardzo','swieze','ugotowane','posiekane','uniwersalnej','naturalna','naturalny','pelne']);
+const STOP_WORDS = new Set(['oraz','lub','albo','duze','male','duzy','maly','okolo','bardzo','swieze','ugotowane','posiekane','uniwersalnej','naturalna','naturalny','pelne','optional','chopped','diced','minced','grated','skinless','fresh']);
 
 function wordsSimilar(a, b) {
   if (a === b || a.includes(b) || b.includes(a)) return true;

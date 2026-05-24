@@ -36,6 +36,25 @@ def test_parse_text_without_gemini_key(client, auth_headers, monkeypatch):
     assert "GEMINI_API_KEY" in res.get_json()["error"]
 
 
+def test_parse_text_accepts_english_ingredients(client, auth_headers, monkeypatch):
+    monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+    res = client.post(
+        "/api/recipes/parse-text",
+        headers=auth_headers,
+        json={
+            "text": (
+                "1 cup soy sauce\n"
+                "1 cup brown sugar\n"
+                "1 onion, chopped\n"
+                "1 tablespoon grated fresh ginger root\n"
+                "5 pounds skinless chicken thighs"
+            ),
+        },
+    )
+    assert res.status_code == 500
+    assert "GEMINI_API_KEY" in res.get_json()["error"]
+
+
 def test_update_category(client, auth_headers, recipe):
     res = client.patch(
         f"/api/recipes/{recipe.id}/category",
