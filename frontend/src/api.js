@@ -62,7 +62,9 @@ export const members = {
 };
 
 export const nutrition = {
-  lookup: (name) => API.get(`/api/nutrition/lookup?name=${encodeURIComponent(name)}`),
+  lookup: (name, lang) => API.get('/api/nutrition/lookup', {
+    params: { name, ...(lang ? { lang } : {}) },
+  }),
 };
 
 export const auth = {

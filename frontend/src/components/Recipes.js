@@ -5,6 +5,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../contexts/ToastContext';
 import { fuzzySearch } from '../utils/search';
+import { fetchProductMacros } from '../utils/macroLookup';
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
@@ -296,19 +297,9 @@ export default function Recipes() {
     } catch {}
   };
 
-  const fetchMacroFromOFF = async (name) => {
-    try {
-      const url = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(name)}&search_simple=1&action=process&json=1&page_size=5&fields=product_name,nutriments`;
-      const r = await fetch(url);
-      const data = await r.json();
-      for (const p of (data.products || [])) {
-        const n = p.nutriments || {};
-        let kcal = n['energy-kcal_100g'] ?? n['energy-kcal'] ?? null;
-        if (!kcal && n['energy_100g']) kcal = Math.round(n['energy_100g'] / 4.184 * 10) / 10;
-        if (kcal) return { kcal: Math.round(kcal * 10) / 10, protein: Math.round((n['proteins_100g'] ?? 0) * 10) / 10, fat: Math.round((n['fat_100g'] ?? 0) * 10) / 10, carbs: Math.round((n['carbohydrates_100g'] ?? 0) * 10) / 10 };
-      }
-    } catch {}
-    return null;
+  const fetchMacro = async (name) => {
+    const { macros } = await fetchProductMacros(name, lang);
+    return macros;
   };
 
   const handleQuickAdd = async (ingIndex) => {
@@ -329,7 +320,7 @@ export default function Recipes() {
       updateIngredient(ingIndex, 'product_id', newId);
       setAddingProductFor(null);
       showSuccess(t('product_adding')(name));
-      const macro = await fetchMacroFromOFF(name);
+      const macro = await fetchMacro(name);
       if (macro) await productsApi.update(newId, macro);
       await loadProducts();
       showSuccess(t('product_added_macro')(name, !!macro));

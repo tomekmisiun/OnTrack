@@ -5,6 +5,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../contexts/ToastContext';
 import { fuzzySearch } from '../utils/search';
+import { fetchProductMacros } from '../utils/macroLookup';
 
 const toUnitPrice = (packagePrice, packageWeight, unit) => {
   const pkg = parseFloat(packageWeight) || 1;
@@ -149,9 +150,15 @@ export default function Products() {
       });
       setForm(EMPTY_FORM);
       setPasteText('');
-      showSuccess(t('product_added_ok'));
-      const macro = await fetchMacroFromOFF(form.name);
-      if (macro) await api.update(created.data.id, macro);
+      const productName = form.name;
+      showSuccess(t('product_adding')(productName));
+      const { macros } = await fetchProductMacros(productName, lang);
+      if (macros) {
+        await api.update(created.data.id, macros);
+        showSuccess(t('product_added_macro')(productName, true));
+      } else {
+        showError(t('err_macro_not_found')(productName));
+      }
       loadProducts();
     } catch (e) { showError(e.response?.data?.error || t('err_fill_fields')); }
   };
@@ -196,24 +203,25 @@ export default function Products() {
 
   const handleAutoFill = async () => {
     if (!editForm.name) return;
-    setLookingUp(editId); 
+    setLookingUp(editId);
     try {
-      const url = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(editForm.name)}&search_simple=1&action=process&json=1&page_size=5&fields=product_name,nutriments`;
-      const res = await fetch(url);
-      const data = await res.json();
-      let found = false;
-      for (const p of (data.products || [])) {
-        const n = p.nutriments || {};
-        let kcal = n['energy-kcal_100g'] ?? n['energy-kcal'] ?? null;
-        if (!kcal && n['energy_100g']) kcal = Math.round(n['energy_100g'] / 4.184 * 10) / 10;
-        if (kcal) {
-          setEditForm(f => ({ ...f, kcal: Math.round(kcal * 10) / 10, protein: Math.round((n['proteins_100g'] ?? 0) * 10) / 10, fat: Math.round((n['fat_100g'] ?? 0) * 10) / 10, carbs: Math.round((n['carbohydrates_100g'] ?? 0) * 10) / 10 }));
-          found = true; break;
-        }
+      const { macros } = await fetchProductMacros(editForm.name, lang);
+      if (macros) {
+        setEditForm(f => ({
+          ...f,
+          kcal: macros.kcal,
+          protein: macros.protein,
+          fat: macros.fat,
+          carbs: macros.carbs,
+        }));
+      } else {
+        showError(t('err_macro_not_found')(editForm.name));
       }
-      if (!found) showError(t('err_not_found_off')(editForm.name));
-    } catch { showError(t('err_off')); }
-    finally { setLookingUp(null); }
+    } catch {
+      showError(t('err_macro_lookup'));
+    } finally {
+      setLookingUp(null);
+    }
   };
 
   const handleDelete = (id, name) => {
@@ -228,19 +236,10 @@ export default function Products() {
     });
   };
 
-  const fetchMacroFromOFF = async (name) => {
-    try {
-      const url = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(name)}&search_simple=1&action=process&json=1&page_size=5&fields=product_name,nutriments`;
-      const r = await fetch(url);
-      const data = await r.json();
-      for (const p of (data.products || [])) {
-        const n = p.nutriments || {};
-        let kcal = n['energy-kcal_100g'] ?? n['energy-kcal'] ?? null;
-        if (!kcal && n['energy_100g']) kcal = Math.round(n['energy_100g'] / 4.184 * 10) / 10;
-        if (kcal) return { kcal: Math.round(kcal * 10) / 10, protein: Math.round((n['proteins_100g'] ?? 0) * 10) / 10, fat: Math.round((n['fat_100g'] ?? 0) * 10) / 10, carbs: Math.round((n['carbohydrates_100g'] ?? 0) * 10) / 10 };
-      }
-    } catch {}
-    return null;
+  const applyMacros = async (productId, productName) => {
+    const { macros } = await fetchProductMacros(productName, lang);
+    if (macros) await api.update(productId, macros);
+    return macros;
   };
 
   const handleFileSelect = (file) => { if (!file) return; setSelectedFile(file);  };
@@ -313,15 +312,13 @@ export default function Products() {
           unit,
           sold_by_weight: sbw,
         });
-        const macro = await fetchMacroFromOFF(item.receipt_name);
-        if (macro) await api.update(created.data.id, macro);
+        await applyMacros(created.data.id, item.receipt_name.trim());
       }
 
       setImportItems(null);
       globalToast(t('fetching_macro'), '#eab308', 999999);
       for (const item of toUpdate) {
-        const macro = await fetchMacroFromOFF(item.matched_product.name);
-        if (macro) await api.update(item.matched_product.id, macro);
+        await applyMacros(item.matched_product.id, item.matched_product.name);
       }
 
       const msg = [
@@ -593,9 +590,7 @@ export default function Products() {
 
           <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: '12px 14px', fontSize: 12, color: '#9ca3af', lineHeight: 1.6 }}>
             <div style={{ fontSize: 14, fontWeight: 700, color: '#0d9488', marginBottom: 4 }}>{t('macro_auto_title')}</div>
-            {t('macro_auto_desc')}{' '}
-            <a href="https://world.openfoodfacts.org/" target="_blank" rel="noreferrer"
-              style={{ color: '#2dd4bf', textDecoration: 'underline', cursor: 'pointer' }}>Open Food Facts</a>.
+            {t('macro_auto_desc')}
             <div style={{ marginTop: 6, color: '#6b7280' }}>
               {t('macro_edit_hint')}
             </div>
