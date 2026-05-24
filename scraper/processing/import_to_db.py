@@ -228,9 +228,18 @@ _FAMILY_RULES: list[tuple[re.Pattern, str]] = [
 ]
 
 
-def collapse_family(name: str) -> str:
+# English catalog — keep English names; do not apply Polish collapse rules.
+_EN_FAMILY_RULES: list[tuple[re.Pattern, str]] = [
+    (re.compile(r"^quinoa pasta\b"),            "quinoa pasta"),
+    (re.compile(r"^quinoa\b"),                 "quinoa"),
+    (re.compile(r"^komosa\b"),                  "quinoa"),  # leaked PL name in EN catalog
+]
+
+
+def collapse_family(name: str, lang: str = "pl") -> str:
     """Collapse product name variants to a single canonical family name."""
-    for pattern, canonical in _FAMILY_RULES:
+    rules = _FAMILY_RULES if lang == "pl" else _EN_FAMILY_RULES
+    for pattern, canonical in rules:
         if pattern.match(name):
             return canonical
     return name
@@ -270,10 +279,11 @@ def fix_pl_typos(name: str) -> str:
     return s
 
 
-def canonical_ingredient_name(name: str) -> str:
+def canonical_ingredient_name(name: str, lang: str = "pl") -> str:
     """Merge ingredient variants that map to the same shop product."""
-    base = collapse_family(name.strip())
-    base = fix_pl_typos(base)
+    base = collapse_family(name.strip(), lang)
+    if lang == "pl":
+        base = fix_pl_typos(base)
     base = base.replace("-", "").strip()
     while True:
         stripped = _FORM_SUFFIX.sub("", base).strip()
@@ -689,11 +699,11 @@ def _pick_shop_product(
     return min(top, key=lambda x: resolve_unit_price(x[1])[0] or 9999)[1]
 
 
-def product_display_name(ing_name: str, generic_name: str, canonical: str) -> str:
+def product_display_name(ing_name: str, generic_name: str, canonical: str, lang: str = "pl") -> str:
     """Use a specific shop/generic name when the ingredient label is too vague."""
     vague = _GENERIC_STANDALONE | {"sos", "przyprawa", "pieprz"}
     if canonical.lower() in vague and generic_name:
-        return collapse_family(generic_name.strip())[:200]
+        return collapse_family(generic_name.strip(), lang)[:200]
     return canonical
 
 
@@ -900,9 +910,9 @@ def compute_product_map_plan(lang: str) -> tuple[list[dict], list[str], dict]:
             skipped_en += 1
             continue
 
-        prod_name = canonical_ingredient_name(ing_name)
+        prod_name = canonical_ingredient_name(ing_name, lang)
         prod_key = dedup_key(prod_name)
-        display_name = product_display_name(ing_name, generic_name, prod_name)
+        display_name = product_display_name(ing_name, generic_name, prod_name, lang)
         unit_price, unit, pkg_val, _sold_by_wt = resolve_unit_price(item)
         macro = lookup_macro(generic_name, prod_name, ing_name, macro_map=macro_map)
 
@@ -1028,9 +1038,9 @@ def import_products(user_id: int, lang: str) -> dict[str, int]:
 
         # Use canonical ingredient name for both languages (e.g. "jajka", "sausage").
         # generic_name is the matched shop label and is often long/noisy.
-        prod_name = canonical_ingredient_name(ing_name)
+        prod_name = canonical_ingredient_name(ing_name, lang)
         prod_key  = dedup_key(prod_name)
-        display_name = product_display_name(ing_name, generic_name, prod_name)
+        display_name = product_display_name(ing_name, generic_name, prod_name, lang)
         unit_price, unit, pkg_val, sold_by_wt = resolve_unit_price(item)
         macro = lookup_macro(
             generic_name, prod_name, ing_name,
