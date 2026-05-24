@@ -45,7 +45,10 @@ def _auth_error_redirect(message: str):
 
 
 def _schedule_catalog_seed(user_id: int, lang: str):
-    """Run heavy catalog import in background so /me stays fast."""
+    """Run catalog seed in background so /me stays fast (skipped under pytest)."""
+    if current_app.config.get('TESTING'):
+        return
+
     app = current_app._get_current_object()
 
     def _run():
