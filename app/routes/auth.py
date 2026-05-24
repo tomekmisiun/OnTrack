@@ -298,8 +298,10 @@ def delete_me():
     from app.models.import_log import ImportLog
     from app.models.recipe_parse_log import RecipeParseLog
     from app.models.household_member import HouseholdMember
+    from app.models.day_schedule import DayScheduleBlock
 
     MealPlan.query.filter_by(user_id=uid).delete()
+    DayScheduleBlock.query.filter_by(user_id=uid).delete()
     HouseholdMember.query.filter_by(user_id=uid).delete()
     recipe_ids = [r.id for r in Recipe.query.filter_by(user_id=uid).all()]
     if recipe_ids:

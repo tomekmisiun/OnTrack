@@ -1,0 +1,245 @@
+{
+  "_meta": {
+    "shop": "UK supermarkets (manual)",
+    "currency": "GBP",
+    "updated": "2026-05",
+    "price_basis_note": "price is per 100g/ml unless unit is pcs"
+  },
+  "plain_flour": {
+    "label": "Plain flour",
+    "price": 0.08,
+    "unit": "g",
+    "price_basis": "per_100g",
+    "note": "Edit — typical UK plain flour ~£0.80/kg"
+  },
+  "yeast": {
+    "label": "Dried yeast",
+    "price": 1.5476,
+    "unit": "g",
+    "price_basis": "per_100g"
+  },
+  "tomato_sauce": {
+    "label": "Tomato sauce",
+    "price": 0.138,
+    "unit": "g",
+    "price_basis": "per_100g"
+  },
+  "mozzarella": {
+    "label": "Mozzarella",
+    "price": 0.552,
+    "unit": "g",
+    "price_basis": "per_100g"
+  },
+  "olive_oil": {
+    "label": "Olive oil",
+    "price": 1.218,
+    "unit": "ml",
+    "price_basis": "per_100ml"
+  },
+  "pepperoni": {
+    "label": "Pepperoni",
+    "price": 0.9083,
+    "unit": "g",
+    "price_basis": "per_100g"
+  },
+  "chicken_breast": {
+    "label": "Chicken breast",
+    "price": 0.425,
+    "unit": "g",
+    "price_basis": "per_100g"
+  },
+  "rice": {
+    "label": "Basmati rice",
+    "price": 0.33,
+    "unit": "g",
+    "price_basis": "per_100g"
+  },
+  "bell_pepper": {
+    "label": "Bell pepper",
+    "price": 1.59,
+    "unit": "g",
+    "price_basis": "per_100g"
+  },
+  "tomato": {
+    "label": "Tomato",
+    "price": 0.134,
+    "unit": "g",
+    "price_basis": "per_100g"
+  },
+  "rice_vinegar": {
+    "label": "Rice vinegar",
+    "price": 0.35,
+    "unit": "ml",
+    "price_basis": "per_100ml",
+    "note": "Edit if needed"
+  },
+  "honey": {
+    "label": "Honey",
+    "price": 0.2181,
+    "unit": "g",
+    "price_basis": "per_100g"
+  },
+  "ketchup": {
+    "label": "Ketchup",
+    "price": 0.15,
+    "unit": "g",
+    "price_basis": "per_100g",
+    "note": "Edit — manual estimate"
+  },
+  "yogurt": {
+    "label": "Natural yogurt",
+    "price": 0.11,
+    "unit": "g",
+    "price_basis": "per_100g"
+  },
+  "curry_powder": {
+    "label": "Curry powder",
+    "price": 0.9889,
+    "unit": "g",
+    "price_basis": "per_100g"
+  },
+  "coconut_milk": {
+    "label": "Coconut milk",
+    "price": 0.1875,
+    "unit": "ml",
+    "price_basis": "per_100ml"
+  },
+  "onion": {
+    "label": "Onion",
+    "price": 0.08,
+    "unit": "g",
+    "price_basis": "per_100g"
+  },
+  "garlic": {
+    "label": "Garlic",
+    "price": 0.3955,
+    "unit": "g",
+    "price_basis": "per_100g"
+  },
+  "tomato_paste": {
+    "label": "Tomato paste",
+    "price": 0.108,
+    "unit": "g",
+    "price_basis": "per_100g"
+  },
+  "egg_noodles": {
+    "label": "Egg noodles",
+    "price": 0.3146,
+    "unit": "g",
+    "price_basis": "per_100g"
+  },
+  "carrot": {
+    "label": "Carrot",
+    "price": 0.09,
+    "unit": "g",
+    "price_basis": "per_100g",
+    "note": "Edit — manual estimate"
+  },
+  "soy_sauce": {
+    "label": "Soy sauce",
+    "price": 0.3667,
+    "unit": "ml",
+    "price_basis": "per_100ml"
+  },
+  "ginger": {
+    "label": "Ginger",
+    "price": 0.792,
+    "unit": "g",
+    "price_basis": "per_100g"
+  },
+  "burger_bun": {
+    "label": "Burger bun",
+    "price": 0.25,
+    "unit": "pcs",
+    "price_basis": "per_piece",
+    "note": "Edit — price per bun"
+  },
+  "beef_mince": {
+    "label": "Beef mince",
+    "price": 0.953,
+    "unit": "g",
+    "price_basis": "per_100g"
+  },
+  "cheese": {
+    "label": "Cheddar cheese",
+    "price": 1.4,
+    "unit": "g",
+    "price_basis": "per_100g"
+  },
+  "lettuce": {
+    "label": "Lettuce",
+    "price": 0.1917,
+    "unit": "g",
+    "price_basis": "per_100g"
+  },
+  "spaghetti": {
+    "label": "Spaghetti",
+    "price": 0.15,
+    "unit": "g",
+    "price_basis": "per_100g",
+    "note": "Edit — typical UK dried spaghetti ~£0.75/500g"
+  },
+  "chopped_tomatoes": {
+    "label": "Chopped tomatoes (tinned)",
+    "price": 0.12,
+    "unit": "g",
+    "price_basis": "per_100g",
+    "note": "Edit — manual estimate"
+  },
+  "celery": {
+    "label": "Celery",
+    "price": 0.12,
+    "unit": "g",
+    "price_basis": "per_100g",
+    "note": "Edit — manual estimate"
+  },
+  "oregano": {
+    "label": "Dried oregano",
+    "price": 1.0,
+    "unit": "g",
+    "price_basis": "per_100g",
+    "note": "Edit — manual estimate"
+  },
+  "black_pepper": {
+    "label": "Black pepper",
+    "price": 1.2,
+    "unit": "g",
+    "price_basis": "per_100g",
+    "note": "Edit — manual estimate"
+  },
+  "water": {
+    "label": "Water",
+    "price": 0.0,
+    "unit": "ml",
+    "price_basis": "per_100ml",
+    "note": "Tap water — negligible cost"
+  },
+  "salt": {
+    "label": "Salt",
+    "price": 0.05,
+    "unit": "g",
+    "price_basis": "per_100g",
+    "note": "Edit — table salt ~£0.50/kg"
+  },
+  "pineapple": {
+    "label": "Pineapple (tinned)",
+    "price": 0.12,
+    "unit": "g",
+    "price_basis": "per_100g",
+    "note": "Edit — manual estimate"
+  },
+  "double_cream": {
+    "label": "Double cream",
+    "price": 0.35,
+    "unit": "g",
+    "price_basis": "per_100g",
+    "note": "Edit — manual estimate"
+  },
+  "coriander": {
+    "label": "Fresh coriander",
+    "price": 0.5,
+    "unit": "g",
+    "price_basis": "per_100g",
+    "note": "Edit — manual estimate"
+  }
+}

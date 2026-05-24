@@ -3,14 +3,19 @@ import { Icon } from '@iconify/react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import PrivacyPolicy from './PrivacyPolicy';
+import DishCompare from './DishCompare';
+import { SEED_STATS } from '../data/seedStats';
 import './Login.css';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
 
-const FEATURE_ICONS = [
-  'heroicons:calendar-days',
-  'heroicons:book-open',
-  'heroicons:banknotes',
+const SHOWCASE_SECTIONS = [
+  { id: 'macro', icon: 'heroicons:calculator', titleKey: 'showcase_macro_title', descKey: 'showcase_macro_desc', media: 'macro' },
+  { id: 'calendar', icon: 'heroicons:calendar-days', titleKey: 'showcase_calendar_title', descKey: 'showcase_calendar_desc', media: 'calendar' },
+  { id: 'recipes', icon: 'heroicons:book-open', titleKey: 'showcase_recipes_title', descKey: 'showcase_recipes_desc', media: 'recipes' },
+  { id: 'products', icon: 'heroicons:shopping-cart', titleKey: 'showcase_products_title', descKey: 'showcase_products_desc', media: 'products' },
+  { id: 'summary', icon: 'heroicons:banknotes', titleKey: 'showcase_summary_title', descKey: 'showcase_summary_desc', media: 'summary' },
+  { id: 'export', icon: 'heroicons:arrow-down-tray', titleKey: 'showcase_export_title', descKey: 'showcase_export_desc', media: 'export' },
 ];
 
 function OntrackLogo({ className }) {
@@ -22,8 +27,217 @@ function OntrackLogo({ className }) {
   );
 }
 
+function DemoFrame({ children }) {
+  return (
+    <div className="demo-frame">
+      <div className="demo-frame-border" aria-hidden="true" />
+      <div className="demo-frame-glow demo-frame-glow--tl" aria-hidden="true" />
+      <div className="demo-frame-glow demo-frame-glow--br" aria-hidden="true" />
+      <div className="demo-frame-grid" aria-hidden="true" />
+      <div className="demo-frame-inner">{children}</div>
+      <div className="demo-frame-vignette" aria-hidden="true" />
+    </div>
+  );
+}
+
+function ShowcaseMedia({ name }) {
+  const [failed, setFailed] = useState(false);
+  const src = `/demos/${name}.webm`;
+
+  const content = failed ? (
+    <div className="showcase-media showcase-media--placeholder" aria-hidden="true" />
+  ) : (
+    <video
+      className="showcase-media"
+      autoPlay
+      loop
+      muted
+      playsInline
+      onError={() => setFailed(true)}
+    >
+      <source src={src} type="video/webm" />
+    </video>
+  );
+
+  return <DemoFrame>{content}</DemoFrame>;
+}
+
+function FeatureDescription({ descKey, t }) {
+  const desc = t(descKey);
+  if (typeof desc !== 'string') {
+    return <p className="feature-desc">{desc}</p>;
+  }
+
+  const parts = desc.split('\n\n').filter(Boolean);
+  if (parts.length <= 1) {
+    return <p className="feature-desc">{desc}</p>;
+  }
+
+  return (
+    <div className="feature-desc-stack">
+      <p className="feature-desc feature-desc--lead">{parts[0]}</p>
+      {parts.slice(1).map((part) => (
+        <p key={part} className="feature-desc">{part}</p>
+      ))}
+    </div>
+  );
+}
+
+function ShowcaseSection({ section, index, t }) {
+  const isHero = index === 0;
+
+  return (
+    <section
+      className={`feature-block${isHero ? ' feature-block--hero' : ''}`}
+      id={`feature-${section.id}`}
+    >
+      <div className="feature-row">
+        <div className="feature-copy">
+          <div className="feature-heading">
+            <span className="feature-icon" aria-hidden="true">
+              <Icon icon={section.icon} width={22} />
+            </span>
+            <h2 className="feature-title">{t(section.titleKey)}</h2>
+          </div>
+          <FeatureDescription descKey={section.descKey} t={t} />
+        </div>
+        <div className="feature-demo">
+          <ShowcaseMedia name={section.media} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function LoginForm({
+  t, uiLang, switchLang, mode, setAuthMode, error, username, setUsername,
+  password, setPassword, busy, handleCredentials, setShowPrivacy,
+}) {
+  return (
+    <div className="login-panel-inner">
+      <div className="login-lang-toggle">
+        <button
+          type="button"
+          className={`login-lang-btn${uiLang === 'pl' ? ' active' : ''}`}
+          onClick={() => switchLang('pl')}
+        >
+          PL
+        </button>
+        <button
+          type="button"
+          className={`login-lang-btn${uiLang === 'en' ? ' active' : ''}`}
+          onClick={() => switchLang('en')}
+        >
+          EN
+        </button>
+      </div>
+
+      <div className="login-card">
+        <div className="login-panel-brand">
+          <OntrackLogo className="login-panel-brand-icon" />
+          <div>
+            <div className="login-panel-brand-name">ONTRACK</div>
+            <div className="login-panel-brand-sub">BE IN CONTROL</div>
+          </div>
+        </div>
+
+        <div className="login-tabs">
+          <button
+            type="button"
+            className={`login-tab${mode === 'login' ? ' active' : ''}`}
+            onClick={() => setAuthMode('login')}
+          >
+            {t('login_tab_login')}
+          </button>
+          <button
+            type="button"
+            className={`login-tab${mode === 'register' ? ' active' : ''}`}
+            onClick={() => setAuthMode('register')}
+          >
+            {t('login_tab_register')}
+          </button>
+        </div>
+
+        <p className="login-subtitle">
+          {mode === 'login' ? t('subtitle_login') : t('subtitle_register')}
+        </p>
+
+        {error && <div className="login-error">{error}</div>}
+
+        <form className="login-form" onSubmit={handleCredentials}>
+          <div className="login-field">
+            <label className="login-label" htmlFor="login-username">
+              {t('login_username_lbl')}
+            </label>
+            <input
+              id="login-username"
+              type="text"
+              className="login-input"
+              autoComplete="username"
+              required
+              maxLength={80}
+              placeholder={t('login_username_ph')}
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+            />
+          </div>
+          <div className="login-field">
+            <label className="login-label" htmlFor="login-password">
+              {t('login_password_lbl')}
+            </label>
+            <input
+              id="login-password"
+              type="password"
+              className="login-input"
+              autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
+              required
+              minLength={8}
+              placeholder={t('login_password_ph')}
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+          </div>
+          <button type="submit" className="login-submit" disabled={busy}>
+            {busy && <span className="login-spinner" />}
+            {busy
+              ? (mode === 'login' ? t('login_busy_login') : t('login_busy_register'))
+              : (mode === 'login' ? t('login_submit') : t('login_register_submit'))}
+          </button>
+        </form>
+
+        <div className="login-divider">
+          <div className="login-divider-line" />
+          <span className="login-divider-text">{t('login_or')}</span>
+          <div className="login-divider-line" />
+        </div>
+
+        <button
+          type="button"
+          className="login-google"
+          onClick={() => {
+            localStorage.setItem('pending_lang', uiLang);
+            window.location.href = `${API_URL}/api/auth/google?lang=${uiLang}`;
+          }}
+        >
+          <GoogleIcon />
+          {t('google_btn')}
+        </button>
+
+        <p className="login-privacy">
+          {t('login_privacy_prefix')}
+          <button type="button" className="login-privacy-link" onClick={() => setShowPrivacy(true)}>
+            {t('login_privacy_link')}
+          </button>
+          {t('login_privacy_suffix')}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default function Login() {
   const { t, lang: uiLang, switchLang } = useLanguage();
+  const seedStats = SEED_STATS[uiLang] || SEED_STATS.pl;
   const { loginWithPassword, registerAccount } = useAuth();
   const [error, setError] = useState('');
   const [showPrivacy, setShowPrivacy] = useState(false);
@@ -71,157 +285,130 @@ export default function Login() {
     setError('');
   };
 
-  const features = [
-    t('login_feature_calendar'),
-    t('login_feature_recipes'),
-    t('login_feature_budget'),
-  ];
+  const formProps = {
+    t,
+    uiLang,
+    switchLang,
+    mode,
+    setAuthMode,
+    error,
+    username,
+    setUsername,
+    password,
+    setPassword,
+    busy,
+    handleCredentials,
+    setShowPrivacy,
+  };
 
   return (
     <div className="login-page">
-      <aside className="login-brand">
-        <div className="login-brand-inner">
-          <div className="login-brand-logo">
-            <OntrackLogo className="login-brand-logo-icon" />
-            <div>
-              <div className="login-brand-logo-name">ONTRACK</div>
-              <div className="login-brand-logo-sub">BE IN CONTROL</div>
-            </div>
-          </div>
-          <h2 className="login-brand-tagline">{t('login_tagline')}</h2>
-          <p className="login-brand-desc">{t('login_tagline_desc')}</p>
-          <ul className="login-features">
-            {features.map((text, i) => (
-              <li key={i} className="login-feature">
-                <span className="login-feature-icon">
-                  <Icon icon={FEATURE_ICONS[i]} width={20} />
+      <div className="login-page-body">
+      <main className="login-marketing">
+        <div className="login-marketing-columns">
+          <div className="login-marketing-primary">
+            <header className="login-hero">
+              <div className="login-hero-logo">
+                <OntrackLogo className="login-hero-logo-icon" />
+                <div>
+                  <div className="login-hero-logo-name">ONTRACK</div>
+                  <div className="login-hero-logo-sub">BE IN CONTROL</div>
+                </div>
+              </div>
+              <h1 className="login-hero-headline">
+                <span className="login-hero-headline-line">{t('login_tagline_line1')}</span>
+                <span className="login-hero-headline-line login-hero-headline-line--accent">{t('login_tagline_line2')}</span>
+              </h1>
+              <p className="login-hero-lead">{t('login_tagline_desc')}</p>
+              <div className="login-hero-chips" aria-label={t('login_seed_chip_note')}>
+                <span className="login-hero-chip">
+                  {typeof t('login_seed_chip_products') === 'function'
+                    ? t('login_seed_chip_products')(seedStats.products)
+                    : seedStats.products}
                 </span>
-                {text}
-              </li>
-            ))}
-          </ul>
-          <div className="login-value-prop">
-            <span className="login-value-prop-dot" />
-            {t('login_value_prop')}
+                <span className="login-hero-chip">
+                  {typeof t('login_seed_chip_recipes') === 'function'
+                    ? t('login_seed_chip_recipes')(seedStats.recipes)
+                    : seedStats.recipes}
+                </span>
+                <span className="login-hero-chip login-hero-chip--muted">{t('login_seed_chip_note')}</span>
+              </div>
+            </header>
+
+            <section className="dish-compare-section" aria-labelledby="dish-compare-section-title">
+              <div className="dish-compare-section-head">
+                <h2 id="dish-compare-section-title" className="dish-compare-section-title">
+                  <span className="dish-compare-section-title-line">{t('compare_headline_1')}</span>
+                  <span className="dish-compare-section-title-line dish-compare-section-title-line--accent">{t('compare_headline_2')}</span>
+                </h2>
+                <p className="dish-compare-section-quote">{t('compare_quote')}</p>
+              </div>
+              <DishCompare />
+            </section>
           </div>
+
+          <a href="#feature-macro" className="dish-compare-cta" aria-label={t('compare_cta_aria')}>
+            <div className="dish-compare-cta-glow" aria-hidden="true" />
+            <div className="dish-compare-cta-grid" aria-hidden="true" />
+            <div className="dish-compare-cta-inner">
+              <div className="dish-compare-cta-mark">
+                <OntrackLogo className="dish-compare-cta-logo" />
+                <span className="dish-compare-cta-eyebrow">{t('compare_cta_eyebrow')}</span>
+              </div>
+              <h3 className="dish-compare-cta-headline">
+                <span className="dish-compare-cta-line">{t('compare_cta_line1')}</span>
+                <span className="dish-compare-cta-line dish-compare-cta-line--accent">{t('compare_cta_line2')}</span>
+                <span className="dish-compare-cta-line">{t('compare_cta_line3')}</span>
+                <span className="dish-compare-cta-line dish-compare-cta-line--brand">
+                  {t('compare_cta_line4')} <em>ONTRACK</em>
+                </span>
+              </h3>
+              <div className="dish-compare-cta-action">
+                <span className="dish-compare-cta-action-label">{t('compare_cta_scroll')}</span>
+                <span className="dish-compare-cta-arrow">
+                  <span className="dish-compare-cta-arrow-ring" />
+                  <Icon icon="heroicons:arrow-down" width={22} />
+                </span>
+              </div>
+            </div>
+          </a>
         </div>
+
+        <div className="features-head">
+          <span className="features-head-line" />
+          <span className="features-head-label">{t('showcase_features_label')}</span>
+          <span className="features-head-line" />
+        </div>
+
+        <div className="features-list">
+          {SHOWCASE_SECTIONS.map((section, index) => (
+            <ShowcaseSection
+              key={section.id}
+              section={section}
+              index={index}
+              t={t}
+            />
+          ))}
+        </div>
+
+        <footer className="login-footer">
+          <div className="login-footer-card">
+            <h2 className="login-footer-title">{t('showcase_more_title')}</h2>
+            <p className="login-footer-desc">{t('showcase_more_desc')}</p>
+          </div>
+        </footer>
+      </main>
+
+      <aside className="login-panel">
+        <LoginForm {...formProps} />
       </aside>
-
-      <div className="login-panel">
-        <div className="login-lang-toggle">
-          <button
-            type="button"
-            className={`login-lang-btn${uiLang === 'pl' ? ' active' : ''}`}
-            onClick={() => switchLang('pl')}
-          >
-            PL
-          </button>
-          <button
-            type="button"
-            className={`login-lang-btn${uiLang === 'en' ? ' active' : ''}`}
-            onClick={() => switchLang('en')}
-          >
-            EN
-          </button>
-        </div>
-
-        <div className="login-card">
-          <div className="login-mobile-brand">
-            <OntrackLogo className="login-mobile-brand-icon" />
-            <span className="login-mobile-brand-name">ONTRACK</span>
-          </div>
-
-          <div className="login-tabs">
-            <button
-              type="button"
-              className={`login-tab${mode === 'login' ? ' active' : ''}`}
-              onClick={() => setAuthMode('login')}
-            >
-              {t('login_tab_login')}
-            </button>
-            <button
-              type="button"
-              className={`login-tab${mode === 'register' ? ' active' : ''}`}
-              onClick={() => setAuthMode('register')}
-            >
-              {t('login_tab_register')}
-            </button>
-          </div>
-
-          <p className="login-subtitle">
-            {mode === 'login' ? t('subtitle_login') : t('subtitle_register')}
-          </p>
-
-          {error && <div className="login-error">{error}</div>}
-
-          <form className="login-form" onSubmit={handleCredentials}>
-            <div className="login-field">
-              <label className="login-label" htmlFor="login-username">
-                {t('login_username_lbl')}
-              </label>
-              <input
-                id="login-username"
-                type="text"
-                className="login-input"
-                autoComplete="username"
-                required
-                maxLength={80}
-                placeholder={t('login_username_ph')}
-                value={username}
-                onChange={e => setUsername(e.target.value)}
-              />
-            </div>
-            <div className="login-field">
-              <label className="login-label" htmlFor="login-password">
-                {t('login_password_lbl')}
-              </label>
-              <input
-                id="login-password"
-                type="password"
-                className="login-input"
-                autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
-                required
-                minLength={8}
-                placeholder={t('login_password_ph')}
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-              />
-            </div>
-            <button type="submit" className="login-submit" disabled={busy}>
-              {busy && <span className="login-spinner" />}
-              {busy
-                ? (mode === 'login' ? t('login_busy_login') : t('login_busy_register'))
-                : (mode === 'login' ? t('login_submit') : t('login_register_submit'))}
-            </button>
-          </form>
-
-          <div className="login-divider">
-            <div className="login-divider-line" />
-            <span className="login-divider-text">{t('login_or')}</span>
-            <div className="login-divider-line" />
-          </div>
-
-          <button
-            type="button"
-            className="login-google"
-            onClick={() => {
-              localStorage.setItem('pending_lang', uiLang);
-              window.location.href = `${API_URL}/api/auth/google?lang=${uiLang}`;
-            }}
-          >
-            <GoogleIcon />
-            {t('google_btn')}
-          </button>
-
-          <p className="login-privacy">
-            {t('login_privacy_prefix')}
-            <button type="button" className="login-privacy-link" onClick={() => setShowPrivacy(true)}>
-              {t('login_privacy_link')}
-            </button>
-            {t('login_privacy_suffix')}
-          </p>
-        </div>
       </div>
+
+      <p className="login-copyright">
+        {typeof t('login_copyright') === 'function'
+          ? t('login_copyright')(new Date().getFullYear())
+          : t('login_copyright')}
+      </p>
 
       {showPrivacy && <PrivacyPolicy lang={uiLang} onClose={() => setShowPrivacy(false)} />}
     </div>

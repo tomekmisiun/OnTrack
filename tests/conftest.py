@@ -13,6 +13,7 @@ os.environ["DATABASE_URL"] = "sqlite:///:memory:"
 
 from app import create_app, db  # noqa: E402
 from app.models.auth_code import AuthCode  # noqa: E402, F401
+from app.models.day_schedule import DayScheduleBlock  # noqa: E402, F401
 from app.models.household_member import HouseholdMember  # noqa: E402
 from app.models.import_log import ImportLog  # noqa: E402, F401
 from app.models.meal_plan import MealPlan  # noqa: E402, F401

@@ -3,6 +3,7 @@ import { Joyride, STATUS, EVENTS, ACTIONS } from 'react-joyride';
 import Products from './components/Products';
 import Recipes from './components/Recipes';
 import Calendar from './components/Calendar';
+import DaySchedule from './components/DaySchedule';
 import Summary from './components/Summary';
 import Export from './components/Export';
 import MacroCalculator from './components/MacroCalculator';
@@ -20,6 +21,7 @@ import './App.css';
 const TAB_ICONS = {
   macro:    'heroicons:calculator',
   calendar: 'heroicons:calendar-days',
+  schedule: 'heroicons:clock',
   recipes:  'heroicons:book-open',
   products: 'heroicons:shopping-cart',
   summary:  'heroicons:banknotes',
@@ -43,6 +45,7 @@ function AppInner({ onStartTour }) {
   const tabs = [
     { id: 'macro',    label: t('tab_macro') },
     { id: 'calendar', label: t('tab_calendar') },
+    { id: 'schedule', label: t('tab_schedule') },
     { id: 'recipes',  label: t('tab_recipes') },
     { id: 'products', label: t('tab_products') },
     { id: 'summary',  label: t('tab_summary') },
@@ -97,6 +100,7 @@ function AppInner({ onStartTour }) {
       <main className="app-main">
         {activeTab === 'macro'     && <MacroCalculator />}
         {activeTab === 'calendar'  && <Calendar onGoToTab={goToTab} />}
+        {activeTab === 'schedule'  && <DaySchedule />}
         {activeTab === 'recipes'   && <Recipes />}
         {activeTab === 'products'  && <Products />}
         {activeTab === 'summary'   && <Summary onGoToTab={goToTab} />}

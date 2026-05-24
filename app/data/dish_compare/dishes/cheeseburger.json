@@ -1,0 +1,25 @@
+{
+  "id": "cheeseburger",
+  "name_pl": "Burger wołowy",
+  "name_en": "Cheeseburger",
+  "portion_note_pl": "1 burger (~250 g)",
+  "portion_note_en": "1 burger (~250 g)",
+  "ingredients_pl": [
+    { "product_name": "bułka", "weight": 65 },
+    { "product_name": "mielona wołowina", "weight": 120 },
+    { "product_name": "ser", "weight": 30 },
+    { "product_name": "pomidor", "weight": 30 },
+    { "product_name": "cebula", "weight": 20 },
+    { "product_name": "sałata", "weight": 20 },
+    { "product_name": "ketchup", "weight": 15 }
+  ],
+  "ingredients_en": [
+    { "catalog_id": "burger_bun", "weight": 1 },
+    { "catalog_id": "beef_mince", "weight": 120 },
+    { "catalog_id": "cheese", "weight": 30 },
+    { "catalog_id": "tomato", "weight": 30 },
+    { "catalog_id": "onion", "weight": 20 },
+    { "catalog_id": "lettuce", "weight": 20 },
+    { "catalog_id": "ketchup", "weight": 15 }
+  ]
+}

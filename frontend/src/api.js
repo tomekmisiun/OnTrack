@@ -89,3 +89,10 @@ export const importPrices = {
 export const fuel = {
   getPrices: (lang = 'pl') => API.get(`/api/fuel/prices?lang=${lang}`),
 };
+
+export const daySchedule = {
+  getAll:  (memberId) => API.get('/api/day-schedule/', { params: memberId ? { member_id: memberId } : {} }),
+  create:  (data)     => API.post('/api/day-schedule/', data),
+  update:  (id, data) => API.patch(`/api/day-schedule/${id}`, data),
+  delete:  (id)       => API.delete(`/api/day-schedule/${id}`),
+};

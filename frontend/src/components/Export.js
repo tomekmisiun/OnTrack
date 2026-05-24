@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { mealPlan as api, recipes as recipesApi } from '../api';
+import { mealPlan as api, recipes as recipesApi, daySchedule as scheduleApi } from '../api';
 import { useMember } from '../contexts/MemberContext';
 import { useToast } from '../contexts/ToastContext';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -577,6 +577,111 @@ input[type="checkbox"]{width:16px;height:16px;cursor:pointer;accent-color:#0d948
 </body></html>`;
 }
 
+// ─── Tygodniowy rozkład dnia HTML generator ───────────────────────────────────
+const SCHEDULE_COLORS = ['#4a6fa5', '#6366f1', '#0d9488', '#c2410c', '#9333ea', '#ca8a04'];
+
+function isScheduleSleepHour(hour) {
+  return hour >= 23 || hour < 6;
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function generateDayScheduleHTML({ blocks, memberName, lang, emptyTemplate }) {
+  const L = lang === 'en';
+  const now = new Date();
+  const dateStr = `${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
+  const DAY_SHORT = L
+    ? ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    : ['Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'So', 'Nd'];
+  const DAY_FULL = L
+    ? ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    : ['Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota', 'Niedziela'];
+
+  const skip = new Set();
+  const blockStart = {};
+  if (!emptyTemplate && blocks?.length) {
+    blocks.forEach(b => {
+      blockStart[`${b.day}-${b.start_hour}`] = b;
+      for (let h = b.start_hour + 1; h < b.end_hour; h++) skip.add(`${b.day}-${h}`);
+    });
+  }
+
+  const rows = [];
+  for (let hour = 0; hour < 24; hour++) {
+    const sleep = isScheduleSleepHour(hour);
+    let cells = `<td class="time${sleep ? ' sleep' : ''}">${String(hour).padStart(2, '0')}:00</td>`;
+    for (let day = 0; day < 7; day++) {
+      if (skip.has(`${day}-${hour}`)) continue;
+      const block = blockStart[`${day}-${hour}`];
+      const cls = `cell${sleep ? ' sleep' : ''}${emptyTemplate ? ' blank' : ''}`;
+      if (block) {
+        const span = block.end_hour - block.start_hour;
+        const col = SCHEDULE_COLORS[block.id % SCHEDULE_COLORS.length];
+        cells += `<td class="${cls}" rowspan="${span}"><div class="block" style="background:${col}">${escHtml(block.label)}</div></td>`;
+      } else {
+        cells += `<td class="${cls}"></td>`;
+      }
+    }
+    rows.push(`<tr>${cells}</tr>`);
+  }
+
+  const headerCells = DAY_FULL.map(d => `<th>${d}</th>`).join('');
+  const subHeader = DAY_SHORT.map(d => `<th class="sub">${d}</th>`).join('');
+  const title = emptyTemplate
+    ? (L ? 'Daily schedule — blank template' : 'Rozkład dnia — pusty szablon')
+    : (L ? 'Daily schedule' : 'Rozkład dnia');
+  const subtitle = emptyTemplate
+    ? (L ? 'Fill in activities by hand' : 'Wypełnij zajęcia ręcznie')
+    : (L ? 'Weekly activity plan' : 'Tygodniowy plan zajęć');
+
+  return `<!DOCTYPE html>
+<html lang="${L ? 'en' : 'pl'}"><head><meta charset="UTF-8">
+<title>${title}${memberName ? ' – ' + escHtml(memberName) : ''}</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#fff;color:#111827;padding:24px 28px;max-width:1100px;margin:0 auto}
+.print-btn{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 auto 20px;padding:10px 32px;background:#0d9488;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer}
+.hdr{margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid #0d9488}
+h1{font-size:22px;font-weight:800;color:#0d9488}
+.sub{font-size:13px;color:#374151;margin-top:4px}
+.member{font-size:12px;color:#6b7280;margin-top:2px}
+.meta{font-size:11px;color:#9ca3af;text-align:right}
+.legend{display:flex;align-items:center;gap:8px;font-size:11px;color:#6b7280;margin:10px 0 14px}
+.legend-swatch{width:14px;height:14px;background:#e5e7eb;border:1px solid #d1d5db;border-radius:2px}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+th{font-size:10px;font-weight:700;color:#0d9488;text-transform:uppercase;letter-spacing:.4px;padding:6px 4px;border:1px solid #e5e7eb;background:#f0fdf4}
+th.sub{font-size:9px;color:#6b7280;background:#fafafa;font-weight:600;text-transform:none;letter-spacing:0}
+td{border:1px solid #e5e7eb;vertical-align:top;padding:0;height:22px}
+td.time{width:46px;font-size:9px;color:#6b7280;text-align:right;padding:2px 4px;background:#fafafa;white-space:nowrap}
+td.sleep{background:#f3f4f6}
+td.blank{min-height:22px}
+.block{font-size:9px;font-weight:700;color:#fff;padding:3px 5px;border-radius:3px;margin:1px;line-height:1.25;min-height:calc(100% - 2px);word-break:break-word}
+.footer{margin-top:20px;padding-top:10px;border-top:1px solid #f3f4f6;font-size:10px;color:#d1d5db;text-align:center}
+@media print{.print-btn{display:none!important}body{padding:8px}tr{break-inside:avoid}}
+</style></head><body>
+<button class="print-btn" onclick="window.print()">${L ? 'Print / Save as PDF' : 'Drukuj / Zapisz PDF'}</button>
+<div class="hdr" style="display:flex;justify-content:space-between;align-items:flex-end">
+  <div>
+    <h1>${title}</h1>
+    <div class="sub">${subtitle}</div>
+    ${memberName ? `<div class="member">${escHtml(memberName)}</div>` : ''}
+  </div>
+  <div class="meta">${L ? 'Generated' : 'Wygenerowano'}: ${dateStr}</div>
+</div>
+<div class="legend"><span class="legend-swatch"></span>${L ? 'Sleep hours (11 pm – 6 am)' : 'Pora snu (23:00–6:00)'}</div>
+<table>
+<thead>
+  <tr><th style="width:46px"></th>${headerCells}</tr>
+  <tr><th></th>${subHeader}</tr>
+</thead>
+<tbody>${rows.join('')}</tbody>
+</table>
+<div class="footer">${L ? 'Generated by OnTrack' : 'Wygenerowano przez aplikację OnTrack'} · ${dateStr}</div>
+</body></html>`;
+}
+
 // ─── Main component ───────────────────────────────────────────────────────────
 export default function Export({ onGoToTab }) {
   const { members, activeMember } = useMember();
@@ -632,6 +737,7 @@ export default function Export({ onGoToTab }) {
   const [htmlRecipeId, setHtmlRecipeId] = useState('');
   const [htmlWLoading, setHtmlWLoading] = useState(false);
   const [htmlKLoading, setHtmlKLoading] = useState(false);
+  const [htmlScheduleLoading, setHtmlScheduleLoading] = useState(false);
 
   // Lista zakupów — kalendarz z zaznaczaniem dni
   const [shopYear,  setShopYear]  = useState(() => new Date().getFullYear());
@@ -759,6 +865,28 @@ export default function Export({ onGoToTab }) {
     finally { setHtmlKLoading(false); }
   };
 
+  const handleGenSchedule = async (emptyTemplate) => {
+    if (!activeMember?.id) { showError(t('export_schedule_err')); return; }
+    setHtmlScheduleLoading(true);
+    try {
+      let blocks = [];
+      if (!emptyTemplate) {
+        const res = await scheduleApi.getAll(activeMember.id);
+        blocks = res.data || [];
+      }
+      const html = generateDayScheduleHTML({
+        blocks,
+        memberName: activeMember.name,
+        lang,
+        emptyTemplate,
+      });
+      const win = window.open('', '_blank');
+      win.document.write(html);
+      win.document.close();
+    } catch { showError(t('export_schedule_err')); }
+    finally { setHtmlScheduleLoading(false); }
+  };
+
   const handleGenSkladniki = () => {
     const recipe = recipes.find(r => String(r.id) === htmlRecipeId);
     if (!recipe) { showError(t('export_select_recipe')); return; }
@@ -838,6 +966,14 @@ export default function Export({ onGoToTab }) {
           <button className="btn btn-primary" onClick={handleGenKalendar} disabled={htmlKLoading}
             style={{ padding:'8px 12px', fontSize:13, fontWeight:700 }}>
             {htmlKLoading ? t('generating') : t('export_btn_calendar')}
+          </button>
+          <button className="btn btn-primary" onClick={() => handleGenSchedule(false)} disabled={htmlScheduleLoading}
+            style={{ padding:'8px 12px', fontSize:13, fontWeight:700 }}>
+            {htmlScheduleLoading ? t('generating') : t('export_btn_schedule')}
+          </button>
+          <button className="btn btn-primary" onClick={() => handleGenSchedule(true)} disabled={htmlScheduleLoading}
+            style={{ padding:'8px 12px', fontSize:13, fontWeight:700 }}>
+            {htmlScheduleLoading ? t('generating') : t('export_btn_schedule_template')}
           </button>
           <div style={{ position:'relative' }}>
             <button type="button" className="btn btn-primary"
@@ -1095,6 +1231,8 @@ export default function Export({ onGoToTab }) {
             { label: t('export_btn_summary'), desc: t('export_help_summary') },
             { label: t('export_btn_macro'), desc: t('export_help_macro') },
             { label: t('export_btn_calendar'), desc: t('export_help_calendar') },
+            { label: t('export_btn_schedule'), desc: t('export_help_schedule') },
+            { label: t('export_btn_schedule_template'), desc: t('export_help_schedule_template') },
             { label: t('export_btn_ingredients'), desc: t('export_help_ingredients') },
             { label: t('shopping_list_title'), desc: t('export_help_shopping') },
             { label: t('week_preview'), desc: t('export_help_preview') },

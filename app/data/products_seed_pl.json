@@ -4499,6 +4499,17 @@
     "carbs": 0.0
   },
   {
+    "name": "woda",
+    "price": 0.0,
+    "package_weight": 1000.0,
+    "unit": "ml",
+    "sold_by_weight": false,
+    "kcal": 0.0,
+    "protein": 0.0,
+    "fat": 0.0,
+    "carbs": 0.0
+  },
+  {
     "name": "wegański ser ricotta",
     "price": 2.38,
     "package_weight": 250.0,

@@ -1,0 +1,29 @@
+{
+  "id": "pepperoni_pizza",
+  "name_pl": "Pizza Pepperoni",
+  "name_en": "Pepperoni Pizza",
+  "portion_note_pl": "1 pizza (~30 cm)",
+  "portion_note_en": "1 pizza (~30 cm)",
+  "ingredients_pl": [
+    { "product_name": "mąka", "weight": 180 },
+    { "product_name": "woda", "weight": 110 },
+    { "product_name": "drożdże", "weight": 4 },
+    { "product_name": "sól", "weight": 4 },
+    { "product_name": "olej", "weight": 15 },
+    { "product_name": "sos pomidorowy do pizzy", "weight": 80 },
+    { "product_name": "oregano", "weight": 2 },
+    { "product_name": "mozzarella", "weight": 100 },
+    { "product_name": "salami", "weight": 40 }
+  ],
+  "ingredients_en": [
+    { "catalog_id": "plain_flour", "weight": 180 },
+    { "catalog_id": "water", "weight": 110 },
+    { "catalog_id": "yeast", "weight": 4 },
+    { "catalog_id": "salt", "weight": 4 },
+    { "catalog_id": "olive_oil", "weight": 15 },
+    { "catalog_id": "tomato_sauce", "weight": 80 },
+    { "catalog_id": "oregano", "weight": 2 },
+    { "catalog_id": "mozzarella", "weight": 100 },
+    { "catalog_id": "pepperoni", "weight": 40 }
+  ]
+}

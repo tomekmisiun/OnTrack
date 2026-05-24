@@ -1,0 +1,352 @@
+{
+  "lang": "en",
+  "currency": "GBP",
+  "dishes": [
+    {
+      "id": "pizza_margherita",
+      "name": "Pizza Margherita",
+      "portion_note": "1 pizza (~30 cm)",
+      "diy_cost": 1.17,
+      "ingredients": [
+        {
+          "product_name": "Plain flour",
+          "weight": 180.0,
+          "unit": "g",
+          "cost": 0.14
+        },
+        {
+          "product_name": "Water",
+          "weight": 110.0,
+          "unit": "ml",
+          "cost": 0.0
+        },
+        {
+          "product_name": "Dried yeast",
+          "weight": 4.0,
+          "unit": "g",
+          "cost": 0.06
+        },
+        {
+          "product_name": "Salt",
+          "weight": 4.0,
+          "unit": "g",
+          "cost": 0.0
+        },
+        {
+          "product_name": "Olive oil",
+          "weight": 15.0,
+          "unit": "ml",
+          "cost": 0.18
+        },
+        {
+          "product_name": "Tomato sauce",
+          "weight": 80.0,
+          "unit": "g",
+          "cost": 0.11
+        },
+        {
+          "product_name": "Dried oregano",
+          "weight": 2.0,
+          "unit": "g",
+          "cost": 0.02
+        },
+        {
+          "product_name": "Mozzarella",
+          "weight": 120.0,
+          "unit": "g",
+          "cost": 0.66
+        }
+      ]
+    },
+    {
+      "id": "pepperoni_pizza",
+      "name": "Pepperoni Pizza",
+      "portion_note": "1 pizza (~30 cm)",
+      "diy_cost": 1.42,
+      "ingredients": [
+        {
+          "product_name": "Plain flour",
+          "weight": 180.0,
+          "unit": "g",
+          "cost": 0.14
+        },
+        {
+          "product_name": "Water",
+          "weight": 110.0,
+          "unit": "ml",
+          "cost": 0.0
+        },
+        {
+          "product_name": "Dried yeast",
+          "weight": 4.0,
+          "unit": "g",
+          "cost": 0.06
+        },
+        {
+          "product_name": "Salt",
+          "weight": 4.0,
+          "unit": "g",
+          "cost": 0.0
+        },
+        {
+          "product_name": "Olive oil",
+          "weight": 15.0,
+          "unit": "ml",
+          "cost": 0.18
+        },
+        {
+          "product_name": "Tomato sauce",
+          "weight": 80.0,
+          "unit": "g",
+          "cost": 0.11
+        },
+        {
+          "product_name": "Dried oregano",
+          "weight": 2.0,
+          "unit": "g",
+          "cost": 0.02
+        },
+        {
+          "product_name": "Mozzarella",
+          "weight": 100.0,
+          "unit": "g",
+          "cost": 0.55
+        },
+        {
+          "product_name": "Pepperoni",
+          "weight": 40.0,
+          "unit": "g",
+          "cost": 0.36
+        }
+      ]
+    },
+    {
+      "id": "chicken_chow_mein",
+      "name": "Chicken Chow Mein",
+      "portion_note": "1 serving (~400 g)",
+      "diy_cost": 2.07,
+      "ingredients": [
+        {
+          "product_name": "Egg noodles",
+          "weight": 100.0,
+          "unit": "g",
+          "cost": 0.31
+        },
+        {
+          "product_name": "Chicken breast",
+          "weight": 150.0,
+          "unit": "g",
+          "cost": 0.64
+        },
+        {
+          "product_name": "Bell pepper",
+          "weight": 50.0,
+          "unit": "g",
+          "cost": 0.8
+        },
+        {
+          "product_name": "Onion",
+          "weight": 30.0,
+          "unit": "g",
+          "cost": 0.02
+        },
+        {
+          "product_name": "Carrot",
+          "weight": 40.0,
+          "unit": "g",
+          "cost": 0.04
+        },
+        {
+          "product_name": "Soy sauce",
+          "weight": 20.0,
+          "unit": "ml",
+          "cost": 0.07
+        },
+        {
+          "product_name": "Rice vinegar",
+          "weight": 10.0,
+          "unit": "ml",
+          "cost": 0.03
+        },
+        {
+          "product_name": "Ginger",
+          "weight": 5.0,
+          "unit": "g",
+          "cost": 0.04
+        },
+        {
+          "product_name": "Olive oil",
+          "weight": 10.0,
+          "unit": "ml",
+          "cost": 0.12
+        }
+      ]
+    },
+    {
+      "id": "sweet_and_sour_chicken",
+      "name": "Sweet and Sour Chicken",
+      "portion_note": "1 serving (~450 g)",
+      "diy_cost": 2.19,
+      "ingredients": [
+        {
+          "product_name": "Chicken breast",
+          "weight": 150.0,
+          "unit": "g",
+          "cost": 0.64
+        },
+        {
+          "product_name": "Basmati rice",
+          "weight": 75.0,
+          "unit": "g",
+          "cost": 0.25
+        },
+        {
+          "product_name": "Bell pepper",
+          "weight": 50.0,
+          "unit": "g",
+          "cost": 0.8
+        },
+        {
+          "product_name": "Onion",
+          "weight": 40.0,
+          "unit": "g",
+          "cost": 0.03
+        },
+        {
+          "product_name": "Pineapple (tinned)",
+          "weight": 80.0,
+          "unit": "g",
+          "cost": 0.1
+        },
+        {
+          "product_name": "Plain flour",
+          "weight": 20.0,
+          "unit": "g",
+          "cost": 0.02
+        },
+        {
+          "product_name": "Ginger",
+          "weight": 5.0,
+          "unit": "g",
+          "cost": 0.04
+        },
+        {
+          "product_name": "Garlic",
+          "weight": 5.0,
+          "unit": "g",
+          "cost": 0.02
+        },
+        {
+          "product_name": "Rice vinegar",
+          "weight": 15.0,
+          "unit": "ml",
+          "cost": 0.05
+        },
+        {
+          "product_name": "Honey",
+          "weight": 15.0,
+          "unit": "g",
+          "cost": 0.03
+        },
+        {
+          "product_name": "Ketchup",
+          "weight": 20.0,
+          "unit": "g",
+          "cost": 0.03
+        },
+        {
+          "product_name": "Soy sauce",
+          "weight": 15.0,
+          "unit": "ml",
+          "cost": 0.06
+        },
+        {
+          "product_name": "Olive oil",
+          "weight": 10.0,
+          "unit": "ml",
+          "cost": 0.12
+        }
+      ]
+    },
+    {
+      "id": "chicken_tikka_masala",
+      "name": "Chicken Tikka Masala",
+      "portion_note": "1 serving (~450 g)",
+      "diy_cost": 1.55,
+      "ingredients": [
+        {
+          "product_name": "Chicken breast",
+          "weight": 150.0,
+          "unit": "g",
+          "cost": 0.64
+        },
+        {
+          "product_name": "Basmati rice",
+          "weight": 75.0,
+          "unit": "g",
+          "cost": 0.25
+        },
+        {
+          "product_name": "Natural yogurt",
+          "weight": 50.0,
+          "unit": "g",
+          "cost": 0.06
+        },
+        {
+          "product_name": "Curry powder",
+          "weight": 5.0,
+          "unit": "g",
+          "cost": 0.05
+        },
+        {
+          "product_name": "Coconut milk",
+          "weight": 80.0,
+          "unit": "ml",
+          "cost": 0.15
+        },
+        {
+          "product_name": "Double cream",
+          "weight": 40.0,
+          "unit": "g",
+          "cost": 0.14
+        },
+        {
+          "product_name": "Onion",
+          "weight": 30.0,
+          "unit": "g",
+          "cost": 0.02
+        },
+        {
+          "product_name": "Garlic",
+          "weight": 5.0,
+          "unit": "g",
+          "cost": 0.02
+        },
+        {
+          "product_name": "Ginger",
+          "weight": 5.0,
+          "unit": "g",
+          "cost": 0.04
+        },
+        {
+          "product_name": "Tomato paste",
+          "weight": 30.0,
+          "unit": "g",
+          "cost": 0.03
+        },
+        {
+          "product_name": "Olive oil",
+          "weight": 10.0,
+          "unit": "ml",
+          "cost": 0.12
+        },
+        {
+          "product_name": "Fresh coriander",
+          "weight": 5.0,
+          "unit": "g",
+          "cost": 0.03
+        }
+      ]
+    }
+  ]
+}

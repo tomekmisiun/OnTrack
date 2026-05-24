@@ -1,0 +1,37 @@
+{
+  "id": "sweet_and_sour_chicken",
+  "name_pl": "Kurczak słodko-kwaśny",
+  "name_en": "Sweet and Sour Chicken",
+  "portion_note_pl": "1 porcja (~450 g)",
+  "portion_note_en": "1 serving (~450 g)",
+  "ingredients_pl": [
+    { "product_name": "kurczak", "weight": 150 },
+    { "product_name": "ryż", "weight": 75 },
+    { "product_name": "papryka", "weight": 50 },
+    { "product_name": "cebula", "weight": 40 },
+    { "product_name": "ananas", "weight": 80 },
+    { "product_name": "mąka", "weight": 20 },
+    { "product_name": "imbir", "weight": 5 },
+    { "product_name": "czosnek", "weight": 5 },
+    { "product_name": "ocet ryżowy", "weight": 15 },
+    { "product_name": "miód", "weight": 15 },
+    { "product_name": "ketchup", "weight": 20 },
+    { "product_name": "sos", "weight": 15 },
+    { "product_name": "olej", "weight": 10 }
+  ],
+  "ingredients_en": [
+    { "catalog_id": "chicken_breast", "weight": 150 },
+    { "catalog_id": "rice", "weight": 75 },
+    { "catalog_id": "bell_pepper", "weight": 50 },
+    { "catalog_id": "onion", "weight": 40 },
+    { "catalog_id": "pineapple", "weight": 80 },
+    { "catalog_id": "plain_flour", "weight": 20 },
+    { "catalog_id": "ginger", "weight": 5 },
+    { "catalog_id": "garlic", "weight": 5 },
+    { "catalog_id": "rice_vinegar", "weight": 15 },
+    { "catalog_id": "honey", "weight": 15 },
+    { "catalog_id": "ketchup", "weight": 20 },
+    { "catalog_id": "soy_sauce", "weight": 15 },
+    { "catalog_id": "olive_oil", "weight": 10 }
+  ]
+}

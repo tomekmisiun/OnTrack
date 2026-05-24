@@ -1,0 +1,34 @@
+{
+  "id": "spaghetti_bolognese",
+  "name_pl": "Spaghetti Bolognese",
+  "name_en": "Spaghetti Bolognese",
+  "portion_note_pl": "1 porcja (~450 g)",
+  "portion_note_en": "1 serving (~450 g)",
+  "ingredients_pl": [
+    { "product_name": "mielona wołowina", "weight": 150 },
+    { "product_name": "makaron", "weight": 100 },
+    { "product_name": "cebula", "weight": 50 },
+    { "product_name": "marchew", "weight": 40 },
+    { "product_name": "seler", "weight": 30 },
+    { "product_name": "czosnek", "weight": 5 },
+    { "product_name": "krojone pomidory", "weight": 200 },
+    { "product_name": "koncentrat pomidorowy", "weight": 30 },
+    { "product_name": "olej", "weight": 15 },
+    { "product_name": "oregano", "weight": 2 },
+    { "product_name": "bazylia", "weight": 2 },
+    { "product_name": "pieprz", "weight": 1 }
+  ],
+  "ingredients_en": [
+    { "catalog_id": "beef_mince", "weight": 150 },
+    { "catalog_id": "spaghetti", "weight": 100 },
+    { "catalog_id": "onion", "weight": 50 },
+    { "catalog_id": "carrot", "weight": 40 },
+    { "catalog_id": "celery", "weight": 30 },
+    { "catalog_id": "garlic", "weight": 5 },
+    { "catalog_id": "chopped_tomatoes", "weight": 200 },
+    { "catalog_id": "tomato_paste", "weight": 30 },
+    { "catalog_id": "olive_oil", "weight": 15 },
+    { "catalog_id": "oregano", "weight": 2 },
+    { "catalog_id": "black_pepper", "weight": 1 }
+  ]
+}

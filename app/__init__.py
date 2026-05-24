@@ -50,6 +50,8 @@ def create_app():
     from app.routes.import_prices import import_bp
     from app.routes.members import members_bp
     from app.routes.fuel import fuel_bp
+    from app.routes.public import public_bp
+    from app.routes.day_schedule import day_schedule_bp
 
     @app.route('/health')
     def health():
@@ -62,5 +64,7 @@ def create_app():
     app.register_blueprint(import_bp, url_prefix='/api/import')
     app.register_blueprint(members_bp, url_prefix='/api/members')
     app.register_blueprint(fuel_bp, url_prefix='/api/fuel')
+    app.register_blueprint(public_bp, url_prefix='/api/public')
+    app.register_blueprint(day_schedule_bp, url_prefix='/api/day-schedule')
 
     return app
