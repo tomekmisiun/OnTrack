@@ -69,11 +69,13 @@ export default function Profile({ onClose, onStartTour }) {
           </div>
         )}
 
-        {/* Email */}
+        {/* Account identity */}
         <div style={{ marginBottom: 24 }}>
-          <div style={{ fontSize: 11, color: '#0d9488', fontWeight: 700, letterSpacing: '0.5px', marginBottom: 6 }}>EMAIL</div>
+          <div style={{ fontSize: 11, color: '#0d9488', fontWeight: 700, letterSpacing: '0.5px', marginBottom: 6 }}>
+            {user.username ? t('login_username_ph').toUpperCase() : 'EMAIL'}
+          </div>
           <div style={{ fontSize: 15, color: '#f1f5f9', padding: '10px 14px', background: '#1c3534', borderRadius: 8, border: '1px solid #e2e8f0' }}>
-            {user.email}
+            {user.username || user.email}
           </div>
         </div>
 

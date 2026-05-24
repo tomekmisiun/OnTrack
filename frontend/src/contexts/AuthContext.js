@@ -123,8 +123,8 @@ export function AuthProvider({ children, onLangChange }) {
     await finishAuth(res.data.token, pendingLang);
   };
 
-  const registerAccount = async ({ username, email, password, lang }) => {
-    const res = await authApi.register({ username, email, password, lang });
+  const registerAccount = async ({ username, password, lang }) => {
+    const res = await authApi.register({ username, password, lang });
     await finishAuth(res.data.token, lang);
   };
 

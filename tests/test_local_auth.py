@@ -6,7 +6,6 @@ def test_register_and_login(client):
         "/api/auth/register",
         json={
             "username": "TestUser",
-            "email": "testuser@example.com",
             "password": "secret123",
             "lang": "en",
         },
@@ -16,8 +15,9 @@ def test_register_and_login(client):
 
     user = User.query.filter_by(username="testuser").first()
     assert user is not None
-    assert user.email == "testuser@example.com"
+    assert user.email == "testuser@users.ontrack.local"
     assert user.lang == "en"
+    assert "email" not in user.to_dict()
 
     login = client.post(
         "/api/auth/login",
@@ -32,7 +32,6 @@ def test_login_rejects_wrong_password(client):
         "/api/auth/register",
         json={
             "username": "alice2",
-            "email": "alice2@example.com",
             "password": "secret123",
             "lang": "pl",
         },
@@ -47,16 +46,12 @@ def test_login_rejects_wrong_password(client):
 def test_register_rejects_duplicate_username(client):
     payload = {
         "username": "dupuser",
-        "email": "first@example.com",
         "password": "secret123",
         "lang": "pl",
     }
     assert client.post("/api/auth/register", json=payload).status_code == 201
 
-    res = client.post(
-        "/api/auth/register",
-        json={**payload, "email": "second@example.com"},
-    )
+    res = client.post("/api/auth/register", json=payload)
     assert res.status_code == 409
 
 
@@ -65,7 +60,6 @@ def test_register_validates_username(client):
         "/api/auth/register",
         json={
             "username": "ab",
-            "email": "short@example.com",
             "password": "secret123",
             "lang": "pl",
         },

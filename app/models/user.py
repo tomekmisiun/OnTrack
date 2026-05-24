@@ -19,7 +19,9 @@ class User(db.Model):
         return check_password_hash(self.password_hash, password)
 
     def to_dict(self):
-        out = {'id': self.id, 'email': self.email, 'lang': self.lang}
+        out = {'id': self.id, 'lang': self.lang}
         if self.username:
             out['username'] = self.username
+        if self.email and not self.email.endswith('@users.ontrack.local'):
+            out['email'] = self.email
         return out

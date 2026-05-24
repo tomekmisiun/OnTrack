@@ -135,6 +135,15 @@ def _seed_new_user_catalog(user_id: int, lang: str):
         db.session.rollback()
 
 
+def _synthetic_email(username: str) -> str:
+    """Placeholder email for username-only accounts (users.email is NOT NULL)."""
+    return f'{username}@users.ontrack.local'
+
+
+def _is_synthetic_email(email: str) -> bool:
+    return bool(email) and email.endswith('@users.ontrack.local')
+
+
 def _normalize_username(raw: str) -> str:
     return (raw or '').strip().lower()
 
@@ -159,7 +168,6 @@ def _issue_jwt(user: User):
 def register():
     data = request.get_json() or {}
     username = _normalize_username(data.get('username'))
-    email = (data.get('email') or '').strip().lower()
     password = data.get('password') or ''
     lang = data.get('lang') or 'pl'
     if lang not in ('pl', 'en'):
@@ -168,14 +176,11 @@ def register():
     err = _validate_username(username) or _validate_password(password)
     if err:
         return jsonify({'error': err}), 400
-    if not email or '@' not in email or len(email) > 255:
-        return jsonify({'error': 'Valid email is required'}), 400
 
     if User.query.filter_by(username=username).first():
         return jsonify({'error': 'Username already taken'}), 409
-    if User.query.filter_by(email=email).first():
-        return jsonify({'error': 'Email already registered'}), 409
 
+    email = _synthetic_email(username)
     user = User(email=email, username=username, lang=lang)
     user.set_password(password)
     db.session.add(user)

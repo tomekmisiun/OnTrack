@@ -63,7 +63,7 @@ In code: `t(expenseI18nKey('czynsz'))` → `"Rent"` / `"Czynsz"`.
 | Key | Where on the page |
 |-----|-------------------|
 | `subtitle_login` | Below the ONTRACK logo |
-| `login_username_ph`, `login_password_ph`, `login_email_ph` | Username/password form (email only when signing up) |
+| `login_username_ph`, `login_password_ph` | Username/password form |
 | `login_submit`, `login_register_submit` | Sign in / Create account buttons |
 | `login_switch_register`, `login_switch_login` | Toggle between sign-in and sign-up |
 | `login_or` | Divider before Google button |

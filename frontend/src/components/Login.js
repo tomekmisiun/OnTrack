@@ -24,7 +24,6 @@ export default function Login() {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [mode, setMode] = useState('login');
   const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [busy, setBusy] = useState(false);
 
@@ -50,7 +49,6 @@ export default function Login() {
       } else {
         await registerAccount({
           username: username.trim(),
-          email: email.trim(),
           password,
           lang: uiLang,
         });
@@ -101,18 +99,6 @@ export default function Login() {
             onChange={e => setUsername(e.target.value)}
             style={inputStyle}
           />
-          {mode === 'register' && (
-            <input
-              type="email"
-              autoComplete="email"
-              required
-              maxLength={255}
-              placeholder={t('login_email_ph')}
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              style={inputStyle}
-            />
-          )}
           <input
             type="password"
             autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
