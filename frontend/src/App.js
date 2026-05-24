@@ -144,18 +144,25 @@ function TourHost() {
     return () => clearTimeout(timer);
   }, [user?.id, loading]);
 
-  const handleTourCallback = useCallback((data) => {
+  const handleTourEvent = useCallback((data) => {
     const { status, type, action, index } = data;
-    if (status === STATUS.FINISHED || status === STATUS.SKIPPED || action === ACTIONS.CLOSE) {
-      if (user?.id) markTourDone(user.id);
-      setTourRun(false);
-      return;
-    }
+
     if (type === EVENTS.STEP_BEFORE) {
       const step = getTourSteps(lang)[index];
       if (step?.gotoTab) {
         window.dispatchEvent(new CustomEvent('tour-goto-tab', { detail: { tab: step.gotoTab } }));
       }
+      return;
+    }
+
+    if (
+      status === STATUS.FINISHED ||
+      status === STATUS.SKIPPED ||
+      action === ACTIONS.SKIP ||
+      (action === ACTIONS.CLOSE && type === EVENTS.TOUR_END)
+    ) {
+      if (user?.id) markTourDone(user.id);
+      setTourRun(false);
     }
   }, [lang, user?.id]);
 
@@ -171,13 +178,16 @@ function TourHost() {
           steps={getTourSteps(lang)}
           run={tourRun}
           continuous
-          showSkipButton
-          showProgress
           scrollToFirstStep={false}
-          disableScrolling
           locale={getTourLocale(lang)}
           styles={TOUR_STYLES}
-          callback={handleTourCallback}
+          onEvent={handleTourEvent}
+          options={{
+            skipScroll: true,
+            showProgress: true,
+            buttons: ['back', 'close', 'skip', 'primary'],
+            closeButtonAction: 'skip',
+          }}
         />
       )}
       <AppInner onStartTour={startTour} />
