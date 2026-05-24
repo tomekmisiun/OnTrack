@@ -251,76 +251,105 @@ export default function DaySchedule() {
       </header>
 
       <div className="card schedule-toolbar">
-        <div className="schedule-week-nav">
-          <button type="button" className="schedule-nav-btn" onClick={() => shiftWeek(-1)} title={t('schedule_prev_week')}>
-            <Icon icon="heroicons:chevron-left" width={18} />
-          </button>
-          <div className="schedule-week-label">
-            <span className="schedule-week-range">{toEU(weekStart)} – {toEU(weekEnd)}</span>
-            {!isCurrentWeek && (
-              <button type="button" className="schedule-today-btn" onClick={() => setWeekStart(currentWeekStart)}>
-                {t('schedule_this_week')}
-              </button>
-            )}
+        <div className="schedule-week-section">
+          <div className="schedule-section-head">
+            <Icon icon="heroicons:calendar-days" width={18} className="schedule-section-icon" />
+            <span>{t('schedule_week_picker_title')}</span>
           </div>
-          <button type="button" className="schedule-nav-btn" onClick={() => shiftWeek(1)} title={t('schedule_next_week')}>
-            <Icon icon="heroicons:chevron-right" width={18} />
-          </button>
+
+          <div className="schedule-week-picker">
+            <button type="button" className="schedule-nav-btn schedule-nav-btn--text" onClick={() => shiftWeek(-1)}>
+              <Icon icon="heroicons:chevron-left" width={16} />
+              <span>{t('schedule_prev_week')}</span>
+            </button>
+
+            <div className="schedule-week-center">
+              <span className="schedule-week-range">{toEU(weekStart)} – {toEU(weekEnd)}</span>
+              <span className={`schedule-week-badge ${isCurrentWeek ? 'schedule-week-badge--current' : ''}`}>
+                {isCurrentWeek ? t('schedule_current_week_badge') : t('schedule_other_week_badge')}
+              </span>
+              {!isCurrentWeek && (
+                <button type="button" className="schedule-back-link" onClick={() => setWeekStart(currentWeekStart)}>
+                  <Icon icon="heroicons:arrow-uturn-left" width={14} />
+                  {t('schedule_back_to_current')}
+                </button>
+              )}
+            </div>
+
+            <button type="button" className="schedule-nav-btn schedule-nav-btn--text" onClick={() => shiftWeek(1)}>
+              <span>{t('schedule_next_week')}</span>
+              <Icon icon="heroicons:chevron-right" width={16} />
+            </button>
+          </div>
+
+          <p className="schedule-week-hint">
+            <Icon icon="heroicons:information-circle" width={15} />
+            {t('schedule_week_nav_hint')}
+          </p>
         </div>
 
-        <div className="schedule-work-bar">
-          <span className="schedule-work-title">
-            <Icon icon="heroicons:briefcase" width={16} />
-            {t('schedule_work_hours')}
-          </span>
-          <label className="schedule-work-field">
-            <span>{t('schedule_work_from')}</span>
-            <select value={workStart} onChange={e => setWorkStart(Number(e.target.value))}>
-              {HOUR_OPTIONS.map(h => <option key={h} value={h}>{formatHour(h)}</option>)}
-            </select>
-          </label>
-          <label className="schedule-work-field">
-            <span>{t('schedule_work_to')}</span>
-            <select value={workEnd} onChange={e => setWorkEnd(Number(e.target.value))}>
-              {END_HOUR_OPTIONS.filter(h => h > workStart).map(h => (
-                <option key={h} value={h}>{h === 24 ? '24:00' : formatHour(h)}</option>
-              ))}
-            </select>
-          </label>
-          <label className="schedule-work-field schedule-work-field--label">
-            <span>{t('schedule_work_label')}</span>
-            <input
-              type="text"
-              maxLength={120}
-              value={workLabel}
-              onChange={e => setWorkLabel(e.target.value)}
-              placeholder={t('schedule_work_default')}
-            />
-          </label>
-          <div className="schedule-work-days">
+        <div className="schedule-work-section">
+          <div className="schedule-section-head">
+            <Icon icon="heroicons:briefcase" width={18} className="schedule-section-icon" />
+            <div>
+              <span>{t('schedule_work_hours')}</span>
+              <p className="schedule-section-desc">{t('schedule_work_desc')}</p>
+            </div>
+          </div>
+
+          <div className="schedule-work-grid">
+            <label className="schedule-work-field">
+              <span>{t('schedule_work_from')}</span>
+              <select value={workStart} onChange={e => setWorkStart(Number(e.target.value))}>
+                {HOUR_OPTIONS.map(h => <option key={h} value={h}>{formatHour(h)}</option>)}
+              </select>
+            </label>
+            <label className="schedule-work-field">
+              <span>{t('schedule_work_to')}</span>
+              <select value={workEnd} onChange={e => setWorkEnd(Number(e.target.value))}>
+                {END_HOUR_OPTIONS.filter(h => h > workStart).map(h => (
+                  <option key={h} value={h}>{h === 24 ? '24:00' : formatHour(h)}</option>
+                ))}
+              </select>
+            </label>
+            <label className="schedule-work-field schedule-work-field--grow">
+              <span>{t('schedule_work_label')}</span>
+              <input
+                type="text"
+                maxLength={120}
+                value={workLabel}
+                onChange={e => setWorkLabel(e.target.value)}
+                placeholder={t('schedule_work_default')}
+              />
+            </label>
+            <div className="schedule-work-field">
+              <span>{t('schedule_work_days_label')}</span>
+              <div className="schedule-work-days">
+                <button
+                  type="button"
+                  className={`schedule-day-chip ${!workAllDays ? 'active' : ''}`}
+                  onClick={() => setWorkAllDays(false)}
+                >
+                  {t('schedule_work_weekdays')}
+                </button>
+                <button
+                  type="button"
+                  className={`schedule-day-chip ${workAllDays ? 'active' : ''}`}
+                  onClick={() => setWorkAllDays(true)}
+                >
+                  {t('schedule_work_all_days')}
+                </button>
+              </div>
+            </div>
             <button
               type="button"
-              className={`schedule-day-chip ${!workAllDays ? 'active' : ''}`}
-              onClick={() => setWorkAllDays(false)}
+              className="btn btn-primary schedule-work-apply"
+              onClick={applyWorkHours}
+              disabled={workLoading}
             >
-              {t('schedule_work_weekdays')}
-            </button>
-            <button
-              type="button"
-              className={`schedule-day-chip ${workAllDays ? 'active' : ''}`}
-              onClick={() => setWorkAllDays(true)}
-            >
-              {t('schedule_work_all_days')}
+              {workLoading ? t('loading') : t('schedule_work_apply')}
             </button>
           </div>
-          <button
-            type="button"
-            className="btn btn-primary schedule-work-apply"
-            onClick={applyWorkHours}
-            disabled={workLoading}
-          >
-            {workLoading ? t('loading') : t('schedule_work_apply')}
-          </button>
         </div>
       </div>
 
