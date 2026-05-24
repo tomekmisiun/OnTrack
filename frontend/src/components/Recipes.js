@@ -9,6 +9,24 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
 
+const PROMPT_NAME_MARK = '{{name}}';
+
+function recipePromptPlainText(t) {
+  return t('recipe_prompt').split(PROMPT_NAME_MARK).join(t('recipe_name_lbl'));
+}
+
+function renderRecipePrompt(text, nameLabel) {
+  const parts = text.split(PROMPT_NAME_MARK);
+  return parts.map((part, i) => (
+    <React.Fragment key={i}>
+      {part}
+      {i < parts.length - 1 && (
+        <strong style={{ color: '#2dd4bf', fontWeight: 800 }}>{nameLabel}</strong>
+      )}
+    </React.Fragment>
+  ));
+}
+
 // ─── Regex parser ────────────────────────────────────────────────────────────
 
 const POLISH_UNITS = [
@@ -432,10 +450,10 @@ export default function Recipes() {
                   <span style={{ display:'inline-flex', alignItems:'center', background:'#1e3a3a', color:'#2dd4bf', border:'1px solid #374151', borderRadius:5, padding:'1px 6px', fontSize:11, fontWeight:600, verticalAlign:'middle' }}>{t('parse_regex_btn')}</span>
                 </div>
                 <div style={{ position: 'relative' }}>
-                  <pre style={{ background: '#1e293b', color: '#e2e8f0', borderRadius: 5, padding: '8px 10px', fontSize: 10, lineHeight: 1.6, whiteSpace: 'pre-wrap', wordBreak: 'break-word', margin: 0, paddingBottom: 32 }}>{t('recipe_prompt')}</pre>
+                  <pre style={{ background: '#1e293b', color: '#e2e8f0', borderRadius: 5, padding: '8px 10px', fontSize: 10, lineHeight: 1.6, whiteSpace: 'pre-wrap', wordBreak: 'break-word', margin: 0, paddingBottom: 32 }}>{renderRecipePrompt(t('recipe_prompt'), t('recipe_name_lbl'))}</pre>
                   <button
                     onClick={() => {
-                      navigator.clipboard.writeText(t('recipe_prompt'));
+                      navigator.clipboard.writeText(recipePromptPlainText(t));
                       setPromptCopied(true);
                       setTimeout(() => setPromptCopied(false), 2000);
                     }}
@@ -471,6 +489,15 @@ export default function Recipes() {
                     </a>
                   ))}
                 </div>
+              </div>
+              <div style={{ fontSize: 12, color: '#9ca3af', padding: '8px 12px', background: '#111827', border: '1px solid #374151', borderRadius: 6, lineHeight: 1.65 }}>
+                <div style={{ fontSize: 11, fontWeight: 700, color: '#0d9488', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 6 }}>{t('format_title')}</div>
+                <div style={{ marginBottom: 4 }}>
+                  1. <strong style={{ color: '#2dd4bf', fontWeight: 800 }}>{t('recipe_name_lbl')}</strong> {t('fmt_1_rest')}
+                </div>
+                <div style={{ marginBottom: 4 }}>2. {t('fmt_2')}</div>
+                <div style={{ marginBottom: 4 }}>3. {t('fmt_3')}</div>
+                <div>4. {t('fmt_4')}</div>
               </div>
               <textarea
                 ref={textareaRef}
