@@ -23,6 +23,15 @@ const T = {
     // Login
     subtitle_login: 'Zaloguj się do swojego konta',
     google_btn: 'Kontynuuj przez Google',
+    login_username_ph: 'Nazwa użytkownika',
+    login_email_ph: 'Adres e-mail',
+    login_password_ph: 'Hasło',
+    login_submit: 'Zaloguj się',
+    login_register_submit: 'Utwórz konto',
+    login_or: 'lub',
+    login_switch_register: 'Nie masz konta? Zarejestruj się',
+    login_switch_login: 'Masz już konto? Zaloguj się',
+    err_login_failed: 'Nieprawidłowa nazwa użytkownika lub hasło',
     account_language: 'JĘZYK KONTA',
     // Calendar arrays
     slot_labels: ['Śniadanie', 'Drugie śniadanie', 'Obiad', 'Podwieczorek', 'Kolacja'],
@@ -794,6 +803,15 @@ const T = {
     // Login
     subtitle_login: 'Sign in to your account',
     google_btn: 'Continue with Google',
+    login_username_ph: 'Username',
+    login_email_ph: 'Email address',
+    login_password_ph: 'Password',
+    login_submit: 'Sign in',
+    login_register_submit: 'Create account',
+    login_or: 'or',
+    login_switch_register: "Don't have an account? Sign up",
+    login_switch_login: 'Already have an account? Sign in',
+    err_login_failed: 'Invalid username or password',
     account_language: 'ACCOUNT LANGUAGE',
     // Calendar arrays
     slot_labels: ['Breakfast', 'Second breakfast', 'Lunch', 'Afternoon snack', 'Dinner'],

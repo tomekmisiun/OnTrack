@@ -7,10 +7,14 @@ from app.models.auth_code import AuthCode
 from app.utils import default_primary_member_name, sync_primary_member_name
 from urllib.parse import urlencode
 import os
+import re
 import threading
 
 auth_bp = Blueprint('auth', __name__)
 oauth = OAuth()
+
+USERNAME_RE = re.compile(r'^[a-zA-Z0-9_]{3,80}$')
+MIN_PASSWORD_LEN = 8
 
 
 def init_oauth(app):
@@ -121,6 +125,87 @@ def _ensure_primary_member(user, lang: str):
     db.session.commit()
 
 
+def _seed_new_user_catalog(user_id: int, lang: str):
+    try:
+        from app.seeds import _seed_products, _seed_recipes
+        _seed_products(user_id, lang=lang)
+        _seed_recipes(user_id, lang=lang)
+    except Exception:
+        current_app.logger.exception('Seed failed during signup for user %s', user_id)
+        db.session.rollback()
+
+
+def _normalize_username(raw: str) -> str:
+    return (raw or '').strip().lower()
+
+
+def _validate_username(username: str) -> str | None:
+    if not USERNAME_RE.match(username):
+        return 'Username must be 3–80 characters (letters, numbers, underscore only)'
+    return None
+
+
+def _validate_password(password: str) -> str | None:
+    if len(password or '') < MIN_PASSWORD_LEN:
+        return f'Password must be at least {MIN_PASSWORD_LEN} characters'
+    return None
+
+
+def _issue_jwt(user: User):
+    return jsonify({'token': create_access_token(identity=str(user.id))})
+
+
+@auth_bp.route('/register', methods=['POST'])
+def register():
+    data = request.get_json() or {}
+    username = _normalize_username(data.get('username'))
+    email = (data.get('email') or '').strip().lower()
+    password = data.get('password') or ''
+    lang = data.get('lang') or 'pl'
+    if lang not in ('pl', 'en'):
+        lang = 'pl'
+
+    err = _validate_username(username) or _validate_password(password)
+    if err:
+        return jsonify({'error': err}), 400
+    if not email or '@' not in email or len(email) > 255:
+        return jsonify({'error': 'Valid email is required'}), 400
+
+    if User.query.filter_by(username=username).first():
+        return jsonify({'error': 'Username already taken'}), 409
+    if User.query.filter_by(email=email).first():
+        return jsonify({'error': 'Email already registered'}), 409
+
+    user = User(email=email, username=username, lang=lang)
+    user.set_password(password)
+    db.session.add(user)
+    db.session.commit()
+
+    _ensure_primary_member(user, lang)
+    _seed_new_user_catalog(user.id, lang)
+    _schedule_catalog_seed(user.id, lang)
+
+    return _issue_jwt(user), 201
+
+
+@auth_bp.route('/login', methods=['POST'])
+def login():
+    data = request.get_json() or {}
+    username = _normalize_username(data.get('username'))
+    password = data.get('password') or ''
+
+    if not username or not password:
+        return jsonify({'error': 'Username and password are required'}), 400
+
+    user = User.query.filter_by(username=username).first()
+    if not user or not user.check_password(password):
+        return jsonify({'error': 'Invalid username or password'}), 401
+
+    _schedule_catalog_seed(user.id, user.lang)
+    sync_primary_member_name(user)
+    return _issue_jwt(user)
+
+
 @auth_bp.route('/google/callback')
 def google_callback():
     try:
@@ -138,13 +223,7 @@ def google_callback():
             user.lang = lang
             db.session.commit()
             _ensure_primary_member(user, lang)
-            try:
-                from app.seeds import _seed_products, _seed_recipes
-                _seed_products(user.id, lang=lang)
-                _seed_recipes(user.id, lang=lang)
-            except Exception:
-                current_app.logger.exception('Seed failed during OAuth signup')
-                db.session.rollback()
+            _seed_new_user_catalog(user.id, lang)
         else:
             _ensure_primary_member(user, user.lang or lang)
 

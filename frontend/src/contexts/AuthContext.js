@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+import { auth as authApi } from '../api';
 
 const AuthContext = createContext(null);
 
@@ -99,8 +100,36 @@ export function AuthProvider({ children, onLangChange }) {
     setUser(u => u ? { ...u, lang } : u);
   };
 
+  const finishAuth = useCallback(async (token, pendingLang) => {
+    localStorage.setItem('token', token);
+    API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    const r = await API.get('/api/auth/me');
+    if (pendingLang && pendingLang !== r.data.lang) {
+      try {
+        await authApi.changeLanguage(pendingLang);
+        applyUser({ ...r.data, lang: pendingLang });
+      } catch {
+        applyUser(r.data);
+      }
+    } else {
+      applyUser(r.data);
+    }
+    localStorage.removeItem('pending_lang');
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const loginWithPassword = async (username, password) => {
+    const res = await authApi.login(username, password);
+    const pendingLang = localStorage.getItem('pending_lang');
+    await finishAuth(res.data.token, pendingLang);
+  };
+
+  const registerAccount = async ({ username, email, password, lang }) => {
+    const res = await authApi.register({ username, email, password, lang });
+    await finishAuth(res.data.token, lang);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, logout, deleteAccount, updateUserLang }}>
+    <AuthContext.Provider value={{ user, loading, logout, deleteAccount, updateUserLang, loginWithPassword, registerAccount }}>
       {children}
     </AuthContext.Provider>
   );

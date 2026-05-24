@@ -1,13 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
 import PrivacyPolicy from './PrivacyPolicy';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
 
+const inputStyle = {
+  width: '100%',
+  boxSizing: 'border-box',
+  padding: '11px 12px',
+  border: '2px solid #374151',
+  borderRadius: 8,
+  background: '#111827',
+  color: '#f1f5f9',
+  fontSize: 14,
+  outline: 'none',
+};
+
 export default function Login() {
   const { t, lang: uiLang, switchLang } = useLanguage();
+  const { loginWithPassword, registerAccount } = useAuth();
   const [error, setError] = useState('');
   const [showPrivacy, setShowPrivacy] = useState(false);
+  const [mode, setMode] = useState('login');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [busy, setBusy] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -20,6 +39,30 @@ export default function Login() {
     }
   }, []);
 
+  const handleCredentials = async (e) => {
+    e.preventDefault();
+    setError('');
+    setBusy(true);
+    localStorage.setItem('pending_lang', uiLang);
+    try {
+      if (mode === 'login') {
+        await loginWithPassword(username.trim(), password);
+      } else {
+        await registerAccount({
+          username: username.trim(),
+          email: email.trim(),
+          password,
+          lang: uiLang,
+        });
+      }
+    } catch (err) {
+      const msg = err.response?.data?.error;
+      setError(msg || (mode === 'login' ? t('err_login_failed') : 'Registration failed'));
+    } finally {
+      setBusy(false);
+    }
+  };
+
   return (
     <div style={{
       minHeight: '100vh',
@@ -30,7 +73,7 @@ export default function Login() {
         background: '#1f2937', borderRadius: 16, padding: '40px 36px',
         width: '100%', maxWidth: 400, boxShadow: '0 20px 60px rgba(0,0,0,0.2)',
       }}>
-        <div style={{ textAlign: 'center', marginBottom: 32 }}>
+        <div style={{ textAlign: 'center', marginBottom: 28 }}>
           <svg viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
             style={{ width: 56, height: 56, margin: '0 auto 12px' }}>
             <circle cx="12" cy="12" r="9.5"/>
@@ -42,12 +85,73 @@ export default function Login() {
         </div>
 
         {error && (
-          <div style={{ background: '#ffe0e0', color: '#c00', padding: '10px 14px', borderRadius: 8, fontSize: 13, marginBottom: 20 }}>
+          <div style={{ background: '#ffe0e0', color: '#c00', padding: '10px 14px', borderRadius: 8, fontSize: 13, marginBottom: 16 }}>
             {error}
           </div>
         )}
 
+        <form onSubmit={handleCredentials} style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 16 }}>
+          <input
+            type="text"
+            autoComplete="username"
+            required
+            maxLength={80}
+            placeholder={t('login_username_ph')}
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+            style={inputStyle}
+          />
+          {mode === 'register' && (
+            <input
+              type="email"
+              autoComplete="email"
+              required
+              maxLength={255}
+              placeholder={t('login_email_ph')}
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              style={inputStyle}
+            />
+          )}
+          <input
+            type="password"
+            autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
+            required
+            minLength={8}
+            placeholder={t('login_password_ph')}
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            style={inputStyle}
+          />
+          <button
+            type="submit"
+            disabled={busy}
+            style={{
+              width: '100%', padding: '12px', border: 'none', borderRadius: 8,
+              background: busy ? '#0f766e' : '#0d9488', cursor: busy ? 'wait' : 'pointer',
+              fontSize: 14, fontWeight: 700, color: '#fff',
+            }}
+          >
+            {busy ? '…' : (mode === 'login' ? t('login_submit') : t('login_register_submit'))}
+          </button>
+        </form>
+
         <button
+          type="button"
+          onClick={() => { setMode(m => m === 'login' ? 'register' : 'login'); setError(''); }}
+          style={{ background: 'none', border: 'none', width: '100%', cursor: 'pointer', fontSize: 12, color: '#2dd4bf', marginBottom: 16 }}
+        >
+          {mode === 'login' ? t('login_switch_register') : t('login_switch_login')}
+        </button>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+          <div style={{ flex: 1, height: 1, background: '#374151' }} />
+          <span style={{ fontSize: 11, color: '#6b7280' }}>{t('login_or')}</span>
+          <div style={{ flex: 1, height: 1, background: '#374151' }} />
+        </div>
+
+        <button
+          type="button"
           onClick={() => { localStorage.setItem('pending_lang', uiLang); window.location.href = `${API_URL}/api/auth/google?lang=${uiLang}`; }}
           style={{
             width: '100%', padding: '12px', border: '2px solid #374151',
@@ -66,6 +170,7 @@ export default function Login() {
         <p style={{ fontSize: 11, color: '#9ca3af', textAlign: 'center', marginTop: 16, lineHeight: 1.6 }}>
           {t('login_privacy_prefix')}
           <button
+            type="button"
             onClick={() => setShowPrivacy(true)}
             style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', color: '#2dd4bf', fontSize: 11, textDecoration: 'underline' }}
           >
@@ -76,8 +181,8 @@ export default function Login() {
         {showPrivacy && <PrivacyPolicy lang={uiLang} onClose={() => setShowPrivacy(false)} />}
 
         <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 28 }}>
-          <button onClick={() => switchLang('en')} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 18, opacity: uiLang === 'en' ? 1 : 0.4 }}>🇬🇧</button>
-          <button onClick={() => switchLang('pl')} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 18, opacity: uiLang === 'pl' ? 1 : 0.4 }}>🇵🇱</button>
+          <button type="button" onClick={() => switchLang('en')} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 18, opacity: uiLang === 'en' ? 1 : 0.4 }}>🇬🇧</button>
+          <button type="button" onClick={() => switchLang('pl')} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: 18, opacity: uiLang === 'pl' ? 1 : 0.4 }}>🇵🇱</button>
         </div>
       </div>
     </div>
