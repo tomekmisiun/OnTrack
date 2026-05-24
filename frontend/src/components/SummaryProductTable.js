@@ -4,6 +4,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 
 function ProductTable({ items, onTotalChange }) {
   const { t } = useLanguage();
+  const displayUnit = u => (u === 'szt' ? t('unit_pcs') : (u || 'g'));
   const [localItems, setLocalItems] = useState(items);
   const [editPkgId,    setEditPkgId]    = useState(null);
   const [editPkg,      setEditPkg]      = useState('');
@@ -118,7 +119,7 @@ function ProductTable({ items, onTotalChange }) {
         {localItems.map((item, i) => (
           <tr key={i}>
             <td style={{ fontSize:13, color:'#e2e8f0' }}>{item.product_name}</td>
-            <td style={{ fontSize:13, color: '#9ca3af' }}>{item.total_weight} {item.unit || 'g'}</td>
+            <td style={{ fontSize:13, color: '#9ca3af' }}>{item.total_weight} {displayUnit(item.unit)}</td>
 
             {/* Pojemność opak — editable */}
             <td style={{ cursor: 'pointer' }} onClick={() => {
@@ -131,7 +132,7 @@ function ProductTable({ items, onTotalChange }) {
                   <div style={{ display:'flex', gap:3, alignItems:'center' }}>
                     <input type="number" min="0" max="99999" value={editPkg} onChange={e => setEditPkg(e.target.value)}
                       className="no-spin" style={inp} autoFocus onKeyDown={e => { if (e.key==='Enter') handleSavePkg(item); if (e.key==='Escape') setEditPkgId(null); }} />
-                    <span style={{ fontSize:11, color:'#6b7280' }}>{item.unit}</span>
+                    <span style={{ fontSize:11, color:'#6b7280' }}>{displayUnit(item.unit)}</span>
                   </div>
                   <label style={{ display:'flex', alignItems:'center', gap:4, fontSize:11, cursor:'pointer' }}>
                     <input type="checkbox" checked={editSBW} onChange={e => setEditSBW(e.target.checked)} />
@@ -144,7 +145,7 @@ function ProductTable({ items, onTotalChange }) {
                 </div>
               ) : (
                 <span style={{ fontSize:13, color: '#9ca3af' }}>
-                  {item.sold_by_weight ? t('weight_btn') : `${item.package_weight} ${item.unit || 'g'}`}
+                  {item.sold_by_weight ? t('weight_btn') : `${item.package_weight} ${displayUnit(item.unit)}`}
                 </span>
               )}
             </td>
@@ -211,7 +212,7 @@ function ProductTable({ items, onTotalChange }) {
                       className="no-spin"
                       style={{ padding:'2px 4px', fontSize:13, width:44, boxSizing:'border-box', border:'1px solid #374151', borderRadius:4, background:'#111827', color:'#e2e8f0' }}
                       placeholder="0" />
-                    <span style={{ fontSize:13, color:'#9ca3af' }}>{item.sold_by_weight ? (item.unit || 'g') : t('col_pcs')}</span>
+                    <span style={{ fontSize:13, color:'#9ca3af' }}>{item.sold_by_weight ? displayUnit(item.unit) : t('col_pcs')}</span>
                   </div>
                 )}
               </div>
