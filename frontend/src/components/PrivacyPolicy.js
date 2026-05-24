@@ -11,21 +11,21 @@ const CONTENT = {
       },
       {
         heading: '2. Data we collect',
-        text: 'When you sign in with Google, we receive and store the following information from your Google account:',
+        text: 'You can create an account in two ways. Depending on the method, we collect:',
         list: [
-          'Your name',
-          'Your email address',
-          'Your profile picture URL',
+          'Username and password sign-up: your chosen username, preferred language (Polish or English), and your password — stored only as a secure one-way hash; we never save or see your plain-text password',
+          'Google sign-in: your email address from your Google account',
         ],
-        text2: 'We do not collect passwords, payment information, or any data beyond what is listed above.',
+        text2: 'We do not require an email address for username and password accounts. We do not collect payment information or use your data for advertising.',
       },
       {
         heading: '3. How we use your data',
         text: 'We use your data solely to:',
         list: [
           'Create and maintain your Ontrack account',
-          'Display your name and profile picture within the app',
+          'Authenticate you when you sign in (username/password or Google)',
           'Associate your meal plans, recipes, and products with your account',
+          'Apply your preferred language setting in the app',
         ],
         text2: 'We do not use your data for advertising, profiling, or any automated decision-making.',
       },
@@ -54,7 +54,7 @@ const CONTENT = {
       },
       {
         heading: '8. Contact',
-        text: 'If you have any questions about this Privacy Policy or how we handle your data, please contact us at: hello@ontrack.app',
+        text: 'If you have any questions about this Privacy Policy or how we handle your data, please contact us at: tomek.misiun@gmail.com',
       },
     ],
   },
@@ -68,21 +68,21 @@ const CONTENT = {
       },
       {
         heading: '2. Jakie dane zbieramy',
-        text: 'Podczas logowania przez Google otrzymujemy i przechowujemy następujące informacje z Twojego konta Google:',
+        text: 'Konto możesz założyć na dwa sposoby. W zależności od wybranej metody zbieramy:',
         list: [
-          'Twoje imię i nazwisko',
-          'Twój adres e-mail',
-          'URL Twojego zdjęcia profilowego',
+          'Rejestracja nazwą użytkownika i hasłem: wybrana nazwa użytkownika, preferowany język (polski lub angielski) oraz hasło — przechowywane wyłącznie w postaci zaszyfrowanego skrótu jednokierunkowego; nigdy nie zapisujemy hasła w formie jawnej',
+          'Logowanie przez Google: adres e-mail z Twojego konta Google',
         ],
-        text2: 'Nie zbieramy haseł, danych płatniczych ani żadnych innych danych poza wymienionymi powyżej.',
+        text2: 'Przy rejestracji nazwą użytkownika i hasłem nie wymagamy adresu e-mail. Nie zbieramy danych płatniczych ani nie wykorzystujemy Twoich danych do celów reklamowych.',
       },
       {
         heading: '3. Jak używamy Twoich danych',
         text: 'Twoje dane wykorzystujemy wyłącznie w celu:',
         list: [
           'Utworzenia i utrzymania Twojego konta Ontrack',
-          'Wyświetlania Twojego imienia i zdjęcia profilowego w aplikacji',
+          'Uwierzytelniania przy logowaniu (nazwa użytkownika i hasło lub Google)',
           'Powiązania Twoich planów posiłków, przepisów i produktów z kontem',
+          'Zastosowania wybranego języka interfejsu aplikacji',
         ],
         text2: 'Nie wykorzystujemy Twoich danych do celów reklamowych, profilowania ani żadnego zautomatyzowanego podejmowania decyzji.',
       },
@@ -111,7 +111,7 @@ const CONTENT = {
       },
       {
         heading: '8. Kontakt',
-        text: 'Jeśli masz pytania dotyczące niniejszej Polityki Prywatności lub sposobu przetwarzania Twoich danych, skontaktuj się z nami: hello@ontrack.app',
+        text: 'Jeśli masz pytania dotyczące niniejszej Polityki Prywatności lub sposobu przetwarzania Twoich danych, skontaktuj się z nami: tomek.misiun@gmail.com',
       },
     ],
   },
