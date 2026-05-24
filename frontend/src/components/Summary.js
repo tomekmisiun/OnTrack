@@ -12,6 +12,7 @@ import { dateToStr, toEU, getCurrentWeek, getCurrentMonth } from '../utils/dates
 import ProductTable from './SummaryProductTable';
 import PieChart from './SummaryPieChart';
 import DrinksCard, { OTHER_TYPES, SHARED_KEYS } from './DrinksCard';
+import { expenseI18nKey } from '../i18n/expenseKeys';
 registerLocale('pl', pl);
 
 // ─── Period card (week / month / custom) ──────────────────────────────────────
@@ -31,7 +32,7 @@ function PeriodContent({ range, summary, loading, scrollToWeek, onGoToTab, drink
         return drinkItems.filter(d => d._dk === 'lekarze').map(d => d.total > 0 ? { label: d._tkey ? t(d._tkey) : d.name, value: d.total, color: COLORS[(i+3)%COLORS.length] } : null).filter(Boolean);
       }
       const val = drinkItems.filter(d => d._dk === ot.key).reduce((s,d)=>s+d.total,0);
-      return val > 0 ? [{ label: t('exp_' + ot.key) || ot.label, value: val, color: COLORS[(i+3)%COLORS.length] }] : [];
+      return val > 0 ? [{ label: t(expenseI18nKey(ot.key)), value: val, color: COLORS[(i+3)%COLORS.length] }] : [];
     });
     return [
       { label: t('food_label'), value: foodTotal, color: COLORS[0] },
@@ -148,7 +149,11 @@ function Summary({ onGoToTab }) {
     }
     return 7;
   }, [activePeriod, customRange]);
-  const drinksPeriodLabel = activePeriod === 'week' ? 'tydzień (7 dni)' : activePeriod === 'month' ? `miesiąc (${drinksDays} dni)` : `wybrany okres (${drinksDays} dni)`;
+  const drinksPeriodLabel = activePeriod === 'week'
+    ? t('drinks_period_week')
+    : activePeriod === 'month'
+      ? t('drinks_period_month')(drinksDays)
+      : t('drinks_period_custom')(drinksDays);
 
   // Ładuj dane gdy mamy activeMember lub zmieniono selectedMemberIds
   // Gdy nikt nie zaznaczony → puste wyniki (0 zł)

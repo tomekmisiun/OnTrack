@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Icon } from '@iconify/react';
 import { fuel as fuelApi } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
+import { expenseI18nKey, drinkI18nKey } from '../i18n/expenseKeys';
 
 function FieldBox({ label, children }) {
   return (
@@ -149,7 +150,7 @@ function loadDrinksFromLS() {
 
 function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = [] }) {
   const { t, lang } = useLanguage();
-  const eg = lang === 'en' ? 'e.g.' : 'np.';
+  const eg = t('eg_prefix');
   const _itemLabel = (name) => {
     const map = { 'Cukier': t('dc_sugar'), 'Słodzik': t('dc_sweetener'), 'Mleko': t('dc_milk'), 'Śmietanka': t('dc_cream') };
     return map[name] || name;
@@ -247,32 +248,32 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
     if (d.kawa.enabled) {
       const gPerDay = n(d.kawa.cupsPerDay) * n(d.kawa.spoonsPerCup) * 3;
       const daily = (gPerDay / Math.max(1, n(d.kawa.pkgG))) * n(d.kawa.pkgPrice);
-      list.push({ name:'Kawa', daily, total: daily * days, _dk:'kawa' });
+      list.push({ name: t(drinkI18nKey('kawa')), daily, total: daily * days, _dk: 'kawa' });
       if (d.kawa.sugarType) { const sd = n(d.kawa.cupsPerDay) * n(d.kawa.sugarSpoons) * priceForType(d.kawa.sugarType); list.push({ name:`${d.kawa.sugarType === 'cukier' ? 'Cukier' : 'Słodzik'} (kawa)`, daily:sd, total:sd*days, _dk:'kawa' }); }
       if (d.kawa.milkType && n(d.kawa.milkPkgMl)>0) { const md = n(d.kawa.cupsPerDay)*n(d.kawa.milkMlPerCup)/n(d.kawa.milkPkgMl)*n(d.kawa.milkPrice); list.push({ name:`${d.kawa.milkType==='mleko'?'Mleko':'Śmietanka'} (kawa)`, daily:md, total:md*days, _dk:'kawa' }); }
     }
     if (d.herbata.enabled) {
       const daily = (n(d.herbata.cupsPerDay) / Math.max(1, n(d.herbata.sachetPerPkg))) * n(d.herbata.pkgPrice);
-      list.push({ name:'Herbata', daily, total: daily * days, _dk:'herbata' });
+      list.push({ name: t(drinkI18nKey('herbata')), daily, total: daily * days, _dk: 'herbata' });
       if (d.herbata.sugarType) { const sd = n(d.herbata.cupsPerDay) * n(d.herbata.sugarSpoons) * priceForType(d.herbata.sugarType); list.push({ name:`${d.herbata.sugarType === 'cukier' ? 'Cukier' : 'Słodzik'} (herbata)`, daily:sd, total:sd*days, _dk:'herbata' }); }
       if (d.herbata.milkType && n(d.herbata.milkPkgMl)>0) { const md = n(d.herbata.cupsPerDay)*n(d.herbata.milkMlPerCup)/n(d.herbata.milkPkgMl)*n(d.herbata.milkPrice); list.push({ name:`${d.herbata.milkType==='mleko'?'Mleko':'Śmietanka'} (herbata)`, daily:md, total:md*days, _dk:'herbata' }); }
     }
-    if (d.napoje.enabled)    { const daily = (n(d.napoje.litersPerDay) / Math.max(0.001, n(d.napoje.pkgL))) * n(d.napoje.pkgPrice); list.push({ name:'Napoje',          daily, total:daily*days, _dk:'napoje' }); }
-    if (d.woda.enabled)      { const daily = (n(d.woda.litersPerDay)   / Math.max(0.001, n(d.woda.pkgL)))   * n(d.woda.pkgPrice);   list.push({ name:'Woda',            daily, total:daily*days, _dk:'woda' }); }
+    if (d.napoje.enabled)    { const daily = (n(d.napoje.litersPerDay) / Math.max(0.001, n(d.napoje.pkgL))) * n(d.napoje.pkgPrice); list.push({ name: t(drinkI18nKey('napoje')), daily, total: daily * days, _dk: 'napoje' }); }
+    if (d.woda.enabled)      { const daily = (n(d.woda.litersPerDay)   / Math.max(0.001, n(d.woda.pkgL)))   * n(d.woda.pkgPrice);   list.push({ name: t(drinkI18nKey('woda')),   daily, total: daily * days, _dk: 'woda' }); }
     if (d.sodaStream.enabled){
       const syrupDaily = n(d.sodaStream.litersPerDay) * (n(d.sodaStream.mlPer1L) / Math.max(1, n(d.sodaStream.syrupMl))) * n(d.sodaStream.syrupPrice);
       const cylDaily = n(d.sodaStream.cylinderDays) > 0 ? n(d.sodaStream.cylinderCost) / n(d.sodaStream.cylinderDays) : 0;
       const daily = syrupDaily + cylDaily;
-      list.push({ name:'Syrop Soda Stream', daily, total:daily*days, _dk:'sodaStream' });
+      list.push({ name: t(drinkI18nKey('sodaStream')), daily, total: daily * days, _dk: 'sodaStream' });
     }
-    OTHER_TYPES.forEach(t => {
-      const o = otherExpenses[t.key];
+    OTHER_TYPES.forEach(ot => {
+      const o = otherExpenses[ot.key];
       if (!o?.enabled) return;
       const n = v => Math.min(99999, parseFloat(v) || 0);
       let daily = 0;
-      if (t.key === 'papier') {
+      if (ot.key === 'papier') {
         daily = (n(o.dailyRolls) / Math.max(1, n(o.rollsPerPkg))) * n(o.pkgPrice);
-      } else if (t.key === 'pranie') {
+      } else if (ot.key === 'pranie') {
         const washesPerDay = n(o.washesPerWeek) / 7;
         let det = 0;
         if (o.detergentType === 'proszek')   det = (n(o.proszekPerWash) / Math.max(1, n(o.proszekPkgKg) * 1000)) * n(o.proszekPkgPrice);
@@ -281,11 +282,11 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
         let plu = 0;
         if (o.plukanie) plu = (n(o.plukaniePerWash) / Math.max(1, n(o.plukanieL) * 1000)) * n(o.plukaniePkgPrice);
         daily = (det + plu) * washesPerDay;
-      } else if (t.key === 'sprzatan') {
+      } else if (ot.key === 'sprzatan') {
         const bagDaily = (n(o.bagsPerWeek) / 7) * (n(o.bagsPkgPrice) / Math.max(1, n(o.bagsPerPkg)));
         const cleanDaily = (o.cleaningItems || []).reduce((s, ci) => s + (n(ci.perMonth) * n(ci.pkgPrice)) / 30, 0);
         daily = bagDaily + cleanDaily;
-      } else if (t.key === 'higiena') {
+      } else if (ot.key === 'higiena') {
         const h = o; const nn2 = v => Math.min(99999, parseFloat(v)||0);
         // zęby
         daily += (nn2(h.zbRazDzien) * nn2(h.zbPastaG) / Math.max(1, nn2(h.zbTubkaMl))) * nn2(h.zbTubkaPrice);
@@ -302,7 +303,7 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
         daily += (nn2(h.papierDailyRolls) / Math.max(1, nn2(h.papierRollsPerPkg))) * nn2(h.papierPkgPrice);
         // inne
         (h.inneItems||[]).forEach(ci => { daily += (n(ci.perMonth)*n(ci.pkgPrice))/30; });
-      } else if (t.key === 'zmywanie') {
+      } else if (ot.key === 'zmywanie') {
         if (o.useReczne) {
           const dur = n(o.pkgDuration) * (o.durationUnit === 'miesiace' ? 30 : 1);
           daily += n(o.pkgPrice) / Math.max(1, dur);
@@ -310,7 +311,7 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
         if (o.useZmywarka) {
           daily += (n(o.usesPerWeek) / 7) * (n(o.kapsulkiPkgPrice) / Math.max(1, n(o.kapsPerPkg)));
         }
-      } else if (t.key === 'zwierze') {
+      } else if (ot.key === 'zwierze') {
         if (o.suchaE) daily += (n(o.suchaG) / Math.max(1, n(o.suchaPkgG))) * n(o.suchaPrice);
         if (o.mokraE) daily += n(o.mokraSzt) * n(o.mokraPrice);
         if (o.zwierekE) daily += (n(o.zwierekL) / Math.max(1, n(o.zwierekPkgL))) * n(o.zwierekPrice) / Math.max(1, n(o.zwierekDni));
@@ -318,35 +319,35 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
         if (o.pielegnacjaE) daily += n(o.pielegnacja) / 30;
         if (o.akcesoriaE) daily += n(o.akcesoria) / 30;
         (o.extraItems||[]).forEach(ci => { daily += n(ci.price) / 30; });
-      } else if (t.key === 'dziecko') {
+      } else if (ot.key === 'dziecko') {
         [['przedszkole','przedszkoleE'],['obiad','obiadE'],['zajecia','zajeciaE'],['korepetycje','korepetycjeE'],
          ['materialy','materialyE'],['dojazdy','dojazdyE'],['odziez','odziezdE'],['kieszonkowe','kieszonkoweE'],['zabawki','zabawkiE'],['kosmetyki','kosmetykiE']]
           .forEach(([k,e]) => { if (o[e]) daily += n(o[k]) / 30; });
         if (o.pieluchyEnabled) daily += (n(o.pieluchyPerDay) / Math.max(1, n(o.pieluchyPerPkg))) * n(o.pieluchyPrice);
         if (o.mlekoEnabled) daily += (n(o.mlekoPerDay) / Math.max(1, n(o.mlekoPkgScoops))) * n(o.mlekoPrice);
         (o.extraItems||[]).forEach(ci => { daily += n(ci.price) / 30; });
-      } else if (t.key === 'lekarze') {
+      } else if (ot.key === 'lekarze') {
         const wizD = n(o.wizyty) / 30;
         const lekD = n(o.leki) / 30;
-        if (wizD > 0) list.push({ name:'Wizyty lekarskie', _tkey:'dc_doctors', daily:wizD, total:wizD*days, _dk:'lekarze' });
-        if (lekD > 0) list.push({ name:'Leki', _tkey:'dc_medicine', daily:lekD, total:lekD*days, _dk:'lekarze' });
+        if (wizD > 0) list.push({ name: t('dc_doctors'), _tkey: 'dc_doctors', daily: wizD, total: wizD * days, _dk: 'lekarze' });
+        if (lekD > 0) list.push({ name: t('dc_medicine'), _tkey: 'dc_medicine', daily: lekD, total: lekD * days, _dk: 'lekarze' });
         return;
-      } else if (t.key === 'biurowe') {
+      } else if (ot.key === 'biurowe') {
         if (o.papierA4E) daily += n(o.papierA4) / 30;
         if (o.tuszE) daily += n(o.tusz) / 30;
         if (o.notatnikE) daily += n(o.notatnik) / 30;
         if (o.dlugopisyE) daily += n(o.dlugopisy) / 30;
         (o.extraItems||[]).forEach(ci => { daily += n(ci.price) / 30; });
-      } else if (t.key === 'paliwo') {
+      } else if (ot.key === 'paliwo') {
         daily = (n(o.kmPerDay) / 100) * n(o.consumption) * n(o.fuelPrice);
-      } else if (t.key === 'media') {
+      } else if (ot.key === 'media') {
         if (o.internetE) daily += n(o.internet) / 30;
         if (o.telefonE) daily += n(o.telefon) / 30;
         if (o.tvE) daily += n(o.tv) / 30;
       } else {
         daily = n(o.monthlyAmount) / 30;
       }
-      list.push({ name: t.label, daily, total: daily * days, _dk: t.key });
+      list.push({ name: t(expenseI18nKey(ot.key)), daily, total: daily * days, _dk: ot.key });
     });
     return list;
   }, [drinks, days, effCukierPrice, effSlodzikPrice, otherExpenses]);
@@ -399,7 +400,7 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
           </div>
         )}
         <span style={{ fontSize:16, lineHeight:1, position:'relative', zIndex:1 }}>{emoji}</span>
-        <span style={{ fontSize:9, fontWeight:700, color:'#fff', textAlign:'center', position:'relative', zIndex:1, textShadow:'0 1px 3px rgba(0,0,0,0.8)', padding:'0 3px', lineHeight:1.3 }}>{t('exp_' + key) || label}</span>
+        <span style={{ fontSize:9, fontWeight:700, color:'#fff', textAlign:'center', position:'relative', zIndex:1, textShadow:'0 1px 3px rgba(0,0,0,0.8)', padding:'0 3px', lineHeight:1.3 }}>{t(expenseI18nKey(key))}</span>
         {(() => { const pv = otherTilePreview(key); return pv>0 ? <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'rgba(0,0,0,0.6)', padding:'3px 4px', textAlign:'center', fontSize:10, fontWeight:800, color:'#2dd4bf', zIndex:2, opacity: enabled?1:0.7 }}>{pv.toFixed(2)} {t('currency')}</div> : null; })()}
       </div>
       {expanded && (() => {
@@ -450,7 +451,7 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
           if (o.plukanie) pluCost = (nn(o.plukaniePerWash) / Math.max(1, nn(o.plukanieL)*1000)) * nn(o.plukaniePkgPrice) * washesTotal;
           return (
           <div style={{ background:'#111827', border:'1px solid #374151', borderRadius:8, padding:'12px', marginTop:4 }}>
-            <InnerSec title={t('exp_pranie')}>
+            <InnerSec title={t('exp_laundry')}>
               <FieldBox label={t('dc_washes_per_week')}><input type="number" className="no-spin" min="0" max="99999" step="0.5" style={inp2} value={o.washesPerWeek} placeholder="5" onChange={e=>updOther(key,{washesPerWeek:cl2(e.target.value)})} /></FieldBox>
             </InnerSec>
             <InnerSec title={t('dc_detergent')}>
@@ -1011,7 +1012,7 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
             }
           };
           const dailyCost = (nn(p.kmPerDay) / 100) * nn(p.consumption) * nn(p.fuelPrice) * days;
-          const FUEL_LABELS = { diesel: 'Diesel', benzyna: lang === 'en' ? 'Petrol' : 'Benzyna', gaz: 'LPG' };
+          const FUEL_LABELS = { diesel: 'Diesel', benzyna: t('dc_fuel_petrol'), gaz: 'LPG' };
           return (
           <div style={{ background:'#111827', border:'1px solid #374151', borderRadius:8, padding:'12px', marginTop:4 }}>
             <div style={{ display:'flex', borderRadius:6, overflow:'hidden', border:'1px solid #374151', marginBottom:10 }}>
@@ -1072,7 +1073,7 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
           const total = ((m.internetE?nn(m.internet):0)+(m.telefonE?nn(m.telefon):0)+(m.tvE?nn(m.tv):0))/30*days;
           return (
           <div style={{ background:'#111827', border:'1px solid #374151', borderRadius:8, padding:'12px', marginTop:4 }}>
-            {[['internetE','internet','Internet','60'],['telefonE','telefon',lang === 'en' ? 'Phone' : 'Telefon','50'],['tvE','tv','TV','40']].map(([eKey,vKey,label,ph]) => (
+            {[['internetE','internet','Internet','60'],['telefonE','telefon',t('dc_media_phone'),'50'],['tvE','tv','TV','40']].map(([eKey,vKey,label,ph]) => (
               <div key={eKey} style={{ marginBottom:8 }}>
                 <button type="button" onClick={()=>updM({[eKey]:!m[eKey]})}
                   style={{ width:'100%', padding:'5px 8px', border:'1px solid #374151', borderRadius:6, cursor:'pointer', fontSize:10, fontWeight:600, transition:'all 0.15s',
@@ -1150,7 +1151,7 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
                 }}>
                 <div style={{ position:'absolute', inset:0, background: enabled ? 'transparent' : 'rgba(0,0,0,0.2)' }} />
                 <span style={{ fontSize:24, lineHeight:1, position:'relative', zIndex:1 }}>{emoji}</span>
-                <span style={{ fontSize:11, fontWeight:700, color:'#fff', textAlign:'center', position:'relative', zIndex:1, textShadow:'0 1px 3px rgba(0,0,0,0.8)', padding:'0 4px' }}>{t('drink_' + key)}</span>
+                <span style={{ fontSize:11, fontWeight:700, color:'#fff', textAlign:'center', position:'relative', zIndex:1, textShadow:'0 1px 3px rgba(0,0,0,0.8)', padding:'0 4px' }}>{t(drinkI18nKey(key))}</span>
                 {(() => { const pv = drinkTilePreview(key); return pv>0 ? <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'rgba(0,0,0,0.6)', padding:'4px 6px', textAlign:'center', fontSize:12, fontWeight:800, color:'#2dd4bf', zIndex:2, letterSpacing:'0.2px', opacity: enabled?1:0.7 }}>{pv.toFixed(2)} {t('currency')}</div> : null; })()}
               </div>
 
@@ -1196,7 +1197,7 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
                       </InnerSec>
                     <div style={{ borderTop:'1px solid #1a3a38', marginTop:8, paddingTop:6, display:'flex', flexDirection:'column', gap:3 }}>
                       {[t('dc_cups_summary')(parseFloat(drinks.kawa.cupsPerDay)||0), t('dc_days_label')(days), t('dc_cups_total')((parseFloat(drinks.kawa.cupsPerDay)||0)*days)].map((l,i)=><div key={i} style={{ fontSize:10, color:'#6b7280' }}>{l}</div>)}
-                      {[{label:t('drink_kawa'),val:items.filter(i=>i._dk==='kawa'&&i.name==='Kawa').reduce((s,i)=>s+i.total,0)},...items.filter(i=>i._dk==='kawa'&&i.name!=='Kawa').map(i=>({label:_itemLabel(i.name.replace(' (kawa)','')),val:i.total}))].filter(b=>b.val>0).map((b,i)=><div key={i} style={{ display:'flex', justifyContent:'space-between', fontSize:10 }}><span style={{ color:'#6b7280' }}>{b.label}</span><span style={{ color:'#9ca3af', fontWeight:600 }}>{b.val.toFixed(2)} {t('currency')}</span></div>)}
+                      {[{label:t(drinkI18nKey('kawa')),val:items.filter(i=>i._dk==='kawa'&&i.name===t(drinkI18nKey('kawa'))).reduce((s,i)=>s+i.total,0)},...items.filter(i=>i._dk==='kawa'&&i.name!==t(drinkI18nKey('kawa'))).map(i=>({label:_itemLabel(i.name.replace(' (kawa)','')),val:i.total}))].filter(b=>b.val>0).map((b,i)=><div key={i} style={{ display:'flex', justifyContent:'space-between', fontSize:10 }}><span style={{ color:'#6b7280' }}>{b.label}</span><span style={{ color:'#9ca3af', fontWeight:600 }}>{b.val.toFixed(2)} {t('currency')}</span></div>)}
                       <div style={{ fontSize:13, fontWeight:800, color:'#0d9488', marginTop:2 }}>{tileTotal.toFixed(2)} {t('currency')}</div>
                     </div>
                   </div>
@@ -1239,7 +1240,7 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
                       </InnerSec>
                     <div style={{ borderTop:'1px solid #1a3a38', marginTop:8, paddingTop:6, display:'flex', flexDirection:'column', gap:3 }}>
                       {[t('dc_cups_summary')(parseFloat(drinks.herbata.cupsPerDay)||0), t('dc_days_label')(days), t('dc_cups_total')((parseFloat(drinks.herbata.cupsPerDay)||0)*days)].map((l,i)=><div key={i} style={{ fontSize:10, color:'#6b7280' }}>{l}</div>)}
-                      {[{label:t('drink_herbata'),val:items.filter(i=>i._dk==='herbata'&&i.name==='Herbata').reduce((s,i)=>s+i.total,0)},...items.filter(i=>i._dk==='herbata'&&i.name!=='Herbata').map(i=>({label:_itemLabel(i.name.replace(' (herbata)','')),val:i.total}))].filter(b=>b.val>0).map((b,i)=><div key={i} style={{ display:'flex', justifyContent:'space-between', fontSize:10 }}><span style={{ color:'#6b7280' }}>{b.label}</span><span style={{ color:'#9ca3af', fontWeight:600 }}>{b.val.toFixed(2)} {t('currency')}</span></div>)}
+                      {[{label:t(drinkI18nKey('herbata')),val:items.filter(i=>i._dk==='herbata'&&i.name===t(drinkI18nKey('herbata'))).reduce((s,i)=>s+i.total,0)},...items.filter(i=>i._dk==='herbata'&&i.name!==t(drinkI18nKey('herbata'))).map(i=>({label:_itemLabel(i.name.replace(' (herbata)','')),val:i.total}))].filter(b=>b.val>0).map((b,i)=><div key={i} style={{ display:'flex', justifyContent:'space-between', fontSize:10 }}><span style={{ color:'#6b7280' }}>{b.label}</span><span style={{ color:'#9ca3af', fontWeight:600 }}>{b.val.toFixed(2)} {t('currency')}</span></div>)}
                       <div style={{ fontSize:13, fontWeight:800, color:'#0d9488', marginTop:2 }}>{tileTotal.toFixed(2)} {t('currency')}</div>
                     </div>
                   </div>

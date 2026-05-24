@@ -1,8 +1,10 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
+import { useLanguage } from './LanguageContext';
 
 const ToastContext = createContext(null);
 
 export function ToastProvider({ children }) {
+  const { t } = useLanguage();
   const [toast, setToast] = useState(null);
   const [confirm, setConfirm] = useState(null);
 
@@ -15,9 +17,9 @@ export function ToastProvider({ children }) {
   const showError   = useCallback((msg, ms) => showToast(msg, '#ef4444', ms), [showToast]);
   const showInfo    = useCallback((msg, ms) => showToast(msg, '#3b82f6', ms), [showToast]);
 
-  const showConfirm = useCallback(({ title, message, confirmLabel = 'Usuń', onConfirm }) => {
-    setConfirm({ title, message, confirmLabel, onConfirm });
-  }, []);
+  const showConfirm = useCallback(({ title, message, confirmLabel, onConfirm }) => {
+    setConfirm({ title, message, confirmLabel: confirmLabel ?? t('btn_delete'), onConfirm });
+  }, [t]);
 
   return (
     <ToastContext.Provider value={{ showToast, showSuccess, showError, showInfo, showConfirm }}>
@@ -78,7 +80,7 @@ export function ToastProvider({ children }) {
                 onClick={() => setConfirm(null)}
                 style={{ padding: '8px 18px', borderRadius: 7, border: '1px solid #374151', background: '#374151', color: '#d1d5db', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}
               >
-                Anuluj
+                {t('cancel')}
               </button>
               <button
                 onClick={() => { confirm.onConfirm(); setConfirm(null); }}

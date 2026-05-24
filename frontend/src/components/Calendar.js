@@ -16,11 +16,6 @@ import { fuzzySearch } from '../utils/search';
 const COLORS = ['#4a6fa5', '#93c5fd', '#fcd34d', '#c2410c', '#6366f1'];
 const getColor = (pos) => COLORS[(pos - 1) % 5];
 
-function plPrzepis(n) {
-  if (n === 1) return '1 przepis';
-  if (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 > 20)) return `${n} przepisy`;
-  return `${n} przepisów`;
-}
 
 // ─── Recipe preview modal ─────────────────────────────────────────────────────
 function RecipePreviewModal({ recipe, onClose }) {
@@ -171,7 +166,7 @@ function RecipePreviewModal({ recipe, onClose }) {
                   ) : (
                     <span
                       onClick={() => startEdit(i, ing)}
-                      title="Kliknij aby edytować makro (wartości na 100g)"
+                      title={t('click_edit_macro')}
                       style={{ fontSize: 11, color: kcal != null ? '#6b7280' : '#9ca3af', flexShrink: 0, textAlign: 'right', whiteSpace: 'nowrap', cursor: 'pointer', borderRadius: 4, padding: '1px 4px' }}
                       onMouseEnter={e => e.currentTarget.style.background = '#1f2937'}
                       onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
@@ -202,6 +197,7 @@ function RecipePreviewModal({ recipe, onClose }) {
 
 // ─── Draggable recipe ─────────────────────────────────────────────────────────
 const DraggableRecipe = React.memo(function DraggableRecipe({ recipe, onToggleFavorite, onPreview }) {
+  const { t } = useLanguage();
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: `recipe-${recipe.id}`, data: { type: 'recipe', recipe },
   });
@@ -312,10 +308,10 @@ const DraggableRecipe = React.memo(function DraggableRecipe({ recipe, onToggleFa
         flexShrink:0, position:'relative', zIndex:1,
       }}>
         <span style={{ fontSize:8.5, fontWeight:500, color:'rgba(255,255,255,0.5)', letterSpacing:'0.2px' }}>
-          {recipe.lang === 'en' ? 'est. cost' : 'szac. koszt'}
+          {t('est_cost')}
         </span>
         <span style={{ fontSize:10.5, fontWeight:700, color:'rgba(255,255,255,0.9)' }}>
-          {recipe.lang === 'en' ? `£${recipe.total_cost.toFixed(2)}` : `${recipe.total_cost.toFixed(2)} zł`}
+          {t('currency')}{recipe.total_cost.toFixed(2)}
         </span>
       </div>
     </div>
@@ -514,7 +510,7 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
         padding:'3px 5px', height:40, boxSizing:'border-box', overflow:'hidden',
       }}>
         {isToday && !hasMeals && (
-          <span style={{fontSize:10,color:'#4b5563',width:'100%',textAlign:'center',display:'block',lineHeight:'34px',userSelect:'none'}}>Makro</span>
+          <span style={{fontSize:10,color:'#4b5563',width:'100%',textAlign:'center',display:'block',lineHeight:'34px',userSelect:'none'}}>{t('macro_day_label')}</span>
         )}
         {hasMeals && hasAnyMacro && (
           <>
@@ -654,13 +650,13 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
                     {copiedTplDay!==null && copiedTplDay!==di && (
                       <button onClick={()=>handlePasteTplDay(di)}
                         style={{background:'#0d9488',color:'#1f2937',border:'none',borderRadius:4,cursor:'pointer',fontSize:10,fontWeight:700,padding:'3px 7px',lineHeight:1.3}}>
-                        Wklej
+                        {t('btn_paste')}
                       </button>
                     )}
                     {dayHasContent && (
                       <button onClick={()=>handleClearDay(di)}
                         style={{background:'#2d1515',color:'#f87171',border:'none',borderRadius:4,cursor:'pointer',fontSize:10,fontWeight:700,padding:'3px 7px',lineHeight:1.3}}>
-                        Usuń
+                        {t('btn_delete')}
                       </button>
                     )}
                   </span>
@@ -751,10 +747,10 @@ function TemplateSection({ templates, tplSlots: editSlots, setTplSlots: setEditS
                         onDelete(ti);
                         document.getElementById('tpl-editor')?.scrollIntoView({behavior:'smooth'});
                       }}>
-                      Edytuj
+                      {t('edit_btn')}
                     </button>
                     <button className="btn btn-danger" style={{padding:'5px 12px',fontSize:12}}
-                      onClick={()=>onDelete(ti)}>Usuń</button>
+                      onClick={()=>onDelete(ti)}>{t('btn_delete')}</button>
                   </div>
                 </div>
                 {/* Siatka dni — widoczna tylko po rozwinięciu */}
@@ -859,7 +855,7 @@ function CarouselList({ recipes, search, categoryFilter, visible, setVisible, sc
   const hasMore = visible < filtered.length;
 
   if (filtered.length === 0) {
-    return <p style={{fontSize:13,color:'#4b5563',margin:0}}>{search.trim() ? `Brak przepisów pasujących do "${search}"` : t('no_recipes_cal')}</p>;
+    return <p style={{fontSize:13,color:'#4b5563',margin:0}}>{search.trim() ? t('cal_no_recipes_match')(search) : t('no_recipes_cal')}</p>;
   }
 
   return (
@@ -991,7 +987,7 @@ export default function Calendar({ onGoToTab }) {
     if (!meals.length) return;
     showConfirm({
       title: t('del_day_title'),
-      message: `Usunąć wszystkie posiłki (${meals.length}) z dnia ${toEU(dateStr)}?`,
+      message: t('confirm_del_day')(meals.length, toEU(dateStr)),
       confirmLabel: t('btn_delete'),
       onConfirm: async () => {
         try { await Promise.all(meals.map(m=>api.deleteMeal(m.id))); showSuccess(t('day_deleted_ok')); await loadMonth(year,month); }
@@ -1019,7 +1015,7 @@ export default function Calendar({ onGoToTab }) {
     if (!allMeals.length) return;
     showConfirm({
       title: t('del_week_title'),
-      message: `Usunąć wszystkie posiłki tego tygodnia (${allMeals.length})?`,
+      message: t('confirm_del_week')(allMeals.length),
       confirmLabel: t('btn_delete'),
       onConfirm: async () => {
         try { await Promise.all(allMeals.map(m=>api.deleteMeal(m.id))); showSuccess(t('week_deleted_ok')); await loadMonth(year, month); }
@@ -1182,7 +1178,7 @@ export default function Calendar({ onGoToTab }) {
               style={{background:'#0d948820',border:'1px solid #0d9488',borderRadius:6,padding:'3px 10px',fontSize:11,fontWeight:600,color:'#2dd4bf',cursor:'pointer',lineHeight:1.4}}>
               {t('btn_create_template')}
             </button>
-            {!carouselOpen && <span style={{fontSize:11,color:'#6b7280'}}>{plPrzepis(recipes.length)}</span>}
+            {!carouselOpen && <span style={{fontSize:11,color:'#6b7280'}}>{t('recipes_count')(recipes.length)}</span>}
           </div>
           <Icon icon="heroicons:chevron-down" style={{width:20,height:20,transition:'transform 0.25s',transform:carouselOpen?'rotate(180deg)':'rotate(0deg)',color:'#0d9488'}}/>
         </div>

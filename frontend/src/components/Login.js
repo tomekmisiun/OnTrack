@@ -64,14 +64,14 @@ export default function Login() {
         </button>
 
         <p style={{ fontSize: 11, color: '#9ca3af', textAlign: 'center', marginTop: 16, lineHeight: 1.6 }}>
-          {uiLang === 'pl' ? 'Zakładając konto akceptujesz ' : 'By creating an account you agree to the '}
+          {t('login_privacy_prefix')}
           <button
             onClick={() => setShowPrivacy(true)}
             style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', color: '#2dd4bf', fontSize: 11, textDecoration: 'underline' }}
           >
-            {uiLang === 'pl' ? 'Politykę Prywatności' : 'Privacy Policy'}
+            {t('login_privacy_link')}
           </button>
-          {uiLang === 'pl' ? ' Ontrack.' : ' of Ontrack.'}
+          {t('login_privacy_suffix')}
         </p>
         {showPrivacy && <PrivacyPolicy lang={uiLang} onClose={() => setShowPrivacy(false)} />}
 

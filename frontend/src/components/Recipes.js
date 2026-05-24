@@ -757,7 +757,7 @@ export default function Recipes() {
         </div>
         {recipeList.length === 0 && <p style={{ textAlign: 'center', color: '#6b7280' }}>{t('no_recipes_add')}</p>}
         {recipeList.length > 0 && search.trim() && filteredRecipes.length === 0 && (
-          <p style={{ textAlign: 'center', color: '#6b7280', fontStyle: 'italic' }}>Nie znaleziono przepisu „{search}"</p>
+          <p style={{ textAlign: 'center', color: '#6b7280', fontStyle: 'italic' }}>{t('recipe_not_found')(search)}</p>
         )}
         <div style={{ overflowX: 'auto' }}>
         <table style={{ borderCollapse: 'separate', borderSpacing: '0 4px', width: '100%', minWidth: 600 }}>
@@ -811,7 +811,7 @@ export default function Recipes() {
                     <button className="btn" style={{ padding: '3px 8px', fontSize: 12, background: '#374151', color: '#9ca3af' }} onClick={() => setEditingName(null)}>✗</button>
                   </div>
                 ) : (
-                  <strong style={{ cursor: 'pointer' }} title="Kliknij dwukrotnie aby edytować"
+                  <strong style={{ cursor: 'pointer' }} title={t('click_to_edit')}
                     onDoubleClick={() => setEditingName({ id: r.id, text: r.name })}>
                     {r.name}
                   </strong>
@@ -850,7 +850,7 @@ export default function Recipes() {
                 </div>
               ) : (
                 <span style={{ fontSize: 11, color: r.category ? '#2dd4bf' : '#374151', fontWeight: r.category ? 600 : 400, cursor: 'pointer' }}
-                      title="Kliknij aby zmienić typ posiłku">
+                      title={t('click_change_meal')}>
                   {r.category ? CAT_MAP[r.category]?.label : t('no_type')}
                 </span>
               )}
@@ -939,7 +939,7 @@ export default function Recipes() {
 
             return (<>
               {ings === null && (
-                <tr style={ingStyle}><td colSpan={6} style={{ textAlign: 'center', padding: 12, color: '#6b7280', fontSize: 13 }}>Ładowanie składników…</td></tr>
+                <tr style={ingStyle}><td colSpan={6} style={{ textAlign: 'center', padding: 12, color: '#6b7280', fontSize: 13 }}>{t('loading_ing')}</td></tr>
               )}
               {ings !== null && <>
               <tr style={ingStyle}>
@@ -1149,7 +1149,7 @@ export default function Recipes() {
         {visibleCount < filteredRecipes.length && (
           <tr ref={sentinelRef}>
             <td colSpan={6} style={{ textAlign: 'center', color: '#4b5563', padding: '10px 0', fontSize: 12 }}>
-              Pokazano {visibleCount} z {filteredRecipes.length} przepisów…
+              {t('shown_recipes')(visibleCount, filteredRecipes.length)}
             </td>
           </tr>
         )}

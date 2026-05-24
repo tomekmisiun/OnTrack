@@ -47,7 +47,7 @@ export default function Profile({ onClose, onStartTour }) {
     }
   };
 
-  const langName = (code) => code === 'pl' ? '🇵🇱 Polski' : '🇬🇧 English';
+  const langName = (code) => code === 'pl' ? t('profile_lang_name_pl') : t('profile_lang_name_en');
 
   return (
     <div
@@ -101,9 +101,7 @@ export default function Profile({ onClose, onStartTour }) {
             ))}
           </div>
           <div style={{ marginTop: 8, fontSize: 11, color: '#6b7280', lineHeight: 1.5 }}>
-            {lang === 'en'
-              ? `Current account language: ${langName(user.lang)}. This determines the language of default products and recipes.`
-              : `Obecny język konta: ${langName(user.lang)}. Określa język domyślnych produktów i przepisów.`}
+            {t('profile_lang_desc')(langName(user.lang))}
           </div>
         </div>
 
@@ -139,20 +137,13 @@ export default function Profile({ onClose, onStartTour }) {
             onClick={e => e.stopPropagation()}>
             <div style={{ fontSize: 32, textAlign: 'center', marginBottom: 12 }}>⚠️</div>
             <h3 style={{ fontSize: 16, color: '#f1f5f9', marginBottom: 12, textAlign: 'center' }}>
-              {lang === 'en' ? 'Change account language?' : 'Zmienić język konta?'}
+              {t('profile_lang_change_title')}
             </h3>
             <div style={{ fontSize: 13, color: '#e2e8f0', lineHeight: 1.7, marginBottom: 20, background: '#111827', border: '1px solid #f59e0b55', borderRadius: 8, padding: '12px 14px' }}>
-              {lang === 'en' ? (
-                <>
-                  <b>Important:</b> The data you have in <b>{langName(user.lang)}</b> (products, recipes, meal plan) <b>will not be available</b> after switching to <b>{langName(pendingLang)}</b>.<br /><br />
-                  Your existing data won't be deleted — but it was created in the other language version and won't match the new defaults.
-                </>
-              ) : (
-                <>
-                  <b>Uwaga:</b> Dane które masz w wersji <b>{langName(user.lang)}</b> (produkty, przepisy, plan posiłków) <b>nie będą dostępne</b> po przełączeniu na <b>{langName(pendingLang)}</b>.<br /><br />
-                  Twoje istniejące dane nie zostaną usunięte — ale zostały stworzone w innej wersji językowej i nie będą pasować do nowych domyślnych.
-                </>
-              )}
+              <b>{t('profile_lang_warning_label')}</b>{' '}
+              {t('profile_lang_warning_body')(langName(user.lang), langName(pendingLang))}
+              <br /><br />
+              {t('profile_lang_warning_note')}
             </div>
             <div style={{ display: 'flex', gap: 10 }}>
               <button
@@ -160,7 +151,7 @@ export default function Profile({ onClose, onStartTour }) {
                 disabled={changingLang}
                 style={{ flex: 1, padding: '11px', border: 'none', borderRadius: 8, background: '#0d9488', color: '#1f2937', fontWeight: 600, fontSize: 14, cursor: changingLang ? 'not-allowed' : 'pointer' }}
               >
-                {changingLang ? '...' : (lang === 'en' ? 'Change anyway' : 'Zmień mimo to')}
+                {changingLang ? '...' : t('profile_lang_change_confirm')}
               </button>
               <button
                 onClick={() => { setShowLangWarning(false); setPendingLang(null); }}

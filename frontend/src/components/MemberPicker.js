@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useMember } from '../contexts/MemberContext';
 import { members as membersApi } from '../api';
+import { useLanguage } from '../contexts/LanguageContext';
 import { useToast } from '../contexts/ToastContext';
 
 const COLORS = ['#0d9488', '#6366f1', '#f59e0b', '#ec4899', '#22c55e', '#ef4444', '#8b5cf6', '#06b6d4'];
@@ -9,6 +10,7 @@ const memberColor = (idx) => COLORS[idx % COLORS.length];
 export default function MemberPicker() {
   const { members, activeMember, setActiveMember, reload, activeMemberName } = useMember();
   const { showError, showConfirm, showSuccess } = useToast();
+  const { t } = useLanguage();
 
   const [open, setOpen] = useState(false);
   const [adding, setAdding] = useState(false);
@@ -35,8 +37,8 @@ export default function MemberPicker() {
       await reload();
       setActiveMember(res.data.id);
       setNewName(''); setAdding(false);
-      showSuccess(`Dodano "${name}"`);
-    } catch (e) { showError(e.response?.data?.error || 'Błąd dodawania'); }
+      showSuccess(t('member_added')(name));
+    } catch (e) { showError(e.response?.data?.error || t('err_member_add')); }
   };
 
   const handleRename = async (m) => {
@@ -46,18 +48,18 @@ export default function MemberPicker() {
     try {
       await membersApi.rename(m.id, name);
       await reload();
-      showSuccess('Nazwa zmieniona');
-    } catch (e) { showError(e.response?.data?.error || 'Błąd zmiany nazwy'); }
+      showSuccess(t('member_renamed'));
+    } catch (e) { showError(e.response?.data?.error || t('err_member_rename')); }
   };
 
   const handleDelete = (m) => {
     showConfirm({
-      title: `Usuń "${m.name}"`,
-      message: 'Wszystkie zaplanowane posiłki tej osoby zostaną usunięte. Tej operacji nie można cofnąć.',
-      confirmLabel: 'Usuń',
+      title: t('member_delete_title')(m.name),
+      message: t('member_delete_confirm'),
+      confirmLabel: t('btn_delete'),
       onConfirm: async () => {
-        try { await membersApi.delete(m.id); await reload(); showSuccess(`Usunięto "${m.name}"`); }
-        catch (e) { showError(e.response?.data?.error || 'Błąd usuwania'); }
+        try { await membersApi.delete(m.id); await reload(); showSuccess(t('member_deleted')(m.name)); }
+        catch (e) { showError(e.response?.data?.error || t('err_member_delete')); }
       },
     });
   };
@@ -112,7 +114,7 @@ export default function MemberPicker() {
                   <span
                     onClick={() => { setActiveMember(m.id); setOpen(false); }}
                     onDoubleClick={() => { setEditingId(m.id); setEditName(m.name); }}
-                    title="Kliknij aby przełączyć · Dwuklik aby zmienić nazwę"
+                    title={t('member_switch_hint')}
                     style={{ flex: 1, fontSize: 13, fontWeight: active ? 700 : 400, color: active ? color : '#e2e8f0', cursor: 'pointer', userSelect: 'none' }}
                   >
                     {m.name}
@@ -122,7 +124,7 @@ export default function MemberPicker() {
                 {!m.is_primary && !isEditing && (
                   <button
                     onClick={() => handleDelete(m)}
-                    title="Usuń"
+                    title={t('btn_delete')}
                     style={{ background: 'none', border: 'none', color: '#6b7280', cursor: 'pointer', fontSize: 12, padding: '2px 4px', lineHeight: 1 }}
                     onMouseEnter={e => e.currentTarget.style.color = '#ef4444'}
                     onMouseLeave={e => e.currentTarget.style.color = '#6b7280'}
@@ -144,12 +146,12 @@ export default function MemberPicker() {
                 maxLength={80}
                 onChange={e => setNewName(e.target.value)}
                 onKeyDown={e => { if (e.key === 'Enter') handleAdd(); if (e.key === 'Escape') { setAdding(false); setNewName(''); } }}
-                placeholder="Imię..."
+                placeholder={t('member_name_ph')}
                 style={{ width: '100%', boxSizing: 'border-box', padding: '4px 8px', fontSize: 12, border: '1px solid #374151', borderRadius: 5, background: '#111827', color: '#f1f5f9' }}
               />
               <button onClick={handleAdd} disabled={!newName.trim()}
                 style={{ width: '100%', padding: '5px 0', fontSize: 12, background: '#0d9488', color: '#fff', border: 'none', borderRadius: 5, cursor: 'pointer', fontWeight: 600 }}>
-                Dodaj
+                {t('add_btn')}
               </button>
             </div>
           ) : (
@@ -159,7 +161,7 @@ export default function MemberPicker() {
               onMouseEnter={e => e.currentTarget.style.color = '#0d9488'}
               onMouseLeave={e => e.currentTarget.style.color = '#6b7280'}
             >
-              <span style={{ fontSize: 14 }}>+</span> Dodaj osobę
+              <span style={{ fontSize: 14 }}>+</span> {t('member_add_person')}
             </button>
           )}
         </div>

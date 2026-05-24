@@ -308,7 +308,7 @@ export default function MacroCalculator() {
     }
     // Fallback localStorage (dla backward compat z Calendar jeśli coś pójdzie nie tak)
     localStorage.setItem('macroGoals', JSON.stringify({ ...macros, goalLabel: goalOpt.label }));
-    showSuccess('Cele makro zapisane! Kolory pojawią się w kalendarzu.');
+    showSuccess(t('macro_goals_saved'));
   }
 
   const bmiInfo = bmiVal ? bmiCat(bmiVal, t) : null;
@@ -337,17 +337,17 @@ export default function MacroCalculator() {
           <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:8, marginBottom:10 }}>
             <div>
               <label style={labelSt}>{t('macro_age')}</label>
-              <input type="number" className="no-spin" style={inp} value={age} onChange={e=>{const v=e.target.value;if(v==='')return setAge('');const n=parseFloat(v);if(!isNaN(n))setAge(String(Math.min(99,Math.max(1,n))));}} placeholder="np. 28" min={1} max={99} />
+              <input type="number" className="no-spin" style={inp} value={age} onChange={e=>{const v=e.target.value;if(v==='')return setAge('');const n=parseFloat(v);if(!isNaN(n))setAge(String(Math.min(99,Math.max(1,n))));}} placeholder={t('placeholder_eg_age')} min={1} max={99} />
             </div>
             <div>
               <label style={labelSt}>{t('macro_weight')}</label>
-              <input type="number" className="no-spin" style={inp} value={weight} onChange={e=>{const v=e.target.value;if(v==='')return setWeight('');const n=parseFloat(v);if(!isNaN(n))setWeight(String(Math.min(500,Math.max(1,n))));}} placeholder="np. 75" min={1} max={500} />
+              <input type="number" className="no-spin" style={inp} value={weight} onChange={e=>{const v=e.target.value;if(v==='')return setWeight('');const n=parseFloat(v);if(!isNaN(n))setWeight(String(Math.min(500,Math.max(1,n))));}} placeholder={t('placeholder_eg_weight')} min={1} max={500} />
             </div>
           </div>
 
           <div style={row}>
             <label style={labelSt}>{t('macro_height')}</label>
-            <input type="number" className="no-spin" style={inp} value={height} onChange={e=>{const v=e.target.value;if(v==='')return setHeight('');const n=parseFloat(v);if(!isNaN(n))setHeight(String(Math.min(300,Math.max(1,n))));}} placeholder="np. 178" min={1} max={300} />
+            <input type="number" className="no-spin" style={inp} value={height} onChange={e=>{const v=e.target.value;if(v==='')return setHeight('');const n=parseFloat(v);if(!isNaN(n))setHeight(String(Math.min(300,Math.max(1,n))));}} placeholder={t('placeholder_eg_height')} min={1} max={300} />
           </div>
           <div style={row}>
             <label style={labelSt}>{t('macro_activity')}</label>
@@ -418,7 +418,7 @@ export default function MacroCalculator() {
               </div>
             </>
           ) : (
-            <span style={{ fontSize:12, color:'#4b5563' }}>Uzupełnij dane po lewej</span>
+            <span style={{ fontSize:12, color:'#4b5563' }}>{t('fill_left')}</span>
           )}
 
           {/* Aktywny cel — przypięty na dole */}
@@ -459,7 +459,7 @@ export default function MacroCalculator() {
               <BmiGauge bmiVal={bmiVal} />
             </>
           ) : (
-            <span style={{ fontSize:12, color:'#4b5563' }}>Uzupełnij dane po lewej</span>
+            <span style={{ fontSize:12, color:'#4b5563' }}>{t('fill_left')}</span>
           )}
 
           <div style={{ borderTop:'1px solid #374151' }} />
@@ -484,7 +484,7 @@ export default function MacroCalculator() {
               )}
             </div>
           ) : (
-            <span style={{ fontSize:12, color:'#4b5563' }}>Uzupełnij dane po lewej</span>
+            <span style={{ fontSize:12, color:'#4b5563' }}>{t('fill_left')}</span>
           )}
         </div>
       </div>

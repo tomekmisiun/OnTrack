@@ -717,8 +717,8 @@ export default function Export({ onGoToTab }) {
     return htmlCustom;
   };
   const getHtmlPeriodLabel = () => {
-    if (htmlPeriod === 'week')  return `${lang==='en'?'Current week':'Bieżący tydzień'} (${toEU(week.start)} – ${toEU(week.end)})`;
-    if (htmlPeriod === 'month') return `${lang==='en'?'Current month':'Bieżący miesiąc'} (${toEU(month.start)} – ${toEU(month.end)})`;
+    if (htmlPeriod === 'week')  return `${t('this_week')} (${toEU(week.start)} – ${toEU(week.end)})`;
+    if (htmlPeriod === 'month') return `${t('this_month')} (${toEU(month.start)} – ${toEU(month.end)})`;
     const r = htmlCustom;
     return r.start && r.end ? `${toEU(r.start)} – ${toEU(r.end)}` : '';
   };
@@ -793,7 +793,7 @@ export default function Export({ onGoToTab }) {
                 <div key={key}>
                   <div style={{ fontSize:11, color:'#6b7280', marginBottom:3 }}>{label}</div>
                   <div style={{ position:'relative' }}>
-                    <input type="text" readOnly placeholder="dd.mm.rrrr"
+                    <input type="text" readOnly placeholder={t('date_format_ph')}
                       value={htmlCustom[key] ? toEU(htmlCustom[key]) : ''}
                       style={{ padding:'6px 10px', border:'1px solid #374151', borderRadius:6, fontSize:13, color:'#f1f5f9', background:'#111827', width:130, cursor:'pointer' }} />
                     <input type="date" value={htmlCustom[key]||''}
@@ -1075,9 +1075,7 @@ export default function Export({ onGoToTab }) {
                   <div style={{ fontSize:11, color: totalMeals > 0 ? '#6b7280' : '#374151', textAlign:'center', marginTop:2 }}>
                     {totalMeals === 0
                       ? t('export_no_meals')
-                      : lang === 'en'
-                        ? `${daysWithMeals.length} ${daysWithMeals.length === 1 ? 'day with meals' : 'days with meals'} · ${totalMeals} ${totalMeals === 1 ? 'meal' : 'meals'}`
-                        : `${daysWithMeals.length} ${daysWithMeals.length === 1 ? 'dzień z posiłkami' : 'dni z posiłkami'} · ${totalMeals} ${totalMeals === 1 ? 'posiłek' : totalMeals < 5 ? 'posiłki' : 'posiłków'}`}
+                      : t('days_with_meals')(daysWithMeals.length, totalMeals)}
                   </div>
                 </>
               )}
@@ -1094,30 +1092,12 @@ export default function Export({ onGoToTab }) {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
 
           {[
-            {
-              label: t('export_btn_summary'),
-              desc: lang === 'en' ? 'Food expenses + fixed costs selected in the Expenses tab (rent, electricity, gas…), prorated by number of days.' : 'Wydatki na jedzenie + koszty stałe zaznaczone w zakładce Wydatki (czynsz, prąd, gaz…), przeliczone proporcjonalnie na liczbę dni.',
-            },
-            {
-              label: t('export_btn_macro'),
-              desc: lang === 'en' ? 'Export from the Macro Calculator — personal data, BMI, caloric needs and macro goals.' : 'Eksport danych z Kalkulatora Makro — dane osobowe, BMI, zapotrzebowanie kaloryczne i docelowe makroskładniki.',
-            },
-            {
-              label: t('export_btn_calendar'),
-              desc: lang === 'en' ? 'Meal plan printout. You can toggle kcal and macro visibility per day before printing.' : 'Wydruk planu posiłków. Przed wydrukiem możesz włączyć lub wyłączyć widoczność kcal i makro przy każdym dniu.',
-            },
-            {
-              label: t('export_btn_ingredients'),
-              desc: lang === 'en' ? 'Search for a recipe by name, then export the ingredient list with quantities and prices ready to print.' : 'Wyszukaj przepis wpisując jego nazwę, a następnie wyeksportuj listę składników z ilościami i cenami gotową do wydruku.',
-            },
-            {
-              label: t('shopping_list_title'),
-              desc: lang === 'en' ? 'Select days, product list from recipes calculated in packages. You can remove items before printing.' : 'Zaznacz dni, lista produktów z przepisów przeliczona na opakowania. Przed wydrukiem możesz usunąć pozycje z listy zakupów.',
-            },
-            {
-              label: lang === 'en' ? 'Week preview' : 'Podgląd tygodnia',
-              desc: lang === 'en' ? 'Mini calendar view reacting to the selected period. Shows meals planned for each day.' : 'Miniaturowy widok kalendarza reagujący na wybrany okres (bieżący tydzień / miesiąc / zakres własny). Pokazuje jakie posiłki są zaplanowane w danym dniu.',
-            },
+            { label: t('export_btn_summary'), desc: t('export_help_summary') },
+            { label: t('export_btn_macro'), desc: t('export_help_macro') },
+            { label: t('export_btn_calendar'), desc: t('export_help_calendar') },
+            { label: t('export_btn_ingredients'), desc: t('export_help_ingredients') },
+            { label: t('shopping_list_title'), desc: t('export_help_shopping') },
+            { label: t('week_preview'), desc: t('export_help_preview') },
           ].map(({ label, desc }) => (
             <div key={label} style={{ background: '#111827', border: '1px solid #374151', borderRadius: 6, padding: '8px 12px', display: 'flex', flexDirection: 'column', gap: 4 }}>
               <span style={{ display: 'inline-flex', alignItems: 'center', background: '#1e3a3a', color: '#2dd4bf', border: '1px solid #374151', borderRadius: 5, padding: '2px 8px', fontSize: 11, fontWeight: 700, alignSelf: 'flex-start' }}>{label}</span>

@@ -72,12 +72,12 @@ export default function Products() {
   const handleDeleteSelected = () => {
     showConfirm({
       title: t('del_sel_products_title'),
-      message: `Czy na pewno chcesz usunąć ${selectedIds.size} zaznaczonych produktów?`,
+      message: t('confirm_del_selected_products')(selectedIds.size),
       confirmLabel: t('btn_delete'),
       onConfirm: async () => {
         try {
           await Promise.all([...selectedIds].map(id => api.delete(id)));
-          showSuccess(`Usunięto ${selectedIds.size} produktów`);
+          showSuccess(t('products_deleted')(selectedIds.size));
           exitSelection();
           loadProducts();
         } catch { showError(t('del_during_err')); }
@@ -219,7 +219,7 @@ export default function Products() {
   const handleDelete = (id, name) => {
     showConfirm({
       title: t('confirm_del_product'),
-      message: `Czy na pewno chcesz usunąć „${name}"? Tej operacji nie można cofnąć.`,
+      message: t('delete_confirm_product')(name),
       confirmLabel: t('btn_delete'),
       onConfirm: async () => {
         try { await api.delete(id); showSuccess(t('product_deleted')); loadProducts(); }
@@ -325,9 +325,9 @@ export default function Products() {
       }
 
       const msg = [
-        toUpdate.length && `Zaktualizowano ${toUpdate.length}`,
-        toCreate.length && `Dodano ${toCreate.length}`,
-      ].filter(Boolean).join(', ') + ' produktów · Makro zaktualizowane';
+        toUpdate.length && t('import_updated_n')(toUpdate.length),
+        toCreate.length && t('import_added_n')(toCreate.length),
+      ].filter(Boolean).join(', ') + (toUpdate.length || toCreate.length ? ` ${t('import_done_suffix')}` : '');
       showSuccess(msg);
       loadProducts();
     } catch { showError(t('save_products_err'));  }
@@ -693,8 +693,9 @@ export default function Products() {
       {importItems && (
           <div style={{ padding: '20px 24px' }}>
             <p style={{ fontSize: 13, color: '#9ca3af', marginBottom: 12 }}>
-              Sprawdź dopasowania i uzupełnij dane. Zaznacz{' '}
-              <strong style={{ color: '#e2e8f0' }}>{t('weight_btn')}</strong> dla warzyw, owoców i mięsa, podaj wtedy cenę za kg.
+              {t('import_review_hint_pre')}{' '}
+              <strong style={{ color: '#e2e8f0' }}>{t('weight_btn')}</strong>{' '}
+              {t('import_review_hint_suf')}
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
               {importItems.map((item, i) => {
@@ -729,7 +730,7 @@ export default function Products() {
                           }}
                           style={{ ...inputSt, width: '100%' }}
                         >
-                          <option value="">➕ Utwórz nowy produkt</option>
+                          <option value="">{t('create_new_product_opt')}</option>
                           {productList.map(p => <option key={p.id} value={String(p.id)}>{p.name}</option>)}
                         </select>
                       </div>
@@ -765,10 +766,16 @@ export default function Products() {
                         onChange={e => upd({ price: Math.min(99999, parseFloat(e.target.value) || 0) })}
                         className="no-spin" style={{ ...inputSt, width: 50, flex: '0 0 50px', boxSizing: 'border-box' }} />
                       <span style={{ fontSize: 11, color: sbw ? '#2dd4bf' : '#6b7280', whiteSpace: 'nowrap', flexShrink: 0 }}>
-                        {sbw ? `${t('currency')} / kg` : `${t('currency')} / opak.`}
+                        {sbw ? `${t('currency')} / kg` : `${t('currency')} ${t('price_per_pkg_suffix')}`}
                       </span>
                     </div>
-                    {isNew && <div style={{ fontSize: 10, color: '#6b7280', marginTop: 5 }}>Brak przypisania — przypisz do podobnego produktu lub zostaw <span style={{ color: '#2dd4bf' }}>Utwórz nowy produkt</span>, a zostanie on dodany do listy Produkty.</div>}
+                    {isNew && (
+                      <div style={{ fontSize: 10, color: '#6b7280', marginTop: 5 }}>
+                        {t('no_assignment_hint')}{' '}
+                        <span style={{ color: '#2dd4bf' }}>{t('create_new_product_label')}</span>
+                        {t('import_new_product_hint_suf')}
+                      </div>
+                    )}
                   </div>
                 );
               })}
@@ -807,7 +814,7 @@ export default function Products() {
               } else {
                 showConfirm({
                   title: t('del_all_products_title'),
-                  message: `Czy na pewno chcesz usunąć wszystkie ${productList.length} produktów? Tej operacji nie można cofnąć.`,
+                  message: t('confirm_del_all_products')(productList.length),
                   confirmLabel: t('del_all_products'),
                   onConfirm: async () => {
                     try { await api.deleteAll(); showSuccess(t('all_products_deleted')); loadProducts(); }
@@ -821,7 +828,7 @@ export default function Products() {
             onMouseEnter={e => { if (!(selectionMode && selectedIds.size === 0)) { e.currentTarget.style.borderColor = '#ef4444'; e.currentTarget.style.color = '#ef4444'; } }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = '#374151'; e.currentTarget.style.color = selectionMode && selectedIds.size === 0 ? '#374151' : '#6b7280'; }}
           >
-            {selectionMode && selectedIds.size > 0 ? `Usuń wybrane (${selectedIds.size})` : t('del_all_products')}
+            {selectionMode && selectedIds.size > 0 ? t('del_selected_products')(selectedIds.size) : t('del_all_products')}
           </button>
 
           {/* Chevron */}
@@ -966,12 +973,12 @@ export default function Products() {
               <tr><td colSpan={6} style={{ textAlign: 'center', color: '#6b7280' }}>{t('no_products')}</td></tr>
             )}
             {filteredProducts.length === 0 && search.trim() && (
-              <tr><td colSpan={6} style={{ textAlign: 'center', color: '#6b7280', fontStyle: 'italic' }}>Nie znaleziono produktu „{search}"</td></tr>
+              <tr><td colSpan={6} style={{ textAlign: 'center', color: '#6b7280', fontStyle: 'italic' }}>{t('product_not_found')(search)}</td></tr>
             )}
             {visibleCount < filteredProducts.length && (
               <tr ref={sentinelRef}>
                 <td colSpan={6} style={{ textAlign: 'center', color: '#4b5563', padding: '10px 0', fontSize: 12 }}>
-                  Pokazano {visibleCount} z {filteredProducts.length} produktów…
+                  {t('shown_products')(visibleCount, filteredProducts.length)}
                 </td>
               </tr>
             )}
