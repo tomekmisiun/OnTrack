@@ -227,12 +227,9 @@ export default function DaySchedule() {
             <h2 className="schedule-hero-title">{t('schedule_title')}</h2>
             <p className="schedule-hero-subtitle">{t('schedule_subtitle')}</p>
           </div>
-          {activeMember && (
+          {blocks.length > 0 && (
             <div className="schedule-hero-meta">
-              {blocks.length > 0 && (
-                <span className="schedule-hero-count">{t('schedule_blocks_count')(blocks.length)}</span>
-              )}
-              <span className="schedule-hero-profile">{activeMember.name}</span>
+              <span className="schedule-hero-count">{t('schedule_blocks_count')(blocks.length)}</span>
             </div>
           )}
         </div>

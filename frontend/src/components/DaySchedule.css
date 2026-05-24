@@ -70,14 +70,6 @@
   white-space: nowrap;
 }
 
-.schedule-hero-profile {
-  font-size: 11px;
-  font-weight: 600;
-  color: #9ca3af;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
 .schedule-steps {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
