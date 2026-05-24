@@ -197,11 +197,20 @@ def _seed_recipes(user_id: int, lang: str):
         p.name.lower(): p.id
         for p in Product.query.filter_by(user_id=user_id, lang=lang).all()
     }
+    existing_names = {
+        r.name.lower()
+        for r in Recipe.query.filter_by(user_id=user_id, lang=lang).all()
+    }
+    seen_names: set[str] = set()
 
     for r in recipes:
         name = (r.get("name") or "").strip()
         if not name:
             continue
+        name_key = name.lower()
+        if name_key in existing_names or name_key in seen_names:
+            continue
+        seen_names.add(name_key)
 
         raw_cat = r.get("category") or ""
         category = {"snacks": "snack", "desserts": "dessert"}.get(raw_cat, raw_cat) or None

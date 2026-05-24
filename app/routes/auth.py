@@ -48,8 +48,31 @@ def _auth_error_redirect(message: str):
     return _frontend_redirect(f'?{urlencode({"auth_error": message[:220]})}')
 
 
+def _catalog_incomplete(user_id: int, lang: str) -> bool:
+    from app.models.product import Product
+    from app.models.recipe import Recipe
+
+    has_products = Product.query.filter_by(user_id=user_id, lang=lang).filter(
+        Product.price > 0
+    ).first()
+    has_recipes = Recipe.query.filter_by(user_id=user_id, lang=lang).first()
+    return not has_products or not has_recipes
+
+
+def _ensure_catalog_seeded(user_id: int, lang: str):
+    """Load default catalog synchronously when missing (new accounts)."""
+    if not _catalog_incomplete(user_id, lang):
+        return
+    try:
+        from app.seeds import ensure_user_seeded
+        ensure_user_seeded(user_id, lang)
+    except Exception:
+        current_app.logger.exception('Catalog seed failed for user %s', user_id)
+        db.session.rollback()
+
+
 def _schedule_catalog_seed(user_id: int, lang: str):
-    """Run catalog seed in background so /me stays fast (skipped under pytest)."""
+    """Backfill images / repair in background (skipped under pytest)."""
     if current_app.config.get('TESTING'):
         return
 
@@ -72,6 +95,7 @@ def me():
     user = User.query.get(int(get_jwt_identity()))
     if not user:
         return jsonify({'error': 'User not found'}), 404
+    _ensure_catalog_seeded(user.id, user.lang)
     _schedule_catalog_seed(user.id, user.lang)
     sync_primary_member_name(user)
     return jsonify(user.to_dict())
@@ -126,13 +150,7 @@ def _ensure_primary_member(user, lang: str):
 
 
 def _seed_new_user_catalog(user_id: int, lang: str):
-    try:
-        from app.seeds import _seed_products, _seed_recipes
-        _seed_products(user_id, lang=lang)
-        _seed_recipes(user_id, lang=lang)
-    except Exception:
-        current_app.logger.exception('Seed failed during signup for user %s', user_id)
-        db.session.rollback()
+    _ensure_catalog_seeded(user_id, lang)
 
 
 def _synthetic_email(username: str) -> str:
@@ -206,7 +224,7 @@ def login():
     if not user or not user.check_password(password):
         return jsonify({'error': 'Invalid username or password'}), 401
 
-    _schedule_catalog_seed(user.id, user.lang)
+    _ensure_catalog_seeded(user.id, user.lang)
     sync_primary_member_name(user)
     return _issue_jwt(user)
 
@@ -260,6 +278,7 @@ def change_language():
         return jsonify({'error': 'User not found'}), 404
     user.lang = lang
     db.session.commit()
+    _ensure_catalog_seeded(user.id, lang)
     _schedule_catalog_seed(user.id, lang)
     sync_primary_member_name(user)
     return jsonify(user.to_dict())

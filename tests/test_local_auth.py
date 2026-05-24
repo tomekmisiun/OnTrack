@@ -1,4 +1,34 @@
 from app.models.user import User
+from app.models.product import Product
+from app.models.recipe import Recipe
+
+
+def test_register_seeds_catalog(client):
+    reg = client.post(
+        "/api/auth/register",
+        json={
+            "username": "seeduser1",
+            "password": "secret123",
+            "lang": "pl",
+        },
+    )
+    assert reg.status_code == 201
+    user = User.query.filter_by(username="seeduser1").first()
+    assert Product.query.filter_by(user_id=user.id, lang="pl").count() > 50
+    assert Recipe.query.filter_by(user_id=user.id, lang="pl").count() > 10
+
+    reg2 = client.post(
+        "/api/auth/register",
+        json={
+            "username": "seeduser2",
+            "password": "secret123",
+            "lang": "pl",
+        },
+    )
+    assert reg2.status_code == 201
+    user2 = User.query.filter_by(username="seeduser2").first()
+    assert Product.query.filter_by(user_id=user2.id, lang="pl").count() > 50
+    assert Recipe.query.filter_by(user_id=user2.id, lang="pl").count() > 10
 
 
 def test_register_and_login(client):
