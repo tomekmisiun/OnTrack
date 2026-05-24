@@ -1,14 +1,27 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
+from sqlalchemy.orm import joinedload, selectinload
 from app import db
 from app.models.meal_plan import MealPlan
-from app.models.recipe import Recipe
+from app.models.recipe import Recipe, RecipeIngredient
 from app.models.household_member import HouseholdMember
 from app.utils import current_uid, current_user_lang
 from datetime import date, timedelta
 import math
 
 meal_plan_bp = Blueprint('meal_plan', __name__)
+
+
+def _meals_query():
+    """Eager-load recipes + ingredients for macro/cost without N+1 queries."""
+    return MealPlan.query.options(
+        joinedload(MealPlan.recipe).selectinload(Recipe.ingredients).selectinload(RecipeIngredient.product),
+    )
+
+
+def _serialize_meal(meal_id):
+    meal = _meals_query().filter(MealPlan.id == meal_id).first()
+    return meal.to_dict(recipe_summary=True) if meal else None
 
 
 def resolve_member_id(uid, member_id=None):
@@ -51,12 +64,12 @@ def get_day(date_str):
     else:
         mids = [resolve_member_id(uid, mid)]
 
-    meals = MealPlan.query.join(Recipe).filter(
+    meals = _meals_query().join(Recipe).filter(
         MealPlan.member_id.in_(mids),
         MealPlan.date == day,
         Recipe.lang == lang,
     ).order_by(MealPlan.position).all()
-    return jsonify([m.to_dict() for m in meals])
+    return jsonify([m.to_dict(recipe_summary=True) for m in meals])
 
 
 @meal_plan_bp.route('/range/<string:start>/<string:end>', methods=['GET'])
@@ -77,7 +90,7 @@ def get_range(start, end):
     else:
         mids = [resolve_member_id(uid, mid)]
 
-    meals = MealPlan.query.join(Recipe).filter(
+    meals = _meals_query().join(Recipe).filter(
         MealPlan.member_id.in_(mids),
         MealPlan.date >= start_date,
         MealPlan.date <= end_date,
@@ -87,7 +100,7 @@ def get_range(start, end):
     result = {}
     for meal in meals:
         key = meal.date.isoformat()
-        result.setdefault(key, []).append(meal.to_dict())
+        result.setdefault(key, []).append(meal.to_dict(recipe_summary=True))
     return jsonify(result)
 
 
@@ -116,12 +129,12 @@ def add_meal():
     if existing:
         existing.recipe_id = data['recipe_id']
         db.session.commit()
-        return jsonify(existing.to_dict()), 200
+        return jsonify(_serialize_meal(existing.id)), 200
 
     meal = MealPlan(user_id=uid, member_id=mid, date=day, position=data['position'], recipe_id=data['recipe_id'])
     db.session.add(meal)
     db.session.commit()
-    return jsonify(meal.to_dict()), 201
+    return jsonify(_serialize_meal(meal.id)), 201
 
 
 @meal_plan_bp.route('/copy', methods=['POST'])

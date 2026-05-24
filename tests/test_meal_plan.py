@@ -58,3 +58,6 @@ def test_meal_plan_range(client, auth_headers, recipe, member):
     data = res.get_json()
     assert "2026-05-25" in data
     assert len(data["2026-05-25"]) == 1
+    meal = data["2026-05-25"][0]
+    assert meal["recipe"]["name"] == recipe.name
+    assert meal["recipe"]["ingredients"] == []

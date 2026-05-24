@@ -11,6 +11,13 @@ import { useToast } from '../contexts/ToastContext';
 import { useMember } from '../contexts/MemberContext';
 import { dateToStr, addDays, toEU, getUpcomingMondays, getCalGrid as getMonthGrid } from '../utils/dates';
 import { fuzzySearch } from '../utils/search';
+import {
+  upsertMealInState,
+  removeMealFromState,
+  clearDayInState,
+  findMealDate,
+  buildOptimisticMeal,
+} from '../utils/mealPlanState';
 
 
 const COLORS = ['#4a6fa5', '#93c5fd', '#fcd34d', '#c2410c', '#6366f1'];
@@ -989,8 +996,18 @@ export default function Calendar({ onGoToTab }) {
   const nextMonth = ()=> month===11?(setYear(y=>y+1),setMonth(0)):setMonth(m=>m+1);
 
   const handleDelete = async(mealId)=>{
-    try { await api.deleteMeal(mealId); await loadMonth(year,month); }
-    catch { showError(t('err_del_meal')); }
+    let previous;
+    setMealsByDate(prev => {
+      previous = prev;
+      const date = findMealDate(prev, mealId);
+      return date ? removeMealFromState(prev, mealId, date) : prev;
+    });
+    try {
+      await api.deleteMeal(mealId);
+    } catch {
+      setMealsByDate(previous);
+      showError(t('err_del_meal'));
+    }
   };
 
   const handleDeleteAll = (dateStr)=>{
@@ -1001,8 +1018,18 @@ export default function Calendar({ onGoToTab }) {
       message: t('confirm_del_day')(meals.length, toEU(dateStr)),
       confirmLabel: t('btn_delete'),
       onConfirm: async () => {
-        try { await Promise.all(meals.map(m=>api.deleteMeal(m.id))); showSuccess(t('day_deleted_ok')); await loadMonth(year,month); }
-        catch { showError(t('err_del_meals')); }
+        let previous;
+        setMealsByDate(prev => {
+          previous = prev;
+          return clearDayInState(prev, dateStr);
+        });
+        try {
+          await Promise.all(meals.map(m=>api.deleteMeal(m.id)));
+          showSuccess(t('day_deleted_ok'));
+        } catch {
+          setMealsByDate(previous);
+          showError(t('err_del_meals'));
+        }
       },
     });
   };
@@ -1128,18 +1155,63 @@ export default function Calendar({ onGoToTab }) {
     const { targetDate, targetPos } = slot;
 
     if (drag.type==='recipe') {
+      const tempId = `temp-${Date.now()}`;
+      const optimistic = buildOptimisticMeal({
+        date: targetDate,
+        position: targetPos,
+        recipe: drag.recipe,
+        memberId: activeMember?.id,
+        tempId,
+      });
+      let previous;
+      setMealsByDate(prev => {
+        previous = prev;
+        return upsertMealInState(prev, optimistic);
+      });
       try {
-        await api.addMeal({date:targetDate,position:targetPos,recipe_id:drag.recipe.id,member_id:activeMember?.id});
-        await loadMonth(year,month);
-      } catch { showError(t('err_add_meal')); }
+        const res = await api.addMeal({
+          date: targetDate,
+          position: targetPos,
+          recipe_id: drag.recipe.id,
+          member_id: activeMember?.id,
+        });
+        setMealsByDate(prev => {
+          let next = removeMealFromState(prev, tempId, targetDate);
+          return upsertMealInState(next, res.data);
+        });
+      } catch {
+        setMealsByDate(previous);
+        showError(t('err_add_meal'));
+      }
     } else if (drag.type==='meal') {
       const {meal} = drag;
       if (meal.date===targetDate && meal.position===targetPos) return;
+      const tempId = `temp-${Date.now()}`;
+      const optimistic = { ...meal, id: tempId, date: targetDate, position: targetPos };
+      let previous;
+      setMealsByDate(prev => {
+        previous = prev;
+        let next = removeMealFromState(prev, meal.id, meal.date);
+        return upsertMealInState(next, optimistic);
+      });
       try {
         await api.deleteMeal(meal.id);
-        await api.addMeal({date:targetDate,position:targetPos,recipe_id:meal.recipe.id,member_id:activeMember?.id});
-        await loadMonth(year,month);
-      } catch { showError(t('err_move_meal')); }
+        const res = await api.addMeal({
+          date: targetDate,
+          position: targetPos,
+          recipe_id: meal.recipe.id,
+          member_id: activeMember?.id,
+        });
+        setMealsByDate(prev => {
+          let next = removeMealFromState(prev, meal.id, meal.date);
+          next = removeMealFromState(next, tempId, targetDate);
+          return upsertMealInState(next, res.data);
+        });
+      } catch {
+        setMealsByDate(previous);
+        showError(t('err_move_meal'));
+        loadMonth(year, month);
+      }
     }
   };
 
