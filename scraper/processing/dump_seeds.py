@@ -1,12 +1,23 @@
 """
 Step 6: Generate products_seed_*.json and recipes_seed_*.json for new users.
 Run as part of the pipeline or standalone: python processing/dump_seeds.py
+
+Recipe thumbnails are resolved here (Pexels → mealpreponfleek fallback) so
+production never calls the Pexels API at signup/login.
 """
 import json
+import sys
+import time
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+
+from app.pexels import resolve_recipe_image_url  # noqa: E402
 
 DATA = Path(__file__).parent.parent / "data"
 OUT  = Path(__file__).parent.parent.parent / "app" / "data"
+PEXELS_SLEEP_S = 0.25
 
 
 def load(fname):
@@ -114,11 +125,21 @@ def build_recipes_seed(lang: str) -> list[dict]:
             })
         raw_cat = r.get("category") or ""
         category = {"snacks": "snack", "desserts": "dessert"}.get(raw_cat, raw_cat) or None
+        name = r[name_key]
+        image_url = resolve_recipe_image_url(
+            name,
+            name_en=r.get("name_en") if lang == "pl" else None,
+            lang=lang,
+            source_url=r.get("url"),
+            fallback_url=r.get("image_url"),
+        )
+        if PEXELS_SLEEP_S:
+            time.sleep(PEXELS_SLEEP_S)
         recipes_seed.append({
-            "name": r[name_key],
+            "name": name,
             "name_en": r.get("name_en") if lang == "pl" else None,
             "source_url": r.get("url"),
-            "image_url": r.get("image_url"),
+            "image_url": image_url,
             "category": category,
             "notes": None,
             "ingredients": ingredients_out,

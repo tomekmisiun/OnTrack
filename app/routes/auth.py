@@ -51,10 +51,8 @@ def _schedule_catalog_seed(user_id: int, lang: str):
     def _run():
         with app.app_context():
             try:
-                from app.seeds import catalog_needs_repair, ensure_user_seeded, import_lang_from_pipeline
+                from app.seeds import ensure_user_seeded
                 ensure_user_seeded(user_id, lang)
-                if catalog_needs_repair(user_id, lang):
-                    import_lang_from_pipeline(user_id, lang, replace=True)
             except Exception:
                 app.logger.exception('Background catalog seed failed for user %s', user_id)
 

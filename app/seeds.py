@@ -1,12 +1,10 @@
 """
 Seed default products and recipes for new users.
 
-Generate seed files after scraping:
+Generate seed files after scraping (includes Pexels thumbnails):
   cd scraper && python processing/dump_seeds.py
 
-If a seed file doesn't exist, new users start with an empty list.
-When scraper pipeline JSON is available, language catalogs are imported
-via the same logic as import_to_db.py (proper product matching + categories).
+Production loads only app/data/*.json — no runtime pipeline import.
 """
 
 import json
@@ -17,7 +15,7 @@ from pathlib import Path
 from app import db
 from app.models.product import Product
 from app.models.recipe import Recipe, RecipeIngredient
-from app.pexels import resolve_recipe_image_url
+from app.pexels import is_source_recipe_image
 from app.utils import looks_like_recipe_ingredient_line
 
 DATA_DIR = Path(__file__).parent / "data"
@@ -120,30 +118,29 @@ def import_lang_from_pipeline(user_id: int, lang: str, replace: bool = False) ->
 
 
 def backfill_recipe_images(user_id: int, lang: str) -> int:
-    """Set image_url from pipeline JSON for recipes missing thumbnails."""
-    recipes_file = SCRAPER_DATA / f"recipes_{lang}.json"
-    if not recipes_file.exists():
+    """Set image_url from seed JSON for recipes missing thumbnails."""
+    seed_path = DATA_DIR / f"recipes_seed_{lang}.json"
+    if not seed_path.exists():
         return 0
 
-    raw = json.loads(recipes_file.read_text(encoding="utf-8"))
-    name_key = "name_en" if lang == "en" else "name_pl"
+    raw = json.loads(seed_path.read_text(encoding="utf-8"))
     by_source = {
-        (r.get("url") or "").strip(): r.get("image_url")
+        (r.get("source_url") or "").strip(): r.get("image_url")
         for r in raw if r.get("image_url")
     }
     by_name = {
-        (r.get(name_key) or "").strip().lower(): r.get("image_url")
+        (r.get("name") or "").strip().lower(): r.get("image_url")
         for r in raw if r.get("image_url")
     }
 
     updated = 0
     for recipe in Recipe.query.filter_by(user_id=user_id, lang=lang).all():
-        if recipe.image_url:
+        if recipe.image_url and not is_source_recipe_image(recipe.image_url):
             continue
         url = by_source.get((recipe.source_url or "").strip())
         if not url:
             url = by_name.get(recipe.name.strip().lower())
-        if url:
+        if url and url != recipe.image_url:
             recipe.image_url = url
             updated += 1
 
@@ -153,30 +150,16 @@ def backfill_recipe_images(user_id: int, lang: str) -> int:
 
 
 def seed_user(user_id: int, lang: str = "pl"):
-    """Create default products and recipes for a new user."""
-    if import_lang_from_pipeline(user_id, lang):
-        return
-    _seed_products(user_id, lang)
-    _seed_recipes(user_id, lang)
+    """Create default products and recipes for a new user from JSON seed files."""
+    ensure_user_seeded(user_id, lang)
 
 
 def ensure_user_seeded(user_id: int, lang: str):
-    """Ensure the user has a catalog for the given language (fast JSON seeds first)."""
-    has_products = Product.query.filter_by(user_id=user_id, lang=lang).filter(Product.price > 0).first()
-    has_recipes = Recipe.query.filter_by(user_id=user_id, lang=lang).first()
-
-    if not has_products:
+    """Load catalog from app/data/*.json — no runtime pipeline import."""
+    if not Product.query.filter_by(user_id=user_id, lang=lang).filter(Product.price > 0).first():
         _seed_products(user_id, lang)
-    if not has_recipes:
+    if not Recipe.query.filter_by(user_id=user_id, lang=lang).first():
         _seed_recipes(user_id, lang)
-
-    # Heavy pipeline import only when JSON seeds left the catalog empty.
-    if _pipeline_available(lang):
-        if not Product.query.filter_by(user_id=user_id, lang=lang).filter(Product.price > 0).first():
-            import_lang_from_pipeline(user_id, lang, replace=False)
-        elif not Recipe.query.filter_by(user_id=user_id, lang=lang).first():
-            import_lang_from_pipeline(user_id, lang, replace=False)
-
     backfill_recipe_images(user_id, lang)
 
 
@@ -227,13 +210,7 @@ def _seed_recipes(user_id: int, lang: str):
             user_id=user_id,
             name=name,
             notes=r.get("notes"),
-            image_url=resolve_recipe_image_url(
-                name,
-                name_en=r.get("name_en"),
-                lang=lang,
-                source_url=r.get("source_url"),
-                fallback_url=r.get("image_url"),
-            ),
+            image_url=r.get("image_url"),
             source_url=r.get("source_url"),
             category=category,
             lang=lang,
