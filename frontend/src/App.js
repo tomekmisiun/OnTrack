@@ -130,15 +130,19 @@ function AppInner({ onStartTour }) {
 }
 
 function TourHost() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const { lang } = useLanguage();
   const [tourRun, setTourRun] = useState(false);
 
   useEffect(() => {
-    if (!user?.id || isTourDone(user.id)) return undefined;
+    if (!user) setTourRun(false);
+  }, [user]);
+
+  useEffect(() => {
+    if (loading || !user?.id || isTourDone(user.id)) return undefined;
     const timer = setTimeout(() => setTourRun(true), 600);
     return () => clearTimeout(timer);
-  }, [user?.id]);
+  }, [user?.id, loading]);
 
   const handleTourCallback = useCallback((data) => {
     const { status, type, action, index } = data;
@@ -162,18 +166,20 @@ function TourHost() {
 
   return (
     <>
-      <Joyride
-        steps={getTourSteps(lang)}
-        run={tourRun}
-        continuous
-        showSkipButton
-        showProgress
-        scrollToFirstStep={false}
-        disableScrolling
-        locale={getTourLocale(lang)}
-        styles={TOUR_STYLES}
-        callback={handleTourCallback}
-      />
+      {user && (
+        <Joyride
+          steps={getTourSteps(lang)}
+          run={tourRun}
+          continuous
+          showSkipButton
+          showProgress
+          scrollToFirstStep={false}
+          disableScrolling
+          locale={getTourLocale(lang)}
+          styles={TOUR_STYLES}
+          callback={handleTourCallback}
+        />
+      )}
       <AppInner onStartTour={startTour} />
     </>
   );

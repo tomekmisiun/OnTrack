@@ -12,6 +12,7 @@ const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
 const SHOWCASE_SECTIONS = [
   { id: 'macro', icon: 'heroicons:calculator', titleKey: 'showcase_macro_title', descKey: 'showcase_macro_desc', media: 'macro' },
   { id: 'calendar', icon: 'heroicons:calendar-days', titleKey: 'showcase_calendar_title', descKey: 'showcase_calendar_desc', media: 'calendar' },
+  { id: 'schedule', icon: 'heroicons:clock', titleKey: 'showcase_schedule_title', descKey: 'showcase_schedule_desc', media: 'schedule' },
   { id: 'recipes', icon: 'heroicons:book-open', titleKey: 'showcase_recipes_title', descKey: 'showcase_recipes_desc', media: 'recipes' },
   { id: 'products', icon: 'heroicons:shopping-cart', titleKey: 'showcase_products_title', descKey: 'showcase_products_desc', media: 'products' },
   { id: 'summary', icon: 'heroicons:banknotes', titleKey: 'showcase_summary_title', descKey: 'showcase_summary_desc', media: 'summary' },
