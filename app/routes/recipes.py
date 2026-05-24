@@ -6,7 +6,7 @@ from app.models.meal_plan import MealPlan
 from app.models.product import Product
 from app.models.recipe_parse_log import RecipeParseLog
 from app.utils import current_uid, current_user_lang
-import json, re, os
+import json, re, os, time
 
 recipes_bp = Blueprint('recipes', __name__)
 
@@ -41,12 +41,22 @@ def create_recipe():
     if len(notes) > 5000:
         return jsonify({'error': 'Notes max 5000 characters'}), 400
 
+    try:
+        servings = int(data.get('servings', 0))
+    except (TypeError, ValueError):
+        return jsonify({'error': 'Servings must be a whole number'}), 400
+    if servings < 1 or servings > 999:
+        return jsonify({'error': 'Servings must be between 1 and 999'}), 400
+
     existing = Recipe.query.filter_by(name=data['name'], user_id=uid, lang=lang).first()
     if existing:
         db.session.delete(existing)
         db.session.flush()
 
-    recipe = Recipe(name=data['name'], user_id=uid, notes=data.get('notes'), category=data.get('category') or None, lang=lang)
+    recipe = Recipe(
+        name=data['name'], user_id=uid, notes=data.get('notes'),
+        category=data.get('category') or None, servings=servings, lang=lang,
+    )
     db.session.add(recipe)
     db.session.flush()
 
@@ -59,10 +69,11 @@ def create_recipe():
             return jsonify({'error': 'Invalid ingredient weight'}), 400
         if weight <= 0 or weight > 99999:
             return jsonify({'error': 'Ingredient weight must be between 0 and 99999'}), 400
+        per_serving = round(weight / servings, 2)
         product = Product.query.filter_by(id=ingredient['product_id'], user_id=uid, lang=lang).first()
         if not product:
             return jsonify({'error': f'Product {ingredient["product_id"]} not found'}), 404
-        db.session.add(RecipeIngredient(recipe_id=recipe.id, product_id=ingredient['product_id'], weight=weight))
+        db.session.add(RecipeIngredient(recipe_id=recipe.id, product_id=ingredient['product_id'], weight=per_serving))
 
     db.session.commit()
     return jsonify(recipe.to_dict()), 201
@@ -231,6 +242,34 @@ Rules:
 - Lines like "przyprawy: sól, pieprz" → parse each as separate ingredient
 - If ingredient quantity is unclear, estimate a reasonable amount"""
 
+
+_GEMINI_PARSE_MODELS = ('gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash')
+
+
+def _is_gemini_overloaded(err: Exception) -> bool:
+    msg = str(err).lower()
+    return any(x in msg for x in ('503', 'unavailable', 'high demand', '429', 'resource exhausted', 'overloaded'))
+
+
+def _generate_with_gemini(client, prompt: str) -> str:
+    """Call Gemini with retries and model fallbacks when the API is overloaded."""
+    last_err = None
+    for model in _GEMINI_PARSE_MODELS:
+        for attempt in range(2):
+            try:
+                response = client.models.generate_content(model=model, contents=prompt)
+                return response.text
+            except Exception as e:
+                last_err = e
+                if _is_gemini_overloaded(e) and attempt == 0:
+                    time.sleep(1.5)
+                    continue
+                if not _is_gemini_overloaded(e):
+                    raise
+                break
+    raise last_err
+
+
 @recipes_bp.route('/parse-limit', methods=['GET'])
 @jwt_required()
 def get_parse_limit():
@@ -278,13 +317,14 @@ def parse_recipe_text():
     try:
         from google import genai
         client = genai.Client(api_key=api_key)
-        response = client.models.generate_content(
-            model='gemini-2.5-flash',
-            contents=prompt,
-        )
-        raw = response.text
+        raw = _generate_with_gemini(client, prompt)
     except Exception as e:
-        return jsonify({'error': f'Gemini API error: {str(e)}'}), 502
+        if _is_gemini_overloaded(e):
+            return jsonify({
+                'error': 'Gemini is busy right now. Try again in a moment or use Parse without AI.',
+                'code': 'gemini_busy',
+            }), 503
+        return jsonify({'error': f'Gemini API error: {str(e)}', 'code': 'gemini_error'}), 502
     match = re.search(r'\{.*\}', raw, re.DOTALL)
     if not match:
         return jsonify({'error': 'AI did not return valid JSON'}), 500

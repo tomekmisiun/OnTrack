@@ -9,7 +9,8 @@ def test_create_and_get_recipe(client, auth_headers, product):
         json={
             "name": "Kanapka",
             "category": "lunch",
-            "ingredients": [{"product_id": product.id, "weight": 100}],
+            "servings": 4,
+            "ingredients": [{"product_id": product.id, "weight": 400}],
         },
     )
     assert res.status_code == 201
@@ -19,14 +20,28 @@ def test_create_and_get_recipe(client, auth_headers, product):
     assert detail.status_code == 200
     data = detail.get_json()
     assert data["name"] == "Kanapka"
+    assert data["servings"] == 4
     assert len(data["ingredients"]) == 1
+    assert data["ingredients"][0]["weight"] == 100
+
+
+def test_create_recipe_requires_servings(client, auth_headers, product):
+    res = client.post(
+        "/api/recipes/",
+        headers=auth_headers,
+        json={
+            "name": "Bez porcji",
+            "ingredients": [{"product_id": product.id, "weight": 100}],
+        },
+    )
+    assert res.status_code == 400
 
 
 def test_create_recipe_requires_valid_ingredient(client, auth_headers):
     res = client.post(
         "/api/recipes/",
         headers=auth_headers,
-        json={"name": "Pusta", "ingredients": [{"product_id": 9999, "weight": 50}]},
+        json={"name": "Pusta", "servings": 2, "ingredients": [{"product_id": 9999, "weight": 50}]},
     )
     assert res.status_code == 404
 

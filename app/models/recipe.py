@@ -42,6 +42,7 @@ class Recipe(db.Model):
     image_url = db.Column(db.Text, nullable=True)
     source_url = db.Column(db.Text, nullable=True)
     category = db.Column(db.String(20), nullable=True)
+    servings = db.Column(db.Integer, nullable=False, default=1)
     lang = db.Column(db.String(5), nullable=True, default='pl')
     kcal_100g = db.Column(db.Float, nullable=True)
     protein_100g = db.Column(db.Float, nullable=True)
@@ -117,6 +118,7 @@ class Recipe(db.Model):
             'image_url': self.image_url,
             'source_url': self.source_url,
             'category': self.category,
+            'servings': self.servings,
             'lang': self.lang,
         }
 
@@ -136,5 +138,6 @@ class Recipe(db.Model):
             'image_url': self.image_url,
             'source_url': self.source_url,
             'category': self.category,
+            'servings': self.servings,
             'lang': self.lang,
         }

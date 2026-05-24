@@ -325,10 +325,11 @@ export default function Recipes() {
       const token = localStorage.getItem('token');
       const res = await axios.post(`${API_URL}/api/recipes/parse-text`, { text: pasteText }, { headers: { Authorization: `Bearer ${token}` } });
       setRemaining(res.data.remaining_today);
-      setParsed({ name: res.data.recipe_name, category: res.data.category || null, ingredients: res.data.ingredients.map(i => ({ rawName: i.ingredient_text, weight: i.weight, unit: i.unit, product_id: i.product_id })) });
+      setParsed({ name: res.data.recipe_name, category: res.data.category || null, servings: '', ingredients: res.data.ingredients.map(i => ({ rawName: i.ingredient_text, weight: i.weight, unit: i.unit, product_id: i.product_id })) });
     } catch (e) {
       const code = e.response?.data?.code;
       if (code === 'gemini_not_configured') showError(t('err_gemini_not_configured'));
+      else if (code === 'gemini_busy') showError(t('err_gemini_busy'));
       else showError(e.response?.data?.error || t('err_save_recipe'));
     }
     finally { setParsing(false); }
@@ -341,7 +342,7 @@ export default function Recipes() {
     if (!result || !result.ingredients.length) { showError(t('err_parse_regex')); return; }
     result.ingredients = matchProducts(result.ingredients, productList);
     result.sourceText = pasteText;
-    setParsed(result);
+    setParsed({ ...result, servings: '' });
   };
 
   const updateIngredient = (i, field, val) => { const u = [...parsed.ingredients]; u[i] = { ...u[i], [field]: val }; setParsed({ ...parsed, ingredients: u }); };
@@ -350,12 +351,15 @@ export default function Recipes() {
   const handleSave = async () => {
     if (!parsed?.name) { showError(t('err_no_name')); return; }
     if (!parsed?.category) { showError(t('select_meal_type')); return; }
+    const servings = parseInt(parsed.servings, 10);
+    if (!servings || servings < 1 || servings > 999) { showError(t('err_no_servings')); return; }
     const valid = parsed.ingredients.filter(i => i.product_id && i.weight > 0);
     if (!valid.length) { showError(t('err_no_ingredients')); return; }
     try {
       const res = await api.create({
         name: parsed.name,
         category: parsed.category || null,
+        servings,
         ingredients: valid.map(i => ({ product_id: parseInt(i.product_id), weight: i.weight })),
       });
       const newId = res.data.id;
@@ -524,6 +528,26 @@ export default function Recipes() {
               {!parsed.category && <span style={{ fontSize: 11, color: '#ef4444', marginLeft: 4 }}>{t('select_meal_type')}</span>}
             </div>
 
+            <div style={{ marginBottom: 14, padding: '10px 14px', background: '#111827', borderRadius: 8, border: parsed.servings && parseInt(parsed.servings, 10) >= 1 ? '1px solid #374151' : '1px solid #ef444466' }}>
+              <label style={{ fontSize: 13, fontWeight: 700, color: parsed.servings && parseInt(parsed.servings, 10) >= 1 ? '#9ca3af' : '#ef4444', display: 'block', marginBottom: 6 }}>
+                {t('recipe_servings_label')} *
+              </label>
+              <input
+                type="number"
+                min="1"
+                max="999"
+                step="1"
+                value={parsed.servings ?? ''}
+                onChange={e => setParsed(p => ({ ...p, servings: e.target.value }))}
+                placeholder="4"
+                style={{ width: 100, padding: '6px 10px', fontSize: 14 }}
+              />
+              <div style={{ fontSize: 11, color: '#6b7280', marginTop: 6, lineHeight: 1.5 }}>{t('recipe_servings_hint')}</div>
+              {(!parsed.servings || parseInt(parsed.servings, 10) < 1) && (
+                <span style={{ fontSize: 11, color: '#ef4444', display: 'block', marginTop: 4 }}>{t('err_no_servings')}</span>
+              )}
+            </div>
+
             <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 80px 1fr 36px', gap: 8, padding: '0 10px', marginBottom: 4 }}>
               <span style={{ fontSize: 11, fontWeight: 600, color: '#0d9488', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 {t('ingredients_lbl')(parsed.ingredients.filter(i => i.product_id).length, parsed.ingredients.length)}
@@ -562,13 +586,13 @@ export default function Recipes() {
                         <div style={{ flex: 2, minWidth: 0 }}>
                           <div style={{ fontSize: 10, color: '#6b7280', marginBottom: 3 }}>{t('product_name_lbl')}</div>
                           <input value={quickForm.name} maxLength={50} onChange={e => setQuickForm(f => ({ ...f, name: e.target.value.slice(0, 50) }))}
-                            placeholder="np. Brokuły" style={{ width: '100%', boxSizing: 'border-box', padding: '6px 8px', fontSize: 13 }} />
+                            placeholder={t('product_name_ph')} style={{ width: '100%', boxSizing: 'border-box', padding: '6px 8px', fontSize: 13 }} />
                         </div>
                         <div style={{ flex: 1, minWidth: 0 }}>
                           <div style={{ fontSize: 10, color: '#6b7280', marginBottom: 3 }}>{t('price_per_pkg_kg')}</div>
                           <input type="number" className="no-spin" min="0" max="99999" step="0.01" value={quickForm.package_price}
                             onChange={e => setQuickForm(f => ({ ...f, package_price: e.target.value === '' ? '' : String(Math.min(99999, parseFloat(e.target.value) || 0)) }))}
-                            placeholder="np. 4.99" style={{ width: '100%', boxSizing: 'border-box', padding: '6px 8px', fontSize: 13 }} />
+                            placeholder={t('pkg_price_ph')} style={{ width: '100%', boxSizing: 'border-box', padding: '6px 8px', fontSize: 13 }} />
                         </div>
                         <div style={{ display: 'flex', borderRadius: 6, overflow: 'hidden', border: '1px solid #374151', flexShrink: 0 }}>
                           <button type="button" onClick={() => setQuickForm(f => ({ ...f, sold_by_weight: false }))}
@@ -585,11 +609,11 @@ export default function Recipes() {
                       </div>
                       {!quickForm.sold_by_weight && (
                         <div>
-                          <div style={{ fontSize: 10, color: '#6b7280', marginBottom: 3 }}>Ilość w opakowaniu</div>
+                          <div style={{ fontSize: 10, color: '#6b7280', marginBottom: 3 }}>{t('pkg_qty_inline')}</div>
                           <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 6, alignItems: 'stretch' }}>
                             <input type="number" className="no-spin" min="0" max="99999" value={quickForm.package_weight}
                               onChange={e => setQuickForm(f => ({ ...f, package_weight: e.target.value === '' ? '' : String(Math.min(99999, parseFloat(e.target.value) || 0)) }))}
-                              placeholder="np. 100" style={{ width: '100%', boxSizing: 'border-box', padding: '6px 8px', fontSize: 13 }} />
+                              placeholder={t('pkg_qty_ph')} style={{ width: '100%', boxSizing: 'border-box', padding: '6px 8px', fontSize: 13 }} />
                             <div style={{ display: 'flex', gap: 3, alignItems: 'stretch' }}>
                               {['g', 'kg', 'ml', 'l', 'szt'].map(u => (
                                 <button key={u} type="button" onClick={() => setQuickForm(f => ({ ...f, unit: u }))}
@@ -618,12 +642,7 @@ export default function Recipes() {
               ))}
             </div>
             <div style={{ background: '#1c2433', border: '1px solid #374151', borderRadius: 8, padding: '10px 14px', marginBottom: 12, fontSize: 12, color: '#9ca3af', lineHeight: 1.6 }}>
-              {t('missing_product_hint')}{' '}
-              <span style={{ display: 'inline', background: '#1e3a3a', color: '#2dd4bf', border: '1px solid #374151', borderRadius: 4, padding: '1px 6px', fontSize: 11, fontWeight: 600 }}>{t('add_to_products_btn')}</span>
-              {' '}{t('missing_product_hint2')}{' '}
-              <span style={{ display: 'inline-flex', alignItems: 'center', background: '#1e3a3a', color: '#2dd4bf', border: '1px solid #374151', borderRadius: 4, padding: '1px 8px', fontSize: 11, fontWeight: 700, verticalAlign: 'middle' }}>{t('add_product_btn')}</span>
-              {' '}{t('missing_product_hint3')}{' '}
-              <span style={{ color: '#0d9488', fontWeight: 600 }}>{t('tab_products')}</span>.
+              {t('missing_product_hint')}
             </div>
             <div style={{ display: 'flex', gap: 10 }}>
               <button className="btn btn-primary" onClick={handleSave}>{t('save_recipe')}</button>
