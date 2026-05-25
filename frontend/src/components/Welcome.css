@@ -313,7 +313,7 @@ html.app-home body {
 .welcome-footer {
   display: flex;
   gap: 12px;
-  margin-top: 36px;
+  margin-top: 24px;
   padding-top: 24px;
   flex-wrap: wrap;
   justify-content: center;

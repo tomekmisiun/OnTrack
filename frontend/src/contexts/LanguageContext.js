@@ -39,6 +39,10 @@ const T = {
     welcome_insight_products_many: (n) => `${n} własnych produktów`,
     welcome_insight_expenses_none: 'Brak wydatków w tym miesiącu',
     welcome_insight_expenses: (n, cur) => `${n.toFixed(2)} ${cur} łącznie w tym miesiącu`,
+    welcome_include_members: 'Uwzględnić członków rodziny?',
+    welcome_members_hint: 'Tu możesz dodać domowników',
+    welcome_add_profile: 'Dodaj profil',
+    welcome_include_min_one: 'Co najmniej jeden profil musi być uwzględniony',
     // Profile modal
     my_profile: 'Mój profil',
     delete_account: 'Usuń konto',
@@ -952,6 +956,10 @@ const T = {
     welcome_insight_products_many: (n) => `${n} custom products`,
     welcome_insight_expenses_none: 'No expenses this month',
     welcome_insight_expenses: (n, cur) => `${n.toFixed(2)} ${cur} total this month`,
+    welcome_include_members: 'Include household members?',
+    welcome_members_hint: 'You can add housemates here',
+    welcome_add_profile: 'Add profile',
+    welcome_include_min_one: 'At least one profile must stay included',
     // Profile modal
     my_profile: 'My Profile',
     delete_account: 'Delete account',

@@ -10,7 +10,7 @@ import MacroCalculator from './components/MacroCalculator';
 import Welcome from './components/Welcome';
 import Login from './components/Login';
 import Profile from './components/Profile';
-import MemberPicker from './components/MemberPicker';
+import MemberToggles from './components/MemberToggles';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { ToastProvider } from './contexts/ToastContext';
@@ -109,8 +109,8 @@ function AppInner({ onStartTour }) {
         </div>
 
         <div className="sidebar-profile">
-          <span className="sidebar-profile-label">{t('current_profile')}</span>
-          <MemberPicker />
+          <span className="sidebar-profile-label">{t('include_label')}</span>
+          <MemberToggles variant="sidebar" />
         </div>
 
         <nav className="sidebar-nav">

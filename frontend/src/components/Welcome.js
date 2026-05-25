@@ -2,6 +2,7 @@ import React from 'react';
 import { Icon } from '@iconify/react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useWelcomeStats } from '../hooks/useWelcomeStats';
+import WelcomeMembers from './WelcomeMembers';
 import './Welcome.css';
 
 const TILES = [
@@ -151,6 +152,8 @@ export default function Welcome({ onGoToTab, onAccount, onLogout }) {
             );
           })}
         </div>
+
+        <WelcomeMembers />
 
         <footer className="welcome-footer">
           <button type="button" className="welcome-footer-btn welcome-footer-btn--account" onClick={onAccount}>

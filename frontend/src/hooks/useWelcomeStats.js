@@ -6,6 +6,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { dateToStr, getCurrentWeek, getCurrentMonth } from '../utils/dates';
 import { SEED_STATS } from '../data/seedStats';
 import { sumEnabledExpenses, SUMMARY_MONTH_DAYS } from '../utils/expenseItems';
+import { getViewMemberId } from '../utils/memberTargets';
 
 const GOAL_I18N = {
   lose: 'macro_cut',
@@ -32,10 +33,13 @@ function resolveMacroGoalLabel(activeMember, t) {
 
 export function useWelcomeStats() {
   const { user } = useAuth();
-  const { activeMember } = useMember();
+  const { activeMember, includedMemberIds, members } = useMember();
   const { lang, t } = useLanguage();
   const [stats, setStats] = useState(EMPTY);
   const [loading, setLoading] = useState(true);
+
+  const includedKey = includedMemberIds.join(',');
+  const activeId = activeMember?.id;
 
   useEffect(() => {
     if (!user?.id) {
@@ -45,7 +49,10 @@ export function useWelcomeStats() {
     }
 
     let cancelled = false;
-    const memberId = activeMember?.id;
+    const includedMids = includedMemberIds.length
+      ? includedMemberIds
+      : (activeId ? [activeId] : []);
+    const scheduleMemberId = getViewMemberId(includedMemberIds, members, activeId);
     const today = dateToStr(new Date());
     const weekStart = getCurrentWeek().start;
     const month = getCurrentMonth();
@@ -55,11 +62,16 @@ export function useWelcomeStats() {
     async function load() {
       setLoading(true);
       try {
-        const mids = memberId ? [memberId] : [];
-        const [mealsRes, scheduleRes, monthRes, productsRes, recipesRes] = await Promise.all([
-          memberId ? mealPlan.getDay(today, memberId) : Promise.resolve({ data: [] }),
-          memberId ? daySchedule.getAll(memberId, weekStart) : Promise.resolve({ data: [] }),
-          mids.length ? mealPlan.getSummary(month.start, month.end, mids) : Promise.resolve({ data: { total_cost: 0 } }),
+        const [mealsResults, scheduleRes, monthRes, productsRes, recipesRes] = await Promise.all([
+          includedMids.length
+            ? Promise.all(includedMids.map(id => mealPlan.getDay(today, id)))
+            : Promise.resolve([]),
+          scheduleMemberId
+            ? daySchedule.getAll(scheduleMemberId, weekStart)
+            : Promise.resolve({ data: [] }),
+          includedMids.length
+            ? mealPlan.getSummary(month.start, month.end, includedMids)
+            : Promise.resolve({ data: { total_cost: 0 } }),
           productsApi.getAll(),
           recipesApi.getAll(),
         ]);
@@ -68,13 +80,16 @@ export function useWelcomeStats() {
 
         const productList = productsRes.data || [];
         const foodCost = monthRes.data?.total_cost ?? 0;
-        const enabledExtras = sumEnabledExpenses(SUMMARY_MONTH_DAYS, productList);
+        const enabledExtras = sumEnabledExpenses(SUMMARY_MONTH_DAYS, productList, includedMids.length);
         const monthTotalCost = foodCost + enabledExtras;
+
+        const mealsToday = mealsResults.reduce((sum, res) => sum + (res.data || []).length, 0);
+        const scheduleToday = (scheduleRes.data || []).filter(b => b.day === todayDow).length;
 
         setStats({
           macroGoalLabel: resolveMacroGoalLabel(activeMember, t),
-          mealsToday: (mealsRes.data || []).length,
-          scheduleToday: (scheduleRes.data || []).filter(b => b.day === todayDow).length,
+          mealsToday,
+          scheduleToday,
           ownProducts: Math.max(0, productList.length - seed.products),
           ownRecipes: Math.max(0, (recipesRes.data || []).length - seed.recipes),
           monthTotalCost,
@@ -88,7 +103,7 @@ export function useWelcomeStats() {
 
     load();
     return () => { cancelled = true; };
-  }, [user?.id, user?.lang, activeMember?.id, activeMember?.goal, activeMember?.macro_goals, lang, t]);
+  }, [user?.id, user?.lang, activeId, activeMember?.goal, activeMember?.macro_goals, members, lang, t, includedKey]); // eslint-disable-line
 
   return { stats, loading };
 }

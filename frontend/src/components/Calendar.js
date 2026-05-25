@@ -17,6 +17,7 @@ import {
   clearDayInState,
   findMealDate,
   buildOptimisticMeal,
+  resolveMealIdsForAllMembers,
 } from '../utils/mealPlanState';
 
 
@@ -965,7 +966,7 @@ export default function Calendar({ onGoToTab, scrollToToday, onScrolledToToday }
   const { t } = useLanguage();
   const { user } = useAuth();
   const { showError, showSuccess, showConfirm } = useToast();
-  const { activeMember } = useMember();
+  const { activeMember, targetMemberIds } = useMember();
   const todayMidnight = new Date(); todayMidnight.setHours(0,0,0,0);
   const todayStr = dateToStr(todayMidnight);
 
@@ -1062,14 +1063,25 @@ export default function Calendar({ onGoToTab, scrollToToday, onScrolledToToday }
   const nextMonth = ()=> month===11?(setYear(y=>y+1),setMonth(0)):setMonth(m=>m+1);
 
   const handleDelete = async(mealId)=>{
+    const date = findMealDate(mealsByDate, mealId);
+    const meal = date ? (mealsByDate[date] || []).find(m => m.id === mealId) : null;
+    if (!meal || !targetMemberIds.length) return;
+
     let previous;
     setMealsByDate(prev => {
       previous = prev;
-      const date = findMealDate(prev, mealId);
-      return date ? removeMealFromState(prev, mealId, date) : prev;
+      return removeMealFromState(prev, mealId, date);
     });
     try {
-      await api.deleteMeal(mealId);
+      const ids = await resolveMealIdsForAllMembers({
+        dateStr: date,
+        position: meal.position,
+        memberIds: targetMemberIds,
+        mealsByDate,
+        viewMemberId: activeMember?.id,
+        getDay: api.getDay,
+      });
+      await Promise.all(ids.map(id => api.deleteMeal(id)));
     } catch {
       setMealsByDate(previous);
       showError(t('err_del_meal'));
@@ -1090,7 +1102,14 @@ export default function Calendar({ onGoToTab, scrollToToday, onScrolledToToday }
           return clearDayInState(prev, dateStr);
         });
         try {
-          await Promise.all(meals.map(m=>api.deleteMeal(m.id)));
+          const ids = await resolveMealIdsForAllMembers({
+            dateStr,
+            memberIds: targetMemberIds,
+            mealsByDate,
+            viewMemberId: activeMember?.id,
+            getDay: api.getDay,
+          });
+          await Promise.all(ids.map(id => api.deleteMeal(id)));
           showSuccess(t('day_deleted_ok'));
         } catch {
           setMealsByDate(previous);
@@ -1105,8 +1124,13 @@ export default function Calendar({ onGoToTab, scrollToToday, onScrolledToToday }
     setCopiedDay(ds);  showToast(t('toast_copy_day')(toEU(ds)));
   };
   const handlePasteDay = async(target)=>{
-    if (!copiedDay) return;
-    try { await api.copyRange({source_start:copiedDay,source_end:copiedDay,target_start:target,member_id:activeMember?.id}); await loadMonth(year,month); }
+    if (!copiedDay || !targetMemberIds.length) return;
+    try {
+      await Promise.all(targetMemberIds.map(member_id =>
+        api.copyRange({ source_start: copiedDay, source_end: copiedDay, target_start: target, member_id })
+      ));
+      await loadMonth(year,month);
+    }
     catch(e){ showError(e.response?.data?.error||t('err_paste_day')); }
   };
 
@@ -1122,7 +1146,23 @@ export default function Calendar({ onGoToTab, scrollToToday, onScrolledToToday }
       message: t('confirm_del_week')(allMeals.length),
       confirmLabel: t('btn_delete'),
       onConfirm: async () => {
-        try { await Promise.all(allMeals.map(m=>api.deleteMeal(m.id))); showSuccess(t('week_deleted_ok')); await loadMonth(year, month); }
+        try {
+          const idSet = new Set();
+          for (let i = 0; i < 7; i++) {
+            const ds = addDays(mondayStr, i);
+            const ids = await resolveMealIdsForAllMembers({
+              dateStr: ds,
+              memberIds: targetMemberIds,
+              mealsByDate,
+              viewMemberId: activeMember?.id,
+              getDay: api.getDay,
+            });
+            ids.forEach(id => idSet.add(id));
+          }
+          await Promise.all([...idSet].map(id => api.deleteMeal(id)));
+          showSuccess(t('week_deleted_ok'));
+          await loadMonth(year, month);
+        }
         catch { showError(t('err_del_week')); }
       },
     });
@@ -1144,8 +1184,13 @@ export default function Calendar({ onGoToTab, scrollToToday, onScrolledToToday }
     showToast(t('toast_copy_week'));
   };
   const handlePasteWeek = async(mon)=>{
-    if (!copiedWeek) return;
-    try { await api.copyRange({source_start:copiedWeek,source_end:addDays(copiedWeek,6),target_start:mon,member_id:activeMember?.id}); await loadMonth(year,month); }
+    if (!copiedWeek || !targetMemberIds.length) return;
+    try {
+      await Promise.all(targetMemberIds.map(member_id =>
+        api.copyRange({ source_start: copiedWeek, source_end: addDays(copiedWeek, 6), target_start: mon, member_id })
+      ));
+      await loadMonth(year,month);
+    }
     catch(e){ showError(e.response?.data?.error||t('err_paste_week')); }
   };
 
@@ -1160,14 +1205,33 @@ export default function Calendar({ onGoToTab, scrollToToday, onScrolledToToday }
     localStorage.setItem('weekTemplates',JSON.stringify(updated));
   };
   const applyTemplate = async(template, targetMon)=>{
-    // Delete existing meals in every day covered by the template (overwrite)
+    if (!targetMemberIds.length) return;
     const offsets = [...new Set(template.meals.map(m => m.dayOffset))];
-    const deletes = offsets.flatMap(offset => mealsByDate[addDays(targetMon, offset)] || []);
-    await Promise.all(deletes.map(m => api.deleteMeal(m.id)));
-    // Add template meals
-    for (const entry of template.meals) {
-      try { await api.addMeal({date:addDays(targetMon,entry.dayOffset), position:entry.position, recipe_id:entry.recipe_id, member_id:activeMember?.id}); }
-      catch {}
+
+    for (const member_id of targetMemberIds) {
+      for (const offset of offsets) {
+        const ds = addDays(targetMon, offset);
+        let dayMeals = [];
+        if (member_id === activeMember?.id) {
+          dayMeals = mealsByDate[ds] || [];
+        } else {
+          try {
+            const res = await api.getDay(ds, member_id);
+            dayMeals = res.data || [];
+          } catch { dayMeals = []; }
+        }
+        await Promise.all(dayMeals.map(m => api.deleteMeal(m.id)));
+      }
+      for (const entry of template.meals) {
+        try {
+          await api.addMeal({
+            date: addDays(targetMon, entry.dayOffset),
+            position: entry.position,
+            recipe_id: entry.recipe_id,
+            member_id,
+          });
+        } catch {}
+      }
     }
     await loadMonth(year,month);
   };
@@ -1208,8 +1272,13 @@ export default function Calendar({ onGoToTab, scrollToToday, onScrolledToToday }
 
     if (drag.type==='day') {
       if (drop.type!=='day-target') return;
-      if (drag.dateStr===drop.dateStr) return;
-      try { await api.copyRange({source_start:drag.dateStr,source_end:drag.dateStr,target_start:drop.dateStr}); await loadMonth(year,month); }
+      if (drag.dateStr===drop.dateStr || !targetMemberIds.length) return;
+      try {
+        await Promise.all(targetMemberIds.map(member_id =>
+          api.copyRange({ source_start: drag.dateStr, source_end: drag.dateStr, target_start: drop.dateStr, member_id })
+        ));
+        await loadMonth(year,month);
+      }
       catch(e){ showError(e.response?.data?.error||t('err_copy_day')); }
       return;
     }
@@ -1221,33 +1290,45 @@ export default function Calendar({ onGoToTab, scrollToToday, onScrolledToToday }
     const { targetDate, targetPos } = slot;
 
     if (drag.type==='recipe') {
+      if (!targetMemberIds.length) return;
+      const displayMid = activeMember?.id;
       const tempId = `temp-${Date.now()}`;
-      const optimistic = buildOptimisticMeal({
-        date: targetDate,
-        position: targetPos,
-        recipe: drag.recipe,
-        memberId: activeMember?.id,
-        tempId,
-      });
-      let previous;
-      setMealsByDate(prev => {
-        previous = prev;
-        return upsertMealInState(prev, optimistic);
-      });
-      try {
-        const res = await api.addMeal({
+      if (displayMid && targetMemberIds.includes(displayMid)) {
+        const optimistic = buildOptimisticMeal({
           date: targetDate,
           position: targetPos,
-          recipe_id: drag.recipe.id,
-          member_id: activeMember?.id,
+          recipe: drag.recipe,
+          memberId: displayMid,
+          tempId,
         });
+        let previous;
         setMealsByDate(prev => {
-          let next = removeMealFromState(prev, tempId, targetDate);
-          return upsertMealInState(next, res.data);
+          previous = prev;
+          return upsertMealInState(prev, optimistic);
         });
-      } catch {
-        setMealsByDate(previous);
-        showError(t('err_add_meal'));
+        try {
+          const results = await Promise.all(targetMemberIds.map(member_id =>
+            api.addMeal({ date: targetDate, position: targetPos, recipe_id: drag.recipe.id, member_id })
+          ));
+          const displayIdx = targetMemberIds.indexOf(displayMid);
+          const res = displayIdx >= 0 ? results[displayIdx] : results[0];
+          setMealsByDate(prev => {
+            let next = removeMealFromState(prev, tempId, targetDate);
+            return upsertMealInState(next, res.data);
+          });
+        } catch {
+          setMealsByDate(previous);
+          showError(t('err_add_meal'));
+        }
+      } else {
+        try {
+          await Promise.all(targetMemberIds.map(member_id =>
+            api.addMeal({ date: targetDate, position: targetPos, recipe_id: drag.recipe.id, member_id })
+          ));
+          await loadMonth(year, month);
+        } catch {
+          showError(t('err_add_meal'));
+        }
       }
     } else if (drag.type==='meal') {
       const {meal} = drag;
