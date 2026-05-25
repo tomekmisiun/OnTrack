@@ -5,13 +5,25 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useMember } from '../contexts/MemberContext';
 import { useToast } from '../contexts/ToastContext';
 import { getCurrentWeek, addDays, toEU } from '../utils/dates';
+import {
+  parseScheduleBlockText,
+  hourToTimeInputValue,
+  parseTimeInputEnd,
+  parseTimeInputPart,
+  normalizeTimeInput,
+} from '../utils/parseScheduleBlockText';
+import {
+  SCHEDULE_DAYS,
+  SCHEDULE_WEEKDAYS,
+  toggleScheduleDay,
+  togglePresetDays,
+  isPresetActive,
+} from '../utils/scheduleWorkDays';
 import './DaySchedule.css';
 
 const HOURS = Array.from({ length: 24 }, (_, i) => i);
-const HOUR_OPTIONS = Array.from({ length: 24 }, (_, i) => i);
-const END_HOUR_OPTIONS = Array.from({ length: 24 }, (_, i) => i + 1);
-const DAYS = [0, 1, 2, 3, 4, 5, 6];
-const WEEKDAYS = [0, 1, 2, 3, 4];
+const DAYS = SCHEDULE_DAYS;
+const WEEKDAYS = SCHEDULE_WEEKDAYS;
 const ROW_H = 28;
 const BLOCK_COLORS = ['#4a6fa5', '#6366f1', '#0d9488', '#c2410c', '#9333ea', '#ca8a04'];
 const WORK_COLOR = '#64748b';
@@ -30,9 +42,18 @@ function formatHour(hour) {
   return `${String(hour).padStart(2, '0')}:00`;
 }
 
-function formatRange(start, end, dayLabel) {
-  const endDisplay = end === 24 ? '24:00' : formatHour(end);
-  return `${dayLabel}, ${formatHour(start)}–${endDisplay}`;
+function hasBlockOverlap(blocks, day, startHour, endHour, excludeId = null) {
+  return blocks.some(b =>
+    b.id !== excludeId &&
+    b.day === day &&
+    startHour < b.end_hour &&
+    endHour > b.start_hour
+  );
+}
+
+function endHourToModalTime(endHour) {
+  if (endHour === 24) return '24:00';
+  return hourToTimeInputValue(endHour, 0);
 }
 
 export default function DaySchedule() {
@@ -49,24 +70,68 @@ export default function DaySchedule() {
   const [modal, setModal] = useState(null);
   const [labelInput, setLabelInput] = useState('');
   const [workStart, setWorkStart] = useState(9);
+  const [workStartMinute, setWorkStartMinute] = useState(0);
   const [workEnd, setWorkEnd] = useState(17);
+  const [workEndPartHour, setWorkEndPartHour] = useState(17);
+  const [workEndPartMinute, setWorkEndPartMinute] = useState(0);
   const [workLabel, setWorkLabel] = useState('');
-  const [workAllDays, setWorkAllDays] = useState(false);
+  const [workPasteText, setWorkPasteText] = useState('');
+  const [selectedWorkDays, setSelectedWorkDays] = useState([...WEEKDAYS]);
   const [workLoading, setWorkLoading] = useState(false);
   const [clearLoading, setClearLoading] = useState(false);
+  const [workStartTimeDraft, setWorkStartTimeDraft] = useState(null);
+  const [workEndTimeDraft, setWorkEndTimeDraft] = useState(null);
+  const [modalStartDraft, setModalStartDraft] = useState(null);
+  const [modalEndDraft, setModalEndDraft] = useState(null);
   const dragRef = useRef(null);
 
   const dayLabels = t('day_short');
   const weekEnd = addDays(weekStart, 6);
   const isCurrentWeek = weekStart === currentWeekStart;
 
-  useEffect(() => {
-    setWorkLabel(t('schedule_work_default'));
-  }, [t]);
+  const workPasteParsed = useMemo(
+    () => (workPasteText.trim() ? parseScheduleBlockText(workPasteText) : null),
+    [workPasteText],
+  );
 
-  useEffect(() => {
-    if (workEnd <= workStart) setWorkEnd(Math.min(workStart + 1, 24));
-  }, [workStart, workEnd]);
+  const applyParsedWork = useCallback((parsed) => {
+    setWorkStart(parsed.start_hour);
+    setWorkStartMinute(parsed.start_minute);
+    setWorkEnd(parsed.end_hour);
+    setWorkEndPartHour(parsed.end_part_hour);
+    setWorkEndPartMinute(parsed.end_part_minute);
+    if (parsed.label) setWorkLabel(parsed.label);
+  }, []);
+
+  const handleWorkPasteChange = (text) => {
+    setWorkPasteText(text);
+    const parsed = parseScheduleBlockText(text);
+    if (parsed) applyParsedWork(parsed);
+  };
+
+  const handleWorkStartTimeChange = (value) => {
+    const part = parseTimeInputPart(value);
+    if (!part) return;
+    setWorkStart(part.hour);
+    setWorkStartMinute(part.minute);
+  };
+
+  const handleWorkEndTimeChange = (value) => {
+    const part = parseTimeInputPart(value);
+    if (!part) return;
+    const end = parseTimeInputEnd(value);
+    if (end == null) return;
+    setWorkEnd(end);
+    setWorkEndPartHour(part.hour);
+    setWorkEndPartMinute(part.minute);
+  };
+
+  const workStartTimeValue = hourToTimeInputValue(workStart, workStartMinute);
+  const workEndTimeValue = hourToTimeInputValue(workEndPartHour, workEndPartMinute);
+
+  const toggleWorkPreset = (preset) => {
+    setSelectedWorkDays(prev => togglePresetDays(prev, preset));
+  };
 
   const loadBlocks = useCallback(async () => {
     if (!activeMember?.id) {
@@ -134,6 +199,8 @@ export default function DaySchedule() {
 
     setModal({ day, start_hour: startHour, end_hour: endHour, week_start: weekStart });
     setLabelInput('');
+    setModalStartDraft(null);
+    setModalEndDraft(null);
     setSelection(null);
     dragRef.current = null;
   };
@@ -144,24 +211,103 @@ export default function DaySchedule() {
     return () => window.removeEventListener('mouseup', up);
   });
 
-  const saveBlock = async () => {
+  const openEditModal = (block) => {
+    setModal({
+      blockId: block.id,
+      day: block.day,
+      start_hour: block.start_hour,
+      end_hour: block.end_hour,
+      week_start: weekStart,
+    });
+    setLabelInput(block.label);
+    setModalStartDraft(null);
+    setModalEndDraft(null);
+  };
+
+  const updateModalStart = (value) => {
+    const part = parseTimeInputPart(value);
+    if (!part) return;
+    setModal(prev => (prev ? { ...prev, start_hour: part.hour } : prev));
+  };
+
+  const updateModalEnd = (value) => {
+    const trimmed = value.trim();
+    if (trimmed === '24:00' || trimmed === '24') {
+      setModal(prev => (prev ? { ...prev, end_hour: 24 } : prev));
+      return;
+    }
+    const part = parseTimeInputPart(value);
+    if (!part) return;
+    const end = parseTimeInputEnd(value);
+    if (end == null) return;
+    setModal(prev => (prev ? { ...prev, end_hour: end } : prev));
+  };
+
+  const saveModal = async () => {
     const label = labelInput.trim();
     if (!label || !modal) return;
+    if (modal.end_hour <= modal.start_hour) {
+      showError(t('schedule_overlap_err'));
+      return;
+    }
+    if (hasBlockOverlap(blocks, modal.day, modal.start_hour, modal.end_hour, modal.blockId ?? null)) {
+      showError(t('schedule_overlap_err'));
+      return;
+    }
+
     try {
-      const res = await api.create({
-        ...modal,
-        label,
-        member_id: activeMember.id,
-      });
-      setBlocks(prev => [...prev, res.data].sort((a, b) =>
-        a.day - b.day || a.start_hour - b.start_hour
-      ));
+      if (modal.blockId) {
+        const res = await api.update(modal.blockId, {
+          label,
+          start_hour: modal.start_hour,
+          end_hour: modal.end_hour,
+        });
+        setBlocks(prev => prev.map(b => (b.id === modal.blockId ? res.data : b)).sort((a, b) =>
+          a.day - b.day || a.start_hour - b.start_hour
+        ));
+        showSuccess(t('schedule_updated'));
+      } else {
+        const res = await api.create({
+          day: modal.day,
+          start_hour: modal.start_hour,
+          end_hour: modal.end_hour,
+          week_start: modal.week_start,
+          label,
+          member_id: activeMember.id,
+        });
+        setBlocks(prev => [...prev, res.data].sort((a, b) =>
+          a.day - b.day || a.start_hour - b.start_hour
+        ));
+        showSuccess(t('schedule_saved'));
+      }
       setModal(null);
-      showSuccess(t('schedule_saved'));
     } catch (err) {
       if (err.response?.status === 409) showError(t('schedule_overlap_err'));
       else showError(t('schedule_save_err'));
     }
+  };
+
+  const confirmDeleteBlock = (block) => {
+    showConfirm({
+      title: t('delete'),
+      message: t('schedule_delete_confirm'),
+      confirmLabel: t('delete'),
+      onConfirm: async () => {
+        try {
+          await api.delete(block.id);
+          setBlocks(prev => prev.filter(b => b.id !== block.id));
+          setModal(null);
+        } catch {
+          showError(t('schedule_delete_err'));
+        }
+      },
+    });
+  };
+
+  const deleteFromModal = () => {
+    if (!modal?.blockId) return;
+    const block = blocks.find(b => b.id === modal.blockId);
+    if (block) confirmDeleteBlock(block);
   };
 
   const applyWorkHours = async () => {
@@ -170,16 +316,19 @@ export default function DaySchedule() {
       showError(t('schedule_overlap_err'));
       return;
     }
+    if (!selectedWorkDays.length) {
+      showError(t('schedule_work_no_days'));
+      return;
+    }
     setWorkLoading(true);
     try {
-      const days = workAllDays ? DAYS : WEEKDAYS;
       const res = await api.createBulk({
         member_id: activeMember.id,
         week_start: weekStart,
         start_hour: workStart,
         end_hour: workEnd,
         label,
-        days,
+        days: selectedWorkDays,
       });
       const created = res.data.created || [];
       const skipped = res.data.skipped || [];
@@ -218,16 +367,6 @@ export default function DaySchedule() {
         }
       },
     });
-  };
-
-  const deleteBlock = async (block) => {
-    if (!window.confirm(t('schedule_delete_confirm'))) return;
-    try {
-      await api.delete(block.id);
-      setBlocks(prev => prev.filter(b => b.id !== block.id));
-    } catch {
-      showError(t('schedule_delete_err'));
-    }
   };
 
   const isSelected = (day, hour) => {
@@ -317,51 +456,118 @@ export default function DaySchedule() {
             </div>
           </div>
 
-          <div className="schedule-work-grid">
-            <label className="schedule-work-field">
-              <span>{t('schedule_work_from')}</span>
-              <select value={workStart} onChange={e => setWorkStart(Number(e.target.value))}>
-                {HOUR_OPTIONS.map(h => <option key={h} value={h}>{formatHour(h)}</option>)}
-              </select>
-            </label>
-            <label className="schedule-work-field">
-              <span>{t('schedule_work_to')}</span>
-              <select value={workEnd} onChange={e => setWorkEnd(Number(e.target.value))}>
-                {END_HOUR_OPTIONS.filter(h => h > workStart).map(h => (
-                  <option key={h} value={h}>{h === 24 ? '24:00' : formatHour(h)}</option>
-                ))}
-              </select>
-            </label>
-            <label className="schedule-work-field schedule-work-field--grow">
-              <span>{t('schedule_work_label')}</span>
+          <div className="schedule-work-card">
+            <div className="schedule-work-quick">
+              <span className="schedule-work-quick-label">{t('schedule_work_quick_label')}</span>
+              <div className="schedule-work-quick-input-wrap">
+                <Icon icon="heroicons:pencil-square" className="schedule-work-quick-icon" width={18} />
+                <input
+                  type="text"
+                  className="schedule-work-paste"
+                  value={workPasteText}
+                  maxLength={80}
+                  onChange={e => handleWorkPasteChange(e.target.value)}
+                  placeholder={t('schedule_work_quick_ph')}
+                  aria-label={t('schedule_work_quick_label')}
+                />
+              </div>
+            </div>
+
+            <div className={`schedule-work-summary${workPasteParsed ? ' schedule-work-summary--parsed' : ''}`}>
+              <div className="schedule-work-time">
+                <input
+                  type="text"
+                  className="schedule-work-time-input"
+                  value={workStartTimeDraft ?? workStartTimeValue}
+                  inputMode="numeric"
+                  maxLength={5}
+                  placeholder="09:00"
+                  onFocus={() => setWorkStartTimeDraft(workStartTimeValue)}
+                  onChange={e => setWorkStartTimeDraft(e.target.value)}
+                  onBlur={e => {
+                    const normalized = normalizeTimeInput(e.target.value);
+                    if (normalized) handleWorkStartTimeChange(normalized);
+                    setWorkStartTimeDraft(null);
+                  }}
+                  onKeyDown={e => {
+                    if (e.key === 'Enter') e.currentTarget.blur();
+                  }}
+                  aria-label={t('schedule_work_from')}
+                />
+                <Icon icon="heroicons:arrow-right" width={14} className="schedule-work-time-arrow" />
+                <input
+                  type="text"
+                  className="schedule-work-time-input"
+                  value={workEndTimeDraft ?? workEndTimeValue}
+                  inputMode="numeric"
+                  maxLength={5}
+                  placeholder="17:00"
+                  onFocus={() => setWorkEndTimeDraft(workEndTimeValue)}
+                  onChange={e => setWorkEndTimeDraft(e.target.value)}
+                  onBlur={e => {
+                    const normalized = normalizeTimeInput(e.target.value);
+                    if (normalized) handleWorkEndTimeChange(normalized);
+                    setWorkEndTimeDraft(null);
+                  }}
+                  onKeyDown={e => {
+                    if (e.key === 'Enter') e.currentTarget.blur();
+                  }}
+                  aria-label={t('schedule_work_to')}
+                />
+              </div>
+              <span className="schedule-work-summary-sep" aria-hidden="true" />
+              {workPasteParsed && (
+                <Icon
+                  icon="heroicons:check-circle"
+                  className="schedule-work-parse-ok"
+                  width={16}
+                  aria-hidden="true"
+                />
+              )}
               <input
                 type="text"
+                className="schedule-work-label-inline"
                 maxLength={120}
                 value={workLabel}
                 onChange={e => setWorkLabel(e.target.value)}
-                placeholder={t('schedule_work_default')}
+                placeholder={t('schedule_work_label_ph')}
+                aria-label={t('schedule_work_label')}
               />
-            </label>
-            <div className="schedule-work-field">
-              <span>{t('schedule_work_days_label')}</span>
-              <div className="schedule-work-days">
+            </div>
+
+            <div className="schedule-work-days-row">
+              <div className="schedule-work-presets">
                 <button
                   type="button"
-                  className={`schedule-day-chip ${!workAllDays ? 'active' : ''}`}
-                  onClick={() => setWorkAllDays(false)}
+                  className={`schedule-day-chip ${isPresetActive(selectedWorkDays, WEEKDAYS) ? 'active' : ''}`}
+                  onClick={() => toggleWorkPreset(WEEKDAYS)}
                 >
                   {t('schedule_work_weekdays')}
                 </button>
                 <button
                   type="button"
-                  className={`schedule-day-chip ${workAllDays ? 'active' : ''}`}
-                  onClick={() => setWorkAllDays(true)}
+                  className={`schedule-day-chip ${isPresetActive(selectedWorkDays, DAYS) ? 'active' : ''}`}
+                  onClick={() => toggleWorkPreset(DAYS)}
                 >
                   {t('schedule_work_all_days')}
                 </button>
               </div>
+              <span className="schedule-work-days-sep" aria-hidden="true" />
+              <div className="schedule-work-individual">
+                {DAYS.map(d => (
+                  <button
+                    key={d}
+                    type="button"
+                    className={`schedule-day-chip schedule-day-chip--day ${selectedWorkDays.includes(d) ? 'active' : ''}`}
+                    onClick={() => setSelectedWorkDays(prev => toggleScheduleDay(prev, d))}
+                  >
+                    {dayLabels[d]}
+                  </button>
+                ))}
+              </div>
             </div>
-            <div className="schedule-work-actions">
+
+            <div className="schedule-work-footer">
               <button
                 type="button"
                 className="btn schedule-work-clear"
@@ -434,8 +640,8 @@ export default function DaySchedule() {
                             background: blockColor(block),
                           }}
                           onMouseDown={e => e.stopPropagation()}
-                          onClick={() => deleteBlock(block)}
-                          title={t('schedule_click_delete')}
+                          onClick={() => openEditModal(block)}
+                          title={t('schedule_click_edit')}
                         >
                           {block.label}
                         </div>
@@ -452,25 +658,80 @@ export default function DaySchedule() {
       {modal && (
         <div className="schedule-modal-backdrop" onMouseDown={() => setModal(null)}>
           <div className="schedule-modal" onMouseDown={e => e.stopPropagation()}>
-            <h3>{t('schedule_add_activity')}</h3>
-            <div className="schedule-modal-meta">
-              {formatRange(modal.start_hour, modal.end_hour, dayLabels[modal.day])}
+            <h3>{modal.blockId ? t('schedule_edit_activity') : t('schedule_add_activity')}</h3>
+            <p className="schedule-modal-day">{dayLabels[modal.day]}</p>
+
+            <label className="schedule-modal-label">{t('schedule_activity_hours')}</label>
+            <div className="schedule-modal-times">
+              <input
+                type="text"
+                className="schedule-modal-time-input"
+                value={modalStartDraft ?? hourToTimeInputValue(modal.start_hour, 0)}
+                inputMode="numeric"
+                maxLength={5}
+                placeholder="09:00"
+                onFocus={() => setModalStartDraft(hourToTimeInputValue(modal.start_hour, 0))}
+                onChange={e => setModalStartDraft(e.target.value)}
+                onBlur={e => {
+                  const normalized = normalizeTimeInput(e.target.value);
+                  if (normalized) updateModalStart(normalized);
+                  setModalStartDraft(null);
+                }}
+                onKeyDown={e => { if (e.key === 'Enter') e.currentTarget.blur(); }}
+                aria-label={t('schedule_work_from')}
+              />
+              <Icon icon="heroicons:arrow-right" width={14} className="schedule-modal-time-arrow" />
+              <input
+                type="text"
+                className="schedule-modal-time-input"
+                value={modalEndDraft ?? endHourToModalTime(modal.end_hour)}
+                inputMode="numeric"
+                maxLength={5}
+                placeholder="17:00"
+                onFocus={() => setModalEndDraft(endHourToModalTime(modal.end_hour))}
+                onChange={e => setModalEndDraft(e.target.value)}
+                onBlur={e => {
+                  const raw = e.target.value.trim();
+                  if (raw === '24:00' || raw === '24') {
+                    updateModalEnd(raw);
+                  } else {
+                    const normalized = normalizeTimeInput(raw);
+                    if (normalized) updateModalEnd(normalized);
+                  }
+                  setModalEndDraft(null);
+                }}
+                onKeyDown={e => { if (e.key === 'Enter') e.currentTarget.blur(); }}
+                aria-label={t('schedule_work_to')}
+              />
             </div>
+
+            <label className="schedule-modal-label">{t('schedule_activity_name')}</label>
             <input
               type="text"
-              autoFocus
+              autoFocus={!modal.blockId}
               maxLength={120}
               placeholder={t('schedule_activity_name')}
               value={labelInput}
               onChange={e => setLabelInput(e.target.value)}
-              onKeyDown={e => { if (e.key === 'Enter') saveBlock(); if (e.key === 'Escape') setModal(null); }}
+              onKeyDown={e => {
+                if (e.key === 'Enter') saveModal();
+                if (e.key === 'Escape') setModal(null);
+              }}
             />
+
             <div className="schedule-modal-actions">
-              <button type="button" className="btn" onClick={() => setModal(null)}>{t('cancel')}</button>
-              <button type="button" className="btn btn-primary" onClick={saveBlock} disabled={!labelInput.trim()}>
-                <Icon icon="heroicons:plus" width={16} style={{ marginRight: 4, verticalAlign: 'text-bottom' }} />
-                {t('save_btn')}
-              </button>
+              {modal.blockId && (
+                <button type="button" className="btn btn-danger schedule-modal-delete" onClick={deleteFromModal}>
+                  {t('delete')}
+                </button>
+              )}
+              <div className="schedule-modal-actions-right">
+                <button type="button" className="btn" onClick={() => setModal(null)}>{t('cancel')}</button>
+                <button type="button" className="btn btn-primary" onClick={saveModal} disabled={!labelInput.trim()}>
+                  <Icon icon="heroicons:check" width={16} style={{ marginRight: 4, verticalAlign: 'text-bottom' }} />
+                  {t('save_btn')}
+                </button>
+              </div>
             </div>
           </div>
         </div>

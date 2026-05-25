@@ -34,15 +34,18 @@ def _block_for_user(block_id, uid):
     return DayScheduleBlock.query.filter_by(id=block_id, user_id=uid).first()
 
 
-def _has_overlap(uid, mid, week_start, day, start_hour, end_hour):
-    return DayScheduleBlock.query.filter(
+def _has_overlap(uid, mid, week_start, day, start_hour, end_hour, exclude_id=None):
+    q = DayScheduleBlock.query.filter(
         DayScheduleBlock.user_id == uid,
         DayScheduleBlock.member_id == mid,
         DayScheduleBlock.week_start == week_start,
         DayScheduleBlock.day == day,
         DayScheduleBlock.start_hour < end_hour,
         DayScheduleBlock.end_hour > start_hour,
-    ).first()
+    )
+    if exclude_id is not None:
+        q = q.filter(DayScheduleBlock.id != exclude_id)
+    return q.first()
 
 
 def _validate_hours(start_hour, end_hour):
@@ -202,11 +205,31 @@ def update_block(block_id):
         return jsonify({'error': 'Not found'}), 404
 
     data = request.get_json() or {}
-    label = (data.get('label') or '').strip()
-    if not label:
-        return jsonify({'error': 'Label is required'}), 400
 
-    block.label = label[:120]
+    start_hour = block.start_hour
+    end_hour = block.end_hour
+    if 'start_hour' in data or 'end_hour' in data:
+        try:
+            start_hour = int(data.get('start_hour', block.start_hour))
+            end_hour = int(data.get('end_hour', block.end_hour))
+        except (TypeError, ValueError):
+            return jsonify({'error': 'Invalid hour range'}), 400
+        if not _validate_hours(start_hour, end_hour):
+            return jsonify({'error': 'Invalid hour range'}), 400
+        if _has_overlap(
+            uid, block.member_id, block.week_start, block.day,
+            start_hour, end_hour, exclude_id=block_id,
+        ):
+            return jsonify({'error': 'Overlapping activity'}), 409
+        block.start_hour = start_hour
+        block.end_hour = end_hour
+
+    if 'label' in data:
+        label = (data.get('label') or '').strip()
+        if not label:
+            return jsonify({'error': 'Label is required'}), 400
+        block.label = label[:120]
+
     db.session.commit()
     return jsonify(block.to_dict())
 
