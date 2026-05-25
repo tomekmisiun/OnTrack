@@ -23,6 +23,12 @@ html.app-home #root {
   min-height: 100vh;
 }
 
+html.app-home #root {
+  height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
 html.app-desktop-scale.app-home,
 html.app-desktop-scale.app-home body,
 html.app-home,
