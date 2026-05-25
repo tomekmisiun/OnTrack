@@ -17,6 +17,9 @@ import { ToastProvider } from './contexts/ToastContext';
 import { MemberProvider } from './contexts/MemberContext';
 import { Icon } from '@iconify/react';
 import { getTourSteps, getTourLocale, TOUR_STYLES } from './tour-steps';
+import { useLayoutViewport } from './hooks/useLayoutViewport';
+import { LAYOUT_WIDTH } from './layoutConstants';
+import './desktopLayout.css';
 import './App.css';
 
 const TAB_ICONS = {
@@ -59,11 +62,26 @@ function AppInner({ onStartTour }) {
     window.scrollTo({ top: 0 });
   }, []);
 
+  const isHome = activeTab === 'home';
+  useLayoutViewport(user ? (isHome ? LAYOUT_WIDTH.home : LAYOUT_WIDTH.app) : LAYOUT_WIDTH.login);
+
+  useEffect(() => {
+    if (!user) return undefined;
+    document.documentElement.classList.toggle('app-home', isHome);
+    document.body.classList.toggle('app-home', isHome);
+    return () => {
+      document.documentElement.classList.remove('app-home');
+      document.body.classList.remove('app-home');
+    };
+  }, [user, isHome]);
+
   useEffect(() => {
     const handler = (e) => goToTab(e.detail.tab);
     window.addEventListener('tour-goto-tab', handler);
     return () => window.removeEventListener('tour-goto-tab', handler);
   }, [goToTab]);
+
+  if (!user) return <Login />;
 
   const tabs = [
     { id: 'macro',    label: t('tab_macro') },
@@ -74,10 +92,6 @@ function AppInner({ onStartTour }) {
     { id: 'summary',  label: t('tab_summary') },
     { id: 'export',   label: t('tab_export') },
   ];
-
-  if (!user) return <Login />;
-
-  const isHome = activeTab === 'home';
 
   return (
     <div className={`app${isHome ? ' app--home' : ''}`}>

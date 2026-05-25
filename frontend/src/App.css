@@ -13,6 +13,26 @@ body {
 .app {
   display: flex;
   min-height: 100vh;
+  width: 100%;
+}
+
+/* Narrow viewport mode — fixed desktop width (see useLayoutViewport) */
+html.app-desktop-scale .app:not(.app--home) {
+  width: 1280px;
+  max-width: none;
+  flex-shrink: 0;
+}
+
+.app--home {
+  width: 100%;
+  max-width: 960px;
+  min-height: 100vh;
+  background: #0f1419;
+}
+
+html.app-desktop-scale .app--home {
+  width: 960px;
+  max-width: none;
 }
 
 /* ── Sidebar ── */
