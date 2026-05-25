@@ -398,14 +398,14 @@ export default function Login() {
             />
           ))}
         </div>
+
+        <AppFooter className="app-site-footer--login" />
       </main>
 
       <aside className="login-panel">
         <LoginForm {...formProps} />
       </aside>
       </div>
-
-      <AppFooter className="app-site-footer--login" />
 
       {showPrivacy && <PrivacyPolicy lang={uiLang} onClose={() => setShowPrivacy(false)} />}
     </div>

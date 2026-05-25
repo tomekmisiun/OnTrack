@@ -3,7 +3,7 @@
   "name_pl": "Kurczak po chińsku",
   "name_en": "Chicken Chow Mein",
   "portion_note_pl": "1 porcja (~400 g)",
-  "portion_note_en": "1 serving (~400 g)",
+  "portion_note_en": "1 serving (~520 g)",
   "ingredients_pl": [
     { "product_name": "makaron jajeczny", "weight": 100 },
     { "product_name": "kurczak", "weight": 150 },
@@ -16,14 +16,20 @@
     { "product_name": "olej", "weight": 10 }
   ],
   "ingredients_en": [
-    { "catalog_id": "egg_noodles", "weight": 100 },
-    { "catalog_id": "chicken_breast", "weight": 150 },
-    { "catalog_id": "bell_pepper", "weight": 50 },
-    { "catalog_id": "onion", "weight": 30 },
-    { "catalog_id": "carrot", "weight": 40 },
-    { "catalog_id": "soy_sauce", "weight": 20 },
-    { "catalog_id": "rice_vinegar", "weight": 10 },
-    { "catalog_id": "ginger", "weight": 5 },
-    { "catalog_id": "olive_oil", "weight": 10 }
+    { "catalog_id": "egg_noodles", "weight": 120 },
+    { "catalog_id": "chicken_breast", "weight": 140 },
+    { "catalog_id": "bell_pepper", "weight": 40 },
+    { "catalog_id": "onion", "weight": 35 },
+    { "catalog_id": "carrot", "weight": 35 },
+    { "catalog_id": "napa_cabbage", "weight": 70 },
+    { "catalog_id": "bean_sprouts", "weight": 60 },
+    { "catalog_id": "spring_onion", "weight": 20 },
+    { "catalog_id": "garlic", "weight": 6 },
+    { "catalog_id": "ginger", "weight": 8 },
+    { "catalog_id": "soy_sauce", "weight": 15 },
+    { "catalog_id": "oyster_sauce", "weight": 12 },
+    { "catalog_id": "rice_vinegar", "weight": 8 },
+    { "catalog_id": "sesame_oil", "weight": 5 },
+    { "catalog_id": "vegetable_oil", "weight": 12 }
   ]
 }

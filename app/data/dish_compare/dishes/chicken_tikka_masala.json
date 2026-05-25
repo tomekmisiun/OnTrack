@@ -3,7 +3,7 @@
   "name_pl": "Kurczak Tikka Masala",
   "name_en": "Chicken Tikka Masala",
   "portion_note_pl": "1 porcja (~450 g)",
-  "portion_note_en": "1 serving (~450 g)",
+  "portion_note_en": "1 serving (~480 g)",
   "ingredients_pl": [
     { "product_name": "kurczak", "weight": 150 },
     { "product_name": "ryż", "weight": 75 },
@@ -22,14 +22,16 @@
     { "catalog_id": "chicken_breast", "weight": 150 },
     { "catalog_id": "rice", "weight": 75 },
     { "catalog_id": "yogurt", "weight": 50 },
-    { "catalog_id": "curry_powder", "weight": 5 },
+    { "catalog_id": "curry_powder", "weight": 4 },
+    { "catalog_id": "garam_masala", "weight": 2 },
     { "catalog_id": "coconut_milk", "weight": 80 },
     { "catalog_id": "double_cream", "weight": 40 },
-    { "catalog_id": "onion", "weight": 30 },
-    { "catalog_id": "garlic", "weight": 5 },
-    { "catalog_id": "ginger", "weight": 5 },
-    { "catalog_id": "tomato_paste", "weight": 30 },
-    { "catalog_id": "olive_oil", "weight": 10 },
+    { "catalog_id": "onion", "weight": 40 },
+    { "catalog_id": "garlic", "weight": 6 },
+    { "catalog_id": "ginger", "weight": 8 },
+    { "catalog_id": "tomato_paste", "weight": 25 },
+    { "catalog_id": "chopped_tomatoes", "weight": 50 },
+    { "catalog_id": "vegetable_oil", "weight": 12 },
     { "catalog_id": "coriander", "weight": 5 }
   ]
 }
