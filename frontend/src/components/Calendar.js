@@ -19,6 +19,7 @@ import {
   buildOptimisticMeal,
   resolveMealIdsForAllMembers,
 } from '../utils/mealPlanState';
+import './Calendar.css';
 
 
 const COLORS = ['#4a6fa5', '#93c5fd', '#fcd34d', '#c2410c', '#6366f1'];
@@ -1385,49 +1386,64 @@ export default function Calendar({ onGoToTab, scrollToToday, onScrolledToToday }
 
 
       {/* Recipe carousel */}
-      <div id="recipe-carousel" className="card" style={{padding:0,marginBottom:16,position:'sticky',top:0,zIndex:50,overflow:'hidden'}}>
-        <div onClick={()=>setCarouselOpen(o=>!o)}
-          style={{width:'100%',padding:'10px 16px',cursor:'pointer',display:'flex',justifyContent:'space-between',alignItems:'center',boxSizing:'border-box'}}>
-          <div style={{display:'flex',alignItems:'center',gap:10}}>
-            <h2 style={{margin:0,fontSize:15,color:'#0d9488'}}>{t('carousel_title')}</h2>
-            <button
-              onClick={e=>{e.stopPropagation();onGoToTab?.('recipes');}}
-              style={{background:'#0d948820',border:'1px solid #0d9488',borderRadius:6,padding:'3px 10px',fontSize:11,fontWeight:600,color:'#2dd4bf',cursor:'pointer',lineHeight:1.4}}>
-              {t('btn_create_recipe')}
-            </button>
-            <button
-              onClick={e=>{e.stopPropagation();setTplOpen(true);setTimeout(()=>document.getElementById('template-section')?.scrollIntoView({behavior:'smooth',block:'start'}),100);}}
-              style={{background:'#0d948820',border:'1px solid #0d9488',borderRadius:6,padding:'3px 10px',fontSize:11,fontWeight:600,color:'#2dd4bf',cursor:'pointer',lineHeight:1.4}}>
-              {t('btn_create_template')}
-            </button>
-            {!carouselOpen && <span style={{fontSize:11,color:'#6b7280'}}>{t('recipes_count')(recipes.length)}</span>}
-          </div>
-          <Icon icon="heroicons:chevron-down" style={{width:20,height:20,transition:'transform 0.25s',transform:carouselOpen?'rotate(180deg)':'rotate(0deg)',color:'#0d9488'}}/>
+      <div id="recipe-carousel" className="card carousel-card">
+        <div className="carousel-header">
+          <button type="button" className="carousel-header-toggle" onClick={() => setCarouselOpen(o => !o)}>
+            <span className="card-section-title">{t('carousel_title')}</span>
+            {!carouselOpen && (
+              <span className="carousel-header-count">{t('recipes_count')(recipes.length)}</span>
+            )}
+          </button>
+          <button type="button" className="carousel-header-chevron" onClick={() => setCarouselOpen(o => !o)}>
+            <Icon icon="heroicons:chevron-down" style={{ width: 20, height: 20, transition: 'transform 0.25s', transform: carouselOpen ? 'rotate(180deg)' : 'rotate(0deg)', color: '#0d9488' }} />
+          </button>
         </div>
         {carouselOpen && (
-          <div style={{padding:'0 16px 14px',borderTop:'1px solid #374151'}}>
-            <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:8,marginTop:10,flexWrap:'wrap'}}>
+          <div className="carousel-body">
+            <div className="carousel-toolbar">
               <input
+                className="carousel-search"
                 value={recipeSearch}
                 onChange={e => setRecipeSearch(e.target.value)}
                 placeholder={t('search_recipe_ph')}
-                style={{flex:'0 0 200px',padding:'4px 10px',fontSize:12,background:'#111827',border:'1px solid #374151',borderRadius:6,color:'#f1f5f9',outline:'none'}}
-                onFocus={e => e.target.style.borderColor='#0d9488'}
-                onBlur={e => e.target.style.borderColor='#374151'}
               />
-              {[{value:null,label:t('cat_all')},...[
-                {value:'breakfast',label:t('cat_breakfast')},
-                {value:'lunch',label:t('cat_lunch')},
-                {value:'dinner',label:t('cat_dinner')},
-                {value:'snack',label:t('cat_snack')},
-                {value:'dessert',label:t('cat_dessert')},
-              ]].map(cat => (
-                <button key={cat.value ?? 'all'} onClick={() => handleCarouselCatFilter(cat.value)}
-                  style={{padding:'3px 10px',border:`1.5px solid ${carouselCatFilter===cat.value?'#0d9488':'#374151'}`,borderRadius:20,fontSize:11,cursor:'pointer',background:carouselCatFilter===cat.value?'#0d948822':'transparent',color:carouselCatFilter===cat.value?'#2dd4bf':'#6b7280',fontWeight:carouselCatFilter===cat.value?700:400,transition:'all 0.15s',whiteSpace:'nowrap'}}>
-                  {cat.label}
+              <div className="carousel-filters">
+                {[{ value: null, label: t('cat_all') }, ...[
+                  { value: 'breakfast', label: t('cat_breakfast') },
+                  { value: 'lunch', label: t('cat_lunch') },
+                  { value: 'dinner', label: t('cat_dinner') },
+                  { value: 'snack', label: t('cat_snack') },
+                  { value: 'dessert', label: t('cat_dessert') },
+                ]].map(cat => (
+                  <button
+                    key={cat.value ?? 'all'}
+                    type="button"
+                    className={`carousel-filter-chip${carouselCatFilter === cat.value ? ' carousel-filter-chip--active' : ''}`}
+                    onClick={() => handleCarouselCatFilter(cat.value)}
+                  >
+                    {cat.label}
+                  </button>
+                ))}
+              </div>
+              <div className="carousel-toolbar-actions">
+                <button
+                  type="button"
+                  className="carousel-action-btn"
+                  onClick={() => onGoToTab?.('recipes')}
+                >
+                  {t('btn_create_recipe')}
                 </button>
-              ))}
-              <span style={{fontSize:11,color:'#6b7280',flexShrink:0,marginLeft:'auto'}}>{t('drag_to_cal')}</span>
+                <button
+                  type="button"
+                  className="carousel-action-btn"
+                  onClick={() => {
+                    setTplOpen(true);
+                    setTimeout(() => document.getElementById('template-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+                  }}
+                >
+                  {t('btn_create_template')}
+                </button>
+              </div>
             </div>
             <CarouselList
               recipes={recipes}
