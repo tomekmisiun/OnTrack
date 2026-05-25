@@ -12,6 +12,7 @@ import Login from './components/Login';
 import Profile from './components/Profile';
 import MemberToggles from './components/MemberToggles';
 import AppBackground from './components/AppBackground';
+import AppFooter from './components/AppFooter';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { ToastProvider } from './contexts/ToastContext';
@@ -54,13 +55,15 @@ function AppInner({ onStartTour }) {
 
   const goToTab = useCallback((tab) => {
     setActiveTab(tab);
-    window.scrollTo({ top: 0 });
-    if (tab === 'calendar') setScrollCalendarToToday(true);
+    document.querySelector('.app-main')?.scrollTo({ top: 0 });
+    if (tab === 'calendar') {
+      setScrollCalendarToToday(true);
+    }
   }, []);
 
   const goHome = useCallback(() => {
     setActiveTab('home');
-    window.scrollTo({ top: 0 });
+    document.querySelector('.app-main')?.scrollTo({ top: 0 });
   }, []);
 
   const isHome = activeTab === 'home';
@@ -149,26 +152,29 @@ function AppInner({ onStartTour }) {
       )}
 
       <main className={`app-main${isHome ? ' app-main--home' : ''}`}>
-        {activeTab === 'home'      && (
-          <Welcome
-            onGoToTab={goToTab}
-            onAccount={() => setShowProfile(true)}
-            onLogout={logout}
-          />
-        )}
-        {activeTab === 'macro'     && <MacroCalculator />}
-        {activeTab === 'calendar'  && (
-          <Calendar
-            onGoToTab={goToTab}
-            scrollToToday={scrollCalendarToToday}
-            onScrolledToToday={() => setScrollCalendarToToday(false)}
-          />
-        )}
-        {activeTab === 'schedule'  && <DaySchedule />}
-        {activeTab === 'recipes'   && <Recipes />}
-        {activeTab === 'products'  && <Products />}
-        {activeTab === 'summary'   && <Summary onGoToTab={goToTab} />}
-        {activeTab === 'export'    && <Export onGoToTab={goToTab} />}
+        <div className="app-main-content">
+          {activeTab === 'home'      && (
+            <Welcome
+              onGoToTab={goToTab}
+              onAccount={() => setShowProfile(true)}
+              onLogout={logout}
+            />
+          )}
+          {activeTab === 'macro'     && <MacroCalculator />}
+          {activeTab === 'calendar'  && (
+            <Calendar
+              onGoToTab={goToTab}
+              scrollToToday={scrollCalendarToToday}
+              onScrolledToToday={() => setScrollCalendarToToday(false)}
+            />
+          )}
+          {activeTab === 'schedule'  && <DaySchedule />}
+          {activeTab === 'recipes'   && <Recipes />}
+          {activeTab === 'products'  && <Products />}
+          {activeTab === 'summary'   && <Summary onGoToTab={goToTab} />}
+          {activeTab === 'export'    && <Export onGoToTab={goToTab} />}
+        </div>
+        <AppFooter />
       </main>
 
       {showProfile && (

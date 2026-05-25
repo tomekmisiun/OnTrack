@@ -24,25 +24,6 @@
   }
 }
 
-.login-copyright {
-  flex-shrink: 0;
-  margin: 0;
-  padding: 14px 24px 18px;
-  text-align: center;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  color: #6b7280;
-  border-top: 1px solid rgba(55, 65, 81, 0.65);
-  background: rgba(15, 20, 25, 0.85);
-}
-
-@media (min-width: 960px) {
-  .login-copyright {
-    padding: 16px 32px 20px;
-  }
-}
-
 /* ── Marketing column ── */
 .login-marketing {
   flex: 1;

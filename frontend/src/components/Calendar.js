@@ -536,6 +536,7 @@ function DayCell({ date, dateStr, meals, isToday, isPast, isCurrentMonth, onDele
       borderRadius:4, overflow:'hidden',
       background: isPast ? '#161d2d' : isToday ? '#162626' : '#1f2937',
       opacity: !isCurrentMonth ? 0.45 : 1,
+      scrollMarginTop: isToday ? 220 : undefined,
     }}>
       <DroppableDayHeader dateStr={dateStr}>
         <div style={{
@@ -987,6 +988,14 @@ export default function Calendar({ onGoToTab, scrollToToday, onScrolledToToday }
   const handleCarouselCatFilter = (val) => { setCarouselCatFilter(val); };
   const carouselScrollRef = useRef(null);
   const carouselDrag = useRef({ active: false, startX: 0, scrollLeft: 0 });
+  const scrolledToTodayRef = useRef(false);
+
+  const scrollToTodayCell = useCallback((behavior = 'smooth') => {
+    const el = document.getElementById('calendar-today');
+    if (!el) return false;
+    el.scrollIntoView({ behavior, block: 'start' });
+    return true;
+  }, []);
   const handleToggleFavorite = useCallback(async (id) => {
     await recipesApi.toggleFavorite(id);
     recipesApi.getAll().then(res => setRecipes(res.data));
@@ -1002,12 +1011,30 @@ export default function Calendar({ onGoToTab, scrollToToday, onScrolledToToday }
 
   useEffect(() => {
     if (!scrollToToday) return undefined;
-    const timer = setTimeout(() => {
-      document.getElementById('calendar-today')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      onScrolledToToday?.();
-    }, 150);
+    let attempts = 0;
+    let timer;
+    const tryScroll = () => {
+      if (scrollToTodayCell()) {
+        onScrolledToToday?.();
+        return;
+      }
+      attempts += 1;
+      if (attempts < 12) timer = setTimeout(tryScroll, 100);
+      else onScrolledToToday?.();
+    };
+    timer = setTimeout(tryScroll, 50);
     return () => clearTimeout(timer);
-  }, [scrollToToday, onScrolledToToday]);
+  }, [scrollToToday, scrollToTodayCell, onScrolledToToday]);
+
+  useEffect(() => {
+    if (year !== todayMidnight.getFullYear() || month !== todayMidnight.getMonth()) return undefined;
+    if (scrollToToday) return undefined;
+    if (scrolledToTodayRef.current) return undefined;
+    let timer = setTimeout(() => {
+      if (scrollToTodayCell()) scrolledToTodayRef.current = true;
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [year, month, mealsByDate, scrollToToday, scrollToTodayCell, todayMidnight]);
 
   useEffect(() => {
     const handler = () => {
@@ -1385,7 +1412,8 @@ export default function Calendar({ onGoToTab, scrollToToday, onScrolledToToday }
       )}
 
 
-      {/* Recipe carousel */}
+      {/* Recipe carousel — sticky wrapper bez backdrop-filter (inaczej sticky nie działa) */}
+      <div className="carousel-sticky">
       <div id="recipe-carousel" className="card carousel-card">
         <div className="carousel-header">
           <button type="button" className="carousel-header-toggle" onClick={() => setCarouselOpen(o => !o)}>
@@ -1459,6 +1487,7 @@ export default function Calendar({ onGoToTab, scrollToToday, onScrolledToToday }
             />
           </div>
         )}
+      </div>
       </div>
 
       <RecipePreviewModal recipe={previewRecipe} onClose={() => setPreviewRecipe(null)} />

@@ -4,10 +4,16 @@
   margin: 0;
   overflow-x: hidden;
   overflow-y: auto;
-  height: auto !important;
   min-height: 100dvh;
+  height: 100vh;
   flex: 1;
   background: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-main--home .app-main-content {
+  flex: 1 0 auto;
 }
 
 .app--home .app-main {

@@ -3,6 +3,7 @@ import { Icon } from '@iconify/react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import PrivacyPolicy from './PrivacyPolicy';
+import AppFooter from './AppFooter';
 import DishCompare from './DishCompare';
 import { SEED_STATS } from '../data/seedStats';
 import './Login.css';
@@ -404,11 +405,7 @@ export default function Login() {
       </aside>
       </div>
 
-      <p className="login-copyright">
-        {typeof t('login_copyright') === 'function'
-          ? t('login_copyright')(new Date().getFullYear())
-          : t('login_copyright')}
-      </p>
+      <AppFooter className="app-site-footer--login" />
 
       {showPrivacy && <PrivacyPolicy lang={uiLang} onClose={() => setShowPrivacy(false)} />}
     </div>
