@@ -7,6 +7,7 @@ import DaySchedule from './components/DaySchedule';
 import Summary from './components/Summary';
 import Export from './components/Export';
 import MacroCalculator from './components/MacroCalculator';
+import Welcome from './components/Welcome';
 import Login from './components/Login';
 import Profile from './components/Profile';
 import MemberPicker from './components/MemberPicker';
@@ -16,6 +17,9 @@ import { ToastProvider } from './contexts/ToastContext';
 import { MemberProvider } from './contexts/MemberContext';
 import { Icon } from '@iconify/react';
 import { getTourSteps, getTourLocale, TOUR_STYLES } from './tour-steps';
+import { useLayoutViewport } from './hooks/useLayoutViewport';
+import { LAYOUT_WIDTH } from './layoutConstants';
+import './desktopLayout.css';
 import './App.css';
 
 const TAB_ICONS = {
@@ -43,16 +47,41 @@ function markTourDone(userId) {
 function AppInner({ onStartTour }) {
   const { user, logout } = useAuth();
   const { t } = useLanguage();
-  const [activeTab, setActiveTab] = useState('calendar');
+  const [activeTab, setActiveTab] = useState('home');
   const [showProfile, setShowProfile] = useState(false);
+  const [scrollCalendarToToday, setScrollCalendarToToday] = useState(false);
 
-  const goToTab = useCallback((tab) => { setActiveTab(tab); window.scrollTo({ top: 0 }); }, []);
+  const goToTab = useCallback((tab) => {
+    setActiveTab(tab);
+    window.scrollTo({ top: 0 });
+    if (tab === 'calendar') setScrollCalendarToToday(true);
+  }, []);
+
+  const goHome = useCallback(() => {
+    setActiveTab('home');
+    window.scrollTo({ top: 0 });
+  }, []);
+
+  const isHome = activeTab === 'home';
+  useLayoutViewport(user ? (isHome ? LAYOUT_WIDTH.home : LAYOUT_WIDTH.app) : LAYOUT_WIDTH.login);
+
+  useEffect(() => {
+    if (!user) return undefined;
+    document.documentElement.classList.toggle('app-home', isHome);
+    document.body.classList.toggle('app-home', isHome);
+    return () => {
+      document.documentElement.classList.remove('app-home');
+      document.body.classList.remove('app-home');
+    };
+  }, [user, isHome]);
 
   useEffect(() => {
     const handler = (e) => goToTab(e.detail.tab);
     window.addEventListener('tour-goto-tab', handler);
     return () => window.removeEventListener('tour-goto-tab', handler);
   }, [goToTab]);
+
+  if (!user) return <Login />;
 
   const tabs = [
     { id: 'macro',    label: t('tab_macro') },
@@ -64,12 +93,11 @@ function AppInner({ onStartTour }) {
     { id: 'export',   label: t('tab_export') },
   ];
 
-  if (!user) return <Login />;
-
   return (
-    <div className="app">
+    <div className={`app${isHome ? ' app--home' : ''}`}>
+      {!isHome && (
       <aside className="app-sidebar">
-        <div className="sidebar-logo">
+        <div className="sidebar-logo sidebar-logo--clickable" role="button" tabIndex={0} onClick={goHome} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') goHome(); }}>
           <svg className="sidebar-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="9.5"/>
             <path d="M8.5 15.5 L11.8 11.8 L15.5 8.5 L12.2 12.2 Z" fill="currentColor" stroke="none"/>
@@ -114,10 +142,24 @@ function AppInner({ onStartTour }) {
           </button>
         </div>
       </aside>
+      )}
 
-      <main className="app-main">
+      <main className={`app-main${isHome ? ' app-main--home' : ''}`}>
+        {activeTab === 'home'      && (
+          <Welcome
+            onGoToTab={goToTab}
+            onAccount={() => setShowProfile(true)}
+            onLogout={logout}
+          />
+        )}
         {activeTab === 'macro'     && <MacroCalculator />}
-        {activeTab === 'calendar'  && <Calendar onGoToTab={goToTab} />}
+        {activeTab === 'calendar'  && (
+          <Calendar
+            onGoToTab={goToTab}
+            scrollToToday={scrollCalendarToToday}
+            onScrolledToToday={() => setScrollCalendarToToday(false)}
+          />
+        )}
         {activeTab === 'schedule'  && <DaySchedule />}
         {activeTab === 'recipes'   && <Recipes />}
         {activeTab === 'products'  && <Products />}
@@ -146,8 +188,15 @@ function TourHost() {
 
   useEffect(() => {
     if (loading || !user?.id || isTourDone(user.id)) return undefined;
-    const timer = setTimeout(() => setTourRun(true), 600);
-    return () => clearTimeout(timer);
+    let tourTimer;
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new CustomEvent('tour-goto-tab', { detail: { tab: 'macro' } }));
+      tourTimer = setTimeout(() => setTourRun(true), 250);
+    }, 600);
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(tourTimer);
+    };
   }, [user?.id, loading]);
 
   const handleTourEvent = useCallback((data) => {
