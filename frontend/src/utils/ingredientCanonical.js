@@ -1,14 +1,10 @@
 import { norm, ingredientWordsForMatch as ingWords } from './search';
-
-const TYPO_FIX = {
-  greck: 'grecki', grecka: 'grecka', drodny: 'drobny', drodna: 'drobna',
-  tortow: 'tortowa', pszen: 'pszenna',
-};
+import { stemIngredientWord, TYPO_FIX } from './ingredientStem';
 
 const PL_DISPLAY = {
   maka: 'mąka', maslo: 'masło', cukier: 'cukier', jajka: 'jajka', jajko: 'jajko',
   olej: 'olej', mleko: 'mleko', jogurt: 'jogurt', kisiel: 'kisiel', rabarbar: 'rabarbar',
-  sol: 'sól', smietana: 'śmietana', drozdze: 'drożdże',
+  sol: 'sól', smietana: 'śmietana', drozdze: 'drożdże', pieczenia: 'pieczenia',
 };
 
 const KEEP_PAIR = {
@@ -34,12 +30,16 @@ export function canonicalizeIngredient(rawName) {
   s = s.replace(/\s*-\s*$/, '');
   s = s.replace(/\s+/g, ' ').trim();
 
-  const words = ingWords(s).map(w => TYPO_FIX[w] || w);
+  const words = ingWords(s).map(w => stemIngredientWord(TYPO_FIX[w] || w));
   if (!words.length) return rawName.trim();
 
   const pair = KEEP_PAIR[words[0]];
   if (pair && words[1] && pair.has(words[1])) {
     return `${displayWord(words[0])} ${words[1]}`;
+  }
+
+  if (words.length >= 2 && words[0] === 'proszek' && (words[1] === 'pieczenia' || words[1] === 'pieczenie')) {
+    return `${displayWord(words[0])} do pieczenia`;
   }
 
   return displayWord(words[0]);
