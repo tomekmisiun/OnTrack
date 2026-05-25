@@ -14,13 +14,16 @@ if [ -z "$DATABASE_URL" ]; then
   exit 1
 fi
 
-case "$DATABASE_URL" in
-  *"@db:"*|*"@db/"*)
-    echo "ERROR: DATABASE_URL points at Docker host 'db', not Railway Postgres"
-    echo "Set DATABASE_URL=\${{Postgres.DATABASE_URL}} on the backend service"
-    exit 1
-    ;;
-esac
+# Railway guard only — local docker-compose uses host name "db"
+if [ -n "$RAILWAY_ENVIRONMENT" ] || [ -n "$RAILWAY_PROJECT_ID" ]; then
+  case "$DATABASE_URL" in
+    *"@db:"*|*"@db/"*)
+      echo "ERROR: DATABASE_URL points at Docker host 'db', not Railway Postgres"
+      echo "Set DATABASE_URL=\${{Postgres.DATABASE_URL}} on the backend service"
+      exit 1
+      ;;
+  esac
+fi
 
 echo "Running database migrations..."
 flask db upgrade
