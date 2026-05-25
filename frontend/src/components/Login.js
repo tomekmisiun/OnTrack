@@ -42,13 +42,19 @@ function DemoFrame({ children }) {
 }
 
 function ShowcaseMedia({ name }) {
+  const { lang } = useLanguage();
   const [failed, setFailed] = useState(false);
-  const src = `/demos/${name}.webm`;
+  const src = `/demos/${name}.${lang}.webm`;
+
+  useEffect(() => {
+    setFailed(false);
+  }, [src]);
 
   const content = failed ? (
     <div className="showcase-media showcase-media--placeholder" aria-hidden="true" />
   ) : (
     <video
+      key={src}
       className="showcase-media"
       autoPlay
       loop

@@ -497,14 +497,14 @@
 .showcase-media {
   width: 100%;
   display: block;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 1280 / 650;
   object-fit: cover;
   object-position: top center;
   background: #0b1018;
 }
 
 .showcase-media--placeholder {
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 1280 / 650;
   width: 100%;
   background:
     radial-gradient(ellipse 75% 60% at 50% 20%, rgba(45, 212, 191, 0.14) 0%, transparent 62%),
