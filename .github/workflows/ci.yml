@@ -2,9 +2,13 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:
@@ -26,36 +30,27 @@ jobs:
       - name: Uruchom testy
         run: pytest tests/ -v
         env:
-          DATABASE_URL: "sqlite:///:memory:"
+          DATABASE_URL: sqlite:///:memory:
           FLASK_SECRET_KEY: ci-test-flask-secret-key-0123456789abcdef
           JWT_SECRET_KEY: ci-test-jwt-secret-key-0123456789abcdef
           GOOGLE_CLIENT_ID: ci-test-google-client-id
           GOOGLE_CLIENT_SECRET: ci-test-google-client-secret
 
-  build-and-push:
+  deploy:
     needs: test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    container: ghcr.io/railwayapp/cli:latest
+    env:
+      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+      RAILWAY_BACKEND_SERVICE_ID: ${{ secrets.RAILWAY_BACKEND_SERVICE_ID }}
+      RAILWAY_FRONTEND_SERVICE_ID: ${{ secrets.RAILWAY_FRONTEND_SERVICE_ID }}
     steps:
       - name: Checkout kod
         uses: actions/checkout@v6
 
-      - name: Zaloguj do Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Deploy backend (Railway)
+        run: railway up --ci --service="$RAILWAY_BACKEND_SERVICE_ID" --message "ci ${{ github.sha }}"
 
-      - name: Zbuduj i pushuj obraz backendu
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/meal-planner-backend:latest
-
-      - name: Zbuduj i pushuj obraz frontendu
-        uses: docker/build-push-action@v5
-        with:
-          context: ./frontend
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/meal-planner-frontend:latest
+      - name: Deploy frontend (Railway)
+        run: railway up --ci --service="$RAILWAY_FRONTEND_SERVICE_ID" --path-as-root frontend --message "ci ${{ github.sha }}"
