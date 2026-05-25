@@ -11,6 +11,7 @@ import Welcome from './components/Welcome';
 import Login from './components/Login';
 import Profile from './components/Profile';
 import MemberToggles from './components/MemberToggles';
+import AppBackground from './components/AppBackground';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { ToastProvider } from './contexts/ToastContext';
@@ -67,11 +68,13 @@ function AppInner({ onStartTour }) {
 
   useEffect(() => {
     if (!user) return undefined;
+    document.documentElement.classList.add('app-shell');
+    document.body.classList.add('app-shell');
     document.documentElement.classList.toggle('app-home', isHome);
     document.body.classList.toggle('app-home', isHome);
     return () => {
-      document.documentElement.classList.remove('app-home');
-      document.body.classList.remove('app-home');
+      document.documentElement.classList.remove('app-shell', 'app-home');
+      document.body.classList.remove('app-shell', 'app-home');
     };
   }, [user, isHome]);
 
@@ -95,6 +98,7 @@ function AppInner({ onStartTour }) {
 
   return (
     <div className={`app${isHome ? ' app--home' : ''}`}>
+      <AppBackground />
       {!isHome && (
       <aside className="app-sidebar">
         <div className="sidebar-logo sidebar-logo--clickable" role="button" tabIndex={0} onClick={goHome} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') goHome(); }}>
