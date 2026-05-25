@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Icon } from '@iconify/react';
 import { mealPlan as api, recipes as recipesApi, daySchedule as scheduleApi } from '../api';
 import { useMember } from '../contexts/MemberContext';
 import { useToast } from '../contexts/ToastContext';
@@ -6,6 +7,52 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { dateToStr, toEU, getCurrentWeek, getCurrentMonth, getCalGrid } from '../utils/dates';
 import { fuzzySearch } from '../utils/search';
+import './Export.css';
+
+function exportHelpItems(t) {
+  return [
+    { label: t('export_btn_summary'), desc: t('export_help_summary') },
+    { label: t('export_btn_macro'), desc: t('export_help_macro') },
+    { label: t('export_btn_calendar'), desc: t('export_help_calendar') },
+    { label: t('export_btn_schedule'), desc: t('export_help_schedule') },
+    { label: t('export_btn_schedule_template'), desc: t('export_help_schedule_template') },
+    { label: t('export_btn_ingredients'), desc: t('export_help_ingredients') },
+    { label: t('shopping_list_title'), desc: t('export_help_shopping') },
+    { label: t('week_preview'), desc: t('export_help_preview') },
+  ];
+}
+
+function ExportHelpModal({ open, onClose, t }) {
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return (
+    <div className="export-help-modal-backdrop" onClick={onClose}>
+      <div className="export-help-modal" onClick={e => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="export-help-title">
+        <div className="export-help-modal-header">
+          <h2 id="export-help-title" className="export-help-modal-title">{t('export_how_title')}</h2>
+          <button type="button" className="export-help-modal-close" onClick={onClose} aria-label={t('cancel')}>×</button>
+        </div>
+        <div className="export-help-modal-body dark-scroll">
+          <div className="export-help-grid">
+            {exportHelpItems(t).map(({ label, desc }) => (
+              <div key={label} className="export-help-item">
+                <span className="export-help-item-label">{label}</span>
+                <span className="export-help-item-desc">{desc}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 // ─── Drinks recalc from localStorage ─────────────────────────────────────────
 function calcDrinks(days, lang) {
@@ -717,6 +764,7 @@ export default function Export({ onGoToTab }) {
     win.document.write(html);
     win.document.close();
   };
+  const [exportHelpModalOpen, setExportHelpModalOpen] = useState(false);
   const [selectedMemberIds, setSelectedMemberIds] = useState(() => activeMember ? [activeMember.id] : []);
   useEffect(() => {
     if (activeMember) setSelectedMemberIds([activeMember.id]);
@@ -904,10 +952,22 @@ export default function Export({ onGoToTab }) {
     <div>
       <div className="card" style={{ padding:'16px 20px', marginBottom:12 }}>
         <div style={{ display:'flex', gap:20, alignItems:'flex-start' }}>
-        <div style={{ flexShrink:0 }}>
+        <div className="export-generate-col">
 
         {/* ── Generuj dokumenty ─────────────────────────── */}
-        <h2 style={{ marginBottom:12 }}>{t('export_generate_title')}</h2>
+        <div className="export-section-head">
+          <h2 className="card-section-title">{t('export_generate_title')}</h2>
+          <button
+            type="button"
+            className="pill-help-btn"
+            onClick={() => setExportHelpModalOpen(true)}
+            aria-label={t('export_how_title')}
+            title={t('export_how_title')}
+          >
+            <Icon icon="heroicons:light-bulb" width={15} />
+            <span>{t('import_help_btn')}</span>
+          </button>
+        </div>
 
         <div style={{ marginBottom:12 }}>
           <div style={LBL}>{t('export_period_label')}</div>
@@ -1031,7 +1091,7 @@ export default function Export({ onGoToTab }) {
         {/* ── Lista zakupów (obok przycisków) ──────────────  */}
         <div style={{ flexShrink:0, width:280 }}>
           <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:6 }}>
-            <h2 style={{ margin:0, fontSize:15 }}>{t('shopping_list_title')}</h2>
+            <h2 className="card-section-title" style={{ margin: 0 }}>{t('shopping_list_title')}</h2>
             {onGoToTab && (
               <button onClick={() => onGoToTab('calendar')}
                 style={{ background:'#0d948820', border:'1px solid #0d9488', borderRadius:6, color:'#2dd4bf', fontSize:11, fontWeight:600, padding:'3px 10px', cursor:'pointer', whiteSpace:'nowrap', flexShrink:0 }}>
@@ -1223,29 +1283,11 @@ export default function Export({ onGoToTab }) {
         </div>{/* end flex row */}
       </div>{/* end card */}
 
-      {/* ── Karta pomocy ── */}
-      <div className="card" style={{ marginTop: 12, background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: '14px 16px', fontSize: 13, lineHeight: 1.7 }}>
-        <div style={{ fontSize: 14, fontWeight: 700, color: '#0d9488', marginBottom: 12 }}>{t('export_how_title')}</div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-
-          {[
-            { label: t('export_btn_summary'), desc: t('export_help_summary') },
-            { label: t('export_btn_macro'), desc: t('export_help_macro') },
-            { label: t('export_btn_calendar'), desc: t('export_help_calendar') },
-            { label: t('export_btn_schedule'), desc: t('export_help_schedule') },
-            { label: t('export_btn_schedule_template'), desc: t('export_help_schedule_template') },
-            { label: t('export_btn_ingredients'), desc: t('export_help_ingredients') },
-            { label: t('shopping_list_title'), desc: t('export_help_shopping') },
-            { label: t('week_preview'), desc: t('export_help_preview') },
-          ].map(({ label, desc }) => (
-            <div key={label} style={{ background: '#111827', border: '1px solid #374151', borderRadius: 6, padding: '8px 12px', display: 'flex', flexDirection: 'column', gap: 4 }}>
-              <span style={{ display: 'inline-flex', alignItems: 'center', background: '#1e3a3a', color: '#2dd4bf', border: '1px solid #374151', borderRadius: 5, padding: '2px 8px', fontSize: 11, fontWeight: 700, alignSelf: 'flex-start' }}>{label}</span>
-              <span style={{ fontSize: 12, color: '#9ca3af' }}>{desc}</span>
-            </div>
-          ))}
-
-        </div>
-      </div>
+      <ExportHelpModal
+        open={exportHelpModalOpen}
+        onClose={() => setExportHelpModalOpen(false)}
+        t={t}
+      />
     </div>
   );
 }
