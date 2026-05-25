@@ -23,7 +23,7 @@ def test_google_login_stores_lang_cookie(client, monkeypatch):
 def test_google_callback_redirects_with_exchange_code(client, monkeypatch):
     from app.routes import auth as auth_mod
 
-    monkeypatch.setattr("app.seeds.seed_user", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr("app.user_seeds.seed_user", lambda *_args, **_kwargs: None)
     monkeypatch.setattr(
         auth_mod.oauth.google,
         "authorize_access_token",
@@ -53,7 +53,7 @@ def test_google_callback_existing_user_skips_seed(client, user, monkeypatch):
     def track_seed(*_args, **_kwargs):
         called["seed"] = True
 
-    monkeypatch.setattr("app.seeds.seed_user", track_seed)
+    monkeypatch.setattr("app.user_seeds.seed_user", track_seed)
     monkeypatch.setattr(
         auth_mod.oauth.google,
         "authorize_access_token",

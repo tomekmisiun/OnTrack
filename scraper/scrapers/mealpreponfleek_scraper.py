@@ -34,9 +34,13 @@ import urllib.request
 import urllib.error
 from pathlib import Path
 
-DATA_DIR    = Path(__file__).parent.parent / "data"
-OUTPUT_FILE = DATA_DIR / "mealpreponfleek_recipes.json"
-NAMES_FILE  = DATA_DIR / "mealpreponfleek_names.txt"
+SCRAPER_ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(SCRAPER_ROOT))
+from data_paths import MEALPREP_RECIPES, MEALPREP_NAMES  # noqa: E402
+
+DATA_DIR    = MEALPREP_RECIPES.parent
+OUTPUT_FILE = MEALPREP_RECIPES
+NAMES_FILE  = MEALPREP_NAMES
 
 CATEGORIES = [
     ("breakfast", "https://mealpreponfleek.com/meal-prep-recipes/breakfast-meal-prep/"),

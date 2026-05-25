@@ -25,7 +25,7 @@ import asyncio
 import argparse
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).parent.parent / "processing"))
+sys.path.insert(0, str(Path(__file__).parent.parent / "pipeline"))
 from food_categories import classify_product
 
 try:
@@ -34,9 +34,13 @@ except ImportError:
     print("Brak playwright. Zainstaluj: pip install playwright && playwright install chromium")
     sys.exit(1)
 
-DATA_DIR     = Path(__file__).parent.parent / "data"
-OUTPUT_FILE  = DATA_DIR / "aldi_products.json"
-NAMES_FILE   = DATA_DIR / "aldi_names.txt"
+SCRAPER_ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(SCRAPER_ROOT))
+from data_paths import ALI_NAMES, ALI_PRODUCTS, RAW  # noqa: E402
+
+DATA_DIR     = RAW
+OUTPUT_FILE  = ALI_PRODUCTS
+NAMES_FILE   = ALI_NAMES
 BASE_URL     = "https://www.aldi.co.uk"
 
 # Kategorie żywności: slug → (etykieta, URL z ID z sitemapa)

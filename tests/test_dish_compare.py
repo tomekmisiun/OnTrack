@@ -4,11 +4,11 @@ from pathlib import Path
 
 import pytest
 
-from app.dish_compare_data import build_built_payload, load_dish_compare, load_manifest, validate_manifest_consistency
+from app.dish_compare import build_built_payload, load_dish_compare, load_manifest, validate_manifest_consistency
 
 ROOT = Path(__file__).resolve().parents[1]
-BUILT_PL = ROOT / "app" / "data" / "dish_compare" / "built" / "pl.json"
-BUILT_EN = ROOT / "app" / "data" / "dish_compare" / "built" / "en.json"
+BUILT_PL = ROOT / "app" / "dish_compare" / "data" / "built" / "pl.json"
+BUILT_EN = ROOT / "app" / "dish_compare" / "data" / "built" / "en.json"
 
 
 def test_manifest_consistency():
@@ -27,18 +27,7 @@ def test_build_built_payload_pl():
     payload = build_built_payload("pl")
     assert payload["lang"] == "pl"
     assert len(payload["dishes"]) == 5
-    for dish in payload["dishes"]:
-        assert dish["diy_cost"] > 0
-        assert dish["ingredients"]
-        ing_total = round(sum(i["cost"] for i in dish["ingredients"]), 2)
-        assert dish["diy_cost"] == ing_total
-
-
-def test_build_built_payload_en_uses_catalog():
-    payload = build_built_payload("en")
-    assert payload["lang"] == "en"
-    assert len(payload["dishes"]) == 5
-    defaults = json.loads((ROOT / "app/data/dish_compare/defaults/en.json").read_text())
+    defaults = json.loads((ROOT / "app/dish_compare/data/defaults/pl.json").read_text())
     delivery = defaults["default_delivery_price"]
     for dish in payload["dishes"]:
         ddef = defaults["dishes"][dish["id"]]
@@ -48,7 +37,21 @@ def test_build_built_payload_en_uses_catalog():
         assert dish["diy_cost"] == ing_total
 
 
-@pytest.mark.skipif(not BUILT_PL.exists(), reason="built/pl.json missing — run build_compare_dishes.py")
+def test_build_built_payload_en_uses_catalog():
+    payload = build_built_payload("en")
+    assert payload["lang"] == "en"
+    assert len(payload["dishes"]) == 5
+    defaults = json.loads((ROOT / "app/dish_compare/data/defaults/en.json").read_text())
+    delivery = defaults["default_delivery_price"]
+    for dish in payload["dishes"]:
+        ddef = defaults["dishes"][dish["id"]]
+        order_total = ddef["avg_restaurant_price"] + delivery
+        assert dish["diy_cost"] < order_total
+        ing_total = round(sum(i["cost"] for i in dish["ingredients"]), 2)
+        assert dish["diy_cost"] == ing_total
+
+
+@pytest.mark.skipif(not BUILT_PL.exists(), reason="built/pl.json missing — run app/dish_compare/build.py")
 def test_load_dish_compare_merge_pl():
     data = load_dish_compare("pl")
     assert data["currency"] == "PLN"
@@ -57,7 +60,7 @@ def test_load_dish_compare_merge_pl():
     assert next(d for d in data["dishes"] if d["id"] == "spaghetti_bolognese")
 
 
-@pytest.mark.skipif(not BUILT_EN.exists(), reason="built/en.json missing — run build_compare_dishes.py")
+@pytest.mark.skipif(not BUILT_EN.exists(), reason="built/en.json missing — run app/dish_compare/build.py")
 def test_load_dish_compare_merge_en():
     data = load_dish_compare("en")
     assert data["currency"] == "GBP"

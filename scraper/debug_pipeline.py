@@ -21,8 +21,54 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).parent
-DATA = HERE / "data"
-APP_DATA = HERE.parent / "app" / "data"
+sys.path.insert(0, str(HERE))
+from data_paths import (  # noqa: E402
+    ALI_NORMALIZED,
+    ALI_PRODUCTS,
+    AUCHAN_PRODUCTS,
+    BIEDRONKA_PRODUCTS,
+    INGREDIENT_DB_EN,
+    INGREDIENT_DB_PL,
+    INGREDIENTS_MACROS,
+    MATCHES_EN,
+    MATCHES_PL,
+    RECIPES_EN,
+    RECIPES_NORMALIZED,
+    RECIPES_PL,
+    SHOPS_EN,
+    SHOPS_PL,
+    UNMATCHED_EN_RAW,
+    UNMATCHED_PL_RAW,
+    USER_SEEDS_DIR,
+)
+
+PIPELINE_FILES = {
+    "aldi_products.json": ALI_PRODUCTS,
+    "auchan_products.json": AUCHAN_PRODUCTS,
+    "biedronka_products.json": BIEDRONKA_PRODUCTS,
+    "recipes_normalized.json": RECIPES_NORMALIZED,
+    "aldi_normalized.json": ALI_NORMALIZED,
+    "shops_en.json": SHOPS_EN,
+    "shops_pl.json": SHOPS_PL,
+    "matches_en.json": MATCHES_EN,
+    "matches_pl.json": MATCHES_PL,
+    "unmatched_en.json": UNMATCHED_EN_RAW,
+    "unmatched_pl.json": UNMATCHED_PL_RAW,
+    "unmatched_en_raw.json": UNMATCHED_EN_RAW,
+    "unmatched_pl_raw.json": UNMATCHED_PL_RAW,
+    "ingredient_db_en.json": INGREDIENT_DB_EN,
+    "ingredient_db_pl.json": INGREDIENT_DB_PL,
+    "recipes_en.json": RECIPES_EN,
+    "recipes_pl.json": RECIPES_PL,
+    "ingredients_macros.json": INGREDIENTS_MACROS,
+}
+
+
+def pipeline_path(fname: str) -> Path:
+    return PIPELINE_FILES[fname]
+
+
+APP_DATA = USER_SEEDS_DIR
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -82,7 +128,7 @@ def debug_step0(name_filter: str = None):
                    data/biedronka_products.json
 """)
     for fname in ("aldi_products.json", "auchan_products.json", "biedronka_products.json"):
-        data = load(DATA / fname)
+        data = load(pipeline_path(fname))
         if data is None:
             continue
         print(f"  {fname}: {len(data)} produktów")
@@ -108,7 +154,7 @@ def debug_step1(name_filter: str = None):
   Plik wejściowy:  (przepisy z zewnętrznego źródła)
   Plik wyjściowy:  data/recipes_normalized.json
 """)
-    data = load(DATA / "recipes_normalized.json")
+    data = load(pipeline_path("recipes_normalized.json"))
     if data is None:
         return
     print(f"  Liczba przepisów: {len(data)}")
@@ -162,7 +208,7 @@ def debug_step2(name_filter: str = None):
                     data/aldi_normalized.json (tylko Aldi, surowo)
 """)
     for lang, fname in (("EN", "shops_en.json"), ("PL", "shops_pl.json")):
-        data = load(DATA / fname)
+        data = load(pipeline_path(fname))
         if data is None:
             continue
         print(f"\n  {fname}: {len(data)} produktów ({lang})")
@@ -178,7 +224,7 @@ def debug_step2(name_filter: str = None):
             show_sample(data, 3, ["original_name", "generic_name", "price_per_100"])
 
     # Aldi normalized
-    aldi = load(DATA / "aldi_normalized.json")
+    aldi = load(pipeline_path("aldi_normalized.json"))
     if aldi:
         print(f"\n  aldi_normalized.json: {len(aldi)} produktów")
         filtered_out = [x for x in aldi if x.get("filtered_reason")]
@@ -214,8 +260,8 @@ def debug_step3(name_filter: str = None):
         ("EN", "matches_en.json",   "unmatched_en.json"),
         ("PL", "matches_pl.json",   "unmatched_pl.json"),
     ):
-        matches   = load(DATA / mfile)
-        unmatched = load(DATA / ufile)
+        matches   = load(pipeline_path(mfile))
+        unmatched = load(pipeline_path(ufile))
         if matches is None:
             continue
 
@@ -283,8 +329,8 @@ def debug_step4(name_filter: str = None):
         ("EN", "ingredient_db_en.json", "recipes_en.json"),
         ("PL", "ingredient_db_pl.json", "recipes_pl.json"),
     ):
-        db   = load(DATA / dbfile)
-        recs = load(DATA / rfile)
+        db   = load(pipeline_path(dbfile))
+        recs = load(pipeline_path(rfile))
         if db is None:
             continue
 
@@ -329,7 +375,7 @@ def debug_step5(name_filter: str = None):
   Plik wejściowy:  data/ingredient_db_en.json (lista składników)
   Plik wyjściowy:  data/ingredients_macros.json
 """)
-    data = load(DATA / "ingredients_macros.json")
+    data = load(pipeline_path("ingredients_macros.json"))
     if data is None:
         return
     print(f"  Liczba składników z makro: {len(data)}")
@@ -361,8 +407,8 @@ def debug_step6(name_filter: str = None):
   Plik wyjściowy:  app/data/products_seed_en.json
                    app/data/recipes_seed_en.json
 """)
-    prods = load(APP_DATA / "products_seed_en.json")
-    recs  = load(APP_DATA / "recipes_seed_en.json")
+    prods = load(USER_SEEDS_DIR /  "products_seed_en.json")
+    recs  = load(USER_SEEDS_DIR /  "recipes_seed_en.json")
 
     if prods:
         no_price = [p for p in prods if not p.get("price")]
@@ -513,24 +559,24 @@ def debug_files_summary():
     section("PODSUMOWANIE — stan wszystkich plików pipeline'u")
     files = [
         # (krok, opis, ścieżka)
-        (0, "aldi_products.json",        DATA / "aldi_products.json"),
-        (0, "auchan_products.json",       DATA / "auchan_products.json"),
-        (0, "biedronka_products.json",    DATA / "biedronka_products.json"),
-        (1, "recipes_normalized.json",    DATA / "recipes_normalized.json"),
-        (2, "aldi_normalized.json",       DATA / "aldi_normalized.json"),
-        (2, "shops_en.json",              DATA / "shops_en.json"),
-        (2, "shops_pl.json",              DATA / "shops_pl.json"),
-        (3, "matches_en.json",            DATA / "matches_en.json"),
-        (3, "matches_pl.json",            DATA / "matches_pl.json"),
-        (3, "unmatched_en.json",          DATA / "unmatched_en.json"),
-        (3, "unmatched_pl.json",          DATA / "unmatched_pl.json"),
-        (4, "ingredient_db_en.json",      DATA / "ingredient_db_en.json"),
-        (4, "ingredient_db_pl.json",      DATA / "ingredient_db_pl.json"),
-        (4, "recipes_en.json",            DATA / "recipes_en.json"),
-        (4, "recipes_pl.json",            DATA / "recipes_pl.json"),
-        (5, "ingredients_macros.json",    DATA / "ingredients_macros.json"),
-        (6, "products_seed_en.json",      APP_DATA / "products_seed_en.json"),
-        (6, "recipes_seed_en.json",       APP_DATA / "recipes_seed_en.json"),
+        (0, "aldi_products.json",        pipeline_path("aldi_products.json")),
+        (0, "auchan_products.json",       pipeline_path("auchan_products.json")),
+        (0, "biedronka_products.json",    pipeline_path("biedronka_products.json")),
+        (1, "recipes_normalized.json",    pipeline_path("recipes_normalized.json")),
+        (2, "aldi_normalized.json",       pipeline_path("aldi_normalized.json")),
+        (2, "shops_en.json",              pipeline_path("shops_en.json")),
+        (2, "shops_pl.json",              pipeline_path("shops_pl.json")),
+        (3, "matches_en.json",            pipeline_path("matches_en.json")),
+        (3, "matches_pl.json",            pipeline_path("matches_pl.json")),
+        (3, "unmatched_en.json",          pipeline_path("unmatched_en.json")),
+        (3, "unmatched_pl.json",          pipeline_path("unmatched_pl.json")),
+        (4, "ingredient_db_en.json",      pipeline_path("ingredient_db_en.json")),
+        (4, "ingredient_db_pl.json",      pipeline_path("ingredient_db_pl.json")),
+        (4, "recipes_en.json",            pipeline_path("recipes_en.json")),
+        (4, "recipes_pl.json",            pipeline_path("recipes_pl.json")),
+        (5, "ingredients_macros.json",    pipeline_path("ingredients_macros.json")),
+        (6, "products_seed_en.json",      USER_SEEDS_DIR /  "products_seed_en.json"),
+        (6, "recipes_seed_en.json",       USER_SEEDS_DIR /  "recipes_seed_en.json"),
     ]
     print(f"\n  {'Krok':<5} {'Plik':<35} {'Rekordów':>10}  Status")
     print(f"  {'-'*65}")

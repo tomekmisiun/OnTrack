@@ -5,7 +5,8 @@ import pytest
 
 _SCRAPER = Path(__file__).resolve().parents[1] / "scraper"
 sys.path.insert(0, str(_SCRAPER))
-from processing.import_to_db import canonical_ingredient_name  # noqa: E402
+sys.path.insert(0, str(_SCRAPER / "pipeline"))
+from import_to_db import canonical_ingredient_name  # noqa: E402
 
 from app import db
 from app.models.product import Product

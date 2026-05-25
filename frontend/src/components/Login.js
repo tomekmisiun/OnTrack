@@ -4,7 +4,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import PrivacyPolicy from './PrivacyPolicy';
 import AppFooter from './AppFooter';
-import DishCompare from './DishCompare';
+import DishCompare from '../features/dishCompare/DishCompare';
 import { SEED_STATS } from '../data/seedStats';
 import './Login.css';
 

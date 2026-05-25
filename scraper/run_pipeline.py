@@ -8,7 +8,7 @@ Steps:
   3  match_ingredients   — rapidfuzz + DeepSeek for ambiguous matches
   4  build_database      — build ingredient_db, unmatched lists, recipes with cost
   5  get_macros          — fetch macronutrients via DeepSeek
-  6  dump_seeds          — generate products_seed_en.json + recipes_seed_en.json in app/data/
+  6  dump_seeds          — generate seed JSON in app/user_seeds/data/
 
 Usage:
     python run_pipeline.py               # all steps
@@ -35,7 +35,7 @@ if _env_file.exists():
 
 HERE   = Path(__file__).parent
 PYTHON = HERE / ".venv" / "bin" / "python3"
-PROC   = HERE / "processing"
+PROC   = HERE / "pipeline"
 LOG_FILE = HERE / "pipeline.log"
 
 STEPS = [
@@ -128,33 +128,44 @@ def main():
     log.info(f"Pipeline completed — total time: {total}s")
     log.info(f"{'='*60}")
 
-    # Summary of output files
-    DATA = HERE / "data"
+    sys.path.insert(0, str(HERE))
+    import json
+    from data_paths import (  # noqa: E402
+        INGREDIENT_DB_EN,
+        INGREDIENT_DB_PL,
+        INGREDIENTS_MACROS,
+        MATCHES_EN,
+        MATCHES_PL,
+        RECIPES_EN,
+        RECIPES_NORMALIZED,
+        RECIPES_PL,
+        SHOPS_EN,
+        SHOPS_PL,
+        USER_SEEDS_DIR,
+    )
     result_files = [
-        "recipes_normalized.json",
-        "shops_en.json", "shops_pl.json",
-        "matches_en.json", "matches_pl.json",
-        "ingredient_db_en.json", "ingredient_db_pl.json",
-        "recipes_en.json", "recipes_pl.json",
-        "ingredients_macros.json",
+        RECIPES_NORMALIZED,
+        SHOPS_EN, SHOPS_PL,
+        MATCHES_EN, MATCHES_PL,
+        INGREDIENT_DB_EN, INGREDIENT_DB_PL,
+        RECIPES_EN, RECIPES_PL,
+        INGREDIENTS_MACROS,
     ]
     seed_files = [
-        Path(__file__).parent.parent / "app" / "data" / "products_seed_en.json",
-        Path(__file__).parent.parent / "app" / "data" / "recipes_seed_en.json",
+        USER_SEEDS_DIR / "products_seed_en.json",
+        USER_SEEDS_DIR / "recipes_seed_en.json",
     ]
     log.info("\nOutput files:")
-    import json
-    for fname in result_files:
-        p = DATA / fname
+    for p in result_files:
         if p.exists():
             try:
                 count = len(json.loads(p.read_text("utf-8")))
-                log.info(f"  ✓  {fname:<35} {count:>5} records")
+                log.info(f"  ✓  {str(p.relative_to(HERE.parent)):<45} {count:>5} records")
             except Exception:
-                log.info(f"  ✓  {fname}")
+                log.info(f"  ✓  {p.relative_to(HERE.parent)}")
         else:
-            log.info(f"  -  {fname:<35} missing")
-    log.info("\nSeed files (app/data/):")
+            log.info(f"  -  {str(p.relative_to(HERE.parent)):<45} missing")
+    log.info("\nSeed files (app/user_seeds/data/):")
     for p in seed_files:
         if p.exists():
             try:

@@ -11,7 +11,9 @@ from pathlib import Path
 from rapidfuzz import fuzz
 
 _PL_CHARS = re.compile(r"[ąćęłńóśźż]", re.I)
-_MACROS_PATH = Path(__file__).resolve().parent.parent / "scraper" / "data" / "ingredients_macros.json"
+from app.paths import SCRAPER_DATA
+
+_MACROS_PATH = SCRAPER_DATA / "macros" / "ingredients_macros.json"
 
 
 def _norm(name: str) -> str:

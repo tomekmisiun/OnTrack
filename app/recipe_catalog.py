@@ -6,9 +6,10 @@ import json
 from functools import lru_cache
 from pathlib import Path
 
-ROOT = Path(__file__).parent.parent
-RECIPES_PL = ROOT / "scraper" / "data" / "recipes_pl.json"
-SEED_PL = ROOT / "app" / "data" / "recipes_seed_pl.json"
+from app.paths import SCRAPER_DATA, USER_SEEDS_DIR
+
+RECIPES_PL = SCRAPER_DATA / "built" / "recipes_pl.json"
+SEED_PL = USER_SEEDS_DIR / "recipes_seed_pl.json"
 
 
 @lru_cache(maxsize=1)
