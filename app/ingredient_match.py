@@ -1,5 +1,6 @@
 """Strict ingredient ↔ product name matching (recipe import). Prefer no match over false positives."""
 
+import re
 import unicodedata
 
 
@@ -68,7 +69,6 @@ def _levenshtein(a: str, b: str) -> int:
 
 
 def _ing_words(text: str) -> list[str]:
-    import re
     words = re.split(r'[\s,.()"\'\[\]-]+', _norm(text))
     return [
         w for w in words
@@ -98,7 +98,6 @@ def ingredient_matches_product(ingredient_text: str, product_name: str) -> bool:
     if not prod_words:
         return False
 
-    # Pierwsze znaczące słowo składnika (rzeczownik), nie przymiotnik z końca
     primary = words[0]
     prod_norm = _norm(product_name)
 

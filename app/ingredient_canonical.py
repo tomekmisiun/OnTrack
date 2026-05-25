@@ -2,7 +2,7 @@
 
 import re
 
-from app.utils.ingredient_match import _ing_words, _norm
+from app.ingredient_match import _ing_words, _norm
 
 
 _TYPO_FIX = {

@@ -6,8 +6,8 @@ from app.models.meal_plan import MealPlan
 from app.models.product import Product
 from app.models.recipe_parse_log import RecipeParseLog
 from app.utils import current_uid, current_user_lang
-from app.utils.ingredient_match import ingredient_matches_product
-from app.utils.ingredient_canonical import canonicalize_ingredient
+from app.ingredient_match import ingredient_matches_product
+from app.ingredient_canonical import canonicalize_ingredient
 import json, re, os, time
 
 recipes_bp = Blueprint('recipes', __name__)
