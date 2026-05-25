@@ -321,7 +321,7 @@ export default function MacroCalculator() {
 
         {/* Karta 1: Twoje dane */}
         <div className="card" style={{ padding: 14 }}>
-          <h2 style={{ margin: '0 0 12px', fontSize: 15, color: '#f1f5f9' }}>{t('macro_your_data')}</h2>
+          <h2 className="card-section-title" style={{ marginBottom: 12 }}>{t('macro_your_data')}</h2>
 
           <div style={row}>
             <span style={labelSt}>{t('macro_gender')}</span>
@@ -388,7 +388,7 @@ export default function MacroCalculator() {
 
         {/* Karta 2: Cel dzienny makro */}
         <div className="card" style={{ padding: 14, display:'flex', flexDirection:'column' }}>
-          <h2 style={{ margin:'0 0 10px', fontSize:15, color:'#f1f5f9' }}>{t('macro_daily_goal')}</h2>
+          <h2 className="card-section-title" style={{ marginBottom: 10 }}>{t('macro_daily_goal')}</h2>
           {macros ? (
             <>
               <div style={{ fontSize:28, fontWeight:800, color:'#2dd4bf', marginBottom:4 }}>
@@ -446,7 +446,7 @@ export default function MacroCalculator() {
 
         {/* Karta 3: BMI */}
         <div className="card" style={{ padding: 14, display:'flex', flexDirection:'column', gap:10 }}>
-          <h2 style={{ margin:0, fontSize:15, color:'#f1f5f9' }}>BMI</h2>
+          <h2 className="card-section-title">BMI</h2>
           {bmiVal ? (
             <>
               <div style={{ display:'flex', alignItems:'center', gap:10 }}>

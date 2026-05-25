@@ -67,7 +67,9 @@ function PeriodContent({ range, summary, loading, scrollToWeek, onGoToTab, drink
           <button onClick={() => setProductsOpen(o => !o)}
             style={{ width:'100%', padding:'10px 20px', background:'none', border:'none', cursor:'pointer', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
             <div style={{ textAlign:'left' }}>
-              <div style={{ fontSize:11, fontWeight:700, color:'#6b7280', textTransform:'uppercase', letterSpacing:'0.6px', marginBottom:2 }}>{t('food_expenses_label')}</div>
+              <div style={{ marginBottom: 2 }}>
+                <span className="card-section-title">{t('food_expenses_label')}</span>
+              </div>
               <div style={{ fontSize:13, fontWeight:600, color:'#0d9488' }}>{productsOpen ? t('hide_product_list') : t('show_product_list')}</div>
             </div>
             <Icon icon="heroicons:chevron-down" style={{width:20,height:20,transition:'transform 0.25s',transform:productsOpen?'rotate(180deg)':'rotate(0deg)',color:'#0d9488'}}/>
@@ -230,7 +232,9 @@ function Summary({ onGoToTab }) {
                   <button onClick={() => setProductsOpenCustom(o => !o)}
                     style={{ width:'100%', padding:'10px 20px', background:'none', border:'none', cursor:'pointer', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
                     <div style={{ textAlign:'left' }}>
-                      <div style={{ fontSize:11, fontWeight:700, color:'#6b7280', textTransform:'uppercase', letterSpacing:'0.6px', marginBottom:2 }}>{t('food_expenses_label')}</div>
+                      <div style={{ marginBottom: 2 }}>
+                <span className="card-section-title">{t('food_expenses_label')}</span>
+              </div>
                       <div style={{ fontSize:13, fontWeight:600, color:'#0d9488' }}>{productsOpenCustom ? t('hide_product_list') : t('show_product_list')}</div>
                     </div>
                     <Icon icon="heroicons:chevron-down" style={{width:20,height:20,transition:'transform 0.25s',transform:productsOpenCustom?'rotate(180deg)':'rotate(0deg)',color:'#0d9488'}}/>
@@ -341,7 +345,7 @@ function Summary({ onGoToTab }) {
       {/* ─── Templates summary ─── */}
       <div className="card" style={{ padding:0, overflow:'hidden', marginBottom:16 }}>
         <div style={{ padding:'16px 20px' }}>
-          <h2 style={{ margin:0, fontSize:17, color:'#f1f5f9', fontWeight:600 }}>{t('week_templates_sum')}</h2>
+          <h2 className="card-section-title">{t('week_templates_sum')}</h2>
           <div style={{ display:'flex', gap:8, marginTop:6 }}>
             <button
               onClick={() => { onGoToTab?.('calendar'); setTimeout(() => window.dispatchEvent(new Event('open-template')), 250); }}

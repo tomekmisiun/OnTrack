@@ -361,11 +361,12 @@ html.app-desktop-scale .app--home {
 .card::after {
   content: '';
   position: absolute;
-  top: -35%;
-  right: -15%;
-  width: 50%;
-  height: 75%;
-  background: radial-gradient(circle, rgba(13, 148, 136, 0.09) 0%, transparent 68%);
+  inset: 0;
+  background: radial-gradient(
+    ellipse 75% 85% at 100% 0%,
+    rgba(13, 148, 136, 0.07) 0%,
+    transparent 58%
+  );
   pointer-events: none;
 }
 
@@ -386,23 +387,132 @@ html.app-desktop-scale .app--home {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 700;
   margin-bottom: 18px;
   padding-bottom: 14px;
   color: #f8fafc;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   border-bottom: 1px solid rgba(55, 65, 81, 0.4);
 }
 
 .card h2::before {
   content: '';
   width: 3px;
-  height: 15px;
+  height: 18px;
   border-radius: 2px;
   background: linear-gradient(180deg, #5eead4 0%, #0d9488 100%);
   flex-shrink: 0;
   box-shadow: 0 0 10px rgba(45, 212, 191, 0.3);
+}
+
+/* Nagłówek sekcji (lista, karuzela) — ten sam styl co .card h2, bez border-bottom */
+.card-section-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  color: #f8fafc;
+  letter-spacing: -0.02em;
+}
+
+.card-section-title::before {
+  content: '';
+  width: 3px;
+  height: 18px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #5eead4 0%, #0d9488 100%);
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(45, 212, 191, 0.3);
+}
+
+/* h2.card-section-title — bez domyślnej kreski .card h2 */
+.card h2.card-section-title {
+  margin: 0;
+  padding: 0;
+  border-bottom: none;
+}
+
+/* Przycisk Pomoc — wspólny pill (Produkty, Przepisy, Eksport) */
+.pill-help-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+  min-height: 30px;
+  height: auto;
+  padding: 6px 14px 6px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(45, 212, 191, 0.55);
+  background: linear-gradient(
+    145deg,
+    rgba(13, 148, 136, 0.24) 0%,
+    rgba(17, 24, 39, 0.95) 100%
+  );
+  color: #5eead4;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  box-shadow:
+    0 0 0 1px rgba(13, 148, 136, 0.14),
+    0 2px 12px rgba(13, 148, 136, 0.2);
+  transition: color 0.15s, border-color 0.15s, background 0.15s, box-shadow 0.15s, transform 0.12s;
+}
+
+.pill-help-btn svg {
+  color: #fbbf24;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.5));
+  transition: color 0.15s, filter 0.15s;
+}
+
+.pill-help-btn:hover {
+  color: #ccfbf1;
+  border-color: rgba(94, 234, 212, 0.8);
+  background: linear-gradient(
+    145deg,
+    rgba(13, 148, 136, 0.38) 0%,
+    rgba(17, 24, 39, 0.92) 100%
+  );
+  box-shadow:
+    0 0 0 3px rgba(13, 148, 136, 0.22),
+    0 4px 18px rgba(13, 148, 136, 0.32);
+}
+
+.pill-help-btn:hover svg {
+  color: #fde047;
+  filter: drop-shadow(0 0 6px rgba(253, 224, 71, 0.6));
+}
+
+.pill-help-btn:active {
+  transform: scale(0.97);
+}
+
+.pill-help-btn:focus-visible {
+  outline: 2px solid #2dd4bf;
+  outline-offset: 2px;
+}
+
+.products-import-title-row .pill-help-btn,
+.export-section-head .pill-help-btn {
+  margin-left: auto;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 11px;
+}
+
+.list-section-toggle {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 14px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
 }
 
 .card h3 {
@@ -535,13 +645,18 @@ tr:hover td {
   cursor: grabbing;
 }
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button,
 input.no-spin::-webkit-outer-spin-button,
 input.no-spin::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+input[type="number"],
 input.no-spin {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 /* Compact table inputs */
