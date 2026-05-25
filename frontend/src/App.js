@@ -77,8 +77,11 @@ function AppInner({ onStartTour }) {
 
   if (!user) return <Login />;
 
+  const isHome = activeTab === 'home';
+
   return (
-    <div className="app">
+    <div className={`app${isHome ? ' app--home' : ''}`}>
+      {!isHome && (
       <aside className="app-sidebar">
         <div className="sidebar-logo sidebar-logo--clickable" role="button" tabIndex={0} onClick={goHome} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') goHome(); }}>
           <svg className="sidebar-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -125,8 +128,9 @@ function AppInner({ onStartTour }) {
           </button>
         </div>
       </aside>
+      )}
 
-      <main className="app-main">
+      <main className={`app-main${isHome ? ' app-main--home' : ''}`}>
         {activeTab === 'home'      && (
           <Welcome
             onGoToTab={goToTab}
@@ -170,8 +174,15 @@ function TourHost() {
 
   useEffect(() => {
     if (loading || !user?.id || isTourDone(user.id)) return undefined;
-    const timer = setTimeout(() => setTourRun(true), 600);
-    return () => clearTimeout(timer);
+    let tourTimer;
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new CustomEvent('tour-goto-tab', { detail: { tab: 'macro' } }));
+      tourTimer = setTimeout(() => setTourRun(true), 250);
+    }, 600);
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(tourTimer);
+    };
   }, [user?.id, loading]);
 
   const handleTourEvent = useCallback((data) => {

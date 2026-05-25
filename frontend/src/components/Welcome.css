@@ -1,10 +1,53 @@
+.app-main--home {
+  max-width: none;
+}
+
+.app--home .app-main {
+  width: 100%;
+}
+
 .welcome {
-  max-width: 880px;
+  max-width: 920px;
   margin: 0 auto;
   padding: 48px 32px 40px;
   min-height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.welcome-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.welcome-brand-icon {
+  width: 40px;
+  height: 40px;
+  color: #2dd4bf;
+  flex-shrink: 0;
+}
+
+.welcome-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.welcome-brand-name {
+  font-size: 22px;
+  font-weight: 800;
+  color: #2dd4bf;
+  letter-spacing: 3px;
+  line-height: 1;
+}
+
+.welcome-brand-sub {
+  font-size: 9px;
+  font-weight: 600;
+  color: #6b7280;
+  letter-spacing: 3px;
 }
 
 .welcome-header {

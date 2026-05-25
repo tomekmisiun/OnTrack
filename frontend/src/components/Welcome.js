@@ -31,6 +31,17 @@ export default function Welcome({ onGoToTab, onAccount, onLogout }) {
 
   return (
     <div className="welcome">
+      <div className="welcome-brand">
+        <svg className="welcome-brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9.5"/>
+          <path d="M8.5 15.5 L11.8 11.8 L15.5 8.5 L12.2 12.2 Z" fill="currentColor" stroke="none"/>
+        </svg>
+        <div className="welcome-brand-text">
+          <span className="welcome-brand-name">ONTRACK</span>
+          <span className="welcome-brand-sub">BE IN CONTROL</span>
+        </div>
+      </div>
+
       <header className="welcome-header">
         <h1 className="welcome-title">
           {t('welcome_greeting')}{displayName ? (
