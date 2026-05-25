@@ -534,7 +534,8 @@ html.app-desktop-scale .app--home {
 }
 
 .products-import-title-row .pill-help-btn,
-.export-section-head .pill-help-btn {
+.export-section-head .pill-help-btn,
+.macro-daily-goal-head .pill-help-btn {
   margin-left: auto;
   text-transform: uppercase;
   letter-spacing: 0.04em;

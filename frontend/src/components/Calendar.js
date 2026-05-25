@@ -964,6 +964,95 @@ function CarouselList({ recipes, search, categoryFilter, visible, setVisible, sc
   );
 }
 
+function calendarHelpSections(t) {
+  return [
+    {
+      title: t('ht_meals_title'),
+      items: [t('ht_meals_1'), t('ht_meals_2'), t('ht_meals_3')],
+    },
+    {
+      title: t('ht_copy_title'),
+      items: [t('ht_copy_1'), t('ht_copy_2'), t('ht_copy_3'), t('ht_copy_4')],
+    },
+    {
+      title: t('ht_tpl_title'),
+      items: [t('ht_tpl_1'), t('ht_tpl_2'), t('ht_tpl_3'), t('ht_tpl_4')],
+    },
+    {
+      title: t('ht_macro_title'),
+      items: [t('ht_macro_1'), t('ht_macro_2')],
+      macroLegend: t('ht_macro_3'),
+    },
+  ];
+}
+
+function CalendarHelpModal({ open, onClose, t }) {
+  useEffect(() => {
+    if (!open) return undefined;
+    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  const sections = calendarHelpSections(t);
+
+  return (
+    <div className="calendar-help-modal-backdrop" onClick={onClose}>
+      <div
+        className="calendar-help-modal"
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="calendar-help-title"
+      >
+        <div className="calendar-help-modal-header">
+          <h2 id="calendar-help-title" className="calendar-help-modal-title">{t('how_to_title')}</h2>
+          <button type="button" className="calendar-help-modal-close" onClick={onClose} aria-label={t('cancel')}>×</button>
+        </div>
+        <div className="calendar-help-modal-body dark-scroll">
+          <div className="calendar-help-grid">
+            {sections.slice(0, 3).map(({ title, items }) => (
+              <section key={title} className="calendar-help-section">
+                <h3 className="calendar-help-section-title">{title.trim()}</h3>
+                <ul className="calendar-help-list">
+                  {items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
+          {sections.slice(3).map(({ title, items, macroLegend }) => (
+            <section key={title} className="calendar-help-section calendar-help-section--wide">
+              <h3 className="calendar-help-section-title">{title.trim()}</h3>
+              <ul className="calendar-help-list">
+                {items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+                {macroLegend && (
+                  <li>
+                    {macroLegend.split('·').map((part, i, arr) => {
+                      const colors = ['#22c55e', '#eab308', '#ef4444'];
+                      return (
+                        <span key={part}>
+                          <span style={{ color: colors[i], fontWeight: 600 }}>{part.trim()}</span>
+                          {i < arr.length - 1 && <span style={{ color: '#6b7280' }}> · </span>}
+                        </span>
+                      );
+                    })}
+                  </li>
+                )}
+              </ul>
+            </section>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Calendar({ onGoToTab, scrollToToday, onScrolledToToday }) {
   const { t } = useLanguage();
   const { user } = useAuth();
@@ -980,7 +1069,7 @@ export default function Calendar({ onGoToTab, scrollToToday, onScrolledToToday }
   const [copiedDay,setCopiedDay]     = useState(null);
   const [copiedWeek,setCopiedWeek]   = useState(null);
   const [toast,setToast]             = useState(null);
-  const [howToOpen,setHowToOpen]     = useState(false);
+  const [calendarHelpOpen, setCalendarHelpOpen] = useState(false);
   const [carouselOpen,setCarouselOpen] = useState(true);
   const [recipeSearch, setRecipeSearch] = useState('');
   const [carouselCatFilter, setCarouselCatFilter] = useState(null);
@@ -1546,7 +1635,26 @@ export default function Calendar({ onGoToTab, scrollToToday, onScrolledToToday }
             </div>
           );
         })}
+
+        <div className="calendar-help-footer">
+          <button
+            type="button"
+            className="pill-help-btn"
+            onClick={() => setCalendarHelpOpen(true)}
+            aria-label={t('how_to_title')}
+            title={t('how_to_title')}
+          >
+            <Icon icon="heroicons:light-bulb" width={15} />
+            <span>{t('import_help_btn')}</span>
+          </button>
+        </div>
       </div>
+
+      <CalendarHelpModal
+        open={calendarHelpOpen}
+        onClose={() => setCalendarHelpOpen(false)}
+        t={t}
+      />
 
       <div id="template-section" />
       <TemplateSection
@@ -1561,65 +1669,6 @@ export default function Calendar({ onGoToTab, scrollToToday, onScrolledToToday }
         macroGoals={macroGoals}
         recipes={recipes}
       />
-
-      {/* How to use — collapsible, na dole */}
-      <div style={{background:'#1c3534',border:'1px solid #374151',borderRadius:8,marginBottom:16,overflow:'hidden'}}>
-        <button onClick={()=>setHowToOpen(o=>!o)}
-          style={{width:'100%',padding:'12px 18px',background:'none',border:'none',cursor:'pointer',display:'flex',justifyContent:'space-between',alignItems:'center',fontSize:14,fontWeight:700,color:'#0d9488'}}>
-          <span>{t('how_to_title')}</span>
-          <Icon icon="heroicons:chevron-down" style={{width:20,height:20,transition:'transform 0.25s',transform:howToOpen?'rotate(180deg)':'rotate(0deg)',color:'#0d9488'}}/>
-        </button>
-        {howToOpen && (
-          <div style={{padding:'0 18px 16px',fontSize:12,lineHeight:1.8,borderTop:'1px solid #374151'}}>
-            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:20,marginTop:14}}>
-              <div>
-                <div style={{fontWeight:700,color:'#0d9488',marginBottom:6}}>{t('ht_meals_title')}</div>
-                <ul style={{margin:0,paddingLeft:16,color:'#9ca3af'}}>
-                  <li>{t('ht_meals_1')}</li>
-                  <li>{t('ht_meals_2')}</li>
-                  <li>{t('ht_meals_3')}</li>
-                </ul>
-              </div>
-              <div>
-                <div style={{fontWeight:700,color:'#0d9488',marginBottom:6}}>{t('ht_copy_title')}</div>
-                <ul style={{margin:0,paddingLeft:16,color:'#9ca3af'}}>
-                  <li>{t('ht_copy_1')}</li>
-                  <li>{t('ht_copy_2')}</li>
-                  <li>{t('ht_copy_3')}</li>
-                  <li>{t('ht_copy_4')}</li>
-                </ul>
-              </div>
-              <div>
-                <div style={{fontWeight:700,color:'#0d9488',marginBottom:6}}>{t('ht_tpl_title')}</div>
-                <ul style={{margin:0,paddingLeft:16,color:'#9ca3af'}}>
-                  <li>{t('ht_tpl_1')}</li>
-                  <li>{t('ht_tpl_2')}</li>
-                  <li>{t('ht_tpl_3')}</li>
-                  <li>{t('ht_tpl_4')}</li>
-                </ul>
-              </div>
-            </div>
-            <div style={{marginTop:14,paddingTop:12,borderTop:'1px solid #374151'}}>
-              <div style={{fontWeight:700,color:'#0d9488',marginBottom:6}}>{t('ht_macro_title')}</div>
-              <ul style={{margin:0,paddingLeft:16,color:'#9ca3af'}}>
-                <li>{t('ht_macro_1')}</li>
-                <li>{t('ht_macro_2')}</li>
-                <li>
-                  {t('ht_macro_3').split('·').map((part, i, arr) => {
-                    const colors = ['#22c55e','#eab308','#ef4444'];
-                    return (
-                      <span key={i}>
-                        <span style={{color: colors[i], fontWeight:600}}>{part.trim()}</span>
-                        {i < arr.length - 1 && <span style={{color:'#6b7280'}}> · </span>}
-                      </span>
-                    );
-                  })}
-                </li>
-              </ul>
-            </div>
-          </div>
-        )}
-      </div>
 
       <DragOverlay dropAnimation={null}>
         {activeDrag && <OverlayContent dragData={activeDrag}/>}
