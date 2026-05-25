@@ -4,7 +4,8 @@ import { recipes as api, products as productsApi } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../contexts/ToastContext';
-import { fuzzySearch } from '../utils/search';
+import { fuzzySearch, ingredientMatchesProduct, pickBestMatchingProduct } from '../utils/search';
+import { canonicalizeIngredient, canonicalDiffersFromRaw } from '../utils/ingredientCanonical';
 import { fetchProductMacros } from '../utils/macroLookup';
 import axios from 'axios';
 
@@ -102,8 +103,13 @@ function parseWeight(text) {
   }
   const pieceM = PIECE_WORDS.exec(text);
   if (pieceM) {
-    const numM = /(\d+)/.exec(text.slice(0, pieceM.index));
-    return { weight: numM ? parseInt(numM[1]) : 1, unit: 'szt', matchIndex: pieceM.index, matchEnd: pieceM.index + pieceM[0].length, forcedName: pieceM[0].toLowerCase() };
+    const before = text.slice(0, pieceM.index);
+    const numBefore = /(\d+)\s*$/.exec(before.trim());
+    const after = text.slice(pieceM.index + pieceM[0].length);
+    const numAfter = /^\s*(\d+)\s*(szt\w*)?/i.exec(after);
+    const count = numBefore ? parseInt(numBefore[1], 10)
+      : numAfter ? parseInt(numAfter[1], 10) : 1;
+    return { weight: count, unit: 'szt', matchIndex: pieceM.index, matchEnd: pieceM.index + pieceM[0].length, forcedName: pieceM[0].toLowerCase() };
   }
   const bareM = /^(\d+)\s+/.exec(text);
   if (bareM) return { weight: parseInt(bareM[1]), unit: 'szt', matchIndex: 0, matchEnd: bareM[0].length, forcedName: null };
@@ -153,32 +159,28 @@ function parseRecipeText(text) {
   return { name, ingredients };
 }
 
-function norm(s) {
-  return s.toLowerCase().replace(/ą/g,'a').replace(/ę/g,'e').replace(/ó/g,'o').replace(/ś/g,'s').replace(/ź/g,'z').replace(/ż/g,'z').replace(/ć/g,'c').replace(/ł/g,'l').replace(/ń/g,'n');
-}
-const STOP_WORDS = new Set(['oraz','lub','albo','duze','male','duzy','maly','okolo','bardzo','swieze','ugotowane','posiekane','uniwersalnej','naturalna','naturalny','pelne','optional','chopped','diced','minced','grated','skinless','fresh']);
-
-function wordsSimilar(a, b) {
-  if (a === b || a.includes(b) || b.includes(a)) return true;
-  const minLen = Math.min(a.length, b.length);
-  if (minLen < 3) return false;
-  let p = 0; while (p < minLen && a[p] === b[p]) p++;
-  return p >= Math.max(3, Math.ceil(minLen * 0.6));
-}
-
 function matchProducts(ingredients, products) {
-  return ingredients.map(ing => {
-    const words = norm(ing.rawName).split(/[\s,.()-]+/).filter(w => w.length >= 3 && !/^\d/.test(w) && !STOP_WORDS.has(w));
-    if (!words.length) return { ...ing, product_id: null };
-    let bestMatch = null, bestScore = 0;
-    for (const p of products) {
-      const prodWords = norm(p.name).split(/\s+/).filter(w => w.length >= 2);
-      let score = 0;
-      for (const iw of words) for (const pw of prodWords) if (wordsSimilar(iw, pw)) score += Math.min(iw.length, pw.length);
-      if (score > bestScore) { bestScore = score; bestMatch = p; }
-    }
-    return { ...ing, product_id: bestScore >= 3 ? bestMatch.id : null };
-  });
+  return ingredients.map(ing => enrichIngredient(ing, products));
+}
+
+function enrichIngredient(ing, products) {
+  const canonicalName = ing.canonicalName || canonicalizeIngredient(ing.rawName);
+  const match = pickBestMatchingProduct(canonicalName, products);
+  const product_id = ing.product_id
+    ? resolveProductId(canonicalName, ing.product_id, products)
+    : (match?.id ?? null);
+  return {
+    ...ing,
+    canonicalName,
+    unit: ing.unit || 'g',
+    product_id: product_id ?? null,
+  };
+}
+
+function resolveProductId(canonicalName, productId, products) {
+  if (!productId) return null;
+  const product = products.find(p => p.id === productId);
+  return product && ingredientMatchesProduct(canonicalName, product.name) ? productId : null;
 }
 
 // ─── Categories ──────────────────────────────────────────────────────────────
@@ -334,7 +336,18 @@ export default function Recipes() {
       const token = localStorage.getItem('token');
       const res = await axios.post(`${API_URL}/api/recipes/parse-text`, { text: pasteText }, { headers: { Authorization: `Bearer ${token}` } });
       setRemaining(res.data.remaining_today);
-      setParsed({ name: res.data.recipe_name, category: res.data.category || null, servings: '', ingredients: res.data.ingredients.map(i => ({ rawName: i.ingredient_text, weight: i.weight, unit: i.unit, product_id: i.product_id })) });
+      setParsed({
+        name: res.data.recipe_name,
+        category: res.data.category || null,
+        servings: '',
+        ingredients: res.data.ingredients.map(i => enrichIngredient({
+          rawName: i.ingredient_text,
+          canonicalName: i.canonical_name || undefined,
+          weight: i.weight,
+          unit: i.unit || 'g',
+          product_id: i.product_id,
+        }, productList)),
+      });
     } catch (e) {
       const code = e.response?.data?.code;
       if (code === 'gemini_not_configured') showError(t('err_gemini_not_configured'));
@@ -566,32 +579,56 @@ export default function Recipes() {
               )}
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 80px 1fr 36px', gap: 8, padding: '0 10px', marginBottom: 4 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 110px 1fr 36px', gap: 8, padding: '0 10px', marginBottom: 4 }}>
               <span style={{ fontSize: 11, fontWeight: 600, color: '#0d9488', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 {t('ingredients_lbl')(parsed.ingredients.filter(i => i.product_id).length, parsed.ingredients.length)}
               </span>
               <span></span>
-              <span style={{ fontSize: 11, fontWeight: 600, color: '#0d9488', textTransform: 'uppercase', letterSpacing: '0.5px' }}>g / ml / {t('unit_pcs')}</span>
+              <span style={{ fontSize: 11, fontWeight: 600, color: '#0d9488', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{t('col_amount')}</span>
               <span style={{ fontSize: 11, fontWeight: 600, color: '#0d9488', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{t('matched_product_col')}</span>
               <span></span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
               {parsed.ingredients.map((ing, i) => (
                 <React.Fragment key={i}>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 80px 1fr 36px', gap: 8, alignItems: 'center', padding: '8px 10px', background: ing.product_id ? '#162616' : '#2d1f0f', border: `1px solid ${addingProductFor === i ? '#0d9488' : ing.product_id ? '#1a4a1a' : '#4a3010'}`, borderRadius: addingProductFor === i ? '8px 8px 0 0' : 8 }}>
-                    <div style={{ fontSize: 13, color: '#e2e8f0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={ing.rawName}>{ing.rawName}</div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 110px 1fr 36px', gap: 8, alignItems: 'center', padding: '8px 10px', background: ing.product_id ? '#162616' : '#2d1f0f', border: `1px solid ${addingProductFor === i ? '#0d9488' : ing.product_id ? '#1a4a1a' : '#4a3010'}`, borderRadius: addingProductFor === i ? '8px 8px 0 0' : 8 }}>
+                    <div style={{ minWidth: 0 }}>
+                      <div style={{ fontSize: 13, color: '#e2e8f0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={ing.rawName}>{ing.rawName}</div>
+                      {canonicalDiffersFromRaw(ing.rawName, ing.canonicalName) && (
+                        <div style={{ fontSize: 10, color: '#6b7280', marginTop: 2, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={ing.canonicalName}>
+                          {t('canonical_match_hint')(ing.canonicalName)}
+                        </div>
+                      )}
+                    </div>
                     <button
                       onClick={() => {
                         if (addingProductFor === i) { setAddingProductFor(null); return; }
                         setAddingProductFor(i);
-                        setQuickForm({ name: ing.rawName, package_weight: '100', package_price: '', unit: 'g', sold_by_weight: false });
+                        setQuickForm({ name: ing.canonicalName || ing.rawName, package_weight: '100', package_price: '', unit: 'g', sold_by_weight: false });
                       }}
                       className="btn btn-primary"
                       style={{ padding: '5px 10px', fontSize: 11, whiteSpace: 'nowrap', ...(addingProductFor === i ? { background: '#0d9488', color: '#fff', borderColor: '#0d9488' } : {}) }}>
                       {t('add_to_products_btn')}
                     </button>
-                    <input type="number" value={ing.weight} min="0" max="99999" onChange={e => updateIngredient(i, 'weight', Math.min(99999, parseFloat(e.target.value) || 0))} style={{ padding: '6px 8px', fontSize: 13 }} />
-                    <select value={ing.product_id || ''} onChange={e => updateIngredient(i, 'product_id', e.target.value || null)} style={{ padding: '6px 8px', fontSize: 13, width: '100%', minWidth: 0 }}>
+                    <div style={{ display: 'flex', gap: 4, alignItems: 'stretch' }}>
+                      <input type="number" value={ing.weight} min="0" max="99999" onChange={e => updateIngredient(i, 'weight', Math.min(99999, parseFloat(e.target.value) || 0))} style={{ flex: 1, minWidth: 0, padding: '6px 8px', fontSize: 13 }} />
+                      <select
+                        value={ing.unit || 'g'}
+                        onChange={e => updateIngredient(i, 'unit', e.target.value)}
+                        title={t('unit_lbl')}
+                        style={{ width: 52, padding: '6px 4px', fontSize: 12, fontWeight: 700, flexShrink: 0 }}>
+                        <option value="g">g</option>
+                        <option value="ml">ml</option>
+                        <option value="szt">{t('unit_pcs')}</option>
+                      </select>
+                    </div>
+                    <select value={ing.product_id || ''} onChange={e => {
+                        const pid = e.target.value || null;
+                        const prod = productList.find(p => String(p.id) === String(pid));
+                        const u = [...parsed.ingredients];
+                        u[i] = { ...u[i], product_id: pid, unit: prod?.unit || u[i].unit || 'g' };
+                        setParsed({ ...parsed, ingredients: u });
+                      }} style={{ padding: '6px 8px', fontSize: 13, width: '100%', minWidth: 0 }}>
                       <option value="">{t('no_match_opt')}</option>
                       {productList.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
                     </select>

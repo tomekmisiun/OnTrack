@@ -6,6 +6,8 @@ from app.models.meal_plan import MealPlan
 from app.models.product import Product
 from app.models.recipe_parse_log import RecipeParseLog
 from app.utils import current_uid, current_user_lang
+from app.utils.ingredient_match import ingredient_matches_product
+from app.utils.ingredient_canonical import canonicalize_ingredient
 import json, re, os, time
 
 recipes_bp = Blueprint('recipes', __name__)
@@ -183,7 +185,7 @@ Return ONLY valid JSON (no markdown, no explanation):
   "recipe_name": "recipe name from first line",
   "category": "breakfast|lunch|dinner|snack|dessert",
   "ingredients": [
-    {"ingredient_text": "original phrase", "product_id": 123, "weight": 50, "unit": "g"},
+    {"ingredient_text": "original phrase", "canonical_name": "generic base ingredient", "product_id": 123, "weight": 50, "unit": "g"},
     ...
   ]
 }
@@ -211,9 +213,10 @@ Available products (ID | Name | Unit):
 {json_schema}
 Rules:
 - ingredient_text: the original ingredient phrase from the recipe
-- product_id: best matching product ID, or null if no match
+- canonical_name: generic base ingredient only (strip brands, packaging, marketing adjectives); e.g. 'vanilla sugar 1 sachet' → 'sugar', 'kisiel typu Sweet Moment' → 'kisiel'
+- product_id: matching product ID only when the product clearly corresponds to the ingredient; otherwise null — never guess
 - weight: numeric amount converted to product unit (g/ml/szt)
-- unit: match the product's unit
+- unit: g, ml, or szt — always set explicitly so the user knows what weight means
 - Conversions: tablespoon=15g, teaspoon=5g, cup=240ml (liquids) or 240g (solids), pound=454g, ounce=28g
 - Ignore prep words when matching products: chopped, diced, minced, grated, optional, skinless, fresh
 - Lines like "salt and pepper" → parse each as separate ingredient
@@ -234,9 +237,10 @@ Available products (ID | Name | Unit):
 {json_schema}
 Rules:
 - ingredient_text: the original ingredient phrase from the recipe
-- product_id: best matching product ID, or null if no match
+- canonical_name: generic base ingredient only (strip brands, packaging, marketing adjectives); e.g. 'cukier wanilinowy 1 saszetka' → 'cukier', 'kisiel typu Słodka Chwila' → 'kisiel'
+- product_id: matching product ID only when the product clearly corresponds to the ingredient; otherwise null — never guess
 - weight: numeric amount converted to product unit (g/ml/szt). Polish units: łyżeczka=5g, łyżka=15g, szklanka=250, szczypta=1g, pęczek=50g, pół=0.5x
-- unit: match the product's unit
+- unit: g, ml, or szt — always set explicitly (eggs in pieces → unit szt, flour → g)
 - Handle Polish grammar: mąki→mąka, masła→masło, cukru→cukier, soli→sól, wołowego→wołowina etc.
 - "X i warzyw z Y" means just X is the ingredient — ignore context after "i"
 - Lines like "przyprawy: sól, pieprz" → parse each as separate ingredient
@@ -310,6 +314,7 @@ def parse_recipe_text():
 
     lang = current_user_lang()
     products = Product.query.filter_by(user_id=uid, lang=lang).order_by(Product.name).all()
+    product_by_id = {p.id: p for p in products}
     product_lines = '\n'.join(f"{p.id} | {p.name} | {p.unit}" for p in products)
 
     prompt = _parse_prompt(recipe_text, product_lines, lang)
@@ -339,11 +344,27 @@ def parse_recipe_text():
                 continue
             pid = ing.get('product_id')
             w = ing.get('weight', 0)
+            ingredient_text = str(ing.get('ingredient_text', ''))[:200]
+            canonical_raw = str(ing.get('canonical_name', '') or '').strip()[:100]
+            canonical_name = canonical_raw or canonicalize_ingredient(ingredient_text)
+            resolved_pid = None
+            if pid is not None and str(pid).isdigit():
+                resolved_pid = int(pid)
+            elif isinstance(pid, (int, float)) and pid:
+                resolved_pid = int(pid)
+            if resolved_pid is not None:
+                product = product_by_id.get(resolved_pid)
+                if not product or not ingredient_matches_product(canonical_name, product.name):
+                    resolved_pid = None
+            unit = str(ing.get('unit', 'g'))[:5]
+            if unit not in ('g', 'ml', 'szt'):
+                unit = 'g'
             ingredients.append({
-                'ingredient_text': str(ing.get('ingredient_text', ''))[:200],
-                'product_id': int(pid) if pid is not None and str(pid).isdigit() else (int(pid) if isinstance(pid, (int, float)) and pid else None),
+                'ingredient_text': ingredient_text,
+                'canonical_name': canonical_name,
+                'product_id': resolved_pid,
                 'weight': round(float(w), 1) if w else 0,
-                'unit': str(ing.get('unit', 'g'))[:5],
+                'unit': unit,
             })
     except (json.JSONDecodeError, ValueError, TypeError) as e:
         return jsonify({'error': 'Failed to parse AI response'}), 500
