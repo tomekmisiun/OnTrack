@@ -51,7 +51,7 @@ function TogBtn({ active, onClick, label }) {
   );
 }
 
-const OTHER_TYPES = [
+export const OTHER_TYPES = [
   { key:'czynsz',     label:'Czynsz',         emoji:'🏠', gradient:'linear-gradient(135deg,#1a1020,#3a2050)' },
   { key:'prad',       label:'Prąd',           emoji:'⚡', gradient:'linear-gradient(135deg,#1a1800,#3a3800)' },
   { key:'gaz_oplata', label:'Gaz',            emoji:'🔥', gradient:'linear-gradient(135deg,#1a0a00,#4a2000)' },
@@ -70,7 +70,7 @@ const OTHER_TYPES = [
 ];
 // Klucze wydatków domowych — współdzielone między profilami (jeden budżet na gospodarstwodo domowe)
 const SHARED_KEYS = new Set(['czynsz','prad','gaz_oplata','media','ogrzewanie','dziecko','zwierze','pranie','zmywanie','sprzatan']);
-const OTHER_DEFAULTS = {
+export const OTHER_DEFAULTS = {
   papier:   { enabled:false, monthlyAmount:'', dailyRolls:'0.5', pkgPrice:'', rollsPerPkg:'8' },
   pranie:   { enabled:false, monthlyAmount:'', washesPerWeek:'5', detergentType:'proszek',
               proszekPerWash:'75', proszekPkgKg:'3', proszekPkgPrice:'',
@@ -130,14 +130,14 @@ const DRINK_TYPES = [
   { key:'sodaStream', emoji:'🫧', gradient:'linear-gradient(135deg,#100a30,#3a0a6a)' },
 ];
 
-const DRINKS_DEFAULTS = {
+export const DRINKS_DEFAULTS = {
   kawa:       { enabled:false, cupsPerDay:2, spoonsPerCup:2, pkgG:200, pkgPrice:'', sugarType:null, sugarSpoons:1, milkType:null, milkMlPerCup:'', milkPkgMl:'', milkPrice:'' },
   herbata:    { enabled:false, cupsPerDay:2, sachetPerPkg:20, pkgPrice:'', sugarType:null, sugarSpoons:1, milkType:null, milkMlPerCup:'', milkPkgMl:'', milkPrice:'' },
   napoje:     { enabled:false, litersPerDay:1,  pkgL:1.5, pkgPrice:'' },
   woda:       { enabled:false, litersPerDay:2,  pkgL:1.5, pkgPrice:'' },
   sodaStream: { enabled:false, litersPerDay:1,  syrupMl:440, syrupPrice:'', mlPer1L:25, cylinderDays:'', cylinderCost:'' },
 };
-function loadDrinksFromLS() {
+export function loadDrinksFromLS() {
   try {
     const saved = JSON.parse(localStorage.getItem('drinksConfig') || '{}');
     return Object.fromEntries(Object.entries(DRINKS_DEFAULTS).map(([k, def]) => {
@@ -1321,5 +1321,5 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
 
 // ─── Main Summary component ───────────────────────────────────────────────────
 
-export { OTHER_TYPES, SHARED_KEYS };
+export { SHARED_KEYS };
 export default DrinksCard;

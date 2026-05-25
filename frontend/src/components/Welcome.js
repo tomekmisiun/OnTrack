@@ -1,15 +1,16 @@
 import React from 'react';
 import { Icon } from '@iconify/react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useWelcomeStats } from '../hooks/useWelcomeStats';
 import './Welcome.css';
 
 const TILES = [
-  { id: 'macro',    icon: 'heroicons:calculator',      descKey: 'welcome_tile_macro' },
-  { id: 'calendar', icon: 'heroicons:calendar-days',   descKey: 'welcome_tile_calendar' },
-  { id: 'schedule', icon: 'heroicons:clock',           descKey: 'welcome_tile_schedule' },
-  { id: 'recipes',  icon: 'heroicons:book-open',       descKey: 'welcome_tile_recipes' },
-  { id: 'products', icon: 'heroicons:shopping-cart',   descKey: 'welcome_tile_products' },
-  { id: 'summary',  icon: 'heroicons:banknotes',       descKey: 'welcome_tile_summary' },
+  { id: 'macro',    icon: 'heroicons:calculator',      descKey: 'welcome_tile_macro',    insight: 'macro' },
+  { id: 'calendar', icon: 'heroicons:calendar-days',   descKey: 'welcome_tile_calendar', insight: 'meals' },
+  { id: 'schedule', icon: 'heroicons:clock',           descKey: 'welcome_tile_schedule', insight: 'schedule' },
+  { id: 'recipes',  icon: 'heroicons:book-open',       descKey: 'welcome_tile_recipes',  insight: 'recipes' },
+  { id: 'products', icon: 'heroicons:shopping-cart',   descKey: 'welcome_tile_products', insight: 'products' },
+  { id: 'summary',  icon: 'heroicons:banknotes',       descKey: 'welcome_tile_summary',  insight: 'expenses' },
   { id: 'export',   icon: 'heroicons:arrow-down-tray', descKey: 'welcome_tile_export' },
 ];
 
@@ -23,8 +24,78 @@ const TAB_LABEL_KEYS = {
   export: 'tab_export',
 };
 
+function countLabel(t, oneKey, manyKey, n) {
+  if (n === 1) return t(oneKey);
+  return t(manyKey)(n);
+}
+
+function getInsight(tileId, insightType, stats, loading, t) {
+  if (!insightType) return null;
+
+  if (loading) {
+    return { text: t('welcome_insight_loading'), tone: 'muted' };
+  }
+
+  switch (insightType) {
+    case 'macro':
+      if (stats.macroGoalLabel) {
+        return { text: stats.macroGoalLabel, tone: 'active' };
+      }
+      return { text: t('welcome_insight_macro_none'), tone: 'empty' };
+
+    case 'meals':
+      if (stats.mealsToday > 0) {
+        return {
+          text: countLabel(t, 'welcome_insight_meals_one', 'welcome_insight_meals_many', stats.mealsToday),
+          tone: 'active',
+        };
+      }
+      return { text: t('welcome_insight_meals_none'), tone: 'empty' };
+
+    case 'schedule':
+      if (stats.scheduleToday > 0) {
+        return {
+          text: countLabel(t, 'welcome_insight_schedule_one', 'welcome_insight_schedule_many', stats.scheduleToday),
+          tone: 'active',
+        };
+      }
+      return { text: t('welcome_insight_schedule_none'), tone: 'empty' };
+
+    case 'recipes':
+      if (stats.ownRecipes > 0) {
+        return {
+          text: countLabel(t, 'welcome_insight_recipes_one', 'welcome_insight_recipes_many', stats.ownRecipes),
+          tone: 'active',
+        };
+      }
+      return { text: t('welcome_insight_recipes_none'), tone: 'empty' };
+
+    case 'products':
+      if (stats.ownProducts > 0) {
+        return {
+          text: countLabel(t, 'welcome_insight_products_one', 'welcome_insight_products_many', stats.ownProducts),
+          tone: 'active',
+        };
+      }
+      return { text: t('welcome_insight_products_none'), tone: 'empty' };
+
+    case 'expenses':
+      if (stats.monthTotalCost > 0) {
+        return {
+          text: t('welcome_insight_expenses')(stats.monthTotalCost, t('currency')),
+          tone: 'active',
+        };
+      }
+      return { text: t('welcome_insight_expenses_none'), tone: 'empty' };
+
+    default:
+      return null;
+  }
+}
+
 export default function Welcome({ onGoToTab, onAccount, onLogout }) {
   const { t } = useLanguage();
+  const { stats, loading } = useWelcomeStats();
 
   return (
     <div className="welcome-page">
@@ -52,23 +123,33 @@ export default function Welcome({ onGoToTab, onAccount, onLogout }) {
         </header>
 
         <div className="welcome-grid">
-          {TILES.map(({ id, icon, descKey }) => (
-            <button
-              key={id}
-              type="button"
-              className="welcome-tile"
-              onClick={() => onGoToTab(id)}
-            >
-              <span className="welcome-tile-icon" aria-hidden="true">
-                <Icon icon={icon} width={26} />
-              </span>
-              <span className="welcome-tile-body">
-                <span className="welcome-tile-label">{t(TAB_LABEL_KEYS[id])}</span>
-                <span className="welcome-tile-desc">{t(descKey)}</span>
-              </span>
-              <Icon icon="heroicons:chevron-right" className="welcome-tile-arrow" width={18} aria-hidden="true" />
-            </button>
-          ))}
+          {TILES.map(({ id, icon, descKey, insight }) => {
+            const insightData = getInsight(id, insight, stats, loading, t);
+            return (
+              <button
+                key={id}
+                type="button"
+                className="welcome-tile-stack"
+                onClick={() => onGoToTab(id)}
+              >
+                {insightData && (
+                  <div className={`welcome-insight welcome-insight--${insightData.tone}`}>
+                    {insightData.text}
+                  </div>
+                )}
+                <div className="welcome-tile">
+                  <span className="welcome-tile-icon" aria-hidden="true">
+                    <Icon icon={icon} width={26} />
+                  </span>
+                  <span className="welcome-tile-body">
+                    <span className="welcome-tile-label">{t(TAB_LABEL_KEYS[id])}</span>
+                    <span className="welcome-tile-desc">{t(descKey)}</span>
+                  </span>
+                  <Icon icon="heroicons:chevron-right" className="welcome-tile-arrow" width={18} aria-hidden="true" />
+                </div>
+              </button>
+            );
+          })}
         </div>
 
         <footer className="welcome-footer">
