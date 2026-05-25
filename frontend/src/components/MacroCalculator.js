@@ -4,6 +4,7 @@ import { useToast } from '../contexts/ToastContext';
 import { useMember } from '../contexts/MemberContext';
 import { members as membersApi } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
+import './MacroCalculator.css';
 
 const ACTIVITY_VALUES = [1.2, 1.375, 1.55, 1.725, 1.9];
 const GOAL_VALUES = [
@@ -116,83 +117,104 @@ function BmiGauge({ bmiVal }) {
   );
 }
 
-// ── Macro legend card ────────────────────────────────────────────────────────
-function MacroLegend({ goalOpt, weight, adjPW }) {
-  const [open, setOpen] = React.useState(false);
-  const { t } = useLanguage();
+// ── Macro formula modal ──────────────────────────────────────────────────────
+function MacroFormulaContent({ goalOpt, weight, adjPW, t }) {
   const pw = adjPW?.pw ?? weight;
   const proteinG = pw > 0 ? Math.round(pw * goalOpt.proteinPerKg) : null;
+
   return (
-    <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8 }}>
-      <button onClick={() => setOpen(o => !o)}
-        style={{ width:'100%', padding:'12px 16px', background:'none', border:'none', cursor:'pointer', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
-        <span style={{ fontSize: 14, fontWeight: 700, color: '#0d9488' }}>{t('macro_how_title')}</span>
-        <Icon icon="heroicons:chevron-down" style={{ width:18, height:18, color:'#0d9488', transition:'transform 0.25s', transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }} />
-      </button>
-      {open && (
-      <div style={{ padding: '0 16px 16px', display: 'flex', flexDirection: 'column', gap: 14 }}>
-
-        {/* Obesity adjustment notice */}
-        {adjPW?.adjusted && (
-          <div style={{ background: '#1c1917', border: '1px solid #78350f', borderRadius: 8, padding: '10px 12px', fontSize: 12, color: '#fcd34d', lineHeight: 1.6 }}>
-            <strong>{t('legend_obesity_title')}</strong> {t('legend_obesity_body1')}{' '}
-            <strong>{adjPW.pw} kg</strong> {t('legend_obesity_body2')(weight)}.{' '}
-            {t('legend_obesity_formula')(adjPW.ibw)}
-          </div>
-        )}
-
-        <div style={{ display: 'flex', gap: 10 }}>
-          <span style={{ width: 10, height: 10, borderRadius: 2, background: '#0d9488', flexShrink: 0, marginTop: 3 }} />
-          <div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: '#e2e8f0', marginBottom: 3 }}>{t('macro_protein')}</div>
-            <div style={{ fontSize: 12, color: '#9ca3af', lineHeight: 1.6 }}>
-              {t('legend_protein_by_goal')}{' '}
-              <span style={{ color: '#2dd4bf' }}>
-                {goalOpt.value === 'lose' && t('legend_protein_lose')}
-                {goalOpt.value === 'maintain' && t('legend_protein_maintain')}
-                {goalOpt.value === 'gain' && t('legend_protein_gain')}
-                {goalOpt.value === 'extreme' && t('legend_protein_extreme')}
-              </span>.
-              {proteinG && (
-                <span style={{ color: '#6b7280' }}>
-                  {' '}{t('legend_protein_basis')}: <strong style={{ color: '#2dd4bf' }}>{pw} kg</strong> → <strong style={{ color: '#2dd4bf' }}>{proteinG} g</strong>.
-                </span>
-              )}
-              {' '}{t('legend_1g_protein')}
-            </div>
-          </div>
+    <>
+      {adjPW?.adjusted && (
+        <div className="macro-formula-obesity">
+          <strong>{t('legend_obesity_title')}</strong> {t('legend_obesity_body1')}{' '}
+          <strong>{adjPW.pw} kg</strong> {t('legend_obesity_body2')(weight)}.{' '}
+          {t('legend_obesity_formula')(adjPW.ibw)}
         </div>
+      )}
 
-        <div style={{ display: 'flex', gap: 10 }}>
-          <span style={{ width: 10, height: 10, borderRadius: 2, background: '#f59e0b', flexShrink: 0, marginTop: 3 }} />
-          <div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: '#e2e8f0', marginBottom: 3 }}>{t('macro_fat')}</div>
-            <div style={{ fontSize: 12, color: '#9ca3af', lineHeight: 1.6 }}>
-              {t('legend_fat_fixed')}{' '}
-              <span style={{ color: '#f59e0b' }}>{Math.round(goalOpt.fatPct * 100)}% {t('legend_fat_of_kcal')}</span> {t('legend_fat_div9')}.
-              {' '}{t('legend_fat_note')}
-            </div>
+      <div className="macro-formula-row">
+        <span className="macro-formula-dot" style={{ background: '#0d9488' }} />
+        <div>
+          <div className="macro-formula-row-title">{t('macro_protein')}</div>
+          <div className="macro-formula-row-text">
+            {t('legend_protein_by_goal')}{' '}
+            <span style={{ color: '#2dd4bf' }}>
+              {goalOpt.value === 'lose' && t('legend_protein_lose')}
+              {goalOpt.value === 'maintain' && t('legend_protein_maintain')}
+              {goalOpt.value === 'gain' && t('legend_protein_gain')}
+              {goalOpt.value === 'extreme' && t('legend_protein_extreme')}
+            </span>.
+            {proteinG && (
+              <span style={{ color: '#6b7280' }}>
+                {' '}{t('legend_protein_basis')}: <strong style={{ color: '#2dd4bf' }}>{pw} kg</strong> → <strong style={{ color: '#2dd4bf' }}>{proteinG} g</strong>.
+              </span>
+            )}
+            {' '}{t('legend_1g_protein')}
           </div>
-        </div>
-
-        <div style={{ display: 'flex', gap: 10 }}>
-          <span style={{ width: 10, height: 10, borderRadius: 2, background: '#6366f1', flexShrink: 0, marginTop: 3 }} />
-          <div>
-            <div style={{ fontSize: 13, fontWeight: 700, color: '#e2e8f0', marginBottom: 3 }}>{t('macro_carbs')}</div>
-            <div style={{ fontSize: 12, color: '#9ca3af', lineHeight: 1.6 }}>
-              {t('legend_carbs_desc')}
-              {' '}{t('legend_formula')}: <span style={{ color: '#6366f1' }}>{t('legend_carbs_formula')}</span>.
-            </div>
-          </div>
-        </div>
-
-        <div style={{ borderTop: '1px solid #374151', paddingTop: 12, fontSize: 11, color: '#9ca3af', lineHeight: 1.6 }}>
-          <strong style={{ color: '#e2e8f0' }}>BMR</strong> {t('legend_bmr_desc')}{' '}
-          <span style={{ color: '#9ca3af' }}>10×{t('legend_bmr_formula')}</span>.{' '}
-          <strong style={{ color: '#e2e8f0' }}>TDEE</strong> = BMR × {t('legend_tdee_desc')}.
         </div>
       </div>
-      )}
+
+      <div className="macro-formula-row">
+        <span className="macro-formula-dot" style={{ background: '#f59e0b' }} />
+        <div>
+          <div className="macro-formula-row-title">{t('macro_fat')}</div>
+          <div className="macro-formula-row-text">
+            {t('legend_fat_fixed')}{' '}
+            <span style={{ color: '#f59e0b' }}>{Math.round(goalOpt.fatPct * 100)}% {t('legend_fat_of_kcal')}</span> {t('legend_fat_div9')}.
+            {' '}{t('legend_fat_note')}
+          </div>
+        </div>
+      </div>
+
+      <div className="macro-formula-row">
+        <span className="macro-formula-dot" style={{ background: '#6366f1' }} />
+        <div>
+          <div className="macro-formula-row-title">{t('macro_carbs')}</div>
+          <div className="macro-formula-row-text">
+            {t('legend_carbs_desc')}
+            {' '}{t('legend_formula')}: <span style={{ color: '#6366f1' }}>{t('legend_carbs_formula')}</span>.
+          </div>
+        </div>
+      </div>
+
+      <div className="macro-formula-bmr">
+        <strong style={{ color: '#e2e8f0' }}>BMR</strong> {t('legend_bmr_desc')}{' '}
+        <span style={{ color: '#9ca3af' }}>10×{t('legend_bmr_formula')}</span>.{' '}
+        <strong style={{ color: '#e2e8f0' }}>TDEE</strong> = BMR × {t('legend_tdee_desc')}.
+      </div>
+    </>
+  );
+}
+
+function MacroFormulaModal({ open, onClose, goalOpt, weight, adjPW }) {
+  const { t } = useLanguage();
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open, onClose]);
+
+  if (!open || !goalOpt) return null;
+
+  return (
+    <div className="macro-formula-modal-backdrop" onClick={onClose}>
+      <div
+        className="macro-formula-modal"
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="macro-formula-title"
+      >
+        <div className="macro-formula-modal-header">
+          <h2 id="macro-formula-title" className="macro-formula-modal-title">{t('macro_how_title')}</h2>
+          <button type="button" className="macro-formula-modal-close" onClick={onClose} aria-label={t('cancel')}>×</button>
+        </div>
+        <div className="macro-formula-modal-body dark-scroll">
+          <MacroFormulaContent goalOpt={goalOpt} weight={weight} adjPW={adjPW} t={t} />
+        </div>
+      </div>
     </div>
   );
 }
@@ -265,6 +287,7 @@ export default function MacroCalculator() {
   const [height,   setHeight]   = useState(saved?.height   ?? '');
   const [activity, setActivity] = useState(saved?.activity ?? 1.55);
   const [goal,     setGoal]     = useState(saved?.goal     ?? 'maintain');
+  const [formulaOpen, setFormulaOpen] = useState(false);
 
   // When active member changes, repopulate form
   useEffect(() => {
@@ -388,7 +411,19 @@ export default function MacroCalculator() {
 
         {/* Karta 2: Cel dzienny makro */}
         <div className="card" style={{ padding: 14, display:'flex', flexDirection:'column' }}>
-          <h2 className="card-section-title" style={{ marginBottom: 10 }}>{t('macro_daily_goal')}</h2>
+          <div className="macro-daily-goal-head">
+            <h2 className="card-section-title">{t('macro_daily_goal')}</h2>
+            <button
+              type="button"
+              className="pill-help-btn"
+              onClick={() => setFormulaOpen(true)}
+              aria-label={t('macro_formula_info_aria')}
+              title={t('macro_formula_info_aria')}
+            >
+              <Icon icon="heroicons:information-circle" width={15} />
+              <span>{t('macro_formula_info_btn')}</span>
+            </button>
+          </div>
           {macros ? (
             <>
               <div style={{ fontSize:28, fontWeight:800, color:'#2dd4bf', marginBottom:4 }}>
@@ -489,21 +524,13 @@ export default function MacroCalculator() {
         </div>
       </div>
 
-      {/* ── ROW 2: Jak liczymy makro — pełna szerokość ── */}
-      <MacroLegend goalOpt={goalOpt} weight={w || 0} adjPW={adjPW} />
-
-      {/* ── ROW 3: Cytaty — pełna szerokość ── */}
-      <div className="card" style={{ padding: '12px 16px', display: 'flex', gap: 16 }}>
-        {[
-          { quote: t('quote_1'), author: t('quote_1_author') },
-          { quote: t('quote_2'), author: t('quote_2_author') },
-        ].map(({ quote, author }) => (
-          <div key={author} style={{ flex: 1, borderLeft: '3px solid #0d9488', paddingLeft: 12 }}>
-            <div style={{ fontSize: 13, color: '#e2e8f0', lineHeight: 1.6, fontStyle: 'italic' }}>„{quote}"</div>
-            <div style={{ fontSize: 11, color: '#6b7280', marginTop: 4 }}>- {author}</div>
-          </div>
-        ))}
-      </div>
+      <MacroFormulaModal
+        open={formulaOpen}
+        onClose={() => setFormulaOpen(false)}
+        goalOpt={goalOpt}
+        weight={w || 0}
+        adjPW={adjPW}
+      />
     </div>
   );
 }
