@@ -19,6 +19,7 @@ import {
   togglePresetDays,
   isPresetActive,
 } from '../utils/scheduleWorkDays';
+import { memberColor } from '../utils/memberColors';
 import './DaySchedule.css';
 
 const HOURS = Array.from({ length: 24 }, (_, i) => i);
@@ -28,11 +29,75 @@ const ROW_H = 28;
 const BLOCK_COLORS = ['#4a6fa5', '#6366f1', '#0d9488', '#c2410c', '#9333ea', '#ca8a04'];
 const WORK_COLOR = '#64748b';
 
-const STEPS = [
-  { icon: 'heroicons:cursor-arrow-rays', titleKey: 'schedule_step_1', descKey: 'schedule_step_1_desc' },
-  { icon: 'heroicons:pencil-square',       titleKey: 'schedule_step_2', descKey: 'schedule_step_2_desc' },
-  { icon: 'heroicons:trash',             titleKey: 'schedule_step_3', descKey: 'schedule_step_3_desc' },
-];
+function scheduleHelpItems(t) {
+  return [
+    {
+      icon: 'heroicons:bolt',
+      label: t('schedule_help_quick_label'),
+      desc: t('schedule_help_quick'),
+      examples: [t('schedule_help_ex_1'), t('schedule_help_ex_2'), t('schedule_help_ex_3')],
+    },
+    {
+      icon: 'heroicons:users',
+      label: t('schedule_help_profiles_label'),
+      desc: t('schedule_help_profiles'),
+    },
+    {
+      icon: 'heroicons:cursor-arrow-rays',
+      label: t('schedule_help_drag_label'),
+      desc: t('schedule_help_drag'),
+    },
+    {
+      icon: 'heroicons:pencil-square',
+      label: t('schedule_help_edit_label'),
+      desc: t('schedule_help_edit'),
+    },
+  ];
+}
+
+function ScheduleHelpModal({ open, onClose, t }) {
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return (
+    <div className="schedule-help-modal-backdrop" onClick={onClose}>
+      <div className="schedule-help-modal" onClick={e => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="schedule-help-title">
+        <div className="schedule-help-modal-header">
+          <h2 id="schedule-help-title" className="schedule-help-modal-title">{t('schedule_how_title')}</h2>
+          <button type="button" className="schedule-help-modal-close" onClick={onClose} aria-label={t('cancel')}>×</button>
+        </div>
+        <div className="schedule-help-modal-body dark-scroll">
+          <div className="schedule-help-list">
+            {scheduleHelpItems(t).map(({ icon, label, desc, examples }) => (
+              <article key={label} className="schedule-help-card">
+                <div className="schedule-help-card-icon" aria-hidden="true">
+                  <Icon icon={icon} width={20} />
+                </div>
+                <div className="schedule-help-card-body">
+                  <h3 className="schedule-help-card-title">{label}</h3>
+                  <p className="schedule-help-card-desc">{desc}</p>
+                  {examples?.length > 0 && (
+                    <div className="schedule-help-examples">
+                      {examples.map(ex => (
+                        <code key={ex} className="schedule-help-example">{ex}</code>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function isSleepHour(hour) {
   return hour >= 23 || hour < 6;
@@ -58,7 +123,7 @@ function endHourToModalTime(endHour) {
 
 export default function DaySchedule() {
   const { t } = useLanguage();
-  const { activeMember } = useMember();
+  const { activeMember, members, includedMemberIds } = useMember();
   const { showError, showSuccess, showConfirm } = useToast();
 
   const currentWeekStart = getCurrentWeek().start;
@@ -77,12 +142,14 @@ export default function DaySchedule() {
   const [workLabel, setWorkLabel] = useState('');
   const [workPasteText, setWorkPasteText] = useState('');
   const [selectedWorkDays, setSelectedWorkDays] = useState([...WEEKDAYS]);
+  const [workTargetMemberIds, setWorkTargetMemberIds] = useState([]);
   const [workLoading, setWorkLoading] = useState(false);
   const [clearLoading, setClearLoading] = useState(false);
   const [workStartTimeDraft, setWorkStartTimeDraft] = useState(null);
   const [workEndTimeDraft, setWorkEndTimeDraft] = useState(null);
   const [modalStartDraft, setModalStartDraft] = useState(null);
   const [modalEndDraft, setModalEndDraft] = useState(null);
+  const [scheduleHelpOpen, setScheduleHelpOpen] = useState(false);
   const dragRef = useRef(null);
 
   const dayLabels = t('day_short');
@@ -151,6 +218,27 @@ export default function DaySchedule() {
   }, [activeMember?.id, weekStart, showError, t]);
 
   useEffect(() => { loadBlocks(); }, [loadBlocks]);
+
+  useEffect(() => {
+    if (!members.length) return;
+    setWorkTargetMemberIds(prev => {
+      const valid = prev.filter(id => members.some(m => m.id === id));
+      if (valid.length) return valid;
+      const fromIncluded = includedMemberIds.filter(id => members.some(m => m.id === id));
+      if (fromIncluded.length) return fromIncluded;
+      return activeMember?.id ? [activeMember.id] : [];
+    });
+  }, [members, includedMemberIds, activeMember?.id]);
+
+  const toggleWorkTargetMember = (id) => {
+    setWorkTargetMemberIds(prev => {
+      if (prev.includes(id)) {
+        if (prev.length <= 1) return prev;
+        return prev.filter(x => x !== id);
+      }
+      return [...prev, id];
+    });
+  };
 
   const dayDates = useMemo(
     () => DAYS.map(d => addDays(weekStart, d)),
@@ -320,25 +408,40 @@ export default function DaySchedule() {
       showError(t('schedule_work_no_days'));
       return;
     }
+    if (!workTargetMemberIds.length) {
+      showError(t('schedule_work_no_members'));
+      return;
+    }
     setWorkLoading(true);
     try {
-      const res = await api.createBulk({
-        member_id: activeMember.id,
-        week_start: weekStart,
-        start_hour: workStart,
-        end_hour: workEnd,
-        label,
-        days: selectedWorkDays,
-      });
-      const created = res.data.created || [];
-      const skipped = res.data.skipped || [];
-      if (created.length === 0) {
+      const allCreated = [];
+      let totalSkipped = 0;
+      for (const memberId of workTargetMemberIds) {
+        const res = await api.createBulk({
+          member_id: memberId,
+          week_start: weekStart,
+          start_hour: workStart,
+          end_hour: workEnd,
+          label,
+          days: selectedWorkDays,
+        });
+        allCreated.push(...(res.data.created || []));
+        totalSkipped += (res.data.skipped || []).length;
+      }
+      if (allCreated.length === 0) {
         showError(t('schedule_work_none'));
       } else {
-        setBlocks(prev => [...prev, ...created].sort((a, b) =>
-          a.day - b.day || a.start_hour - b.start_hour
+        const forActive = allCreated.filter(b => b.member_id === activeMember?.id);
+        if (forActive.length) {
+          setBlocks(prev => [...prev, ...forActive].sort((a, b) =>
+            a.day - b.day || a.start_hour - b.start_hour
+          ));
+        }
+        showSuccess(t('schedule_work_applied')(
+          allCreated.length,
+          totalSkipped,
+          workTargetMemberIds.length,
         ));
-        showSuccess(t('schedule_work_applied')(created.length, skipped.length));
       }
     } catch {
       showError(t('schedule_save_err'));
@@ -382,12 +485,18 @@ export default function DaySchedule() {
     <div className="schedule-page">
       <header className="schedule-hero card">
         <div className="schedule-hero-top">
-          <div className="schedule-hero-icon">
-            <Icon icon="heroicons:clock" width={26} />
-          </div>
-          <div className="schedule-hero-text">
-            <h2 className="schedule-hero-title">{t('schedule_title')}</h2>
-            <p className="schedule-hero-subtitle">{t('schedule_subtitle')}</p>
+          <div className="schedule-hero-head">
+            <h2 className="card-section-title">{t('schedule_title')}</h2>
+            <button
+              type="button"
+              className="pill-help-btn"
+              onClick={() => setScheduleHelpOpen(true)}
+              aria-label={t('schedule_how_title')}
+              title={t('schedule_how_title')}
+            >
+              <Icon icon="heroicons:light-bulb" width={15} />
+              <span>{t('import_help_btn')}</span>
+            </button>
           </div>
           {blocks.length > 0 && (
             <div className="schedule-hero-meta">
@@ -395,19 +504,9 @@ export default function DaySchedule() {
             </div>
           )}
         </div>
-        <div className="schedule-steps">
-          {STEPS.map((step, i) => (
-            <div key={step.titleKey} className="schedule-step">
-              <span className="schedule-step-num">{i + 1}</span>
-              <Icon icon={step.icon} className="schedule-step-icon" width={18} />
-              <div className="schedule-step-body">
-                <span className="schedule-step-title">{t(step.titleKey)}</span>
-                <span className="schedule-step-desc">{t(step.descKey)}</span>
-              </div>
-            </div>
-          ))}
-        </div>
       </header>
+
+      <ScheduleHelpModal open={scheduleHelpOpen} onClose={() => setScheduleHelpOpen(false)} t={t} />
 
       <div className="card schedule-toolbar">
         <div className="schedule-week-section">
@@ -440,11 +539,6 @@ export default function DaySchedule() {
               <Icon icon="heroicons:chevron-right" width={16} />
             </button>
           </div>
-
-          <p className="schedule-week-hint">
-            <Icon icon="heroicons:information-circle" width={15} />
-            {t('schedule_week_nav_hint')}
-          </p>
         </div>
 
         <div className="schedule-work-section">
@@ -452,7 +546,6 @@ export default function DaySchedule() {
             <Icon icon="heroicons:queue-list" width={18} className="schedule-section-icon" />
             <div>
               <span>{t('schedule_work_hours')}</span>
-              <p className="schedule-section-desc">{t('schedule_work_desc')}</p>
             </div>
           </div>
 
@@ -576,14 +669,42 @@ export default function DaySchedule() {
               >
                 {clearLoading ? t('loading') : t('schedule_clear_week')}
               </button>
-              <button
-                type="button"
-                className="btn btn-primary schedule-work-apply"
-                onClick={applyWorkHours}
-                disabled={workLoading}
-              >
-                {workLoading ? t('loading') : t('schedule_work_apply')}
-              </button>
+              <div className="schedule-work-footer-actions">
+                {members.length > 1 && (
+                  <div className="schedule-work-targets" role="group" aria-label={t('schedule_work_for_members')}>
+                    <span className="schedule-work-targets-label">{t('schedule_work_for_members')}</span>
+                    {members.map((m, i) => {
+                      const active = workTargetMemberIds.includes(m.id);
+                      const color = memberColor(i);
+                      return (
+                        <button
+                          key={m.id}
+                          type="button"
+                          className={`schedule-work-member-chip${active ? ' active' : ''}`}
+                          style={active ? { borderColor: color, color } : undefined}
+                          onClick={() => toggleWorkTargetMember(m.id)}
+                          aria-pressed={active}
+                        >
+                          <span
+                            className="schedule-work-member-dot"
+                            style={{ background: active ? color : 'transparent', borderColor: color }}
+                            aria-hidden="true"
+                          />
+                          {m.name}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+                <button
+                  type="button"
+                  className="btn btn-primary schedule-work-apply"
+                  onClick={applyWorkHours}
+                  disabled={workLoading}
+                >
+                  {workLoading ? t('loading') : t('schedule_work_apply')}
+                </button>
+              </div>
             </div>
           </div>
         </div>
