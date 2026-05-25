@@ -1,49 +1,58 @@
-# Deploy — CI → Railway
+# Deploy — Wait for CI (Railway + GitHub Actions)
 
-Produkcja deployuje się **wyłącznie z GitHub Actions**, po przejściu testów. Push na `main` sam w sobie nie powinien uruchamiać osobnego buildu w Railway.
+Produkcja deployuje się z Railway po pushu na `main`, **ale tylko gdy GitHub Actions (job `test`) przejdzie**. Nie trzeba sekretów Railway w GitHub.
 
-## 1. Wyłącz auto-deploy w Railway
+## 1. Railway — oba serwisy (`ontrack-back`, `ontrackapp`)
 
-Dla **backendu** i **frontendu** (każdy serwis osobno):
+Dla **każdego** serwisu osobno → **Settings** → **Source**:
 
-1. Railway → serwis → **Settings** → **Source** / **Deploy**
-2. Odłącz repozytorium GitHub **albo** wyłącz „Deploy on push” / „Automatic deployments”
+1. **Source Repo** — podpięte do `tomekmislun/Meal-planner-and-budgeter`
+2. **Branch connected to production** → **`main`** (Connect Environment to Branch, jeśli odłączone)
+3. **Auto deploys when pushed to GitHub** — **włączone** (nie klikaj Disable)
+4. **Wait for CI** → **ON**
 
-Bez tego Railway nadal zbuduje aplikację przy każdym pushu, niezależnie od CI.
+Powtórz dla backendu i frontendu. Kliknij **Apply** / **Deploy**, jeśli Railway pokazuje pending changes.
 
-## 2. Sekrety w GitHub
+## 2. GitHub Actions
 
-**Settings → Secrets and variables → Actions** → New repository secret:
-
-| Sekret | Skąd wziąć |
-|--------|------------|
-| `RAILWAY_TOKEN` | Railway → Project → **Settings** → **Tokens** → Project Token |
-| `RAILWAY_BACKEND_SERVICE_ID` | Backend service → **Settings** → Service ID |
-| `RAILWAY_FRONTEND_SERVICE_ID` | Frontend service → **Settings** → Service ID |
-
-## 3. Workflow
+Workflow `.github/workflows/ci.yml` uruchamia tylko **test** (pytest).
 
 ```
-feature branch → Pull Request → job test (pytest)
-                              → merge do main (po review + zielone CI)
-main push       → test → deploy (railway up backend + frontend)
+push main → job test
+              ✅ → Railway czeka i deployuje z GitHub
+              ❌ → Railway pomija deploy (SKIPPED)
 ```
 
-**Nie pushuj bezpośrednio na `main`.** Użyj PR, żeby zepsuty kod nie trafił na produkcję.
+PR na `main` → tylko test, bez deployu.
 
-## 4. Branch protection (GitHub)
+## 3. Branch protection (GitHub)
 
 **Settings → Branches → Add rule** dla `main`:
 
 - Require a pull request before merging
 - Require status checks to pass: **`test`**
-- (Opcjonalnie) Do not allow bypassing the above settings
+
+## 4. Workflow deweloperski
+
+```
+feature branch → Pull Request → test (CI)
+                              → merge po review + zielone CI
+main push       → test → Railway deploy (Wait for CI)
+```
+
+**Nie pushuj bezpośrednio na `main`.**
 
 ## 5. Lokalnie vs produkcja
 
 | Środowisko | Jak uruchomić |
 |------------|----------------|
-| Dev | `docker compose up` (Dockerfile + Dockerfile.dev) |
-| Produkcja | tylko przez CI po merge na `main` |
+| Dev | `docker compose up` |
+| Produkcja | merge na `main` + zielony CI → Railway auto-deploy |
 
-Docker Hub **nie jest używany** — obrazy nie są pushowane do rejestru zewnętrznego.
+## Troubleshooting
+
+- Deploy nie startuje po pushu → sprawdź, czy branch `main` jest podpięty i Wait for CI włączone
+- Deploy mimo failu CI → Wait for CI wyłączone albo workflow nie ma `on: push: branches: [main]`
+- Status `WAITING` w Railway → normalne, czeka na GitHub Actions
+
+Docs: [Railway — Wait for CI](https://docs.railway.com/deployments/github-autodeploys#wait-for-ci)

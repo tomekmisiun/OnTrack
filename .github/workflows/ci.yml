@@ -35,22 +35,3 @@ jobs:
           JWT_SECRET_KEY: ci-test-jwt-secret-key-0123456789abcdef
           GOOGLE_CLIENT_ID: ci-test-google-client-id
           GOOGLE_CLIENT_SECRET: ci-test-google-client-secret
-
-  deploy:
-    needs: test
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    container: ghcr.io/railwayapp/cli:latest
-    env:
-      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-      RAILWAY_BACKEND_SERVICE_ID: ${{ secrets.RAILWAY_BACKEND_SERVICE_ID }}
-      RAILWAY_FRONTEND_SERVICE_ID: ${{ secrets.RAILWAY_FRONTEND_SERVICE_ID }}
-    steps:
-      - name: Checkout kod
-        uses: actions/checkout@v6
-
-      - name: Deploy backend (Railway)
-        run: railway up --ci --service="$RAILWAY_BACKEND_SERVICE_ID" --message "ci ${{ github.sha }}"
-
-      - name: Deploy frontend (Railway)
-        run: railway up --ci --service="$RAILWAY_FRONTEND_SERVICE_ID" --path-as-root frontend --message "ci ${{ github.sha }}"
