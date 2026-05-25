@@ -43,10 +43,15 @@ function markTourDone(userId) {
 function AppInner({ onStartTour }) {
   const { user, logout } = useAuth();
   const { t } = useLanguage();
-  const [activeTab, setActiveTab] = useState('calendar');
+  const [activeTab, setActiveTab] = useState('macro');
   const [showProfile, setShowProfile] = useState(false);
+  const [scrollCalendarToToday, setScrollCalendarToToday] = useState(false);
 
-  const goToTab = useCallback((tab) => { setActiveTab(tab); window.scrollTo({ top: 0 }); }, []);
+  const goToTab = useCallback((tab) => {
+    setActiveTab(tab);
+    window.scrollTo({ top: 0 });
+    if (tab === 'calendar') setScrollCalendarToToday(true);
+  }, []);
 
   useEffect(() => {
     const handler = (e) => goToTab(e.detail.tab);
@@ -117,7 +122,13 @@ function AppInner({ onStartTour }) {
 
       <main className="app-main">
         {activeTab === 'macro'     && <MacroCalculator />}
-        {activeTab === 'calendar'  && <Calendar onGoToTab={goToTab} />}
+        {activeTab === 'calendar'  && (
+          <Calendar
+            onGoToTab={goToTab}
+            scrollToToday={scrollCalendarToToday}
+            onScrolledToToday={() => setScrollCalendarToToday(false)}
+          />
+        )}
         {activeTab === 'schedule'  && <DaySchedule />}
         {activeTab === 'recipes'   && <Recipes />}
         {activeTab === 'products'  && <Products />}

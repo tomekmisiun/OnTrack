@@ -961,7 +961,7 @@ function CarouselList({ recipes, search, categoryFilter, visible, setVisible, sc
   );
 }
 
-export default function Calendar({ onGoToTab }) {
+export default function Calendar({ onGoToTab, scrollToToday, onScrolledToToday }) {
   const { t } = useLanguage();
   const { user } = useAuth();
   const { showError, showSuccess, showConfirm } = useToast();
@@ -999,8 +999,13 @@ export default function Calendar({ onGoToTab }) {
   }, [tplSlots]);
 
   useEffect(() => {
-    setTimeout(() => document.getElementById('calendar-today')?.scrollIntoView({ behavior:'smooth', block:'center' }), 150);
-  }, []);
+    if (!scrollToToday) return undefined;
+    const timer = setTimeout(() => {
+      document.getElementById('calendar-today')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      onScrolledToToday?.();
+    }, 150);
+    return () => clearTimeout(timer);
+  }, [scrollToToday, onScrolledToToday]);
 
   useEffect(() => {
     const handler = () => {
