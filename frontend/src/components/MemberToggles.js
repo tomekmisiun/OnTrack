@@ -20,15 +20,33 @@ export default function MemberToggles({ variant = 'sidebar' }) {
 
   const [adding, setAdding] = useState(false);
   const [newName, setNewName] = useState('');
+  const [editingId, setEditingId] = useState(null);
+  const [editName, setEditName] = useState('');
   const inputRef = useRef(null);
+  const renameInputRef = useRef(null);
 
   useEffect(() => {
     if (adding) inputRef.current?.focus();
   }, [adding]);
 
+  useEffect(() => {
+    if (editingId) renameInputRef.current?.focus();
+  }, [editingId]);
+
   const cancelAdd = () => {
     setAdding(false);
     setNewName('');
+  };
+
+  const cancelRename = () => {
+    setEditingId(null);
+    setEditName('');
+  };
+
+  const startRename = (m) => {
+    setEditingId(m.id);
+    setEditName(m.name);
+    cancelAdd();
   };
 
   const handleAdd = async () => {
@@ -46,6 +64,27 @@ export default function MemberToggles({ variant = 'sidebar' }) {
       showSuccess(t('member_added')(name));
     } catch (e) {
       showError(e.response?.data?.error || t('err_member_add'));
+    }
+  };
+
+  const handleRename = async (memberId) => {
+    const name = editName.trim();
+    if (!name) {
+      cancelRename();
+      return;
+    }
+    const member = members.find(m => m.id === memberId);
+    if (member?.name === name) {
+      cancelRename();
+      return;
+    }
+    try {
+      await membersApi.rename(memberId, name);
+      await reload();
+      cancelRename();
+      showSuccess(t('member_renamed'));
+    } catch (e) {
+      showError(e.response?.data?.error || t('err_member_rename'));
     }
   };
 
@@ -84,25 +123,86 @@ export default function MemberToggles({ variant = 'sidebar' }) {
         const locked = checked && includedMemberIds.length === 1;
 
         return (
-          <span key={m.id} className="member-toggle-wrap">
-            <button
-              type="button"
-              className={`member-toggle${checked ? ' member-toggle--on' : ''}`}
-              onClick={() => handleToggle(m)}
-              disabled={locked}
-              title={locked ? t('welcome_include_min_one') : undefined}
-              aria-pressed={checked}
-              style={{
-                '--member-color': color,
-                borderColor: checked ? color : undefined,
-                background: checked ? `${color}18` : undefined,
-                color: checked ? color : undefined,
-              }}
-            >
-              <span className="member-toggle-dot" />
-              {m.name}
-            </button>
-            {!m.is_primary && (
+          <span
+            key={m.id}
+            className="member-toggle-wrap"
+            title={t('member_switch_hint')}
+          >
+            {editingId === m.id ? (
+              <form
+                className="member-toggle-add-form member-toggle-rename-form"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleRename(m.id);
+                }}
+              >
+                <input
+                  ref={renameInputRef}
+                  type="text"
+                  className="member-toggle-add-input"
+                  value={editName}
+                  onChange={(e) => setEditName(e.target.value)}
+                  placeholder={t('member_name_ph')}
+                  maxLength={40}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Escape') cancelRename();
+                  }}
+                  onBlur={() => {
+                    if (!editName.trim()) {
+                      cancelRename();
+                      return;
+                    }
+                    handleRename(m.id);
+                  }}
+                />
+                <button
+                  type="submit"
+                  className="member-toggle-add-confirm"
+                  aria-label={t('save_btn')}
+                  onMouseDown={(e) => e.preventDefault()}
+                >
+                  <Icon icon="heroicons:check" width={14} />
+                </button>
+              </form>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  className={`member-toggle${checked ? ' member-toggle--on' : ''}${locked ? ' member-toggle--locked' : ''}`}
+                  onClick={() => handleToggle(m)}
+                  onDoubleClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    startRename(m);
+                  }}
+                  aria-disabled={locked || undefined}
+                  title={locked ? t('welcome_include_min_one') : t('member_switch_hint')}
+                  aria-pressed={checked}
+                  style={{
+                    '--member-color': color,
+                    borderColor: checked ? color : undefined,
+                    background: checked ? `${color}18` : undefined,
+                    color: checked ? color : undefined,
+                  }}
+                >
+                  <span className="member-toggle-dot" />
+                  {m.name}
+                </button>
+                <button
+                  type="button"
+                  className="member-toggle-edit"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    startRename(m);
+                  }}
+                  aria-label={t('member_rename_btn')}
+                  title={t('member_rename_btn')}
+                >
+                  <Icon icon="heroicons:pencil-square" width={11} />
+                </button>
+              </>
+            )}
+            {!m.is_primary && editingId !== m.id && (
               <button
                 type="button"
                 className="member-toggle-del"

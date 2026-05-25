@@ -6,7 +6,6 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { dateToStr, getCurrentWeek, getCurrentMonth } from '../utils/dates';
 import { SEED_STATS } from '../data/seedStats';
 import { sumEnabledExpenses, SUMMARY_MONTH_DAYS } from '../utils/expenseItems';
-import { getViewMemberId } from '../utils/memberTargets';
 
 const GOAL_I18N = {
   lose: 'macro_cut',
@@ -16,19 +15,19 @@ const GOAL_I18N = {
 };
 
 const EMPTY = {
-  macroGoalLabel: null,
+  macroInsights: [],
   mealsToday: null,
-  scheduleToday: null,
+  scheduleInsights: [],
   ownRecipes: null,
   ownProducts: null,
   monthTotalCost: null,
 };
 
-function resolveMacroGoalLabel(activeMember, t) {
-  if (!activeMember?.macro_goals?.kcal && !activeMember?.goal) return null;
-  const i18nKey = GOAL_I18N[activeMember.goal];
+function resolveMemberMacroLabel(member, t) {
+  if (!member?.macro_goals?.kcal && !member?.goal) return null;
+  const i18nKey = GOAL_I18N[member.goal];
   if (i18nKey) return t(i18nKey);
-  return activeMember.macro_goals?.goalLabel || activeMember.goal || null;
+  return member.macro_goals?.goalLabel || member.goal || null;
 }
 
 export function useWelcomeStats() {
@@ -52,7 +51,6 @@ export function useWelcomeStats() {
     const includedMids = includedMemberIds.length
       ? includedMemberIds
       : (activeId ? [activeId] : []);
-    const scheduleMemberId = getViewMemberId(includedMemberIds, members, activeId);
     const today = dateToStr(new Date());
     const weekStart = getCurrentWeek().start;
     const month = getCurrentMonth();
@@ -62,13 +60,13 @@ export function useWelcomeStats() {
     async function load() {
       setLoading(true);
       try {
-        const [mealsResults, scheduleRes, monthRes, productsRes, recipesRes] = await Promise.all([
+        const [mealsResults, scheduleResults, monthRes, productsRes, recipesRes] = await Promise.all([
           includedMids.length
             ? Promise.all(includedMids.map(id => mealPlan.getDay(today, id)))
             : Promise.resolve([]),
-          scheduleMemberId
-            ? daySchedule.getAll(scheduleMemberId, weekStart)
-            : Promise.resolve({ data: [] }),
+          includedMids.length
+            ? Promise.all(includedMids.map(id => daySchedule.getAll(id, weekStart)))
+            : Promise.resolve([]),
           includedMids.length
             ? mealPlan.getSummary(month.start, month.end, includedMids)
             : Promise.resolve({ data: { total_cost: 0 } }),
@@ -84,12 +82,29 @@ export function useWelcomeStats() {
         const monthTotalCost = foodCost + enabledExtras;
 
         const mealsToday = mealsResults.reduce((sum, res) => sum + (res.data || []).length, 0);
-        const scheduleToday = (scheduleRes.data || []).filter(b => b.day === todayDow).length;
+        const scheduleInsights = includedMids.map((mid, i) => {
+          const member = members.find(m => m.id === mid);
+          const blocks = scheduleResults[i]?.data || [];
+          return {
+            id: mid,
+            name: member?.name || '?',
+            count: blocks.filter(b => b.day === todayDow).length,
+          };
+        });
+
+        const macroInsights = includedMids.map(mid => {
+          const member = members.find(m => m.id === mid);
+          return {
+            id: mid,
+            name: member?.name || '?',
+            label: member ? resolveMemberMacroLabel(member, t) : null,
+          };
+        });
 
         setStats({
-          macroGoalLabel: resolveMacroGoalLabel(activeMember, t),
+          macroInsights,
           mealsToday,
-          scheduleToday,
+          scheduleInsights,
           ownProducts: Math.max(0, productList.length - seed.products),
           ownRecipes: Math.max(0, (recipesRes.data || []).length - seed.recipes),
           monthTotalCost,
@@ -103,7 +118,7 @@ export function useWelcomeStats() {
 
     load();
     return () => { cancelled = true; };
-  }, [user?.id, user?.lang, activeId, activeMember?.goal, activeMember?.macro_goals, members, lang, t, includedKey]); // eslint-disable-line
+  }, [user?.id, user?.lang, members, lang, t, includedKey]); // eslint-disable-line
 
   return { stats, loading };
 }

@@ -15,8 +15,37 @@
 }
 
 .member-toggle-wrap:hover .member-toggle-del,
-.member-toggle-wrap:focus-within .member-toggle-del {
+.member-toggle-wrap:focus-within .member-toggle-del,
+.member-toggle-wrap:hover .member-toggle-edit,
+.member-toggle-wrap:focus-within .member-toggle-edit {
   opacity: 1;
+  pointer-events: auto;
+}
+
+.member-toggle-edit {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 1px solid rgba(45, 212, 191, 0.35);
+  border-radius: 50%;
+  background: #1f2937;
+  color: #2dd4bf;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s, background 0.15s, color 0.15s;
+}
+
+.member-toggle-edit:hover {
+  background: rgba(13, 148, 136, 0.2);
+  color: #5eead4;
 }
 
 .member-toggle-del {
@@ -36,16 +65,13 @@
   color: #f87171;
   cursor: pointer;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.15s, background 0.15s, color 0.15s;
 }
 
 .member-toggle-del:hover {
   background: rgba(239, 68, 68, 0.2);
   color: #fca5a5;
-}
-
-.member-toggles--welcome .member-toggle-del {
-  opacity: 1;
 }
 
 .member-toggle {
@@ -66,8 +92,9 @@
 .member-toggles--sidebar .member-toggle {
   padding: 5px 12px;
   font-size: 11px;
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(75, 85, 99, 0.75);
+  background: rgba(31, 41, 55, 0.35);
+  border-color: rgba(55, 65, 81, 0.55);
+  color: #9ca3af;
 }
 
 .member-toggle--on {
@@ -76,12 +103,21 @@
 }
 
 .member-toggles--sidebar .member-toggle--on {
-  background: color-mix(in srgb, var(--member-color, #0d9488) 12%, transparent);
+  background: color-mix(in srgb, var(--member-color, #0d9488) 14%, transparent);
+  border-color: color-mix(in srgb, var(--member-color, #0d9488) 35%, transparent);
 }
 
 .member-toggle:disabled {
   cursor: default;
   opacity: 1;
+}
+
+.member-toggle--locked {
+  cursor: default;
+}
+
+.member-toggle--locked:hover {
+  border-color: var(--member-color, rgba(55, 65, 81, 0.85));
 }
 
 .member-toggle:not(:disabled):hover {
@@ -138,6 +174,10 @@
   border-radius: 999px;
   border: 1px solid rgba(13, 148, 136, 0.45);
   background: rgba(31, 41, 55, 0.55);
+}
+
+.member-toggle-rename-form {
+  cursor: text;
 }
 
 .member-toggles--sidebar .member-toggle-add-form {
