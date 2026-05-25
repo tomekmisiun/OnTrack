@@ -30,7 +30,7 @@ jobs:
       - name: Uruchom testy
         run: pytest tests/ -v
         env:
-          DATABASE_URL: sqlite:///:memory:
+          DATABASE_URL: "sqlite:///:memory:"
           FLASK_SECRET_KEY: ci-test-flask-secret-key-0123456789abcdef
           JWT_SECRET_KEY: ci-test-jwt-secret-key-0123456789abcdef
           GOOGLE_CLIENT_ID: ci-test-google-client-id
