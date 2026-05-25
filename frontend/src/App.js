@@ -190,7 +190,7 @@ function TourHost() {
           onEvent={handleTourEvent}
           options={{
             skipScroll: true,
-            showProgress: true,
+            showProgress: false,
             buttons: ['back', 'close', 'skip', 'primary'],
             closeButtonAction: 'skip',
           }}
