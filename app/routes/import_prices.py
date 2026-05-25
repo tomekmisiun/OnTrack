@@ -4,8 +4,6 @@ from app.utils import current_uid, current_user_lang
 from app import db
 from app.models.product import Product
 from app.models.import_log import ImportLog
-import anthropic
-import base64
 import json
 import os
 import re
@@ -13,6 +11,7 @@ import io
 from PIL import Image
 
 from app.import_names import translate_product_name
+from app.gemini_client import generate_with_gemini, is_gemini_overloaded
 
 import_bp = Blueprint('import', __name__)
 
@@ -102,7 +101,7 @@ def _sanitize_image(data: bytes):
 
 def _safe_text(raw: str) -> str:
     text = raw[:MAX_TEXT_CHARS]
-    # Strip potentially malicious patterns — Claude is still constrained by the system prompt
+    # Strip potentially malicious patterns — Gemini is still constrained by the system prompt
     if INJECTION_PATTERNS.search(text):
         text = re.sub(INJECTION_PATTERNS, '[REMOVED]', text)
     return text
@@ -208,11 +207,13 @@ def parse_receipt():
     if len(file_data) > MAX_FILE_SIZE:
         return jsonify({'error': 'File too large (max 5 MB)'}), 400
 
-    api_key = os.environ.get('ANTHROPIC_API_KEY')
+    api_key = os.environ.get('GEMINI_API_KEY')
     if not api_key:
-        return jsonify({'error': 'ANTHROPIC_API_KEY is not configured on the server'}), 500
+        return jsonify({
+            'error': 'AI parsing is not configured on the server.',
+            'code': 'gemini_not_configured',
+        }), 503
 
-    client = anthropic.Anthropic(api_key=api_key)
     is_image = ext in ('png', 'jpg', 'jpeg', 'webp')
 
     if is_image:
@@ -224,10 +225,10 @@ def parse_receipt():
             clean_data, mime = _sanitize_image(file_data)
         except ValueError as e:
             return jsonify({'error': str(e)}), 400
-        b64 = base64.standard_b64encode(clean_data).decode()
+        from google.genai import types
         user_content = [
-            {'type': 'image', 'source': {'type': 'base64', 'media_type': mime, 'data': b64}},
-            {'type': 'text', 'text': 'Parse this receipt image and return the JSON.'},
+            types.Part.from_bytes(data=clean_data, mime_type=mime),
+            types.Part.from_text(text='Parse this receipt image and return the JSON.'),
         ]
     else:
         try:
@@ -240,16 +241,22 @@ def parse_receipt():
     lang = current_user_lang()
 
     try:
-        msg = client.messages.create(
-            model='claude-haiku-4-5-20251001',
-            max_tokens=1024,
-            system=_system_prompt(lang),
-            messages=[{'role': 'user', 'content': user_content}],
+        from google import genai
+        client = genai.Client(api_key=api_key)
+        raw = generate_with_gemini(
+            client,
+            user_content,
+            system_instruction=_system_prompt(lang),
         )
-    except anthropic.APIError as e:
-        return jsonify({'error': f'API error: {str(e)}'}), 502
+    except Exception as e:
+        if is_gemini_overloaded(e):
+            return jsonify({
+                'error': 'Gemini is busy right now. Try again in a moment.',
+                'code': 'gemini_busy',
+            }), 503
+        return jsonify({'error': f'Gemini API error: {str(e)}', 'code': 'gemini_error'}), 502
 
-    parsed = _extract_json(msg.content[0].text)
+    parsed = _extract_json(raw)
     if not parsed:
         return jsonify({'error': 'Failed to process response — please try again'}), 500
 

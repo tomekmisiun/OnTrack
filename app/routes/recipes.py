@@ -8,7 +8,8 @@ from app.models.recipe_parse_log import RecipeParseLog
 from app.utils import current_uid, current_user_lang
 from app.ingredient_match import ingredient_matches_product
 from app.ingredient_canonical import canonicalize_ingredient
-import json, re, os, time
+from app.gemini_client import generate_with_gemini, is_gemini_overloaded
+import json, re, os
 
 recipes_bp = Blueprint('recipes', __name__)
 
@@ -247,33 +248,6 @@ Rules:
 - If ingredient quantity is unclear, estimate a reasonable amount"""
 
 
-_GEMINI_PARSE_MODELS = ('gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash')
-
-
-def _is_gemini_overloaded(err: Exception) -> bool:
-    msg = str(err).lower()
-    return any(x in msg for x in ('503', 'unavailable', 'high demand', '429', 'resource exhausted', 'overloaded'))
-
-
-def _generate_with_gemini(client, prompt: str) -> str:
-    """Call Gemini with retries and model fallbacks when the API is overloaded."""
-    last_err = None
-    for model in _GEMINI_PARSE_MODELS:
-        for attempt in range(2):
-            try:
-                response = client.models.generate_content(model=model, contents=prompt)
-                return response.text
-            except Exception as e:
-                last_err = e
-                if _is_gemini_overloaded(e) and attempt == 0:
-                    time.sleep(1.5)
-                    continue
-                if not _is_gemini_overloaded(e):
-                    raise
-                break
-    raise last_err
-
-
 @recipes_bp.route('/parse-limit', methods=['GET'])
 @jwt_required()
 def get_parse_limit():
@@ -322,9 +296,9 @@ def parse_recipe_text():
     try:
         from google import genai
         client = genai.Client(api_key=api_key)
-        raw = _generate_with_gemini(client, prompt)
+        raw = generate_with_gemini(client, prompt)
     except Exception as e:
-        if _is_gemini_overloaded(e):
+        if is_gemini_overloaded(e):
             return jsonify({
                 'error': 'Gemini is busy right now. Try again in a moment or use Parse without AI.',
                 'code': 'gemini_busy',

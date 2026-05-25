@@ -3,6 +3,19 @@ import io
 from app.models.product import Product
 
 
+def test_parse_receipt_without_gemini_key(client, auth_headers, monkeypatch):
+    monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+    data = {"file": (io.BytesIO(b"name,price\nTest,1.99"), "prices.txt")}
+    res = client.post(
+        "/api/import/parse",
+        headers=auth_headers,
+        data=data,
+        content_type="multipart/form-data",
+    )
+    assert res.status_code == 503
+    assert res.get_json()["code"] == "gemini_not_configured"
+
+
 def test_parse_free_requires_file(client, auth_headers):
     res = client.post("/api/import/parse-free", headers=auth_headers)
     assert res.status_code == 400

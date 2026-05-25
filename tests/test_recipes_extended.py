@@ -1,11 +1,11 @@
 from app.models.product import Product
 from app.models.recipe import Recipe
-from app.routes.recipes import _is_gemini_overloaded
+from app.gemini_client import is_gemini_overloaded
 
 
 def test_is_gemini_overloaded_detects_503():
-    assert _is_gemini_overloaded(Exception("503 UNAVAILABLE. high demand"))
-    assert not _is_gemini_overloaded(Exception("invalid API key"))
+    assert is_gemini_overloaded(Exception("503 UNAVAILABLE. high demand"))
+    assert not is_gemini_overloaded(Exception("invalid API key"))
 
 
 def test_parse_limit_returns_remaining(client, auth_headers):
