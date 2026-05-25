@@ -11,13 +11,13 @@ from pathlib import Path
 
 from rapidfuzz import fuzz, process
 
-_APP_ROOT = Path(__file__).resolve().parents[1]
-_REPO_ROOT = _APP_ROOT.parent
+from app.paths import RUNTIME_DATA_DIR, SCRAPER_DATA
+
 _MACROS_PATHS = (
-    _APP_ROOT / 'data' / 'ingredients_macros.json',
-    _REPO_ROOT / 'scraper' / 'data' / 'ingredients_macros.json',
+    SCRAPER_DATA / "macros" / "ingredients_macros.json",
+    RUNTIME_DATA_DIR / "ingredients_macros.json",
 )
-_AI_CACHE_PATH = _APP_ROOT / 'data' / 'macro_ai_cache.json'
+_AI_CACHE_PATH = RUNTIME_DATA_DIR / "macro_ai_cache.json"
 
 _PL_TRANSLATE = str.maketrans('ąćęłńóśźż', 'acelnoszz')
 _CACHE_LOCK = threading.Lock()

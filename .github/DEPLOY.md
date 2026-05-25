@@ -1,58 +1,58 @@
 # Deploy — Wait for CI (Railway + GitHub Actions)
 
-Produkcja deployuje się z Railway po pushu na `main`, **ale tylko gdy GitHub Actions (job `test`) przejdzie**. Nie trzeba sekretów Railway w GitHub.
+Production deploys from Railway after a push to `main`, **but only when GitHub Actions (job `test`) passes**. You do not need Railway secrets in GitHub.
 
-## 1. Railway — oba serwisy (`ontrack-back`, `ontrackapp`)
+## 1. Railway — both services (`ontrack-back`, `ontrackapp`)
 
-Dla **każdego** serwisu osobno → **Settings** → **Source**:
+For **each** service separately → **Settings** → **Source**:
 
-1. **Source Repo** — podpięte do `tomekmislun/Meal-planner-and-budgeter`
-2. **Branch connected to production** → **`main`** (Connect Environment to Branch, jeśli odłączone)
-3. **Auto deploys when pushed to GitHub** — **włączone** (nie klikaj Disable)
+1. **Source Repo** — connected to `tomekmislun/Meal-planner-and-budgeter`
+2. **Branch connected to production** → **`main`** (Connect Environment to Branch if disconnected)
+3. **Auto deploys when pushed to GitHub** — **enabled** (do not click Disable)
 4. **Wait for CI** → **ON**
 
-Powtórz dla backendu i frontendu. Kliknij **Apply** / **Deploy**, jeśli Railway pokazuje pending changes.
+Repeat for backend and frontend. Click **Apply** / **Deploy** if Railway shows pending changes.
 
 ## 2. GitHub Actions
 
-Workflow `.github/workflows/ci.yml` uruchamia tylko **test** (pytest).
+The workflow `.github/workflows/ci.yml` runs only **test** (pytest).
 
 ```
-push main → job test
-              ✅ → Railway czeka i deployuje z GitHub
-              ❌ → Railway pomija deploy (SKIPPED)
+push to main → job test
+                 ✅ → Railway waits and deploys from GitHub
+                 ❌ → Railway skips deploy (SKIPPED)
 ```
 
-PR na `main` → tylko test, bez deployu.
+PR to `main` → test only, no deploy.
 
 ## 3. Branch protection (GitHub)
 
-**Settings → Branches → Add rule** dla `main`:
+**Settings → Branches → Add rule** for `main`:
 
 - Require a pull request before merging
 - Require status checks to pass: **`test`**
 
-## 4. Workflow deweloperski
+## 4. Developer workflow
 
 ```
 feature branch → Pull Request → test (CI)
-                              → merge po review + zielone CI
-main push       → test → Railway deploy (Wait for CI)
+                               → merge after review + green CI
+push to main     → test → Railway deploy (Wait for CI)
 ```
 
-**Nie pushuj bezpośrednio na `main`.**
+**Do not push directly to `main`.**
 
-## 5. Lokalnie vs produkcja
+## 5. Local vs production
 
-| Środowisko | Jak uruchomić |
-|------------|----------------|
+| Environment | How to run |
+|-------------|------------|
 | Dev | `docker compose up` |
-| Produkcja | merge na `main` + zielony CI → Railway auto-deploy |
+| Production | merge to `main` + green CI → Railway auto-deploy |
 
 ## Troubleshooting
 
-- Deploy nie startuje po pushu → sprawdź, czy branch `main` jest podpięty i Wait for CI włączone
-- Deploy mimo failu CI → Wait for CI wyłączone albo workflow nie ma `on: push: branches: [main]`
-- Status `WAITING` w Railway → normalne, czeka na GitHub Actions
+- Deploy does not start after push → check that branch `main` is connected and Wait for CI is enabled
+- Deploy despite failed CI → Wait for CI is off or the workflow is missing `on: push: branches: [main]`
+- Status `WAITING` in Railway → normal; waiting for GitHub Actions
 
 Docs: [Railway — Wait for CI](https://docs.railway.com/deployments/github-autodeploys#wait-for-ci)

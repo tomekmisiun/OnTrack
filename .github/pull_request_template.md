@@ -1,9 +1,9 @@
-## Opis
+## Description
 
-<!-- Co zmieniasz i po co? -->
+<!-- What are you changing and why? -->
 
 ## Checklist
 
-- [ ] Zmiany przetestowane lokalnie (`docker compose up` / pytest)
-- [ ] PR celuje w `main` (nie push bezpośrednio na main)
-- [ ] Po merge: CI `test` ✅ → Railway deploy (Wait for CI)
+- [ ] Changes tested locally (`docker compose up` / pytest)
+- [ ] PR targets `main` (no direct push to main)
+- [ ] After merge: CI `test` ✅ → Railway deploy (Wait for CI)

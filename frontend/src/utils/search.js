@@ -1,4 +1,6 @@
 // Levenshtein distance — ile edycji (wstaw/usuń/zamień znak) dzieli dwa słowa
+import { stemIngredientWord } from './ingredientStem';
+
 function levenshtein(a, b) {
   const m = a.length, n = b.length;
   if (m === 0) return n;
@@ -28,6 +30,9 @@ const ING_STOP_WORDS = new Set([
   // PL — słowa przygotowania / szum
   'oraz', 'lub', 'albo', 'duze', 'male', 'duzy', 'maly', 'okolo', 'bardzo',
   'swieze', 'ugotowane', 'posiekane', 'uniwersalnej', 'pelne',
+  'niepelne', 'niepelna', 'niepelny', 'nepelne', 'nepelna',
+  'szczypta', 'srednie', 'srednia', 'sredni', 'srednich',
+  'pol', 'polowa', 'polowe', 'niepelnych',
   'typu', 'np', 'xxl', 'saszetka', 'saszetki', 'sztuki', 'sztuk', 'duza', 'chwila',
   // EN — prep words / noise
   'and', 'or', 'very', 'large', 'big', 'small', 'little', 'about', 'approx', 'approximately',
@@ -72,47 +77,111 @@ function wordsMatchStrict(a, b) {
   return false;
 }
 
+/** Dopasowanie głównego rzeczownika — max 1 literówka, ten sam początek słowa. */
+function wordsMatchPrimary(a, b) {
+  if (a === b) return true;
+  const minLen = Math.min(a.length, b.length);
+  if (minLen < 4) return false;
+  if (a.slice(0, 3) !== b.slice(0, 3)) return false;
+  if ((a.startsWith(b) || b.startsWith(a)) && Math.abs(a.length - b.length) <= 2) {
+    return true;
+  }
+  return levenshtein(a, b) <= 1;
+}
+
+function matchWords(text) {
+  return ingWords(text).map(stemIngredientWord);
+}
+
 function prodWords(text) {
   return norm(text)
     .split(/\s+/)
     .filter(w => w.length >= 2 && !ING_STOP_WORDS.has(w) && !ING_QUALIFIERS.has(w));
 }
 
+/** Rodzina jednostki: objętość (ml/l), masa (g/kg), sztuki. */
+export function unitFamily(unit) {
+  const u = (unit || 'g').toLowerCase();
+  if (u === 'ml' || u === 'l') return 'volume';
+  if (u === 'szt') return 'piece';
+  return 'mass';
+}
+
+/** Czy jednostka składnika z przepisu pasuje do produktu w bazie (mleko 375 ml ≠ mięta w g). */
+export function unitsCompatible(ingUnit, product) {
+  const ingFam = unitFamily(ingUnit);
+  if (product.sold_by_weight) return ingFam === 'mass';
+  return ingFam === unitFamily(product.unit);
+}
+
 /** Czy produkt sensownie pasuje do składnika z przepisu (strict — wolę brak niż fałszywe trafienie). */
 export function ingredientMatchesProduct(ingredientText, productName) {
-  const words = ingWords(ingredientText);
+  const words = matchWords(ingredientText);
   if (!words.length) return false;
 
-  const pWords = prodWords(productName);
+  const pWords = prodWords(productName).map(stemIngredientWord);
   if (!pWords.length) return false;
 
   const primary = words[0];
-  const prodNorm = norm(productName);
-
-  const primaryOk = pWords.some(pw => wordsMatchStrict(primary, pw))
-    || (primary.length >= 5 && prodNorm.includes(primary));
-  if (!primaryOk) return false;
+  if (!wordsMatchPrimary(primary, pWords[0])) return false;
 
   if (words.length === 1) return true;
 
-  const matched = words.filter(iw => pWords.some(pw => wordsMatchStrict(iw, pw))).length;
-  if (matched / words.length >= 0.5) return true;
+  const restIng = words.slice(1);
+  const restProd = pWords.slice(1);
+  if (!restProd.length) return true;
 
-  return wordsMatchStrict(pWords[0], primary);
+  return restIng.every(iw => restProd.some(pw => wordsMatchPrimary(iw, pw) || iw === pw));
 }
 
-/** Wybierz najlepszy produkt — preferuj dokładne trafienie rzeczownika (np. cukier, nie odżywka). */
-export function pickBestMatchingProduct(ingredientText, products) {
-  const candidates = products.filter(p => ingredientMatchesProduct(ingredientText, p.name));
-  if (!candidates.length) return null;
-  const words = ingWords(ingredientText);
+/** Nazwa + jednostka — pełna weryfikacja dopasowania składnik ↔ produkt. */
+export function productMatchesIngredient(ingredientText, product, ingUnit = 'g') {
+  if (!unitsCompatible(ingUnit, product)) return false;
+  return ingredientMatchesProduct(ingredientText, product.name);
+}
+
+function scoreProductMatch(words, productName) {
+  const pWords = prodWords(productName).map(stemIngredientWord);
+  if (!pWords.length) return -1;
+
+  let score = 0;
+  if (pWords[0] === words[0]) score += 100;
+  else if (wordsMatchPrimary(words[0], pWords[0])) score += 50;
+  else return -1;
+
+  for (let i = 1; i < words.length; i++) {
+    if (pWords.length === 1) break;
+    if (restProdHas(pWords, words[i])) score += 20;
+    else return -1;
+  }
+
+  if (pWords.length === words.length) score += 10;
+  score -= (pWords.length - 1) * 5;
+  return score;
+}
+
+function restProdHas(pWords, word) {
+  return pWords.slice(1).some(pw => pw === word || wordsMatchPrimary(word, pw));
+}
+
+/** Wybierz najlepszy produkt — preferuj dokładne trafienie rzeczownika (np. cukier, nie curry). */
+export function pickBestMatchingProduct(ingredientText, products, ingUnit = 'g') {
+  const words = matchWords(ingredientText);
   if (!words.length) return null;
-  const primary = words[0];
-  const exact = candidates.find(p => prodWords(p.name).some(w => w === primary));
-  if (exact) return exact;
-  const starts = candidates.find(p => norm(p.name).startsWith(primary));
-  if (starts) return starts;
-  return candidates[0];
+
+  let best = null;
+  let bestScore = -1;
+
+  for (const p of products) {
+    if (!productMatchesIngredient(ingredientText, p, ingUnit)) continue;
+    const score = scoreProductMatch(words, p.name);
+    if (score > bestScore) {
+      bestScore = score;
+      best = p;
+    }
+  }
+
+  return best;
 }
 
 /**

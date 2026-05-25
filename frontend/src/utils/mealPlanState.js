@@ -52,3 +52,36 @@ export function buildOptimisticMeal({ date, position, recipe, memberId, tempId }
     recipe: recipeSnapshotFromCarousel(recipe),
   };
 }
+
+/** Posiłki do usunięcia u wszystkich zaznaczonych domowników (ten sam dzień + opcjonalnie slot). */
+export async function resolveMealIdsForAllMembers({
+  dateStr,
+  position,
+  memberIds,
+  mealsByDate,
+  viewMemberId,
+  getDay,
+}) {
+  if (!dateStr || !memberIds?.length) return [];
+
+  const ids = new Set();
+  await Promise.all(memberIds.map(async (memberId) => {
+    let dayMeals = [];
+    if (memberId === viewMemberId) {
+      dayMeals = mealsByDate[dateStr] || [];
+    } else {
+      try {
+        const res = await getDay(dateStr, memberId);
+        dayMeals = res.data || [];
+      } catch {
+        dayMeals = [];
+      }
+    }
+    const matches = position != null
+      ? dayMeals.filter(m => m.position === position)
+      : dayMeals;
+    matches.forEach(m => ids.add(m.id));
+  }));
+
+  return [...ids];
+}

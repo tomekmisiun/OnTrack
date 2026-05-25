@@ -6,6 +6,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../contexts/ToastContext';
 import { fuzzySearch } from '../utils/search';
 import { fetchProductMacros } from '../utils/macroLookup';
+import './Products.css';
 
 const toUnitPrice = (packagePrice, packageWeight, unit) => {
   const pkg = parseFloat(packageWeight) || 1;
@@ -25,6 +26,112 @@ const displayPrice = (p, currency) => {
 };
 
 const EMPTY_FORM = { name: '', package_weight: '', package_price: '', unit: 'g', sold_by_weight: false };
+
+function ImportHelpContent({ t, lang, remainingImports, promptCopied, onCopyPrompt }) {
+  return (
+    <>
+      <div className="products-help-options">
+        <div>
+          <div className="products-help-option-title">{t('opt1_title')}</div>
+          <ol className="products-help-steps">
+            <li>{t('opt1_s1')}</li>
+            <li>
+              {t('opt1_s2_pre')}{' '}
+              <span className="products-help-badge">{t('apply_ai_label')}</span>
+              {' '}-{' '}
+              <a href="https://gemini.google.com/app" target="_blank" rel="noreferrer">Gemini</a>
+              {' '}{t('opt1_s2_suf')}
+            </li>
+            <li>
+              {t('opt1_s3_pre')}{' '}
+              <span className="products-help-badge">{t('apply_changes_label')}</span>
+            </li>
+          </ol>
+          <div className="products-help-limit">
+            {t('ai_daily_lim')}{remainingImports !== null && <span>{t('ai_rem')(remainingImports)}</span>}
+          </div>
+          <div className="products-help-note">{t('lost_receipt_hint')}</div>
+        </div>
+        <div>
+          <div className="products-help-option-title">{t('opt2_title')}</div>
+          <ol className="products-help-steps">
+            <li>
+              {t('opt2_required_fmt')}{' '}
+              <code>{t('csv_format_full')}</code>
+              <br />
+              {t('opt2_or')}{' '}
+              <code>{t('csv_format_short')}</code>
+              {' '}<span style={{ color: '#6b7280', fontSize: 11 }}>({t('opt2_manually')})</span>
+            </li>
+            <li>
+              {t('opt2_upload_pre')}{' '}
+              <span className="products-help-badge">{t('apply_file_label')}</span>
+            </li>
+          </ol>
+          <div className="products-help-free">{t('no_lim')}</div>
+        </div>
+      </div>
+      <div className="products-prompt-box">
+        <div className="products-prompt-intro">{t('quick_update_hint')}</div>
+        <div className="products-prompt-intro">
+          <strong>1.</strong> {t('go_to_ai_pre')}{' '}
+          <a href="https://claude.ai/" target="_blank" rel="noreferrer">Claude</a>
+          {' / '}
+          <a href="https://gemini.google.com/app" target="_blank" rel="noreferrer">Gemini</a>
+          {' / '}
+          <a href="https://chatgpt.com/" target="_blank" rel="noreferrer">ChatGPT</a>
+          {' '}{t('go_to_ai_suf')}
+        </div>
+        <div className="products-prompt-scroll">
+          <pre className="products-prompt-pre">{t('products_prompt')}</pre>
+          <button
+            type="button"
+            className={`products-prompt-copy${promptCopied ? ' products-prompt-copy--done' : ''}`}
+            onClick={onCopyPrompt}
+          >
+            {promptCopied ? t('btn_copied') : t('copy_prompt_btn')}
+          </button>
+        </div>
+        <div className="products-prompt-step"><strong>2.</strong> {t('paste_products_step')}</div>
+        <div className="products-prompt-step"><strong>3.</strong> {t('create_doc_step')}</div>
+        <div className="products-prompt-step"><strong>4.</strong> {t('copy_response_step')}</div>
+        <div className="products-prompt-step"><strong>5.</strong> {t('save_doc_step_pre')} <code>{lang === 'en' ? 'yourname.txt' : 'twojanazwa.txt'}</code></div>
+        <div className="products-prompt-step"><strong>6.</strong> {t('drag_doc_step')} <strong>{t('click_drag_file')}</strong></div>
+      </div>
+    </>
+  );
+}
+
+function ImportHelpModal({ open, onClose, t, lang, remainingImports, promptCopied, onCopyPrompt }) {
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return (
+    <div className="products-import-modal-backdrop" onClick={onClose}>
+      <div className="products-import-modal" onClick={e => e.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="import-help-title">
+        <div className="products-import-modal-header">
+          <h2 id="import-help-title" className="products-import-modal-title">{t('import_how_to')}</h2>
+          <button type="button" className="products-import-modal-close" onClick={onClose} aria-label={t('cancel')}>×</button>
+        </div>
+        <div className="products-import-modal-body dark-scroll">
+          <ImportHelpContent
+            t={t}
+            lang={lang}
+            remainingImports={remainingImports}
+            promptCopied={promptCopied}
+            onCopyPrompt={onCopyPrompt}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const MacroDisplay = ({ p }) => {
   const { t } = useLanguage();
@@ -54,6 +161,7 @@ export default function Products() {
   const [dragOver, setDragOver] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [listOpen, setListOpen] = useState(true);
+  const [importHelpModalOpen, setImportHelpModalOpen] = useState(false);
   const [search, setSearch] = useState('');
   const [promptCopied, setPromptCopied] = useState(false);
   const [selectionMode, setSelectionMode] = useState(false);
@@ -435,94 +543,95 @@ export default function Products() {
     return { name, package_price: price, package_weight: weight, unit, sold_by_weight: isByWeight };
   };
 
+  const shopLinks = lang === 'en' ? [
+    { domain: 'www.tesco.com', url: 'https://www.tesco.com/', label: 'Tesco' },
+    { domain: 'www.aldi.co.uk', url: 'https://www.aldi.co.uk/', label: 'Aldi' },
+    { domain: 'groceries.asda.com', url: 'https://groceries.asda.com/', label: 'Asda' },
+  ] : [
+    { domain: 'zakupy.auchan.pl', url: 'https://zakupy.auchan.pl/', label: 'Auchan' },
+    { domain: 'zakupy.biedronka.pl', url: 'https://zakupy.biedronka.pl/', label: 'Biedronka' },
+    { domain: 'carrefour.pl', url: 'https://www.carrefour.pl/', label: 'Carrefour' },
+  ];
+
   return (
-    <div>
-      <div className="card" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0, marginBottom: 20, padding: 0, overflow: 'hidden' }}>
-      <div style={{ padding: '20px 24px' }}>
+    <div className="products-page">
+      <div className="card products-add-card">
         <h2>{t('add_product_title')}</h2>
 
-        {/* Szukasz produktów */}
-        <div style={{ marginBottom: 16 }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: '#9ca3af', textTransform: 'uppercase', letterSpacing: '0.7px', marginBottom: 8 }}>{t('search_products_hint')}</div>
-          <div style={{ display: 'flex', gap: 8 }}>
-            {(lang === 'en' ? [
-              { domain: 'www.tesco.com',  url: 'https://www.tesco.com/',        label: 'Tesco' },
-              { domain: 'www.aldi.co.uk', url: 'https://www.aldi.co.uk/',       label: 'Aldi' },
-              { domain: 'groceries.asda.com', url: 'https://groceries.asda.com/', label: 'Asda' },
-            ] : [
-              { domain: 'zakupy.auchan.pl',    url: 'https://zakupy.auchan.pl/',    label: 'Auchan' },
-              { domain: 'zakupy.biedronka.pl', url: 'https://zakupy.biedronka.pl/', label: 'Biedronka' },
-              { domain: 'carrefour.pl',        url: 'https://www.carrefour.pl/',    label: 'Carrefour' },
-            ]).map(({ domain, url, label }) => (
-              <a key={label} href={url} target="_blank" rel="noreferrer"
-                style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 6, textDecoration: 'none', background: '#111827', border: '1px solid #374151', borderRadius: 8, padding: '10px 8px', transition: 'border-color 0.15s', minWidth: 0 }}
-                onMouseEnter={e => e.currentTarget.style.borderColor = '#0d9488'}
-                onMouseLeave={e => e.currentTarget.style.borderColor = '#374151'}>
-                <img src={`https://www.google.com/s2/favicons?domain=${domain}&sz=32`} alt="" style={{ width: 22, height: 22, borderRadius: 4 }} />
-                <span style={{ fontSize: 11, fontWeight: 600, color: '#e2e8f0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100%', textAlign: 'center' }}>{label}</span>
-              </a>
-            ))}
-          </div>
-        </div>
+        <div className="products-add-layout">
+          <section className="products-inspire-band">
+            <div className="products-section-label">
+              <Icon icon="heroicons:building-storefront" width={15} />
+              {t('search_products_hint')}
+            </div>
+            <div className="products-inspire-grid">
+              {shopLinks.map(({ domain, url, label }) => (
+                <a key={label} href={url} target="_blank" rel="noreferrer" className="products-inspire-link">
+                  <img src={`https://www.google.com/s2/favicons?domain=${domain}&sz=32`} alt="" />
+                  <span>{label}</span>
+                </a>
+              ))}
+            </div>
+          </section>
 
-        {/* Textarea + formularz obok siebie */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
-          <textarea
-            value={pasteText}
-            maxLength={500}
-            onChange={e => {
-              const txt = e.target.value.slice(0, 500);
-              setPasteText(txt);
-              const parsed = parseProductText(txt);
-              if (parsed) setForm(f => ({ ...f, ...parsed }));
-              else if (!txt.trim()) setForm(EMPTY_FORM);
-            }}
-            placeholder={t('product_paste_ph')}
-            style={{ width: '100%', boxSizing: 'border-box', minHeight: 250, padding: '8px 10px', fontSize: 12, fontFamily: 'inherit', lineHeight: 1.6, resize: 'none', background: '#111827', border: '1px solid #374151', color: '#e2e8f0', borderRadius: 7, outline: 'none' }}
-            onFocus={e => e.target.style.borderColor = '#0d9488'}
-            onBlur={e => e.target.style.borderColor = '#374151'}
-          />
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              <div style={{ fontSize: 13, color: '#e2e8f0', fontWeight: 600 }}>{t('check_data_label')}</div>
-              <div>
-                <div style={fl}>{t('product_name_lbl')}</div>
-                <input value={form.name} maxLength={50} onChange={e => setForm({ ...form, name: e.target.value.slice(0, 50) })}
-                  style={{ width: '100%', boxSizing: 'border-box' }} />
+          <div className="products-add-columns">
+            <div className="products-editor">
+              <div className="products-editor-head">
+                <Icon icon="heroicons:clipboard-document" width={18} />
+                {t('product_paste_title')}
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 8, alignItems: 'end' }}>
-                <div>
-                  <div style={fl}>{t('price_per_kg_lbl')}</div>
+              <div className="products-textarea-wrap">
+                <textarea
+                  className="products-textarea"
+                  value={pasteText}
+                  maxLength={500}
+                  onChange={e => {
+                    const txt = e.target.value.slice(0, 500);
+                    setPasteText(txt);
+                    const parsed = parseProductText(txt);
+                    if (parsed) setForm(f => ({ ...f, ...parsed }));
+                    else if (!txt.trim()) setForm(EMPTY_FORM);
+                  }}
+                  placeholder={t('product_paste_ph')}
+                />
+              </div>
+            </div>
+
+            <div className="products-form-panel">
+              <div className="products-form-head">
+                <Icon icon="heroicons:check-badge" width={18} />
+                {t('check_data_label')}
+              </div>
+              <div className="products-form-field">
+                <label className="products-form-label">{t('product_name_lbl')}</label>
+                <input value={form.name} maxLength={50} onChange={e => setForm({ ...form, name: e.target.value.slice(0, 50) })} />
+              </div>
+              <div className="products-price-row">
+                <div className="products-form-field">
+                  <label className="products-form-label">{t('price_per_kg_lbl')}</label>
                   <input type="number" className="no-spin" step="0.01" min="0" max="9999" value={form.package_price}
                     onChange={e => setForm({ ...form, package_price: numClamp(e.target.value, 9999) })}
-                    placeholder={t('price_ph')} style={{ width: '100%', boxSizing: 'border-box' }} />
+                    placeholder={t('price_ph')} />
                 </div>
-                <div style={{ display: 'flex', borderRadius: 7, overflow: 'hidden', border: '1px solid #374151' }}>
-                  <button type="button" onClick={() => setForm(f => ({ ...f, sold_by_weight: false }))}
-                    style={{ padding: '9px 10px', border: 'none', borderRight: '1px solid #374151', cursor: 'pointer', fontSize: 11, fontWeight: 600, transition: 'all 0.15s', whiteSpace: 'nowrap',
-                      background: !form.sold_by_weight ? '#1e3a3a' : 'transparent', color: !form.sold_by_weight ? '#2dd4bf' : '#6b7280' }}>
+                <div className="products-toggle-group">
+                  <button type="button" className={!form.sold_by_weight ? 'active' : ''} onClick={() => setForm(f => ({ ...f, sold_by_weight: false }))}>
                     {t('pkg_btn')}
                   </button>
-                  <button type="button" onClick={() => setForm(f => ({ ...f, sold_by_weight: true, unit: 'g', package_weight: '' }))}
-                    style={{ padding: '9px 10px', border: 'none', cursor: 'pointer', fontSize: 11, fontWeight: 600, transition: 'all 0.15s', whiteSpace: 'nowrap',
-                      background: !!form.sold_by_weight ? '#1e3a3a' : 'transparent', color: !!form.sold_by_weight ? '#2dd4bf' : '#6b7280' }}>
+                  <button type="button" className={form.sold_by_weight ? 'active' : ''} onClick={() => setForm(f => ({ ...f, sold_by_weight: true, unit: 'g', package_weight: '' }))}>
                     {t('weight_btn')}
                   </button>
                 </div>
               </div>
               {!form.sold_by_weight && (
-                <div>
-                  <div style={fl}>{t('pkg_capacity_lbl')}</div>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 8, alignItems: 'stretch' }}>
+                <div className="products-form-field">
+                  <label className="products-form-label">{t('pkg_capacity_lbl')}</label>
+                  <div className="products-unit-row">
                     <input type="number" className="no-spin" min="0" max="99999" value={form.package_weight}
                       onChange={e => setForm({ ...form, package_weight: numClamp(e.target.value) })}
-                      placeholder={t('pkg_ph')} style={{ width: '100%', boxSizing: 'border-box' }} />
-                    <div style={{ display: 'flex', gap: 4, alignItems: 'stretch' }}>
+                      placeholder={t('pkg_ph')} />
+                    <div className="products-unit-btns">
                       {['g', 'kg', 'ml', 'l', 'szt'].map(u => (
-                        <button key={u} type="button" onClick={() => setForm(f => ({ ...f, unit: u }))}
-                          style={{ padding: '0 7px', border: '1px solid #374151', borderRadius: 6, fontSize: 11, fontWeight: 700, cursor: 'pointer', flexShrink: 0,
-                            background: form.unit === u ? '#1e3a3a' : '#111827',
-                            color: form.unit === u ? '#2dd4bf' : '#6b7280' }}>
+                        <button key={u} type="button" className={form.unit === u ? 'active' : ''} onClick={() => setForm(f => ({ ...f, unit: u }))}>
                           {displayUnit(u)}
                         </button>
                       ))}
@@ -530,267 +639,172 @@ export default function Products() {
                   </div>
                 </div>
               )}
-              <div style={{ display: 'flex', gap: 8, marginTop: 'auto' }}>
-                <button className="btn btn-primary" onClick={handleSubmit} style={{ flex: 1 }}>{t('save_btn')}</button>
-                <button className="btn" onClick={() => { setPasteText(''); setForm(EMPTY_FORM); }}
-                  style={{ background: '#374151', color: '#9ca3af' }}>{t('cancel')}</button>
+              <div className="products-form-actions">
+                <button type="button" className="btn btn-primary" onClick={handleSubmit}>{t('save_btn')}</button>
+                <button type="button" className="btn" style={{ background: '#374151', color: '#9ca3af' }} onClick={() => { setPasteText(''); setForm(EMPTY_FORM); }}>
+                  {t('cancel')}
+                </button>
               </div>
             </div>
-        </div>
+          </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          {/* Drop zone + import */}
-          <div style={{ borderTop: '1px solid #374151', marginTop: 16, paddingTop: 16 }}>
-            <h2 style={{ margin: '0 0 10px' }}>{t('import_title')}</h2>
-            {!importItems ? (
-              <>
+          {importItems ? (
+            <section className="products-import-review">
+              <h2 className="card-section-title" style={{ marginBottom: 12 }}>{t('import_review_title')}</h2>
+              <p className="products-import-review-hint">
+                {t('import_review_hint_pre')}{' '}
+                <strong>{t('weight_btn')}</strong>{' '}
+                {t('import_review_hint_suf')}
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
+                {importItems.map((item, i) => {
+                  const upd = u => { const a = [...importItems]; a[i] = { ...a[i], ...u }; setImportItems(a); };
+                  const isNew = !item.matched_product;
+                  const sbw = !!item.sold_by_weight;
+                  const inputSt = { padding: '5px 8px', fontSize: 12, background: '#111827', border: '1px solid #374151', color: '#e2e8f0', borderRadius: 6 };
+                  return (
+                    <div key={i} style={{
+                      background: '#1f2937', border: '1px solid #374151', borderRadius: 10,
+                      padding: '10px 14px', opacity: item.selected ? 1 : 0.5,
+                      transition: 'opacity 0.15s',
+                    }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+                        <button type="button" onClick={() => upd({ selected: !item.selected })}
+                          style={{ flexShrink: 0, width: 28, height: 28, borderRadius: 6, border: '1px solid #374151', cursor: 'pointer', fontSize: 14, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.15s',
+                            background: item.selected ? '#1e3a3a' : 'transparent',
+                            color: item.selected ? '#2dd4bf' : '#4b5563' }}>
+                          ✓
+                        </button>
+                        <span style={{ fontSize: 13, color: '#e2e8f0', fontWeight: 600, flexShrink: 0 }}>{item.receipt_name}</span>
+                        <span style={{ color: '#4b5563', flexShrink: 0 }}>→</span>
+                        <div style={{ flex: 1, minWidth: 80 }}>
+                          <select
+                            value={String(item.matched_product?.id || '')}
+                            onChange={e => {
+                              const p = productList.find(p => String(p.id) === e.target.value) || null;
+                              upd({ matched_product: p, selected: item.selected || !!p });
+                            }}
+                            style={{ ...inputSt, width: '100%' }}
+                          >
+                            <option value="">{t('create_new_product_opt')}</option>
+                            {productList.map(p => <option key={p.id} value={String(p.id)}>{p.name}</option>)}
+                          </select>
+                        </div>
+                        <div className="products-toggle-group">
+                          {[[t('pkg_btn'), false], [t('weight_btn'), true]].map(([label, val]) => (
+                            <button key={label} type="button" className={sbw === val ? 'active' : ''} onClick={() => upd({ sold_by_weight: val })}>
+                              {label}
+                            </button>
+                          ))}
+                        </div>
+                        {!sbw && <>
+                          <input type="number" step="1" min="0" max="99999" value={item.weight}
+                            onChange={e => upd({ weight: Math.min(99999, parseFloat(e.target.value) || 0) })}
+                            className="no-spin" style={{ ...inputSt, width: 44, flex: '0 0 44px', boxSizing: 'border-box' }} placeholder="500" />
+                          <div className="products-toggle-group">
+                            {['g', 'ml', 'szt'].map((u) => (
+                              <button key={u} type="button" className={item.unit === u ? 'active' : ''} onClick={() => upd({ unit: u })}>
+                                {displayUnit(u)}
+                              </button>
+                            ))}
+                          </div>
+                        </>}
+                        <input type="number" step="0.01" min="0" max="99999" value={item.price}
+                          onChange={e => upd({ price: Math.min(99999, parseFloat(e.target.value) || 0) })}
+                          className="no-spin" style={{ ...inputSt, width: 50, flex: '0 0 50px', boxSizing: 'border-box' }} />
+                        <span style={{ fontSize: 11, color: sbw ? '#2dd4bf' : '#6b7280', whiteSpace: 'nowrap', flexShrink: 0 }}>
+                          {sbw ? `${t('currency')} / kg` : `${t('currency')} ${t('price_per_pkg_suffix')}`}
+                        </span>
+                      </div>
+                      {isNew && (
+                        <div style={{ fontSize: 10, color: '#6b7280', marginTop: 5 }}>
+                          {t('no_assignment_hint')}{' '}
+                          <span style={{ color: '#2dd4bf' }}>{t('create_new_product_label')}</span>
+                          {t('import_new_product_hint_suf')}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+              <div style={{ display: 'flex', gap: 10 }}>
+                <button type="button" className="btn btn-primary" onClick={handleApplyImport}>{t('apply_changes')}</button>
+                <button type="button" className="btn" style={{ background: '#374151', color: '#9ca3af' }} onClick={() => setImportItems(null)}>{t('cancel')}</button>
+              </div>
+            </section>
+          ) : (
+            <div className="products-bottom-sections">
+              <section className="products-import-section">
+                <div className="products-import-title-row">
+                  <span className="card-section-title">{t('import_title')}</span>
+                  <button
+                    type="button"
+                    className="pill-help-btn"
+                    onClick={() => setImportHelpModalOpen(true)}
+                    aria-label={t('import_how_to')}
+                    title={t('import_how_to')}
+                  >
+                    <Icon icon="heroicons:light-bulb" width={15} />
+                    <span>{t('import_help_btn')}</span>
+                  </button>
+                </div>
                 <div
+                  className={`products-dropzone${dragOver ? ' products-dropzone--drag' : ''}${selectedFile ? ' products-dropzone--selected' : ''}`}
                   onDragOver={e => { e.preventDefault(); setDragOver(true); }}
                   onDragLeave={() => setDragOver(false)}
                   onDrop={e => { e.preventDefault(); setDragOver(false); handleFileSelect(e.dataTransfer.files[0]); }}
                   onClick={() => fileInputRef.current?.click()}
-                  style={{ border: `2px dashed ${dragOver ? '#0d9488' : selectedFile ? '#22c55e' : '#374151'}`, borderRadius: 10, padding: '20px', textAlign: 'center', cursor: 'pointer', background: dragOver ? 'rgba(13,148,136,0.05)' : '#111827', transition: 'all 0.15s', marginBottom: 10 }}
                 >
                   <input ref={fileInputRef} type="file" accept=".jpg,.jpeg,.png,.webp,.txt,.csv" style={{ display: 'none' }} onChange={e => handleFileSelect(e.target.files[0])} />
                   {selectedFile ? (
                     <>
-                      <div style={{ fontWeight: 600, color: '#2dd4bf', marginBottom: 2 }}>
+                      <div className={`products-dropzone-title${selectedFile ? ' products-dropzone-title--selected' : ''}`}>
                         {isImageFile(selectedFile) ? t('opt1_short') + ' ' : t('opt2_short') + ' '}{selectedFile.name}
                       </div>
-                      <div style={{ fontSize: 11, color: '#6b7280' }}>{t('click_change')}</div>
+                      <div className="products-dropzone-hint">{t('click_change')}</div>
                     </>
                   ) : (
                     <>
-                      <div style={{ fontSize: 28, marginBottom: 6 }}>📂</div>
-                      <div style={{ fontWeight: 600, color: '#9ca3af', marginBottom: 4 }}>{t('click_drag_file')}</div>
-                      <div style={{ fontSize: 12, color: '#6b7280' }}>{t('file_types_hint')}</div>
+                      <div className="products-dropzone-icon">📂</div>
+                      <div className="products-dropzone-title">{t('click_drag_file')}</div>
+                      <div className="products-dropzone-hint">{t('file_types_hint')}</div>
                     </>
                   )}
                 </div>
                 {selectedFile && (
-                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                  <div className="products-import-actions">
                     {isImageFile(selectedFile) && (
-                      <button className="btn btn-primary" onClick={handleParseAI} disabled={importing}>
+                      <button type="button" className="btn btn-primary" onClick={handleParseAI} disabled={importing}>
                         {importing ? t('analyzing') : t('apply_ai_btn')}
                       </button>
                     )}
                     {isTextFile(selectedFile) && (
-                      <button className="btn btn-primary" onClick={handleParseFree} disabled={importing}>
+                      <button type="button" className="btn btn-primary" onClick={handleParseFree} disabled={importing}>
                         {importing ? t('processing') : t('apply_file_btn')}
                       </button>
                     )}
-                    <button className="btn" style={{ background: '#374151', color: '#9ca3af' }} onClick={() => setSelectedFile(null)}>
+                    <button type="button" className="btn" style={{ background: '#374151', color: '#9ca3af' }} onClick={() => setSelectedFile(null)}>
                       {t('cancel')}
                     </button>
                   </div>
                 )}
-              </>
-            ) : null}
-          </div>
+              </section>
 
-          <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: '12px 14px', fontSize: 12, color: '#9ca3af', lineHeight: 1.6 }}>
-            <div style={{ fontSize: 14, fontWeight: 700, color: '#0d9488', marginBottom: 4 }}>{t('macro_auto_title')}</div>
-            {t('macro_auto_desc')}
-            <div style={{ marginTop: 6, color: '#6b7280' }}>
-              {t('macro_edit_hint')}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Import section — how-to only */}
-      {!importItems && <div style={{ padding: '20px 24px' }}>
-
-        <div style={{ background: '#1c3534', border: '1px solid #374151', borderRadius: 8, padding: '12px 16px', marginBottom: 16, fontSize: 13, lineHeight: 1.7 }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: '#0d9488', marginBottom: 8 }}>{t('import_how_to')}</div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-
-            {/* Opcja 1 */}
-            <div>
-              <div style={{ fontWeight: 700, fontSize: 12, color: '#e2e8f0', marginBottom: 8 }}>{t('opt1_title')}</div>
-              <ol style={{ margin: '0 0 8px', paddingLeft: 18, color: '#9ca3af', fontSize: 12, lineHeight: 1.8 }}>
-                <li>{t('opt1_s1')}</li>
-                <li>{t('opt1_s2_pre')}{' '}
-                  <span style={{ display:'inline-flex', alignItems:'center', background:'#1e3a3a', color:'#2dd4bf', border:'1px solid #374151', borderRadius:4, padding:'2px 7px', fontSize:11, fontWeight:700, verticalAlign:'middle', margin:'0 2px' }}>{t('apply_ai_label')}</span>
-                  {' '}-{' '}
-                  <a href="https://gemini.google.com/app" target="_blank" rel="noreferrer" style={{ color:'#2dd4bf', textDecoration:'underline' }}>Gemini</a>
-                  {' '}{t('opt1_s2_suf')}
-                </li>
-                <li>{t('opt1_s3_pre')}{' '}
-                  <span style={{ display:'inline-flex', alignItems:'center', background:'#1e3a3a', color:'#2dd4bf', border:'1px solid #374151', borderRadius:4, padding:'2px 7px', fontSize:11, fontWeight:700, verticalAlign:'middle', margin:'0 2px' }}>{t('apply_changes_label')}</span>
-                </li>
-              </ol>
-              <div style={{ fontSize: 11, color: '#ca8a04', marginBottom: 6 }}>
-                {t('ai_daily_lim')}{remainingImports !== null && <span>{t('ai_rem')(remainingImports)}</span>}
-              </div>
-              <div style={{ fontSize: 11, color: '#2dd4bf', background: '#111827', border: '1px solid #374151', borderRadius: 5, padding: '6px 10px' }}>
-                {t('lost_receipt_hint')}
+              <div className="products-macro-callout">
+                <div className="products-macro-callout-title">{t('macro_auto_title')}</div>
+                {t('macro_auto_desc')}
+                <div className="products-macro-callout-hint">{t('macro_edit_hint')}</div>
               </div>
             </div>
-
-            {/* Opcja 2 */}
-            <div>
-              <div style={{ fontWeight: 700, fontSize: 12, color: '#e2e8f0', marginBottom: 8 }}>{t('opt2_title')}</div>
-              <ol style={{ margin: '0 0 8px', paddingLeft: 18, color: '#9ca3af', fontSize: 12, lineHeight: 1.8 }}>
-                <li>
-                  {t('opt2_required_fmt')}{' '}
-                  <code style={{ background: '#1e293b', color: '#2dd4bf', padding: '1px 6px', borderRadius: 3, fontFamily: 'monospace' }}>{t('csv_format_full')}</code>
-                  <br />
-                  {t('opt2_or')}{' '}
-                  <code style={{ background: '#1e293b', color: '#2dd4bf', padding: '1px 6px', borderRadius: 3, fontFamily: 'monospace' }}>{t('csv_format_short')}</code>
-                  {' '}<span style={{ color: '#6b7280', fontSize: 11 }}>({t('opt2_manually')})</span>
-                </li>
-                <li>{t('opt2_upload_pre')}{' '}
-                  <span style={{ display:'inline-flex', alignItems:'center', background:'#1e3a3a', color:'#2dd4bf', border:'1px solid #374151', borderRadius:4, padding:'2px 7px', fontSize:11, fontWeight:700, verticalAlign:'middle', margin:'0 2px' }}>{t('apply_file_label')}</span>
-                </li>
-              </ol>
-              <div style={{ fontSize: 11, color: '#2dd4bf' }}>{t('no_lim')}</div>
-            </div>
-
-          </div>
-
-          {/* Prompt box — pełna szerokość pod oboma opcjami */}
-          <div style={{ marginTop: 12, fontSize: 11, color: '#2dd4bf', background: '#111827', border: '1px solid #374151', borderRadius: 5, padding: '10px 12px' }}>
-            <div style={{ marginBottom: 8, color: '#9ca3af', fontSize: 12, fontWeight: 600 }}>
-              {t('quick_update_hint')}
-            </div>
-            <div style={{ marginBottom: 6, color: '#9ca3af', fontSize: 12 }}>
-              <strong style={{ color: '#e2e8f0' }}>1.</strong> {t('go_to_ai_pre')}{' '}
-              <a href="https://claude.ai/" target="_blank" rel="noreferrer" style={{ color: '#2dd4bf', textDecoration: 'underline' }}>Claude</a>
-              {' / '}
-              <a href="https://gemini.google.com/app" target="_blank" rel="noreferrer" style={{ color: '#2dd4bf', textDecoration: 'underline' }}>Gemini</a>
-              {' / '}
-              <a href="https://chatgpt.com/" target="_blank" rel="noreferrer" style={{ color: '#2dd4bf', textDecoration: 'underline' }}>ChatGPT</a>
-              {' '}{t('go_to_ai_suf')}
-            </div>
-            <div style={{ position: 'relative' }}>
-              <pre style={{ background: '#1e293b', color: '#e2e8f0', borderRadius: 5, padding: '8px 10px', paddingBottom: 32, fontSize: 10, lineHeight: 1.6, whiteSpace: 'pre-wrap', wordBreak: 'break-word', margin: 0 }}>{t('products_prompt')}</pre>
-              <button
-                onClick={() => {
-                  navigator.clipboard.writeText(t('products_prompt'));
-                  setPromptCopied(true);
-                  setTimeout(() => setPromptCopied(false), 2000);
-                }}
-                style={{ position: 'absolute', bottom: 6, right: 6, padding: '3px 10px', fontSize: 10, fontWeight: 600, background: promptCopied ? '#0d9488' : '#374151', color: promptCopied ? '#1f2937' : '#9ca3af', border: 'none', borderRadius: 4, cursor: 'pointer', transition: 'all 0.2s' }}
-              >
-                {promptCopied ? t('btn_copied') : t('copy_prompt_btn')}
-              </button>
-            </div>
-            <div style={{ marginTop: 6, color: '#9ca3af', fontSize: 12 }}><strong style={{ color: '#e2e8f0' }}>2.</strong> {t('paste_products_step')}</div>
-            <div style={{ marginTop: 4, color: '#9ca3af', fontSize: 12 }}><strong style={{ color: '#e2e8f0' }}>3.</strong> {t('create_doc_step')}</div>
-            <div style={{ marginTop: 4, color: '#9ca3af', fontSize: 12 }}><strong style={{ color: '#e2e8f0' }}>4.</strong> {t('copy_response_step')}</div>
-            <div style={{ marginTop: 4, color: '#9ca3af', fontSize: 12 }}><strong style={{ color: '#e2e8f0' }}>5.</strong> {t('save_doc_step_pre')} <code style={{ background: '#1e293b', color: '#2dd4bf', padding: '1px 5px', borderRadius: 3 }}>{lang === 'en' ? 'yourname.txt' : 'twojanazwa.txt'}</code></div>
-            <div style={{ marginTop: 4, color: '#9ca3af', fontSize: 12 }}><strong style={{ color: '#e2e8f0' }}>6.</strong> {t('drag_doc_step')} <strong>{t('click_drag_file')}</strong></div>
-          </div>
+          )}
         </div>
-      </div>}
-
-      {importItems && (
-          <div style={{ padding: '20px 24px' }}>
-            <p style={{ fontSize: 13, color: '#9ca3af', marginBottom: 12 }}>
-              {t('import_review_hint_pre')}{' '}
-              <strong style={{ color: '#e2e8f0' }}>{t('weight_btn')}</strong>{' '}
-              {t('import_review_hint_suf')}
-            </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
-              {importItems.map((item, i) => {
-                const upd = u => { const a = [...importItems]; a[i] = { ...a[i], ...u }; setImportItems(a); };
-                const isNew = !item.matched_product;
-                const sbw = !!item.sold_by_weight;
-                const inputSt = { padding: '5px 8px', fontSize: 12, background: '#111827', border: '1px solid #374151', color: '#e2e8f0', borderRadius: 6 };
-                return (
-                  <div key={i} style={{
-                    background: '#1f2937', border: '1px solid #374151', borderRadius: 10,
-                    padding: '10px 14px', opacity: item.selected ? 1 : 0.5,
-                    transition: 'opacity 0.15s',
-                  }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      {/* Toggle ✓ */}
-                      <button type="button" onClick={() => upd({ selected: !item.selected })}
-                        style={{ flexShrink: 0, width: 28, height: 28, borderRadius: 6, border: '1px solid #374151', cursor: 'pointer', fontSize: 14, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.15s',
-                          background: item.selected ? '#1e3a3a' : 'transparent',
-                          color: item.selected ? '#2dd4bf' : '#4b5563' }}>
-                        ✓
-                      </button>
-                      {/* Nazwa z pliku */}
-                      <span style={{ fontSize: 13, color: '#e2e8f0', fontWeight: 600, flexShrink: 0 }}>{item.receipt_name}</span>
-                      <span style={{ color: '#4b5563', flexShrink: 0 }}>→</span>
-                      {/* Dopasowanie */}
-                      <div style={{ flex: 1, minWidth: 80 }}>
-                        <select
-                          value={String(item.matched_product?.id || '')}
-                          onChange={e => {
-                            const p = productList.find(p => String(p.id) === e.target.value) || null;
-                            upd({ matched_product: p, selected: item.selected || !!p });
-                          }}
-                          style={{ ...inputSt, width: '100%' }}
-                        >
-                          <option value="">{t('create_new_product_opt')}</option>
-                          {productList.map(p => <option key={p.id} value={String(p.id)}>{p.name}</option>)}
-                        </select>
-                      </div>
-                      {/* {t('pkg_btn')} / {t('weight_btn')} */}
-                      <div style={{ display: 'flex', borderRadius: 6, overflow: 'hidden', border: '1px solid #374151', flexShrink: 0 }}>
-                        {[[t('pkg_btn'), false], [t('weight_btn'), true]].map(([label, val]) => (
-                          <button key={label} type="button" onClick={() => upd({ sold_by_weight: val })}
-                            style={{ padding: '4px 10px', border: 'none', borderRight: !val ? '1px solid #374151' : 'none', cursor: 'pointer', fontSize: 11, fontWeight: 600, whiteSpace: 'nowrap', transition: 'all 0.15s',
-                              background: sbw === val ? '#1e3a3a' : 'transparent',
-                              color: sbw === val ? '#2dd4bf' : '#6b7280' }}>
-                            {label}
-                          </button>
-                        ))}
-                      </div>
-                      {/* Pojemność + jednostka (tylko {t('pkg_btn')}) */}
-                      {!sbw && <>
-                        <input type="number" step="1" min="0" max="99999" value={item.weight}
-                          onChange={e => upd({ weight: Math.min(99999, parseFloat(e.target.value) || 0) })}
-                          className="no-spin" style={{ ...inputSt, width: 44, flex: '0 0 44px', boxSizing: 'border-box' }} placeholder="500" />
-                        <div style={{ display: 'flex', borderRadius: 6, overflow: 'hidden', border: '1px solid #374151', flexShrink: 0 }}>
-                          {['g', 'ml', 'szt'].map((u, idx) => (
-                            <button key={u} type="button" onClick={() => upd({ unit: u })}
-                              style={{ padding: '4px 8px', border: 'none', borderRight: idx < 2 ? '1px solid #374151' : 'none', cursor: 'pointer', fontSize: 11, fontWeight: 600, transition: 'all 0.15s',
-                                background: item.unit === u ? '#1e3a3a' : 'transparent',
-                                color: item.unit === u ? '#2dd4bf' : '#6b7280' }}>
-                              {displayUnit(u)}
-                            </button>
-                          ))}
-                        </div>
-                      </>}
-                      {/* Cena */}
-                      <input type="number" step="0.01" min="0" max="99999" value={item.price}
-                        onChange={e => upd({ price: Math.min(99999, parseFloat(e.target.value) || 0) })}
-                        className="no-spin" style={{ ...inputSt, width: 50, flex: '0 0 50px', boxSizing: 'border-box' }} />
-                      <span style={{ fontSize: 11, color: sbw ? '#2dd4bf' : '#6b7280', whiteSpace: 'nowrap', flexShrink: 0 }}>
-                        {sbw ? `${t('currency')} / kg` : `${t('currency')} ${t('price_per_pkg_suffix')}`}
-                      </span>
-                    </div>
-                    {isNew && (
-                      <div style={{ fontSize: 10, color: '#6b7280', marginTop: 5 }}>
-                        {t('no_assignment_hint')}{' '}
-                        <span style={{ color: '#2dd4bf' }}>{t('create_new_product_label')}</span>
-                        {t('import_new_product_hint_suf')}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-            <div style={{ display: 'flex', gap: 10 }}>
-              <button className="btn btn-primary" onClick={handleApplyImport}>{t('apply_changes')}</button>
-              <button className="btn" style={{ background: '#374151', color: '#9ca3af' }}
-                onClick={() => { setImportItems(null); }}>{t('cancel')}</button>
-            </div>
-          </div>
-        )}
       </div>
 
       {/* Product list — collapsible */}
-      <div className="card" style={{ padding: 0, overflow: 'hidden' }}>
-        <div style={{ display: 'flex', alignItems: 'center', padding: '0 12px 0 20px', gap: 6 }}>
-          {/* Tytuł — klik zwija/rozwija */}
-          <button onClick={() => setListOpen(o => !o)}
-            style={{ flex: 1, padding: '14px 0', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', fontSize: 14, fontWeight: 600, color: '#0d9488' }}>
-            {t('product_list_title')}
+      <div className="card products-list-card">
+        <div className="products-list-header">
+          <button type="button" className="list-section-toggle" onClick={() => setListOpen(o => !o)}>
+            <span className="card-section-title">{t('product_list_title')}</span>
           </button>
 
           {/* Zaznacz / Odznacz */}
@@ -832,16 +846,13 @@ export default function Products() {
             <Icon icon="heroicons:chevron-down" style={{ width: 20, height: 20, transition: 'transform 0.25s', transform: listOpen ? 'rotate(180deg)' : 'rotate(0deg)', color: '#0d9488' }} />
           </button>
         </div>
-        {listOpen && <div style={{ padding: '0 20px 20px', borderTop: '1px solid #374151' }}>
-        <div style={{ margin: '12px 0 10px' }}>
+        {listOpen && <div className="products-list-body">
+        <div className="products-list-search">
           <input
             type="text"
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder={t('search_product_ph')}
-            style={{ width: '100%', padding: '7px 12px', border: '1px solid #374151', borderRadius: 6, fontSize: 13, boxSizing: 'border-box', outline: 'none' }}
-            onFocus={e => e.target.style.borderColor = '#0d9488'}
-            onBlur={e => e.target.style.borderColor = '#374151'}
           />
         </div>
         <table style={{ borderCollapse: 'separate', borderSpacing: '0 3px' }}>
@@ -981,6 +992,20 @@ export default function Products() {
         </table>
         </div>}
       </div>
+
+      <ImportHelpModal
+        open={importHelpModalOpen}
+        onClose={() => setImportHelpModalOpen(false)}
+        t={t}
+        lang={lang}
+        remainingImports={remainingImports}
+        promptCopied={promptCopied}
+        onCopyPrompt={() => {
+          navigator.clipboard.writeText(t('products_prompt'));
+          setPromptCopied(true);
+          setTimeout(() => setPromptCopied(false), 2000);
+        }}
+      />
     </div>
   );
 }

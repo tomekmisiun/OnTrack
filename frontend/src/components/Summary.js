@@ -67,7 +67,9 @@ function PeriodContent({ range, summary, loading, scrollToWeek, onGoToTab, drink
           <button onClick={() => setProductsOpen(o => !o)}
             style={{ width:'100%', padding:'10px 20px', background:'none', border:'none', cursor:'pointer', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
             <div style={{ textAlign:'left' }}>
-              <div style={{ fontSize:11, fontWeight:700, color:'#6b7280', textTransform:'uppercase', letterSpacing:'0.6px', marginBottom:2 }}>{t('food_expenses_label')}</div>
+              <div style={{ marginBottom: 2 }}>
+                <span className="card-section-title">{t('food_expenses_label')}</span>
+              </div>
               <div style={{ fontSize:13, fontWeight:600, color:'#0d9488' }}>{productsOpen ? t('hide_product_list') : t('show_product_list')}</div>
             </div>
             <Icon icon="heroicons:chevron-down" style={{width:20,height:20,transition:'transform 0.25s',transform:productsOpen?'rotate(180deg)':'rotate(0deg)',color:'#0d9488'}}/>
@@ -88,7 +90,7 @@ function Summary({ onGoToTab }) {
   const { t } = useLanguage();
   const { user } = useAuth();
   const { showError } = useToast();
-  const { members, activeMember } = useMember();
+  const { members, targetMemberIds } = useMember();
 
   const week  = getCurrentWeek();
   const month = getCurrentMonth();
@@ -97,20 +99,6 @@ function Summary({ onGoToTab }) {
   const [monthSummary, setMonthSummary] = useState(null);
   const [weekLoading,  setWeekLoading]  = useState(false);
   const [monthLoading, setMonthLoading] = useState(false);
-
-  // Które profile uwzględniać (domyślnie wszystkie, aktualizuje się gdy member lista załaduje)
-  const [selectedMemberIds, setSelectedMemberIds] = useState(
-    () => activeMember ? [activeMember.id] : []
-  );
-  useEffect(() => {
-    if (members.length > 0 && selectedMemberIds.length === 0) {
-      setSelectedMemberIds(members.map(m => m.id));
-    }
-  }, [members]); // eslint-disable-line
-
-  const toggleMember = (id) => setSelectedMemberIds(prev =>
-    prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
-  );
 
   const [activePeriod, setActivePeriod] = useState('month');
 
@@ -155,20 +143,9 @@ function Summary({ onGoToTab }) {
       ? t('drinks_period_month')(drinksDays)
       : t('drinks_period_custom')(drinksDays);
 
-  // Ładuj dane gdy mamy activeMember lub zmieniono selectedMemberIds
-  // Gdy nikt nie zaznaczony → puste wyniki (0 zł)
-  const noMembersSelected = members.length > 1 && selectedMemberIds.length === 0;
-  const loadMids = noMembersSelected ? [] : selectedMemberIds.length > 0
-    ? selectedMemberIds
-    : activeMember ? [activeMember.id] : [];
+  const loadMids = targetMemberIds;
 
   useEffect(() => {
-    if (noMembersSelected) {
-      const empty = { items: [], total_cost: 0 };
-      setWeekSummary(empty); setMonthSummary(empty);
-      setWeekLoading(false); setMonthLoading(false);
-      return;
-    }
     if (!loadMids.length) return;
     setWeekLoading(true); setMonthLoading(true);
     Promise.all([
@@ -209,35 +186,6 @@ function Summary({ onGoToTab }) {
   return (
     <div>
 
-      {/* ─── Member selector (tylko gdy > 1 osoba) ─── */}
-      {members.length > 1 && (
-        <div style={{ display:'flex', alignItems:'center', gap:8, marginBottom:12, flexWrap:'wrap' }}>
-          <span style={{ fontSize:11, fontWeight:700, color:'#6b7280', textTransform:'uppercase', letterSpacing:'0.6px', marginRight:2 }}>{t('include_label')}</span>
-          {members.map((m, idx) => {
-            const checked = selectedMemberIds.includes(m.id);
-            const color = ['#0d9488','#6366f1','#f59e0b','#ec4899','#22c55e','#ef4444'][idx % 6];
-            return (
-              <button
-                key={m.id}
-                onClick={() => toggleMember(m.id)}
-                style={{
-                  display: 'flex', alignItems: 'center', gap: 6,
-                  padding: '5px 14px', borderRadius: 20,
-                  border: `1px solid ${checked ? color : '#374151'}`,
-                  background: checked ? `${color}22` : '#1f2937',
-                  color: checked ? color : '#6b7280',
-                  fontSize: 12, fontWeight: checked ? 700 : 400,
-                  cursor: 'pointer', transition: 'all 0.15s',
-                }}
-              >
-                <span style={{ width:8, height:8, borderRadius:'50%', background: checked ? color : '#374151', flexShrink:0, transition:'background 0.15s' }} />
-                {m.name}
-              </button>
-            );
-          })}
-        </div>
-      )}
-
       {/* ─── Połączona karta: taby + 2 kolumny pod spodem ─── */}
       <div className="card" style={{ padding:0, overflow:'hidden', marginBottom:16 }}>
 
@@ -274,17 +222,19 @@ function Summary({ onGoToTab }) {
             {/* Wydatki na jedzenie — nad przyciskami */}
             <div style={{ borderBottom:'1px solid #374151' }}>
               {activePeriod === 'week' && (
-                <PeriodContent range={week} summary={weekSummary} loading={weekLoading} scrollToWeek onGoToTab={onGoToTab} drinkItems={drinkItems} showDrinksInSummary={showDrinksInSummary} onToggleDrinks={() => setShowDrinksInSummary(v => !v)} memberLabel={members.length > 1 ? members.filter(m => selectedMemberIds.includes(m.id)).map(m => m.name).join(', ') : members[0]?.name ?? ''} onCategoriesUpdate={setPieCategories} hideHeader />
+                <PeriodContent range={week} summary={weekSummary} loading={weekLoading} scrollToWeek onGoToTab={onGoToTab} drinkItems={drinkItems} showDrinksInSummary={showDrinksInSummary} onToggleDrinks={() => setShowDrinksInSummary(v => !v)} memberLabel={members.length > 1 ? members.filter(m => targetMemberIds.includes(m.id)).map(m => m.name).join(', ') : members[0]?.name ?? ''} onCategoriesUpdate={setPieCategories} hideHeader />
               )}
               {activePeriod === 'month' && (
-                <PeriodContent range={month} summary={monthSummary} loading={monthLoading} onGoToTab={onGoToTab} drinkItems={drinkItems} showDrinksInSummary={showDrinksInSummary} onToggleDrinks={() => setShowDrinksInSummary(v => !v)} memberLabel={members.length > 1 ? members.filter(m => selectedMemberIds.includes(m.id)).map(m => m.name).join(', ') : members[0]?.name ?? ''} onCategoriesUpdate={setPieCategories} hideHeader />
+                <PeriodContent range={month} summary={monthSummary} loading={monthLoading} onGoToTab={onGoToTab} drinkItems={drinkItems} showDrinksInSummary={showDrinksInSummary} onToggleDrinks={() => setShowDrinksInSummary(v => !v)} memberLabel={members.length > 1 ? members.filter(m => targetMemberIds.includes(m.id)).map(m => m.name).join(', ') : members[0]?.name ?? ''} onCategoriesUpdate={setPieCategories} hideHeader />
               )}
               {activePeriod === 'custom' && customSummary && customSummary.items.length > 0 && (
                 <div>
                   <button onClick={() => setProductsOpenCustom(o => !o)}
                     style={{ width:'100%', padding:'10px 20px', background:'none', border:'none', cursor:'pointer', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
                     <div style={{ textAlign:'left' }}>
-                      <div style={{ fontSize:11, fontWeight:700, color:'#6b7280', textTransform:'uppercase', letterSpacing:'0.6px', marginBottom:2 }}>{t('food_expenses_label')}</div>
+                      <div style={{ marginBottom: 2 }}>
+                <span className="card-section-title">{t('food_expenses_label')}</span>
+              </div>
                       <div style={{ fontSize:13, fontWeight:600, color:'#0d9488' }}>{productsOpenCustom ? t('hide_product_list') : t('show_product_list')}</div>
                     </div>
                     <Icon icon="heroicons:chevron-down" style={{width:20,height:20,transition:'transform 0.25s',transform:productsOpenCustom?'rotate(180deg)':'rotate(0deg)',color:'#0d9488'}}/>
@@ -395,7 +345,7 @@ function Summary({ onGoToTab }) {
       {/* ─── Templates summary ─── */}
       <div className="card" style={{ padding:0, overflow:'hidden', marginBottom:16 }}>
         <div style={{ padding:'16px 20px' }}>
-          <h2 style={{ margin:0, fontSize:17, color:'#f1f5f9', fontWeight:600 }}>{t('week_templates_sum')}</h2>
+          <h2 className="card-section-title">{t('week_templates_sum')}</h2>
           <div style={{ display:'flex', gap:8, marginTop:6 }}>
             <button
               onClick={() => { onGoToTab?.('calendar'); setTimeout(() => window.dispatchEvent(new Event('open-template')), 250); }}

@@ -64,7 +64,7 @@ def _ensure_catalog_seeded(user_id: int, lang: str):
     if not _catalog_incomplete(user_id, lang):
         return
     try:
-        from app.seeds import ensure_user_seeded
+        from app.user_seeds import ensure_user_seeded
         ensure_user_seeded(user_id, lang)
     except Exception:
         current_app.logger.exception('Catalog seed failed for user %s', user_id)
@@ -81,7 +81,7 @@ def _schedule_catalog_seed(user_id: int, lang: str):
     def _run():
         with app.app_context():
             try:
-                from app.seeds import ensure_user_seeded
+                from app.user_seeds import ensure_user_seeded
                 ensure_user_seeded(user_id, lang)
             except Exception:
                 app.logger.exception('Background catalog seed failed for user %s', user_id)

@@ -19,7 +19,7 @@ import argparse
 import random
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).parent.parent / "processing"))
+sys.path.insert(0, str(Path(__file__).parent.parent / "pipeline"))
 from food_categories import classify_product
 
 try:

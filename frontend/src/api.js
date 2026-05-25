@@ -41,7 +41,6 @@ export const recipes = {
   fetchImage:    (id)       => API.post(`/api/recipes/${id}/fetch-image`),
   delete:        (id)       => API.delete(`/api/recipes/${id}`),
   deleteAll:     ()         => API.delete('/api/recipes/all'),
-  getParseLimit: ()         => API.get('/api/recipes/parse-limit'),
 };
 
 export const mealPlan = {

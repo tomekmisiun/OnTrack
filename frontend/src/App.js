@@ -10,7 +10,9 @@ import MacroCalculator from './components/MacroCalculator';
 import Welcome from './components/Welcome';
 import Login from './components/Login';
 import Profile from './components/Profile';
-import MemberPicker from './components/MemberPicker';
+import MemberToggles from './components/MemberToggles';
+import AppBackground from './components/AppBackground';
+import AppFooter from './components/AppFooter';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { ToastProvider } from './contexts/ToastContext';
@@ -53,13 +55,15 @@ function AppInner({ onStartTour }) {
 
   const goToTab = useCallback((tab) => {
     setActiveTab(tab);
-    window.scrollTo({ top: 0 });
-    if (tab === 'calendar') setScrollCalendarToToday(true);
+    document.querySelector('.app-main')?.scrollTo({ top: 0 });
+    if (tab === 'calendar') {
+      setScrollCalendarToToday(true);
+    }
   }, []);
 
   const goHome = useCallback(() => {
     setActiveTab('home');
-    window.scrollTo({ top: 0 });
+    document.querySelector('.app-main')?.scrollTo({ top: 0 });
   }, []);
 
   const isHome = activeTab === 'home';
@@ -67,11 +71,13 @@ function AppInner({ onStartTour }) {
 
   useEffect(() => {
     if (!user) return undefined;
+    document.documentElement.classList.add('app-shell');
+    document.body.classList.add('app-shell');
     document.documentElement.classList.toggle('app-home', isHome);
     document.body.classList.toggle('app-home', isHome);
     return () => {
-      document.documentElement.classList.remove('app-home');
-      document.body.classList.remove('app-home');
+      document.documentElement.classList.remove('app-shell', 'app-home');
+      document.body.classList.remove('app-shell', 'app-home');
     };
   }, [user, isHome]);
 
@@ -95,6 +101,7 @@ function AppInner({ onStartTour }) {
 
   return (
     <div className={`app${isHome ? ' app--home' : ''}`}>
+      <AppBackground />
       {!isHome && (
       <aside className="app-sidebar">
         <div className="sidebar-logo sidebar-logo--clickable" role="button" tabIndex={0} onClick={goHome} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') goHome(); }}>
@@ -109,8 +116,8 @@ function AppInner({ onStartTour }) {
         </div>
 
         <div className="sidebar-profile">
-          <span className="sidebar-profile-label">{t('current_profile')}</span>
-          <MemberPicker />
+          <span className="sidebar-profile-label">{t('include_label')}</span>
+          <MemberToggles variant="sidebar" />
         </div>
 
         <nav className="sidebar-nav">
@@ -145,26 +152,29 @@ function AppInner({ onStartTour }) {
       )}
 
       <main className={`app-main${isHome ? ' app-main--home' : ''}`}>
-        {activeTab === 'home'      && (
-          <Welcome
-            onGoToTab={goToTab}
-            onAccount={() => setShowProfile(true)}
-            onLogout={logout}
-          />
-        )}
-        {activeTab === 'macro'     && <MacroCalculator />}
-        {activeTab === 'calendar'  && (
-          <Calendar
-            onGoToTab={goToTab}
-            scrollToToday={scrollCalendarToToday}
-            onScrolledToToday={() => setScrollCalendarToToday(false)}
-          />
-        )}
-        {activeTab === 'schedule'  && <DaySchedule />}
-        {activeTab === 'recipes'   && <Recipes />}
-        {activeTab === 'products'  && <Products />}
-        {activeTab === 'summary'   && <Summary onGoToTab={goToTab} />}
-        {activeTab === 'export'    && <Export onGoToTab={goToTab} />}
+        <div className="app-main-content">
+          {activeTab === 'home'      && (
+            <Welcome
+              onGoToTab={goToTab}
+              onAccount={() => setShowProfile(true)}
+              onLogout={logout}
+            />
+          )}
+          {activeTab === 'macro'     && <MacroCalculator />}
+          {activeTab === 'calendar'  && (
+            <Calendar
+              onGoToTab={goToTab}
+              scrollToToday={scrollCalendarToToday}
+              onScrolledToToday={() => setScrollCalendarToToday(false)}
+            />
+          )}
+          {activeTab === 'schedule'  && <DaySchedule />}
+          {activeTab === 'recipes'   && <Recipes />}
+          {activeTab === 'products'  && <Products />}
+          {activeTab === 'summary'   && <Summary onGoToTab={goToTab} />}
+          {activeTab === 'export'    && <Export onGoToTab={goToTab} />}
+        </div>
+        <AppFooter />
       </main>
 
       {showProfile && (

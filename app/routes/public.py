@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 
-from app.dish_compare_data import load_dish_compare
+from app.dish_compare import load_dish_compare
 
 public_bp = Blueprint("public", __name__)
 

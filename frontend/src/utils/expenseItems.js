@@ -1,4 +1,4 @@
-import { OTHER_TYPES, OTHER_DEFAULTS, DRINKS_DEFAULTS } from '../components/DrinksCard';
+import { OTHER_TYPES, OTHER_DEFAULTS, DRINKS_DEFAULTS, SHARED_KEYS } from '../components/DrinksCard';
 
 export function loadDrinksFromStorage() {
   try {
@@ -162,12 +162,21 @@ export function computeExpenseItems(days, drinks, otherExpenses, effCukierPrice,
   return list;
 }
 
-export function sumEnabledExpenses(days, productList = []) {
+/** Wspólne kategorie (czynsz, prąd…) — raz na konto; reszta × liczba zaznaczonych domowników. */
+function expenseMemberMultiplier(key, includedMemberCount) {
+  if (SHARED_KEYS.has(key)) return 1;
+  return Math.max(1, includedMemberCount);
+}
+
+export function sumEnabledExpenses(days, productList = [], includedMemberCount = 1) {
   const drinks = loadDrinksFromStorage();
   const otherExpenses = loadOtherExpensesFromStorage();
   const { effCukierPrice, effSlodzikPrice } = resolveSugarPrices(productList);
   const items = computeExpenseItems(days, drinks, otherExpenses, effCukierPrice, effSlodzikPrice);
-  return items.reduce((s, i) => s + i.total, 0);
+  return items.reduce(
+    (s, i) => s + i.total * expenseMemberMultiplier(i._dk, includedMemberCount),
+    0,
+  );
 }
 
 export const SUMMARY_MONTH_DAYS = 30;

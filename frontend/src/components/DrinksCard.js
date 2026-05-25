@@ -1123,8 +1123,8 @@ function DrinksCard({ days, periodLabel, productList, onUpdate, pieCategories = 
   return (
     <div ref={cardRef}>
 
-      <div style={{ fontSize:11, fontWeight:700, color:'#6b7280', textTransform:'uppercase', letterSpacing:'0.6px', marginBottom:8 }}>
-        {t('expenses_select_title')}
+      <div style={{ marginBottom: 8 }}>
+        <span className="card-section-title">{t('expenses_select_title')}</span>
       </div>
 
       <div style={{ display:'grid', gridTemplateColumns:'repeat(5, 1fr)', gap:4, marginBottom:4 }}>

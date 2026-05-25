@@ -1,0 +1,144 @@
+.carousel-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  margin-bottom: 16px;
+}
+
+.carousel-card {
+  padding: 0;
+  margin-bottom: 0;
+  overflow: visible;
+}
+
+.card.carousel-card {
+  overflow: visible;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: rgba(26, 34, 44, 0.98);
+}
+
+.carousel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 20px;
+  background: rgba(26, 34, 44, 0.98);
+  border-radius: 16px 16px 0 0;
+}
+
+.carousel-header-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  flex-shrink: 0;
+}
+
+.carousel-header-count {
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.carousel-header-chevron {
+  margin-left: auto;
+  padding: 5px 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.carousel-body {
+  padding: 0 20px 14px;
+  border-top: 1px solid #374151;
+  background: rgba(26, 34, 44, 0.98);
+  border-radius: 0 0 16px 16px;
+}
+
+.carousel-toolbar {
+  display: grid;
+  grid-template-columns: minmax(160px, 200px) 1fr auto;
+  grid-template-areas: "search filters actions";
+  gap: 8px 12px;
+  margin: 12px 0 10px;
+  align-items: center;
+}
+
+.carousel-search {
+  grid-area: search;
+  width: 100%;
+  min-width: 0;
+  padding: 6px 10px;
+  font-size: 12px;
+  background: #111827;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  color: #f1f5f9;
+  outline: none;
+}
+
+.carousel-search:focus {
+  border-color: #0d9488;
+}
+
+.carousel-filters {
+  grid-area: filters;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.carousel-filter-chip {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  background: transparent;
+  border: 1.5px solid #374151;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+.carousel-filter-chip--active {
+  border-color: #0d9488;
+  background: #0d948822;
+  color: #2dd4bf;
+  font-weight: 700;
+}
+
+.carousel-toolbar-actions {
+  grid-area: actions;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  justify-content: flex-end;
+}
+
+.carousel-action-btn {
+  padding: 6px 12px;
+  background: #0d948820;
+  border: 1px solid #0d9488;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2dd4bf;
+  cursor: pointer;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.carousel-action-btn:hover {
+  background: #0d948833;
+}

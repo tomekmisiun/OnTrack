@@ -2,6 +2,7 @@ import React from 'react';
 import { Icon } from '@iconify/react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useWelcomeStats } from '../hooks/useWelcomeStats';
+import WelcomeMembers from './WelcomeMembers';
 import './Welcome.css';
 
 const TILES = [
@@ -37,11 +38,28 @@ function getInsight(tileId, insightType, stats, loading, t) {
   }
 
   switch (insightType) {
-    case 'macro':
-      if (stats.macroGoalLabel) {
-        return { text: stats.macroGoalLabel, tone: 'active' };
+    case 'macro': {
+      const lines = stats.macroInsights || [];
+      if (!lines.length) {
+        return { text: t('welcome_insight_macro_none'), tone: 'empty' };
       }
-      return { text: t('welcome_insight_macro_none'), tone: 'empty' };
+      if (lines.length === 1) {
+        const label = lines[0].label;
+        if (label) {
+          return { text: label, tone: 'active' };
+        }
+        return { text: t('welcome_insight_macro_none'), tone: 'empty' };
+      }
+      const text = lines
+        .map(({ name, label }) => t('welcome_insight_macro_member')(name, label))
+        .join(', ');
+      const anyGoal = lines.some(line => line.label);
+      return {
+        text,
+        tone: anyGoal ? 'active' : 'empty',
+        wide: true,
+      };
+    }
 
     case 'meals':
       if (stats.mealsToday > 0) {
@@ -52,14 +70,31 @@ function getInsight(tileId, insightType, stats, loading, t) {
       }
       return { text: t('welcome_insight_meals_none'), tone: 'empty' };
 
-    case 'schedule':
-      if (stats.scheduleToday > 0) {
-        return {
-          text: countLabel(t, 'welcome_insight_schedule_one', 'welcome_insight_schedule_many', stats.scheduleToday),
-          tone: 'active',
-        };
+    case 'schedule': {
+      const lines = stats.scheduleInsights || [];
+      if (!lines.length) {
+        return { text: t('welcome_insight_schedule_none'), tone: 'empty' };
       }
-      return { text: t('welcome_insight_schedule_none'), tone: 'empty' };
+      if (lines.length === 1) {
+        const count = lines[0].count;
+        if (count > 0) {
+          return {
+            text: countLabel(t, 'welcome_insight_schedule_one', 'welcome_insight_schedule_many', count),
+            tone: 'active',
+          };
+        }
+        return { text: t('welcome_insight_schedule_none'), tone: 'empty' };
+      }
+      const text = lines
+        .map(({ name, count }) => t('welcome_insight_schedule_member')(name, count))
+        .join(', ');
+      const total = lines.reduce((sum, line) => sum + line.count, 0);
+      return {
+        text,
+        tone: total > 0 ? 'active' : 'empty',
+        wide: true,
+      };
+    }
 
     case 'recipes':
       if (stats.ownRecipes > 0) {
@@ -99,12 +134,6 @@ export default function Welcome({ onGoToTab, onAccount, onLogout }) {
 
   return (
     <div className="welcome-page">
-      <div className="welcome-bg" aria-hidden="true">
-        <div className="welcome-bg-glow welcome-bg-glow--tl" />
-        <div className="welcome-bg-glow welcome-bg-glow--br" />
-        <div className="welcome-bg-grid" />
-      </div>
-
       <div className="welcome">
         <div className="welcome-brand">
           <svg className="welcome-brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -133,7 +162,7 @@ export default function Welcome({ onGoToTab, onAccount, onLogout }) {
                 onClick={() => onGoToTab(id)}
               >
                 {insightData && (
-                  <div className={`welcome-insight welcome-insight--${insightData.tone}`}>
+                  <div className={`welcome-insight welcome-insight--${insightData.tone}${insightData.wide ? ' welcome-insight--wide' : ''}`}>
                     {insightData.text}
                   </div>
                 )}
@@ -151,6 +180,8 @@ export default function Welcome({ onGoToTab, onAccount, onLogout }) {
             );
           })}
         </div>
+
+        <WelcomeMembers />
 
         <footer className="welcome-footer">
           <button type="button" className="welcome-footer-btn welcome-footer-btn--account" onClick={onAccount}>

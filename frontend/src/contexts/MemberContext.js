@@ -2,10 +2,20 @@ import React, { createContext, useContext, useState, useEffect, useCallback } fr
 import { members as membersApi } from '../api';
 import { useAuth } from './AuthContext';
 import { useLanguage } from './LanguageContext';
+import { getViewMemberId } from '../utils/memberTargets';
 
 const MemberContext = createContext(null);
 
 const DEFAULT_PRIMARY = { pl: 'Ja', en: 'Me' };
+const INCLUDED_STORAGE_KEY = 'includedMemberIds';
+
+function loadIncludedIds() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(INCLUDED_STORAGE_KEY) || 'null');
+    if (Array.isArray(parsed) && parsed.length) return parsed.map(Number).filter(Boolean);
+  } catch {}
+  return [];
+}
 
 function localizePrimaryName(name, lang, isPrimary) {
   if (!isPrimary) return name;
@@ -21,6 +31,7 @@ export function MemberProvider({ children }) {
   const [activeMemberId, setActiveMemberId] = useState(
     () => parseInt(localStorage.getItem('activeMemberId') || '0') || null
   );
+  const [includedMemberIds, setIncludedMemberIds] = useState(loadIncludedIds);
 
   const reload = useCallback(async () => {
     try {
@@ -38,11 +49,56 @@ export function MemberProvider({ children }) {
     } catch {}
   }, []);
 
-  // Załaduj gdy user się zaloguje, zmieni język, wyczyść gdy wyloguje
   useEffect(() => {
-    if (user) { reload(); }
-    else { setMembers([]); }
+    if (!user) {
+      setMembers([]);
+      setIncludedMemberIds([]);
+      return;
+    }
+    reload();
   }, [user?.id, user?.lang, reload]);
+
+  useEffect(() => {
+    if (!members.length) return;
+    setIncludedMemberIds(prev => {
+      const valid = prev.filter(id => members.some(m => m.id === id));
+      if (valid.length > 0) return valid;
+      const fallback = activeMemberId
+        || members.find(m => m.is_primary)?.id
+        || members[0]?.id;
+      return fallback ? [fallback] : [];
+    });
+  }, [members, activeMemberId]);
+
+  useEffect(() => {
+    if (!members.length || !includedMemberIds.length) return;
+    const viewId = getViewMemberId(includedMemberIds, members, activeMemberId);
+    if (!viewId || viewId === activeMemberId) return;
+    setActiveMemberId(viewId);
+    localStorage.setItem('activeMemberId', String(viewId));
+    const m = members.find(x => x.id === viewId);
+    if (m) localStorage.setItem('activeMemberName', localizePrimaryName(m.name, lang, m.is_primary));
+  }, [includedMemberIds, members, lang]); // eslint-disable-line
+
+  useEffect(() => {
+    if (includedMemberIds.length) {
+      localStorage.setItem(INCLUDED_STORAGE_KEY, JSON.stringify(includedMemberIds));
+    }
+  }, [includedMemberIds]);
+
+  const toggleIncludedMember = useCallback((id) => {
+    setIncludedMemberIds(prev => {
+      if (prev.includes(id)) {
+        if (prev.length <= 1) return prev;
+        return prev.filter(x => x !== id);
+      }
+      return [...prev, id];
+    });
+  }, []);
+
+  const includeMember = useCallback((id) => {
+    setIncludedMemberIds(prev => (prev.includes(id) ? prev : [...prev, id]));
+  }, []);
 
   const displayMembers = members.map(m => ({
     ...m,
@@ -58,6 +114,10 @@ export function MemberProvider({ children }) {
 
   const activeMember = displayMembers.find(m => m.id === activeMemberId) || displayMembers[0] || null;
 
+  const targetMemberIds = includedMemberIds.length
+    ? includedMemberIds
+    : (activeMemberId ? [activeMemberId] : []);
+
   // Zapisz nazwę gdy się zmieni (po załadowaniu)
   useEffect(() => {
     if (activeMember) localStorage.setItem('activeMemberName', activeMember.name);
@@ -70,7 +130,17 @@ export function MemberProvider({ children }) {
     || fallbackName;
 
   return (
-    <MemberContext.Provider value={{ members: displayMembers, activeMember, setActiveMember, reload, activeMemberName }}>
+    <MemberContext.Provider value={{
+      members: displayMembers,
+      activeMember,
+      setActiveMember,
+      reload,
+      activeMemberName,
+      includedMemberIds,
+      targetMemberIds,
+      toggleIncludedMember,
+      includeMember,
+    }}>
       {children}
     </MemberContext.Provider>
   );

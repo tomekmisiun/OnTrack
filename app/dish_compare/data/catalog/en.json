@@ -1,0 +1,367 @@
+{
+  "_meta": {
+    "shop": "UK supermarkets (manual, Tesco/Sainsbury's/Aldi typical shelf prices)",
+    "currency": "GBP",
+    "updated": "2026-05",
+    "price_model": "price = shelf price of package; package_weight = size of that package (g or ml). Cost = (used_amount / package_weight) * price. Same model as products_seed_pl.json."
+  },
+  "plain_flour": {
+    "label": "Plain flour",
+    "price": 0.80,
+    "package_weight": 1000,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "1 kg bag (~£0.80, May 2026)"
+  },
+  "yeast": {
+    "label": "Dried yeast",
+    "price": 0.62,
+    "package_weight": 40,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Small jar/sachets 40 g (~£0.62)"
+  },
+  "passata": {
+    "label": "Passata (jar)",
+    "price": 1.75,
+    "package_weight": 500,
+    "unit": "ml",
+    "price_basis": "per_package",
+    "note": "Jar 500 ml (~£1.75, Tesco May 2026)"
+  },
+  "mozzarella": {
+    "label": "Mozzarella",
+    "price": 1.65,
+    "package_weight": 300,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Block 300 g (~£1.65)"
+  },
+  "olive_oil": {
+    "label": "Olive oil",
+    "price": 3.65,
+    "package_weight": 500,
+    "unit": "ml",
+    "price_basis": "per_package",
+    "note": "Bottle 500 ml (~£3.65)"
+  },
+  "pepperoni": {
+    "label": "Pepperoni",
+    "price": 2.18,
+    "package_weight": 240,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Sliced pack 240 g (~£2.18)"
+  },
+  "chicken_breast": {
+    "label": "Chicken breast",
+    "price": 4.25,
+    "package_weight": 500,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Fresh fillets 500 g (~£4.25, Tesco May 2026)"
+  },
+  "rice": {
+    "label": "Basmati rice",
+    "price": 1.65,
+    "package_weight": 500,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Dried rice 500 g (~£1.65)"
+  },
+  "bell_pepper": {
+    "label": "Bell pepper",
+    "price": 1.00,
+    "package_weight": 160,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "1 whole pepper, ~160 g usable (~£1.00)"
+  },
+  "tomato": {
+    "label": "Tomato",
+    "price": 0.89,
+    "package_weight": 500,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Pack 500 g (~£0.89)"
+  },
+  "rice_vinegar": {
+    "label": "Rice vinegar",
+    "price": 1.25,
+    "package_weight": 250,
+    "unit": "ml",
+    "price_basis": "per_package",
+    "note": "Bottle 250 ml (~£1.25)"
+  },
+  "honey": {
+    "label": "Honey",
+    "price": 1.75,
+    "package_weight": 454,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Jar 454 g (~£1.75)"
+  },
+  "ketchup": {
+    "label": "Ketchup",
+    "price": 1.00,
+    "package_weight": 500,
+    "unit": "ml",
+    "price_basis": "per_package",
+    "note": "Bottle 500 ml (~£1.00)"
+  },
+  "yogurt": {
+    "label": "Natural yogurt",
+    "price": 0.95,
+    "package_weight": 500,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Pot 500 g (~£0.95)"
+  },
+  "curry_powder": {
+    "label": "Curry powder",
+    "price": 0.89,
+    "package_weight": 90,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Spice jar 90 g (~£0.89)"
+  },
+  "coconut_milk": {
+    "label": "Coconut milk",
+    "price": 0.75,
+    "package_weight": 400,
+    "unit": "ml",
+    "price_basis": "per_package",
+    "note": "Tin 400 ml (~£0.75)"
+  },
+  "onion": {
+    "label": "Onion",
+    "price": 0.75,
+    "package_weight": 500,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "3-pack ~500 g (~£0.75)"
+  },
+  "garlic": {
+    "label": "Garlic",
+    "price": 0.60,
+    "package_weight": 50,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "1 bulb, ~50 g usable (~£0.60)"
+  },
+  "tomato_paste": {
+    "label": "Tomato paste",
+    "price": 0.45,
+    "package_weight": 200,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Tube/tin 200 g (~£0.45)"
+  },
+  "egg_noodles": {
+    "label": "Egg noodles",
+    "price": 0.79,
+    "package_weight": 250,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Dried nests 250 g (~£0.79)"
+  },
+  "carrot": {
+    "label": "Carrot",
+    "price": 0.45,
+    "package_weight": 500,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Bag 500 g (~£0.45)"
+  },
+  "soy_sauce": {
+    "label": "Soy sauce",
+    "price": 1.10,
+    "package_weight": 300,
+    "unit": "ml",
+    "price_basis": "per_package",
+    "note": "Bottle 300 ml (~£1.10)"
+  },
+  "ginger": {
+    "label": "Ginger",
+    "price": 0.95,
+    "package_weight": 120,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Fresh root ~120 g piece (~£0.95)"
+  },
+  "burger_bun": {
+    "label": "Burger bun",
+    "price": 0.25,
+    "unit": "pcs",
+    "price_basis": "per_piece",
+    "note": "Price per bun (~£0.25)"
+  },
+  "beef_mince": {
+    "label": "Beef mince",
+    "price": 4.75,
+    "package_weight": 500,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Fresh 500 g (~£4.75)"
+  },
+  "cheese": {
+    "label": "Cheddar cheese",
+    "price": 2.80,
+    "package_weight": 200,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Block 200 g (~£2.80)"
+  },
+  "lettuce": {
+    "label": "Lettuce",
+    "price": 0.69,
+    "package_weight": 360,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Iceberg ~360 g (~£0.69)"
+  },
+  "spaghetti": {
+    "label": "Spaghetti",
+    "price": 0.75,
+    "package_weight": 500,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Dried 500 g (~£0.75)"
+  },
+  "chopped_tomatoes": {
+    "label": "Chopped tomatoes (tinned)",
+    "price": 0.45,
+    "package_weight": 400,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Tin 400 g (~£0.45)"
+  },
+  "celery": {
+    "label": "Celery",
+    "price": 0.69,
+    "package_weight": 400,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Head 400 g (~£0.69)"
+  },
+  "oregano": {
+    "label": "Dried oregano",
+    "price": 1.00,
+    "package_weight": 14,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Small jar 14 g (~£1.00)"
+  },
+  "black_pepper": {
+    "label": "Black pepper",
+    "price": 1.20,
+    "package_weight": 50,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Grinder/jar 50 g (~£1.20)"
+  },
+  "water": {
+    "label": "Water",
+    "price": 0.0,
+    "package_weight": 1000,
+    "unit": "ml",
+    "price_basis": "per_package",
+    "note": "Tap water — negligible cost"
+  },
+  "salt": {
+    "label": "Salt",
+    "price": 0.50,
+    "package_weight": 1000,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Table salt 1 kg (~£0.50)"
+  },
+  "pineapple": {
+    "label": "Pineapple (tinned)",
+    "price": 0.85,
+    "package_weight": 425,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Tin 425 g (~£0.85)"
+  },
+  "double_cream": {
+    "label": "Double cream",
+    "price": 1.05,
+    "package_weight": 300,
+    "unit": "ml",
+    "price_basis": "per_package",
+    "note": "Pot 300 ml (~£1.05)"
+  },
+  "coriander": {
+    "label": "Fresh coriander",
+    "price": 0.52,
+    "package_weight": 30,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Bunch ~30 g (~£0.52)"
+  },
+  "bean_sprouts": {
+    "label": "Bean sprouts",
+    "price": 0.90,
+    "package_weight": 300,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Fresh pack 300 g (~£0.90, Tesco May 2026)"
+  },
+  "napa_cabbage": {
+    "label": "Chinese leaf (napa cabbage)",
+    "price": 1.50,
+    "package_weight": 600,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Whole head ~600 g (~£1.50)"
+  },
+  "spring_onion": {
+    "label": "Spring onion",
+    "price": 0.75,
+    "package_weight": 60,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Bunch, ~60 g usable (~£0.75)"
+  },
+  "sesame_oil": {
+    "label": "Sesame oil",
+    "price": 3.50,
+    "package_weight": 250,
+    "unit": "ml",
+    "price_basis": "per_package",
+    "note": "Toasted sesame oil 250 ml (~£3.50)"
+  },
+  "oyster_sauce": {
+    "label": "Oyster sauce",
+    "price": 1.80,
+    "package_weight": 150,
+    "unit": "ml",
+    "price_basis": "per_package",
+    "note": "Jar 150 ml (~£1.80)"
+  },
+  "vegetable_oil": {
+    "label": "Vegetable oil",
+    "price": 1.50,
+    "package_weight": 1000,
+    "unit": "ml",
+    "price_basis": "per_package",
+    "note": "Sunflower/rapeseed 1 L (~£1.50)"
+  },
+  "sugar": {
+    "label": "Granulated sugar",
+    "price": 0.90,
+    "package_weight": 1000,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Bag 1 kg (~£0.90)"
+  },
+  "garam_masala": {
+    "label": "Garam masala",
+    "price": 0.99,
+    "package_weight": 38,
+    "unit": "g",
+    "price_basis": "per_package",
+    "note": "Spice jar 38 g (~£0.99)"
+  }
+}

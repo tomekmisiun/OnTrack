@@ -3,7 +3,8 @@ import { Icon } from '@iconify/react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import PrivacyPolicy from './PrivacyPolicy';
-import DishCompare from './DishCompare';
+import AppFooter from './AppFooter';
+import DishCompare from '../features/dishCompare/DishCompare';
 import { SEED_STATS } from '../data/seedStats';
 import './Login.css';
 
@@ -397,18 +398,14 @@ export default function Login() {
             />
           ))}
         </div>
+
+        <AppFooter className="app-site-footer--login" />
       </main>
 
       <aside className="login-panel">
         <LoginForm {...formProps} />
       </aside>
       </div>
-
-      <p className="login-copyright">
-        {typeof t('login_copyright') === 'function'
-          ? t('login_copyright')(new Date().getFullYear())
-          : t('login_copyright')}
-      </p>
 
       {showPrivacy && <PrivacyPolicy lang={uiLang} onClose={() => setShowPrivacy(false)} />}
     </div>
