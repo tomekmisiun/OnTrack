@@ -7,6 +7,7 @@ import DaySchedule from './components/DaySchedule';
 import Summary from './components/Summary';
 import Export from './components/Export';
 import MacroCalculator from './components/MacroCalculator';
+import Welcome from './components/Welcome';
 import Login from './components/Login';
 import Profile from './components/Profile';
 import MemberPicker from './components/MemberPicker';
@@ -43,7 +44,7 @@ function markTourDone(userId) {
 function AppInner({ onStartTour }) {
   const { user, logout } = useAuth();
   const { t } = useLanguage();
-  const [activeTab, setActiveTab] = useState('macro');
+  const [activeTab, setActiveTab] = useState('home');
   const [showProfile, setShowProfile] = useState(false);
   const [scrollCalendarToToday, setScrollCalendarToToday] = useState(false);
 
@@ -51,6 +52,11 @@ function AppInner({ onStartTour }) {
     setActiveTab(tab);
     window.scrollTo({ top: 0 });
     if (tab === 'calendar') setScrollCalendarToToday(true);
+  }, []);
+
+  const goHome = useCallback(() => {
+    setActiveTab('home');
+    window.scrollTo({ top: 0 });
   }, []);
 
   useEffect(() => {
@@ -74,7 +80,7 @@ function AppInner({ onStartTour }) {
   return (
     <div className="app">
       <aside className="app-sidebar">
-        <div className="sidebar-logo">
+        <div className="sidebar-logo sidebar-logo--clickable" role="button" tabIndex={0} onClick={goHome} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') goHome(); }}>
           <svg className="sidebar-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="9.5"/>
             <path d="M8.5 15.5 L11.8 11.8 L15.5 8.5 L12.2 12.2 Z" fill="currentColor" stroke="none"/>
@@ -121,6 +127,13 @@ function AppInner({ onStartTour }) {
       </aside>
 
       <main className="app-main">
+        {activeTab === 'home'      && (
+          <Welcome
+            onGoToTab={goToTab}
+            onAccount={() => setShowProfile(true)}
+            onLogout={logout}
+          />
+        )}
         {activeTab === 'macro'     && <MacroCalculator />}
         {activeTab === 'calendar'  && (
           <Calendar

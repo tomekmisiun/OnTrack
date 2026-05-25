@@ -30,6 +30,21 @@ body {
   overflow-y: auto;
 }
 
+.sidebar-logo--clickable {
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.sidebar-logo--clickable:hover {
+  opacity: 0.85;
+}
+
+.sidebar-logo--clickable:focus-visible {
+  outline: 2px solid #2dd4bf;
+  outline-offset: -2px;
+  border-radius: 4px;
+}
+
 .sidebar-logo {
   display: flex;
   align-items: center;

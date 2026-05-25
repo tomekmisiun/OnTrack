@@ -14,6 +14,8 @@ const T = {
     logout: 'Wyloguj',
     profile: 'Profil',
     account: 'Konto',
+    welcome_greeting: 'Witaj',
+    welcome_subtitle: 'Od czego chcesz rozpocząć dziś?',
     // Profile modal
     my_profile: 'Mój profil',
     delete_account: 'Usuń konto',
@@ -902,6 +904,8 @@ const T = {
     logout: 'Log out',
     profile: 'Profile',
     account: 'Account',
+    welcome_greeting: 'Welcome',
+    welcome_subtitle: 'What would you like to start with today?',
     // Profile modal
     my_profile: 'My Profile',
     delete_account: 'Delete account',
