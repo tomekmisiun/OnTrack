@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  flask-test:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout kod
