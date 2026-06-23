@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import re
 import secrets
-import threading
 from datetime import UTC, datetime, timedelta
 from urllib.parse import urlencode
 
@@ -24,6 +23,7 @@ from app.models.user import User
 from app.services.catalog_seed_service import ensure_catalog_if_incomplete, ensure_user_seeded
 from app.services.member_service import ensure_primary_member, sync_primary_member_name
 from app.services.user_presenter import user_to_dict
+from app.worker.queue import enqueue_catalog_seed
 
 USERNAME_RE = re.compile(r"^[a-zA-Z0-9_]{3,80}$")
 MIN_PASSWORD_LEN = 8
@@ -61,22 +61,7 @@ def issue_token(user_id: int) -> str:
 
 
 def _schedule_catalog_seed(user_id: int, lang: str) -> None:
-    settings = get_settings()
-    if settings.testing:
-        return
-
-    def _run() -> None:
-        from app.db.session import get_session_factory
-
-        session = get_session_factory()()
-        try:
-            ensure_user_seeded(session, user_id, lang)
-        except Exception:
-            session.rollback()
-        finally:
-            session.close()
-
-    threading.Thread(target=_run, daemon=True, name=f"seed-{user_id}").start()
+    enqueue_catalog_seed(user_id, lang)
 
 
 def login(session: Session, username: str, password: str) -> str:
