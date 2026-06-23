@@ -10,6 +10,7 @@ class Settings(BaseSettings):
     debug: bool = False
     host: str = "0.0.0.0"
     port: int = 8000
+    database_url: str = "postgresql+psycopg://user:change-me@localhost:5432/mealplanner"
 
 
 @lru_cache
