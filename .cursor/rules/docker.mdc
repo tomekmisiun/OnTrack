@@ -1,0 +1,15 @@
+---
+description: Docker and container configuration rules
+globs:
+  - "Dockerfile*"
+  - "docker-compose*.yml"
+  - "docker-compose*.yaml"
+  - "compose*.yml"
+  - "compose*.yaml"
+  - ".dockerignore"
+alwaysApply: false
+---
+
+Source of truth: `.ai-rules/docker.md`.
+
+Use container validation commands from `.ai-rules/validation.md` when defined by the target repository.

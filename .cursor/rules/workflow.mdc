@@ -1,0 +1,11 @@
+---
+description: Git workflow and branch safety rules
+globs:
+  - ".git/**"
+alwaysApply: false
+---
+
+Source of truth: `.ai-rules/git.md`.
+
+One task equals one branch unless the user explicitly requests otherwise.
+No commit, push, merge, or force-push without explicit user `approve`.

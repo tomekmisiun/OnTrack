@@ -1,0 +1,26 @@
+---
+description: Backend application code and tests (Flask + future FastAPI)
+globs:
+  - "app/**/*.py"
+  - "backend/**/*.py"
+  - "tests/**/*.py"
+  - "migrations/**/*.py"
+  - "config.py"
+  - "run.py"
+alwaysApply: false
+---
+
+Source of truth (read from `.ai-rules/`):
+
+- `architecture.md`
+- `api.md`
+- `database.md`
+- `security.md`
+- `testing.md`
+- `workers.md`
+
+OnTrack-specific:
+
+- `docs/backend-migration/API_CONTRACT.md` — frontend JSON contract
+- `docs/backend-migration/AUTH_COMPATIBILITY.md` — JWT and OAuth parity
+- During migration: do not break Flask until FastAPI passes contract tests

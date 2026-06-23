@@ -1,0 +1,28 @@
+---
+description: OnTrack product constraints and migration guardrails
+alwaysApply: true
+---
+
+# OnTrack
+
+Meal planner & budgeter — Flask API + React SPA (migrating to FastAPI in `backend/`).
+
+## Non-negotiable during backend migration
+
+- **Frontend contract:** `docs/backend-migration/API_CONTRACT.md` and `frontend/src/api.js`
+- **Auth response:** `{ "token": "..." }` — not `{ access_token, refresh_token }`
+- **Do not modify** frontend appearance, CSS, `LanguageContext`, tour, or routing unless explicitly requested
+- **Do not push to `main`** — use PR + green CI (`.github/DEPLOY.md`)
+- **Never commit** `.env` or secrets
+
+## Migration roadmap
+
+Read `docs/backend-migration/README.md` before large backend work. One MIG task per branch.
+
+## Stack
+
+| Layer | Current | Target |
+|-------|---------|--------|
+| API | Flask `app/` | FastAPI `backend/` |
+| Frontend | `frontend/` | unchanged |
+| DB | Postgres, `migrations/` | same schema, new `backend/alembic/` |

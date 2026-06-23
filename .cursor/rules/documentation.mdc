@@ -1,0 +1,13 @@
+---
+description: Documentation and README rules
+globs:
+  - "README.md"
+  - "docs/**/*.md"
+  - "CHANGELOG.md"
+  - "CONTRIBUTING.md"
+alwaysApply: false
+---
+
+Source of truth: `.ai-rules/documentation.md`.
+
+Feature specs: `docs/specs/README.md`.
