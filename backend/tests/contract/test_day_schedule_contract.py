@@ -1,6 +1,59 @@
 WEEK_START = "2026-05-18"  # Monday
 
 
+def test_update_schedule_block(client, auth_headers, member):
+    created = client.post(
+        "/api/day-schedule/",
+        headers=auth_headers,
+        json={
+            "week_start": WEEK_START,
+            "day": 2,
+            "start_hour": 10,
+            "end_hour": 12,
+            "label": "Spotkanie",
+            "member_id": member.id,
+        },
+    )
+    block_id = created.json()["id"]
+
+    updated = client.patch(
+        f"/api/day-schedule/{block_id}",
+        headers=auth_headers,
+        json={"label": "Stand-up", "end_hour": 11},
+    )
+    assert updated.status_code == 200
+    data = updated.json()
+    assert data["label"] == "Stand-up"
+    assert data["end_hour"] == 11
+
+
+def test_delete_week_blocks(client, auth_headers, member):
+    client.post(
+        "/api/day-schedule/",
+        headers=auth_headers,
+        json={
+            "week_start": WEEK_START,
+            "day": 0,
+            "start_hour": 9,
+            "end_hour": 12,
+            "label": "Praca",
+            "member_id": member.id,
+        },
+    )
+    res = client.delete(
+        f"/api/day-schedule/week?member_id={member.id}&week_start={WEEK_START}",
+        headers=auth_headers,
+    )
+    assert res.status_code == 200
+    assert res.json()["deleted"] == 1
+
+    listed = client.get(
+        f"/api/day-schedule/?member_id={member.id}&week_start={WEEK_START}",
+        headers=auth_headers,
+    )
+    assert listed.json() == []
+
+
 def test_create_and_list_schedule_blocks(client, auth_headers, member):
     res = client.post(
         "/api/day-schedule/",

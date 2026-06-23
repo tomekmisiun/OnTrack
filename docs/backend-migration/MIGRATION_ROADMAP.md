@@ -191,6 +191,8 @@ One task = one branch = one reviewable PR. Flask remains until MIG-016 stability
 | CI | Add backend job; gradual coverage thresholds |
 | Policy | New modules ≥ 80% coverage; global floor 50% initially (**ADAPT** ramp) |
 
+**Status:** ✅ Complete — contract registry, gap tests (R04/R07/DS04/DS06/H01), backend CI job with 50% floor.
+
 ---
 
 ## MIG-014 — Railway staging deployment

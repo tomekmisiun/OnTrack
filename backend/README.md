@@ -72,6 +72,12 @@ Integration test (in-memory test queue):
 uv run pytest tests/integration/test_worker_catalog_seed.py -v
 ```
 
+Contract regression suite (all API_CONTRACT rows):
+
+```bash
+uv run pytest tests/contract/ -q --cov=app --cov-fail-under=50
+```
+
 ## Python version
 
 3.11 — aligned with OnTrack CI and the legacy Flask Dockerfile.
