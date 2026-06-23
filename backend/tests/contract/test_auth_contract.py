@@ -148,8 +148,10 @@ def test_flask_jwt_validates_on_fastapi(client, user):
     from flask_jwt_extended import JWTManager
     from flask_jwt_extended import create_access_token as flask_create_token
 
+    from app.core.config import get_settings
+
     flask_app = Flask(__name__)
-    flask_app.config["JWT_SECRET_KEY"] = "test-jwt-secret-key-for-pytest"
+    flask_app.config["JWT_SECRET_KEY"] = get_settings().jwt_secret_key
     JWTManager(flask_app)
 
     with flask_app.app_context():
