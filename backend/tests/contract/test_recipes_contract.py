@@ -74,6 +74,31 @@ def test_update_category(client, auth_headers, recipe):
     assert res.json()["category"] == "dinner"
 
 
+def test_update_recipe(client, auth_headers, recipe, product):
+    res = client.put(
+        f"/api/recipes/{recipe.id}",
+        headers=auth_headers,
+        json={
+            "name": "Owsianka XL",
+            "ingredients": [{"product_id": product.id, "weight": 300}],
+        },
+    )
+    assert res.status_code == 200
+    data = res.json()
+    assert data["name"] == "Owsianka XL"
+    assert data["ingredients"][0]["weight"] == 300
+
+
+def test_fetch_recipe_image(client, auth_headers, recipe, monkeypatch):
+    monkeypatch.setattr(
+        "app.services.recipe_service.resolve_recipe_image",
+        lambda _recipe: "https://example.com/photo.jpg",
+    )
+    res = client.post(f"/api/recipes/{recipe.id}/fetch-image", headers=auth_headers)
+    assert res.status_code == 200
+    assert res.json()["image_url"] == "https://example.com/photo.jpg"
+
+
 def test_delete_all_recipes(client, auth_headers, recipe, db_session):
     res = client.delete("/api/recipes/all", headers=auth_headers)
     assert res.status_code == 200

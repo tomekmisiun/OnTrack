@@ -1,5 +1,3 @@
-from sqlalchemy.orm import sessionmaker
-
 from app.core.passwords import hash_password
 from app.models.household_member import HouseholdMember
 from app.models.product import Product
@@ -13,6 +11,7 @@ from app.worker.queue import (
     enqueue_catalog_seed,
     reset_testing_jobs,
 )
+from sqlalchemy.orm import sessionmaker
 
 
 def _bare_user(db_session) -> User:

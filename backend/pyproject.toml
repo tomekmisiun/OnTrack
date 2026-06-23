@@ -27,6 +27,7 @@ dev = [
     "flask-jwt-extended>=4.6.0,<5",
     "httpx>=0.28.0,<0.29",
     "pytest>=8.3.0,<9",
+    "pytest-cov>=6.0.0,<7",
     "ruff>=0.8.0,<0.9",
 ]
 
@@ -43,6 +44,14 @@ pythonpath = ["."]
 markers = [
     "integration: tests requiring PostgreSQL (set TEST_DATABASE_URL)",
 ]
+
+[tool.coverage.run]
+source = ["app"]
+omit = ["app/worker/run.py"]
+
+[tool.coverage.report]
+fail_under = 50
+show_missing = true
 
 [tool.ruff]
 target-version = "py311"

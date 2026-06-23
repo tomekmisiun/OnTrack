@@ -27,10 +27,40 @@ jobs:
           pip install -r requirements.txt
           pip install pytest
 
-      - name: Uruchom testy
+      - name: Uruchom testy Flask
         run: pytest tests/ -v
         env:
           DATABASE_URL: "sqlite:///:memory:"
+          FLASK_SECRET_KEY: ci-test-flask-secret-key-0123456789abcdef
+          JWT_SECRET_KEY: ci-test-jwt-secret-key-0123456789abcdef
+          GOOGLE_CLIENT_ID: ci-test-google-client-id
+          GOOGLE_CLIENT_SECRET: ci-test-google-client-secret
+
+  backend-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout kod
+        uses: actions/checkout@v6
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "latest"
+
+      - name: Ustaw Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Uruchom testy FastAPI (contract suite)
+        working-directory: backend
+        run: |
+          uv sync --dev
+          uv run pytest tests/contract/ tests/integration/test_worker_catalog_seed.py tests/test_health.py \
+            -q --cov=app --cov-report=term-missing --cov-fail-under=50
+        env:
+          TESTING: "1"
+          DATABASE_URL: "sqlite://"
           FLASK_SECRET_KEY: ci-test-flask-secret-key-0123456789abcdef
           JWT_SECRET_KEY: ci-test-jwt-secret-key-0123456789abcdef
           GOOGLE_CLIENT_ID: ci-test-google-client-id
