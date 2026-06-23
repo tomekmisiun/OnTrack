@@ -1,0 +1,165 @@
+from sqlalchemy.orm import Session
+
+from app.domain.product_filters import looks_like_recipe_ingredient_line
+from app.models.product import Product
+from app.models.user import User
+from app.services.product_presenter import product_to_dict
+
+MAX_NUM = 99999
+MAX_NAME = 50
+MAX_KCAL = 9999
+MAX_MACRO = 100
+MAX_PRICE = 9999
+
+
+class ProductServiceError(Exception):
+    def __init__(self, message: str, status_code: int):
+        self.message = message
+        self.status_code = status_code
+        super().__init__(message)
+
+
+def validate_product_data(data: dict, require_all: bool = True) -> str | None:
+    if require_all and not all(k in data for k in ("name", "package_weight", "price")):
+        return "Required fields: name, package_weight, price"
+    if "name" in data:
+        name = str(data["name"]).strip()
+        if not name:
+            return "Product name cannot be empty"
+        if len(name) > MAX_NAME:
+            return f"Product name max {MAX_NAME} characters"
+    if "package_weight" in data:
+        try:
+            w = float(data["package_weight"])
+        except (TypeError, ValueError):
+            return "Invalid package weight"
+        if w <= 0 or w > MAX_NUM:
+            return f"Package weight must be between 0 and {MAX_NUM}"
+    if "price" in data:
+        try:
+            p = float(data["price"])
+        except (TypeError, ValueError):
+            return "Invalid price"
+        if p < 0 or p > MAX_PRICE:
+            return f"Price must be between 0 and {MAX_PRICE}"
+    if "kcal" in data and data["kcal"] is not None:
+        try:
+            v = float(data["kcal"])
+        except (TypeError, ValueError):
+            return "Invalid kcal value"
+        if v < 0 or v > MAX_KCAL:
+            return f"Kcal must be between 0 and {MAX_KCAL}"
+    for macro in ("protein", "fat", "carbs"):
+        if macro in data and data[macro] is not None:
+            try:
+                v = float(data[macro])
+            except (TypeError, ValueError):
+                return f"Invalid {macro} value"
+            if v < 0 or v > MAX_MACRO:
+                return f"{macro} must be between 0 and {MAX_MACRO}"
+    return None
+
+
+def _is_catalog_product(product: Product) -> bool:
+    if looks_like_recipe_ingredient_line(product.name):
+        return False
+    if product.price and product.price > 0:
+        return True
+    if product.kcal is not None or product.protein is not None:
+        return True
+    if len(product.name or "") <= 40:
+        return True
+    return False
+
+
+def _user_lang(session: Session, user_id: int) -> str:
+    user = session.get(User, user_id)
+    if user and user.lang in ("pl", "en"):
+        return user.lang
+    return "pl"
+
+
+def _get_own_product(session: Session, user_id: int, product_id: int) -> Product:
+    lang = _user_lang(session, user_id)
+    product = (
+        session.query(Product)
+        .filter_by(id=product_id, user_id=user_id, lang=lang)
+        .first()
+    )
+    if not product:
+        raise ProductServiceError("Product not found", 404)
+    return product
+
+
+def list_products(session: Session, user_id: int) -> list[dict]:
+    lang = _user_lang(session, user_id)
+    products = (
+        session.query(Product)
+        .filter_by(user_id=user_id, lang=lang)
+        .order_by(Product.name)
+        .all()
+    )
+    return [product_to_dict(p) for p in products if _is_catalog_product(p)]
+
+
+def create_product(session: Session, user_id: int, data: dict) -> dict:
+    err = validate_product_data(data, require_all=True)
+    if err:
+        raise ProductServiceError(err, 400)
+
+    user = session.get(User, user_id)
+    product = Product(
+        user_id=user_id,
+        name=str(data["name"]).strip()[:MAX_NAME],
+        package_weight=float(data["package_weight"]),
+        price=float(data["price"]),
+        unit=str(data.get("unit", "g"))[:10],
+        kcal=float(data["kcal"]) if data.get("kcal") is not None else None,
+        protein=float(data["protein"]) if data.get("protein") is not None else None,
+        fat=float(data["fat"]) if data.get("fat") is not None else None,
+        carbs=float(data["carbs"]) if data.get("carbs") is not None else None,
+        sold_by_weight=bool(data.get("sold_by_weight", False)),
+        lang=user.lang if user else "pl",
+    )
+    session.add(product)
+    session.commit()
+    session.refresh(product)
+    return product_to_dict(product)
+
+
+def update_product(session: Session, user_id: int, product_id: int, data: dict) -> dict:
+    product = _get_own_product(session, user_id, product_id)
+    err = validate_product_data(data, require_all=False)
+    if err:
+        raise ProductServiceError(err, 400)
+
+    if "name" in data:
+        product.name = str(data["name"]).strip()[:MAX_NAME]
+    if "package_weight" in data:
+        product.package_weight = float(data["package_weight"])
+    if "price" in data:
+        product.price = float(data["price"])
+    if "unit" in data:
+        product.unit = str(data["unit"])[:10]
+    if "sold_by_weight" in data:
+        product.sold_by_weight = bool(data["sold_by_weight"])
+    for macro in ("kcal", "protein", "fat", "carbs"):
+        if macro in data:
+            setattr(product, macro, float(data[macro]) if data[macro] is not None else None)
+
+    session.commit()
+    session.refresh(product)
+    return product_to_dict(product)
+
+
+def delete_product(session: Session, user_id: int, product_id: int) -> None:
+    product = _get_own_product(session, user_id, product_id)
+    session.delete(product)
+    session.commit()
+
+
+def delete_all_products(session: Session, user_id: int) -> int:
+    lang = _user_lang(session, user_id)
+    count = session.query(Product).filter_by(user_id=user_id, lang=lang).delete()
+    session.commit()
+    return count
