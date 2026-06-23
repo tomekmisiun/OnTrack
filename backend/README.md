@@ -52,6 +52,16 @@ curl -sf http://localhost:5001/health
 
 Image runs uvicorn on port **8000** inside the container.
 
+### Railway staging (MIG-014)
+
+Production/staging image uses monorepo context:
+
+```bash
+docker build -f backend/Dockerfile.railway -t ontrack-fastapi-railway .
+```
+
+Deploy runbook: [`docs/backend-migration/RAILWAY_STAGING.md`](../docs/backend-migration/RAILWAY_STAGING.md).
+
 ## Background worker (MIG-012)
 
 Catalog seed jobs enqueue to Redis (`REDIS_URL`). Without Redis, jobs run synchronously in-process (no threads).
