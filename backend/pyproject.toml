@@ -5,8 +5,11 @@ description = "OnTrack FastAPI backend (Flask migration target)"
 readme = "README.md"
 requires-python = ">=3.11,<3.12"
 dependencies = [
+    "alembic>=1.14.0,<2",
     "fastapi>=0.115.0,<0.116",
+    "psycopg[binary]>=3.2.0,<4",
     "pydantic-settings>=2.6.0,<3",
+    "sqlalchemy>=2.0.36,<3",
     "uvicorn[standard]>=0.32.0,<0.33",
 ]
 
@@ -27,6 +30,9 @@ packages = ["app"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
+markers = [
+    "integration: tests requiring PostgreSQL (set TEST_DATABASE_URL)",
+]
 
 [tool.ruff]
 target-version = "py311"
@@ -35,3 +41,6 @@ src = ["app", "tests"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"alembic/versions/*.py" = ["I001", "UP007", "UP035"]

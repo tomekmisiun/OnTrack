@@ -72,6 +72,8 @@ One task = one branch = one reviewable PR. Flask remains until MIG-016 stability
 | **Rollback** | Drop staging DB; revert branch |
 | **Out of scope** | Production stamp; data migration |
 
+**Status:** ✅ Complete — models, Alembic initial revision, integration test.
+
 ---
 
 ## MIG-004 — Authentication compatibility layer
