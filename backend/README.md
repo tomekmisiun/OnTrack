@@ -52,6 +52,26 @@ curl -sf http://localhost:5001/health
 
 Image runs uvicorn on port **8000** inside the container.
 
+## Background worker (MIG-012)
+
+Catalog seed jobs enqueue to Redis (`REDIS_URL`). Without Redis, jobs run synchronously in-process (no threads).
+
+```bash
+# Local with compose
+docker compose up --build backend worker redis db
+
+# Worker only (from backend/)
+export DATABASE_URL=postgresql+psycopg://user:change-me@localhost:5432/mealplanner
+export REDIS_URL=redis://localhost:6379/0
+uv run python -m app.worker.run
+```
+
+Integration test (in-memory test queue):
+
+```bash
+uv run pytest tests/integration/test_worker_catalog_seed.py -v
+```
+
 ## Python version
 
 3.11 — aligned with OnTrack CI and the legacy Flask Dockerfile.

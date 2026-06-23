@@ -179,6 +179,8 @@ One task = one branch = one reviewable PR. Flask remains until MIG-016 stability
 | Tests | Integration test job enqueue + process |
 | Out of scope | DLQ, email jobs |
 
+**Status:** ✅ Complete — Redis queue, worker process, catalog_seed job, compose redis+worker.
+
 ---
 
 ## MIG-013 — Contract regression suite

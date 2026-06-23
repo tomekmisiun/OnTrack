@@ -32,6 +32,7 @@ class Settings(BaseSettings):
 
     pexels_api_key: str | None = Field(default=None, validation_alias="PEXELS_API_KEY")
     gemini_api_key: str | None = Field(default=None, validation_alias="GEMINI_API_KEY")
+    redis_url: str | None = Field(default=None, validation_alias="REDIS_URL")
 
     user_seeds_dir: str | None = None
 

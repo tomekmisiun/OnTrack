@@ -30,6 +30,46 @@ services:
       - "${BACKEND_PUBLISH_PORT:-8000}:8000"
     environment:
       - DEBUG=${BACKEND_DEBUG:-0}
+      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      - REDIS_URL=redis://redis:6379/0
+      - FLASK_SECRET_KEY=${FLASK_SECRET_KEY}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - FRONTEND_URL=http://localhost:3000
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - backend
+
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: ["uv", "run", "python", "-m", "app.worker.run"]
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      - REDIS_URL=redis://redis:6379/0
+      - FLASK_SECRET_KEY=${FLASK_SECRET_KEY}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - backend
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
     networks:
       - backend
 
