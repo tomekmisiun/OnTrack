@@ -3,11 +3,12 @@
 Target replacement for the legacy Flask app in `app/`. Built incrementally per
 [`docs/backend-migration/MIGRATION_ROADMAP.md`](../docs/backend-migration/MIGRATION_ROADMAP.md).
 
-## Current scope (MIG-001 + MIG-003)
+## Current scope (MIG-001 – MIG-004)
 
 - FastAPI app with `GET /health` → `{ "status": "ok" }`
-- SQLAlchemy models for all 10 OnTrack tables
-- OnTrack-only Alembic chain under `alembic/` (no foundation migrations)
+- SQLAlchemy models + OnTrack-only Alembic chain
+- Auth routes `/api/auth/*` (login, register, exchange, me, language, delete, Google OAuth)
+- JWT compatible with Flask (`JWT_SECRET_KEY`, `{ "token" }`, werkzeug passwords)
 
 ## Local development
 

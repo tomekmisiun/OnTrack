@@ -90,6 +90,8 @@ One task = one branch = one reviewable PR. Flask remains until MIG-016 stability
 | **Rollback** | Feature flag route traffic to Flask |
 | **Out of scope** | Refresh tokens; password reset |
 
+**Status:** ✅ Complete — auth routes A01–A08, werkzeug passwords, `{ token }` contract, contract tests.
+
 ---
 
 ## MIG-005 — Members domain
