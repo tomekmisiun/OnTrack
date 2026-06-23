@@ -21,6 +21,7 @@ from app.core.security import create_access_token  # noqa: E402
 from app.db.base import Base  # noqa: E402
 from app.main import create_app  # noqa: E402
 from app.models.household_member import HouseholdMember  # noqa: E402
+from app.models.product import Product  # noqa: E402
 from app.models.user import User  # noqa: E402
 from app.services import auth_service  # noqa: E402
 
@@ -99,6 +100,37 @@ def user(db_session: Session) -> User:
 def auth_headers(user: User) -> dict[str, str]:
     token = create_access_token(user.id)
     return {"Authorization": f"Bearer {token}"}
+
+
+@pytest.fixture
+def other_user(db_session: Session) -> User:
+    return create_user(db_session, "bob@example.com", lang="en")
+
+
+@pytest.fixture
+def other_auth_headers(other_user: User) -> dict[str, str]:
+    token = create_access_token(other_user.id)
+    return {"Authorization": f"Bearer {token}"}
+
+
+@pytest.fixture
+def product(db_session: Session, user: User) -> Product:
+    p = Product(
+        user_id=user.id,
+        name="Jogurt naturalny",
+        package_weight=400,
+        price=3.49,
+        unit="g",
+        kcal=60,
+        protein=4,
+        fat=3,
+        carbs=5,
+        lang="pl",
+    )
+    db_session.add(p)
+    db_session.commit()
+    db_session.refresh(p)
+    return p
 
 
 @pytest.fixture
