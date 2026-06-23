@@ -156,6 +156,8 @@ One task = one branch = one reviewable PR. Flask remains until MIG-016 stability
 | Acceptance | N01, F01 contract tests |
 | Tests | Port `test_nutrition.py`, `test_fuel.py` |
 
+**Status:** ✅ Complete — N01 macro lookup, F01 fuel prices (public), contract tests.
+
 ---
 
 ## MIG-011 — Import and public endpoints
