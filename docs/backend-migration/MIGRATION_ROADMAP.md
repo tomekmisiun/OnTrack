@@ -224,6 +224,8 @@ One task = one branch = one reviewable PR. Flask remains until MIG-016 stability
 | Acceptance | Frontend `REACT_APP_API_URL` points to FastAPI prod; Flask standby |
 | Rollback | See CUTOVER_AND_ROLLBACK.md |
 
+**Status:** ✅ Complete — prod Railway configs, cutover runbook, smoke script, Railway proxy headers. Manual cutover on Railway required post-merge.
+
 ---
 
 ## MIG-017 — Flask backend removal

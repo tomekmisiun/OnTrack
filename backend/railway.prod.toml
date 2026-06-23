@@ -1,0 +1,18 @@
+# FastAPI production API — Railway service: ontrack-back-fastapi
+# Root Directory in Railway Settings MUST be repository root (not backend/).
+# Flask ontrack-back stays as standby until MIG-017 (do not delete).
+[build]
+builder = "dockerfile"
+dockerfilePath = "backend/Dockerfile.railway"
+watchPatterns = [
+  "backend/**",
+  "app/user_seeds/**",
+  "app/dish_compare/**",
+  "scraper/data/macros/**",
+  "scraper/data/built/**",
+]
+
+[deploy]
+healthcheckPath = "/health"
+healthcheckTimeout = 120
+restartPolicyType = "on_failure"

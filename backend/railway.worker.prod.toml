@@ -1,0 +1,16 @@
+# FastAPI production worker — Railway service: ontrack-worker
+# Root Directory in Railway Settings MUST be repository root (not backend/).
+[build]
+builder = "dockerfile"
+dockerfilePath = "backend/Dockerfile.railway"
+watchPatterns = [
+  "backend/**",
+  "app/user_seeds/**",
+  "app/dish_compare/**",
+  "scraper/data/macros/**",
+  "scraper/data/built/**",
+]
+
+[deploy]
+restartPolicyType = "on_failure"
+startCommand = "sh scripts/start-worker.sh"
