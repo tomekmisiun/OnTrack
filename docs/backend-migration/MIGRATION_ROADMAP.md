@@ -101,6 +101,8 @@ One task = one branch = one reviewable PR. Flask remains until MIG-016 stability
 | Acceptance | M01–M05 contract tests green |
 | Tests | Port `test_members*.py` |
 
+**Status:** ✅ Complete — M01–M05 routes and contract tests.
+
 ---
 
 ## MIG-006 — Products domain
