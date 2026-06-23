@@ -7,10 +7,12 @@ from starlette.middleware.sessions import SessionMiddleware
 from app.api.routes.auth import router as auth_router
 from app.api.routes.day_schedule import router as day_schedule_router
 from app.api.routes.fuel import router as fuel_router
+from app.api.routes.import_prices import router as import_router
 from app.api.routes.meal_plan import router as meal_plan_router
 from app.api.routes.members import router as members_router
 from app.api.routes.nutrition import router as nutrition_router
 from app.api.routes.products import router as products_router
+from app.api.routes.public import router as public_router
 from app.api.routes.recipes import router as recipes_router
 from app.core.config import get_settings
 
@@ -54,6 +56,8 @@ def create_app() -> FastAPI:
     app.include_router(day_schedule_router)
     app.include_router(nutrition_router)
     app.include_router(fuel_router)
+    app.include_router(import_router)
+    app.include_router(public_router)
 
     return app
 
