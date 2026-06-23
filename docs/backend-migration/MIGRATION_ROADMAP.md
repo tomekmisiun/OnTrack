@@ -18,7 +18,7 @@ One task = one branch = one reviewable PR. Flask remains until MIG-016 stability
 | **Rollback** | Delete docs folder |
 | **Out of scope** | Implementation, compose changes, template copy |
 
-**Status:** This document set.
+**Status:** ✅ Complete — merged in PR #7 (`docs/mig-000-backend-migration`).
 
 ---
 
@@ -35,6 +35,8 @@ One task = one branch = one reviewable PR. Flask remains until MIG-016 stability
 | **Validate** | `cd backend && uv run pytest -q` |
 | **Rollback** | Remove `backend/` directory |
 | **Out of scope** | Domain routes, Alembic, Redis, worker, compose, Flask edits, frontend |
+
+**Status:** ✅ Complete — `backend/` skeleton, `GET /health`, pytest + ruff.
 
 ---
 
