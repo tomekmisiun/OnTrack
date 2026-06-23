@@ -54,6 +54,8 @@ One task = one branch = one reviewable PR. Flask remains until MIG-016 stability
 | **Rollback** | Revert compose changes |
 | **Out of scope** | Switching frontend default to FastAPI for all routes |
 
+**Status:** ✅ Complete — `backend` service in compose; port switch via `FLASK_PUBLISH_PORT` / `BACKEND_PUBLISH_PORT`.
+
 ---
 
 ## MIG-003 — Database models and safe Alembic baseline

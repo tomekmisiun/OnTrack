@@ -22,7 +22,18 @@ curl -s http://localhost:8000/health
 
 ## Docker
 
-Built from this directory in MIG-002 (compose integration). Image runs uvicorn on port **8000**.
+From repo root (with compose):
+
+```bash
+# Default: Flask :5001, FastAPI :8000
+docker compose up --build backend
+
+# FastAPI on :5001 (roadmap validate)
+FLASK_PUBLISH_PORT=5002 BACKEND_PUBLISH_PORT=5001 docker compose up --build -d app backend
+curl -sf http://localhost:5001/health
+```
+
+Image runs uvicorn on port **8000** inside the container.
 
 ## Python version
 
