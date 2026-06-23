@@ -145,6 +145,8 @@ One task = one branch = one reviewable PR. Flask remains until MIG-016 stability
 | Acceptance | DS01–DS06 including overlap 409 |
 | Tests | Port `test_day_schedule.py` |
 
+**Status:** ✅ Complete — DS01–DS06 routes, overlap 409, contract tests.
+
 ---
 
 ## MIG-010 — Nutrition and fuel

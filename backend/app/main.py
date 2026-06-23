@@ -5,6 +5,7 @@ from fastapi.responses import JSONResponse
 from starlette.middleware.sessions import SessionMiddleware
 
 from app.api.routes.auth import router as auth_router
+from app.api.routes.day_schedule import router as day_schedule_router
 from app.api.routes.meal_plan import router as meal_plan_router
 from app.api.routes.members import router as members_router
 from app.api.routes.products import router as products_router
@@ -48,6 +49,7 @@ def create_app() -> FastAPI:
     app.include_router(products_router)
     app.include_router(recipes_router)
     app.include_router(meal_plan_router)
+    app.include_router(day_schedule_router)
 
     return app
 
