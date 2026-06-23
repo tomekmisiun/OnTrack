@@ -24,5 +24,14 @@ if [ -n "$RAILWAY_ENVIRONMENT" ] || [ -n "$RAILWAY_PROJECT_ID" ]; then
   esac
 fi
 
-echo "Starting uvicorn (Alembic stamp/upgrade deferred to MIG-015 rehearsal)..."
+if [ -n "$RAILWAY_ENVIRONMENT" ] || [ -n "$RAILWAY_PROJECT_ID" ]; then
+  echo "Starting uvicorn (Railway proxy headers enabled)..."
+  exec uv run uvicorn app.main:app \
+    --host 0.0.0.0 \
+    --port "${PORT:-8000}" \
+    --proxy-headers \
+    --forwarded-allow-ips='*'
+fi
+
+echo "Starting uvicorn..."
 exec uv run uvicorn app.main:app --host 0.0.0.0 --port "${PORT:-8000}"

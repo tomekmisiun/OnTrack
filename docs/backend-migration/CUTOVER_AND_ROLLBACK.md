@@ -50,6 +50,8 @@ Runbook on fresh clone:
 
 **Preferred:** Switch routing without DB migration risk (schema unchanged).
 
+Runbook: **[PRODUCTION_CUTOVER.md](./PRODUCTION_CUTOVER.md)**
+
 ```
 ┌──────────────┐     ┌─────────────────┐
 │   Frontend   │────▶│ FastAPI (prod)  │  NEW

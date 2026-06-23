@@ -75,6 +75,17 @@ uv run python scripts/validate_schema.py
 
 Runbook: [`docs/backend-migration/DB_REHEARSAL.md`](../docs/backend-migration/DB_REHEARSAL.md).
 
+### Production cutover (MIG-016)
+
+Railway prod configs: `railway.prod.toml`, `railway.worker.prod.toml`.
+
+```bash
+export API_URL=https://<fastapi-prod-domain>
+./scripts/cutover_smoke.sh
+```
+
+Runbook: [`docs/backend-migration/PRODUCTION_CUTOVER.md`](../docs/backend-migration/PRODUCTION_CUTOVER.md).
+
 ## Background worker (MIG-012)
 
 Catalog seed jobs enqueue to Redis (`REDIS_URL`). Without Redis, jobs run synchronously in-process (no threads).
