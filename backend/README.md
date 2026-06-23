@@ -62,6 +62,19 @@ docker build -f backend/Dockerfile.railway -t ontrack-fastapi-railway .
 
 Deploy runbook: [`docs/backend-migration/RAILWAY_STAGING.md`](../docs/backend-migration/RAILWAY_STAGING.md).
 
+### DB adoption rehearsal (MIG-015)
+
+On an existing Flask-migrated database (staging clone):
+
+```bash
+cd backend
+export DATABASE_URL=postgresql+psycopg://...
+uv run python scripts/validate_schema.py
+./scripts/db_rehearsal_stamp.sh
+```
+
+Runbook: [`docs/backend-migration/DB_REHEARSAL.md`](../docs/backend-migration/DB_REHEARSAL.md).
+
 ## Background worker (MIG-012)
 
 Catalog seed jobs enqueue to Redis (`REDIS_URL`). Without Redis, jobs run synchronously in-process (no threads).

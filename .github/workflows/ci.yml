@@ -74,3 +74,46 @@ jobs:
 
       - name: Build FastAPI Railway image
         run: docker build -f backend/Dockerfile.railway -t ontrack-fastapi-railway .
+
+  backend-integration:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: ontrack
+          POSTGRES_PASSWORD: ontrack
+          POSTGRES_DB: ontrack_rehearsal
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U ontrack -d ontrack_rehearsal"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - name: Checkout kod
+        uses: actions/checkout@v6
+
+      - name: Ustaw Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Zainstaluj Flask (rehearsal fixture)
+        run: pip install -r requirements.txt
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "latest"
+
+      - name: DB rehearsal — stamp on Flask-migrated schema
+        working-directory: backend
+        run: |
+          uv sync --dev
+          uv run pytest tests/integration/ -v
+        env:
+          TEST_DATABASE_URL: postgresql+psycopg://ontrack:ontrack@localhost:5432/ontrack_rehearsal
+          FLASK_SECRET_KEY: ci-test-flask-secret-key-0123456789abcdef
+          JWT_SECRET_KEY: ci-test-jwt-secret-key-0123456789abcdef

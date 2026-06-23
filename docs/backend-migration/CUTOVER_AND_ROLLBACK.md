@@ -28,10 +28,12 @@ Safe Railway migration: **Flask production stays live** until FastAPI is proven 
 | Database | **Clone** of production — never first test on live |
 | Build | `backend/Dockerfile.railway` with **repo root** as Railway Root Directory |
 | Frontend staging | Optional staging frontend with `REACT_APP_API_URL` → staging FastAPI |
-| Migrations | Deferred to MIG-015 — startup does **not** run Alembic on first deploy |
+| Migrations | [DB_REHEARSAL.md](./DB_REHEARSAL.md) — stamp on clone after parity check |
 | Validation | Full contract suite + manual smoke |
 
 Runbook: **[RAILWAY_STAGING.md](./RAILWAY_STAGING.md)**
+
+DB rehearsal: **[DB_REHEARSAL.md](./DB_REHEARSAL.md)**
 
 ### Phase 3 — Rehearsal (MIG-015)
 
