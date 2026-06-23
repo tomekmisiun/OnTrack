@@ -65,3 +65,12 @@ jobs:
           JWT_SECRET_KEY: ci-test-jwt-secret-key-0123456789abcdef
           GOOGLE_CLIENT_ID: ci-test-google-client-id
           GOOGLE_CLIENT_SECRET: ci-test-google-client-secret
+
+  backend-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout kod
+        uses: actions/checkout@v6
+
+      - name: Build FastAPI Railway image
+        run: docker build -f backend/Dockerfile.railway -t ontrack-fastapi-railway .

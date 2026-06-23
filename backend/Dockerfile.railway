@@ -1,0 +1,24 @@
+# Railway staging/production image — build context MUST be the repository root.
+# See docs/backend-migration/RAILWAY_STAGING.md and backend/railway.toml.
+FROM python:3.11-slim
+
+WORKDIR /app/backend
+
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+
+COPY backend/pyproject.toml backend/uv.lock backend/README.md ./
+RUN uv sync --frozen --no-dev
+
+COPY backend/app ./app
+COPY backend/scripts ./scripts
+RUN chmod +x scripts/*.sh
+
+# Monorepo assets referenced via _repo_root() (parents[3] from backend/app/services).
+COPY app/user_seeds/data /app/app/user_seeds/data
+COPY app/dish_compare/data /app/app/dish_compare/data
+COPY scraper/data/macros /app/scraper/data/macros
+COPY scraper/data/built /app/scraper/data/built
+
+EXPOSE 8000
+
+CMD ["scripts/start-production.sh"]

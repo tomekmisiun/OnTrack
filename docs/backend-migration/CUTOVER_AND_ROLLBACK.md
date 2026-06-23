@@ -23,11 +23,15 @@ Safe Railway migration: **Flask production stays live** until FastAPI is proven 
 
 | Item | Action |
 |------|--------|
-| New Railway service | `ontrack-back-fastapi-staging` (name TBD) |
+| New Railway service | `ontrack-back-fastapi-staging` — config `backend/railway.toml` |
+| Worker + Redis | `ontrack-worker-staging` + `ontrack-redis-staging` — `backend/railway.worker.toml` |
 | Database | **Clone** of production — never first test on live |
+| Build | `backend/Dockerfile.railway` with **repo root** as Railway Root Directory |
 | Frontend staging | Optional staging frontend with `REACT_APP_API_URL` → staging FastAPI |
-| Migrations | `alembic stamp` or upgrade on **clone** only |
+| Migrations | Deferred to MIG-015 — startup does **not** run Alembic on first deploy |
 | Validation | Full contract suite + manual smoke |
+
+Runbook: **[RAILWAY_STAGING.md](./RAILWAY_STAGING.md)**
 
 ### Phase 3 — Rehearsal (MIG-015)
 
@@ -226,6 +230,6 @@ FastAPI must allow:
 
 | ID | Question |
 |----|----------|
-| CQ1 | Exact Railway service names and whether single or multi-environment |
+| CQ1 | ~~Exact Railway service names~~ → `ontrack-back-fastapi-staging`, `ontrack-worker-staging`, `ontrack-redis-staging`, `ontrack-postgres-staging` (see RAILWAY_STAGING.md) |
 | CQ2 | Whether frontend and backend share a domain/path proxy vs separate URLs |
 | CQ3 | Google OAuth staging credentials vs production |

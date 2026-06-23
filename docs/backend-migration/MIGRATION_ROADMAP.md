@@ -202,6 +202,8 @@ One task = one branch = one reviewable PR. Flask remains until MIG-016 stability
 | Acceptance | FastAPI staging service on Railway; **clone DB** attached |
 | Out of scope | Production traffic switch |
 
+**Status:** ✅ Complete — `Dockerfile.railway`, Railway configs, production startup scripts, [RAILWAY_STAGING.md](./RAILWAY_STAGING.md) runbook. Manual Railway service creation required post-merge.
+
 ---
 
 ## MIG-015 — Production database adoption rehearsal
