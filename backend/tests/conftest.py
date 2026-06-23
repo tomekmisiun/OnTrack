@@ -102,6 +102,15 @@ def auth_headers(user: User) -> dict[str, str]:
 
 
 @pytest.fixture
+def member(db_session: Session, user: User) -> HouseholdMember:
+    return (
+        db_session.query(HouseholdMember)
+        .filter_by(user_id=user.id, is_primary=True)
+        .first()
+    )
+
+
+@pytest.fixture
 def issue_auth_code(db_session: Session):
     def _issue(user_id: int, ttl_seconds: int = 120) -> str:
         return auth_service.issue_auth_code(db_session, user_id, ttl_seconds=ttl_seconds)
