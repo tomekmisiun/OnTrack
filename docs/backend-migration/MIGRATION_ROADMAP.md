@@ -167,6 +167,8 @@ One task = one branch = one reviewable PR. Flask remains until MIG-016 stability
 | Acceptance | I01–I03, PU01; dish-compare HTTP test |
 | Tests | Port `test_import.py`, add `test_public_dish_compare_http.py` |
 
+**Status:** ✅ Complete — I01–I03 import routes, PU01 dish-compare, contract tests.
+
 ---
 
 ## MIG-012 — Worker migration
