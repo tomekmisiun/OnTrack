@@ -157,11 +157,9 @@ Initial schema had global unique product/recipe names and no users — evolved s
 | System | Table | Expected content |
 |--------|-------|------------------|
 | Flask (current) | `alembic_version` | Flask migration head revision id |
-| FastAPI (target) | `alembic_version` | New OnTrack-specific revision id(s) |
+| FastAPI (after stamp) | `alembic_version` | `7966d120d748` — see [DB_REHEARSAL.md](./DB_REHEARSAL.md) |
 
 **Risk (HIGH):** Two Alembic environments may fight over `alembic_version` if both run upgrades. **Decision:** After cutover, only FastAPI runs migrations; Flask decommissioned.
-
-**Unresolved:** Whether to preserve Flask revision id in stamp metadata for audit or start fresh revision id series with baseline marked `ontrack_baseline_YYYYMMDD`.
 
 ---
 

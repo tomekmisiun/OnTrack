@@ -110,9 +110,7 @@ Local `docker compose` still uses `backend/Dockerfile` (backend-only context). S
 
 Do **not** run `alembic upgrade head` on the clone until MIG-015 rehearsal is signed off.
 
-The clone already has Flask schema from prod. FastAPI startup (`scripts/start-production.sh`) starts uvicorn only — no Alembic.
-
-MIG-015 will document `alembic stamp` on the clone after schema diff validation.
+Runbook: **[DB_REHEARSAL.md](./DB_REHEARSAL.md)** — schema parity, `alembic stamp 7966d120d748`, smoke checklist.
 
 ---
 

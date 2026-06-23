@@ -213,6 +213,8 @@ One task = one branch = one reviewable PR. Flask remains until MIG-016 stability
 | Acceptance | Documented runbook executed on staging clone; `alembic stamp` validated |
 | Tests | Schema diff empty; smoke checklist |
 
+**Status:** ✅ Complete — [DB_REHEARSAL.md](./DB_REHEARSAL.md) runbook, `validate_schema.py`, stamp integration test, CI `backend-integration` job.
+
 ---
 
 ## MIG-016 — Production cutover
