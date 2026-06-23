@@ -1,0 +1,2 @@
+# Marker: this repo is an existing application adopting AI rules (not the template-only repo).
+# validate-ai-workflows.sh skips template-only runtime path guards when this file exists.

@@ -1,0 +1,17 @@
+---
+description: Security-sensitive code and configuration rules
+globs:
+  - "**/security*"
+  - "**/auth*"
+  - "**/.env.example"
+  - "**/config*"
+  - "**/middleware*"
+alwaysApply: false
+---
+
+Source of truth:
+
+- `.ai-rules/security.md`
+- `.ai-rules/threat-modeling.md`
+
+For audits, see `agents/security-auditor.md` and `.commands/security-audit.md`.

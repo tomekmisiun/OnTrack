@@ -1,0 +1,16 @@
+---
+description: React frontend — API client and i18n
+globs:
+  - "frontend/src/**/*.js"
+  - "frontend/src/**/*.css"
+alwaysApply: false
+---
+
+Source of truth:
+
+- `frontend/TRANSLATIONS.md` — all UI strings in `LanguageContext.js` (`T.pl` / `T.en`)
+- `frontend/src/api.js` — HTTP client; changes require `docs/backend-migration/API_CONTRACT.md` update
+
+During FastAPI migration: **avoid frontend edits** unless fixing a confirmed bug or explicitly adding features.
+
+API base URL: `REACT_APP_API_URL` or `http://localhost:5001`.

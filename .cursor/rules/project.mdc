@@ -1,0 +1,29 @@
+---
+description: Source of truth index for project AI rules and workflows
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+Binding rules: **`.ai-rules/`** — read before making changes. Do not duplicate rule bodies here.
+
+Workflow guide: **`docs/ai-workflows.md`**
+
+Start tasks with `.ai-rules/agent-orchestration.md` and `.ai-rules/context-map.md`.
+Always apply `.ai-rules/anti-overengineering.md` through those indexes.
+
+Builder / Reviewer workflow: `.ai-rules/agent-orchestration.md` §8 and `docs/two-agent-review-workflow.md`.
+Cross-provider review: `scripts/ai/invoke-cross-reviewer.sh` when CLI is available.
+Fallback: `.claude/agents/code-reviewer.md` (Claude), native CLI review (Codex), or `.commands/builder-handoff.md` (Cursor).
+
+Optional (review / prompts, not binding):
+
+- `agents/**/*.md`
+- `.commands/**/*.md`
+- `docs/specs/**/*.md`
+
+Entry indexes: `AGENTS.md`, `CLAUDE.md`.
+
+Validation: `make validate` — commands in `.ai-rules/validation.md`.
+
+OnTrack: `.cursor/rules/ontrack.mdc` (migration guardrails), `docs/backend-migration/`.

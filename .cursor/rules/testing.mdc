@@ -1,0 +1,17 @@
+---
+description: Testing rules and test file conventions
+globs:
+  - "tests/**/*"
+  - "test/**/*"
+  - "**/*_test.*"
+  - "**/*.test.*"
+  - "**/*.spec.*"
+alwaysApply: false
+---
+
+Source of truth:
+
+- `.ai-rules/testing.md`
+- `.ai-rules/tdd-and-regression.md`
+
+Use validation commands from `.ai-rules/validation.md`.
