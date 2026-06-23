@@ -22,6 +22,7 @@ from app.db.base import Base  # noqa: E402
 from app.main import create_app  # noqa: E402
 from app.models.household_member import HouseholdMember  # noqa: E402
 from app.models.product import Product  # noqa: E402
+from app.models.recipe import Recipe, RecipeIngredient  # noqa: E402
 from app.models.user import User  # noqa: E402
 from app.services import auth_service  # noqa: E402
 
@@ -131,6 +132,17 @@ def product(db_session: Session, user: User) -> Product:
     db_session.commit()
     db_session.refresh(p)
     return p
+
+
+@pytest.fixture
+def recipe(db_session: Session, user: User, product: Product) -> Recipe:
+    r = Recipe(name="Owsianka", user_id=user.id, category="breakfast", lang="pl", servings=1)
+    db_session.add(r)
+    db_session.flush()
+    db_session.add(RecipeIngredient(recipe_id=r.id, product_id=product.id, weight=200))
+    db_session.commit()
+    db_session.refresh(r)
+    return r
 
 
 @pytest.fixture
