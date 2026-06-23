@@ -134,6 +134,8 @@ One task = one branch = one reviewable PR. Flask remains until MIG-016 stability
 | Acceptance | MP01–MP06 including summary math |
 | Tests | Port `test_meal_plan*.py` |
 
+**Status:** ✅ Complete — MP01–MP06 routes, summary math, contract tests.
+
 ---
 
 ## MIG-009 — Day-schedule domain
