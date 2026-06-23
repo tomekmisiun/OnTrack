@@ -4,7 +4,7 @@ Planning-only artifacts for migrating the OnTrack backend to FastAPI using
 [`fastapi-production-foundation` v1.0.0](https://github.com/tomekmisiun/fastapi-production-foundation/tree/v1.0.0)
 as a **reference foundation** (not a blind copy).
 
-**Status:** MIG-000–MIG-006 ✅ · MIG-007+ in progress — see [MIGRATION_ROADMAP.md](./MIGRATION_ROADMAP.md).
+**Status:** MIG-000–MIG-007 ✅ · MIG-008+ in progress — see [MIGRATION_ROADMAP.md](./MIGRATION_ROADMAP.md).
 
 ## Reading order
 

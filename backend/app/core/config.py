@@ -30,6 +30,9 @@ class Settings(BaseSettings):
     frontend_url: str = Field(default="http://localhost:3000", validation_alias="FRONTEND_URL")
     auth_code_ttl_seconds: int = Field(default=120, validation_alias="AUTH_CODE_TTL_SECONDS")
 
+    pexels_api_key: str | None = Field(default=None, validation_alias="PEXELS_API_KEY")
+    gemini_api_key: str | None = Field(default=None, validation_alias="GEMINI_API_KEY")
+
     user_seeds_dir: str | None = None
 
     @property
