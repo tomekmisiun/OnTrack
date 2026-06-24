@@ -1,12 +1,28 @@
 """Tests for public dish-compare data loading."""
+
+import importlib.util
 import json
 from pathlib import Path
 
 import pytest
 
-from app.dish_compare import build_built_payload, load_dish_compare, load_manifest, validate_manifest_consistency
+ROOT = Path(__file__).resolve().parents[2]
+LOADER_PATH = ROOT / "app" / "dish_compare" / "loader.py"
 
-ROOT = Path(__file__).resolve().parents[1]
+
+def _loader():
+    spec = importlib.util.spec_from_file_location("ontrack_dish_compare_loader", LOADER_PATH)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+dcd = _loader()
+load_manifest = dcd.load_manifest
+build_built_payload = dcd.build_built_payload
+load_dish_compare = dcd.load_dish_compare
+validate_manifest_consistency = dcd.validate_manifest_consistency
+
 BUILT_PL = ROOT / "app" / "dish_compare" / "data" / "built" / "pl.json"
 BUILT_EN = ROOT / "app" / "dish_compare" / "data" / "built" / "en.json"
 

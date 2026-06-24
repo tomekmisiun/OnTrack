@@ -235,6 +235,8 @@ One task = one branch = one reviewable PR. Flask remains until MIG-016 stability
 | Acceptance | Remove `app/`, `run.py`, Flask Dockerfile service, `migrations/` from deploy path |
 | Out of scope | Scraper removal |
 
+**Status:** ✅ Complete — Flask code, root `tests/`, `migrations/`, Flask Dockerfile/Railway config removed; compose defaults to FastAPI on `:5001`.
+
 ---
 
 ## Dependency graph
@@ -270,6 +272,6 @@ MIG-000
 
 - [ ] Contract tests added/updated for touched endpoints
 - [ ] No frontend file changes
-- [ ] Flask still runs in compose (until MIG-017)
+- [ ] Flask still runs in compose (until MIG-017) — **N/A after MIG-017**
 - [ ] Documentation updated if contract assumptions change
 - [ ] Rollback noted in PR description

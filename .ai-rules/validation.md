@@ -8,13 +8,14 @@ Agents MUST use these commands — not commands from other projects.
 |---------|---------|
 | Validate AI rules files | `make validate` or `bash scripts/validate-ai-workflows.sh` |
 
-## Flask backend (current production path)
+## FastAPI backend
 
 | Purpose | Command |
 |---------|---------|
-| Full backend test suite | `pip install -r requirements.txt && pytest tests/ -v` |
-| Targeted test file | `pytest tests/test_<area>.py -v` |
-| CI-equivalent env | Set `DATABASE_URL=sqlite:///:memory:`, `FLASK_SECRET_KEY`, `JWT_SECRET_KEY`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` (see `.github/workflows/ci.yml`) |
+| Contract + health tests | `cd backend && uv sync --dev && uv run pytest tests/contract/ tests/test_health.py -q` |
+| Full backend suite | `cd backend && uv run pytest -q` |
+| Lint | `cd backend && uv run ruff check .` |
+| CI-equivalent env | `TESTING=1`, `DATABASE_URL=sqlite://`, `FLASK_SECRET_KEY`, `JWT_SECRET_KEY` (see `.github/workflows/ci.yml`) |
 
 ## Local full stack (Docker)
 
@@ -22,16 +23,7 @@ Agents MUST use these commands — not commands from other projects.
 |---------|---------|
 | Start all services | `docker compose up --build` |
 | Health check | `curl -sf http://localhost:5001/health` and `curl -sf http://localhost:3000` |
-| Logs | `docker compose logs -f app frontend` |
-
-## FastAPI backend (when `backend/` exists)
-
-| Purpose | Command |
-|---------|---------|
-| Backend tests | `cd backend && uv run pytest -q` |
-| Lint | `cd backend && uv run ruff check .` |
-
-Document additional commands here as `backend/` lands (MIG-001+).
+| Logs | `docker compose logs -f backend frontend` |
 
 ## Frontend
 
@@ -53,4 +45,4 @@ Skip frontend validation unless the task touches `frontend/`.
 
 Do not claim validation PASS unless the command exited 0.
 
-Report SKIPPED when a command does not apply (e.g. docs-only edits, or FastAPI commands before `backend/` exists).
+Report SKIPPED when a command does not apply (e.g. docs-only edits).

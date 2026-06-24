@@ -24,7 +24,7 @@ from data_paths import (  # noqa: E402
     RECIPES_PL,
     USER_SEEDS_DIR,
 )
-from app.pexels import resolve_recipe_image_url  # noqa: E402
+from pexels import resolve_recipe_image_url  # noqa: E402
 
 OUT = USER_SEEDS_DIR
 PEXELS_SLEEP_S = 0.25

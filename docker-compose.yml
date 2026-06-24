@@ -1,10 +1,14 @@
 services:
-  app:
-    build: .
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile.railway
     ports:
-      - "${FLASK_PUBLISH_PORT:-5001}:5000"
+      - "${BACKEND_PUBLISH_PORT:-5001}:8000"
     environment:
+      - DEBUG=${BACKEND_DEBUG:-0}
       - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      - REDIS_URL=redis://redis:6379/0
       - FLASK_SECRET_KEY=${FLASK_SECRET_KEY}
       - JWT_SECRET_KEY=${JWT_SECRET_KEY}
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
@@ -17,27 +21,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    volumes:
-      - .:/app
-    networks:
-      - backend
-
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    ports:
-      - "${BACKEND_PUBLISH_PORT:-8000}:8000"
-    environment:
-      - DEBUG=${BACKEND_DEBUG:-0}
-      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
-      - REDIS_URL=redis://redis:6379/0
-      - FLASK_SECRET_KEY=${FLASK_SECRET_KEY}
-      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
-      - FRONTEND_URL=http://localhost:3000
-    depends_on:
-      db:
-        condition: service_healthy
       redis:
         condition: service_healthy
     networks:
@@ -45,9 +28,9 @@ services:
 
   worker:
     build:
-      context: ./backend
-      dockerfile: Dockerfile
-    command: ["uv", "run", "python", "-m", "app.worker.run"]
+      context: .
+      dockerfile: backend/Dockerfile.railway
+    command: ["sh", "scripts/start-worker.sh"]
     environment:
       - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
       - REDIS_URL=redis://redis:6379/0
@@ -105,7 +88,6 @@ services:
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
     depends_on:
-      - app
       - backend
     networks:
       - backend
@@ -117,7 +99,7 @@ services:
     volumes:
       - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
     depends_on:
-      - app
+      - backend
     networks:
       - backend
 

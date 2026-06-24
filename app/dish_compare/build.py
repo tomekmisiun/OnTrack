@@ -16,15 +16,11 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def _load_loader():
+    import importlib.util
+
     path = ROOT / "app" / "dish_compare" / "loader.py"
     spec = importlib.util.spec_from_file_location("dish_compare_loader", path)
     mod = importlib.util.module_from_spec(spec)
-    sys.modules["dish_compare_loader"] = mod
-    # loader imports app.paths — bootstrap minimal path constants without Flask
-    paths_mod = type(sys)("app_paths")
-    paths_mod.DISH_COMPARE_DIR = path.parent / "data"
-    sys.modules["app"] = type(sys)("app")
-    sys.modules["app.paths"] = paths_mod
     spec.loader.exec_module(mod)
     return mod
 

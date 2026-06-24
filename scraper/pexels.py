@@ -1,13 +1,12 @@
-"""Fetch recipe thumbnail images from the Pexels API."""
+"""Fetch recipe thumbnail images from the Pexels API (scraper pipeline)."""
 
 from __future__ import annotations
 
 import os
-import time
 
 import requests
 
-from app.recipe_catalog import english_name_for_recipe
+from recipe_catalog import english_name_for_recipe
 
 SOURCE_IMAGE_DOMAINS = ("mealpreponfleek.com",)
 
@@ -30,12 +29,6 @@ def pexels_search_term(
     lang: str | None = "pl",
     source_url: str | None = None,
 ) -> str:
-    """
-    Build a food-focused English query for Pexels.
-
-    PL recipes: prefer pipeline name_en (from recipes_pl.json), matched by
-    source_url or PL title — not the displayed Polish name alone.
-    """
     if not name_en and lang == "pl":
         name_en = english_name_for_recipe(recipe_name, source_url, lang)
 
@@ -78,61 +71,10 @@ def resolve_recipe_image_url(
     fallback_url: str | None = None,
     api_key: str | None = None,
 ) -> str | None:
-    """Prefer Pexels when configured; otherwise use the source recipe thumbnail."""
     term = pexels_search_term(
         recipe_name, name_en, lang=lang, source_url=source_url,
     )
     url = fetch_pexels_image(term, api_key)
     if url:
         return url
-    if fallback_url:
-        return fallback_url
-    return None
-
-
-def apply_pexels_to_user_recipes(
-    user_id: int,
-    lang: str | None = None,
-    *,
-    replace_all: bool = False,
-    dry_run: bool = False,
-    sleep_s: float = 0.25,
-) -> tuple[int, int, int]:
-    """
-    Set recipe.image_url from Pexels for one user.
-
-    Returns (updated, failed, skipped).
-    """
-    from app import db
-    from app.models.recipe import Recipe
-
-    query = Recipe.query.filter_by(user_id=user_id)
-    if lang:
-        query = query.filter_by(lang=lang)
-
-    updated = failed = skipped = 0
-    for recipe in query.all():
-        if not replace_all and recipe.image_url and not is_source_recipe_image(recipe.image_url):
-            skipped += 1
-            continue
-
-        term = pexels_search_term(
-            recipe.name,
-            lang=recipe.lang,
-            source_url=recipe.source_url,
-        )
-        url = fetch_pexels_image(term)
-        if url:
-            if not dry_run:
-                recipe.image_url = url
-            updated += 1
-        else:
-            failed += 1
-
-        if sleep_s:
-            time.sleep(sleep_s)
-
-    if not dry_run and updated:
-        db.session.commit()
-
-    return updated, failed, skipped
+    return fallback_url
