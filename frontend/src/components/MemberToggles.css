@@ -1,0 +1,224 @@
+.member-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.member-toggles--sidebar {
+  gap: 6px;
+}
+
+.member-toggle-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.member-toggle-wrap:hover .member-toggle-del,
+.member-toggle-wrap:focus-within .member-toggle-del,
+.member-toggle-wrap:hover .member-toggle-edit,
+.member-toggle-wrap:focus-within .member-toggle-edit {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.member-toggle-edit {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 1px solid rgba(45, 212, 191, 0.35);
+  border-radius: 50%;
+  background: #1f2937;
+  color: #2dd4bf;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s, background 0.15s, color 0.15s;
+}
+
+.member-toggle-edit:hover {
+  background: rgba(13, 148, 136, 0.2);
+  color: #5eead4;
+}
+
+.member-toggle-del {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  border-radius: 50%;
+  background: #1f2937;
+  color: #f87171;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s, background 0.15s, color 0.15s;
+}
+
+.member-toggle-del:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+}
+
+.member-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(55, 65, 81, 0.85);
+  background: rgba(31, 41, 55, 0.45);
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+
+.member-toggles--sidebar .member-toggle {
+  padding: 5px 12px;
+  font-size: 11px;
+  background: rgba(31, 41, 55, 0.35);
+  border-color: rgba(55, 65, 81, 0.55);
+  color: #9ca3af;
+}
+
+.member-toggle--on {
+  font-weight: 600;
+  box-shadow: 0 0 12px color-mix(in srgb, var(--member-color, #0d9488) 15%, transparent);
+}
+
+.member-toggles--sidebar .member-toggle--on {
+  background: color-mix(in srgb, var(--member-color, #0d9488) 14%, transparent);
+  border-color: color-mix(in srgb, var(--member-color, #0d9488) 35%, transparent);
+}
+
+.member-toggle:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.member-toggle--locked {
+  cursor: default;
+}
+
+.member-toggle--locked:hover {
+  border-color: var(--member-color, rgba(55, 65, 81, 0.85));
+}
+
+.member-toggle:not(:disabled):hover {
+  border-color: rgba(75, 85, 99, 0.95);
+  color: #9ca3af;
+}
+
+.member-toggle-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #374151;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.member-toggle--on .member-toggle-dot {
+  background: var(--member-color, #0d9488);
+}
+
+.member-toggle-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px dashed rgba(75, 85, 99, 0.9);
+  background: transparent;
+  color: #6b7280;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.member-toggles--sidebar .member-toggle-add {
+  width: 28px;
+  height: 28px;
+  border-color: rgba(107, 114, 128, 0.85);
+  color: #9ca3af;
+}
+
+.member-toggle-add:hover {
+  border-color: rgba(13, 148, 136, 0.55);
+  color: #2dd4bf;
+  background: rgba(13, 148, 136, 0.08);
+}
+
+.member-toggle-add-form {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 2px 2px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(13, 148, 136, 0.45);
+  background: rgba(31, 41, 55, 0.55);
+}
+
+.member-toggle-rename-form {
+  cursor: text;
+}
+
+.member-toggles--sidebar .member-toggle-add-form {
+  background: rgba(17, 24, 39, 0.95);
+}
+
+.member-toggle-add-input {
+  width: 88px;
+  padding: 4px 0;
+  border: none;
+  background: transparent;
+  color: #f1f5f9;
+  font-size: 12px;
+  font-weight: 500;
+  outline: none;
+}
+
+.member-toggles--sidebar .member-toggle-add-input {
+  width: 72px;
+  font-size: 11px;
+}
+
+.member-toggle-add-input::placeholder {
+  color: #6b7280;
+}
+
+.member-toggle-add-confirm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(13, 148, 136, 0.25);
+  color: #2dd4bf;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.member-toggle-add-confirm:hover {
+  background: rgba(13, 148, 136, 0.4);
+}
