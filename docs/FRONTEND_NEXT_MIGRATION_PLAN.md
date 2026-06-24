@@ -106,6 +106,7 @@ npm run export:openapi → openapi/openapi.json
 | **Tests** | Component tests for Toast |
 | **Risks** | Large `LanguageContext.js` — split or import JSON in later pass |
 | **Out of scope** | Auth, Member context |
+| **Status** | Done |
 
 ---
 
