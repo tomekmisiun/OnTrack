@@ -1,9 +1,9 @@
 from sqlalchemy.orm import Session, joinedload
 
 from app.models.meal_plan import MealPlan
-from app.models.product import Product
 from app.models.recipe import Recipe, RecipeIngredient
 from app.models.user import User
+from app.services.product_service import resolve_visible_product
 from app.services.recipe_image_service import resolve_recipe_image
 from app.services.recipe_presenter import recipe_to_dict, recipe_to_summary
 
@@ -96,11 +96,7 @@ def create_recipe(session: Session, user_id: int, data: dict) -> dict:
         if weight <= 0 or weight > 99999:
             raise RecipeServiceError("Ingredient weight must be between 0 and 99999", 400)
         per_serving = round(weight / servings, 2)
-        product = (
-            session.query(Product)
-            .filter_by(id=ingredient["product_id"], user_id=user_id, lang=lang)
-            .first()
-        )
+        product = resolve_visible_product(session, user_id, int(ingredient["product_id"]))
         if not product:
             raise RecipeServiceError(f'Product {ingredient["product_id"]} not found', 404)
         session.add(
@@ -116,7 +112,6 @@ def create_recipe(session: Session, user_id: int, data: dict) -> dict:
 
 
 def update_recipe(session: Session, user_id: int, recipe_id: int, data: dict) -> dict:
-    lang = _user_lang(session, user_id)
     recipe = _load_recipe(session, user_id, recipe_id)
 
     if "name" in data:
@@ -134,11 +129,7 @@ def update_recipe(session: Session, user_id: int, recipe_id: int, data: dict) ->
                 raise RecipeServiceError("Invalid ingredient weight", 400)
             if weight <= 0 or weight > 99999:
                 raise RecipeServiceError("Ingredient weight must be between 0 and 99999", 400)
-            product = (
-                session.query(Product)
-                .filter_by(id=ingredient["product_id"], user_id=user_id, lang=lang)
-                .first()
-            )
+            product = resolve_visible_product(session, user_id, int(ingredient["product_id"]))
             if not product:
                 raise RecipeServiceError(f'Product {ingredient["product_id"]} not found', 404)
             session.add(

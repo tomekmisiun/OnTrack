@@ -15,10 +15,17 @@ def _service_error(exc: product_service.ProductServiceError) -> JSONResponse:
 
 @router.get("/")
 def get_products(
+    q: str | None = None,
+    limit: int = 20,
+    offset: int = 0,
     user_id: int = Depends(get_current_user_id),
     session: Session = Depends(get_db_session),
 ) -> JSONResponse:
-    return JSONResponse(content=product_service.list_products(session, user_id))
+    try:
+        data = product_service.list_products(session, user_id, q=q, limit=limit, offset=offset)
+    except product_service.ProductServiceError as exc:
+        return _service_error(exc)
+    return JSONResponse(content=data)
 
 
 @router.post("/", status_code=201)
