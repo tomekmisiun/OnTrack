@@ -6,8 +6,9 @@ import { Icon } from "@iconify/react";
 import { MemberToggles } from "@/components/MemberToggles";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { NAV_ICONS, OntrackLogo } from "@/components/layout/nav-icons";
+import { OntrackLogo, TAB_ICONS } from "@/components/layout/nav-icons";
 import { APP_NAV_ITEMS, HOME_PATH } from "@/lib/config/routes";
+import "@/styles/sidebar.css";
 
 type SidebarProps = {
   onAccount?: () => void;
@@ -20,31 +21,31 @@ export function Sidebar({ onAccount }: SidebarProps) {
   const { logout } = useAuth();
 
   return (
-    <aside className="flex w-56 shrink-0 flex-col border-r border-slate-800 bg-slate-900/60">
+    <aside className="app-sidebar">
       <button
         type="button"
+        className="sidebar-logo sidebar-logo--clickable"
         onClick={() => router.push(HOME_PATH)}
-        className="sidebar-logo flex cursor-pointer items-center gap-3 border-b border-slate-800 px-4 py-5 text-left"
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            router.push(HOME_PATH);
+          }
+        }}
       >
-        <OntrackLogo className="h-8 w-8 text-teal-400" />
-        <div>
-          <div className="text-sm font-bold tracking-wide text-slate-100">
-            ONTRACK
-          </div>
-          <div className="text-[9px] tracking-[0.18em] text-teal-500">
-            BE IN CONTROL
-          </div>
+        <OntrackLogo className="sidebar-logo-icon" />
+        <div className="sidebar-logo-text">
+          <span className="sidebar-logo-name">ONTRACK</span>
+          <span className="sidebar-logo-sub">BE IN CONTROL</span>
         </div>
       </button>
 
-      <div className="sidebar-profile border-b border-slate-800 px-4 py-3">
-        <span className="mb-2 block text-[10px] font-semibold uppercase tracking-wide text-slate-500">
-          {String(t("include_label"))}
-        </span>
+      <div className="sidebar-profile">
+        <span className="sidebar-profile-label">{String(t("include_label"))}</span>
         <MemberToggles variant="sidebar" />
       </div>
 
-      <nav className="flex flex-1 flex-col gap-1 p-3">
+      <nav className="sidebar-nav">
         {APP_NAV_ITEMS.map((item) => {
           const active = pathname === item.path;
           return (
@@ -52,35 +53,34 @@ export function Sidebar({ onAccount }: SidebarProps) {
               key={item.id}
               href={item.path}
               data-tour={`tab-${item.id}`}
-              className={`flex items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
-                active
-                  ? "bg-teal-600/20 text-teal-300"
-                  : "text-slate-400 hover:bg-slate-800 hover:text-slate-200"
-              }`}
+              className={`sidebar-tab${active ? " active" : ""}`}
             >
-              <span className="w-4 text-center text-xs opacity-80" aria-hidden>
-                {NAV_ICONS[item.id]}
-              </span>
+              <Icon icon={TAB_ICONS[item.id]} className="sidebar-tab-icon" />
               {String(t(item.labelKey))}
             </Link>
           );
         })}
       </nav>
 
-      <div className="sidebar-footer border-t border-slate-800 p-3">
+      <div className="sidebar-footer">
         <button
           type="button"
+          className="sidebar-btn sidebar-btn-account"
           onClick={onAccount}
-          className="mb-1 flex w-full cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-left text-sm font-medium text-slate-400 hover:bg-slate-800 hover:text-teal-300"
         >
-          <Icon icon="heroicons:cog-6-tooth" width={18} />
+          <span className="sidebar-btn-icon" aria-hidden="true">
+            <Icon icon="heroicons:cog-6-tooth" width={18} />
+          </span>
           {String(t("account"))}
         </button>
         <button
           type="button"
+          className="sidebar-btn sidebar-btn-logout"
           onClick={() => logout()}
-          className="w-full cursor-pointer rounded-lg px-3 py-2 text-left text-sm font-medium text-slate-400 hover:bg-slate-800 hover:text-red-300"
         >
+          <span className="sidebar-btn-icon sidebar-btn-icon--logout" aria-hidden="true">
+            <Icon icon="heroicons:arrow-left-start-on-rectangle" width={18} />
+          </span>
           {String(t("logout"))}
         </button>
       </div>

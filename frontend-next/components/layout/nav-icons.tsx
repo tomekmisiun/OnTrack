@@ -1,3 +1,5 @@
+import type { AppNavId } from "@/lib/config/routes";
+
 function OntrackLogo({ className }: { className?: string }) {
   return (
     <svg
@@ -20,14 +22,15 @@ function OntrackLogo({ className }: { className?: string }) {
   );
 }
 
-const NAV_ICONS: Record<string, string> = {
-  macro: "◈",
-  calendar: "▦",
-  schedule: "◷",
-  recipes: "☰",
-  products: "◫",
-  summary: "¤",
-  export: "↓",
+/** CRA TAB_ICONS — heroicons matching `frontend/src/App.js`. */
+const TAB_ICONS: Record<AppNavId, string> = {
+  macro: "heroicons:calculator",
+  calendar: "heroicons:calendar-days",
+  schedule: "heroicons:clock",
+  recipes: "heroicons:book-open",
+  products: "heroicons:shopping-cart",
+  summary: "heroicons:banknotes",
+  export: "heroicons:arrow-down-tray",
 };
 
-export { OntrackLogo, NAV_ICONS };
+export { OntrackLogo, TAB_ICONS };
