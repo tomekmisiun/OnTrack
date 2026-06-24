@@ -1,8 +1,8 @@
 services:
   backend:
     build:
-      context: .
-      dockerfile: backend/Dockerfile.railway
+      context: ./backend
+      dockerfile: Dockerfile
     ports:
       - "${BACKEND_PUBLISH_PORT:-5001}:8000"
     environment:
@@ -28,8 +28,8 @@ services:
 
   worker:
     build:
-      context: .
-      dockerfile: backend/Dockerfile.railway
+      context: ./backend
+      dockerfile: Dockerfile
     command: ["sh", "scripts/start-worker.sh"]
     environment:
       - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}

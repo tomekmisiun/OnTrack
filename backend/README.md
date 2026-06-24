@@ -27,7 +27,16 @@ docker compose up --build backend
 curl -sf http://localhost:5001/health
 ```
 
-Uses `backend/Dockerfile.railway` (monorepo context for `app/user_seeds`, `app/dish_compare`, `scraper/data`).
+## Docker
+
+Build and run the API from `backend/` (self-contained image including `data/`):
+
+```bash
+docker build -t ontrack-api backend
+```
+
+Railway staging/production configs live under `backend/railway*.toml` — see
+[DATA_DEPLOYMENT_ROADMAP.md](../docs/backend-migration/DATA_DEPLOYMENT_ROADMAP.md).
 
 ### Railway
 

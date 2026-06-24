@@ -128,7 +128,7 @@ backend/data/
 | **Rollback** | Restore `Dockerfile.railway` + root compose context |
 | **Out of scope** | Root `railway.toml` removal; Railway UI changes |
 
-**Status:** ⬜ Not started
+**Status:** ✅ Complete — `backend/Dockerfile`, `.dockerignore`, compose + CI use `backend/` context.
 
 ---
 

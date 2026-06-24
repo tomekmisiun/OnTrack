@@ -48,8 +48,8 @@ jobs:
       - name: Checkout kod
         uses: actions/checkout@v6
 
-      - name: Build FastAPI Railway image
-        run: docker build -f backend/Dockerfile.railway -t ontrack-fastapi-railway .
+      - name: Build FastAPI backend image
+        run: docker build -t ontrack-fastapi backend
 
   backend-integration:
     runs-on: ubuntu-latest
