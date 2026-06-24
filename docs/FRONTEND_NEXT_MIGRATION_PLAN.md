@@ -49,7 +49,7 @@ Migrate OnTrack UI from **React 19 + Create React App** (`frontend/`) to **Next.
 | **Tests** | Manual `GET /health` via `HealthStatus`; optional unit test for `ApiError` |
 | **Risks** | Port 3000 conflict with CRA — document alternate port |
 | **Out of scope** | Auth, screens, Docker, OpenAPI codegen, CRA removal |
-| **Status** | In progress |
+| **Status** | Done (PR #41) |
 
 ---
 
@@ -65,6 +65,7 @@ Migrate OnTrack UI from **React 19 + Create React App** (`frontend/`) to **Next.
 | **Tests** | Typecheck in CI (new job) |
 | **Risks** | Over-typing before OpenAPI codegen — keep UI types minimal |
 | **Out of scope** | Duplicating Pydantic schemas by hand |
+| **Status** | Done |
 
 ---
 

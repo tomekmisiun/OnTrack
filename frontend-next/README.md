@@ -47,8 +47,19 @@ contexts/      — React contexts (auth, language, etc. — future tasks)
 lib/api/       — HTTP client and API modules
 lib/config/    — Environment helpers
 styles/        — Global CSS + Tailwind entry
+types/         — UI-only TypeScript types (not API DTOs — those come from OpenAPI)
 public/        — Static assets
 ```
+
+## TypeScript conventions
+
+- **`strict: true`** plus **`noUncheckedIndexedAccess`** — array and record indexing may be `undefined`; narrow before use.
+- **Path alias** `@/*` maps to the package root (`baseUrl: "."` in `tsconfig.json`).
+- **Import style** — use `import type { … }` for type-only imports (enforced by ESLint).
+- **`types/`** — UI state shapes (`AsyncState`, `FetchState`), view models, and helpers. Do **not** hand-write Pydantic/API DTOs here; task 3 generates those from OpenAPI.
+- **`lib/api/`** — transport layer and thin endpoint wrappers until the typed OpenAPI client lands.
+- **No `any`** — ESLint error; prefer `unknown` and narrowing.
+- **Unused bindings** — prefix with `_` if intentionally unused.
 
 ## API client
 

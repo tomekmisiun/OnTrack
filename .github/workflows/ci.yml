@@ -42,6 +42,29 @@ jobs:
           GOOGLE_CLIENT_ID: ci-test-google-client-id
           GOOGLE_CLIENT_SECRET: ci-test-google-client-secret
 
+  frontend-next:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout kod
+        uses: actions/checkout@v6
+
+      - name: Ustaw Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: frontend-next/package-lock.json
+
+      - name: Lint, typecheck i build frontend-next
+        working-directory: frontend-next
+        run: |
+          npm ci
+          npm run lint
+          npm run typecheck
+          npm run build
+        env:
+          NEXT_PUBLIC_API_URL: http://localhost:5001
+
   backend-docker:
     runs-on: ubuntu-latest
     steps:
