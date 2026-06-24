@@ -29,10 +29,12 @@ Agents MUST use these commands — not commands from other projects.
 
 | Purpose | Command |
 |---------|---------|
-| Unit tests (interactive) | `cd frontend && npm test` |
-| Production build | `cd frontend && npm run build` |
+| Unit tests | `cd frontend-next && npm run test` |
+| E2E smoke | `cd frontend-next && npm run test:e2e` |
+| Production build | `cd frontend-next && npm run build` |
+| Lint + typecheck | `cd frontend-next && npm run lint && npm run typecheck` |
 
-Skip frontend validation unless the task touches `frontend/`.
+Skip frontend validation unless the task touches `frontend-next/`.
 
 ## Policy / git
 

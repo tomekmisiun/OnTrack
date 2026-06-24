@@ -1,6 +1,6 @@
-# OnTrack — Next.js frontend (migration)
+# OnTrack — Next.js frontend
 
-New frontend shell migrating from Create React App (`frontend/`). This package runs **alongside** the legacy CRA app until feature parity is reached.
+Production UI for OnTrack: meal planning, products, recipes, budget summary, and export — built with Next.js App Router, TypeScript strict, and Tailwind CSS.
 
 ## Stack
 
@@ -31,7 +31,7 @@ cp .env.example .env.local
 
 ```bash
 npm ci
-npm run dev          # http://localhost:3000 (use port 3001 if CRA occupies 3000)
+npm run dev          # http://localhost:3000
 npm run lint
 npm run typecheck
 npm run build
@@ -161,12 +161,12 @@ Unit tests live in `tests/unit/` and replace the legacy `scripts/check-*.mjs` gu
 
 ## Docker
 
-Local Compose runs the Next.js dev server on **port 3002** (CRA `frontend` stays on 3000):
+Local Compose runs the Next.js dev server on **port 3000**:
 
 ```bash
 # From repo root — requires .env and running backend stack
-docker compose up --build frontend-next
-# http://localhost:3002
+docker compose up --build frontend
+# http://localhost:3000
 ```
 
 Production image (standalone output):
@@ -179,7 +179,7 @@ docker build -t ontrack-frontend-next \
 docker run --rm -p 3002:3000 ontrack-frontend-next
 ```
 
-`NEXT_PUBLIC_API_URL` is **baked at build time** — set it via `--build-arg` or Railway build variables before `npm run build`. The browser calls this URL directly (same as CRA `REACT_APP_API_URL`).
+`NEXT_PUBLIC_API_URL` is **baked at build time** — set it via `--build-arg` or Railway build variables before `npm run build`.
 
 ## Migration plan
 

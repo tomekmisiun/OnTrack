@@ -19,13 +19,13 @@ Before editing, read the files listed for your **task type**. Start with
 |------|------|-------|
 | Flask backend (legacy) | `app/routes/`, `app/models/`, `app/services/` | Keep until FastAPI cutover |
 | FastAPI backend (target) | `backend/app/api/routes/`, `backend/app/models/`, `backend/app/services/` | Migration in progress |
-| Frontend (React) | `frontend/src/` | **Do not change UI/CSS/i18n** during backend migration unless explicitly requested |
+| Frontend (Next.js) | `frontend-next/` | App Router UI, i18n in `lib/i18n/translations.ts` |
 | Flask migrations | `migrations/versions/` | Must stay in repo for Railway |
 | FastAPI migrations | `backend/alembic/` | Future — OnTrack-only chain |
 | Tests (Flask) | `tests/` | pytest, sqlite in-memory |
 | Tests (FastAPI) | `backend/tests/` | Future |
 | Migration plan | `docs/backend-migration/` | API contract, roadmap |
-| Docker | `docker-compose.yml`, `Dockerfile`, `frontend/Dockerfile.dev` | Local dev stack |
+| Docker | `docker-compose.yml`, `frontend-next/Dockerfile` | Local dev stack |
 | CI | `.github/workflows/ci.yml` | pytest on push/PR |
 | Deploy | `.github/DEPLOY.md` | Railway Wait for CI |
 
@@ -35,7 +35,7 @@ Before editing, read the files listed for your **task type**. Start with
 - `.ai-rules/api.md`, `.ai-rules/architecture.md`, `.ai-rules/testing.md`
 - `docs/backend-migration/API_CONTRACT.md` — **frontend contract is authoritative**
 - `app/routes/` and/or `backend/app/api/routes/`
-- `frontend/src/api.js` — verify consumer expectations
+- `frontend-next/lib/api/` — typed HTTP client (OpenAPI-generated types)
 - `tests/` or `backend/tests/contract/` for affected endpoints
 
 ### Database / model change
@@ -56,7 +56,7 @@ Before editing, read the files listed for your **task type**. Start with
 - Target: replace threads with Redis worker (MIG-012)
 
 ### Frontend change (only when explicitly in scope)
-- `frontend/TRANSLATIONS.md`, `frontend/src/contexts/LanguageContext.js`
+- `frontend-next/lib/i18n/translations.ts`
 - Do not break `api.js` contract without backend coordination
 
 ### Docker / CI change

@@ -76,4 +76,4 @@ uv run python scripts/validate_runtime_data.py
 
 ### Frontend
 
-`ontrackapp`: Root Directory `frontend`, `REACT_APP_API_URL` → `ontrack-back` URL.
+`ontrackapp`: Root Directory `frontend-next`, `NEXT_PUBLIC_API_URL` → `ontrack-back` URL (build-time).

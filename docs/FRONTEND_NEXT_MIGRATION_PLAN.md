@@ -1,13 +1,12 @@
 # Frontend Next.js migration plan
 
-Migrate OnTrack UI from **React 19 + Create React App** (`frontend/`) to **Next.js App Router + TypeScript strict + Tailwind** (`frontend-next/`), without changing the FastAPI backend or replacing CRA until feature parity.
+Migrate OnTrack UI from **React 19 + Create React App** to **Next.js App Router + TypeScript strict + Tailwind** (`frontend-next/`). **Tasks 1–15 complete** — CRA removed; production frontend is Next.js.
 
 **Principles**
 
 - `1 task = 1 branch = 1 PR`
 - FastAPI owns all domain logic, auth, and PostgreSQL
 - Next.js owns UI, routing, and typed API communication
-- CRA remains runnable until task 15
 - JWT stays in `localStorage` until optional task 16 (BFF / HttpOnly cookies)
 
 **Source of truth for API:** FastAPI routes + OpenAPI (`/openapi.json`), contract tests — not stale `API_CONTRACT.md` alone.
@@ -266,7 +265,9 @@ npm run export:openapi → openapi/openapi.json
 | **Files** | `frontend/railway.toml` → `frontend-next`, root README, `.github/DEPLOY.md` |
 | **Dependencies** | Tasks 1–13, stakeholder sign-off |
 | **Acceptance** | No references to `react-scripts`; production on Next.js |
+| **Status** | Done |
 | **Risks** | Rollback plan documented |
+| **Rollback** | See `.github/DEPLOY.md` §5 — redeploy pre-cutover Railway release or checkout tag before task 15 |
 
 ---
 
@@ -308,10 +309,7 @@ npm run export:openapi → openapi/openapi.json
 
 ```bash
 # frontend-next
-cd frontend-next && npm ci && npm run lint && npm run typecheck && npm run build
-
-# legacy CRA (until task 15)
-cd frontend && npm ci && npm run build && CI=true npm test -- --watchAll=false
+cd frontend-next && npm ci && npm run generate:api && npm run test && npm run lint && npm run typecheck && npm run build
 
 # backend (unchanged)
 cd backend && uv run pytest -q
@@ -322,6 +320,7 @@ cd backend && uv run pytest -q
 ## References
 
 - Audit: `docs/PROJECT_TECHNICAL_AUDIT.md`
-- CRA API client: `frontend/src/api.js`
+- Frontend API client: `frontend-next/lib/api/`
 - FastAPI entry: `backend/app/main.py`
 - OpenAPI: `http://localhost:5001/openapi.json` when API running
+- Deploy / rollback: `.github/DEPLOY.md`
