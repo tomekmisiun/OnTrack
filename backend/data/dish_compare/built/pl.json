@@ -1,0 +1,44 @@
+{
+  "lang": "pl",
+  "currency": "PLN",
+  "dishes": [
+    {
+      "id": "pizza_margherita",
+      "name": "Pizza Margherita",
+      "portion_note": "1 pizza (demo)",
+      "diy_cost": 10.0,
+      "ingredients": [{"product_name": "mąka pszenna", "weight": 180, "unit": "g", "cost": 1.0}]
+    },
+    {
+      "id": "pepperoni_pizza",
+      "name": "Pizza Pepperoni",
+      "portion_note": "1 pizza (demo)",
+      "diy_cost": 12.0,
+      "ingredients": [{"product_name": "mąka pszenna", "weight": 180, "unit": "g", "cost": 1.0}]
+    },
+    {
+      "id": "sweet_and_sour_chicken",
+      "name": "Kurczak słodko-kwaśny",
+      "portion_note": "1 porcja (demo)",
+      "diy_cost": 15.0,
+      "ingredients": [{"product_name": "pierś z kurczaka", "weight": 200, "unit": "g", "cost": 8.0}]
+    },
+    {
+      "id": "chicken_tikka_masala",
+      "name": "Kurczak Tikka Masala",
+      "portion_note": "1 porcja (demo)",
+      "diy_cost": 16.0,
+      "ingredients": [{"product_name": "pierś z kurczaka", "weight": 200, "unit": "g", "cost": 8.0}]
+    },
+    {
+      "id": "spaghetti_bolognese",
+      "name": "Spaghetti Bolognese",
+      "portion_note": "1 porcja (demo)",
+      "diy_cost": 14.0,
+      "ingredients": [
+        {"product_name": "makaron spaghetti", "weight": 100, "unit": "g", "cost": 1.5},
+        {"product_name": "passata pomidorowa", "weight": 150, "unit": "ml", "cost": 2.0}
+      ]
+    }
+  ]
+}

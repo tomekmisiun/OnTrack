@@ -1,0 +1,10 @@
+[
+  {
+    "name": "Owsianka demo",
+    "category": "breakfast",
+    "ingredients": [
+      {"product_name": "jogurt naturalny", "weight": 150},
+      {"product_name": "płatki owsiane", "weight": 50}
+    ]
+  }
+]

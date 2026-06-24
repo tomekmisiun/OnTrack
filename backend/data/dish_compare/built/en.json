@@ -1,0 +1,41 @@
+{
+  "lang": "en",
+  "currency": "GBP",
+  "dishes": [
+    {
+      "id": "pizza_margherita",
+      "name": "Pizza Margherita",
+      "portion_note": "1 pizza (demo)",
+      "diy_cost": 3.0,
+      "ingredients": [{"product_name": "plain flour", "weight": 180, "unit": "g", "cost": 0.5}]
+    },
+    {
+      "id": "pepperoni_pizza",
+      "name": "Pepperoni Pizza",
+      "portion_note": "1 pizza (demo)",
+      "diy_cost": 3.5,
+      "ingredients": [{"product_name": "plain flour", "weight": 180, "unit": "g", "cost": 0.5}]
+    },
+    {
+      "id": "chicken_chow_mein",
+      "name": "Chicken Chow Mein",
+      "portion_note": "1 portion (demo)",
+      "diy_cost": 4.0,
+      "ingredients": [{"product_name": "chicken breast", "weight": 200, "unit": "g", "cost": 2.0}]
+    },
+    {
+      "id": "sweet_and_sour_chicken",
+      "name": "Sweet and Sour Chicken",
+      "portion_note": "1 portion (demo)",
+      "diy_cost": 4.5,
+      "ingredients": [{"product_name": "chicken breast", "weight": 200, "unit": "g", "cost": 2.0}]
+    },
+    {
+      "id": "chicken_tikka_masala",
+      "name": "Chicken Tikka Masala",
+      "portion_note": "1 portion (demo)",
+      "diy_cost": 5.0,
+      "ingredients": [{"product_name": "chicken breast", "weight": 200, "unit": "g", "cost": 2.0}]
+    }
+  ]
+}

@@ -92,7 +92,7 @@ backend/data/
 
 **Do not copy:** `ingredient_db_*.json`, `recipes_en.json`, other pipeline intermediates unless a consumer requires them.
 
-**Status:** ⬜ Not started
+**Status:** ✅ Complete — demo `backend/data/`, validator, classification README.
 
 ---
 
@@ -230,5 +230,5 @@ Use the exact branch names above (`refactor/…`, `data/…`, `docker/…`, `rai
 
 ## Current next step
 
-1. Merge **DATA-001** (`refactor/backend-runtime-data-contract`).
-2. Implement **DATA-002** on `data/backend-curated-runtime-dataset`.
+1. Merge **DATA-002** (`data/backend-curated-runtime-dataset`).
+2. Implement **DATA-003** on `refactor/disconnect-scraper-from-backend`.

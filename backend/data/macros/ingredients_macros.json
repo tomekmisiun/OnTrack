@@ -1,0 +1,66 @@
+[
+  {
+    "name_en": "natural yogurt",
+    "name_pl": "jogurt naturalny",
+    "kcal": 60.0,
+    "protein_g": 4.0,
+    "fat_g": 3.0,
+    "carbs_g": 5.0
+  },
+  {
+    "name_en": "rolled oats",
+    "name_pl": "płatki owsiane",
+    "kcal": 370.0,
+    "protein_g": 13.0,
+    "fat_g": 7.0,
+    "carbs_g": 60.0
+  },
+  {
+    "name_en": "plain flour",
+    "name_pl": "mąka pszenna",
+    "kcal": 364.0,
+    "protein_g": 10.0,
+    "fat_g": 1.0,
+    "carbs_g": 76.0
+  },
+  {
+    "name_en": "mozzarella",
+    "name_pl": "mozzarella",
+    "kcal": 280.0,
+    "protein_g": 22.0,
+    "fat_g": 20.0,
+    "carbs_g": 2.0
+  },
+  {
+    "name_en": "chicken breast",
+    "name_pl": "pierś z kurczaka",
+    "kcal": 165.0,
+    "protein_g": 31.0,
+    "fat_g": 3.6,
+    "carbs_g": 0.0
+  },
+  {
+    "name_en": "spaghetti dry",
+    "name_pl": "makaron spaghetti",
+    "kcal": 350.0,
+    "protein_g": 12.0,
+    "fat_g": 1.5,
+    "carbs_g": 72.0
+  },
+  {
+    "name_en": "tomato passata",
+    "name_pl": "passata pomidorowa",
+    "kcal": 30.0,
+    "protein_g": 1.5,
+    "fat_g": 0.2,
+    "carbs_g": 5.0
+  },
+  {
+    "name_en": "water",
+    "name_pl": "woda",
+    "kcal": 0.0,
+    "protein_g": 0.0,
+    "fat_g": 0.0,
+    "carbs_g": 0.0
+  }
+]

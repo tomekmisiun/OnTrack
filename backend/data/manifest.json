@@ -1,0 +1,68 @@
+{
+  "dataset_version": "0.1.0-demo",
+  "schema_version": "1",
+  "status": "active",
+  "dataset_type": "demo",
+  "provenance": "Synthetic demo dataset for local development, CI, and migration testing. Values are illustrative placeholders — not verified against shops, USDA, or medical references.",
+  "generated_at": "2026-05-26",
+  "updated_at": "2026-05-26",
+  "limitations": [
+    "Not for medical, dietary, or clinical decisions",
+    "Macronutrient values are round demo numbers only",
+    "Product prices and DIY costs are fictional",
+    "Catalog seeds contain the minimum records needed for smoke tests",
+    "Legacy monorepo datasets (app/, scraper/) remain authoritative until DATA-003"
+  ],
+  "files": [
+    {
+      "path": "seeds/products_seed_pl.json",
+      "role": "catalog_seed_products",
+      "trust": "synthetic"
+    },
+    {
+      "path": "seeds/products_seed_en.json",
+      "role": "catalog_seed_products",
+      "trust": "synthetic"
+    },
+    {
+      "path": "seeds/recipes_seed_pl.json",
+      "role": "catalog_seed_recipes",
+      "trust": "synthetic"
+    },
+    {
+      "path": "seeds/recipes_seed_en.json",
+      "role": "catalog_seed_recipes",
+      "trust": "synthetic"
+    },
+    {
+      "path": "dish_compare/defaults/pl.json",
+      "role": "dish_compare_defaults",
+      "trust": "synthetic"
+    },
+    {
+      "path": "dish_compare/defaults/en.json",
+      "role": "dish_compare_defaults",
+      "trust": "synthetic"
+    },
+    {
+      "path": "dish_compare/built/pl.json",
+      "role": "dish_compare_built",
+      "trust": "synthetic"
+    },
+    {
+      "path": "dish_compare/built/en.json",
+      "role": "dish_compare_built",
+      "trust": "synthetic"
+    },
+    {
+      "path": "macros/ingredients_macros.json",
+      "role": "macro_lookup",
+      "trust": "synthetic"
+    },
+    {
+      "path": "recipes/recipes_pl.json",
+      "role": "recipe_image_lookup",
+      "trust": "synthetic"
+    }
+  ]
+}
