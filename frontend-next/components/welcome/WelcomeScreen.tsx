@@ -2,6 +2,7 @@
 
 import { Icon } from "@iconify/react";
 import { useRouter } from "next/navigation";
+import { useProfileModal } from "@/components/profile/ProfileModalContext";
 import { WelcomeMembers } from "@/components/welcome/WelcomeMembers";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -9,7 +10,6 @@ import { useWelcomeStats } from "@/hooks/useWelcomeStats";
 import type { AppNavId } from "@/lib/config/routes";
 import { tFormatArgs, tFormatN, tString } from "@/lib/i18n/translate";
 import type { TranslationKey } from "@/lib/i18n/translations";
-import "./welcome.css";
 
 const TILES: Array<{
   id: AppNavId;
@@ -167,7 +167,6 @@ function getInsight(
   }
 }
 
-import { useProfileModal } from "@/components/profile/ProfileModalContext";
 export function WelcomeScreen() {
   const router = useRouter();
   const { t } = useLanguage();
