@@ -146,7 +146,18 @@ npm run generate:api
 - `lib/api/fuel.ts`, `lib/api/public.ts`, `saveMemberProfile` in `lib/api/members.ts`
 - `npm run test:expense` — sanity check for expense item math
 
-CI runs `generate:api` before lint to catch drift.
+CI runs `generate:api`, `npm test` (Vitest unit tests), lint, typecheck, and build. A separate CI job runs Playwright smoke tests against a production build.
+
+## Tests
+
+```bash
+npm run test              # all Vitest unit tests (imports real TS modules)
+npm run test:watch        # Vitest watch mode
+npm run test:e2e          # Playwright smoke tests (builds + starts on port 3002)
+npm run test:recipes      # single suite shortcut
+```
+
+Unit tests live in `tests/unit/` and replace the legacy `scripts/check-*.mjs` guards. E2E smoke tests in `tests/e2e/` cover login rendering and auth middleware redirects (no backend required).
 
 ## Migration plan
 

@@ -237,6 +237,7 @@ npm run export:openapi → openapi/openapi.json
 | **Files** | `.github/workflows/ci.yml`, `frontend-next/tests/**` |
 | **Dependencies** | Task 12 |
 | **Acceptance** | CI runs lint, typecheck, unit, optional E2E against docker compose |
+| **Status** | Done |
 | **Out of scope** | Replacing backend contract tests |
 
 ---
