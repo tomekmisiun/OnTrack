@@ -11,6 +11,7 @@ from pathlib import Path
 
 import pytest
 from app.core.runtime_data import seeds_dir
+from app.domain.product_normalize import normalize_product_name
 from app.models.product import Product
 from app.models.recipe import Recipe
 from app.models.user import User
@@ -137,6 +138,8 @@ def test_product_list_excludes_other_users_products(
 def test_product_list_filters_by_user_language(client, auth_headers, user, db_session):
     foreign_lang = Product(
         user_id=user.id,
+        source="user",
+        normalized_name=normalize_product_name("English only item"),
         name="English only item",
         package_weight=100,
         price=1.0,

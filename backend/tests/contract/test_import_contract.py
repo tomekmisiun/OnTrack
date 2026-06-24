@@ -1,5 +1,6 @@
 import io
 
+from app.domain.product_normalize import normalize_product_name
 from app.models.product import Product
 
 
@@ -57,6 +58,8 @@ def test_apply_prices_updates_product(client, auth_headers, product, db_session)
 def test_apply_prices_ignores_other_users_product(client, auth_headers, other_user, db_session):
     foreign = Product(
         user_id=other_user.id,
+        source="user",
+        normalized_name=normalize_product_name("Cudzy produkt"),
         name="Cudzy produkt",
         package_weight=500,
         price=2.0,

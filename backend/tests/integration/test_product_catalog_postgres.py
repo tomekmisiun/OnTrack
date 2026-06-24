@@ -10,6 +10,7 @@ from alembic import command
 from alembic.config import Config
 from app.core.config import get_settings
 from app.core.passwords import hash_password
+from app.domain.product_normalize import normalize_product_name
 from app.models.household_member import HouseholdMember
 from app.models.product import Product
 from app.models.recipe import Recipe, RecipeIngredient
@@ -83,6 +84,8 @@ def _create_user_with_product_and_recipe(session: Session) -> tuple[User, Produc
     session.add(HouseholdMember(user_id=user.id, name="Ja", is_primary=True))
     product = Product(
         user_id=user.id,
+        source="user",
+        normalized_name=normalize_product_name("Produkt FK"),
         name="Produkt FK",
         package_weight=500,
         price=2.5,

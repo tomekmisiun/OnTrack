@@ -4,11 +4,13 @@ from __future__ import annotations
 
 from alembic.autogenerate import compare_metadata
 from alembic.migration import MigrationContext
-from app.models import Base
 from sqlalchemy.engine import Engine
 
-# FastAPI Alembic head — stamp target for existing Flask databases.
+from app.models import Base
+
+# FastAPI Alembic head — stamp target for existing Flask databases (initial schema).
 ONTRACK_ALEMBIC_HEAD = "7966d120d748"
+ONTRACK_ALEMBIC_CATALOG_HEAD = "c4e5f6a7b8c9d1"
 
 
 def collect_schema_diffs(engine: Engine) -> list:

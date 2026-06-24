@@ -9,14 +9,19 @@ import pytest
 from alembic import command
 from alembic.config import Config
 from app.core.config import get_settings
-from app.db.schema_validate import ONTRACK_ALEMBIC_HEAD, assert_schema_parity
+from app.db.schema_validate import (
+    ONTRACK_ALEMBIC_CATALOG_HEAD,
+    ONTRACK_ALEMBIC_HEAD,
+    assert_schema_parity,
+    collect_schema_diffs,
+)
 from app.models.tables import ONTRACK_TABLES
 from sqlalchemy import create_engine, inspect, text
 
 BACKEND_ROOT = Path(__file__).resolve().parents[2]
 
-# Legacy Flask-Migrate head revision id (pre-cutover prod databases).
-LEGACY_FLASK_ALEMBIC_HEAD = "a1b2c3d4e5f6"
+# Legacy Flask-Migrate revision id (pre-cutover prod databases; not a FastAPI revision).
+LEGACY_FLASK_ALEMBIC_HEAD = "flask_legacy_placeholder"
 
 
 def _postgres_test_url() -> str | None:
@@ -57,7 +62,7 @@ def legacy_migrated_postgres(postgres_url: str, monkeypatch) -> str:
 
     alembic_cfg = Config(str(BACKEND_ROOT / "alembic.ini"))
     alembic_cfg.set_main_option("script_location", str(BACKEND_ROOT / "alembic"))
-    command.upgrade(alembic_cfg, "head")
+    command.upgrade(alembic_cfg, ONTRACK_ALEMBIC_HEAD)
 
     engine = create_engine(postgres_url)
     with engine.connect() as conn:
@@ -72,7 +77,7 @@ def legacy_migrated_postgres(postgres_url: str, monkeypatch) -> str:
 
 
 def test_stamp_existing_schema_has_empty_diff(legacy_migrated_postgres: str, monkeypatch) -> None:
-    """Legacy alembic_version → stamp FastAPI head → no drift vs SQLAlchemy models."""
+    """Legacy alembic_version → stamp initial FastAPI → upgrade catalog migration → parity."""
     monkeypatch.setenv("DATABASE_URL", legacy_migrated_postgres)
     get_settings.cache_clear()
 
@@ -91,12 +96,13 @@ def test_stamp_existing_schema_has_empty_diff(legacy_migrated_postgres: str, mon
         stamped = conn.execute(text("SELECT version_num FROM alembic_version")).scalar()
     assert stamped == ONTRACK_ALEMBIC_HEAD
 
-    assert_schema_parity(engine)
+    # Pre-catalog schema: models include catalog columns — drift expected until upgrade.
+    assert collect_schema_diffs(engine)  # noqa: not empty before upgrade
 
     command.upgrade(alembic_cfg, "head")
 
     with engine.connect() as conn:
         after_upgrade = conn.execute(text("SELECT version_num FROM alembic_version")).scalar()
-    assert after_upgrade == ONTRACK_ALEMBIC_HEAD
+    assert after_upgrade == ONTRACK_ALEMBIC_CATALOG_HEAD
     assert_schema_parity(engine)
     engine.dispose()
