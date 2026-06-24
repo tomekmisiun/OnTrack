@@ -1,43 +1,22 @@
-"""Safety-net tests for product catalog isolation, seed behavior, and migration guards.
-
-These tests document current (legacy) behavior before the global catalog migration.
-Tests marked ``legacy_catalog_copy`` are expected to change in Task 6.
-"""
+"""Safety-net tests for product catalog isolation, seed behavior, and migration guards."""
 
 from __future__ import annotations
 
-import json
-
-import pytest
-from app.core.runtime_data import seeds_dir
 from app.domain.product_normalize import normalize_product_name
 from app.models.product import Product
 from app.models.recipe import Recipe
 from app.models.user import User
-from app.services.catalog_seed_service import _seed_products, ensure_user_seeded
+from app.services.catalog_seed_service import ensure_user_seeded
 from app.worker.jobs import process_job
 from app.worker.queue import drain_testing_jobs, reset_testing_jobs
 
 from tests.conftest import create_user
-
-LEGACY_CATALOG_COPY = pytest.mark.legacy_catalog_copy(
-    reason=(
-        "Documents per-user seed copy; replace in Task 6 "
-        "(refactor/remove-per-user-product-seed)."
-    ),
-)
 
 
 def _product_items(response_json: dict | list) -> list:
     if isinstance(response_json, dict) and "items" in response_json:
         return response_json["items"]
     return response_json
-
-
-def _seed_product_count(lang: str = "pl") -> int:
-    path = seeds_dir() / f"products_seed_{lang}.json"
-    data = json.loads(path.read_text(encoding="utf-8"))
-    return sum(1 for item in data if (item.get("name") or "").strip())
 
 
 # --- Cross-user isolation (authorization) ---
@@ -81,52 +60,49 @@ def test_user_a_cannot_use_user_b_product_in_recipe(client, other_auth_headers, 
     assert "not found" in res.json()["error"].lower()
 
 
-# --- Legacy per-user seed on registration ---
+# --- Registration: no per-user product copy (global catalog) ---
 
 
-@LEGACY_CATALOG_COPY
-def test_legacy_register_copies_seed_products_per_user(client, db_session):
-    """Registration currently inserts seed JSON rows with user_id — change in Task 6."""
+def test_register_does_not_copy_seed_products_per_user(client, db_session):
     reg = client.post(
         "/api/auth/register",
-        json={"username": "legacyseed1", "password": "secret123", "lang": "pl"},
+        json={"username": "noseed1", "password": "secret123", "lang": "pl"},
     )
     assert reg.status_code == 201
-    user = db_session.query(User).filter_by(username="legacyseed1").first()
+    user = db_session.query(User).filter_by(username="noseed1").first()
     assert user is not None
-    count = db_session.query(Product).filter_by(user_id=user.id, lang="pl").count()
-    assert count >= _seed_product_count("pl")
+    private_count = db_session.query(Product).filter_by(user_id=user.id, lang="pl").count()
+    assert private_count == 0
+
+
+def test_register_sees_global_catalog_via_api(client, db_session):
+    reg = client.post(
+        "/api/auth/register",
+        json={"username": "globalview1", "password": "secret123", "lang": "pl"},
+    )
+    assert reg.status_code == 201
+    token = reg.json()["token"]
+    headers = {"Authorization": f"Bearer {token}"}
+    res = client.get("/api/products/", headers=headers, params={"limit": 100})
+    assert res.status_code == 200
+    items = _product_items(res.json())
+    assert any(p["is_system"] for p in items)
+    assert items  # global catalog visible without private copies
 
 
 # --- Seed idempotency ---
 
 
-def test_ensure_user_seeded_twice_does_not_duplicate(db_session):
+def test_ensure_user_seeded_twice_does_not_duplicate_recipes(db_session):
     user = create_user(db_session, "idempotent@example.com", lang="pl")
     ensure_user_seeded(db_session, user.id, "pl")
-    after_first = db_session.query(Product).filter_by(user_id=user.id, lang="pl").count()
-    assert after_first >= _seed_product_count("pl")
+    after_first = db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count()
+    assert after_first >= 1
+    assert db_session.query(Product).filter_by(user_id=user.id, lang="pl").count() == 0
 
     ensure_user_seeded(db_session, user.id, "pl")
-    after_second = db_session.query(Product).filter_by(user_id=user.id, lang="pl").count()
+    after_second = db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count()
     assert after_second == after_first
-
-
-@pytest.mark.xfail(
-    reason=(
-        "_seed_products has no per-row deduplication; "
-        "guard only checks any product with price > 0. "
-        "Direct re-entry creates duplicates — fix planned in global catalog import (Task 3)."
-    ),
-    strict=True,
-)
-def test_xfail_direct_seed_products_twice_creates_duplicates(db_session):
-    user = create_user(db_session, "dupseed@example.com", lang="pl")
-    _seed_products(db_session, user.id, "pl")
-    first_count = db_session.query(Product).filter_by(user_id=user.id, lang="pl").count()
-    _seed_products(db_session, user.id, "pl")
-    second_count = db_session.query(Product).filter_by(user_id=user.id, lang="pl").count()
-    assert second_count == first_count
 
 
 # --- Product list (current contract: no pagination) ---
@@ -180,7 +156,7 @@ def test_product_list_supports_pagination(client, auth_headers, product):
 
 
 def test_register_does_not_require_worker_job_processing(client, db_session):
-    """Catalog is seeded synchronously; worker job is not required for products to exist."""
+    """Recipe seed runs synchronously; worker job is not required for recipes to exist."""
     reset_testing_jobs()
     reg = client.post(
         "/api/auth/register",
@@ -188,14 +164,14 @@ def test_register_does_not_require_worker_job_processing(client, db_session):
     )
     assert reg.status_code == 201
     user = db_session.query(User).filter_by(username="noworker1").first()
-    product_count = db_session.query(Product).filter_by(user_id=user.id, lang="pl").count()
-    assert product_count >= _seed_product_count("pl")
+    assert db_session.query(Product).filter_by(user_id=user.id, lang="pl").count() == 0
+    assert db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count() >= 1
     jobs = drain_testing_jobs()
     assert any(j.get("type") == "catalog_seed" for j in jobs)
 
 
 def test_register_sync_and_worker_seed_are_idempotent(client, db_session, engine, monkeypatch):
-    """Sync seed on register + enqueued job must not double the catalog."""
+    """Sync seed on register + enqueued job must not duplicate recipes."""
     from sqlalchemy.orm import sessionmaker
 
     bind = db_session.get_bind()
@@ -210,13 +186,14 @@ def test_register_sync_and_worker_seed_are_idempotent(client, db_session, engine
     )
     assert reg.status_code == 201
     user = db_session.query(User).filter_by(username="redundant1").first()
-    before_job = db_session.query(Product).filter_by(user_id=user.id, lang="pl").count()
-    assert before_job >= _seed_product_count("pl")
+    before_job = db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count()
+    assert before_job >= 1
+    assert db_session.query(Product).filter_by(user_id=user.id, lang="pl").count() == 0
 
     jobs = drain_testing_jobs()
     assert jobs
     process_job(jobs[0])
-    after_job = db_session.query(Product).filter_by(user_id=user.id, lang="pl").count()
+    after_job = db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count()
     assert after_job == before_job
 
 
@@ -245,5 +222,5 @@ def test_inline_fallback_runs_catalog_seed_without_redis(db_session, engine, mon
     monkeypatch.setattr(queue_mod, "get_settings", lambda: fake_settings)
 
     queue_mod.enqueue_catalog_seed(user.id, "pl")
-    product_count = db_session.query(Product).filter_by(user_id=user.id, lang="pl").count()
-    assert product_count >= _seed_product_count("pl")
+    assert db_session.query(Product).filter_by(user_id=user.id, lang="pl").count() == 0
+    assert db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count() >= 1

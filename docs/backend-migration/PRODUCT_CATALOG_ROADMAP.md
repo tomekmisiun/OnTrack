@@ -329,7 +329,7 @@ CAT-008 (worker cleanup)
 | CAT-002 | `feat/global-product-catalog-schema` | ✅ Complete |
 | CAT-003 | `feat/global-product-catalog-import` | ✅ Complete |
 | CAT-004 | `feat/product-catalog-query-layer` | ✅ Complete |
-| CAT-005 | `feat/product-catalog-mutation-policy` | 🟡 In progress |
-| CAT-006 | `refactor/remove-per-user-product-seed` | ⬜ Not started |
+| CAT-005 | `feat/product-catalog-mutation-policy` | ✅ Complete |
+| CAT-006 | `refactor/remove-per-user-product-seed` | 🟡 In progress |
 | CAT-007 | `feat/product-catalog-frontend` | ⬜ Not started |
 | CAT-008 | `chore/remove-catalog-seed-worker` | ⬜ Not started |

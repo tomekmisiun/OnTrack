@@ -121,8 +121,14 @@ def test_register_seeds_catalog(client, db_session):
     )
     assert reg.status_code == 201
     user = db_session.query(User).filter_by(username="seeduser1").first()
-    assert db_session.query(Product).filter_by(user_id=user.id, lang="pl").count() >= 2
+    assert db_session.query(Product).filter_by(user_id=user.id, lang="pl").count() == 0
     assert db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count() >= 1
+    system_count = (
+        db_session.query(Product)
+        .filter(Product.user_id.is_(None), Product.source == "system", Product.lang == "pl")
+        .count()
+    )
+    assert system_count >= 2
 
 
 def test_werkzeug_hash_from_flask_login_works(client, db_session):
