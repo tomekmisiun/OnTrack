@@ -133,6 +133,19 @@ npm run generate:api
 - `lib/api/daySchedule.ts`, `lib/schedule/**` — API, parse helpers, overlap detection
 - `npm run test:schedule` — unit check for `parseScheduleBlockText`
 
+## Remaining modules (task 12)
+
+- `components/welcome/WelcomeScreen.tsx` — home tiles with insights (`useWelcomeStats`)
+- `components/macro/MacroScreen.tsx` — BMI/TDEE/macro calculator with profile save
+- `components/summary/**` — expenses, drinks card, pie chart, product table
+- `components/export/ExportScreen.tsx` — print/HTML export (macro card, calendar, shopping list)
+- `components/profile/ProfileModal.tsx` — account, language, delete, restart tour
+- `components/privacy/PrivacyPolicyModal.tsx` — login page privacy link
+- `components/dish-compare/DishCompare.tsx` — public marketing widget on login
+- `components/tour/TourProvider.tsx` — react-joyride onboarding
+- `lib/api/fuel.ts`, `lib/api/public.ts`, `saveMemberProfile` in `lib/api/members.ts`
+- `npm run test:expense` — sanity check for expense item math
+
 CI runs `generate:api` before lint to catch drift.
 
 ## Migration plan

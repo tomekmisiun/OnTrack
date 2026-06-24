@@ -1,0 +1,120 @@
+/* Summary module — datepicker, compact table, template rows */
+
+.dp-input {
+  padding: 7px 10px;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #9ca3af;
+  background: #111827;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+  outline: none;
+  text-align: center;
+}
+
+.dp-input:focus {
+  border-color: #0d9488;
+}
+
+.react-datepicker {
+  background: #1f2937 !important;
+  border: 1px solid #374151 !important;
+  font-size: 12px !important;
+}
+
+.react-datepicker__header {
+  background: #111827 !important;
+  border-bottom: 1px solid #374151 !important;
+}
+
+.react-datepicker__current-month,
+.react-datepicker__day-name {
+  color: #e2e8f0 !important;
+}
+
+.react-datepicker__day {
+  color: #e2e8f0 !important;
+  border-radius: 4px !important;
+}
+
+.react-datepicker__day:hover {
+  background: #374151 !important;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background: #0d9488 !important;
+  color: #fff !important;
+}
+
+.react-datepicker__day--outside-month {
+  color: #4b5563 !important;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: #6b7280 !important;
+}
+
+.react-datepicker__triangle {
+  display: none !important;
+}
+
+.template-row {
+  transition: background 0.15s, border-left-color 0.15s;
+  border-left: 3px solid transparent;
+  cursor: pointer;
+}
+
+.template-row:hover {
+  background: #0d948818 !important;
+  border-left-color: #0d9488 !important;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button,
+input.no-spin::-webkit-outer-spin-button,
+input.no-spin::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"],
+input.no-spin {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.compact-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.compact-table th {
+  padding: 8px 10px;
+  text-align: left;
+  color: #6b7280;
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  border-bottom: 1px solid rgba(55, 65, 81, 0.45);
+}
+
+.compact-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid rgba(31, 41, 55, 0.65);
+  font-size: 13px;
+  color: #e2e8f0;
+}
+
+.compact-table input,
+.compact-table select {
+  flex: none;
+  min-width: 0;
+  padding: 2px 5px;
+  font-size: 12px;
+  border-radius: 4px;
+  border-width: 1px;
+}

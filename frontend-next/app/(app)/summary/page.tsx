@@ -1,5 +1,5 @@
-import { ModulePlaceholder } from "@/components/screens/ModulePlaceholder";
+import { SummaryScreen } from "@/components/summary/SummaryScreen";
 
 export default function SummaryPage() {
-  return <ModulePlaceholder moduleId="summary" />;
+  return <SummaryScreen />;
 }

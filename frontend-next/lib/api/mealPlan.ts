@@ -72,12 +72,22 @@ export async function copyRange(
   );
 }
 
+export type MealPlanSummaryItem = {
+  product_id: number;
+  product_name: string;
+  total_weight: number;
+  unit: string;
+  package_weight: number;
+  packages_exact: number;
+  packages_rounded: number;
+  price_per_package: number;
+  total_cost: number;
+  actual_cost: number;
+  sold_by_weight: boolean;
+};
+
 export type MealPlanSummary = {
-  items: Array<{
-    product_name: string;
-    total_weight: number;
-    total_cost?: number;
-  }>;
+  items: MealPlanSummaryItem[];
   total_cost: number;
 };
 

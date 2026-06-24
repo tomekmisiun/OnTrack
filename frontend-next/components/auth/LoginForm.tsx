@@ -2,6 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState, type FormEvent } from "react";
+import { DishCompare } from "@/components/dish-compare/DishCompare";
+import { PrivacyPolicyModal } from "@/components/privacy/PrivacyPolicyModal";
 import { isAuthApiError, useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { googleAuthUrl } from "@/lib/api/auth";
@@ -42,6 +44,7 @@ export function LoginForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [privacyOpen, setPrivacyOpen] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -95,7 +98,7 @@ export function LoginForm() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-md">
+    <div className="mx-auto w-full max-w-lg">
       <div className="mb-4 flex justify-end gap-1">
         {(["pl", "en"] as LangCode[]).map((code) => (
           <button
@@ -235,7 +238,27 @@ export function LoginForm() {
           <GoogleIcon />
           {String(t("google_btn"))}
         </button>
+
+        <p className="mt-4 text-center text-xs text-slate-500">
+          {String(t("login_privacy_prefix"))}
+          <button
+            type="button"
+            className="cursor-pointer text-teal-500 hover:underline"
+            onClick={() => setPrivacyOpen(true)}
+          >
+            {String(t("login_privacy_link"))}
+          </button>
+          {String(t("login_privacy_suffix"))}
+        </p>
       </div>
+
+      <div className="mt-8">
+        <DishCompare />
+      </div>
+
+      {privacyOpen && (
+        <PrivacyPolicyModal lang={uiLang} onClose={() => setPrivacyOpen(false)} />
+      )}
     </div>
   );
 }

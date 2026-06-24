@@ -48,3 +48,8 @@ export function tFormatArgs(
   }
   return String(value);
 }
+
+export function tArray(t: TFn, key: TranslationKey): string[] {
+  const value = t(key);
+  return Array.isArray(value) ? value.map(String) : [];
+}
