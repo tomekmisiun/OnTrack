@@ -4,14 +4,12 @@ import { useEffect, useState } from "react";
 import { ApiError } from "@/lib/api/errors";
 import { fetchHealth } from "@/lib/api/health";
 import { getApiBaseUrl } from "@/lib/config/env";
+import type { FetchState } from "@/types";
 
-type HealthState =
-  | { kind: "loading" }
-  | { kind: "ok"; status: string }
-  | { kind: "error"; message: string };
+type HealthFetchState = FetchState<{ status: string }, string>;
 
 export function HealthStatus() {
-  const [state, setState] = useState<HealthState>({ kind: "loading" });
+  const [state, setState] = useState<HealthFetchState>({ kind: "loading" });
 
   useEffect(() => {
     let cancelled = false;
@@ -19,7 +17,7 @@ export function HealthStatus() {
     fetchHealth()
       .then((data) => {
         if (!cancelled) {
-          setState({ kind: "ok", status: data.status });
+          setState({ kind: "ok", data: { status: data.status } });
         }
       })
       .catch((err: unknown) => {
@@ -30,7 +28,7 @@ export function HealthStatus() {
             : err instanceof Error
               ? err.message
               : "Unknown error";
-        setState({ kind: "error", message });
+        setState({ kind: "error", error: message });
       });
 
     return () => {
@@ -54,12 +52,12 @@ export function HealthStatus() {
       )}
       {state.kind === "ok" && (
         <p className="text-emerald-400">
-          Connected — backend status: <strong>{state.status}</strong>
+          Connected — backend status: <strong>{state.data.status}</strong>
         </p>
       )}
       {state.kind === "error" && (
         <p className="text-amber-400">
-          Could not reach backend: {state.message}
+          Could not reach backend: {state.error}
         </p>
       )}
     </section>
