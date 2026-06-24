@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { MemberToggles } from "@/components/MemberToggles";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { APP_NAV_ITEMS } from "@/lib/config/routes";
@@ -43,6 +44,16 @@ export function HomeScreen() {
         </div>
       </header>
 
+      <section className="rounded-xl border border-slate-700 bg-slate-800/40 p-4">
+        <p className="mb-3 text-sm font-medium text-slate-300">
+          {String(t("welcome_include_members"))}
+        </p>
+        <MemberToggles variant="welcome" />
+        <p className="mt-2 text-xs text-slate-500">
+          {String(t("welcome_members_hint"))}
+        </p>
+      </section>
+
       <section className="grid gap-3 sm:grid-cols-2">
         {APP_NAV_ITEMS.map((item) => (
           <Link
@@ -59,7 +70,7 @@ export function HomeScreen() {
       </section>
 
       <footer className="mt-auto border-t border-slate-800 pt-6 text-xs text-slate-500">
-        Migration task 6 — App Router navigation.{" "}
+        Migration task 7 — members module.{" "}
         <button
           type="button"
           onClick={() => router.push("/macro")}

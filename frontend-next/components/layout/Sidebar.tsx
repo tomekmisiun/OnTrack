@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { MemberToggles } from "@/components/MemberToggles";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { NAV_ICONS, OntrackLogo } from "@/components/layout/nav-icons";
@@ -30,6 +31,13 @@ export function Sidebar() {
           </div>
         </div>
       </button>
+
+      <div className="border-b border-slate-800 px-4 py-3">
+        <span className="mb-2 block text-[10px] font-semibold uppercase tracking-wide text-slate-500">
+          {String(t("include_label"))}
+        </span>
+        <MemberToggles variant="sidebar" />
+      </div>
 
       <nav className="flex flex-1 flex-col gap-1 p-3">
         {APP_NAV_ITEMS.map((item) => {

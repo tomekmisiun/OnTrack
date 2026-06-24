@@ -34,6 +34,7 @@ const eslintConfig = [
       "next-env.d.ts",
       "lib/api/generated/**",
       "lib/i18n/translations.ts",
+      "scripts/**",
     ],
   },
 ];
