@@ -1,15 +1,13 @@
-"""Load dish-compare data from app/dish_compare/data/."""
+"""Load dish-compare data from the configured runtime data directory."""
 
 from __future__ import annotations
 
 import json
 from pathlib import Path
 
+from app.core.runtime_data import dish_compare_data_dir
+
 SUPPORTED_LANGS = ("pl", "en")
-
-
-def _dish_compare_dir() -> Path:
-    return Path(__file__).resolve().parents[3] / "app" / "dish_compare" / "data"
 
 
 def _read_json(path: Path) -> dict | list:
@@ -19,14 +17,14 @@ def _read_json(path: Path) -> dict | list:
 
 def load_defaults(lang: str) -> dict:
     lang = lang if lang in SUPPORTED_LANGS else "pl"
-    return _read_json(_dish_compare_dir() / "defaults" / f"{lang}.json")
+    return _read_json(dish_compare_data_dir() / "defaults" / f"{lang}.json")
 
 
 def load_built(lang: str) -> dict:
     lang = lang if lang in SUPPORTED_LANGS else "pl"
-    path = _dish_compare_dir() / "built" / f"{lang}.json"
+    path = dish_compare_data_dir() / "built" / f"{lang}.json"
     if not path.exists():
-        raise FileNotFoundError(f"built file missing: {path} — run app/dish_compare/build.py")
+        raise FileNotFoundError(f"built file missing: {path}")
     return _read_json(path)
 
 
