@@ -8,7 +8,7 @@ Steps:
   3  match_ingredients   — rapidfuzz + DeepSeek for ambiguous matches
   4  build_database      — build ingredient_db, unmatched lists, recipes with cost
   5  get_macros          — fetch macronutrients via DeepSeek
-  6  dump_seeds          — generate seed JSON in app/user_seeds/data/
+  6  dump_seeds          — generate seed JSON in scraper/output/seeds/
 
 Usage:
     python run_pipeline.py               # all steps
@@ -165,7 +165,7 @@ def main():
                 log.info(f"  ✓  {p.relative_to(HERE.parent)}")
         else:
             log.info(f"  -  {str(p.relative_to(HERE.parent)):<45} missing")
-    log.info("\nSeed files (app/user_seeds/data/):")
+    log.info("\nSeed files (scraper/output/seeds/):")
     for p in seed_files:
         if p.exists():
             try:

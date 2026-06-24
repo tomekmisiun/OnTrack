@@ -49,5 +49,22 @@ MACROS = DATA / "macros"
 INGREDIENTS_MACROS = MACROS / "ingredients_macros.json"
 INGREDIENTS_MACROS_PARTIAL = MACROS / "ingredients_macros_partial.json"
 
-# Step 6 — user signup seeds (written by dump_seeds.py)
-USER_SEEDS_DIR = SCRAPER_ROOT.parent / "app" / "user_seeds" / "data"
+# Step 6 — pipeline seed export (local scraper workspace; not backend/data)
+SCRAPER_OUTPUT = SCRAPER_ROOT / "output"
+USER_SEEDS_DIR = SCRAPER_OUTPUT / "seeds"
+BACKEND_DATA_DIR = SCRAPER_ROOT.parent / "backend" / "data"
+
+
+def assert_scraper_may_write(target: Path) -> None:
+    """Block accidental writes into backend/data without explicit approval."""
+    import os
+
+    resolved = target.resolve()
+    backend_data = BACKEND_DATA_DIR.resolve()
+    if resolved == backend_data or backend_data in resolved.parents:
+        if os.environ.get("ALLOW_SCRAPER_EXPORT_TO_BACKEND") != "1":
+            raise RuntimeError(
+                "Refusing to write into backend/data. "
+                "Scraper output is experimental — set ALLOW_SCRAPER_EXPORT_TO_BACKEND=1 "
+                "only after manual dataset review."
+            )

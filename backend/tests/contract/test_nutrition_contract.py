@@ -1,14 +1,14 @@
-def test_nutrition_lookup_schab(client, auth_headers):
+def test_nutrition_lookup_demo_yogurt(client, auth_headers):
     res = client.get(
         "/api/nutrition/lookup",
         headers=auth_headers,
-        params={"name": "schab", "lang": "pl"},
+        params={"name": "jogurt naturalny", "lang": "pl"},
     )
     assert res.status_code == 200
     data = res.json()
     assert data["found"] is True
     assert data["source"] == "database"
-    assert data["kcal"] == 242.0
+    assert data["kcal"] == 60.0
 
 
 def test_nutrition_lookup_missing_name(client, auth_headers):

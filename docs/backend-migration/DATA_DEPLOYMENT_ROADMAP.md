@@ -110,7 +110,7 @@ backend/data/
 | **Rollback** | Restore legacy fallback in resolver (revert PR) |
 | **Out of scope** | Dockerfile; Railway; scraper algorithm fixes; removing `scraper/` directory |
 
-**Status:** ⬜ Not started
+**Status:** ✅ Complete — backend defaults to `backend/data/`; scraper disconnected.
 
 ---
 
@@ -231,4 +231,4 @@ Use the exact branch names above (`refactor/…`, `data/…`, `docker/…`, `rai
 ## Current next step
 
 1. Merge **DATA-002** (`data/backend-curated-runtime-dataset`).
-2. Implement **DATA-003** on `refactor/disconnect-scraper-from-backend`.
+2. Implement **DATA-004** on `docker/backend-self-contained-image`.
