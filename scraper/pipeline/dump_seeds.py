@@ -23,6 +23,7 @@ from data_paths import (  # noqa: E402
     RECIPES_EN,
     RECIPES_PL,
     USER_SEEDS_DIR,
+    assert_scraper_may_write,
 )
 from pexels import resolve_recipe_image_url  # noqa: E402
 
@@ -165,6 +166,7 @@ def build_recipes_seed(lang: str) -> list[dict]:
     return recipes_seed
 
 
+assert_scraper_may_write(OUT)
 OUT.mkdir(parents=True, exist_ok=True)
 
 all_products = {}

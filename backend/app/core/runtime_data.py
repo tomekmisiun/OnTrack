@@ -1,7 +1,7 @@
 """Central runtime data path resolution.
 
 All backend consumers MUST resolve JSON/runtime assets through this module.
-Legacy monorepo layout fallback is temporary — see TODO markers below.
+Default root is ``backend/data/`` (override with ``RUNTIME_DATA_DIR``).
 """
 
 from __future__ import annotations
@@ -9,8 +9,6 @@ from __future__ import annotations
 from pathlib import Path
 
 from app.core.config import get_settings
-
-# TODO(refactor/disconnect-scraper-from-backend): remove legacy monorepo fallback.
 
 
 class RuntimeDataError(Exception):
@@ -22,67 +20,35 @@ def _backend_root() -> Path:
     return Path(__file__).resolve().parents[2]
 
 
-def _legacy_monorepo_root() -> Path:
-    """Repository root when backend lives at repo/backend/ (monorepo layout)."""
-    return Path(__file__).resolve().parents[3]
-
-
-def _configured_runtime_root() -> Path | None:
+def runtime_data_root() -> Path:
+    """Resolved runtime data directory."""
     settings = get_settings()
     if settings.runtime_data_dir:
         return Path(settings.runtime_data_dir)
-    return None
-
-
-def runtime_data_root() -> Path | None:
-    """Configured RUNTIME_DATA_DIR, or None when using legacy layout."""
-    return _configured_runtime_root()
+    return _backend_root() / "data"
 
 
 def seeds_dir() -> Path:
     settings = get_settings()
     if settings.user_seeds_dir:
         return Path(settings.user_seeds_dir)
-    root = _configured_runtime_root()
-    if root is not None:
-        return root / "seeds"
-    return _legacy_monorepo_root() / "app" / "user_seeds" / "data"
+    return runtime_data_root() / "seeds"
 
 
 def dish_compare_data_dir() -> Path:
-    root = _configured_runtime_root()
-    if root is not None:
-        return root / "dish_compare"
-    return _legacy_monorepo_root() / "app" / "dish_compare" / "data"
+    return runtime_data_root() / "dish_compare"
 
 
 def ingredients_macros_paths() -> tuple[Path, ...]:
-    root = _configured_runtime_root()
-    if root is not None:
-        return (root / "macros" / "ingredients_macros.json",)
-    legacy_root = _legacy_monorepo_root()
-    return (
-        legacy_root / "scraper" / "data" / "macros" / "ingredients_macros.json",
-        legacy_root / "app" / "data" / "ingredients_macros.json",
-    )
+    return (runtime_data_root() / "macros" / "ingredients_macros.json",)
 
 
 def recipes_pl_paths() -> tuple[Path, ...]:
-    root = _configured_runtime_root()
-    if root is not None:
-        return (root / "recipes" / "recipes_pl.json",)
-    legacy_root = _legacy_monorepo_root()
-    return (
-        legacy_root / "scraper" / "data" / "built" / "recipes_pl.json",
-        legacy_root / "app" / "user_seeds" / "data" / "recipes_seed_pl.json",
-    )
+    return (runtime_data_root() / "recipes" / "recipes_pl.json",)
 
 
 def macro_ai_cache_path() -> Path:
-    root = _configured_runtime_root()
-    if root is not None:
-        return root / "cache" / "macro_ai_cache.json"
-    return _legacy_monorepo_root() / "app" / "data" / "macro_ai_cache.json"
+    return runtime_data_root() / "cache" / "macro_ai_cache.json"
 
 
 def required_runtime_files() -> tuple[tuple[Path, str], ...]:
@@ -93,16 +59,8 @@ def required_runtime_files() -> tuple[tuple[Path, str], ...]:
         (dc / "defaults" / "en.json", "dish_compare defaults (en)"),
         (dc / "built" / "pl.json", "dish_compare built (pl)"),
         (dc / "built" / "en.json", "dish_compare built (en)"),
-        *_required_ingredients_macros_entries(),
+        (ingredients_macros_paths()[0], "ingredients_macros"),
     )
-
-
-def _required_ingredients_macros_entries() -> tuple[tuple[Path, str], ...]:
-    for path in ingredients_macros_paths():
-        if path.exists():
-            return ((path, "ingredients_macros"),)
-    primary = ingredients_macros_paths()[0]
-    return ((primary, "ingredients_macros"),)
 
 
 def validate_required_runtime_data() -> None:

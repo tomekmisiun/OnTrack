@@ -11,7 +11,7 @@ All paths are defined in `scraper/data_paths.py`.
 | `built/` | 4 | Ingredient DB + costed recipes |
 | `macros/` | 5 | Macronutrients per ingredient |
 
-**Output for app:** step 6 writes to `app/user_seeds/data/`.
+**Output for pipeline step 6:** `scraper/output/seeds/` (not `backend/data/`).
 
 **Run full pipeline:**
 ```bash

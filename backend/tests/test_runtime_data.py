@@ -77,19 +77,17 @@ def test_runtime_data_dir_override_paths(tmp_path, monkeypatch, clear_settings_c
     assert macro_ai_cache_path() == data_root / "cache" / "macro_ai_cache.json"
 
 
-def test_legacy_fallback_paths_without_runtime_data_dir(monkeypatch, clear_settings_cache):
+def test_default_runtime_root_is_backend_data(monkeypatch, clear_settings_cache):
     monkeypatch.delenv("RUNTIME_DATA_DIR", raising=False)
     backend_root = Path(__file__).resolve().parents[1]
-    monorepo_root = backend_root.parent
 
-    assert runtime_data_root() is None
-    assert seeds_dir() == monorepo_root / "app" / "user_seeds" / "data"
-    assert dish_compare_data_dir() == monorepo_root / "app" / "dish_compare" / "data"
-    assert ingredients_macros_paths()[0] == (
-        monorepo_root / "scraper" / "data" / "macros" / "ingredients_macros.json"
-    )
-    assert recipes_pl_paths()[0] == monorepo_root / "scraper" / "data" / "built" / "recipes_pl.json"
-    assert macro_ai_cache_path() == monorepo_root / "app" / "data" / "macro_ai_cache.json"
+    assert runtime_data_root() == backend_root / "data"
+    assert seeds_dir() == backend_root / "data" / "seeds"
+    assert dish_compare_data_dir() == backend_root / "data" / "dish_compare"
+    macros = backend_root / "data" / "macros" / "ingredients_macros.json"
+    assert ingredients_macros_paths()[0] == macros
+    assert recipes_pl_paths()[0] == backend_root / "data" / "recipes" / "recipes_pl.json"
+    assert macro_ai_cache_path() == backend_root / "data" / "cache" / "macro_ai_cache.json"
 
 
 def test_user_seeds_dir_overrides_seeds_path(tmp_path, monkeypatch, clear_settings_cache):
