@@ -1,5 +1,5 @@
-import { ModulePlaceholder } from "@/components/screens/ModulePlaceholder";
+import { ProductsScreen } from "@/components/products/ProductsScreen";
 
 export default function ProductsPage() {
-  return <ModulePlaceholder moduleId="products" />;
+  return <ProductsScreen />;
 }

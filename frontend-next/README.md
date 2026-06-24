@@ -96,7 +96,7 @@ npm run generate:api
 - Protected app routes under `app/(app)/` — `/`, `/macro`, `/calendar`, `/schedule`, `/recipes`, `/products`, `/summary`, `/export`
 - `middleware.ts` — session cookie gate (`ontrack_has_token`, synced from JWT in localStorage)
 - `components/layout/Sidebar.tsx` — CRA tab parity (sidebar hidden on home)
-- Module screens are placeholders until tasks 8–12
+- Module screens: products (task 8); recipes, calendar, etc. are placeholders until tasks 9–12
 
 ## Members
 
@@ -104,6 +104,13 @@ npm run generate:api
 - `components/MemberToggles.tsx` — add, rename, delete, include toggles
 - `lib/api/members.ts` — CRUD via `/api/members`
 - `npm run test:members` — unit check for target member ID helpers
+
+## Products
+
+- `components/products/ProductsScreen.tsx` — paginated catalog, add/paste, import, edit
+- `hooks/useProductsPage.ts` — state and handlers (CRA `Products.js` parity)
+- `lib/api/products.ts`, `lib/api/import.ts`, `lib/api/nutrition.ts`
+- `npm run test:products` — unit check for pagination helpers
 
 CI runs `generate:api` before lint to catch drift.
 
