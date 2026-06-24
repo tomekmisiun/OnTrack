@@ -13,6 +13,7 @@ import ProductTable from './SummaryProductTable';
 import PieChart from './SummaryPieChart';
 import DrinksCard, { OTHER_TYPES, SHARED_KEYS } from './DrinksCard';
 import { expenseI18nKey } from '../i18n/expenseKeys';
+import { normalizeProductPage } from '../utils/productPage';
 registerLocale('pl', pl);
 
 // ─── Period card (week / month / custom) ──────────────────────────────────────
@@ -152,12 +153,12 @@ function Summary({ onGoToTab }) {
       api.getSummary(week.start, week.end, loadMids),
       api.getSummary(month.start, month.end, loadMids),
       recipesApi.getAll(),
-      productsApi.getAll(),
+      productsApi.getAll({ limit: 100 }),
     ]).then(([wRes, mRes, rRes, pRes]) => {
       setWeekSummary(wRes.data);
       setMonthSummary(mRes.data);
       setRecipeList(rRes.data);
-      setProductList(pRes.data);
+      setProductList(normalizeProductPage(pRes.data).items);
     }).catch(() => showError(t('err_load_summary')))
       .finally(() => { setWeekLoading(false); setMonthLoading(false); });
   }, [loadMids.join(','), week.start, week.end, user?.lang]); // eslint-disable-line

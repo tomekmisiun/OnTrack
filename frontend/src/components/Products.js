@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Icon } from '@iconify/react';
 import { products as api, importPrices } from '../api';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import { useToast } from '../contexts/ToastContext';
-import { fuzzySearch } from '../utils/search';
 import { fetchProductMacros } from '../utils/macroLookup';
+import { apiErrorMessage, normalizeProductPage, PRODUCT_PAGE_SIZE } from '../utils/productPage';
 import './Products.css';
 
 const toUnitPrice = (packagePrice, packageWeight, unit) => {
@@ -150,9 +150,13 @@ export default function Products() {
   const { user } = useAuth();
   const { showError, showSuccess, showToast: globalToast, showConfirm } = useToast();
   const [productList, setProductList] = useState([]);
+  const [productTotal, setProductTotal] = useState(0);
+  const [listLoading, setListLoading] = useState(false);
   const [pasteText, setPasteText] = useState('');
   const [form, setForm] = useState(EMPTY_FORM);
   const [editId, setEditId] = useState(null);
+  const [editSourceId, setEditSourceId] = useState(null);
+  const [editIsSystem, setEditIsSystem] = useState(false);
   const [editForm, setEditForm] = useState({});
   const [lookingUp, setLookingUp] = useState(null);
   const [importItems, setImportItems] = useState(null);
@@ -166,9 +170,9 @@ export default function Products() {
   const [promptCopied, setPromptCopied] = useState(false);
   const [selectionMode, setSelectionMode] = useState(false);
   const [selectedIds, setSelectedIds] = useState(new Set());
-  const [visibleCount, setVisibleCount] = useState(50);
   const fileInputRef = useRef();
   const sentinelRef = useRef(null);
+  const searchDebounceRef = useRef(null);
 
   const toggleSelect = (id) => setSelectedIds(prev => {
     const next = new Set(prev);
@@ -179,17 +183,22 @@ export default function Products() {
   const exitSelection = () => { setSelectionMode(false); setSelectedIds(new Set()); };
 
   const handleDeleteSelected = () => {
+    const editableIds = [...selectedIds].filter(id => {
+      const p = productList.find(row => row.id === id);
+      return p?.is_editable;
+    });
+    if (!editableIds.length) return;
     showConfirm({
       title: t('del_sel_products_title'),
-      message: t('confirm_del_selected_products')(selectedIds.size),
+      message: t('confirm_del_selected_products')(editableIds.length),
       confirmLabel: t('btn_delete'),
       onConfirm: async () => {
         try {
-          await Promise.all([...selectedIds].map(id => api.delete(id)));
-          showSuccess(t('products_deleted')(selectedIds.size));
+          await Promise.all(editableIds.map(id => api.delete(id)));
+          showSuccess(t('products_deleted')(editableIds.length));
           exitSelection();
-          loadProducts();
-        } catch { showError(t('del_during_err')); }
+          loadProducts({ reset: true });
+        } catch (e) { showError(apiErrorMessage(e, t('del_during_err'))); }
       },
     });
   };
@@ -207,29 +216,43 @@ export default function Products() {
   const isImageFile = (file) => file && /\.(jpe?g|png|webp)$/i.test(file.name);
   const isTextFile  = (file) => file && /\.(txt|csv)$/i.test(file.name);
 
-  useEffect(() => { loadProducts(); }, [user?.lang]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { loadProducts({ reset: true }); }, [user?.lang]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const filteredProducts = useMemo(() => {
-    const q = search.trim();
-    return q ? productList.filter(p => fuzzySearch(q, p.name)) : productList;
-  }, [productList, search]);
-
-  useEffect(() => { setVisibleCount(50); }, [search]);
+  useEffect(() => {
+    if (searchDebounceRef.current) clearTimeout(searchDebounceRef.current);
+    searchDebounceRef.current = setTimeout(() => loadProducts({ reset: true, q: search }), 300);
+    return () => { if (searchDebounceRef.current) clearTimeout(searchDebounceRef.current); };
+  }, [search]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const el = sentinelRef.current;
     if (!el) return;
     const obs = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting)
-        setVisibleCount(v => Math.min(v + 50, filteredProducts.length));
+      if (entries[0].isIntersecting && !listLoading && productList.length < productTotal)
+        loadProducts({ reset: false });
     }, { rootMargin: '300px' });
     obs.observe(el);
     return () => obs.disconnect();
-  }, [filteredProducts.length]);
+  }, [productList.length, productTotal, listLoading, search]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const loadProducts = async () => {
-    try { setProductList((await api.getAll()).data); }
-    catch { showError(t('err_load_products')); }
+  const loadProducts = async ({ reset = true, q = search } = {}) => {
+    const offset = reset ? 0 : productList.length;
+    setListLoading(true);
+    try {
+      const trimmed = (q || '').trim();
+      const res = await api.getAll({
+        q: trimmed || undefined,
+        limit: PRODUCT_PAGE_SIZE,
+        offset,
+      });
+      const page = normalizeProductPage(res.data);
+      setProductTotal(page.total);
+      setProductList(prev => (reset ? page.items : [...prev, ...page.items]));
+    } catch {
+      showError(t('err_load_products'));
+    } finally {
+      setListLoading(false);
+    }
   };
 
   const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, parseFloat(v) || 0));
@@ -267,12 +290,15 @@ export default function Products() {
       } else {
         showError(t('err_macro_not_found')(productName));
       }
-      loadProducts();
+      loadProducts({ reset: true });
     } catch (e) { showError(e.response?.data?.error || t('err_fill_fields')); }
   };
 
   const startEdit = (p) => {
+    if (!p.is_editable && !p.is_system) return;
     setEditId(p.id);
+    setEditSourceId(p.is_system ? p.id : p.id);
+    setEditIsSystem(!!p.is_system);
     setEditForm({
       name: p.name,
       package_weight: p.package_weight,
@@ -294,7 +320,7 @@ export default function Products() {
     if (unit === 'l')  { unit = 'ml'; pkgW = Math.min(99999, pkgW * 1000); }
     const pkgPrice = clamp(editForm.package_price, 0, 99999);
     try {
-      await api.update(editId, {
+      const payload = {
         name: editForm.name,
         package_weight: pkgW,
         price: Math.min(99999, toUnitPrice(pkgPrice, pkgW, unit)),
@@ -304,9 +330,22 @@ export default function Products() {
         protein: editForm.protein !== '' ? parseFloat(editForm.protein) : null,
         fat:     editForm.fat     !== '' ? parseFloat(editForm.fat)     : null,
         carbs:   editForm.carbs   !== '' ? parseFloat(editForm.carbs)   : null,
-      });
-      setEditId(null); showSuccess(t('save_changes_label')); loadProducts();
-    } catch (e) { showError(e.response?.data?.error || t('save_btn')); }
+      };
+      if (editIsSystem) {
+        await api.customize(editSourceId, payload);
+        showSuccess(t('product_customized'));
+      } else {
+        await api.update(editId, payload);
+        showSuccess(t('save_changes_label'));
+      }
+      setEditId(null);
+      setEditIsSystem(false);
+      loadProducts({ reset: true });
+    } catch (e) {
+      const status = e.response?.status;
+      if (status === 403) showError(t('err_cannot_modify_system'));
+      else showError(apiErrorMessage(e, t('save_btn')));
+    }
   };
 
   const handleAutoFill = async () => {
@@ -338,8 +377,16 @@ export default function Products() {
       message: t('delete_confirm_product')(name),
       confirmLabel: t('btn_delete'),
       onConfirm: async () => {
-        try { await api.delete(id); showSuccess(t('product_deleted')); loadProducts(); }
-        catch { showError(t('del_btn')); }
+        try {
+          await api.delete(id);
+          showSuccess(t('product_deleted'));
+          loadProducts({ reset: true });
+        } catch (e) {
+          const status = e.response?.status;
+          if (status === 409) showError(t('err_product_in_recipes'));
+          else if (status === 403) showError(t('err_cannot_modify_system'));
+          else showError(apiErrorMessage(e, t('del_btn')));
+        }
       },
     });
   };
@@ -434,7 +481,7 @@ export default function Products() {
         toCreate.length && t('import_added_n')(toCreate.length),
       ].filter(Boolean).join(', ') + (toUpdate.length || toCreate.length ? ` ${t('import_done_suffix')}` : '');
       showSuccess(msg);
-      loadProducts();
+      loadProducts({ reset: true });
     } catch { showError(t('save_products_err'));  }
   };
 
@@ -542,6 +589,8 @@ export default function Products() {
     const name = stripWeight((lines[0] || '').replace(/na\s+wagę/gi, '').replace(/kiść/gi, ''));
     return { name, package_price: price, package_weight: weight, unit, sold_by_weight: isByWeight };
   };
+
+  const editablePrivateCount = productList.filter(p => p.is_editable).length;
 
   const shopLinks = lang === 'en' ? [
     { domain: 'www.tesco.com', url: 'https://www.tesco.com/', label: 'Tesco' },
@@ -823,11 +872,14 @@ export default function Products() {
               } else {
                 showConfirm({
                   title: t('del_all_products_title'),
-                  message: t('confirm_del_all_products')(productList.length),
+                  message: t('confirm_del_all_products')(editablePrivateCount),
                   confirmLabel: t('del_all_products'),
                   onConfirm: async () => {
-                    try { await api.deleteAll(); showSuccess(t('all_products_deleted')); loadProducts(); }
-                    catch { showError(t('del_during_err')); }
+                    try {
+                      await api.deleteAll();
+                      showSuccess(t('all_products_deleted'));
+                      loadProducts({ reset: true });
+                    } catch { showError(t('del_during_err')); }
                   },
                 });
               }
@@ -860,25 +912,34 @@ export default function Products() {
             <tr><th>{t('col_name')}</th><th>{t('col_kcal')}</th><th>{t('col_macro')}</th><th>{t('col_pkg_capacity')}</th><th>{t('col_price_opak_kg')}</th><th></th></tr>
           </thead>
           <tbody>
-            {filteredProducts.slice(0, visibleCount).map(p => {
+            {productList.map(p => {
               const isEditing = editId === p.id;
+              const canSelect = !selectionMode || p.is_editable;
               return (
                 <React.Fragment key={p.id}>
                   <tr
                     className={`product-row${isEditing ? ' product-row-selected' : ''}${selectionMode && selectedIds.has(p.id) ? ' product-row-checked' : ''}`}
-                    style={{ cursor: 'pointer' }}
+                    style={{ cursor: canSelect || !selectionMode ? 'pointer' : 'default' }}
                     onClick={() => {
-                      if (selectionMode) { toggleSelect(p.id); return; }
+                      if (selectionMode) {
+                        if (p.is_editable) toggleSelect(p.id);
+                        return;
+                      }
                       isEditing ? setEditId(null) : startEdit(p);
                     }}
                   >
                     <td style={{ fontSize: 13 }}>
-                      {selectionMode && (
+                      {selectionMode && p.is_editable && (
                         <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 16, height: 16, borderRadius: 4, border: `1.5px solid ${selectedIds.has(p.id) ? '#6366f1' : '#374151'}`, background: selectedIds.has(p.id) ? '#6366f1' : 'transparent', marginRight: 8, flexShrink: 0, verticalAlign: 'middle', transition: 'all 0.12s' }}>
                           {selectedIds.has(p.id) && <Icon icon="heroicons:check" style={{ width: 10, height: 10, color: '#fff' }} />}
                         </span>
                       )}
                       {p.name}
+                      {p.is_system && (
+                        <span style={{ marginLeft: 8, fontSize: 10, color: '#6b7280', textTransform: 'uppercase' }}>
+                          {t('catalog_system_badge')}
+                        </span>
+                      )}
                     </td>
                     <td style={{ fontSize: 13, color: p.kcal ? '#9ca3af' : '#4b5563' }}>{p.kcal != null ? `${p.kcal} kcal` : '-'}</td>
                     <td><MacroDisplay p={p} /></td>
@@ -887,7 +948,9 @@ export default function Products() {
                     </td>
                     <td style={{ fontSize: 13, color: p.price > 0 ? '#9ca3af' : '#4b5563' }}>{displayPrice(p, t('currency'))}</td>
                     <td style={{ display: 'flex', gap: 6, justifyContent: 'flex-end' }} onClick={e => e.stopPropagation()}>
-                      <button className="btn btn-danger" style={{ padding: '5px 12px', fontSize: 13 }} onClick={() => handleDelete(p.id, p.name)}>{t('del_btn')}</button>
+                      {p.is_editable && (
+                        <button className="btn btn-danger" style={{ padding: '5px 12px', fontSize: 13 }} onClick={() => handleDelete(p.id, p.name)}>{t('del_btn')}</button>
+                      )}
                     </td>
                   </tr>
                   {isEditing && (
@@ -975,16 +1038,17 @@ export default function Products() {
                 </React.Fragment>
               );
             })}
-            {productList.length === 0 && (
-              <tr><td colSpan={6} style={{ textAlign: 'center', color: '#6b7280' }}>{t('no_products')}</td></tr>
+            {!listLoading && productList.length === 0 && (
+              <tr>
+                <td colSpan={6} style={{ textAlign: 'center', color: '#6b7280', fontStyle: search.trim() ? 'italic' : 'normal' }}>
+                  {search.trim() ? t('product_not_found')(search) : t('no_products')}
+                </td>
+              </tr>
             )}
-            {filteredProducts.length === 0 && search.trim() && (
-              <tr><td colSpan={6} style={{ textAlign: 'center', color: '#6b7280', fontStyle: 'italic' }}>{t('product_not_found')(search)}</td></tr>
-            )}
-            {visibleCount < filteredProducts.length && (
+            {productList.length < productTotal && (
               <tr ref={sentinelRef}>
                 <td colSpan={6} style={{ textAlign: 'center', color: '#4b5563', padding: '10px 0', fontSize: 12 }}>
-                  {t('shown_products')(visibleCount, filteredProducts.length)}
+                  {listLoading ? '…' : t('shown_products')(productList.length, productTotal)}
                 </td>
               </tr>
             )}

@@ -6,6 +6,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import { dateToStr, getCurrentWeek, getCurrentMonth } from '../utils/dates';
 import { SEED_STATS } from '../data/seedStats';
 import { sumEnabledExpenses, SUMMARY_MONTH_DAYS } from '../utils/expenseItems';
+import { normalizeProductPage } from '../utils/productPage';
 
 const GOAL_I18N = {
   lose: 'macro_cut',
@@ -70,13 +71,13 @@ export function useWelcomeStats() {
           includedMids.length
             ? mealPlan.getSummary(month.start, month.end, includedMids)
             : Promise.resolve({ data: { total_cost: 0 } }),
-          productsApi.getAll(),
+          productsApi.getAll({ limit: 100 }),
           recipesApi.getAll(),
         ]);
 
         if (cancelled) return;
 
-        const productList = productsRes.data || [];
+        const productList = normalizeProductPage(productsRes.data).items;
         const foodCost = monthRes.data?.total_cost ?? 0;
         const enabledExtras = sumEnabledExpenses(SUMMARY_MONTH_DAYS, productList, includedMids.length);
         const monthTotalCost = foodCost + enabledExtras;
@@ -105,7 +106,7 @@ export function useWelcomeStats() {
           macroInsights,
           mealsToday,
           scheduleInsights,
-          ownProducts: Math.max(0, productList.length - seed.products),
+          ownProducts: Math.max(0, productList.filter(p => p.is_editable).length - seed.products),
           ownRecipes: Math.max(0, (recipesRes.data || []).length - seed.recipes),
           monthTotalCost,
         });

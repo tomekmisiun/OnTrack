@@ -24,9 +24,10 @@ API.interceptors.response.use(
 );
 
 export const products = {
-  getAll:           ()         => API.get('/api/products/'),
+  getAll:           (params) => API.get('/api/products/', { params }),
   create:           (data)     => API.post('/api/products/', data),
   update:           (id, data) => API.put(`/api/products/${id}`, data),
+  customize:        (id, data) => API.post(`/api/products/${id}/customize`, data),
   delete:           (id)       => API.delete(`/api/products/${id}`),
   deleteAll:        ()         => API.delete('/api/products/all'),
 };

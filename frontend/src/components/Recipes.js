@@ -7,6 +7,7 @@ import { useToast } from '../contexts/ToastContext';
 import { fuzzySearch, productMatchesIngredient, pickBestMatchingProduct } from '../utils/search';
 import { canonicalizeIngredient, canonicalDiffersFromRaw } from '../utils/ingredientCanonical';
 import { fetchProductMacros } from '../utils/macroLookup';
+import { normalizeProductPage } from '../utils/productPage';
 import './Recipes.css';
 
 const PROMPT_NAME_MARK = '{{name}}';
@@ -374,7 +375,10 @@ export default function Recipes() {
     try { setExpandedDetail((await api.get(id)).data); } catch {}
   };
   const loadProducts = async () => {
-    try { setProductList((await productsApi.getAll()).data); } catch {}
+    try {
+      const res = await productsApi.getAll({ limit: 100 });
+      setProductList(normalizeProductPage(res.data).items);
+    } catch {}
   };
 
   const fetchMacro = async (name) => {
