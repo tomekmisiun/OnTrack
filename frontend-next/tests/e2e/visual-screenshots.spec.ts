@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { setupAuthenticatedMocks } from "./helpers/mock-api";
-import { prepareVisualPage, stabilizeLoginMedia } from "./helpers/visual";
+import { prepareVisualPage, stabilizeLoginMedia, waitForScreenReady } from "./helpers/visual";
 
 const VIEWPORTS = [
   { name: "1440x900", width: 1440, height: 900 },
@@ -51,6 +51,7 @@ for (const viewport of VIEWPORTS) {
           await expect(page.locator(screen.marker).first()).toBeVisible({
             timeout: 15_000,
           });
+          await waitForScreenReady(page, screen.name);
           await expect(page).toHaveScreenshot(
             `${screen.name}-${viewport.name}.png`,
             { fullPage: true },
