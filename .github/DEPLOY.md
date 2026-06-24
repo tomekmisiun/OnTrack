@@ -6,7 +6,8 @@ Production deploys from Railway after a push to `main`, **but only when GitHub A
 
 | Service | Role | Config |
 |---------|------|--------|
-| `ontrack-back-fastapi` | Production API (FastAPI) | `backend/railway.prod.toml` |
+| `ontrack-back` | Production API (FastAPI) | root `railway.toml` (repo root, empty Root Directory) |
+| `ontrack-back-fastapi` | Alt. name (same config) | `backend/railway.prod.toml` |
 | `ontrack-worker` | Background worker | `backend/railway.worker.prod.toml` |
 | `ontrackapp` | Frontend SPA | `frontend/railway.toml` |
 | Postgres + Redis | Data + queue | Railway plugins |
@@ -25,7 +26,8 @@ For **each** service → **Settings** → **Source**:
 2. **Branch connected to production** → **`main`**
 3. **Auto deploys when pushed to GitHub** — **enabled**
 4. **Wait for CI** → **ON**
-5. FastAPI services: **Root Directory** = `.` (repo root), config path as in table above
+5. **ontrack-back:** Root Directory **empty** (repo root) — uses root `railway.toml` automatically
+6. **ontrackapp:** Root Directory = `frontend` — uses `frontend/railway.toml`
 
 ### Frontend build variable
 

@@ -1,0 +1,18 @@
+# Railway config for ontrack-back (FastAPI production API).
+# Auto-detected when service Root Directory is empty (repo root).
+# Frontend ontrackapp must use Root Directory = frontend/ (frontend/railway.toml).
+[build]
+builder = "dockerfile"
+dockerfilePath = "backend/Dockerfile.railway"
+watchPatterns = [
+  "backend/**",
+  "app/user_seeds/**",
+  "app/dish_compare/**",
+  "scraper/data/macros/**",
+  "scraper/data/built/**",
+]
+
+[deploy]
+healthcheckPath = "/health"
+healthcheckTimeout = 120
+restartPolicyType = "on_failure"
