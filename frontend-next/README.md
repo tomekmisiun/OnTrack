@@ -69,6 +69,23 @@ public/        — Static assets
 
 OpenAPI-generated types are planned in a later task (`openapi-typescript`).
 
+## OpenAPI types
+
+```bash
+# Refresh snapshot from FastAPI (requires uv + backend deps)
+npm run export:openapi
+
+# Regenerate TypeScript from openapi/openapi.json
+npm run generate:api
+```
+
+- Committed snapshot: `openapi/openapi.json`
+- Generated types: `lib/api/generated/schema.ts` (do not edit by hand)
+- Helpers: `lib/api/openapi-helpers.ts` (`OperationResponse`, `ApiSchema`)
+- Example modules: `lib/api/health.ts`, `lib/api/auth.ts`
+
+CI runs `generate:api` before lint to catch drift.
+
 ## Migration plan
 
 See [`docs/FRONTEND_NEXT_MIGRATION_PLAN.md`](../docs/FRONTEND_NEXT_MIGRATION_PLAN.md).

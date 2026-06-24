@@ -82,12 +82,14 @@ Migrate OnTrack UI from **React 19 + Create React App** (`frontend/`) to **Next.
 | **Tests** | Script runs in CI against exported OpenAPI artifact or live `/openapi.json` in integration job |
 | **Risks** | OpenAPI drift — pin generation to CI + backend contract tests |
 | **Out of scope** | Migrating all `api.js` modules at once |
+| **Status** | Done |
 
-**Workflow (planned)**
+**Workflow**
 
 ```text
-curl $API/openapi.json → openapi-typescript → lib/api/schema.d.ts
-→ createApiClient uses paths from schema
+npm run export:openapi → openapi/openapi.json
+→ npm run generate:api → lib/api/generated/schema.ts
+→ openapi-helpers + createApiClient
 ```
 
 ---
