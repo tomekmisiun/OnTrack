@@ -18,7 +18,8 @@ Deploy: [`.github/DEPLOY.md`](../.github/DEPLOY.md) · [`docs/deployment/RAILWAY
 6. **[TARGET_ARCHITECTURE.md](./TARGET_ARCHITECTURE.md)** — target `backend/` layout and layer rules.
 7. **[MIGRATION_ROADMAP.md](./MIGRATION_ROADMAP.md)** — Flask → FastAPI implementation plan (MIG-000–017).
 8. **[DATA_DEPLOYMENT_ROADMAP.md](./DATA_DEPLOYMENT_ROADMAP.md)** — runtime data + deployment architecture (DATA-001–006).
-9. **[CUTOVER_AND_ROLLBACK.md](./CUTOVER_AND_ROLLBACK.md)** — Railway staging, rehearsal, production switch.
+9. **[PRODUCT_CATALOG_ROADMAP.md](./PRODUCT_CATALOG_ROADMAP.md)** — global product catalog migration (CAT-001–008).
+10. **[CUTOVER_AND_ROLLBACK.md](./CUTOVER_AND_ROLLBACK.md)** — Railway staging, rehearsal, production switch.
 
 ## Principles (non-negotiable)
 
