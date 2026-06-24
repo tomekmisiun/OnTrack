@@ -331,5 +331,5 @@ CAT-008 (worker cleanup)
 | CAT-004 | `feat/product-catalog-query-layer` | ✅ Complete |
 | CAT-005 | `feat/product-catalog-mutation-policy` | ✅ Complete |
 | CAT-006 | `refactor/remove-per-user-product-seed` | ✅ Complete |
-| CAT-007 | `feat/product-catalog-frontend` | 🟡 In progress |
-| CAT-008 | `chore/remove-catalog-seed-worker` | ⬜ Not started |
+| CAT-007 | `feat/product-catalog-frontend` | ✅ Complete |
+| CAT-008 | `chore/remove-catalog-seed-worker` | ✅ Complete |

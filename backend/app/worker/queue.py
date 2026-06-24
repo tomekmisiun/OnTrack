@@ -9,7 +9,6 @@ from app.core.config import get_settings
 logger = logging.getLogger(__name__)
 
 QUEUE_KEY = "ontrack:jobs"
-JOB_CATALOG_SEED = "catalog_seed"
 
 _testing_jobs: list[dict] = []
 _redis_client = None
@@ -60,10 +59,6 @@ def enqueue_job(job: dict) -> None:
     from app.worker.jobs import process_job
 
     process_job(job)
-
-
-def enqueue_catalog_seed(user_id: int, lang: str) -> None:
-    enqueue_job({"type": JOB_CATALOG_SEED, "user_id": user_id, "lang": lang})
 
 
 def dequeue_job(timeout_seconds: int = 5) -> dict | None:

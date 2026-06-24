@@ -23,7 +23,6 @@ from app.models.user import User
 from app.services.catalog_seed_service import ensure_catalog_if_incomplete, ensure_user_seeded
 from app.services.member_service import ensure_primary_member, sync_primary_member_name
 from app.services.user_presenter import user_to_dict
-from app.worker.queue import enqueue_catalog_seed
 
 USERNAME_RE = re.compile(r"^[a-zA-Z0-9_]{3,80}$")
 MIN_PASSWORD_LEN = 8
@@ -58,10 +57,6 @@ def _synthetic_email(username: str) -> str:
 
 def issue_token(user_id: int) -> str:
     return create_access_token(user_id)
-
-
-def _schedule_catalog_seed(user_id: int, lang: str) -> None:
-    enqueue_catalog_seed(user_id, lang)
 
 
 def login(session: Session, username: str, password: str) -> str:
@@ -102,7 +97,6 @@ def register(session: Session, username: str, password: str, lang: str) -> str:
 
     ensure_primary_member(session, user.id, lang)
     ensure_user_seeded(session, user.id, lang)
-    _schedule_catalog_seed(user.id, lang)
     return issue_token(user.id)
 
 
@@ -112,7 +106,6 @@ def get_me(session: Session, user_id: int) -> dict:
         raise AuthServiceError("User not found", 404)
 
     ensure_catalog_if_incomplete(session, user.id, user.lang)
-    _schedule_catalog_seed(user.id, user.lang)
     sync_primary_member_name(session, user)
     return user_to_dict(user)
 
@@ -128,7 +121,6 @@ def change_language(session: Session, user_id: int, lang: str) -> dict:
     user.lang = lang
     session.commit()
     ensure_catalog_if_incomplete(session, user.id, lang)
-    _schedule_catalog_seed(user.id, lang)
     sync_primary_member_name(session, user)
     return user_to_dict(user)
 

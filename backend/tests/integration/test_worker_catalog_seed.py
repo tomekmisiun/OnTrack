@@ -1,70 +1,25 @@
-from app.core.passwords import hash_password
-from app.models.household_member import HouseholdMember
-from app.models.product import Product
-from app.models.recipe import Recipe
-from app.models.user import User
 from app.worker.jobs import process_job
-from app.worker.queue import (
-    JOB_CATALOG_SEED,
-    UnknownJobTypeError,
-    dequeue_job,
-    enqueue_catalog_seed,
-    reset_testing_jobs,
-)
-from sqlalchemy.orm import sessionmaker
+from app.worker.queue import UnknownJobTypeError, drain_testing_jobs, enqueue_job, reset_testing_jobs
 
 
-def _bare_user(db_session) -> User:
-    user = User(
-        email="worker-seed@example.com",
-        lang="pl",
-        password_hash=hash_password("test-password"),
-    )
-    db_session.add(user)
-    db_session.flush()
-    db_session.add(
-        HouseholdMember(user_id=user.id, name="Ja", is_primary=True),
-    )
-    db_session.commit()
-    db_session.refresh(user)
-    return user
-
-
-def test_catalog_seed_job_enqueue_and_process(db_session, engine, monkeypatch):
-    bind = db_session.get_bind()
-    monkeypatch.setattr(
-        "app.worker.jobs.get_session_factory",
-        lambda: sessionmaker(bind=bind, autocommit=False, autoflush=False),
-    )
+def test_enqueue_job_unknown_type_raises():
     reset_testing_jobs()
-    user = _bare_user(db_session)
-    assert db_session.query(Product).filter_by(user_id=user.id).count() == 0
-    assert db_session.query(Recipe).filter_by(user_id=user.id).count() == 0
-
-    enqueue_catalog_seed(user.id, "pl")
-    job = dequeue_job()
-    assert job is not None
-    assert job["type"] == JOB_CATALOG_SEED
-    assert job["user_id"] == user.id
-
-    process_job(job)
-
-    assert db_session.query(Product).filter_by(user_id=user.id, lang="pl").count() == 0
-    assert db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count() > 0
-
-
-def test_unknown_job_type_raises():
+    enqueue_job({"type": "catalog_seed", "user_id": 1, "lang": "pl"})
+    jobs = drain_testing_jobs()
+    assert len(jobs) == 1
     try:
-        process_job({"type": "not_a_real_job"})
+        process_job(jobs[0])
         raise AssertionError("expected UnknownJobTypeError")
     except UnknownJobTypeError as exc:
-        assert "not_a_real_job" in str(exc)
+        assert "catalog_seed" in str(exc)
 
 
-def test_auth_schedule_enqueues_catalog_seed(db_session, user):
-    from app.services.auth_service import _schedule_catalog_seed
-
+def test_register_does_not_enqueue_catalog_seed(client, db_session):
     reset_testing_jobs()
-    _schedule_catalog_seed(user.id, "pl")
-    job = dequeue_job()
-    assert job == {"type": JOB_CATALOG_SEED, "user_id": user.id, "lang": "pl"}
+    reg = client.post(
+        "/api/auth/register",
+        json={"username": "noworker2", "password": "secret123", "lang": "pl"},
+    )
+    assert reg.status_code == 201
+    jobs = drain_testing_jobs()
+    assert jobs == []
