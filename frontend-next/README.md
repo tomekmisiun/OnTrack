@@ -91,6 +91,13 @@ npm run generate:api
 - `contexts/AuthContext.tsx` — bootstrap, `?code=` OAuth exchange, login/register/logout
 - `/login` — password + Google OAuth redirect to FastAPI `/api/auth/google`
 
+## Routing
+
+- Protected app routes under `app/(app)/` — `/`, `/macro`, `/calendar`, `/schedule`, `/recipes`, `/products`, `/summary`, `/export`
+- `middleware.ts` — session cookie gate (`ontrack_has_token`, synced from JWT in localStorage)
+- `components/layout/Sidebar.tsx` — CRA tab parity (sidebar hidden on home)
+- Module screens are placeholders until tasks 7–12
+
 CI runs `generate:api` before lint to catch drift.
 
 ## Migration plan

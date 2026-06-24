@@ -1,3 +1,8 @@
+import {
+  clearSessionCookie,
+  setSessionCookie,
+} from "@/lib/auth/session-cookie";
+
 export const TOKEN_STORAGE_KEY = "token";
 export const PENDING_LANG_STORAGE_KEY = "pending_lang";
 
@@ -8,10 +13,12 @@ export function getStoredToken(): string | null {
 
 export function setStoredToken(token: string): void {
   localStorage.setItem(TOKEN_STORAGE_KEY, token);
+  setSessionCookie();
 }
 
 export function clearStoredToken(): void {
   localStorage.removeItem(TOKEN_STORAGE_KEY);
+  clearSessionCookie();
 }
 
 export function getPendingLang(): string | null {
