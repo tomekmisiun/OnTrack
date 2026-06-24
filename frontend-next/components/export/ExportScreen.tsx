@@ -10,7 +10,6 @@ import {
   type CSSProperties,
   type ReactNode,
 } from "react";
-import "@/components/calendar/calendar.css";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useMember } from "@/contexts/MemberContext";
 import { useToast } from "@/contexts/ToastContext";

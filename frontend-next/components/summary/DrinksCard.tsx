@@ -16,7 +16,7 @@ import {
 } from "@/lib/summary/expenseDefaults";
 import { loadDrinksFromStorage, type ExpenseLineItem } from "@/lib/summary/expenseItems";
 import type { Product } from "@/types/product";
-import "@/components/calendar/calendar.css";
+import "@/components/summary/summary.css";
 
 function FieldBox({ label, children }: { label: ReactNode; children: ReactNode }) {
   return (
