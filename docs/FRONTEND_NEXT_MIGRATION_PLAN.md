@@ -122,6 +122,7 @@ npm run export:openapi → openapi/openapi.json
 | **Tests** | MSW mocks; manual OAuth with credentials |
 | **Risks** | SSR + `localStorage` — auth client components only |
 | **Out of scope** | HttpOnly cookies, BFF |
+| **Status** | Done |
 
 ---
 
