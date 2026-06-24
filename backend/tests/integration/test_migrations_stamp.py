@@ -1,9 +1,8 @@
-"""Rehearse adopting an existing Flask-migrated database via alembic stamp (MIG-015)."""
+"""Rehearse adopting an existing database via alembic stamp (MIG-015)."""
 
 from __future__ import annotations
 
 import os
-import sys
 from pathlib import Path
 
 import pytest
@@ -15,7 +14,9 @@ from app.models.tables import ONTRACK_TABLES
 from sqlalchemy import create_engine, inspect, text
 
 BACKEND_ROOT = Path(__file__).resolve().parents[2]
-REPO_ROOT = BACKEND_ROOT.parent
+
+# Legacy Flask-Migrate head revision id (pre-cutover prod databases).
+LEGACY_FLASK_ALEMBIC_HEAD = "a1b2c3d4e5f6"
 
 
 def _postgres_test_url() -> str | None:
@@ -27,24 +28,6 @@ def _postgres_test_url() -> str | None:
     return url
 
 
-def _upgrade_flask_schema(postgres_url: str) -> None:
-    """Apply Flask-Migrate chain (simulates production clone schema)."""
-    if str(REPO_ROOT) not in sys.path:
-        sys.path.insert(0, str(REPO_ROOT))
-
-    try:
-        from app import create_app
-        from flask_migrate import upgrade
-    except ImportError as exc:
-        pytest.skip(f"Flask app not available for rehearsal test: {exc}")
-
-    flask_url = postgres_url.replace("postgresql+psycopg://", "postgresql://", 1)
-    app = create_app()
-    app.config["SQLALCHEMY_DATABASE_URI"] = flask_url
-    with app.app_context():
-        upgrade()
-
-
 @pytest.fixture
 def postgres_url() -> str:
     url = _postgres_test_url()
@@ -54,8 +37,8 @@ def postgres_url() -> str:
 
 
 @pytest.fixture
-def flask_migrated_postgres(postgres_url: str) -> str:
-    """Empty schema → Flask db upgrade (simulates production clone)."""
+def legacy_migrated_postgres(postgres_url: str, monkeypatch) -> str:
+    """Empty schema → FastAPI upgrade → legacy alembic_version (simulates pre-stamp prod)."""
     engine = create_engine(postgres_url, isolation_level="AUTOCOMMIT")
     with engine.connect() as conn:
         conn.execute(
@@ -69,26 +52,40 @@ def flask_migrated_postgres(postgres_url: str) -> str:
         )
     engine.dispose()
 
-    _upgrade_flask_schema(postgres_url)
+    monkeypatch.setenv("DATABASE_URL", postgres_url)
+    get_settings.cache_clear()
+
+    alembic_cfg = Config(str(BACKEND_ROOT / "alembic.ini"))
+    alembic_cfg.set_main_option("script_location", str(BACKEND_ROOT / "alembic"))
+    command.upgrade(alembic_cfg, "head")
+
+    engine = create_engine(postgres_url)
+    with engine.connect() as conn:
+        conn.execute(
+            text("UPDATE alembic_version SET version_num = :rev"),
+            {"rev": LEGACY_FLASK_ALEMBIC_HEAD},
+        )
+        conn.commit()
+    engine.dispose()
+
     return postgres_url
 
 
-def test_stamp_existing_flask_schema_has_empty_diff(flask_migrated_postgres: str, monkeypatch) -> None:
-    """Flask head schema → alembic stamp → no drift vs SQLAlchemy models."""
-    monkeypatch.setenv("DATABASE_URL", flask_migrated_postgres)
+def test_stamp_existing_schema_has_empty_diff(legacy_migrated_postgres: str, monkeypatch) -> None:
+    """Legacy alembic_version → stamp FastAPI head → no drift vs SQLAlchemy models."""
+    monkeypatch.setenv("DATABASE_URL", legacy_migrated_postgres)
     get_settings.cache_clear()
 
-    engine = create_engine(flask_migrated_postgres)
+    engine = create_engine(legacy_migrated_postgres)
     with engine.connect() as conn:
         tables = set(inspect(conn).get_table_names())
         version = conn.execute(text("SELECT version_num FROM alembic_version")).scalar()
     assert ONTRACK_TABLES <= tables
-    assert version is not None
-    assert version != ONTRACK_ALEMBIC_HEAD
+    assert version == LEGACY_FLASK_ALEMBIC_HEAD
 
     alembic_cfg = Config(str(BACKEND_ROOT / "alembic.ini"))
     alembic_cfg.set_main_option("script_location", str(BACKEND_ROOT / "alembic"))
-    command.stamp(alembic_cfg, ONTRACK_ALEMBIC_HEAD)
+    command.stamp(alembic_cfg, ONTRACK_ALEMBIC_HEAD, purge=True)
 
     with engine.connect() as conn:
         stamped = conn.execute(text("SELECT version_num FROM alembic_version")).scalar()

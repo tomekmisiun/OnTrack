@@ -4,21 +4,15 @@ from __future__ import annotations
 
 import json
 from functools import lru_cache
-from pathlib import Path
 
-from app.paths import SCRAPER_DATA, USER_SEEDS_DIR
+from data_paths import RECIPES_PL, USER_SEEDS_DIR
 
-RECIPES_PL = SCRAPER_DATA / "built" / "recipes_pl.json"
 SEED_PL = USER_SEEDS_DIR / "recipes_seed_pl.json"
 
 
 @lru_cache(maxsize=1)
 def pl_name_en_lookup() -> tuple[dict[str, str], dict[str, str]]:
-    """
-    Build lookups from accepted PL catalog recipes:
-      source_url -> name_en
-      name_pl (lower) -> name_en
-    """
+    """Build source_url / PL title → name_en lookups from pipeline and seed files."""
     by_url: dict[str, str] = {}
     by_pl: dict[str, str] = {}
 

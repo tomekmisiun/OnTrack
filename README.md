@@ -21,7 +21,7 @@ Meal planner and household budget tracker. Plan meals on a calendar, manage prod
 
 | Layer | Stack |
 |-------|--------|
-| Backend | Python 3.11, Flask, SQLAlchemy, Alembic, JWT |
+| Backend | Python 3.11, FastAPI, SQLAlchemy, Alembic, JWT |
 | Frontend | React (Create React App), axios |
 | Database | PostgreSQL 15 |
 | Dev / deploy | Docker Compose locally, Railway + GitHub Actions in production |
@@ -83,7 +83,7 @@ Copy `.env.example` to `.env`. Never commit `.env`.
 | `POSTGRES_USER` | yes | Postgres user (local Docker) |
 | `POSTGRES_PASSWORD` | yes | Postgres password |
 | `POSTGRES_DB` | yes | Database name (`mealplanner`) |
-| `FLASK_SECRET_KEY` | yes | Flask session secret (`token_hex(32)`) |
+| `FLASK_SECRET_KEY` | yes | Session/OAuth cookie secret (`token_hex(32)`) — env name kept for compat |
 | `JWT_SECRET_KEY` | yes | JWT signing secret (different from above) |
 | `FRONTEND_URL` | yes | Frontend origin (`http://localhost:3000` locally) |
 | `GOOGLE_REDIRECT_URI` | yes | OAuth callback (`http://localhost:5001/api/auth/google/callback` locally) |
@@ -97,36 +97,29 @@ On Railway, the backend uses `DATABASE_URL=${{Postgres.DATABASE_URL}}` (private)
 
 ## Tests
 
-Backend tests use in-memory SQLite — no Docker required:
-
 ```bash
-pip install -r requirements.txt
-pytest tests/ -v
+cd backend
+uv sync --dev
+uv run pytest tests/contract/ tests/test_health.py -q
 ```
 
-CI runs the same suite on every PR and push to `main` (`.github/workflows/ci.yml`).
+CI runs the FastAPI suite on every PR and push to `main` (`.github/workflows/ci.yml`).
 
 ## Project structure
 
 ```
 OnTrack/
-├── app/
-│   ├── routes/          # Flask blueprints (/api/*)
-│   ├── models/          # SQLAlchemy models
-│   ├── services/        # Business logic
-│   ├── dish_compare/    # Public cost-comparison widget data
-│   └── user_seeds/      # Seed data for new users
+├── backend/             # FastAPI API + worker + Alembic
+│   └── app/
+├── app/                 # Static data only (user seeds, dish compare)
+│   ├── dish_compare/
+│   └── user_seeds/
 ├── frontend/
 │   └── src/
-│       ├── components/  # UI tabs (Calendar, Recipes, Products, …)
-│       ├── contexts/    # Auth, language, members, toasts
-│       └── api.js       # Axios client + API helpers
-├── migrations/          # Alembic (must stay in repo)
-├── tests/               # pytest
-├── scraper/             # Offline data pipeline (shops, recipes, macros)
+├── scraper/             # Offline data pipeline
 ├── monitoring/          # Prometheus config
 ├── docker-compose.yml
-└── .github/DEPLOY.md    # Production deploy workflow
+└── .github/DEPLOY.md
 ```
 
 ## API overview
@@ -174,7 +167,7 @@ Full setup: [.github/DEPLOY.md](.github/DEPLOY.md)
 ## Developer workflow
 
 ```
-feature branch → Pull Request → CI (pytest)
+feature branch → Pull Request → CI (FastAPI tests)
                                → review + merge
 push to main     → CI green → Railway deploys backend + frontend
 ```
@@ -182,6 +175,6 @@ push to main     → CI green → Railway deploys backend + frontend
 Local verification before a PR:
 
 ```bash
-docker compose up    # full stack
-pytest tests/ -v     # backend tests
+docker compose up --build
+cd backend && uv run pytest tests/contract/ -q
 ```

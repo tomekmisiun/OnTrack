@@ -15,4 +15,4 @@ data/
 cd scraper && python pipeline/dump_seeds.py
 ```
 
-**Runtime loader:** `app/user_seeds/loader.py` → called from `app/routes/auth.py`
+**Runtime loader:** `backend/app/services/catalog_seed_service.py` (FastAPI register / worker job).

@@ -98,7 +98,7 @@ export DATABASE_URL='postgresql+psycopg://...'
 uv run python scripts/validate_schema.py
 
 # 2. Stamp FastAPI head (replaces Flask revision id in alembic_version)
-uv run alembic stamp 7966d120d748
+uv run alembic stamp --purge 7966d120d748
 
 # 3. Confirm
 uv run alembic current
@@ -158,10 +158,9 @@ GitHub Actions job `backend-integration` runs:
 3. Assert schema diff empty
 4. `alembic upgrade head` no-op
 
-Local (requires Postgres + Flask deps):
+Local (requires Postgres):
 
 ```bash
-pip install -r requirements.txt
 cd backend && uv sync --dev
 export TEST_DATABASE_URL=postgresql+psycopg://user:pass@localhost:5432/ontrack_rehearsal
 uv run pytest tests/integration/test_migrations_stamp.py -v
