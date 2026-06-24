@@ -26,6 +26,12 @@ const eslintConfig = [
     },
   },
   {
+    files: ["lib/i18n/messages/**/*.ts"],
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+    },
+  },
+  {
     ignores: [
       "node_modules/**",
       ".next/**",
@@ -33,7 +39,6 @@ const eslintConfig = [
       "build/**",
       "next-env.d.ts",
       "lib/api/generated/**",
-      "lib/i18n/translations.ts",
       "scripts/**",
     ],
   },
