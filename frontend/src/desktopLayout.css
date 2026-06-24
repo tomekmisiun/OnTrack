@@ -1,0 +1,52 @@
+html.app-desktop-scale,
+html.app-desktop-scale body {
+  overflow-x: hidden;
+  background: #111827;
+}
+
+html.app-shell,
+html.app-shell body {
+  background: #0f1419;
+}
+
+html.app-desktop-scale.app-shell,
+html.app-desktop-scale.app-shell body {
+  background: #0f1419;
+}
+
+html.app-desktop-scale #root,
+html.app-home #root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
+html.app-home #root {
+  height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+html.app-desktop-scale.app-home,
+html.app-desktop-scale.app-home body,
+html.app-home,
+html.app-home body {
+  background: #0f1419;
+}
+
+html.app-shell body {
+  background: #0f1419 !important;
+}
+
+html.app-desktop-scale .app,
+html.app-home .app {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+html.app-desktop-scale .login-page {
+  min-width: 1200px;
+  min-height: 100vh;
+}
