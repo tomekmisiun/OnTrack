@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 
 from app.domain.product_normalize import normalize_product_name
 from app.models.product import Product
+from app.models.recipe import RecipeIngredient
 from app.models.user import User
 from app.services.product_presenter import product_to_dict
 
@@ -106,12 +107,12 @@ def resolve_visible_product(
 
 def _get_own_product(session: Session, user_id: int, product_id: int) -> Product:
     lang = _user_lang(session, user_id)
-    product = (
-        session.query(Product)
-        .filter_by(id=product_id, user_id=user_id, lang=lang)
-        .first()
-    )
+    product = session.get(Product, product_id)
     if not product:
+        raise ProductServiceError("Product not found", 404)
+    if product.source == "system" and product.user_id is None:
+        raise ProductServiceError("System catalog products cannot be modified", 403)
+    if product.user_id != user_id or product.lang != lang:
         raise ProductServiceError("Product not found", 404)
     return product
 
@@ -175,6 +176,66 @@ def create_product(session: Session, user_id: int, data: dict) -> dict:
     return product_to_dict(product, viewer_user_id=user_id)
 
 
+def customize_product(session: Session, user_id: int, product_id: int, data: dict) -> dict:
+    lang = _user_lang(session, user_id)
+    system = session.get(Product, product_id)
+    if (
+        not system
+        or system.source != "system"
+        or system.user_id is not None
+        or system.lang != lang
+    ):
+        raise ProductServiceError("Product not found or not a system catalog item", 404)
+
+    existing = (
+        session.query(Product)
+        .filter_by(user_id=user_id, lang=lang, base_product_id=system.id)
+        .first()
+    )
+    if existing:
+        return update_product(session, user_id, existing.id, data)
+
+    err = validate_product_data(data, require_all=False)
+    if err:
+        raise ProductServiceError(err, 400)
+
+    product = Product(
+        user_id=user_id,
+        source="user",
+        base_product_id=system.id,
+        normalized_name=system.normalized_name,
+        name=system.name,
+        package_weight=system.package_weight,
+        price=system.price,
+        unit=system.unit,
+        kcal=system.kcal,
+        protein=system.protein,
+        fat=system.fat,
+        carbs=system.carbs,
+        sold_by_weight=system.sold_by_weight,
+        lang=lang,
+    )
+    if "name" in data:
+        product.name = str(data["name"]).strip()[:MAX_NAME]
+        product.normalized_name = normalize_product_name(product.name)
+    if "package_weight" in data:
+        product.package_weight = float(data["package_weight"])
+    if "price" in data:
+        product.price = float(data["price"])
+    if "unit" in data:
+        product.unit = str(data["unit"])[:10]
+    if "sold_by_weight" in data:
+        product.sold_by_weight = bool(data["sold_by_weight"])
+    for macro in ("kcal", "protein", "fat", "carbs"):
+        if macro in data:
+            setattr(product, macro, float(data[macro]) if data[macro] is not None else None)
+
+    session.add(product)
+    session.commit()
+    session.refresh(product)
+    return product_to_dict(product, viewer_user_id=user_id)
+
+
 def update_product(session: Session, user_id: int, product_id: int, data: dict) -> dict:
     product = _get_own_product(session, user_id, product_id)
     err = validate_product_data(data, require_all=False)
@@ -203,6 +264,13 @@ def update_product(session: Session, user_id: int, product_id: int, data: dict) 
 
 def delete_product(session: Session, user_id: int, product_id: int) -> None:
     product = _get_own_product(session, user_id, product_id)
+    in_recipes = (
+        session.query(RecipeIngredient).filter_by(product_id=product.id).count()
+    )
+    if in_recipes > 0:
+        raise ProductServiceError(
+            "Product is used in recipes and cannot be deleted", 409
+        )
     session.delete(product)
     session.commit()
 

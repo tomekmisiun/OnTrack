@@ -50,6 +50,25 @@ def delete_all_products(
     return JSONResponse(content={"message": f"Deleted {count} products"})
 
 
+@router.post("/{product_id}/customize")
+def customize_product(
+    product_id: int,
+    body: ProductUpdateRequest,
+    user_id: int = Depends(get_current_user_id),
+    session: Session = Depends(get_db_session),
+) -> JSONResponse:
+    try:
+        data = product_service.customize_product(
+            session,
+            user_id,
+            product_id,
+            body.model_dump(exclude_unset=True),
+        )
+    except product_service.ProductServiceError as exc:
+        return _service_error(exc)
+    return JSONResponse(content=data)
+
+
 @router.put("/{product_id}")
 def update_product(
     product_id: int,

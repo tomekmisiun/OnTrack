@@ -18,7 +18,6 @@ from app.models.user import User
 from app.services import product_service
 from sqlalchemy import inspect, text
 from sqlalchemy.engine import create_engine
-from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, sessionmaker
 
 BACKEND_ROOT = Path(__file__).resolve().parents[2]
@@ -105,15 +104,15 @@ def _create_user_with_product_and_recipe(session: Session) -> tuple[User, Produc
     return user, product, recipe
 
 
-def test_delete_product_referenced_by_recipe_raises_on_postgres(migrated_postgres: Session):
-    """Documents current PostgreSQL behavior: FK blocks hard delete (no ON DELETE CASCADE)."""
+def test_delete_product_referenced_by_recipe_returns_409_on_postgres(migrated_postgres: Session):
+    """Service blocks delete with 409 when product is referenced by recipe ingredients."""
     session = migrated_postgres
     user, product, recipe = _create_user_with_product_and_recipe(session)
 
-    with pytest.raises(IntegrityError):
+    with pytest.raises(product_service.ProductServiceError) as exc_info:
         product_service.delete_product(session, user.id, product.id)
+    assert exc_info.value.status_code == 409
 
-    session.rollback()
     assert session.get(Product, product.id) is not None
     assert (
         session.query(RecipeIngredient)
@@ -123,21 +122,18 @@ def test_delete_product_referenced_by_recipe_raises_on_postgres(migrated_postgre
     )
 
 
-def test_sqlite_allows_orphan_recipe_ingredient_without_fk_enforcement(db_session, user, product):
-    """SQLite test harness does not enforce FK — documents divergence from PostgreSQL."""
+def test_sqlite_delete_product_in_recipe_returns_409(db_session, user, product):
+    """SQLite harness enforces the same 409 guard as PostgreSQL."""
     recipe = Recipe(name="SQLite FK", user_id=user.id, category="lunch", lang="pl", servings=1)
     db_session.add(recipe)
     db_session.flush()
     db_session.add(RecipeIngredient(recipe_id=recipe.id, product_id=product.id, weight=50))
     db_session.commit()
 
-    product_service.delete_product(db_session, user.id, product.id)
-    orphan = (
-        db_session.query(RecipeIngredient)
-        .filter_by(recipe_id=recipe.id, product_id=product.id)
-        .first()
-    )
-    assert orphan is not None
+    with pytest.raises(product_service.ProductServiceError) as exc_info:
+        product_service.delete_product(db_session, user.id, product.id)
+    assert exc_info.value.status_code == 409
+    assert db_session.get(Product, product.id) is not None
 
 
 def test_recipe_ingredients_fk_exists_on_postgres(migrated_postgres: Session, postgres_url: str):
