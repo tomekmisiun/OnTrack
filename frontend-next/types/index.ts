@@ -27,3 +27,8 @@ export type {
   RecipeCategory,
   QuickProductForm,
 } from "@/types/recipe";
+export type {
+  ScheduleBlock,
+  ParsedScheduleBlock,
+  BulkCreateResult,
+} from "@/types/daySchedule";

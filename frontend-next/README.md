@@ -96,7 +96,7 @@ npm run generate:api
 - Protected app routes under `app/(app)/` — `/`, `/macro`, `/calendar`, `/schedule`, `/recipes`, `/products`, `/summary`, `/export`
 - `middleware.ts` — session cookie gate (`ontrack_has_token`, synced from JWT in localStorage)
 - `components/layout/Sidebar.tsx` — CRA tab parity (sidebar hidden on home)
-- Module screens: products (task 8), recipes (task 9), calendar/meal plan (task 10); schedule, etc. are placeholders until tasks 11–12
+- Module screens: products (task 8), recipes (task 9), calendar/meal plan (task 10), day schedule (task 11); summary, export, etc. are placeholders until task 12
 
 ## Members
 
@@ -125,6 +125,13 @@ npm run generate:api
 - `hooks/useCalendarPage.ts` — state and handlers (CRA `Calendar.js` parity)
 - `lib/api/mealPlan.ts`, `lib/dates.ts`, `lib/mealPlan/state.ts`, `types/mealPlan.ts`
 - `npm run test:calendar` — unit check for date grid helpers
+
+## Day schedule
+
+- `components/schedule/DayScheduleScreen.tsx` — weekly 24h grid, drag blocks, bulk work hours
+- `hooks/useDaySchedulePage.ts` — state and handlers (CRA `DaySchedule.js` parity)
+- `lib/api/daySchedule.ts`, `lib/schedule/**` — API, parse helpers, overlap detection
+- `npm run test:schedule` — unit check for `parseScheduleBlockText`
 
 CI runs `generate:api` before lint to catch drift.
 

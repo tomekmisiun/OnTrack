@@ -1,5 +1,5 @@
-import { ModulePlaceholder } from "@/components/screens/ModulePlaceholder";
+import { DayScheduleScreen } from "@/components/schedule/DayScheduleScreen";
 
 export default function SchedulePage() {
-  return <ModulePlaceholder moduleId="schedule" />;
+  return <DayScheduleScreen />;
 }
