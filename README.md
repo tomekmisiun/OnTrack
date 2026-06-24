@@ -22,7 +22,7 @@ Meal planner and household budget tracker. Plan meals on a calendar, manage prod
 | Layer | Stack |
 |-------|--------|
 | Backend | Python 3.11, FastAPI, SQLAlchemy, Alembic, JWT |
-| Frontend | React (Create React App), axios |
+| Frontend | Next.js 15 (App Router), TypeScript, Tailwind |
 | Database | PostgreSQL 15 |
 | Dev / deploy | Docker Compose locally, Railway + GitHub Actions in production |
 
@@ -49,8 +49,7 @@ First run builds images and installs frontend dependencies; it may take a few mi
 
 | Service | URL |
 |---------|-----|
-| **App (frontend, CRA)** | http://localhost:3000 |
-| **App (frontend-next)** | http://localhost:3002 |
+| **App (frontend)** | http://localhost:3000 |
 | Backend API | http://localhost:5001 |
 | Health check | http://localhost:5001/health |
 | Grafana | http://localhost:3001 |
@@ -72,7 +71,7 @@ View logs:
 
 ```bash
 docker compose logs -f
-docker compose logs -f frontend app
+docker compose logs -f frontend backend
 ```
 
 ## Environment variables
@@ -93,6 +92,7 @@ Copy `.env.example` to `.env`. Never commit `.env`.
 | `GEMINI_API_KEY` | optional | AI features (graceful fallback if missing) |
 | `PEXELS_API_KEY` | optional | Recipe image search |
 | `DEEPSEEK_API_KEY` | optional | Macro lookup + scraper pipeline |
+| `NEXT_PUBLIC_API_URL` | yes (frontend build) | Browser-facing API URL (`http://localhost:5001` locally) |
 
 On Railway, the backend uses `DATABASE_URL=${{Postgres.DATABASE_URL}}` (private). Do not point the app at `DATABASE_PUBLIC_URL`.
 
@@ -102,6 +102,9 @@ On Railway, the backend uses `DATABASE_URL=${{Postgres.DATABASE_URL}}` (private)
 cd backend
 uv sync --dev
 uv run pytest tests/contract/ tests/test_health.py -q
+
+cd frontend-next
+npm ci && npm run test && npm run lint && npm run typecheck && npm run build
 ```
 
 CI runs the FastAPI suite on every PR and push to `main` (`.github/workflows/ci.yml`).
@@ -116,8 +119,7 @@ OnTrack/
 │   ├── Dockerfile
 │   └── railway.toml     # Railway config (Root Directory = backend)
 ├── app/                 # Legacy dish-compare build tooling (optional, not runtime)
-├── frontend/
-├── frontend-next/       # Next.js migration (Compose :3002, prod Dockerfile)
+├── frontend-next/       # Next.js frontend (Compose :3000, Railway ontrackapp)
 ├── scraper/             # Experimental offline pipeline (disconnected)
 ├── monitoring/          # Prometheus config (local dev)
 ├── docker-compose.yml
@@ -157,7 +159,7 @@ See `scraper/data/README.md` for folder layout and pipeline steps.
 
 ## Translations
 
-UI strings live in `frontend/src/contexts/LanguageContext.js` (`T.pl` / `T.en`). See `frontend/TRANSLATIONS.md` for conventions and key map.
+UI strings live in `frontend-next/lib/i18n/translations.ts` (Polish and English).
 
 ## Deployment
 
@@ -180,4 +182,5 @@ Local verification before a PR:
 ```bash
 docker compose up --build
 cd backend && uv run pytest tests/contract/ -q
+cd frontend-next && npm run test && npm run build
 ```
