@@ -180,7 +180,7 @@ Then: deploy → build logs → deploy logs → `GET /health` → smoke critical
 | **Rollback** | Restore root `railway.toml`; revert Railway UI to empty Root Directory |
 | **Out of scope** | Worker service removal (separate decision); deleting `scraper/` experimental artifacts |
 
-**Status:** ⬜ Not started — **blocked on manual checkpoint**
+**Status:** ✅ Complete — legacy deploy configs removed; canonical `backend/railway.toml`.
 
 ---
 
@@ -222,13 +222,12 @@ Use the exact branch names above (`refactor/…`, `data/…`, `docker/…`, `rai
 | Document | Purpose |
 |----------|---------|
 | [MIGRATION_ROADMAP.md](./MIGRATION_ROADMAP.md) | Flask → FastAPI migration (MIG-000–017) |
-| [RAILWAY_STAGING.md](./RAILWAY_STAGING.md) | Current staging runbook (may be stale post DATA-004) |
-| [PRODUCTION_CUTOVER.md](./PRODUCTION_CUTOVER.md) | Production cutover (update after DATA-006) |
-| `docs/deployment/RAILWAY_BACKEND_MIGRATION.md` | Created in DATA-005 — deploy + rollback |
+| [RAILWAY_STAGING.md](./RAILWAY_STAGING.md) | Staging runbook (backend Root Directory) |
+| [PRODUCTION_CUTOVER.md](./PRODUCTION_CUTOVER.md) | Historical Flask → FastAPI cutover |
+| [docs/deployment/RAILWAY_BACKEND_MIGRATION.md](../deployment/RAILWAY_BACKEND_MIGRATION.md) | Backend Railway deploy + rollback |
 
 ---
 
-## Current next step
+## Status
 
-1. Merge **DATA-002** (`data/backend-curated-runtime-dataset`).
-2. Complete **manual Railway checkpoint** (see below), then **DATA-006**.
+**DATA-001 through DATA-006 complete.** Backend deploy uses Root Directory `backend`.

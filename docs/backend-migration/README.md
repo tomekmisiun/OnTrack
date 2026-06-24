@@ -4,10 +4,9 @@ Planning-only artifacts for migrating the OnTrack backend to FastAPI using
 [`fastapi-production-foundation` v1.0.0](https://github.com/tomekmisiun/fastapi-production-foundation/tree/v1.0.0)
 as a **reference foundation** (not a blind copy).
 
-**Status:** MIG-000–MIG-017 ✅ — Flask backend removed; FastAPI is the sole API.
+**Status:** MIG-000–MIG-017 ✅ — Flask removed. DATA-001–DATA-006 ✅ — self-contained backend deploy.
 
-**In progress:** [DATA_DEPLOYMENT_ROADMAP.md](./DATA_DEPLOYMENT_ROADMAP.md) — backend data
-decoupling + self-contained Docker/Railway deploy (DATA-001–006).
+Deploy: [`.github/DEPLOY.md`](../.github/DEPLOY.md) · [`docs/deployment/RAILWAY_BACKEND_MIGRATION.md`](../deployment/RAILWAY_BACKEND_MIGRATION.md)
 
 ## Reading order
 
@@ -42,5 +41,4 @@ decoupling + self-contained Docker/Railway deploy (DATA-001–006).
 
 ## Next step
 
-Implement **DATA-002** on branch `data/backend-curated-runtime-dataset` — see
-[DATA_DEPLOYMENT_ROADMAP.md](./DATA_DEPLOYMENT_ROADMAP.md) (after DATA-001 is merged).
+Migration complete. See [`DATA_DEPLOYMENT_ROADMAP.md`](./DATA_DEPLOYMENT_ROADMAP.md) and [`.github/DEPLOY.md`](../../.github/DEPLOY.md).

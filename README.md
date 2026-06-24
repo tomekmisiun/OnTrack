@@ -109,15 +109,15 @@ CI runs the FastAPI suite on every PR and push to `main` (`.github/workflows/ci.
 
 ```
 OnTrack/
-├── backend/             # FastAPI API + worker + Alembic
-│   └── app/
-├── app/                 # Static data only (user seeds, dish compare)
-│   ├── dish_compare/
-│   └── user_seeds/
+├── backend/             # FastAPI API + worker + Alembic + runtime data
+│   ├── app/
+│   ├── data/            # Runtime JSON (demo dataset — manifest.json)
+│   ├── Dockerfile
+│   └── railway.toml     # Railway config (Root Directory = backend)
+├── app/                 # Legacy dish-compare build tooling (optional, not runtime)
 ├── frontend/
-│   └── src/
-├── scraper/             # Offline data pipeline
-├── monitoring/          # Prometheus config
+├── scraper/             # Experimental offline pipeline (disconnected)
+├── monitoring/          # Prometheus config (local dev)
 ├── docker-compose.yml
 └── .github/DEPLOY.md
 ```
@@ -141,7 +141,8 @@ All authenticated routes use `Authorization: Bearer <token>`.
 
 ## Scraper pipeline (optional)
 
-Populates shop catalogs, ingredient DB, and user seed data. Separate from the web app runtime.
+Populates shop catalogs and ingredient DB into `scraper/data/`. **Not connected**
+to the API runtime — see [`scraper/README.md`](scraper/README.md).
 
 ```bash
 cd scraper

@@ -280,9 +280,5 @@ MIG-000
 
 ## Follow-on: data & deployment architecture
 
-MIG-017 removed Flask but left backend coupled to monorepo paths (`app/`, `scraper/`)
-and repo-root Docker build context. The next phase is tracked separately:
-
-**[DATA_DEPLOYMENT_ROADMAP.md](./DATA_DEPLOYMENT_ROADMAP.md)** — DATA-001 through DATA-006
-(runtime data contract → `backend/data/` → scraper disconnect → self-contained image →
-Railway `/backend` → legacy config cleanup).
+**Complete (DATA-001–006).** Backend deploy uses Root Directory `backend`, runtime data in
+`backend/data/`. See **[DATA_DEPLOYMENT_ROADMAP.md](./DATA_DEPLOYMENT_ROADMAP.md)**.

@@ -26,7 +26,7 @@ Safe Railway migration: **Flask production stays live** until FastAPI is proven 
 | New Railway service | `ontrack-back-fastapi-staging` — config `backend/railway.toml` |
 | Worker + Redis | `ontrack-worker-staging` + `ontrack-redis-staging` — `backend/railway.worker.toml` |
 | Database | **Clone** of production — never first test on live |
-| Build | `backend/Dockerfile.railway` with **repo root** as Railway Root Directory |
+| Build | `docker build backend` — Root Directory `backend` on Railway |
 | Frontend staging | Optional staging frontend with `REACT_APP_API_URL` → staging FastAPI |
 | Migrations | [DB_REHEARSAL.md](./DB_REHEARSAL.md) — stamp on clone after parity check |
 | Validation | Full contract suite + manual smoke |

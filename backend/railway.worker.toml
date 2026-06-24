@@ -1,4 +1,4 @@
-# FastAPI staging worker — Root Directory: backend (repo root)
+# FastAPI staging worker — Root Directory: backend
 [build]
 builder = "dockerfile"
 dockerfilePath = "Dockerfile"

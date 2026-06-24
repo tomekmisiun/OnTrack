@@ -4,17 +4,14 @@ Production deploys from Railway after a push to `main`, **but only when GitHub A
 
 ## Railway services
 
-| Service | Role | Config |
-|---------|------|--------|
-| `ontrack-back` | Production API (FastAPI) | root `railway.toml` (repo root, empty Root Directory) |
-| `ontrack-back-fastapi` | Alt. name (same config) | `backend/railway.prod.toml` |
-| `ontrack-worker` | Background worker | `backend/railway.worker.prod.toml` |
-| `ontrackapp` | Frontend SPA | `frontend/railway.toml` |
-| Postgres + Redis | Data + queue | Railway plugins |
+| Service | Role | Root Directory | Config |
+|---------|------|----------------|--------|
+| `ontrack-back` | Production API (FastAPI) | `backend` | `backend/railway.toml` |
+| `ontrack-worker` | Background worker (optional) | `backend` | `backend/railway.worker.prod.toml` |
+| `ontrackapp` | Frontend SPA | `frontend` | `frontend/railway.toml` |
+| Postgres + Redis | Data + queue | — | Railway plugins |
 
-**MIG-017:** Delete legacy `ontrack-back` (Flask) Railway service after cutover stability period.
-
-Cutover runbook: [`docs/backend-migration/PRODUCTION_CUTOVER.md`](../docs/backend-migration/PRODUCTION_CUTOVER.md)
+Backend migration runbook: [`docs/deployment/RAILWAY_BACKEND_MIGRATION.md`](../docs/deployment/RAILWAY_BACKEND_MIGRATION.md)
 
 ---
 
@@ -26,13 +23,13 @@ For **each** service → **Settings** → **Source**:
 2. **Branch connected to production** → **`main`**
 3. **Auto deploys when pushed to GitHub** — **enabled**
 4. **Wait for CI** → **ON**
-5. **ontrack-back:** Root Directory **empty** (repo root) — uses root `railway.toml` automatically
-6. **ontrackapp:** Root Directory = `frontend` — uses `frontend/railway.toml`
+5. **ontrack-back:** Root Directory = **`backend`**, config **`railway.toml`**
+6. **ontrackapp:** Root Directory = **`frontend`**, config **`frontend/railway.toml`**
 
 ### Frontend build variable
 
 ```
-REACT_APP_API_URL=https://<ontrack-back-fastapi-domain>
+REACT_APP_API_URL=https://<ontrack-back-domain>
 ```
 
 ---
@@ -42,7 +39,7 @@ REACT_APP_API_URL=https://<ontrack-back-fastapi-domain>
 | Job | Purpose |
 |-----|---------|
 | `test` | FastAPI contract + health tests (branch protection) |
-| `backend-docker` | Railway image build |
+| `backend-docker` | `docker build backend` validation |
 | `backend-integration` | DB stamp rehearsal (Postgres) |
 
 ---

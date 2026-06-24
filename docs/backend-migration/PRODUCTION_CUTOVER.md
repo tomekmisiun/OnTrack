@@ -1,5 +1,9 @@
 # Production cutover — Flask → FastAPI (MIG-016)
 
+> **Historical document.** MIG-017 removed Flask; DATA-006 completed backend-only Railway deploy.
+> Current production: **`ontrack-back`** with Root Directory `backend`, config `backend/railway.toml`.
+> See [`.github/DEPLOY.md`](../../.github/DEPLOY.md) and [`docs/deployment/RAILWAY_BACKEND_MIGRATION.md`](../deployment/RAILWAY_BACKEND_MIGRATION.md).
+
 Switch live traffic from Flask (`ontrack-back`) to FastAPI (`ontrack-back-fastapi`) **without schema changes**. Flask remains deployed as standby until MIG-017.
 
 **Prerequisites:** MIG-015 signed off — [DB_REHEARSAL.md](./DB_REHEARSAL.md) completed on staging clone.
