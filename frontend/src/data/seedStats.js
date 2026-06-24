@@ -1,5 +1,5 @@
-/** Sync with app/user_seeds/data/products_seed_{lang}.json and recipes_seed_{lang}.json */
+/** Demo counts — sync with backend/data/seeds/products_seed_{lang}.json */
 export const SEED_STATS = {
-  pl: { products: 444, recipes: 66 },
-  en: { products: 365, recipes: 54 },
+  pl: { products: 2, recipes: 1 },
+  en: { products: 2, recipes: 1 },
 };

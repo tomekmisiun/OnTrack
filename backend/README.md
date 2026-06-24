@@ -1,6 +1,6 @@
 # OnTrack FastAPI backend
 
-Production API for OnTrack. See [`docs/backend-migration/MIGRATION_ROADMAP.md`](../docs/backend-migration/MIGRATION_ROADMAP.md).
+Production API for OnTrack. See [`docs/backend-migration/DATA_DEPLOYMENT_ROADMAP.md`](../docs/backend-migration/DATA_DEPLOYMENT_ROADMAP.md).
 
 ## Local development
 
@@ -12,6 +12,12 @@ uv run uvicorn app.main:app --reload --port 8000
 curl -s http://localhost:8000/health
 ```
 
+Runtime data lives in `data/` (demo dataset — see `data/manifest.json`).
+
+```bash
+uv run python scripts/validate_runtime_data.py
+```
+
 ### Database migrations
 
 ```bash
@@ -20,28 +26,24 @@ uv run alembic upgrade head
 uv run alembic current
 ```
 
-## Docker (from repo root)
+## Docker
+
+Self-contained image (build context = `backend/`):
 
 ```bash
-docker compose up --build backend
+docker build -t ontrack-api .
+docker compose -f ../docker-compose.yml up --build backend
 curl -sf http://localhost:5001/health
 ```
 
-## Docker
+## Railway
 
-Build and run the API from `backend/` (self-contained image including `data/`):
+| Service | Config |
+|---------|--------|
+| API (`ontrack-back`) | `railway.toml` — Root Directory **`backend`** |
+| Worker | `railway.worker.prod.toml` |
 
-```bash
-docker build -t ontrack-api backend
-```
-
-Railway staging/production configs live under `backend/railway*.toml` — see
-[DATA_DEPLOYMENT_ROADMAP.md](../docs/backend-migration/DATA_DEPLOYMENT_ROADMAP.md).
-
-### Railway
-
-- Staging: `backend/railway.toml` — [RAILWAY_STAGING.md](../docs/backend-migration/RAILWAY_STAGING.md)
-- Production: `backend/railway.prod.toml` — [PRODUCTION_CUTOVER.md](../docs/backend-migration/PRODUCTION_CUTOVER.md)
+Deploy guide: [`docs/deployment/RAILWAY_BACKEND_MIGRATION.md`](../docs/deployment/RAILWAY_BACKEND_MIGRATION.md)
 
 ### DB adoption rehearsal
 

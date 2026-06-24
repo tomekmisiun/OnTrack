@@ -1,20 +1,12 @@
-# Dish compare (login widget)
+# Dish compare build tooling (legacy)
 
-Public marketing widget: DIY cost vs restaurant order.
+**Runtime API data lives in `backend/data/dish_compare/`.** This package is an optional
+offline build tool — not part of production deploy.
 
-```
-data/
-  manifest.json     — which dishes appear per language
-  dishes/           — recipe templates (catalog_id + weight)
-  catalog/          — manual shop prices (PLN / GBP)
-  defaults/         — restaurant prices, delivery, meal prep wage
-  built/            — precomputed DIY costs (regenerate after edits)
-```
+To regenerate legacy built files (if you restore `data/` sources locally):
 
-**Regenerate built files:**
 ```bash
 python app/dish_compare/build.py
 ```
 
-**API:** `GET /api/public/dish-compare?lang=pl|en`  
-**Frontend:** `frontend/src/features/dishCompare/DishCompare.js`
+**API:** `GET /api/public/dish-compare?lang=pl|en` — served from `backend/data/`.
