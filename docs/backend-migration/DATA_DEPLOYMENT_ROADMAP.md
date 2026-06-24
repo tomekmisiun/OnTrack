@@ -146,7 +146,7 @@ backend/data/
 | **Rollback** | N/A (additive only) |
 | **Out of scope** | Railway UI changes; deleting root `railway.toml` |
 
-**Status:** ⬜ Not started
+**Status:** ✅ Complete — `backend/railway.toml` + migration runbook.
 
 ---
 
@@ -224,11 +224,11 @@ Use the exact branch names above (`refactor/…`, `data/…`, `docker/…`, `rai
 | [MIGRATION_ROADMAP.md](./MIGRATION_ROADMAP.md) | Flask → FastAPI migration (MIG-000–017) |
 | [RAILWAY_STAGING.md](./RAILWAY_STAGING.md) | Current staging runbook (may be stale post DATA-004) |
 | [PRODUCTION_CUTOVER.md](./PRODUCTION_CUTOVER.md) | Production cutover (update after DATA-006) |
-| `docs/deployment/RAILWAY_BACKEND_MIGRATION.md` | Created in DATA-005 |
+| `docs/deployment/RAILWAY_BACKEND_MIGRATION.md` | Created in DATA-005 — deploy + rollback |
 
 ---
 
 ## Current next step
 
 1. Merge **DATA-002** (`data/backend-curated-runtime-dataset`).
-2. Implement **DATA-004** on `docker/backend-self-contained-image`.
+2. Complete **manual Railway checkpoint** (see below), then **DATA-006**.

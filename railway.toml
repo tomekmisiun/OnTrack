@@ -1,6 +1,9 @@
-# Railway config for ontrack-back (FastAPI production API).
-# Auto-detected when service Root Directory is empty (repo root).
-# Frontend ontrackapp must use Root Directory = frontend/ (frontend/railway.toml).
+# Legacy Railway config — repo root context (rollback only).
+# Target deploy: Root Directory = backend, config backend/railway.toml
+# See docs/deployment/RAILWAY_BACKEND_MIGRATION.md
+#
+# WARNING: dockerfilePath below is INVALID after DATA-004 (Dockerfile.railway removed).
+# Use only for rollback reference until DATA-006 removes this file.
 [build]
 builder = "dockerfile"
 dockerfilePath = "backend/Dockerfile.railway"

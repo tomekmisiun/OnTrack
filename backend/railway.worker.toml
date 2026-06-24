@@ -1,14 +1,11 @@
-# FastAPI staging worker — Railway service: ontrack-worker-staging
-# Root Directory in Railway Settings MUST be repository root (not backend/).
+# FastAPI staging worker — Root Directory: backend (repo root)
 [build]
 builder = "dockerfile"
-dockerfilePath = "backend/Dockerfile.railway"
+dockerfilePath = "Dockerfile"
 watchPatterns = [
-  "backend/**",
-  "app/user_seeds/**",
-  "app/dish_compare/**",
-  "scraper/data/macros/**",
-  "scraper/data/built/**",
+  "app/**",
+  "data/**",
+  "scripts/**",
 ]
 
 [deploy]
