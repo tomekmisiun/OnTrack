@@ -9,3 +9,12 @@ export type {
   ImportItem,
   ParsedProductText,
 } from "@/types/product";
+export type {
+  Recipe,
+  RecipeSummary,
+  RecipeIngredient,
+  ParsedRecipe,
+  ParsedRecipeIngredient,
+  RecipeCategory,
+  QuickProductForm,
+} from "@/types/recipe";

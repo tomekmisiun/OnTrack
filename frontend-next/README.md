@@ -96,7 +96,7 @@ npm run generate:api
 - Protected app routes under `app/(app)/` — `/`, `/macro`, `/calendar`, `/schedule`, `/recipes`, `/products`, `/summary`, `/export`
 - `middleware.ts` — session cookie gate (`ontrack_has_token`, synced from JWT in localStorage)
 - `components/layout/Sidebar.tsx` — CRA tab parity (sidebar hidden on home)
-- Module screens: products (task 8); recipes, calendar, etc. are placeholders until tasks 9–12
+- Module screens: products (task 8), recipes (task 9); calendar, etc. are placeholders until tasks 10–12
 
 ## Members
 
@@ -111,6 +111,13 @@ npm run generate:api
 - `hooks/useProductsPage.ts` — state and handlers (CRA `Products.js` parity)
 - `lib/api/products.ts`, `lib/api/import.ts`, `lib/api/nutrition.ts`
 - `npm run test:products` — unit check for pagination helpers
+
+## Recipes
+
+- `components/recipes/RecipesScreen.tsx` — paste-parse, CRUD, favorites, categories, product matching
+- `hooks/useRecipesPage.ts` — state and handlers (CRA `Recipes.js` parity)
+- `lib/api/recipes.ts`, `lib/recipes/**` — parser, search, ingredient canonicalization
+- `npm run test:recipes` — unit check for fuzzySearch and parseRecipeText
 
 CI runs `generate:api` before lint to catch drift.
 
