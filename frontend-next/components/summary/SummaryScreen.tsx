@@ -21,7 +21,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import type { TranslationKey } from "@/lib/i18n/translations";
 import { tArray, tFormatN, tString } from "@/lib/i18n/translate";
 import { useSummaryPage } from "@/hooks/useSummaryPage";
-import "@/components/calendar/calendar.css";
 import "@/components/summary/summary.css";
 
 registerLocale("pl", pl);
