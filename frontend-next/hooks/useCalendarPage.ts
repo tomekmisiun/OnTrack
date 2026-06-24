@@ -161,7 +161,7 @@ export function useCalendarPage() {
     listRecipes()
       .then(setRecipes)
       .catch(() => showError(String(t("err_load_recipes"))));
-  }, [user?.lang, showError, t]);
+  }, [user?.market_code, showError, t]);
 
   useEffect(() => {
     void loadMonth(year, month);

@@ -160,7 +160,7 @@ export function useWelcomeStats() {
     return () => {
       cancelled = true;
     };
-  }, [user?.id, user?.lang, members, lang, t, includedKey, activeId]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [user?.id, user?.market_code, members, lang, t, includedKey, activeId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return { stats, loading };
 }
