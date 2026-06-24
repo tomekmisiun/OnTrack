@@ -6,7 +6,10 @@ import "@/styles/globals.css";
 
 export const metadata: Metadata = {
   title: "OnTrack",
-  description: "OnTrack — Next.js foundation (migration from CRA)",
+  description: "OnTrack — meal planning and budgeting",
+  icons: {
+    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+  },
 };
 
 export const viewport: Viewport = {
