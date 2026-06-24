@@ -11,6 +11,7 @@ type LoginRequest = ApiSchema<"LoginRequest">;
 type RegisterRequest = ApiSchema<"RegisterRequest">;
 type ExchangeRequest = ApiSchema<"ExchangeRequest">;
 type LanguageRequest = ApiSchema<"LanguageRequest">;
+type MarketRequest = { market_code: string };
 
 let unauthorizedHandler: (() => void) | undefined;
 
@@ -116,6 +117,18 @@ export function changeLanguage(lang: string): Promise<unknown> {
     });
   }
   return createAuthedApiClient().patch<unknown>("/api/auth/language", body);
+}
+
+export function changeMarket(marketCode: string): Promise<unknown> {
+  const body: MarketRequest = { market_code: marketCode };
+  if (isBffEnabled()) {
+    return sessionRequest<unknown>("/api/auth/session", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...body, target: "market" }),
+    });
+  }
+  return createAuthedApiClient().patch<unknown>("/api/auth/market", body);
 }
 
 export function deleteAccountApi() {

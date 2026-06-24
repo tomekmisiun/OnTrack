@@ -11,6 +11,7 @@ from sqlalchemy.orm import Session
 from app.core.config import get_settings
 from app.core.passwords import hash_password, verify_password
 from app.core.security import create_access_token
+from app.domain.market import MARKET_CODES, UI_LOCALES, default_market_for_ui_locale
 from app.models.auth_code import AuthCode
 from app.models.day_schedule import DayScheduleBlock
 from app.models.household_member import HouseholdMember
@@ -20,8 +21,12 @@ from app.models.product import Product
 from app.models.recipe import Recipe, RecipeIngredient
 from app.models.recipe_parse_log import RecipeParseLog
 from app.models.user import User
-from app.services.catalog_seed_service import ensure_catalog_if_incomplete, ensure_user_seeded
 from app.services.member_service import ensure_primary_member, sync_primary_member_name
+from app.services.user_preferences import (
+    apply_market_code,
+    apply_ui_locale,
+    init_user_preferences,
+)
 from app.services.user_presenter import user_to_dict
 
 USERNAME_RE = re.compile(r"^[a-zA-Z0-9_]{3,80}$")
@@ -68,15 +73,13 @@ def login(session: Session, username: str, password: str) -> str:
     if not user or not verify_password(user.password_hash, password):
         raise AuthServiceError("Invalid username or password", 401)
 
-    ensure_catalog_if_incomplete(session, user.id, user.lang)
     sync_primary_member_name(session, user)
     return issue_token(user.id)
 
 
 def register(session: Session, username: str, password: str, lang: str) -> str:
     username = _normalize_username(username)
-    if lang not in ("pl", "en"):
-        lang = "pl"
+    ui_locale = lang if lang in UI_LOCALES else "pl"
 
     err = _validate_username(username) or _validate_password(password)
     if err:
@@ -88,15 +91,18 @@ def register(session: Session, username: str, password: str, lang: str) -> str:
     user = User(
         email=_synthetic_email(username),
         username=username,
-        lang=lang,
         password_hash=hash_password(password),
+    )
+    init_user_preferences(
+        user,
+        ui_locale,
+        default_market_for_ui_locale(ui_locale),
     )
     session.add(user)
     session.commit()
     session.refresh(user)
 
-    ensure_primary_member(session, user.id, lang)
-    ensure_user_seeded(session, user.id, lang)
+    ensure_primary_member(session, user.id, user.ui_locale)
     return issue_token(user.id)
 
 
@@ -105,23 +111,35 @@ def get_me(session: Session, user_id: int) -> dict:
     if not user:
         raise AuthServiceError("User not found", 404)
 
-    ensure_catalog_if_incomplete(session, user.id, user.lang)
     sync_primary_member_name(session, user)
     return user_to_dict(user)
 
 
 def change_language(session: Session, user_id: int, lang: str) -> dict:
-    if lang not in ("pl", "en"):
+    if lang not in UI_LOCALES:
         raise AuthServiceError("Invalid language", 400)
 
     user = session.get(User, user_id)
     if not user:
         raise AuthServiceError("User not found", 404)
 
-    user.lang = lang
+    apply_ui_locale(user, lang)
     session.commit()
-    ensure_catalog_if_incomplete(session, user.id, lang)
     sync_primary_member_name(session, user)
+    return user_to_dict(user)
+
+
+def change_market(session: Session, user_id: int, market_code: str) -> dict:
+    code = (market_code or "").strip().upper()
+    if code not in MARKET_CODES:
+        raise AuthServiceError("Invalid market", 400)
+
+    user = session.get(User, user_id)
+    if not user:
+        raise AuthServiceError("User not found", 404)
+
+    apply_market_code(user, code)
+    session.commit()
     return user_to_dict(user)
 
 
@@ -204,6 +222,7 @@ def find_or_create_oauth_user(session: Session, email: str) -> tuple[User, bool]
     if user:
         return user, False
     user = User(email=email, password_hash=hash_password(secrets.token_hex(32)))
+    init_user_preferences(user, "pl", "PL")
     session.add(user)
     session.commit()
     session.refresh(user)
@@ -232,16 +251,19 @@ def handle_oauth_callback(
     if not email:
         return auth_error_redirect("No email returned from Google")
 
-    lang = pending_lang if pending_lang in ("pl", "en") else "pl"
+    ui_locale = pending_lang if pending_lang in UI_LOCALES else "pl"
     user, is_new = find_or_create_oauth_user(session, email)
 
     if is_new:
-        user.lang = lang
+        init_user_preferences(
+            user,
+            ui_locale,
+            default_market_for_ui_locale(ui_locale),
+        )
         session.commit()
-        ensure_primary_member(session, user.id, lang)
-        ensure_user_seeded(session, user.id, lang)
+        ensure_primary_member(session, user.id, user.ui_locale)
     else:
-        ensure_primary_member(session, user.id, user.lang or lang)
+        ensure_primary_member(session, user.id, user.ui_locale)
 
     settings = get_settings()
     code = issue_auth_code(session, user.id, ttl_seconds=settings.auth_code_ttl_seconds)

@@ -75,6 +75,9 @@ def test_register_does_not_copy_seed_products_per_user(client, db_session):
 
 
 def test_register_sees_global_catalog_via_api(client, db_session):
+    from app.scripts.seed_global_catalog import import_global_catalog
+
+    import_global_catalog(db_session, "pl")
     reg = client.post(
         "/api/auth/register",
         json={"username": "globalview1", "password": "secret123", "lang": "pl"},
@@ -155,7 +158,7 @@ def test_product_list_supports_pagination(client, auth_headers, product):
 
 
 def test_register_does_not_enqueue_catalog_seed_job(client, db_session):
-    """Recipe seed is synchronous; no background catalog_seed job is enqueued."""
+    """Registration no longer seeds recipes synchronously."""
     reset_testing_jobs()
     reg = client.post(
         "/api/auth/register",
@@ -164,7 +167,7 @@ def test_register_does_not_enqueue_catalog_seed_job(client, db_session):
     assert reg.status_code == 201
     user = db_session.query(User).filter_by(username="noworker1").first()
     assert db_session.query(Product).filter_by(user_id=user.id, lang="pl").count() == 0
-    assert db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count() >= 1
+    assert db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count() == 0
     assert drain_testing_jobs() == []
 
 

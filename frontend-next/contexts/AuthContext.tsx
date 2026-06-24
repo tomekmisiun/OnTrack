@@ -61,8 +61,8 @@ export function AuthProvider({ children, onLangChange }: AuthProviderProps) {
   const applyUser = useCallback(
     (userData: AuthUser) => {
       setUser(userData);
-      if (userData.lang && onLangChange) {
-        onLangChange(userData.lang);
+      if (userData.ui_locale && onLangChange) {
+        onLangChange(userData.ui_locale);
       }
     },
     [onLangChange],
@@ -235,7 +235,9 @@ export function AuthProvider({ children, onLangChange }: AuthProviderProps) {
   }, [logout]);
 
   const updateUserLang = useCallback((lang: LangCode) => {
-    setUser((current) => (current ? { ...current, lang } : current));
+    setUser((current) =>
+      current ? { ...current, lang, ui_locale: lang } : current,
+    );
   }, []);
 
   const value = useMemo(

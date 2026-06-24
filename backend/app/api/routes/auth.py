@@ -9,6 +9,7 @@ from app.schemas.auth import (
     ExchangeRequest,
     LanguageRequest,
     LoginRequest,
+    MarketRequest,
     MessageResponse,
     RegisterRequest,
     TokenResponse,
@@ -88,6 +89,19 @@ def change_language(
 ) -> JSONResponse:
     try:
         data = auth_service.change_language(session, user_id, body.lang)
+    except auth_service.AuthServiceError as exc:
+        return _service_error(exc)
+    return JSONResponse(content=data)
+
+
+@router.patch("/market")
+def change_market(
+    body: MarketRequest,
+    user_id: int = Depends(get_current_user_id),
+    session: Session = Depends(get_db_session),
+) -> JSONResponse:
+    try:
+        data = auth_service.change_market(session, user_id, body.market_code)
     except auth_service.AuthServiceError as exc:
         return _service_error(exc)
     return JSONResponse(content=data)

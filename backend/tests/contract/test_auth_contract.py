@@ -40,6 +40,8 @@ def test_me_returns_user(client, user, auth_headers):
     data = res.json()
     assert data["email"] == user.email
     assert data["lang"] == "pl"
+    assert data["ui_locale"] == "pl"
+    assert data["market_code"] == "PL"
 
 
 def test_change_language(client, user, auth_headers, db_session):
@@ -50,9 +52,11 @@ def test_change_language(client, user, auth_headers, db_session):
     )
     assert res.status_code == 200
     assert res.json()["lang"] == "en"
+    assert res.json()["ui_locale"] == "en"
 
     db_session.refresh(user)
     assert user.lang == "en"
+    assert user.ui_locale == "en"
 
 
 def test_change_language_rejects_invalid(client, auth_headers):
@@ -76,6 +80,8 @@ def test_register_and_login(client, db_session):
     user = db_session.query(User).filter_by(username="testuser").first()
     assert user is not None
     assert user.email == "testuser@users.ontrack.local"
+    assert user.ui_locale == "en"
+    assert user.market_code == "GB"
     assert user.lang == "en"
     me = client.get("/api/auth/me", headers={"Authorization": f"Bearer {reg.json()['token']}"})
     assert "email" not in me.json()
@@ -114,7 +120,7 @@ def test_register_validates_username(client):
     assert res.status_code == 400
 
 
-def test_register_seeds_catalog(client, db_session):
+def test_register_does_not_seed_catalog(client, db_session):
     reg = client.post(
         "/api/auth/register",
         json={"username": "seeduser1", "password": "secret123", "lang": "pl"},
@@ -122,13 +128,7 @@ def test_register_seeds_catalog(client, db_session):
     assert reg.status_code == 201
     user = db_session.query(User).filter_by(username="seeduser1").first()
     assert db_session.query(Product).filter_by(user_id=user.id, lang="pl").count() == 0
-    assert db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count() >= 1
-    system_count = (
-        db_session.query(Product)
-        .filter(Product.user_id.is_(None), Product.source == "system", Product.lang == "pl")
-        .count()
-    )
-    assert system_count >= 2
+    assert db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count() == 0
 
 
 def test_werkzeug_hash_from_flask_login_works(client, db_session):
@@ -195,11 +195,6 @@ def test_google_login_stores_lang_cookie(client, monkeypatch):
 def test_google_callback_redirects_with_exchange_code(client, db_session, monkeypatch):
     from app.api.routes import auth as auth_routes
 
-    monkeypatch.setattr(
-        "app.services.catalog_seed_service.ensure_user_seeded",
-        lambda *_args, **_kwargs: None,
-    )
-
     class FakeGoogle:
         async def authorize_access_token(self, _request):
             return {"userinfo": {"email": "oauth-new@example.com"}}
@@ -221,7 +216,8 @@ def test_google_callback_redirects_with_exchange_code(client, db_session, monkey
 
     user = db_session.query(User).filter_by(email="oauth-new@example.com").first()
     assert user is not None
-    assert user.lang == "pl"
+    assert user.ui_locale == "pl"
+    assert user.market_code == "PL"
 
     exchange = client.post("/api/auth/exchange", json={"code": query["code"][0]})
     assert exchange.status_code == 200

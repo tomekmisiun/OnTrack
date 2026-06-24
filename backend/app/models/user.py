@@ -15,3 +15,5 @@ class User(Base):
     password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
     created_at: Mapped[datetime | None] = mapped_column(DateTime, default=datetime.utcnow)
     lang: Mapped[str] = mapped_column(String(5), nullable=False, default="pl")
+    ui_locale: Mapped[str] = mapped_column(String(5), nullable=False, default="pl")
+    market_code: Mapped[str] = mapped_column(String(10), nullable=False, default="PL")
