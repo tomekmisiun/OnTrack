@@ -1,12 +1,11 @@
-"""OnTrack application tables (11). Excludes alembic_version."""
+"""OnTrack application tables. Excludes alembic_version."""
 
-ONTRACK_TABLES = frozenset(
+ONTRACK_INITIAL_HEAD_TABLES = frozenset(
     {
         "auth_codes",
         "day_schedule_blocks",
         "household_members",
         "import_logs",
-        "markets",
         "meal_plans",
         "products",
         "recipe_ingredients",
@@ -15,6 +14,8 @@ ONTRACK_TABLES = frozenset(
         "users",
     }
 )
+
+ONTRACK_TABLES = ONTRACK_INITIAL_HEAD_TABLES | {"markets"}
 
 # Tables from fastapi-production-foundation that must never appear in OnTrack DB.
 FOUNDATION_FORBIDDEN_TABLES = frozenset(
