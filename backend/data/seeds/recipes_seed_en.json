@@ -1,0 +1,10 @@
+[
+  {
+    "name": "Demo overnight oats",
+    "category": "breakfast",
+    "ingredients": [
+      {"product_name": "natural yogurt", "weight": 150},
+      {"product_name": "rolled oats", "weight": 50}
+    ]
+  }
+]

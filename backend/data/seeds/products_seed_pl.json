@@ -1,0 +1,24 @@
+[
+  {
+    "name": "jogurt naturalny",
+    "price": 3.49,
+    "package_weight": 400,
+    "unit": "g",
+    "sold_by_weight": false,
+    "kcal": 60,
+    "protein": 4,
+    "fat": 3,
+    "carbs": 5
+  },
+  {
+    "name": "płatki owsiane",
+    "price": 4.99,
+    "package_weight": 500,
+    "unit": "g",
+    "sold_by_weight": false,
+    "kcal": 370,
+    "protein": 13,
+    "fat": 7,
+    "carbs": 60
+  }
+]

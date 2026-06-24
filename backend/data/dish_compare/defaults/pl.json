@@ -1,0 +1,29 @@
+{
+  "currency": "PLN",
+  "dishes": {
+    "pizza_margherita": {
+      "avg_restaurant_price": 35.0,
+      "price_note": "Demo price — not verified"
+    },
+    "pepperoni_pizza": {
+      "avg_restaurant_price": 40.0,
+      "price_note": "Demo price — not verified"
+    },
+    "sweet_and_sour_chicken": {
+      "avg_restaurant_price": 40.0,
+      "price_note": "Demo price — not verified"
+    },
+    "chicken_tikka_masala": {
+      "avg_restaurant_price": 40.0,
+      "price_note": "Demo price — not verified"
+    },
+    "spaghetti_bolognese": {
+      "avg_restaurant_price": 40.0,
+      "price_note": "Demo price — not verified"
+    }
+  },
+  "default_delivery_price": 6.0,
+  "meal_prep": {
+    "avg_hourly_wage": 33.7
+  }
+}
