@@ -11,7 +11,8 @@
     "export:openapi": "node scripts/export-openapi.mjs",
     "generate:api": "openapi-typescript openapi/openapi.json -o lib/api/generated/schema.ts",
     "test:members": "node scripts/check-member-targets.mjs",
-    "test:products": "node scripts/check-product-page.mjs"
+    "test:products": "node scripts/check-product-page.mjs",
+    "test:recipes": "node scripts/check-recipe-search.mjs"
   },
   "dependencies": {
     "next": "15.5.4",

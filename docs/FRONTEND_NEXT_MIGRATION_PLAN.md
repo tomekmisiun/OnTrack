@@ -181,7 +181,7 @@ npm run export:openapi → openapi/openapi.json
 | **Dependencies** | Task 8 (product list for ingredients) |
 | **Acceptance** | Parity with `test_recipes_contract.py` |
 | **Tests** | Component + MSW |
-| **Out of scope** | Server-side AI recipe parse (not in backend today) |
+| **Status** | Done |
 
 ---
 
