@@ -19,9 +19,11 @@ from app.core.config import get_settings  # noqa: E402
 from app.core.passwords import hash_password  # noqa: E402
 from app.core.security import create_access_token  # noqa: E402
 from app.db.base import Base  # noqa: E402
+from app.domain.market import default_market_for_ui_locale  # noqa: E402
 from app.domain.product_normalize import normalize_product_name  # noqa: E402
 from app.main import create_app  # noqa: E402
 from app.models.household_member import HouseholdMember  # noqa: E402
+from app.models.market import Market  # noqa: E402
 from app.models.product import Product  # noqa: E402
 from app.models.recipe import Recipe, RecipeIngredient  # noqa: E402
 from app.models.user import User  # noqa: E402
@@ -67,16 +69,47 @@ def client(db_session: Session):
     app.dependency_overrides.clear()
 
 
+def _ensure_markets(session: Session) -> None:
+    if session.query(Market).count() > 0:
+        return
+    session.add_all(
+        [
+            Market(
+                code="PL",
+                name="Poland",
+                default_locale="pl",
+                currency_code="PLN",
+                is_active=True,
+            ),
+            Market(
+                code="GB",
+                name="United Kingdom",
+                default_locale="en",
+                currency_code="GBP",
+                is_active=True,
+            ),
+        ]
+    )
+    session.commit()
+
+
 def create_user(
     session: Session,
     email: str,
     lang: str = "pl",
     username: str | None = None,
+    *,
+    market_code: str | None = None,
 ) -> User:
+    _ensure_markets(session)
+    ui_locale = lang if lang in ("pl", "en") else "pl"
+    market = market_code or default_market_for_ui_locale(ui_locale)
     user = User(
         email=email,
         username=username,
-        lang=lang,
+        lang=ui_locale,
+        ui_locale=ui_locale,
+        market_code=market,
         password_hash=hash_password("test-password"),
     )
     session.add(user)
@@ -84,7 +117,7 @@ def create_user(
     session.add(
         HouseholdMember(
             user_id=user.id,
-            name="Ja" if lang == "pl" else "Me",
+            name="Ja" if ui_locale == "pl" else "Me",
             is_primary=True,
         )
     )

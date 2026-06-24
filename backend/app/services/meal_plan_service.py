@@ -6,8 +6,8 @@ from sqlalchemy.orm import Session, joinedload
 from app.models.household_member import HouseholdMember
 from app.models.meal_plan import MealPlan
 from app.models.recipe import Recipe, RecipeIngredient
-from app.models.user import User
 from app.services.meal_plan_presenter import meal_to_dict
+from app.services.user_preferences import catalog_lang_for_user
 
 
 class MealPlanServiceError(Exception):
@@ -15,13 +15,6 @@ class MealPlanServiceError(Exception):
         self.message = message
         self.status_code = status_code
         super().__init__(message)
-
-
-def _user_lang(session: Session, user_id: int) -> str:
-    user = session.get(User, user_id)
-    if user and user.lang in ("pl", "en"):
-        return user.lang
-    return "pl"
 
 
 def _meals_query(session: Session):
@@ -90,7 +83,7 @@ def get_day(
     member_ids: str | None = None,
     member_id: int | None = None,
 ) -> list[dict]:
-    lang = _user_lang(session, user_id)
+    lang = catalog_lang_for_user(session, user_id)
     mids = _member_ids_from_params(session, user_id, member_ids, member_id)
     meals = (
         _meals_query(session)
@@ -115,7 +108,7 @@ def get_range(
     member_ids: str | None = None,
     member_id: int | None = None,
 ) -> dict[str, list[dict]]:
-    lang = _user_lang(session, user_id)
+    lang = catalog_lang_for_user(session, user_id)
     mids = _member_ids_from_params(session, user_id, member_ids, member_id)
     meals = (
         _meals_query(session)
@@ -152,7 +145,7 @@ def add_meal(
     if not mid:
         raise MealPlanServiceError("No profile configured", 400)
 
-    lang = _user_lang(session, user_id)
+    lang = catalog_lang_for_user(session, user_id)
     recipe = (
         session.query(Recipe)
         .filter_by(id=recipe_id, user_id=user_id, lang=lang)
@@ -199,7 +192,7 @@ def copy_range(
     if not mid:
         raise MealPlanServiceError("No profile configured", 400)
 
-    lang = _user_lang(session, user_id)
+    lang = catalog_lang_for_user(session, user_id)
     meals = (
         session.query(MealPlan)
         .join(Recipe)
@@ -264,7 +257,7 @@ def get_summary(
     member_ids: str | None = None,
     member_id: int | None = None,
 ) -> dict:
-    lang = _user_lang(session, user_id)
+    lang = catalog_lang_for_user(session, user_id)
     mids = _member_ids_from_params(session, user_id, member_ids, member_id)
     meals = (
         session.query(MealPlan)

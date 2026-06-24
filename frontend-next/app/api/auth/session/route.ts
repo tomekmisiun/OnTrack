@@ -172,13 +172,28 @@ export async function PATCH(request: NextRequest) {
   }
 
   const base = getApiBaseUrl();
-  const response = await fetch(`${base}/api/auth/language`, {
+  const target =
+    typeof body === "object" &&
+    body !== null &&
+    "target" in body &&
+    (body as { target?: string }).target === "market"
+      ? "/api/auth/market"
+      : "/api/auth/language";
+  const upstreamBody =
+    typeof body === "object" && body !== null && "target" in body
+      ? (() => {
+          const { target: _target, ...rest } = body as Record<string, unknown>;
+          return rest;
+        })()
+      : body;
+
+  const response = await fetch(`${base}${target}`, {
     method: "PATCH",
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(body),
+    body: JSON.stringify(upstreamBody),
   });
 
   const text = await response.text();

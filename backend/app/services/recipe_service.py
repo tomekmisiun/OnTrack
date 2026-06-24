@@ -2,10 +2,10 @@ from sqlalchemy.orm import Session, joinedload
 
 from app.models.meal_plan import MealPlan
 from app.models.recipe import Recipe, RecipeIngredient
-from app.models.user import User
 from app.services.product_service import resolve_visible_product
 from app.services.recipe_image_service import resolve_recipe_image
 from app.services.recipe_presenter import recipe_to_dict, recipe_to_summary
+from app.services.user_preferences import catalog_lang_for_user
 
 
 class RecipeServiceError(Exception):
@@ -15,15 +15,8 @@ class RecipeServiceError(Exception):
         super().__init__(message)
 
 
-def _user_lang(session: Session, user_id: int) -> str:
-    user = session.get(User, user_id)
-    if user and user.lang in ("pl", "en"):
-        return user.lang
-    return "pl"
-
-
 def _load_recipe(session: Session, user_id: int, recipe_id: int) -> Recipe:
-    lang = _user_lang(session, user_id)
+    lang = catalog_lang_for_user(session, user_id)
     recipe = (
         session.query(Recipe)
         .options(joinedload(Recipe.ingredients).joinedload(RecipeIngredient.product))
@@ -36,7 +29,7 @@ def _load_recipe(session: Session, user_id: int, recipe_id: int) -> Recipe:
 
 
 def list_recipes(session: Session, user_id: int) -> list[dict]:
-    lang = _user_lang(session, user_id)
+    lang = catalog_lang_for_user(session, user_id)
     recipes = (
         session.query(Recipe)
         .options(joinedload(Recipe.ingredients).joinedload(RecipeIngredient.product))
@@ -52,7 +45,7 @@ def get_recipe(session: Session, user_id: int, recipe_id: int) -> dict:
 
 
 def create_recipe(session: Session, user_id: int, data: dict) -> dict:
-    lang = _user_lang(session, user_id)
+    lang = catalog_lang_for_user(session, user_id)
     if not data or "name" not in data:
         raise RecipeServiceError("Required field: name", 400)
     if len(str(data["name"])) > 200:
@@ -175,7 +168,7 @@ def delete_recipe(session: Session, user_id: int, recipe_id: int) -> None:
 
 
 def delete_all_recipes(session: Session, user_id: int) -> int:
-    lang = _user_lang(session, user_id)
+    lang = catalog_lang_for_user(session, user_id)
     recipe_ids = [r.id for r in session.query(Recipe).filter_by(user_id=user_id, lang=lang).all()]
     if recipe_ids:
         session.query(MealPlan).filter(MealPlan.recipe_id.in_(recipe_ids)).delete(

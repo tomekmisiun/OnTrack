@@ -6,6 +6,7 @@ from app.models.product import Product
 from app.models.recipe import RecipeIngredient
 from app.models.user import User
 from app.services.product_presenter import product_to_dict
+from app.services.user_preferences import catalog_lang_for_user
 
 MAX_NUM = 99999
 MAX_NAME = 50
@@ -64,13 +65,6 @@ def validate_product_data(data: dict, require_all: bool = True) -> str | None:
     return None
 
 
-def _user_lang(session: Session, user_id: int) -> str:
-    user = session.get(User, user_id)
-    if user and user.lang in ("pl", "en"):
-        return user.lang
-    return "pl"
-
-
 def _visible_products_query(session: Session, user_id: int, lang: str):
     overridden_system_ids = (
         session.query(Product.base_product_id)
@@ -97,7 +91,7 @@ def _visible_products_query(session: Session, user_id: int, lang: str):
 def resolve_visible_product(
     session: Session, user_id: int, product_id: int
 ) -> Product | None:
-    lang = _user_lang(session, user_id)
+    lang = catalog_lang_for_user(session, user_id)
     return (
         _visible_products_query(session, user_id, lang)
         .filter(Product.id == product_id)
@@ -106,7 +100,7 @@ def resolve_visible_product(
 
 
 def _get_own_product(session: Session, user_id: int, product_id: int) -> Product:
-    lang = _user_lang(session, user_id)
+    lang = catalog_lang_for_user(session, user_id)
     product = session.get(Product, product_id)
     if not product:
         raise ProductServiceError("Product not found", 404)
@@ -132,7 +126,7 @@ def list_products(
     if offset < 0:
         raise ProductServiceError("offset must be non-negative", 400)
 
-    lang = _user_lang(session, user_id)
+    lang = catalog_lang_for_user(session, user_id)
     query = _visible_products_query(session, user_id, lang)
 
     if q:
@@ -177,7 +171,7 @@ def create_product(session: Session, user_id: int, data: dict) -> dict:
 
 
 def customize_product(session: Session, user_id: int, product_id: int, data: dict) -> dict:
-    lang = _user_lang(session, user_id)
+    lang = catalog_lang_for_user(session, user_id)
     system = session.get(Product, product_id)
     if (
         not system
@@ -276,7 +270,7 @@ def delete_product(session: Session, user_id: int, product_id: int) -> None:
 
 
 def delete_all_products(session: Session, user_id: int) -> int:
-    lang = _user_lang(session, user_id)
+    lang = catalog_lang_for_user(session, user_id)
     count = session.query(Product).filter_by(user_id=user_id, lang=lang).delete()
     session.commit()
     return count

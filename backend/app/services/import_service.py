@@ -11,10 +11,10 @@ from sqlalchemy.orm import Session
 
 from app.models.import_log import ImportLog
 from app.models.product import Product
-from app.models.user import User
 from app.services.gemini_client import generate_with_gemini, is_gemini_overloaded
 from app.services.import_names import translate_product_name
 from app.services.product_presenter import product_to_dict
+from app.services.user_preferences import catalog_lang_for_user
 
 DAILY_LIMIT = 2
 MAX_FILE_SIZE = 5 * 1024 * 1024
@@ -67,13 +67,6 @@ class ImportServiceError(Exception):
         self.status_code = status_code
         self.code = code
         super().__init__(message)
-
-
-def _user_lang(session: Session, user_id: int) -> str:
-    user = session.get(User, user_id)
-    if user and user.lang in ("pl", "en"):
-        return user.lang
-    return "pl"
 
 
 def _system_prompt(lang: str) -> str:
@@ -251,7 +244,7 @@ def parse_receipt(
         )
 
     is_image = ext in ("png", "jpg", "jpeg", "webp")
-    lang = _user_lang(session, user_id)
+    lang = catalog_lang_for_user(session, user_id)
 
     if is_image:
         if not _detect_image_mime(file_data):
@@ -337,7 +330,7 @@ def parse_free(
     except Exception as exc:
         raise ImportServiceError("Could not read file", 400) from exc
 
-    lang = _user_lang(session, user_id)
+    lang = catalog_lang_for_user(session, user_id)
     db_products = session.query(Product).filter_by(user_id=user_id, lang=lang).all()
     results = []
 
@@ -403,7 +396,7 @@ def apply_prices(session: Session, user_id: int, updates: list) -> dict:
     if not isinstance(updates, list) or len(updates) > 200:
         raise ImportServiceError("Invalid data", 400)
 
-    lang = _user_lang(session, user_id)
+    lang = catalog_lang_for_user(session, user_id)
     updated = 0
     for entry in updates:
         if not isinstance(entry, dict):

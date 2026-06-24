@@ -15,7 +15,7 @@ from app.db.schema_validate import (
     assert_schema_parity,
     collect_schema_diffs,
 )
-from app.models.tables import ONTRACK_TABLES
+from app.models.tables import ONTRACK_INITIAL_HEAD_TABLES, ONTRACK_TABLES
 from sqlalchemy import create_engine, inspect, text
 
 BACKEND_ROOT = Path(__file__).resolve().parents[2]
@@ -85,7 +85,7 @@ def test_stamp_existing_schema_has_empty_diff(legacy_migrated_postgres: str, mon
     with engine.connect() as conn:
         tables = set(inspect(conn).get_table_names())
         version = conn.execute(text("SELECT version_num FROM alembic_version")).scalar()
-    assert ONTRACK_TABLES <= tables
+    assert ONTRACK_INITIAL_HEAD_TABLES <= tables
     assert version == LEGACY_FLASK_ALEMBIC_HEAD
 
     alembic_cfg = Config(str(BACKEND_ROOT / "alembic.ini"))

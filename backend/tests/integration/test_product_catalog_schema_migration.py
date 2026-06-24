@@ -13,7 +13,6 @@ from app.core.passwords import hash_password
 from app.domain.product_normalize import normalize_product_name
 from app.models.household_member import HouseholdMember
 from app.models.product import Product
-from app.models.user import User
 from sqlalchemy import inspect, text
 from sqlalchemy.engine import create_engine
 from sqlalchemy.exc import IntegrityError
@@ -64,15 +63,22 @@ def legacy_migrated_db(postgres_url: str, monkeypatch):
 
     Session = sessionmaker(bind=create_engine(postgres_url))
     session = Session()
-    user = User(
-        email="mig@example.com",
-        username="miguser",
-        lang="pl",
-        password_hash=hash_password("test-password"),
-    )
-    session.add(user)
-    session.flush()
-    session.add(HouseholdMember(user_id=user.id, name="Ja", is_primary=True))
+    user_id = session.execute(
+        text(
+            """
+            INSERT INTO users (email, username, password_hash, lang)
+            VALUES (:email, :username, :password_hash, :lang)
+            RETURNING id
+            """
+        ),
+        {
+            "email": "mig@example.com",
+            "username": "miguser",
+            "password_hash": hash_password("test-password"),
+            "lang": "pl",
+        },
+    ).scalar_one()
+    session.add(HouseholdMember(user_id=user_id, name="Ja", is_primary=True))
     session.flush()
     session.execute(
         text(
@@ -83,7 +89,7 @@ def legacy_migrated_db(postgres_url: str, monkeypatch):
                 (:user_id, 'Mleko', 1000, 3.0, 'ml', false, 'pl')
             """
         ),
-        {"user_id": user.id},
+        {"user_id": user_id},
     )
     session.commit()
     legacy_id = session.execute(text("SELECT id FROM products LIMIT 1")).scalar_one()

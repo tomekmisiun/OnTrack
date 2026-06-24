@@ -39,7 +39,11 @@ def ensure_primary_member(session: Session, user_id: int, lang: str) -> None:
 def sync_primary_member_name(session: Session, user) -> bool:
     if not user:
         return False
-    lang = user.lang if user.lang in ("pl", "en") else "pl"
+    locale = (
+        user.ui_locale
+        if getattr(user, "ui_locale", None) in ("pl", "en")
+        else (user.lang if user.lang in ("pl", "en") else "pl")
+    )
     primary = (
         session.query(HouseholdMember)
         .filter_by(user_id=user.id, is_primary=True)
@@ -47,7 +51,7 @@ def sync_primary_member_name(session: Session, user) -> bool:
     )
     if not primary or primary.name not in ("Me", "Ja"):
         return False
-    expected = default_primary_member_name(lang)
+    expected = default_primary_member_name(locale)
     if primary.name == expected:
         return False
     primary.name = expected

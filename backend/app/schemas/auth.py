@@ -20,6 +20,10 @@ class LanguageRequest(BaseModel):
     lang: str = ""
 
 
+class MarketRequest(BaseModel):
+    market_code: str = ""
+
+
 class TokenResponse(BaseModel):
     token: str
 
@@ -35,6 +39,8 @@ class ErrorResponse(BaseModel):
 class UserResponse(BaseModel):
     id: int
     lang: str
+    ui_locale: str
+    market_code: str
     username: str | None = None
     email: str | None = None
 
