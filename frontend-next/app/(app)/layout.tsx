@@ -1,5 +1,6 @@
 import { RequireAuth } from "@/components/auth/RequireAuth";
 import { AppShell } from "@/components/layout/AppShell";
+import { MemberProvider } from "@/contexts/MemberContext";
 
 export default function AppLayout({
   children,
@@ -8,7 +9,9 @@ export default function AppLayout({
 }>) {
   return (
     <RequireAuth>
-      <AppShell>{children}</AppShell>
+      <MemberProvider>
+        <AppShell>{children}</AppShell>
+      </MemberProvider>
     </RequireAuth>
   );
 }

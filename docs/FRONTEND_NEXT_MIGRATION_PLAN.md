@@ -153,6 +153,7 @@ npm run export:openapi → openapi/openapi.json
 | **Acceptance** | Contract parity with `test_members_contract.py` behaviors |
 | **Tests** | Integration tests with MSW |
 | **Out of scope** | Macro profile (partial — link to task 12) |
+| **Status** | Done |
 
 ---
 
