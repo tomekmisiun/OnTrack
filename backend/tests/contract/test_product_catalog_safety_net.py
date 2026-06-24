@@ -7,7 +7,6 @@ from app.models.product import Product
 from app.models.recipe import Recipe
 from app.models.user import User
 from app.services.catalog_seed_service import ensure_user_seeded
-from app.worker.jobs import process_job
 from app.worker.queue import drain_testing_jobs, reset_testing_jobs
 
 from tests.conftest import create_user
@@ -155,8 +154,8 @@ def test_product_list_supports_pagination(client, auth_headers, product):
 # --- Worker / registration (worker not required; redundant enqueue) ---
 
 
-def test_register_does_not_require_worker_job_processing(client, db_session):
-    """Recipe seed runs synchronously; worker job is not required for recipes to exist."""
+def test_register_does_not_enqueue_catalog_seed_job(client, db_session):
+    """Recipe seed is synchronous; no background catalog_seed job is enqueued."""
     reset_testing_jobs()
     reg = client.post(
         "/api/auth/register",
@@ -166,61 +165,15 @@ def test_register_does_not_require_worker_job_processing(client, db_session):
     user = db_session.query(User).filter_by(username="noworker1").first()
     assert db_session.query(Product).filter_by(user_id=user.id, lang="pl").count() == 0
     assert db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count() >= 1
-    jobs = drain_testing_jobs()
-    assert any(j.get("type") == "catalog_seed" for j in jobs)
+    assert drain_testing_jobs() == []
 
 
-def test_register_sync_and_worker_seed_are_idempotent(client, db_session, engine, monkeypatch):
-    """Sync seed on register + enqueued job must not duplicate recipes."""
-    from sqlalchemy.orm import sessionmaker
-
-    bind = db_session.get_bind()
-    monkeypatch.setattr(
-        "app.worker.jobs.get_session_factory",
-        lambda: sessionmaker(bind=bind, autocommit=False, autoflush=False),
-    )
-    reset_testing_jobs()
-    reg = client.post(
-        "/api/auth/register",
-        json={"username": "redundant1", "password": "secret123", "lang": "pl"},
-    )
-    assert reg.status_code == 201
-    user = db_session.query(User).filter_by(username="redundant1").first()
-    before_job = db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count()
-    assert before_job >= 1
-    assert db_session.query(Product).filter_by(user_id=user.id, lang="pl").count() == 0
-
-    jobs = drain_testing_jobs()
-    assert jobs
-    process_job(jobs[0])
-    after_job = db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count()
-    assert after_job == before_job
-
-
-def test_inline_fallback_runs_catalog_seed_without_redis(db_session, engine, monkeypatch):
-    """Without REDIS_URL and outside TESTING queue mode, enqueue runs process_job inline."""
-    from app.core.config import Settings
-    from app.worker import queue as queue_mod
-    from sqlalchemy.orm import sessionmaker
-
-    user = create_user(db_session, "inline@example.com", lang="pl")
-    db_session.query(Product).filter_by(user_id=user.id).delete()
-    db_session.query(Recipe).filter_by(user_id=user.id).delete()
-    db_session.commit()
-
-    bind = db_session.get_bind()
-    monkeypatch.setattr(
-        "app.worker.jobs.get_session_factory",
-        lambda: sessionmaker(bind=bind, autocommit=False, autoflush=False),
-    )
-
-    fake_settings = Settings(
-        testing=False,
-        redis_url=None,
-        database_url="sqlite://",
-    )
-    monkeypatch.setattr(queue_mod, "get_settings", lambda: fake_settings)
-
-    queue_mod.enqueue_catalog_seed(user.id, "pl")
-    assert db_session.query(Product).filter_by(user_id=user.id, lang="pl").count() == 0
-    assert db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count() >= 1
+def test_register_recipe_seed_is_idempotent(client, db_session):
+    """Repeated ensure_user_seeded must not duplicate demo recipes."""
+    user = create_user(db_session, "redundant1@example.com", lang="pl")
+    ensure_user_seeded(db_session, user.id, "pl")
+    before = db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count()
+    assert before >= 1
+    ensure_user_seeded(db_session, user.id, "pl")
+    after = db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count()
+    assert after == before
