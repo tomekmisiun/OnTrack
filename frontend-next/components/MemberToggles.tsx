@@ -1,23 +1,25 @@
 "use client";
 
+import { Icon } from "@iconify/react";
 import {
   useEffect,
   useRef,
   useState,
-  type FormEvent,
   type CSSProperties,
+  type FormEvent,
 } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useMember } from "@/contexts/MemberContext";
 import { useToast } from "@/contexts/ToastContext";
+import { ApiError } from "@/lib/api/errors";
 import {
   createMember,
   deleteMember,
   renameMember,
 } from "@/lib/api/members";
-import { memberColor } from "@/lib/members/colors";
-import { ApiError } from "@/lib/api/errors";
 import type { TranslationKey } from "@/lib/i18n/translations";
+import { memberColor } from "@/lib/members/colors";
+import "./member-toggles.css";
 
 type MemberTogglesProps = {
   variant?: "sidebar" | "welcome";
@@ -161,9 +163,7 @@ export function MemberToggles({ variant = "sidebar" }: MemberTogglesProps) {
 
   return (
     <div
-      className={`flex flex-wrap gap-1.5 ${
-        variant === "sidebar" ? "text-xs" : "text-sm"
-      }`}
+      className={`member-toggles member-toggles--${variant}`}
       role="group"
       aria-label={tString(t, "welcome_include_members")}
     >
@@ -179,10 +179,14 @@ export function MemberToggles({ variant = "sidebar" }: MemberTogglesProps) {
         } as CSSProperties;
 
         return (
-          <span key={member.id} className="inline-flex items-center gap-0.5">
+          <span
+            key={member.id}
+            className="member-toggle-wrap"
+            title={tString(t, "member_switch_hint")}
+          >
             {editingId === member.id ? (
               <form
-                className="inline-flex items-center gap-1"
+                className="member-toggle-add-form member-toggle-rename-form"
                 onSubmit={(e) => {
                   e.preventDefault();
                   void handleRename(member.id);
@@ -191,7 +195,7 @@ export function MemberToggles({ variant = "sidebar" }: MemberTogglesProps) {
                 <input
                   ref={renameInputRef}
                   type="text"
-                  className="w-24 rounded border border-slate-600 bg-slate-800 px-2 py-1 text-xs text-slate-100"
+                  className="member-toggle-add-input"
                   value={editName}
                   onChange={(e) => setEditName(e.target.value)}
                   placeholder={tString(t, "member_name_ph")}
@@ -209,21 +213,18 @@ export function MemberToggles({ variant = "sidebar" }: MemberTogglesProps) {
                 />
                 <button
                   type="submit"
-                  className="cursor-pointer rounded bg-teal-700 px-1.5 py-1 text-[10px] text-white"
+                  className="member-toggle-add-confirm"
                   aria-label={tString(t, "save_btn")}
                   onMouseDown={(e) => e.preventDefault()}
                 >
-                  ✓
+                  <Icon icon="heroicons:check" width={14} />
                 </button>
               </form>
             ) : (
               <>
                 <button
                   type="button"
-                  className={`inline-flex cursor-pointer items-center gap-1 rounded-full border border-slate-600 px-2 py-1 font-medium text-slate-300 ${
-                    checked ? "border-[var(--member-color)]" : ""
-                  } ${locked ? "opacity-90" : ""}`}
-                  style={chipStyle}
+                  className={`member-toggle${checked ? " member-toggle--on" : ""}${locked ? " member-toggle--locked" : ""}`}
                   onClick={() => handleToggle(member.id)}
                   onDoubleClick={(e) => {
                     e.preventDefault();
@@ -237,16 +238,14 @@ export function MemberToggles({ variant = "sidebar" }: MemberTogglesProps) {
                       : tString(t, "member_switch_hint")
                   }
                   aria-pressed={checked}
+                  style={chipStyle}
                 >
-                  <span
-                    className="h-1.5 w-1.5 rounded-full bg-current opacity-80"
-                    aria-hidden
-                  />
+                  <span className="member-toggle-dot" />
                   {member.name}
                 </button>
                 <button
                   type="button"
-                  className="cursor-pointer rounded px-1 text-[10px] text-slate-500 hover:text-slate-300"
+                  className="member-toggle-edit"
                   onClick={(e) => {
                     e.stopPropagation();
                     startRename(member.id, member.name);
@@ -254,19 +253,19 @@ export function MemberToggles({ variant = "sidebar" }: MemberTogglesProps) {
                   aria-label={tString(t, "member_rename_btn")}
                   title={tString(t, "member_rename_btn")}
                 >
-                  ✎
+                  <Icon icon="heroicons:pencil-square" width={11} />
                 </button>
               </>
             )}
             {!member.is_primary && editingId !== member.id && (
               <button
                 type="button"
-                className="cursor-pointer rounded px-1 text-[10px] text-slate-500 hover:text-red-400"
+                className="member-toggle-del"
                 onClick={() => handleDelete(member.id, member.name)}
                 aria-label={tFormat(t, "member_delete_title", member.name)}
                 title={tString(t, "btn_delete")}
               >
-                ×
+                <Icon icon="heroicons:x-mark" width={10} />
               </button>
             )}
           </span>
@@ -274,11 +273,11 @@ export function MemberToggles({ variant = "sidebar" }: MemberTogglesProps) {
       })}
 
       {adding ? (
-        <form className="inline-flex items-center gap-1" onSubmit={onAddSubmit}>
+        <form className="member-toggle-add-form" onSubmit={onAddSubmit}>
           <input
             ref={inputRef}
             type="text"
-            className="w-24 rounded border border-slate-600 bg-slate-800 px-2 py-1 text-xs text-slate-100"
+            className="member-toggle-add-input"
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
             placeholder={tString(t, "member_name_ph")}
@@ -292,21 +291,21 @@ export function MemberToggles({ variant = "sidebar" }: MemberTogglesProps) {
           />
           <button
             type="submit"
-            className="cursor-pointer rounded bg-teal-700 px-1.5 py-1 text-[10px] text-white"
+            className="member-toggle-add-confirm"
             aria-label={tString(t, "welcome_add_profile")}
             onMouseDown={(e) => e.preventDefault()}
           >
-            ✓
+            <Icon icon="heroicons:check" width={14} />
           </button>
         </form>
       ) : (
         <button
           type="button"
-          className="inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-full border border-dashed border-slate-600 text-slate-400 hover:border-teal-500 hover:text-teal-400"
+          className="member-toggle-add"
           onClick={() => setAdding(true)}
           aria-label={tString(t, "welcome_add_profile")}
         >
-          +
+          <Icon icon="heroicons:plus" width={variant === "sidebar" ? 14 : 16} />
         </button>
       )}
     </div>

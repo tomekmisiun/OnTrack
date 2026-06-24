@@ -12,6 +12,7 @@ import { useAppShellDocument } from "@/hooks/useAppShellDocument";
 import { useLayoutViewport } from "@/hooks/useLayoutViewport";
 import { HOME_PATH } from "@/lib/config/routes";
 import { LAYOUT_WIDTH } from "@/lib/layout/constants";
+import "@/components/welcome/welcome.css";
 
 type AppShellInnerProps = {
   children: React.ReactNode;
