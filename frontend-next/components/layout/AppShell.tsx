@@ -2,11 +2,16 @@
 
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { AppBackground } from "@/components/layout/AppBackground";
+import { AppFooter } from "@/components/layout/AppFooter";
 import { ProfileModal } from "@/components/profile/ProfileModal";
 import { ProfileModalProvider } from "@/components/profile/ProfileModalContext";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { TourProvider, useTour } from "@/components/tour/TourProvider";
+import { useAppShellDocument } from "@/hooks/useAppShellDocument";
+import { useLayoutViewport } from "@/hooks/useLayoutViewport";
 import { HOME_PATH } from "@/lib/config/routes";
+import { LAYOUT_WIDTH } from "@/lib/layout/constants";
 
 type AppShellInnerProps = {
   children: React.ReactNode;
@@ -17,6 +22,9 @@ function AppShellInner({ children }: AppShellInnerProps) {
   const isHome = pathname === HOME_PATH;
   const [showProfile, setShowProfile] = useState(false);
   const { startTour } = useTour();
+
+  useLayoutViewport(isHome ? LAYOUT_WIDTH.home : LAYOUT_WIDTH.app);
+  useAppShellDocument(isHome);
 
   const profileModal = showProfile ? (
     <ProfileModal
@@ -31,8 +39,12 @@ function AppShellInner({ children }: AppShellInnerProps) {
   if (isHome) {
     return (
       <ProfileModalProvider openProfile={() => setShowProfile(true)}>
-        <div className="min-h-screen">
-          {children}
+        <div className="app app--home">
+          <AppBackground />
+          <main className="app-main app-main--home">
+            <div className="app-main-content">{children}</div>
+            <AppFooter />
+          </main>
           {profileModal}
         </div>
       </ProfileModalProvider>
@@ -41,9 +53,13 @@ function AppShellInner({ children }: AppShellInnerProps) {
 
   return (
     <ProfileModalProvider openProfile={() => setShowProfile(true)}>
-      <div className="flex min-h-screen">
+      <div className="app">
+        <AppBackground />
         <Sidebar onAccount={() => setShowProfile(true)} />
-        <main className="min-w-0 flex-1 overflow-auto p-4 md:p-6">{children}</main>
+        <main className="app-main">
+          <div className="app-main-content">{children}</div>
+          <AppFooter />
+        </main>
         {profileModal}
       </div>
     </ProfileModalProvider>
