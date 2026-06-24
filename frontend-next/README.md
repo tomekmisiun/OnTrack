@@ -43,7 +43,8 @@ npm run start
 ```text
 app/           — App Router pages and layouts
 components/    — UI components
-contexts/      — React contexts (auth, language, etc. — future tasks)
+contexts/      — React contexts (Language, Toast; auth/member in later tasks)
+lib/i18n/      — Translation tables (ported from CRA)
 lib/api/       — HTTP client and API modules
 lib/config/    — Environment helpers
 styles/        — Global CSS + Tailwind entry

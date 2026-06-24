@@ -33,6 +33,7 @@ const eslintConfig = [
       "build/**",
       "next-env.d.ts",
       "lib/api/generated/**",
+      "lib/i18n/translations.ts",
     ],
   },
 ];
