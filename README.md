@@ -49,7 +49,8 @@ First run builds images and installs frontend dependencies; it may take a few mi
 
 | Service | URL |
 |---------|-----|
-| **App (frontend)** | http://localhost:3000 |
+| **App (frontend, CRA)** | http://localhost:3000 |
+| **App (frontend-next)** | http://localhost:3002 |
 | Backend API | http://localhost:5001 |
 | Health check | http://localhost:5001/health |
 | Grafana | http://localhost:3001 |
@@ -116,6 +117,7 @@ OnTrack/
 │   └── railway.toml     # Railway config (Root Directory = backend)
 ├── app/                 # Legacy dish-compare build tooling (optional, not runtime)
 ├── frontend/
+├── frontend-next/       # Next.js migration (Compose :3002, prod Dockerfile)
 ├── scraper/             # Experimental offline pipeline (disconnected)
 ├── monitoring/          # Prometheus config (local dev)
 ├── docker-compose.yml
