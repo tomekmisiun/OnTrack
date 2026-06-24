@@ -6,6 +6,9 @@ as a **reference foundation** (not a blind copy).
 
 **Status:** MIG-000–MIG-017 ✅ — Flask backend removed; FastAPI is the sole API.
 
+**In progress:** [DATA_DEPLOYMENT_ROADMAP.md](./DATA_DEPLOYMENT_ROADMAP.md) — backend data
+decoupling + self-contained Docker/Railway deploy (DATA-001–006).
+
 ## Reading order
 
 1. **[API_CONTRACT.md](./API_CONTRACT.md)** — authoritative frontend consumer contract (start here for porting).
@@ -14,8 +17,9 @@ as a **reference foundation** (not a blind copy).
 4. **[DATABASE_COMPATIBILITY.md](./DATABASE_COMPATIBILITY.md)** — tables, fresh vs production DB strategy.
 5. **[TEMPLATE_TRIM_MATRIX.md](./TEMPLATE_TRIM_MATRIX.md)** — what to keep/adapt/defer/remove from the foundation.
 6. **[TARGET_ARCHITECTURE.md](./TARGET_ARCHITECTURE.md)** — target `backend/` layout and layer rules.
-7. **[MIGRATION_ROADMAP.md](./MIGRATION_ROADMAP.md)** — one-task-per-branch implementation plan.
-8. **[CUTOVER_AND_ROLLBACK.md](./CUTOVER_AND_ROLLBACK.md)** — Railway staging, rehearsal, production switch.
+7. **[MIGRATION_ROADMAP.md](./MIGRATION_ROADMAP.md)** — Flask → FastAPI implementation plan (MIG-000–017).
+8. **[DATA_DEPLOYMENT_ROADMAP.md](./DATA_DEPLOYMENT_ROADMAP.md)** — runtime data + deployment architecture (DATA-001–006).
+9. **[CUTOVER_AND_ROLLBACK.md](./CUTOVER_AND_ROLLBACK.md)** — Railway staging, rehearsal, production switch.
 
 ## Principles (non-negotiable)
 
@@ -38,4 +42,5 @@ as a **reference foundation** (not a blind copy).
 
 ## Next step
 
-Implement **MIG-001** on branch `mig-001-fastapi-skeleton` — see [MIGRATION_ROADMAP.md](./MIGRATION_ROADMAP.md).
+Implement **DATA-002** on branch `data/backend-curated-runtime-dataset` — see
+[DATA_DEPLOYMENT_ROADMAP.md](./DATA_DEPLOYMENT_ROADMAP.md) (after DATA-001 is merged).
