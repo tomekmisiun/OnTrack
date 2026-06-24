@@ -12,9 +12,12 @@
     "generate:api": "openapi-typescript openapi/openapi.json -o lib/api/generated/schema.ts",
     "test:members": "node scripts/check-member-targets.mjs",
     "test:products": "node scripts/check-product-page.mjs",
-    "test:recipes": "node scripts/check-recipe-search.mjs"
+    "test:recipes": "node scripts/check-recipe-search.mjs",
+    "test:calendar": "node scripts/check-meal-plan-dates.mjs"
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@iconify/react": "^6.0.2",
     "next": "15.5.4",
     "react": "19.1.0",
     "react-dom": "19.1.0"

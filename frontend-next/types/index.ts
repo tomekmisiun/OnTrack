@@ -10,6 +10,15 @@ export type {
   ParsedProductText,
 } from "@/types/product";
 export type {
+  Meal,
+  MealRecipeSnapshot,
+  MealsByDate,
+  TplSlotRecipe,
+  TplSlots,
+  WeekTemplate,
+  WeekTemplateMeal,
+} from "@/types/mealPlan";
+export type {
   Recipe,
   RecipeSummary,
   RecipeIngredient,
