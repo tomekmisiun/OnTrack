@@ -85,6 +85,12 @@ npm run generate:api
 - Helpers: `lib/api/openapi-helpers.ts` (`OperationResponse`, `ApiSchema`)
 - Example modules: `lib/api/health.ts`, `lib/api/auth.ts`
 
+## Authentication
+
+- JWT in `localStorage` (`lib/auth/storage.ts`) — unchanged from CRA until optional BFF task
+- `contexts/AuthContext.tsx` — bootstrap, `?code=` OAuth exchange, login/register/logout
+- `/login` — password + Google OAuth redirect to FastAPI `/api/auth/google`
+
 CI runs `generate:api` before lint to catch drift.
 
 ## Migration plan
