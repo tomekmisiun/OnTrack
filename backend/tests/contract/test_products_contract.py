@@ -2,6 +2,12 @@ from app.models.product import Product
 from app.services.product_service import validate_product_data
 
 
+def _items(body: dict | list) -> list:
+    if isinstance(body, dict) and "items" in body:
+        return body["items"]
+    return body
+
+
 def test_validate_product_data_requires_fields():
     assert validate_product_data({}) == "Required fields: name, package_weight, price"
 
@@ -35,7 +41,7 @@ def test_create_and_list_products(client, auth_headers):
 
     listed = client.get("/api/products/", headers=auth_headers)
     assert listed.status_code == 200
-    names = [p["name"] for p in listed.json()]
+    names = [p["name"] for p in _items(listed.json())]
     assert "Banany" in names
 
 
@@ -58,7 +64,9 @@ def test_delete_product(client, auth_headers, product, db_session):
 def test_products_are_scoped_by_user(client, auth_headers, other_auth_headers, product):
     res = client.get("/api/products/", headers=other_auth_headers)
     assert res.status_code == 200
-    assert res.json() == []
+    body = res.json()
+    assert _items(body) == []
+    assert body.get("total") == 0
 
     missing = client.delete(f"/api/products/{product.id}", headers=other_auth_headers)
     assert missing.status_code == 404

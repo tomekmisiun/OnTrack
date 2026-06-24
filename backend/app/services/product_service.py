@@ -1,6 +1,6 @@
+from sqlalchemy import and_, or_
 from sqlalchemy.orm import Session
 
-from app.domain.product_filters import looks_like_recipe_ingredient_line
 from app.domain.product_normalize import normalize_product_name
 from app.models.product import Product
 from app.models.user import User
@@ -11,6 +11,8 @@ MAX_NAME = 50
 MAX_KCAL = 9999
 MAX_MACRO = 100
 MAX_PRICE = 9999
+DEFAULT_LIST_LIMIT = 20
+MAX_LIST_LIMIT = 100
 
 
 class ProductServiceError(Exception):
@@ -61,23 +63,45 @@ def validate_product_data(data: dict, require_all: bool = True) -> str | None:
     return None
 
 
-def _is_catalog_product(product: Product) -> bool:
-    if looks_like_recipe_ingredient_line(product.name):
-        return False
-    if product.price and product.price > 0:
-        return True
-    if product.kcal is not None or product.protein is not None:
-        return True
-    if len(product.name or "") <= 40:
-        return True
-    return False
-
-
 def _user_lang(session: Session, user_id: int) -> str:
     user = session.get(User, user_id)
     if user and user.lang in ("pl", "en"):
         return user.lang
     return "pl"
+
+
+def _visible_products_query(session: Session, user_id: int, lang: str):
+    overridden_system_ids = (
+        session.query(Product.base_product_id)
+        .filter(
+            Product.user_id == user_id,
+            Product.lang == lang,
+            Product.base_product_id.isnot(None),
+        )
+        .scalar_subquery()
+    )
+    return session.query(Product).filter(
+        Product.lang == lang,
+        or_(
+            Product.user_id == user_id,
+            and_(
+                Product.user_id.is_(None),
+                Product.source == "system",
+                ~Product.id.in_(overridden_system_ids),
+            ),
+        ),
+    )
+
+
+def resolve_visible_product(
+    session: Session, user_id: int, product_id: int
+) -> Product | None:
+    lang = _user_lang(session, user_id)
+    return (
+        _visible_products_query(session, user_id, lang)
+        .filter(Product.id == product_id)
+        .first()
+    )
 
 
 def _get_own_product(session: Session, user_id: int, product_id: int) -> Product:
@@ -92,15 +116,36 @@ def _get_own_product(session: Session, user_id: int, product_id: int) -> Product
     return product
 
 
-def list_products(session: Session, user_id: int) -> list[dict]:
+def list_products(
+    session: Session,
+    user_id: int,
+    *,
+    q: str | None = None,
+    limit: int = DEFAULT_LIST_LIMIT,
+    offset: int = 0,
+) -> dict:
+    if limit < 1:
+        raise ProductServiceError("limit must be at least 1", 400)
+    if limit > MAX_LIST_LIMIT:
+        raise ProductServiceError(f"limit must be at most {MAX_LIST_LIMIT}", 400)
+    if offset < 0:
+        raise ProductServiceError("offset must be non-negative", 400)
+
     lang = _user_lang(session, user_id)
-    products = (
-        session.query(Product)
-        .filter_by(user_id=user_id, lang=lang)
-        .order_by(Product.name)
-        .all()
-    )
-    return [product_to_dict(p) for p in products if _is_catalog_product(p)]
+    query = _visible_products_query(session, user_id, lang)
+
+    if q:
+        term = f"%{normalize_product_name(q)}%"
+        query = query.filter(Product.normalized_name.ilike(term))
+
+    total = query.count()
+    rows = query.order_by(Product.name).offset(offset).limit(limit).all()
+    return {
+        "items": [product_to_dict(p, viewer_user_id=user_id) for p in rows],
+        "total": total,
+        "limit": limit,
+        "offset": offset,
+    }
 
 
 def create_product(session: Session, user_id: int, data: dict) -> dict:
@@ -127,7 +172,7 @@ def create_product(session: Session, user_id: int, data: dict) -> dict:
     session.add(product)
     session.commit()
     session.refresh(product)
-    return product_to_dict(product)
+    return product_to_dict(product, viewer_user_id=user_id)
 
 
 def update_product(session: Session, user_id: int, product_id: int, data: dict) -> dict:
@@ -153,7 +198,7 @@ def update_product(session: Session, user_id: int, product_id: int, data: dict) 
 
     session.commit()
     session.refresh(product)
-    return product_to_dict(product)
+    return product_to_dict(product, viewer_user_id=user_id)
 
 
 def delete_product(session: Session, user_id: int, product_id: int) -> None:

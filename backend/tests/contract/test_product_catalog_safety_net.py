@@ -7,7 +7,6 @@ Tests marked ``legacy_catalog_copy`` are expected to change in Task 6.
 from __future__ import annotations
 
 import json
-from pathlib import Path
 
 import pytest
 from app.core.runtime_data import seeds_dir
@@ -29,6 +28,12 @@ LEGACY_CATALOG_COPY = pytest.mark.legacy_catalog_copy(
 )
 
 
+def _product_items(response_json: dict | list) -> list:
+    if isinstance(response_json, dict) and "items" in response_json:
+        return response_json["items"]
+    return response_json
+
+
 def _seed_product_count(lang: str = "pl") -> int:
     path = seeds_dir() / f"products_seed_{lang}.json"
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -43,7 +48,7 @@ def test_user_a_cannot_see_user_b_private_product(
 ):
     res = client.get("/api/products/", headers=other_auth_headers)
     assert res.status_code == 200
-    ids = {p["id"] for p in res.json()}
+    ids = {p["id"] for p in _product_items(res.json())}
     assert product.id not in ids
 
 
@@ -132,7 +137,7 @@ def test_product_list_excludes_other_users_products(
 ):
     res = client.get("/api/products/", headers=other_auth_headers)
     assert res.status_code == 200
-    assert all(p["id"] != product.id for p in res.json())
+    assert all(p["id"] != product.id for p in _product_items(res.json()))
 
 
 def test_product_list_filters_by_user_language(client, auth_headers, user, db_session):
@@ -152,22 +157,23 @@ def test_product_list_filters_by_user_language(client, auth_headers, user, db_se
 
     res = client.get("/api/products/", headers=auth_headers)
     assert res.status_code == 200
-    ids = {p["id"] for p in res.json()}
+    ids = {p["id"] for p in _product_items(res.json())}
     assert foreign_lang.id not in ids
 
 
-def test_product_list_has_no_pagination_legacy(client, auth_headers, product):
-    """Documents current API: full list returned, no limit/offset/total metadata."""
-    res = client.get("/api/products/", headers=auth_headers)
+def test_product_list_supports_pagination(client, auth_headers, product):
+    """CAT-004: list returns paginated envelope with limit/offset/total."""
+    res = client.get("/api/products/", headers=auth_headers, params={"limit": 1, "offset": 0})
     assert res.status_code == 200
     body = res.json()
-    assert isinstance(body, list)
-    assert len(body) >= 1
-    # OpenAPI route has no pagination query params today.
-    routes_path = Path(__file__).resolve().parents[2] / "app" / "api" / "routes" / "products.py"
-    source = routes_path.read_text(encoding="utf-8")
-    assert "limit" not in source.split("def get_products")[1].split("def ")[0]
-    assert "offset" not in source.split("def get_products")[1].split("def ")[0]
+    assert isinstance(body, dict)
+    assert "items" in body
+    assert "total" in body
+    assert "limit" in body
+    assert "offset" in body
+    assert isinstance(body["items"], list)
+    assert body["limit"] == 1
+    assert body["total"] >= 1
 
 
 # --- Worker / registration (worker not required; redundant enqueue) ---
