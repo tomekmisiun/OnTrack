@@ -43,6 +43,7 @@ testpaths = ["tests"]
 pythonpath = ["."]
 markers = [
     "integration: tests requiring PostgreSQL (set TEST_DATABASE_URL)",
+    "legacy_catalog_copy: documents per-user seed on register; change in Task 6",
 ]
 
 [tool.coverage.run]
