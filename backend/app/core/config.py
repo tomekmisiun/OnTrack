@@ -35,6 +35,7 @@ class Settings(BaseSettings):
     redis_url: str | None = Field(default=None, validation_alias="REDIS_URL")
 
     user_seeds_dir: str | None = None
+    runtime_data_dir: str | None = Field(default=None, validation_alias="RUNTIME_DATA_DIR")
 
     @property
     def google_oauth_configured(self) -> bool:

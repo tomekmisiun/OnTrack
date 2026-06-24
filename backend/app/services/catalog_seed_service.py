@@ -1,25 +1,16 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
 
 from sqlalchemy.orm import Session
 
-from app.core.config import get_settings
+from app.core.runtime_data import seeds_dir
 from app.models.product import Product
 from app.models.recipe import Recipe, RecipeIngredient
 
 
-def _user_seeds_dir() -> Path:
-    settings = get_settings()
-    if settings.user_seeds_dir:
-        return Path(settings.user_seeds_dir)
-    # Monorepo: backend/app/services -> repo root
-    return Path(__file__).resolve().parents[3] / "app" / "user_seeds" / "data"
-
-
 def _load_json(fname: str, lang: str) -> list[dict]:
-    base = _user_seeds_dir()
+    base = seeds_dir()
     for name in (fname.replace("_pl.", f"_{lang}."), fname):
         path = base / name
         if path.exists():

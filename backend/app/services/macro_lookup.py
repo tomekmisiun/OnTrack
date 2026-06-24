@@ -7,9 +7,10 @@ import os
 import re
 import threading
 import unicodedata
-from pathlib import Path
 
 from rapidfuzz import fuzz, process
+
+from app.core.runtime_data import ingredients_macros_paths, macro_ai_cache_path
 
 _PL_TRANSLATE = str.maketrans("ąćęłńóśźż", "acelnoszz")
 _CACHE_LOCK = threading.Lock()
@@ -49,22 +50,6 @@ _macro_map_en: dict[str, dict] | None = None
 _ai_cache: dict[str, dict] | None = None
 
 
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[3]
-
-
-def _macros_paths() -> tuple[Path, Path]:
-    root = _repo_root()
-    return (
-        root / "scraper" / "data" / "macros" / "ingredients_macros.json",
-        root / "app" / "data" / "ingredients_macros.json",
-    )
-
-
-def _ai_cache_path() -> Path:
-    return _repo_root() / "app" / "data" / "macro_ai_cache.json"
-
-
 def strip_accents(text: str) -> str:
     return "".join(
         c for c in unicodedata.normalize("NFKD", text) if not unicodedata.combining(c)
@@ -87,7 +72,7 @@ def _macro_value(item: dict) -> dict:
 
 
 def _load_macros_file() -> list[dict]:
-    for path in _macros_paths():
+    for path in ingredients_macros_paths():
         if path.exists():
             return json.loads(path.read_text(encoding="utf-8"))
     return []
@@ -119,7 +104,7 @@ def _load_ai_cache() -> dict[str, dict]:
     global _ai_cache
     if _ai_cache is not None:
         return _ai_cache
-    path = _ai_cache_path()
+    path = macro_ai_cache_path()
     if path.exists():
         try:
             _ai_cache = json.loads(path.read_text(encoding="utf-8"))
@@ -134,7 +119,7 @@ def _save_ai_cache_entry(cache_key: str, payload: dict) -> None:
     with _CACHE_LOCK:
         cache = _load_ai_cache()
         cache[cache_key] = payload
-        path = _ai_cache_path()
+        path = macro_ai_cache_path()
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps(cache, ensure_ascii=False, indent=2), encoding="utf-8")
 

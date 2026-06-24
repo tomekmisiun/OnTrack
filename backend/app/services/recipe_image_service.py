@@ -4,11 +4,11 @@ from __future__ import annotations
 
 import json
 from functools import lru_cache
-from pathlib import Path
 
 import requests
 
 from app.core.config import get_settings
+from app.core.runtime_data import recipes_pl_paths
 
 _FOOD_HINTS = frozenset({
     "food", "meal", "dish", "recipe", "salad", "soup", "stew", "bowl",
@@ -16,19 +16,11 @@ _FOOD_HINTS = frozenset({
 })
 
 
-def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[3]
-
-
 @lru_cache(maxsize=1)
 def _pl_name_en_lookup() -> tuple[dict[str, str], dict[str, str]]:
     by_url: dict[str, str] = {}
     by_pl: dict[str, str] = {}
-    paths = (
-        _repo_root() / "scraper" / "data" / "built" / "recipes_pl.json",
-        _repo_root() / "app" / "user_seeds" / "data" / "recipes_seed_pl.json",
-    )
-    for path in paths:
+    for path in recipes_pl_paths():
         if not path.exists():
             continue
         try:

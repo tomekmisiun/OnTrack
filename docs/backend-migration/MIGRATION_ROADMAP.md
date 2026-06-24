@@ -275,3 +275,14 @@ MIG-000
 - [ ] Flask still runs in compose (until MIG-017) — **N/A after MIG-017**
 - [ ] Documentation updated if contract assumptions change
 - [ ] Rollback noted in PR description
+
+---
+
+## Follow-on: data & deployment architecture
+
+MIG-017 removed Flask but left backend coupled to monorepo paths (`app/`, `scraper/`)
+and repo-root Docker build context. The next phase is tracked separately:
+
+**[DATA_DEPLOYMENT_ROADMAP.md](./DATA_DEPLOYMENT_ROADMAP.md)** — DATA-001 through DATA-006
+(runtime data contract → `backend/data/` → scraper disconnect → self-contained image →
+Railway `/backend` → legacy config cleanup).
