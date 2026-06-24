@@ -326,8 +326,8 @@ CAT-008 (worker cleanup)
 | Task | Branch | Status |
 |------|--------|--------|
 | CAT-001 | `test/product-catalog-safety-net` | ✅ Complete |
-| CAT-002 | `feat/global-product-catalog-schema` | 🟡 In progress |
-| CAT-003 | `feat/global-product-catalog-import` | ⬜ Not started |
+| CAT-002 | `feat/global-product-catalog-schema` | ✅ Complete |
+| CAT-003 | `feat/global-product-catalog-import` | 🟡 In progress |
 | CAT-004 | `feat/product-catalog-query-layer` | ⬜ Not started |
 | CAT-005 | `feat/product-catalog-mutation-policy` | ⬜ Not started |
 | CAT-006 | `refactor/remove-per-user-product-seed` | ⬜ Not started |
