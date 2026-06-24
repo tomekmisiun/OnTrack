@@ -641,7 +641,7 @@ export function useProductsPage() {
   const editablePrivateCount = productList.filter((p) => p.is_editable).length;
 
   const shopLinks =
-    lang === "en"
+    user?.market_code === "GB"
       ? [
           {
             domain: "www.tesco.com",

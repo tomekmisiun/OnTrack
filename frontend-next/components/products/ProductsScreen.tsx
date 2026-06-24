@@ -1,7 +1,9 @@
 "use client";
 
-import { Fragment } from "react";
+import { Fragment, type ChangeEvent, type CSSProperties } from "react";
+import { Icon } from "@iconify/react";
 import { ImportHelpModal } from "@/components/products/ImportHelpModal";
+import { useLanguage } from "@/contexts/LanguageContext";
 import {
   EMPTY_FORM,
   isImageFile,
@@ -11,20 +13,22 @@ import {
 import { displayPrice } from "@/lib/products/pricing";
 import { tFormat, tFormat2, tFormatN, tString } from "@/lib/i18n/translate";
 import type { ImportItem, Product } from "@/types/product";
+import "./products.css";
 
-function MacroDisplay({ p, t }: { p: Product; t: ReturnType<typeof useProductsPage>["t"] }) {
+function MacroDisplay({ p }: { p: Product }) {
+  const { t } = useLanguage();
   if (!p.protein && !p.fat && !p.carbs) {
-    return <span className="text-slate-600">-</span>;
+    return <span style={{ color: "#4b5563" }}>-</span>;
   }
   return (
-    <div className="text-[13px] text-slate-400">
+    <div style={{ fontSize: 13, color: "#9ca3af" }}>
       {p.protein != null && (
-        <span className="mr-1.5">
+        <span style={{ marginRight: 6 }}>
           {tString(t, "macro_p")}: {p.protein}g
         </span>
       )}
       {p.fat != null && (
-        <span className="mr-1.5">
+        <span style={{ marginRight: 6 }}>
           {tString(t, "macro_f")}: {p.fat}g
         </span>
       )}
@@ -93,94 +97,83 @@ export function ProductsScreen() {
     numClamp,
   } = page;
 
-  const inputClass =
-    "rounded-md border border-slate-600 bg-slate-900 px-2 py-1.5 text-sm text-slate-200 outline-none focus:border-teal-600";
+  const s: CSSProperties = { padding: "5px 8px", fontSize: 13 };
+  const fl: CSSProperties = { fontSize: 10, color: "#6b7280", marginBottom: 3 };
 
-  const btnPrimary =
-    "cursor-pointer rounded-md border-none bg-teal-600 px-4 py-2 text-sm font-semibold text-slate-900 hover:bg-teal-500 disabled:opacity-50";
-
-  const btnSecondary =
-    "cursor-pointer rounded-md border border-slate-600 bg-slate-700 px-4 py-2 text-sm font-semibold text-slate-400 hover:bg-slate-600";
-
-  const toggleBtn = (active: boolean) =>
-    `cursor-pointer border-none px-3 py-1.5 text-xs font-semibold ${
-      active
-        ? "bg-teal-600 text-slate-900"
-        : "bg-slate-700 text-slate-400 hover:bg-slate-600"
-    }`;
-
-  const updateImportItem = (
-    items: ImportItem[],
-    index: number,
-    patch: Partial<ImportItem>,
-  ) => {
-    const next = [...items];
-    const current = next[index];
-    if (!current) return items;
-    next[index] = { ...current, ...patch };
-    return next;
-  };
+  const UnitSelect = ({
+    value,
+    onChange,
+    style,
+  }: {
+    value: string;
+    onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+    style?: CSSProperties;
+  }) => (
+    <select value={value} onChange={onChange} style={style}>
+      <option value="g">g</option>
+      <option value="ml">ml</option>
+      <option value="szt">{displayUnit("szt")}</option>
+    </select>
+  );
 
   return (
-    <div className="space-y-4 p-4 md:p-6">
-      <div className="rounded-xl border border-slate-700 bg-slate-800/40 p-4 md:p-6">
-        <h2 className="mb-4 text-lg font-bold text-slate-100">
-          {tString(t, "add_product_title")}
-        </h2>
+    <div className="products-page">
+      <div className="card products-add-card">
+        <h2>{tString(t, "add_product_title")}</h2>
 
-        <section className="mb-5 rounded-lg border border-slate-700/60 bg-slate-900/30 p-4">
-          <div className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-teal-500">
-            <span aria-hidden>🏪</span>
-            {tString(t, "search_products_hint")}
-          </div>
-          <div className="flex flex-wrap gap-3">
-            {shopLinks.map(({ domain, url, label }) => (
-              <a
-                key={label}
-                href={url}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800 px-3 py-2 text-sm text-slate-300 hover:border-teal-600/50"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={`https://www.google.com/s2/favicons?domain=${domain}&sz=32`}
-                  alt=""
-                  className="h-4 w-4"
+        <div className="products-add-layout">
+          <section className="products-inspire-band">
+            <div className="products-section-label">
+              <Icon icon="heroicons:building-storefront" width={15} />
+              {tString(t, "search_products_hint")}
+            </div>
+            <div className="products-inspire-grid">
+              {shopLinks.map(({ domain, url, label }) => (
+                <a
+                  key={label}
+                  href={url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="products-inspire-link"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={`https://www.google.com/s2/favicons?domain=${domain}&sz=32`}
+                    alt=""
+                  />
+                  <span>{label}</span>
+                </a>
+              ))}
+            </div>
+          </section>
+
+          <div className="products-add-columns">
+            <div className="products-editor">
+              <div className="products-editor-head">
+                <Icon icon="heroicons:clipboard-document" width={18} />
+                {tString(t, "product_paste_title")}
+              </div>
+              <div className="products-textarea-wrap">
+                <textarea
+                  className="products-textarea"
+                  value={pasteText}
+                  maxLength={500}
+                  onChange={(e) => handlePasteChange(e.target.value)}
+                  placeholder={tString(t, "product_paste_ph")}
                 />
-                <span>{label}</span>
-              </a>
-            ))}
-          </div>
-        </section>
-
-        <div className="grid gap-4 lg:grid-cols-2">
-          <div>
-            <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-slate-300">
-              <span aria-hidden>📋</span>
-              {tString(t, "product_paste_title")}
+              </div>
             </div>
-            <textarea
-              className={`${inputClass} min-h-[180px] w-full resize-y`}
-              value={pasteText}
-              maxLength={500}
-              onChange={(e) => handlePasteChange(e.target.value)}
-              placeholder={tString(t, "product_paste_ph")}
-            />
-          </div>
 
-          <div>
-            <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-slate-300">
-              <span aria-hidden>✓</span>
-              {tString(t, "check_data_label")}
-            </div>
-            <div className="space-y-3">
-              <div>
-                <label className="mb-1 block text-[10px] uppercase text-slate-500">
+            <div className="products-form-panel">
+              <div className="products-form-head">
+                <Icon icon="heroicons:check-badge" width={18} />
+                {tString(t, "check_data_label")}
+              </div>
+              <div className="products-form-field">
+                <label className="products-form-label">
                   {tString(t, "product_name_lbl")}
                 </label>
                 <input
-                  className={`${inputClass} w-full`}
                   value={form.name}
                   maxLength={50}
                   onChange={(e) =>
@@ -188,15 +181,14 @@ export function ProductsScreen() {
                   }
                 />
               </div>
-
-              <div className="flex flex-wrap items-end gap-3">
-                <div className="min-w-[120px] flex-1">
-                  <label className="mb-1 block text-[10px] uppercase text-slate-500">
+              <div className="products-price-row">
+                <div className="products-form-field">
+                  <label className="products-form-label">
                     {tString(t, "price_per_kg_lbl")}
                   </label>
                   <input
                     type="number"
-                    className={`${inputClass} w-full [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`}
+                    className="no-spin"
                     step="0.01"
                     min="0"
                     max="9999"
@@ -210,10 +202,10 @@ export function ProductsScreen() {
                     placeholder={tString(t, "price_ph")}
                   />
                 </div>
-                <div className="flex overflow-hidden rounded-md border border-slate-600">
+                <div className="products-toggle-group">
                   <button
                     type="button"
-                    className={toggleBtn(!form.sold_by_weight)}
+                    className={!form.sold_by_weight ? "active" : ""}
                     onClick={() =>
                       setForm((f) => ({ ...f, sold_by_weight: false }))
                     }
@@ -222,7 +214,7 @@ export function ProductsScreen() {
                   </button>
                   <button
                     type="button"
-                    className={toggleBtn(form.sold_by_weight)}
+                    className={form.sold_by_weight ? "active" : ""}
                     onClick={() =>
                       setForm((f) => ({
                         ...f,
@@ -236,16 +228,15 @@ export function ProductsScreen() {
                   </button>
                 </div>
               </div>
-
               {!form.sold_by_weight && (
-                <div>
-                  <label className="mb-1 block text-[10px] uppercase text-slate-500">
+                <div className="products-form-field">
+                  <label className="products-form-label">
                     {tString(t, "pkg_capacity_lbl")}
                   </label>
-                  <div className="flex flex-wrap items-center gap-2">
+                  <div className="products-unit-row">
                     <input
                       type="number"
-                      className={`${inputClass} w-24 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`}
+                      className="no-spin"
                       min="0"
                       max="99999"
                       value={form.package_weight}
@@ -257,12 +248,12 @@ export function ProductsScreen() {
                       }
                       placeholder={tString(t, "pkg_ph")}
                     />
-                    <div className="flex overflow-hidden rounded-md border border-slate-600">
+                    <div className="products-unit-btns">
                       {(["g", "kg", "ml", "l", "szt"] as const).map((u) => (
                         <button
                           key={u}
                           type="button"
-                          className={toggleBtn(form.unit === u)}
+                          className={form.unit === u ? "active" : ""}
                           onClick={() => setForm((f) => ({ ...f, unit: u }))}
                         >
                           {displayUnit(u)}
@@ -272,14 +263,18 @@ export function ProductsScreen() {
                   </div>
                 </div>
               )}
-
-              <div className="flex gap-2 pt-1">
-                <button type="button" className={btnPrimary} onClick={handleSubmit}>
+              <div className="products-form-actions">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={handleSubmit}
+                >
                   {tString(t, "save_btn")}
                 </button>
                 <button
                   type="button"
-                  className={btnSecondary}
+                  className="btn"
+                  style={{ background: "#374151", color: "#9ca3af" }}
                   onClick={() => {
                     handlePasteChange("");
                     setForm(EMPTY_FORM);
@@ -290,324 +285,382 @@ export function ProductsScreen() {
               </div>
             </div>
           </div>
-        </div>
 
-        {importItems ? (
-          <section className="mt-6 border-t border-slate-700 pt-6">
-            <h2 className="mb-3 text-sm font-bold uppercase tracking-wide text-teal-500">
-              {tString(t, "import_review_title")}
-            </h2>
-            <p className="mb-4 text-sm text-slate-400">
-              {tString(t, "import_review_hint_pre")}{" "}
-              <strong>{tString(t, "weight_btn")}</strong>{" "}
-              {tString(t, "import_review_hint_suf")}
-            </p>
-            <div className="mb-4 flex flex-col gap-2">
-              {importItems.map((item, i) => {
-                const sbw = !!item.sold_by_weight;
-                const isNew = !item.matched_product;
-                return (
-                  <div
-                    key={i}
-                    className={`rounded-lg border border-slate-600 bg-slate-800/80 p-3 transition-opacity ${
-                      item.selected ? "opacity-100" : "opacity-50"
-                    }`}
-                  >
-                    <div className="flex flex-wrap items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={() =>
-                          setImportItems(
-                            updateImportItem(importItems, i, {
-                              selected: !item.selected,
-                            }),
-                          )
-                        }
-                        className={`flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-md border text-sm font-bold ${
-                          item.selected
-                            ? "border-teal-700 bg-teal-900/40 text-teal-400"
-                            : "border-slate-600 bg-transparent text-slate-600"
-                        }`}
-                      >
-                        ✓
-                      </button>
-                      <span className="shrink-0 text-sm font-semibold text-slate-200">
-                        {item.receipt_name}
-                      </span>
-                      <span className="shrink-0 text-slate-600">→</span>
-                      <select
-                        value={String(item.matched_product?.id || "")}
-                        onChange={(e) => {
-                          const p =
-                            productList.find(
-                              (row) => String(row.id) === e.target.value,
-                            ) || null;
-                          setImportItems(
-                            updateImportItem(importItems, i, {
-                              matched_product: p,
-                              selected: item.selected || !!p,
-                            }),
-                          );
+          {importItems ? (
+            <section className="products-import-review">
+              <h2 className="card-section-title" style={{ marginBottom: 12 }}>
+                {tString(t, "import_review_title")}
+              </h2>
+              <p className="products-import-review-hint">
+                {tString(t, "import_review_hint_pre")}{" "}
+                <strong>{tString(t, "weight_btn")}</strong>{" "}
+                {tString(t, "import_review_hint_suf")}
+              </p>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 8,
+                  marginBottom: 16,
+                }}
+              >
+                {importItems.map((item, i) => {
+                  const upd = (u: Partial<ImportItem>) => {
+                    const a = [...importItems];
+                    a[i] = { ...a[i]!, ...u };
+                    setImportItems(a);
+                  };
+                  const isNew = !item.matched_product;
+                  const sbw = !!item.sold_by_weight;
+                  const inputSt: CSSProperties = {
+                    padding: "5px 8px",
+                    fontSize: 12,
+                    background: "#111827",
+                    border: "1px solid #374151",
+                    color: "#e2e8f0",
+                    borderRadius: 6,
+                  };
+                  return (
+                    <div
+                      key={i}
+                      style={{
+                        background: "#1f2937",
+                        border: "1px solid #374151",
+                        borderRadius: 10,
+                        padding: "10px 14px",
+                        opacity: item.selected ? 1 : 0.5,
+                        transition: "opacity 0.15s",
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 8,
+                          flexWrap: "wrap",
                         }}
-                        className={`${inputClass} min-w-[120px] flex-1`}
                       >
-                        <option value="">{tString(t, "create_new_product_opt")}</option>
-                        {productList.map((p) => (
-                          <option key={p.id} value={String(p.id)}>
-                            {p.name}
-                          </option>
-                        ))}
-                      </select>
-                      <div className="flex overflow-hidden rounded-md border border-slate-600">
-                        {(
-                          [
-                            [tString(t, "pkg_btn"), false],
-                            [tString(t, "weight_btn"), true],
-                          ] as const
-                        ).map(([label, val]) => (
-                          <button
-                            key={label}
-                            type="button"
-                            className={toggleBtn(sbw === val)}
-                            onClick={() =>
-                              setImportItems(
-                                updateImportItem(importItems, i, {
-                                  sold_by_weight: val,
-                                }),
-                              )
-                            }
+                        <button
+                          type="button"
+                          onClick={() => upd({ selected: !item.selected })}
+                          style={{
+                            flexShrink: 0,
+                            width: 28,
+                            height: 28,
+                            borderRadius: 6,
+                            border: "1px solid #374151",
+                            cursor: "pointer",
+                            fontSize: 14,
+                            fontWeight: 700,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            transition: "all 0.15s",
+                            background: item.selected ? "#1e3a3a" : "transparent",
+                            color: item.selected ? "#2dd4bf" : "#4b5563",
+                          }}
+                        >
+                          ✓
+                        </button>
+                        <span
+                          style={{
+                            fontSize: 13,
+                            color: "#e2e8f0",
+                            fontWeight: 600,
+                            flexShrink: 0,
+                          }}
+                        >
+                          {item.receipt_name}
+                        </span>
+                        <span style={{ color: "#4b5563", flexShrink: 0 }}>
+                          →
+                        </span>
+                        <div style={{ flex: 1, minWidth: 80 }}>
+                          <select
+                            value={String(item.matched_product?.id || "")}
+                            onChange={(e) => {
+                              const p =
+                                productList.find(
+                                  (row) => String(row.id) === e.target.value,
+                                ) || null;
+                              upd({
+                                matched_product: p,
+                                selected: item.selected || !!p,
+                              });
+                            }}
+                            style={{ ...inputSt, width: "100%" }}
                           >
-                            {label}
-                          </button>
-                        ))}
-                      </div>
-                      {!sbw && (
-                        <>
-                          <input
-                            type="number"
-                            step="1"
-                            min="0"
-                            max="99999"
-                            value={item.weight}
-                            onChange={(e) =>
-                              setImportItems(
-                                updateImportItem(importItems, i, {
+                            <option value="">
+                              {tString(t, "create_new_product_opt")}
+                            </option>
+                            {productList.map((p) => (
+                              <option key={p.id} value={String(p.id)}>
+                                {p.name}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                        <div className="products-toggle-group">
+                          {(
+                            [
+                              [tString(t, "pkg_btn"), false],
+                              [tString(t, "weight_btn"), true],
+                            ] as const
+                          ).map(([label, val]) => (
+                            <button
+                              key={label}
+                              type="button"
+                              className={sbw === val ? "active" : ""}
+                              onClick={() => upd({ sold_by_weight: val })}
+                            >
+                              {label}
+                            </button>
+                          ))}
+                        </div>
+                        {!sbw && (
+                          <>
+                            <input
+                              type="number"
+                              step="1"
+                              min="0"
+                              max="99999"
+                              value={item.weight}
+                              onChange={(e) =>
+                                upd({
                                   weight: String(
                                     Math.min(
                                       99999,
                                       parseFloat(e.target.value) || 0,
                                     ),
                                   ),
-                                }),
-                              )
-                            }
-                            className={`${inputClass} w-11 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`}
-                            placeholder="500"
-                          />
-                          <div className="flex overflow-hidden rounded-md border border-slate-600">
-                            {(["g", "ml", "szt"] as const).map((u) => (
-                              <button
-                                key={u}
-                                type="button"
-                                className={toggleBtn(item.unit === u)}
-                                onClick={() =>
-                                  setImportItems(
-                                    updateImportItem(importItems, i, { unit: u }),
-                                  )
-                                }
-                              >
-                                {displayUnit(u)}
-                              </button>
-                            ))}
-                          </div>
-                        </>
-                      )}
-                      <input
-                        type="number"
-                        step="0.01"
-                        min="0"
-                        max="99999"
-                        value={item.price}
-                        onChange={(e) =>
-                          setImportItems(
-                            updateImportItem(importItems, i, {
+                                })
+                              }
+                              className="no-spin"
+                              style={{
+                                ...inputSt,
+                                width: 44,
+                                flex: "0 0 44px",
+                                boxSizing: "border-box",
+                              }}
+                              placeholder="500"
+                            />
+                            <div className="products-toggle-group">
+                              {(["g", "ml", "szt"] as const).map((u) => (
+                                <button
+                                  key={u}
+                                  type="button"
+                                  className={item.unit === u ? "active" : ""}
+                                  onClick={() => upd({ unit: u })}
+                                >
+                                  {displayUnit(u)}
+                                </button>
+                              ))}
+                            </div>
+                          </>
+                        )}
+                        <input
+                          type="number"
+                          step="0.01"
+                          min="0"
+                          max="99999"
+                          value={item.price}
+                          onChange={(e) =>
+                            upd({
                               price: String(
-                                Math.min(99999, parseFloat(e.target.value) || 0),
+                                Math.min(
+                                  99999,
+                                  parseFloat(e.target.value) || 0,
+                                ),
                               ),
-                            }),
-                          )
-                        }
-                        className={`${inputClass} w-12 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`}
-                      />
-                      <span
-                        className={`shrink-0 whitespace-nowrap text-[11px] ${
-                          sbw ? "text-teal-400" : "text-slate-500"
-                        }`}
-                      >
-                        {sbw
-                          ? `${tString(t, "currency")} / kg`
-                          : `${tString(t, "currency")} ${tString(t, "price_per_pkg_suffix")}`}
-                      </span>
-                    </div>
-                    {isNew && (
-                      <div className="mt-1 text-[10px] text-slate-500">
-                        {tString(t, "no_assignment_hint")}{" "}
-                        <span className="text-teal-400">
-                          {tString(t, "create_new_product_label")}
+                            })
+                          }
+                          className="no-spin"
+                          style={{
+                            ...inputSt,
+                            width: 50,
+                            flex: "0 0 50px",
+                            boxSizing: "border-box",
+                          }}
+                        />
+                        <span
+                          style={{
+                            fontSize: 11,
+                            color: sbw ? "#2dd4bf" : "#6b7280",
+                            whiteSpace: "nowrap",
+                            flexShrink: 0,
+                          }}
+                        >
+                          {sbw
+                            ? `${tString(t, "currency")} / kg`
+                            : `${tString(t, "currency")} ${tString(t, "price_per_pkg_suffix")}`}
                         </span>
-                        {tString(t, "import_new_product_hint_suf")}
                       </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-            <div className="flex gap-2">
-              <button
-                type="button"
-                className={btnPrimary}
-                onClick={handleApplyImport}
-              >
-                {tString(t, "apply_changes")}
-              </button>
-              <button
-                type="button"
-                className={btnSecondary}
-                onClick={() => setImportItems(null)}
-              >
-                {tString(t, "cancel")}
-              </button>
-            </div>
-          </section>
-        ) : (
-          <div className="mt-6 grid gap-4 border-t border-slate-700 pt-6 lg:grid-cols-[1fr_auto]">
-            <section>
-              <div className="mb-3 flex flex-wrap items-center gap-2">
-                <span className="text-sm font-bold uppercase tracking-wide text-teal-500">
-                  {tString(t, "import_title")}
-                </span>
+                      {isNew && (
+                        <div
+                          style={{
+                            fontSize: 10,
+                            color: "#6b7280",
+                            marginTop: 5,
+                          }}
+                        >
+                          {tString(t, "no_assignment_hint")}{" "}
+                          <span style={{ color: "#2dd4bf" }}>
+                            {tString(t, "create_new_product_label")}
+                          </span>
+                          {tString(t, "import_new_product_hint_suf")}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+              <div style={{ display: "flex", gap: 10 }}>
                 <button
                   type="button"
-                  className="flex cursor-pointer items-center gap-1 rounded-full border border-slate-600 px-2 py-1 text-xs text-slate-400 hover:border-teal-600 hover:text-teal-400"
-                  onClick={() => setImportHelpModalOpen(true)}
-                  aria-label={tString(t, "import_how_to")}
-                  title={tString(t, "import_how_to")}
+                  className="btn btn-primary"
+                  onClick={handleApplyImport}
                 >
-                  <span aria-hidden>💡</span>
-                  <span>{tString(t, "import_help_btn")}</span>
+                  {tString(t, "apply_changes")}
+                </button>
+                <button
+                  type="button"
+                  className="btn"
+                  style={{ background: "#374151", color: "#9ca3af" }}
+                  onClick={() => setImportItems(null)}
+                >
+                  {tString(t, "cancel")}
                 </button>
               </div>
-              <div
-                className={`cursor-pointer rounded-xl border-2 border-dashed p-8 text-center transition-colors ${
-                  dragOver
-                    ? "border-teal-500 bg-teal-900/20"
-                    : selectedFile
-                      ? "border-teal-700 bg-teal-900/10"
-                      : "border-slate-600 bg-slate-900/30 hover:border-slate-500"
-                }`}
-                onDragOver={(e) => {
-                  e.preventDefault();
-                  setDragOver(true);
-                }}
-                onDragLeave={() => setDragOver(false)}
-                onDrop={(e) => {
-                  e.preventDefault();
-                  setDragOver(false);
-                  handleFileSelect(e.dataTransfer.files[0] ?? null);
-                }}
-                onClick={() => fileInputRef.current?.click()}
-              >
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept=".jpg,.jpeg,.png,.webp,.txt,.csv"
-                  className="hidden"
-                  onChange={(e) =>
-                    handleFileSelect(e.target.files?.[0] ?? null)
-                  }
-                />
-                {selectedFile ? (
-                  <>
-                    <div className="font-semibold text-teal-400">
-                      {isImageFile(selectedFile)
-                        ? `${tString(t, "opt1_short")} `
-                        : `${tString(t, "opt2_short")} `}
-                      {selectedFile.name}
-                    </div>
-                    <div className="mt-1 text-xs text-slate-500">
-                      {tString(t, "click_change")}
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="text-3xl">📂</div>
-                    <div className="mt-2 font-semibold text-slate-300">
-                      {tString(t, "click_drag_file")}
-                    </div>
-                    <div className="mt-1 text-xs text-slate-500">
-                      {tString(t, "file_types_hint")}
-                    </div>
-                  </>
-                )}
-              </div>
-              {selectedFile && (
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {isImageFile(selectedFile) && (
-                    <button
-                      type="button"
-                      className={btnPrimary}
-                      onClick={handleParseAI}
-                      disabled={importing}
-                    >
-                      {importing
-                        ? tString(t, "analyzing")
-                        : tString(t, "apply_ai_btn")}
-                    </button>
-                  )}
-                  {isTextFile(selectedFile) && (
-                    <button
-                      type="button"
-                      className={btnPrimary}
-                      onClick={handleParseFree}
-                      disabled={importing}
-                    >
-                      {importing
-                        ? tString(t, "processing")
-                        : tString(t, "apply_file_btn")}
-                    </button>
-                  )}
+            </section>
+          ) : (
+            <div className="products-bottom-sections">
+              <section className="products-import-section">
+                <div className="products-import-title-row">
+                  <span className="card-section-title">
+                    {tString(t, "import_title")}
+                  </span>
                   <button
                     type="button"
-                    className={btnSecondary}
-                    onClick={() => setSelectedFile(null)}
+                    className="pill-help-btn"
+                    onClick={() => setImportHelpModalOpen(true)}
+                    aria-label={tString(t, "import_how_to")}
+                    title={tString(t, "import_how_to")}
                   >
-                    {tString(t, "cancel")}
+                    <Icon icon="heroicons:light-bulb" width={15} />
+                    <span>{tString(t, "import_help_btn")}</span>
                   </button>
                 </div>
-              )}
-            </section>
+                <div
+                  className={`products-dropzone${dragOver ? " products-dropzone--drag" : ""}${selectedFile ? " products-dropzone--selected" : ""}`}
+                  onDragOver={(e) => {
+                    e.preventDefault();
+                    setDragOver(true);
+                  }}
+                  onDragLeave={() => setDragOver(false)}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    setDragOver(false);
+                    handleFileSelect(e.dataTransfer.files[0] ?? null);
+                  }}
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept=".jpg,.jpeg,.png,.webp,.txt,.csv"
+                    style={{ display: "none" }}
+                    onChange={(e) =>
+                      handleFileSelect(e.target.files?.[0] ?? null)
+                    }
+                  />
+                  {selectedFile ? (
+                    <>
+                      <div
+                        className={`products-dropzone-title${selectedFile ? " products-dropzone-title--selected" : ""}`}
+                      >
+                        {isImageFile(selectedFile)
+                          ? `${tString(t, "opt1_short")} `
+                          : `${tString(t, "opt2_short")} `}
+                        {selectedFile.name}
+                      </div>
+                      <div className="products-dropzone-hint">
+                        {tString(t, "click_change")}
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="products-dropzone-icon">📂</div>
+                      <div className="products-dropzone-title">
+                        {tString(t, "click_drag_file")}
+                      </div>
+                      <div className="products-dropzone-hint">
+                        {tString(t, "file_types_hint")}
+                      </div>
+                    </>
+                  )}
+                </div>
+                {selectedFile && (
+                  <div className="products-import-actions">
+                    {isImageFile(selectedFile) && (
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={handleParseAI}
+                        disabled={importing}
+                      >
+                        {importing
+                          ? tString(t, "analyzing")
+                          : tString(t, "apply_ai_btn")}
+                      </button>
+                    )}
+                    {isTextFile(selectedFile) && (
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={handleParseFree}
+                        disabled={importing}
+                      >
+                        {importing
+                          ? tString(t, "processing")
+                          : tString(t, "apply_file_btn")}
+                      </button>
+                    )}
+                    <button
+                      type="button"
+                      className="btn"
+                      style={{ background: "#374151", color: "#9ca3af" }}
+                      onClick={() => setSelectedFile(null)}
+                    >
+                      {tString(t, "cancel")}
+                    </button>
+                  </div>
+                )}
+              </section>
 
-            <aside className="rounded-lg border border-slate-700 bg-slate-900/40 p-4 text-sm text-slate-400 lg:max-w-xs">
-              <div className="mb-1 font-semibold text-slate-300">
-                {tString(t, "macro_auto_title")}
+              <div className="products-macro-callout">
+                <div className="products-macro-callout-title">
+                  {tString(t, "macro_auto_title")}
+                </div>
+                {tString(t, "macro_auto_desc")}
+                <div className="products-macro-callout-hint">
+                  {tString(t, "macro_edit_hint")}
+                </div>
               </div>
-              {tString(t, "macro_auto_desc")}
-              <div className="mt-2 text-xs text-slate-500">
-                {tString(t, "macro_edit_hint")}
-              </div>
-            </aside>
-          </div>
-        )}
+            </div>
+          )}
+        </div>
       </div>
 
-      <div className="rounded-xl border border-slate-700 bg-slate-800/40 p-4">
-        <div className="mb-3 flex flex-wrap items-center gap-2">
+      <div className="card products-list-card">
+        <div className="products-list-header">
           <button
             type="button"
-            className="cursor-pointer text-sm font-bold uppercase tracking-wide text-teal-500"
+            className="list-section-toggle"
             onClick={() => setListOpen((o) => !o)}
           >
-            {tString(t, "product_list_title")}
+            <span className="card-section-title">
+              {tString(t, "product_list_title")}
+            </span>
           </button>
 
           <button
@@ -617,11 +670,18 @@ export function ProductsScreen() {
                 ? exitSelection()
                 : (setSelectionMode(true), setEditId(null))
             }
-            className={`cursor-pointer rounded-md border px-3 py-1 text-xs font-semibold whitespace-nowrap transition-colors ${
-              selectionMode
-                ? "border-teal-700 bg-teal-900/30 text-teal-400"
-                : "border-slate-600 text-slate-500 hover:border-slate-500"
-            }`}
+            style={{
+              padding: "5px 11px",
+              background: selectionMode ? "#1e3a3a" : "transparent",
+              border: `1px solid ${selectionMode ? "#0d9488" : "#374151"}`,
+              borderRadius: 6,
+              cursor: "pointer",
+              fontSize: 12,
+              fontWeight: 600,
+              color: selectionMode ? "#2dd4bf" : "#6b7280",
+              transition: "all 0.15s",
+              whiteSpace: "nowrap",
+            }}
           >
             {selectionMode
               ? tString(t, "deselect_label")
@@ -638,11 +698,37 @@ export function ProductsScreen() {
               }
             }}
             disabled={selectionMode && selectedIds.size === 0}
-            className={`cursor-pointer rounded-md border border-slate-600 px-3 py-1 text-xs whitespace-nowrap transition-colors hover:border-red-500 hover:text-red-400 disabled:cursor-default disabled:opacity-40 ${
-              selectionMode && selectedIds.size === 0
-                ? "text-slate-700"
-                : "text-slate-500"
-            }`}
+            style={{
+              padding: "5px 11px",
+              background: "transparent",
+              border: "1px solid #374151",
+              borderRadius: 6,
+              cursor:
+                selectionMode && selectedIds.size === 0
+                  ? "default"
+                  : "pointer",
+              fontSize: 12,
+              color:
+                selectionMode && selectedIds.size === 0
+                  ? "#374151"
+                  : "#6b7280",
+              transition: "all 0.15s",
+              whiteSpace: "nowrap",
+              opacity: selectionMode && selectedIds.size === 0 ? 0.4 : 1,
+            }}
+            onMouseEnter={(e) => {
+              if (!(selectionMode && selectedIds.size === 0)) {
+                e.currentTarget.style.borderColor = "#ef4444";
+                e.currentTarget.style.color = "#ef4444";
+              }
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "#374151";
+              e.currentTarget.style.color =
+                selectionMode && selectedIds.size === 0
+                  ? "#374151"
+                  : "#6b7280";
+            }}
           >
             {selectionMode && selectedIds.size > 0
               ? tFormatN(t, "del_selected_products", selectedIds.size)
@@ -652,349 +738,529 @@ export function ProductsScreen() {
           <button
             type="button"
             onClick={() => setListOpen((o) => !o)}
-            className="ml-auto cursor-pointer border-none bg-transparent p-1 text-teal-500"
-            aria-label={listOpen ? "Collapse" : "Expand"}
+            style={{
+              padding: "5px 4px",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+            }}
           >
-            <span
-              className="inline-block text-xl transition-transform"
-              style={{ transform: listOpen ? "rotate(180deg)" : "rotate(0deg)" }}
-            >
-              ▼
-            </span>
+            <Icon
+              icon="heroicons:chevron-down"
+              style={{
+                width: 20,
+                height: 20,
+                transition: "transform 0.25s",
+                transform: listOpen ? "rotate(180deg)" : "rotate(0deg)",
+                color: "#0d9488",
+              }}
+            />
           </button>
         </div>
-
         {listOpen && (
-          <div>
-            <div className="mb-3">
+          <div className="products-list-body">
+            <div className="products-list-search">
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder={tString(t, "search_product_ph")}
-                className={`${inputClass} w-full max-w-md`}
               />
             </div>
-
-            <div className="overflow-x-auto">
-              <table className="w-full border-separate border-spacing-y-0.5">
-                <thead>
-                  <tr className="text-left text-xs uppercase text-slate-500">
-                    <th className="px-2 py-1">{tString(t, "col_name")}</th>
-                    <th className="px-2 py-1">{tString(t, "col_kcal")}</th>
-                    <th className="px-2 py-1">{tString(t, "col_macro")}</th>
-                    <th className="px-2 py-1">{tString(t, "col_pkg_capacity")}</th>
-                    <th className="px-2 py-1">{tString(t, "col_price_opak_kg")}</th>
-                    <th className="px-2 py-1" />
-                  </tr>
-                </thead>
-                <tbody>
-                  {productList.map((p) => {
-                    const isEditing = editId === p.id;
-                    const canSelect = !selectionMode || p.is_editable;
-                    return (
-                      <Fragment key={p.id}>
-                        <tr
-                          className={`rounded-lg transition-colors ${
-                            isEditing
-                              ? "bg-teal-900/20"
-                              : selectionMode && selectedIds.has(p.id)
-                                ? "bg-indigo-900/20"
-                                : "hover:bg-slate-800/60"
-                          } ${canSelect || !selectionMode ? "cursor-pointer" : ""}`}
-                          onClick={() => {
-                            if (selectionMode) {
-                              if (p.is_editable) toggleSelect(p.id);
-                              return;
-                            }
-                            if (isEditing) setEditId(null);
-                            else startEdit(p);
+            <table
+              style={{ borderCollapse: "separate", borderSpacing: "0 3px" }}
+            >
+              <thead>
+                <tr>
+                  <th>{tString(t, "col_name")}</th>
+                  <th>{tString(t, "col_kcal")}</th>
+                  <th>{tString(t, "col_macro")}</th>
+                  <th>{tString(t, "col_pkg_capacity")}</th>
+                  <th>{tString(t, "col_price_opak_kg")}</th>
+                  <th />
+                </tr>
+              </thead>
+              <tbody>
+                {productList.map((p) => {
+                  const isEditing = editId === p.id;
+                  const canSelect = !selectionMode || p.is_editable;
+                  return (
+                    <Fragment key={p.id}>
+                      <tr
+                        className={`product-row${isEditing ? " product-row-selected" : ""}${selectionMode && selectedIds.has(p.id) ? " product-row-checked" : ""}`}
+                        style={{
+                          cursor:
+                            canSelect || !selectionMode ? "pointer" : "default",
+                        }}
+                        onClick={() => {
+                          if (selectionMode) {
+                            if (p.is_editable) toggleSelect(p.id);
+                            return;
+                          }
+                          if (isEditing) setEditId(null);
+                          else startEdit(p);
+                        }}
+                      >
+                        <td style={{ fontSize: 13 }}>
+                          {selectionMode && p.is_editable && (
+                            <span
+                              style={{
+                                display: "inline-flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                width: 16,
+                                height: 16,
+                                borderRadius: 4,
+                                border: `1.5px solid ${selectedIds.has(p.id) ? "#6366f1" : "#374151"}`,
+                                background: selectedIds.has(p.id)
+                                  ? "#6366f1"
+                                  : "transparent",
+                                marginRight: 8,
+                                flexShrink: 0,
+                                verticalAlign: "middle",
+                                transition: "all 0.12s",
+                              }}
+                            >
+                              {selectedIds.has(p.id) && (
+                                <Icon
+                                  icon="heroicons:check"
+                                  style={{
+                                    width: 10,
+                                    height: 10,
+                                    color: "#fff",
+                                  }}
+                                />
+                              )}
+                            </span>
+                          )}
+                          {p.name}
+                          {p.is_system && (
+                            <span
+                              style={{
+                                marginLeft: 8,
+                                fontSize: 10,
+                                color: "#6b7280",
+                                textTransform: "uppercase",
+                              }}
+                            >
+                              {tString(t, "catalog_system_badge")}
+                            </span>
+                          )}
+                        </td>
+                        <td
+                          style={{
+                            fontSize: 13,
+                            color: p.kcal ? "#9ca3af" : "#4b5563",
                           }}
                         >
-                          <td className="px-2 py-2 text-[13px] text-slate-200">
-                            {selectionMode && p.is_editable && (
-                              <span
-                                className={`mr-2 inline-flex h-4 w-4 items-center justify-center rounded border align-middle text-[10px] ${
-                                  selectedIds.has(p.id)
-                                    ? "border-indigo-500 bg-indigo-500 text-white"
-                                    : "border-slate-600 bg-transparent"
-                                }`}
-                              >
-                                {selectedIds.has(p.id) ? "✓" : ""}
-                              </span>
-                            )}
-                            {p.name}
-                            {p.is_system && (
-                              <span className="ml-2 text-[10px] uppercase text-slate-500">
-                                {tString(t, "catalog_system_badge")}
-                              </span>
-                            )}
+                          {p.kcal != null ? `${p.kcal} kcal` : "-"}
+                        </td>
+                        <td>
+                          <MacroDisplay p={p} />
+                        </td>
+                        <td style={{ fontSize: 13, color: "#9ca3af" }}>
+                          {p.sold_by_weight
+                            ? tString(t, "weight_btn")
+                            : p.package_weight
+                              ? `${p.package_weight} ${p.unit || "g"}`
+                              : "-"}
+                        </td>
+                        <td
+                          style={{
+                            fontSize: 13,
+                            color: p.price > 0 ? "#9ca3af" : "#4b5563",
+                          }}
+                        >
+                          {displayPrice(p, tString(t, "currency"))}
+                        </td>
+                        <td
+                          style={{
+                            display: "flex",
+                            gap: 6,
+                            justifyContent: "flex-end",
+                          }}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          {p.is_editable && (
+                            <button
+                              type="button"
+                              className="btn btn-danger"
+                              style={{ padding: "5px 12px", fontSize: 13 }}
+                              onClick={() => handleDelete(p.id, p.name)}
+                            >
+                              {tString(t, "del_btn")}
+                            </button>
+                          )}
+                        </td>
+                      </tr>
+                      {isEditing && (
+                        <tr className="edit-body-row">
+                          <td
+                            style={{
+                              verticalAlign: "top",
+                              padding: "8px 6px 8px 12px",
+                              borderLeft: "3px solid #0d9488",
+                            }}
+                          >
+                            <div style={fl}>{tString(t, "col_name")}</div>
+                            <input
+                              value={editForm.name}
+                              maxLength={50}
+                              onChange={(e) =>
+                                setEditForm({
+                                  ...editForm,
+                                  name: e.target.value.slice(0, 50),
+                                })
+                              }
+                              style={{
+                                width: "100%",
+                                boxSizing: "border-box",
+                                ...s,
+                              }}
+                            />
                           </td>
                           <td
-                            className={`px-2 py-2 text-[13px] ${
-                              p.kcal ? "text-slate-400" : "text-slate-600"
-                            }`}
+                            style={{
+                              verticalAlign: "top",
+                              padding: "8px 6px",
+                            }}
                           >
-                            {p.kcal != null ? `${p.kcal} kcal` : "-"}
-                          </td>
-                          <td className="px-2 py-2">
-                            <MacroDisplay p={p} t={t} />
-                          </td>
-                          <td className="px-2 py-2 text-[13px] text-slate-400">
-                            {p.sold_by_weight
-                              ? tString(t, "weight_btn")
-                              : p.package_weight
-                                ? `${p.package_weight} ${p.unit || "g"}`
-                                : "-"}
+                            <div style={fl}>Kcal/100g</div>
+                            <input
+                              type="number"
+                              className="no-spin"
+                              step="0.1"
+                              min="0"
+                              max="9999"
+                              value={editForm.kcal}
+                              onChange={(e) =>
+                                setEditForm({
+                                  ...editForm,
+                                  kcal: numClamp(e.target.value, 9999),
+                                })
+                              }
+                              style={{
+                                ...s,
+                                width: "100%",
+                                boxSizing: "border-box",
+                              }}
+                            />
                           </td>
                           <td
-                            className={`px-2 py-2 text-[13px] ${
-                              p.price > 0 ? "text-slate-400" : "text-slate-600"
-                            }`}
+                            style={{
+                              verticalAlign: "top",
+                              padding: "8px 6px",
+                            }}
                           >
-                            {displayPrice(p, tString(t, "currency"))}
+                            <div
+                              style={{
+                                display: "flex",
+                                gap: 4,
+                                marginBottom: 4,
+                              }}
+                            >
+                              <div>
+                                <div style={fl}>
+                                  {tString(t, "macro_p")}
+                                </div>
+                                <input
+                                  type="number"
+                                  className="no-spin"
+                                  step="0.1"
+                                  min="0"
+                                  max="100"
+                                  value={editForm.protein}
+                                  onChange={(e) =>
+                                    setEditForm({
+                                      ...editForm,
+                                      protein: numClamp(e.target.value, 100),
+                                    })
+                                  }
+                                  style={{ ...s, width: 52 }}
+                                />
+                              </div>
+                              <div>
+                                <div style={fl}>
+                                  {tString(t, "macro_f")}
+                                </div>
+                                <input
+                                  type="number"
+                                  className="no-spin"
+                                  step="0.1"
+                                  min="0"
+                                  max="100"
+                                  value={editForm.fat}
+                                  onChange={(e) =>
+                                    setEditForm({
+                                      ...editForm,
+                                      fat: numClamp(e.target.value, 100),
+                                    })
+                                  }
+                                  style={{ ...s, width: 52 }}
+                                />
+                              </div>
+                              <div>
+                                <div style={fl}>
+                                  {tString(t, "macro_c")}
+                                </div>
+                                <input
+                                  type="number"
+                                  className="no-spin"
+                                  step="0.1"
+                                  min="0"
+                                  max="100"
+                                  value={editForm.carbs}
+                                  onChange={(e) =>
+                                    setEditForm({
+                                      ...editForm,
+                                      carbs: numClamp(e.target.value, 100),
+                                    })
+                                  }
+                                  style={{ ...s, width: 52 }}
+                                />
+                              </div>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={handleAutoFill}
+                              disabled={lookingUp === editId}
+                              style={{
+                                padding: "3px 7px",
+                                fontSize: 10,
+                                background: "#0d9488",
+                                color: "#1f2937",
+                                border: "none",
+                                borderRadius: 5,
+                                cursor: "pointer",
+                                whiteSpace: "nowrap",
+                              }}
+                            >
+                              {lookingUp === editId
+                                ? "⏳..."
+                                : tString(t, "fetch_macro_btn")}
+                            </button>
                           </td>
                           <td
-                            className="px-2 py-2"
-                            onClick={(e) => e.stopPropagation()}
+                            style={{
+                              verticalAlign: "top",
+                              padding: "8px 6px",
+                            }}
                           >
-                            {p.is_editable && (
+                            <div
+                              style={{
+                                display: "flex",
+                                borderRadius: 5,
+                                border: "1px solid #374151",
+                                overflow: "hidden",
+                                marginBottom: 4,
+                                width: "fit-content",
+                              }}
+                            >
                               <button
                                 type="button"
-                                className="cursor-pointer rounded-md bg-red-600/80 px-3 py-1 text-[13px] font-semibold text-white hover:bg-red-500"
-                                onClick={() => handleDelete(p.id, p.name)}
+                                onClick={() =>
+                                  setEditForm((f) => ({
+                                    ...f,
+                                    sold_by_weight: false,
+                                  }))
+                                }
+                                style={{
+                                  padding: "4px 8px",
+                                  border: "none",
+                                  borderRight: "1px solid #374151",
+                                  cursor: "pointer",
+                                  fontSize: 10,
+                                  fontWeight: 600,
+                                  background: !editForm.sold_by_weight
+                                    ? "#0d9488"
+                                    : "#2d3748",
+                                  color: !editForm.sold_by_weight
+                                    ? "#1f2937"
+                                    : "#9ca3af",
+                                }}
                               >
-                                {tString(t, "del_btn")}
+                                {tString(t, "pkg_op_btn")}
                               </button>
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  setEditForm((f) => ({
+                                    ...f,
+                                    sold_by_weight: true,
+                                    unit: "g",
+                                    package_weight: "1000",
+                                  }))
+                                }
+                                style={{
+                                  padding: "4px 8px",
+                                  border: "none",
+                                  cursor: "pointer",
+                                  fontSize: 10,
+                                  fontWeight: 600,
+                                  background: editForm.sold_by_weight
+                                    ? "#0d9488"
+                                    : "#2d3748",
+                                  color: editForm.sold_by_weight
+                                    ? "#1f2937"
+                                    : "#9ca3af",
+                                }}
+                              >
+                                {tString(t, "weight_btn")}
+                              </button>
+                            </div>
+                            {!editForm.sold_by_weight && (
+                              <div style={{ display: "flex", gap: 3 }}>
+                                <input
+                                  type="number"
+                                  className="no-spin"
+                                  min="0"
+                                  max="99999"
+                                  value={editForm.package_weight}
+                                  onChange={(e) =>
+                                    setEditForm({
+                                      ...editForm,
+                                      package_weight: String(
+                                        numClamp(e.target.value),
+                                      ),
+                                    })
+                                  }
+                                  style={{ ...s, width: 60 }}
+                                  placeholder="500"
+                                />
+                                <UnitSelect
+                                  value={editForm.unit}
+                                  onChange={(e) =>
+                                    setEditForm({
+                                      ...editForm,
+                                      unit: e.target.value,
+                                    })
+                                  }
+                                  style={{
+                                    ...s,
+                                    width: 40,
+                                    padding: "3px 2px",
+                                  }}
+                                />
+                              </div>
                             )}
+                          </td>
+                          <td
+                            style={{
+                              verticalAlign: "top",
+                              padding: "8px 6px",
+                            }}
+                          >
+                            <div style={fl}>
+                              {editForm.sold_by_weight
+                                ? tString(t, "price_per_kg_lbl")
+                                : tString(t, "price_per_opak_lbl")}
+                            </div>
+                            <input
+                              type="number"
+                              className="no-spin"
+                              step="0.01"
+                              min="0"
+                              max="9999"
+                              value={editForm.package_price}
+                              onChange={(e) =>
+                                setEditForm({
+                                  ...editForm,
+                                  package_price: String(
+                                    numClamp(e.target.value, 9999),
+                                  ),
+                                })
+                              }
+                              style={{
+                                ...s,
+                                width: "100%",
+                                boxSizing: "border-box",
+                              }}
+                            />
+                          </td>
+                          <td
+                            style={{
+                              verticalAlign: "middle",
+                              padding: "8px 6px",
+                              borderBottom: "1px solid #0d948860",
+                            }}
+                          >
+                            <div
+                              style={{
+                                display: "flex",
+                                gap: 6,
+                                flexDirection: "column",
+                              }}
+                            >
+                              <button
+                                type="button"
+                                className="btn btn-primary"
+                                style={{ padding: "5px 10px", fontSize: 12 }}
+                                onClick={handleSaveEdit}
+                              >
+                                {tString(t, "save_btn")}
+                              </button>
+                              <button
+                                type="button"
+                                className="btn"
+                                style={{
+                                  padding: "5px 10px",
+                                  fontSize: 12,
+                                  background: "#374151",
+                                  color: "#9ca3af",
+                                }}
+                                onClick={() => setEditId(null)}
+                              >
+                                {tString(t, "cancel")}
+                              </button>
+                            </div>
                           </td>
                         </tr>
-                        {isEditing && (
-                          <tr className="bg-slate-900/50">
-                            <td
-                              className="border-l-[3px] border-teal-600 px-3 py-2 align-top"
-                            >
-                              <div className="mb-1 text-[10px] text-slate-500">
-                                {tString(t, "col_name")}
-                              </div>
-                              <input
-                                value={editForm.name}
-                                maxLength={50}
-                                onChange={(e) =>
-                                  setEditForm({
-                                    ...editForm,
-                                    name: e.target.value.slice(0, 50),
-                                  })
-                                }
-                                className={`${inputClass} w-full`}
-                              />
-                            </td>
-                            <td className="px-2 py-2 align-top">
-                              <div className="mb-1 text-[10px] text-slate-500">
-                                Kcal/100g
-                              </div>
-                              <input
-                                type="number"
-                                step="0.1"
-                                min="0"
-                                max="9999"
-                                value={editForm.kcal}
-                                onChange={(e) =>
-                                  setEditForm({
-                                    ...editForm,
-                                    kcal: numClamp(e.target.value, 9999),
-                                  })
-                                }
-                                className={`${inputClass} w-full [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`}
-                              />
-                            </td>
-                            <td className="px-2 py-2 align-top">
-                              <div className="mb-1 flex gap-1">
-                                {(
-                                  [
-                                    ["macro_p", "protein"],
-                                    ["macro_f", "fat"],
-                                    ["macro_c", "carbs"],
-                                  ] as const
-                                ).map(([labelKey, field]) => (
-                                  <div key={field}>
-                                    <div className="mb-1 text-[10px] text-slate-500">
-                                      {tString(t, labelKey)}
-                                    </div>
-                                    <input
-                                      type="number"
-                                      step="0.1"
-                                      min="0"
-                                      max="100"
-                                      value={editForm[field]}
-                                      onChange={(e) =>
-                                        setEditForm({
-                                          ...editForm,
-                                          [field]: numClamp(e.target.value, 100),
-                                        })
-                                      }
-                                      className={`${inputClass} w-[52px] [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`}
-                                    />
-                                  </div>
-                                ))}
-                              </div>
-                              <button
-                                type="button"
-                                onClick={handleAutoFill}
-                                disabled={lookingUp === editId}
-                                className="cursor-pointer rounded bg-teal-600 px-2 py-0.5 text-[10px] font-semibold text-slate-900 disabled:opacity-50"
-                              >
-                                {lookingUp === editId
-                                  ? "⏳..."
-                                  : tString(t, "fetch_macro_btn")}
-                              </button>
-                            </td>
-                            <td className="px-2 py-2 align-top">
-                              <div className="mb-1 flex w-fit overflow-hidden rounded border border-slate-600">
-                                <button
-                                  type="button"
-                                  onClick={() =>
-                                    setEditForm((f) => ({
-                                      ...f,
-                                      sold_by_weight: false,
-                                    }))
-                                  }
-                                  className={toggleBtn(!editForm.sold_by_weight)}
-                                >
-                                  {tString(t, "pkg_op_btn")}
-                                </button>
-                                <button
-                                  type="button"
-                                  onClick={() =>
-                                    setEditForm((f) => ({
-                                      ...f,
-                                      sold_by_weight: true,
-                                      unit: "g",
-                                      package_weight: "1000",
-                                    }))
-                                  }
-                                  className={toggleBtn(!!editForm.sold_by_weight)}
-                                >
-                                  {tString(t, "weight_btn")}
-                                </button>
-                              </div>
-                              {!editForm.sold_by_weight && (
-                                <div className="mt-1 flex gap-1">
-                                  <input
-                                    type="number"
-                                    min="0"
-                                    max="99999"
-                                    value={editForm.package_weight}
-                                    onChange={(e) =>
-                                      setEditForm({
-                                        ...editForm,
-                                        package_weight: String(
-                                          numClamp(e.target.value),
-                                        ),
-                                      })
-                                    }
-                                    className={`${inputClass} w-[60px] [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`}
-                                    placeholder="500"
-                                  />
-                                  <select
-                                    value={editForm.unit}
-                                    onChange={(e) =>
-                                      setEditForm({
-                                        ...editForm,
-                                        unit: e.target.value,
-                                      })
-                                    }
-                                    className={`${inputClass} w-10 px-1`}
-                                  >
-                                    <option value="g">g</option>
-                                    <option value="ml">ml</option>
-                                    <option value="szt">
-                                      {displayUnit("szt")}
-                                    </option>
-                                  </select>
-                                </div>
-                              )}
-                            </td>
-                            <td className="px-2 py-2 align-top">
-                              <div className="mb-1 text-[10px] text-slate-500">
-                                {editForm.sold_by_weight
-                                  ? tString(t, "price_per_kg_lbl")
-                                  : tString(t, "price_per_opak_lbl")}
-                              </div>
-                              <input
-                                type="number"
-                                step="0.01"
-                                min="0"
-                                max="9999"
-                                value={editForm.package_price}
-                                onChange={(e) =>
-                                  setEditForm({
-                                    ...editForm,
-                                    package_price: String(
-                                      numClamp(e.target.value, 9999),
-                                    ),
-                                  })
-                                }
-                                className={`${inputClass} w-full [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`}
-                              />
-                            </td>
-                            <td className="border-b border-teal-600/40 px-2 py-2 align-middle">
-                              <div className="flex flex-col gap-1.5">
-                                <button
-                                  type="button"
-                                  className={`${btnPrimary} px-2.5 py-1 text-xs`}
-                                  onClick={handleSaveEdit}
-                                >
-                                  {tString(t, "save_btn")}
-                                </button>
-                                <button
-                                  type="button"
-                                  className={`${btnSecondary} px-2.5 py-1 text-xs`}
-                                  onClick={() => setEditId(null)}
-                                >
-                                  {tString(t, "cancel")}
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                        )}
-                      </Fragment>
-                    );
-                  })}
-                  {!listLoading && productList.length === 0 && (
-                    <tr>
-                      <td
-                        colSpan={6}
-                        className={`px-2 py-6 text-center text-slate-500 ${
-                          search.trim() ? "italic" : ""
-                        }`}
-                      >
-                        {search.trim()
-                          ? tFormat(t, "product_not_found", search)
-                          : tString(t, "no_products")}
-                      </td>
-                    </tr>
-                  )}
-                  {productList.length < productTotal && (
-                    <tr ref={sentinelRef}>
-                      <td
-                        colSpan={6}
-                        className="px-2 py-2 text-center text-xs text-slate-600"
-                      >
-                        {listLoading
-                          ? "…"
-                          : tFormat2(
-                              t,
-                              "shown_products",
-                              productList.length,
-                              productTotal,
-                            )}
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
+                      )}
+                    </Fragment>
+                  );
+                })}
+                {!listLoading && productList.length === 0 && (
+                  <tr>
+                    <td
+                      colSpan={6}
+                      style={{
+                        textAlign: "center",
+                        color: "#6b7280",
+                        fontStyle: search.trim() ? "italic" : "normal",
+                      }}
+                    >
+                      {search.trim()
+                        ? tFormat(t, "product_not_found", search)
+                        : tString(t, "no_products")}
+                    </td>
+                  </tr>
+                )}
+                {productList.length < productTotal && (
+                  <tr ref={sentinelRef}>
+                    <td
+                      colSpan={6}
+                      style={{
+                        textAlign: "center",
+                        color: "#4b5563",
+                        padding: "10px 0",
+                        fontSize: 12,
+                      }}
+                    >
+                      {listLoading
+                        ? "…"
+                        : tFormat2(
+                            t,
+                            "shown_products",
+                            productList.length,
+                            productTotal,
+                          )}
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
         )}
       </div>
