@@ -1,4 +1,4 @@
-"""OnTrack application tables (10). Excludes alembic_version."""
+"""OnTrack application tables (11). Excludes alembic_version."""
 
 ONTRACK_TABLES = frozenset(
     {
@@ -6,6 +6,7 @@ ONTRACK_TABLES = frozenset(
         "day_schedule_blocks",
         "household_members",
         "import_logs",
+        "markets",
         "meal_plans",
         "products",
         "recipe_ingredients",
