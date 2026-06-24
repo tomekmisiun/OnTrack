@@ -138,6 +138,7 @@ npm run export:openapi → openapi/openapi.json
 | **Tests** | E2E navigation smoke |
 | **Risks** | Large Calendar state — may need client-only pages |
 | **Out of scope** | Full screen migration |
+| **Status** | Done |
 
 ---
 

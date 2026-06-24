@@ -27,6 +27,7 @@ import {
   getStoredToken,
   setStoredToken,
 } from "@/lib/auth/storage";
+import { setSessionCookie } from "@/lib/auth/session-cookie";
 import type { LangCode } from "@/lib/i18n/translations";
 import { parseAuthUser, type AuthUser } from "@/types/auth";
 
@@ -128,6 +129,8 @@ export function AuthProvider({ children, onLangChange }: AuthProviderProps) {
         setLoading(false);
         return;
       }
+
+      setSessionCookie();
 
       try {
         const raw = await fetchMeRaw();

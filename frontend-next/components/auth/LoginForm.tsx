@@ -73,7 +73,9 @@ export function LoginForm() {
           lang: uiLang,
         });
       }
-      router.replace("/");
+      router.replace(
+        new URLSearchParams(window.location.search).get("next") ?? "/",
+      );
     } catch (err) {
       const msg = isAuthApiError(err) ? err.message : null;
       setError(
