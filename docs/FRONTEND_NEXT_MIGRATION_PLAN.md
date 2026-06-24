@@ -197,6 +197,7 @@ npm run export:openapi → openapi/openapi.json
 | **Tests** | E2E critical paths |
 | **Risks** | Largest UI module — split into sub-PRs if needed |
 | **Out of scope** | `@fullcalendar` (unused in CRA) |
+| **Status** | Done |
 
 ---
 

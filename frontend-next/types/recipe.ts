@@ -31,6 +31,10 @@ export type RecipeSummary = {
   total_protein: number;
   total_fat: number;
   total_carbs: number;
+  kcal_100g: number | null;
+  protein_100g: number | null;
+  fat_100g: number | null;
+  carbs_100g: number | null;
   image_url: string | null;
   source_url: string | null;
   category: string | null;
@@ -143,6 +147,10 @@ export function parseRecipeSummary(data: unknown): RecipeSummary | null {
     total_protein: numOrZero(row.total_protein),
     total_fat: numOrZero(row.total_fat),
     total_carbs: numOrZero(row.total_carbs),
+    kcal_100g: numOrNull(row.kcal_100g),
+    protein_100g: numOrNull(row.protein_100g),
+    fat_100g: numOrNull(row.fat_100g),
+    carbs_100g: numOrNull(row.carbs_100g),
     image_url: typeof row.image_url === "string" ? row.image_url : null,
     source_url: typeof row.source_url === "string" ? row.source_url : null,
     category: typeof row.category === "string" ? row.category : null,

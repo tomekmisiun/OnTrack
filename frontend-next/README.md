@@ -96,7 +96,7 @@ npm run generate:api
 - Protected app routes under `app/(app)/` — `/`, `/macro`, `/calendar`, `/schedule`, `/recipes`, `/products`, `/summary`, `/export`
 - `middleware.ts` — session cookie gate (`ontrack_has_token`, synced from JWT in localStorage)
 - `components/layout/Sidebar.tsx` — CRA tab parity (sidebar hidden on home)
-- Module screens: products (task 8), recipes (task 9); calendar, etc. are placeholders until tasks 10–12
+- Module screens: products (task 8), recipes (task 9), calendar/meal plan (task 10); schedule, etc. are placeholders until tasks 11–12
 
 ## Members
 
@@ -118,6 +118,13 @@ npm run generate:api
 - `hooks/useRecipesPage.ts` — state and handlers (CRA `Recipes.js` parity)
 - `lib/api/recipes.ts`, `lib/recipes/**` — parser, search, ingredient canonicalization
 - `npm run test:recipes` — unit check for fuzzySearch and parseRecipeText
+
+## Calendar / meal plan
+
+- `components/calendar/CalendarScreen.tsx` — month grid, recipe carousel, DnD, templates, copy/paste
+- `hooks/useCalendarPage.ts` — state and handlers (CRA `Calendar.js` parity)
+- `lib/api/mealPlan.ts`, `lib/dates.ts`, `lib/mealPlan/state.ts`, `types/mealPlan.ts`
+- `npm run test:calendar` — unit check for date grid helpers
 
 CI runs `generate:api` before lint to catch drift.
 

@@ -1,5 +1,5 @@
-import { ModulePlaceholder } from "@/components/screens/ModulePlaceholder";
+import { CalendarScreen } from "@/components/calendar/CalendarScreen";
 
 export default function CalendarPage() {
-  return <ModulePlaceholder moduleId="calendar" />;
+  return <CalendarScreen />;
 }
