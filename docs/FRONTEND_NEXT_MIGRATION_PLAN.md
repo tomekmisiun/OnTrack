@@ -224,6 +224,7 @@ npm run export:openapi → openapi/openapi.json
 | **Dependencies** | Tasks 7–11 |
 | **Acceptance** | Feature matrix from audit marked migrated |
 | **Tests** | Full frontend test suite |
+| **Status** | Done |
 
 ---
 

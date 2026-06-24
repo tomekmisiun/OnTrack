@@ -50,3 +50,16 @@ export async function deleteMember(
   );
   return data;
 }
+
+type MemberProfileRequest = ApiSchema<"MemberProfileRequest">;
+
+export async function saveMemberProfile(
+  memberId: number,
+  body: MemberProfileRequest,
+): Promise<Member> {
+  const data = await createAuthedApiClient().patch<unknown>(
+    `/api/members/${memberId}/profile`,
+    body,
+  );
+  return parseMemberResponse(data);
+}

@@ -1,5 +1,5 @@
-import { ModulePlaceholder } from "@/components/screens/ModulePlaceholder";
+import { ExportScreen } from "@/components/export/ExportScreen";
 
 export default function ExportPage() {
-  return <ModulePlaceholder moduleId="export" />;
+  return <ExportScreen />;
 }

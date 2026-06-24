@@ -1,0 +1,131 @@
+.macro-daily-goal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  min-height: 28px;
+  margin-bottom: 10px;
+}
+
+.macro-daily-goal-head .card-section-title {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+  line-height: 1.2;
+}
+
+.macro-formula-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.macro-formula-modal {
+  width: 100%;
+  max-width: 640px;
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  background: #1c2433;
+  border: 1px solid rgba(75, 85, 99, 0.5);
+}
+
+.macro-formula-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(55, 65, 81, 0.6);
+  background: rgba(26, 34, 44, 0.98);
+  flex-shrink: 0;
+}
+
+.macro-formula-modal-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0d9488;
+}
+
+.macro-formula-modal-close {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(55, 65, 81, 0.6);
+  color: #e2e8f0;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.macro-formula-modal-close:hover {
+  background: rgba(75, 85, 99, 0.8);
+}
+
+.macro-formula-modal-body {
+  overflow-y: auto;
+  padding: 18px 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.macro-formula-obesity {
+  background: #1c1917;
+  border: 1px solid #78350f;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 12px;
+  color: #fcd34d;
+  line-height: 1.6;
+}
+
+.macro-formula-row {
+  display: flex;
+  gap: 10px;
+}
+
+.macro-formula-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.macro-formula-row-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin-bottom: 3px;
+}
+
+.macro-formula-row-text {
+  font-size: 12px;
+  color: #9ca3af;
+  line-height: 1.6;
+}
+
+.macro-formula-bmr {
+  border-top: 1px solid #374151;
+  padding-top: 12px;
+  font-size: 11px;
+  color: #9ca3af;
+  line-height: 1.6;
+}

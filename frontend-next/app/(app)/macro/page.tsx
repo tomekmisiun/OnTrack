@@ -1,5 +1,5 @@
-import { ModulePlaceholder } from "@/components/screens/ModulePlaceholder";
+import { MacroScreen } from "@/components/macro/MacroScreen";
 
 export default function MacroPage() {
-  return <ModulePlaceholder moduleId="macro" />;
+  return <MacroScreen />;
 }
