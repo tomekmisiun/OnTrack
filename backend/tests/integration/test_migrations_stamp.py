@@ -85,7 +85,7 @@ def test_stamp_existing_schema_has_empty_diff(legacy_migrated_postgres: str, mon
 
     alembic_cfg = Config(str(BACKEND_ROOT / "alembic.ini"))
     alembic_cfg.set_main_option("script_location", str(BACKEND_ROOT / "alembic"))
-    command.stamp(alembic_cfg, ONTRACK_ALEMBIC_HEAD)
+    command.stamp(alembic_cfg, ONTRACK_ALEMBIC_HEAD, purge=True)
 
     with engine.connect() as conn:
         stamped = conn.execute(text("SELECT version_num FROM alembic_version")).scalar()

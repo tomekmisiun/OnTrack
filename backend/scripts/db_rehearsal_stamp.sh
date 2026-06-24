@@ -20,8 +20,8 @@ else
   exit 1
 fi
 
-echo "Stamping alembic_version -> $HEAD (no DDL)..."
-uv run alembic stamp "$HEAD"
+echo "Stamping alembic_version -> $HEAD (no DDL, purge legacy Flask revision id)..."
+uv run alembic stamp --purge "$HEAD"
 
 echo "Post-stamp validation..."
 uv run alembic current

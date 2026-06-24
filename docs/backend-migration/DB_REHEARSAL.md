@@ -98,7 +98,7 @@ export DATABASE_URL='postgresql+psycopg://...'
 uv run python scripts/validate_schema.py
 
 # 2. Stamp FastAPI head (replaces Flask revision id in alembic_version)
-uv run alembic stamp 7966d120d748
+uv run alembic stamp --purge 7966d120d748
 
 # 3. Confirm
 uv run alembic current
