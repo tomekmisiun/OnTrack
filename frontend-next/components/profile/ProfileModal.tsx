@@ -6,6 +6,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import type { LangCode } from "@/lib/i18n/translations";
 import { tFormatArgs, tString } from "@/lib/i18n/translate";
+import "./profile-modal.css";
 
 type ProfileModalProps = {
   onClose: () => void;
@@ -23,6 +24,8 @@ export function ProfileModal({ onClose, onStartTour }: ProfileModalProps) {
 
   if (!user) return null;
 
+  const activeLang = user.ui_locale;
+
   const handleDelete = async () => {
     if (!window.confirm(tString(t, "delete_confirm"))) return;
     setDeleting(true);
@@ -37,7 +40,7 @@ export function ProfileModal({ onClose, onStartTour }: ProfileModalProps) {
   };
 
   const requestLangChange = (newLang: LangCode) => {
-    if (newLang === user.lang) return;
+    if (newLang === activeLang) return;
     setPendingLang(newLang);
     setShowLangWarning(true);
   };
@@ -65,144 +68,52 @@ export function ProfileModal({ onClose, onStartTour }: ProfileModalProps) {
       : tString(t, "profile_lang_name_en");
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        background: "rgba(0,0,0,0.5)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        zIndex: 10000,
-      }}
-      onClick={onClose}
-    >
-      <div
-        style={{
-          background: "#1f2937",
-          borderRadius: 16,
-          padding: "32px 28px",
-          width: "100%",
-          maxWidth: 420,
-          boxShadow: "0 20px 60px rgba(0,0,0,0.3)",
-        }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: 24,
-          }}
-        >
-          <h2 style={{ fontSize: 20, color: "#f1f5f9", margin: 0 }}>
-            {tString(t, "my_profile")}
-          </h2>
+    <div className="profile-modal-backdrop" onClick={onClose}>
+      <div className="profile-modal" onClick={(e) => e.stopPropagation()}>
+        <div className="profile-modal-header">
+          <h2 className="profile-modal-title">{tString(t, "my_profile")}</h2>
           <button
             type="button"
             onClick={onClose}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              fontSize: 20,
-              color: "#6b7280",
-            }}
+            className="profile-modal-close"
           >
             ✕
           </button>
         </div>
 
-        {error && (
-          <div
-            style={{
-              background: "#ffe0e0",
-              color: "#c00",
-              padding: "10px 14px",
-              borderRadius: 8,
-              fontSize: 13,
-              marginBottom: 16,
-            }}
-          >
-            {error}
-          </div>
-        )}
+        {error && <div className="profile-modal-error">{error}</div>}
 
-        <div style={{ marginBottom: 24 }}>
-          <div
-            style={{
-              fontSize: 11,
-              color: "#0d9488",
-              fontWeight: 700,
-              letterSpacing: "0.5px",
-              marginBottom: 6,
-            }}
-          >
+        <div className="profile-field">
+          <div className="profile-field-label">
             {user.username
               ? tString(t, "login_username_ph").toUpperCase()
               : "EMAIL"}
           </div>
-          <div
-            style={{
-              fontSize: 15,
-              color: "#f1f5f9",
-              padding: "10px 14px",
-              background: "#1c3534",
-              borderRadius: 8,
-              border: "1px solid #e2e8f0",
-            }}
-          >
+          <div className="profile-field-value">
             {user.username || user.email}
           </div>
         </div>
 
-        <div style={{ marginBottom: 24 }}>
-          <div
-            style={{
-              fontSize: 11,
-              color: "#0d9488",
-              fontWeight: 700,
-              letterSpacing: "0.5px",
-              marginBottom: 10,
-            }}
-          >
+        <div className="profile-field">
+          <div className="profile-field-label profile-field-label--lang">
             {tString(t, "account_language")}
           </div>
-          <div style={{ display: "flex", gap: 10 }}>
+          <div className="profile-lang-row">
             {(["pl", "en"] as LangCode[]).map((code) => (
               <button
                 key={code}
                 type="button"
                 onClick={() => requestLangChange(code)}
-                style={{
-                  flex: 1,
-                  padding: "10px",
-                  borderRadius: 8,
-                  cursor: "pointer",
-                  border: `2px solid ${user.lang === code ? "#0d9488" : "#374151"}`,
-                  background: user.lang === code ? "#1c3534" : "#1f2937",
-                  color: user.lang === code ? "#0d9488" : "#555",
-                  fontWeight: user.lang === code ? 700 : 400,
-                  fontSize: 14,
-                  transition: "all 0.15s",
-                }}
+                className={`profile-lang-btn${activeLang === code ? " profile-lang-btn--active" : ""}`}
               >
                 {langName(code)}
               </button>
             ))}
           </div>
-          <div
-            style={{
-              marginTop: 8,
-              fontSize: 11,
-              color: "#6b7280",
-              lineHeight: 1.5,
-            }}
-          >
+          <div className="profile-lang-desc">
             {(() => {
               const v = t("profile_lang_desc");
-              const name = langName(user.lang as LangCode);
+              const name = langName(activeLang);
               return typeof v === "function"
                 ? (v as (n: string) => string)(name)
                 : String(v);
@@ -210,23 +121,12 @@ export function ProfileModal({ onClose, onStartTour }: ProfileModalProps) {
           </div>
         </div>
 
-        <div style={{ borderTop: "1px solid #374151", paddingTop: 20 }}>
+        <div className="profile-actions">
           <button
             type="button"
             onClick={() => void handleDelete()}
             disabled={deleting}
-            style={{
-              width: "100%",
-              padding: "11px",
-              border: "none",
-              borderRadius: 8,
-              background: deleting ? "#ffb3b3" : "#ff4757",
-              color: "#1f2937",
-              cursor: deleting ? "not-allowed" : "pointer",
-              fontSize: 14,
-              fontWeight: 600,
-              marginBottom: 10,
-            }}
+            className="profile-btn profile-btn-delete"
           >
             {deleting ? tString(t, "deleting") : tString(t, "delete_account")}
           </button>
@@ -234,18 +134,7 @@ export function ProfileModal({ onClose, onStartTour }: ProfileModalProps) {
             <button
               type="button"
               onClick={onStartTour}
-              style={{
-                width: "100%",
-                padding: "10px",
-                border: "1px solid #0d9488",
-                borderRadius: 8,
-                background: "none",
-                cursor: "pointer",
-                fontSize: 14,
-                color: "#0d9488",
-                fontWeight: 600,
-                marginBottom: 8,
-              }}
+              className="profile-btn profile-btn-tour"
             >
               ▶ {tString(t, "show_tutorial")}
             </button>
@@ -253,16 +142,7 @@ export function ProfileModal({ onClose, onStartTour }: ProfileModalProps) {
           <button
             type="button"
             onClick={onClose}
-            style={{
-              width: "100%",
-              padding: "10px",
-              border: "1px solid #e0e0e0",
-              borderRadius: 8,
-              background: "none",
-              cursor: "pointer",
-              fontSize: 14,
-              color: "#9ca3af",
-            }}
+            className="profile-btn profile-btn-close"
           >
             {tString(t, "close")}
           </button>
@@ -271,80 +151,35 @@ export function ProfileModal({ onClose, onStartTour }: ProfileModalProps) {
 
       {showLangWarning && pendingLang && (
         <div
-          style={{
-            position: "fixed",
-            inset: 0,
-            background: "rgba(0,0,0,0.6)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 10001,
-          }}
+          className="profile-warning-backdrop"
           onClick={() => setShowLangWarning(false)}
         >
           <div
-            style={{
-              background: "#1f2937",
-              borderRadius: 14,
-              padding: "28px 24px",
-              maxWidth: 380,
-              width: "100%",
-              boxShadow: "0 20px 60px rgba(0,0,0,0.35)",
-            }}
+            className="profile-warning-modal"
             onClick={(e) => e.stopPropagation()}
           >
-            <div style={{ fontSize: 32, textAlign: "center", marginBottom: 12 }}>
-              ⚠️
-            </div>
-            <h3
-              style={{
-                fontSize: 16,
-                color: "#f1f5f9",
-                marginBottom: 12,
-                textAlign: "center",
-              }}
-            >
+            <div className="profile-warning-icon">⚠️</div>
+            <h3 className="profile-warning-title">
               {tString(t, "profile_lang_change_title")}
             </h3>
-            <div
-              style={{
-                fontSize: 13,
-                color: "#e2e8f0",
-                lineHeight: 1.7,
-                marginBottom: 20,
-                background: "#111827",
-                border: "1px solid #f59e0b55",
-                borderRadius: 8,
-                padding: "12px 14px",
-              }}
-            >
+            <div className="profile-warning-body">
               <b>{tString(t, "profile_lang_warning_label")}</b>{" "}
               {tFormatArgs(
                 t,
                 "profile_lang_warning_body",
-                langName(user.lang as LangCode),
+                langName(activeLang),
                 langName(pendingLang),
               )}
               <br />
               <br />
               {tString(t, "profile_lang_warning_note")}
             </div>
-            <div style={{ display: "flex", gap: 10 }}>
+            <div className="profile-warning-actions">
               <button
                 type="button"
                 onClick={() => void confirmLangChange()}
                 disabled={changingLang}
-                style={{
-                  flex: 1,
-                  padding: "11px",
-                  border: "none",
-                  borderRadius: 8,
-                  background: "#0d9488",
-                  color: "#1f2937",
-                  fontWeight: 600,
-                  fontSize: 14,
-                  cursor: changingLang ? "not-allowed" : "pointer",
-                }}
+                className="profile-warning-confirm"
               >
                 {changingLang ? "..." : tString(t, "profile_lang_change_confirm")}
               </button>
@@ -354,16 +189,7 @@ export function ProfileModal({ onClose, onStartTour }: ProfileModalProps) {
                   setShowLangWarning(false);
                   setPendingLang(null);
                 }}
-                style={{
-                  flex: 1,
-                  padding: "11px",
-                  border: "1px solid #374151",
-                  borderRadius: 8,
-                  background: "none",
-                  color: "#9ca3af",
-                  fontSize: 14,
-                  cursor: "pointer",
-                }}
+                className="profile-warning-cancel"
               >
                 {tString(t, "cancel")}
               </button>

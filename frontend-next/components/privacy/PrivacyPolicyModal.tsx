@@ -1,6 +1,7 @@
 "use client";
 
 import type { LangCode } from "@/lib/i18n/translations";
+import "./privacy-modal.css";
 
 const CONTENT = {
   en: {
@@ -135,123 +136,36 @@ export function PrivacyPolicyModal({
   const c = CONTENT[lang] ?? CONTENT.en;
 
   return (
-    <div
-      onClick={onClose}
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 9999,
-        background: "rgba(0,0,0,0.7)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "20px",
-      }}
-    >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        style={{
-          background: "#1f2937",
-          borderRadius: 16,
-          width: "100%",
-          maxWidth: 640,
-          maxHeight: "85vh",
-          display: "flex",
-          flexDirection: "column",
-          boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            padding: "20px 24px 16px",
-            borderBottom: "1px solid #374151",
-            flexShrink: 0,
-          }}
-        >
+    <div className="privacy-modal-backdrop" onClick={onClose}>
+      <div className="privacy-modal" onClick={(e) => e.stopPropagation()}>
+        <div className="privacy-modal-header">
           <div>
-            <h2
-              style={{
-                margin: 0,
-                fontSize: 18,
-                fontWeight: 700,
-                color: "#f1f5f9",
-              }}
-            >
-              {c.title}
-            </h2>
-            <p style={{ margin: "2px 0 0", fontSize: 11, color: "#6b7280" }}>
-              {c.updated}
-            </p>
+            <h2 className="privacy-modal-title">{c.title}</h2>
+            <p className="privacy-modal-updated">{c.updated}</p>
           </div>
           <button
             type="button"
             onClick={onClose}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              color: "#6b7280",
-              fontSize: 22,
-              lineHeight: 1,
-              padding: "4px 8px",
-            }}
+            className="privacy-modal-close"
           >
             ×
           </button>
         </div>
 
-        <div style={{ overflowY: "auto", padding: "20px 24px 24px" }}>
+        <div className="privacy-modal-body dark-scroll">
           {c.sections.map((s, i) => (
-            <div key={i} style={{ marginBottom: 20 }}>
-              <h3
-                style={{
-                  margin: "0 0 6px",
-                  fontSize: 13,
-                  fontWeight: 700,
-                  color: "#2dd4bf",
-                }}
-              >
-                {s.heading}
-              </h3>
-              <p
-                style={{
-                  margin: "0 0 6px",
-                  fontSize: 13,
-                  color: "#d1d5db",
-                  lineHeight: 1.6,
-                }}
-              >
-                {s.text}
-              </p>
+            <div key={i} className="privacy-section">
+              <h3 className="privacy-section-heading">{s.heading}</h3>
+              <p className="privacy-section-text">{s.text}</p>
               {"list" in s && s.list && (
-                <ul style={{ margin: "4px 0 6px 18px", padding: 0 }}>
+                <ul className="privacy-section-list">
                   {s.list.map((item, j) => (
-                    <li
-                      key={j}
-                      style={{
-                        fontSize: 13,
-                        color: "#d1d5db",
-                        lineHeight: 1.6,
-                        marginBottom: 2,
-                      }}
-                    >
-                      {item}
-                    </li>
+                    <li key={j}>{item}</li>
                   ))}
                 </ul>
               )}
               {"text2" in s && s.text2 && (
-                <p
-                  style={{
-                    margin: 0,
-                    fontSize: 13,
-                    color: "#d1d5db",
-                    lineHeight: 1.6,
-                  }}
-                >
+                <p className="privacy-section-text privacy-section-text--tail">
                   {s.text2}
                 </p>
               )}
