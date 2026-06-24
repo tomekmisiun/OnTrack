@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from app.services.dish_compare_loader import load_dish_compare, load_defaults
+from app.services.dish_compare_loader import load_defaults, load_dish_compare
 
 DATA_ROOT = Path(__file__).resolve().parents[1] / "data"
 

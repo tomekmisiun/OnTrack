@@ -12,6 +12,8 @@ class ProductCreateRequest(BaseModel):
     carbs: float | None = None
     sold_by_weight: bool = False
 
+    model_config = {"extra": "ignore"}
+
 
 class ProductUpdateRequest(BaseModel):
     name: str | None = None

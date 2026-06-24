@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 
 from app.domain.product_filters import looks_like_recipe_ingredient_line
+from app.domain.product_normalize import normalize_product_name
 from app.models.product import Product
 from app.models.user import User
 from app.services.product_presenter import product_to_dict
@@ -110,6 +111,8 @@ def create_product(session: Session, user_id: int, data: dict) -> dict:
     user = session.get(User, user_id)
     product = Product(
         user_id=user_id,
+        source="user",
+        normalized_name=normalize_product_name(str(data["name"])),
         name=str(data["name"]).strip()[:MAX_NAME],
         package_weight=float(data["package_weight"]),
         price=float(data["price"]),
@@ -135,6 +138,7 @@ def update_product(session: Session, user_id: int, product_id: int, data: dict) 
 
     if "name" in data:
         product.name = str(data["name"]).strip()[:MAX_NAME]
+        product.normalized_name = normalize_product_name(product.name)
     if "package_weight" in data:
         product.package_weight = float(data["package_weight"])
     if "price" in data:

@@ -6,7 +6,6 @@ import json
 from pathlib import Path
 
 import pytest
-
 from app.core.config import get_settings
 from app.core.runtime_data import (
     dish_compare_data_dir,

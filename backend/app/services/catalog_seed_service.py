@@ -5,6 +5,7 @@ import json
 from sqlalchemy.orm import Session
 
 from app.core.runtime_data import seeds_dir
+from app.domain.product_normalize import normalize_product_name
 from app.models.product import Product
 from app.models.recipe import Recipe, RecipeIngredient
 
@@ -45,6 +46,8 @@ def _seed_products(session: Session, user_id: int, lang: str) -> None:
         session.add(
             Product(
                 user_id=user_id,
+                source="legacy",
+                normalized_name=normalize_product_name(name),
                 name=name,
                 price=float(p.get("price") or 0),
                 package_weight=float(p.get("package_weight") or 100),

@@ -19,6 +19,7 @@ from app.core.config import get_settings  # noqa: E402
 from app.core.passwords import hash_password  # noqa: E402
 from app.core.security import create_access_token  # noqa: E402
 from app.db.base import Base  # noqa: E402
+from app.domain.product_normalize import normalize_product_name  # noqa: E402
 from app.main import create_app  # noqa: E402
 from app.models.household_member import HouseholdMember  # noqa: E402
 from app.models.product import Product  # noqa: E402
@@ -118,6 +119,8 @@ def other_auth_headers(other_user: User) -> dict[str, str]:
 def product(db_session: Session, user: User) -> Product:
     p = Product(
         user_id=user.id,
+        source="user",
+        normalized_name=normalize_product_name("Jogurt naturalny"),
         name="Jogurt naturalny",
         package_weight=400,
         price=3.49,
