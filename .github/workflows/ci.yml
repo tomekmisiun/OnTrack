@@ -109,9 +109,9 @@ jobs:
       - name: Build frontend-next production image
         run: |
           docker build -t ontrack-frontend-next \
-            --target runner \
+            -f frontend-next/Dockerfile.railway \
             --build-arg NEXT_PUBLIC_API_URL=http://localhost:5001 \
-            -f frontend-next/Dockerfile frontend-next
+            frontend-next
 
   backend-integration:
     runs-on: ubuntu-latest

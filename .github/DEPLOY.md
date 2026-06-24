@@ -28,11 +28,25 @@ For **each** service → **Settings** → **Source**:
 
 ### Frontend build variable
 
-Set at **build time** (baked into the Next.js bundle):
+Set at **build time** (baked into the Next.js client bundle). Railway passes service variables matching Dockerfile `ARG` names automatically.
 
 ```
 NEXT_PUBLIC_API_URL=https://<ontrack-back-domain>
 ```
+
+Remove legacy `REACT_APP_API_URL` if still present — CRA was removed in task 15.
+
+### Frontend troubleshooting (deploy fails)
+
+| Symptom | Fix |
+|---------|-----|
+| Build: directory / Dockerfile not found | **Root Directory** must be `frontend-next` (not `frontend` — deleted) |
+| Build: missing `NEXT_PUBLIC_API_URL` | Add variable on `ontrackapp` → **Variables**, redeploy |
+| Build uses dev server / wrong stage | Config must point to `Dockerfile.railway` (see `frontend-next/railway.toml`) |
+| Healthcheck timeout | `/login` must return 200; check deploy logs for `node server.js` |
+| App loads but API fails | `NEXT_PUBLIC_API_URL` must be the public `ontrack-back` URL (not localhost) |
+
+After changing Root Directory or variables: **Deployments → Redeploy** (not just restart).
 
 ---
 

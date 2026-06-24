@@ -179,9 +179,9 @@ Production image (standalone output):
 
 ```bash
 docker build -t ontrack-frontend-next \
-  --target runner \
+  -f Dockerfile.railway \
   --build-arg NEXT_PUBLIC_API_URL=https://your-api.example.com \
-  -f Dockerfile .
+  .
 docker run --rm -p 3002:3000 ontrack-frontend-next
 ```
 

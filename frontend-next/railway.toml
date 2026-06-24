@@ -1,6 +1,27 @@
+# Railway service: ontrackapp
+# Settings → Source → Root Directory: frontend-next
+# Settings → Source → Config file path: frontend-next/railway.toml (from repo root)
+#
+# Required build variable (service Variables tab):
+#   NEXT_PUBLIC_API_URL=https://<ontrack-back-domain>
+
 [build]
 builder = "dockerfile"
-dockerfilePath = "Dockerfile"
+dockerfilePath = "Dockerfile.railway"
+watchPatterns = [
+  "app/**",
+  "components/**",
+  "contexts/**",
+  "hooks/**",
+  "lib/**",
+  "public/**",
+  "package.json",
+  "package-lock.json",
+  "next.config.ts",
+  "Dockerfile.railway",
+]
 
 [deploy]
+healthcheckPath = "/login"
+healthcheckTimeout = 120
 restartPolicyType = "on_failure"
