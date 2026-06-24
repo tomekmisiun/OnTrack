@@ -65,8 +65,7 @@ def test_products_are_scoped_by_user(client, auth_headers, other_auth_headers, p
     res = client.get("/api/products/", headers=other_auth_headers)
     assert res.status_code == 200
     body = res.json()
-    assert _items(body) == []
-    assert body.get("total") == 0
+    assert product.id not in {p["id"] for p in _items(body)}
 
     missing = client.delete(f"/api/products/{product.id}", headers=other_auth_headers)
     assert missing.status_code == 404

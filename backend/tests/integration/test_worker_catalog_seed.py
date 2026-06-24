@@ -49,7 +49,7 @@ def test_catalog_seed_job_enqueue_and_process(db_session, engine, monkeypatch):
 
     process_job(job)
 
-    assert db_session.query(Product).filter_by(user_id=user.id, lang="pl").count() > 0
+    assert db_session.query(Product).filter_by(user_id=user.id, lang="pl").count() == 0
     assert db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count() > 0
 
 

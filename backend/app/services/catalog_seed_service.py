@@ -5,7 +5,6 @@ import json
 from sqlalchemy.orm import Session
 
 from app.core.runtime_data import seeds_dir
-from app.domain.product_normalize import normalize_product_name
 from app.models.product import Product
 from app.models.recipe import Recipe, RecipeIngredient
 
@@ -25,42 +24,21 @@ def _load_json(fname: str, lang: str) -> list[dict]:
 
 
 def _catalog_incomplete(session: Session, user_id: int, lang: str) -> bool:
-    has_products = (
-        session.query(Product)
-        .filter_by(user_id=user_id, lang=lang)
-        .filter(Product.price > 0)
-        .first()
-    )
-    has_recipes = session.query(Recipe).filter_by(user_id=user_id, lang=lang).first()
-    return not has_products or not has_recipes
+    return not session.query(Recipe).filter_by(user_id=user_id, lang=lang).first()
 
 
-def _seed_products(session: Session, user_id: int, lang: str) -> None:
-    products = _load_json("products_seed_pl.json", lang)
-    if not products:
-        return
-    for p in products:
-        name = (p.get("name") or "").strip()[:200]
-        if not name:
-            continue
-        session.add(
-            Product(
-                user_id=user_id,
-                source="legacy",
-                normalized_name=normalize_product_name(name),
-                name=name,
-                price=float(p.get("price") or 0),
-                package_weight=float(p.get("package_weight") or 100),
-                unit=p.get("unit") or "g",
-                sold_by_weight=bool(p.get("sold_by_weight", False)),
-                kcal=p.get("kcal"),
-                protein=p.get("protein"),
-                fat=p.get("fat"),
-                carbs=p.get("carbs"),
-                lang=lang,
-            )
-        )
-    session.commit()
+def _product_lookup_map(session: Session, user_id: int, lang: str) -> dict[str, int]:
+    """Resolve ingredient names to product ids: user-owned rows override system catalog."""
+    product_map: dict[str, int] = {}
+    for product in session.query(Product).filter(
+        Product.lang == lang,
+        Product.user_id.is_(None),
+        Product.source == "system",
+    ):
+        product_map[product.name.lower()] = product.id
+    for product in session.query(Product).filter_by(user_id=user_id, lang=lang):
+        product_map[product.name.lower()] = product.id
+    return product_map
 
 
 def _seed_recipes(session: Session, user_id: int, lang: str) -> None:
@@ -68,10 +46,7 @@ def _seed_recipes(session: Session, user_id: int, lang: str) -> None:
     if not recipes:
         return
 
-    product_map = {
-        p.name.lower(): p.id
-        for p in session.query(Product).filter_by(user_id=user_id, lang=lang).all()
-    }
+    product_map = _product_lookup_map(session, user_id, lang)
     existing_names = {
         r.name.lower() for r in session.query(Recipe).filter_by(user_id=user_id, lang=lang).all()
     }
@@ -122,14 +97,24 @@ def _seed_recipes(session: Session, user_id: int, lang: str) -> None:
     session.commit()
 
 
-def ensure_user_seeded(session: Session, user_id: int, lang: str) -> None:
-    if (
-        not session.query(Product)
-        .filter_by(user_id=user_id, lang=lang)
-        .filter(Product.price > 0)
+def _ensure_global_catalog(session: Session, lang: str) -> None:
+    has_system = (
+        session.query(Product)
+        .filter(
+            Product.user_id.is_(None),
+            Product.source == "system",
+            Product.lang == lang,
+        )
         .first()
-    ):
-        _seed_products(session, user_id, lang)
+    )
+    if not has_system:
+        from app.scripts.seed_global_catalog import import_global_catalog
+
+        import_global_catalog(session, lang)
+
+
+def ensure_user_seeded(session: Session, user_id: int, lang: str) -> None:
+    _ensure_global_catalog(session, lang)
     if not session.query(Recipe).filter_by(user_id=user_id, lang=lang).first():
         _seed_recipes(session, user_id, lang)
 
