@@ -1295,6 +1295,7 @@ export function CalendarScreen() {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    gap: 4,
     width: "100%",
     flex: 1,
     padding: 4,
@@ -1302,6 +1303,8 @@ export function CalendarScreen() {
     cursor: "pointer",
     fontSize: 11,
     fontWeight: 700,
+    lineHeight: 1.3,
+    whiteSpace: "nowrap",
     border: "1px solid #374151",
   };
 
@@ -1400,19 +1403,43 @@ export function CalendarScreen() {
             const weekHasMeals = weekDays.some((d) => (mealsByDate[dateToStr(d)] ?? []).length > 0);
             return (
               <div key={wi} style={{ display: "grid", gridTemplateColumns: "72px repeat(7,1fr)", gap: 3, marginBottom: 3 }}>
-                <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 3, alignSelf: "stretch" }}>
                   {weekHasMeals && (
-                    <button type="button" onClick={() => handleCopyWeek(mondayStr)} style={{ ...wBtn, background: isCopied ? "#0d9488" : "#1e3a3a", color: isCopied ? "white" : "#2dd4bf" }}>
+                    <button
+                      type="button"
+                      onClick={() => handleCopyWeek(mondayStr)}
+                      title={tString(t, "copy_week_title")}
+                      style={{
+                        ...wBtn,
+                        background: isCopied ? "#0d9488" : "#1e3a3a",
+                        color: isCopied ? "white" : "#2dd4bf",
+                      }}
+                    >
                       {isCopied ? tString(t, "btn_copied") : tString(t, "btn_copy")}
                     </button>
                   )}
                   {copiedWeek && copiedWeek !== mondayStr && (
-                    <button type="button" onClick={() => void handlePasteWeek(mondayStr)} style={{ ...wBtn, background: "#1e3358", color: "#93c5fd" }}>
+                    <button
+                      type="button"
+                      onClick={() => void handlePasteWeek(mondayStr)}
+                      title={tString(t, "paste_week_title")}
+                      style={{ ...wBtn, background: "#1e3358", color: "#93c5fd" }}
+                    >
                       {tString(t, "btn_paste")}
                     </button>
                   )}
                   {weekHasMeals && (
-                    <button type="button" onClick={() => handleDeleteWeek(mondayStr)} style={{ ...wBtn, background: "#2d1515", color: "#f87171", borderColor: "#4b1515" }}>
+                    <button
+                      type="button"
+                      onClick={() => handleDeleteWeek(mondayStr)}
+                      title={tString(t, "del_week_title")}
+                      style={{
+                        ...wBtn,
+                        background: "#2d1515",
+                        color: "#f87171",
+                        border: "1px solid #4b1515",
+                      }}
+                    >
                       {tString(t, "btn_delete")}
                     </button>
                   )}
@@ -1445,7 +1472,13 @@ export function CalendarScreen() {
           })}
 
           <div className="calendar-help-footer">
-            <button type="button" className="pill-help-btn" onClick={() => setCalendarHelpOpen(true)}>
+            <button
+              type="button"
+              className="pill-help-btn"
+              onClick={() => setCalendarHelpOpen(true)}
+              aria-label={tString(t, "how_to_title")}
+              title={tString(t, "how_to_title")}
+            >
               <Icon icon="heroicons:light-bulb" width={15} />
               <span>{tString(t, "import_help_btn")}</span>
             </button>
