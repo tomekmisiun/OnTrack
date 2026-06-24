@@ -81,6 +81,22 @@
   border-color: #4b1515;
 }
 
+.btn-danger:hover {
+  background: #3d1a1a;
+  color: #fca5a5;
+  border-color: #7f1d1d;
+}
+
+input.no-spin::-webkit-outer-spin-button,
+input.no-spin::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input.no-spin {
+  -moz-appearance: textfield;
+}
+
 .pill-help-btn {
   display: inline-flex;
   align-items: center;
@@ -252,6 +268,10 @@
   white-space: nowrap;
 }
 
+.carousel-action-btn:hover {
+  background: #0d948833;
+}
+
 .calendar-help-footer {
   display: flex;
   justify-content: flex-end;
@@ -316,6 +336,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background 0.15s;
+}
+
+.calendar-help-modal-close:hover {
+  background: rgba(75, 85, 99, 0.8);
 }
 
 .calendar-help-modal-body {
