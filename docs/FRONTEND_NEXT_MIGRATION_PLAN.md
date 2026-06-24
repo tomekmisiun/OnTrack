@@ -251,6 +251,7 @@ npm run export:openapi → openapi/openapi.json
 | **Files** | `docker-compose.yml`, `frontend-next/Dockerfile`, `.env.example` root |
 | **Dependencies** | Task 1 |
 | **Acceptance** | `docker compose up frontend-next` works; CRA service untouched |
+| **Status** | Done |
 | **Risks** | `NEXT_PUBLIC_*` baked at build time — document Railway build args |
 | **Out of scope** | Replacing nginx CRA image in production |
 

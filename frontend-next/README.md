@@ -159,6 +159,28 @@ npm run test:recipes      # single suite shortcut
 
 Unit tests live in `tests/unit/` and replace the legacy `scripts/check-*.mjs` guards. E2E smoke tests in `tests/e2e/` cover login rendering and auth middleware redirects (no backend required).
 
+## Docker
+
+Local Compose runs the Next.js dev server on **port 3002** (CRA `frontend` stays on 3000):
+
+```bash
+# From repo root — requires .env and running backend stack
+docker compose up --build frontend-next
+# http://localhost:3002
+```
+
+Production image (standalone output):
+
+```bash
+docker build -t ontrack-frontend-next \
+  --target runner \
+  --build-arg NEXT_PUBLIC_API_URL=https://your-api.example.com \
+  -f Dockerfile .
+docker run --rm -p 3002:3000 ontrack-frontend-next
+```
+
+`NEXT_PUBLIC_API_URL` is **baked at build time** — set it via `--build-arg` or Railway build variables before `npm run build`. The browser calls this URL directly (same as CRA `REACT_APP_API_URL`).
+
 ## Migration plan
 
 See [`docs/FRONTEND_NEXT_MIGRATION_PLAN.md`](../docs/FRONTEND_NEXT_MIGRATION_PLAN.md).

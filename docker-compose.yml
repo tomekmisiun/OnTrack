@@ -92,6 +92,24 @@ services:
     networks:
       - backend
 
+  frontend-next:
+    build:
+      context: ./frontend-next
+      dockerfile: Dockerfile
+      target: dev
+    volumes:
+      - ./frontend-next:/app
+      - /app/node_modules
+    ports:
+      - "${FRONTEND_NEXT_PUBLISH_PORT:-3002}:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:5001}
+      - WATCHPACK_POLLING=true
+    depends_on:
+      - backend
+    networks:
+      - backend
+
   prometheus:
     image: prom/prometheus:v2.53.0
     ports:
