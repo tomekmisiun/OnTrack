@@ -1,13 +1,13 @@
 # Frontend Next.js migration plan
 
-Migrate OnTrack UI from **React 19 + Create React App** to **Next.js App Router + TypeScript strict + Tailwind** (`frontend-next/`). **Tasks 1–15 complete** — CRA removed; production frontend is Next.js.
+Migrate OnTrack UI from **React 19 + Create React App** to **Next.js App Router + TypeScript strict + Tailwind** (`frontend-next/`). **All 16 tasks complete** — CRA removed; production frontend is Next.js.
 
 **Principles**
 
 - `1 task = 1 branch = 1 PR`
 - FastAPI owns all domain logic, auth, and PostgreSQL
 - Next.js owns UI, routing, and typed API communication
-- JWT stays in `localStorage` until optional task 16 (BFF / HttpOnly cookies)
+- JWT stays in `localStorage` by default; optional task 16 adds BFF + HttpOnly cookies (`NEXT_PUBLIC_BFF_ENABLED=1`)
 
 **Source of truth for API:** FastAPI routes + OpenAPI (`/openapi.json`), contract tests — not stale `API_CONTRACT.md` alone.
 
@@ -271,7 +271,7 @@ npm run export:openapi → openapi/openapi.json
 
 ---
 
-## Task 16 — Optional BFF and HttpOnly cookies (future)
+## Task 16 — Optional BFF and HttpOnly cookies
 
 | Field | Value |
 |-------|-------|
@@ -280,6 +280,7 @@ npm run export:openapi → openapi/openapi.json
 | **Dependencies** | Task 15, backend cookie-session design (may need FastAPI changes — **separate backend epic**) |
 | **Acceptance** | Documented threat model; no duplicate domain logic in Route Handlers |
 | **Out of scope** | This epic does not modify FastAPI auth in tasks 1–15 |
+| **Status** | **Done** — opt-in via `NEXT_PUBLIC_BFF_ENABLED=1`; see `docs/FRONTEND_NEXT_BFF.md` |
 
 ---
 
@@ -288,7 +289,7 @@ npm run export:openapi → openapi/openapi.json
 | CRA | Next.js |
 |-----|---------|
 | `REACT_APP_API_URL` | `NEXT_PUBLIC_API_URL` |
-| `localStorage.token` | Unchanged until task 16 |
+| `localStorage.token` | Default; BFF mode uses HttpOnly `ontrack_session` cookie |
 | Port 3000 (compose) | 3000 dev (or 3002 in compose task 14) |
 
 ---

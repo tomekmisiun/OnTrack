@@ -15,10 +15,12 @@ import {
   exchangeCode,
   fetchMeRaw,
   login,
+  logoutSession,
   register,
   setUnauthorizedHandler,
 } from "@/lib/api/auth";
 import { ApiError } from "@/lib/api/errors";
+import { isBffEnabled } from "@/lib/bff/config";
 import {
   clearAuthQueryParams,
   clearPendingLang,
@@ -67,7 +69,11 @@ export function AuthProvider({ children, onLangChange }: AuthProviderProps) {
   );
 
   const logout = useCallback(() => {
-    clearStoredToken();
+    if (isBffEnabled()) {
+      void logoutSession();
+    } else {
+      clearStoredToken();
+    }
     setUser(null);
   }, []);
 
@@ -77,8 +83,10 @@ export function AuthProvider({ children, onLangChange }: AuthProviderProps) {
   }, [logout]);
 
   const finishAuth = useCallback(
-    async (token: string, pendingLang: string | null) => {
-      setStoredToken(token);
+    async (token: string | null, pendingLang: string | null) => {
+      if (!isBffEnabled() && token) {
+        setStoredToken(token);
+      }
       const raw = await fetchMeRaw();
       const me = parseAuthUser(raw);
       if (!me) {
@@ -111,7 +119,9 @@ export function AuthProvider({ children, onLangChange }: AuthProviderProps) {
         try {
           const { token } = await exchangeCode(authCode);
           if (cancelled) return;
-          setStoredToken(token);
+          if (!isBffEnabled() && token) {
+            setStoredToken(token);
+          }
           clearAuthQueryParams();
         } catch {
           if (cancelled) return;
@@ -122,6 +132,36 @@ export function AuthProvider({ children, onLangChange }: AuthProviderProps) {
           setLoading(false);
           return;
         }
+      }
+
+      if (isBffEnabled()) {
+        try {
+          const raw = await fetchMeRaw();
+          if (cancelled) return;
+          const me = parseAuthUser(raw);
+          if (!me) {
+            throw new Error("Invalid user");
+          }
+          const pendingLang = getPendingLang();
+          if (authCode && pendingLang && pendingLang !== me.lang) {
+            try {
+              await changeLanguage(pendingLang);
+              if (cancelled) return;
+              applyUser({ ...me, lang: pendingLang as LangCode });
+            } catch {
+              applyUser(me);
+            }
+          } else {
+            if (pendingLang) clearPendingLang();
+            applyUser(me);
+          }
+        } catch {
+          if (cancelled) return;
+          setUser(null);
+        } finally {
+          if (!cancelled) setLoading(false);
+        }
+        return;
       }
 
       const token = getStoredToken();

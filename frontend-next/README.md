@@ -26,6 +26,9 @@ cp .env.example .env.local
 | Variable | Description |
 |----------|-------------|
 | `NEXT_PUBLIC_API_URL` | FastAPI base URL (no trailing slash required) |
+| `NEXT_PUBLIC_BFF_ENABLED` | Set to `1` for HttpOnly cookie BFF mode (default off) |
+
+See `docs/FRONTEND_NEXT_BFF.md` for BFF threat model and rollout.
 
 ## Scripts
 
@@ -87,14 +90,17 @@ npm run generate:api
 
 ## Authentication
 
-- JWT in `localStorage` (`lib/auth/storage.ts`) — unchanged from CRA until optional BFF task
+**Default:** JWT in `localStorage` (`lib/auth/storage.ts`) — CRA parity.
+
+**Optional BFF** (`NEXT_PUBLIC_BFF_ENABLED=1`): HttpOnly `ontrack_session` cookie; Route Handlers at `/api/bff/*` and `/api/auth/session`. See `docs/FRONTEND_NEXT_BFF.md`.
+
 - `contexts/AuthContext.tsx` — bootstrap, `?code=` OAuth exchange, login/register/logout
 - `/login` — password + Google OAuth redirect to FastAPI `/api/auth/google`
 
 ## Routing
 
 - Protected app routes under `app/(app)/` — `/`, `/macro`, `/calendar`, `/schedule`, `/recipes`, `/products`, `/summary`, `/export`
-- `middleware.ts` — session cookie gate (`ontrack_has_token`, synced from JWT in localStorage)
+- `middleware.ts` — session gate (`ontrack_has_token` or HttpOnly `ontrack_session`)
 - `components/layout/Sidebar.tsx` — CRA tab parity (sidebar hidden on home)
 - Module screens: products (task 8), recipes (task 9), calendar/meal plan (task 10), day schedule (task 11); summary, export, etc. are placeholders until task 12
 

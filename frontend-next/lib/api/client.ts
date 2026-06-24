@@ -1,4 +1,5 @@
 import { getApiBaseUrl } from "@/lib/config/env";
+import { isBffEnabled } from "@/lib/bff/config";
 import { ApiError, errorMessageFromBody } from "@/lib/api/errors";
 
 export type ApiClientOptions = {
@@ -13,8 +14,16 @@ export type RequestOptions = Omit<RequestInit, "body"> & {
 };
 
 function buildUrl(path: string): string {
-  const base = getApiBaseUrl();
   const normalized = path.startsWith("/") ? path : `/${path}`;
+
+  if (isBffEnabled()) {
+    const apiPath = normalized.startsWith("/api/")
+      ? normalized.slice("/api/".length)
+      : normalized.slice(1);
+    return `/api/bff/${apiPath}`;
+  }
+
+  const base = getApiBaseUrl();
   return `${base}${normalized}`;
 }
 
@@ -27,7 +36,7 @@ export function createApiClient(options: ApiClientOptions = {}) {
       headers.set("Content-Type", "application/json");
     }
 
-    const token = options.getToken?.();
+    const token = isBffEnabled() ? null : options.getToken?.();
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
     }
@@ -35,6 +44,7 @@ export function createApiClient(options: ApiClientOptions = {}) {
     const response = await fetch(buildUrl(path), {
       ...rest,
       headers,
+      credentials: isBffEnabled() ? "include" : rest.credentials,
       body: body !== undefined ? JSON.stringify(body) : undefined,
     });
 
