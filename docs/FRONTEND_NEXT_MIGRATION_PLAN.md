@@ -169,8 +169,7 @@ npm run export:openapi → openapi/openapi.json
 | **Tests** | Port `productPage.test.ts`; MSW contract tests |
 | **Risks** | Import dropdown needs search API — align with backend pagination |
 | **Out of scope** | Backend catalog changes |
-
----
+| **Status** | Done |
 
 ## Task 9 — Recipes module
 
