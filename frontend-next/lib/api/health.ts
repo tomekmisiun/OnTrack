@@ -1,8 +1,5 @@
 import { apiClient } from "@/lib/api/client";
-
-export type HealthResponse = {
-  status: string;
-};
+import type { HealthResponse } from "@/lib/api/openapi-helpers";
 
 export function fetchHealth(): Promise<HealthResponse> {
   return apiClient.get<HealthResponse>("/health");

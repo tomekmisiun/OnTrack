@@ -17,7 +17,7 @@ export function HealthStatus() {
     fetchHealth()
       .then((data) => {
         if (!cancelled) {
-          setState({ kind: "ok", data: { status: data.status } });
+          setState({ kind: "ok", data: { status: data.status ?? "ok" } });
         }
       })
       .catch((err: unknown) => {

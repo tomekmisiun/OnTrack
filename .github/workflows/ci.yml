@@ -59,6 +59,7 @@ jobs:
         working-directory: frontend-next
         run: |
           npm ci
+          npm run generate:api
           npm run lint
           npm run typecheck
           npm run build
