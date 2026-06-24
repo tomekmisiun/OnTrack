@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import DateTime, String
+from sqlalchemy import DateTime, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db.base import Base
@@ -16,4 +16,10 @@ class User(Base):
     created_at: Mapped[datetime | None] = mapped_column(DateTime, default=datetime.utcnow)
     lang: Mapped[str] = mapped_column(String(5), nullable=False, default="pl")
     ui_locale: Mapped[str] = mapped_column(String(5), nullable=False, default="pl")
-    market_code: Mapped[str] = mapped_column(String(10), nullable=False, default="PL")
+    market_code: Mapped[str] = mapped_column(
+        String(10),
+        ForeignKey("markets.code"),
+        nullable=False,
+        default="PL",
+        index=True,
+    )
