@@ -13,7 +13,8 @@
     "test:members": "node scripts/check-member-targets.mjs",
     "test:products": "node scripts/check-product-page.mjs",
     "test:recipes": "node scripts/check-recipe-search.mjs",
-    "test:calendar": "node scripts/check-meal-plan-dates.mjs"
+    "test:calendar": "node scripts/check-meal-plan-dates.mjs",
+    "test:schedule": "node scripts/check-schedule-parse.mjs"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

@@ -210,6 +210,7 @@ npm run export:openapi → openapi/openapi.json
 | **Files** | `DaySchedule.js` port, `lib/api/daySchedule.ts` |
 | **Dependencies** | Task 7, 6 |
 | **Acceptance** | Parity with `test_day_schedule_contract.py` |
+| **Status** | Done |
 
 ---
 
