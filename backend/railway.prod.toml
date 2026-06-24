@@ -1,15 +1,14 @@
-# FastAPI production API — Railway service: ontrack-back-fastapi
-# Root Directory in Railway Settings MUST be repository root (not backend/).
-# Flask ontrack-back removed in MIG-017 — delete Railway service after cutover stability period.
+# FastAPI production API — Railway service: ontrack-back (canonical prod config)
+# Root Directory: backend
 [build]
 builder = "dockerfile"
-dockerfilePath = "backend/Dockerfile.railway"
+dockerfilePath = "Dockerfile"
 watchPatterns = [
-  "backend/**",
-  "app/user_seeds/**",
-  "app/dish_compare/**",
-  "scraper/data/macros/**",
-  "scraper/data/built/**",
+  "app/**",
+  "data/**",
+  "scripts/**",
+  "pyproject.toml",
+  "uv.lock",
 ]
 
 [deploy]

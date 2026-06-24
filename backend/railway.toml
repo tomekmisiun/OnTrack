@@ -1,14 +1,15 @@
-# FastAPI staging API — Railway service: ontrack-back-fastapi-staging
-# Root Directory in Railway Settings MUST be repository root (not backend/).
+# FastAPI production API — Railway service: ontrack-back
+# Railway Settings → Source → Root Directory: backend
+# Railway Settings → Source → Config file path: railway.toml (or backend/railway.toml)
 [build]
 builder = "dockerfile"
-dockerfilePath = "backend/Dockerfile.railway"
+dockerfilePath = "Dockerfile"
 watchPatterns = [
-  "backend/**",
-  "app/user_seeds/**",
-  "app/dish_compare/**",
-  "scraper/data/macros/**",
-  "scraper/data/built/**",
+  "app/**",
+  "data/**",
+  "scripts/**",
+  "pyproject.toml",
+  "uv.lock",
 ]
 
 [deploy]
