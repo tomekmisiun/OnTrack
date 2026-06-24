@@ -31,6 +31,7 @@ import {
 } from "@/lib/auth/storage";
 import { setSessionCookie } from "@/lib/auth/session-cookie";
 import type { LangCode } from "@/lib/i18n/translations";
+import type { MarketCode } from "@/lib/domain/market";
 import { parseAuthUser, type AuthUser } from "@/types/auth";
 
 export type AuthContextValue = {
@@ -39,6 +40,7 @@ export type AuthContextValue = {
   logout: () => void;
   deleteAccount: () => Promise<void>;
   updateUserLang: (lang: LangCode) => void;
+  updateUserMarket: (marketCode: MarketCode) => void;
   loginWithPassword: (username: string, password: string) => Promise<void>;
   registerAccount: (input: {
     username: string;
@@ -93,10 +95,14 @@ export function AuthProvider({ children, onLangChange }: AuthProviderProps) {
         throw new Error("Invalid /api/auth/me response");
       }
 
-      if (pendingLang && pendingLang !== me.lang) {
+      if (pendingLang && pendingLang !== me.ui_locale) {
         try {
           await changeLanguage(pendingLang);
-          applyUser({ ...me, lang: pendingLang as LangCode });
+          applyUser({
+            ...me,
+            lang: pendingLang as LangCode,
+            ui_locale: pendingLang as LangCode,
+          });
         } catch {
           applyUser(me);
         }
@@ -143,11 +149,15 @@ export function AuthProvider({ children, onLangChange }: AuthProviderProps) {
             throw new Error("Invalid user");
           }
           const pendingLang = getPendingLang();
-          if (authCode && pendingLang && pendingLang !== me.lang) {
+          if (authCode && pendingLang && pendingLang !== me.ui_locale) {
             try {
               await changeLanguage(pendingLang);
               if (cancelled) return;
-              applyUser({ ...me, lang: pendingLang as LangCode });
+              applyUser({
+                ...me,
+                lang: pendingLang as LangCode,
+                ui_locale: pendingLang as LangCode,
+              });
             } catch {
               applyUser(me);
             }
@@ -181,11 +191,15 @@ export function AuthProvider({ children, onLangChange }: AuthProviderProps) {
         }
 
         const pendingLang = getPendingLang();
-        if (authCode && pendingLang && pendingLang !== me.lang) {
+        if (authCode && pendingLang && pendingLang !== me.ui_locale) {
           try {
             await changeLanguage(pendingLang);
             if (cancelled) return;
-            applyUser({ ...me, lang: pendingLang as LangCode });
+            applyUser({
+              ...me,
+              lang: pendingLang as LangCode,
+              ui_locale: pendingLang as LangCode,
+            });
           } catch {
             applyUser(me);
           }
@@ -240,6 +254,12 @@ export function AuthProvider({ children, onLangChange }: AuthProviderProps) {
     );
   }, []);
 
+  const updateUserMarket = useCallback((marketCode: MarketCode) => {
+    setUser((current) =>
+      current ? { ...current, market_code: marketCode } : current,
+    );
+  }, []);
+
   const value = useMemo(
     () => ({
       user,
@@ -247,6 +267,7 @@ export function AuthProvider({ children, onLangChange }: AuthProviderProps) {
       logout,
       deleteAccount,
       updateUserLang,
+      updateUserMarket,
       loginWithPassword,
       registerAccount,
     }),
@@ -256,6 +277,7 @@ export function AuthProvider({ children, onLangChange }: AuthProviderProps) {
       logout,
       deleteAccount,
       updateUserLang,
+      updateUserMarket,
       loginWithPassword,
       registerAccount,
     ],

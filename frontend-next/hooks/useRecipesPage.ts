@@ -196,7 +196,7 @@ export function useRecipesPage() {
   useEffect(() => {
     void loadRecipes();
     void loadProducts();
-  }, [user?.lang]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [user?.market_code]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!pasteText.trim()) {

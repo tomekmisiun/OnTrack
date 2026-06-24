@@ -204,7 +204,7 @@ export function useProductsPage() {
 
   useEffect(() => {
     void loadProducts({ reset: true });
-  }, [user?.lang]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [user?.market_code]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (searchDebounceRef.current) clearTimeout(searchDebounceRef.current);
