@@ -1,8 +1,36 @@
 from app.domain.product_normalize import normalize_product_name
 from app.models.product import Product
-from app.scripts.seed_global_catalog import catalog_key_for_seed, import_global_catalog
+from app.scripts.seed_global_catalog import (
+    _load_seed_products,
+    catalog_key_for_seed,
+    import_global_catalog,
+)
 
 from tests.conftest import create_user
+
+
+def _jogurt_seed_row() -> dict:
+    for row in _load_seed_products("pl"):
+        if row["name"] == "jogurt naturalny":
+            return row
+    raise AssertionError("jogurt naturalny missing from pl seed")
+
+
+def _legacy_product_from_seed(user_id: int, row: dict) -> Product:
+    return Product(
+        user_id=user_id,
+        source="legacy",
+        normalized_name=normalize_product_name(row["name"]),
+        name=row["name"],
+        package_weight=row["package_weight"],
+        price=row["price"],
+        unit=row["unit"],
+        kcal=row.get("kcal"),
+        protein=row.get("protein"),
+        fat=row.get("fat"),
+        carbs=row.get("carbs"),
+        lang="pl",
+    )
 
 
 def test_catalog_key_is_stable():
@@ -42,20 +70,8 @@ def test_import_global_catalog_is_idempotent(db_session):
 
 def test_import_links_deterministic_legacy_copy(db_session):
     user = create_user(db_session, "legacy-link@example.com", lang="pl")
-    legacy = Product(
-        user_id=user.id,
-        source="legacy",
-        normalized_name=normalize_product_name("jogurt naturalny"),
-        name="jogurt naturalny",
-        package_weight=400,
-        price=3.49,
-        unit="g",
-        kcal=60,
-        protein=4,
-        fat=3,
-        carbs=5,
-        lang="pl",
-    )
+    seed_row = _jogurt_seed_row()
+    legacy = _legacy_product_from_seed(user.id, seed_row)
     db_session.add(legacy)
     db_session.commit()
 
@@ -71,23 +87,9 @@ def test_import_links_deterministic_legacy_copy(db_session):
 
 def test_import_skips_ambiguous_legacy_matches(db_session):
     user = create_user(db_session, "ambig@example.com", lang="pl")
+    seed_row = _jogurt_seed_row()
     for _ in range(2):
-        db_session.add(
-            Product(
-                user_id=user.id,
-                source="legacy",
-                normalized_name=normalize_product_name("jogurt naturalny"),
-                name="jogurt naturalny",
-                package_weight=400,
-                price=3.49,
-                unit="g",
-                kcal=60,
-                protein=4,
-                fat=3,
-                carbs=5,
-                lang="pl",
-            )
-        )
+        db_session.add(_legacy_product_from_seed(user.id, seed_row))
     db_session.commit()
 
     report = import_global_catalog(db_session, "pl")

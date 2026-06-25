@@ -98,19 +98,23 @@ def _seed_recipes(session: Session, user_id: int, lang: str) -> None:
 
 
 def _ensure_global_catalog(session: Session, lang: str) -> None:
-    has_system = (
+    from app.scripts.seed_global_catalog import _load_seed_products, import_global_catalog
+
+    rows = _load_seed_products(lang)
+    if not rows:
+        return
+
+    system_count = (
         session.query(Product)
         .filter(
             Product.user_id.is_(None),
             Product.source == "system",
             Product.lang == lang,
         )
-        .first()
+        .count()
     )
-    if not has_system:
-        from app.scripts.seed_global_catalog import import_global_catalog
-
-        import_global_catalog(session, lang)
+    replace = system_count != len(rows)
+    import_global_catalog(session, lang, replace=replace)
 
 
 def ensure_user_seeded(session: Session, user_id: int, lang: str) -> None:

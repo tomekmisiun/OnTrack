@@ -87,12 +87,22 @@ class GlobalCatalogImportReport:
         }
 
 
-def import_global_catalog(session: Session, lang: str) -> GlobalCatalogImportReport:
+def import_global_catalog(
+    session: Session, lang: str, *, replace: bool = False
+) -> GlobalCatalogImportReport:
     """UPSERT system products for ``lang`` and link unambiguous legacy copies."""
     report = GlobalCatalogImportReport()
     rows = _load_seed_products(lang)
     if not rows:
         return report
+
+    if replace:
+        session.query(Product).filter(
+            Product.user_id.is_(None),
+            Product.source == "system",
+            Product.lang == lang,
+        ).delete(synchronize_session=False)
+        session.commit()
 
     manifest_path = runtime_data_root() / "manifest.json"
     dataset_type = "unknown"
