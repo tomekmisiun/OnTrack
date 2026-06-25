@@ -22,9 +22,11 @@ from app.models.recipe import Recipe, RecipeIngredient
 from app.models.recipe_parse_log import RecipeParseLog
 from app.models.user import User
 from app.services.member_service import ensure_primary_member, sync_primary_member_name
+from app.services.catalog_seed_service import ensure_catalog_if_incomplete, ensure_user_seeded
 from app.services.user_preferences import (
     apply_market_code,
     apply_ui_locale,
+    catalog_lang_for_user,
     init_user_preferences,
 )
 from app.services.user_presenter import user_to_dict
@@ -74,6 +76,7 @@ def login(session: Session, username: str, password: str) -> str:
         raise AuthServiceError("Invalid username or password", 401)
 
     sync_primary_member_name(session, user)
+    ensure_catalog_if_incomplete(session, user.id, catalog_lang_for_user(session, user.id))
     return issue_token(user.id)
 
 
@@ -103,6 +106,7 @@ def register(session: Session, username: str, password: str, lang: str) -> str:
     session.refresh(user)
 
     ensure_primary_member(session, user.id, user.ui_locale)
+    ensure_user_seeded(session, user.id, catalog_lang_for_user(session, user.id))
     return issue_token(user.id)
 
 
@@ -112,6 +116,7 @@ def get_me(session: Session, user_id: int) -> dict:
         raise AuthServiceError("User not found", 404)
 
     sync_primary_member_name(session, user)
+    ensure_catalog_if_incomplete(session, user_id, catalog_lang_for_user(session, user_id))
     return user_to_dict(user)
 
 
@@ -140,6 +145,7 @@ def change_market(session: Session, user_id: int, market_code: str) -> dict:
 
     apply_market_code(user, code)
     session.commit()
+    ensure_catalog_if_incomplete(session, user_id, catalog_lang_for_user(session, user_id))
     return user_to_dict(user)
 
 
@@ -262,8 +268,10 @@ def handle_oauth_callback(
         )
         session.commit()
         ensure_primary_member(session, user.id, user.ui_locale)
+        ensure_user_seeded(session, user.id, catalog_lang_for_user(session, user.id))
     else:
         ensure_primary_member(session, user.id, user.ui_locale)
+        ensure_catalog_if_incomplete(session, user.id, catalog_lang_for_user(session, user.id))
 
     settings = get_settings()
     code = issue_auth_code(session, user.id, ttl_seconds=settings.auth_code_ttl_seconds)
