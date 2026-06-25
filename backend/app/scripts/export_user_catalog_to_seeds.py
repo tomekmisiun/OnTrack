@@ -1,10 +1,14 @@
-"""Export a user's product catalog and recipes into backend/data/seeds JSON files.
+"""MIGRATION-ONLY: export a user's catalog to JSON snapshot files.
 
-Products are written for global catalog import (system rows on next seed).
-Recipes are written per-user seed format used by catalog_seed_service.
+This script requires a live database and a specific user account.
+It is NOT part of the standard catalog rebuild workflow.
 
-Usage:
-  uv run python -m app.scripts.export_user_catalog_to_seeds --user-id 3 --lang pl
+For normal operations, edit ``backend/data/canonical/`` and run ``build_catalog``.
+
+One-time owner snapshot is already stored in ``raw/user_1_catalog_snapshot/``.
+
+Usage (admin / migration):
+  uv run python -m app.scripts.export_user_catalog_to_seeds --user-id 1 --lang pl
   uv run python -m app.scripts.export_user_catalog_to_seeds --username tomek --lang pl
   uv run python -m app.scripts.export_user_catalog_to_seeds --list-users
 """
