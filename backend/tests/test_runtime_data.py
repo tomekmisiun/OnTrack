@@ -19,7 +19,6 @@ from app.core.runtime_data import (
 )
 
 CONSUMER_SERVICE_FILES = (
-    Path(__file__).resolve().parents[1] / "app" / "services" / "catalog_seed_service.py",
     Path(__file__).resolve().parents[1] / "app" / "services" / "dish_compare_loader.py",
     Path(__file__).resolve().parents[1] / "app" / "services" / "import_names.py",
     Path(__file__).resolve().parents[1] / "app" / "services" / "macro_lookup.py",
@@ -43,12 +42,17 @@ def clear_settings_cache():
 
 
 def _write_minimal_runtime_tree(root: Path) -> None:
-    (root / "seeds").mkdir(parents=True)
+    (root / "generated").mkdir(parents=True)
     (root / "dish_compare" / "defaults").mkdir(parents=True)
     (root / "dish_compare" / "built").mkdir(parents=True)
     (root / "macros").mkdir(parents=True)
     (root / "recipes").mkdir(parents=True)
     (root / "cache").mkdir(parents=True)
+
+    envelope = {"meta": {"generated": True, "do_not_edit": True, "canonical_version": "test"}, "items": [{"name": "x", "price": 1, "package_weight": 100}]}
+    recipe_envelope = {"meta": {"generated": True, "do_not_edit": True, "canonical_version": "test"}, "items": [{"name": "r", "ingredients": [{"product_name": "x", "weight": 10}]}]}
+    for fname in ("products_PL.json", "recipes_PL.json"):
+        (root / "generated" / fname).write_text(json.dumps(envelope if "products" in fname else recipe_envelope), encoding="utf-8")
 
     for lang in ("pl", "en"):
         (root / "dish_compare" / "defaults" / f"{lang}.json").write_text(

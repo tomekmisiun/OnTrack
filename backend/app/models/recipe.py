@@ -1,15 +1,38 @@
-from sqlalchemy import Boolean, Float, ForeignKey, Integer, String, Text
+from sqlalchemy import Boolean, CheckConstraint, Float, ForeignKey, Index, Integer, String, Text, text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
 from app.models.product import Product
 
+RECIPE_SOURCES = frozenset({"system", "user"})
+
 
 class Recipe(Base):
     __tablename__ = "recipes"
+    __table_args__ = (
+        CheckConstraint(
+            "(source = 'system' AND user_id IS NULL) OR "
+            "(source != 'system' AND user_id IS NOT NULL)",
+            name="ck_recipes_system_user_id",
+        ),
+        CheckConstraint(
+            "source != 'system' OR catalog_key IS NOT NULL",
+            name="ck_recipes_system_catalog_key",
+        ),
+        Index("ix_recipes_market_code", "market_code"),
+        Index(
+            "uq_recipes_market_catalog_key_system",
+            "market_code",
+            "catalog_key",
+            unique=True,
+            postgresql_where=text("user_id IS NULL AND catalog_key IS NOT NULL"),
+        ),
+    )
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
+    user_id: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
+    source: Mapped[str] = mapped_column(String(20), nullable=False, default="user")
+    catalog_key: Mapped[str | None] = mapped_column(String(120))
     name: Mapped[str] = mapped_column(String(100), nullable=False)
     notes: Mapped[str | None] = mapped_column(Text)
     is_favorite: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
@@ -18,6 +41,7 @@ class Recipe(Base):
     category: Mapped[str | None] = mapped_column(String(20))
     servings: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
     lang: Mapped[str | None] = mapped_column(String(5), default="pl")
+    market_code: Mapped[str] = mapped_column(String(10), nullable=False, default="PL")
     kcal_100g: Mapped[float | None] = mapped_column(Float)
     protein_100g: Mapped[float | None] = mapped_column(Float)
     fat_100g: Mapped[float | None] = mapped_column(Float)

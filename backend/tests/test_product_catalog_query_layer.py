@@ -1,6 +1,6 @@
 from app.domain.product_normalize import normalize_product_name
 from app.models.product import Product
-from app.scripts.seed_global_catalog import import_global_catalog
+from app.scripts.import_catalog import import_catalog
 
 
 def _items(body: dict) -> list:
@@ -8,7 +8,7 @@ def _items(body: dict) -> list:
 
 
 def test_list_includes_system_and_own_products(client, auth_headers, user, db_session):
-    import_global_catalog(db_session, "pl")
+    import_catalog(db_session)
     own = Product(
         user_id=user.id,
         source="user",
@@ -34,7 +34,7 @@ def test_list_includes_system_and_own_products(client, auth_headers, user, db_se
 
 
 def test_list_search_filters_by_normalized_name(client, auth_headers, db_session):
-    import_global_catalog(db_session, "pl")
+    import_catalog(db_session)
     res = client.get(
         "/api/products/",
         headers=auth_headers,
@@ -47,7 +47,7 @@ def test_list_search_filters_by_normalized_name(client, auth_headers, db_session
 
 
 def test_list_pagination(client, auth_headers, db_session):
-    import_global_catalog(db_session, "pl")
+    import_catalog(db_session)
     full = client.get("/api/products/", headers=auth_headers, params={"limit": 100})
     total = full.json()["total"]
     assert total >= 2
@@ -62,11 +62,11 @@ def test_list_pagination(client, auth_headers, db_session):
 
 
 def test_override_hides_system_product(client, auth_headers, user, db_session):
-    report = import_global_catalog(db_session, "pl")
-    assert report.created >= 1
+    report = import_catalog(db_session, markets=("PL",))
+    assert report.products_created >= 1
     system = (
         db_session.query(Product)
-        .filter_by(source="system", lang="pl")
+        .filter_by(source="system", market_code="PL")
         .filter(Product.user_id.is_(None))
         .first()
     )
@@ -82,6 +82,7 @@ def test_override_hides_system_product(client, auth_headers, user, db_session):
         price=9.99,
         unit=system.unit,
         lang="pl",
+        market_code="PL",
     )
     db_session.add(override)
     db_session.commit()
@@ -93,10 +94,10 @@ def test_override_hides_system_product(client, auth_headers, user, db_session):
 
 
 def test_recipe_can_use_system_product(client, auth_headers, db_session):
-    import_global_catalog(db_session, "pl")
+    import_catalog(db_session)
     system = (
         db_session.query(Product)
-        .filter_by(source="system", lang="pl")
+        .filter_by(source="system", market_code="PL")
         .filter(Product.user_id.is_(None))
         .first()
     )
@@ -140,7 +141,7 @@ def test_list_rejects_invalid_limit(client, auth_headers):
 
 
 def test_system_product_presenter_flags(client, auth_headers, db_session):
-    import_global_catalog(db_session, "pl")
+    import_catalog(db_session)
     res = client.get("/api/products/", headers=auth_headers, params={"limit": 100})
     system_rows = [p for p in _items(res.json()) if p["is_system"]]
     assert system_rows

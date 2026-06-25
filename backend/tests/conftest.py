@@ -27,6 +27,7 @@ from app.models.market import Market  # noqa: E402
 from app.models.product import Product  # noqa: E402
 from app.models.recipe import Recipe, RecipeIngredient  # noqa: E402
 from app.models.user import User  # noqa: E402
+from app.scripts.import_catalog import import_catalog  # noqa: E402
 from app.services import auth_service  # noqa: E402
 
 get_settings.cache_clear()
@@ -148,6 +149,13 @@ def other_auth_headers(other_user: User) -> dict[str, str]:
 
 
 @pytest.fixture
+def global_catalog(db_session: Session):
+    """Import generated global catalog for tests that need system products/recipes."""
+    import_catalog(db_session)
+    yield
+
+
+@pytest.fixture
 def product(db_session: Session, user: User) -> Product:
     p = Product(
         user_id=user.id,
@@ -162,6 +170,7 @@ def product(db_session: Session, user: User) -> Product:
         fat=3,
         carbs=5,
         lang="pl",
+        market_code="PL",
     )
     db_session.add(p)
     db_session.commit()
@@ -171,7 +180,15 @@ def product(db_session: Session, user: User) -> Product:
 
 @pytest.fixture
 def recipe(db_session: Session, user: User, product: Product) -> Recipe:
-    r = Recipe(name="Owsianka", user_id=user.id, category="breakfast", lang="pl", servings=1)
+    r = Recipe(
+        name="Owsianka",
+        user_id=user.id,
+        source="user",
+        category="breakfast",
+        lang="pl",
+        market_code="PL",
+        servings=1,
+    )
     db_session.add(r)
     db_session.flush()
     db_session.add(RecipeIngredient(recipe_id=r.id, product_id=product.id, weight=200))

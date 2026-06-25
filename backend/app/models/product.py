@@ -28,9 +28,17 @@ class Product(Base):
         ),
         Index("ix_products_user_id_lang", "user_id", "lang"),
         Index("ix_products_lang_normalized_name", "lang", "normalized_name"),
+        Index("ix_products_market_code", "market_code"),
         Index(
             "uq_products_lang_catalog_key_system",
             "lang",
+            "catalog_key",
+            unique=True,
+            postgresql_where=text("user_id IS NULL AND catalog_key IS NOT NULL"),
+        ),
+        Index(
+            "uq_products_market_catalog_key_system",
+            "market_code",
             "catalog_key",
             unique=True,
             postgresql_where=text("user_id IS NULL AND catalog_key IS NOT NULL"),
@@ -53,3 +61,4 @@ class Product(Base):
     carbs: Mapped[float | None] = mapped_column(Float)
     sold_by_weight: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
     lang: Mapped[str | None] = mapped_column(String(5), default="pl")
+    market_code: Mapped[str] = mapped_column(String(10), nullable=False, default="PL")

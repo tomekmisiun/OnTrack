@@ -120,15 +120,15 @@ def test_register_validates_username(client):
     assert res.status_code == 400
 
 
-def test_register_seeds_global_catalog_not_private_products(client, db_session):
+def test_register_sees_global_catalog_not_private_products(client, db_session, global_catalog):
     reg = client.post(
         "/api/auth/register",
         json={"username": "seeduser1", "password": "secret123", "lang": "pl"},
     )
     assert reg.status_code == 201
     user = db_session.query(User).filter_by(username="seeduser1").first()
-    assert db_session.query(Product).filter_by(user_id=user.id, lang="pl").count() == 0
-    assert db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count() >= 1
+    assert db_session.query(Product).filter_by(user_id=user.id).count() == 0
+    assert db_session.query(Recipe).filter_by(user_id=user.id).count() == 0
 
 
 def test_werkzeug_hash_from_flask_login_works(client, db_session):

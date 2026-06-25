@@ -1,45 +1,66 @@
 {
-  "dataset_version": "1.0.0-catalog",
+  "dataset_version": "2.0.0-catalog",
   "schema_version": "1",
   "status": "active",
   "dataset_type": "curated",
-  "provenance": "Exported and verified from production reference user catalog (PL). Product prices and macros from live user data.",
+  "provenance": "Canonical catalog derived from one-time user_1 snapshot (445 unique PL products after dedupe, 69 recipes). Verified and exported 2026-06-25.",
   "generated_at": "2026-06-25",
   "updated_at": "2026-06-25",
   "limitations": [
     "Not for medical, dietary, or clinical decisions",
-    "EN catalog still uses generated GB prices from scraper where available",
-    "Product prices reflect reference user import, not live shop feeds"
+    "GB catalog uses available EN shop data; incomplete GB prices are omitted, not synthesized",
+    "Product prices reflect reference import, not live shop feeds",
+    "Legacy seeds/ directory is deprecated; edit canonical/ only"
   ],
   "files": [
     {
-      "path": "seeds/catalog_products.json",
-      "role": "catalog_seed_products_canonical",
+      "path": "canonical/products.json",
+      "role": "catalog_products_canonical",
       "trust": "curated"
     },
     {
-      "path": "seeds/catalog_recipes.json",
-      "role": "catalog_seed_recipes_canonical",
+      "path": "canonical/recipes.json",
+      "role": "catalog_recipes_canonical",
       "trust": "curated"
     },
     {
-      "path": "seeds/products_seed_pl.json",
-      "role": "catalog_seed_products",
-      "trust": "curated"
+      "path": "generated/products_PL.json",
+      "role": "catalog_products_generated",
+      "trust": "generated"
     },
     {
-      "path": "seeds/products_seed_en.json",
-      "role": "catalog_seed_products",
+      "path": "generated/products_GB.json",
+      "role": "catalog_products_generated",
+      "trust": "generated"
+    },
+    {
+      "path": "generated/recipes_PL.json",
+      "role": "catalog_recipes_generated",
+      "trust": "generated"
+    },
+    {
+      "path": "generated/recipes_GB.json",
+      "role": "catalog_recipes_generated",
+      "trust": "generated"
+    },
+    {
+      "path": "raw/user_1_catalog_snapshot/products_pl.json",
+      "role": "migration_snapshot_products",
+      "trust": "historical"
+    },
+    {
+      "path": "raw/user_1_catalog_snapshot/recipes_pl.json",
+      "role": "migration_snapshot_recipes",
+      "trust": "historical"
+    },
+    {
+      "path": "macros/ingredients_macros.json",
+      "role": "macro_lookup",
       "trust": "synthetic"
     },
     {
-      "path": "seeds/recipes_seed_pl.json",
-      "role": "catalog_seed_recipes",
-      "trust": "curated"
-    },
-    {
-      "path": "seeds/recipes_seed_en.json",
-      "role": "catalog_seed_recipes",
+      "path": "recipes/recipes_pl.json",
+      "role": "recipe_image_lookup",
       "trust": "synthetic"
     },
     {
@@ -60,16 +81,6 @@
     {
       "path": "dish_compare/built/en.json",
       "role": "dish_compare_built",
-      "trust": "synthetic"
-    },
-    {
-      "path": "macros/ingredients_macros.json",
-      "role": "macro_lookup",
-      "trust": "synthetic"
-    },
-    {
-      "path": "recipes/recipes_pl.json",
-      "role": "recipe_image_lookup",
       "trust": "synthetic"
     }
   ]
