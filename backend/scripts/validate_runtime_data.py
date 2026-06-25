@@ -175,6 +175,52 @@ def _validate_dish_built(data: dict, label: str) -> None:
             _require_number(diy, f"{label}.dishes[{idx}].diy_cost", min_value=0)
 
 
+def _validate_generated_catalog(data: dict, label: str) -> None:
+    if not isinstance(data, dict):
+        raise ValidationError(f"{label}: expected object envelope")
+    meta = data.get("meta")
+    if not isinstance(meta, dict):
+        raise ValidationError(f"{label}: missing meta object")
+    if not meta.get("generated"):
+        raise ValidationError(f"{label}: meta.generated must be true")
+    if not meta.get("do_not_edit"):
+        raise ValidationError(f"{label}: meta.do_not_edit must be true")
+    if not meta.get("canonical_version"):
+        raise ValidationError(f"{label}: meta.canonical_version required")
+    items = data.get("items")
+    if not isinstance(items, list) or not items:
+        raise ValidationError(f"{label}: items must be a non-empty list")
+
+
+def _validate_canonical_products(data: list, label: str) -> None:
+    if not isinstance(data, list) or not data:
+        raise ValidationError(f"{label}: expected non-empty list")
+    keys: set[str] = set()
+    for idx, row in enumerate(data):
+        if not isinstance(row, dict):
+            raise ValidationError(f"{label}[{idx}]: expected object")
+        key = (row.get("key") or "").strip()
+        if not key:
+            raise ValidationError(f"{label}[{idx}]: missing key")
+        if key in keys:
+            raise ValidationError(f"{label}: duplicate key {key!r}")
+        keys.add(key)
+        names = row.get("names")
+        if not isinstance(names, dict) or not (names.get("pl") or names.get("en")):
+            raise ValidationError(f"{label}[{idx}]: names.pl or names.en required")
+
+
+def _validate_canonical_recipes(data: list, label: str) -> None:
+    if not isinstance(data, list) or not data:
+        raise ValidationError(f"{label}: expected non-empty list")
+    for idx, row in enumerate(data):
+        if not isinstance(row, dict):
+            raise ValidationError(f"{label}[{idx}]: expected object")
+        names = row.get("names")
+        if not isinstance(names, dict) or not (names.get("pl") or names.get("en")):
+            raise ValidationError(f"{label}[{idx}]: names.pl or names.en required")
+
+
 def validate_runtime_data(root: Path | None = None) -> None:
     data_root = root or _backend_data_root()
     manifest_path = data_root / "manifest.json"
@@ -186,11 +232,23 @@ def validate_runtime_data(root: Path | None = None) -> None:
         raise ValidationError("manifest.json must be an object")
     _validate_manifest(manifest, data_root)
 
+    def _validate_generated_products(path: Path) -> None:
+        data = _load_json(path)
+        _validate_generated_catalog(data, path.name)
+        _validate_product_seeds(data["items"], path.name)
+
+    def _validate_generated_recipes(path: Path) -> None:
+        data = _load_json(path)
+        _validate_generated_catalog(data, path.name)
+        _validate_recipe_seeds(data["items"], path.name)
+
     validators: dict[str, Any] = {
-        "seeds/products_seed_pl.json": lambda p: _validate_product_seeds(_load_json(p), p.name),
-        "seeds/products_seed_en.json": lambda p: _validate_product_seeds(_load_json(p), p.name),
-        "seeds/recipes_seed_pl.json": lambda p: _validate_recipe_seeds(_load_json(p), p.name),
-        "seeds/recipes_seed_en.json": lambda p: _validate_recipe_seeds(_load_json(p), p.name),
+        "canonical/products.json": lambda p: _validate_canonical_products(_load_json(p), p.name),
+        "canonical/recipes.json": lambda p: _validate_canonical_recipes(_load_json(p), p.name),
+        "generated/products_PL.json": _validate_generated_products,
+        "generated/products_GB.json": _validate_generated_products,
+        "generated/recipes_PL.json": _validate_generated_recipes,
+        "generated/recipes_GB.json": _validate_generated_recipes,
         "macros/ingredients_macros.json": lambda p: _validate_macros(_load_json(p)),
         "recipes/recipes_pl.json": lambda p: _validate_recipes_pl(_load_json(p)),
         "dish_compare/defaults/pl.json": lambda p: _validate_dish_defaults(_load_json(p), p.name),

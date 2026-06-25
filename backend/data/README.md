@@ -1,44 +1,138 @@
-# Backend runtime data
+# Backend catalog data
 
 See `manifest.json` for dataset status and limitations.
 
-## UI language vs product market (important)
+## UI language vs market (important)
 
 These are **separate** user preferences:
 
 | Field | Values | Controls |
 |-------|--------|----------|
 | `ui_locale` | `pl`, `en` | UI labels, login screen, help text |
-| `market_code` | `PL`, `GB` | **Product & recipe catalog** (`products.lang`, `recipes.lang`) |
+| `market_code` | `PL`, `GB` | Product & recipe **availability**, prices, currency |
 
-Mapping: `PL → pl`, `GB → en` (see `app/domain/market.py`).
+Mapping for catalog locale: `PL → pl`, `GB → en` (see `app/domain/market.py`).
 
-- **Changing UI language** (`PATCH /api/auth/language`) does **not** switch products.
-- **Changing market** (`PATCH /api/auth/market`) switches catalog language and seeds missing recipes for that lang.
+- **Changing UI language** (`PATCH /api/auth/language`) does **not** switch the catalog.
+- **Changing market** (`PATCH /api/auth/market`) only updates `user.market_code` — no seeding, no imports.
 
-There is **no runtime auto-translation** of product names. Bilingual data lives in canonical seed files; per-lang JSON is generated at build time.
+There is **no runtime auto-translation**. Bilingual names live in canonical JSON; per-market files are generated at build time.
 
-## Catalog seed layout
+## Directory layout
 
-| File | Role |
-|------|------|
-| `seeds/catalog_products.json` | **Source of truth** — `key`, `names.pl/en`, `markets.PL/GB`, macros |
-| `seeds/catalog_recipes.json` | **Source of truth** — `names.pl/en`, ingredients with bilingual names |
-| `seeds/products_seed_{pl,en}.json` | Generated — imported as global system products |
-| `seeds/recipes_seed_{pl,en}.json` | Generated — copied per user on register/login |
-
-### Rebuild from production reference user (PL)
-
-```bash
-# 1. Export PL catalog from DB (reference account)
-railway run -- sh -c 'DATABASE_URL="$DATABASE_PUBLIC_URL" \
-  uv run python -m app.scripts.export_user_catalog_to_seeds --user-id 1 --lang pl'
-
-# 2. Build canonical + EN derivatives (uses scraper macros + EN shop prices)
-uv run python -m app.scripts.build_catalog_seeds --from-exports
-
-# 3. Regenerate lang files only (after hand-editing canonical JSON)
-uv run python -m app.scripts.build_catalog_seeds
+```text
+backend/data/
+├── raw/                          # inputs & historical snapshots (do not treat as source of truth)
+│   └── user_1_catalog_snapshot/  # one-time export from owner account (445 unique PL products, 69 recipes)
+├── canonical/                    # **source of truth** — edit here
+│   ├── products.json
+│   └── recipes.json
+├── generated/                    # deterministic build output — **never edit manually**
+│   ├── products_PL.json
+│   ├── products_GB.json
+│   ├── recipes_PL.json
+│   └── recipes_GB.json
+├── macros/                       # macro lookup inputs
+├── recipes/                      # recipe image lookup (legacy helper data)
+└── dish_compare/                 # dish compare feature data
 ```
 
-Validate: `uv run python scripts/validate_runtime_data.py`
+Legacy `seeds/` files are **deprecated** and kept only for historical reference. Standard workflow uses `canonical/` → `generated/`.
+
+### Why `user_id=1` is not in runtime
+
+The owner account once held the reference PL catalog. That data was exported once into `raw/user_1_catalog_snapshot/` and transformed into `canonical/`. Rebuilds and deployments **must not** connect to the database or require user 1.
+
+## Standard workflow
+
+### 1. Edit catalog (source of truth)
+
+Edit `canonical/products.json` and/or `canonical/recipes.json`:
+
+- Products: stable `key`, `names.pl` / `names.en`, `markets.PL` / `markets.GB`, macros.
+- Recipes: `names.pl` / `names.en`, bilingual ingredient names, category, notes.
+
+### 2. Rebuild generated artifacts
+
+```bash
+cd backend
+uv run python -m app.scripts.build_catalog
+```
+
+Check for drift (CI guard):
+
+```bash
+uv run python -m app.scripts.build_catalog --check
+```
+
+### 3. Validate data
+
+```bash
+uv run python scripts/validate_runtime_data.py
+```
+
+### 4. Import into database
+
+```bash
+uv run python -m app.scripts.import_catalog
+uv run python -m app.scripts.import_catalog --market PL   # single market
+```
+
+Import is idempotent: upserts by stable `catalog_key`, runs in a transaction, reports created/updated/skipped/rejected counts.
+
+### 5. Pre-migration DB report (admin)
+
+```bash
+uv run python -m app.scripts.report_catalog_migration
+```
+
+Use before/after Alembic migrations to review system vs user-owned rows.
+
+## One-time migration from owner account
+
+**Migration-only** — not part of normal rebuilds:
+
+```bash
+# Export (requires DB + owner account — run once, snapshot already in raw/)
+uv run python -m app.scripts.export_user_catalog_to_seeds --user-id 1 --lang pl
+
+# Rebuild canonical from snapshot + scraper refs
+uv run python -m app.scripts.build_catalog --from-snapshot
+uv run python -m app.scripts.build_catalog
+```
+
+## Adding content
+
+| Task | Where |
+|------|-------|
+| New product | Add entry to `canonical/products.json` with unique `key` |
+| Translation | Set `names.pl` and/or `names.en` on canonical entry |
+| New market price | Set `markets.PL` / `markets.GB` on canonical entry |
+| New recipe | Add to `canonical/recipes.json` |
+| Rebuild | `uv run python -m app.scripts.build_catalog` |
+| Deploy to DB | `uv run python -m app.scripts.import_catalog` |
+
+## Do not edit manually
+
+- `generated/*.json` — regenerated by `build_catalog`
+- `raw/user_1_catalog_snapshot/` — frozen historical export
+- `meta.generated`, `meta.do_not_edit` headers in generated files
+
+## Rollback
+
+- **Generated files**: `git checkout -- backend/data/generated/`
+- **Canonical**: revert commits to `canonical/`, then rebuild
+- **Database**: Alembic downgrade `a2b3c4d5e6f7` removes `market_code`, system recipes, favorites — review `report_catalog_migration` output first; downgrade deletes system recipes
+
+## Technical debt (future)
+
+Full normalization into `product_translations` / `product_markets` / `recipe_translations` / `recipe_markets` tables is deferred. Current stage uses `market_code` on `products` and `recipes` with bilingual canonical JSON. Tests guard `ui_locale ≠ market_code` separation.
+
+## Counts (reference)
+
+| Market | Products | Recipes |
+|--------|----------|---------|
+| PL | 445 | 69 |
+| GB | ~205 (EN data where available) | 69 |
+
+GB product count is lower because EN shop data is incomplete — missing GB prices are omitted, not synthesized.
