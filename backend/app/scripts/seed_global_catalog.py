@@ -11,6 +11,7 @@ from sqlalchemy.orm import Session
 from app.core.runtime_data import runtime_data_root, seeds_dir
 from app.domain.product_normalize import normalize_product_name
 from app.models.product import Product
+from app.models.recipe import RecipeIngredient
 
 _CATALOG_KEY_SAFE = re.compile(r"[^a-z0-9._-]+")
 
@@ -87,6 +88,37 @@ class GlobalCatalogImportReport:
         }
 
 
+def _delete_unreferenced_system_products(session: Session, lang: str) -> int:
+    """Remove system catalog rows not referenced by recipe_ingredients (FK-safe)."""
+    system_products = (
+        session.query(Product)
+        .filter(
+            Product.user_id.is_(None),
+            Product.source == "system",
+            Product.lang == lang,
+        )
+        .all()
+    )
+    if not system_products:
+        return 0
+    system_ids = [p.id for p in system_products]
+    referenced = {
+        pid
+        for (pid,) in session.query(RecipeIngredient.product_id)
+        .filter(RecipeIngredient.product_id.in_(system_ids))
+        .distinct()
+    }
+    deleted = 0
+    for product in system_products:
+        if product.id in referenced:
+            continue
+        session.delete(product)
+        deleted += 1
+    if deleted:
+        session.commit()
+    return deleted
+
+
 def import_global_catalog(
     session: Session, lang: str, *, replace: bool = False
 ) -> GlobalCatalogImportReport:
@@ -97,12 +129,7 @@ def import_global_catalog(
         return report
 
     if replace:
-        session.query(Product).filter(
-            Product.user_id.is_(None),
-            Product.source == "system",
-            Product.lang == lang,
-        ).delete(synchronize_session=False)
-        session.commit()
+        _delete_unreferenced_system_products(session, lang)
 
     manifest_path = runtime_data_root() / "manifest.json"
     dataset_type = "unknown"
