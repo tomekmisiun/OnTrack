@@ -1,0 +1,70 @@
+#!/bin/sh
+# Production/staging auth smoke via HTTP (no browser).
+# Usage:
+#   API_URL=https://<ontrack-back-domain> ./scripts/verify-production-auth.sh
+#   API_URL=... FRONTEND_ORIGIN=https://<ontrackapp-domain> ./scripts/verify-production-auth.sh
+set -eu
+
+API_URL="${API_URL:?Set API_URL to the FastAPI base URL (no trailing slash)}"
+FRONTEND_ORIGIN="${FRONTEND_ORIGIN:-http://localhost:3000}"
+
+USER="verify_$(date +%s)_$$"
+PASS="VerifyPass123!"
+
+echo "=== OnTrack auth verify: $API_URL ==="
+echo "Origin header: $FRONTEND_ORIGIN"
+echo "Test user: $USER"
+
+fail() {
+  echo "FAIL: $1"
+  exit 1
+}
+
+check_status() {
+  label="$1"
+  expected="$2"
+  actual="$3"
+  if [ "$actual" != "$expected" ]; then
+    fail "$label expected HTTP $expected, got $actual"
+  fi
+  echo "OK  $label (HTTP $actual)"
+}
+
+echo -n "GET /health... "
+health_code=$(curl -s -o /tmp/ontrack-verify-health.json -w '%{http_code}' "$API_URL/health")
+check_status "GET /health" "200" "$health_code"
+grep -q '"status"[[:space:]]*:[[:space:]]*"ok"' /tmp/ontrack-verify-health.json \
+  || fail "health body missing status ok"
+
+register_body=$(mktemp)
+register_code=$(curl -s -o "$register_body" -w '%{http_code}' \
+  -X POST "$API_URL/api/auth/register" \
+  -H 'Content-Type: application/json' \
+  -H "Origin: $FRONTEND_ORIGIN" \
+  -d "{\"username\":\"$USER\",\"password\":\"$PASS\",\"lang\":\"pl\"}")
+check_status "POST /api/auth/register" "201" "$register_code"
+grep -q '"token"' "$register_body" || fail "register response missing token"
+TOKEN=$(sed -n 's/.*"token"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' "$register_body" | head -1)
+[ -n "$TOKEN" ] || fail "could not parse token from register response"
+
+me_body=$(mktemp)
+me_code=$(curl -s -o "$me_body" -w '%{http_code}' \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Origin: $FRONTEND_ORIGIN" \
+  "$API_URL/api/auth/me")
+check_status "GET /api/auth/me (after register)" "200" "$me_code"
+grep -q '"ui_locale"' "$me_body" || fail "/me body missing ui_locale"
+
+login_body=$(mktemp)
+login_code=$(curl -s -o "$login_body" -w '%{http_code}' \
+  -X POST "$API_URL/api/auth/login" \
+  -H 'Content-Type: application/json' \
+  -H "Origin: $FRONTEND_ORIGIN" \
+  -d "{\"username\":\"$USER\",\"password\":\"$PASS\"}")
+check_status "POST /api/auth/login" "200" "$login_code"
+grep -q '"token"' "$login_body" || fail "login response missing token"
+
+rm -f "$register_body" "$me_body" "$login_body" /tmp/ontrack-verify-health.json
+
+echo "=== Auth verify passed ==="
+echo "Registered and authenticated user: $USER"

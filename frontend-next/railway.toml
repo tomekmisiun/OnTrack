@@ -1,6 +1,6 @@
 # Railway service: ontrackapp
 # Settings → Source → Root Directory: frontend-next
-# Settings → Source → Config file path: frontend-next/railway.toml (from repo root)
+# Settings → Source → Config file path: /frontend-next/railway.toml (from repo root)
 #
 # Required build variable (service Variables tab):
 #   NEXT_PUBLIC_API_URL=https://<ontrack-back-domain>
