@@ -14,3 +14,12 @@ export function getApiBaseUrl(): string {
   }
   return "http://localhost:5001";
 }
+
+/** Server-side upstream URL (Route Handlers). Prefer internal Docker hostname when set. */
+export function getApiServerUrl(): string {
+  const internal = process.env.API_INTERNAL_URL?.trim();
+  if (internal) {
+    return internal.replace(/\/$/, "");
+  }
+  return getApiBaseUrl();
+}

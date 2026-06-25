@@ -1,4 +1,3 @@
-import { createApiClient } from "@/lib/api/client";
 import type { LangCode } from "@/lib/i18n/translations";
 
 export type DishCompareIngredient = {
@@ -33,7 +32,9 @@ export async function getDishCompare(
   lang: LangCode | string = "pl",
 ): Promise<DishCompareResponse> {
   const params = new URLSearchParams({ lang: String(lang) });
-  return createApiClient().get<DishCompareResponse>(
-    `/api/public/dish-compare?${params.toString()}`,
-  );
+  const res = await fetch(`/api/public/dish-compare?${params.toString()}`);
+  if (!res.ok) {
+    throw new Error(`dish-compare failed: ${res.status}`);
+  }
+  return res.json() as Promise<DishCompareResponse>;
 }

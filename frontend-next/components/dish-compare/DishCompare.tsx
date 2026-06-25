@@ -6,6 +6,7 @@ import {
   getDishCompare,
   type DishCompareResponse,
 } from "@/lib/api/public";
+import { loadDishCompareFallback } from "@/lib/data/dishCompareFallback";
 import { tFormatArgs, tString } from "@/lib/i18n/translate";
 import "./dish-compare.css";
 
@@ -33,7 +34,6 @@ export function DishCompare() {
 
   const [data, setData] = useState<DishCompareResponse | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [animKey, setAnimKey] = useState(0);
   const [showIngredients, setShowIngredients] = useState(false);
@@ -67,21 +67,24 @@ export function DishCompare() {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    setError(false);
+
+    const applyPayload = (payload: DishCompareResponse) => {
+      setData(payload);
+      setActiveIndex(0);
+      setAnimKey((k) => k + 1);
+      setShowIngredients(false);
+      setAutoPaused(false);
+      tabRefs.current = [];
+      if (tabsListRef.current) tabsListRef.current.scrollLeft = 0;
+    };
 
     getDishCompare(lang)
       .then((payload) => {
         if (cancelled) return;
-        setData(payload);
-        setActiveIndex(0);
-        setAnimKey((k) => k + 1);
-        setShowIngredients(false);
-        setAutoPaused(false);
-        tabRefs.current = [];
-        if (tabsListRef.current) tabsListRef.current.scrollLeft = 0;
+        applyPayload(payload);
       })
       .catch(() => {
-        if (!cancelled) setError(true);
+        if (!cancelled) applyPayload(loadDishCompareFallback(lang));
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
@@ -149,8 +152,12 @@ export function DishCompare() {
     );
   }
 
-  if (error || !dishes.length || !activeDish) {
-    return null;
+  if (!dishes.length || !activeDish) {
+    return (
+      <section className="dish-compare dish-compare--loading" aria-label={tString(t, "compare_headline_1")}>
+        <div className="dish-compare-skeleton" />
+      </section>
+    );
   }
 
   const dishIcon = DISH_ICONS[activeDish.id] || 'mdi:silverware-fork-knife';
