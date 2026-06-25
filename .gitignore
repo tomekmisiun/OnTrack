@@ -4,6 +4,7 @@ __pycache__/
 *.pyo
 .venv/
 backend/.venv/
+backend/.coverage
 .env
 
 # Node

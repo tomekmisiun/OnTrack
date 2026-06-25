@@ -4,7 +4,7 @@
 **CRA reference commit:** `dca8eb9` (restored on `main` in `frontend/src/`)  
 **Production frontend:** `frontend-next/` (Next.js App Router)  
 **Epic:** Phases 0–7 of `docs/CRA_NEXT_VISUAL_AND_I18N_AUDIT.md`  
-**Last merged PR:** #78 — `chore/typescript-parity-export` (ExportScreen TS)
+**Last merged PR:** #83 — `chore/drop-users-lang-column` (legacy `users.lang` dropped)
 
 ---
 
@@ -14,13 +14,13 @@ The CRA → Next.js migration epic is **functionally complete** and **visually a
 
 **Remaining technical debt (non-blocking):**
 
-| Item | Severity | Suggested branch |
-|------|----------|------------------|
-| `DrinksCard.tsx` — `@ts-nocheck` (~1166 TS errors if removed) | Medium | `chore/typescript-parity-drinks-card` |
-| `DishCompare.tsx` — `@ts-nocheck` | Low | `chore/typescript-parity-dish-compare` |
-| EN demo WebM videos (`public/demos/*.en.webm`) | Low | optional asset task |
-| `users.lang` column retained for backward compat (dual-read) | Low | future cleanup migration |
+| Item | Severity | Status |
+|------|----------|--------|
 | BFF + HttpOnly cookies | Deferred | opt-in via env flag (task 16, merged #56) |
+| CRA-vs-Next live diff job (not just self-baselines) | Low | optional (TD-5) |
+| BFF production cutover decision | Product | optional (TD-6) |
+
+All TypeScript `@ts-nocheck` removed from `frontend-next/`. EN demo WebM assets shipped. Legacy `users.lang` column dropped (Alembic `f1a2b3c4d5e6`).
 
 ---
 
@@ -50,7 +50,11 @@ The CRA → Next.js migration epic is **functionally complete** and **visually a
 | 6b | #76 | `test/e2e-visual-screenshots` | ✅ merged |
 | 6c | #77 | `chore/remove-dead-scaffold` | ✅ merged |
 | 6d | #78 | `chore/typescript-parity-export` | ✅ merged |
-| 7 | — | `docs/cra-next-final-parity-report` | ✅ this document |
+| 7 | #79 | `docs/cra-next-final-parity-report` | ✅ merged |
+| TD-2 | #80 | `chore/typescript-parity-dish-compare` | ✅ merged |
+| TD-1 | #81 | `chore/typescript-parity-drinks-card` | ✅ merged |
+| TD-3 | #82 | `chore/en-demo-webm-assets` | ✅ merged |
+| TD-4 | #83 | `chore/drop-users-lang-column` | ✅ merged |
 
 ---
 
@@ -71,7 +75,7 @@ The CRA → Next.js migration epic is **functionally complete** and **visually a
 | Macro calculator + profile save | ✅ | ✅ | ✅ | |
 | Joyride tour | ✅ | ✅ | ✅ | |
 | Dish compare (public) | ✅ | ✅ | ✅ | On login page |
-| Login showcase + demos | ✅ | ✅ | ✅ | 7× PL WebM in `public/demos/` |
+| Login showcase + demos | ✅ | ✅ | ✅ | 7× PL + 7× EN WebM in `public/demos/` |
 | `ui_locale` ≠ `market_code` | ❌ (conflated) | ✅ | ✅ | Phase 2 |
 | Market selector in Profile | ❌ | ✅ | ✅ | Phase 5 — PL / GB |
 | No seed on login / me / lang change | ❌ | ✅ | ✅ | Seed on register only + admin CLI |
@@ -95,7 +99,7 @@ The CRA → Next.js migration epic is **functionally complete** and **visually a
 | Macro | `MacroCalculator.css` | `MacroScreen.tsx` | ✅ | `@ts-nocheck` removed |
 | Calendar | `Calendar.css` | `calendar.css` | ✅ | |
 | Schedule | `DaySchedule.css` | `day-schedule.css` | ✅ | |
-| Summary | inline + modules | `summary.css` | ✅ | DrinksCard still nocheck |
+| Summary | inline + modules | `summary.css` | ✅ | DrinksCard strict TS (PR #81) |
 | Export | `Export.css` | `export.css` | ✅ | TS strict (PR #78) |
 | Profile | `Profile.js` | `ProfileModal.tsx` + CSS | ✅ | |
 | Privacy | `PrivacyPolicy.js` | `PrivacyPolicyModal.tsx` | ✅ | |
@@ -145,7 +149,7 @@ Screens × viewports in CI:
 
 ### Schema
 
-- `users.ui_locale` and `users.market_code` added (Alembic); `users.lang` kept for backward compatibility.
+- `users.ui_locale` and `users.market_code` on `users`; legacy `users.lang` dropped (Alembic `f1a2b3c4d5e6`). API still returns `"lang"` from `ui_locale` for backward compat.
 - `markets` reference table with `PL`, `GB`.
 - Products: global system catalog (`user_id IS NULL`, `source='system'`) + per-user overrides; filtered by `market_code` (not `ui_locale`).
 
@@ -195,8 +199,8 @@ These are **intentional** and not parity defects:
 2. **Framework:** Next.js SSR/hydration, `next/image` where used, React 19.
 3. **i18n loading:** Modular TS message modules instead of single `LanguageContext` blob (same keys).
 4. **Auth transport:** JWT in `localStorage` by default; optional BFF cookies behind feature flag.
-5. **Demo videos:** PL-only WebM (CRA was also PL-only for demos).
-6. **TypeScript:** Stricter typing in ported modules; two files still `@ts-nocheck` (see debt).
+5. **Demo videos:** PL and EN WebM copies in `public/demos/` (EN initially duplicated from PL; replace with native EN recordings when available).
+6. **TypeScript:** All ported modules strict — zero `@ts-nocheck` in `frontend-next/`.
 7. **Removed scaffold:** `HomeScreen`, `ModulePlaceholder`, `ProviderDemo`, `HealthStatus` — never in CRA production UX.
 8. **a11y:** Minor semantic HTML / focus improvements where they do not change visual design.
 
@@ -247,23 +251,28 @@ Condensed rollup of all epic branches. Full diffs: GitHub PRs #58–#78.
 | `chore/remove-dead-scaffold` | Deleted 4 unused components |
 | `chore/typescript-parity-export` | `ExportScreen.tsx` strict TS |
 
-### Phase 7 — `docs/cra-next-final-parity-report` (this PR)
+### Phase 7 — Documentation & follow-up debt (#79–#83)
 
-- **Goal:** Epic closure documentation.
-- **Scope:** docs only — no runtime changes.
+| PR | Branch | Deliverable |
+|----|--------|-------------|
+| #79 | `docs/cra-next-final-parity-report` | Epic closure documentation |
+| #80 | `chore/typescript-parity-dish-compare` | `DishCompare.tsx` strict TS |
+| #81 | `chore/typescript-parity-drinks-card` | `DrinksCard.tsx` strict TS (~1247 lines) |
+| #82 | `chore/en-demo-webm-assets` | 7× `*.en.webm` demo videos |
+| #83 | `chore/drop-users-lang-column` | Drop `users.lang`; bump alembic head |
 
 ---
 
 ## 10. Remaining technical debt
 
-| ID | Description | Effort | Priority |
-|----|-------------|--------|----------|
-| TD-1 | `DrinksCard.tsx` — remove `@ts-nocheck`, type ~1246 lines | Large | P2 |
-| TD-2 | `DishCompare.tsx` — remove `@ts-nocheck` | Small | P3 |
-| TD-3 | EN demo WebM assets | Small | P3 |
-| TD-4 | Drop legacy `users.lang` column after dual-read period | Medium | P3 |
-| TD-5 | Optional: CRA-vs-Next live diff job (not just self-baselines) | Medium | P3 |
-| TD-6 | BFF production cutover decision | Product | P3 |
+| ID | Description | Effort | Priority | Status |
+|----|-------------|--------|----------|--------|
+| TD-1 | `DrinksCard.tsx` — remove `@ts-nocheck` | Large | P2 | ✅ #81 |
+| TD-2 | `DishCompare.tsx` — remove `@ts-nocheck` | Small | P3 | ✅ #80 |
+| TD-3 | EN demo WebM assets | Small | P3 | ✅ #82 |
+| TD-4 | Drop legacy `users.lang` column | Medium | P3 | ✅ #83 |
+| TD-5 | Optional: CRA-vs-Next live diff job (not just self-baselines) | Medium | P3 | open |
+| TD-6 | BFF production cutover decision | Product | P3 | open |
 
 ---
 
@@ -287,9 +296,12 @@ Condensed rollup of all epic branches. Full diffs: GitHub PRs #58–#78.
 | E2E smoke + visual CI | ✅ |
 | Dead scaffold removed | ✅ |
 | ExportScreen TypeScript strict | ✅ |
+| DrinksCard + DishCompare TypeScript strict | ✅ |
+| EN demo WebM assets | ✅ |
+| Legacy `users.lang` column dropped | ✅ |
 | Final report published | ✅ |
 
-**Epic status: COMPLETE** (with documented follow-up debt TD-1–TD-2).
+**Epic status: COMPLETE** — all planned parity work and follow-up debt TD-1–TD-4 resolved.
 
 ---
 
