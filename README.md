@@ -43,6 +43,20 @@ cp .env.example .env
 docker compose up --build
 ```
 
+On first run, apply database migrations (once per fresh Postgres volume):
+
+```bash
+docker compose exec backend sh scripts/run-migrations.sh
+```
+
+If host ports `5432` / `6379` / `5001` are already in use, use the recovery override:
+
+```bash
+docker compose -p ontrack-recovery -f docker-compose.yml -f docker-compose.recovery.yml up -d db redis backend
+docker compose -p ontrack-recovery exec backend sh scripts/run-migrations.sh
+# Frontend locally: NEXT_PUBLIC_API_URL=http://localhost:5002 npm run dev -- -p 3003
+```
+
 First run builds images and installs frontend dependencies; it may take a few minutes.
 
 ### Local URLs
@@ -85,7 +99,7 @@ Copy `.env.example` to `.env`. Never commit `.env`.
 | `POSTGRES_DB` | yes | Database name (`mealplanner`) |
 | `FLASK_SECRET_KEY` | yes | Session/OAuth cookie secret (`token_hex(32)`) — env name kept for compat |
 | `JWT_SECRET_KEY` | yes | JWT signing secret (different from above) |
-| `FRONTEND_URL` | yes | Frontend origin (`http://localhost:3000` locally) |
+| `FRONTEND_URL` | yes | Frontend origin(s), comma-separated for CORS (`http://localhost:3000,http://127.0.0.1:3000` locally) |
 | `GOOGLE_REDIRECT_URI` | yes | OAuth callback (`http://localhost:5001/api/auth/google/callback` locally) |
 | `GF_SECURITY_ADMIN_PASSWORD` | yes | Grafana admin password (local stack) |
 | `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` | optional | Google OAuth — login works without if using local auth |
@@ -105,7 +119,11 @@ uv run pytest tests/contract/ tests/test_health.py -q
 
 cd frontend-next
 npm ci && npm run test && npm run lint && npm run typecheck && npm run build
+npm run test:e2e          # mocked API smoke tests
+npm run test:e2e:auth     # real register/login (requires FastAPI + migrated Postgres)
 ```
+
+`test:e2e:auth` expects FastAPI on `E2E_API_URL` (default `http://127.0.0.1:5001`) with `FRONTEND_URL` including `http://127.0.0.1:3002` (or `BACKEND_DEBUG=1`).
 
 CI runs the FastAPI suite on every PR and push to `main` (`.github/workflows/ci.yml`).
 
@@ -117,7 +135,7 @@ OnTrack/
 │   ├── app/
 │   ├── data/            # Runtime JSON (demo dataset — manifest.json)
 │   ├── Dockerfile
-│   └── railway.toml     # Railway config (Root Directory = backend)
+│   └── railway.toml     # Railway: Root Directory = backend, config path = /backend/railway.toml
 ├── app/                 # Legacy dish-compare build tooling (optional, not runtime)
 ├── frontend-next/       # Next.js frontend (Compose :3000, Railway ontrackapp)
 ├── scraper/             # Experimental offline pipeline (disconnected)

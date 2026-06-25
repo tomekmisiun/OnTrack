@@ -7,12 +7,12 @@ Production service **`ontrack-back`**:
 | Setting | Value |
 |---------|-------|
 | Root Directory | `backend` |
-| Config file | `railway.toml` |
+| Config file path | `/backend/railway.toml` |
 | Dockerfile | `Dockerfile` |
 | Build context | `backend/` only |
 | Healthcheck | `/health` |
 
-Worker (optional): same Root Directory, config `railway.worker.prod.toml`.
+Worker (optional): same Root Directory, config file path `/backend/railway.worker.prod.toml`.
 
 See also: [`.github/DEPLOY.md`](../../.github/DEPLOY.md)
 
@@ -43,7 +43,7 @@ The steps below were used for the one-time migration from repo-root build contex
 ### Migration steps (completed)
 
 1. Settings → Source → Root Directory: `backend`
-2. Config File Path: `railway.toml`
+2. Config file path: `/backend/railway.toml`
 3. Wait for CI: ON
 4. Deploy → verify build logs show `COPY data ./data`
 5. `curl -sf https://<domain>/health`
@@ -59,6 +59,19 @@ The steps below were used for the one-time migration from repo-root build contex
 | Google OAuth + API keys | copy from prior service |
 
 `RUNTIME_DATA_DIR` not required — defaults to `backend/data/` in image.
+
+### Database migrations (pre-deploy)
+
+`backend/railway.toml` sets:
+
+```toml
+[deploy]
+preDeployCommand = "sh scripts/run-migrations.sh"
+```
+
+Railway runs this **once per deployment** in a pre-deploy container (before the new API instance starts). If the command exits non-zero, the deployment is aborted. The script is included in the production Docker image (`COPY alembic`, `COPY scripts`).
+
+Confirm in Dashboard → `ontrack-back` → latest deployment → **Pre-deploy** phase logs show `Alembic current: f1a2b3c4d5e6 (head)`.
 
 ### Verification commands
 

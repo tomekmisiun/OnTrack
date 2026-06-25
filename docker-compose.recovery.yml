@@ -1,0 +1,19 @@
+# Optional override when host ports 5432/6379/5001/3000 are already in use.
+# Usage: docker compose -p ontrack-recovery -f docker-compose.yml -f docker-compose.recovery.yml up -d db redis backend
+services:
+  db:
+    ports: !override
+      - "5434:5432"
+  redis:
+    ports: !override
+      - "6381:6379"
+  backend:
+    ports: !override
+      - "5002:8000"
+    environment:
+      - FRONTEND_URL=http://localhost:3003,http://127.0.0.1:3003,http://localhost:3002,http://127.0.0.1:3002
+  frontend:
+    ports:
+      - "3003:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:5002

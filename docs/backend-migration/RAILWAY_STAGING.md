@@ -8,10 +8,10 @@ Deploy FastAPI to Railway **staging** with a **clone** of production Postgres.
 
 ## Services (recommended names)
 
-| Railway service | Config file | Root Directory |
-|-----------------|-------------|----------------|
-| `ontrack-back-staging` | `backend/railway.toml` | `backend` |
-| `ontrack-worker-staging` | `backend/railway.worker.toml` | `backend` |
+| Railway service | Config file path | Root Directory |
+|-----------------|------------------|----------------|
+| `ontrack-back-staging` | `/backend/railway.toml` | `backend` |
+| `ontrack-worker-staging` | `/backend/railway.worker.toml` | `backend` |
 | `ontrack-redis-staging` | Railway Redis plugin | — |
 | `ontrack-postgres-staging` | Postgres clone | — |
 
@@ -23,7 +23,7 @@ Deploy FastAPI to Railway **staging** with a **clone** of production Postgres.
 2. **Settings → Source**
    - Branch: `main`
    - **Root Directory:** `backend`
-   - **Config file path:** `railway.toml`
+   - **Config file path:** `/backend/railway.toml`
 3. **Wait for CI:** ON
 4. **Variables:** same as production (see [`.github/DEPLOY.md`](../../.github/DEPLOY.md)) but `DATABASE_URL` → **staging clone only**
 

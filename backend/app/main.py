@@ -15,6 +15,7 @@ from app.api.routes.products import router as products_router
 from app.api.routes.public import router as public_router
 from app.api.routes.recipes import router as recipes_router
 from app.core.config import get_settings
+from app.core.cors import cors_allowed_origins
 
 
 def create_app() -> FastAPI:
@@ -23,10 +24,14 @@ def create_app() -> FastAPI:
 
     app.add_middleware(SessionMiddleware, secret_key=settings.app_secret_key)
 
-    origins = [o.strip() for o in settings.frontend_url.split(",") if o.strip()]
+    origins = cors_allowed_origins(
+        settings.frontend_url,
+        debug=settings.debug,
+        testing=settings.testing,
+    )
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=origins or ["http://localhost:3000"],
+        allow_origins=origins,
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],

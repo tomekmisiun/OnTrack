@@ -6,8 +6,8 @@ Production deploys from Railway after a push to `main`, **but only when GitHub A
 
 | Service | Role | Root Directory | Config |
 |---------|------|----------------|--------|
-| `ontrack-back` | Production API (FastAPI) | `backend` | `backend/railway.toml` |
-| `ontrack-worker` | Background worker (optional) | `backend` | `backend/railway.worker.prod.toml` |
+| `ontrack-back` | Production API (FastAPI) | `backend` | `/backend/railway.toml` |
+| `ontrack-worker` | Background worker (optional) | `backend` | `/backend/railway.worker.prod.toml` |
 | `ontrackapp` | Frontend (Next.js) | `frontend-next` | `frontend-next/railway.toml` |
 | Postgres + Redis | Data + queue | — | Railway plugins |
 
@@ -23,7 +23,7 @@ For **each** service → **Settings** → **Source**:
 2. **Branch connected to production** → **`main`**
 3. **Auto deploys when pushed to GitHub** — **enabled**
 4. **Wait for CI** → **ON**
-5. **ontrack-back:** Root Directory = **`backend`**, config **`railway.toml`**
+5. **ontrack-back:** Root Directory = **`backend`**, Config file path = **`/backend/railway.toml`** (absolute from repo root — Config file path does not follow Root Directory)
 6. **ontrackapp:** Root Directory = **`frontend-next`**, config **`frontend-next/railway.toml`**
 
 ### Frontend build variable
@@ -45,6 +45,8 @@ Remove legacy `REACT_APP_API_URL` if still present — CRA was removed in task 1
 | Build uses dev server / wrong stage | Config must point to `Dockerfile.railway` (see `frontend-next/railway.toml`) |
 | Healthcheck timeout | `/login` must return 200; check deploy logs for `node server.js` |
 | App loads but API fails | `NEXT_PUBLIC_API_URL` must be the public `ontrack-back` URL (not localhost) |
+| Register/login CORS errors | `FRONTEND_URL` on `ontrack-back` must match the browser origin exactly (scheme + host + port) |
+| 500 on register after deploy | Run migrations once per release — `ontrack-back` uses `preDeployCommand` in `backend/railway.toml` |
 
 After changing Root Directory or variables: **Deployments → Redeploy** (not just restart).
 
@@ -57,6 +59,7 @@ After changing Root Directory or variables: **Deployments → Redeploy** (not ju
 | `test` | FastAPI contract + health tests (branch protection) |
 | `frontend-next` | Lint, unit tests, typecheck, build |
 | `frontend-next-e2e` | Playwright smoke tests |
+| `frontend-next-e2e-auth` | Playwright register/login against real FastAPI + Postgres |
 | `frontend-next-docker` | Production Docker image build |
 | `backend-docker` | `docker build backend` validation |
 | `backend-integration` | DB stamp rehearsal (Postgres) |
