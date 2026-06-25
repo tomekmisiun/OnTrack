@@ -5,8 +5,10 @@ export type ExpenseTypeMeta = {
   gradient: string;
 };
 
+export type DrinkKey = "kawa" | "herbata" | "napoje" | "woda" | "sodaStream";
+
 export type DrinkTypeMeta = {
-  key: string;
+  key: DrinkKey;
   emoji: string;
   gradient: string;
 };
