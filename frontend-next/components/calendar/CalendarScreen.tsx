@@ -32,6 +32,10 @@ import { getUpcomingMondays, toEU, dateToStr } from "@/lib/dates";
 import type { TranslationKey } from "@/lib/i18n/translations";
 import { tFormat, tFormatN, tString } from "@/lib/i18n/translate";
 import { fuzzySearch } from "@/lib/recipes/search";
+import {
+  ingredientMacroFactor,
+  resolveIngredientDisplayUnit,
+} from "@/lib/recipes/ingredientUnits";
 import { useToast } from "@/contexts/ToastContext";
 import type {
   Meal,
@@ -294,7 +298,8 @@ function RecipePreviewModal({
           )}
           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
             {localIngredients.map((ing, i) => {
-              const factor = ing.unit === "szt" ? ing.weight : ing.weight / 100;
+              const factor = ingredientMacroFactor(ing);
+              const displayUnit = resolveIngredientDisplayUnit(ing);
               const ikcal = ing.kcal != null ? Math.round(ing.kcal * factor) : null;
               const iprotein = ing.protein != null ? Math.round(ing.protein * factor * 10) / 10 : null;
               const ifat = ing.fat != null ? Math.round(ing.fat * factor * 10) / 10 : null;
@@ -323,7 +328,8 @@ function RecipePreviewModal({
                   }}
                 >
                   <span style={{ fontSize: 12, color: "#9ca3af", minWidth: 50, textAlign: "right" }}>
-                    {ing.weight} {ing.unit === "szt" ? tString(t, "unit_pcs") : ing.unit}
+                    {ing.weight}{" "}
+                    {displayUnit === "szt" ? tString(t, "unit_pcs") : displayUnit}
                   </span>
                   <span style={{ fontSize: 13, color: "#e2e8f0", flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                     {ing.product_name}
