@@ -13,14 +13,8 @@ from app.domain.market import (
 from app.models.user import User
 
 
-def sync_legacy_lang(user: User) -> None:
-    """Keep users.lang aligned with ui_locale for API compatibility."""
-    user.lang = user.ui_locale
-
-
 def apply_ui_locale(user: User, ui_locale: str) -> None:
     user.ui_locale = normalize_ui_locale(ui_locale)
-    sync_legacy_lang(user)
 
 
 def apply_market_code(user: User, market_code: str) -> None:
@@ -31,7 +25,6 @@ def init_user_preferences(user: User, ui_locale: str, market_code: str | None = 
     locale = normalize_ui_locale(ui_locale)
     user.ui_locale = locale
     user.market_code = normalize_market_code(market_code, ui_locale=locale)
-    sync_legacy_lang(user)
 
 
 def get_user(session: Session, user_id: int) -> User | None:
@@ -42,9 +35,7 @@ def ui_locale_for_user(session: Session, user_id: int) -> str:
     user = get_user(session, user_id)
     if not user:
         return "pl"
-    if user.ui_locale in ("pl", "en"):
-        return user.ui_locale
-    return normalize_ui_locale(user.lang)
+    return normalize_ui_locale(user.ui_locale)
 
 
 def market_code_for_user(session: Session, user_id: int) -> str:

@@ -26,7 +26,7 @@ def test_register_sets_ui_locale_and_default_market(client, db_session):
     user = db_session.query(User).filter_by(username="locale1").first()
     assert user.ui_locale == "en"
     assert user.market_code == "GB"
-    assert user.lang == "en"
+    assert user.ui_locale == "en"
 
 
 def test_register_pl_defaults_to_pl_market(client, db_session):
@@ -64,7 +64,7 @@ def test_change_language_updates_ui_locale_only(client, user, auth_headers, db_s
     db_session.refresh(user)
     assert user.ui_locale == "en"
     assert user.market_code == "PL"
-    assert user.lang == "en"
+    assert user.ui_locale == "en"
 
 
 def test_change_market_updates_market_only(client, user, auth_headers, db_session):
@@ -100,7 +100,6 @@ def test_product_list_uses_market_not_ui_locale(
 
     user.ui_locale = "en"
     user.market_code = "PL"
-    user.lang = "en"
     db_session.commit()
 
     pl_only = Product(

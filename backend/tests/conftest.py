@@ -107,7 +107,6 @@ def create_user(
     user = User(
         email=email,
         username=username,
-        lang=ui_locale,
         ui_locale=ui_locale,
         market_code=market,
         password_hash=hash_password("test-password"),

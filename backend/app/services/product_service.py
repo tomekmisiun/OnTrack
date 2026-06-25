@@ -162,7 +162,7 @@ def create_product(session: Session, user_id: int, data: dict) -> dict:
         fat=float(data["fat"]) if data.get("fat") is not None else None,
         carbs=float(data["carbs"]) if data.get("carbs") is not None else None,
         sold_by_weight=bool(data.get("sold_by_weight", False)),
-        lang=user.lang if user else "pl",
+        lang=user.ui_locale if user else "pl",
     )
     session.add(product)
     session.commit()

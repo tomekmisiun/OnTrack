@@ -75,7 +75,8 @@ def _create_user_with_product_and_recipe(session: Session) -> tuple[User, Produc
     user = User(
         email="fk-test@example.com",
         username="fktest",
-        lang="pl",
+        ui_locale="pl",
+        market_code="PL",
         password_hash=hash_password("test-password"),
     )
     session.add(user)
