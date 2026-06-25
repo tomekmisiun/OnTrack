@@ -5,6 +5,10 @@ import { Icon } from "@iconify/react";
 import { RecipeHelpModal } from "@/components/recipes/RecipeHelpModal";
 import { useRecipesPage } from "@/hooks/useRecipesPage";
 import { canonicalDiffersFromRaw } from "@/lib/recipes/ingredientCanonical";
+import {
+  ingredientMacroFactor,
+  resolveIngredientDisplayUnit,
+} from "@/lib/recipes/ingredientUnits";
 import { tFormat, tFormat2, tFormatN, tString } from "@/lib/i18n/translate";
 import type { RecipeIngredient, RecipeSummary } from "@/types/recipe";
 import "./recipes.css";
@@ -40,7 +44,7 @@ function IngredientMacros({
   ing: RecipeIngredient;
   t: ReturnType<typeof useRecipesPage>["t"];
 }) {
-  const factor = ing.unit === "szt" ? ing.weight : ing.weight / 100;
+  const factor = ingredientMacroFactor(ing);
   const kcal =
     ing.kcal != null ? Math.round(ing.kcal * factor) : null;
   const protein =
@@ -313,7 +317,9 @@ function ExpandedRecipeDetail({
                       )
                     }
                   />
-                  <span style={{ fontSize: 11, color: "#6b7280" }}>{ing.unit}</span>
+                  <span style={{ fontSize: 11, color: "#6b7280" }}>
+                    {displayUnit(resolveIngredientDisplayUnit(ing))}
+                  </span>
                   <button
                     type="button"
                     onClick={() =>
@@ -354,7 +360,7 @@ function ExpandedRecipeDetail({
                 </div>
               ) : (
                 <span style={{ fontSize: 12, color: "#e2e8f0" }}>
-                  {ing.weight} {ing.unit}
+                  {ing.weight} {displayUnit(resolveIngredientDisplayUnit(ing))}
                 </span>
               )}
             </td>
@@ -584,7 +590,8 @@ function ExpandedRecipeDetail({
                                 search: p.name,
                                 product: p,
                                 showDrop: false,
-                                unit: p.unit,
+                                unit:
+                                  p.unit === "szt" ? "g" : p.unit,
                                 kcal: p.kcal != null ? String(p.kcal) : "",
                                 protein:
                                   p.protein != null ? String(p.protein) : "",
