@@ -225,6 +225,19 @@ def import_catalog(session: Session, markets: tuple[str, ...] = MARKETS) -> Cata
     return report
 
 
+def ensure_global_catalog_loaded(session: Session) -> CatalogImportReport | None:
+    """Import global catalog once when DB has no system products (idempotent, not per-user)."""
+    has_system = (
+        session.query(Product.id)
+        .filter(Product.user_id.is_(None), Product.source == "system")
+        .limit(1)
+        .first()
+    )
+    if has_system is not None:
+        return None
+    return import_catalog(session)
+
+
 def main() -> None:
     from app.db.session import get_session_factory
 

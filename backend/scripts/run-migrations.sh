@@ -10,3 +10,6 @@ if [ -z "${DATABASE_URL:-}" ]; then
 fi
 
 uv run python scripts/ensure_alembic_head.py
+
+echo "=== OnTrack global catalog import ==="
+uv run python -m app.scripts.import_catalog

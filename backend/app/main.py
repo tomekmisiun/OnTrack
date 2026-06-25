@@ -1,3 +1,5 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, Request
 from fastapi.exceptions import HTTPException, RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
@@ -20,7 +22,21 @@ from app.core.cors import cors_allowed_origins
 
 def create_app() -> FastAPI:
     settings = get_settings()
-    app = FastAPI(title=settings.app_name, debug=settings.debug)
+
+    @asynccontextmanager
+    async def lifespan(_app: FastAPI):
+        if not settings.testing:
+            from app.db.session import get_session_factory
+            from app.scripts.import_catalog import ensure_global_catalog_loaded
+
+            session = get_session_factory()()
+            try:
+                ensure_global_catalog_loaded(session)
+            finally:
+                session.close()
+        yield
+
+    app = FastAPI(title=settings.app_name, debug=settings.debug, lifespan=lifespan)
 
     app.add_middleware(SessionMiddleware, secret_key=settings.app_secret_key)
 
