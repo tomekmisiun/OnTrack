@@ -87,12 +87,12 @@ Import `multipart/form-data` is **OnTrack-specific ADAPT** in routes — not tem
 
 | Subsystem | Decision | Rationale | Day one? | Dependencies | Maintenance | Risk |
 |-----------|----------|-----------|----------|--------------|-------------|------|
-| Dockerfile pattern | **ADAPT** | Python 3.11 to match current OnTrack CI | Yes | — | Low | Low |
+| Dockerfile pattern | **ADAPT** | Python 3.14 to match current OnTrack CI | Yes | — | Low | Low |
 | docker-compose service split (api/worker/redis) | **ADAPT** | Merge into monorepo root compose | MIG-002 | compose | Medium | Medium |
 | Makefile | **ADAPT** | Subset: test, lint, migrate | Yes | uv optional | Low | Low |
-| uv + pyproject.toml | **KEEP** | Foundation standard | Yes | uv | Low | Low — pin 3.11 if needed |
+| uv + pyproject.toml | **KEEP** | Foundation standard | Yes | uv | Low | Low — pin 3.14 if needed |
 
-**Note:** Foundation defaults Python 3.13+; OnTrack CI uses **3.11** — **ADAPT** pin in `backend/pyproject.toml`.
+**Note:** Foundation defaults Python 3.13+; OnTrack CI uses **3.14** — **ADAPT** pin in `backend/pyproject.toml`.
 
 ---
 

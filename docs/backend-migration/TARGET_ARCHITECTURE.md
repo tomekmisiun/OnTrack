@@ -165,9 +165,9 @@ Queue: Redis list or foundation worker pattern — **ADAPT** simplified job tabl
 
 | Component | Version |
 |-----------|---------|
-| OnTrack CI (current) | 3.11 |
+| OnTrack CI (current) | 3.14 |
 | Foundation default | 3.13+ |
-| **Target backend** | **3.11** (align with CI and existing Dockerfile) |
+| **Target backend** | **3.14** (align with CI and existing Dockerfile) |
 
 ---
 

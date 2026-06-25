@@ -166,7 +166,7 @@ Legend: **PORT** = frontend uses; **ADAPT** = port with compatibility layer; **D
 | Test modules | 24 under `tests/` |
 | Fixture DB | SQLite in-memory (`tests/conftest.py`) |
 | Auth fixture | `auth_headers` with JWT from Flask test client |
-| CI | `.github/workflows/ci.yml` — pytest only, Python 3.11 |
+| CI | `.github/workflows/ci.yml` — pytest only, Python 3.14 |
 
 **Coverage gaps (inferred):** No dedicated contract test suite; dish-compare API route not HTTP-tested (loader unit tests only).
 

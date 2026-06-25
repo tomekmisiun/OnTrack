@@ -1,6 +1,6 @@
 # Self-contained backend image — build context MUST be backend/
 # See docs/backend-migration/DATA_DEPLOYMENT_ROADMAP.md
-FROM python:3.11-slim
+FROM python:3.14-slim
 
 WORKDIR /app
 
