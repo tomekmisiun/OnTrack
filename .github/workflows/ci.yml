@@ -42,6 +42,17 @@ jobs:
           GOOGLE_CLIENT_ID: ci-test-google-client-id
           GOOGLE_CLIENT_SECRET: ci-test-google-client-secret
 
+      - name: Ustaw Node.js (OpenAPI export)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Sprawdź drift OpenAPI
+        working-directory: backend
+        run: |
+          node ../frontend-next/scripts/export-openapi.mjs
+          git diff --exit-code ../frontend-next/openapi/openapi.json
+
   frontend-next:
     runs-on: ubuntu-latest
     steps:

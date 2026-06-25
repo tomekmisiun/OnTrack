@@ -242,6 +242,50 @@
         ]
       }
     },
+    "/api/auth/market": {
+      "patch": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Change Market",
+        "operationId": "change_market_api_auth_market_patch",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MarketRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
     "/api/auth/google": {
       "get": {
         "tags": [
@@ -2409,6 +2453,17 @@
         },
         "type": "object",
         "title": "LoginRequest"
+      },
+      "MarketRequest": {
+        "properties": {
+          "market_code": {
+            "type": "string",
+            "title": "Market Code",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "MarketRequest"
       },
       "MemberNameRequest": {
         "properties": {
