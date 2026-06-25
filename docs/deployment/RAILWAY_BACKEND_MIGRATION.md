@@ -73,6 +73,8 @@ Railway runs this **once per deployment** in a pre-deploy container (before the 
 
 Confirm in Dashboard → `ontrack-back` → latest deployment → **Pre-deploy** phase logs show `Alembic current: f1a2b3c4d5e6 (head)`.
 
+Post-deploy auth smoke: [`RAILWAY_AUTH_PRODUCTION_VERIFY.md`](./RAILWAY_AUTH_PRODUCTION_VERIFY.md)
+
 ### Verification commands
 
 ```bash

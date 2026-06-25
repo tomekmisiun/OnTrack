@@ -13,6 +13,8 @@ Production deploys from Railway after a push to `main`, **but only when GitHub A
 
 Backend migration runbook: [`docs/deployment/RAILWAY_BACKEND_MIGRATION.md`](../docs/deployment/RAILWAY_BACKEND_MIGRATION.md)
 
+Production auth verification: [`docs/deployment/RAILWAY_AUTH_PRODUCTION_VERIFY.md`](../docs/deployment/RAILWAY_AUTH_PRODUCTION_VERIFY.md)
+
 ---
 
 ## 1. Railway — configure each service
@@ -24,7 +26,7 @@ For **each** service → **Settings** → **Source**:
 3. **Auto deploys when pushed to GitHub** — **enabled**
 4. **Wait for CI** → **ON**
 5. **ontrack-back:** Root Directory = **`backend`**, Config file path = **`/backend/railway.toml`** (absolute from repo root — Config file path does not follow Root Directory)
-6. **ontrackapp:** Root Directory = **`frontend-next`**, config **`frontend-next/railway.toml`**
+6. **ontrackapp:** Root Directory = **`frontend-next`**, Config file path = **`/frontend-next/railway.toml`**
 
 ### Frontend build variable
 
