@@ -1,4 +1,5 @@
 #!/bin/sh
+# Pre-deploy migrations (Railway preDeployCommand).
 set -eu
 
 echo "=== OnTrack Alembic migrations ==="
@@ -8,6 +9,4 @@ if [ -z "${DATABASE_URL:-}" ]; then
   exit 1
 fi
 
-uv run alembic upgrade head
-echo "Alembic current:"
-uv run alembic current
+uv run python scripts/ensure_alembic_head.py

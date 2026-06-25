@@ -58,3 +58,9 @@ def test_production_dockerfile_includes_alembic_and_migration_script():
     assert "COPY alembic.ini ./" in dockerfile
     assert "COPY scripts ./scripts" in dockerfile
     assert MIGRATIONS_SCRIPT.is_file()
+    assert (REPO_ROOT / "backend" / "scripts" / "ensure_alembic_head.py").is_file()
+
+
+def test_railway_watch_patterns_include_alembic():
+    text = BACKEND_RAILWAY_TOML.read_text(encoding="utf-8")
+    assert '"alembic/**"' in text

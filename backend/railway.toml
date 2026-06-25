@@ -5,6 +5,7 @@
 builder = "dockerfile"
 dockerfilePath = "Dockerfile"
 watchPatterns = [
+  "alembic/**",
   "app/**",
   "data/**",
   "scripts/**",
