@@ -1,13 +1,13 @@
 from app.models.product import Product
 from app.models.recipe import Recipe, RecipeIngredient
-from app.scripts.seed_global_catalog import import_global_catalog
+from app.scripts.import_catalog import import_catalog
 
 
 def _system_product(db_session) -> Product:
-    import_global_catalog(db_session, "pl")
+    import_catalog(db_session, markets=("PL",))
     system = (
         db_session.query(Product)
-        .filter_by(source="system", lang="pl")
+        .filter_by(source="system", market_code="PL")
         .filter(Product.user_id.is_(None))
         .first()
     )

@@ -31,8 +31,10 @@ jobs:
         working-directory: backend
         run: |
           uv sync --dev
+          uv run python -m app.scripts.build_catalog --check
+          uv run python scripts/validate_runtime_data.py
           uv run pytest tests/contract/ tests/integration/test_worker_catalog_seed.py \
-            tests/test_health.py tests/test_dish_compare_data.py \
+            tests/test_health.py tests/test_dish_compare_data.py tests/test_catalog_pipeline.py \
             -q --cov=app --cov-report=term-missing --cov-fail-under=50
         env:
           TESTING: "1"

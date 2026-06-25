@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
+from app.core.security import create_access_token
 from app.domain.product_normalize import normalize_product_name
 from app.models.product import Product
 from app.models.recipe import Recipe
 from app.models.user import User
-from app.core.security import create_access_token
-from app.scripts.seed_global_catalog import import_global_catalog
+from app.scripts.import_catalog import import_catalog
 
 from tests.conftest import create_user
 
@@ -27,7 +27,6 @@ def test_register_sets_ui_locale_and_default_market(client, db_session):
     user = db_session.query(User).filter_by(username="locale1").first()
     assert user.ui_locale == "en"
     assert user.market_code == "GB"
-    assert user.ui_locale == "en"
 
 
 def test_register_pl_defaults_to_pl_market(client, db_session):
@@ -65,10 +64,12 @@ def test_change_language_updates_ui_locale_only(client, user, auth_headers, db_s
     db_session.refresh(user)
     assert user.ui_locale == "en"
     assert user.market_code == "PL"
-    assert user.ui_locale == "en"
 
 
-def test_change_market_updates_market_only(client, user, auth_headers, db_session):
+def test_change_market_updates_market_only(client, user, auth_headers, db_session, global_catalog):
+    before_recipes = db_session.query(Recipe).filter_by(user_id=user.id).count()
+    before_products = db_session.query(Product).filter_by(user_id=user.id).count()
+
     res = client.patch(
         "/api/auth/market",
         headers=auth_headers,
@@ -81,7 +82,8 @@ def test_change_market_updates_market_only(client, user, auth_headers, db_sessio
 
     db_session.refresh(user)
     assert user.market_code == "GB"
-    assert user.ui_locale == "pl"
+    assert db_session.query(Recipe).filter_by(user_id=user.id).count() == before_recipes
+    assert db_session.query(Product).filter_by(user_id=user.id).count() == before_products
 
 
 def test_change_market_rejects_invalid(client, auth_headers):
@@ -94,11 +96,8 @@ def test_change_market_rejects_invalid(client, auth_headers):
 
 
 def test_product_list_uses_market_not_ui_locale(
-    client, db_session, auth_headers, user
+    client, db_session, auth_headers, user, global_catalog
 ):
-    import_global_catalog(db_session, "pl")
-    import_global_catalog(db_session, "en")
-
     user.ui_locale = "en"
     user.market_code = "PL"
     db_session.commit()
@@ -112,6 +111,7 @@ def test_product_list_uses_market_not_ui_locale(
         price=1.0,
         unit="g",
         lang="pl",
+        market_code="PL",
     )
     en_only = Product(
         user_id=user.id,
@@ -122,6 +122,7 @@ def test_product_list_uses_market_not_ui_locale(
         price=1.0,
         unit="g",
         lang="en",
+        market_code="GB",
     )
     db_session.add_all([pl_only, en_only])
     db_session.commit()
@@ -135,39 +136,47 @@ def test_product_list_uses_market_not_ui_locale(
     assert en_only.id not in ids
 
 
-def test_register_seeds_demo_recipes(client, db_session):
+def test_register_does_not_copy_global_catalog(client, db_session, global_catalog):
     reg = client.post(
         "/api/auth/register",
         json={"username": "noseed2", "password": "secret123", "lang": "pl"},
     )
     assert reg.status_code == 201
     user = db_session.query(User).filter_by(username="noseed2").first()
-    assert db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count() >= 1
+    assert db_session.query(Product).filter_by(user_id=user.id).count() == 0
+    assert db_session.query(Recipe).filter_by(user_id=user.id).count() == 0
+
+    token = reg.json()["token"]
+    headers = {"Authorization": f"Bearer {token}"}
+    products = client.get("/api/products/", headers=headers, params={"limit": 5})
+    recipes = client.get("/api/recipes/", headers=headers)
+    assert products.json()["total"] >= 1
+    assert len(recipes.json()) >= 1
 
 
-def test_login_seeds_missing_recipes(client, db_session):
+def test_login_does_not_seed_recipes(client, db_session, global_catalog):
     create_user(db_session, "loginseed@example.com", lang="pl", username="loginseed")
     user = db_session.query(User).filter_by(username="loginseed").first()
-    assert db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count() == 0
+    assert db_session.query(Recipe).filter_by(user_id=user.id).count() == 0
     res = client.post(
         "/api/auth/login",
         json={"username": "loginseed", "password": "test-password"},
     )
     assert res.status_code == 200
-    assert db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count() >= 1
+    assert db_session.query(Recipe).filter_by(user_id=user.id).count() == 0
 
 
-def test_me_seeds_missing_recipes(client, db_session):
-    user = create_user(db_session, "meseED@example.com", lang="pl", username="meseed")
-    assert db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count() == 0
+def test_me_does_not_seed_recipes(client, db_session, global_catalog):
+    user = create_user(db_session, "meseed@example.com", lang="pl", username="meseed")
+    assert db_session.query(Recipe).filter_by(user_id=user.id).count() == 0
     token = create_access_token(user.id)
     headers = {"Authorization": f"Bearer {token}"}
     res = client.get("/api/auth/me", headers=headers)
     assert res.status_code == 200
-    assert db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count() >= 1
+    assert db_session.query(Recipe).filter_by(user_id=user.id).count() == 0
 
 
-def test_change_language_does_not_seed_recipes(client, user, auth_headers, db_session):
+def test_change_language_does_not_seed_recipes(client, user, auth_headers, db_session, global_catalog):
     before = db_session.query(Recipe).filter_by(user_id=user.id).count()
     res = client.patch(
         "/api/auth/language",

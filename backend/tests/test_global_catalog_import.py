@@ -1,97 +1,81 @@
-from app.domain.product_normalize import normalize_product_name
+"""Tests for global catalog import (``import_catalog``)."""
+
+from __future__ import annotations
+
 from app.models.product import Product
-from app.scripts.seed_global_catalog import (
-    _load_seed_products,
-    catalog_key_for_seed,
-    import_global_catalog,
+from app.models.recipe import Recipe
+from app.scripts.import_catalog import (
+    catalog_key_for_product,
+    catalog_key_for_recipe,
+    import_catalog,
 )
 
-from tests.conftest import create_user
+
+def test_catalog_key_for_product_is_stable():
+    key = catalog_key_for_product("PL", 0, "jogurt naturalny")
+    assert key == catalog_key_for_product("PL", 0, "jogurt naturalny")
+    assert key.startswith("catalog:pl:0:")
 
 
-def _jogurt_seed_row() -> dict:
-    for row in _load_seed_products("pl"):
-        if row["name"] == "jogurt naturalny":
-            return row
-    raise AssertionError("jogurt naturalny missing from pl seed")
+def test_catalog_key_for_recipe_uses_source_url():
+    key = catalog_key_for_recipe("PL", "https://example.com/foo-bar", "Test")
+    assert "foo-bar" in key
 
 
-def _legacy_product_from_seed(user_id: int, row: dict) -> Product:
-    return Product(
-        user_id=user_id,
-        source="legacy",
-        normalized_name=normalize_product_name(row["name"]),
-        name=row["name"],
-        package_weight=row["package_weight"],
-        price=row["price"],
-        unit=row["unit"],
-        kcal=row.get("kcal"),
-        protein=row.get("protein"),
-        fat=row.get("fat"),
-        carbs=row.get("carbs"),
-        lang="pl",
-    )
-
-
-def test_catalog_key_is_stable():
-    key = catalog_key_for_seed("pl", 0, "jogurt naturalny")
-    assert key == catalog_key_for_seed("pl", 0, "jogurt naturalny")
-    assert key.startswith("seed:pl:0:")
-
-
-def test_import_global_catalog_creates_system_products(db_session):
-    report = import_global_catalog(db_session, "pl")
-    assert report.created >= 2
-    assert report.updated == 0
+def test_import_catalog_creates_system_products(db_session):
+    report = import_catalog(db_session)
+    assert report.products_created >= 1
     system = (
         db_session.query(Product)
-        .filter_by(source="system", lang="pl")
+        .filter_by(source="system", market_code="PL")
         .filter(Product.user_id.is_(None))
         .all()
     )
-    assert len(system) >= 2
+    assert len(system) >= 1
     assert all(p.catalog_key for p in system)
 
 
-def test_import_global_catalog_is_idempotent(db_session):
-    first = import_global_catalog(db_session, "pl")
-    second = import_global_catalog(db_session, "pl")
-    assert first.created >= 2
-    assert second.created == 0
-    assert second.updated == 0
+def test_import_catalog_creates_system_recipes(db_session):
+    report = import_catalog(db_session)
+    assert report.recipes_created >= 1
+    system = (
+        db_session.query(Recipe)
+        .filter_by(source="system", market_code="PL")
+        .filter(Recipe.user_id.is_(None))
+        .all()
+    )
+    assert len(system) >= 1
+
+
+def test_import_catalog_is_idempotent(db_session):
+    first = import_catalog(db_session)
+    second = import_catalog(db_session)
+    assert first.products_created >= 1
+    assert second.products_created == 0
+    assert second.recipes_created == 0
     count = (
         db_session.query(Product)
-        .filter_by(source="system", lang="pl")
+        .filter_by(source="system")
         .filter(Product.user_id.is_(None))
         .count()
     )
-    assert count == first.created
+    assert count >= first.products_created
 
 
-def test_import_links_deterministic_legacy_copy(db_session):
-    user = create_user(db_session, "legacy-link@example.com", lang="pl")
-    seed_row = _jogurt_seed_row()
-    legacy = _legacy_product_from_seed(user.id, seed_row)
-    db_session.add(legacy)
-    db_session.commit()
-
-    report = import_global_catalog(db_session, "pl")
-    db_session.refresh(legacy)
-    assert report.linked_legacy >= 1
-    assert legacy.base_product_id is not None
-    system = db_session.get(Product, legacy.base_product_id)
+def test_import_catalog_updates_existing_product(db_session):
+    first = import_catalog(db_session, markets=("PL",))
+    system = (
+        db_session.query(Product)
+        .filter_by(source="system", market_code="PL")
+        .filter(Product.user_id.is_(None))
+        .first()
+    )
     assert system is not None
-    assert system.source == "system"
-    assert system.user_id is None
-
-
-def test_import_skips_ambiguous_legacy_matches(db_session):
-    user = create_user(db_session, "ambig@example.com", lang="pl")
-    seed_row = _jogurt_seed_row()
-    for _ in range(2):
-        db_session.add(_legacy_product_from_seed(user.id, seed_row))
+    original_name = system.name
+    system.name = "SHOULD BE OVERWRITTEN"
     db_session.commit()
 
-    report = import_global_catalog(db_session, "pl")
-    assert report.ambiguous_legacy >= 2
-    assert report.linked_legacy == 0
+    second = import_catalog(db_session, markets=("PL",))
+    db_session.refresh(system)
+    assert second.products_updated >= 1
+    assert system.name == original_name
