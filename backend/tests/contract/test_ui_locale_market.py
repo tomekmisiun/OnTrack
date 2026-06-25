@@ -6,6 +6,7 @@ from app.domain.product_normalize import normalize_product_name
 from app.models.product import Product
 from app.models.recipe import Recipe
 from app.models.user import User
+from app.core.security import create_access_token
 from app.scripts.seed_global_catalog import import_global_catalog
 
 from tests.conftest import create_user
@@ -134,32 +135,36 @@ def test_product_list_uses_market_not_ui_locale(
     assert en_only.id not in ids
 
 
-def test_register_does_not_seed_recipes(client, db_session):
+def test_register_seeds_demo_recipes(client, db_session):
     reg = client.post(
         "/api/auth/register",
         json={"username": "noseed2", "password": "secret123", "lang": "pl"},
     )
     assert reg.status_code == 201
     user = db_session.query(User).filter_by(username="noseed2").first()
-    assert db_session.query(Recipe).filter_by(user_id=user.id).count() == 0
+    assert db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count() >= 1
 
 
-def test_login_does_not_seed_recipes(client, db_session):
+def test_login_seeds_missing_recipes(client, db_session):
     create_user(db_session, "loginseed@example.com", lang="pl", username="loginseed")
-    before = db_session.query(Recipe).count()
+    user = db_session.query(User).filter_by(username="loginseed").first()
+    assert db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count() == 0
     res = client.post(
         "/api/auth/login",
         json={"username": "loginseed", "password": "test-password"},
     )
     assert res.status_code == 200
-    assert db_session.query(Recipe).count() == before
+    assert db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count() >= 1
 
 
-def test_me_does_not_seed_recipes(client, user, auth_headers, db_session):
-    before = db_session.query(Recipe).filter_by(user_id=user.id).count()
-    res = client.get("/api/auth/me", headers=auth_headers)
+def test_me_seeds_missing_recipes(client, db_session):
+    user = create_user(db_session, "meseED@example.com", lang="pl", username="meseed")
+    assert db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count() == 0
+    token = create_access_token(user.id)
+    headers = {"Authorization": f"Bearer {token}"}
+    res = client.get("/api/auth/me", headers=headers)
     assert res.status_code == 200
-    assert db_session.query(Recipe).filter_by(user_id=user.id).count() == before
+    assert db_session.query(Recipe).filter_by(user_id=user.id, lang="pl").count() >= 1
 
 
 def test_change_language_does_not_seed_recipes(client, user, auth_headers, db_session):
