@@ -1,26 +1,27 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
-import { useLanguage } from '@/contexts/LanguageContext';
-import { getDishCompare } from '@/lib/api/public';
-import './dish-compare.css';
-
+import { useLanguage } from "@/contexts/LanguageContext";
+import {
+  getDishCompare,
+  type DishCompareResponse,
+} from "@/lib/api/public";
+import { tFormatArgs, tString } from "@/lib/i18n/translate";
+import "./dish-compare.css";
 
 const AUTO_INTERVAL_MS = 8250;
 const MANUAL_PAUSE_MS = 12000;
 
-const DISH_ICONS = {
-  pizza_margherita: 'mdi:pizza',
-  pepperoni_pizza: 'mdi:pizza',
-  chicken_chow_mein: 'mdi:noodles',
-  sweet_and_sour_chicken: 'mdi:food-drumstick',
-  chicken_tikka_masala: 'mdi:bowl-mix',
-  spaghetti_bolognese: 'mdi:noodles',
+const DISH_ICONS: Record<string, string> = {
+  pizza_margherita: "mdi:pizza",
+  pepperoni_pizza: "mdi:pizza",
+  chicken_chow_mein: "mdi:noodles",
+  sweet_and_sour_chicken: "mdi:food-drumstick",
+  chicken_tikka_masala: "mdi:bowl-mix",
+  spaghetti_bolognese: "mdi:noodles",
 };
 
-function formatMoney(value, currency) {
+function formatMoney(value: number | string, currency: string): string {
   const n = Number(value);
   if (!Number.isFinite(n)) return `0.00 ${currency}`;
   return `${n.toFixed(2)} ${currency}`;
@@ -28,9 +29,9 @@ function formatMoney(value, currency) {
 
 export function DishCompare() {
   const { lang, t } = useLanguage();
-  const currency = t('currency');
+  const currency = tString(t, "currency");
 
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<DishCompareResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -39,8 +40,8 @@ export function DishCompare() {
   const [autoPaused, setAutoPaused] = useState(false);
   const pauseUntilRef = useRef(0);
   const showIngredientsRef = useRef(false);
-  const tabRefs = useRef([]);
-  const tabsListRef = useRef(null);
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const tabsListRef = useRef<HTMLDivElement | null>(null);
 
   const dishes = data?.dishes || [];
   const mealPrep = data?.meal_prep || {};
@@ -48,7 +49,7 @@ export function DishCompare() {
 
   showIngredientsRef.current = showIngredients;
 
-  const goToIndex = useCallback((index, manual = false) => {
+  const goToIndex = useCallback((index: number, manual = false) => {
     if (!dishes.length) return;
     const next = ((index % dishes.length) + dishes.length) % dishes.length;
     setActiveIndex(next);
@@ -142,7 +143,7 @@ export function DishCompare() {
 
   if (loading) {
     return (
-      <section className="dish-compare dish-compare--loading" aria-label={t('compare_headline_1')}>
+      <section className="dish-compare dish-compare--loading" aria-label={tString(t, "compare_headline_1")}>
         <div className="dish-compare-skeleton" />
       </section>
     );
@@ -155,10 +156,10 @@ export function DishCompare() {
   const dishIcon = DISH_ICONS[activeDish.id] || 'mdi:silverware-fork-knife';
 
   return (
-    <section className="dish-compare" aria-label={t('compare_headline_1')}>
+    <section className="dish-compare" aria-label={tString(t, "compare_headline_1")}>
       <div className="dish-compare-widget">
         <div className="dish-compare-nav">
-        <button type="button" className="dish-compare-arrow" onClick={() => goPrev(true)} aria-label={t('compare_prev')}>
+        <button type="button" className="dish-compare-arrow" onClick={() => goPrev(true)} aria-label={tString(t, "compare_prev")}>
           <Icon icon="heroicons:chevron-left" width={20} />
         </button>
 
@@ -180,7 +181,7 @@ export function DishCompare() {
           ))}
         </div>
 
-        <button type="button" className="dish-compare-arrow" onClick={() => goNext(true)} aria-label={t('compare_next')}>
+        <button type="button" className="dish-compare-arrow" onClick={() => goNext(true)} aria-label={tString(t, "compare_next")}>
           <Icon icon="heroicons:chevron-right" width={20} />
         </button>
         </div>
@@ -212,11 +213,11 @@ export function DishCompare() {
               <div className="dish-compare-panel-icon dish-compare-panel-icon--order">
                 <Icon icon="heroicons:truck" width={22} />
               </div>
-              <span className="dish-compare-panel-label">{t('compare_order_label')}</span>
+              <span className="dish-compare-panel-label">{tString(t, "compare_order_label")}</span>
               <span className="dish-compare-panel-price">{formatMoney(orderTotal, currency)}</span>
               <div className="dish-compare-panel-breakdown">
-                <span>{t('compare_menu')} {formatMoney(dishNum, currency)}</span>
-                <span>{t('compare_delivery_fee')} {formatMoney(deliveryNum, currency)}</span>
+                <span>{tString(t, "compare_menu")} {formatMoney(dishNum, currency)}</span>
+                <span>{tString(t, "compare_delivery_fee")} {formatMoney(deliveryNum, currency)}</span>
               </div>
             </div>
 
@@ -228,23 +229,23 @@ export function DishCompare() {
               <div className="dish-compare-panel-icon dish-compare-panel-icon--diy">
                 <Icon icon="heroicons:home-modern" width={22} />
               </div>
-              <span className="dish-compare-panel-label">{t('compare_diy_label')}</span>
+              <span className="dish-compare-panel-label">{tString(t, "compare_diy_label")}</span>
               <span className="dish-compare-panel-price dish-compare-panel-price--diy">
                 {formatMoney(diyCost, currency)}
               </span>
-              <span className="dish-compare-panel-tag">{t('compare_diy_tag')}</span>
+              <span className="dish-compare-panel-tag">{tString(t, "compare_diy_tag")}</span>
             </div>
           </div>
 
           <div className="dish-compare-bars" aria-hidden="true">
             <div className="dish-compare-bar-row">
-              <span className="dish-compare-bar-label dish-compare-bar-label--order">{t('compare_order_label')}</span>
+              <span className="dish-compare-bar-label dish-compare-bar-label--order">{tString(t, "compare_order_label")}</span>
               <div className="dish-compare-bar-track">
                 <div className="dish-compare-bar dish-compare-bar--order" style={{ width: '100%' }} />
               </div>
             </div>
             <div className="dish-compare-bar-row">
-              <span className="dish-compare-bar-label dish-compare-bar-label--diy">{t('compare_diy_label')}</span>
+              <span className="dish-compare-bar-label dish-compare-bar-label--diy">{tString(t, "compare_diy_label")}</span>
               <div className="dish-compare-bar-track">
                 <div className="dish-compare-bar dish-compare-bar--diy" style={{ width: `${diyBarPct}%` }} />
               </div>
@@ -258,17 +259,19 @@ export function DishCompare() {
               </div>
               <div className="dish-compare-savings-copy">
                 <span className="dish-compare-savings-headline">
-                  {typeof t('compare_savings_headline') === 'function'
-                    ? t('compare_savings_headline')(formatMoney(savings, currency))
-                    : formatMoney(savings, currency)}
+                  {tFormatArgs(
+                    t,
+                    "compare_savings_headline",
+                    formatMoney(savings, currency),
+                  )}
                 </span>
                 <p className="dish-compare-savings-detail">
-                  {typeof t('compare_savings_detail') === 'function'
-                    ? t('compare_savings_detail')(
-                      workHoursSaved,
-                      formatMoney(avgHourlyWage, currency),
-                    )
-                    : null}
+                  {tFormatArgs(
+                    t,
+                    "compare_savings_detail",
+                    workHoursSaved,
+                    formatMoney(avgHourlyWage, currency),
+                  )}
                 </p>
               </div>
               <span className="dish-compare-savings-pct">{savingsPct}%</span>
@@ -287,7 +290,7 @@ export function DishCompare() {
           aria-expanded={showIngredients}
         >
           <Icon icon={showIngredients ? 'heroicons:chevron-up' : 'heroicons:chevron-down'} width={16} />
-          {t('compare_ingredients')}
+          {tString(t, "compare_ingredients")}
         </button>
 
         {showIngredients && (
@@ -298,7 +301,7 @@ export function DishCompare() {
                   {ing.product_name}
                   <em>
                     {ing.weight}
-                    {ing.unit === 'szt' ? ` ${t('unit_pcs')}` : (ing.unit === 'ml' ? ' ml' : ' g')}
+                    {ing.unit === 'szt' ? ` ${tString(t, "unit_pcs")}` : (ing.unit === 'ml' ? ' ml' : ' g')}
                   </em>
                 </span>
                 <span className="dish-compare-ing-cost">{formatMoney(ing.cost, currency)}</span>
@@ -307,7 +310,7 @@ export function DishCompare() {
           </ul>
         )}
 
-        <p className="dish-compare-disclaimer">{t('compare_disclaimer')}</p>
+        <p className="dish-compare-disclaimer">{tString(t, "compare_disclaimer")}</p>
       </div>
       </div>
     </section>
