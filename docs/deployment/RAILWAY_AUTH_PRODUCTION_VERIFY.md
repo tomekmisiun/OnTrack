@@ -65,10 +65,11 @@ From repo root:
 export API_URL=https://<ontrack-back-domain>
 export FRONTEND_ORIGIN=https://<ontrackapp-domain>
 
-chmod +x backend/scripts/cutover_smoke.sh backend/scripts/verify-production-auth.sh
+chmod +x backend/scripts/cutover_smoke.sh backend/scripts/verify-production-auth.sh backend/scripts/verify-production-env.sh
 
 API_URL="$API_URL" ./backend/scripts/cutover_smoke.sh
 API_URL="$API_URL" FRONTEND_ORIGIN="$FRONTEND_ORIGIN" ./backend/scripts/verify-production-auth.sh
+API_URL="$API_URL" FRONTEND_ORIGIN="$FRONTEND_ORIGIN" ./backend/scripts/verify-production-env.sh
 ```
 
 `verify-production-auth.sh` creates a unique user, registers (201), calls `/me`, logs in (200). It does not print JWTs.
@@ -95,6 +96,7 @@ On `https://<ontrackapp-domain>`:
 | Pre-deploy Alembic `f1a2b3c4d5e6` | ☐ |
 | `GET /health` → 200 | ☐ |
 | `verify-production-auth.sh` | ☐ |
+| `verify-production-env.sh` (CORS preflight) | ☐ |
 | Browser register/login/refresh/logout | ☐ |
 | `FRONTEND_URL` matches frontend origin (no CORS errors in DevTools) | ☐ |
 | `NEXT_PUBLIC_API_URL` points to API (not localhost) | ☐ |
