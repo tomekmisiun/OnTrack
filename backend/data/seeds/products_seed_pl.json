@@ -3590,11 +3590,7 @@
     "price": 3.065,
     "package_weight": 600.0,
     "unit": "g",
-    "sold_by_weight": false,
-    "kcal": null,
-    "protein": null,
-    "fat": null,
-    "carbs": null
+    "sold_by_weight": false
   },
   {
     "name": "płatki chili",
@@ -4052,11 +4048,7 @@
     "price": 1.603,
     "package_weight": 330.0,
     "unit": "g",
-    "sold_by_weight": false,
-    "kcal": null,
-    "protein": null,
-    "fat": null,
-    "carbs": null
+    "sold_by_weight": false
   },
   {
     "name": "soczewica",
@@ -4679,11 +4671,7 @@
     "price": 4.4475,
     "package_weight": 400.0,
     "unit": "g",
-    "sold_by_weight": false,
-    "kcal": null,
-    "protein": null,
-    "fat": null,
-    "carbs": null
+    "sold_by_weight": false
   },
   {
     "name": "zielona papryka",
