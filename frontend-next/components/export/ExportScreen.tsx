@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars, @typescript-eslint/no-unused-expressions, prefer-const */
-// @ts-nocheck
 "use client";
 
 import { Icon } from "@iconify/react";
@@ -27,8 +25,8 @@ import type { TranslationKey } from "@/lib/i18n/translations";
 import { tArray, tFormat2, tFormatN, tString } from "@/lib/i18n/translate";
 import { fuzzySearch } from "@/lib/recipes/search";
 import type { ScheduleBlock } from "@/types/daySchedule";
-import type { MealsByDate } from "@/types/mealPlan";
-import type { RecipeSummary } from "@/types/recipe";
+import type { Meal, MealsByDate } from "@/types/mealPlan";
+import type { Recipe, RecipeSummary } from "@/types/recipe";
 import "./export.css";
 
 type TFn = (key: TranslationKey) => unknown;
@@ -49,6 +47,60 @@ type ShopSummaryItem = {
   packages_rounded?: number;
   total_cost?: number;
   actual_cost?: number;
+};
+
+type MacroHtmlMacros = {
+  kcal: number;
+  protein: number;
+  fat: number;
+  carbs: number;
+};
+
+type MacroHtmlParams = {
+  gender: string;
+  age: string | number;
+  weight: string | number;
+  height: string | number;
+  activity: string | number;
+  goal: string;
+  macros: MacroHtmlMacros;
+  memberName?: string;
+  lang: string;
+};
+
+type ExpenseCategoryRow = { label: string; value: number };
+
+type WydatkiHtmlParams = {
+  categories: ExpenseCategoryRow[];
+  total: number;
+  periodLabel: string;
+  memberLabel: string;
+  lang: string;
+};
+
+type KalendarzHtmlParams = {
+  mealsByDate: MealsByDate;
+  start: string;
+  end: string;
+  periodLabel: string;
+  memberName: string;
+  lang: string;
+};
+
+type ShopListHtmlParams = {
+  items: ShopSummaryItem[];
+  total: number;
+  selectedDays: string[];
+  memberLabel: string;
+  lang: string;
+};
+
+type DayScheduleHtmlParams = {
+  blocks: ScheduleBlock[];
+  memberName: string;
+  lang: string;
+  emptyTemplate: boolean;
+  weekLabel: string;
 };
 
 function openHtmlWindow(html: string) {
@@ -199,13 +251,12 @@ const MACRO_GOALS = [
   { value: 'gain',     label: 'Masa',           adj:  +300, proteinPerKg: 2.0, fatPct: 0.25, warn: false },
 ];
 function mBmi(w: number, h: number)       { const hm=h/100; return w/(hm*hm); }
-function mBmiCat(b: number)      { if(b<18.5) return{label:'Niedowaga',color:'#3b82f6'}; if(b<25) return{label:'Norma',color:'#22c55e'}; if(b<30) return{label:'Nadwaga',color:'#eab308'}; return{label:'Otyłość',color:'#ef4444'}; }
 function mBmr(w: number, h: number, age: number, g: string) { const b=10*w+6.25*h-5*age; return g==='m'?b+5:b-161; }
 function mAdj(w: number, h: number)       { const hm=h/100,ibw=25*hm*hm; if(w<=ibw) return{pw:w,adjusted:false,ibw:null}; const adj=ibw+0.25*(w-ibw); return{pw:Math.round(adj),adjusted:true,ibw:Math.round(ibw)}; }
 function mCalc(w: number, h: number, tdee: number, g: typeof MACRO_GOALS[number]) { const{pw}=mAdj(w,h); const kcal=Math.round(tdee+g.adj); const protein=Math.round(pw*g.proteinPerKg); const fat=Math.round((g.fatPct*kcal)/9); const carbs=Math.max(0,Math.round((kcal-protein*4-fat*9)/4)); return{kcal,protein,fat,carbs}; }
 
-function generateMacroHTML({ gender, age, weight, height, activity, goal, macros, memberName, lang }: Record<string, any>) {
-  const w=parseFloat(weight), h=parseFloat(height), a=parseInt(age), act=parseFloat(activity);
+function generateMacroHTML({ gender, age, weight, height, activity, goal, macros, memberName, lang }: MacroHtmlParams) {
+  const w=parseFloat(String(weight)), h=parseFloat(String(height)), a=parseInt(String(age), 10), act=parseFloat(String(activity));
   if(!(w>0&&h>0&&a>0)||!macros) return null;
   const L = lang === 'en';
   const bmiVal  = mBmi(w,h);
@@ -231,7 +282,6 @@ function generateMacroHTML({ gender, age, weight, height, activity, goal, macros
   const proteinPct  = Math.round(proteinKcal/totalKcal*100);
   const fatPct      = Math.round(fatKcal/totalKcal*100);
   const carbsPct    = 100-proteinPct-fatPct;
-  const cur = L ? '£' : 'zł';
   const goalNote = goalOpt.adj===0
     ? (L ? `Weight maintenance — eat as much as your TDEE (${tdeeVal} kcal)` : `Utrzymanie wagi — spożywaj tyle co TDEE (${tdeeVal} kcal)`)
     : `${goalLabel}: ${goalOpt.adj>0?'+':''}${goalOpt.adj} ${L?'kcal/day relative to TDEE':'kcal/dzień względem TDEE'} (${tdeeVal} kcal)`;
@@ -333,7 +383,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#fff;color:#111827;p
 }
 
 // ─── Wydatki HTML generator (podsumowanie kategorii) ─────────────────────────
-function generateWydatkiHTML({ categories, total, periodLabel, memberLabel, lang }: Record<string, any>) {
+function generateWydatkiHTML({ categories, total, periodLabel, memberLabel, lang }: WydatkiHtmlParams) {
   const L = lang === 'en';
   const cur = L ? '£' : 'zł';
   const now = new Date();
@@ -385,7 +435,7 @@ ${rows}
 }
 
 // ─── Karta Kalendarza HTML generator ─────────────────────────────────────────
-function generateKalendarzHTML({ mealsByDate, start, end, periodLabel, memberName, lang }: Record<string, any>) {
+function generateKalendarzHTML({ mealsByDate, start, end, periodLabel, memberName, lang }: KalendarzHtmlParams) {
   const L = lang === 'en';
   const now = new Date();
   const dateStr = `${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
@@ -422,7 +472,7 @@ function generateKalendarzHTML({ mealsByDate, start, end, periodLabel, memberNam
       const meals   = (mealsByDate[ds] || []).slice().sort((a: { position: number }, b: { position: number }) => a.position - b.position);
       const dow     = (day.getDay() + 6) % 7;
 
-      const mealsHTML = meals.map((m: Record<string, any>) => {
+      const mealsHTML = meals.map((m: Meal) => {
         const col  = SLOT_COLORS[(m.position - 1) % 5];
         const name = m.recipe?.name || '';
         return `<div style="background:${col}22;border-left:3px solid ${col};border-radius:4px;padding:3px 6px;margin-bottom:3px">
@@ -431,10 +481,10 @@ function generateKalendarzHTML({ mealsByDate, start, end, periodLabel, memberNam
         </div>`;
       }).join('');
 
-      const totalKcal    = meals.reduce((s: number, m: Record<string, any>) => s + (m.recipe?.total_kcal    || 0), 0);
-      const totalProtein = meals.reduce((s: number, m: Record<string, any>) => s + (m.recipe?.total_protein || 0), 0);
-      const totalFat     = meals.reduce((s: number, m: Record<string, any>) => s + (m.recipe?.total_fat     || 0), 0);
-      const totalCarbs   = meals.reduce((s: number, m: Record<string, any>) => s + (m.recipe?.total_carbs   || 0), 0);
+      const totalKcal    = meals.reduce((s: number, m: Meal) => s + (m.recipe?.total_kcal    || 0), 0);
+      const totalProtein = meals.reduce((s: number, m: Meal) => s + (m.recipe?.total_protein || 0), 0);
+      const totalFat     = meals.reduce((s: number, m: Meal) => s + (m.recipe?.total_fat     || 0), 0);
+      const totalCarbs   = meals.reduce((s: number, m: Meal) => s + (m.recipe?.total_carbs   || 0), 0);
       const hasMacro     = totalKcal > 0 || totalProtein > 0;
 
       const dayFooter = hasMacro ? `<div class="day-footer">
@@ -516,12 +566,12 @@ ${weeksHTML}
 }
 
 // ─── Składniki przepisu HTML generator ───────────────────────────────────────
-function generateSkladnikiHTML(recipe: Record<string, any>, lang: string) {
+function generateSkladnikiHTML(recipe: Recipe, lang: string) {
   const L = lang === 'en';
   const cur = L ? '£' : 'zł';
   const now = new Date();
   const dateStr = `${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
-  const rows = (recipe.ingredients || []).map((ing: Record<string, any>) =>
+  const rows = (recipe.ingredients || []).map((ing) =>
     `<tr>
       <td>${ing.product_name}</td>
       <td class="num">${ing.weight}</td>
@@ -587,14 +637,14 @@ ${macroHTML}
 }
 
 // ─── Lista zakupów HTML generator ────────────────────────────────────────────
-function generateShopListHTML({ items, total, selectedDays, memberLabel, lang }: Record<string, any>) {
+function generateShopListHTML({ items, total, selectedDays, memberLabel, lang }: ShopListHtmlParams) {
   const L = lang === 'en';
   const cur = L ? '£' : 'zł';
   const now = new Date();
   const dateStr = `${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
   const daysStr = selectedDays.map((d: string) => toEU(d)).join(', ');
 
-  const rows = items.map((item: Record<string, any>) => {
+  const rows = items.map((item: ShopSummaryItem) => {
     const pkgStr = item.sold_by_weight
       ? (L ? 'by weight' : 'na wagę')
       : `${item.packages_rounded} ${L ? 'pcs' : 'szt.'}`;
@@ -684,7 +734,7 @@ function escHtml(s: unknown) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-function generateDayScheduleHTML({ blocks, memberName, lang, emptyTemplate, weekLabel }: Record<string, any>) {
+function generateDayScheduleHTML({ blocks, memberName, lang, emptyTemplate, weekLabel }: DayScheduleHtmlParams) {
   const L = lang === 'en';
   const now = new Date();
   const dateStr = `${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
@@ -875,13 +925,19 @@ export function ExportScreen(props: ExportScreenProps = {}) {
     if (id === activeMember?.id) return;
     setShopMemberIds(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
   };
-  const toggleShopDay = (ds: string) => setShopDays(prev => { const n = new Set(prev); n.has(ds) ? n.delete(ds) : n.add(ds); return n; });
+  const toggleShopDay = (ds: string) => setShopDays(prev => {
+    const n = new Set(prev);
+    if (n.has(ds)) n.delete(ds); else n.add(ds);
+    return n;
+  });
   const prevShopMonth = () => { if (shopMonth === 0) { setShopYear(y => y-1); setShopMonth(11); } else setShopMonth(m => m-1); };
   const nextShopMonth = () => { if (shopMonth === 11) { setShopYear(y => y+1); setShopMonth(0); } else setShopMonth(m => m+1); };
   const selectShopWeek = () => {
     const { start, end } = getCurrentWeek();
-    const s = new Set<string>(); let d = new Date(start); const e = new Date(end);
-    while (d <= e) { s.add(dateToStr(d)); d.setDate(d.getDate()+1); }
+    const s = new Set<string>();
+    for (let day = new Date(start); day <= new Date(end); day.setDate(day.getDate() + 1)) {
+      s.add(dateToStr(day));
+    }
     setShopDays(s);
   };
   const selectShopMonth = () => {
@@ -1297,7 +1353,7 @@ export function ExportScreen(props: ExportScreenProps = {}) {
                             </div>
                             {meals.length === 0
                               ? <div style={{ textAlign:'center', fontSize:10, color:'#374151', marginTop:4 }}>—</div>
-                              : meals.map((m: Record<string, any>) => {
+                              : meals.map((m: Meal) => {
                                   const col = SLOT_COLORS[(m.position-1)%5];
                                   return (
                                     <div key={m.id} style={{
