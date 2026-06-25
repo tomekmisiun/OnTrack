@@ -42,7 +42,7 @@ def sync_primary_member_name(session: Session, user) -> bool:
     locale = (
         user.ui_locale
         if getattr(user, "ui_locale", None) in ("pl", "en")
-        else (user.lang if user.lang in ("pl", "en") else "pl")
+        else "pl"
     )
     primary = (
         session.query(HouseholdMember)

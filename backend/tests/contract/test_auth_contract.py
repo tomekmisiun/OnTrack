@@ -55,7 +55,7 @@ def test_change_language(client, user, auth_headers, db_session):
     assert res.json()["ui_locale"] == "en"
 
     db_session.refresh(user)
-    assert user.lang == "en"
+    assert user.ui_locale == "en"
     assert user.ui_locale == "en"
 
 
@@ -82,7 +82,7 @@ def test_register_and_login(client, db_session):
     assert user.email == "testuser@users.ontrack.local"
     assert user.ui_locale == "en"
     assert user.market_code == "GB"
-    assert user.lang == "en"
+    assert user.ui_locale == "en"
     me = client.get("/api/auth/me", headers={"Authorization": f"Bearer {reg.json()['token']}"})
     assert "email" not in me.json()
 
@@ -135,7 +135,8 @@ def test_werkzeug_hash_from_flask_login_works(client, db_session):
     user = User(
         email="legacy@example.com",
         username="legacyuser",
-        lang="pl",
+        ui_locale="pl",
+        market_code="PL",
         password_hash=generate_password_hash("secret123"),
     )
     db_session.add(user)
