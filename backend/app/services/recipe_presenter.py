@@ -1,37 +1,30 @@
+from app.domain.ingredient_units import ingredient_cost, resolve_ingredient_unit
 from app.models.recipe import Recipe, RecipeIngredient
-
-
-def _ingredient_cost(ingredient: RecipeIngredient) -> float:
-    product = ingredient.product
-    if not product:
-        return 0.0
-    price = product.price or 0
-    unit = product.unit or "g"
-    if unit == "szt":
-        return round(ingredient.weight * price, 2)
-    return round((ingredient.weight / 100) * price, 2)
 
 
 def ingredient_to_dict(ingredient: RecipeIngredient) -> dict:
     product = ingredient.product
+    display_unit = resolve_ingredient_unit(ingredient)
     return {
         "id": ingredient.id,
         "product_id": ingredient.product_id,
         "product_name": product.name if product else "",
         "package_weight": product.package_weight if product else None,
-        "unit": (product.unit or "g") if product else "g",
+        "unit": display_unit,
         "kcal": product.kcal if product else None,
         "protein": product.protein if product else None,
         "fat": product.fat if product else None,
         "carbs": product.carbs if product else None,
         "weight": ingredient.weight,
-        "cost": _ingredient_cost(ingredient),
+        "cost": ingredient_cost(ingredient),
     }
 
 
 def _total_weight(recipe: Recipe) -> float:
     return sum(
-        i.weight for i in recipe.ingredients if i.product and i.product.unit != "szt"
+        i.weight
+        for i in recipe.ingredients
+        if resolve_ingredient_unit(i) != "szt"
     )
 
 
@@ -49,7 +42,7 @@ def _calc_macros(recipe: Recipe) -> tuple[int, float, float, float]:
     kcal = protein = fat = carbs = 0.0
     for ing in recipe.ingredients:
         p = ing.product
-        if not p or p.unit == "szt":
+        if not p or resolve_ingredient_unit(ing) == "szt":
             continue
         factor = ing.weight / 100.0
         kcal += (p.kcal or 0) * factor
@@ -60,11 +53,11 @@ def _calc_macros(recipe: Recipe) -> tuple[int, float, float, float]:
 
 
 def _quick_cost(recipe: Recipe) -> float:
-    return round(sum(_ingredient_cost(i) for i in recipe.ingredients), 2)
+    return round(sum(ingredient_cost(i) for i in recipe.ingredients), 2)
 
 
 def _total_cost(recipe: Recipe) -> float:
-    return round(sum(_ingredient_cost(i) for i in recipe.ingredients), 2)
+    return round(sum(ingredient_cost(i) for i in recipe.ingredients), 2)
 
 
 def recipe_to_summary(recipe: Recipe) -> dict:
