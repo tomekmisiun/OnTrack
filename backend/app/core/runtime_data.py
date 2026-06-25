@@ -29,10 +29,15 @@ def runtime_data_root() -> Path:
 
 
 def seeds_dir() -> Path:
+    """Deprecated legacy seed path — prefer ``generated_dir()`` from catalog_data."""
     settings = get_settings()
     if settings.user_seeds_dir:
         return Path(settings.user_seeds_dir)
     return runtime_data_root() / "seeds"
+
+
+def generated_catalog_dir() -> Path:
+    return runtime_data_root() / "generated"
 
 
 def dish_compare_data_dir() -> Path:
@@ -54,12 +59,15 @@ def macro_ai_cache_path() -> Path:
 def required_runtime_files() -> tuple[tuple[Path, str], ...]:
     """Return (path, label) pairs that must exist for full API runtime."""
     dc = dish_compare_data_dir()
+    gen = generated_catalog_dir()
     return (
         (dc / "defaults" / "pl.json", "dish_compare defaults (pl)"),
         (dc / "defaults" / "en.json", "dish_compare defaults (en)"),
         (dc / "built" / "pl.json", "dish_compare built (pl)"),
         (dc / "built" / "en.json", "dish_compare built (en)"),
         (ingredients_macros_paths()[0], "ingredients_macros"),
+        (gen / "products_PL.json", "generated products (PL)"),
+        (gen / "recipes_PL.json", "generated recipes (PL)"),
     )
 
 
@@ -69,8 +77,6 @@ def validate_required_runtime_data() -> None:
     for path, label in required_runtime_files():
         if not path.is_file():
             missing.append(f"{label}: {path}")
-    if not seeds_dir().is_dir():
-        missing.append(f"seeds directory: {seeds_dir()}")
     if missing:
         raise RuntimeDataError(
             "Required runtime data missing:\n  - " + "\n  - ".join(missing)

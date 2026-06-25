@@ -60,13 +60,19 @@ def _total_cost(recipe: Recipe) -> float:
     return round(sum(ingredient_cost(i) for i in recipe.ingredients), 2)
 
 
-def recipe_to_summary(recipe: Recipe) -> dict:
+def _resolve_favorite(recipe: Recipe, is_favorite: bool | None = None) -> bool:
+    if is_favorite is not None:
+        return is_favorite
+    return bool(recipe.is_favorite)
+
+
+def recipe_to_summary(recipe: Recipe, *, is_favorite: bool | None = None) -> dict:
     kcal, protein, fat, carbs = _calc_macros(recipe)
     return {
         "id": recipe.id,
         "name": recipe.name,
         "notes": recipe.notes,
-        "is_favorite": bool(recipe.is_favorite),
+        "is_favorite": _resolve_favorite(recipe, is_favorite),
         "ingredients": [],
         "total_cost": _quick_cost(recipe),
         "total_kcal": kcal,
@@ -85,13 +91,13 @@ def recipe_to_summary(recipe: Recipe) -> dict:
     }
 
 
-def recipe_to_dict(recipe: Recipe) -> dict:
+def recipe_to_dict(recipe: Recipe, *, is_favorite: bool | None = None) -> dict:
     kcal, protein, fat, carbs = _calc_macros(recipe)
     return {
         "id": recipe.id,
         "name": recipe.name,
         "notes": recipe.notes,
-        "is_favorite": bool(recipe.is_favorite),
+        "is_favorite": _resolve_favorite(recipe, is_favorite),
         "ingredients": [ingredient_to_dict(i) for i in recipe.ingredients],
         "total_cost": _total_cost(recipe),
         "total_kcal": kcal,

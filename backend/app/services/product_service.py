@@ -4,9 +4,8 @@ from sqlalchemy.orm import Session
 from app.domain.product_normalize import normalize_product_name
 from app.models.product import Product
 from app.models.recipe import RecipeIngredient
-from app.models.user import User
 from app.services.product_presenter import product_to_dict
-from app.services.user_preferences import catalog_lang_for_user
+from app.services.user_preferences import catalog_lang_for_user, market_code_for_user
 
 MAX_NUM = 99999
 MAX_NAME = 50
@@ -65,20 +64,21 @@ def validate_product_data(data: dict, require_all: bool = True) -> str | None:
     return None
 
 
-def _visible_products_query(session: Session, user_id: int, lang: str):
+def _visible_products_query(session: Session, user_id: int, market_code: str):
+    catalog_lang = catalog_lang_for_user(session, user_id)
     overridden_system_ids = (
         session.query(Product.base_product_id)
         .filter(
             Product.user_id == user_id,
-            Product.lang == lang,
+            Product.market_code == market_code,
             Product.base_product_id.isnot(None),
         )
         .scalar_subquery()
     )
     return session.query(Product).filter(
-        Product.lang == lang,
+        Product.market_code == market_code,
         or_(
-            Product.user_id == user_id,
+            and_(Product.user_id == user_id, Product.lang == catalog_lang),
             and_(
                 Product.user_id.is_(None),
                 Product.source == "system",
@@ -91,22 +91,25 @@ def _visible_products_query(session: Session, user_id: int, lang: str):
 def resolve_visible_product(
     session: Session, user_id: int, product_id: int
 ) -> Product | None:
-    lang = catalog_lang_for_user(session, user_id)
+    market_code = market_code_for_user(session, user_id)
     return (
-        _visible_products_query(session, user_id, lang)
+        _visible_products_query(session, user_id, market_code)
         .filter(Product.id == product_id)
         .first()
     )
 
 
 def _get_own_product(session: Session, user_id: int, product_id: int) -> Product:
-    lang = catalog_lang_for_user(session, user_id)
+    market_code = market_code_for_user(session, user_id)
+    catalog_lang = catalog_lang_for_user(session, user_id)
     product = session.get(Product, product_id)
     if not product:
         raise ProductServiceError("Product not found", 404)
     if product.source == "system" and product.user_id is None:
         raise ProductServiceError("System catalog products cannot be modified", 403)
-    if product.user_id != user_id or product.lang != lang:
+    if product.user_id != user_id or product.market_code != market_code:
+        raise ProductServiceError("Product not found", 404)
+    if product.lang != catalog_lang:
         raise ProductServiceError("Product not found", 404)
     return product
 
@@ -126,8 +129,8 @@ def list_products(
     if offset < 0:
         raise ProductServiceError("offset must be non-negative", 400)
 
-    lang = catalog_lang_for_user(session, user_id)
-    query = _visible_products_query(session, user_id, lang)
+    market_code = market_code_for_user(session, user_id)
+    query = _visible_products_query(session, user_id, market_code)
 
     if q:
         term = f"%{normalize_product_name(q)}%"
@@ -148,7 +151,8 @@ def create_product(session: Session, user_id: int, data: dict) -> dict:
     if err:
         raise ProductServiceError(err, 400)
 
-    user = session.get(User, user_id)
+    market_code = market_code_for_user(session, user_id)
+    catalog_lang = catalog_lang_for_user(session, user_id)
     product = Product(
         user_id=user_id,
         source="user",
@@ -162,7 +166,8 @@ def create_product(session: Session, user_id: int, data: dict) -> dict:
         fat=float(data["fat"]) if data.get("fat") is not None else None,
         carbs=float(data["carbs"]) if data.get("carbs") is not None else None,
         sold_by_weight=bool(data.get("sold_by_weight", False)),
-        lang=user.ui_locale if user else "pl",
+        lang=catalog_lang,
+        market_code=market_code,
     )
     session.add(product)
     session.commit()
@@ -171,19 +176,20 @@ def create_product(session: Session, user_id: int, data: dict) -> dict:
 
 
 def customize_product(session: Session, user_id: int, product_id: int, data: dict) -> dict:
-    lang = catalog_lang_for_user(session, user_id)
+    market_code = market_code_for_user(session, user_id)
+    catalog_lang = catalog_lang_for_user(session, user_id)
     system = session.get(Product, product_id)
     if (
         not system
         or system.source != "system"
         or system.user_id is not None
-        or system.lang != lang
+        or system.market_code != market_code
     ):
         raise ProductServiceError("Product not found or not a system catalog item", 404)
 
     existing = (
         session.query(Product)
-        .filter_by(user_id=user_id, lang=lang, base_product_id=system.id)
+        .filter_by(user_id=user_id, market_code=market_code, base_product_id=system.id)
         .first()
     )
     if existing:
@@ -207,7 +213,8 @@ def customize_product(session: Session, user_id: int, product_id: int, data: dic
         fat=system.fat,
         carbs=system.carbs,
         sold_by_weight=system.sold_by_weight,
-        lang=lang,
+        lang=catalog_lang,
+        market_code=market_code,
     )
     if "name" in data:
         product.name = str(data["name"]).strip()[:MAX_NAME]
@@ -270,7 +277,11 @@ def delete_product(session: Session, user_id: int, product_id: int) -> None:
 
 
 def delete_all_products(session: Session, user_id: int) -> int:
-    lang = catalog_lang_for_user(session, user_id)
-    count = session.query(Product).filter_by(user_id=user_id, lang=lang).delete()
+    market_code = market_code_for_user(session, user_id)
+    count = (
+        session.query(Product)
+        .filter_by(user_id=user_id, market_code=market_code)
+        .delete()
+    )
     session.commit()
     return count
