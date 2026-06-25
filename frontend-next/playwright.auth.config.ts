@@ -6,7 +6,7 @@ const apiUrl = process.env.E2E_API_URL ?? "http://127.0.0.1:5001";
 
 export default defineConfig({
   testDir: "tests/e2e",
-  testMatch: "auth-fullstack.spec.ts",
+  testMatch: ["auth-fullstack.spec.ts", "auth-negative.spec.ts"],
   fullyParallel: false,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 1 : 0,
