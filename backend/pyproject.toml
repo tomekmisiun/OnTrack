@@ -3,7 +3,7 @@ name = "ontrack-backend"
 version = "0.1.0"
 description = "OnTrack FastAPI backend (Flask migration target)"
 readme = "README.md"
-requires-python = ">=3.11,<3.12"
+requires-python = ">=3.14,<3.15"
 dependencies = [
     "alembic>=1.14.0,<2",
     "authlib>=1.4.0,<2",
@@ -28,7 +28,7 @@ dev = [
     "httpx>=0.28.0,<0.29",
     "pytest>=8.3.0,<9",
     "pytest-cov>=6.0.0,<7",
-    "ruff>=0.8.0,<0.9",
+    "ruff>=0.9",
 ]
 
 [build-system]
@@ -55,7 +55,7 @@ fail_under = 50
 show_missing = true
 
 [tool.ruff]
-target-version = "py311"
+target-version = "py314"
 line-length = 100
 src = ["app", "tests"]
 

@@ -46,7 +46,7 @@
 
 | Technology | Version | Use | Proof |
 |------------|---------|-----|-------|
-| Python | 3.11 (`>=3.11,<3.12`) | Runtime | `backend/pyproject.toml` |
+| Python | 3.14 (`>=3.14,<3.15`) | Runtime | `backend/pyproject.toml` |
 | FastAPI | ^0.115 | HTTP API | `backend/app/main.py` |
 | Uvicorn | ^0.32 | ASGI server | `backend/scripts/start-production.sh` |
 | SQLAlchemy | ^2.0 | ORM | `backend/app/models/` |

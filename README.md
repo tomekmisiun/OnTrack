@@ -21,7 +21,7 @@ Meal planner and household budget tracker. Plan meals on a calendar, manage prod
 
 | Layer | Stack |
 |-------|--------|
-| Backend | Python 3.11, FastAPI, SQLAlchemy, Alembic, JWT |
+| Backend | Python 3.14, FastAPI, SQLAlchemy, Alembic, JWT |
 | Frontend | Next.js 15 (App Router), TypeScript, Tailwind |
 | Database | PostgreSQL 15 |
 | Dev / deploy | Docker Compose locally, Railway + GitHub Actions in production |

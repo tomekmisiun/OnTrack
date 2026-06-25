@@ -66,4 +66,4 @@ docker compose up --build backend worker redis db
 uv run pytest tests/contract/ -q --cov=app --cov-fail-under=50
 ```
 
-Python 3.11.
+Python 3.14.
