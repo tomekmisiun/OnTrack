@@ -13,6 +13,7 @@ watchPatterns = [
 ]
 
 [deploy]
+releaseCommand = "sh scripts/run-migrations.sh"
 healthcheckPath = "/health"
 healthcheckTimeout = 120
 restartPolicyType = "on_failure"

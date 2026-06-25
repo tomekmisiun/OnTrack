@@ -2,21 +2,16 @@ import { defineConfig, devices } from "@playwright/test";
 
 const port = 3002;
 const baseURL = `http://127.0.0.1:${port}`;
+const apiUrl = process.env.E2E_API_URL ?? "http://127.0.0.1:5001";
 
 export default defineConfig({
   testDir: "tests/e2e",
-  testIgnore: "**/auth-fullstack.spec.ts",
-  fullyParallel: true,
+  testMatch: "auth-fullstack.spec.ts",
+  fullyParallel: false,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 1 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: 1,
   reporter: process.env.CI ? "github" : "list",
-  expect: {
-    toHaveScreenshot: {
-      animations: "disabled",
-      maxDiffPixelRatio: 0.04,
-    },
-  },
   use: {
     baseURL,
     trace: "on-first-retry",
@@ -33,7 +28,7 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
     env: {
-      NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:5001",
+      NEXT_PUBLIC_API_URL: apiUrl,
     },
   },
 });

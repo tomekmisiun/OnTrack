@@ -45,6 +45,8 @@ Remove legacy `REACT_APP_API_URL` if still present — CRA was removed in task 1
 | Build uses dev server / wrong stage | Config must point to `Dockerfile.railway` (see `frontend-next/railway.toml`) |
 | Healthcheck timeout | `/login` must return 200; check deploy logs for `node server.js` |
 | App loads but API fails | `NEXT_PUBLIC_API_URL` must be the public `ontrack-back` URL (not localhost) |
+| Register/login CORS errors | `FRONTEND_URL` on `ontrack-back` must match the browser origin exactly (scheme + host + port) |
+| 500 on register after deploy | Run migrations once per release — `ontrack-back` uses `releaseCommand` in `backend/railway.toml` |
 
 After changing Root Directory or variables: **Deployments → Redeploy** (not just restart).
 
@@ -57,6 +59,7 @@ After changing Root Directory or variables: **Deployments → Redeploy** (not ju
 | `test` | FastAPI contract + health tests (branch protection) |
 | `frontend-next` | Lint, unit tests, typecheck, build |
 | `frontend-next-e2e` | Playwright smoke tests |
+| `frontend-next-e2e-auth` | Playwright register/login against real FastAPI + Postgres |
 | `frontend-next-docker` | Production Docker image build |
 | `backend-docker` | `docker build backend` validation |
 | `backend-integration` | DB stamp rehearsal (Postgres) |
