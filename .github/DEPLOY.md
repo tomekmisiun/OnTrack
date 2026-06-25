@@ -6,8 +6,8 @@ Production deploys from Railway after a push to `main`, **but only when GitHub A
 
 | Service | Role | Root Directory | Config |
 |---------|------|----------------|--------|
-| `ontrack-back` | Production API (FastAPI) | `backend` | `backend/railway.toml` |
-| `ontrack-worker` | Background worker (optional) | `backend` | `backend/railway.worker.prod.toml` |
+| `ontrack-back` | Production API (FastAPI) | `backend` | `/backend/railway.toml` |
+| `ontrack-worker` | Background worker (optional) | `backend` | `/backend/railway.worker.prod.toml` |
 | `ontrackapp` | Frontend (Next.js) | `frontend-next` | `frontend-next/railway.toml` |
 | Postgres + Redis | Data + queue | — | Railway plugins |
 
@@ -23,7 +23,7 @@ For **each** service → **Settings** → **Source**:
 2. **Branch connected to production** → **`main`**
 3. **Auto deploys when pushed to GitHub** — **enabled**
 4. **Wait for CI** → **ON**
-5. **ontrack-back:** Root Directory = **`backend`**, Config file path = **`railway.toml`** (relative to Root Directory; or **`/backend/railway.toml`** from repo root — see [Railway config as code](https://docs.railway.com/config-as-code))
+5. **ontrack-back:** Root Directory = **`backend`**, Config file path = **`/backend/railway.toml`** (absolute from repo root — Config file path does not follow Root Directory)
 6. **ontrackapp:** Root Directory = **`frontend-next`**, config **`frontend-next/railway.toml`**
 
 ### Frontend build variable

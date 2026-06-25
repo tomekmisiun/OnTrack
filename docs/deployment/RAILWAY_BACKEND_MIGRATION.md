@@ -7,12 +7,12 @@ Production service **`ontrack-back`**:
 | Setting | Value |
 |---------|-------|
 | Root Directory | `backend` |
-| Config file | `railway.toml` |
+| Config file path | `/backend/railway.toml` |
 | Dockerfile | `Dockerfile` |
 | Build context | `backend/` only |
 | Healthcheck | `/health` |
 
-Worker (optional): same Root Directory, config `railway.worker.prod.toml`.
+Worker (optional): same Root Directory, config file path `/backend/railway.worker.prod.toml`.
 
 See also: [`.github/DEPLOY.md`](../../.github/DEPLOY.md)
 
@@ -43,7 +43,7 @@ The steps below were used for the one-time migration from repo-root build contex
 ### Migration steps (completed)
 
 1. Settings → Source → Root Directory: `backend`
-2. Config File Path: `railway.toml`
+2. Config file path: `/backend/railway.toml`
 3. Wait for CI: ON
 4. Deploy → verify build logs show `COPY data ./data`
 5. `curl -sf https://<domain>/health`

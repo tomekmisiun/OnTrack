@@ -38,10 +38,10 @@ curl -sf http://localhost:5001/health
 
 ## Railway
 
-| Service | Config |
-|---------|--------|
-| API (`ontrack-back`) | `railway.toml` — Root Directory **`backend`** |
-| Worker | `railway.worker.prod.toml` |
+| Service | Root Directory | Config file path |
+|---------|----------------|------------------|
+| API (`ontrack-back`) | `backend` | `/backend/railway.toml` |
+| Worker | `backend` | `/backend/railway.worker.prod.toml` |
 
 Deploy guide: [`docs/deployment/RAILWAY_BACKEND_MIGRATION.md`](../docs/deployment/RAILWAY_BACKEND_MIGRATION.md)
 

@@ -135,7 +135,7 @@ OnTrack/
 │   ├── app/
 │   ├── data/            # Runtime JSON (demo dataset — manifest.json)
 │   ├── Dockerfile
-│   └── railway.toml     # Railway config (Root Directory = backend)
+│   └── railway.toml     # Railway: Root Directory = backend, config path = /backend/railway.toml
 ├── app/                 # Legacy dish-compare build tooling (optional, not runtime)
 ├── frontend-next/       # Next.js frontend (Compose :3000, Railway ontrackapp)
 ├── scraper/             # Experimental offline pipeline (disconnected)

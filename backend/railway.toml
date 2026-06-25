@@ -1,7 +1,6 @@
 # FastAPI production API — Railway service: ontrack-back
 # Railway Settings → Source → Root Directory: backend
-# Railway Settings → Source → Config file path: railway.toml (relative to Root Directory)
-#   or /backend/railway.toml when browsing from repo root (see docs.railway.com/config-as-code)
+# Railway Settings → Source → Config file path: /backend/railway.toml
 [build]
 builder = "dockerfile"
 dockerfilePath = "Dockerfile"
