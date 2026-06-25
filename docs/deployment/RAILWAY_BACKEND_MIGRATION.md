@@ -60,6 +60,19 @@ The steps below were used for the one-time migration from repo-root build contex
 
 `RUNTIME_DATA_DIR` not required — defaults to `backend/data/` in image.
 
+### Database migrations (pre-deploy)
+
+`backend/railway.toml` sets:
+
+```toml
+[deploy]
+preDeployCommand = "sh scripts/run-migrations.sh"
+```
+
+Railway runs this **once per deployment** in a pre-deploy container (before the new API instance starts). If the command exits non-zero, the deployment is aborted. The script is included in the production Docker image (`COPY alembic`, `COPY scripts`).
+
+Confirm in Dashboard → `ontrack-back` → latest deployment → **Pre-deploy** phase logs show `Alembic current: f1a2b3c4d5e6 (head)`.
+
 ### Verification commands
 
 ```bash

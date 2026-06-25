@@ -1,9 +1,9 @@
 #!/bin/sh
-set -e
+set -eu
 
 echo "=== OnTrack Alembic migrations ==="
 
-if [ -z "$DATABASE_URL" ]; then
+if [ -z "${DATABASE_URL:-}" ]; then
   echo "ERROR: DATABASE_URL is not set"
   exit 1
 fi

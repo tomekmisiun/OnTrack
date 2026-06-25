@@ -23,7 +23,7 @@ For **each** service → **Settings** → **Source**:
 2. **Branch connected to production** → **`main`**
 3. **Auto deploys when pushed to GitHub** — **enabled**
 4. **Wait for CI** → **ON**
-5. **ontrack-back:** Root Directory = **`backend`**, config **`railway.toml`**
+5. **ontrack-back:** Root Directory = **`backend`**, Config file path = **`railway.toml`** (relative to Root Directory; or **`/backend/railway.toml`** from repo root — see [Railway config as code](https://docs.railway.com/config-as-code))
 6. **ontrackapp:** Root Directory = **`frontend-next`**, config **`frontend-next/railway.toml`**
 
 ### Frontend build variable
@@ -46,7 +46,7 @@ Remove legacy `REACT_APP_API_URL` if still present — CRA was removed in task 1
 | Healthcheck timeout | `/login` must return 200; check deploy logs for `node server.js` |
 | App loads but API fails | `NEXT_PUBLIC_API_URL` must be the public `ontrack-back` URL (not localhost) |
 | Register/login CORS errors | `FRONTEND_URL` on `ontrack-back` must match the browser origin exactly (scheme + host + port) |
-| 500 on register after deploy | Run migrations once per release — `ontrack-back` uses `releaseCommand` in `backend/railway.toml` |
+| 500 on register after deploy | Run migrations once per release — `ontrack-back` uses `preDeployCommand` in `backend/railway.toml` |
 
 After changing Root Directory or variables: **Deployments → Redeploy** (not just restart).
 
