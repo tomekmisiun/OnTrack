@@ -10,7 +10,7 @@ from app.models import Base
 
 # FastAPI Alembic head — stamp target for existing Flask databases (initial schema).
 ONTRACK_ALEMBIC_HEAD = "7966d120d748"
-ONTRACK_ALEMBIC_CATALOG_HEAD = "f1a2b3c4d5e6"
+ONTRACK_ALEMBIC_CATALOG_HEAD = "a2b3c4d5e6f7"
 
 
 def collect_schema_diffs(engine: Engine) -> list:
