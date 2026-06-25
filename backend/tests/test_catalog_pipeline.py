@@ -139,6 +139,18 @@ def test_import_catalog_transaction_rolls_back_on_error(db_session, monkeypatch)
     assert calls["rollback"] == 1
 
 
+def test_register_bootstraps_global_catalog_on_empty_db(client, db_session):
+    assert db_session.query(Product).filter_by(source="system").count() == 0
+    reg = client.post(
+        "/api/auth/register",
+        json={"username": "bootstrap1", "password": "secret123", "lang": "pl"},
+    )
+    assert reg.status_code == 201
+    assert db_session.query(Product).filter_by(source="system").count() >= 1
+    user = db_session.query(User).filter_by(username="bootstrap1").first()
+    assert db_session.query(Product).filter_by(user_id=user.id).count() == 0
+
+
 def test_system_recipe_visible_without_user_copy(client, db_session, global_catalog):
     user = create_user(db_session, "recipes-global@example.com", lang="pl")
     assert db_session.query(Recipe).filter_by(user_id=user.id).count() == 0

@@ -22,6 +22,7 @@ from app.models.recipe import Recipe, RecipeIngredient
 from app.models.recipe_parse_log import RecipeParseLog
 from app.models.user import User
 from app.services.member_service import ensure_primary_member, sync_primary_member_name
+from app.scripts.import_catalog import ensure_global_catalog_loaded
 from app.services.user_preferences import (
     apply_market_code,
     apply_ui_locale,
@@ -69,6 +70,8 @@ def login(session: Session, username: str, password: str) -> str:
     if not username or not password:
         raise AuthServiceError("Username and password are required", 400)
 
+    ensure_global_catalog_loaded(session)
+
     user = session.query(User).filter_by(username=username).first()
     if not user or not verify_password(user.password_hash, password):
         raise AuthServiceError("Invalid username or password", 401)
@@ -87,6 +90,8 @@ def register(session: Session, username: str, password: str, lang: str) -> str:
 
     if session.query(User).filter_by(username=username).first():
         raise AuthServiceError("Username already taken", 409)
+
+    ensure_global_catalog_loaded(session)
 
     user = User(
         email=_synthetic_email(username),
