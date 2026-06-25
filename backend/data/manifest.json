@@ -8,10 +8,20 @@
   "updated_at": "2026-06-25",
   "limitations": [
     "Not for medical, dietary, or clinical decisions",
-    "EN catalog still uses minimal demo seeds until exported",
+    "EN catalog still uses generated GB prices from scraper where available",
     "Product prices reflect reference user import, not live shop feeds"
   ],
   "files": [
+    {
+      "path": "seeds/catalog_products.json",
+      "role": "catalog_seed_products_canonical",
+      "trust": "curated"
+    },
+    {
+      "path": "seeds/catalog_recipes.json",
+      "role": "catalog_seed_recipes_canonical",
+      "trust": "curated"
+    },
     {
       "path": "seeds/products_seed_pl.json",
       "role": "catalog_seed_products",
