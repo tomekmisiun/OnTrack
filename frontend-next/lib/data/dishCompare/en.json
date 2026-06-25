@@ -1,0 +1,100 @@
+{
+  "lang": "en",
+  "currency": "GBP",
+  "dishes": [
+    {
+      "id": "pizza_margherita",
+      "name": "Pizza Margherita",
+      "portion_note": "1 pizza (demo)",
+      "diy_cost": 3.0,
+      "ingredients": [
+        {
+          "product_name": "plain flour",
+          "weight": 180,
+          "unit": "g",
+          "cost": 0.5
+        }
+      ],
+      "defaults": {
+        "avg_restaurant_price": 12.0,
+        "price_note": "Demo price — not verified"
+      }
+    },
+    {
+      "id": "pepperoni_pizza",
+      "name": "Pepperoni Pizza",
+      "portion_note": "1 pizza (demo)",
+      "diy_cost": 3.5,
+      "ingredients": [
+        {
+          "product_name": "plain flour",
+          "weight": 180,
+          "unit": "g",
+          "cost": 0.5
+        }
+      ],
+      "defaults": {
+        "avg_restaurant_price": 13.0,
+        "price_note": "Demo price — not verified"
+      }
+    },
+    {
+      "id": "chicken_chow_mein",
+      "name": "Chicken Chow Mein",
+      "portion_note": "1 portion (demo)",
+      "diy_cost": 4.0,
+      "ingredients": [
+        {
+          "product_name": "chicken breast",
+          "weight": 200,
+          "unit": "g",
+          "cost": 2.0
+        }
+      ],
+      "defaults": {
+        "avg_restaurant_price": 10.0,
+        "price_note": "Demo price — not verified"
+      }
+    },
+    {
+      "id": "sweet_and_sour_chicken",
+      "name": "Sweet and Sour Chicken",
+      "portion_note": "1 portion (demo)",
+      "diy_cost": 4.5,
+      "ingredients": [
+        {
+          "product_name": "chicken breast",
+          "weight": 200,
+          "unit": "g",
+          "cost": 2.0
+        }
+      ],
+      "defaults": {
+        "avg_restaurant_price": 10.5,
+        "price_note": "Demo price — not verified"
+      }
+    },
+    {
+      "id": "chicken_tikka_masala",
+      "name": "Chicken Tikka Masala",
+      "portion_note": "1 portion (demo)",
+      "diy_cost": 5.0,
+      "ingredients": [
+        {
+          "product_name": "chicken breast",
+          "weight": 200,
+          "unit": "g",
+          "cost": 2.0
+        }
+      ],
+      "defaults": {
+        "avg_restaurant_price": 11.0,
+        "price_note": "Demo price — not verified"
+      }
+    }
+  ],
+  "default_delivery_price": 2.99,
+  "meal_prep": {
+    "avg_hourly_wage": 13.5
+  }
+}
