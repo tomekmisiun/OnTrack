@@ -49,7 +49,7 @@ test.describe("core user flows (mocked API)", () => {
       timeout: 15_000,
     });
 
-    await todayColumn.getByRole("button", { name: "✕" }).click();
+    await todayColumn.locator('button[type="button"]', { hasText: "✕" }).click();
     await expect(todayColumn.getByText("Kanapka testowa")).toHaveCount(0);
   });
 });
