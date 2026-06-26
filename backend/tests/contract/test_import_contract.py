@@ -1,6 +1,8 @@
 import io
+from datetime import date
 
 from app.domain.product_normalize import normalize_product_name
+from app.models.import_log import ImportLog
 from app.models.product import Product
 
 
@@ -41,6 +43,18 @@ def test_parse_free_parses_csv_and_matches_product(client, auth_headers, product
     assert len(items) == 1
     assert items[0]["receipt_name"] == "Jogurt naturalny"
     assert items[0]["matched_product"]["id"] == product.id
+
+
+def test_parse_free_enforces_daily_quota(client, auth_headers, user, db_session):
+    db_session.add(ImportLog(user_id=user.id, date=date.today(), count=2))
+    db_session.commit()
+    res = client.post(
+        "/api/import/parse-free",
+        headers=auth_headers,
+        files={"file": ("ceny.csv", io.BytesIO(b"name,price\nTest,1.99\n"))},
+    )
+    assert res.status_code == 429
+    assert "Daily limit" in res.json()["error"]
 
 
 def test_apply_prices_updates_product(client, auth_headers, product, db_session):
