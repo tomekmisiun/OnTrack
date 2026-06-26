@@ -24,6 +24,20 @@ class MarketRequest(BaseModel):
     market_code: str = ""
 
 
+class PasswordChangeRequest(BaseModel):
+    current_password: str = ""
+    new_password: str = ""
+
+
+class ForgotPasswordRequest(BaseModel):
+    username: str = ""
+
+
+class ResetPasswordRequest(BaseModel):
+    token: str = ""
+    new_password: str = ""
+
+
 class TokenResponse(BaseModel):
     token: str
 

@@ -8,11 +8,14 @@ from app.core.config import get_settings
 from app.core.rate_limit import check_rate_limit
 from app.schemas.auth import (
     ExchangeRequest,
+    ForgotPasswordRequest,
     LanguageRequest,
     LoginRequest,
     MarketRequest,
     MessageResponse,
+    PasswordChangeRequest,
     RegisterRequest,
+    ResetPasswordRequest,
     TokenResponse,
 )
 from app.services import auth_service
@@ -104,6 +107,53 @@ def refresh(
 ) -> JSONResponse:
     try:
         token = auth_service.refresh_session(session, user_id)
+    except auth_service.AuthServiceError as exc:
+        return _service_error(exc)
+    return JSONResponse(content={"token": token})
+
+
+@router.patch("/password", response_model=MessageResponse)
+def change_password(
+    body: PasswordChangeRequest,
+    user_id: int = Depends(get_current_user_id),
+    session: Session = Depends(get_db_session),
+) -> JSONResponse:
+    try:
+        auth_service.change_password(
+            session,
+            user_id,
+            current_password=body.current_password,
+            new_password=body.new_password,
+        )
+    except auth_service.AuthServiceError as exc:
+        return _service_error(exc)
+    return JSONResponse(content={"message": "Password updated"})
+
+
+@router.post("/forgot-password")
+def forgot_password(
+    body: ForgotPasswordRequest,
+    request: Request,
+    session: Session = Depends(get_db_session),
+) -> JSONResponse:
+    check_rate_limit(request, scope="auth_forgot", max_requests=10, window_seconds=60)
+    data = auth_service.forgot_password(session, body.username)
+    return JSONResponse(content=data)
+
+
+@router.post("/reset-password", response_model=TokenResponse)
+def reset_password(
+    body: ResetPasswordRequest,
+    request: Request,
+    session: Session = Depends(get_db_session),
+) -> JSONResponse:
+    check_rate_limit(request, scope="auth_reset", max_requests=10, window_seconds=60)
+    try:
+        token = auth_service.reset_password(
+            session,
+            token=body.token,
+            new_password=body.new_password,
+        )
     except auth_service.AuthServiceError as exc:
         return _service_error(exc)
     return JSONResponse(content={"token": token})

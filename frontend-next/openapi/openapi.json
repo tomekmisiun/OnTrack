@@ -256,6 +256,132 @@
         ]
       }
     },
+    "/api/auth/password": {
+      "patch": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Change Password",
+        "operationId": "change_password_api_auth_password_patch",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PasswordChangeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ]
+      }
+    },
+    "/api/auth/forgot-password": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Forgot Password",
+        "operationId": "forgot_password_api_auth_forgot_password_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForgotPasswordRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/reset-password": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Reset Password",
+        "operationId": "reset_password_api_auth_reset_password_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPasswordRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/auth/language": {
       "patch": {
         "tags": [
@@ -2472,6 +2598,17 @@
         "type": "object",
         "title": "ExchangeRequest"
       },
+      "ForgotPasswordRequest": {
+        "properties": {
+          "username": {
+            "type": "string",
+            "title": "Username",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "ForgotPasswordRequest"
+      },
       "HTTPValidationError": {
         "properties": {
           "detail": {
@@ -2674,6 +2811,22 @@
           "message"
         ],
         "title": "MessageResponse"
+      },
+      "PasswordChangeRequest": {
+        "properties": {
+          "current_password": {
+            "type": "string",
+            "title": "Current Password",
+            "default": ""
+          },
+          "new_password": {
+            "type": "string",
+            "title": "New Password",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "PasswordChangeRequest"
       },
       "ProductCreateRequest": {
         "properties": {
@@ -3012,6 +3165,22 @@
         },
         "type": "object",
         "title": "RegisterRequest"
+      },
+      "ResetPasswordRequest": {
+        "properties": {
+          "token": {
+            "type": "string",
+            "title": "Token",
+            "default": ""
+          },
+          "new_password": {
+            "type": "string",
+            "title": "New Password",
+            "default": ""
+          }
+        },
+        "type": "object",
+        "title": "ResetPasswordRequest"
       },
       "TokenResponse": {
         "properties": {
