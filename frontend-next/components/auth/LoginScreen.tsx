@@ -16,7 +16,7 @@ import { isAuthApiError, useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { googleAuthUrl } from "@/lib/api/auth";
 import { setPendingLang } from "@/lib/auth/storage";
-import { SEED_STATS } from "@/lib/data/seedStats";
+import { CATALOG_STATS } from "@/lib/data/catalogStats";
 import type { LangCode, TranslationKey } from "@/lib/i18n/translations";
 import { tFormatN, tString } from "@/lib/i18n/translate";
 import "@/components/auth/login.css";
@@ -362,7 +362,7 @@ function LoginPanel({
 export function LoginScreen() {
   const router = useRouter();
   const { t, lang: uiLang, switchLang } = useLanguage();
-  const seedStats = SEED_STATS[uiLang] ?? SEED_STATS.pl;
+  const catalogStats = CATALOG_STATS[uiLang] ?? CATALOG_STATS.pl;
   const { loginWithPassword, registerAccount } = useAuth();
   const [error, setError] = useState("");
   const [showPrivacy, setShowPrivacy] = useState(false);
@@ -456,10 +456,10 @@ export function LoginScreen() {
                   aria-label={tString(t, "login_seed_chip_note")}
                 >
                   <span className="login-hero-chip">
-                    {tFormatN(t, "login_seed_chip_products", seedStats.products)}
+                    {tFormatN(t, "login_seed_chip_products", catalogStats.products)}
                   </span>
                   <span className="login-hero-chip">
-                    {tFormatN(t, "login_seed_chip_recipes", seedStats.recipes)}
+                    {tFormatN(t, "login_seed_chip_recipes", catalogStats.recipes)}
                   </span>
                   <span className="login-hero-chip login-hero-chip--muted">
                     {tString(t, "login_seed_chip_note")}
