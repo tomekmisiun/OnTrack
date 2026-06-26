@@ -1,14 +1,14 @@
 # API contract matrix (frontend-authoritative)
 
-**Source of truth:** `frontend/src/api.js`, `frontend/src/contexts/AuthContext.js`, `frontend/src/components/Login.js`, `frontend/src/features/dishCompare/DishCompare.js`.
+**Source of truth:** `frontend-next/lib/api/*.ts`, `frontend-next/contexts/AuthContext.tsx`, OpenAPI export (`frontend-next/openapi/openapi.json`).
 
-**Base URL:** `process.env.REACT_APP_API_URL` or `http://localhost:5001` (confirmed in `api.js`, `AuthContext.js`, `Login.js`, `DishCompare.js`).
+**Base URL:** `NEXT_PUBLIC_API_URL` or `http://localhost:5001` (see `frontend-next/lib/config/env.ts`).
 
-**Global auth:** `Authorization: Bearer <token>` from `localStorage.token` (`api.js` interceptor).
+**Global auth:** `Authorization: Bearer <token>` from `localStorage` (default) or HttpOnly BFF cookie when `NEXT_PUBLIC_BFF_ENABLED=1`.
 
-**Global 401 behavior:** On any 401, `api.js` removes `token` and `window.location.reload()`. Auth bootstrap also clears token on `/api/auth/me` failure (`AuthContext.js`).
+**Global 401 behavior:** `lib/api/client.ts` calls `onUnauthorized` → logout; legacy CRA used `window.location.reload()`.
 
-**Trailing slashes:** Frontend uses trailing slashes on collection endpoints (e.g. `/api/products/`). Flask `strict_slashes` defaults may redirect; FastAPI must accept the exact paths below without breaking axios.
+**Trailing slashes:** Collection endpoints use trailing slashes (e.g. `/api/products/`). FastAPI must accept the exact paths below.
 
 ---
 
@@ -20,7 +20,8 @@
 | A02 | POST | `/api/auth/register` | Public | `api.js` → `AuthContext.registerAccount` | `auth.register` |
 | A03 | POST | `/api/auth/exchange` | Public | `AuthContext` bootstrap | `auth.exchange_code` |
 | A04 | GET | `/api/auth/me` | Bearer | `AuthContext` bootstrap, `finishAuth` | `auth.me` |
-| A05 | PATCH | `/api/auth/language` | Bearer | `api.js`, `AuthContext`, `Profile.js` | `auth.change_language` |
+| A05 | PATCH | `/api/auth/language` | Bearer | `lib/api/auth.ts`, `AuthContext` | `auth.change_language` |
+| A09 | PATCH | `/api/auth/market` | Bearer | `lib/api/auth.ts`, `ProfileModal` | `auth.change_market` |
 | A06 | DELETE | `/api/auth/me` | Bearer | `AuthContext.deleteAccount` | `auth.delete_me` |
 | A07 | GET | `/api/auth/google` | Public (browser) | `Login.js` redirect | `auth.google_login` |
 | A08 | GET | `/api/auth/google/callback` | Public (browser) | Google → frontend `?code=` | `auth.google_callback` |
@@ -33,7 +34,8 @@
 | P02 | POST | `/api/products/` | Bearer | `api.js` | `products.create_product` |
 | P03 | PUT | `/api/products/{id}` | Bearer | `api.js` | `products.update_product` |
 | P04 | DELETE | `/api/products/{id}` | Bearer | `api.js` | `products.delete_product` |
-| P05 | DELETE | `/api/products/all` | Bearer | `api.js` | `products.delete_all_products` |
+| P05 | DELETE | `/api/products/all` | Bearer | `lib/api/products.ts` | `products.delete_all_products` |
+| P06 | POST | `/api/products/{id}/customize` | Bearer | `lib/api/products.ts`, `useProductsPage` | `products.customize_product` |
 | R01 | GET | `/api/recipes/` | Bearer | `api.js` | `recipes.get_recipes` |
 | R02 | GET | `/api/recipes/{id}` | Bearer | `api.js` | `recipes.get_recipe` |
 | R03 | POST | `/api/recipes/` | Bearer | `api.js` | `recipes.create_recipe` |
@@ -61,7 +63,9 @@
 | I03 | POST | `/api/import/apply` | Bearer | `api.js` | `import_prices.apply_prices` |
 | F01 | GET | `/api/fuel/prices` | Public | `api.js` → `DrinksCard.js` | `fuel.get_fuel_prices` |
 | PU01 | GET | `/api/public/dish-compare` | Public | `DishCompare.js` fetch | `public.dish_compare` |
-| H01 | GET | `/health` | Public | Ops / Docker (not React) | `create_app.health` |
+| H01 | GET | `/health` | Public | Ops / Docker | `create_app.health` |
+| H02 | GET | `/health/ready` | Public | Ops / Railway readiness | `create_app.health_ready` |
+| H03 | GET | `/metrics` | Public | Prometheus (local dev) | `create_app.metrics` |
 
 ---
 

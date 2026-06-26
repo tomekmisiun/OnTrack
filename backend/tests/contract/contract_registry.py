@@ -13,6 +13,7 @@ CONTRACT_IDS: frozenset[str] = frozenset(
         "A06",
         "A07",
         "A08",
+        "A09",
         "M01",
         "M02",
         "M03",
@@ -23,6 +24,7 @@ CONTRACT_IDS: frozenset[str] = frozenset(
         "P03",
         "P04",
         "P05",
+        "P06",
         "R01",
         "R02",
         "R03",
@@ -51,6 +53,8 @@ CONTRACT_IDS: frozenset[str] = frozenset(
         "F01",
         "PU01",
         "H01",
+        "H02",
+        "H03",
     }
 )
 
@@ -60,7 +64,8 @@ CONTRACT_COVERAGE: dict[str, tuple[str, ...]] = {
     "A02": ("test_auth_contract.py",),
     "A03": ("test_auth_contract.py",),
     "A04": ("test_auth_contract.py",),
-    "A05": ("test_auth_contract.py",),
+    "A05": ("test_auth_contract.py", "test_ui_locale_market.py"),
+    "A09": ("test_ui_locale_market.py",),
     "A06": ("test_auth_contract.py",),
     "A07": ("test_auth_contract.py",),
     "A08": ("test_auth_contract.py",),
@@ -74,6 +79,7 @@ CONTRACT_COVERAGE: dict[str, tuple[str, ...]] = {
     "P03": ("test_products_contract.py",),
     "P04": ("test_products_contract.py",),
     "P05": ("test_products_contract.py",),
+    "P06": ("test_products_contract.py",),
     "R01": ("test_recipes_contract.py",),
     "R02": ("test_recipes_contract.py",),
     "R03": ("test_recipes_contract.py",),
@@ -102,4 +108,6 @@ CONTRACT_COVERAGE: dict[str, tuple[str, ...]] = {
     "F01": ("test_fuel_contract.py",),
     "PU01": ("test_public_dish_compare_http.py",),
     "H01": ("test_health_contract.py",),
+    "H02": ("test_health_contract.py",),
+    "H03": ("test_health_contract.py",),
 }

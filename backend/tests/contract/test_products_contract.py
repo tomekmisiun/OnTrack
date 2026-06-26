@@ -100,3 +100,17 @@ def test_reject_invalid_price(client, auth_headers):
         json={"name": "Test", "package_weight": 100, "price": -1},
     )
     assert res.status_code == 400
+
+
+def test_customize_system_product(client, auth_headers, global_catalog):
+    listed = client.get("/api/products/", headers=auth_headers).json()
+    items = _items(listed)
+    system = next(p for p in items if p.get("source") == "system")
+    res = client.post(
+        f"/api/products/{system['id']}/customize",
+        headers=auth_headers,
+        json={"price": 4.99},
+    )
+    assert res.status_code == 200
+    assert res.json()["price"] == 4.99
+    assert res.json()["source"] == "user"
