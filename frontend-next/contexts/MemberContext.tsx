@@ -23,6 +23,7 @@ import {
   saveActiveMemberId,
   saveActiveMemberName,
   saveIncludedMemberIds,
+  clearMemberStorage,
 } from "@/lib/members/storage";
 import { getTargetMemberIds, getViewMemberId } from "@/lib/members/targets";
 import type { LangCode } from "@/lib/i18n/translations";
@@ -83,6 +84,8 @@ export function MemberProvider({ children }: { children: ReactNode }) {
     if (!user) {
       setMembers([]);
       setIncludedMemberIds([]);
+      setActiveMemberId(null);
+      clearMemberStorage();
       return;
     }
     void reload();

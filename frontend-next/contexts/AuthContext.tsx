@@ -29,6 +29,7 @@ import {
   getStoredToken,
   setStoredToken,
 } from "@/lib/auth/storage";
+import { clearMemberStorage } from "@/lib/members/storage";
 import { setSessionCookie } from "@/lib/auth/session-cookie";
 import type { LangCode } from "@/lib/i18n/translations";
 import type { MarketCode } from "@/lib/domain/market";
@@ -76,6 +77,7 @@ export function AuthProvider({ children, onLangChange }: AuthProviderProps) {
     } else {
       clearStoredToken();
     }
+    clearMemberStorage();
     setUser(null);
   }, []);
 
