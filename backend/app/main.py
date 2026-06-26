@@ -1,10 +1,14 @@
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, Request
+from fastapi import Depends, FastAPI, Request
 from fastapi.exceptions import HTTPException, RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
+from sqlalchemy import text
+from sqlalchemy.orm import Session
 from starlette.middleware.sessions import SessionMiddleware
+
+from app.api.dependencies import get_db_session
 
 from app.api.routes.auth import router as auth_router
 from app.api.routes.day_schedule import router as day_schedule_router
@@ -68,6 +72,18 @@ def create_app() -> FastAPI:
     @app.get("/health")
     def health() -> dict[str, str]:
         return {"status": "ok"}
+
+    @app.get("/health/ready")
+    def health_ready(session: Session = Depends(get_db_session)) -> JSONResponse:
+        try:
+            session.execute(text("SELECT 1"))
+        except Exception:
+            return JSONResponse(
+                status_code=503,
+                content={"status": "degraded", "database": "error"},
+            )
+        return JSONResponse(content={"status": "ok", "database": "ok"})
+
 
     app.include_router(auth_router)
     app.include_router(members_router)
