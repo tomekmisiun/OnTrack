@@ -1,7 +1,6 @@
 import math
 from datetime import date, timedelta
 
-from sqlalchemy import and_, or_
 from sqlalchemy.orm import Session, joinedload
 
 from app.models.household_member import HouseholdMember
@@ -10,7 +9,6 @@ from app.models.recipe import Recipe, RecipeIngredient
 from app.services.meal_plan_presenter import meal_to_dict
 from app.services.recipe_service import RecipeServiceError as RecipeLookupError
 from app.services.recipe_service import load_visible_recipe
-from app.services.user_preferences import market_code_for_user
 
 
 class MealPlanServiceError(Exception):
@@ -78,16 +76,17 @@ def _member_ids_from_params(
     return [resolve_member_id(session, user_id, member_id)]
 
 
-def _visible_recipes_filter(user_id: int, market_code: str):
-    """Match recipe list visibility — do not hide meals by recipe.lang alone."""
-    return or_(
-        and_(
-            Recipe.source == "system",
-            Recipe.user_id.is_(None),
-            Recipe.market_code == market_code,
-        ),
-        and_(Recipe.user_id == user_id, Recipe.source != "system"),
-    )
+def _query_member_ids(
+    session: Session,
+    user_id: int,
+    member_ids: str | None,
+    member_id: int | None,
+) -> list[int]:
+    """Resolve member filter; fall back to all owned members when filter is empty."""
+    mids = [m for m in _member_ids_from_params(session, user_id, member_ids, member_id) if m]
+    if mids:
+        return mids
+    return member_ids_for_user(session, user_id, None)
 
 
 def get_day(
@@ -98,15 +97,15 @@ def get_day(
     member_ids: str | None = None,
     member_id: int | None = None,
 ) -> list[dict]:
-    market_code = market_code_for_user(session, user_id)
-    mids = _member_ids_from_params(session, user_id, member_ids, member_id)
+    mids = _query_member_ids(session, user_id, member_ids, member_id)
+    if not mids:
+        return []
     meals = (
         _meals_query(session)
-        .join(Recipe)
         .filter(
+            MealPlan.user_id == user_id,
             MealPlan.member_id.in_(mids),
             MealPlan.date == day,
-            _visible_recipes_filter(user_id, market_code),
         )
         .order_by(MealPlan.position)
         .all()
@@ -123,16 +122,16 @@ def get_range(
     member_ids: str | None = None,
     member_id: int | None = None,
 ) -> dict[str, list[dict]]:
-    market_code = market_code_for_user(session, user_id)
-    mids = _member_ids_from_params(session, user_id, member_ids, member_id)
+    mids = _query_member_ids(session, user_id, member_ids, member_id)
+    if not mids:
+        return {}
     meals = (
         _meals_query(session)
-        .join(Recipe)
         .filter(
+            MealPlan.user_id == user_id,
             MealPlan.member_id.in_(mids),
             MealPlan.date >= start_date,
             MealPlan.date <= end_date,
-            _visible_recipes_filter(user_id, market_code),
         )
         .order_by(MealPlan.date, MealPlan.position)
         .all()
@@ -203,15 +202,13 @@ def copy_range(
     if not mid:
         raise MealPlanServiceError("No profile configured", 400)
 
-    market_code = market_code_for_user(session, user_id)
     meals = (
         session.query(MealPlan)
-        .join(Recipe)
         .filter(
+            MealPlan.user_id == user_id,
             MealPlan.member_id == mid,
             MealPlan.date >= source_start,
             MealPlan.date <= source_end,
-            _visible_recipes_filter(user_id, market_code),
         )
         .all()
     )
@@ -268,8 +265,9 @@ def get_summary(
     member_ids: str | None = None,
     member_id: int | None = None,
 ) -> dict:
-    market_code = market_code_for_user(session, user_id)
-    mids = _member_ids_from_params(session, user_id, member_ids, member_id)
+    mids = _query_member_ids(session, user_id, member_ids, member_id)
+    if not mids:
+        return {"items": [], "total_cost": 0.0}
     meals = (
         session.query(MealPlan)
         .options(
@@ -277,12 +275,11 @@ def get_summary(
                 RecipeIngredient.product
             ),
         )
-        .join(Recipe)
         .filter(
+            MealPlan.user_id == user_id,
             MealPlan.member_id.in_(mids),
             MealPlan.date >= start_date,
             MealPlan.date <= end_date,
-            _visible_recipes_filter(user_id, market_code),
         )
         .all()
     )

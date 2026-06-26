@@ -58,13 +58,28 @@ export async function proxyToUpstream(
 
   const hasBody = request.method !== "GET" && request.method !== "HEAD";
   const body = hasBody ? await request.arrayBuffer() : undefined;
+  const method = request.method;
 
-  const upstream = await fetch(upstreamUrl, {
-    method: request.method,
+  let currentUrl = upstreamUrl;
+  let upstream = await fetch(currentUrl, {
+    method,
     headers,
     body,
     redirect: "manual",
   });
+
+  for (let redirects = 0; redirects < 5; redirects += 1) {
+    if (upstream.status !== 307 && upstream.status !== 308) break;
+    const location = upstream.headers.get("location");
+    if (!location) break;
+    currentUrl = new URL(location, currentUrl).href;
+    upstream = await fetch(currentUrl, {
+      method,
+      headers,
+      body,
+      redirect: "manual",
+    });
+  }
 
   const responseHeaders = new Headers();
   const contentType = upstream.headers.get("content-type");

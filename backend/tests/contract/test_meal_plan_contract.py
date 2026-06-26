@@ -145,6 +145,30 @@ def test_add_meal_with_system_recipe(client, auth_headers, member, global_catalo
     assert day_meals[0]["recipe"]["id"] == system_recipe["id"]
 
 
+def test_get_range_returns_meal_with_invalid_member_ids_filter(
+    client, auth_headers, recipe, member
+):
+    client.post(
+        "/api/meal-plan/",
+        headers=auth_headers,
+        json={
+            "date": "2026-05-28",
+            "position": 1,
+            "recipe_id": recipe.id,
+            "member_id": member.id,
+        },
+    )
+    res = client.get(
+        "/api/meal-plan/range/2026-05-28/2026-05-28",
+        headers=auth_headers,
+        params={"member_ids": "999999"},
+    )
+    assert res.status_code == 200
+    day_meals = res.json().get("2026-05-28", [])
+    assert len(day_meals) == 1
+    assert day_meals[0]["recipe"]["id"] == recipe.id
+
+
 def test_summary_rejects_invalid_dates(client, auth_headers):
     res = client.get(
         "/api/meal-plan/summary/not-a-date/2026-05-23",

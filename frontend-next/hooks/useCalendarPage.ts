@@ -129,6 +129,21 @@ export function useCalendarPage() {
 
   const macroGoals: MacroGoals | null = activeMember?.macro_goals ?? null;
 
+  const effectiveTargetMemberIds = useMemo(() => {
+    if (targetMemberIds.length) return targetMemberIds;
+    const fallback =
+      activeMember?.id ??
+      members.find((member) => member.is_primary)?.id ??
+      members[0]?.id;
+    return fallback ? [fallback] : [];
+  }, [activeMember?.id, members, targetMemberIds]);
+
+  const requireTargetMembers = useCallback((): number[] => {
+    if (effectiveTargetMemberIds.length) return effectiveTargetMemberIds;
+    showError(String(t("err_no_members")));
+    return [];
+  }, [effectiveTargetMemberIds, showError, t]);
+
   const showInlineToast = useCallback((msg: string, color = "#0066cc") => {
     setInlineToast({ msg, color });
     setTimeout(() => setInlineToast(null), 3000);
@@ -259,7 +274,8 @@ export function useCalendarPage() {
       const date = findMealDate(mealsByDate, mealId);
       if (!date) return;
       const meal = (mealsByDate[date] ?? []).find((m) => m.id === mealId);
-      if (!meal || !targetMemberIds.length) return;
+      const mids = requireTargetMembers();
+      if (!meal || !mids.length) return;
 
       let previous: MealsByDate | undefined;
       setMealsByDate((prev) => {
@@ -270,7 +286,7 @@ export function useCalendarPage() {
         const ids = await resolveMealIdsForAllMembers({
           dateStr: date,
           position: meal.position,
-          memberIds: targetMemberIds,
+          memberIds: mids,
           mealsByDate,
           viewMemberId: activeMember?.id,
           getDay,
@@ -281,7 +297,7 @@ export function useCalendarPage() {
         showError(String(t("err_del_meal")));
       }
     },
-    [activeMember?.id, mealsByDate, showError, t, targetMemberIds],
+    [activeMember?.id, mealsByDate, requireTargetMembers, showError, t],
   );
 
   const handleDeleteAll = useCallback(
@@ -308,7 +324,7 @@ export function useCalendarPage() {
           try {
             const ids = await resolveMealIdsForAllMembers({
               dateStr,
-              memberIds: targetMemberIds,
+              memberIds: effectiveTargetMemberIds,
               mealsByDate,
               viewMemberId: activeMember?.id,
               getDay,
@@ -329,7 +345,7 @@ export function useCalendarPage() {
       showError,
       showSuccess,
       t,
-      targetMemberIds,
+      effectiveTargetMemberIds,
     ],
   );
 
@@ -353,10 +369,11 @@ export function useCalendarPage() {
 
   const handlePasteDay = useCallback(
     async (target: string) => {
-      if (!copiedDay || !targetMemberIds.length) return;
+      const mids = requireTargetMembers();
+      if (!copiedDay || !mids.length) return;
       try {
         await Promise.all(
-          targetMemberIds.map((member_id) =>
+          mids.map((member_id) =>
             copyRange({
               source_start: copiedDay,
               source_end: copiedDay,
@@ -374,7 +391,7 @@ export function useCalendarPage() {
         showError(msg);
       }
     },
-    [copiedDay, loadMonth, month, showError, t, targetMemberIds, year],
+    [copiedDay, loadMonth, month, requireTargetMembers, showError, t, year],
   );
 
   const handleDeleteWeek = useCallback(
@@ -400,7 +417,7 @@ export function useCalendarPage() {
               const ds = addDays(mondayStr, i);
               const ids = await resolveMealIdsForAllMembers({
                 dateStr: ds,
-                memberIds: targetMemberIds,
+                memberIds: effectiveTargetMemberIds,
                 mealsByDate,
                 viewMemberId: activeMember?.id,
                 getDay,
@@ -425,7 +442,7 @@ export function useCalendarPage() {
       showError,
       showSuccess,
       t,
-      targetMemberIds,
+      effectiveTargetMemberIds,
       year,
     ],
   );
@@ -454,10 +471,11 @@ export function useCalendarPage() {
 
   const handlePasteWeek = useCallback(
     async (mon: string) => {
-      if (!copiedWeek || !targetMemberIds.length) return;
+      const mids = requireTargetMembers();
+      if (!copiedWeek || !mids.length) return;
       try {
         await Promise.all(
-          targetMemberIds.map((member_id) =>
+          mids.map((member_id) =>
             copyRange({
               source_start: copiedWeek,
               source_end: addDays(copiedWeek, 6),
@@ -475,7 +493,7 @@ export function useCalendarPage() {
         showError(msg);
       }
     },
-    [copiedWeek, loadMonth, month, showError, t, targetMemberIds, year],
+    [copiedWeek, loadMonth, month, requireTargetMembers, showError, t, year],
   );
 
   const saveTemplate = useCallback((name: string, meals: WeekTemplate["meals"]) => {
@@ -495,10 +513,11 @@ export function useCalendarPage() {
 
   const applyTemplate = useCallback(
     async (template: WeekTemplate, targetMon: string) => {
-      if (!targetMemberIds.length) return;
+      const mids = requireTargetMembers();
+      if (!mids.length) return;
       const offsets = [...new Set(template.meals.map((m) => m.dayOffset))];
 
-      for (const member_id of targetMemberIds) {
+      for (const member_id of mids) {
         for (const offset of offsets) {
           const ds = addDays(targetMon, offset);
           let dayMeals: Meal[] = [];
@@ -528,7 +547,7 @@ export function useCalendarPage() {
       }
       await loadMonth(year, month);
     },
-    [activeMember?.id, loadMonth, mealsByDate, month, targetMemberIds, year],
+    [activeMember?.id, loadMonth, mealsByDate, month, requireTargetMembers, year],
   );
 
   const handleDragEndRecipeDrop = useCallback(
@@ -537,10 +556,11 @@ export function useCalendarPage() {
       targetDate: string,
       targetPos: number,
     ) => {
-      if (!targetMemberIds.length) return;
+      const mids = requireTargetMembers();
+      if (!mids.length) return;
       const displayMid = activeMember?.id;
       const tempId = -Date.now();
-      if (displayMid && targetMemberIds.includes(displayMid)) {
+      if (displayMid && mids.includes(displayMid)) {
         const optimistic = buildOptimisticMeal({
           date: targetDate,
           position: targetPos,
@@ -555,7 +575,7 @@ export function useCalendarPage() {
         });
         try {
           const results = await Promise.all(
-            targetMemberIds.map((member_id) =>
+            mids.map((member_id) =>
               addMeal({
                 date: targetDate,
                 position: targetPos,
@@ -564,7 +584,7 @@ export function useCalendarPage() {
               }),
             ),
           );
-          const displayIdx = targetMemberIds.indexOf(displayMid);
+          const displayIdx = mids.indexOf(displayMid);
           const res = displayIdx >= 0 ? results[displayIdx] : results[0];
           if (res) {
             setMealsByDate((prev) => {
@@ -579,7 +599,7 @@ export function useCalendarPage() {
       } else {
         try {
           await Promise.all(
-            targetMemberIds.map((member_id) =>
+            mids.map((member_id) =>
               addMeal({
                 date: targetDate,
                 position: targetPos,
@@ -600,7 +620,8 @@ export function useCalendarPage() {
       month,
       showError,
       t,
-      targetMemberIds,
+      effectiveTargetMemberIds,
+      requireTargetMembers,
       year,
     ],
   );
@@ -645,10 +666,11 @@ export function useCalendarPage() {
 
   const handleDragEndDayCopy = useCallback(
     async (sourceDate: string, targetDate: string) => {
-      if (sourceDate === targetDate || !targetMemberIds.length) return;
+      const mids = requireTargetMembers();
+      if (sourceDate === targetDate || !mids.length) return;
       try {
         await Promise.all(
-          targetMemberIds.map((member_id) =>
+          mids.map((member_id) =>
             copyRange({
               source_start: sourceDate,
               source_end: sourceDate,
@@ -666,7 +688,7 @@ export function useCalendarPage() {
         showError(msg);
       }
     },
-    [loadMonth, month, showError, t, targetMemberIds, year],
+    [loadMonth, month, requireTargetMembers, showError, t, year],
   );
 
   const goToRecipes = useCallback(() => {
