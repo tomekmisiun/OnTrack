@@ -3,7 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import Depends, FastAPI, Request
 from fastapi.exceptions import HTTPException, RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 from starlette.middleware.sessions import SessionMiddleware
@@ -82,6 +82,26 @@ def create_app() -> FastAPI:
                 content={"status": "degraded", "database": "error"},
             )
         return JSONResponse(content={"status": "ok", "database": "ok"})
+
+    @app.get("/metrics")
+    def metrics(session: Session = Depends(get_db_session)) -> Response:
+        try:
+            session.execute(text("SELECT 1"))
+            db_up = 1
+        except Exception:
+            db_up = 0
+        body = "\n".join(
+            [
+                "# HELP ontrack_up OnTrack API process is running",
+                "# TYPE ontrack_up gauge",
+                "ontrack_up 1",
+                "# HELP ontrack_db_up Database connectivity (1 = ok)",
+                "# TYPE ontrack_db_up gauge",
+                f"ontrack_db_up {db_up}",
+                "",
+            ]
+        )
+        return Response(content=body, media_type="text/plain; version=0.0.4; charset=utf-8")
 
 
     app.include_router(auth_router)
