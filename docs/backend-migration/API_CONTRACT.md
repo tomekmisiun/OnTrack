@@ -27,6 +27,8 @@
 | A06 | DELETE | `/api/auth/me` | Bearer | `AuthContext.deleteAccount` | `routes/auth.py` |
 | A07 | GET | `/api/auth/google` | Public (browser) | `LoginScreen` redirect | `routes/auth.py` |
 | A08 | GET | `/api/auth/google/callback` | Public (browser) | Google → frontend `?code=` | `routes/auth.py` |
+| A10 | POST | `/api/auth/forgot-password` | Public | API only (no UI) | `routes/auth.py` |
+| A11 | POST | `/api/auth/reset-password` | Public | API only (no UI) | `routes/auth.py` |
 | M01 | GET | `/api/members/` | Bearer | `lib/api/members.ts`, `MemberContext` | `routes/members.py` |
 | M02 | POST | `/api/members/` | Bearer | `lib/api/members.ts` | `routes/members.py` |
 | M03 | PATCH | `/api/members/{id}` | Bearer | `lib/api/members.ts` | `routes/members.py` |
@@ -145,6 +147,22 @@
 | Behavior | `302` redirect to `{FRONTEND_URL}/?code=<auth_code>` or `?auth_error=...` |
 | Frontend | Reads `code` or `auth_error` from query string |
 | Compatibility risk | **HIGH** |
+
+### A10 — `POST /api/auth/forgot-password`
+
+| Field | Detail |
+|-------|--------|
+| Request | `{ "username": string }` |
+| Success | `200`, `{ "message": "..." }` |
+| Production limitation | **`reset_token` is returned only when `DEBUG` or `TESTING` is set** — no email delivery in production. Users cannot self-serve password reset until an email provider is integrated. |
+
+### A11 — `POST /api/auth/reset-password`
+
+| Field | Detail |
+|-------|--------|
+| Request | `{ "token": string, "new_password": string }` |
+| Success | `200`, `{ "token": "<jwt>" }` |
+| Errors | `400` invalid/expired token or weak password |
 
 ---
 

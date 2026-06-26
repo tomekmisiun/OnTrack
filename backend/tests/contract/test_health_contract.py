@@ -11,6 +11,8 @@ def test_health_ready_ok(client):
 
 
 def test_metrics_ok(client):
+    client.get("/health")
     res = client.get("/metrics")
     assert res.status_code == 200
     assert "ontrack_up 1" in res.text
+    assert "ontrack_http_requests_total" in res.text

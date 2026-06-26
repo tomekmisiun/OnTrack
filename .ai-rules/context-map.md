@@ -49,8 +49,7 @@ Before editing, read the files listed for your **task type**. Start with
 - `backend/tests/contract/test_auth_contract.py`
 
 ### Background jobs / workers
-- `.ai-rules/workers.md`
-- `backend/app/worker/` (scaffold — no production jobs yet)
+- `.ai-rules/workers.md` (historical — worker scaffold removed per ADR 0002)
 
 ### Frontend change (only when explicitly in scope)
 - `frontend-next/lib/i18n/messages/`

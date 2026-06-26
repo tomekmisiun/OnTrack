@@ -22,6 +22,8 @@ from app.api.routes.recipes import router as recipes_router
 from app.core.config import get_settings
 from app.core.cors import cors_allowed_origins
 
+_http_requests_total = 0
+
 
 def create_app() -> FastAPI:
     settings = get_settings()
@@ -55,6 +57,12 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
+    @app.middleware("http")
+    async def count_http_requests(request: Request, call_next):
+        global _http_requests_total
+        _http_requests_total += 1
+        return await call_next(request)
 
     @app.exception_handler(HTTPException)
     async def http_exception_handler(_request: Request, exc: HTTPException) -> JSONResponse:
@@ -98,6 +106,9 @@ def create_app() -> FastAPI:
                 "# HELP ontrack_db_up Database connectivity (1 = ok)",
                 "# TYPE ontrack_db_up gauge",
                 f"ontrack_db_up {db_up}",
+                "# HELP ontrack_http_requests_total Total HTTP requests handled by this process",
+                "# TYPE ontrack_http_requests_total counter",
+                f"ontrack_http_requests_total {_http_requests_total}",
                 "",
             ]
         )

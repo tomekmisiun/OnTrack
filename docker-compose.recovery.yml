@@ -1,12 +1,9 @@
 # Optional override when host ports 5432/6379/5001/3000 are already in use.
-# Usage: docker compose -p ontrack-recovery -f docker-compose.yml -f docker-compose.recovery.yml up -d db redis backend
+# Usage: docker compose -p ontrack-recovery -f docker-compose.yml -f docker-compose.recovery.yml up -d db backend
 services:
   db:
     ports: !override
       - "5434:5432"
-  redis:
-    ports: !override
-      - "6381:6379"
   backend:
     ports: !override
       - "5002:8000"

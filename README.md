@@ -31,7 +31,6 @@ Plan meals on a calendar, manage products and recipes, calculate nutrition targe
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-Strict-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![Redis](https://img.shields.io/badge/Redis-Queue_&_Cache-DC382D?style=for-the-badge&logo=redis&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI%2FCD-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
 ![Railway](https://img.shields.io/badge/Railway-Deployment-0B0D0E?style=for-the-badge&logo=railway&logoColor=white)
@@ -207,7 +206,7 @@ OnTrack connects these workflows through one data model. Products feed recipes, 
 - public dish-cost comparison
 - DIY versus restaurant comparison
 - localized public data
-- offline scraper pipeline
+- public dish-cost comparison (demo dataset)
 
 </td>
 </tr>
@@ -286,12 +285,10 @@ flowchart TB
     subgraph Backend
         API[FastAPI API]
         Services[Service layer]
-        Worker[Optional Redis worker]
     end
 
     subgraph Data
         PostgreSQL[(PostgreSQL 15)]
-        Redis[(Redis 7)]
     end
 
     subgraph External
@@ -302,29 +299,42 @@ flowchart TB
     end
 
     subgraph Observability
-        Prometheus[Prometheus]
-        Grafana[Grafana]
+        Prometheus[Prometheus local]
+        Grafana[Grafana local]
     end
 
     Browser --> Next
-    Next -->|Bearer JWT| API
+    Next -->|Bearer JWT default| API
     Next -->|Optional HttpOnly session| BFF
     BFF --> API
 
     API --> Services
     Services --> PostgreSQL
-    Services --> Redis
-    Redis --> Worker
-    Worker --> PostgreSQL
 
     API --> Google
     API --> Gemini
     API --> Pexels
     API --> DeepSeek
 
-    API -->|/metrics| Prometheus
+    API -->|/metrics local only| Prometheus
     Prometheus --> Grafana
 ```
+
+### Authentication modes
+
+Production uses **Bearer JWT in `localStorage`** by default. The Next.js middleware checks a session **hint cookie** for route redirects only — it does not validate the JWT cryptographically.
+
+Optional **BFF mode** (`NEXT_PUBLIC_BFF_ENABLED=1`) stores tokens in HttpOnly cookies and proxies API calls through Next.js route handlers. BFF is **off on Railway** by default. See [`docs/adr/0001-bff-production-mode.md`](docs/adr/0001-bff-production-mode.md) and [`docs/FRONTEND_NEXT_BFF.md`](docs/FRONTEND_NEXT_BFF.md).
+
+### Observability (local development)
+
+Prometheus and Grafana run in Docker Compose for **local development only**. They are not deployed to Railway.
+
+- Prometheus scrapes `GET /metrics` on the backend container.
+- Grafana is provisioned with a Prometheus datasource and a minimal API dashboard (`monitoring/grafana/`).
+- Metrics include process up, database connectivity, and HTTP request counts.
+
+See [`docs/PRODUCTION_READINESS.md`](docs/PRODUCTION_READINESS.md) for the full status matrix.
 
 ### Backend request flow
 
@@ -353,7 +363,7 @@ JSON response
 | **Backend architecture** | Thin FastAPI routes with business logic in service modules |
 | **Frontend architecture** | Next.js App Router with feature hooks and dedicated screen components |
 | **API contract** | OpenAPI snapshot committed to the repository and TypeScript types generated from it |
-| **Authentication** | Bearer JWT by default; optional Next.js BFF with an HttpOnly session cookie |
+| **Authentication** | Bearer JWT by default; optional Next.js BFF with HttpOnly cookies ([ADR 0001](docs/adr/0001-bff-production-mode.md)) |
 | **User isolation** | User-owned resources are scoped by authenticated user ID |
 | **Household model** | Meal plans, schedules and targets can be scoped to individual members |
 | **Product catalog** | Shared read-only system products plus personal copy-on-write overrides |
@@ -394,7 +404,6 @@ JSON response
 
 <p>
 <img src="https://img.shields.io/badge/PostgreSQL_15-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL" />
-<img src="https://img.shields.io/badge/Redis_7-DC382D?style=flat-square&logo=redis&logoColor=white" alt="Redis" />
 <img src="https://img.shields.io/badge/Docker_Compose-2496ED?style=flat-square&logo=docker&logoColor=white" alt="Docker Compose" />
 <img src="https://img.shields.io/badge/Railway-0B0D0E?style=flat-square&logo=railway&logoColor=white" alt="Railway" />
 <img src="https://img.shields.io/badge/Prometheus-E6522C?style=flat-square&logo=prometheus&logoColor=white" alt="Prometheus" />
@@ -521,7 +530,7 @@ docker compose \
   -p ontrack-recovery \
   -f docker-compose.yml \
   -f docker-compose.recovery.yml \
-  up -d db redis backend
+  up -d db backend
 ```
 
 Apply migrations in the recovery stack:
@@ -560,7 +569,7 @@ Copy `.env.example` to `.env`. Never commit the populated `.env` file.
 | `GOOGLE_REDIRECT_URI` | Google OAuth callback |
 | `GEMINI_API_KEY` | AI-assisted receipt parsing |
 | `PEXELS_API_KEY` | Recipe image search |
-| `DEEPSEEK_API_KEY` | Macro lookup and scraper pipeline |
+| `DEEPSEEK_API_KEY` | Macro lookup AI fallback (after catalog and cache) |
 | `NEXT_PUBLIC_BFF_ENABLED` | Enables the optional Next.js BFF and HttpOnly session mode |
 | `BACKEND_DEBUG` | Development-only backend behavior |
 | `TEST_DATABASE_URL` | PostgreSQL integration tests |
@@ -572,7 +581,10 @@ Copy `.env.example` to `.env`. Never commit the populated `.env` file.
 
 ## Testing and quality
 
-The CI workflow validates backend behavior, frontend quality, API compatibility, production images and PostgreSQL migrations.
+The CI workflow validates backend behavior, frontend quality, API compatibility, production images and PostgreSQL migrations. See [`docs/TESTING.md`](docs/TESTING.md) for the full job matrix.
+
+> [!NOTE]
+> `make test` runs a **subset** of the backend suite. CI job `test` also runs a subset (~contract + health). Full backend coverage: `cd backend && uv run pytest -q` (~198 tests).
 
 ### Backend
 
@@ -642,6 +654,18 @@ npm run test:e2e:visual
 | `backend-docker` | Backend production-image build |
 | `frontend-next-docker` | Frontend production-image build |
 | `backend-integration` | PostgreSQL migration and schema rehearsal |
+| `deploy-production` | **`main` only** — deploy `ontrack-back` + `ontrackapp` to Railway after green CI |
+
+### Known limitations
+
+| Limitation | Detail |
+|---|---|
+| Password reset | API exists; reset token is returned only when `DEBUG` or `TESTING` is set — no email delivery in production |
+| BFF / HttpOnly auth | Implemented but disabled in production ([ADR 0001](docs/adr/0001-bff-production-mode.md)) |
+| Macro AI cache | File-based `macro_ai_cache.json`; ephemeral on Railway redeploy |
+| Observability | Prometheus/Grafana local only; no production APM |
+| Background jobs | No async worker — removed per [ADR 0002](docs/adr/0002-background-worker.md) |
+| Scraper pipeline | Archived under `archive/scraper-legacy/` — not part of runtime |
 
 ---
 
@@ -736,9 +760,7 @@ Production is configured for **Railway**.
 |---|---|---|
 | `ontrack-back` | FastAPI production API | `backend` |
 | `ontrackapp` | Next.js production frontend | `frontend-next` |
-| `ontrack-worker` | Optional Redis worker | `backend` |
 | PostgreSQL | Primary database | Railway plugin |
-| Redis | Queue and cache | Railway plugin |
 
 ### Deployment flow
 
@@ -747,8 +769,8 @@ flowchart LR
     Branch[Feature branch] --> PR[Pull request]
     PR --> CI[GitHub Actions]
     CI -->|green| Merge[Merge to main]
-    Merge --> Railway[Railway Wait for CI]
-    Railway --> Migrations[Alembic pre-deploy migrations]
+    Merge --> CI2[deploy-production job]
+    CI2 --> Migrations[Alembic pre-deploy migrations]
     Migrations --> Deploy[Backend and frontend deployment]
 ```
 
@@ -782,9 +804,8 @@ OnTrack is a functionally mature portfolio application. Its main user journeys a
 | FastAPI migration | ✅ Completed |
 | CRA to Next.js migration | ✅ Runtime cutover completed |
 | Archived CRA reference | ✅ Preserved under `archive/` |
-| Monitoring endpoints | ✅ Implemented |
-| Full production hardening | 🟡 Ongoing |
-| Optional background worker | 🟡 Infrastructure available; limited runtime role |
+| Monitoring endpoints | ✅ Implemented (`/metrics`; local Prometheus/Grafana) |
+| Full production hardening | 🟡 Ongoing — see [`docs/PRODUCTION_READINESS.md`](docs/PRODUCTION_READINESS.md) |
 | Third-party AI integrations | 🟡 Require configured external credentials |
 
 > [!IMPORTANT]
@@ -804,7 +825,6 @@ OnTrack/
 │   │   ├── models/              # SQLAlchemy models
 │   │   ├── schemas/             # Pydantic request models
 │   │   ├── services/            # Business logic
-│   │   └── worker/              # Redis worker infrastructure
 │   ├── alembic/                 # Database migrations
 │   ├── data/                    # Runtime catalogs and public datasets
 │   ├── scripts/                 # Migration, validation and deployment tools
@@ -824,7 +844,7 @@ OnTrack/
 ├── archive/
 │   ├── frontend-cra-reference/  # Archived frontend used during migration
 │   └── scraper-legacy/          # Archived offline product-data pipeline (not runtime)
-├── monitoring/                  # Prometheus configuration
+├── monitoring/                  # Prometheus + Grafana (local)
 ├── docs/                        # Audits, specifications and runbooks
 ├── scripts/                     # Repository and AI-workflow validation
 ├── .ai-rules/                   # Binding development-agent rules
@@ -841,6 +861,10 @@ OnTrack/
 |---|---|
 | [`docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md`](docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md) | **Current** technical and product audit |
 | [`docs/PROJECT_REMEDIATION_ROADMAP.md`](docs/PROJECT_REMEDIATION_ROADMAP.md) | Remediation tasks and priorities |
+| [`docs/PRODUCTION_READINESS.md`](docs/PRODUCTION_READINESS.md) | Production readiness matrix |
+| [`docs/TESTING.md`](docs/TESTING.md) | CI job matrix and local test commands |
+| [`docs/adr/0001-bff-production-mode.md`](docs/adr/0001-bff-production-mode.md) | ADR: BFF default off in production |
+| [`docs/adr/0002-background-worker.md`](docs/adr/0002-background-worker.md) | ADR: worker scaffold removed |
 | [`docs/audits/archive/`](docs/audits/archive/) | Historical audits and migration reports |
 | [`docs/CRA_REFERENCE.md`](docs/CRA_REFERENCE.md) | Legacy frontend reference map |
 | [`docs/FRONTEND_NEXT_BFF.md`](docs/FRONTEND_NEXT_BFF.md) | Optional BFF and HttpOnly-session threat model |

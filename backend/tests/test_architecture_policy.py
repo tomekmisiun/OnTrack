@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-BACKEND_SCAN_DIRS = ("api", "services", "worker")
+BACKEND_SCAN_DIRS = ("api", "services")
 
 FORBIDDEN_SUBSTRINGS = (
     "scraper/data",
@@ -24,7 +24,7 @@ def test_backend_app_has_no_legacy_monorepo_data_paths():
         for path in sorted((app_root / sub).rglob("*.py")):
             source = path.read_text(encoding="utf-8")
             rel = path.relative_to(app_root)
-        for needle in FORBIDDEN_SUBSTRINGS:
-            if needle in source:
-                violations.append(f"{rel}: contains {needle!r}")
+            for needle in FORBIDDEN_SUBSTRINGS:
+                if needle in source:
+                    violations.append(f"{rel}: contains {needle!r}")
     assert not violations, "Legacy data path coupling found:\n" + "\n".join(violations)

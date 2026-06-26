@@ -394,14 +394,14 @@ Phase 4 — Optional (P3)
 
 ## Definition of Done (whole roadmap)
 
-- [ ] README matches code for auth, Redis, worker, scraper, integrations, CI.
-- [ ] One canonical current audit (June 2026) linked from README.
-- [ ] Stale audits archived with historical headers, not mixed with ops docs.
-- [ ] BFF and worker decisions recorded in ADRs.
-- [ ] Deployment runbook matches CI deploy job.
-- [ ] Local setup reproducible from README + `.env.example`.
-- [ ] Production readiness matrix maintained in `docs/PRODUCTION_READINESS.md`.
-- [ ] Each task merged via separate PR with validation from `.ai-rules/validation.md`.
+- [x] README matches code for auth, Redis, worker, scraper, integrations, CI.
+- [x] One canonical current audit (June 2026) linked from README.
+- [x] Stale audits archived with historical headers, not mixed with ops docs.
+- [x] BFF and worker decisions recorded in ADRs.
+- [x] Deployment runbook matches CI deploy job.
+- [x] Local setup reproducible from README + `.env.example`.
+- [x] Production readiness matrix maintained in `docs/PRODUCTION_READINESS.md`.
+- [x] Each task merged via separate PR with validation from `.ai-rules/validation.md`.
 
 ---
 

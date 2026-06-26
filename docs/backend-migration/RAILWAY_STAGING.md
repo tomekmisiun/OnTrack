@@ -11,9 +11,9 @@ Deploy FastAPI to Railway **staging** with a **clone** of production Postgres.
 | Railway service | Config file path | Root Directory |
 |-----------------|------------------|----------------|
 | `ontrack-back-staging` | `/backend/railway.toml` | `backend` |
-| `ontrack-worker-staging` | `/backend/railway.worker.toml` | `backend` |
-| `ontrack-redis-staging` | Railway Redis plugin | — |
 | `ontrack-postgres-staging` | Postgres clone | — |
+
+Worker and Redis staging services were removed — see [`docs/adr/0002-background-worker.md`](../adr/0002-background-worker.md).
 
 ---
 
@@ -30,14 +30,6 @@ Deploy FastAPI to Railway **staging** with a **clone** of production Postgres.
 ```bash
 curl -sf "https://<staging-api-domain>/health"
 ```
-
----
-
-## Worker service
-
-1. Same repo, **Root Directory:** `backend`
-2. **Config:** `railway.worker.toml`
-3. **Variables:** `DATABASE_URL`, `REDIS_URL`, secrets (same as API)
 
 ---
 
