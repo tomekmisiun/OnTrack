@@ -16,6 +16,7 @@ import {
   fetchMeRaw,
   login,
   logoutSession,
+  refreshAccessToken,
   register,
   setUnauthorizedHandler,
 } from "@/lib/api/auth";
@@ -208,6 +209,14 @@ export function AuthProvider({ children, onLangChange }: AuthProviderProps) {
         } else {
           if (pendingLang) clearPendingLang();
           applyUser(me);
+        }
+        try {
+          const { token: refreshed } = await refreshAccessToken();
+          if (!cancelled && refreshed) {
+            setStoredToken(refreshed);
+          }
+        } catch {
+          // keep existing token when refresh is unavailable
         }
       } catch {
         if (cancelled) return;

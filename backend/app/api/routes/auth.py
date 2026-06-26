@@ -97,6 +97,18 @@ def me(
     return JSONResponse(content=data)
 
 
+@router.post("/refresh", response_model=TokenResponse)
+def refresh(
+    user_id: int = Depends(get_current_user_id),
+    session: Session = Depends(get_db_session),
+) -> JSONResponse:
+    try:
+        token = auth_service.refresh_session(session, user_id)
+    except auth_service.AuthServiceError as exc:
+        return _service_error(exc)
+    return JSONResponse(content={"token": token})
+
+
 @router.patch("/language")
 def change_language(
     body: LanguageRequest,

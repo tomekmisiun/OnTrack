@@ -44,6 +44,13 @@ def test_me_returns_user(client, user, auth_headers):
     assert data["market_code"] == "PL"
 
 
+def test_refresh_issues_new_token(client, user, auth_headers):
+    res = client.post("/api/auth/refresh", headers=auth_headers)
+    assert res.status_code == 200
+    assert "token" in res.json()
+    assert decode_access_token(res.json()["token"]) == user.id
+
+
 def test_change_language(client, user, auth_headers, db_session):
     res = client.patch(
         "/api/auth/language",
