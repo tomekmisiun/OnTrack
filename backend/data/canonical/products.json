@@ -102,14 +102,14 @@
     }
   },
   {
-    "key": "banana",
+    "key": "banana-banan-7zl",
     "names": {
-      "pl": "banan",
+      "pl": "banan 7zł",
       "en": "banana"
     },
     "markets": {
       "PL": {
-        "price": 0.699,
+        "price": 0.7000000000000001,
         "package_weight": 1000.0,
         "unit": "g",
         "sold_by_weight": false
@@ -129,14 +129,14 @@
     }
   },
   {
-    "key": "banana-banan-7zl",
+    "key": "banana",
     "names": {
-      "pl": "banan 7zł",
+      "pl": "banan",
       "en": "banana"
     },
     "markets": {
       "PL": {
-        "price": 0.7000000000000001,
+        "price": 0.699,
         "package_weight": 1000.0,
         "unit": "g",
         "sold_by_weight": false

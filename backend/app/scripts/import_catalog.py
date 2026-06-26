@@ -48,17 +48,14 @@ class CatalogImportReport:
         }
 
 
-def catalog_key_for_product(market_code: str, index: int, name: str) -> str:
-    slug = normalize_product_name(name).replace(" ", "-")[:80]
-    return f"catalog:{market_code.lower()}:{index}:{slug}"
+def catalog_key_for_product(market_code: str, sort_index: int, stable_key: str) -> str:
+    safe = (stable_key or "item").strip()[:80]
+    return f"catalog:{market_code.lower()}:{sort_index:05d}:{safe}"
 
 
-def catalog_key_for_recipe(market_code: str, source_url: str | None, name: str) -> str:
-    if source_url:
-        slug = source_url.rstrip("/").split("/")[-1][:80]
-        return f"recipe:{market_code.lower()}:{slug}"
-    slug = normalize_product_name(name).replace(" ", "-")[:80]
-    return f"recipe:{market_code.lower()}:{slug}"
+def catalog_key_for_recipe(market_code: str, sort_index: int, stable_key: str) -> str:
+    safe = (stable_key or "item").strip()[:80]
+    return f"recipe:{market_code.lower()}:{sort_index:05d}:{safe}"
 
 
 def _locale_for_market(market_code: str) -> str:
@@ -87,7 +84,9 @@ def import_products_for_market(session: Session, market_code: str, report: Catal
         if not name:
             report.rejected.append(f"{market_code} product[{idx}]: empty name")
             continue
-        key = catalog_key_for_product(market_code, idx, name)
+        sort_index = int(row.get("sort_index", idx))
+        stable_key = (row.get("stable_key") or normalize_product_name(name).replace(" ", "-")).strip()
+        key = catalog_key_for_product(market_code, sort_index, stable_key)
         payload = {
             "name": name[:255],
             "normalized_name": normalize_product_name(name),
@@ -122,6 +121,43 @@ def import_products_for_market(session: Session, market_code: str, report: Catal
             session.flush()
             system_by_key[key] = product
             report.products_created += 1
+
+    _purge_orphan_system_products(session, market_code, set(system_by_key.keys()), report)
+
+
+def _relink_recipe_ingredients(session: Session, from_id: int, to_id: int) -> None:
+    for ing in session.query(RecipeIngredient).filter_by(product_id=from_id):
+        ing.product_id = to_id
+
+
+def _purge_orphan_system_products(
+    session: Session,
+    market_code: str,
+    active_keys: set[str],
+    report: CatalogImportReport,
+) -> None:
+    system_rows = (
+        session.query(Product)
+        .filter_by(source="system", market_code=market_code)
+        .filter(Product.user_id.is_(None))
+        .all()
+    )
+    canonical_by_name: dict[str, Product] = {}
+    for product in system_rows:
+        if product.catalog_key in active_keys:
+            canonical_by_name.setdefault(product.normalized_name, product)
+
+    for product in system_rows:
+        if product.catalog_key in active_keys:
+            continue
+        replacement = canonical_by_name.get(product.normalized_name)
+        if replacement and replacement.id != product.id:
+            _relink_recipe_ingredients(session, product.id, replacement.id)
+        refs = session.query(RecipeIngredient).filter_by(product_id=product.id).count()
+        if refs:
+            continue
+        session.delete(product)
+        report.rejected.append(f"purged orphan product {product.catalog_key!r}")
 
 
 def _product_name_map(session: Session, market_code: str) -> dict[str, int]:
@@ -161,7 +197,9 @@ def import_recipes_for_market(session: Session, market_code: str, report: Catalo
         if not name:
             continue
         source_url = (row.get("source_url") or "").strip() or None
-        key = catalog_key_for_recipe(market_code, source_url, name)
+        sort_index = int(row.get("sort_index", 0))
+        stable_key = (row.get("stable_key") or (source_url or name)).strip()
+        key = catalog_key_for_recipe(market_code, sort_index, stable_key)
         raw_cat = row.get("category") or ""
         category = {"snacks": "snack", "desserts": "dessert"}.get(raw_cat, raw_cat) or None
 
@@ -211,6 +249,18 @@ def import_recipes_for_market(session: Session, market_code: str, report: Catalo
             )
             report.recipe_ingredients_linked += 1
 
+    active_recipe_keys = set(system_by_key.keys())
+    for recipe in (
+        session.query(Recipe)
+        .filter_by(source="system", market_code=market_code)
+        .filter(Recipe.user_id.is_(None))
+        .all()
+    ):
+        if recipe.catalog_key not in active_recipe_keys:
+            session.query(RecipeIngredient).filter_by(recipe_id=recipe.id).delete()
+            session.delete(recipe)
+            report.rejected.append(f"purged orphan recipe {recipe.catalog_key!r}")
+
 
 def import_catalog(session: Session, markets: tuple[str, ...] = MARKETS) -> CatalogImportReport:
     report = CatalogImportReport()
@@ -225,17 +275,14 @@ def import_catalog(session: Session, markets: tuple[str, ...] = MARKETS) -> Cata
     return report
 
 
-def ensure_global_catalog_loaded(session: Session) -> CatalogImportReport | None:
-    """Import global catalog once when DB has no system products (idempotent, not per-user)."""
-    has_system = (
-        session.query(Product.id)
-        .filter(Product.user_id.is_(None), Product.source == "system")
-        .limit(1)
-        .first()
-    )
-    if has_system is not None:
-        return None
+def sync_global_catalog(session: Session) -> CatalogImportReport:
+    """Reconcile DB system catalog with generated JSON (idempotent, purges orphans)."""
     return import_catalog(session)
+
+
+def ensure_global_catalog_loaded(session: Session) -> CatalogImportReport | None:
+    """Import or refresh global catalog on API startup."""
+    return sync_global_catalog(session)
 
 
 def main() -> None:

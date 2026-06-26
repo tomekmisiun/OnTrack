@@ -22,7 +22,11 @@ def test_list_includes_system_and_own_products(client, auth_headers, user, db_se
     db_session.add(own)
     db_session.commit()
 
-    res = client.get("/api/products/", headers=auth_headers, params={"limit": 100})
+    res = client.get(
+        "/api/products/",
+        headers=auth_headers,
+        params={"limit": 100, "q": "prywatny"},
+    )
     assert res.status_code == 200
     body = res.json()
     items = _items(body)
@@ -87,7 +91,11 @@ def test_override_hides_system_product(client, auth_headers, user, db_session):
     db_session.add(override)
     db_session.commit()
 
-    res = client.get("/api/products/", headers=auth_headers, params={"limit": 100})
+    res = client.get(
+        "/api/products/",
+        headers=auth_headers,
+        params={"limit": 100, "q": system.name[:6]},
+    )
     ids = {p["id"] for p in _items(res.json())}
     assert system.id not in ids
     assert override.id in ids

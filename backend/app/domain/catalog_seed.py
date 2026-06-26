@@ -45,7 +45,7 @@ def expand_products_catalog(catalog: list[dict[str, Any]], lang: str) -> list[di
         return []
     out: list[dict[str, Any]] = []
     seen_names: set[str] = set()
-    for entry in catalog:
+    for sort_index, entry in enumerate(catalog):
         names = entry.get("names") or {}
         name = (names.get(lang) or "").strip()
         markets = entry.get("markets") or {}
@@ -55,16 +55,20 @@ def expand_products_catalog(catalog: list[dict[str, Any]], lang: str) -> list[di
         if name_key in seen_names:
             continue
         seen_names.add(name_key)
+        stable_key = (entry.get("key") or slug_catalog_key(name)).strip()
         out.append(
-            market_row_to_product(name, markets[market], entry.get("macros") or {})
+            {
+                **market_row_to_product(name, markets[market], entry.get("macros") or {}),
+                "stable_key": stable_key,
+                "sort_index": sort_index,
+            }
         )
-    out.sort(key=lambda r: r["name"].lower())
     return out
 
 
 def expand_recipes_catalog(catalog: list[dict[str, Any]], lang: str) -> list[dict[str, Any]]:
     out: list[dict[str, Any]] = []
-    for entry in catalog:
+    for sort_index, entry in enumerate(catalog):
         names = entry.get("names") or {}
         name = (names.get(lang) or "").strip()
         if not name:
@@ -80,13 +84,17 @@ def expand_recipes_catalog(catalog: list[dict[str, Any]], lang: str) -> list[dic
             )
         if not ingredients_out:
             continue
+        source_url = (entry.get("source_url") or "").strip() or None
+        stable_key = (entry.get("key") or slug_catalog_key(source_url or name)).strip()
         row: dict[str, Any] = {
             "name": name,
             "category": entry.get("category"),
             "notes": entry.get("notes"),
             "image_url": entry.get("image_url"),
-            "source_url": entry.get("source_url"),
+            "source_url": source_url,
             "ingredients": ingredients_out,
+            "stable_key": stable_key,
+            "sort_index": sort_index,
         }
         for macro in ("kcal_100g", "protein_100g", "fat_100g", "carbs_100g"):
             if entry.get(macro) is not None:
