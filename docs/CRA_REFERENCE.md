@@ -5,11 +5,11 @@
 | Directory | Role | Deployed |
 |-----------|------|----------|
 | **`frontend-next/`** | Production Next.js UI | ✅ Railway `ontrackapp`, Docker Compose `frontend` service |
-| **`frontend/`** | CRA reference snapshot (`dca8eb9`) | ❌ **Never deploy** |
+| **`archive/frontend-cra-reference/`** | CRA reference snapshot (`dca8eb9`) | ❌ **Never deploy** |
 
 ## Why CRA was restored
 
-Task 15 removed `frontend/src/` from `main`. The parity epic needs CRA as the **source of truth** for layout, CSS, marketing login, and component behavior. Reference code lives in `frontend/` again; production remains `frontend-next/`.
+Task 15 removed `frontend/src/` from `main`. The parity epic needed CRA as the **source of truth** for layout, CSS, marketing login, and component behavior. Reference code now lives in `archive/frontend-cra-reference/`; production remains `frontend-next/`.
 
 ## Side-by-side local comparison
 
@@ -21,7 +21,7 @@ Task 15 removed `frontend/src/` from `main`. The parity epic needs CRA as the **
 ### Terminal 1 — CRA reference (port 3000)
 
 ```bash
-cd frontend
+cd archive/frontend-cra-reference
 npm ci
 REACT_APP_API_URL=http://localhost:5001 npm start
 ```

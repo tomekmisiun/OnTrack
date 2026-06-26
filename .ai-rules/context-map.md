@@ -19,7 +19,7 @@ Before editing, read the files listed for your **task type**. Start with
 |------|------|-------|
 | **Backend (production)** | `backend/app/api/routes/`, `backend/app/models/`, `backend/app/services/` | FastAPI |
 | **Frontend (production)** | `frontend-next/` | App Router; i18n in `lib/i18n/messages/` |
-| **CRA reference** | `frontend/` | Not deployed; parity reference only |
+| **CRA reference** | `archive/frontend-cra-reference/` | Not deployed; archived parity reference |
 | **Migrations** | `backend/alembic/` | Single head; `scripts/ensure_alembic_head.py` for legacy stamp |
 | **Tests (backend)** | `backend/tests/` | Contract + integration |
 | **Tests (frontend)** | `frontend-next/tests/` | Vitest + Playwright |
