@@ -73,12 +73,21 @@ def load_visible_recipe(session: Session, user_id: int, recipe_id: int) -> Recip
     return _load_recipe(session, user_id, recipe_id)
 
 
-def list_recipes(session: Session, user_id: int) -> list[dict]:
+def list_recipes(session: Session, user_id: int, *, own_only: bool = False) -> list[dict]:
     market_code = market_code_for_user(session, user_id)
     favorites = _favorite_recipe_ids(session, user_id)
+    base_query = (
+        session.query(Recipe)
+        .filter(
+            Recipe.user_id == user_id,
+            Recipe.market_code == market_code,
+            Recipe.source != "system",
+        )
+        if own_only
+        else _visible_recipes_query(session, user_id, market_code)
+    )
     recipes = (
-        _visible_recipes_query(session, user_id, market_code)
-        .options(joinedload(Recipe.ingredients).joinedload(RecipeIngredient.product))
+        base_query.options(joinedload(Recipe.ingredients).joinedload(RecipeIngredient.product))
         .order_by(Recipe.name)
         .all()
     )

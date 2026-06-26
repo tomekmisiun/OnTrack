@@ -15,10 +15,11 @@ def _service_error(exc: recipe_service.RecipeServiceError) -> JSONResponse:
 
 @router.get("/")
 def list_recipes(
+    own_only: bool = False,
     user_id: int = Depends(get_current_user_id),
     session: Session = Depends(get_db_session),
 ) -> JSONResponse:
-    return JSONResponse(content=recipe_service.list_recipes(session, user_id))
+    return JSONResponse(content=recipe_service.list_recipes(session, user_id, own_only=own_only))
 
 
 @router.post("/", status_code=201)

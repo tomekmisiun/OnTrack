@@ -28,9 +28,23 @@ function parseRecipeSummaryResponse(data: unknown): RecipeSummary {
   return summary;
 }
 
-export async function listRecipes(): Promise<RecipeSummary[]> {
-  const data = await createAuthedApiClient().get<unknown>("/api/recipes/");
+export type RecipeListParams = {
+  ownOnly?: boolean;
+};
+
+function buildRecipesPath(params?: RecipeListParams): string {
+  if (!params?.ownOnly) return "/api/recipes/";
+  return "/api/recipes/?own_only=true";
+}
+
+export async function listRecipes(params?: RecipeListParams): Promise<RecipeSummary[]> {
+  const data = await createAuthedApiClient().get<unknown>(buildRecipesPath(params));
   return parseRecipeSummaryList(data);
+}
+
+export async function countOwnRecipes(): Promise<number> {
+  const items = await listRecipes({ ownOnly: true });
+  return items.length;
 }
 
 export async function getRecipe(id: number): Promise<Recipe> {

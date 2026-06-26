@@ -3,12 +3,11 @@
 import { useEffect, useState } from "react";
 import { getAll } from "@/lib/api/daySchedule";
 import { getDay, getSummary } from "@/lib/api/mealPlan";
-import { listProducts } from "@/lib/api/products";
-import { listRecipes } from "@/lib/api/recipes";
+import { listProducts, countOwnProducts } from "@/lib/api/products";
+import { countOwnRecipes } from "@/lib/api/recipes";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useMember } from "@/contexts/MemberContext";
-import { SEED_STATS } from "@/lib/data/seedStats";
 import { dateToStr, getCurrentMonth, getCurrentWeek } from "@/lib/dates";
 import {
   SUMMARY_MONTH_DAYS,
@@ -82,12 +81,11 @@ export function useWelcomeStats() {
     const weekStart = getCurrentWeek().start;
     const month = getCurrentMonth();
     const todayDow = (new Date().getDay() + 6) % 7;
-    const seed = SEED_STATS[lang] ?? SEED_STATS.pl;
 
     async function load() {
       setLoading(true);
       try {
-        const [mealsResults, scheduleResults, monthRes, productsRes, recipesRes] =
+        const [mealsResults, scheduleResults, monthRes, productsRes, ownProducts, ownRecipes] =
           await Promise.all([
             includedMids.length
               ? Promise.all(includedMids.map((id) => getDay(today, id)))
@@ -101,7 +99,8 @@ export function useWelcomeStats() {
               ? getSummary(month.start, month.end, includedMids)
               : Promise.resolve({ total_cost: 0, items: [] }),
             listProducts({ limit: 100 }),
-            listRecipes(),
+            countOwnProducts(),
+            countOwnRecipes(),
           ]);
 
         if (cancelled) return;
@@ -142,11 +141,8 @@ export function useWelcomeStats() {
           macroInsights,
           mealsToday,
           scheduleInsights,
-          ownProducts: Math.max(
-            0,
-            productList.filter((p) => p.is_editable).length - seed.products,
-          ),
-          ownRecipes: Math.max(0, recipesRes.length - seed.recipes),
+          ownProducts,
+          ownRecipes,
           monthTotalCost,
         });
       } catch {
