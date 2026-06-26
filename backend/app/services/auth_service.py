@@ -10,7 +10,13 @@ from sqlalchemy.orm import Session
 
 from app.core.config import get_settings
 from app.core.passwords import hash_password, verify_password
-from app.core.security import create_access_token
+from app.core.security import (
+    TokenExpiredError,
+    TokenInvalidError,
+    create_access_token,
+    create_password_reset_token,
+    decode_password_reset_token,
+)
 from app.domain.market import MARKET_CODES, UI_LOCALES, default_market_for_ui_locale
 from app.models.auth_code import AuthCode
 from app.models.day_schedule import DayScheduleBlock
@@ -126,6 +132,55 @@ def refresh_session(session: Session, user_id: int) -> str:
     if not user:
         raise AuthServiceError("User not found", 404)
     return issue_token(user_id)
+
+
+def change_password(
+    session: Session,
+    user_id: int,
+    *,
+    current_password: str,
+    new_password: str,
+) -> None:
+    user = session.get(User, user_id)
+    if not user:
+        raise AuthServiceError("User not found", 404)
+    if not verify_password(user.password_hash, current_password):
+        raise AuthServiceError("Invalid current password", 401)
+    err = _validate_password(new_password)
+    if err:
+        raise AuthServiceError(err, 400)
+    user.password_hash = hash_password(new_password)
+    session.commit()
+
+
+def forgot_password(session: Session, username: str) -> dict:
+    normalized = _normalize_username(username)
+    user = session.query(User).filter_by(username=normalized).first()
+    message = "If the account exists, a reset link has been generated."
+    if not user:
+        return {"message": message}
+    token = create_password_reset_token(user.id)
+    settings = get_settings()
+    payload: dict = {"message": message}
+    if settings.debug or settings.testing:
+        payload["reset_token"] = token
+    return payload
+
+
+def reset_password(session: Session, *, token: str, new_password: str) -> str:
+    err = _validate_password(new_password)
+    if err:
+        raise AuthServiceError(err, 400)
+    try:
+        user_id = decode_password_reset_token((token or "").strip())
+    except (TokenExpiredError, TokenInvalidError) as exc:
+        raise AuthServiceError("Invalid or expired reset token", 400) from exc
+    user = session.get(User, user_id)
+    if not user:
+        raise AuthServiceError("Invalid or expired reset token", 400)
+    user.password_hash = hash_password(new_password)
+    session.commit()
+    return issue_token(user.id)
 
 
 def change_language(session: Session, user_id: int, lang: str) -> dict:

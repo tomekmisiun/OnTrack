@@ -6,6 +6,8 @@ from app.models.recipe import Recipe
 from app.models.user import User
 from werkzeug.security import generate_password_hash
 
+from tests.conftest import create_user
+
 
 def test_exchange_requires_code(client):
     res = client.post("/api/auth/exchange", json={})
@@ -49,6 +51,36 @@ def test_refresh_issues_new_token(client, user, auth_headers):
     assert res.status_code == 200
     assert "token" in res.json()
     assert decode_access_token(res.json()["token"]) == user.id
+
+
+def test_change_password(client, db_session):
+    user = create_user(db_session, "alice@example.com", lang="pl", username="aliceuser")
+    headers = {"Authorization": f"Bearer {create_access_token(user.id)}"}
+    res = client.patch(
+        "/api/auth/password",
+        headers=headers,
+        json={"current_password": "test-password", "new_password": "NewPass123!"},
+    )
+    assert res.status_code == 200
+    login = client.post(
+        "/api/auth/login",
+        json={"username": "aliceuser", "password": "NewPass123!"},
+    )
+    assert login.status_code == 200
+
+
+def test_forgot_password_returns_token_in_testing(client, db_session):
+    create_user(db_session, "reset@example.com", lang="pl", username="resetuser")
+    res = client.post("/api/auth/forgot-password", json={"username": "resetuser"})
+    assert res.status_code == 200
+    data = res.json()
+    assert "reset_token" in data
+    reset = client.post(
+        "/api/auth/reset-password",
+        json={"token": data["reset_token"], "new_password": "ResetPass123!"},
+    )
+    assert reset.status_code == 200
+    assert "token" in reset.json()
 
 
 def test_change_language(client, user, auth_headers, db_session):
