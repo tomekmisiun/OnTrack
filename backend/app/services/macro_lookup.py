@@ -10,6 +10,7 @@ import unicodedata
 
 from rapidfuzz import fuzz, process
 
+from app.core.catalog_data import generated_products_path, read_generated_items
 from app.core.runtime_data import ingredients_macros_paths, macro_ai_cache_path
 
 _PL_TRANSLATE = str.maketrans("ąćęłńóśźż", "acelnoszz")
@@ -47,6 +48,7 @@ Zaokrąglij do 1 miejsca po przecinku. name_pl w mianowniku.
 
 _macro_map_pl: dict[str, dict] | None = None
 _macro_map_en: dict[str, dict] | None = None
+_catalog_maps: dict[str, dict[str, dict]] | None = None
 _ai_cache: dict[str, dict] | None = None
 
 
@@ -165,6 +167,64 @@ def _normalize_result(source: str, val: dict, name: str | None = None) -> dict |
     return out
 
 
+def _market_for_lang(lang: str) -> str:
+    return "GB" if lang == "en" else "PL"
+
+
+def _build_catalog_map(market_code: str) -> dict[str, dict]:
+    path = generated_products_path(market_code)
+    if not path.is_file():
+        return {}
+    _, items = read_generated_items(path)
+    result: dict[str, dict] = {}
+    for item in items:
+        name = (item.get("name") or "").strip()
+        if not name:
+            continue
+        val = {
+            "kcal": item.get("kcal"),
+            "protein": item.get("protein"),
+            "fat": item.get("fat"),
+            "carbs": item.get("carbs"),
+        }
+        if not validate_macros(val["kcal"], val["protein"], val["fat"], val["carbs"]):
+            continue
+        result[name.lower()] = val
+        result[dedup_key(name)] = val
+    return result
+
+
+def _get_catalog_map(lang: str) -> dict[str, dict]:
+    global _catalog_maps
+    if _catalog_maps is None:
+        _catalog_maps = {}
+    market = _market_for_lang(lang)
+    if market not in _catalog_maps:
+        _catalog_maps[market] = _build_catalog_map(market)
+    return _catalog_maps[market]
+
+
+def _lookup_catalog(name: str, lang: str) -> dict | None:
+    map_ = _get_catalog_map(lang)
+    if not map_:
+        return None
+    key = dedup_key(name)
+    hit = map_.get(name.lower()) or map_.get(key)
+    if hit:
+        return _normalize_result("catalog", hit, name)
+    match = process.extractOne(
+        name,
+        map_.keys(),
+        scorer=fuzz.partial_ratio,
+        score_cutoff=88,
+    )
+    if match:
+        matched_key, score, _ = match
+        if score >= 88:
+            return _normalize_result("catalog", map_[matched_key], matched_key)
+    return None
+
+
 def _lookup_local(name: str, lang: str) -> dict | None:
     macro_pl, macro_en = _get_macro_maps()
     primary = macro_pl if lang == "pl" else macro_en
@@ -262,7 +322,12 @@ def lookup_macros(name: str, lang: str = "pl") -> dict:
     if not name:
         return {"found": False, "error": "empty_name"}
 
-    for resolver in (_lookup_local, _lookup_ai_cache, lambda n, lng: _fetch_ai_macros(n, lng)):
+    for resolver in (
+        _lookup_local,
+        _lookup_catalog,
+        _lookup_ai_cache,
+        lambda n, lng: _fetch_ai_macros(n, lng),
+    ):
         hit = resolver(name, lang)
         if hit:
             return hit

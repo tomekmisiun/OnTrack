@@ -40,6 +40,17 @@ import {
   type ProductForm,
 } from "@/types/product";
 
+function macroLookupFailureMessage(
+  t: ReturnType<typeof useLanguage>["t"],
+  productName: string,
+  error?: string,
+) {
+  if (error === "ai_not_configured") {
+    return tString(t, "err_macro_ai_not_configured");
+  }
+  return tFormat(t, "err_macro_not_found", productName);
+}
+
 export const EMPTY_FORM: ProductForm = {
   name: "",
   package_weight: "",
@@ -277,12 +288,12 @@ export function useProductsPage() {
       setForm(EMPTY_FORM);
       setPasteText("");
       showSuccess(tFormat(t, "product_adding", productName));
-      const { macros } = await fetchProductMacros(productName, lang);
+      const { macros, error } = await fetchProductMacros(productName, lang);
       if (macros) {
         await updateProduct(created.id, macros);
         showSuccess(tFormatArgs(t, "product_added_macro", productName, true));
       } else {
-        showError(tFormat(t, "err_macro_not_found", productName));
+        showError(macroLookupFailureMessage(t, productName, error));
       }
       void loadProducts({ reset: true });
     } catch (e) {
@@ -375,7 +386,7 @@ export function useProductsPage() {
     if (!editForm.name) return;
     setLookingUp(editId);
     try {
-      const { macros } = await fetchProductMacros(editForm.name, lang);
+      const { macros, error } = await fetchProductMacros(editForm.name, lang);
       if (macros) {
         setEditForm((f) => ({
           ...f,
@@ -385,7 +396,7 @@ export function useProductsPage() {
           carbs: macros.carbs,
         }));
       } else {
-        showError(tFormat(t, "err_macro_not_found", editForm.name));
+        showError(macroLookupFailureMessage(t, editForm.name, error));
       }
     } catch {
       showError(tString(t, "err_macro_lookup"));
