@@ -12,7 +12,7 @@ Meal planner and household budget tracker. Plan meals on a calendar, manage prod
 - **Macro calculator** — nutrition targets and meal macros
 - **Household members** — separate plans and budgets per person
 - **Auth** — local accounts + Google OAuth (JWT)
-- **i18n** — Polish and English UI (`LanguageContext.js`)
+- **i18n** — Polish and English UI (`frontend-next/contexts/LanguageContext.tsx`)
 - **Monitoring** — Prometheus + Grafana (local dev stack)
 - **Scraper pipeline** — offline shop/recipe data ingestion (`scraper/`)
 - **Dish compare** — public widget comparing DIY vs restaurant cost (login page)
@@ -34,8 +34,8 @@ Meal planner and household budget tracker. Plan meals on a calendar, manage prod
 ## Quick start
 
 ```bash
-git clone https://github.com/tomekmislun/Meal-planner-and-budgeter.git
-cd Meal-planner-and-budgeter
+git clone https://github.com/tomekmisiun/OnTrack.git
+cd OnTrack
 
 cp .env.example .env
 # Edit .env — set POSTGRES_PASSWORD, FLASK_SECRET_KEY, JWT_SECRET_KEY at minimum
