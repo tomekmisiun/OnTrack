@@ -23,7 +23,7 @@ backend/
 ├── pyproject.toml
 └── uv.lock
 
-scraper/               # experimental; outputs NOT auto-published to backend/data
+scraper/               # archived → archive/scraper-legacy/ (not runtime)
 frontend/              # separate Railway service (unchanged in this roadmap)
 ```
 
