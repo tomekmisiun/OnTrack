@@ -12,9 +12,7 @@ Production service **`ontrack-back`**:
 | Build context | `backend/` only |
 | Healthcheck | `/health` |
 
-Worker (optional): same Root Directory, config file path `/backend/railway.worker.prod.toml`.
-
-See also: [`.github/DEPLOY.md`](../../.github/DEPLOY.md)
+See also: [`.github/DEPLOY.md`](../../.github/DEPLOY.md). CI deploys **`ontrack-back`** and **`ontrackapp`** only (no worker service).
 
 ---
 

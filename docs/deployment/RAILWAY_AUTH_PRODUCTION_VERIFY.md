@@ -7,6 +7,25 @@ No application code changes are required unless a step fails.
 
 ---
 
+## When to run production smoke
+
+Run this runbook **after every production deploy** (CI job `deploy-production` on `main`) or when debugging auth/CORS regressions.
+
+| Trigger | Action |
+|---------|--------|
+| Merge to `main` with deploy changes | Wait for CI green → run §3 scripts |
+| Auth/CORS incident | Run §3 + §4 browser checks |
+| Railway variable change (`FRONTEND_URL`, JWT secrets) | Re-run `verify-production-auth.sh` |
+| Scheduled check (optional) | Manual — no prod secrets in CI; use local env vars |
+
+Expected outputs for `verify-production-auth.sh`:
+
+- Exit code **0**
+- Lines indicating register **201**, `/me` **200**, login **200**
+- No JWT values printed
+
+---
+
 ## 1. Railway service settings (Dashboard)
 
 ### `ontrack-back` (API)
@@ -117,5 +136,5 @@ railway logs          # inspect latest pre-deploy + runtime
 ## Related
 
 - [`.github/DEPLOY.md`](../../.github/DEPLOY.md)
+- [`docs/PRODUCTION_READINESS.md`](../PRODUCTION_READINESS.md)
 - [`RAILWAY_BACKEND_MIGRATION.md`](./RAILWAY_BACKEND_MIGRATION.md)
-- [`docs/audits/archive/cra-next-migration/CRA_NEXT_FULL_REGRESSION_AUDIT.md`](../audits/archive/cra-next-migration/CRA_NEXT_FULL_REGRESSION_AUDIT.md) (historical)

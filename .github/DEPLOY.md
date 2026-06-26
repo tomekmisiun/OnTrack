@@ -7,9 +7,10 @@ Production deploys after a push to **`main`** when **all CI jobs pass**, via the
 | Service | Role | Root Directory | Config |
 |---------|------|----------------|--------|
 | `ontrack-back` | Production API (FastAPI) | `backend` | `/backend/railway.toml` |
-| `ontrack-worker` | Background worker (optional) | `backend` | `/backend/railway.worker.prod.toml` |
 | `ontrackapp` | Frontend (Next.js) | `frontend-next` | `frontend-next/railway.toml` |
-| Postgres + Redis | Data + queue | — | Railway plugins |
+| Postgres | Primary database | — | Railway plugin |
+
+Background worker and Redis were **removed** per [`docs/adr/0002-background-worker.md`](../docs/adr/0002-background-worker.md). Decommission any legacy `ontrack-worker` or Redis plugin services in the Railway dashboard if still present.
 
 Backend migration runbook: [`docs/deployment/RAILWAY_BACKEND_MIGRATION.md`](../docs/deployment/RAILWAY_BACKEND_MIGRATION.md)
 
@@ -24,33 +25,34 @@ For **each** service → **Settings** → **Source**:
 1. **Source Repo** — connected to `tomekmisiun/OnTrack`
 2. **Branch connected to production** → **`main`**
 3. **Auto deploy when pushed to GitHub** — **OFF** recommended (deploy via GitHub Actions §5; avoids duplicate/SKIPPED builds)
-4. **Wait for CI** → **OFF**
-5. **ontrack-back:** Root Directory = **`backend`**, Config file path = **`/backend/railway.toml`** (absolute from repo root — Config file path does not follow Root Directory)
+4. **Wait for CI** → **OFF** (CI job `deploy-production` is the deploy gate)
+5. **ontrack-back:** Root Directory = **`backend`**, Config file path = **`/backend/railway.toml`**
 6. **ontrackapp:** Root Directory = **`frontend-next`**, Config file path = **`/frontend-next/railway.toml`**
 
 ### Frontend build variable
 
-Set at **build time** (baked into the Next.js client bundle). Railway passes service variables matching Dockerfile `ARG` names automatically.
+Set at **build time** (baked into the Next.js client bundle):
 
 ```
 NEXT_PUBLIC_API_URL=https://<ontrack-back-domain>
 ```
 
-Remove legacy `REACT_APP_API_URL` if still present — CRA was removed in task 15.
+Remove legacy `REACT_APP_API_URL` if still present.
 
 ### Frontend troubleshooting (deploy fails)
 
 | Symptom | Fix |
 |---------|-----|
-| Build: directory / Dockerfile not found | **Root Directory** must be `frontend-next` (not `frontend` — deleted) |
+| Build: directory / Dockerfile not found | **Root Directory** must be `frontend-next` |
 | Build: missing `NEXT_PUBLIC_API_URL` | Add variable on `ontrackapp` → **Variables**, redeploy |
-| Build uses dev server / wrong stage | Config must point to `Dockerfile.railway` (see `frontend-next/railway.toml`) |
+| Build uses dev server / wrong stage | Config must point to `Dockerfile.railway` |
 | Healthcheck timeout | `/login` must return 200; check deploy logs for `node server.js` |
-| App loads but API fails | `NEXT_PUBLIC_API_URL` must be the public `ontrack-back` URL (not localhost) |
-| Register/login CORS errors | `FRONTEND_URL` on `ontrack-back` must match the browser origin exactly (scheme + host + port) |
-| 500 on register after deploy | Run migrations once per release — `ontrack-back` uses `preDeployCommand` in `backend/railway.toml` |
+| App loads but API fails | `NEXT_PUBLIC_API_URL` must be the public `ontrack-back` URL |
+| Register/login CORS errors | `FRONTEND_URL` on `ontrack-back` must match browser origin exactly |
+| 500 on register after deploy | Check pre-deploy migration logs in Railway |
+| GraphQL / CLI timeout during deploy | Retry `railway up`; confirm `RAILWAY_TOKEN` and network |
 
-After changing Root Directory or variables: **Deployments → Redeploy** (not just restart).
+After changing Root Directory or variables: **Deployments → Redeploy**.
 
 ---
 
@@ -58,14 +60,16 @@ After changing Root Directory or variables: **Deployments → Redeploy** (not ju
 
 | Job | Purpose |
 |-----|---------|
-| `test` | FastAPI contract + health tests (branch protection) |
-| `frontend-next` | Lint, unit tests, typecheck, build |
+| `test` | Ruff, catalog validation, contract subset, OpenAPI drift |
+| `frontend-next` | generate:api, schema.ts drift, Vitest, lint, typecheck, build |
 | `frontend-next-e2e` | Playwright smoke tests |
-| `frontend-next-e2e-auth` | Playwright register/login against real FastAPI + Postgres |
+| `frontend-next-e2e-auth` | Playwright register/login against FastAPI + Postgres |
 | `frontend-next-docker` | Production Docker image build |
 | `backend-docker` | `docker build backend` validation |
 | `backend-integration` | DB stamp rehearsal (Postgres) |
 | `deploy-production` | **`main` only** — `railway up` for `ontrack-back` + `ontrackapp` after green CI |
+
+Full matrix: [`docs/TESTING.md`](../docs/TESTING.md)
 
 ---
 
@@ -88,7 +92,7 @@ push to main     → CI (all jobs green) → deploy-production → railway up (b
 
 ## 5. GitHub Actions → Railway (production deploy)
 
-After every push to **`main`**, job **`deploy-production`** uploads the **full repository** from the repo root (not `backend/` or `frontend-next/`). Railway applies each service’s **Root Directory** and **Config file path** from service settings.
+After every push to **`main`**, job **`deploy-production`** uploads the **full repository**. Railway applies each service’s **Root Directory** and **Config file path**.
 
 | Job | Deploys |
 |-----|---------|
@@ -96,42 +100,27 @@ After every push to **`main`**, job **`deploy-production`** uploads the **full r
 
 ### One-time setup: `RAILWAY_TOKEN`
 
-1. Railway → project **attractive-renewal** → **Settings** → **Tokens** → create **Project token** (production environment).
-2. GitHub → repo **OnTrack** → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**
-3. Name: **`RAILWAY_TOKEN`**, value: the project token.
+1. Railway → project → **Settings** → **Tokens** → create **Project token**.
+2. GitHub → repo **OnTrack** → **Settings** → **Secrets** → **`RAILWAY_TOKEN`**.
 
-Without this secret, CI still passes but **`deploy-production` fails** — add the token before merging deploy changes.
+Without this secret, CI passes but **`deploy-production` fails**.
 
 ### CI concurrency on `main`
 
-Workflow uses `cancel-in-progress: false` on **`main`** so a merge is not invalidated by the next push while CI is running. On PRs, in-progress runs are still cancelled.
+Workflow uses `cancel-in-progress: false` on **`main`** so merges are not invalidated mid-run.
 
 ---
 
 ## 6. Deploy runbook — SKIPPED deployments
 
-If Railway **Auto deploy** + **Wait for CI** are still enabled, you may see **SKIPPED** when CI was cancelled or superseded. **Preferred fix:** rely on **`deploy-production`** (§5) and turn **Wait for CI** **OFF** on both services.
+If Railway **Auto deploy** + **Wait for CI** are still enabled, you may see **SKIPPED** deployments. **Preferred:** rely on **`deploy-production`** and turn both **OFF**.
 
-Legacy symptom (Wait for CI only):
-
-### Symptoms
-
-- GitHub Actions on `main` is green, but production behavior matches an older commit.
-- Railway → **Deployments** shows latest entry **SKIPPED** with timestamp matching the merge push.
-
-### Fix (manual)
-
-From the **repository root** (full tree — service Root Directory in Railway picks `backend/` or `frontend-next/`):
+### Manual redeploy
 
 ```bash
-# Backend (ontrack-back)
 railway up --service=ontrack-back --detach
-
-# Frontend (ontrackapp)
 railway up --service=ontrackapp --detach
 ```
-
-Use `railway redeploy` only to restart the **same** image — it does **not** build new code. After code changes, use `railway up` or trigger a new GitHub deploy.
 
 ### Verification
 
@@ -143,21 +132,12 @@ curl -sf https://<ontrack-back-domain>/health/ready
 curl -sf https://<ontrack-back-domain>/metrics | head
 ```
 
-### Prevention
-
-- Use **`deploy-production`** (§5) with **`RAILWAY_TOKEN`** configured.
-- Turn **Wait for CI** **OFF** on `ontrack-back` and `ontrackapp`.
-- After merge, confirm GitHub Actions job **`Deploy to Railway (production)`** succeeded, then verify `/health/ready` and `/api/auth/refresh` on production.
+See [`docs/deployment/RAILWAY_AUTH_PRODUCTION_VERIFY.md`](../docs/deployment/RAILWAY_AUTH_PRODUCTION_VERIFY.md) for the full smoke runbook.
 
 ---
 
-## 7. Rollback (CRA → Next.js cutover)
+## 7. Rollback
 
-If the Next.js frontend deploy causes issues:
+If the Next.js frontend deploy causes issues, redeploy the last known-good Railway deployment from the dashboard. Backend API contract is unchanged between frontend releases.
 
-1. **Railway `ontrackapp`:** redeploy the last known-good deployment from the Railway dashboard, **or** temporarily set Root Directory back to a git tag/commit that still contains `frontend/` (pre–task 15).
-2. **Build variable:** restore `REACT_APP_API_URL=https://<ontrack-back-domain>` for the CRA image; for Next.js use `NEXT_PUBLIC_API_URL`.
-3. **Backend:** no change required — FastAPI API contract is unchanged.
-4. **Local dev:** `git checkout <pre-cutover-tag>` and `docker compose up --build frontend` if you need the legacy CRA stack.
-
-Document the rollback commit hash in your release notes when merging task 15.
+Document the rollback commit hash in release notes.

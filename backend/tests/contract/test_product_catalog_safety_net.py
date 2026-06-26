@@ -138,9 +138,6 @@ def test_product_list_supports_pagination(client, auth_headers, product, global_
 
 
 def test_register_does_not_enqueue_catalog_seed_job(client, db_session, global_catalog):
-    from app.worker.queue import drain_testing_jobs, reset_testing_jobs
-
-    reset_testing_jobs()
     reg = client.post(
         "/api/auth/register",
         json={"username": "noworker1", "password": "secret123", "lang": "pl"},
@@ -149,7 +146,6 @@ def test_register_does_not_enqueue_catalog_seed_job(client, db_session, global_c
     user = db_session.query(User).filter_by(username="noworker1").first()
     assert db_session.query(Product).filter_by(user_id=user.id).count() == 0
     assert db_session.query(Recipe).filter_by(user_id=user.id).count() == 0
-    assert drain_testing_jobs() == []
 
 
 def test_new_user_sees_global_recipes_without_private_copies(client, db_session, global_catalog):
