@@ -131,7 +131,7 @@ CI runs the FastAPI suite on every PR and push to `main` (`.github/workflows/ci.
 
 ```
 OnTrack/
-├── backend/             # FastAPI API + worker + Alembic + runtime data
+├── backend/             # FastAPI API + Alembic + runtime data
 │   ├── app/
 │   ├── data/            # Runtime JSON (demo dataset — manifest.json)
 │   ├── Dockerfile
