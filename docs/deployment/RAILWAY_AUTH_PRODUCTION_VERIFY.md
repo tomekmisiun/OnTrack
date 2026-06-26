@@ -118,4 +118,4 @@ railway logs          # inspect latest pre-deploy + runtime
 
 - [`.github/DEPLOY.md`](../../.github/DEPLOY.md)
 - [`RAILWAY_BACKEND_MIGRATION.md`](./RAILWAY_BACKEND_MIGRATION.md)
-- [`docs/CRA_NEXT_FULL_REGRESSION_AUDIT.md`](../CRA_NEXT_FULL_REGRESSION_AUDIT.md)
+- [`docs/audits/archive/cra-next-migration/CRA_NEXT_FULL_REGRESSION_AUDIT.md`](../audits/archive/cra-next-migration/CRA_NEXT_FULL_REGRESSION_AUDIT.md) (historical)

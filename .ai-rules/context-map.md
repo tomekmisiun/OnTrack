@@ -74,8 +74,9 @@ Before editing, read the files listed for your **task type**. Start with
 
 | File | Purpose |
 |------|---------|
-| `docs/audits/FULL_PROJECT_AUDIT.md` | Full audit + approved remediation plan |
-| `docs/backend-migration/MIGRATION_ROADMAP.md` | Historical MIG tasks (cutover complete) |
+| `docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md` | Current state audit |
+| `docs/PROJECT_REMEDIATION_ROADMAP.md` | Remediation task backlog |
+| `docs/audits/archive/backend-migration-completed/MIGRATION_ROADMAP.md` | Historical MIG tasks (cutover complete) |
 | `.github/DEPLOY.md` | Production deploy workflow |
 
 Do not invent roadmap or status files beyond what exists above.

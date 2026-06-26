@@ -1,3 +1,5 @@
+> **HISTORICAL DOCUMENT** — Archived TARGET_ARCHITECTURE.md. For current state see [`docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md`](../PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md).
+
 # Target architecture
 
 Monorepo layout after migration (Flask `app/` remains until MIG-017):

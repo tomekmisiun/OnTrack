@@ -98,6 +98,6 @@ npm run lint && npm run typecheck && npm run build
 
 ## References
 
-- Migration plan: `docs/FRONTEND_NEXT_MIGRATION_PLAN.md` (Task 16)
+- Migration plan (archived): `docs/audits/archive/cra-next-migration/FRONTEND_NEXT_MIGRATION_PLAN.md` (Task 16)
 - Auth client: `frontend-next/lib/api/auth.ts`
 - Proxy helpers: `frontend-next/lib/bff/proxy.ts`

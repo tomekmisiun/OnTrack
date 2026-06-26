@@ -1,6 +1,6 @@
 # OnTrack FastAPI backend
 
-Production API for OnTrack. See [`docs/backend-migration/DATA_DEPLOYMENT_ROADMAP.md`](../docs/backend-migration/DATA_DEPLOYMENT_ROADMAP.md).
+Production API for OnTrack. See [`backend/data/README.md`](data/README.md) and [`docs/deployment/RAILWAY_BACKEND_MIGRATION.md`](../docs/deployment/RAILWAY_BACKEND_MIGRATION.md).
 
 ## Local development
 

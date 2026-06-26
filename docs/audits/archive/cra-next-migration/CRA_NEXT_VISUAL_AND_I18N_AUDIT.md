@@ -1,3 +1,5 @@
+> **HISTORICAL DOCUMENT** — Archived CRA_NEXT_VISUAL_AND_I18N_AUDIT.md. For current state see [`docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md`](../PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md).
+
 # CRA → Next.js: Visual parity & UI locale / market audit
 
 **Date:** 2026-06-24  

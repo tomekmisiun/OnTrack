@@ -1,3 +1,5 @@
+> **HISTORICAL DOCUMENT** — Archived 2026-05-26_FULL_PROJECT_AUDIT.md. For current state see [`docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md`](../PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md).
+
 # Full Project Audit
 
 **Initial audit date:** 2026-05-26  

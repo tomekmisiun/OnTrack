@@ -1,3 +1,5 @@
+> **HISTORICAL DOCUMENT** — Archived ADAPTATION_CHECKLIST.md. For current state see [`docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md`](../PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md).
+
 # Adaptation Checklist — OnTrack
 
 Completed when adopting [ai-agent-rules-template](https://github.com/tomekmisiun/ai-agent-rules-template) into this repo.
