@@ -11,12 +11,11 @@ import "./profile-modal.css";
 
 type ProfileModalProps = {
   onClose: () => void;
-  onStartTour?: () => void;
 };
 
 const MARKETS: MarketCode[] = ["PL", "GB"];
 
-export function ProfileModal({ onClose, onStartTour }: ProfileModalProps) {
+export function ProfileModal({ onClose }: ProfileModalProps) {
   const { user, logout, deleteAccount, updateUserLang, updateUserMarket } =
     useAuth();
   const { t, switchLang } = useLanguage();
@@ -183,15 +182,6 @@ export function ProfileModal({ onClose, onStartTour }: ProfileModalProps) {
           >
             {deleting ? tString(t, "deleting") : tString(t, "delete_account")}
           </button>
-          {onStartTour && (
-            <button
-              type="button"
-              onClick={onStartTour}
-              className="profile-btn profile-btn-tour"
-            >
-              ▶ {tString(t, "show_tutorial")}
-            </button>
-          )}
           <button
             type="button"
             onClick={onClose}

@@ -68,6 +68,11 @@ def _load_recipe(session: Session, user_id: int, recipe_id: int) -> Recipe:
     return recipe
 
 
+def load_visible_recipe(session: Session, user_id: int, recipe_id: int) -> Recipe:
+    """Return a system-catalog or user-owned recipe row visible to the user."""
+    return _load_recipe(session, user_id, recipe_id)
+
+
 def list_recipes(session: Session, user_id: int) -> list[dict]:
     market_code = market_code_for_user(session, user_id)
     favorites = _favorite_recipe_ids(session, user_id)

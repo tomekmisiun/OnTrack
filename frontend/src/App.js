@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Joyride, STATUS, EVENTS, ACTIONS } from 'react-joyride';
 import Products from './components/Products';
 import Recipes from './components/Recipes';
 import Calendar from './components/Calendar';
@@ -18,7 +17,6 @@ import { LanguageProvider, useLanguage } from './contexts/LanguageContext';
 import { ToastProvider } from './contexts/ToastContext';
 import { MemberProvider } from './contexts/MemberContext';
 import { Icon } from '@iconify/react';
-import { getTourSteps, getTourLocale, TOUR_STYLES } from './tour-steps';
 import { useLayoutViewport } from './hooks/useLayoutViewport';
 import { LAYOUT_WIDTH } from './layoutConstants';
 import './desktopLayout.css';
@@ -34,19 +32,7 @@ const TAB_ICONS = {
   export:   'heroicons:arrow-down-tray',
 };
 
-function tourStorageKey(userId) {
-  return `mealplanner_tour_done_${userId}`;
-}
-
-function isTourDone(userId) {
-  return Boolean(userId && localStorage.getItem(tourStorageKey(userId)) === '1');
-}
-
-function markTourDone(userId) {
-  if (userId) localStorage.setItem(tourStorageKey(userId), '1');
-}
-
-function AppInner({ onStartTour }) {
+function AppInner() {
   const { user, logout } = useAuth();
   const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('home');
@@ -80,12 +66,6 @@ function AppInner({ onStartTour }) {
       document.body.classList.remove('app-shell', 'app-home');
     };
   }, [user, isHome]);
-
-  useEffect(() => {
-    const handler = (e) => goToTab(e.detail.tab);
-    window.addEventListener('tour-goto-tab', handler);
-    return () => window.removeEventListener('tour-goto-tab', handler);
-  }, [goToTab]);
 
   if (!user) return <Login />;
 
@@ -124,7 +104,6 @@ function AppInner({ onStartTour }) {
           {tabs.map(tab => (
             <button
               key={tab.id}
-              data-tour={`tab-${tab.id}`}
               className={`sidebar-tab ${activeTab === tab.id ? 'active' : ''}`}
               onClick={() => goToTab(tab.id)}
             >
@@ -178,95 +157,19 @@ function AppInner({ onStartTour }) {
       </main>
 
       {showProfile && (
-        <Profile
-          onClose={() => setShowProfile(false)}
-          onStartTour={() => { setShowProfile(false); onStartTour(); }}
-        />
+        <Profile onClose={() => setShowProfile(false)} />
       )}
     </div>
   );
 }
 
-function TourHost() {
-  const { user, loading } = useAuth();
-  const { lang } = useLanguage();
-  const [tourRun, setTourRun] = useState(false);
-
-  useEffect(() => {
-    if (!user) setTourRun(false);
-  }, [user]);
-
-  useEffect(() => {
-    if (loading || !user?.id || isTourDone(user.id)) return undefined;
-    let tourTimer;
-    const timer = setTimeout(() => {
-      window.dispatchEvent(new CustomEvent('tour-goto-tab', { detail: { tab: 'macro' } }));
-      tourTimer = setTimeout(() => setTourRun(true), 250);
-    }, 600);
-    return () => {
-      clearTimeout(timer);
-      clearTimeout(tourTimer);
-    };
-  }, [user?.id, loading]);
-
-  const handleTourEvent = useCallback((data) => {
-    const { status, type, action, index } = data;
-
-    if (type === EVENTS.STEP_BEFORE) {
-      const step = getTourSteps(lang)[index];
-      if (step?.gotoTab) {
-        window.dispatchEvent(new CustomEvent('tour-goto-tab', { detail: { tab: step.gotoTab } }));
-      }
-      return;
-    }
-
-    if (
-      status === STATUS.FINISHED ||
-      status === STATUS.SKIPPED ||
-      action === ACTIONS.SKIP ||
-      (action === ACTIONS.CLOSE && type === EVENTS.TOUR_END)
-    ) {
-      if (user?.id) markTourDone(user.id);
-      setTourRun(false);
-    }
-  }, [lang, user?.id]);
-
-  const startTour = useCallback(() => {
-    setTourRun(false);
-    setTimeout(() => setTourRun(true), 100);
-  }, []);
-
-  return (
-    <>
-      {user && (
-        <Joyride
-          steps={getTourSteps(lang)}
-          run={tourRun}
-          continuous
-          scrollToFirstStep={false}
-          locale={getTourLocale(lang)}
-          styles={TOUR_STYLES}
-          onEvent={handleTourEvent}
-          options={{
-            skipScroll: true,
-            showProgress: false,
-            buttons: ['back', 'close', 'skip', 'primary'],
-            closeButtonAction: 'skip',
-          }}
-        />
-      )}
-      <AppInner onStartTour={startTour} />
-    </>
-  );
-}
-
-function AppWithTour() {
+function AppAuthenticated() {
   const { switchLang } = useLanguage();
 
   return (
     <AuthProvider onLangChange={switchLang}>
       <MemberProvider>
-        <TourHost />
+        <AppInner />
       </MemberProvider>
     </AuthProvider>
   );
@@ -276,7 +179,7 @@ export default function App() {
   return (
     <LanguageProvider>
       <ToastProvider>
-        <AppWithTour />
+        <AppAuthenticated />
       </ToastProvider>
     </LanguageProvider>
   );
