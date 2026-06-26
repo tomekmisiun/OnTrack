@@ -88,7 +88,7 @@ push to main     → CI (all jobs green) → deploy-production → railway up (b
 
 ## 5. GitHub Actions → Railway (production deploy)
 
-After every push to **`main`**, job **`deploy-production`** in [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) runs **only when all CI jobs pass**:
+After every push to **`main`**, job **`deploy-production`** uploads the **full repository** from the repo root (not `backend/` or `frontend-next/`). Railway applies each service’s **Root Directory** and **Config file path** from service settings.
 
 | Job | Deploys |
 |-----|---------|
@@ -121,14 +121,14 @@ Legacy symptom (Wait for CI only):
 
 ### Fix (manual)
 
-From the repo root, with Railway CLI linked to the correct project:
+From the **repository root** (full tree — service Root Directory in Railway picks `backend/` or `frontend-next/`):
 
 ```bash
 # Backend (ontrack-back)
-cd backend && railway up --detach
+railway up --service=ontrack-back --detach
 
 # Frontend (ontrackapp)
-cd frontend-next && railway up --service ontrackapp --detach
+railway up --service=ontrackapp --detach
 ```
 
 Use `railway redeploy` only to restart the **same** image — it does **not** build new code. After code changes, use `railway up` or trigger a new GitHub deploy.

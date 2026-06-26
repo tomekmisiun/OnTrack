@@ -255,9 +255,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Deploy backend (ontrack-back)
-        working-directory: backend
         run: railway up --service=ontrack-back --ci --detach
 
       - name: Deploy frontend (ontrackapp)
-        working-directory: frontend-next
         run: railway up --service=ontrackapp --ci --detach
