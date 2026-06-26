@@ -117,6 +117,24 @@ def test_copy_range_duplicates_meals(client, auth_headers, recipe, member):
     assert len(target_day.json()) == 1
 
 
+def test_add_meal_with_system_recipe(client, auth_headers, member, global_catalog):
+    system_recipe = (
+        client.get("/api/recipes/", headers=auth_headers).json()[0]
+    )
+    res = client.post(
+        "/api/meal-plan/",
+        headers=auth_headers,
+        json={
+            "date": "2026-05-27",
+            "position": 3,
+            "recipe_id": system_recipe["id"],
+            "member_id": member.id,
+        },
+    )
+    assert res.status_code == 201
+    assert res.json()["recipe"]["id"] == system_recipe["id"]
+
+
 def test_summary_rejects_invalid_dates(client, auth_headers):
     res = client.get(
         "/api/meal-plan/summary/not-a-date/2026-05-23",

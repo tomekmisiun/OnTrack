@@ -7,6 +7,7 @@ from app.models.household_member import HouseholdMember
 from app.models.meal_plan import MealPlan
 from app.models.recipe import Recipe, RecipeIngredient
 from app.services.meal_plan_presenter import meal_to_dict
+from app.services.recipe_service import RecipeServiceError as RecipeLookupError, load_visible_recipe
 from app.services.user_preferences import catalog_lang_for_user
 
 
@@ -145,14 +146,10 @@ def add_meal(
     if not mid:
         raise MealPlanServiceError("No profile configured", 400)
 
-    lang = catalog_lang_for_user(session, user_id)
-    recipe = (
-        session.query(Recipe)
-        .filter_by(id=recipe_id, user_id=user_id, lang=lang)
-        .first()
-    )
-    if not recipe:
-        raise MealPlanServiceError("Recipe not found", 404)
+    try:
+        recipe = load_visible_recipe(session, user_id, recipe_id)
+    except RecipeLookupError as exc:
+        raise MealPlanServiceError(exc.message, exc.status_code) from exc
 
     existing = (
         session.query(MealPlan)
