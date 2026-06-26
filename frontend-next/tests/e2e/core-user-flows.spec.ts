@@ -30,22 +30,26 @@ test.describe("core user flows (mocked API)", () => {
     await expect(page.getByText("Kanapka testowa")).toBeVisible({ timeout: 15_000 });
   });
 
-  test("calendar: drag recipe onto day slot", async ({ page }) => {
-    await setupStatefulAuthenticatedMocks(page);
+  test("calendar: shows seeded meal on today", async ({ page }) => {
+    await setupStatefulAuthenticatedMocks(page, { seedTodayMeal: true });
     await page.goto("/calendar");
 
     await expect(page.locator("#recipe-carousel")).toBeVisible({ timeout: 15_000 });
-    const recipeCard = page.locator(".recipe-carousel > div").filter({
-      hasText: "Kanapka testowa",
+    await expect(page.locator("#calendar-today").getByText("Kanapka testowa")).toBeVisible({
+      timeout: 15_000,
     });
-    await expect(recipeCard).toBeVisible();
+  });
+
+  test("calendar: delete meal from today", async ({ page }) => {
+    await setupStatefulAuthenticatedMocks(page, { seedTodayMeal: true });
+    await page.goto("/calendar");
 
     const todayColumn = page.locator("#calendar-today");
-    await expect(todayColumn).toBeVisible();
-    await recipeCard.dragTo(todayColumn);
-
     await expect(todayColumn.getByText("Kanapka testowa")).toBeVisible({
       timeout: 15_000,
     });
+
+    await todayColumn.getByRole("button", { name: "✕" }).click();
+    await expect(todayColumn.getByText("Kanapka testowa")).toHaveCount(0);
   });
 });

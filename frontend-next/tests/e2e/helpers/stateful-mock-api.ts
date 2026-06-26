@@ -147,12 +147,20 @@ export type StatefulMock = {
   mealsByDate: Record<string, MockMeal[]>;
 };
 
-export async function setupStatefulAuthenticatedMocks(page: Page): Promise<StatefulMock> {
+export async function setupStatefulAuthenticatedMocks(
+  page: Page,
+  options?: { seedTodayMeal?: boolean },
+): Promise<StatefulMock> {
   const state: StatefulMock = {
     products: [],
     recipes: [recipeSummary(1, "Kanapka testowa")],
     mealsByDate: {},
   };
+
+  if (options?.seedTodayMeal) {
+    const today = new Date().toISOString().slice(0, 10);
+    state.mealsByDate[today] = [mealFromRecipe(300, today, 1, state.recipes[0]!)];
+  }
 
   let nextProductId = 100;
   let nextRecipeId = 200;
