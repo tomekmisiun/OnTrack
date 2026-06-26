@@ -8,7 +8,8 @@ on:
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  # On main, let CI finish so Railway (or deploy-production) sees a green run.
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
   test:
@@ -233,3 +234,30 @@ jobs:
           TEST_DATABASE_URL: postgresql+psycopg://ontrack:ontrack@localhost:5432/ontrack_rehearsal
           FLASK_SECRET_KEY: ci-test-flask-secret-key-0123456789abcdef
           JWT_SECRET_KEY: ci-test-jwt-secret-key-0123456789abcdef
+
+  deploy-production:
+    name: Deploy to Railway (production)
+    needs:
+      - test
+      - frontend-next
+      - frontend-next-e2e
+      - frontend-next-e2e-auth
+      - backend-docker
+      - frontend-next-docker
+      - backend-integration
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    container: ghcr.io/railwayapp/cli:latest
+    env:
+      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+    steps:
+      - name: Checkout kod
+        uses: actions/checkout@v6
+
+      - name: Deploy backend (ontrack-back)
+        working-directory: backend
+        run: railway up --service=ontrack-back --ci --detach
+
+      - name: Deploy frontend (ontrackapp)
+        working-directory: frontend-next
+        run: railway up --service=ontrackapp --ci --detach

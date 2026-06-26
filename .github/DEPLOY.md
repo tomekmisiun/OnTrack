@@ -1,6 +1,6 @@
-# Deploy — Wait for CI (Railway + GitHub Actions)
+# Deploy — GitHub Actions → Railway
 
-Production deploys from Railway after a push to `main`, **but only when GitHub Actions passes**.
+Production deploys after a push to **`main`** when **all CI jobs pass**, via the **`deploy-production`** workflow job (`railway up`).
 
 ## Railway services
 
@@ -23,8 +23,8 @@ For **each** service → **Settings** → **Source**:
 
 1. **Source Repo** — connected to `tomekmisiun/OnTrack`
 2. **Branch connected to production** → **`main`**
-3. **Auto deploys when pushed to GitHub** — **enabled**
-4. **Wait for CI** → **ON**
+3. **Auto deploy when pushed to GitHub** — **OFF** recommended (deploy via GitHub Actions §5; avoids duplicate/SKIPPED builds)
+4. **Wait for CI** → **OFF**
 5. **ontrack-back:** Root Directory = **`backend`**, Config file path = **`/backend/railway.toml`** (absolute from repo root — Config file path does not follow Root Directory)
 6. **ontrackapp:** Root Directory = **`frontend-next`**, Config file path = **`/frontend-next/railway.toml`**
 
@@ -65,6 +65,7 @@ After changing Root Directory or variables: **Deployments → Redeploy** (not ju
 | `frontend-next-docker` | Production Docker image build |
 | `backend-docker` | `docker build backend` validation |
 | `backend-integration` | DB stamp rehearsal (Postgres) |
+| `deploy-production` | **`main` only** — `railway up` for `ontrack-back` + `ontrackapp` after green CI |
 
 ---
 
@@ -78,18 +79,40 @@ Require status checks: **`test`**, **`frontend-next`** (recommended)
 
 ```
 feature branch → PR → CI → merge
-push to main     → CI → Railway deploy (Wait for CI)
+push to main     → CI (all jobs green) → deploy-production → railway up (backend + frontend)
 ```
 
 **Do not push directly to `main`.**
 
-Docs: [Railway — Wait for CI](https://docs.railway.com/deployments/github-autodeploys#wait-for-ci)
+---
+
+## 5. GitHub Actions → Railway (production deploy)
+
+After every push to **`main`**, job **`deploy-production`** in [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) runs **only when all CI jobs pass**:
+
+| Job | Deploys |
+|-----|---------|
+| `deploy-production` | `ontrack-back` + `ontrackapp` via `railway up --ci` |
+
+### One-time setup: `RAILWAY_TOKEN`
+
+1. Railway → project **attractive-renewal** → **Settings** → **Tokens** → create **Project token** (production environment).
+2. GitHub → repo **OnTrack** → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**
+3. Name: **`RAILWAY_TOKEN`**, value: the project token.
+
+Without this secret, CI still passes but **`deploy-production` fails** — add the token before merging deploy changes.
+
+### CI concurrency on `main`
+
+Workflow uses `cancel-in-progress: false` on **`main`** so a merge is not invalidated by the next push while CI is running. On PRs, in-progress runs are still cancelled.
 
 ---
 
 ## 6. Deploy runbook — SKIPPED deployments
 
-Railway may record a deployment as **SKIPPED** when a push to `main` arrives while CI is still running (Wait for CI). The service keeps the **previous** deployment until a successful deploy completes.
+If Railway **Auto deploy** + **Wait for CI** are still enabled, you may see **SKIPPED** when CI was cancelled or superseded. **Preferred fix:** rely on **`deploy-production`** (§5) and turn **Wait for CI** **OFF** on both services.
+
+Legacy symptom (Wait for CI only):
 
 ### Symptoms
 
@@ -122,9 +145,9 @@ curl -sf https://<ontrack-back-domain>/metrics | head
 
 ### Prevention
 
-- Confirm **Wait for CI** is enabled on each production service.
-- After merging to `main`, wait for the CI workflow to finish before assuming production updated.
-- Optional: add a post-merge deploy smoke job or monitor Railway deployment status in release notes.
+- Use **`deploy-production`** (§5) with **`RAILWAY_TOKEN`** configured.
+- Turn **Wait for CI** **OFF** on `ontrack-back` and `ontrackapp`.
+- After merge, confirm GitHub Actions job **`Deploy to Railway (production)`** succeeded, then verify `/health/ready` and `/api/auth/refresh` on production.
 
 ---
 
