@@ -87,7 +87,48 @@ Docs: [Railway — Wait for CI](https://docs.railway.com/deployments/github-auto
 
 ---
 
-## 5. Rollback (CRA → Next.js cutover)
+## 6. Deploy runbook — SKIPPED deployments
+
+Railway may record a deployment as **SKIPPED** when a push to `main` arrives while CI is still running (Wait for CI). The service keeps the **previous** deployment until a successful deploy completes.
+
+### Symptoms
+
+- GitHub Actions on `main` is green, but production behavior matches an older commit.
+- Railway → **Deployments** shows latest entry **SKIPPED** with timestamp matching the merge push.
+
+### Fix (manual)
+
+From the repo root, with Railway CLI linked to the correct project:
+
+```bash
+# Backend (ontrack-back)
+cd backend && railway up --detach
+
+# Frontend (ontrackapp)
+cd frontend-next && railway up --service ontrackapp --detach
+```
+
+Use `railway redeploy` only to restart the **same** image — it does **not** build new code. After code changes, use `railway up` or trigger a new GitHub deploy.
+
+### Verification
+
+```bash
+API_URL=https://<ontrack-back-domain> FRONTEND_ORIGIN=https://<ontrackapp-domain> \
+  ./backend/scripts/verify-production-auth.sh
+
+curl -sf https://<ontrack-back-domain>/health/ready
+curl -sf https://<ontrack-back-domain>/metrics | head
+```
+
+### Prevention
+
+- Confirm **Wait for CI** is enabled on each production service.
+- After merging to `main`, wait for the CI workflow to finish before assuming production updated.
+- Optional: add a post-merge deploy smoke job or monitor Railway deployment status in release notes.
+
+---
+
+## 7. Rollback (CRA → Next.js cutover)
 
 If the Next.js frontend deploy causes issues:
 
