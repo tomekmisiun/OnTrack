@@ -29,7 +29,7 @@ All **10 tasks** from §18 Recommended Task Breakdown were implemented:
 
 **Re-validation:** backend **188 passed**, 7 skipped; frontend **43 passed**; `ruff check` **pass**; `npm run build` **pass**.
 
-**Still open:** JWT refresh (AUDIT-004), password reset (AUDIT-005), worker stub (AUDIT-010), `parse_free` quota (AUDIT-005 related), legacy `frontend/` folder (AUDIT-020), npm audit moderates (AUDIT-018).
+**Still open:** JWT refresh (AUDIT-004), password reset (AUDIT-005), worker stub (AUDIT-010), `parse_free` quota (AUDIT-005 related), legacy `frontend/` folder (AUDIT-020 — **keep until task #10**), npm audit moderates (AUDIT-018), meal calendar persistence on prod until deploy of `0275099` (AUDIT-021 — **code merged PR #116**).
 
 ---
 
@@ -223,7 +223,7 @@ flowchart TB
 | Products CRUD | **WORKS** | User isolation + system catalog | `test_products_contract.py`, safety-net tests | — |
 | Product customize | **WORKS** | `POST /api/products/{id}/customize` | Partial via products tests | Undocumented in API contract |
 | Recipes CRUD + favorites | **WORKS** | System + user recipes visible | `test_recipes_contract.py` | — |
-| Meal calendar (add/delete/copy) | **WORKS** | System recipe drag-drop fixed PR #104 | `test_meal_plan_contract.py` | `member_id` fallback can surprise UX |
+| Meal calendar (add/delete/copy) | **WORKS** (post PR #116) | Read path no longer filters by recipe visibility; member fallback | `test_meal_plan_contract.py` | Deploy `0275099` to prod; add E2E persistence (task #1) |
 | Day schedule | **WORKS** | Full contract DS01–DS06 | `test_day_schedule_contract.py` | — |
 | Nutrition lookup | **WORKS** | Macro lookup service | `test_nutrition_contract.py` | Depends on DeepSeek when configured |
 | Receipt import (AI) | **PARTIALLY WORKS** | Gemini + 2/day limit | `test_import_contract.py` | REQUIRES MANUAL TEST with API key |
@@ -763,4 +763,50 @@ npm run typecheck && npm run build                     # pass
 
 ---
 
-*Remediation applied 2026-05-26. Changes uncommitted at audit update time — commit via PR before production deploy.*
+## 21. Post-audit follow-up (2026-05-26, user-approved)
+
+### Step 1 — Meal calendar persistence (merged)
+
+| Item | Value |
+|------|-------|
+| PR | [#116](https://github.com/tomekmisiun/OnTrack/pull/116) — **merged** to `main` at `0275099` |
+| Branch | `fix/calendar-meal-persistence-v2` (deleted after merge) |
+| Fix | Stop filtering meal reads by recipe visibility; member-id fallback; calendar `effectiveTargetMemberIds`; BFF 307 follow |
+
+**AUDIT-021 status:** **RESOLVED** (pending production deploy after Railway picks up `main`).
+
+### Step 2 — Approved implementation plan (tasks 1–11)
+
+User approved execution order on 2026-05-26. One task per branch; no commit/push/merge without explicit approval per task (except docs-only updates agreed in session).
+
+| # | Branch | Task | Priority | Status |
+|---|--------|------|----------|--------|
+| 1 | `test/e2e-meal-persistence` | E2E: add meal → reload → still visible | P1 | **APPROVED — pending** |
+| 2 | `chore/update-ai-rules-post-cutover` | Fix `.cursor/rules/ontrack.mdc`, `.ai-rules/context-map.md` (FastAPI + Next as current) | P2 | **APPROVED — pending** |
+| 3 | `docs/post-migration-architecture` | Remove Flask column from API_CONTRACT; mark stale cutover docs | P2 | **APPROVED — pending** |
+| 4 | `fix/auth-session-flow` | JWT refresh or shorter TTL + UX | P2 | **APPROVED — pending** |
+| 5 | `feat/password-reset` | Password reset flow | P2 | **APPROVED — pending** |
+| 6 | `fix/import-parse-free-quota` | Rate limit / quota on `parse_free` for authenticated users | P2 | **APPROVED — pending** |
+| 7 | `chore/worker-decision` | Remove worker from Compose or implement first real job | P2 | **APPROVED — pending** |
+| 8 | `feat/visual-parity-login` | Login showcase, demo WebM, shell CSS parity | P2 | **APPROVED — pending** |
+| 9 | `refactor/separate-ui-locale-and-market` | Decouple `ui_locale` from `market_code` in UI | P2 | **APPROVED — pending** |
+| 10 | `chore/archive-legacy-frontend` | Archive or remove `frontend/` CRA tree | P3 | **APPROVED — pending** (after #8) |
+| 11 | `test/core-user-flows` | E2E coverage: products, recipes, calendar CRUD | P2 | **APPROVED — pending** (after #1) |
+
+**Execution rule:** task #1 is next; discover new issues → log as separate finding, do not expand scope.
+
+### Step 3 — Legacy `frontend/` (CRA) decision
+
+| Decision | Detail |
+|----------|--------|
+| **Verdict** | **KEEP in repo** as read-only CRA reference until visual parity epic (#8) is done |
+| **Not used for** | Docker Compose, Railway, CI, production builds |
+| **Removal trigger** | Task #10 (`chore/archive-legacy-frontend`) after login/shell parity or explicit user override |
+| **Rationale** | Side-by-side comparison still needed (`docs/CRA_REFERENCE.md`, `docs/CRA_NEXT_VISUAL_AND_I18N_AUDIT.md`); deleting now would block parity work |
+| **Hygiene** | Do not commit `frontend/node_modules/` or `frontend/build/`; reference snapshot is `frontend/src/` + `package.json` only |
+
+Recorded in `frontend/README.md` (§ Decision).
+
+---
+
+*Last updated: 2026-05-26 — PR #116 merged; plan and legacy decision approved by user.*

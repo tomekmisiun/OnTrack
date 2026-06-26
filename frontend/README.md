@@ -13,7 +13,16 @@ This directory was restored from commit **`dca8eb9`** for **visual and behaviora
 
 - Point Railway Root Directory to `frontend/`
 - Change `docker-compose.yml` to build this app for production
-- Delete this tree until parity epic is complete
+- Delete this tree until parity epic is complete (**see Decision below**)
+
+## Decision (2026-05-26)
+
+**Status: KEEP as reference.** Approved in full-project audit follow-up (`docs/audits/FULL_PROJECT_AUDIT.md` §21).
+
+- Remains in the repository for CRA ↔ Next.js visual and behavioral comparison.
+- **Not** part of production runtime (Compose / Railway / CI use `frontend-next/` only).
+- Planned removal/archival in task **`chore/archive-legacy-frontend`** after `feat/visual-parity-login` (or earlier only with explicit user approval).
+- Do not commit `node_modules/` or `build/` artifacts from local runs.
 
 ## Local run (comparison only)
 
