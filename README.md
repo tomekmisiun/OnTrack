@@ -435,7 +435,7 @@ For running services directly outside Docker:
 
 - Python 3.14
 - [`uv`](https://docs.astral.sh/uv/)
-- Node.js 20+
+- Node.js 24+
 - npm
 
 ### 1. Clone the repository

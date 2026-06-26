@@ -12,7 +12,7 @@ Production UI for OnTrack: meal planning, products, recipes, budget summary, and
 
 ## Prerequisites
 
-- Node.js 20+ (matches production Docker image)
+- Node.js 24+ (matches production Docker image and CI)
 - Running FastAPI backend (default `http://localhost:5001`)
 
 ## Environment
