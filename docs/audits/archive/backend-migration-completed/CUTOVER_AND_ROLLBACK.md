@@ -1,3 +1,5 @@
+> **HISTORICAL DOCUMENT** — Archived CUTOVER_AND_ROLLBACK.md. For current state see [`docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md`](../PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md).
+
 # Cutover and rollback
 
 Safe Railway migration: **Flask production stays live** until FastAPI is proven on staging with a **database clone**.

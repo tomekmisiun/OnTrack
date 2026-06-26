@@ -1,3 +1,5 @@
+> **HISTORICAL DOCUMENT** — Archived FRONTEND_NEXT_MIGRATION_PLAN.md. For current state see [`docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md`](../PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md).
+
 # Frontend Next.js migration plan
 
 Migrate OnTrack UI from **React 19 + Create React App** to **Next.js App Router + TypeScript strict + Tailwind** (`frontend-next/`). **All 16 tasks complete** — CRA removed; production frontend is Next.js.

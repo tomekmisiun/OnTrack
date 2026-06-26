@@ -145,7 +145,7 @@ Confirms stamp did not alter schema — Flask must still work.
 3. `GET /api/products/` returns data
 4. No migration errors in Flask logs
 
-Production rollback during cutover: revert frontend URL to Flask — see [CUTOVER_AND_ROLLBACK.md](./CUTOVER_AND_ROLLBACK.md).
+Production rollback to Flask is **obsolete**. See archived [CUTOVER_AND_ROLLBACK.md](../audits/archive/backend-migration-completed/CUTOVER_AND_ROLLBACK.md) for historical context only.
 
 ---
 
@@ -198,4 +198,4 @@ Production stamp uses the same commands with **production** `DATABASE_URL` durin
 
 - [DATABASE_COMPATIBILITY.md](./DATABASE_COMPATIBILITY.md) — table inventory, adoption strategy
 - [RAILWAY_STAGING.md](./RAILWAY_STAGING.md) — staging deploy
-- [CUTOVER_AND_ROLLBACK.md](./CUTOVER_AND_ROLLBACK.md) — production cutover phases
+- [CUTOVER_AND_ROLLBACK.md](../audits/archive/backend-migration-completed/CUTOVER_AND_ROLLBACK.md) — historical cutover phases (Flask rollback not applicable)

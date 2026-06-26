@@ -71,4 +71,4 @@ git checkout <new-cra-commit> -- frontend/src frontend/public
 # Update frontend/README.md snapshot commit hash
 ```
 
-Do **not** merge CRA changes into `frontend-next/` wholesale — port screen-by-screen per roadmap in `docs/CRA_NEXT_VISUAL_AND_I18N_AUDIT.md`.
+Do **not** merge CRA changes into `frontend-next/` wholesale — see archived migration audit [`docs/audits/archive/cra-next-migration/CRA_NEXT_VISUAL_AND_I18N_AUDIT.md`](audits/archive/cra-next-migration/CRA_NEXT_VISUAL_AND_I18N_AUDIT.md) for historical context.

@@ -1,3 +1,5 @@
+> **HISTORICAL DOCUMENT** — Archived CURRENT_FLASK_INVENTORY.md. For current state see [`docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md`](../PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md).
+
 # Current Flask backend inventory
 
 Facts verified from OnTrack repository at plan time unless marked **inferred**.

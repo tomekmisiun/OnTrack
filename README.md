@@ -11,8 +11,8 @@ Plan meals on a calendar, manage products and recipes, calculate nutrition targe
 <br />
 
 [![Repository](https://img.shields.io/badge/REPOSITORY-OPEN_ON_GITHUB-181717?style=for-the-badge&logo=github)](https://github.com/tomekmisiun/OnTrack)
-[![Technical Audit](https://img.shields.io/badge/TECHNICAL_AUDIT-READ_REPORT-1f6feb?style=for-the-badge&logo=readthedocs&logoColor=white)](docs/audits/FULL_PROJECT_AUDIT.md)
-[![Migration Report](https://img.shields.io/badge/NEXT.JS_MIGRATION-READ_REPORT-000000?style=for-the-badge&logo=nextdotjs)](docs/CRA_NEXT_FINAL_PARITY_REPORT.md)
+[![Technical Audit](https://img.shields.io/badge/TECHNICAL_AUDIT-READ_REPORT-1f6feb?style=for-the-badge&logo=readthedocs&logoColor=white)](docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md)
+[![Migration Report](https://img.shields.io/badge/NEXT.JS_MIGRATION-ARCHIVED_REPORT-666666?style=for-the-badge&logo=nextdotjs)](docs/audits/archive/cra-next-migration/CRA_NEXT_FINAL_PARITY_REPORT.md)
 
 <br />
 
@@ -788,7 +788,7 @@ OnTrack is a functionally mature portfolio application. Its main user journeys a
 | Third-party AI integrations | 🟡 Require configured external credentials |
 
 > [!IMPORTANT]
-> The repository contains operational and audit documents with findings from different stages of the migration. For the latest consolidated assessment, start with [`docs/audits/FULL_PROJECT_AUDIT.md`](docs/audits/FULL_PROJECT_AUDIT.md).
+> For the latest consolidated assessment, start with [`docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md`](docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md). Remediation tasks: [`docs/PROJECT_REMEDIATION_ROADMAP.md`](docs/PROJECT_REMEDIATION_ROADMAP.md). Older audits are in [`docs/audits/archive/`](docs/audits/archive/).
 
 ---
 
@@ -839,13 +839,12 @@ OnTrack/
 
 | Document | Purpose |
 |---|---|
-| [`docs/audits/FULL_PROJECT_AUDIT.md`](docs/audits/FULL_PROJECT_AUDIT.md) | Consolidated technical and product audit |
-| [`docs/CRA_NEXT_FINAL_PARITY_REPORT.md`](docs/CRA_NEXT_FINAL_PARITY_REPORT.md) | CRA-to-Next.js migration report |
-| [`docs/CRA_NEXT_FULL_REGRESSION_AUDIT.md`](docs/CRA_NEXT_FULL_REGRESSION_AUDIT.md) | Regression findings and migration verification |
+| [`docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md`](docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md) | **Current** technical and product audit |
+| [`docs/PROJECT_REMEDIATION_ROADMAP.md`](docs/PROJECT_REMEDIATION_ROADMAP.md) | Remediation tasks and priorities |
+| [`docs/audits/archive/`](docs/audits/archive/) | Historical audits and migration reports |
 | [`docs/CRA_REFERENCE.md`](docs/CRA_REFERENCE.md) | Legacy frontend reference map |
 | [`docs/FRONTEND_NEXT_BFF.md`](docs/FRONTEND_NEXT_BFF.md) | Optional BFF and HttpOnly-session threat model |
 | [`docs/backend-migration/API_CONTRACT.md`](docs/backend-migration/API_CONTRACT.md) | API contract registry |
-| [`docs/backend-migration/PRODUCTION_CUTOVER.md`](docs/backend-migration/PRODUCTION_CUTOVER.md) | Backend production-cutover notes |
 | [`docs/deployment/RAILWAY_BACKEND_MIGRATION.md`](docs/deployment/RAILWAY_BACKEND_MIGRATION.md) | Railway backend runbook |
 | [`.github/DEPLOY.md`](.github/DEPLOY.md) | CI-gated deployment configuration |
 | [`archive/scraper-legacy/README.md`](archive/scraper-legacy/README.md) | Archived scraper pipeline (not runtime) |

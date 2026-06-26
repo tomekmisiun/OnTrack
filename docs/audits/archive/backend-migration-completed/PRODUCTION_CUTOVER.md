@@ -1,3 +1,5 @@
+> **HISTORICAL DOCUMENT** — Archived PRODUCTION_CUTOVER.md. For current state see [`docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md`](../PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md).
+
 # Production cutover — Flask → FastAPI (MIG-016)
 
 > **Historical document.** MIG-017 removed Flask; DATA-006 completed backend-only Railway deploy.

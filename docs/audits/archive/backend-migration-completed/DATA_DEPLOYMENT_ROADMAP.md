@@ -1,3 +1,5 @@
+> **HISTORICAL DOCUMENT** — Archived DATA_DEPLOYMENT_ROADMAP.md. For current state see [`docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md`](../PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md).
+
 # Data & deployment roadmap
 
 One task = one branch = one reviewable PR. Do **not** combine build-context changes,

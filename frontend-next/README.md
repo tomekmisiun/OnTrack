@@ -188,4 +188,4 @@ docker run --rm -p 3002:3000 ontrack-frontend-next
 
 ## Migration plan
 
-See [`docs/FRONTEND_NEXT_MIGRATION_PLAN.md`](../docs/FRONTEND_NEXT_MIGRATION_PLAN.md).
+See [`docs/audits/archive/cra-next-migration/FRONTEND_NEXT_MIGRATION_PLAN.md`](../docs/audits/archive/cra-next-migration/FRONTEND_NEXT_MIGRATION_PLAN.md) (historical) and [`docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md`](../docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md) (current).
