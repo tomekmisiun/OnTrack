@@ -22,8 +22,8 @@ from app.models.recipe import Recipe, RecipeIngredient
 from app.models.recipe_parse_log import RecipeParseLog
 from app.models.user import User
 from app.models.user_recipe_favorite import UserRecipeFavorite
-from app.services.member_service import ensure_primary_member, sync_primary_member_name
 from app.scripts.import_catalog import ensure_global_catalog_loaded
+from app.services.member_service import ensure_primary_member, sync_primary_member_name
 from app.services.user_preferences import (
     apply_market_code,
     apply_ui_locale,
@@ -242,8 +242,19 @@ def frontend_redirect_path(path_query: str) -> str:
     return f"{base}/{path_query.lstrip('/')}"
 
 
-def auth_error_redirect(message: str) -> str:
-    return frontend_redirect_path(f"?{urlencode({'auth_error': message[:220]})}")
+AUTH_ERROR_CODES = frozenset(
+    {
+        "oauth_not_configured",
+        "oauth_denied",
+        "oauth_failed",
+        "oauth_no_email",
+    }
+)
+
+
+def auth_error_redirect(code: str) -> str:
+    safe = code if code in AUTH_ERROR_CODES else "oauth_failed"
+    return frontend_redirect_path(f"?{urlencode({'auth_error': safe})}")
 
 
 def oauth_success_redirect(code: str) -> str:
@@ -256,7 +267,7 @@ def handle_oauth_callback(
     pending_lang: str,
 ) -> str:
     if not email:
-        return auth_error_redirect("No email returned from Google")
+        return auth_error_redirect("oauth_no_email")
 
     ui_locale = pending_lang if pending_lang in UI_LOCALES else "pl"
     user, is_new = find_or_create_oauth_user(session, email)
