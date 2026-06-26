@@ -13,7 +13,7 @@ Meal planner & budgeter — **FastAPI** backend (`backend/`) + **Next.js** front
 - **Auth response:** `{ "token": "..." }` — not `{ access_token, refresh_token }` unless contract is updated
 - **Do not push to `main`** — use PR + green CI (`.github/DEPLOY.md`)
 - **Never commit** `.env` or secrets
-- **Production frontend:** `frontend-next/` only — not `frontend/` (CRA reference)
+- **Production frontend:** `frontend-next/` only — not `archive/frontend-cra-reference/` (CRA archive)
 
 ## Stack
 
@@ -26,5 +26,5 @@ Meal planner & budgeter — **FastAPI** backend (`backend/`) + **Next.js** front
 
 ## Legacy (reference only)
 
-- `frontend/` — CRA snapshot for parity comparison; see `frontend/README.md`
+- `archive/frontend-cra-reference/` — CRA snapshot for parity comparison; see `archive/frontend-cra-reference/README.md`
 - `docs/backend-migration/` — cutover history; FastAPI is production
