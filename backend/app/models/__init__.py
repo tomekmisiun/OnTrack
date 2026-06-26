@@ -7,8 +7,8 @@ from app.models.market import Market
 from app.models.meal_plan import MealPlan
 from app.models.product import Product
 from app.models.recipe import Recipe, RecipeIngredient
-from app.models.user_recipe_favorite import UserRecipeFavorite
 from app.models.user import User
+from app.models.user_recipe_favorite import UserRecipeFavorite
 
 __all__ = [
     "AuthCode",

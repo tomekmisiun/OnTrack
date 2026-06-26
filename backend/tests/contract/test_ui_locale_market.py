@@ -7,7 +7,6 @@ from app.domain.product_normalize import normalize_product_name
 from app.models.product import Product
 from app.models.recipe import Recipe
 from app.models.user import User
-from app.scripts.import_catalog import import_catalog
 
 from tests.conftest import create_user
 

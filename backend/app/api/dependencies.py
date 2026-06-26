@@ -28,5 +28,5 @@ def get_current_user_id(
         raise HTTPException(status_code=401, detail={"error": "Invalid token"}) from None
 
 
-def get_db_session() -> Generator[Session, None, None]:
+def get_db_session() -> Generator[Session]:
     yield from get_db()

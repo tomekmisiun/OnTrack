@@ -29,15 +29,17 @@ from app.core.catalog_data import (
     write_generated,
 )
 from app.core.runtime_data import runtime_data_root
-from app.domain.catalog_seed import expand_products_catalog, expand_recipes_catalog, slug_catalog_key
-from app.domain.product_normalize import normalize_product_name
+from app.domain.catalog_seed import (
+    expand_products_catalog,
+    expand_recipes_catalog,
+)
 from app.scripts.build_catalog_seeds import (
-    build_products_catalog,
-    build_recipes_catalog,
     _load_en_ingredient_db,
     _load_macros,
     _load_scraper_recipes,
     _product_key_by_pl_name,
+    build_products_catalog,
+    build_recipes_catalog,
 )
 
 
