@@ -43,6 +43,12 @@ def test_nutrition_lookup_catalog_fuzzy_banany(client, auth_headers, monkeypatch
     assert data["source"] in ("database", "catalog")
 
 
+def test_openai_dependency_is_installed():
+    import openai
+
+    assert openai.__version__
+
+
 def test_nutrition_lookup_unknown_without_ai(client, auth_headers, monkeypatch):
     monkeypatch.delenv("DEEPSEEK_API_KEY", raising=False)
     res = client.get(
