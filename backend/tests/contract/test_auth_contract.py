@@ -260,3 +260,16 @@ def test_delete_account_with_recipe_favorites(
     assert res.json()["message"] == "Account deleted"
     assert db_session.get(User, user.id) is None
 
+def test_auth_login_rate_limit(client):
+    from app.core.rate_limit import reset_rate_limits
+
+    reset_rate_limits()
+    payload = {"username": "nobody", "password": "wrong-password"}
+    for _ in range(20):
+        res = client.post("/api/auth/login", json=payload)
+        assert res.status_code in (401, 400)
+    blocked = client.post("/api/auth/login", json=payload)
+    assert blocked.status_code == 429
+    assert blocked.json()["error"] == "Too many requests"
+    reset_rate_limits()
+

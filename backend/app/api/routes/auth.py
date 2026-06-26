@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.api.dependencies import get_current_user_id, get_db_session
 from app.core.config import get_settings
+from app.core.rate_limit import check_rate_limit
 from app.schemas.auth import (
     ExchangeRequest,
     LanguageRequest,
@@ -43,7 +44,12 @@ def _service_error(exc: auth_service.AuthServiceError) -> JSONResponse:
 
 
 @router.post("/login", response_model=TokenResponse)
-def login(body: LoginRequest, session: Session = Depends(get_db_session)) -> JSONResponse:
+def login(
+    body: LoginRequest,
+    request: Request,
+    session: Session = Depends(get_db_session),
+) -> JSONResponse:
+    check_rate_limit(request, scope="auth_login", max_requests=20, window_seconds=60)
     try:
         token = auth_service.login(session, body.username, body.password)
     except auth_service.AuthServiceError as exc:
@@ -52,7 +58,12 @@ def login(body: LoginRequest, session: Session = Depends(get_db_session)) -> JSO
 
 
 @router.post("/register", response_model=TokenResponse, status_code=201)
-def register(body: RegisterRequest, session: Session = Depends(get_db_session)) -> JSONResponse:
+def register(
+    body: RegisterRequest,
+    request: Request,
+    session: Session = Depends(get_db_session),
+) -> JSONResponse:
+    check_rate_limit(request, scope="auth_register", max_requests=10, window_seconds=60)
     try:
         token = auth_service.register(session, body.username, body.password, body.lang)
     except auth_service.AuthServiceError as exc:
@@ -61,7 +72,12 @@ def register(body: RegisterRequest, session: Session = Depends(get_db_session)) 
 
 
 @router.post("/exchange", response_model=TokenResponse)
-def exchange(body: ExchangeRequest, session: Session = Depends(get_db_session)) -> JSONResponse:
+def exchange(
+    body: ExchangeRequest,
+    request: Request,
+    session: Session = Depends(get_db_session),
+) -> JSONResponse:
+    check_rate_limit(request, scope="auth_exchange", max_requests=30, window_seconds=60)
     try:
         token = auth_service.exchange_code(session, body.code)
     except auth_service.AuthServiceError as exc:
