@@ -134,6 +134,16 @@ def test_add_meal_with_system_recipe(client, auth_headers, member, global_catalo
     assert res.status_code == 201
     assert res.json()["recipe"]["id"] == system_recipe["id"]
 
+    persisted = client.get(
+        "/api/meal-plan/range/2026-05-27/2026-05-27",
+        headers=auth_headers,
+        params={"member_id": member.id},
+    )
+    assert persisted.status_code == 200
+    day_meals = persisted.json().get("2026-05-27", [])
+    assert len(day_meals) == 1
+    assert day_meals[0]["recipe"]["id"] == system_recipe["id"]
+
 
 def test_summary_rejects_invalid_dates(client, auth_headers):
     res = client.get(

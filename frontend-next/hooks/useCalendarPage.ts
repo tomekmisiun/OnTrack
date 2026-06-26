@@ -92,7 +92,7 @@ export function useCalendarPage() {
   const { t } = useLanguage();
   const { user } = useAuth();
   const { showError, showSuccess, showConfirm } = useToast();
-  const { activeMember, targetMemberIds } = useMember();
+  const { activeMember, members, targetMemberIds } = useMember();
 
   const todayMidnight = useMemo(() => {
     const d = new Date();
@@ -143,10 +143,19 @@ export function useCalendarPage() {
 
   const loadMonth = useCallback(
     async (y: number, m: number) => {
+      if (!user) {
+        setMealsByDate({});
+        return;
+      }
+      if (!members.length) return;
+
       const grid = getCalGrid(y, m);
       const start = dateToStr(grid[0]!);
       const end = dateToStr(grid[grid.length - 1]!);
-      const mid = activeMember?.id;
+      const mid =
+        activeMember?.id ??
+        members.find((member) => member.is_primary)?.id ??
+        members[0]?.id;
       try {
         const data = await getRange(start, end, mid ? [mid] : []);
         setMealsByDate(data);
@@ -154,8 +163,14 @@ export function useCalendarPage() {
         showError(String(t("err_load_plan")));
       }
     },
-    [activeMember?.id, showError, t],
+    [activeMember?.id, members, showError, t, user],
   );
+
+  useEffect(() => {
+    if (!user) {
+      setMealsByDate({});
+    }
+  }, [user]);
 
   useEffect(() => {
     listRecipes()
