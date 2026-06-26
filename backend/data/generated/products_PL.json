@@ -3,8 +3,8 @@
     "generated": true,
     "do_not_edit": true,
     "market_code": "PL",
-    "canonical_version": "0eb294863220141a",
-    "generated_at": "2026-06-26T18:29:45+00:00",
+    "canonical_version": "d6daedfd4c98ac48",
+    "generated_at": "2026-06-26T19:42:24+00:00",
     "item_count": 445
   },
   "items": [
@@ -17,7 +17,9 @@
       "kcal": 50.0,
       "protein": 0.5,
       "fat": 0.1,
-      "carbs": 13.1
+      "carbs": 13.1,
+      "stable_key": "pineapple",
+      "sort_index": 0
     },
     {
       "name": "arbuz",
@@ -28,7 +30,9 @@
       "kcal": 30.0,
       "protein": 0.6,
       "fat": 0.2,
-      "carbs": 7.6
+      "carbs": 7.6,
+      "stable_key": "watermelon",
+      "sort_index": 1
     },
     {
       "name": "awokado",
@@ -39,7 +43,9 @@
       "kcal": 160.0,
       "protein": 2.0,
       "fat": 14.7,
-      "carbs": 8.5
+      "carbs": 8.5,
+      "stable_key": "avocado",
+      "sort_index": 2
     },
     {
       "name": "bakłażan",
@@ -50,18 +56,9 @@
       "kcal": 25.0,
       "protein": 1.0,
       "fat": 0.2,
-      "carbs": 5.9
-    },
-    {
-      "name": "banan",
-      "price": 0.699,
-      "package_weight": 1000.0,
-      "unit": "g",
-      "sold_by_weight": false,
-      "kcal": 89.0,
-      "protein": 1.1,
-      "fat": 0.3,
-      "carbs": 22.8
+      "carbs": 5.9,
+      "stable_key": "eggplant",
+      "sort_index": 3
     },
     {
       "name": "banan 7zł",
@@ -72,7 +69,22 @@
       "kcal": 89.0,
       "protein": 1.1,
       "fat": 0.3,
-      "carbs": 22.8
+      "carbs": 22.8,
+      "stable_key": "banana-banan-7zl",
+      "sort_index": 4
+    },
+    {
+      "name": "banan",
+      "price": 0.699,
+      "package_weight": 1000.0,
+      "unit": "g",
+      "sold_by_weight": false,
+      "kcal": 89.0,
+      "protein": 1.1,
+      "fat": 0.3,
+      "carbs": 22.8,
+      "stable_key": "banana",
+      "sort_index": 5
     },
     {
       "name": "bazylia",
@@ -83,7 +95,9 @@
       "kcal": 44.0,
       "protein": 3.2,
       "fat": 0.6,
-      "carbs": 4.3
+      "carbs": 4.3,
+      "stable_key": "basil",
+      "sort_index": 6
     },
     {
       "name": "bazylia suszona",
@@ -94,7 +108,9 @@
       "kcal": 233.0,
       "protein": 22.8,
       "fat": 4.1,
-      "carbs": 47.8
+      "carbs": 47.8,
+      "stable_key": "basil-dried",
+      "sort_index": 7
     },
     {
       "name": "bazylia tajska",
@@ -105,7 +121,9 @@
       "kcal": 44.0,
       "protein": 4.9,
       "fat": 0.6,
-      "carbs": 6.1
+      "carbs": 6.1,
+      "stable_key": "thai-basil",
+      "sort_index": 8
     },
     {
       "name": "biała fasola",
@@ -116,7 +134,9 @@
       "kcal": 139.0,
       "protein": 9.7,
       "fat": 0.4,
-      "carbs": 25.1
+      "carbs": 25.1,
+      "stable_key": "beans",
+      "sort_index": 9
     },
     {
       "name": "białko jaja",
@@ -127,7 +147,9 @@
       "kcal": 143.0,
       "protein": 12.6,
       "fat": 9.5,
-      "carbs": 0.7
+      "carbs": 0.7,
+      "stable_key": "eggs",
+      "sort_index": 10
     },
     {
       "name": "boczek",
@@ -138,7 +160,9 @@
       "kcal": 541.0,
       "protein": 37.0,
       "fat": 42.0,
-      "carbs": 1.3
+      "carbs": 1.3,
+      "stable_key": "bacon",
+      "sort_index": 11
     },
     {
       "name": "borówka",
@@ -149,7 +173,9 @@
       "kcal": 57.0,
       "protein": 0.7,
       "fat": 0.3,
-      "carbs": 14.5
+      "carbs": 14.5,
+      "stable_key": "blueberry",
+      "sort_index": 12
     },
     {
       "name": "borówki",
@@ -160,7 +186,9 @@
       "kcal": 57.0,
       "protein": 0.7,
       "fat": 0.3,
-      "carbs": 14.5
+      "carbs": 14.5,
+      "stable_key": "blueberries",
+      "sort_index": 13
     },
     {
       "name": "brokuly",
@@ -171,7 +199,9 @@
       "kcal": 34.0,
       "protein": 2.8,
       "fat": 0.4,
-      "carbs": 6.6
+      "carbs": 6.6,
+      "stable_key": "broccoli",
+      "sort_index": 14
     },
     {
       "name": "brokuł",
@@ -182,7 +212,9 @@
       "kcal": 34.0,
       "protein": 2.8,
       "fat": 0.4,
-      "carbs": 6.6
+      "carbs": 6.6,
+      "stable_key": "broccoli-brokul",
+      "sort_index": 15
     },
     {
       "name": "brokuły",
@@ -193,7 +225,9 @@
       "kcal": 34.0,
       "protein": 2.8,
       "fat": 0.4,
-      "carbs": 6.6
+      "carbs": 6.6,
+      "stable_key": "broccoli-brokuly",
+      "sort_index": 16
     },
     {
       "name": "brukselka",
@@ -204,7 +238,9 @@
       "kcal": 41.0,
       "protein": 3.6,
       "fat": 0.5,
-      "carbs": 7.9
+      "carbs": 7.9,
+      "stable_key": "brussels-sprouts-frozen",
+      "sort_index": 17
     },
     {
       "name": "brzoskwinia",
@@ -215,7 +251,9 @@
       "kcal": 39.0,
       "protein": 0.9,
       "fat": 0.3,
-      "carbs": 9.5
+      "carbs": 9.5,
+      "stable_key": "peach",
+      "sort_index": 18
     },
     {
       "name": "brązowy cukier",
@@ -226,7 +264,9 @@
       "kcal": 387.0,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 100.0
+      "carbs": 100.0,
+      "stable_key": "sugar",
+      "sort_index": 19
     },
     {
       "name": "brązowy ryż",
@@ -237,7 +277,9 @@
       "kcal": 111.0,
       "protein": 2.6,
       "fat": 0.9,
-      "carbs": 23.0
+      "carbs": 23.0,
+      "stable_key": "rice",
+      "sort_index": 20
     },
     {
       "name": "bulgur",
@@ -248,7 +290,9 @@
       "kcal": 342.0,
       "protein": 11.0,
       "fat": 1.25,
-      "carbs": 66.56
+      "carbs": 66.56,
+      "stable_key": "bulgur",
+      "sort_index": 21
     },
     {
       "name": "bulion drobiowy",
@@ -259,7 +303,9 @@
       "kcal": 4.0,
       "protein": 0.6,
       "fat": 0.1,
-      "carbs": 0.4
+      "carbs": 0.4,
+      "stable_key": "chicken-broth",
+      "sort_index": 22
     },
     {
       "name": "bulion warzywny",
@@ -270,7 +316,9 @@
       "kcal": 4.0,
       "protein": 0.2,
       "fat": 0.1,
-      "carbs": 0.7
+      "carbs": 0.7,
+      "stable_key": "vegetable-stock",
+      "sort_index": 23
     },
     {
       "name": "bulion wolowy",
@@ -281,7 +329,9 @@
       "kcal": 4.0,
       "protein": 0.3,
       "fat": 0.1,
-      "carbs": 0.4
+      "carbs": 0.4,
+      "stable_key": "beef-broth",
+      "sort_index": 24
     },
     {
       "name": "bulion wołowy",
@@ -292,7 +342,9 @@
       "kcal": 7.0,
       "protein": 1.0,
       "fat": 0.2,
-      "carbs": 0.4
+      "carbs": 0.4,
+      "stable_key": "beef-broth-bulion-wolowy",
+      "sort_index": 25
     },
     {
       "name": "burak",
@@ -303,7 +355,9 @@
       "kcal": 43.0,
       "protein": 1.6,
       "fat": 0.2,
-      "carbs": 9.6
+      "carbs": 9.6,
+      "stable_key": "beetroot",
+      "sort_index": 26
     },
     {
       "name": "buraki",
@@ -314,7 +368,9 @@
       "kcal": 43.0,
       "protein": 1.6,
       "fat": 0.2,
-      "carbs": 9.6
+      "carbs": 9.6,
+      "stable_key": "beetroot-buraki",
+      "sort_index": 27
     },
     {
       "name": "bułka",
@@ -325,7 +381,9 @@
       "kcal": 272.0,
       "protein": 9.5,
       "fat": 3.3,
-      "carbs": 51.0
+      "carbs": 51.0,
+      "stable_key": "gluten-free-panko-breadcrumbs",
+      "sort_index": 28
     },
     {
       "name": "bułka śniadaniowa",
@@ -336,7 +394,9 @@
       "kcal": 272.0,
       "protein": 9.5,
       "fat": 3.3,
-      "carbs": 51.0
+      "carbs": 51.0,
+      "stable_key": "breakfast-roll-with-seeds",
+      "sort_index": 29
     },
     {
       "name": "cebula",
@@ -347,7 +407,9 @@
       "kcal": 40.0,
       "protein": 1.1,
       "fat": 0.1,
-      "carbs": 9.3
+      "carbs": 9.3,
+      "stable_key": "onion",
+      "sort_index": 30
     },
     {
       "name": "cebula biała",
@@ -358,7 +420,9 @@
       "kcal": 40.0,
       "protein": 1.1,
       "fat": 0.1,
-      "carbs": 9.3
+      "carbs": 9.3,
+      "stable_key": "white-onion",
+      "sort_index": 31
     },
     {
       "name": "cebula czerwona",
@@ -369,7 +433,9 @@
       "kcal": 40.0,
       "protein": 1.1,
       "fat": 0.1,
-      "carbs": 9.3
+      "carbs": 9.3,
+      "stable_key": "red-onion",
+      "sort_index": 32
     },
     {
       "name": "cebula granulowana",
@@ -380,7 +446,9 @@
       "kcal": 40.0,
       "protein": 1.1,
       "fat": 0.1,
-      "carbs": 9.3
+      "carbs": 9.3,
+      "stable_key": "onion-cebula-granulowana",
+      "sort_index": 33
     },
     {
       "name": "cebula słodka",
@@ -391,7 +459,9 @@
       "kcal": 40.0,
       "protein": 1.1,
       "fat": 0.1,
-      "carbs": 9.3
+      "carbs": 9.3,
+      "stable_key": "sweet-onion",
+      "sort_index": 34
     },
     {
       "name": "cebula w proszku",
@@ -402,7 +472,9 @@
       "kcal": 40.0,
       "protein": 1.1,
       "fat": 0.1,
-      "carbs": 9.3
+      "carbs": 9.3,
+      "stable_key": "onion-cebula-w-proszku",
+      "sort_index": 35
     },
     {
       "name": "cebula żółta",
@@ -413,7 +485,9 @@
       "kcal": 40.0,
       "protein": 1.1,
       "fat": 0.1,
-      "carbs": 9.3
+      "carbs": 9.3,
+      "stable_key": "yellow-onion",
+      "sort_index": 36
     },
     {
       "name": "chili",
@@ -424,7 +498,9 @@
       "kcal": 282.0,
       "protein": 12.0,
       "fat": 14.0,
-      "carbs": 49.0
+      "carbs": 49.0,
+      "stable_key": "dried-red-chiles",
+      "sort_index": 37
     },
     {
       "name": "chleb",
@@ -435,7 +511,9 @@
       "kcal": 265.0,
       "protein": 9.0,
       "fat": 3.2,
-      "carbs": 49.0
+      "carbs": 49.0,
+      "stable_key": "wheat-bread",
+      "sort_index": 38
     },
     {
       "name": "chorizo sojowe",
@@ -446,7 +524,9 @@
       "kcal": 455.0,
       "protein": 24.0,
       "fat": 38.0,
-      "carbs": 2.0
+      "carbs": 2.0,
+      "stable_key": "chorizo",
+      "sort_index": 39
     },
     {
       "name": "ciecierzyca",
@@ -457,7 +537,9 @@
       "kcal": 139.0,
       "protein": 8.9,
       "fat": 2.6,
-      "carbs": 22.5
+      "carbs": 22.5,
+      "stable_key": "chickpeas",
+      "sort_index": 40
     },
     {
       "name": "cukier",
@@ -468,7 +550,9 @@
       "kcal": 387.0,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 100.0
+      "carbs": 100.0,
+      "stable_key": "sugar-cukier",
+      "sort_index": 41
     },
     {
       "name": "cukier brązowy",
@@ -479,7 +563,9 @@
       "kcal": 387.0,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 100.0
+      "carbs": 100.0,
+      "stable_key": "sugar-cukier-brazowy",
+      "sort_index": 42
     },
     {
       "name": "cukier kokosowy",
@@ -490,7 +576,9 @@
       "kcal": 387.0,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 100.0
+      "carbs": 100.0,
+      "stable_key": "sugar-cukier-kokosowy",
+      "sort_index": 43
     },
     {
       "name": "cukier palmowy",
@@ -501,7 +589,9 @@
       "kcal": 387.0,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 100.0
+      "carbs": 100.0,
+      "stable_key": "sugar-cukier-palmowy",
+      "sort_index": 44
     },
     {
       "name": "cukier puder",
@@ -512,7 +602,9 @@
       "kcal": 389.0,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 99.8
+      "carbs": 99.8,
+      "stable_key": "powdered-sugar",
+      "sort_index": 45
     },
     {
       "name": "cukier trzcinowy",
@@ -523,7 +615,9 @@
       "kcal": 387.0,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 100.0
+      "carbs": 100.0,
+      "stable_key": "cane-sugar",
+      "sort_index": 46
     },
     {
       "name": "cukinia",
@@ -534,7 +628,9 @@
       "kcal": 17.0,
       "protein": 1.2,
       "fat": 0.3,
-      "carbs": 3.1
+      "carbs": 3.1,
+      "stable_key": "zucchini",
+      "sort_index": 47
     },
     {
       "name": "curry",
@@ -545,7 +641,9 @@
       "kcal": 325.0,
       "protein": 14.0,
       "fat": 14.0,
-      "carbs": 55.0
+      "carbs": 55.0,
+      "stable_key": "curry-powder",
+      "sort_index": 48
     },
     {
       "name": "curry w proszku",
@@ -556,7 +654,9 @@
       "kcal": 325.0,
       "protein": 14.0,
       "fat": 14.0,
-      "carbs": 55.0
+      "carbs": 55.0,
+      "stable_key": "curry-powder-curry-w-proszku",
+      "sort_index": 49
     },
     {
       "name": "cynamon",
@@ -567,7 +667,9 @@
       "kcal": 247.0,
       "protein": 3.9,
       "fat": 1.2,
-      "carbs": 80.6
+      "carbs": 80.6,
+      "stable_key": "cinnamon",
+      "sort_index": 50
     },
     {
       "name": "cytryna",
@@ -578,7 +680,9 @@
       "kcal": 29.0,
       "protein": 1.1,
       "fat": 0.3,
-      "carbs": 9.3
+      "carbs": 9.3,
+      "stable_key": "lemon",
+      "sort_index": 51
     },
     {
       "name": "czarna fasola",
@@ -589,7 +693,9 @@
       "kcal": 132.0,
       "protein": 8.9,
       "fat": 0.5,
-      "carbs": 23.7
+      "carbs": 23.7,
+      "stable_key": "beans-czarna-fasola",
+      "sort_index": 52
     },
     {
       "name": "czarny sezam",
@@ -600,7 +706,9 @@
       "kcal": 573.0,
       "protein": 17.7,
       "fat": 49.7,
-      "carbs": 23.4
+      "carbs": 23.4,
+      "stable_key": "sesame",
+      "sort_index": 53
     },
     {
       "name": "czekolada",
@@ -611,7 +719,9 @@
       "kcal": 546.0,
       "protein": 4.9,
       "fat": 31.3,
-      "carbs": 59.4
+      "carbs": 59.4,
+      "stable_key": "chocolate",
+      "sort_index": 54
     },
     {
       "name": "czerwona cebula",
@@ -622,7 +732,9 @@
       "kcal": 40.0,
       "protein": 1.1,
       "fat": 0.1,
-      "carbs": 9.3
+      "carbs": 9.3,
+      "stable_key": "onion-czerwona-cebula",
+      "sort_index": 55
     },
     {
       "name": "czerwona kapusta",
@@ -633,7 +745,9 @@
       "kcal": 31.0,
       "protein": 1.4,
       "fat": 0.2,
-      "carbs": 7.4
+      "carbs": 7.4,
+      "stable_key": "cabbage",
+      "sort_index": 56
     },
     {
       "name": "czerwona papryka",
@@ -644,7 +758,9 @@
       "kcal": 31.0,
       "protein": 1.0,
       "fat": 0.3,
-      "carbs": 6.0
+      "carbs": 6.0,
+      "stable_key": "roasted-red-pepper",
+      "sort_index": 57
     },
     {
       "name": "czerwone winogrona",
@@ -655,7 +771,9 @@
       "kcal": 69.0,
       "protein": 0.7,
       "fat": 0.2,
-      "carbs": 18.1
+      "carbs": 18.1,
+      "stable_key": "grapes",
+      "sort_index": 58
     },
     {
       "name": "czerwony ziemniak",
@@ -666,7 +784,9 @@
       "kcal": 70.0,
       "protein": 1.9,
       "fat": 0.1,
-      "carbs": 15.9
+      "carbs": 15.9,
+      "stable_key": "potato",
+      "sort_index": 59
     },
     {
       "name": "czosnek",
@@ -677,7 +797,9 @@
       "kcal": 149.0,
       "protein": 6.4,
       "fat": 0.5,
-      "carbs": 33.1
+      "carbs": 33.1,
+      "stable_key": "garlic",
+      "sort_index": 60
     },
     {
       "name": "czosnek granulowany",
@@ -688,7 +810,9 @@
       "kcal": 331.0,
       "protein": 16.6,
       "fat": 0.7,
-      "carbs": 72.7
+      "carbs": 72.7,
+      "stable_key": "garlic-granulated",
+      "sort_index": 61
     },
     {
       "name": "czosnek w proszku",
@@ -699,7 +823,9 @@
       "kcal": 331.0,
       "protein": 16.6,
       "fat": 0.7,
-      "carbs": 72.7
+      "carbs": 72.7,
+      "stable_key": "garlic-powder",
+      "sort_index": 62
     },
     {
       "name": "daktyl",
@@ -710,7 +836,9 @@
       "kcal": 282.0,
       "protein": 2.5,
       "fat": 0.4,
-      "carbs": 75.0
+      "carbs": 75.0,
+      "stable_key": "dried-pitted-date",
+      "sort_index": 63
     },
     {
       "name": "daktyle",
@@ -721,7 +849,9 @@
       "kcal": 282.0,
       "protein": 2.5,
       "fat": 0.4,
-      "carbs": 75.0
+      "carbs": 75.0,
+      "stable_key": "dates",
+      "sort_index": 64
     },
     {
       "name": "daktyle medjool",
@@ -732,7 +862,9 @@
       "kcal": 282.0,
       "protein": 2.5,
       "fat": 0.4,
-      "carbs": 75.0
+      "carbs": 75.0,
+      "stable_key": "dates-daktyle-medjool",
+      "sort_index": 65
     },
     {
       "name": "dorsz",
@@ -743,7 +875,9 @@
       "kcal": 82.0,
       "protein": 17.8,
       "fat": 0.7,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "cod",
+      "sort_index": 66
     },
     {
       "name": "drożdże",
@@ -754,7 +888,9 @@
       "kcal": 105.0,
       "protein": 14.3,
       "fat": 1.9,
-      "carbs": 14.3
+      "carbs": 14.3,
+      "stable_key": "yeast",
+      "sort_index": 67
     },
     {
       "name": "drożdże suszone",
@@ -765,7 +901,9 @@
       "kcal": 325.0,
       "protein": 40.0,
       "fat": 5.0,
-      "carbs": 41.0
+      "carbs": 41.0,
+      "stable_key": "yeast-dried-instant",
+      "sort_index": 68
     },
     {
       "name": "dynia",
@@ -776,7 +914,9 @@
       "kcal": 26.0,
       "protein": 1.0,
       "fat": 0.1,
-      "carbs": 6.5
+      "carbs": 6.5,
+      "stable_key": "pumpkin",
+      "sort_index": 69
     },
     {
       "name": "dynia kabocha",
@@ -787,7 +927,9 @@
       "kcal": 26.0,
       "protein": 1.0,
       "fat": 0.1,
-      "carbs": 6.5
+      "carbs": 6.5,
+      "stable_key": "pumpkin-dynia-kabocha",
+      "sort_index": 70
     },
     {
       "name": "dynia letnia",
@@ -798,7 +940,9 @@
       "kcal": 26.0,
       "protein": 1.0,
       "fat": 0.1,
-      "carbs": 6.5
+      "carbs": 6.5,
+      "stable_key": "pumpkin-dynia-letnia",
+      "sort_index": 71
     },
     {
       "name": "dynia piżmowa",
@@ -809,7 +953,9 @@
       "kcal": 45.0,
       "protein": 1.0,
       "fat": 0.1,
-      "carbs": 11.7
+      "carbs": 11.7,
+      "stable_key": "butternut-squash",
+      "sort_index": 72
     },
     {
       "name": "dynia spaghetti",
@@ -820,7 +966,9 @@
       "kcal": 26.0,
       "protein": 1.0,
       "fat": 0.1,
-      "carbs": 6.5
+      "carbs": 6.5,
+      "stable_key": "spaghetti",
+      "sort_index": 73
     },
     {
       "name": "dynia żółta",
@@ -831,7 +979,9 @@
       "kcal": 26.0,
       "protein": 1.0,
       "fat": 0.1,
-      "carbs": 6.5
+      "carbs": 6.5,
+      "stable_key": "pumpkin-dynia-zolta",
+      "sort_index": 74
     },
     {
       "name": "dziki ryż",
@@ -842,7 +992,9 @@
       "kcal": 130.0,
       "protein": 2.7,
       "fat": 0.3,
-      "carbs": 28.2
+      "carbs": 28.2,
+      "stable_key": "rice-dziki-ryz",
+      "sort_index": 75
     },
     {
       "name": "dżem morelowy",
@@ -853,7 +1005,9 @@
       "kcal": 120.0,
       "protein": 0.5,
       "fat": 0.1,
-      "carbs": 29.0
+      "carbs": 29.0,
+      "stable_key": "lowsugar-apricot-jam",
+      "sort_index": 76
     },
     {
       "name": "erytrytol",
@@ -864,7 +1018,9 @@
       "kcal": 0.2,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 1.0
+      "carbs": 1.0,
+      "stable_key": "erythritol",
+      "sort_index": 77
     },
     {
       "name": "erytrytol pudrowy",
@@ -875,7 +1031,9 @@
       "kcal": 0.2,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 1.0
+      "carbs": 1.0,
+      "stable_key": "erythritol-erytrytol-pudrowy",
+      "sort_index": 78
     },
     {
       "name": "erytrytol w proszku",
@@ -886,7 +1044,9 @@
       "kcal": 0.2,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 1.0
+      "carbs": 1.0,
+      "stable_key": "erythritol-erytrytol-w-proszku",
+      "sort_index": 79
     },
     {
       "name": "fasola cannellini",
@@ -897,7 +1057,9 @@
       "kcal": 132.0,
       "protein": 8.7,
       "fat": 0.5,
-      "carbs": 23.7
+      "carbs": 23.7,
+      "stable_key": "cannellini-beans",
+      "sort_index": 80
     },
     {
       "name": "fasola czarna",
@@ -908,7 +1070,9 @@
       "kcal": 132.0,
       "protein": 8.9,
       "fat": 0.5,
-      "carbs": 23.7
+      "carbs": 23.7,
+      "stable_key": "black-beans",
+      "sort_index": 81
     },
     {
       "name": "fasola czerwona",
@@ -919,7 +1083,9 @@
       "kcal": 337.0,
       "protein": 22.5,
       "fat": 1.1,
-      "carbs": 61.3
+      "carbs": 61.3,
+      "stable_key": "red-kidney-beans",
+      "sort_index": 82
     },
     {
       "name": "fasola pinto",
@@ -930,7 +1096,9 @@
       "kcal": 132.0,
       "protein": 8.7,
       "fat": 0.5,
-      "carbs": 23.7
+      "carbs": 23.7,
+      "stable_key": "beans-fasola-pinto",
+      "sort_index": 83
     },
     {
       "name": "fasola refried",
@@ -941,7 +1109,9 @@
       "kcal": 132.0,
       "protein": 8.7,
       "fat": 0.5,
-      "carbs": 23.7
+      "carbs": 23.7,
+      "stable_key": "beans-fasola-refried",
+      "sort_index": 84
     },
     {
       "name": "fasola smażona",
@@ -952,7 +1122,9 @@
       "kcal": 132.0,
       "protein": 8.7,
       "fat": 0.5,
-      "carbs": 23.7
+      "carbs": 23.7,
+      "stable_key": "beans-fasola-smazona",
+      "sort_index": 85
     },
     {
       "name": "fasolka szparagowa",
@@ -963,7 +1135,9 @@
       "kcal": 31.0,
       "protein": 1.8,
       "fat": 0.2,
-      "carbs": 7.1
+      "carbs": 7.1,
+      "stable_key": "green-beans",
+      "sort_index": 86
     },
     {
       "name": "figi",
@@ -974,7 +1148,9 @@
       "kcal": 249.0,
       "protein": 3.3,
       "fat": 0.9,
-      "carbs": 63.9
+      "carbs": 63.9,
+      "stable_key": "dried-figs",
+      "sort_index": 87
     },
     {
       "name": "filet z indyka",
@@ -985,7 +1161,9 @@
       "kcal": 135.0,
       "protein": 29.3,
       "fat": 1.5,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "turkey",
+      "sort_index": 88
     },
     {
       "name": "filet z kurczaka",
@@ -996,7 +1174,9 @@
       "kcal": 165.0,
       "protein": 31.0,
       "fat": 3.6,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "chicken",
+      "sort_index": 89
     },
     {
       "name": "fioletowe ziemniaki",
@@ -1007,7 +1187,9 @@
       "kcal": 77.0,
       "protein": 2.0,
       "fat": 0.1,
-      "carbs": 17.5
+      "carbs": 17.5,
+      "stable_key": "purple-potatoes",
+      "sort_index": 90
     },
     {
       "name": "garam masala",
@@ -1018,7 +1200,9 @@
       "kcal": 307.0,
       "protein": 10.9,
       "fat": 12.0,
-      "carbs": 55.0
+      "carbs": 55.0,
+      "stable_key": "garam-masala",
+      "sort_index": 91
     },
     {
       "name": "gałka muszkatołowa",
@@ -1029,7 +1213,9 @@
       "kcal": 525.0,
       "protein": 5.8,
       "fat": 36.3,
-      "carbs": 49.3
+      "carbs": 49.3,
+      "stable_key": "ground-nutmeg",
+      "sort_index": 92
     },
     {
       "name": "goździki",
@@ -1040,7 +1226,9 @@
       "kcal": 274.0,
       "protein": 6.0,
       "fat": 13.0,
-      "carbs": 65.0
+      "carbs": 65.0,
+      "stable_key": "ground-clove",
+      "sort_index": 93
     },
     {
       "name": "goździki mielone",
@@ -1051,7 +1239,9 @@
       "kcal": 274.0,
       "protein": 6.0,
       "fat": 13.0,
-      "carbs": 65.0
+      "carbs": 65.0,
+      "stable_key": "ground-clove-gozdziki-mielone",
+      "sort_index": 94
     },
     {
       "name": "granat",
@@ -1062,7 +1252,9 @@
       "kcal": 83.0,
       "protein": 1.7,
       "fat": 1.2,
-      "carbs": 18.7
+      "carbs": 18.7,
+      "stable_key": "pomegranate",
+      "sort_index": 95
     },
     {
       "name": "granola",
@@ -1073,7 +1265,9 @@
       "kcal": 471.0,
       "protein": 10.5,
       "fat": 20.9,
-      "carbs": 64.4
+      "carbs": 64.4,
+      "stable_key": "granola",
+      "sort_index": 96
     },
     {
       "name": "groszek",
@@ -1084,7 +1278,9 @@
       "kcal": 81.0,
       "protein": 5.4,
       "fat": 0.4,
-      "carbs": 14.5
+      "carbs": 14.5,
+      "stable_key": "green-peas",
+      "sort_index": 97
     },
     {
       "name": "groszek cukrowy",
@@ -1095,7 +1291,9 @@
       "kcal": 42.0,
       "protein": 2.8,
       "fat": 0.2,
-      "carbs": 7.6
+      "carbs": 7.6,
+      "stable_key": "sugar-snap-peas",
+      "sort_index": 98
     },
     {
       "name": "groszek zielony",
@@ -1106,7 +1304,9 @@
       "kcal": 81.0,
       "protein": 5.4,
       "fat": 0.4,
-      "carbs": 14.5
+      "carbs": 14.5,
+      "stable_key": "peas",
+      "sort_index": 99
     },
     {
       "name": "gruszka",
@@ -1117,7 +1317,9 @@
       "kcal": 57.0,
       "protein": 0.4,
       "fat": 0.1,
-      "carbs": 15.2
+      "carbs": 15.2,
+      "stable_key": "pear",
+      "sort_index": 100
     },
     {
       "name": "grzyby",
@@ -1128,7 +1330,9 @@
       "kcal": 22.0,
       "protein": 3.1,
       "fat": 0.3,
-      "carbs": 3.3
+      "carbs": 3.3,
+      "stable_key": "mushrooms",
+      "sort_index": 101
     },
     {
       "name": "grzyby portobello",
@@ -1139,7 +1343,9 @@
       "kcal": 22.0,
       "protein": 3.1,
       "fat": 0.3,
-      "carbs": 3.3
+      "carbs": 3.3,
+      "stable_key": "mushrooms-grzyby-portobello",
+      "sort_index": 102
     },
     {
       "name": "grzyby shiitake",
@@ -1150,7 +1356,9 @@
       "kcal": 34.0,
       "protein": 2.2,
       "fat": 0.5,
-      "carbs": 6.8
+      "carbs": 6.8,
+      "stable_key": "shiitake-mushrooms",
+      "sort_index": 103
     },
     {
       "name": "halloumi",
@@ -1161,7 +1369,9 @@
       "kcal": 321.0,
       "protein": 21.6,
       "fat": 25.0,
-      "carbs": 2.0
+      "carbs": 2.0,
+      "stable_key": "cheese--halloumi",
+      "sort_index": 104
     },
     {
       "name": "harissa",
@@ -1172,7 +1382,9 @@
       "kcal": 82.0,
       "protein": 2.0,
       "fat": 4.0,
-      "carbs": 10.0
+      "carbs": 10.0,
+      "stable_key": "harissa",
+      "sort_index": 105
     },
     {
       "name": "imbir",
@@ -1183,7 +1395,9 @@
       "kcal": 80.0,
       "protein": 1.8,
       "fat": 0.8,
-      "carbs": 17.8
+      "carbs": 17.8,
+      "stable_key": "ginger",
+      "sort_index": 106
     },
     {
       "name": "imbir mielony",
@@ -1194,7 +1408,9 @@
       "kcal": 335.0,
       "protein": 9.0,
       "fat": 4.2,
-      "carbs": 71.6
+      "carbs": 71.6,
+      "stable_key": "ground-ginger",
+      "sort_index": 107
     },
     {
       "name": "indyk",
@@ -1205,7 +1421,9 @@
       "kcal": 135.0,
       "protein": 22.6,
       "fat": 4.6,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "turkey-indyk",
+      "sort_index": 108
     },
     {
       "name": "jabłko",
@@ -1216,7 +1434,9 @@
       "kcal": 52.0,
       "protein": 0.3,
       "fat": 0.2,
-      "carbs": 13.8
+      "carbs": 13.8,
+      "stable_key": "apple",
+      "sort_index": 109
     },
     {
       "name": "jagody",
@@ -1227,7 +1447,9 @@
       "kcal": 57.0,
       "protein": 0.7,
       "fat": 0.3,
-      "carbs": 14.5
+      "carbs": 14.5,
+      "stable_key": "berries",
+      "sort_index": 110
     },
     {
       "name": "jajka",
@@ -1238,7 +1460,9 @@
       "kcal": 143.0,
       "protein": 12.6,
       "fat": 9.5,
-      "carbs": 0.7
+      "carbs": 0.7,
+      "stable_key": "eggs-jajka",
+      "sort_index": 111
     },
     {
       "name": "jarmuż",
@@ -1249,7 +1473,9 @@
       "kcal": 49.0,
       "protein": 4.3,
       "fat": 0.9,
-      "carbs": 8.8
+      "carbs": 8.8,
+      "stable_key": "kale",
+      "sort_index": 112
     },
     {
       "name": "jeżyna",
@@ -1260,7 +1486,9 @@
       "kcal": 43.0,
       "protein": 1.4,
       "fat": 0.5,
-      "carbs": 9.6
+      "carbs": 9.6,
+      "stable_key": "blackberry",
+      "sort_index": 113
     },
     {
       "name": "jeżyny",
@@ -1271,7 +1499,9 @@
       "kcal": 43.0,
       "protein": 1.4,
       "fat": 0.5,
-      "carbs": 9.6
+      "carbs": 9.6,
+      "stable_key": "blackberries",
+      "sort_index": 114
     },
     {
       "name": "jogurt grecki",
@@ -1282,7 +1512,9 @@
       "kcal": 97.0,
       "protein": 9.0,
       "fat": 5.0,
-      "carbs": 3.6
+      "carbs": 3.6,
+      "stable_key": "greek-yogurt",
+      "sort_index": 115
     },
     {
       "name": "jogurt naturalny",
@@ -1293,7 +1525,9 @@
       "kcal": 61.0,
       "protein": 3.5,
       "fat": 3.3,
-      "carbs": 4.7
+      "carbs": 4.7,
+      "stable_key": "plain-yogurt",
+      "sort_index": 116
     },
     {
       "name": "jogurt roslinny",
@@ -1304,7 +1538,9 @@
       "kcal": 61.0,
       "protein": 3.5,
       "fat": 3.3,
-      "carbs": 4.7
+      "carbs": 4.7,
+      "stable_key": "yogurt",
+      "sort_index": 117
     },
     {
       "name": "jogurt roślinny",
@@ -1315,7 +1551,9 @@
       "kcal": 61.0,
       "protein": 3.5,
       "fat": 3.3,
-      "carbs": 4.7
+      "carbs": 4.7,
+      "stable_key": "yogurt-jogurt-roslinny",
+      "sort_index": 118
     },
     {
       "name": "kakao",
@@ -1326,7 +1564,9 @@
       "kcal": 228.0,
       "protein": 19.6,
       "fat": 13.7,
-      "carbs": 57.9
+      "carbs": 57.9,
+      "stable_key": "cocoa-hazelnut-spread",
+      "sort_index": 119
     },
     {
       "name": "kalafior",
@@ -1337,7 +1577,9 @@
       "kcal": 25.0,
       "protein": 1.9,
       "fat": 0.3,
-      "carbs": 5.0
+      "carbs": 5.0,
+      "stable_key": "cauliflower",
+      "sort_index": 120
     },
     {
       "name": "kalafior ryżowy",
@@ -1348,7 +1590,9 @@
       "kcal": 25.0,
       "protein": 1.9,
       "fat": 0.3,
-      "carbs": 5.0
+      "carbs": 5.0,
+      "stable_key": "cauliflower-kalafior-ryzowy",
+      "sort_index": 121
     },
     {
       "name": "kapusta",
@@ -1359,7 +1603,9 @@
       "kcal": 25.0,
       "protein": 1.3,
       "fat": 0.1,
-      "carbs": 5.8
+      "carbs": 5.8,
+      "stable_key": "cabbage-kapusta",
+      "sort_index": 122
     },
     {
       "name": "kapusta biała",
@@ -1370,7 +1616,9 @@
       "kcal": 25.0,
       "protein": 1.3,
       "fat": 0.1,
-      "carbs": 5.8
+      "carbs": 5.8,
+      "stable_key": "green-cabbage",
+      "sort_index": 123
     },
     {
       "name": "kapusta czerwona",
@@ -1381,7 +1629,9 @@
       "kcal": 31.0,
       "protein": 1.4,
       "fat": 0.2,
-      "carbs": 7.4
+      "carbs": 7.4,
+      "stable_key": "red-cabbage",
+      "sort_index": 124
     },
     {
       "name": "kapusta fioletowa",
@@ -1392,7 +1642,9 @@
       "kcal": 25.0,
       "protein": 1.3,
       "fat": 0.1,
-      "carbs": 5.8
+      "carbs": 5.8,
+      "stable_key": "cabbage-kapusta-fioletowa",
+      "sort_index": 125
     },
     {
       "name": "kapusta i marchew",
@@ -1403,7 +1655,9 @@
       "kcal": 41.0,
       "protein": 0.9,
       "fat": 0.2,
-      "carbs": 9.6
+      "carbs": 9.6,
+      "stable_key": "carrots",
+      "sort_index": 126
     },
     {
       "name": "kapusta pekińska",
@@ -1414,7 +1668,9 @@
       "kcal": 12.0,
       "protein": 1.1,
       "fat": 0.2,
-      "carbs": 2.2
+      "carbs": 2.2,
+      "stable_key": "napa-cabbage",
+      "sort_index": 127
     },
     {
       "name": "karkówka wołowa",
@@ -1425,7 +1681,9 @@
       "kcal": 288.0,
       "protein": 26.0,
       "fat": 20.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "beef-chuck",
+      "sort_index": 128
     },
     {
       "name": "kawa",
@@ -1436,7 +1694,9 @@
       "kcal": 40.0,
       "protein": 1.5,
       "fat": 1.0,
-      "carbs": 6.0
+      "carbs": 6.0,
+      "stable_key": "tuna-chunks-in-water",
+      "sort_index": 129
     },
     {
       "name": "ketchup",
@@ -1447,7 +1707,9 @@
       "kcal": 101.0,
       "protein": 1.0,
       "fat": 0.1,
-      "carbs": 27.4
+      "carbs": 27.4,
+      "stable_key": "ketchup",
+      "sort_index": 130
     },
     {
       "name": "kiełbasa",
@@ -1458,7 +1720,9 @@
       "kcal": 299.0,
       "protein": 15.4,
       "fat": 25.7,
-      "carbs": 1.9
+      "carbs": 1.9,
+      "stable_key": "sausage",
+      "sort_index": 131
     },
     {
       "name": "kiełbasa andouille",
@@ -1469,7 +1733,9 @@
       "kcal": 310.0,
       "protein": 16.0,
       "fat": 26.0,
-      "carbs": 2.0
+      "carbs": 2.0,
+      "stable_key": "andouille-sausage",
+      "sort_index": 132
     },
     {
       "name": "kiełbasa wegetariańska",
@@ -1480,7 +1746,9 @@
       "kcal": 200.0,
       "protein": 18.0,
       "fat": 10.0,
-      "carbs": 10.0
+      "carbs": 10.0,
+      "stable_key": "vegetarian-sausage",
+      "sort_index": 133
     },
     {
       "name": "kiełbasa wieprzowa śniadaniowa",
@@ -1491,7 +1759,9 @@
       "kcal": 100.0,
       "protein": 2.0,
       "fat": 5.0,
-      "carbs": 12.0
+      "carbs": 12.0,
+      "stable_key": "breakfast",
+      "sort_index": 134
     },
     {
       "name": "kiełbasa wędzona",
@@ -1502,7 +1772,9 @@
       "kcal": 299.0,
       "protein": 15.4,
       "fat": 25.7,
-      "carbs": 1.9
+      "carbs": 1.9,
+      "stable_key": "sausage-kielbasa-wedzona",
+      "sort_index": 135
     },
     {
       "name": "kiełbasa włoska",
@@ -1513,7 +1785,9 @@
       "kcal": 299.0,
       "protein": 15.4,
       "fat": 25.7,
-      "carbs": 1.9
+      "carbs": 1.9,
+      "stable_key": "sausage-kielbasa-wloska",
+      "sort_index": 136
     },
     {
       "name": "kiełbasa z indyka",
@@ -1524,7 +1798,9 @@
       "kcal": 299.0,
       "protein": 15.4,
       "fat": 25.7,
-      "carbs": 1.9
+      "carbs": 1.9,
+      "stable_key": "sausage-kielbasa-z-indyka",
+      "sort_index": 137
     },
     {
       "name": "kiełbasa z kurczaka",
@@ -1535,7 +1811,9 @@
       "kcal": 299.0,
       "protein": 15.4,
       "fat": 25.7,
-      "carbs": 1.9
+      "carbs": 1.9,
+      "stable_key": "chicken-apple-sausage",
+      "sort_index": 138
     },
     {
       "name": "kiełbasa śniadaniowa",
@@ -1546,7 +1824,9 @@
       "kcal": 100.0,
       "protein": 2.0,
       "fat": 5.0,
-      "carbs": 12.0
+      "carbs": 12.0,
+      "stable_key": "breakfast-kielbasa-sniadaniowa",
+      "sort_index": 139
     },
     {
       "name": "kiełbaski śniadaniowe",
@@ -1557,7 +1837,9 @@
       "kcal": 100.0,
       "protein": 2.0,
       "fat": 5.0,
-      "carbs": 12.0
+      "carbs": 12.0,
+      "stable_key": "breakfast-kielbaski-sniadaniow",
+      "sort_index": 140
     },
     {
       "name": "kiełki fasoli",
@@ -1568,7 +1850,9 @@
       "kcal": 30.0,
       "protein": 3.0,
       "fat": 0.2,
-      "carbs": 5.9
+      "carbs": 5.9,
+      "stable_key": "bean-sprouts",
+      "sort_index": 141
     },
     {
       "name": "kimchi",
@@ -1579,7 +1863,9 @@
       "kcal": 24.0,
       "protein": 1.1,
       "fat": 0.2,
-      "carbs": 4.5
+      "carbs": 4.5,
+      "stable_key": "kimchi",
+      "sort_index": 142
     },
     {
       "name": "kiwi",
@@ -1590,7 +1876,9 @@
       "kcal": 61.0,
       "protein": 1.1,
       "fat": 0.5,
-      "carbs": 14.7
+      "carbs": 14.7,
+      "stable_key": "kiwi",
+      "sort_index": 143
     },
     {
       "name": "kmin rzymski",
@@ -1601,7 +1889,9 @@
       "kcal": 375.0,
       "protein": 17.8,
       "fat": 22.3,
-      "carbs": 44.2
+      "carbs": 44.2,
+      "stable_key": "cumin",
+      "sort_index": 144
     },
     {
       "name": "kmin rzymski mielony",
@@ -1612,7 +1902,9 @@
       "kcal": 375.0,
       "protein": 17.8,
       "fat": 22.3,
-      "carbs": 44.2
+      "carbs": 44.2,
+      "stable_key": "ground-cumin",
+      "sort_index": 145
     },
     {
       "name": "kokos",
@@ -1623,7 +1915,9 @@
       "kcal": 354.0,
       "protein": 3.3,
       "fat": 33.5,
-      "carbs": 15.2
+      "carbs": 15.2,
+      "stable_key": "coconut",
+      "sort_index": 146
     },
     {
       "name": "kolendra",
@@ -1634,7 +1928,9 @@
       "kcal": 23.0,
       "protein": 2.1,
       "fat": 0.5,
-      "carbs": 3.7
+      "carbs": 3.7,
+      "stable_key": "coriander",
+      "sort_index": 147
     },
     {
       "name": "kolendra mielona",
@@ -1645,7 +1941,9 @@
       "kcal": 23.0,
       "protein": 2.1,
       "fat": 0.5,
-      "carbs": 3.7
+      "carbs": 3.7,
+      "stable_key": "coriander-kolendra-mielona",
+      "sort_index": 148
     },
     {
       "name": "komosa ryzowa",
@@ -1656,7 +1954,9 @@
       "kcal": 120.0,
       "protein": 4.4,
       "fat": 1.9,
-      "carbs": 21.3
+      "carbs": 21.3,
+      "stable_key": "quinoa",
+      "sort_index": 149
     },
     {
       "name": "komosa ryżowa",
@@ -1667,7 +1967,9 @@
       "kcal": 120.0,
       "protein": 4.4,
       "fat": 1.9,
-      "carbs": 21.3
+      "carbs": 21.3,
+      "stable_key": "quinoa-komosa-ryzowa",
+      "sort_index": 150
     },
     {
       "name": "koncentrat pomidorowy",
@@ -1678,7 +1980,9 @@
       "kcal": 82.0,
       "protein": 4.3,
       "fat": 0.5,
-      "carbs": 18.9
+      "carbs": 18.9,
+      "stable_key": "tomato-paste",
+      "sort_index": 151
     },
     {
       "name": "koperek",
@@ -1689,7 +1993,9 @@
       "kcal": 43.0,
       "protein": 3.5,
       "fat": 1.1,
-      "carbs": 7.0
+      "carbs": 7.0,
+      "stable_key": "dill",
+      "sort_index": 152
     },
     {
       "name": "krakersy",
@@ -1700,7 +2006,9 @@
       "kcal": 480.0,
       "protein": 8.0,
       "fat": 20.0,
-      "carbs": 68.0
+      "carbs": 68.0,
+      "stable_key": "salted-crackers-mix",
+      "sort_index": 153
     },
     {
       "name": "krewetki",
@@ -1711,7 +2019,9 @@
       "kcal": 85.0,
       "protein": 20.3,
       "fat": 0.5,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "shrimp-cocktail",
+      "sort_index": 154
     },
     {
       "name": "krojone pomidory",
@@ -1722,7 +2032,9 @@
       "kcal": 18.0,
       "protein": 0.9,
       "fat": 0.2,
-      "carbs": 3.9
+      "carbs": 3.9,
+      "stable_key": "tomatoes--red--ripe--raw--year-round-average",
+      "sort_index": 155
     },
     {
       "name": "kukurydza",
@@ -1733,7 +2045,9 @@
       "kcal": 86.0,
       "protein": 3.3,
       "fat": 1.4,
-      "carbs": 18.7
+      "carbs": 18.7,
+      "stable_key": "corn",
+      "sort_index": 156
     },
     {
       "name": "kukurydza mini",
@@ -1744,7 +2058,9 @@
       "kcal": 86.0,
       "protein": 3.3,
       "fat": 1.4,
-      "carbs": 18.7
+      "carbs": 18.7,
+      "stable_key": "corn-kukurydza-mini",
+      "sort_index": 157
     },
     {
       "name": "kukurydza słodka",
@@ -1755,7 +2071,9 @@
       "kcal": 86.0,
       "protein": 3.3,
       "fat": 1.4,
-      "carbs": 19.0
+      "carbs": 19.0,
+      "stable_key": "sweet-corn",
+      "sort_index": 158
     },
     {
       "name": "kur-kuma",
@@ -1766,7 +2084,9 @@
       "kcal": 354.0,
       "protein": 7.8,
       "fat": 9.9,
-      "carbs": 64.9
+      "carbs": 64.9,
+      "stable_key": "turmeric",
+      "sort_index": 159
     },
     {
       "name": "kurczak",
@@ -1777,7 +2097,9 @@
       "kcal": 239.0,
       "protein": 27.3,
       "fat": 13.6,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "chicken-kurczak",
+      "sort_index": 160
     },
     {
       "name": "kurczak fajita",
@@ -1788,7 +2110,9 @@
       "kcal": 239.0,
       "protein": 27.3,
       "fat": 13.6,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "chicken-kurczak-fajita",
+      "sort_index": 161
     },
     {
       "name": "kurkuma",
@@ -1799,7 +2123,9 @@
       "kcal": 354.0,
       "protein": 7.8,
       "fat": 9.9,
-      "carbs": 64.9
+      "carbs": 64.9,
+      "stable_key": "turmeric-kurkuma",
+      "sort_index": 162
     },
     {
       "name": "limonka",
@@ -1810,7 +2136,9 @@
       "kcal": 30.0,
       "protein": 0.7,
       "fat": 0.2,
-      "carbs": 10.5
+      "carbs": 10.5,
+      "stable_key": "lime",
+      "sort_index": 163
     },
     {
       "name": "liofilizowane truskawki",
@@ -1821,7 +2149,9 @@
       "kcal": 396.0,
       "protein": 4.0,
       "fat": 3.0,
-      "carbs": 84.0
+      "carbs": 84.0,
+      "stable_key": "freeze-dried-strawberries",
+      "sort_index": 164
     },
     {
       "name": "majonez",
@@ -1832,7 +2162,9 @@
       "kcal": 717.0,
       "protein": 0.9,
       "fat": 79.0,
-      "carbs": 0.6
+      "carbs": 0.6,
+      "stable_key": "mayonnaise",
+      "sort_index": 165
     },
     {
       "name": "mak",
@@ -1843,7 +2175,9 @@
       "kcal": 525.0,
       "protein": 18.0,
       "fat": 41.6,
-      "carbs": 28.1
+      "carbs": 28.1,
+      "stable_key": "cavatappi-durum-wheat-pasta",
+      "sort_index": 166
     },
     {
       "name": "makaron",
@@ -1854,7 +2188,9 @@
       "kcal": 131.0,
       "protein": 5.0,
       "fat": 1.1,
-      "carbs": 25.0
+      "carbs": 25.0,
+      "stable_key": "pasta",
+      "sort_index": 167
     },
     {
       "name": "makaron angel hair",
@@ -1865,7 +2201,9 @@
       "kcal": 131.0,
       "protein": 5.0,
       "fat": 1.1,
-      "carbs": 25.0
+      "carbs": 25.0,
+      "stable_key": "pasta-makaron-angel-hair",
+      "sort_index": 168
     },
     {
       "name": "makaron bezglutenowy",
@@ -1876,7 +2214,9 @@
       "kcal": 350.0,
       "protein": 5.0,
       "fat": 1.0,
-      "carbs": 78.0
+      "carbs": 78.0,
+      "stable_key": "glutenfree-tonnarelli-pasta",
+      "sort_index": 169
     },
     {
       "name": "makaron cavatappi",
@@ -1887,7 +2227,9 @@
       "kcal": 131.0,
       "protein": 5.0,
       "fat": 1.1,
-      "carbs": 25.0
+      "carbs": 25.0,
+      "stable_key": "cavatappi-durum-wheat-pasta-makaron-cavatappi",
+      "sort_index": 170
     },
     {
       "name": "makaron fusilli z ciecierzycy",
@@ -1898,7 +2240,9 @@
       "kcal": 357.0,
       "protein": 19.0,
       "fat": 6.0,
-      "carbs": 63.0
+      "carbs": 63.0,
+      "stable_key": "chickpea-fusilli-pasta",
+      "sort_index": 171
     },
     {
       "name": "makaron jajeczny",
@@ -1909,7 +2253,9 @@
       "kcal": 138.0,
       "protein": 4.5,
       "fat": 2.1,
-      "carbs": 25.2
+      "carbs": 25.2,
+      "stable_key": "egg-noodles",
+      "sort_index": 172
     },
     {
       "name": "makaron kokardki",
@@ -1920,7 +2266,9 @@
       "kcal": 131.0,
       "protein": 5.0,
       "fat": 1.1,
-      "carbs": 25.0
+      "carbs": 25.0,
+      "stable_key": "farfalle-pasta",
+      "sort_index": 173
     },
     {
       "name": "makaron orzo",
@@ -1931,7 +2279,9 @@
       "kcal": 131.0,
       "protein": 5.0,
       "fat": 1.1,
-      "carbs": 25.0
+      "carbs": 25.0,
+      "stable_key": "orzo-pasta-medium",
+      "sort_index": 174
     },
     {
       "name": "makaron palmini",
@@ -1942,7 +2292,9 @@
       "kcal": 131.0,
       "protein": 5.0,
       "fat": 1.1,
-      "carbs": 25.0
+      "carbs": 25.0,
+      "stable_key": "pasta-makaron-palmini",
+      "sort_index": 175
     },
     {
       "name": "makaron penne",
@@ -1953,7 +2305,9 @@
       "kcal": 357.0,
       "protein": 12.5,
       "fat": 1.5,
-      "carbs": 71.0
+      "carbs": 71.0,
+      "stable_key": "penne-pasta",
+      "sort_index": 176
     },
     {
       "name": "makaron quinoa",
@@ -1964,7 +2318,9 @@
       "kcal": 131.0,
       "protein": 5.0,
       "fat": 1.1,
-      "carbs": 25.0
+      "carbs": 25.0,
+      "stable_key": "pasta-makaron-quinoa",
+      "sort_index": 177
     },
     {
       "name": "makaron ramen",
@@ -1975,7 +2331,9 @@
       "kcal": 138.0,
       "protein": 4.5,
       "fat": 5.0,
-      "carbs": 19.5
+      "carbs": 19.5,
+      "stable_key": "ramen-noodles",
+      "sort_index": 178
     },
     {
       "name": "makaron rotini",
@@ -1986,7 +2344,9 @@
       "kcal": 131.0,
       "protein": 5.0,
       "fat": 1.1,
-      "carbs": 25.0
+      "carbs": 25.0,
+      "stable_key": "pasta-makaron-rotini",
+      "sort_index": 179
     },
     {
       "name": "makaron ryżowy",
@@ -1997,7 +2357,9 @@
       "kcal": 109.0,
       "protein": 1.8,
       "fat": 0.2,
-      "carbs": 24.9
+      "carbs": 24.9,
+      "stable_key": "rice-noodles",
+      "sort_index": 180
     },
     {
       "name": "makaron ryżowy brązowy",
@@ -2008,7 +2370,9 @@
       "kcal": 109.0,
       "protein": 1.8,
       "fat": 0.2,
-      "carbs": 24.9
+      "carbs": 24.9,
+      "stable_key": "rice-noodles-makaron-ryzowy-brazo",
+      "sort_index": 181
     },
     {
       "name": "makaron soba",
@@ -2019,7 +2383,9 @@
       "kcal": 99.0,
       "protein": 5.1,
       "fat": 0.1,
-      "carbs": 21.4
+      "carbs": 21.4,
+      "stable_key": "soba-noodles",
+      "sort_index": 182
     },
     {
       "name": "makaron z ciecierzycy",
@@ -2030,7 +2396,9 @@
       "kcal": 119.0,
       "protein": 7.0,
       "fat": 1.5,
-      "carbs": 21.0
+      "carbs": 21.0,
+      "stable_key": "chickpea-pasta-spirals",
+      "sort_index": 183
     },
     {
       "name": "makaron z cukinii",
@@ -2041,7 +2409,9 @@
       "kcal": 131.0,
       "protein": 5.0,
       "fat": 1.1,
-      "carbs": 25.0
+      "carbs": 25.0,
+      "stable_key": "pasta-makaron-z-cukinii",
+      "sort_index": 184
     },
     {
       "name": "makaron z serem",
@@ -2052,7 +2422,9 @@
       "kcal": 131.0,
       "protein": 5.0,
       "fat": 1.1,
-      "carbs": 25.0
+      "carbs": 25.0,
+      "stable_key": "pasta-makaron-z-serem",
+      "sort_index": 185
     },
     {
       "name": "makaron łokieć",
@@ -2063,7 +2435,9 @@
       "kcal": 131.0,
       "protein": 5.0,
       "fat": 1.1,
-      "carbs": 25.0
+      "carbs": 25.0,
+      "stable_key": "pasta-makaron-lokiec",
+      "sort_index": 186
     },
     {
       "name": "maliny",
@@ -2074,7 +2448,9 @@
       "kcal": 52.0,
       "protein": 1.2,
       "fat": 0.7,
-      "carbs": 11.9
+      "carbs": 11.9,
+      "stable_key": "raspberries",
+      "sort_index": 187
     },
     {
       "name": "mandarynka",
@@ -2085,7 +2461,9 @@
       "kcal": 53.0,
       "protein": 0.8,
       "fat": 0.3,
-      "carbs": 13.3
+      "carbs": 13.3,
+      "stable_key": "mandarin-orange",
+      "sort_index": 188
     },
     {
       "name": "mango",
@@ -2096,7 +2474,9 @@
       "kcal": 60.0,
       "protein": 0.8,
       "fat": 0.4,
-      "carbs": 15.0
+      "carbs": 15.0,
+      "stable_key": "mango",
+      "sort_index": 189
     },
     {
       "name": "marchew",
@@ -2107,7 +2487,9 @@
       "kcal": 41.0,
       "protein": 0.9,
       "fat": 0.2,
-      "carbs": 9.6
+      "carbs": 9.6,
+      "stable_key": "carrots-marchew",
+      "sort_index": 190
     },
     {
       "name": "marmolada pomarańczowa",
@@ -2118,7 +2500,9 @@
       "kcal": 246.0,
       "protein": 0.3,
       "fat": 0.0,
-      "carbs": 60.8
+      "carbs": 60.8,
+      "stable_key": "orange-marmalade",
+      "sort_index": 191
     },
     {
       "name": "masło",
@@ -2129,7 +2513,9 @@
       "kcal": 717.0,
       "protein": 0.9,
       "fat": 81.1,
-      "carbs": 0.1
+      "carbs": 0.1,
+      "stable_key": "butter",
+      "sort_index": 192
     },
     {
       "name": "masło kokosowe",
@@ -2140,7 +2526,9 @@
       "kcal": 717.0,
       "protein": 0.9,
       "fat": 81.1,
-      "carbs": 0.1
+      "carbs": 0.1,
+      "stable_key": "butter-maslo-kokosowe",
+      "sort_index": 193
     },
     {
       "name": "masło migdałowe",
@@ -2151,7 +2539,9 @@
       "kcal": 717.0,
       "protein": 0.9,
       "fat": 81.1,
-      "carbs": 0.1
+      "carbs": 0.1,
+      "stable_key": "almond",
+      "sort_index": 194
     },
     {
       "name": "masło orzechowe",
@@ -2162,7 +2552,9 @@
       "kcal": 588.0,
       "protein": 25.1,
       "fat": 50.2,
-      "carbs": 20.0
+      "carbs": 20.0,
+      "stable_key": "peanut-butter",
+      "sort_index": 195
     },
     {
       "name": "masło roślinne",
@@ -2173,7 +2565,9 @@
       "kcal": 717.0,
       "protein": 0.9,
       "fat": 81.1,
-      "carbs": 0.1
+      "carbs": 0.1,
+      "stable_key": "butter-maslo-roslinne",
+      "sort_index": 196
     },
     {
       "name": "maślanka w proszku",
@@ -2184,7 +2578,9 @@
       "kcal": 40.0,
       "protein": 3.3,
       "fat": 0.9,
-      "carbs": 4.8
+      "carbs": 4.8,
+      "stable_key": "buttermilk",
+      "sort_index": 197
     },
     {
       "name": "melasa",
@@ -2195,7 +2591,9 @@
       "kcal": 290.0,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 72.0
+      "carbs": 72.0,
+      "stable_key": "mulberry-fruit-molasses",
+      "sort_index": 198
     },
     {
       "name": "melon",
@@ -2206,7 +2604,9 @@
       "kcal": 34.0,
       "protein": 0.8,
       "fat": 0.2,
-      "carbs": 8.2
+      "carbs": 8.2,
+      "stable_key": "melon",
+      "sort_index": 199
     },
     {
       "name": "mielona kiełbasa",
@@ -2217,7 +2617,9 @@
       "kcal": 332.0,
       "protein": 14.0,
       "fat": 30.0,
-      "carbs": 1.0
+      "carbs": 1.0,
+      "stable_key": "ground-sausage",
+      "sort_index": 200
     },
     {
       "name": "mielona wieprzowina",
@@ -2228,7 +2630,9 @@
       "kcal": 263.0,
       "protein": 16.9,
       "fat": 21.2,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "ground-pork",
+      "sort_index": 201
     },
     {
       "name": "mielona woowina",
@@ -2239,7 +2643,9 @@
       "kcal": 215.0,
       "protein": 18.6,
       "fat": 15.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "mielona-woowina",
+      "sort_index": 202
     },
     {
       "name": "mielona wołowina",
@@ -2250,7 +2656,9 @@
       "kcal": 215.0,
       "protein": 18.6,
       "fat": 15.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "ground-beef",
+      "sort_index": 203
     },
     {
       "name": "mielone siemię lniane",
@@ -2261,7 +2669,9 @@
       "kcal": 534.0,
       "protein": 18.3,
       "fat": 42.2,
-      "carbs": 28.9
+      "carbs": 28.9,
+      "stable_key": "flaxseed-meal",
+      "sort_index": 204
     },
     {
       "name": "mielony indyk",
@@ -2272,7 +2682,9 @@
       "kcal": 135.0,
       "protein": 22.6,
       "fat": 4.6,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "turkey-mielony-indyk",
+      "sort_index": 205
     },
     {
       "name": "mielony kurczak",
@@ -2283,7 +2695,9 @@
       "kcal": 143.0,
       "protein": 17.4,
       "fat": 8.1,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "ground-chicken",
+      "sort_index": 206
     },
     {
       "name": "mieszanka coleslaw",
@@ -2294,7 +2708,9 @@
       "kcal": 100.0,
       "protein": 1.0,
       "fat": 7.0,
-      "carbs": 9.0
+      "carbs": 9.0,
+      "stable_key": "mix",
+      "sort_index": 207
     },
     {
       "name": "mieszanka do coleslaw",
@@ -2305,7 +2721,9 @@
       "kcal": 0.0,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "coleslaw-mix",
+      "sort_index": 208
     },
     {
       "name": "mieszanka do colesław",
@@ -2316,7 +2734,9 @@
       "kcal": 23.0,
       "protein": 1.3,
       "fat": 0.1,
-      "carbs": 5.0
+      "carbs": 5.0,
+      "stable_key": "coleslaw-mix-mieszanka-do-colesla",
+      "sort_index": 209
     },
     {
       "name": "mieszanka kapusty i marchwi",
@@ -2327,7 +2747,9 @@
       "kcal": 0.0,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "mix-mieszanka-kapusty-i-",
+      "sort_index": 210
     },
     {
       "name": "mieszanka owoców leśnych",
@@ -2338,7 +2760,9 @@
       "kcal": 0.0,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "mix-mieszanka-owocow-les",
+      "sort_index": 211
     },
     {
       "name": "mieszanka sałat",
@@ -2349,7 +2773,9 @@
       "kcal": 17.0,
       "protein": 1.5,
       "fat": 0.3,
-      "carbs": 3.0
+      "carbs": 3.0,
+      "stable_key": "mix-mieszanka-salat",
+      "sort_index": 212
     },
     {
       "name": "mieszanka suszonych owoców",
@@ -2360,7 +2786,9 @@
       "kcal": 250.0,
       "protein": 3.0,
       "fat": 0.5,
-      "carbs": 60.0
+      "carbs": 60.0,
+      "stable_key": "mix-mieszanka-suszonych-",
+      "sort_index": 213
     },
     {
       "name": "mieszanka warzyw",
@@ -2371,7 +2799,9 @@
       "kcal": 50.0,
       "protein": 2.0,
       "fat": 0.5,
-      "carbs": 10.0
+      "carbs": 10.0,
+      "stable_key": "mexican-vegetable-mix",
+      "sort_index": 214
     },
     {
       "name": "migdał",
@@ -2382,7 +2812,9 @@
       "kcal": 579.0,
       "protein": 21.2,
       "fat": 49.9,
-      "carbs": 21.6
+      "carbs": 21.6,
+      "stable_key": "almond-migdal",
+      "sort_index": 215
     },
     {
       "name": "migdały",
@@ -2393,7 +2825,9 @@
       "kcal": 579.0,
       "protein": 21.2,
       "fat": 49.9,
-      "carbs": 21.6
+      "carbs": 21.6,
+      "stable_key": "almonds",
+      "sort_index": 216
     },
     {
       "name": "miód",
@@ -2404,7 +2838,9 @@
       "kcal": 304.0,
       "protein": 0.3,
       "fat": 0.0,
-      "carbs": 82.4
+      "carbs": 82.4,
+      "stable_key": "honey",
+      "sort_index": 217
     },
     {
       "name": "mięta",
@@ -2415,7 +2851,9 @@
       "kcal": 70.0,
       "protein": 3.8,
       "fat": 0.9,
-      "carbs": 14.9
+      "carbs": 14.9,
+      "stable_key": "mint",
+      "sort_index": 218
     },
     {
       "name": "mleko",
@@ -2426,7 +2864,9 @@
       "kcal": 61.0,
       "protein": 3.2,
       "fat": 3.3,
-      "carbs": 4.8
+      "carbs": 4.8,
+      "stable_key": "milk",
+      "sort_index": 219
     },
     {
       "name": "mleko kokosowe",
@@ -2437,7 +2877,9 @@
       "kcal": 230.0,
       "protein": 2.3,
       "fat": 23.8,
-      "carbs": 5.5
+      "carbs": 5.5,
+      "stable_key": "coconut-milk",
+      "sort_index": 220
     },
     {
       "name": "mleko kokosowe w proszku",
@@ -2448,7 +2890,9 @@
       "kcal": 660.0,
       "protein": 10.0,
       "fat": 60.0,
-      "carbs": 25.0
+      "carbs": 25.0,
+      "stable_key": "coconut-milk-powder",
+      "sort_index": 221
     },
     {
       "name": "mleko migdałowe",
@@ -2459,7 +2903,9 @@
       "kcal": 61.0,
       "protein": 3.2,
       "fat": 3.3,
-      "carbs": 4.8
+      "carbs": 4.8,
+      "stable_key": "almond-mleko-migdalowe",
+      "sort_index": 222
     },
     {
       "name": "mleko owsiane",
@@ -2470,7 +2916,9 @@
       "kcal": 61.0,
       "protein": 3.2,
       "fat": 3.3,
-      "carbs": 4.8
+      "carbs": 4.8,
+      "stable_key": "milk-mleko-owsiane",
+      "sort_index": 223
     },
     {
       "name": "mleko roślinne",
@@ -2481,7 +2929,9 @@
       "kcal": 61.0,
       "protein": 3.2,
       "fat": 3.3,
-      "carbs": 4.8
+      "carbs": 4.8,
+      "stable_key": "milk-mleko-roslinne",
+      "sort_index": 224
     },
     {
       "name": "morele suszone",
@@ -2492,7 +2942,9 @@
       "kcal": 241.0,
       "protein": 3.4,
       "fat": 0.5,
-      "carbs": 62.6
+      "carbs": 62.6,
+      "stable_key": "dried-apricots",
+      "sort_index": 225
     },
     {
       "name": "mozzarella",
@@ -2503,7 +2955,9 @@
       "kcal": 280.0,
       "protein": 22.0,
       "fat": 21.0,
-      "carbs": 2.2
+      "carbs": 2.2,
+      "stable_key": "mozzarella",
+      "sort_index": 226
     },
     {
       "name": "mus jabłkowy",
@@ -2514,7 +2968,9 @@
       "kcal": 68.0,
       "protein": 0.2,
       "fat": 0.1,
-      "carbs": 17.9
+      "carbs": 17.9,
+      "stable_key": "applesauce",
+      "sort_index": 227
     },
     {
       "name": "musztarda",
@@ -2525,7 +2981,9 @@
       "kcal": 66.0,
       "protein": 3.7,
       "fat": 3.3,
-      "carbs": 6.0
+      "carbs": 6.0,
+      "stable_key": "mustard",
+      "sort_index": 228
     },
     {
       "name": "musztarda dijon",
@@ -2536,7 +2994,9 @@
       "kcal": 66.0,
       "protein": 4.4,
       "fat": 3.3,
-      "carbs": 5.0
+      "carbs": 5.0,
+      "stable_key": "dijon-mustard",
+      "sort_index": 229
     },
     {
       "name": "musztarda dyniowa",
@@ -2547,7 +3007,9 @@
       "kcal": 66.0,
       "protein": 3.7,
       "fat": 3.3,
-      "carbs": 6.0
+      "carbs": 6.0,
+      "stable_key": "mustard-musztarda-dyniowa",
+      "sort_index": 230
     },
     {
       "name": "musztarda miodowa",
@@ -2558,7 +3020,9 @@
       "kcal": 160.0,
       "protein": 2.0,
       "fat": 6.0,
-      "carbs": 25.0
+      "carbs": 25.0,
+      "stable_key": "honey-mustard",
+      "sort_index": 231
     },
     {
       "name": "musztarda ostra",
@@ -2569,7 +3033,9 @@
       "kcal": 66.0,
       "protein": 3.7,
       "fat": 3.3,
-      "carbs": 6.0
+      "carbs": 6.0,
+      "stable_key": "mustard-musztarda-ostra",
+      "sort_index": 232
     },
     {
       "name": "musztarda żółta",
@@ -2580,7 +3046,9 @@
       "kcal": 66.0,
       "protein": 3.7,
       "fat": 3.3,
-      "carbs": 6.0
+      "carbs": 6.0,
+      "stable_key": "mustard-musztarda-zolta",
+      "sort_index": 233
     },
     {
       "name": "mąka",
@@ -2591,7 +3059,9 @@
       "kcal": 364.0,
       "protein": 10.3,
       "fat": 1.0,
-      "carbs": 76.3
+      "carbs": 76.3,
+      "stable_key": "flour",
+      "sort_index": 234
     },
     {
       "name": "mąka bezglutenowa",
@@ -2602,7 +3072,9 @@
       "kcal": 366.0,
       "protein": 5.9,
       "fat": 1.4,
-      "carbs": 80.1
+      "carbs": 80.1,
+      "stable_key": "flour-maka-bezglutenowa",
+      "sort_index": 235
     },
     {
       "name": "mąka bezglutenowa uniwersalna",
@@ -2613,7 +3085,9 @@
       "kcal": 357.0,
       "protein": 5.0,
       "fat": 1.0,
-      "carbs": 80.0
+      "carbs": 80.0,
+      "stable_key": "flour-maka-bezglutenowa-un",
+      "sort_index": 236
     },
     {
       "name": "mąka maranta",
@@ -2624,7 +3098,9 @@
       "kcal": 364.0,
       "protein": 10.3,
       "fat": 1.0,
-      "carbs": 76.3
+      "carbs": 76.3,
+      "stable_key": "flour-maka-maranta",
+      "sort_index": 237
     },
     {
       "name": "mąka migdałowa",
@@ -2635,7 +3111,9 @@
       "kcal": 579.0,
       "protein": 21.4,
       "fat": 49.9,
-      "carbs": 21.6
+      "carbs": 21.6,
+      "stable_key": "almond-flour",
+      "sort_index": 238
     },
     {
       "name": "mąka owsiana",
@@ -2646,7 +3124,9 @@
       "kcal": 404.0,
       "protein": 14.7,
       "fat": 6.9,
-      "carbs": 65.7
+      "carbs": 65.7,
+      "stable_key": "oat-flour",
+      "sort_index": 239
     },
     {
       "name": "młode ziemniaki",
@@ -2657,7 +3137,9 @@
       "kcal": 77.0,
       "protein": 2.0,
       "fat": 0.1,
-      "carbs": 17.5
+      "carbs": 17.5,
+      "stable_key": "potatoes",
+      "sort_index": 240
     },
     {
       "name": "nasiona chia",
@@ -2668,7 +3150,9 @@
       "kcal": 486.0,
       "protein": 16.5,
       "fat": 30.7,
-      "carbs": 42.1
+      "carbs": 42.1,
+      "stable_key": "chia-seeds",
+      "sort_index": 241
     },
     {
       "name": "nasiona konopi",
@@ -2679,7 +3163,9 @@
       "kcal": 553.0,
       "protein": 31.6,
       "fat": 48.8,
-      "carbs": 8.7
+      "carbs": 8.7,
+      "stable_key": "hemp-seeds",
+      "sort_index": 242
     },
     {
       "name": "nasiona sezamu",
@@ -2690,7 +3176,9 @@
       "kcal": 573.0,
       "protein": 17.7,
       "fat": 49.7,
-      "carbs": 23.5
+      "carbs": 23.5,
+      "stable_key": "sesame-seeds",
+      "sort_index": 243
     },
     {
       "name": "natka pietruszki",
@@ -2701,7 +3189,9 @@
       "kcal": 36.0,
       "protein": 3.0,
       "fat": 0.8,
-      "carbs": 6.3
+      "carbs": 6.3,
+      "stable_key": "parsley",
+      "sort_index": 244
     },
     {
       "name": "nerkowce",
@@ -2712,7 +3202,9 @@
       "kcal": 553.0,
       "protein": 18.2,
       "fat": 43.8,
-      "carbs": 30.2
+      "carbs": 30.2,
+      "stable_key": "cashew-nuts",
+      "sort_index": 245
     },
     {
       "name": "ocet balsamiczny",
@@ -2723,7 +3215,9 @@
       "kcal": 88.0,
       "protein": 0.5,
       "fat": 0.0,
-      "carbs": 17.0
+      "carbs": 17.0,
+      "stable_key": "balsamic-vinegar",
+      "sort_index": 246
     },
     {
       "name": "ocet jabłkowy",
@@ -2734,7 +3228,9 @@
       "kcal": 21.0,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 0.9
+      "carbs": 0.9,
+      "stable_key": "apple-cider-vinegar",
+      "sort_index": 247
     },
     {
       "name": "ocet ryzowy",
@@ -2745,7 +3241,9 @@
       "kcal": 18.0,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "rice-wine-vinegar",
+      "sort_index": 248
     },
     {
       "name": "ocet ryżowy",
@@ -2756,7 +3254,9 @@
       "kcal": 18.0,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "rice-wine-vinegar-ocet-ryzowy",
+      "sort_index": 249
     },
     {
       "name": "ocet spirytusowy",
@@ -2767,7 +3267,9 @@
       "kcal": 18.0,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "distilled-white-vinegar",
+      "sort_index": 250
     },
     {
       "name": "ocet winny biały",
@@ -2778,7 +3280,9 @@
       "kcal": 18.0,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "white-wine-vinegar",
+      "sort_index": 251
     },
     {
       "name": "ocet winny czerwony",
@@ -2789,7 +3293,9 @@
       "kcal": 19.0,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 0.3
+      "carbs": 0.3,
+      "stable_key": "red-wine-vinegar",
+      "sort_index": 252
     },
     {
       "name": "odżywka białkowa",
@@ -2800,7 +3306,9 @@
       "kcal": 400.0,
       "protein": 80.0,
       "fat": 3.0,
-      "carbs": 10.0
+      "carbs": 10.0,
+      "stable_key": "protein-powder",
+      "sort_index": 253
     },
     {
       "name": "odżywka białkowa czekoladowa",
@@ -2811,7 +3319,9 @@
       "kcal": 400.0,
       "protein": 80.0,
       "fat": 3.0,
-      "carbs": 10.0
+      "carbs": 10.0,
+      "stable_key": "protein-powder-odzywka-bialkowa-cze",
+      "sort_index": 254
     },
     {
       "name": "odżywka białkowa serwatkowa",
@@ -2822,7 +3332,9 @@
       "kcal": 400.0,
       "protein": 80.0,
       "fat": 3.0,
-      "carbs": 10.0
+      "carbs": 10.0,
+      "stable_key": "protein-powder-odzywka-bialkowa-ser",
+      "sort_index": 255
     },
     {
       "name": "odżywka białkowa waniliowa",
@@ -2833,7 +3345,9 @@
       "kcal": 400.0,
       "protein": 80.0,
       "fat": 3.0,
-      "carbs": 10.0
+      "carbs": 10.0,
+      "stable_key": "protein-powder-odzywka-bialkowa-wan",
+      "sort_index": 256
     },
     {
       "name": "ogórek",
@@ -2844,7 +3358,9 @@
       "kcal": 15.0,
       "protein": 0.7,
       "fat": 0.1,
-      "carbs": 3.6
+      "carbs": 3.6,
+      "stable_key": "cucumber",
+      "sort_index": 257
     },
     {
       "name": "ogórek kiszony",
@@ -2855,7 +3371,9 @@
       "kcal": 11.0,
       "protein": 0.3,
       "fat": 0.2,
-      "carbs": 2.3
+      "carbs": 2.3,
+      "stable_key": "cucumber-ogorek-kiszony",
+      "sort_index": 258
     },
     {
       "name": "ogórki kiszone",
@@ -2866,7 +3384,9 @@
       "kcal": 11.0,
       "protein": 0.3,
       "fat": 0.2,
-      "carbs": 2.3
+      "carbs": 2.3,
+      "stable_key": "pickled-cucumbers",
+      "sort_index": 259
     },
     {
       "name": "olej",
@@ -2877,7 +3397,9 @@
       "kcal": 884.0,
       "protein": 0.0,
       "fat": 100.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "chicken-broth-without-palm-oil",
+      "sort_index": 260
     },
     {
       "name": "olej rzepakowy",
@@ -2888,7 +3410,9 @@
       "kcal": 884.0,
       "protein": 0.0,
       "fat": 100.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "canola-oil",
+      "sort_index": 261
     },
     {
       "name": "olej sezamowy",
@@ -2899,7 +3423,9 @@
       "kcal": 884.0,
       "protein": 0.0,
       "fat": 100.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "sesame-oil",
+      "sort_index": 262
     },
     {
       "name": "olej w sprayu z awokado",
@@ -2910,7 +3436,9 @@
       "kcal": 884.0,
       "protein": 0.0,
       "fat": 100.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "avocado-olej-w-sprayu-z-awok",
+      "sort_index": 263
     },
     {
       "name": "olej z awokado",
@@ -2921,7 +3449,9 @@
       "kcal": 884.0,
       "protein": 0.0,
       "fat": 100.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "avocado-oil",
+      "sort_index": 264
     },
     {
       "name": "olej z pestek dyni",
@@ -2932,7 +3462,9 @@
       "kcal": 884.0,
       "protein": 0.0,
       "fat": 100.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "pumpkin-seed-oil",
+      "sort_index": 265
     },
     {
       "name": "olej z pestek winogron",
@@ -2943,7 +3475,9 @@
       "kcal": 884.0,
       "protein": 0.0,
       "fat": 100.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "grape-seed-oil",
+      "sort_index": 266
     },
     {
       "name": "oliwa z oliwek",
@@ -2954,7 +3488,9 @@
       "kcal": 884.0,
       "protein": 0.0,
       "fat": 100.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "olive-oil",
+      "sort_index": 267
     },
     {
       "name": "oliwki",
@@ -2965,7 +3501,9 @@
       "kcal": 145.0,
       "protein": 1.0,
       "fat": 15.0,
-      "carbs": 3.8
+      "carbs": 3.8,
+      "stable_key": "green-olives-stuffed-with-almonds",
+      "sort_index": 268
     },
     {
       "name": "oliwki czarne",
@@ -2976,7 +3514,9 @@
       "kcal": 115.0,
       "protein": 0.8,
       "fat": 10.7,
-      "carbs": 6.3
+      "carbs": 6.3,
+      "stable_key": "black-olives",
+      "sort_index": 269
     },
     {
       "name": "oliwki zielone",
@@ -2987,7 +3527,9 @@
       "kcal": 145.0,
       "protein": 1.5,
       "fat": 15.0,
-      "carbs": 3.0
+      "carbs": 3.0,
+      "stable_key": "green-olives-stuffed-with-almonds-oliwki-zielone",
+      "sort_index": 270
     },
     {
       "name": "oregano",
@@ -2998,7 +3540,9 @@
       "kcal": 265.0,
       "protein": 9.0,
       "fat": 4.3,
-      "carbs": 68.9
+      "carbs": 68.9,
+      "stable_key": "oregano",
+      "sort_index": 271
     },
     {
       "name": "oregano suszone",
@@ -3009,7 +3553,9 @@
       "kcal": 265.0,
       "protein": 9.0,
       "fat": 4.3,
-      "carbs": 68.9
+      "carbs": 68.9,
+      "stable_key": "dried-oregano",
+      "sort_index": 272
     },
     {
       "name": "orzech laskowy",
@@ -3020,7 +3566,9 @@
       "kcal": 628.0,
       "protein": 15.0,
       "fat": 60.8,
-      "carbs": 16.7
+      "carbs": 16.7,
+      "stable_key": "orzech-laskowy",
+      "sort_index": 273
     },
     {
       "name": "orzechy",
@@ -3031,7 +3579,9 @@
       "kcal": 607.0,
       "protein": 20.0,
       "fat": 54.0,
-      "carbs": 21.0
+      "carbs": 21.0,
+      "stable_key": "nuts",
+      "sort_index": 274
     },
     {
       "name": "orzechy makadamia",
@@ -3042,7 +3592,9 @@
       "kcal": 718.0,
       "protein": 7.9,
       "fat": 75.8,
-      "carbs": 13.8
+      "carbs": 13.8,
+      "stable_key": "macadamia-nuts",
+      "sort_index": 275
     },
     {
       "name": "orzechy nerkowca",
@@ -3053,7 +3605,9 @@
       "kcal": 553.0,
       "protein": 18.2,
       "fat": 43.8,
-      "carbs": 30.2
+      "carbs": 30.2,
+      "stable_key": "cashews",
+      "sort_index": 276
     },
     {
       "name": "orzechy pekan",
@@ -3064,7 +3618,9 @@
       "kcal": 691.0,
       "protein": 9.2,
       "fat": 72.0,
-      "carbs": 13.9
+      "carbs": 13.9,
+      "stable_key": "pecans",
+      "sort_index": 277
     },
     {
       "name": "orzechy włoskie",
@@ -3075,7 +3631,9 @@
       "kcal": 654.0,
       "protein": 15.2,
       "fat": 65.2,
-      "carbs": 13.7
+      "carbs": 13.7,
+      "stable_key": "walnuts",
+      "sort_index": 278
     },
     {
       "name": "orzeszki piniowe",
@@ -3086,7 +3644,9 @@
       "kcal": 673.0,
       "protein": 13.7,
       "fat": 68.4,
-      "carbs": 13.1
+      "carbs": 13.1,
+      "stable_key": "pine-nuts",
+      "sort_index": 279
     },
     {
       "name": "orzeszki ziemne",
@@ -3097,7 +3657,9 @@
       "kcal": 567.0,
       "protein": 25.8,
       "fat": 49.2,
-      "carbs": 16.1
+      "carbs": 16.1,
+      "stable_key": "peanuts",
+      "sort_index": 280
     },
     {
       "name": "papier ryżowy",
@@ -3108,7 +3670,9 @@
       "kcal": 333.0,
       "protein": 0.3,
       "fat": 0.1,
-      "carbs": 82.0
+      "carbs": 82.0,
+      "stable_key": "tapioca-rice-paper",
+      "sort_index": 281
     },
     {
       "name": "papryczki pepperoncini",
@@ -3119,7 +3683,9 @@
       "kcal": 40.0,
       "protein": 1.9,
       "fat": 0.4,
-      "carbs": 9.5
+      "carbs": 9.5,
+      "stable_key": "papryczki-pepperoncini",
+      "sort_index": 282
     },
     {
       "name": "papryka",
@@ -3130,7 +3696,9 @@
       "kcal": 31.0,
       "protein": 1.0,
       "fat": 0.3,
-      "carbs": 6.0
+      "carbs": 6.0,
+      "stable_key": "bell-pepper",
+      "sort_index": 283
     },
     {
       "name": "papryka czerwona",
@@ -3141,7 +3709,9 @@
       "kcal": 31.0,
       "protein": 1.0,
       "fat": 0.3,
-      "carbs": 6.0
+      "carbs": 6.0,
+      "stable_key": "red-pepper",
+      "sort_index": 284
     },
     {
       "name": "papryka czerwona pieczona",
@@ -3152,7 +3722,9 @@
       "kcal": 31.0,
       "protein": 1.0,
       "fat": 0.3,
-      "carbs": 6.0
+      "carbs": 6.0,
+      "stable_key": "red-pepper-papryka-czerwona-pie",
+      "sort_index": 285
     },
     {
       "name": "papryka ostra",
@@ -3163,7 +3735,9 @@
       "kcal": 318.0,
       "protein": 12.0,
       "fat": 17.3,
-      "carbs": 56.6
+      "carbs": 56.6,
+      "stable_key": "cayenne-pepper",
+      "sort_index": 286
     },
     {
       "name": "papryka poblano",
@@ -3174,7 +3748,9 @@
       "kcal": 31.0,
       "protein": 1.0,
       "fat": 0.3,
-      "carbs": 6.0
+      "carbs": 6.0,
+      "stable_key": "bell-pepper-papryka-poblano",
+      "sort_index": 287
     },
     {
       "name": "papryka słodka",
@@ -3185,7 +3761,9 @@
       "kcal": 282.0,
       "protein": 14.1,
       "fat": 12.9,
-      "carbs": 53.9
+      "carbs": 53.9,
+      "stable_key": "sweet-paprika",
+      "sort_index": 288
     },
     {
       "name": "papryka w proszku",
@@ -3196,7 +3774,9 @@
       "kcal": 282.0,
       "protein": 14.1,
       "fat": 12.9,
-      "carbs": 54.0
+      "carbs": 54.0,
+      "stable_key": "paprika",
+      "sort_index": 289
     },
     {
       "name": "papryka wędzona",
@@ -3207,7 +3787,9 @@
       "kcal": 282.0,
       "protein": 14.1,
       "fat": 12.9,
-      "carbs": 54.0
+      "carbs": 54.0,
+      "stable_key": "smoked-paprika",
+      "sort_index": 290
     },
     {
       "name": "papryka zielona",
@@ -3218,7 +3800,9 @@
       "kcal": 20.0,
       "protein": 0.9,
       "fat": 0.2,
-      "carbs": 4.6
+      "carbs": 4.6,
+      "stable_key": "green-bell-pepper",
+      "sort_index": 291
     },
     {
       "name": "pasta chili",
@@ -3229,7 +3813,9 @@
       "kcal": 131.0,
       "protein": 5.0,
       "fat": 1.1,
-      "carbs": 25.0
+      "carbs": 25.0,
+      "stable_key": "pasta-pasta-chili",
+      "sort_index": 292
     },
     {
       "name": "pałki z kurczaka",
@@ -3240,7 +3826,9 @@
       "kcal": 165.0,
       "protein": 31.0,
       "fat": 3.6,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "chicken-palki-z-kurczaka",
+      "sort_index": 293
     },
     {
       "name": "pestki dyni",
@@ -3251,7 +3839,9 @@
       "kcal": 559.0,
       "protein": 30.2,
       "fat": 49.1,
-      "carbs": 10.7
+      "carbs": 10.7,
+      "stable_key": "pumpkin-seeds",
+      "sort_index": 294
     },
     {
       "name": "pesto",
@@ -3262,7 +3852,9 @@
       "kcal": 490.0,
       "protein": 8.0,
       "fat": 47.0,
-      "carbs": 8.0
+      "carbs": 8.0,
+      "stable_key": "pesto",
+      "sort_index": 295
     },
     {
       "name": "pesto rukolowe",
@@ -3273,7 +3865,9 @@
       "kcal": 490.0,
       "protein": 8.0,
       "fat": 47.0,
-      "carbs": 8.0
+      "carbs": 8.0,
+      "stable_key": "pesto-pesto-rukolowe",
+      "sort_index": 296
     },
     {
       "name": "pieczarka",
@@ -3284,7 +3878,9 @@
       "kcal": 22.0,
       "protein": 3.1,
       "fat": 0.3,
-      "carbs": 3.3
+      "carbs": 3.3,
+      "stable_key": "mushroom",
+      "sort_index": 297
     },
     {
       "name": "pieczarki",
@@ -3295,7 +3891,9 @@
       "kcal": 22.0,
       "protein": 3.1,
       "fat": 0.3,
-      "carbs": 3.3
+      "carbs": 3.3,
+      "stable_key": "mushrooms-pieczarki",
+      "sort_index": 298
     },
     {
       "name": "pieczarki cremini",
@@ -3306,7 +3904,9 @@
       "kcal": 22.0,
       "protein": 3.1,
       "fat": 0.3,
-      "carbs": 3.3
+      "carbs": 3.3,
+      "stable_key": "mushrooms-pieczarki-cremini",
+      "sort_index": 299
     },
     {
       "name": "pieczarki portobello",
@@ -3317,7 +3917,9 @@
       "kcal": 22.0,
       "protein": 2.1,
       "fat": 0.3,
-      "carbs": 3.9
+      "carbs": 3.9,
+      "stable_key": "portobello-mushrooms",
+      "sort_index": 300
     },
     {
       "name": "pieprz",
@@ -3328,7 +3930,9 @@
       "kcal": 251.0,
       "protein": 10.4,
       "fat": 3.3,
-      "carbs": 64.0
+      "carbs": 64.0,
+      "stable_key": "pepper",
+      "sort_index": 301
     },
     {
       "name": "pieprz cayenne",
@@ -3339,7 +3943,9 @@
       "kcal": 318.0,
       "protein": 12.0,
       "fat": 17.3,
-      "carbs": 56.6
+      "carbs": 56.6,
+      "stable_key": "cayenne-pepper-pieprz-cayenne",
+      "sort_index": 302
     },
     {
       "name": "pieprz cytrynowy",
@@ -3350,7 +3956,9 @@
       "kcal": 255.0,
       "protein": 10.4,
       "fat": 3.3,
-      "carbs": 64.8
+      "carbs": 64.8,
+      "stable_key": "spices--pepper--lemon--ground",
+      "sort_index": 303
     },
     {
       "name": "pieprz czarny",
@@ -3361,7 +3969,9 @@
       "kcal": 251.0,
       "protein": 10.4,
       "fat": 3.3,
-      "carbs": 64.0
+      "carbs": 64.0,
+      "stable_key": "black-pepper",
+      "sort_index": 304
     },
     {
       "name": "pierś z indyka",
@@ -3372,7 +3982,9 @@
       "kcal": 135.0,
       "protein": 29.3,
       "fat": 1.5,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "turkey-breast",
+      "sort_index": 305
     },
     {
       "name": "pietruszka",
@@ -3383,7 +3995,9 @@
       "kcal": 36.0,
       "protein": 3.0,
       "fat": 0.8,
-      "carbs": 6.3
+      "carbs": 6.3,
+      "stable_key": "parsley-pietruszka",
+      "sort_index": 306
     },
     {
       "name": "pistacje",
@@ -3394,7 +4008,9 @@
       "kcal": 567.0,
       "protein": 20.6,
       "fat": 45.8,
-      "carbs": 27.2
+      "carbs": 27.2,
+      "stable_key": "nuts--pistachio-nuts--dry-roasted--without-salt-added",
+      "sort_index": 307
     },
     {
       "name": "pomarańcza krwista",
@@ -3405,7 +4021,9 @@
       "kcal": 49.0,
       "protein": 0.9,
       "fat": 0.2,
-      "carbs": 12.5
+      "carbs": 12.5,
+      "stable_key": "oranges--raw--navels",
+      "sort_index": 308
     },
     {
       "name": "pomidor",
@@ -3416,7 +4034,9 @@
       "kcal": 18.0,
       "protein": 0.9,
       "fat": 0.2,
-      "carbs": 3.9
+      "carbs": 3.9,
+      "stable_key": "tomato",
+      "sort_index": 309
     },
     {
       "name": "pomidor koktajlowy",
@@ -3427,7 +4047,9 @@
       "kcal": 18.0,
       "protein": 0.9,
       "fat": 0.2,
-      "carbs": 3.9
+      "carbs": 3.9,
+      "stable_key": "cherry-tomato",
+      "sort_index": 310
     },
     {
       "name": "pomidor krojony",
@@ -3438,7 +4060,9 @@
       "kcal": 18.0,
       "protein": 0.9,
       "fat": 0.2,
-      "carbs": 3.9
+      "carbs": 3.9,
+      "stable_key": "tomato-pomidor-krojony",
+      "sort_index": 311
     },
     {
       "name": "pomidor rzymski",
@@ -3449,7 +4073,9 @@
       "kcal": 18.0,
       "protein": 0.9,
       "fat": 0.2,
-      "carbs": 3.9
+      "carbs": 3.9,
+      "stable_key": "tomato-pomidor-rzymski",
+      "sort_index": 312
     },
     {
       "name": "pomidor suszony",
@@ -3460,7 +4086,9 @@
       "kcal": 258.0,
       "protein": 14.1,
       "fat": 2.9,
-      "carbs": 55.8
+      "carbs": 55.8,
+      "stable_key": "sundried-tomato",
+      "sort_index": 313
     },
     {
       "name": "pomidorek koktajlowy",
@@ -3471,7 +4099,9 @@
       "kcal": 18.0,
       "protein": 0.9,
       "fat": 0.2,
-      "carbs": 3.9
+      "carbs": 3.9,
+      "stable_key": "tomato-pomidorek-koktajlowy",
+      "sort_index": 314
     },
     {
       "name": "pomidorki koktajlowe",
@@ -3482,7 +4112,9 @@
       "kcal": 18.0,
       "protein": 0.9,
       "fat": 0.2,
-      "carbs": 3.9
+      "carbs": 3.9,
+      "stable_key": "tomato-pomidorki-koktajlowe",
+      "sort_index": 315
     },
     {
       "name": "pomidory krojone",
@@ -3493,7 +4125,9 @@
       "kcal": 18.0,
       "protein": 0.9,
       "fat": 0.2,
-      "carbs": 3.9
+      "carbs": 3.9,
+      "stable_key": "diced-tomatoes",
+      "sort_index": 316
     },
     {
       "name": "pomidory kruszone",
@@ -3504,7 +4138,9 @@
       "kcal": 32.0,
       "protein": 1.6,
       "fat": 0.2,
-      "carbs": 7.0
+      "carbs": 7.0,
+      "stable_key": "crushed-tomatoes",
+      "sort_index": 317
     },
     {
       "name": "pomidory prażone",
@@ -3515,7 +4151,9 @@
       "kcal": 18.0,
       "protein": 0.9,
       "fat": 0.2,
-      "carbs": 3.9
+      "carbs": 3.9,
+      "stable_key": "tomatoes--red--ripe--raw--year-round-average-pomidory-prazone",
+      "sort_index": 318
     },
     {
       "name": "pomidory prażone z chili",
@@ -3526,7 +4164,9 @@
       "kcal": 18.0,
       "protein": 0.9,
       "fat": 0.2,
-      "carbs": 3.9
+      "carbs": 3.9,
+      "stable_key": "tomatoes--red--ripe--raw--year-round-average-pomidory-prazone-z-c",
+      "sort_index": 319
     },
     {
       "name": "pomidory suszone",
@@ -3537,7 +4177,9 @@
       "kcal": 258.0,
       "protein": 14.1,
       "fat": 2.9,
-      "carbs": 55.8
+      "carbs": 55.8,
+      "stable_key": "sundried-tomatoes",
+      "sort_index": 320
     },
     {
       "name": "por",
@@ -3548,7 +4190,9 @@
       "kcal": 61.0,
       "protein": 1.5,
       "fat": 0.3,
-      "carbs": 14.2
+      "carbs": 14.2,
+      "stable_key": "leek",
+      "sort_index": 321
     },
     {
       "name": "przyprawa chili",
@@ -3559,7 +4203,9 @@
       "kcal": 251.0,
       "protein": 10.4,
       "fat": 3.3,
-      "carbs": 64.0
+      "carbs": 64.0,
+      "stable_key": "spices--mixed--generic",
+      "sort_index": 322
     },
     {
       "name": "przyprawa do drobiu",
@@ -3570,7 +4216,9 @@
       "kcal": 307.0,
       "protein": 9.7,
       "fat": 7.5,
-      "carbs": 65.6
+      "carbs": 65.6,
+      "stable_key": "spices--poultry-seasoning",
+      "sort_index": 323
     },
     {
       "name": "przyprawa włoska",
@@ -3581,14 +4229,18 @@
       "kcal": 250.0,
       "protein": 10.0,
       "fat": 5.0,
-      "carbs": 50.0
+      "carbs": 50.0,
+      "stable_key": "italian-seasoning",
+      "sort_index": 324
     },
     {
       "name": "płatki chex",
       "price": 3.065,
       "package_weight": 600.0,
       "unit": "g",
-      "sold_by_weight": false
+      "sold_by_weight": false,
+      "stable_key": "platki-chex",
+      "sort_index": 325
     },
     {
       "name": "płatki chili",
@@ -3599,7 +4251,9 @@
       "kcal": 318.0,
       "protein": 12.0,
       "fat": 17.0,
-      "carbs": 56.0
+      "carbs": 56.0,
+      "stable_key": "red-chili-flakes",
+      "sort_index": 326
     },
     {
       "name": "płatki drożdżowe",
@@ -3610,7 +4264,9 @@
       "kcal": 371.0,
       "protein": 49.0,
       "fat": 5.0,
-      "carbs": 35.0
+      "carbs": 35.0,
+      "stable_key": "nutritional-yeast--flakes",
+      "sort_index": 327
     },
     {
       "name": "Płatki owsiane",
@@ -3621,7 +4277,9 @@
       "kcal": 579.0,
       "protein": 21.2,
       "fat": 49.9,
-      "carbs": 21.6
+      "carbs": 21.6,
+      "stable_key": "cereals--oats--rolled--dry",
+      "sort_index": 328
     },
     {
       "name": "ricotta",
@@ -3632,7 +4290,9 @@
       "kcal": 174.0,
       "protein": 11.3,
       "fat": 13.0,
-      "carbs": 3.0
+      "carbs": 3.0,
+      "stable_key": "cheese--ricotta--whole-milk",
+      "sort_index": 329
     },
     {
       "name": "rodzynki",
@@ -3643,7 +4303,9 @@
       "kcal": 299.0,
       "protein": 3.1,
       "fat": 0.5,
-      "carbs": 79.2
+      "carbs": 79.2,
+      "stable_key": "raisins",
+      "sort_index": 330
     },
     {
       "name": "rukola",
@@ -3654,7 +4316,9 @@
       "kcal": 25.0,
       "protein": 2.6,
       "fat": 0.7,
-      "carbs": 3.7
+      "carbs": 3.7,
+      "stable_key": "arugula--raw",
+      "sort_index": 331
     },
     {
       "name": "ryż",
@@ -3665,7 +4329,9 @@
       "kcal": 130.0,
       "protein": 2.7,
       "fat": 0.3,
-      "carbs": 28.2
+      "carbs": 28.2,
+      "stable_key": "rice-ryz",
+      "sort_index": 332
     },
     {
       "name": "ryż basmati",
@@ -3676,7 +4342,9 @@
       "kcal": 357.0,
       "protein": 7.1,
       "fat": 0.7,
-      "carbs": 79.0
+      "carbs": 79.0,
+      "stable_key": "basmati-rice",
+      "sort_index": 333
     },
     {
       "name": "ryż biały",
@@ -3687,7 +4355,9 @@
       "kcal": 365.0,
       "protein": 7.1,
       "fat": 0.7,
-      "carbs": 80.0
+      "carbs": 80.0,
+      "stable_key": "rice--white--longgrain--regular--raw--enriched",
+      "sort_index": 334
     },
     {
       "name": "ryż biały długoziarnisty",
@@ -3698,7 +4368,9 @@
       "kcal": 365.0,
       "protein": 7.1,
       "fat": 0.7,
-      "carbs": 80.0
+      "carbs": 80.0,
+      "stable_key": "long-grain-white-rice",
+      "sort_index": 335
     },
     {
       "name": "ryż brązowy",
@@ -3709,7 +4381,9 @@
       "kcal": 111.0,
       "protein": 2.6,
       "fat": 0.9,
-      "carbs": 23.0
+      "carbs": 23.0,
+      "stable_key": "brown-rice",
+      "sort_index": 336
     },
     {
       "name": "ryż brązowy błyskawiczny",
@@ -3720,7 +4394,9 @@
       "kcal": 370.0,
       "protein": 7.0,
       "fat": 3.0,
-      "carbs": 78.0
+      "carbs": 78.0,
+      "stable_key": "instant-brown-rice",
+      "sort_index": 337
     },
     {
       "name": "ryż jaśminowy",
@@ -3731,7 +4407,9 @@
       "kcal": 365.0,
       "protein": 7.1,
       "fat": 0.7,
-      "carbs": 80.0
+      "carbs": 80.0,
+      "stable_key": "rice--white--longgrain--jasmine--raw",
+      "sort_index": 338
     },
     {
       "name": "ryż pełnoziarnisty i komosa ryżowa",
@@ -3742,7 +4420,9 @@
       "kcal": 120.0,
       "protein": 4.4,
       "fat": 1.9,
-      "carbs": 21.3
+      "carbs": 21.3,
+      "stable_key": "quinoa-ryz-pelnoziarnisty-i",
+      "sort_index": 339
     },
     {
       "name": "rzodkiewka",
@@ -3753,7 +4433,9 @@
       "kcal": 16.0,
       "protein": 0.7,
       "fat": 0.1,
-      "carbs": 3.4
+      "carbs": 3.4,
+      "stable_key": "radish",
+      "sort_index": 340
     },
     {
       "name": "salami",
@@ -3764,7 +4446,9 @@
       "kcal": 407.0,
       "protein": 22.9,
       "fat": 33.7,
-      "carbs": 1.6
+      "carbs": 1.6,
+      "stable_key": "salami",
+      "sort_index": 341
     },
     {
       "name": "sałata",
@@ -3775,7 +4459,9 @@
       "kcal": 14.0,
       "protein": 0.9,
       "fat": 0.1,
-      "carbs": 3.0
+      "carbs": 3.0,
+      "stable_key": "lettuce--iceberg--raw",
+      "sort_index": 342
     },
     {
       "name": "sałata masłowa",
@@ -3786,7 +4472,9 @@
       "kcal": 13.0,
       "protein": 1.4,
       "fat": 0.2,
-      "carbs": 2.2
+      "carbs": 2.2,
+      "stable_key": "lettuce--butterhead--raw",
+      "sort_index": 343
     },
     {
       "name": "sałata rzymska",
@@ -3797,7 +4485,9 @@
       "kcal": 17.0,
       "protein": 1.2,
       "fat": 0.3,
-      "carbs": 3.3
+      "carbs": 3.3,
+      "stable_key": "romaine-lettuce",
+      "sort_index": 344
     },
     {
       "name": "Schab",
@@ -3808,7 +4498,9 @@
       "kcal": 128.0,
       "protein": 24.0,
       "fat": 4.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "pork-loin",
+      "sort_index": 345
     },
     {
       "name": "seler",
@@ -3819,7 +4511,9 @@
       "kcal": 16.0,
       "protein": 0.7,
       "fat": 0.2,
-      "carbs": 3.0
+      "carbs": 3.0,
+      "stable_key": "celery--raw",
+      "sort_index": 346
     },
     {
       "name": "seler naciowy",
@@ -3830,7 +4524,9 @@
       "kcal": 16.0,
       "protein": 0.7,
       "fat": 0.2,
-      "carbs": 3.0
+      "carbs": 3.0,
+      "stable_key": "celery",
+      "sort_index": 347
     },
     {
       "name": "ser",
@@ -3841,7 +4537,9 @@
       "kcal": 404.0,
       "protein": 25.0,
       "fat": 33.1,
-      "carbs": 1.3
+      "carbs": 1.3,
+      "stable_key": "cheese",
+      "sort_index": 348
     },
     {
       "name": "ser feta",
@@ -3852,7 +4550,9 @@
       "kcal": 264.0,
       "protein": 14.2,
       "fat": 21.3,
-      "carbs": 4.1
+      "carbs": 4.1,
+      "stable_key": "feta",
+      "sort_index": 349
     },
     {
       "name": "ser gruyere",
@@ -3863,7 +4563,9 @@
       "kcal": 413.0,
       "protein": 29.8,
       "fat": 32.3,
-      "carbs": 0.4
+      "carbs": 0.4,
+      "stable_key": "cheese--gruyere--aged--hard",
+      "sort_index": 350
     },
     {
       "name": "ser halloumi",
@@ -3874,7 +4576,9 @@
       "kcal": 321.0,
       "protein": 21.6,
       "fat": 25.0,
-      "carbs": 2.0
+      "carbs": 2.0,
+      "stable_key": "cheese--halloumi-ser-halloumi",
+      "sort_index": 351
     },
     {
       "name": "ser kozi",
@@ -3885,7 +4589,9 @@
       "kcal": 264.0,
       "protein": 18.5,
       "fat": 20.6,
-      "carbs": 1.2
+      "carbs": 1.2,
+      "stable_key": "cheese--goat--soft-type",
+      "sort_index": 352
     },
     {
       "name": "ser pleśniowy",
@@ -3896,7 +4602,9 @@
       "kcal": 353.0,
       "protein": 21.4,
       "fat": 28.7,
-      "carbs": 2.3
+      "carbs": 2.3,
+      "stable_key": "cheese--blue-cheese",
+      "sort_index": 353
     },
     {
       "name": "ser ricotta",
@@ -3907,7 +4615,9 @@
       "kcal": 174.0,
       "protein": 11.3,
       "fat": 13.0,
-      "carbs": 3.0
+      "carbs": 3.0,
+      "stable_key": "ricotta-cheese",
+      "sort_index": 354
     },
     {
       "name": "ser ricotta roślinny",
@@ -3918,7 +4628,9 @@
       "kcal": 174.0,
       "protein": 11.3,
       "fat": 13.0,
-      "carbs": 3.0
+      "carbs": 3.0,
+      "stable_key": "ricotta-cheese-ser-ricotta-roslinny",
+      "sort_index": 355
     },
     {
       "name": "ser w kawałku",
@@ -3929,7 +4641,9 @@
       "kcal": 402.0,
       "protein": 25.0,
       "fat": 33.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "cheese-ser-w-kawalku",
+      "sort_index": 356
     },
     {
       "name": "ser wegański",
@@ -3940,7 +4654,9 @@
       "kcal": 250.0,
       "protein": 1.0,
       "fat": 20.0,
-      "carbs": 15.0
+      "carbs": 15.0,
+      "stable_key": "cheese--vegan--lactosefree",
+      "sort_index": 357
     },
     {
       "name": "serca karczochów",
@@ -3951,7 +4667,9 @@
       "kcal": 50.0,
       "protein": 2.0,
       "fat": 2.5,
-      "carbs": 6.0
+      "carbs": 6.0,
+      "stable_key": "cheese-serca-karczochow",
+      "sort_index": 358
     },
     {
       "name": "serce karczocha",
@@ -3962,7 +4680,9 @@
       "kcal": 50.0,
       "protein": 2.0,
       "fat": 2.5,
-      "carbs": 6.0
+      "carbs": 6.0,
+      "stable_key": "cheese-serce-karczocha",
+      "sort_index": 359
     },
     {
       "name": "sezam",
@@ -3973,7 +4693,9 @@
       "kcal": 573.0,
       "protein": 17.7,
       "fat": 49.7,
-      "carbs": 23.5
+      "carbs": 23.5,
+      "stable_key": "sesame-sezam",
+      "sort_index": 360
     },
     {
       "name": "siemię lniane",
@@ -3984,7 +4706,9 @@
       "kcal": 534.0,
       "protein": 18.3,
       "fat": 42.2,
-      "carbs": 28.9
+      "carbs": 28.9,
+      "stable_key": "flax-seeds",
+      "sort_index": 361
     },
     {
       "name": "siemię lniane mielone",
@@ -3995,7 +4719,9 @@
       "kcal": 534.0,
       "protein": 18.3,
       "fat": 42.2,
-      "carbs": 28.9
+      "carbs": 28.9,
+      "stable_key": "ground-flaxseed",
+      "sort_index": 362
     },
     {
       "name": "skrobia kukurydziana",
@@ -4006,7 +4732,9 @@
       "kcal": 381.0,
       "protein": 0.3,
       "fat": 0.1,
-      "carbs": 91.3
+      "carbs": 91.3,
+      "stable_key": "corn-starch",
+      "sort_index": 363
     },
     {
       "name": "skrzydełko z kurczaka",
@@ -4017,7 +4745,9 @@
       "kcal": 222.0,
       "protein": 18.3,
       "fat": 15.8,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "chicken-skrzydelko-z-kurczak",
+      "sort_index": 364
     },
     {
       "name": "skyr",
@@ -4028,7 +4758,9 @@
       "kcal": 66.0,
       "protein": 12.0,
       "fat": 0.0,
-      "carbs": 3.8
+      "carbs": 3.8,
+      "stable_key": "skyr",
+      "sort_index": 365
     },
     {
       "name": "skórka z cytryny",
@@ -4039,14 +4771,18 @@
       "kcal": 29.0,
       "protein": 1.1,
       "fat": 0.3,
-      "carbs": 9.3
+      "carbs": 9.3,
+      "stable_key": "lemon-skorka-z-cytryny",
+      "sort_index": 366
     },
     {
       "name": "smietana",
       "price": 1.603,
       "package_weight": 330.0,
       "unit": "g",
-      "sold_by_weight": false
+      "sold_by_weight": false,
+      "stable_key": "sour-cream",
+      "sort_index": 367
     },
     {
       "name": "soczewica",
@@ -4057,7 +4793,9 @@
       "kcal": 353.0,
       "protein": 25.8,
       "fat": 1.1,
-      "carbs": 60.1
+      "carbs": 60.1,
+      "stable_key": "lentils",
+      "sort_index": 368
     },
     {
       "name": "soczewica czerwona",
@@ -4068,7 +4806,9 @@
       "kcal": 358.0,
       "protein": 25.8,
       "fat": 2.2,
-      "carbs": 63.1
+      "carbs": 63.1,
+      "stable_key": "red-lentils",
+      "sort_index": 369
     },
     {
       "name": "sok z cytryny",
@@ -4079,7 +4819,9 @@
       "kcal": 22.0,
       "protein": 0.4,
       "fat": 0.2,
-      "carbs": 6.9
+      "carbs": 6.9,
+      "stable_key": "lemon-juice",
+      "sort_index": 370
     },
     {
       "name": "sok z limonki",
@@ -4090,7 +4832,9 @@
       "kcal": 25.0,
       "protein": 0.4,
       "fat": 0.1,
-      "carbs": 8.4
+      "carbs": 8.4,
+      "stable_key": "lime-juice-from-concentrate",
+      "sort_index": 371
     },
     {
       "name": "sos",
@@ -4101,7 +4845,9 @@
       "kcal": 100.0,
       "protein": 1.0,
       "fat": 5.0,
-      "carbs": 12.0
+      "carbs": 12.0,
+      "stable_key": "sauce",
+      "sort_index": 372
     },
     {
       "name": "sos BBQ",
@@ -4112,7 +4858,9 @@
       "kcal": 100.0,
       "protein": 1.0,
       "fat": 5.0,
-      "carbs": 12.0
+      "carbs": 12.0,
+      "stable_key": "sauce-sos-bbq",
+      "sort_index": 373
     },
     {
       "name": "sos czosnkowy do makaronu",
@@ -4123,7 +4871,9 @@
       "kcal": 42.0,
       "protein": 1.2,
       "fat": 1.5,
-      "carbs": 6.5
+      "carbs": 6.5,
+      "stable_key": "garlic-pasta-sauce",
+      "sort_index": 374
     },
     {
       "name": "sos do makaronu",
@@ -4134,7 +4884,9 @@
       "kcal": 42.0,
       "protein": 1.2,
       "fat": 1.0,
-      "carbs": 7.0
+      "carbs": 7.0,
+      "stable_key": "pasta-sauce",
+      "sort_index": 375
     },
     {
       "name": "sos grecki",
@@ -4145,7 +4897,9 @@
       "kcal": 150.0,
       "protein": 2.0,
       "fat": 12.0,
-      "carbs": 8.0
+      "carbs": 8.0,
+      "stable_key": "greek-sauce",
+      "sort_index": 376
     },
     {
       "name": "sos ostry",
@@ -4156,7 +4910,9 @@
       "kcal": 100.0,
       "protein": 1.0,
       "fat": 5.0,
-      "carbs": 12.0
+      "carbs": 12.0,
+      "stable_key": "sauce-sos-ostry",
+      "sort_index": 377
     },
     {
       "name": "sos pomidorowy",
@@ -4167,7 +4923,9 @@
       "kcal": 24.0,
       "protein": 1.2,
       "fat": 0.3,
-      "carbs": 5.3
+      "carbs": 5.3,
+      "stable_key": "tomato-sauce",
+      "sort_index": 378
     },
     {
       "name": "sos pomidorowy do makaronu",
@@ -4178,7 +4936,9 @@
       "kcal": 24.0,
       "protein": 1.2,
       "fat": 0.3,
-      "carbs": 5.3
+      "carbs": 5.3,
+      "stable_key": "tomato-sauce-sos-pomidorowy-do-ma",
+      "sort_index": 379
     },
     {
       "name": "sos pomidorowy do pizzy",
@@ -4189,7 +4949,9 @@
       "kcal": 24.0,
       "protein": 1.2,
       "fat": 0.3,
-      "carbs": 5.3
+      "carbs": 5.3,
+      "stable_key": "tomato-sauce-sos-pomidorowy-do-pi",
+      "sort_index": 380
     },
     {
       "name": "sos ranch",
@@ -4200,7 +4962,9 @@
       "kcal": 100.0,
       "protein": 1.0,
       "fat": 5.0,
-      "carbs": 12.0
+      "carbs": 12.0,
+      "stable_key": "sauce-sos-ranch",
+      "sort_index": 381
     },
     {
       "name": "stewia",
@@ -4211,7 +4975,9 @@
       "kcal": 0.0,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "stevia",
+      "sort_index": 382
     },
     {
       "name": "suszone daktyle bez pestek",
@@ -4222,7 +4988,9 @@
       "kcal": 282.0,
       "protein": 2.5,
       "fat": 0.4,
-      "carbs": 75.0
+      "carbs": 75.0,
+      "stable_key": "dried-pitted-date-suszone-daktyle-bez-",
+      "sort_index": 383
     },
     {
       "name": "suszone jabłka",
@@ -4233,7 +5001,9 @@
       "kcal": 243.0,
       "protein": 0.9,
       "fat": 0.3,
-      "carbs": 65.9
+      "carbs": 65.9,
+      "stable_key": "suszone-jablka",
+      "sort_index": 384
     },
     {
       "name": "suszone jagody goji",
@@ -4244,7 +5014,9 @@
       "kcal": 349.0,
       "protein": 14.3,
       "fat": 0.4,
-      "carbs": 77.1
+      "carbs": 77.1,
+      "stable_key": "berries-suszone-jagody-goji",
+      "sort_index": 385
     },
     {
       "name": "suszone żurawiny",
@@ -4255,7 +5027,9 @@
       "kcal": 308.0,
       "protein": 0.2,
       "fat": 0.1,
-      "carbs": 82.8
+      "carbs": 82.8,
+      "stable_key": "dried-cranberries",
+      "sort_index": 386
     },
     {
       "name": "syrop daktylowy",
@@ -4266,7 +5040,9 @@
       "kcal": 300.0,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 80.0
+      "carbs": 80.0,
+      "stable_key": "syrup",
+      "sort_index": 387
     },
     {
       "name": "syrop klonowy",
@@ -4277,7 +5053,9 @@
       "kcal": 260.0,
       "protein": 0.0,
       "fat": 0.1,
-      "carbs": 67.0
+      "carbs": 67.0,
+      "stable_key": "maple-syrup",
+      "sort_index": 388
     },
     {
       "name": "syrop z agawy",
@@ -4288,7 +5066,9 @@
       "kcal": 310.0,
       "protein": 0.1,
       "fat": 0.5,
-      "carbs": 76.0
+      "carbs": 76.0,
+      "stable_key": "light-agave-syrup",
+      "sort_index": 389
     },
     {
       "name": "szalotka",
@@ -4299,7 +5079,9 @@
       "kcal": 72.0,
       "protein": 2.5,
       "fat": 0.1,
-      "carbs": 16.8
+      "carbs": 16.8,
+      "stable_key": "shallot",
+      "sort_index": 390
     },
     {
       "name": "szałwia suszona",
@@ -4310,7 +5092,9 @@
       "kcal": 308.0,
       "protein": 0.2,
       "fat": 1.1,
-      "carbs": 82.4
+      "carbs": 82.4,
+      "stable_key": "sage",
+      "sort_index": 391
     },
     {
       "name": "szczypiorek",
@@ -4321,7 +5105,9 @@
       "kcal": 32.0,
       "protein": 1.8,
       "fat": 0.2,
-      "carbs": 7.3
+      "carbs": 7.3,
+      "stable_key": "spring-onions",
+      "sort_index": 392
     },
     {
       "name": "szczypiorek suszony",
@@ -4332,7 +5118,9 @@
       "kcal": 32.0,
       "protein": 1.8,
       "fat": 0.2,
-      "carbs": 7.3
+      "carbs": 7.3,
+      "stable_key": "spring-onions-szczypiorek-suszony",
+      "sort_index": 393
     },
     {
       "name": "szparagi",
@@ -4343,7 +5131,9 @@
       "kcal": 20.0,
       "protein": 2.2,
       "fat": 0.1,
-      "carbs": 3.9
+      "carbs": 3.9,
+      "stable_key": "asparagus",
+      "sort_index": 394
     },
     {
       "name": "szpinak",
@@ -4354,7 +5144,9 @@
       "kcal": 23.0,
       "protein": 2.9,
       "fat": 0.4,
-      "carbs": 3.6
+      "carbs": 3.6,
+      "stable_key": "spinach",
+      "sort_index": 395
     },
     {
       "name": "szpinak baby",
@@ -4365,7 +5157,9 @@
       "kcal": 23.0,
       "protein": 2.9,
       "fat": 0.4,
-      "carbs": 3.6
+      "carbs": 3.6,
+      "stable_key": "baby-spinach",
+      "sort_index": 396
     },
     {
       "name": "szynka",
@@ -4376,7 +5170,9 @@
       "kcal": 145.0,
       "protein": 20.0,
       "fat": 7.0,
-      "carbs": 1.5
+      "carbs": 1.5,
+      "stable_key": "ham",
+      "sort_index": 397
     },
     {
       "name": "sól",
@@ -4387,7 +5183,9 @@
       "kcal": 0.0,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "salt",
+      "sort_index": 398
     },
     {
       "name": "sól morska",
@@ -4398,7 +5196,9 @@
       "kcal": 0.0,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "sea-salt",
+      "sort_index": 399
     },
     {
       "name": "tahini",
@@ -4409,7 +5209,9 @@
       "kcal": 595.0,
       "protein": 17.0,
       "fat": 53.0,
-      "carbs": 21.0
+      "carbs": 21.0,
+      "stable_key": "tahini",
+      "sort_index": 400
     },
     {
       "name": "tortilla",
@@ -4420,7 +5222,9 @@
       "kcal": 300.0,
       "protein": 8.0,
       "fat": 7.0,
-      "carbs": 50.0
+      "carbs": 50.0,
+      "stable_key": "multigrain-tortilla-wraps",
+      "sort_index": 401
     },
     {
       "name": "truskawka",
@@ -4431,7 +5235,9 @@
       "kcal": 32.0,
       "protein": 0.7,
       "fat": 0.3,
-      "carbs": 7.7
+      "carbs": 7.7,
+      "stable_key": "strawberry",
+      "sort_index": 402
     },
     {
       "name": "truskawki",
@@ -4442,7 +5248,9 @@
       "kcal": 32.0,
       "protein": 0.7,
       "fat": 0.3,
-      "carbs": 7.7
+      "carbs": 7.7,
+      "stable_key": "strawberries",
+      "sort_index": 403
     },
     {
       "name": "truskawki liofilizowane",
@@ -4453,7 +5261,9 @@
       "kcal": 32.0,
       "protein": 0.7,
       "fat": 0.3,
-      "carbs": 7.7
+      "carbs": 7.7,
+      "stable_key": "strawberries-truskawki-liofilizow",
+      "sort_index": 404
     },
     {
       "name": "tuńczyk",
@@ -4464,7 +5274,9 @@
       "kcal": 130.0,
       "protein": 29.1,
       "fat": 0.8,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "tuna",
+      "sort_index": 405
     },
     {
       "name": "twaróg",
@@ -4475,7 +5287,9 @@
       "kcal": 98.0,
       "protein": 11.1,
       "fat": 4.3,
-      "carbs": 3.4
+      "carbs": 3.4,
+      "stable_key": "cottage-cheese",
+      "sort_index": 406
     },
     {
       "name": "twaróg kremowy",
@@ -4486,7 +5300,9 @@
       "kcal": 98.0,
       "protein": 11.1,
       "fat": 4.3,
-      "carbs": 3.4
+      "carbs": 3.4,
+      "stable_key": "cottage-cheese-twarog-kremowy",
+      "sort_index": 407
     },
     {
       "name": "tymianek",
@@ -4497,7 +5313,9 @@
       "kcal": 101.0,
       "protein": 5.6,
       "fat": 1.7,
-      "carbs": 24.5
+      "carbs": 24.5,
+      "stable_key": "thyme",
+      "sort_index": 408
     },
     {
       "name": "tymianek suszony",
@@ -4508,7 +5326,9 @@
       "kcal": 101.0,
       "protein": 5.6,
       "fat": 1.7,
-      "carbs": 24.5
+      "carbs": 24.5,
+      "stable_key": "thyme-tymianek-suszony",
+      "sort_index": 409
     },
     {
       "name": "udka z kurczaka",
@@ -4519,7 +5339,9 @@
       "kcal": 172.0,
       "protein": 24.0,
       "fat": 8.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "chicken-drumsticks",
+      "sort_index": 410
     },
     {
       "name": "wegański ser ricotta",
@@ -4530,7 +5352,9 @@
       "kcal": 174.0,
       "protein": 11.3,
       "fat": 13.0,
-      "carbs": 3.0
+      "carbs": 3.0,
+      "stable_key": "ricotta-cheese-weganski-ser-ricotta",
+      "sort_index": 411
     },
     {
       "name": "wieprzowina",
@@ -4541,7 +5365,9 @@
       "kcal": 242.0,
       "protein": 27.3,
       "fat": 14.4,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "pork",
+      "sort_index": 412
     },
     {
       "name": "winogrona",
@@ -4552,7 +5378,9 @@
       "kcal": 69.0,
       "protein": 0.7,
       "fat": 0.2,
-      "carbs": 18.1
+      "carbs": 18.1,
+      "stable_key": "grapes-winogrona",
+      "sort_index": 413
     },
     {
       "name": "winogrona zielone",
@@ -4563,7 +5391,9 @@
       "kcal": 69.0,
       "protein": 0.7,
       "fat": 0.2,
-      "carbs": 18.1
+      "carbs": 18.1,
+      "stable_key": "grapes-winogrona-zielone",
+      "sort_index": 414
     },
     {
       "name": "wiórki kokosowe",
@@ -4574,7 +5404,9 @@
       "kcal": 660.0,
       "protein": 6.9,
       "fat": 64.5,
-      "carbs": 23.7
+      "carbs": 23.7,
+      "stable_key": "coconut-flakes",
+      "sort_index": 415
     },
     {
       "name": "wiórki kokosowe niesłodzone",
@@ -4585,7 +5417,9 @@
       "kcal": 660.0,
       "protein": 6.9,
       "fat": 64.5,
-      "carbs": 23.7
+      "carbs": 23.7,
+      "stable_key": "coconut-flakes-wiorki-kokosowe-nies",
+      "sort_index": 416
     },
     {
       "name": "wołowina",
@@ -4596,7 +5430,9 @@
       "kcal": 250.0,
       "protein": 26.0,
       "fat": 15.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "beef",
+      "sort_index": 417
     },
     {
       "name": "wołowina na fajitas",
@@ -4607,7 +5443,9 @@
       "kcal": 250.0,
       "protein": 26.0,
       "fat": 15.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "beef-wolowina-na-fajitas",
+      "sort_index": 418
     },
     {
       "name": "wołowina w kawałkach",
@@ -4618,7 +5456,9 @@
       "kcal": 250.0,
       "protein": 26.0,
       "fat": 15.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "beef-wolowina-w-kawalkach",
+      "sort_index": 419
     },
     {
       "name": "wędzona papryka",
@@ -4629,7 +5469,9 @@
       "kcal": 31.0,
       "protein": 1.0,
       "fat": 0.3,
-      "carbs": 6.0
+      "carbs": 6.0,
+      "stable_key": "bell-pepper-wedzona-papryka",
+      "sort_index": 420
     },
     {
       "name": "wędzony łosoś",
@@ -4640,7 +5482,9 @@
       "kcal": 208.0,
       "protein": 20.4,
       "fat": 13.4,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "salmon",
+      "sort_index": 421
     },
     {
       "name": "zamiennik jajka",
@@ -4651,7 +5495,9 @@
       "kcal": 300.0,
       "protein": 0.0,
       "fat": 0.0,
-      "carbs": 75.0
+      "carbs": 75.0,
+      "stable_key": "eggs-zamiennik-jajka",
+      "sort_index": 422
     },
     {
       "name": "ziele angielskie",
@@ -4662,14 +5508,18 @@
       "kcal": 263.0,
       "protein": 6.1,
       "fat": 8.7,
-      "carbs": 72.1
+      "carbs": 72.1,
+      "stable_key": "allspice",
+      "sort_index": 423
     },
     {
       "name": "zielona fasolka",
       "price": 4.4475,
       "package_weight": 400.0,
       "unit": "g",
-      "sold_by_weight": false
+      "sold_by_weight": false,
+      "stable_key": "salt-zielona-fasolka",
+      "sort_index": 424
     },
     {
       "name": "zielona papryka",
@@ -4680,7 +5530,9 @@
       "kcal": 20.0,
       "protein": 0.9,
       "fat": 0.2,
-      "carbs": 4.6
+      "carbs": 4.6,
+      "stable_key": "bell-pepper-zielona-papryka",
+      "sort_index": 425
     },
     {
       "name": "zielone oliwki",
@@ -4691,7 +5543,9 @@
       "kcal": 150.0,
       "protein": 2.0,
       "fat": 14.0,
-      "carbs": 5.0
+      "carbs": 5.0,
+      "stable_key": "green-olives-stuffed-with-almonds-zielone-oliwki",
+      "sort_index": 426
     },
     {
       "name": "zielony banan",
@@ -4702,7 +5556,9 @@
       "kcal": 89.0,
       "protein": 1.1,
       "fat": 0.3,
-      "carbs": 22.8
+      "carbs": 22.8,
+      "stable_key": "banana-zielony-banan",
+      "sort_index": 427
     },
     {
       "name": "ziemniak",
@@ -4713,7 +5569,9 @@
       "kcal": 77.0,
       "protein": 2.0,
       "fat": 0.1,
-      "carbs": 17.5
+      "carbs": 17.5,
+      "stable_key": "potato-ziemniak",
+      "sort_index": 428
     },
     {
       "name": "ziemniak czerwony",
@@ -4724,7 +5582,9 @@
       "kcal": 70.0,
       "protein": 1.9,
       "fat": 0.1,
-      "carbs": 15.9
+      "carbs": 15.9,
+      "stable_key": "red-potato",
+      "sort_index": 429
     },
     {
       "name": "ziemniaki",
@@ -4735,7 +5595,9 @@
       "kcal": 77.0,
       "protein": 2.0,
       "fat": 0.1,
-      "carbs": 17.5
+      "carbs": 17.5,
+      "stable_key": "potatoes-ziemniaki",
+      "sort_index": 430
     },
     {
       "name": "ziemniaki czerwone",
@@ -4746,7 +5608,9 @@
       "kcal": 70.0,
       "protein": 1.9,
       "fat": 0.1,
-      "carbs": 15.9
+      "carbs": 15.9,
+      "stable_key": "red-potatoes",
+      "sort_index": 431
     },
     {
       "name": "zioła",
@@ -4757,7 +5621,9 @@
       "kcal": 50.0,
       "protein": 2.0,
       "fat": 1.0,
-      "carbs": 8.0
+      "carbs": 8.0,
+      "stable_key": "herbs",
+      "sort_index": 432
     },
     {
       "name": "łopatka wieprzowa",
@@ -4768,7 +5634,9 @@
       "kcal": 242.0,
       "protein": 27.3,
       "fat": 14.4,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "pork-shoulder",
+      "sort_index": 433
     },
     {
       "name": "łosoś",
@@ -4779,7 +5647,9 @@
       "kcal": 208.0,
       "protein": 20.4,
       "fat": 13.4,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "salmon-losos",
+      "sort_index": 434
     },
     {
       "name": "śmietana",
@@ -4790,7 +5660,9 @@
       "kcal": 198.0,
       "protein": 2.4,
       "fat": 19.3,
-      "carbs": 4.6
+      "carbs": 4.6,
+      "stable_key": "sour-cream-smietana",
+      "sort_index": 435
     },
     {
       "name": "śmietana 30%",
@@ -4801,7 +5673,9 @@
       "kcal": 198.0,
       "protein": 2.4,
       "fat": 19.3,
-      "carbs": 4.6
+      "carbs": 4.6,
+      "stable_key": "sour-cream-smietana-30",
+      "sort_index": 436
     },
     {
       "name": "śmietana roślinna",
@@ -4812,7 +5686,9 @@
       "kcal": 198.0,
       "protein": 2.4,
       "fat": 19.3,
-      "carbs": 4.6
+      "carbs": 4.6,
+      "stable_key": "sour-cream-smietana-roslinna",
+      "sort_index": 437
     },
     {
       "name": "śmietanka 30%",
@@ -4823,7 +5699,9 @@
       "kcal": 200.0,
       "protein": 2.0,
       "fat": 20.0,
-      "carbs": 3.0
+      "carbs": 3.0,
+      "stable_key": "cream",
+      "sort_index": 438
     },
     {
       "name": "śmietanka kokosowa",
@@ -4834,7 +5712,9 @@
       "kcal": 200.0,
       "protein": 2.0,
       "fat": 20.0,
-      "carbs": 3.0
+      "carbs": 3.0,
+      "stable_key": "cream-smietanka-kokosowa",
+      "sort_index": 439
     },
     {
       "name": "świeże zioła",
@@ -4845,7 +5725,9 @@
       "kcal": 50.0,
       "protein": 2.0,
       "fat": 1.0,
-      "carbs": 8.0
+      "carbs": 8.0,
+      "stable_key": "herbs-swieze-ziola",
+      "sort_index": 440
     },
     {
       "name": "żeberka wołowe",
@@ -4856,7 +5738,9 @@
       "kcal": 388.0,
       "protein": 18.0,
       "fat": 35.0,
-      "carbs": 0.0
+      "carbs": 0.0,
+      "stable_key": "beef-ribs",
+      "sort_index": 441
     },
     {
       "name": "żurawina",
@@ -4867,7 +5751,9 @@
       "kcal": 46.0,
       "protein": 0.4,
       "fat": 0.1,
-      "carbs": 12.2
+      "carbs": 12.2,
+      "stable_key": "cranberry",
+      "sort_index": 442
     },
     {
       "name": "żurawina suszona",
@@ -4878,7 +5764,9 @@
       "kcal": 308.0,
       "protein": 0.2,
       "fat": 1.1,
-      "carbs": 82.4
+      "carbs": 82.4,
+      "stable_key": "dried-cranberries-zurawina-suszona",
+      "sort_index": 443
     },
     {
       "name": "żółta papryka",
@@ -4889,7 +5777,9 @@
       "kcal": 27.0,
       "protein": 1.0,
       "fat": 0.2,
-      "carbs": 6.3
+      "carbs": 6.3,
+      "stable_key": "bell-pepper-zolta-papryka",
+      "sort_index": 444
     }
   ]
 }

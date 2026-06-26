@@ -128,7 +128,11 @@ def test_product_list_uses_market_not_ui_locale(
     db_session.refresh(pl_only)
     db_session.refresh(en_only)
 
-    res = client.get("/api/products/", headers=auth_headers)
+    res = client.get(
+        "/api/products/",
+        headers=auth_headers,
+        params={"limit": 100, "q": "Tylko PL"},
+    )
     assert res.status_code == 200
     ids = {p["id"] for p in _product_items(res.json())}
     assert pl_only.id in ids

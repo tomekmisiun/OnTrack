@@ -88,7 +88,7 @@ def list_recipes(session: Session, user_id: int, *, own_only: bool = False) -> l
     )
     recipes = (
         base_query.options(joinedload(Recipe.ingredients).joinedload(RecipeIngredient.product))
-        .order_by(Recipe.name)
+        .order_by(Recipe.catalog_key.asc().nulls_last(), Recipe.name.asc())
         .all()
     )
     return [

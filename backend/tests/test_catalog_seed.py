@@ -40,3 +40,34 @@ def test_expand_recipes_catalog_uses_lang_specific_ingredient_names():
     assert pl[0]["ingredients"][0]["product_name"] == "awokado"
     assert en[0]["name"] == "Salad"
     assert en[0]["ingredients"][0]["product_name"] == "avocado"
+
+
+def test_expand_products_preserves_canonical_order():
+    catalog = [
+        {
+            "key": "banana-banan-7zl",
+            "names": {"pl": "banan 7zł", "en": "banana"},
+            "markets": {
+                "PL": {"price": 7, "package_weight": 1000, "unit": "g", "sold_by_weight": False},
+            },
+            "macros": {"kcal": 89, "protein": 1, "fat": 0, "carbs": 23},
+        },
+        {
+            "key": "banana",
+            "names": {"pl": "banan", "en": "banana"},
+            "markets": {
+                "PL": {"price": 6.99, "package_weight": 1000, "unit": "g", "sold_by_weight": False},
+            },
+            "macros": {"kcal": 89, "protein": 1, "fat": 0, "carbs": 23},
+        },
+        {
+            "key": "avocado",
+            "names": {"pl": "awokado", "en": "avocado"},
+            "markets": {
+                "PL": {"price": 3.5, "package_weight": 200, "unit": "szt", "sold_by_weight": False},
+            },
+            "macros": {"kcal": 160, "protein": 2, "fat": 15, "carbs": 9},
+        },
+    ]
+    pl = expand_products_catalog(catalog, "pl")
+    assert [row["name"] for row in pl] == ["banan 7zł", "banan", "awokado"]

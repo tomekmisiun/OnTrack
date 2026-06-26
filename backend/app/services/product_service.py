@@ -91,6 +91,7 @@ def _visible_products_query(session: Session, user_id: int, market_code: str):
             and_(
                 Product.user_id.is_(None),
                 Product.source == "system",
+                Product.lang == catalog_lang,
                 ~Product.id.in_(overridden_system_ids),
             ),
         ),
@@ -151,7 +152,12 @@ def list_products(
         query = query.filter(Product.normalized_name.ilike(term))
 
     total = query.count()
-    rows = query.order_by(Product.name).offset(offset).limit(limit).all()
+    rows = (
+        query.order_by(Product.catalog_key.asc().nulls_last(), Product.name.asc())
+        .offset(offset)
+        .limit(limit)
+        .all()
+    )
     return {
         "items": [product_to_dict(p, viewer_user_id=user_id) for p in rows],
         "total": total,

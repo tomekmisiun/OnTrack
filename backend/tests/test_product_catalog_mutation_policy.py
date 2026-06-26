@@ -46,7 +46,11 @@ def test_customize_system_product_creates_private_override(client, auth_headers,
     assert body["is_editable"] is True
     assert body["is_system"] is False
 
-    listed = client.get("/api/products/", headers=auth_headers, params={"limit": 100})
+    listed = client.get(
+        "/api/products/",
+        headers=auth_headers,
+        params={"limit": 100, "q": system.name[:6]},
+    )
     ids = {p["id"] for p in listed.json()["items"]}
     assert system.id not in ids
     assert body["id"] in ids

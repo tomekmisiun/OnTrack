@@ -12,14 +12,14 @@ from app.scripts.import_catalog import (
 
 
 def test_catalog_key_for_product_is_stable():
-    key = catalog_key_for_product("PL", 0, "jogurt naturalny")
-    assert key == catalog_key_for_product("PL", 0, "jogurt naturalny")
-    assert key.startswith("catalog:pl:0:")
+    key = catalog_key_for_product("PL", 42, "banana-banan-7zl")
+    assert key == catalog_key_for_product("PL", 42, "banana-banan-7zl")
+    assert key == "catalog:pl:00042:banana-banan-7zl"
 
 
-def test_catalog_key_for_recipe_uses_source_url():
-    key = catalog_key_for_recipe("PL", "https://example.com/foo-bar", "Test")
-    assert "foo-bar" in key
+def test_catalog_key_for_recipe_uses_stable_key():
+    key = catalog_key_for_recipe("PL", 3, "air-fried-apple-chips")
+    assert key == "recipe:pl:00003:air-fried-apple-chips"
 
 
 def test_import_catalog_creates_system_products(db_session):
