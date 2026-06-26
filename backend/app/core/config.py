@@ -19,7 +19,10 @@ class Settings(BaseSettings):
 
     app_secret_key: str = Field(default="dev-only-app-secret", validation_alias="FLASK_SECRET_KEY")
     jwt_secret_key: str = Field(default="dev-only-jwt-secret", validation_alias="JWT_SECRET_KEY")
-    jwt_access_token_expires_seconds: int = 60 * 60 * 24 * 7
+    jwt_access_token_expires_seconds: int = Field(
+        default=60 * 60 * 24,
+        validation_alias="JWT_ACCESS_TOKEN_EXPIRES_SECONDS",
+    )
 
     google_client_id: str | None = Field(default=None, validation_alias="GOOGLE_CLIENT_ID")
     google_client_secret: str | None = Field(default=None, validation_alias="GOOGLE_CLIENT_SECRET")

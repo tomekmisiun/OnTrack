@@ -121,6 +121,13 @@ def get_me(session: Session, user_id: int) -> dict:
     return user_to_dict(user)
 
 
+def refresh_session(session: Session, user_id: int) -> str:
+    user = session.get(User, user_id)
+    if not user:
+        raise AuthServiceError("User not found", 404)
+    return issue_token(user_id)
+
+
 def change_language(session: Session, user_id: int, lang: str) -> dict:
     if lang not in UI_LOCALES:
         raise AuthServiceError("Invalid language", 400)

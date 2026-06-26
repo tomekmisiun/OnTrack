@@ -107,6 +107,17 @@ export function fetchMeRaw(): Promise<unknown> {
   return createAuthedApiClient().get<unknown>("/api/auth/me");
 }
 
+export function refreshAccessToken(): Promise<TokenResponse> {
+  if (isBffEnabled()) {
+    return sessionRequest<TokenResponse>("/api/auth/session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "refresh" }),
+    }).then(() => ({ token: "" }));
+  }
+  return createAuthedApiClient().post<TokenResponse>("/api/auth/refresh");
+}
+
 export function changeLanguage(lang: string): Promise<unknown> {
   const body: LanguageRequest = { lang };
   if (isBffEnabled()) {

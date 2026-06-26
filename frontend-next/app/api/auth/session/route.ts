@@ -11,7 +11,8 @@ import { getApiBaseUrl } from "@/lib/config/env";
 type SessionAction =
   | { action: "login"; username: string; password: string }
   | { action: "register"; username: string; password: string; lang: string }
-  | { action: "exchange"; code: string };
+  | { action: "exchange"; code: string }
+  | { action: "refresh" };
 
 type TokenPayload = { token?: string };
 
@@ -135,6 +136,19 @@ export async function POST(request: NextRequest) {
         body: JSON.stringify({ code: payload.code }),
       };
       break;
+    case "refresh": {
+      const cookieStore = await cookies();
+      const token = cookieStore.get(AUTH_COOKIE_NAME)?.value;
+      if (!token) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      }
+      upstreamPath = "/api/auth/refresh";
+      upstreamInit = {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+      };
+      break;
+    }
     default:
       return NextResponse.json({ error: "Unknown action" }, { status: 400 });
   }
