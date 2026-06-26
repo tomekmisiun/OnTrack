@@ -244,3 +244,19 @@ def test_delete_account(client, user, auth_headers, db_session):
     assert res.status_code == 200
     assert res.json()["message"] == "Account deleted"
     assert db_session.get(User, user.id) is None
+
+def test_delete_account_with_recipe_favorites(
+    client, user, auth_headers, db_session, global_catalog
+):
+    recipes = client.get("/api/recipes/", headers=auth_headers).json()
+    assert recipes
+    recipe_id = recipes[0]["id"]
+    fav = client.patch(f"/api/recipes/{recipe_id}/favorite", headers=auth_headers)
+    assert fav.status_code == 200
+    assert fav.json()["is_favorite"] is True
+
+    res = client.delete("/api/auth/me", headers=auth_headers)
+    assert res.status_code == 200
+    assert res.json()["message"] == "Account deleted"
+    assert db_session.get(User, user.id) is None
+
