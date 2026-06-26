@@ -29,7 +29,9 @@ All **10 tasks** from §18 Recommended Task Breakdown were implemented:
 
 **Re-validation:** backend **188 passed**, 7 skipped; frontend **43 passed**; `ruff check` **pass**; `npm run build` **pass**.
 
-**Still open:** JWT refresh (AUDIT-004), password reset (AUDIT-005), worker stub (AUDIT-010), `parse_free` quota (AUDIT-005 related), legacy `frontend/` folder (AUDIT-020 — **keep until task #10**), npm audit moderates (AUDIT-018), meal calendar persistence on prod until deploy of `0275099` (AUDIT-021 — **code merged PR #116**).
+**Still open:** npm audit moderates (AUDIT-018), meal calendar persistence on prod until Railway deploy picks up latest `main` (AUDIT-021 — **code merged PR #116**).
+
+Legacy CRA moved to `archive/frontend-cra-reference/` (task #10, PR #127). JWT refresh (AUDIT-004), password reset (AUDIT-005), `parse_free` quota (AUDIT-005), worker stub (AUDIT-010) — **resolved** in tasks #4–7.
 
 ---
 
@@ -777,36 +779,33 @@ npm run typecheck && npm run build                     # pass
 
 ### Step 2 — Approved implementation plan (tasks 1–11)
 
-User approved execution order on 2026-05-26. One task per branch; no commit/push/merge without explicit approval per task (except docs-only updates agreed in session).
+User approved execution order on 2026-05-26. **All 11 tasks merged 2026-05-26** (PRs #118–#129).
 
 | # | Branch | Task | Priority | Status |
 |---|--------|------|----------|--------|
-| 1 | `test/e2e-meal-persistence` | E2E: add meal → reload → still visible | P1 | **APPROVED — pending** |
-| 2 | `chore/update-ai-rules-post-cutover` | Fix `.cursor/rules/ontrack.mdc`, `.ai-rules/context-map.md` (FastAPI + Next as current) | P2 | **APPROVED — pending** |
-| 3 | `docs/post-migration-architecture` | Remove Flask column from API_CONTRACT; mark stale cutover docs | P2 | **APPROVED — pending** |
-| 4 | `fix/auth-session-flow` | JWT refresh or shorter TTL + UX | P2 | **APPROVED — pending** |
-| 5 | `feat/password-reset` | Password reset flow | P2 | **APPROVED — pending** |
-| 6 | `fix/import-parse-free-quota` | Rate limit / quota on `parse_free` for authenticated users | P2 | **APPROVED — pending** |
-| 7 | `chore/worker-decision` | Remove worker from Compose or implement first real job | P2 | **APPROVED — pending** |
-| 8 | `feat/visual-parity-login` | Login showcase, demo WebM, shell CSS parity | P2 | **APPROVED — pending** |
-| 9 | `refactor/separate-ui-locale-and-market` | Decouple `ui_locale` from `market_code` in UI | P2 | **APPROVED — pending** |
-| 10 | `chore/archive-legacy-frontend` | Archive or remove `frontend/` CRA tree | P3 | **APPROVED — pending** (after #8) |
-| 11 | `test/core-user-flows` | E2E coverage: products, recipes, calendar CRUD | P2 | **APPROVED — pending** (after #1) |
-
-**Execution rule:** task #1 is next; discover new issues → log as separate finding, do not expand scope.
+| 1 | `test/e2e-meal-persistence` | E2E: add meal → reload → still visible | P1 | **DONE** — PR #118 |
+| 2 | `chore/update-ai-rules-post-cutover` | Fix `.cursor/rules/ontrack.mdc`, `.ai-rules/context-map.md` | P2 | **DONE** — PR #119 |
+| 3 | `docs/post-migration-architecture` | API_CONTRACT + archived cutover docs | P2 | **DONE** — PR #120 |
+| 4 | `fix/auth-session-flow` | JWT refresh + 24h TTL + bootstrap refresh | P2 | **DONE** — PR #121 |
+| 5 | `feat/password-reset` | Password change + reset-token flow | P2 | **DONE** — PR #122 |
+| 6 | `fix/import-parse-free-quota` | Daily quota on `parse_free` (ImportLog) | P2 | **DONE** — PR #123 |
+| 7 | `chore/worker-decision` | Remove worker from Compose (scaffold only) | P2 | **DONE** — PR #124 |
+| 8 | `feat/visual-parity-login` | Login showcase E2E regression | P2 | **DONE** — PR #125 |
+| 9 | `refactor/separate-ui-locale-and-market` | Profile locale/market E2E regression | P2 | **DONE** — PR #126 |
+| 10 | `chore/archive-legacy-frontend` | Move CRA → `archive/frontend-cra-reference/` | P3 | **DONE** — PR #127 |
+| 11 | `test/core-user-flows` | E2E: products, recipes, calendar flows | P2 | **DONE** — PR #128, hotfix #129 |
 
 ### Step 3 — Legacy `frontend/` (CRA) decision
 
 | Decision | Detail |
 |----------|--------|
-| **Verdict** | **KEEP in repo** as read-only CRA reference until visual parity epic (#8) is done |
+| **Verdict** | **ARCHIVED** — moved to `archive/frontend-cra-reference/` (PR #127) |
 | **Not used for** | Docker Compose, Railway, CI, production builds |
-| **Removal trigger** | Task #10 (`chore/archive-legacy-frontend`) after login/shell parity or explicit user override |
-| **Rationale** | Side-by-side comparison still needed (`docs/CRA_REFERENCE.md`, `docs/CRA_NEXT_VISUAL_AND_I18N_AUDIT.md`); deleting now would block parity work |
-| **Hygiene** | Do not commit `frontend/node_modules/` or `frontend/build/`; reference snapshot is `frontend/src/` + `package.json` only |
+| **Reference path** | `archive/frontend-cra-reference/README.md`, `docs/CRA_REFERENCE.md` |
+| **Hygiene** | Do not commit `node_modules/` or `build/` from local CRA runs |
 
-Recorded in `frontend/README.md` (§ Decision).
+Previously recorded in repo-root `frontend/README.md` (removed with archive move).
 
 ---
 
-*Last updated: 2026-05-26 — PR #116 merged; plan and legacy decision approved by user.*
+*Last updated: 2026-05-26 — tasks 1–11 complete (PRs #118–#129); CRA archived to `archive/frontend-cra-reference/`.*
