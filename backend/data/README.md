@@ -89,16 +89,7 @@ Use before/after Alembic migrations to review system vs user-owned rows.
 
 ## One-time migration from owner account
 
-**Migration-only** — not part of normal rebuilds:
-
-```bash
-# Export (requires DB + owner account — run once, snapshot already in raw/)
-uv run python -m app.scripts.export_user_catalog_to_seeds --user-id 1 --lang pl
-
-# Rebuild canonical from snapshot + scraper refs
-uv run python -m app.scripts.build_catalog --from-snapshot
-uv run python -m app.scripts.build_catalog
-```
+**Completed.** Historical snapshot is frozen in `raw/user_1_catalog_snapshot/`. Canonical catalog was built from that export. Do not re-run migration tooling; edit `canonical/` directly.
 
 ## Adding content
 

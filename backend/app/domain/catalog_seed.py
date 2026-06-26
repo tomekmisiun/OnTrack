@@ -1,16 +1,14 @@
-"""Canonical bilingual catalog seed → per-lang runtime JSON.
+"""Canonical bilingual catalog → per-lang generated JSON.
 
 Architecture (see backend/data/README.md):
 - ``ui_locale`` (pl/en) = UI language only
 - ``market_code`` (PL/GB) = product/recipe catalog (pl/en rows in DB)
-- One canonical seed file; ``products_seed_{lang}.json`` are generated artifacts.
+- Source of truth: ``backend/data/canonical/*.json``
 """
 
 from __future__ import annotations
 
-import json
 import re
-from pathlib import Path
 from typing import Any
 
 from app.domain.product_normalize import normalize_product_name
@@ -95,24 +93,3 @@ def expand_recipes_catalog(catalog: list[dict[str, Any]], lang: str) -> list[dic
                 row[macro] = entry[macro]
         out.append(row)
     return out
-
-
-def write_lang_seed_files(
-    seeds_dir: Path,
-    products_catalog: list[dict[str, Any]],
-    recipes_catalog: list[dict[str, Any]],
-) -> dict[str, dict[str, int]]:
-    stats: dict[str, dict[str, int]] = {}
-    for lang in ("pl", "en"):
-        products = expand_products_catalog(products_catalog, lang)
-        recipes = expand_recipes_catalog(recipes_catalog, lang)
-        (seeds_dir / f"products_seed_{lang}.json").write_text(
-            json.dumps(products, ensure_ascii=False, indent=2) + "\n",
-            encoding="utf-8",
-        )
-        (seeds_dir / f"recipes_seed_{lang}.json").write_text(
-            json.dumps(recipes, ensure_ascii=False, indent=2) + "\n",
-            encoding="utf-8",
-        )
-        stats[lang] = {"products": len(products), "recipes": len(recipes)}
-    return stats

@@ -1,10 +1,13 @@
-# Scraper (experimental / disconnected)
+# Scraper (archived — experimental / disconnected)
 
-**Status:** experimental — **not part of OnTrack API runtime or Railway deployment.**
+**Status:** archived under `archive/scraper-legacy/`. **Not part of OnTrack API runtime or Railway deployment.**
+
+This pipeline is kept for historical reference only. Runtime catalog data lives in
+`backend/data/canonical/` → `generated/` → `import_catalog`.
 
 ## Purpose
 
-The `scraper/` directory contains an offline data pipeline (shop scraping, recipe
+The archived `scraper/` directory contained an offline data pipeline (shop scraping, recipe
 normalization, ingredient matching, macro enrichment). It is kept for experiments
 and future rework.
 

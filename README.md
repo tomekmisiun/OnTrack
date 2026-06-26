@@ -822,9 +822,8 @@ OnTrack/
 │   └── tests/                   # Vitest and Playwright suites
 │
 ├── archive/
-│   └── frontend-cra-reference/  # Archived frontend used during migration
-│
-├── scraper/                     # Optional offline product-data pipeline
+│   ├── frontend-cra-reference/  # Archived frontend used during migration
+│   └── scraper-legacy/          # Archived offline product-data pipeline (not runtime)
 ├── monitoring/                  # Prometheus configuration
 ├── docs/                        # Audits, specifications and runbooks
 ├── scripts/                     # Repository and AI-workflow validation
@@ -849,7 +848,7 @@ OnTrack/
 | [`docs/backend-migration/PRODUCTION_CUTOVER.md`](docs/backend-migration/PRODUCTION_CUTOVER.md) | Backend production-cutover notes |
 | [`docs/deployment/RAILWAY_BACKEND_MIGRATION.md`](docs/deployment/RAILWAY_BACKEND_MIGRATION.md) | Railway backend runbook |
 | [`.github/DEPLOY.md`](.github/DEPLOY.md) | CI-gated deployment configuration |
-| [`scraper/README.md`](scraper/README.md) | Optional scraper-pipeline documentation |
+| [`archive/scraper-legacy/README.md`](archive/scraper-legacy/README.md) | Archived scraper pipeline (not runtime) |
 
 ---
 
