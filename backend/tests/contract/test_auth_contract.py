@@ -6,6 +6,8 @@ from app.models.recipe import Recipe
 from app.models.user import User
 from werkzeug.security import generate_password_hash
 
+from tests.conftest import create_user
+
 
 def test_exchange_requires_code(client):
     res = client.post("/api/auth/exchange", json={})
@@ -52,9 +54,6 @@ def test_refresh_issues_new_token(client, user, auth_headers):
 
 
 def test_change_password(client, db_session):
-    from app.core.security import create_access_token
-    from tests.conftest import create_user
-
     user = create_user(db_session, "alice@example.com", lang="pl", username="aliceuser")
     headers = {"Authorization": f"Bearer {create_access_token(user.id)}"}
     res = client.patch(
@@ -71,9 +70,7 @@ def test_change_password(client, db_session):
 
 
 def test_forgot_password_returns_token_in_testing(client, db_session):
-    from tests.conftest import create_user
-
-    user = create_user(db_session, "reset@example.com", lang="pl", username="resetuser")
+    create_user(db_session, "reset@example.com", lang="pl", username="resetuser")
     res = client.post("/api/auth/forgot-password", json={"username": "resetuser"})
     assert res.status_code == 200
     data = res.json()
