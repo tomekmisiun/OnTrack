@@ -10,58 +10,60 @@
 
 **Trailing slashes:** Collection endpoints use trailing slashes (e.g. `/api/products/`). FastAPI must accept the exact paths below.
 
+> **Cutover complete (2026-06):** Production is FastAPI + Next.js. The summary table’s last column lists FastAPI route modules (historical Flask names removed). See `ARCHIVED_CUTOVER_DOCS.md` for legacy migration docs.
+
 ---
 
 ## Summary table
 
-| ID | Method | Path | Auth | Frontend consumer | Flask handler |
+| ID | Method | Path | Auth | Frontend consumer | Backend route |
 |----|--------|------|------|-------------------|---------------|
-| A01 | POST | `/api/auth/login` | Public | `api.js` → `AuthContext.loginWithPassword` | `auth.login` |
-| A02 | POST | `/api/auth/register` | Public | `api.js` → `AuthContext.registerAccount` | `auth.register` |
-| A03 | POST | `/api/auth/exchange` | Public | `AuthContext` bootstrap | `auth.exchange_code` |
-| A04 | GET | `/api/auth/me` | Bearer | `AuthContext` bootstrap, `finishAuth` | `auth.me` |
-| A05 | PATCH | `/api/auth/language` | Bearer | `lib/api/auth.ts`, `AuthContext` | `auth.change_language` |
-| A09 | PATCH | `/api/auth/market` | Bearer | `lib/api/auth.ts`, `ProfileModal` | `auth.change_market` |
-| A06 | DELETE | `/api/auth/me` | Bearer | `AuthContext.deleteAccount` | `auth.delete_me` |
-| A07 | GET | `/api/auth/google` | Public (browser) | `Login.js` redirect | `auth.google_login` |
-| A08 | GET | `/api/auth/google/callback` | Public (browser) | Google → frontend `?code=` | `auth.google_callback` |
-| M01 | GET | `/api/members/` | Bearer | `api.js` → `MemberContext`, etc. | `members.list_members` |
-| M02 | POST | `/api/members/` | Bearer | `api.js` | `members.create_member` |
-| M03 | PATCH | `/api/members/{id}` | Bearer | `api.js` | `members.rename_member` |
-| M04 | DELETE | `/api/members/{id}` | Bearer | `api.js` | `members.delete_member` |
-| M05 | PATCH | `/api/members/{id}/profile` | Bearer | `api.js` → `MacroCalculator.js` | `members.save_profile` |
-| P01 | GET | `/api/products/` | Bearer | `api.js` → many components | `products.get_products` |
-| P02 | POST | `/api/products/` | Bearer | `api.js` | `products.create_product` |
-| P03 | PUT | `/api/products/{id}` | Bearer | `api.js` | `products.update_product` |
-| P04 | DELETE | `/api/products/{id}` | Bearer | `api.js` | `products.delete_product` |
-| P05 | DELETE | `/api/products/all` | Bearer | `lib/api/products.ts` | `products.delete_all_products` |
-| P06 | POST | `/api/products/{id}/customize` | Bearer | `lib/api/products.ts`, `useProductsPage` | `products.customize_product` |
-| R01 | GET | `/api/recipes/` | Bearer | `api.js` | `recipes.get_recipes` |
-| R02 | GET | `/api/recipes/{id}` | Bearer | `api.js` | `recipes.get_recipe` |
-| R03 | POST | `/api/recipes/` | Bearer | `api.js` | `recipes.create_recipe` |
-| R04 | PUT | `/api/recipes/{id}` | Bearer | `api.js` | `recipes.update_recipe` |
-| R05 | PATCH | `/api/recipes/{id}/favorite` | Bearer | `api.js` | `recipes.toggle_favorite` |
-| R06 | PATCH | `/api/recipes/{id}/category` | Bearer | `api.js` | `recipes.update_category` |
-| R07 | POST | `/api/recipes/{id}/fetch-image` | Bearer | `api.js` | `recipes.fetch_recipe_image` |
-| R08 | DELETE | `/api/recipes/{id}` | Bearer | `api.js` | `recipes.delete_recipe` |
-| R09 | DELETE | `/api/recipes/all` | Bearer | `api.js` | `recipes.delete_all_recipes` |
-| MP01 | GET | `/api/meal-plan/{date}` | Bearer | `api.js` | `meal_plan.get_day` |
-| MP02 | GET | `/api/meal-plan/range/{start}/{end}` | Bearer | `api.js` | `meal_plan.get_range` |
-| MP03 | POST | `/api/meal-plan/` | Bearer | `api.js` | `meal_plan.add_meal` |
-| MP04 | POST | `/api/meal-plan/copy` | Bearer | `api.js` | `meal_plan.copy_range` |
-| MP05 | DELETE | `/api/meal-plan/{id}` | Bearer | `api.js` | `meal_plan.delete_meal` |
-| MP06 | GET | `/api/meal-plan/summary/{start}/{end}` | Bearer | `api.js` | `meal_plan.get_summary` |
-| DS01 | GET | `/api/day-schedule/` | Bearer | `api.js` | `day_schedule.get_blocks` |
-| DS02 | POST | `/api/day-schedule/` | Bearer | `api.js` | `day_schedule.create_block` |
-| DS03 | POST | `/api/day-schedule/bulk` | Bearer | `api.js` | `day_schedule.create_bulk` |
-| DS04 | PATCH | `/api/day-schedule/{id}` | Bearer | `api.js` | `day_schedule.update_block` |
-| DS05 | DELETE | `/api/day-schedule/{id}` | Bearer | `api.js` | `day_schedule.delete_block` |
-| DS06 | DELETE | `/api/day-schedule/week` | Bearer | `api.js` | `day_schedule.delete_week_blocks` |
-| N01 | GET | `/api/nutrition/lookup` | Bearer | `api.js` → `macroLookup.js` | `nutrition.lookup` |
-| I01 | POST | `/api/import/parse` | Bearer | `api.js` → `Products.js` | `import_prices.parse_receipt` |
-| I02 | POST | `/api/import/parse-free` | Bearer | `api.js` | `import_prices.parse_csv` |
-| I03 | POST | `/api/import/apply` | Bearer | `api.js` | `import_prices.apply_prices` |
-| F01 | GET | `/api/fuel/prices` | Public | `api.js` → `DrinksCard.js` | `fuel.get_fuel_prices` |
+| A01 | POST | `/api/auth/login` | Public | `lib/api/auth.ts` → `AuthContext` | `routes/auth.py` |
+| A02 | POST | `/api/auth/register` | Public | `lib/api/auth.ts` → `AuthContext` | `routes/auth.py` |
+| A03 | POST | `/api/auth/exchange` | Public | `AuthContext` bootstrap | `routes/auth.py` |
+| A04 | GET | `/api/auth/me` | Bearer | `AuthContext` bootstrap | `routes/auth.py` |
+| A05 | PATCH | `/api/auth/language` | Bearer | `lib/api/auth.ts`, `ProfileModal` | `routes/auth.py` |
+| A09 | PATCH | `/api/auth/market` | Bearer | `lib/api/auth.ts`, `ProfileModal` | `routes/auth.py` |
+| A06 | DELETE | `/api/auth/me` | Bearer | `AuthContext.deleteAccount` | `routes/auth.py` |
+| A07 | GET | `/api/auth/google` | Public (browser) | `LoginScreen` redirect | `routes/auth.py` |
+| A08 | GET | `/api/auth/google/callback` | Public (browser) | Google → frontend `?code=` | `routes/auth.py` |
+| M01 | GET | `/api/members/` | Bearer | `lib/api/members.ts`, `MemberContext` | `routes/members.py` |
+| M02 | POST | `/api/members/` | Bearer | `lib/api/members.ts` | `routes/members.py` |
+| M03 | PATCH | `/api/members/{id}` | Bearer | `lib/api/members.ts` | `routes/members.py` |
+| M04 | DELETE | `/api/members/{id}` | Bearer | `lib/api/members.ts` | `routes/members.py` |
+| M05 | PATCH | `/api/members/{id}/profile` | Bearer | `MacroScreen` | `routes/members.py` |
+| P01 | GET | `/api/products/` | Bearer | `lib/api/products.ts` | `routes/products.py` |
+| P02 | POST | `/api/products/` | Bearer | `lib/api/products.ts` | `routes/products.py` |
+| P03 | PUT | `/api/products/{id}` | Bearer | `lib/api/products.ts` | `routes/products.py` |
+| P04 | DELETE | `/api/products/{id}` | Bearer | `lib/api/products.ts` | `routes/products.py` |
+| P05 | DELETE | `/api/products/all` | Bearer | `lib/api/products.ts` | `routes/products.py` |
+| P06 | POST | `/api/products/{id}/customize` | Bearer | `lib/api/products.ts` | `routes/products.py` |
+| R01 | GET | `/api/recipes/` | Bearer | `lib/api/recipes.ts` | `routes/recipes.py` |
+| R02 | GET | `/api/recipes/{id}` | Bearer | `lib/api/recipes.ts` | `routes/recipes.py` |
+| R03 | POST | `/api/recipes/` | Bearer | `lib/api/recipes.ts` | `routes/recipes.py` |
+| R04 | PUT | `/api/recipes/{id}` | Bearer | `lib/api/recipes.ts` | `routes/recipes.py` |
+| R05 | PATCH | `/api/recipes/{id}/favorite` | Bearer | `lib/api/recipes.ts` | `routes/recipes.py` |
+| R06 | PATCH | `/api/recipes/{id}/category` | Bearer | `lib/api/recipes.ts` | `routes/recipes.py` |
+| R07 | POST | `/api/recipes/{id}/fetch-image` | Bearer | `lib/api/recipes.ts` | `routes/recipes.py` |
+| R08 | DELETE | `/api/recipes/{id}` | Bearer | `lib/api/recipes.ts` | `routes/recipes.py` |
+| R09 | DELETE | `/api/recipes/all` | Bearer | `lib/api/recipes.ts` | `routes/recipes.py` |
+| MP01 | GET | `/api/meal-plan/{date}` | Bearer | `lib/api/mealPlan.ts` | `routes/meal_plan.py` |
+| MP02 | GET | `/api/meal-plan/range/{start}/{end}` | Bearer | `lib/api/mealPlan.ts` | `routes/meal_plan.py` |
+| MP03 | POST | `/api/meal-plan/` | Bearer | `lib/api/mealPlan.ts` | `routes/meal_plan.py` |
+| MP04 | POST | `/api/meal-plan/copy` | Bearer | `lib/api/mealPlan.ts` | `routes/meal_plan.py` |
+| MP05 | DELETE | `/api/meal-plan/{id}` | Bearer | `lib/api/mealPlan.ts` | `routes/meal_plan.py` |
+| MP06 | GET | `/api/meal-plan/summary/{start}/{end}` | Bearer | `lib/api/mealPlan.ts` | `routes/meal_plan.py` |
+| DS01 | GET | `/api/day-schedule/` | Bearer | `lib/api/daySchedule.ts` | `routes/day_schedule.py` |
+| DS02 | POST | `/api/day-schedule/` | Bearer | `lib/api/daySchedule.ts` | `routes/day_schedule.py` |
+| DS03 | POST | `/api/day-schedule/bulk` | Bearer | `lib/api/daySchedule.ts` | `routes/day_schedule.py` |
+| DS04 | PATCH | `/api/day-schedule/{id}` | Bearer | `lib/api/daySchedule.ts` | `routes/day_schedule.py` |
+| DS05 | DELETE | `/api/day-schedule/{id}` | Bearer | `lib/api/daySchedule.ts` | `routes/day_schedule.py` |
+| DS06 | DELETE | `/api/day-schedule/week` | Bearer | `lib/api/daySchedule.ts` | `routes/day_schedule.py` |
+| N01 | GET | `/api/nutrition/lookup` | Bearer | `lib/api/nutrition.ts` | `routes/nutrition.py` |
+| I01 | POST | `/api/import/parse` | Bearer | `lib/api/import.ts` | `routes/import_prices.py` |
+| I02 | POST | `/api/import/parse-free` | Bearer | `lib/api/import.ts` | `routes/import_prices.py` |
+| I03 | POST | `/api/import/apply` | Bearer | `lib/api/import.ts` | `routes/import_prices.py` |
+| F01 | GET | `/api/fuel/prices` | Public | `lib/api/fuel.ts` | `routes/fuel.py` |
 | PU01 | GET | `/api/public/dish-compare` | Public | `DishCompare.js` fetch | `public.dish_compare` |
 | H01 | GET | `/health` | Public | Ops / Docker | `create_app.health` |
 | H02 | GET | `/health/ready` | Public | Ops / Railway readiness | `create_app.health_ready` |

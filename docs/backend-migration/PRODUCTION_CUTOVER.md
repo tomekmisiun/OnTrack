@@ -1,6 +1,7 @@
 # Production cutover — Flask → FastAPI (MIG-016)
 
 > **Historical document.** MIG-017 removed Flask; DATA-006 completed backend-only Railway deploy.
+> See also [`ARCHIVED_CUTOVER_DOCS.md`](ARCHIVED_CUTOVER_DOCS.md).
 > Current production: **`ontrack-back`** with Root Directory `backend`, config `backend/railway.toml`.
 > See [`.github/DEPLOY.md`](../../.github/DEPLOY.md) and [`docs/deployment/RAILWAY_BACKEND_MIGRATION.md`](../deployment/RAILWAY_BACKEND_MIGRATION.md).
 
