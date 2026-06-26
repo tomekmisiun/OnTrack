@@ -18,11 +18,19 @@ def get_products(
     q: str | None = None,
     limit: int = 20,
     offset: int = 0,
+    own_only: bool = False,
     user_id: int = Depends(get_current_user_id),
     session: Session = Depends(get_db_session),
 ) -> JSONResponse:
     try:
-        data = product_service.list_products(session, user_id, q=q, limit=limit, offset=offset)
+        data = product_service.list_products(
+            session,
+            user_id,
+            q=q,
+            limit=limit,
+            offset=offset,
+            own_only=own_only,
+        )
     except product_service.ProductServiceError as exc:
         return _service_error(exc)
     return JSONResponse(content=data)

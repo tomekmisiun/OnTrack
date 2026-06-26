@@ -64,6 +64,15 @@ def validate_product_data(data: dict, require_all: bool = True) -> str | None:
     return None
 
 
+def _own_products_query(session: Session, user_id: int, market_code: str):
+    catalog_lang = catalog_lang_for_user(session, user_id)
+    return session.query(Product).filter(
+        Product.user_id == user_id,
+        Product.market_code == market_code,
+        Product.lang == catalog_lang,
+    )
+
+
 def _visible_products_query(session: Session, user_id: int, market_code: str):
     catalog_lang = catalog_lang_for_user(session, user_id)
     overridden_system_ids = (
@@ -121,6 +130,7 @@ def list_products(
     q: str | None = None,
     limit: int = DEFAULT_LIST_LIMIT,
     offset: int = 0,
+    own_only: bool = False,
 ) -> dict:
     if limit < 1:
         raise ProductServiceError("limit must be at least 1", 400)
@@ -130,7 +140,11 @@ def list_products(
         raise ProductServiceError("offset must be non-negative", 400)
 
     market_code = market_code_for_user(session, user_id)
-    query = _visible_products_query(session, user_id, market_code)
+    query = (
+        _own_products_query(session, user_id, market_code)
+        if own_only
+        else _visible_products_query(session, user_id, market_code)
+    )
 
     if q:
         term = f"%{normalize_product_name(q)}%"

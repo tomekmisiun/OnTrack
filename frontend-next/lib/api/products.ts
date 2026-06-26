@@ -14,6 +14,7 @@ export type ProductListParams = {
   q?: string;
   limit?: number;
   offset?: number;
+  ownOnly?: boolean;
 };
 
 export type ProductPage = {
@@ -28,6 +29,7 @@ function buildProductsPath(params?: ProductListParams): string {
   if (params?.q) search.set("q", params.q);
   if (params?.limit != null) search.set("limit", String(params.limit));
   if (params?.offset != null) search.set("offset", String(params.offset));
+  if (params?.ownOnly) search.set("own_only", "true");
   const qs = search.toString();
   return `/api/products/${qs ? `?${qs}` : ""}`;
 }
@@ -53,6 +55,11 @@ export async function listProducts(
     limit: page.limit,
     offset: page.offset,
   };
+}
+
+export async function countOwnProducts(): Promise<number> {
+  const page = await listProducts({ limit: 1, ownOnly: true });
+  return page.total;
 }
 
 export async function createProduct(
