@@ -5,6 +5,14 @@ import {
   pickForwardRequestHeaders,
 } from "@/lib/bff/proxy";
 
+function buildImportUrl(path: string): string {
+  const normalized = path.startsWith("/") ? path : `/${path}`;
+  const apiPath = normalized.startsWith("/api/")
+    ? normalized.slice("/api/".length)
+    : normalized.slice(1);
+  return `/api/bff/${apiPath}`;
+}
+
 describe("bff proxy", () => {
   it("builds upstream URL from path segments", () => {
     expect(buildUpstreamApiUrl(["members"])).toBe(
@@ -37,6 +45,13 @@ describe("bff proxy", () => {
     expect(headers.get("content-type")).toBe("application/json");
     expect(headers.get("authorization")).toBeNull();
     expect(headers.get("cookie")).toBeNull();
+  });
+});
+
+describe("bff import URLs", () => {
+  it("routes import uploads through the BFF proxy path", () => {
+    expect(buildImportUrl("/api/import/parse")).toBe("/api/bff/import/parse");
+    expect(buildImportUrl("/api/import/parse-free")).toBe("/api/bff/import/parse-free");
   });
 });
 
