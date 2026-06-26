@@ -1,28 +1,30 @@
 ---
-description: OnTrack product constraints and migration guardrails
+description: OnTrack product constraints and stack guardrails
 alwaysApply: true
 ---
 
 # OnTrack
 
-Meal planner & budgeter — Flask API + React SPA (migrating to FastAPI in `backend/`).
+Meal planner & budgeter — **FastAPI** backend (`backend/`) + **Next.js** frontend (`frontend-next/`).
 
-## Non-negotiable during backend migration
+## Non-negotiable
 
-- **Frontend contract:** `docs/backend-migration/API_CONTRACT.md` and `frontend/src/api.js`
-- **Auth response:** `{ "token": "..." }` — not `{ access_token, refresh_token }`
-- **Do not modify** frontend appearance, CSS, `LanguageContext`, tour, or routing unless explicitly requested
+- **API contract:** `docs/backend-migration/API_CONTRACT.md`, `frontend-next/lib/api/*.ts`, OpenAPI snapshot in CI
+- **Auth response:** `{ "token": "..." }` — not `{ access_token, refresh_token }` unless contract is updated
 - **Do not push to `main`** — use PR + green CI (`.github/DEPLOY.md`)
 - **Never commit** `.env` or secrets
-
-## Migration roadmap
-
-Read `docs/backend-migration/README.md` before large backend work. One MIG task per branch.
+- **Production frontend:** `frontend-next/` only — not `frontend/` (CRA reference)
 
 ## Stack
 
-| Layer | Current | Target |
-|-------|---------|--------|
-| API | Flask `app/` | FastAPI `backend/` |
-| Frontend | `frontend/` | unchanged |
-| DB | Postgres, `migrations/` | same schema, new `backend/alembic/` |
+| Layer | Runtime |
+|-------|---------|
+| API | FastAPI `backend/app/` |
+| Frontend | Next.js App Router `frontend-next/` |
+| DB | PostgreSQL 15, Alembic in `backend/alembic/` |
+| Deploy | Railway + GitHub Actions |
+
+## Legacy (reference only)
+
+- `frontend/` — CRA snapshot for parity comparison; see `frontend/README.md`
+- `docs/backend-migration/` — cutover history; FastAPI is production
