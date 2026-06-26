@@ -1,5 +1,10 @@
 from app.worker.jobs import process_job
-from app.worker.queue import UnknownJobTypeError, drain_testing_jobs, enqueue_job, reset_testing_jobs
+from app.worker.queue import (
+    UnknownJobTypeError,
+    drain_testing_jobs,
+    enqueue_job,
+    reset_testing_jobs,
+)
 
 
 def test_enqueue_job_unknown_type_raises():

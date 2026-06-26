@@ -1,4 +1,14 @@
-from sqlalchemy import Boolean, CheckConstraint, Float, ForeignKey, Index, Integer, String, Text, text
+from sqlalchemy import (
+    Boolean,
+    CheckConstraint,
+    Float,
+    ForeignKey,
+    Index,
+    Integer,
+    String,
+    Text,
+    text,
+)
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
@@ -47,7 +57,7 @@ class Recipe(Base):
     fat_100g: Mapped[float | None] = mapped_column(Float)
     carbs_100g: Mapped[float | None] = mapped_column(Float)
 
-    ingredients: Mapped[list["RecipeIngredient"]] = relationship(
+    ingredients: Mapped[list[RecipeIngredient]] = relationship(
         back_populates="recipe",
         cascade="all, delete-orphan",
     )
@@ -61,5 +71,5 @@ class RecipeIngredient(Base):
     product_id: Mapped[int] = mapped_column(ForeignKey("products.id"), nullable=False)
     weight: Mapped[float] = mapped_column(Float, nullable=False)
 
-    recipe: Mapped["Recipe"] = relationship(back_populates="ingredients")
-    product: Mapped["Product"] = relationship()
+    recipe: Mapped[Recipe] = relationship(back_populates="ingredients")
+    product: Mapped[Product] = relationship()

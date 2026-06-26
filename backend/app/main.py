@@ -3,13 +3,12 @@ from contextlib import asynccontextmanager
 from fastapi import Depends, FastAPI, Request
 from fastapi.exceptions import HTTPException, RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse, Response
+from fastapi.responses import JSONResponse
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 from starlette.middleware.sessions import SessionMiddleware
 
 from app.api.dependencies import get_db_session
-
 from app.api.routes.auth import router as auth_router
 from app.api.routes.day_schedule import router as day_schedule_router
 from app.api.routes.fuel import router as fuel_router

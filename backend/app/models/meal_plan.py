@@ -20,4 +20,4 @@ class MealPlan(Base):
     position: Mapped[int] = mapped_column(Integer, nullable=False)
     recipe_id: Mapped[int] = mapped_column(ForeignKey("recipes.id"), nullable=False)
 
-    recipe: Mapped["Recipe"] = relationship()
+    recipe: Mapped[Recipe] = relationship()

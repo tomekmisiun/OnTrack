@@ -63,7 +63,7 @@ def test_import_catalog_is_idempotent(db_session):
 
 
 def test_import_catalog_updates_existing_product(db_session):
-    first = import_catalog(db_session, markets=("PL",))
+    import_catalog(db_session, markets=("PL",))
     system = (
         db_session.query(Product)
         .filter_by(source="system", market_code="PL")

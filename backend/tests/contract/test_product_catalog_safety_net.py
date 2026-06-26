@@ -8,8 +8,6 @@ from app.models.recipe import Recipe
 from app.models.user import User
 from app.scripts.import_catalog import import_catalog
 
-from tests.conftest import create_user
-
 
 def _product_items(response_json: dict | list) -> list:
     if isinstance(response_json, dict) and "items" in response_json:

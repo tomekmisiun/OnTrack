@@ -15,7 +15,7 @@ from app.db.schema_validate import (
     assert_schema_parity,
     collect_schema_diffs,
 )
-from app.models.tables import ONTRACK_INITIAL_HEAD_TABLES, ONTRACK_TABLES
+from app.models.tables import ONTRACK_INITIAL_HEAD_TABLES
 from sqlalchemy import create_engine, inspect, text
 
 BACKEND_ROOT = Path(__file__).resolve().parents[2]

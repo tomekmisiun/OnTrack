@@ -10,9 +10,8 @@ from pathlib import Path
 
 from alembic import command
 from alembic.config import Config
-from sqlalchemy import create_engine, text
-
 from app.db.schema_validate import ONTRACK_ALEMBIC_HEAD
+from sqlalchemy import create_engine, text
 
 BACKEND_ROOT = Path(__file__).resolve().parents[1]
 REVISION_RE = re.compile(r"""^revision:\s*str\s*=\s*['"]([^'"]+)['"]""", re.M)

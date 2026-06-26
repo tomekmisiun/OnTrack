@@ -67,7 +67,9 @@ def canonical_version_hash(products: list[dict], recipes: list[dict]) -> str:
     return hashlib.sha256(payload.encode()).hexdigest()[:16]
 
 
-def wrap_generated(items: list[dict], *, market_code: str, canonical_version: str) -> dict[str, Any]:
+def wrap_generated(
+    items: list[dict], *, market_code: str, canonical_version: str
+) -> dict[str, Any]:
     return {
         "meta": {
             "generated": True,

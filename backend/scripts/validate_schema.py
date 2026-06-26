@@ -6,9 +6,8 @@ from __future__ import annotations
 import os
 import sys
 
-from sqlalchemy import create_engine, text
-
 from app.db.schema_validate import ONTRACK_ALEMBIC_HEAD, assert_schema_parity
+from sqlalchemy import create_engine, text
 
 
 def _database_url() -> str:

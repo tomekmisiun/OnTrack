@@ -25,7 +25,9 @@ def slug_catalog_key(raw: str) -> str:
     return slug[:80] or "item"
 
 
-def market_row_to_product(name: str, market: dict[str, Any], macros: dict[str, Any]) -> dict[str, Any]:
+def market_row_to_product(
+    name: str, market: dict[str, Any], macros: dict[str, Any]
+) -> dict[str, Any]:
     row: dict[str, Any] = {
         "name": name,
         "price": float(market.get("price") or 0),
