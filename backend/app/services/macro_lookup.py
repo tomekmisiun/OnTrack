@@ -1,8 +1,9 @@
-"""Macro lookup: local ingredient DB → AI cache → DeepSeek."""
+"""Macro lookup: local ingredient DB → catalog → AI cache → DeepSeek."""
 
 from __future__ import annotations
 
 import json
+import logging
 import os
 import re
 import threading
@@ -15,6 +16,7 @@ from app.core.runtime_data import ingredients_macros_paths, macro_ai_cache_path
 
 _PL_TRANSLATE = str.maketrans("ąćęłńóśźż", "acelnoszz")
 _CACHE_LOCK = threading.Lock()
+_log = logging.getLogger(__name__)
 
 _SYSTEM_PROMPT_EN = """\
 Return macronutrients per 100g or 100ml of the raw/basic culinary form of the ingredient.
@@ -270,17 +272,27 @@ def _parse_ai_json(content: str) -> dict | None:
     return None
 
 
-def _fetch_ai_macros(name: str, lang: str) -> dict | None:
-    api_key = os.environ.get("DEEPSEEK_API_KEY", "").strip()
+def _deepseek_api_key() -> str:
+    return os.environ.get("DEEPSEEK_API_KEY", "").strip()
+
+
+def _openai_client():
+    api_key = _deepseek_api_key()
     if not api_key:
         return None
-
     try:
         from openai import OpenAI
     except ImportError:
+        _log.error("openai package is not installed; DeepSeek macro lookup disabled")
+        return None
+    return OpenAI(api_key=api_key, base_url="https://api.deepseek.com", timeout=30.0)
+
+
+def _fetch_ai_macros(name: str, lang: str) -> dict | None:
+    client = _openai_client()
+    if client is None:
         return None
 
-    client = OpenAI(api_key=api_key, base_url="https://api.deepseek.com")
     system = _SYSTEM_PROMPT_PL if lang == "pl" else _SYSTEM_PROMPT_EN
     user_msg = json.dumps([name], ensure_ascii=False)
 
@@ -294,7 +306,8 @@ def _fetch_ai_macros(name: str, lang: str) -> dict | None:
             temperature=0.0,
         )
         item = _parse_ai_json(resp.choices[0].message.content or "")
-    except Exception:
+    except Exception as exc:
+        _log.warning("DeepSeek macro lookup failed for %r: %s", name, exc)
         return None
 
     if not item:
@@ -332,6 +345,10 @@ def lookup_macros(name: str, lang: str = "pl") -> dict:
         if hit:
             return hit
 
-    if not os.environ.get("DEEPSEEK_API_KEY", "").strip():
+    if not _deepseek_api_key():
         return {"found": False, "error": "ai_not_configured"}
+    try:
+        import openai  # noqa: F401
+    except ImportError:
+        return {"found": False, "error": "ai_unavailable"}
     return {"found": False, "error": "not_found"}
