@@ -318,6 +318,13 @@ def parse_free(
     filename: str | None,
     file_data: bytes,
 ) -> dict:
+    today_count = _get_today_count(session, user_id)
+    if today_count >= DAILY_LIMIT:
+        raise ImportServiceError(
+            f"Daily limit of {DAILY_LIMIT} imports reached. Try again tomorrow.",
+            429,
+        )
+
     ext = _extension(filename)
     if ext not in ("txt", "csv"):
         raise ImportServiceError("This endpoint only accepts .txt and .csv files", 400)
@@ -389,7 +396,9 @@ def parse_free(
 
         results.append(_build_import_item(name, qty, unit, price, db_products, lang))
 
-    return {"items": results}
+    _increment_log(session, user_id)
+    remaining = DAILY_LIMIT - today_count - 1
+    return {"items": results, "remaining_today": remaining}
 
 
 def apply_prices(session: Session, user_id: int, updates: list) -> dict:
