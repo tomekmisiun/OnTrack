@@ -71,7 +71,7 @@ public/        — Static assets
 - `lib/api/client.ts` — `createApiClient()` with optional Bearer token hook (unused in foundation)
 - `lib/api/health.ts` — `GET /health` smoke test
 
-OpenAPI-generated types are planned in a later task (`openapi-typescript`).
+OpenAPI-generated types: `npm run export:openapi` then `npm run generate:api` → `lib/api/generated/schema.ts`.
 
 ## OpenAPI types
 
@@ -145,10 +145,9 @@ npm run generate:api
 - `components/macro/MacroScreen.tsx` — BMI/TDEE/macro calculator with profile save
 - `components/summary/**` — expenses, drinks card, pie chart, product table
 - `components/export/ExportScreen.tsx` — print/HTML export (macro card, calendar, shopping list)
-- `components/profile/ProfileModal.tsx` — account, language, delete, restart tour
+- `components/profile/ProfileModal.tsx` — account, language, market, delete
 - `components/privacy/PrivacyPolicyModal.tsx` — login page privacy link
 - `components/dish-compare/DishCompare.tsx` — public marketing widget on login
-- `components/tour/TourProvider.tsx` — react-joyride onboarding
 - `lib/api/fuel.ts`, `lib/api/public.ts`, `saveMemberProfile` in `lib/api/members.ts`
 - `npm run test:expense` — sanity check for expense item math
 
