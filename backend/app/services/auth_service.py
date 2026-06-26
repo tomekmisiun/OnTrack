@@ -21,6 +21,7 @@ from app.models.product import Product
 from app.models.recipe import Recipe, RecipeIngredient
 from app.models.recipe_parse_log import RecipeParseLog
 from app.models.user import User
+from app.models.user_recipe_favorite import UserRecipeFavorite
 from app.services.member_service import ensure_primary_member, sync_primary_member_name
 from app.scripts.import_catalog import ensure_global_catalog_loaded
 from app.services.user_preferences import (
@@ -165,6 +166,7 @@ def delete_account(session: Session, user_id: int) -> None:
     session.query(Product).filter_by(user_id=user_id).delete()
     session.query(ImportLog).filter_by(user_id=user_id).delete()
     session.query(RecipeParseLog).filter_by(user_id=user_id).delete()
+    session.query(UserRecipeFavorite).filter_by(user_id=user_id).delete()
     session.delete(user)
     session.commit()
 
