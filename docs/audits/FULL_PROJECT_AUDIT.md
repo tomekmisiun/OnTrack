@@ -227,7 +227,7 @@ flowchart TB
 | Recipes CRUD + favorites | **WORKS** | System + user recipes visible | `test_recipes_contract.py` | — |
 | Meal calendar (add/delete/copy) | **WORKS** (post PR #116) | Read path no longer filters by recipe visibility; member fallback | `test_meal_plan_contract.py` | Deploy `0275099` to prod; add E2E persistence (task #1) |
 | Day schedule | **WORKS** | Full contract DS01–DS06 | `test_day_schedule_contract.py` | — |
-| Nutrition lookup | **WORKS** | Macro lookup service | `test_nutrition_contract.py` | Depends on DeepSeek when configured |
+| Nutrition lookup | **WORKS** | Catalog → AI cache → DeepSeek | `test_nutrition_contract.py` | Catalog covers ~445 PL products without AI |
 | Receipt import (AI) | **PARTIALLY WORKS** | Gemini + 2/day limit | `test_import_contract.py` | REQUIRES MANUAL TEST with API key |
 | CSV/txt import (free) | **WORKS** | No daily limit | `test_import_contract.py` | Abuse vector for authenticated users |
 | Apply imported prices | **WORKS** | User-scoped product updates | `test_apply_prices_ignores_other_users_product` | — |

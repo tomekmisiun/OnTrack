@@ -79,6 +79,16 @@ uv run python -m app.scripts.import_catalog --market PL   # single market
 
 Import is idempotent: upserts by stable `catalog_key`, runs in a transaction, reports created/updated/skipped/rejected counts.
 
+## Nutrition / macro lookup
+
+`/api/nutrition/lookup` resolves macros in this order:
+
+1. **Generated catalog** — fuzzy match against `generated/products_{PL,GB}.json`
+2. **AI cache** — `cache/macro_ai_cache.json` (DeepSeek hits; gitignored at repo root)
+3. **DeepSeek API** — fallback when `DEEPSEEK_API_KEY` is set
+
+After lookup, the frontend saves macros on the product row in PostgreSQL (`kcal`, `protein`, `fat`, `carbs`). There is no separate `ingredients_macros.json` at runtime.
+
 ### 5. Pre-migration DB report (admin)
 
 ```bash

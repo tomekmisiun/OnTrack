@@ -10,7 +10,7 @@
     "Not for medical, dietary, or clinical decisions",
     "GB catalog uses available EN shop data; incomplete GB prices are omitted, not synthesized",
     "Product prices reflect reference import, not live shop feeds",
-    "Legacy seeds/ directory is deprecated; edit canonical/ only"
+    "Legacy seeds/ and macros/ directories removed; edit canonical/ only"
   ],
   "files": [
     {
