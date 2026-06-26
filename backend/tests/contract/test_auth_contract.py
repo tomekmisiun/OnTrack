@@ -236,7 +236,7 @@ def test_google_callback_missing_email_redirects_with_error(client, monkeypatch)
 
     res = client.get("/api/auth/google/callback", follow_redirects=False)
     assert res.status_code == 302
-    assert "auth_error=" in res.headers["location"]
+    assert "auth_error=oauth_no_email" in res.headers["location"]
 
 
 def test_delete_account(client, user, auth_headers, db_session):
@@ -244,6 +244,7 @@ def test_delete_account(client, user, auth_headers, db_session):
     assert res.status_code == 200
     assert res.json()["message"] == "Account deleted"
     assert db_session.get(User, user.id) is None
+
 
 def test_delete_account_with_recipe_favorites(
     client, user, auth_headers, db_session, global_catalog
@@ -260,6 +261,7 @@ def test_delete_account_with_recipe_favorites(
     assert res.json()["message"] == "Account deleted"
     assert db_session.get(User, user.id) is None
 
+
 def test_auth_login_rate_limit(client):
     from app.core.rate_limit import reset_rate_limits
 
@@ -273,3 +275,19 @@ def test_auth_login_rate_limit(client):
     assert blocked.json()["error"] == "Too many requests"
     reset_rate_limits()
 
+
+def test_oauth_callback_redacts_internal_errors(client, monkeypatch):
+    from app.api.routes import auth as auth_routes
+
+    class FakeGoogle:
+        async def authorize_access_token(self, _request):
+            raise RuntimeError("internal database connection string leaked")
+
+    monkeypatch.setattr(auth_routes, "_oauth", type("O", (), {"google": FakeGoogle()})())
+
+    res = client.get("/api/auth/google/callback", follow_redirects=False)
+    assert res.status_code == 302
+    location = res.headers["location"]
+    assert "auth_error=oauth_failed" in location
+    assert "RuntimeError" not in location
+    assert "database" not in location.lower()

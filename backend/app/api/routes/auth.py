@@ -167,7 +167,7 @@ async def google_login(request: Request) -> Response:
 async def google_callback(request: Request, session: Session = Depends(get_db_session)) -> Response:
     settings = get_settings()
     if not settings.google_oauth_configured:
-        return RedirectResponse(auth_service.auth_error_redirect("Google OAuth is not configured"))
+        return RedirectResponse(auth_service.auth_error_redirect("oauth_not_configured"))
 
     oauth = get_oauth()
     pending_lang = request.cookies.get("pending_lang") or "pl"
@@ -185,14 +185,13 @@ async def google_callback(request: Request, session: Session = Depends(get_db_se
             from authlib.integrations.base_client.errors import OAuthError
 
             if isinstance(exc, OAuthError):
-                desc = getattr(exc, "description", None) or str(getattr(exc, "error", exc))
                 return RedirectResponse(
-                    auth_service.auth_error_redirect(f"Google OAuth: {desc}"),
+                    auth_service.auth_error_redirect("oauth_denied"),
                     status_code=302,
                 )
         except ImportError:
             pass
         return RedirectResponse(
-            auth_service.auth_error_redirect(f"{type(exc).__name__}: {exc}"),
+            auth_service.auth_error_redirect("oauth_failed"),
             status_code=302,
         )

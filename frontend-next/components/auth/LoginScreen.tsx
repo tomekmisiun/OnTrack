@@ -375,7 +375,12 @@ export function LoginScreen() {
     const params = new URLSearchParams(window.location.search);
     const authError = params.get("auth_error");
     if (authError) {
-      setError(authError);
+      const oauthKey = `err_${authError}` as keyof typeof t;
+      const message =
+        oauthKey in t && typeof t[oauthKey] === "string"
+          ? (t[oauthKey] as string)
+          : authError;
+      setError(message);
       params.delete("auth_error");
       const qs = params.toString();
       window.history.replaceState(
@@ -384,7 +389,7 @@ export function LoginScreen() {
         qs ? `${window.location.pathname}?${qs}` : window.location.pathname,
       );
     }
-  }, []);
+  }, [t]);
 
   const handleCredentials = async (e: FormEvent) => {
     e.preventDefault();
