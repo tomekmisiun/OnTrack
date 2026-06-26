@@ -1,7 +1,5 @@
 # User seeds (legacy location)
 
-**Runtime data moved to `backend/data/seeds/`.** This directory is no longer used by the API.
+**Runtime data moved to `backend/data/canonical/` and `backend/data/generated/`.** This directory is no longer used by the API.
 
-Scraper pipeline exports to `scraper/output/seeds/` (see `scraper/README.md`).
-
-**Runtime loader:** `backend/app/services/catalog_seed_service.py`
+Catalog import: `uv run python -m app.scripts.import_catalog` (see `backend/data/README.md`).

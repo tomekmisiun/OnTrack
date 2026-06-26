@@ -29,7 +29,7 @@ def runtime_data_root() -> Path:
 
 
 def seeds_dir() -> Path:
-    """Deprecated legacy seed path — prefer ``generated_dir()`` from catalog_data."""
+    """Optional export output path for ``export_user_catalog_to_seeds``."""
     settings = get_settings()
     if settings.user_seeds_dir:
         return Path(settings.user_seeds_dir)
