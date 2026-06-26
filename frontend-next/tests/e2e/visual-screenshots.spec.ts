@@ -41,7 +41,7 @@ for (const viewport of VIEWPORTS) {
     test.describe("authenticated", () => {
       test.beforeEach(async ({ page }) => {
         await setupAuthenticatedMocks(page);
-        await prepareVisualPage(page, { authenticated: true });
+        await prepareVisualPage(page);
       });
 
       for (const screen of AUTH_SCREENS) {

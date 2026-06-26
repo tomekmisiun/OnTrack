@@ -7,34 +7,26 @@ import { AppFooter } from "@/components/layout/AppFooter";
 import { ProfileModal } from "@/components/profile/ProfileModal";
 import { ProfileModalProvider } from "@/components/profile/ProfileModalContext";
 import { Sidebar } from "@/components/layout/Sidebar";
-import { TourProvider, useTour } from "@/components/tour/TourProvider";
 import { useAppShellDocument } from "@/hooks/useAppShellDocument";
 import { useLayoutViewport } from "@/hooks/useLayoutViewport";
 import { HOME_PATH } from "@/lib/config/routes";
 import { LAYOUT_WIDTH } from "@/lib/layout/constants";
 import "@/components/welcome/welcome.css";
 
-type AppShellInnerProps = {
+type AppShellProps = {
   children: React.ReactNode;
 };
 
-function AppShellInner({ children }: AppShellInnerProps) {
+export function AppShell({ children }: AppShellProps) {
   const pathname = usePathname();
   const isHome = pathname === HOME_PATH;
   const [showProfile, setShowProfile] = useState(false);
-  const { startTour } = useTour();
 
   useLayoutViewport(isHome ? LAYOUT_WIDTH.home : LAYOUT_WIDTH.app);
   useAppShellDocument(isHome);
 
   const profileModal = showProfile ? (
-    <ProfileModal
-      onClose={() => setShowProfile(false)}
-      onStartTour={() => {
-        setShowProfile(false);
-        startTour();
-      }}
-    />
+    <ProfileModal onClose={() => setShowProfile(false)} />
   ) : null;
 
   if (isHome) {
@@ -64,17 +56,5 @@ function AppShellInner({ children }: AppShellInnerProps) {
         {profileModal}
       </div>
     </ProfileModalProvider>
-  );
-}
-
-type AppShellProps = {
-  children: React.ReactNode;
-};
-
-export function AppShell({ children }: AppShellProps) {
-  return (
-    <TourProvider>
-      <AppShellInner>{children}</AppShellInner>
-    </TourProvider>
   );
 }

@@ -57,7 +57,6 @@ const T = {
     delete_confirm: 'Czy na pewno chcesz usunąć swoje konto? Wszystkie dane zostaną trwale usunięte. Tej operacji nie można cofnąć.',
     close: 'Zamknij',
     deleting: 'Usuwanie…',
-    show_tutorial: 'Pokaż samouczek',
     // Login
     subtitle_login: 'Zaloguj się do swojego konta',
     subtitle_register: 'Utwórz nowe konto Ontrack',
@@ -1006,7 +1005,6 @@ const T = {
     delete_confirm: 'Are you sure you want to delete your account? All data will be permanently deleted. This action cannot be undone.',
     close: 'Close',
     deleting: 'Deleting…',
-    show_tutorial: 'Show tutorial',
     // Login
     subtitle_login: 'Sign in to your account',
     subtitle_register: 'Create your Ontrack account',

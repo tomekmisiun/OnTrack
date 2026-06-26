@@ -3,7 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { auth as authApi } from '../api';
 
-export default function Profile({ onClose, onStartTour }) {
+export default function Profile({ onClose }) {
   const { user, logout, deleteAccount, updateUserLang } = useAuth();
   const { t, lang, switchLang } = useLanguage();
   const [deleting, setDeleting] = useState(false);
@@ -120,11 +120,6 @@ export default function Profile({ onClose, onStartTour }) {
           >
             {deleting ? t('deleting') : t('delete_account')}
           </button>
-          {onStartTour && (
-            <button onClick={onStartTour} style={{ width: '100%', padding: '10px', border: '1px solid #0d9488', borderRadius: 8, background: 'none', cursor: 'pointer', fontSize: 14, color: '#0d9488', fontWeight: 600, marginBottom: 8 }}>
-              ▶ {t('show_tutorial')}
-            </button>
-          )}
           <button onClick={onClose} style={{ width: '100%', padding: '10px', border: '1px solid #e0e0e0', borderRadius: 8, background: 'none', cursor: 'pointer', fontSize: 14, color: '#9ca3af' }}>
             {t('close')}
           </button>

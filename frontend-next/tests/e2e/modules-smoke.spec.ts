@@ -72,9 +72,9 @@ test.describe("logged-in module smoke", () => {
       }
 
       await expect(page.locator("aside.app-sidebar")).toBeVisible();
-      await expect(page.locator(`[data-tour="tab-${mod.tab}"]`)).toHaveClass(
-        /active/,
-      );
+      await expect(
+        page.locator(`a.sidebar-tab[href="${mod.path}"]`),
+      ).toHaveClass(/active/);
     });
   }
 });

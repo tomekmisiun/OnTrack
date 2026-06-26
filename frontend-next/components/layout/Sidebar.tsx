@@ -52,7 +52,6 @@ export function Sidebar({ onAccount }: SidebarProps) {
             <Link
               key={item.id}
               href={item.path}
-              data-tour={`tab-${item.id}`}
               className={`sidebar-tab${active ? " active" : ""}`}
             >
               <Icon icon={TAB_ICONS[item.id]} className="sidebar-tab-icon" />
