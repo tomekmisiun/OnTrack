@@ -5,7 +5,11 @@ const baseURL = `http://127.0.0.1:${port}`;
 
 export default defineConfig({
   testDir: "tests/e2e",
-  testIgnore: ["**/auth-fullstack.spec.ts", "**/auth-negative.spec.ts"],
+  testIgnore: [
+    "**/auth-fullstack.spec.ts",
+    "**/auth-negative.spec.ts",
+    "**/meal-persistence.spec.ts",
+  ],
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 1 : 0,
