@@ -7,7 +7,7 @@ def test_nutrition_lookup_demo_yogurt(client, auth_headers):
     assert res.status_code == 200
     data = res.json()
     assert data["found"] is True
-    assert data["source"] in ("database", "catalog")
+    assert data["source"] == "catalog"
     assert data["kcal"] > 0
 
 
@@ -26,7 +26,7 @@ def test_nutrition_lookup_catalog_mleko(client, auth_headers, monkeypatch):
     assert res.status_code == 200
     data = res.json()
     assert data["found"] is True
-    assert data["source"] in ("database", "catalog")
+    assert data["source"] == "catalog"
     assert data["kcal"] > 0
 
 
@@ -40,7 +40,7 @@ def test_nutrition_lookup_catalog_fuzzy_banany(client, auth_headers, monkeypatch
     assert res.status_code == 200
     data = res.json()
     assert data["found"] is True
-    assert data["source"] in ("database", "catalog")
+    assert data["source"] == "catalog"
 
 
 def test_openai_dependency_is_installed():

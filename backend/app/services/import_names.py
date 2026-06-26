@@ -2,14 +2,13 @@
 
 from __future__ import annotations
 
-import json
 import re
 import unicodedata
 from functools import lru_cache
 
 from rapidfuzz import fuzz
 
-from app.core.runtime_data import ingredients_macros_paths
+from app.core.catalog_data import canonical_products_path, load_json_list
 
 _PL_CHARS = re.compile(r"[ąćęłńóśźż]", re.I)
 
@@ -22,14 +21,14 @@ def _norm(name: str) -> str:
 
 @lru_cache(maxsize=1)
 def _pl_to_en_map() -> dict[str, str]:
-    path = next((p for p in ingredients_macros_paths() if p.exists()), None)
-    if path is None:
+    path = canonical_products_path()
+    if not path.is_file():
         return {}
-    data = json.loads(path.read_text(encoding="utf-8"))
     out: dict[str, str] = {}
-    for row in data:
-        pl = _norm(row.get("name_pl") or "")
-        en = (row.get("name_en") or "").strip()
+    for entry in load_json_list(path):
+        names = entry.get("names") or {}
+        pl = _norm(names.get("pl") or "")
+        en = (names.get("en") or "").strip()
         if pl and en and pl not in out:
             out[pl] = en
     return out

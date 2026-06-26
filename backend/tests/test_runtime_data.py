@@ -10,7 +10,6 @@ from app.core.config import get_settings
 from app.core.runtime_data import (
     RuntimeDataError,
     dish_compare_data_dir,
-    ingredients_macros_paths,
     macro_ai_cache_path,
     recipes_pl_paths,
     runtime_data_root,
@@ -45,7 +44,6 @@ def _write_minimal_runtime_tree(root: Path) -> None:
     (root / "generated").mkdir(parents=True)
     (root / "dish_compare" / "defaults").mkdir(parents=True)
     (root / "dish_compare" / "built").mkdir(parents=True)
-    (root / "macros").mkdir(parents=True)
     (root / "recipes").mkdir(parents=True)
     (root / "cache").mkdir(parents=True)
 
@@ -64,7 +62,6 @@ def _write_minimal_runtime_tree(root: Path) -> None:
             encoding="utf-8",
         )
 
-    (root / "macros" / "ingredients_macros.json").write_text("[]", encoding="utf-8")
     (root / "recipes" / "recipes_pl.json").write_text("[]", encoding="utf-8")
 
 
@@ -76,7 +73,6 @@ def test_runtime_data_dir_override_paths(tmp_path, monkeypatch, clear_settings_c
     assert runtime_data_root() == data_root
     assert seeds_dir() == data_root / "seeds"
     assert dish_compare_data_dir() == data_root / "dish_compare"
-    assert ingredients_macros_paths() == (data_root / "macros" / "ingredients_macros.json",)
     assert recipes_pl_paths() == (data_root / "recipes" / "recipes_pl.json",)
     assert macro_ai_cache_path() == data_root / "cache" / "macro_ai_cache.json"
 
@@ -88,8 +84,6 @@ def test_default_runtime_root_is_backend_data(monkeypatch, clear_settings_cache)
     assert runtime_data_root() == backend_root / "data"
     assert seeds_dir() == backend_root / "data" / "seeds"
     assert dish_compare_data_dir() == backend_root / "data" / "dish_compare"
-    macros = backend_root / "data" / "macros" / "ingredients_macros.json"
-    assert ingredients_macros_paths()[0] == macros
     assert recipes_pl_paths()[0] == backend_root / "data" / "recipes" / "recipes_pl.json"
     assert macro_ai_cache_path() == backend_root / "data" / "cache" / "macro_ai_cache.json"
 
@@ -140,4 +134,7 @@ def test_consumers_do_not_resolve_paths_manually():
 def test_consumers_import_runtime_data_module():
     for path in CONSUMER_SERVICE_FILES:
         source = path.read_text(encoding="utf-8")
-        assert "runtime_data" in source, f"{path.name} should use app.core.runtime_data"
+        if path.name == "import_names.py":
+            assert "catalog_data" in source, f"{path.name} should use app.core.catalog_data"
+        else:
+            assert "runtime_data" in source, f"{path.name} should use app.core.runtime_data"

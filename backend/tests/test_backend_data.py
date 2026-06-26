@@ -10,7 +10,6 @@ from app.core.catalog_data import generated_products_path, read_generated_items
 from app.core.config import get_settings
 from app.core.runtime_data import (
     dish_compare_data_dir,
-    ingredients_macros_paths,
     recipes_pl_paths,
     runtime_data_root,
 )
@@ -59,7 +58,6 @@ def test_validate_runtime_data_fails_on_empty_product_name(tmp_path):
 def test_runtime_data_dir_points_at_backend_data(use_backend_data):
     assert runtime_data_root() == BACKEND_DATA
     assert dish_compare_data_dir() == BACKEND_DATA / "dish_compare"
-    assert ingredients_macros_paths()[0] == BACKEND_DATA / "macros" / "ingredients_macros.json"
     assert recipes_pl_paths()[0] == BACKEND_DATA / "recipes" / "recipes_pl.json"
 
 
@@ -73,15 +71,14 @@ def test_dish_compare_loads_from_backend_data(use_backend_data):
 def test_macro_lookup_uses_backend_data(use_backend_data):
     import app.services.macro_lookup as macro_mod
 
-    macro_mod._macro_map_pl = None
-    macro_mod._macro_map_en = None
     macro_mod._catalog_maps = None
     result = lookup_macros("jogurt naturalny", lang="pl")
     assert result["found"] is True
+    assert result["source"] == "catalog"
     assert result["kcal"] > 0
 
 
-def test_import_names_uses_backend_data_macros(use_backend_data):
+def test_import_names_uses_canonical_catalog(use_backend_data):
     assert translate_product_name("jogurt naturalny", "en") in (
         "natural yogurt",
         "plain yogurt",

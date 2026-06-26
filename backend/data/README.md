@@ -32,12 +32,11 @@ backend/data/
 │   ├── products_GB.json
 │   ├── recipes_PL.json
 │   └── recipes_GB.json
-├── macros/                       # macro lookup inputs
 ├── recipes/                      # recipe image lookup (legacy helper data)
 └── dish_compare/                 # dish compare feature data
 ```
 
-Legacy `seeds/` files are **deprecated** and kept only for historical reference. Standard workflow uses `canonical/` → `generated/`.
+Macro lookup uses `generated/products_*.json` (catalog) → AI cache → DeepSeek. Legacy `seeds/` and `macros/` directories are removed.
 
 ### Why `user_id=1` is not in runtime
 
