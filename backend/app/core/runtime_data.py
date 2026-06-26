@@ -44,10 +44,6 @@ def dish_compare_data_dir() -> Path:
     return runtime_data_root() / "dish_compare"
 
 
-def ingredients_macros_paths() -> tuple[Path, ...]:
-    return (runtime_data_root() / "macros" / "ingredients_macros.json",)
-
-
 def recipes_pl_paths() -> tuple[Path, ...]:
     return (runtime_data_root() / "recipes" / "recipes_pl.json",)
 
@@ -65,7 +61,6 @@ def required_runtime_files() -> tuple[tuple[Path, str], ...]:
         (dc / "defaults" / "en.json", "dish_compare defaults (en)"),
         (dc / "built" / "pl.json", "dish_compare built (pl)"),
         (dc / "built" / "en.json", "dish_compare built (en)"),
-        (ingredients_macros_paths()[0], "ingredients_macros"),
         (gen / "products_PL.json", "generated products (PL)"),
         (gen / "recipes_PL.json", "generated recipes (PL)"),
     )

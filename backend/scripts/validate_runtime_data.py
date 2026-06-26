@@ -249,7 +249,6 @@ def validate_runtime_data(root: Path | None = None) -> None:
         "generated/products_GB.json": _validate_generated_products,
         "generated/recipes_PL.json": _validate_generated_recipes,
         "generated/recipes_GB.json": _validate_generated_recipes,
-        "macros/ingredients_macros.json": lambda p: _validate_macros(_load_json(p)),
         "recipes/recipes_pl.json": lambda p: _validate_recipes_pl(_load_json(p)),
         "dish_compare/defaults/pl.json": lambda p: _validate_dish_defaults(_load_json(p), p.name),
         "dish_compare/defaults/en.json": lambda p: _validate_dish_defaults(_load_json(p), p.name),

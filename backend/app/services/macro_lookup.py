@@ -1,4 +1,4 @@
-"""Macro lookup: local ingredient DB → catalog → AI cache → DeepSeek."""
+"""Macro lookup: generated catalog → AI cache → DeepSeek."""
 
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ import unicodedata
 from rapidfuzz import fuzz, process
 
 from app.core.catalog_data import generated_products_path, read_generated_items
-from app.core.runtime_data import ingredients_macros_paths, macro_ai_cache_path
+from app.core.runtime_data import macro_ai_cache_path
 
 _PL_TRANSLATE = str.maketrans("ąćęłńóśźż", "acelnoszz")
 _CACHE_LOCK = threading.Lock()
@@ -48,8 +48,6 @@ Użyj wartości referencyjnych USDA dla surowych składników (nie produktów ma
 Zaokrąglij do 1 miejsca po przecinku. name_pl w mianowniku.
 """
 
-_macro_map_pl: dict[str, dict] | None = None
-_macro_map_en: dict[str, dict] | None = None
 _catalog_maps: dict[str, dict[str, dict]] | None = None
 _ai_cache: dict[str, dict] | None = None
 
@@ -73,35 +71,6 @@ def _macro_value(item: dict) -> dict:
         "fat": item.get("fat_g"),
         "carbs": item.get("carbs_g"),
     }
-
-
-def _load_macros_file() -> list[dict]:
-    for path in ingredients_macros_paths():
-        if path.exists():
-            return json.loads(path.read_text(encoding="utf-8"))
-    return []
-
-
-def _build_macro_map(key: str) -> dict[str, dict]:
-    result: dict[str, dict] = {}
-    for item in _load_macros_file():
-        name = item.get(key)
-        if not name:
-            continue
-        val = _macro_value(item)
-        if not val.get("kcal"):
-            continue
-        result[name] = val
-        result[dedup_key(name)] = val
-    return result
-
-
-def _get_macro_maps() -> tuple[dict[str, dict], dict[str, dict]]:
-    global _macro_map_pl, _macro_map_en
-    if _macro_map_pl is None:
-        _macro_map_pl = _build_macro_map("name_pl")
-        _macro_map_en = _build_macro_map("name_en")
-    return _macro_map_pl, _macro_map_en
 
 
 def _load_ai_cache() -> dict[str, dict]:
@@ -227,29 +196,6 @@ def _lookup_catalog(name: str, lang: str) -> dict | None:
     return None
 
 
-def _lookup_local(name: str, lang: str) -> dict | None:
-    macro_pl, macro_en = _get_macro_maps()
-    primary = macro_pl if lang == "pl" else macro_en
-    secondary = macro_en if lang == "pl" else macro_pl
-    key = dedup_key(name)
-
-    for map_ in (primary, secondary):
-        hit = map_.get(name.lower()) or map_.get(key)
-        if hit:
-            return _normalize_result("database", hit, name)
-        match = process.extractOne(
-            name,
-            map_.keys(),
-            scorer=fuzz.partial_ratio,
-            score_cutoff=88,
-        )
-        if match:
-            matched_key, score, _ = match
-            if score >= 88:
-                return _normalize_result("database", map_[matched_key], matched_key)
-    return None
-
-
 def _lookup_ai_cache(name: str, lang: str) -> dict | None:
     cache = _load_ai_cache()
     entry = cache.get(f"{lang}:{dedup_key(name)}")
@@ -336,7 +282,6 @@ def lookup_macros(name: str, lang: str = "pl") -> dict:
         return {"found": False, "error": "empty_name"}
 
     for resolver in (
-        _lookup_local,
         _lookup_catalog,
         _lookup_ai_cache,
         lambda n, lng: _fetch_ai_macros(n, lng),

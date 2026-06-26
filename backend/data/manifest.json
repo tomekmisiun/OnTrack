@@ -54,11 +54,6 @@
       "trust": "historical"
     },
     {
-      "path": "macros/ingredients_macros.json",
-      "role": "macro_lookup",
-      "trust": "synthetic"
-    },
-    {
       "path": "recipes/recipes_pl.json",
       "role": "recipe_image_lookup",
       "trust": "synthetic"
