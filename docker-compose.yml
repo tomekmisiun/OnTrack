@@ -26,24 +26,6 @@ services:
     networks:
       - backend
 
-  worker:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    command: ["sh", "scripts/start-worker.sh"]
-    environment:
-      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
-      - REDIS_URL=redis://redis:6379/0
-      - FLASK_SECRET_KEY=${FLASK_SECRET_KEY}
-      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
-    depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    networks:
-      - backend
-
   redis:
     image: redis:7-alpine
     ports:

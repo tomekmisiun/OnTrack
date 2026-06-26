@@ -41,7 +41,7 @@ curl -sf http://localhost:5001/health
 | Service | Root Directory | Config file path |
 |---------|----------------|------------------|
 | API (`ontrack-back`) | `backend` | `/backend/railway.toml` |
-| Worker | `backend` | `/backend/railway.worker.prod.toml` |
+| Worker | `backend` | `/backend/railway.worker.prod.toml` (optional; no Compose service — scaffold only) |
 
 Deploy guide: [`docs/deployment/RAILWAY_BACKEND_MIGRATION.md`](../docs/deployment/RAILWAY_BACKEND_MIGRATION.md)
 
@@ -55,9 +55,11 @@ uv run python scripts/validate_schema.py
 
 ## Background worker
 
+The worker entrypoint (`python -m app.worker.run`) is a **scaffold only** — no jobs are enqueued yet. It is **not** started by root `docker-compose.yml`. To run it manually for development:
+
 ```bash
-docker compose up --build backend worker redis db
-# or: uv run python -m app.worker.run
+docker compose up --build backend redis db
+# optional: uv run python -m app.worker.run
 ```
 
 ## Contract suite
