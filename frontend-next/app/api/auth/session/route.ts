@@ -9,8 +9,8 @@ import {
 import { getApiBaseUrl } from "@/lib/config/env";
 
 type SessionAction =
-  | { action: "login"; username: string; password: string }
-  | { action: "register"; username: string; password: string; lang: string }
+  | { action: "login"; email: string; password: string }
+  | { action: "register"; email: string; password: string; lang: string }
   | { action: "exchange"; code: string }
   | { action: "refresh" };
 
@@ -111,7 +111,7 @@ export async function POST(request: NextRequest) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          username: payload.username,
+          email: payload.email,
           password: payload.password,
         }),
       };
@@ -122,7 +122,7 @@ export async function POST(request: NextRequest) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          username: payload.username,
+          email: payload.email,
           password: payload.password,
           lang: payload.lang,
         }),

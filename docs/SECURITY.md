@@ -78,8 +78,7 @@ Misconfiguration causes register/login failures from the browser despite healthy
 ## Password reset
 
 - API generates time-limited reset token (1 hour)
-- When `SMTP_HOST` and `SMTP_FROM` are configured, backend emails a reset link to deliverable addresses
-- Local username accounts use synthetic `@users.ontrack.local` emails — reset email applies to Google OAuth accounts with real inboxes
+- When `SMTP_HOST` and `SMTP_FROM` are configured, backend emails a reset link to the user's registered email
 - `reset_token` in JSON response remains limited to `DEBUG` / `TESTING` only
 
 ---

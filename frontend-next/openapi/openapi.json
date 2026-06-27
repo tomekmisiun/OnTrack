@@ -2632,9 +2632,9 @@
       },
       "ForgotPasswordRequest": {
         "properties": {
-          "username": {
+          "email": {
             "type": "string",
-            "title": "Username",
+            "title": "Email",
             "default": ""
           }
         },
@@ -2667,9 +2667,9 @@
       },
       "LoginRequest": {
         "properties": {
-          "username": {
+          "email": {
             "type": "string",
-            "title": "Username",
+            "title": "Email",
             "default": ""
           },
           "password": {
@@ -3179,9 +3179,9 @@
       },
       "RegisterRequest": {
         "properties": {
-          "username": {
+          "email": {
             "type": "string",
-            "title": "Username",
+            "title": "Email",
             "default": ""
           },
           "password": {

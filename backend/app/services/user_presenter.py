@@ -10,6 +10,6 @@ def user_to_dict(user: User) -> dict:
     }
     if user.username:
         out["username"] = user.username
-    if user.email and not user.email.endswith("@users.ontrack.local"):
+    if user.email:
         out["email"] = user.email
     return out

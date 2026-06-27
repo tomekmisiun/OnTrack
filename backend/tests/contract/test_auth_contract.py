@@ -65,14 +65,14 @@ def test_change_password(client, db_session):
     assert res.status_code == 200
     login = client.post(
         "/api/auth/login",
-        json={"username": "aliceuser", "password": "NewPass123!"},
+        json={"email": "alice@example.com", "password": "NewPass123!"},
     )
     assert login.status_code == 200
 
 
 def test_forgot_password_returns_token_in_testing(client, db_session):
     create_user(db_session, "reset@example.com", lang="pl", username="resetuser")
-    res = client.post("/api/auth/forgot-password", json={"username": "resetuser"})
+    res = client.post("/api/auth/forgot-password", json={"email": "reset@example.com"})
     assert res.status_code == 200
     data = res.json()
     assert "reset_token" in data
@@ -93,7 +93,7 @@ def test_forgot_password_sends_email_when_smtp_configured(client, db_session, mo
     get_settings.cache_clear()
 
     with patch("app.services.auth_service.send_password_reset_email") as send_mock:
-        res = client.post("/api/auth/forgot-password", json={"username": "mailuser"})
+        res = client.post("/api/auth/forgot-password", json={"email": "oauth@example.com"})
     assert res.status_code == 200
     assert "reset_token" not in res.json()
     send_mock.assert_called_once()
@@ -126,24 +126,24 @@ def test_change_language_rejects_invalid(client, auth_headers):
 def test_register_and_login(client, db_session):
     reg = client.post(
         "/api/auth/register",
-        json={"username": "TestUser", "password": "secret123", "lang": "en"},
+        json={"email": "testuser@example.com", "password": "secret123", "lang": "en"},
     )
     assert reg.status_code == 201
     assert "token" in reg.json()
     assert "access_token" not in reg.json()
 
-    user = db_session.query(User).filter_by(username="testuser").first()
+    user = db_session.query(User).filter(User.email.ilike("testuser@example.com")).first()
     assert user is not None
-    assert user.email == "testuser@users.ontrack.local"
+    assert user.email == "testuser@example.com"
+    assert user.username == "testuser"
     assert user.ui_locale == "en"
     assert user.market_code == "GB"
-    assert user.ui_locale == "en"
     me = client.get("/api/auth/me", headers={"Authorization": f"Bearer {reg.json()['token']}"})
-    assert "email" not in me.json()
+    assert me.json()["email"] == "testuser@example.com"
 
     login = client.post(
         "/api/auth/login",
-        json={"username": "testuser", "password": "secret123"},
+        json={"email": "testuser@example.com", "password": "secret123"},
     )
     assert login.status_code == 200
     assert "token" in login.json()
@@ -152,25 +152,25 @@ def test_register_and_login(client, db_session):
 def test_login_rejects_wrong_password(client):
     client.post(
         "/api/auth/register",
-        json={"username": "alice2", "password": "secret123", "lang": "pl"},
+        json={"email": "alice2@example.com", "password": "secret123", "lang": "pl"},
     )
     res = client.post(
         "/api/auth/login",
-        json={"username": "alice2", "password": "wrong-password"},
+        json={"email": "alice2@example.com", "password": "wrong-password"},
     )
     assert res.status_code == 401
 
 
-def test_register_rejects_duplicate_username(client):
-    payload = {"username": "dupuser", "password": "secret123", "lang": "pl"}
+def test_register_rejects_duplicate_email(client):
+    payload = {"email": "dup@example.com", "password": "secret123", "lang": "pl"}
     assert client.post("/api/auth/register", json=payload).status_code == 201
     assert client.post("/api/auth/register", json=payload).status_code == 409
 
 
-def test_register_validates_username(client):
+def test_register_validates_email(client):
     res = client.post(
         "/api/auth/register",
-        json={"username": "ab", "password": "secret123", "lang": "pl"},
+        json={"email": "not-an-email", "password": "secret123", "lang": "pl"},
     )
     assert res.status_code == 400
 
@@ -178,10 +178,10 @@ def test_register_validates_username(client):
 def test_register_sees_global_catalog_not_private_products(client, db_session, global_catalog):
     reg = client.post(
         "/api/auth/register",
-        json={"username": "seeduser1", "password": "secret123", "lang": "pl"},
+        json={"email": "seeduser1@example.com", "password": "secret123", "lang": "pl"},
     )
     assert reg.status_code == 201
-    user = db_session.query(User).filter_by(username="seeduser1").first()
+    user = db_session.query(User).filter(User.email.ilike("seeduser1@example.com")).first()
     assert db_session.query(Product).filter_by(user_id=user.id).count() == 0
     assert db_session.query(Recipe).filter_by(user_id=user.id).count() == 0
 
@@ -199,7 +199,7 @@ def test_werkzeug_hash_from_flask_login_works(client, db_session):
 
     res = client.post(
         "/api/auth/login",
-        json={"username": "legacyuser", "password": "secret123"},
+        json={"email": "legacy@example.com", "password": "secret123"},
     )
     assert res.status_code == 200
     assert "token" in res.json()
@@ -321,7 +321,7 @@ def test_auth_login_rate_limit(client):
     from app.core.rate_limit import reset_rate_limits
 
     reset_rate_limits()
-    payload = {"username": "nobody", "password": "wrong-password"}
+    payload = {"email": "nobody@example.com", "password": "wrong-password"}
     for _ in range(20):
         res = client.post("/api/auth/login", json=payload)
         assert res.status_code in (401, 400)

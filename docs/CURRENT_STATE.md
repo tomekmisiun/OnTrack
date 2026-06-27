@@ -12,7 +12,7 @@ OnTrack is a **meal planner and budget tracker** for households. Production runs
 |------|--------|-------|
 | User auth (register, login, JWT) | Implemented | Bearer token in localStorage; optional BFF cookie mode for local dev |
 | Google OAuth | Implemented | Requires `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, redirect URI |
-| Password reset API | Implemented | SMTP email when configured; token in response only in debug/testing |
+| Password reset API | Implemented | SMTP email when configured; register/login use email; token in response only in debug/testing |
 | Household members | Implemented | CRUD via `/api/members` |
 | Products (user catalog) | Implemented | Per-user products + global catalog import |
 | Recipes | Implemented | User recipes + system/global recipes by market |

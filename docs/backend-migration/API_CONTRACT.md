@@ -79,9 +79,9 @@
 
 | Field | Detail |
 |-------|--------|
-| Request body | `{ "username": string, "password": string }` |
+| Request body | `{ "email": string, "password": string }` |
 | Success | `200`, `{ "token": string }` |
-| Errors | `400` `{ "error": "Username and password are required" }`; `401` `{ "error": "Invalid username or password" }` |
+| Errors | `400` `{ "error": "Email and password are required" }`; `401` `{ "error": "Invalid email or password" }` |
 | Frontend | Stores `res.data.token`, calls `/api/auth/me` via `finishAuth` |
 | Compatibility risk | **HIGH** — template returns `{ access_token, refresh_token }`; must return `{ token }` |
 
@@ -89,9 +89,9 @@
 
 | Field | Detail |
 |-------|--------|
-| Request body | `{ "username": string, "password": string, "lang": "pl" \| "en" }` |
+| Request body | `{ "email": string, "password": string, "lang": "pl" \| "en" }` |
 | Success | `201`, `{ "token": string }` |
-| Errors | `400` validation message in `{ "error" }`; `409` `{ "error": "Username already taken" }` |
+| Errors | `400` validation message in `{ "error" }`; `409` `{ "error": "Email already registered" }` |
 | Side effects | Creates user, primary member, seeds catalog (`auth.register`) |
 | Compatibility risk | **HIGH** — template registers by email, returns `UserRead`, no token |
 
@@ -109,7 +109,7 @@
 
 | Field | Detail |
 |-------|--------|
-| Success | `200`, user object: `{ "id": int, "lang": "pl"\|"en", "ui_locale": "pl"\|"en", "market_code": "PL"\|"GB", "username"?: string, "email"?: string }` — `lang` mirrors `ui_locale` (legacy alias); email omitted for `@users.ontrack.local` |
+| Success | `200`, user object: `{ "id": int, "lang": "pl"\|"en", "ui_locale": "pl"\|"en", "market_code": "PL"\|"GB", "username"?: string, "email"?: string }` — `lang` mirrors `ui_locale` (legacy alias) |
 | Errors | `401` (JWT loaders); `404` `{ "error": "User not found" }` |
 | Side effects | Catalog seed sync + background seed thread (`auth.me`) |
 | Compatibility risk | **MEDIUM** — shape differs from template `UserRead` |
@@ -162,9 +162,9 @@
 
 | Field | Detail |
 |-------|--------|
-| Request | `{ "username": string }` |
+| Request | `{ "email": string }` |
 | Success | `200`, `{ "message": "..." }` |
-| Production limitation | When `SMTP_HOST` + `SMTP_FROM` are set, sends reset link to deliverable user email. **`reset_token` still returned only when `DEBUG` or `TESTING`**. Local username accounts use `@users.ontrack.local` and cannot receive mail — use Google OAuth or configure SMTP for OAuth-linked accounts. |
+| Production limitation | When `SMTP_HOST` + `SMTP_FROM` are set, sends reset link to the user's registered email. **`reset_token` still returned only when `DEBUG` or `TESTING`**. |
 
 ### A11 — `POST /api/auth/reset-password`
 
@@ -402,7 +402,7 @@ For each row above, automated tests must assert:
 1. Status code for happy path and primary error paths.
 2. JSON key names and nesting (not just Pydantic model names).
 3. Array vs object top-level type.
-4. Nullable fields present vs omitted (document per endpoint; user `to_dict` omits synthetic email).
+4. Nullable fields present vs omitted (document per endpoint).
 5. Date format `YYYY-MM-DD` strings.
 6. `401` triggers frontend logout path (header format).
 

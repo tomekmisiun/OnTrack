@@ -207,8 +207,8 @@ type LoginPanelProps = {
   mode: AuthMode;
   setAuthMode: (mode: AuthMode) => void;
   error: string;
-  username: string;
-  setUsername: (value: string) => void;
+  email: string;
+  setEmail: (value: string) => void;
   password: string;
   setPassword: (value: string) => void;
   busy: boolean;
@@ -223,8 +223,8 @@ function LoginPanel({
   mode,
   setAuthMode,
   error,
-  username,
-  setUsername,
+  email,
+  setEmail,
   password,
   setPassword,
   busy,
@@ -283,19 +283,19 @@ function LoginPanel({
 
         <form className="login-form" onSubmit={handleCredentials}>
           <div className="login-field">
-            <label className="login-label" htmlFor="login-username">
-              {tString(t, "login_username_lbl")}
+            <label className="login-label" htmlFor="login-email">
+              {tString(t, "login_email_lbl")}
             </label>
             <input
-              id="login-username"
-              type="text"
+              id="login-email"
+              type="email"
               className="login-input"
-              autoComplete="username"
+              autoComplete="email"
               required
-              maxLength={80}
-              placeholder={tString(t, "login_username_ph")}
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              maxLength={255}
+              placeholder={tString(t, "login_email_ph")}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="login-field">
@@ -450,7 +450,7 @@ export function LoginScreen() {
   const [flow, setFlow] = useState<PanelFlow>("auth");
   const [resetToken, setResetToken] = useState("");
   const [mode, setMode] = useState<AuthMode>("login");
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
 
@@ -487,10 +487,10 @@ export function LoginScreen() {
     setPendingLang(uiLang);
     try {
       if (mode === "login") {
-        await loginWithPassword(username.trim(), password);
+        await loginWithPassword(email.trim(), password);
       } else {
         await registerAccount({
-          username: username.trim(),
+          email: email.trim(),
           password,
           lang: uiLang,
         });
@@ -531,7 +531,7 @@ export function LoginScreen() {
     setInfo("");
     setBusy(true);
     try {
-      await forgotPassword(username.trim());
+      await forgotPassword(email.trim());
       setInfo(tString(t, "login_forgot_success"));
     } catch (err) {
       const msg = isAuthApiError(err) ? err.message : null;
@@ -686,8 +686,8 @@ export function LoginScreen() {
               mode={mode}
               setAuthMode={setAuthMode}
               error={error}
-              username={username}
-              setUsername={setUsername}
+              email={email}
+              setEmail={setEmail}
               password={password}
               setPassword={setPassword}
               busy={busy}
@@ -712,19 +712,19 @@ export function LoginScreen() {
             >
               <form className="login-form" onSubmit={handleForgot}>
                 <div className="login-field">
-                  <label className="login-label" htmlFor="forgot-username">
-                    {tString(t, "login_username_lbl")}
+                  <label className="login-label" htmlFor="forgot-email">
+                    {tString(t, "login_email_lbl")}
                   </label>
                   <input
-                    id="forgot-username"
-                    type="text"
+                    id="forgot-email"
+                    type="email"
                     className="login-input"
-                    autoComplete="username"
+                    autoComplete="email"
                     required
-                    maxLength={80}
-                    placeholder={tString(t, "login_username_ph")}
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    maxLength={255}
+                    placeholder={tString(t, "login_email_ph")}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <button type="submit" className="login-submit" disabled={busy}>

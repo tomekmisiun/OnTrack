@@ -62,20 +62,24 @@ async function sessionRequest<T>(
   return parsed as T;
 }
 
-export function login(username: string, password: string): Promise<TokenResponse> {
+export function login(email: string, password: string): Promise<TokenResponse> {
   if (isBffEnabled()) {
     return sessionRequest<TokenResponse>("/api/auth/session", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "login", username, password }),
+      body: JSON.stringify({ action: "login", email, password }),
     }).then(() => ({ token: "" }));
   }
 
-  const body: LoginRequest = { username, password };
+  const body: LoginRequest = { email, password };
   return publicClient.post<TokenResponse>("/api/auth/login", body);
 }
 
-export function register(data: RegisterRequest): Promise<TokenResponse> {
+export function register(data: {
+  email: string;
+  password: string;
+  lang: string;
+}): Promise<TokenResponse> {
   if (isBffEnabled()) {
     return sessionRequest<TokenResponse>("/api/auth/session", {
       method: "POST",
@@ -84,7 +88,8 @@ export function register(data: RegisterRequest): Promise<TokenResponse> {
     }).then(() => ({ token: "" }));
   }
 
-  return publicClient.post<TokenResponse>("/api/auth/register", data);
+  const body: RegisterRequest = data;
+  return publicClient.post<TokenResponse>("/api/auth/register", body);
 }
 
 export function exchangeCode(code: string): Promise<TokenResponse> {
@@ -146,9 +151,9 @@ export function deleteAccountApi() {
   return createAuthedApiClient().delete<{ message: string }>("/api/auth/me");
 }
 
-export function forgotPassword(username: string): Promise<{ message: string }> {
+export function forgotPassword(email: string): Promise<{ message: string }> {
   return publicClient.post<{ message: string }>("/api/auth/forgot-password", {
-    username,
+    email,
   });
 }
 

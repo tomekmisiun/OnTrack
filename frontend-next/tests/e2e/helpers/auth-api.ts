@@ -2,18 +2,18 @@ import { expect, type APIRequestContext, type Page } from "@playwright/test";
 
 const apiUrl = process.env.E2E_API_URL ?? "http://127.0.0.1:5001";
 
-export function uniqueUsername(): string {
-  return `e2e_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+export function uniqueEmail(): string {
+  return `e2e_${Date.now()}_${Math.random().toString(36).slice(2, 8)}@example.com`;
 }
 
 export async function registerUser(
   request: APIRequestContext,
-  username: string,
+  email: string,
   password: string,
   lang = "pl",
 ): Promise<void> {
   const res = await request.post(`${apiUrl}/api/auth/register`, {
-    data: { username, password, lang },
+    data: { email, password, lang },
   });
   if (!res.ok()) {
     throw new Error(`register failed: ${res.status()} ${await res.text()}`);
@@ -22,11 +22,11 @@ export async function registerUser(
 
 export async function loginUser(
   request: APIRequestContext,
-  username: string,
+  email: string,
   password: string,
 ): Promise<string> {
   const res = await request.post(`${apiUrl}/api/auth/login`, {
-    data: { username, password },
+    data: { email, password },
   });
   if (!res.ok()) {
     throw new Error(`login failed: ${res.status()} ${await res.text()}`);

@@ -852,10 +852,10 @@ export interface components {
         /** ForgotPasswordRequest */
         ForgotPasswordRequest: {
             /**
-             * Username
+             * Email
              * @default
              */
-            username: string;
+            email: string;
         };
         /** HTTPValidationError */
         HTTPValidationError: {
@@ -873,10 +873,10 @@ export interface components {
         /** LoginRequest */
         LoginRequest: {
             /**
-             * Username
+             * Email
              * @default
              */
-            username: string;
+            email: string;
             /**
              * Password
              * @default
@@ -1032,10 +1032,10 @@ export interface components {
         /** RegisterRequest */
         RegisterRequest: {
             /**
-             * Username
+             * Email
              * @default
              */
-            username: string;
+            email: string;
             /**
              * Password
              * @default

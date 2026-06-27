@@ -56,10 +56,10 @@ def test_user_a_cannot_use_user_b_product_in_recipe(client, other_auth_headers, 
 def test_register_does_not_copy_seed_products_per_user(client, db_session, global_catalog):
     reg = client.post(
         "/api/auth/register",
-        json={"username": "noseed1", "password": "secret123", "lang": "pl"},
+        json={"email": "noseed1@example.com", "password": "secret123", "lang": "pl"},
     )
     assert reg.status_code == 201
-    user = db_session.query(User).filter_by(username="noseed1").first()
+    user = db_session.query(User).filter(User.email.ilike("noseed1@example.com")).first()
     assert user is not None
     private_count = db_session.query(Product).filter_by(user_id=user.id).count()
     assert private_count == 0
@@ -68,7 +68,7 @@ def test_register_does_not_copy_seed_products_per_user(client, db_session, globa
 def test_register_sees_global_catalog_via_api(client, db_session, global_catalog):
     reg = client.post(
         "/api/auth/register",
-        json={"username": "globalview1", "password": "secret123", "lang": "pl"},
+        json={"email": "globalview1@example.com", "password": "secret123", "lang": "pl"},
     )
     assert reg.status_code == 201
     token = reg.json()["token"]
@@ -153,10 +153,10 @@ def test_product_list_supports_pagination(client, auth_headers, product, global_
 def test_register_does_not_enqueue_catalog_seed_job(client, db_session, global_catalog):
     reg = client.post(
         "/api/auth/register",
-        json={"username": "noworker1", "password": "secret123", "lang": "pl"},
+        json={"email": "noworker1@example.com", "password": "secret123", "lang": "pl"},
     )
     assert reg.status_code == 201
-    user = db_session.query(User).filter_by(username="noworker1").first()
+    user = db_session.query(User).filter(User.email.ilike("noworker1@example.com")).first()
     assert db_session.query(Product).filter_by(user_id=user.id).count() == 0
     assert db_session.query(Recipe).filter_by(user_id=user.id).count() == 0
 
@@ -164,10 +164,10 @@ def test_register_does_not_enqueue_catalog_seed_job(client, db_session, global_c
 def test_new_user_sees_global_recipes_without_private_copies(client, db_session, global_catalog):
     reg = client.post(
         "/api/auth/register",
-        json={"username": "recipes1", "password": "secret123", "lang": "pl"},
+        json={"email": "recipes1@example.com", "password": "secret123", "lang": "pl"},
     )
     assert reg.status_code == 201
-    user = db_session.query(User).filter_by(username="recipes1").first()
+    user = db_session.query(User).filter(User.email.ilike("recipes1@example.com")).first()
     assert db_session.query(Recipe).filter_by(user_id=user.id).count() == 0
     token = reg.json()["token"]
     res = client.get("/api/recipes/", headers={"Authorization": f"Bearer {token}"})
