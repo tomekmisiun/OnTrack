@@ -398,11 +398,17 @@ const DraggableRecipe = memo(function DraggableRecipe({
   const isPer100g = recipe.total_kcal === 0 && recipe.kcal_100g != null;
   const hasKcal = displayKcal != null;
 
+  const macroLabels =
+    recipe.lang === "en"
+      ? [["P", displayProtein], ["F", displayFat], ["C", displayCarbs]]
+      : [["B", displayProtein], ["T", displayFat], ["W", displayCarbs]];
+
   return (
     <div
       ref={setNodeRef}
       {...listeners}
       {...attributes}
+      className={`recipe-thumb${isDragging ? " recipe-thumb--dragging" : ""}`}
       onPointerDown={(e) => {
         pointerStart.current = { x: e.clientX, y: e.clientY };
         listeners?.onPointerDown?.(e);
@@ -413,21 +419,6 @@ const DraggableRecipe = memo(function DraggableRecipe({
         const dy = e.clientY - pointerStart.current.y;
         if (Math.sqrt(dx * dx + dy * dy) < 8) onPreview(recipe);
       }}
-      style={{
-        flexShrink: 0,
-        width: 128,
-        height: 148,
-        background: "linear-gradient(135deg, #0d9488, #0f766e)",
-        borderRadius: 12,
-        cursor: "grab",
-        opacity: isDragging ? 0.3 : 1,
-        userSelect: "none",
-        touchAction: "none",
-        display: "flex",
-        flexDirection: "column",
-        overflow: "hidden",
-        position: "relative",
-      }}
     >
       {recipe.image_url && (
         // eslint-disable-next-line @next/next/no-img-element -- external recipe URLs
@@ -437,71 +428,54 @@ const DraggableRecipe = memo(function DraggableRecipe({
           loading="lazy"
           decoding="async"
           draggable={false}
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            borderRadius: 12,
-            pointerEvents: "none",
-          }}
+          className="recipe-thumb__image"
         />
       )}
-      {recipe.image_url && (
-        <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.45)", borderRadius: 12 }} />
-      )}
-      <div style={{ flex: 1, padding: "8px 11px 6px", position: "relative", zIndex: 1 }}>
-        <div style={{ display: "flex", justifyContent: "space-between", gap: 4 }}>
-          <div style={{ fontWeight: 700, fontSize: 11.5, color: "#fff", flex: 1, overflow: "hidden" }}>
-            {recipe.name}
-          </div>
-          <button
-            type="button"
-            onPointerDown={(e) => e.stopPropagation()}
-            onClick={(e) => {
-              e.stopPropagation();
-              onToggleFavorite(recipe.id);
-            }}
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              color: recipe.is_favorite ? "#facc15" : "transparent",
-              WebkitTextStroke: recipe.is_favorite ? "0" : "1.2px rgba(255,255,255,0.5)",
-            }}
-          >
-            ★
-          </button>
+      {recipe.image_url && <div className="recipe-thumb__overlay" aria-hidden />}
+      <div className="recipe-thumb__header">
+        <div className="recipe-thumb__name">{recipe.name}</div>
+        <button
+          type="button"
+          className={`recipe-thumb__favorite${recipe.is_favorite ? " recipe-thumb__favorite--active" : " recipe-thumb__favorite--inactive"}`}
+          onPointerDown={(e) => e.stopPropagation()}
+          onClick={(e) => {
+            e.stopPropagation();
+            onToggleFavorite(recipe.id);
+          }}
+        >
+          ★
+        </button>
+      </div>
+      <div className="recipe-thumb__stats">
+        <div className="recipe-thumb__kcal">
+          {hasKcal ? (
+            <>
+              {Math.round(displayKcal!)}
+              <span className="recipe-thumb__kcal-unit">
+                {" "}
+                kcal{isPer100g ? "/100g" : ""}
+              </span>
+            </>
+          ) : (
+            <span className="recipe-thumb__kcal-unit">— kcal</span>
+          )}
+        </div>
+        <div className="recipe-thumb__macros">
+          {macroLabels.map(([lbl, val]) => (
+            <div key={lbl} className="recipe-thumb__macro">
+              <div className="recipe-thumb__macro-label">{lbl}</div>
+              <div className="recipe-thumb__macro-value">
+                {hasKcal ? `${Math.round(Number(val ?? 0))}g` : "—"}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-      <div style={{ padding: "0 8px 7px", position: "relative", zIndex: 1 }}>
-        {hasKcal ? (
-          <>
-            <div style={{ fontSize: 18, fontWeight: 800, color: "#fff" }}>
-              {Math.round(displayKcal!)}
-              <span style={{ fontSize: 9 }}> kcal{isPer100g ? "/100g" : ""}</span>
-            </div>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 3 }}>
-              {(recipe.lang === "en"
-                ? [["P", displayProtein], ["F", displayFat], ["C", displayCarbs]]
-                : [["B", displayProtein], ["T", displayFat], ["W", displayCarbs]]
-              ).map(([lbl, val]) => (
-                <div key={lbl} style={{ background: "rgba(0,0,0,0.45)", borderRadius: 5, padding: "3px 0", textAlign: "center" }}>
-                  <div style={{ fontSize: 8, fontWeight: 700, color: "rgba(255,255,255,0.85)" }}>{lbl}</div>
-                  <div style={{ fontSize: 10, fontWeight: 700, color: "#fff" }}>{Math.round(Number(val ?? 0))}g</div>
-                </div>
-              ))}
-            </div>
-          </>
-        ) : (
-          <div style={{ height: 52 }} />
-        )}
-      </div>
-      <div style={{ borderTop: "1px solid rgba(255,255,255,0.2)", background: "rgba(0,0,0,0.35)", padding: "4px 8px", position: "relative", zIndex: 1 }}>
-        <span style={{ fontSize: 8.5, color: "rgba(255,255,255,0.5)" }}>{tString(t, "est_cost")}</span>
-        <span style={{ fontSize: 10.5, fontWeight: 700, color: "rgba(255,255,255,0.9)", float: "right" }}>
-          {tString(t, "currency")}{recipe.total_cost.toFixed(2)}
+      <div className="recipe-thumb__cost">
+        <span className="recipe-thumb__cost-label">{tString(t, "est_cost")}</span>
+        <span className="recipe-thumb__cost-value">
+          {tString(t, "currency")}
+          {recipe.total_cost.toFixed(2)}
         </span>
       </div>
     </div>
@@ -1344,9 +1318,21 @@ export function CalendarScreen() {
                   <span className="carousel-header-count">{tFormatN(t, "recipes_count", recipes.length)}</span>
                 )}
               </button>
-              <button type="button" className="carousel-header-chevron" onClick={() => setCarouselOpen((o) => !o)}>
-                <Icon icon="heroicons:chevron-down" style={{ width: 20, height: 20, transform: carouselOpen ? "rotate(180deg)" : "rotate(0deg)", color: "#0d9488" }} />
-              </button>
+              <div className="carousel-header-actions">
+                <button
+                  type="button"
+                  className="pill-help-btn carousel-header-help"
+                  onClick={() => setCalendarHelpOpen(true)}
+                  aria-label={tString(t, "how_to_title")}
+                  title={tString(t, "how_to_title")}
+                >
+                  <Icon icon="heroicons:light-bulb" width={15} />
+                  <span>{tString(t, "import_help_btn")}</span>
+                </button>
+                <button type="button" className="carousel-header-chevron" onClick={() => setCarouselOpen((o) => !o)}>
+                  <Icon icon="heroicons:chevron-down" style={{ width: 20, height: 20, transform: carouselOpen ? "rotate(180deg)" : "rotate(0deg)", color: "#0d9488" }} />
+                </button>
+              </div>
             </div>
             {carouselOpen && (
               <div className="carousel-body">
@@ -1477,18 +1463,6 @@ export function CalendarScreen() {
             );
           })}
 
-          <div className="calendar-help-footer">
-            <button
-              type="button"
-              className="pill-help-btn"
-              onClick={() => setCalendarHelpOpen(true)}
-              aria-label={tString(t, "how_to_title")}
-              title={tString(t, "how_to_title")}
-            >
-              <Icon icon="heroicons:light-bulb" width={15} />
-              <span>{tString(t, "import_help_btn")}</span>
-            </button>
-          </div>
         </div>
 
         <CalendarHelpModal open={calendarHelpOpen} onClose={() => setCalendarHelpOpen(false)} t={t} />
