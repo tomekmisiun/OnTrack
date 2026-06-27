@@ -620,7 +620,6 @@ export function useCalendarPage() {
       month,
       showError,
       t,
-      effectiveTargetMemberIds,
       requireTargetMembers,
       year,
     ],
