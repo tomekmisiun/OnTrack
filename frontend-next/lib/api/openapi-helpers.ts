@@ -17,9 +17,4 @@ export type OperationResponse<Op extends keyof operations> =
       : never
     : never;
 
-export type HealthResponse = OperationResponse<"health_health_get">;
-export type MessageResponse = ApiSchema<"MessageResponse">;
 export type TokenResponse = ApiSchema<"TokenResponse">;
-
-/** GET /api/auth/me — OpenAPI body is `unknown` until FastAPI adds response_model. */
-export type MeResponse = OperationResponse<"me_api_auth_me_get">;
