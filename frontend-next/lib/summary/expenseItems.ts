@@ -58,13 +58,13 @@ export function resolveSugarPrices(productList: Product[] = []) {
     cukierStored !== null
       ? parseFloat(cukierStored)
       : cukierProduct
-        ? cukierProduct.price * 10
+        ? (cukierProduct.price ?? 0) * 10
         : 3.5;
   const effSlodzikPrice =
     slodzikStored !== null
       ? parseFloat(slodzikStored)
       : slodzikProduct
-        ? slodzikProduct.price * 10
+        ? (slodzikProduct.price ?? 0) * 10
         : 15;
   return { effCukierPrice, effSlodzikPrice };
 }

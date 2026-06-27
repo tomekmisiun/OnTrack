@@ -57,12 +57,10 @@ def test_import_catalog_idempotent(db_session):
 
 
 def test_import_catalog_unique_system_keys(db_session):
-    import_catalog(db_session, markets=("PL",))
+    import_catalog(db_session)
     keys = [
         p.catalog_key
-        for p in db_session.query(Product)
-        .filter_by(source="system", market_code="PL")
-        .all()
+        for p in db_session.query(Product).filter_by(source="system").all()
         if p.catalog_key
     ]
     assert len(keys) == len(set(keys))
@@ -77,7 +75,7 @@ def test_expand_products_uses_market_not_ui():
     assert pl[0]["name"] != en[0]["name"] or len(pl) != len(en)
 
 
-def test_ui_locale_en_market_pl_shows_pl_catalog(client, db_session, global_catalog):
+def test_ui_locale_en_market_pl_shows_same_catalog_count(client, db_session, global_catalog):
     from app.core.security import create_access_token
 
     user = create_user(db_session, "en-ui-pl@example.com", lang="en", market_code="PL")
@@ -87,7 +85,7 @@ def test_ui_locale_en_market_pl_shows_pl_catalog(client, db_session, global_cata
     assert res.json()["total"] >= 400
 
 
-def test_ui_locale_pl_market_gb_shows_gb_catalog(client, db_session, global_catalog):
+def test_ui_locale_pl_market_gb_shows_same_catalog_count(client, db_session, global_catalog):
     user = create_user(db_session, "pl-ui-gb@example.com", lang="pl", market_code="GB")
     from app.core.security import create_access_token
 
@@ -95,8 +93,7 @@ def test_ui_locale_pl_market_gb_shows_gb_catalog(client, db_session, global_cata
     res = client.get("/api/products/", headers=headers, params={"limit": 5})
     assert res.status_code == 200
     total = res.json()["total"]
-    assert total >= 1
-    assert total < 446
+    assert total >= 400
 
 
 def test_private_product_not_in_global_catalog(client, auth_headers, product, db_session, global_catalog):
@@ -133,7 +130,7 @@ def test_import_catalog_transaction_rolls_back_on_error(db_session, monkeypatch)
     monkeypatch.setattr(db_session, "rollback", rollback)
 
     with pytest.raises(RuntimeError):
-        import_mod.import_catalog(db_session, markets=("PL",))
+        import_mod.import_catalog(db_session)
     assert calls["rollback"] == 1
 
 

@@ -109,7 +109,7 @@
 
 | Field | Detail |
 |-------|--------|
-| Success | `200`, user object: `{ "id": int, "lang": "pl"\|"en", "username"?: string, "email"?: string }` — email omitted for `@users.ontrack.local` |
+| Success | `200`, user object: `{ "id": int, "lang": "pl"\|"en", "ui_locale": "pl"\|"en", "market_code": "PL"\|"GB", "username"?: string, "email"?: string }` — `lang` mirrors `ui_locale` (legacy alias); email omitted for `@users.ontrack.local` |
 | Errors | `401` (JWT loaders); `404` `{ "error": "User not found" }` |
 | Side effects | Catalog seed sync + background seed thread (`auth.me`) |
 | Compatibility risk | **MEDIUM** — shape differs from template `UserRead` |
@@ -121,6 +121,16 @@
 | Request body | `{ "lang": "pl" \| "en" }` |
 | Success | `200`, same user shape as `/me` |
 | Errors | `400` `{ "error": "Invalid language" }`; `404` user not found |
+| Compatibility risk | **LOW** |
+
+### A09 — `PATCH /api/auth/market`
+
+| Field | Detail |
+|-------|--------|
+| Request body | `{ "market_code": "PL" \| "GB" }` |
+| Success | `200`, same user shape as `/me` |
+| Errors | `400` `{ "error": "Invalid market" }`; `404` user not found |
+| Behavior | Updates product/recipe **prices** resolution (`market_code`); UI labels still follow `ui_locale` |
 | Compatibility risk | **LOW** |
 
 ### A06 — `DELETE /api/auth/me`
@@ -204,8 +214,9 @@
 ### P01 — `GET /api/products/`
 
 | Success | `200`, **array** of product objects |
-| Product shape | `{ id, name, package_weight, price, unit, kcal, protein, fat, carbs, sold_by_weight, lang }` — macros nullable |
-| Filter | User's `lang`; excludes ingredient-line placeholders (`products._is_catalog_product`) |
+| Product shape | `{ id, catalog_key?, name, package_weight, price, currency, has_price, unit, kcal, protein, fat, carbs, sold_by_weight, source, is_system, is_editable, base_product_id? }` — macros nullable; `price`/`package_weight` null when no market price row |
+| Resolution | Names from `product_translations` by user's **`ui_locale`**; prices from `product_market_prices` by user's **`market_code`** |
+| Filter | User-owned + system catalog; excludes ingredient-line placeholders (`products._is_catalog_product`) |
 
 ### P02 — `POST /api/products/`
 
@@ -232,18 +243,19 @@
 ### R01 — `GET /api/recipes/`
 
 | Success | `200`, **array** of `to_dict_summary()` objects |
-| Shape | `{ id, name, notes, is_favorite, ingredients: [], total_cost, total_kcal, total_protein, total_fat, total_carbs, kcal_100g?, protein_100g?, fat_100g?, carbs_100g?, image_url, source_url, category, servings, lang }` |
+| Shape | `{ id, catalog_key?, name, notes, is_favorite, ingredients: [], total_cost, total_kcal, total_protein, total_fat, total_carbs, kcal_100g?, protein_100g?, fat_100g?, carbs_100g?, image_url, source_url, category, servings }` |
+| Resolution | Names/notes from `recipe_translations` by **`ui_locale`**; costs from ingredient prices for user's **`market_code`** |
 
 ### R02 — `GET /api/recipes/{id}`
 
 | Success | `200`, full `to_dict()` with populated `ingredients[]` |
-| Ingredient shape | `{ id, product_id, product_name, package_weight, unit, kcal, protein, fat, carbs, weight, cost }` |
+| Ingredient shape | `{ id, product_id, product_name, package_weight, unit, kcal, protein, fat, carbs, weight, cost, currency, has_price }` |
 
 ### R03 — `POST /api/recipes/`
 
 | Request | `{ name, notes?, category?, servings, ingredients: [{ product_id, weight }] }` — **create divides weight by servings** |
 | Success | `201`, full recipe |
-| Note | Replaces existing recipe with same name+lang |
+| Note | Replaces existing user recipe with same `name` (per user) |
 
 ### R04 — `PUT /api/recipes/{id}`
 

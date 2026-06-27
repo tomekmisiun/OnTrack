@@ -10,6 +10,8 @@ import {
   isTextFile,
   useProductsPage,
 } from "@/hooks/useProductsPage";
+import { useAuth } from "@/contexts/AuthContext";
+import { currencyForMarket, currencyLabel } from "@/lib/format/currency";
 import { displayPrice } from "@/lib/products/pricing";
 import { tFormat, tFormat2, tFormatN, tString } from "@/lib/i18n/translate";
 import type { ImportItem, Product } from "@/types/product";
@@ -43,6 +45,9 @@ function MacroDisplay({ p }: { p: Product }) {
 
 export function ProductsScreen() {
   const page = useProductsPage();
+  const { user } = useAuth();
+  const marketCurrency = currencyForMarket(user?.market_code);
+  const priceSuffix = currencyLabel(marketCurrency);
   const {
     t,
     lang,
@@ -491,8 +496,8 @@ export function ProductsScreen() {
                           }}
                         >
                           {sbw
-                            ? `${tString(t, "currency")} / kg`
-                            : `${tString(t, "currency")} ${tString(t, "price_per_pkg_suffix")}`}
+                            ? `${priceSuffix} / kg`
+                            : `${priceSuffix} ${tString(t, "price_per_pkg_suffix")}`}
                         </span>
                       </div>
                       {isNew && (
@@ -806,8 +811,8 @@ export function ProductsScreen() {
                               ? `${p.package_weight} ${p.unit || "g"}`
                               : "-"}
                         </td>
-                        <td className={p.price > 0 ? "cell-muted" : "cell-empty"}>
-                          {displayPrice(p, tString(t, "currency"))}
+                        <td className={(p.price ?? 0) > 0 ? "cell-muted" : "cell-empty"}>
+                          {displayPrice(p, priceSuffix)}
                         </td>
                         <td onClick={(e) => e.stopPropagation()}>
                           <div className="row-actions">

@@ -94,39 +94,61 @@ def test_change_market_rejects_invalid(client, auth_headers):
     assert res.status_code == 400
 
 
-def test_product_list_uses_market_not_ui_locale(
+def test_product_list_shows_all_user_products_regardless_of_market(
     client, db_session, auth_headers, user, global_catalog
 ):
     user.ui_locale = "en"
     user.market_code = "PL"
     db_session.commit()
 
+    from app.models.product import Product
+    from app.models.product_market_price import ProductMarketPrice
+    from app.domain.product_normalize import normalize_product_name
+
     pl_only = Product(
         user_id=user.id,
         source="user",
+        user_name="Tylko PL",
         normalized_name=normalize_product_name("Tylko PL"),
-        name="Tylko PL",
-        package_weight=100,
-        price=1.0,
-        unit="g",
-        lang="pl",
-        market_code="PL",
+        kcal=0,
+        protein=0,
+        fat=0,
+        carbs=0,
     )
-    en_only = Product(
+    pl_only.market_prices.append(
+        ProductMarketPrice(
+            market_code="PL",
+            amount=1.0,
+            currency="PLN",
+            package_weight=100,
+            unit="g",
+            sold_by_weight=False,
+        )
+    )
+    gb_only = Product(
         user_id=user.id,
         source="user",
+        user_name="GB only item",
         normalized_name=normalize_product_name("GB only item"),
-        name="GB only item",
-        package_weight=100,
-        price=1.0,
-        unit="g",
-        lang="en",
-        market_code="GB",
+        kcal=0,
+        protein=0,
+        fat=0,
+        carbs=0,
     )
-    db_session.add_all([pl_only, en_only])
+    gb_only.market_prices.append(
+        ProductMarketPrice(
+            market_code="GB",
+            amount=1.0,
+            currency="GBP",
+            package_weight=100,
+            unit="g",
+            sold_by_weight=False,
+        )
+    )
+    db_session.add_all([pl_only, gb_only])
     db_session.commit()
     db_session.refresh(pl_only)
-    db_session.refresh(en_only)
+    db_session.refresh(gb_only)
 
     res = client.get(
         "/api/products/",
@@ -136,7 +158,14 @@ def test_product_list_uses_market_not_ui_locale(
     assert res.status_code == 200
     ids = {p["id"] for p in _product_items(res.json())}
     assert pl_only.id in ids
-    assert en_only.id not in ids
+    # GB-priced product is still visible; search by its name separately
+    res2 = client.get(
+        "/api/products/",
+        headers=auth_headers,
+        params={"limit": 100, "q": "GB only"},
+    )
+    ids2 = {p["id"] for p in _product_items(res2.json())}
+    assert gb_only.id in ids2
 
 
 def test_register_does_not_copy_global_catalog(client, db_session, global_catalog):

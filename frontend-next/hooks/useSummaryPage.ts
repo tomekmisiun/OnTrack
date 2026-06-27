@@ -91,7 +91,7 @@ export function useSummaryPage() {
         setWeekLoading(false);
         setMonthLoading(false);
       });
-  }, [loadMidsKey, week.start, week.end, month.start, month.end, user?.market_code, showError, t, targetMemberIds]);
+  }, [loadMidsKey, week.start, week.end, month.start, month.end, user?.market_code, user?.ui_locale, showError, t, targetMemberIds]);
 
   const drinksDays = useMemo(() => {
     if (activePeriod === "week") return 7;

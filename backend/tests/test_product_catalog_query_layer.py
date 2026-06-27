@@ -1,5 +1,7 @@
 from app.domain.product_normalize import normalize_product_name
 from app.models.product import Product
+from app.models.product_market_price import ProductMarketPrice
+from app.models.product_translation import ProductTranslation
 from app.scripts.import_catalog import import_catalog
 
 
@@ -7,20 +9,36 @@ def _items(body: dict) -> list:
     return body["items"]
 
 
-def test_list_includes_system_and_own_products(client, auth_headers, user, db_session):
-    import_catalog(db_session)
-    own = Product(
+def _add_user_product(db_session, user, name: str, *, market_code: str = "PL", price: float = 5.0):
+    product = Product(
         user_id=user.id,
         source="user",
-        normalized_name=normalize_product_name("Moj prywatny produkt"),
-        name="Moj prywatny produkt",
-        package_weight=250,
-        price=5.0,
-        unit="g",
-        lang="pl",
+        user_name=name,
+        normalized_name=normalize_product_name(name),
+        kcal=0,
+        protein=0,
+        fat=0,
+        carbs=0,
     )
-    db_session.add(own)
+    product.market_prices.append(
+        ProductMarketPrice(
+            market_code=market_code,
+            amount=price,
+            currency="PLN" if market_code == "PL" else "GBP",
+            package_weight=250,
+            unit="g",
+            sold_by_weight=False,
+        )
+    )
+    db_session.add(product)
     db_session.commit()
+    db_session.refresh(product)
+    return product
+
+
+def test_list_includes_system_and_own_products(client, auth_headers, user, db_session):
+    import_catalog(db_session)
+    own = _add_user_product(db_session, user, "Moj prywatny produkt")
 
     res = client.get(
         "/api/products/",
@@ -30,11 +48,13 @@ def test_list_includes_system_and_own_products(client, auth_headers, user, db_se
     assert res.status_code == 200
     body = res.json()
     items = _items(body)
-    assert body["total"] >= 2
+    assert body["total"] >= 1
     sources = {p["name"]: p for p in items}
     assert "Moj prywatny produkt" in sources
-    assert any(p["is_system"] for p in items)
     assert sources["Moj prywatny produkt"]["is_editable"] is True
+
+    all_res = client.get("/api/products/", headers=auth_headers, params={"limit": 5})
+    assert any(p["is_system"] for p in _items(all_res.json()))
 
 
 def test_list_search_filters_by_normalized_name(client, auth_headers, db_session):
@@ -66,27 +86,38 @@ def test_list_pagination(client, auth_headers, db_session):
 
 
 def test_override_hides_system_product(client, auth_headers, user, db_session):
-    report = import_catalog(db_session, markets=("PL",))
+    report = import_catalog(db_session)
     assert report.products_created >= 1
     system = (
         db_session.query(Product)
-        .filter_by(source="system", market_code="PL")
+        .filter_by(source="system")
         .filter(Product.user_id.is_(None))
         .first()
     )
     assert system is not None
+    pl_name = next(t.name for t in system.translations if t.locale == "pl")
 
     override = Product(
         user_id=user.id,
         source="user",
         base_product_id=system.id,
+        user_name=f"Override {pl_name}",
         normalized_name=system.normalized_name,
-        name=system.name,
-        package_weight=system.package_weight,
-        price=9.99,
-        unit=system.unit,
-        lang="pl",
-        market_code="PL",
+        kcal=system.kcal,
+        protein=system.protein,
+        fat=system.fat,
+        carbs=system.carbs,
+    )
+    pl_price = next(p for p in system.market_prices if p.market_code == "PL")
+    override.market_prices.append(
+        ProductMarketPrice(
+            market_code="PL",
+            amount=9.99,
+            currency="PLN",
+            package_weight=pl_price.package_weight,
+            unit=pl_price.unit,
+            sold_by_weight=pl_price.sold_by_weight,
+        )
     )
     db_session.add(override)
     db_session.commit()
@@ -94,7 +125,7 @@ def test_override_hides_system_product(client, auth_headers, user, db_session):
     res = client.get(
         "/api/products/",
         headers=auth_headers,
-        params={"limit": 100, "q": system.name[:6]},
+        params={"limit": 100, "q": pl_name[:6]},
     )
     ids = {p["id"] for p in _items(res.json())}
     assert system.id not in ids
@@ -105,7 +136,7 @@ def test_recipe_can_use_system_product(client, auth_headers, db_session):
     import_catalog(db_session)
     system = (
         db_session.query(Product)
-        .filter_by(source="system", market_code="PL")
+        .filter_by(source="system")
         .filter(Product.user_id.is_(None))
         .first()
     )
@@ -157,3 +188,5 @@ def test_system_product_presenter_flags(client, auth_headers, db_session):
     assert row["source"] == "system"
     assert row["is_editable"] is False
     assert row["base_product_id"] is None
+    assert row["catalog_key"]
+    assert row["currency"] in ("PLN", "GBP")

@@ -9,6 +9,8 @@ from app.models.recipe import Recipe, RecipeIngredient
 from app.services.meal_plan_presenter import meal_to_dict
 from app.services.recipe_service import RecipeServiceError as RecipeLookupError
 from app.services.recipe_service import load_visible_recipe
+from app.services.catalog_resolver import resolve_product
+from app.services.user_preferences import market_code_for_user, ui_locale_for_user
 
 
 class MealPlanServiceError(Exception):
@@ -26,9 +28,15 @@ def _meals_query(session: Session):
     )
 
 
-def _serialize_meal(session: Session, meal_id: int) -> dict | None:
+def _serialize_meal(session: Session, meal_id: int, user_id: int) -> dict | None:
+    locale = ui_locale_for_user(session, user_id)
+    market_code = market_code_for_user(session, user_id)
     meal = _meals_query(session).filter(MealPlan.id == meal_id).first()
-    return meal_to_dict(meal, recipe_summary=True) if meal else None
+    return (
+        meal_to_dict(meal, locale=locale, market_code=market_code, recipe_summary=True)
+        if meal
+        else None
+    )
 
 
 def resolve_member_id(session: Session, user_id: int, member_id: int | None = None) -> int | None:
@@ -110,7 +118,7 @@ def get_day(
         .order_by(MealPlan.position)
         .all()
     )
-    return [meal_to_dict(m, recipe_summary=True) for m in meals]
+    return [meal_to_dict(m, locale=ui_locale_for_user(session, user_id), market_code=market_code_for_user(session, user_id), recipe_summary=True) for m in meals]
 
 
 def get_range(
@@ -139,7 +147,14 @@ def get_range(
     result: dict[str, list[dict]] = {}
     for meal in meals:
         key = meal.date.isoformat()
-        result.setdefault(key, []).append(meal_to_dict(meal, recipe_summary=True))
+        result.setdefault(key, []).append(
+            meal_to_dict(
+                meal,
+                locale=ui_locale_for_user(session, user_id),
+                market_code=market_code_for_user(session, user_id),
+                recipe_summary=True,
+            )
+        )
     return result
 
 
@@ -172,7 +187,7 @@ def add_meal(
     if existing:
         existing.recipe_id = recipe_id
         session.commit()
-        data = _serialize_meal(session, existing.id)
+        data = _serialize_meal(session, existing.id, user_id)
         return data, 200
 
     meal = MealPlan(
@@ -185,7 +200,7 @@ def add_meal(
     session.add(meal)
     session.commit()
     session.refresh(meal)
-    data = _serialize_meal(session, meal.id)
+    data = _serialize_meal(session, meal.id, user_id)
     return data, 201
 
 
@@ -284,18 +299,21 @@ def get_summary(
         .all()
     )
 
+    locale = ui_locale_for_user(session, user_id)
+    market_code = market_code_for_user(session, user_id)
     products: dict[int, dict] = {}
     for meal in meals:
         for ingredient in meal.recipe.ingredients:
             pid = ingredient.product_id
             if pid not in products:
                 prod = ingredient.product
+                view = resolve_product(prod, locale=locale, market_code=market_code)
                 products[pid] = {
-                    "name": prod.name,
-                    "package_weight": prod.package_weight,
-                    "unit": prod.unit or "g",
-                    "price": prod.price or 0,
-                    "sold_by_weight": bool(prod.sold_by_weight),
+                    "name": view.name,
+                    "package_weight": view.package_weight,
+                    "unit": view.unit or "g",
+                    "price": view.price or 0,
+                    "sold_by_weight": bool(view.sold_by_weight),
                     "total_weight": 0,
                 }
             products[pid]["total_weight"] += ingredient.weight

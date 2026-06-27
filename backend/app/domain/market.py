@@ -1,19 +1,18 @@
-"""UI locale vs product market — catalog mapping."""
+"""UI locale vs product market — independent concerns."""
 
 from __future__ import annotations
 
 UI_LOCALES = frozenset({"pl", "en"})
 MARKET_CODES = frozenset({"PL", "GB"})
 
-# Catalog rows in `products.lang` still use pl/en; markets use ISO-like codes.
-CATALOG_LANG_BY_MARKET: dict[str, str] = {
-    "PL": "pl",
-    "GB": "en",
-}
-
 MARKET_BY_UI_LOCALE_DEFAULT: dict[str, str] = {
     "pl": "PL",
     "en": "GB",
+}
+
+CURRENCY_BY_MARKET: dict[str, str] = {
+    "PL": "PLN",
+    "GB": "GBP",
 }
 
 
@@ -35,5 +34,5 @@ def normalize_market_code(value: str | None, *, ui_locale: str | None = None) ->
     return "PL"
 
 
-def catalog_lang_for_market(market_code: str) -> str:
-    return CATALOG_LANG_BY_MARKET.get(market_code, "pl")
+def currency_for_market(market_code: str) -> str:
+    return CURRENCY_BY_MARKET.get(market_code, "PLN")

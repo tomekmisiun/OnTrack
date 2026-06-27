@@ -1,11 +1,10 @@
-"""Resolve ui_locale, market_code, and catalog language for a user."""
+"""Resolve ui_locale and market_code for a user."""
 
 from __future__ import annotations
 
 from sqlalchemy.orm import Session
 
 from app.domain.market import (
-    catalog_lang_for_market,
     default_market_for_ui_locale,
     normalize_market_code,
     normalize_ui_locale,
@@ -45,7 +44,3 @@ def market_code_for_user(session: Session, user_id: int) -> str:
     if user.market_code in ("PL", "GB"):
         return user.market_code
     return default_market_for_ui_locale(ui_locale_for_user(session, user_id))
-
-
-def catalog_lang_for_user(session: Session, user_id: int) -> str:
-    return catalog_lang_for_market(market_code_for_user(session, user_id))

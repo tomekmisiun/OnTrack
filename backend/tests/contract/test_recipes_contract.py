@@ -92,7 +92,7 @@ def test_update_recipe(client, auth_headers, recipe, product):
 def test_fetch_recipe_image(client, auth_headers, recipe, monkeypatch):
     monkeypatch.setattr(
         "app.services.recipe_service.resolve_recipe_image",
-        lambda _recipe: "https://example.com/photo.jpg",
+        lambda _recipe, **kwargs: "https://example.com/photo.jpg",
     )
     res = client.post(f"/api/recipes/{recipe.id}/fetch-image", headers=auth_headers)
     assert res.status_code == 200

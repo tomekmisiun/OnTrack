@@ -9,6 +9,7 @@ import {
   type ReactNode,
 } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useAuth } from "@/contexts/AuthContext";
 import { useMember } from "@/contexts/MemberContext";
 import { useToast } from "@/contexts/ToastContext";
 import { getAll as getScheduleAll } from "@/lib/api/daySchedule";
@@ -23,6 +24,7 @@ import {
 } from "@/lib/dates";
 import type { TranslationKey } from "@/lib/i18n/translations";
 import { tArray, tFormat2, tFormatN, tString } from "@/lib/i18n/translate";
+import { currencyForMarket, currencyLabel } from "@/lib/format/currency";
 import { fuzzySearch } from "@/lib/recipes/search";
 import type { ScheduleBlock } from "@/types/daySchedule";
 import type { Meal, MealsByDate } from "@/types/mealPlan";
@@ -76,6 +78,7 @@ type WydatkiHtmlParams = {
   periodLabel: string;
   memberLabel: string;
   lang: string;
+  marketCode?: string;
 };
 
 type KalendarzHtmlParams = {
@@ -93,6 +96,7 @@ type ShopListHtmlParams = {
   selectedDays: string[];
   memberLabel: string;
   lang: string;
+  marketCode?: string;
 };
 
 type DayScheduleHtmlParams = {
@@ -383,9 +387,9 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#fff;color:#111827;p
 }
 
 // ─── Wydatki HTML generator (podsumowanie kategorii) ─────────────────────────
-function generateWydatkiHTML({ categories, total, periodLabel, memberLabel, lang }: WydatkiHtmlParams) {
+function generateWydatkiHTML({ categories, total, periodLabel, memberLabel, lang, marketCode }: WydatkiHtmlParams) {
   const L = lang === 'en';
-  const cur = L ? '£' : 'zł';
+  const cur = currencyLabel(currencyForMarket(marketCode));
   const now = new Date();
   const dateStr = `${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
   const rows = categories.map((cat: { label: string; value: number }, i: number) =>
@@ -566,9 +570,9 @@ ${weeksHTML}
 }
 
 // ─── Składniki przepisu HTML generator ───────────────────────────────────────
-function generateSkladnikiHTML(recipe: Recipe, lang: string) {
+function generateSkladnikiHTML(recipe: Recipe, lang: string, marketCode?: string) {
   const L = lang === 'en';
-  const cur = L ? '£' : 'zł';
+  const cur = currencyLabel(currencyForMarket(marketCode));
   const now = new Date();
   const dateStr = `${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
   const rows = (recipe.ingredients || []).map((ing) =>
@@ -637,9 +641,9 @@ ${macroHTML}
 }
 
 // ─── Lista zakupów HTML generator ────────────────────────────────────────────
-function generateShopListHTML({ items, total, selectedDays, memberLabel, lang }: ShopListHtmlParams) {
+function generateShopListHTML({ items, total, selectedDays, memberLabel, lang, marketCode }: ShopListHtmlParams) {
   const L = lang === 'en';
-  const cur = L ? '£' : 'zł';
+  const cur = currencyLabel(currencyForMarket(marketCode));
   const now = new Date();
   const dateStr = `${String(now.getDate()).padStart(2,'0')}.${String(now.getMonth()+1).padStart(2,'0')}.${now.getFullYear()}`;
   const daysStr = selectedDays.map((d: string) => toEU(d)).join(', ');
@@ -835,6 +839,8 @@ export function ExportScreen(props: ExportScreenProps = {}) {
   const router = useRouter();
   const goToTab = onGoToTabProp ?? ((tab: string) => router.push(`/${tab}`));
   const { members, activeMember } = useMember();
+  const { user } = useAuth();
+  const marketCode = user?.market_code;
   const { showError } = useToast();
   const { t, lang } = useLanguage();
   const handleExportMacro = () => {
@@ -967,7 +973,7 @@ export function ExportScreen(props: ExportScreenProps = {}) {
         return { ...item, packages_exact: exact, packages_rounded: rounded, total_cost: cost, actual_cost: Math.round(exact * item.price_per_package * 100) / 100 };
       }).sort((a, b) => a.product_name.localeCompare(b.product_name, 'pl'));
       const total = mergedItems.reduce((s, i) => s + (i.total_cost ?? 0), 0);
-      const html = generateShopListHTML({ items: mergedItems, total, selectedDays: days, memberLabel: shopMemberLabel, lang });
+      const html = generateShopListHTML({ items: mergedItems, total, selectedDays: days, memberLabel: shopMemberLabel, lang, marketCode });
       openHtmlWindow(html);
     } catch { showError(tStr(t, 'export_shop_list_err')); }
     finally { setShopLoading(false); }
@@ -1000,7 +1006,7 @@ export function ExportScreen(props: ExportScreenProps = {}) {
         if (item?.label) categories.push({ label: item.label, value: item.total });
       });
       const total = categories.reduce((s, c) => s + c.value, 0);
-      const html = generateWydatkiHTML({ categories, total, periodLabel: getHtmlPeriodLabel(), memberLabel, lang });
+      const html = generateWydatkiHTML({ categories, total, periodLabel: getHtmlPeriodLabel(), memberLabel, lang, marketCode });
       openHtmlWindow(html);
     } catch { showError(tStr(t, 'export_wydatki_err')); }
     finally { setHtmlWLoading(false); }
@@ -1043,7 +1049,7 @@ export function ExportScreen(props: ExportScreenProps = {}) {
     if (!htmlRecipeId) { showError(tString(t, 'export_select_recipe')); return; }
     try {
       const recipe = await getRecipe(Number(htmlRecipeId));
-      const html = generateSkladnikiHTML(recipe, lang);
+      const html = generateSkladnikiHTML(recipe, lang, marketCode);
       openHtmlWindow(html);
     } catch {
       showError(tString(t, 'export_select_recipe'));

@@ -21,6 +21,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import type { TranslationKey } from "@/lib/i18n/translations";
 import { tArray, tFormatN, tString } from "@/lib/i18n/translate";
 import { useSummaryPage } from "@/hooks/useSummaryPage";
+import { useMarketCurrency } from "@/hooks/useMarketCurrency";
 import "@/components/summary/summary.css";
 
 registerLocale("pl", pl);
@@ -241,6 +242,7 @@ export function SummaryScreen() {
   } = useSummaryPage();
 
   const { t } = useLanguage();
+  const { format } = useMarketCurrency();
   const txt = (key: TranslationKey) => tString(t, key);
   const DAY_NAMES = tArray(t, "day_short");
 
@@ -424,7 +426,7 @@ export function SummaryScreen() {
                             whiteSpace: "nowrap",
                           }}
                         >
-                          {cat.value.toFixed(2)} {txt("currency")}
+                          {format(cat.value)}
                         </span>
                       </div>
                     ))}
@@ -442,7 +444,7 @@ export function SummaryScreen() {
                         {txt("expenses_total")}
                       </span>
                       <span style={{ fontSize: 22, fontWeight: 800, color: "#0d9488" }}>
-                        {pieCategories.reduce((s, c) => s + c.value, 0).toFixed(2)} {txt("currency")}
+                        {format(pieCategories.reduce((s, c) => s + c.value, 0))}
                       </span>
                     </div>
                   </div>
@@ -640,7 +642,7 @@ export function SummaryScreen() {
                     <div style={{ textAlign: "right" }}>
                       <div style={{ fontSize: 11, color: "#6b7280" }}>{txt("est_weekly_cost")}</div>
                       <div style={{ fontSize: 18, fontWeight: 700, color: "#0d9488" }}>
-                        ~{tpl.estimatedCost.toFixed(2)} {txt("currency")}
+                        ~{format(tpl.estimatedCost)}
                       </div>
                     </div>
                     <button

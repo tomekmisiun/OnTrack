@@ -25,7 +25,7 @@ export function displayPrice(p: Product, currency: string): string {
   if (p.sold_by_weight) {
     return `${toPackagePrice(p.price, 1000, "g").toFixed(2)} ${currency}/kg`;
   }
-  return `${toPackagePrice(p.price, p.package_weight, p.unit || "g").toFixed(2)} ${currency}`;
+  return `${toPackagePrice(p.price, p.package_weight ?? 100, p.unit ?? "g").toFixed(2)} ${currency}`;
 }
 
 export function clamp(v: string | number, lo: number, hi: number): number {
