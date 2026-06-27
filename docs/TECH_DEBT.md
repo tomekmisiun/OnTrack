@@ -53,8 +53,8 @@ Concrete issues with code evidence. Priority: **P0** (production risk) → **P3*
 | **Problem** | Auth verification script requires live URLs + secrets — not run in GitHub Actions |
 | **Evidence** | `backend/scripts/verify-production-auth.sh`; manual runbook in DEPLOYMENT.md |
 | **Risk** | Broken deploy reaches users before manual check |
-| **Suggested fix** | External synthetic monitor or post-deploy hook with Railway secrets |
-| **Priority** | P1 |
+| **Suggested fix** | GitHub scheduled workflow `.github/workflows/production-smoke.yml` with `PRODUCTION_API_URL` secret |
+| **Priority** | P1 — **Mitigated** (requires operator to configure secrets) |
 
 ---
 

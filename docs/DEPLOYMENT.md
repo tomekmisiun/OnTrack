@@ -118,6 +118,17 @@ Expect exit code **0** — register 201, `/me` 200, login 200. Script does not p
 
 Run after every production deploy or when changing `FRONTEND_URL` / JWT secrets.
 
+### Scheduled GitHub smoke (optional)
+
+Workflow [`.github/workflows/production-smoke.yml`](../.github/workflows/production-smoke.yml) runs every 6 hours and on manual dispatch. It is **separate from PR CI** and uses repository secrets:
+
+| Secret | Required | Example |
+|--------|----------|---------|
+| `PRODUCTION_API_URL` | Yes (otherwise job skips) | `https://<ontrack-back-domain>` |
+| `PRODUCTION_FRONTEND_ORIGIN` | Recommended | `https://<ontrackapp-domain>` |
+
+Configure under **Settings → Secrets and variables → Actions**. Without `PRODUCTION_API_URL`, scheduled runs exit successfully with a skip message.
+
 ### Browser checks
 
 1. Open `ontrackapp` → register or login
