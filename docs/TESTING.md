@@ -24,7 +24,11 @@ How CI jobs map to local commands. Prefer running the commands below rather than
 | `backend-docker` | PR + `main` | repo root | `docker build backend` | Image build only |
 | `frontend-next-docker` | PR + `main` | repo root | `docker build -f Dockerfile.railway` | Image build only |
 | `backend-integration` | PR + `main` | `backend/` | `pytest tests/integration/` | Postgres migration rehearsal |
-| `deploy-production` | **`main` push only** | repo root | `railway up` ×2 | Deploy after all jobs green |
+| `deploy-staging` | **`main` push only** | repo root | `railway up --environment staging` ×2 | After all CI jobs |
+| `wait-staging-ready` | after staging deploy | — | poll `/health/ready` | Staging gate |
+| `staging-smoke` | after readiness | — | `verify-production-auth.sh` | Staging gate |
+| `deploy-production` | after staging smoke + approval | repo root | `railway up --environment production` ×2 | Requires GitHub Environment approval |
+| `production-smoke` | after production deploy | — | readiness + auth smoke | Production verification |
 
 ## Not run in default CI `test` job
 

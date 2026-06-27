@@ -1,7 +1,6 @@
 name: Staging auth smoke
 
-# Synthetic register/login check against a staging Railway deployment.
-# Operator-managed — configure secrets after creating a staging project.
+# Manual dispatch only — supplementary to job staging-smoke in ci.yml on push to main.
 
 on:
   workflow_dispatch:
@@ -13,6 +12,7 @@ concurrency:
 jobs:
   auth-smoke:
     runs-on: ubuntu-latest
+    environment: staging
     steps:
       - name: Checkout code
         uses: actions/checkout@v6

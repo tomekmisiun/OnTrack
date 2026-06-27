@@ -20,30 +20,53 @@ Quick reference for CI operators: [`.github/DEPLOY.md`](../.github/DEPLOY.md)
 
 ## Deploy flow
 
-```
+```text
 feature branch → PR → CI (all jobs) → merge to main
-push to main → CI (all jobs green) → deploy-production → railway up ×2
+push to main
+  → CI (7 jobs)
+  → deploy-staging          (GitHub Environment: staging, Railway environment: staging)
+  → wait-staging-ready      (poll STAGING_API_URL/health/ready)
+  → staging-smoke           (verify-production-auth.sh)
+  → deploy-production       (GitHub Environment: production — manual approval required)
+  → production-smoke        (readiness + verify-production-auth.sh)
 ```
 
-Job **`deploy-production`** (`.github/workflows/ci.yml`) runs only on `main` and deploys both services via `railway up --ci`.
+Defined in [`.github/workflows/ci.yml`](../.github/workflows/ci.yml). There is no deploy branch and no `git push` to promote between environments — both deploy jobs use **`github.sha`** from the same workflow run.
 
-### GitHub secret
+Quick operator guide: [`.github/DEPLOY.md`](../.github/DEPLOY.md)
 
-| Secret | Purpose |
-|--------|---------|
-| `RAILWAY_TOKEN` | Project token for `deploy-production` |
+### GitHub Environments
 
-Without it, CI passes but deploy job fails.
+| Environment | When used | Required secrets |
+|-------------|-----------|------------------|
+| `staging` | Auto after green CI on `main` | `RAILWAY_TOKEN`, `STAGING_API_URL`, `STAGING_FRONTEND_ORIGIN` |
+| `production` | After staging smoke + manual approval | `RAILWAY_TOKEN`, `PRODUCTION_API_URL`, `PRODUCTION_FRONTEND_ORIGIN` |
 
-### Railway service settings
+Configure under **Settings → Environments → production → Required reviewers**.
 
-For each service → **Settings → Source**:
+### Railway environments
 
-1. Source repo connected to GitHub
-2. Production branch: **`main`**
-3. **Auto deploy when pushed:** OFF (recommended)
-4. **Wait for CI:** OFF (CI job is the gate)
-5. Root Directory and config path as in table above
+One Railway **project**, two **environments**: `staging` and `production`. Each has its own Postgres plugin, service variables, and public domains. CI deploy commands:
+
+```bash
+railway up --environment staging --service ontrack-back --ci
+railway up --environment production --service ontrackapp --ci
+```
+
+Deploy runs from the **repository root**; Railway service settings (Root Directory `backend` / `frontend-next`) select the build context.
+
+**Auto deploy on Railway:** OFF for both environments — GitHub Actions is the only deploy path.
+
+### Concurrency
+
+| Group | Policy | Rationale |
+|-------|--------|-----------|
+| `deploy-staging-main` | cancel in-progress | New merge superseded stale staging deploy |
+| `deploy-production-main` | do not cancel | Approved run keeps its SHA even if `main` moves forward |
+
+### Migrations
+
+`backend/railway.toml` `preDeployCommand` runs on every Railway deploy. Staging deploys migrate **staging Postgres only**; production migrates **production Postgres** only after approval. There is no cross-environment `DATABASE_URL` in CI — isolation is enforced by Railway environment-scoped variables and tokens.
 
 ---
 
@@ -124,14 +147,7 @@ Run after every production deploy or when changing `FRONTEND_URL` / JWT secrets.
 
 ### Scheduled GitHub smoke (optional)
 
-Workflow [`.github/workflows/production-smoke.yml`](../.github/workflows/production-smoke.yml) runs every 6 hours and on manual dispatch. It is **separate from PR CI** and uses repository secrets:
-
-| Secret | Required | Example |
-|--------|----------|---------|
-| `PRODUCTION_API_URL` | Yes (otherwise job skips) | `https://<ontrack-back-domain>` |
-| `PRODUCTION_FRONTEND_ORIGIN` | Recommended | `https://<ontrackapp-domain>` |
-
-Configure under **Settings → Secrets and variables → Actions**. Without `PRODUCTION_API_URL`, scheduled runs exit successfully with a skip message.
+Workflow [`.github/workflows/production-smoke.yml`](../.github/workflows/production-smoke.yml) runs every 6 hours and on manual dispatch. Uses GitHub Environment **`production`** secrets (`PRODUCTION_API_URL`, `PRODUCTION_FRONTEND_ORIGIN`). Skips if URL is unset. This is **separate from** the mandatory **`production-smoke`** job in `ci.yml` (runs after each production deploy).
 
 ### Browser checks
 
@@ -151,15 +167,19 @@ Configure under **Settings → Secrets and variables → Actions**. Without `PRO
 | API calls fail from browser | `NEXT_PUBLIC_API_URL` must match public backend URL |
 | CORS on register/login | `FRONTEND_URL` on backend must match browser origin exactly |
 | 500 after deploy | Check pre-deploy migration logs |
-| SKIPPED Railway deployments | Turn OFF Auto deploy + Wait for CI; use `deploy-production` only |
+| SKIPPED Railway deployments | Turn OFF Auto deploy on Railway; use CI deploy jobs only |
 | Pre-deploy FK errors on catalog import | Ensure `restore_post_catalog_migration` runs (included in script since `b1c2d3e4f5a6`) |
 
-### Manual redeploy
+### Manual redeploy (emergency)
+
+Use the same SHA-aware flow via GitHub Actions re-run, or Railway CLI with the correct environment:
 
 ```bash
-railway up --service=ontrack-back --detach
-railway up --service=ontrackapp --detach
+railway up --environment staging --service ontrack-back --ci
+railway up --environment production --service ontrackapp --ci
 ```
+
+Do not deploy production without passing staging smoke for the same commit.
 
 ---
 
@@ -211,78 +231,75 @@ Full CI matrix: [TESTING.md](./TESTING.md)
 
 ## Staging
 
-Staging is a **separate Railway project** (not auto-deployed from this repo). Use it to rehearse migrations, OAuth, and UI changes before production.
+Staging is the **Railway environment `staging`** in the same project as production (not a separate project). GitHub Actions deploys staging automatically on every green CI run on `main`.
 
-### Create the project
+### Staging URLs and variables
 
-1. Railway → **New Project** → deploy from the same GitHub repo (`tomekmisiun/OnTrack`).
-2. Add services mirroring production:
+Configure per-service variables on Railway **environment staging** (mirrors production layout):
 
-| Staging service | Root Directory | Config |
-|-----------------|----------------|--------|
-| `ontrack-back-staging` (or similar) | `backend` | `/backend/railway.toml` |
-| `ontrackapp-staging` | `frontend-next` | `/frontend-next/railway.toml` |
-| Postgres plugin | — | dedicated staging DB (empty or prod clone) |
+| Variable (backend) | Staging note |
+|--------------------|--------------|
+| `DATABASE_URL` | Staging Postgres only |
+| `JWT_SECRET_KEY`, `FLASK_SECRET_KEY` | Unique — not production values |
+| `FRONTEND_URL` | Staging frontend origin |
+| `GOOGLE_REDIRECT_URI` | Staging API callback URL |
 
-3. **Auto deploy:** OFF on both services — deploy staging manually when needed (`railway up` against the staging project token).
-4. Record public URLs (example placeholders — replace with your Railway domains):
-
-| Role | Example URL |
-|------|-------------|
-| Staging API | `https://ontrack-back-staging.up.railway.app` |
-| Staging frontend | `https://ontrackapp-staging.up.railway.app` |
-
-### Staging variables
-
-Copy production values, then override URLs and secrets:
-
-**`ontrack-back-staging`**
-
-| Variable | Staging note |
-|----------|--------------|
-| `DATABASE_URL` | Staging Postgres only — never point at production |
-| `JWT_SECRET_KEY`, `FLASK_SECRET_KEY` | Unique values (not prod secrets) |
-| `FRONTEND_URL` | Exact staging frontend origin |
-| `GOOGLE_REDIRECT_URI` | `https://<staging-api>/api/auth/google/callback` |
-| `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` | Separate OAuth client recommended |
-| `SENTRY_DSN` / `SENTRY_ENVIRONMENT` | Optional — use `staging` environment tag |
-
-**`ontrackapp-staging`**
-
-| Variable | Staging note |
-|----------|--------------|
+| Variable (frontend) | Staging note |
+|---------------------|--------------|
 | `NEXT_PUBLIC_API_URL` | Staging API URL (build-time) |
-| `NEXT_PUBLIC_SENTRY_DSN` | Optional — same Sentry project, `staging` environment |
 
-### Deploy staging manually
+GitHub Environment **`staging`** must define `STAGING_API_URL` and `STAGING_FRONTEND_ORIGIN` for readiness polling and smoke tests (no trailing slash on API URL).
 
-```bash
-# Link CLI to the staging Railway project first
-railway up --service=ontrack-back-staging --detach
-railway up --service=ontrackapp-staging --detach
-```
-
-Pre-deploy migrations run via `backend/railway.toml` the same as production.
-
-### Verify staging
+### Verify staging locally
 
 ```bash
 API_URL=https://<staging-api> FRONTEND_ORIGIN=https://<staging-frontend> \
   ./backend/scripts/verify-production-auth.sh
 ```
 
-DB migration rehearsal on a **clone** DB: [DB_REHEARSAL.md](./backend-migration/DB_REHEARSAL.md)
+DB migration rehearsal on a clone: [DB_REHEARSAL.md](./backend-migration/DB_REHEARSAL.md)
 
-### GitHub Actions smoke (optional)
+### Supplementary workflow
 
-Workflow [`.github/workflows/staging-smoke.yml`](../.github/workflows/staging-smoke.yml) — manual dispatch only.
+[`.github/workflows/staging-smoke.yml`](../.github/workflows/staging-smoke.yml) — manual dispatch only; the release gate is job **`staging-smoke`** in `ci.yml`.
 
-| Secret | Purpose |
-|--------|---------|
-| `STAGING_API_URL` | Staging FastAPI base URL |
-| `STAGING_FRONTEND_ORIGIN` | Staging browser origin (CORS) |
+---
 
-Without `STAGING_API_URL`, the workflow exits successfully with a skip message.
+## Normal release (operator checklist)
+
+1. Merge PR to `main` (CI must pass on the PR first).
+2. Open **Actions → CI/CD Pipeline** for the merge commit.
+3. Confirm jobs through **Staging auth smoke** are green.
+4. Click **Review deployments** → approve **production**.
+5. Confirm **Production auth smoke (post-deploy)** passes.
+6. Optional: spot-check staging/production URLs in the browser.
+
+### If staging smoke fails
+
+- Do **not** approve production.
+- Open the failed job log (deploy, readiness, or smoke).
+- Fix forward on a new branch/PR, or cancel the workflow run under **Actions**.
+- To stop a bad staging deploy: Railway dashboard → staging environment → redeploy last good deployment or scale down.
+
+### Cancel a deployment
+
+- **Before production approval:** cancel the workflow run in GitHub Actions — production will not start.
+- **After approval:** let the job finish or cancel from Actions (Railway may still complete an in-flight deploy — check Railway deployment view).
+
+### Check deployed SHA
+
+In the workflow run:
+
+- Each deploy job logs `Deploying commit <sha>` and verifies `git rev-parse HEAD`.
+- Railway deployment details show the uploaded source; cross-check with the GitHub commit on the run page.
+
+### Rollback
+
+1. Railway → select environment (`staging` or `production`) → service → **Deployments** → redeploy last known-good deployment.
+2. Document the rollback in release notes.
+3. If a migration broke production, assess Alembic downgrade separately (avoid ad-hoc prod downgrades).
+
+There is **no** git-based promotion between environments.
 
 ---
 

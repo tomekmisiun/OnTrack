@@ -74,7 +74,7 @@ CI matrix and integration tests: [docs/TESTING.md](docs/TESTING.md).
 Browser → Next.js (frontend-next) → FastAPI (backend) → PostgreSQL
 ```
 
-Production: Railway services `ontrackapp` + `ontrack-back`. Deploy runs via GitHub Actions after CI on `main`.
+Production: Railway (`staging` then `production` environments). Deploy via GitHub Actions after CI on `main` — staging first, manual approval for production.
 
 Details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 
