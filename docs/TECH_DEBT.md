@@ -27,8 +27,8 @@ Concrete issues with code evidence. Priority: **P0** (production risk) → **P3*
 | **Problem** | Reset token returned in API response (testing/debug paths) — not viable for end users |
 | **Evidence** | Password reset routes in `backend/app/api/routes/auth.py`; no SMTP integration |
 | **Risk** | Feature unusable in production UX |
-| **Suggested fix** | SMTP + email template + rate limiting ([ROADMAP R-012](./ROADMAP.md)) |
-| **Priority** | P1 |
+| **Suggested fix** | Generic SMTP env vars + reset email + login UI ([R-012](./ROADMAP.md)) |
+| **Priority** | P1 — **Resolved** (local username accounts still need Google OAuth or future email field) |
 
 ---
 

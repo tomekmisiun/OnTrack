@@ -77,9 +77,10 @@ Misconfiguration causes register/login failures from the browser despite healthy
 
 ## Password reset
 
-- API generates time-limited reset token
-- **No email delivery** — token may appear in API response in non-production paths
-- Do not expose reset tokens in production client UX until email delivery exists ([TECH_DEBT TD-002](./TECH_DEBT.md))
+- API generates time-limited reset token (1 hour)
+- When `SMTP_HOST` and `SMTP_FROM` are configured, backend emails a reset link to deliverable addresses
+- Local username accounts use synthetic `@users.ontrack.local` emails — reset email applies to Google OAuth accounts with real inboxes
+- `reset_token` in JSON response remains limited to `DEBUG` / `TESTING` only
 
 ---
 

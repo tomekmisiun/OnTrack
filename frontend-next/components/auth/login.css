@@ -698,6 +698,44 @@
   line-height: 1.4;
 }
 
+.login-info {
+  background: rgba(20, 83, 45, 0.35);
+  border: 1px solid #166534;
+  color: #86efac;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.login-subtitle--strong {
+  font-size: 15px;
+  color: #e5e7eb;
+  margin-bottom: 8px;
+}
+
+.login-forgot-link {
+  align-self: flex-start;
+  margin: -4px 0 4px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #93c5fd;
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.login-forgot-link--block {
+  margin-top: 8px;
+}
+
+.login-forgot-link:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .login-form {
   display: flex;
   flex-direction: column;

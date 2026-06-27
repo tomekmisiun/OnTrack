@@ -14,7 +14,7 @@ import { OntrackLogo } from "@/components/layout/nav-icons";
 import { PrivacyPolicyModal } from "@/components/privacy/PrivacyPolicyModal";
 import { isAuthApiError, useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { googleAuthUrl } from "@/lib/api/auth";
+import { googleAuthUrl, forgotPassword } from "@/lib/api/auth";
 import { setPendingLang } from "@/lib/auth/storage";
 import { CATALOG_STATS } from "@/lib/data/catalogStats";
 import type { LangCode, TranslationKey } from "@/lib/i18n/translations";
@@ -199,6 +199,7 @@ function ShowcaseSection({
 }
 
 type AuthMode = "login" | "register";
+type PanelFlow = "auth" | "forgot" | "reset";
 
 type LoginPanelProps = {
   uiLang: LangCode;
@@ -213,6 +214,7 @@ type LoginPanelProps = {
   busy: boolean;
   handleCredentials: (e: FormEvent) => void;
   setShowPrivacy: (open: boolean) => void;
+  onForgotClick?: () => void;
 };
 
 function LoginPanel({
@@ -228,6 +230,7 @@ function LoginPanel({
   busy,
   handleCredentials,
   setShowPrivacy,
+  onForgotClick,
 }: LoginPanelProps) {
   const { t } = useLanguage();
 
@@ -311,6 +314,15 @@ function LoginPanel({
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          {mode === "login" && onForgotClick ? (
+            <button
+              type="button"
+              className="login-forgot-link"
+              onClick={onForgotClick}
+            >
+              {tString(t, "login_forgot_link")}
+            </button>
+          ) : null}
           <button type="submit" className="login-submit" disabled={busy}>
             {busy ? <span className="login-spinner" /> : null}
             {busy
@@ -359,13 +371,84 @@ function LoginPanel({
   );
 }
 
+function AlternateAuthPanel({
+  uiLang,
+  switchLang,
+  titleKey,
+  subtitleKey,
+  error,
+  info,
+  busy,
+  onBack,
+  children,
+}: {
+  uiLang: LangCode;
+  switchLang: (lang: LangCode) => void;
+  titleKey: TranslationKey;
+  subtitleKey: TranslationKey;
+  error: string;
+  info: string;
+  busy: boolean;
+  onBack: () => void;
+  children: ReactNode;
+}) {
+  const { t } = useLanguage();
+
+  return (
+    <div className="login-panel-inner">
+      <div className="login-lang-toggle">
+        {(["pl", "en"] as LangCode[]).map((code) => (
+          <button
+            key={code}
+            type="button"
+            className={`login-lang-btn${uiLang === code ? " active" : ""}`}
+            onClick={() => switchLang(code)}
+          >
+            {code.toUpperCase()}
+          </button>
+        ))}
+      </div>
+
+      <div className="login-card">
+        <div className="login-panel-brand">
+          <OntrackLogo className="login-panel-brand-icon" />
+          <div>
+            <div className="login-panel-brand-name">ONTRACK</div>
+            <div className="login-panel-brand-sub">BE IN CONTROL</div>
+          </div>
+        </div>
+
+        <p className="login-subtitle login-subtitle--strong">{tString(t, titleKey)}</p>
+        <p className="login-subtitle">{tString(t, subtitleKey)}</p>
+
+        {error ? <div className="login-error">{error}</div> : null}
+        {info ? <div className="login-info">{info}</div> : null}
+
+        {children}
+
+        <button
+          type="button"
+          className="login-forgot-link login-forgot-link--block"
+          onClick={onBack}
+          disabled={busy}
+        >
+          {tString(t, "login_forgot_back")}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export function LoginScreen() {
   const router = useRouter();
   const { t, lang: uiLang, switchLang } = useLanguage();
   const catalogStats = CATALOG_STATS[uiLang] ?? CATALOG_STATS.pl;
-  const { loginWithPassword, registerAccount } = useAuth();
+  const { loginWithPassword, registerAccount, completePasswordReset } = useAuth();
   const [error, setError] = useState("");
+  const [info, setInfo] = useState("");
   const [showPrivacy, setShowPrivacy] = useState(false);
+  const [flow, setFlow] = useState<PanelFlow>("auth");
+  const [resetToken, setResetToken] = useState("");
   const [mode, setMode] = useState<AuthMode>("login");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -374,6 +457,12 @@ export function LoginScreen() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const authError = params.get("auth_error");
+    const token = params.get("reset_token");
+    if (token) {
+      setResetToken(token);
+      setFlow("reset");
+      params.delete("reset_token");
+    }
     if (authError) {
       const oauthKey = `err_${authError}` as keyof typeof t;
       const message =
@@ -426,6 +515,49 @@ export function LoginScreen() {
   const setAuthMode = (next: AuthMode) => {
     setMode(next);
     setError("");
+    setInfo("");
+  };
+
+  const returnToAuth = () => {
+    setFlow("auth");
+    setError("");
+    setInfo("");
+    setPassword("");
+  };
+
+  const handleForgot = async (e: FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setInfo("");
+    setBusy(true);
+    try {
+      await forgotPassword(username.trim());
+      setInfo(tString(t, "login_forgot_success"));
+    } catch (err) {
+      const msg = isAuthApiError(err) ? err.message : null;
+      setError(msg ?? tString(t, "err_forgot_failed"));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const handleReset = async (e: FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setInfo("");
+    setBusy(true);
+    setPendingLang(uiLang);
+    try {
+      await completePasswordReset(resetToken, password);
+      router.replace(
+        new URLSearchParams(window.location.search).get("next") ?? "/",
+      );
+    } catch (err) {
+      const msg = isAuthApiError(err) ? err.message : null;
+      setError(msg ?? tString(t, "err_reset_failed"));
+    } finally {
+      setBusy(false);
+    }
   };
 
   return (
@@ -547,20 +679,99 @@ export function LoginScreen() {
         </main>
 
         <aside className="login-panel">
-          <LoginPanel
-            uiLang={uiLang}
-            switchLang={switchLang}
-            mode={mode}
-            setAuthMode={setAuthMode}
-            error={error}
-            username={username}
-            setUsername={setUsername}
-            password={password}
-            setPassword={setPassword}
-            busy={busy}
-            handleCredentials={handleCredentials}
-            setShowPrivacy={setShowPrivacy}
-          />
+          {flow === "auth" ? (
+            <LoginPanel
+              uiLang={uiLang}
+              switchLang={switchLang}
+              mode={mode}
+              setAuthMode={setAuthMode}
+              error={error}
+              username={username}
+              setUsername={setUsername}
+              password={password}
+              setPassword={setPassword}
+              busy={busy}
+              handleCredentials={handleCredentials}
+              setShowPrivacy={setShowPrivacy}
+              onForgotClick={() => {
+                setFlow("forgot");
+                setError("");
+                setInfo("");
+              }}
+            />
+          ) : flow === "forgot" ? (
+            <AlternateAuthPanel
+              uiLang={uiLang}
+              switchLang={switchLang}
+              titleKey="login_forgot_title"
+              subtitleKey="login_forgot_desc"
+              error={error}
+              info={info}
+              busy={busy}
+              onBack={returnToAuth}
+            >
+              <form className="login-form" onSubmit={handleForgot}>
+                <div className="login-field">
+                  <label className="login-label" htmlFor="forgot-username">
+                    {tString(t, "login_username_lbl")}
+                  </label>
+                  <input
+                    id="forgot-username"
+                    type="text"
+                    className="login-input"
+                    autoComplete="username"
+                    required
+                    maxLength={80}
+                    placeholder={tString(t, "login_username_ph")}
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </div>
+                <button type="submit" className="login-submit" disabled={busy}>
+                  {busy ? <span className="login-spinner" /> : null}
+                  {busy
+                    ? tString(t, "login_forgot_busy")
+                    : tString(t, "login_forgot_submit")}
+                </button>
+              </form>
+            </AlternateAuthPanel>
+          ) : (
+            <AlternateAuthPanel
+              uiLang={uiLang}
+              switchLang={switchLang}
+              titleKey="login_reset_title"
+              subtitleKey="login_reset_desc"
+              error={error}
+              info={info}
+              busy={busy}
+              onBack={returnToAuth}
+            >
+              <form className="login-form" onSubmit={handleReset}>
+                <div className="login-field">
+                  <label className="login-label" htmlFor="reset-password">
+                    {tString(t, "login_password_lbl")}
+                  </label>
+                  <input
+                    id="reset-password"
+                    type="password"
+                    className="login-input"
+                    autoComplete="new-password"
+                    required
+                    minLength={8}
+                    placeholder={tString(t, "login_password_ph")}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                <button type="submit" className="login-submit" disabled={busy}>
+                  {busy ? <span className="login-spinner" /> : null}
+                  {busy
+                    ? tString(t, "login_reset_busy")
+                    : tString(t, "login_reset_submit")}
+                </button>
+              </form>
+            </AlternateAuthPanel>
+          )}
         </aside>
       </div>
 

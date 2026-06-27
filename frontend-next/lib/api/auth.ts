@@ -146,6 +146,22 @@ export function deleteAccountApi() {
   return createAuthedApiClient().delete<{ message: string }>("/api/auth/me");
 }
 
+export function forgotPassword(username: string): Promise<{ message: string }> {
+  return publicClient.post<{ message: string }>("/api/auth/forgot-password", {
+    username,
+  });
+}
+
+export function resetPassword(
+  token: string,
+  newPassword: string,
+): Promise<TokenResponse> {
+  return publicClient.post<TokenResponse>("/api/auth/reset-password", {
+    token,
+    new_password: newPassword,
+  });
+}
+
 export function logoutSession(): Promise<void> {
   if (!isBffEnabled()) return Promise.resolve();
   return sessionRequest<{ ok: true }>("/api/auth/session", {

@@ -1,3 +1,4 @@
+from unittest.mock import patch
 from urllib.parse import parse_qs, urlparse
 
 from app.core.security import create_access_token, decode_access_token
@@ -81,6 +82,21 @@ def test_forgot_password_returns_token_in_testing(client, db_session):
     )
     assert reset.status_code == 200
     assert "token" in reset.json()
+
+
+def test_forgot_password_sends_email_when_smtp_configured(client, db_session, monkeypatch):
+    create_user(db_session, "oauth@example.com", lang="pl", username="mailuser")
+    monkeypatch.setenv("SMTP_HOST", "smtp.example.com")
+    monkeypatch.setenv("SMTP_FROM", "noreply@example.com")
+    from app.core.config import get_settings
+
+    get_settings.cache_clear()
+
+    with patch("app.services.auth_service.send_password_reset_email") as send_mock:
+        res = client.post("/api/auth/forgot-password", json={"username": "mailuser"})
+    assert res.status_code == 200
+    assert "reset_token" not in res.json()
+    send_mock.assert_called_once()
 
 
 def test_change_language(client, user, auth_headers, db_session):

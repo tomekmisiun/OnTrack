@@ -59,6 +59,7 @@ For each service → **Settings → Source**:
 | `FRONTEND_URL` | Exact browser origin of `ontrackapp` (no trailing slash) |
 | `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` | Optional OAuth |
 | `GOOGLE_REDIRECT_URI` | `https://<ontrack-back>/api/auth/google/callback` |
+| `SMTP_HOST`, `SMTP_FROM`, `SMTP_USER`, `SMTP_PASSWORD` | Optional — password reset emails |
 | API keys (Gemini, Pexels, DeepSeek) | Optional |
 
 Healthcheck: `/health` (120s timeout in `railway.toml`)

@@ -28,6 +28,12 @@ from app.models.recipe import Recipe, RecipeIngredient
 from app.models.user import User
 from app.models.user_recipe_favorite import UserRecipeFavorite
 from app.scripts.import_catalog import ensure_global_catalog_loaded
+from app.services.email_service import (
+    EmailDeliveryError,
+    is_deliverable_email,
+    password_reset_url,
+    send_password_reset_email,
+)
 from app.services.member_service import ensure_primary_member, sync_primary_member_name
 from app.services.user_preferences import (
     apply_market_code,
@@ -155,14 +161,29 @@ def change_password(
 def forgot_password(session: Session, username: str) -> dict:
     normalized = _normalize_username(username)
     user = session.query(User).filter_by(username=normalized).first()
-    message = "If the account exists, a reset link has been generated."
+    message = "If the account exists, a reset link has been sent."
     if not user:
         return {"message": message}
+
     token = create_password_reset_token(user.id)
     settings = get_settings()
     payload: dict = {"message": message}
-    if settings.debug or settings.testing:
+
+    if settings.smtp_configured and is_deliverable_email(user.email):
+        try:
+            send_password_reset_email(
+                to_email=user.email,
+                reset_url=password_reset_url(token),
+                ui_locale=user.ui_locale,
+            )
+        except EmailDeliveryError:
+            if settings.debug or settings.testing:
+                payload["reset_token"] = token
+            else:
+                raise AuthServiceError("Unable to send reset email", 503) from None
+    elif settings.debug or settings.testing:
         payload["reset_token"] = token
+
     return payload
 
 

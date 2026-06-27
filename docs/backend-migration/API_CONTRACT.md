@@ -164,7 +164,7 @@
 |-------|--------|
 | Request | `{ "username": string }` |
 | Success | `200`, `{ "message": "..." }` |
-| Production limitation | **`reset_token` is returned only when `DEBUG` or `TESTING` is set** — no email delivery in production. Users cannot self-serve password reset until an email provider is integrated. |
+| Production limitation | When `SMTP_HOST` + `SMTP_FROM` are set, sends reset link to deliverable user email. **`reset_token` still returned only when `DEBUG` or `TESTING`**. Local username accounts use `@users.ontrack.local` and cannot receive mail — use Google OAuth or configure SMTP for OAuth-linked accounts. |
 
 ### A11 — `POST /api/auth/reset-password`
 
