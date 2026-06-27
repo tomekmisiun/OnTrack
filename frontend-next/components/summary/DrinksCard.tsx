@@ -318,9 +318,9 @@ function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pi
       list.push({ name: tString(t, expenseI18nKey(ot.key) as TranslationKey), daily, total: daily * days, _dk: ot.key });
     });
     return list;
-  }, [drinks, days, effCukierPrice, effSlodzikPrice, otherExpenses]);
+  }, [drinks, days, effCukierPrice, effSlodzikPrice, otherExpenses, t]);
 
-  useEffect(() => { onUpdate(items); }, [items]);
+  useEffect(() => { onUpdate(items); }, [items, onUpdate]);
 
 
 
