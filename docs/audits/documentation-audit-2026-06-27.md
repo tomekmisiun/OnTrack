@@ -1,7 +1,8 @@
 # Documentation audit — 2026-06-27
 
-**Branch:** `chore/docs-audit-and-reset`  
+**Branch:** `chore/docs-audit-and-reset` (merged #163)  
 **Baseline commit:** `01ff765` (`main`)  
+**Status:** **Complete** — living docs reset merged 2026-06-27  
 **Method:** code-first inventory (backend routes, Alembic head, CI, Railway, tests) + full `.md` grep for links and references.
 
 ---
