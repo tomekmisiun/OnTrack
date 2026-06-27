@@ -263,9 +263,14 @@ jobs:
           ref: ${{ github.sha }}
 
       - name: Record deploy SHA
+        env:
+          DEPLOY_SHA: ${{ github.sha }}
         run: |
-          echo "Deploying commit ${{ github.sha }}"
-          test "$(git rev-parse HEAD)" = "${{ github.sha }}"
+          if [ -z "${DEPLOY_SHA}" ]; then
+            echo "ERROR: github.sha is empty" >&2
+            exit 1
+          fi
+          echo "Deploying commit ${DEPLOY_SHA}"
 
       - name: Deploy backend to staging (ontrack-back)
         run: railway up --environment staging --service ontrack-back --ci --detach
@@ -339,9 +344,14 @@ jobs:
           ref: ${{ github.sha }}
 
       - name: Record deploy SHA
+        env:
+          DEPLOY_SHA: ${{ github.sha }}
         run: |
-          echo "Deploying commit ${{ github.sha }}"
-          test "$(git rev-parse HEAD)" = "${{ github.sha }}"
+          if [ -z "${DEPLOY_SHA}" ]; then
+            echo "ERROR: github.sha is empty" >&2
+            exit 1
+          fi
+          echo "Deploying commit ${DEPLOY_SHA}"
 
       - name: Deploy backend to production (ontrack-back)
         run: railway up --environment production --service ontrack-back --ci --detach
