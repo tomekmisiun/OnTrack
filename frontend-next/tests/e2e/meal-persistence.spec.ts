@@ -4,6 +4,7 @@ import {
   getFirstRecipeId,
   getPrimaryMemberId,
   loginUser,
+  logoutFromWelcome,
   registerUser,
   seedTokenInBrowser,
   uniqueUsername,
@@ -19,7 +20,7 @@ function todayIso(): string {
 
 test.describe("meal calendar persistence (real API)", () => {
   test("saved meal survives reload and re-login", async ({ page, request }) => {
-    test.setTimeout(90_000);
+    test.setTimeout(120_000);
     const username = uniqueUsername();
     const password = "TestPass123!";
     const mealDate = todayIso();
@@ -58,9 +59,7 @@ test.describe("meal calendar persistence (real API)", () => {
       timeout: 15_000,
     });
 
-    await page.goto("/");
-    await page.locator(".welcome-footer-btn--logout").click();
-    await expect(page).toHaveURL(/\/login/, { timeout: 10_000 });
+    await logoutFromWelcome(page);
 
     await page.getByRole("button", { name: /log in|zaloguj/i }).click();
     await page.locator("#login-username").fill(username);

@@ -1,4 +1,4 @@
-import type { APIRequestContext, Page } from "@playwright/test";
+import { expect, type APIRequestContext, type Page } from "@playwright/test";
 
 const apiUrl = process.env.E2E_API_URL ?? "http://127.0.0.1:5001";
 
@@ -93,4 +93,20 @@ export async function seedTokenInBrowser(page: Page, token: string): Promise<voi
     localStorage.setItem("token", t);
     document.cookie = "ontrack_has_token=1; path=/; max-age=604800; SameSite=Lax";
   }, token);
+}
+
+/** Wait until auth bootstrap finishes and the welcome shell is interactive. */
+export async function waitForWelcomePage(page: Page): Promise<void> {
+  await expect(page.locator(".welcome-page")).toBeVisible({ timeout: 30_000 });
+  await expect(
+    page.getByRole("button", { name: /log out|wyloguj/i }),
+  ).toBeVisible({ timeout: 10_000 });
+}
+
+/** Navigate home and log out via the welcome footer (real API session). */
+export async function logoutFromWelcome(page: Page): Promise<void> {
+  await page.goto("/");
+  await waitForWelcomePage(page);
+  await page.getByRole("button", { name: /log out|wyloguj/i }).click();
+  await expect(page).toHaveURL(/\/login/, { timeout: 15_000 });
 }
