@@ -1,7 +1,7 @@
 [project]
 name = "ontrack-backend"
 version = "0.1.0"
-description = "OnTrack FastAPI backend (Flask migration target)"
+description = "OnTrack FastAPI backend"
 readme = "README.md"
 requires-python = ">=3.14,<3.15"
 dependencies = [
@@ -43,7 +43,6 @@ testpaths = ["tests"]
 pythonpath = ["."]
 markers = [
     "integration: tests requiring PostgreSQL (set TEST_DATABASE_URL)",
-    "legacy_catalog_copy: documents per-user seed on register; change in Task 6",
 ]
 
 [tool.coverage.run]
