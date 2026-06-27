@@ -55,10 +55,6 @@ class AuthServiceError(Exception):
         super().__init__(message)
 
 
-def _normalize_username(raw: str) -> str:
-    return (raw or "").strip().lower()
-
-
 def _validate_password(password: str) -> str | None:
     if len(password or "") < MIN_PASSWORD_LEN:
         return f"Password must be at least {MIN_PASSWORD_LEN} characters"
@@ -84,29 +80,24 @@ def _optional_username_from_email(email: str) -> str | None:
     return None
 
 
-def _find_user_by_login_identifier(session: Session, raw: str) -> User | None:
-    identifier = (raw or "").strip()
-    if not identifier:
+def _find_user_by_email(session: Session, raw: str) -> User | None:
+    email = _normalize_email(raw)
+    if not email:
         return None
-    if "@" in identifier:
-        email = _normalize_email(identifier)
-        return session.query(User).filter(User.email.ilike(email)).first()
-    username = _normalize_username(identifier)
-    return session.query(User).filter_by(username=username).first()
+    return session.query(User).filter(User.email.ilike(email)).first()
 
 
 def issue_token(user_id: int) -> str:
     return create_access_token(user_id)
 
 
-def login(session: Session, email: str, password: str, *, username: str = "") -> str:
-    identifier = email or username
-    if not identifier.strip() or not password:
+def login(session: Session, email: str, password: str) -> str:
+    if not email.strip() or not password:
         raise AuthServiceError("Email and password are required", 400)
 
     ensure_global_catalog_loaded(session)
 
-    user = _find_user_by_login_identifier(session, identifier)
+    user = _find_user_by_email(session, email)
     if not user or not verify_password(user.password_hash, password):
         raise AuthServiceError("Invalid email or password", 401)
 
@@ -184,8 +175,8 @@ def change_password(
     session.commit()
 
 
-def forgot_password(session: Session, email: str, *, username: str = "") -> dict:
-    user = _find_user_by_login_identifier(session, email or username)
+def forgot_password(session: Session, email: str) -> dict:
+    user = _find_user_by_email(session, email)
     message = "If the account exists, a reset link has been sent."
     if not user:
         return {"message": message}

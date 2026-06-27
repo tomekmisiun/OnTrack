@@ -71,7 +71,7 @@ export function login(email: string, password: string): Promise<TokenResponse> {
     }).then(() => ({ token: "" }));
   }
 
-  const body: LoginRequest = { email, password, username: "" };
+  const body: LoginRequest = { email, password };
   return publicClient.post<TokenResponse>("/api/auth/login", body);
 }
 

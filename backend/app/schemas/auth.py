@@ -3,7 +3,6 @@ from pydantic import BaseModel
 
 class LoginRequest(BaseModel):
     email: str = ""
-    username: str = ""  # legacy — username lookup for pre-email accounts
     password: str = ""
 
 
@@ -32,7 +31,6 @@ class PasswordChangeRequest(BaseModel):
 
 class ForgotPasswordRequest(BaseModel):
     email: str = ""
-    username: str = ""  # legacy — username lookup for pre-email accounts
 
 
 class ResetPasswordRequest(BaseModel):

@@ -856,11 +856,6 @@ export interface components {
              * @default
              */
             email: string;
-            /**
-             * Username
-             * @default
-             */
-            username: string;
         };
         /** HTTPValidationError */
         HTTPValidationError: {
@@ -882,11 +877,6 @@ export interface components {
              * @default
              */
             email: string;
-            /**
-             * Username
-             * @default
-             */
-            username: string;
             /**
              * Password
              * @default

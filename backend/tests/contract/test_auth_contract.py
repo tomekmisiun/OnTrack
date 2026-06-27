@@ -65,7 +65,7 @@ def test_change_password(client, db_session):
     assert res.status_code == 200
     login = client.post(
         "/api/auth/login",
-        json={"username": "aliceuser", "password": "NewPass123!"},
+        json={"email": "alice@example.com", "password": "NewPass123!"},
     )
     assert login.status_code == 200
 
@@ -199,7 +199,7 @@ def test_werkzeug_hash_from_flask_login_works(client, db_session):
 
     res = client.post(
         "/api/auth/login",
-        json={"username": "legacyuser", "password": "secret123"},
+        json={"email": "legacy@example.com", "password": "secret123"},
     )
     assert res.status_code == 200
     assert "token" in res.json()

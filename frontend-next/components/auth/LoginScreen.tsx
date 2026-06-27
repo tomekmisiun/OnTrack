@@ -288,7 +288,7 @@ function LoginPanel({
             </label>
             <input
               id="login-email"
-              type={mode === "register" ? "email" : "text"}
+              type="email"
               className="login-input"
               autoComplete="email"
               required
@@ -717,7 +717,7 @@ export function LoginScreen() {
                   </label>
                   <input
                     id="forgot-email"
-                    type="text"
+                    type="email"
                     className="login-input"
                     autoComplete="email"
                     required

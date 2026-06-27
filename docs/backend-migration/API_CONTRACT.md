@@ -79,7 +79,7 @@
 
 | Field | Detail |
 |-------|--------|
-| Request body | `{ "email": string, "password": string }` — optional legacy `username` for pre-email accounts |
+| Request body | `{ "email": string, "password": string }` |
 | Success | `200`, `{ "token": string }` |
 | Errors | `400` `{ "error": "Email and password are required" }`; `401` `{ "error": "Invalid email or password" }` |
 | Frontend | Stores `res.data.token`, calls `/api/auth/me` via `finishAuth` |
@@ -109,7 +109,7 @@
 
 | Field | Detail |
 |-------|--------|
-| Success | `200`, user object: `{ "id": int, "lang": "pl"\|"en", "ui_locale": "pl"\|"en", "market_code": "PL"\|"GB", "username"?: string, "email"?: string }` — `lang` mirrors `ui_locale` (legacy alias); email omitted for `@users.ontrack.local` |
+| Success | `200`, user object: `{ "id": int, "lang": "pl"\|"en", "ui_locale": "pl"\|"en", "market_code": "PL"\|"GB", "username"?: string, "email"?: string }` — `lang` mirrors `ui_locale` (legacy alias) |
 | Errors | `401` (JWT loaders); `404` `{ "error": "User not found" }` |
 | Side effects | Catalog seed sync + background seed thread (`auth.me`) |
 | Compatibility risk | **MEDIUM** — shape differs from template `UserRead` |
@@ -162,9 +162,9 @@
 
 | Field | Detail |
 |-------|--------|
-| Request | `{ "email": string }` — optional legacy `username` for pre-email accounts |
+| Request | `{ "email": string }` |
 | Success | `200`, `{ "message": "..." }` |
-| Production limitation | When `SMTP_HOST` + `SMTP_FROM` are set, sends reset link to the user's registered email. **`reset_token` still returned only when `DEBUG` or `TESTING`**. Legacy username-only accounts (`@users.ontrack.local`) can still request reset via `username` but cannot receive mail unless a real email is on file. |
+| Production limitation | When `SMTP_HOST` + `SMTP_FROM` are set, sends reset link to the user's registered email. **`reset_token` still returned only when `DEBUG` or `TESTING`**. |
 
 ### A11 — `POST /api/auth/reset-password`
 
@@ -402,7 +402,7 @@ For each row above, automated tests must assert:
 1. Status code for happy path and primary error paths.
 2. JSON key names and nesting (not just Pydantic model names).
 3. Array vs object top-level type.
-4. Nullable fields present vs omitted (document per endpoint; user `to_dict` omits synthetic email).
+4. Nullable fields present vs omitted (document per endpoint).
 5. Date format `YYYY-MM-DD` strings.
 6. `401` triggers frontend logout path (header format).
 

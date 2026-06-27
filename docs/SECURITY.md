@@ -79,7 +79,6 @@ Misconfiguration causes register/login failures from the browser despite healthy
 
 - API generates time-limited reset token (1 hour)
 - When `SMTP_HOST` and `SMTP_FROM` are configured, backend emails a reset link to the user's registered email
-- New local accounts register with a real email; legacy username-only accounts (`@users.ontrack.local`) cannot receive mail unless they add a deliverable address
 - `reset_token` in JSON response remains limited to `DEBUG` / `TESTING` only
 
 ---

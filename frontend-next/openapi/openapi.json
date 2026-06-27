@@ -2636,11 +2636,6 @@
             "type": "string",
             "title": "Email",
             "default": ""
-          },
-          "username": {
-            "type": "string",
-            "title": "Username",
-            "default": ""
           }
         },
         "type": "object",
@@ -2675,11 +2670,6 @@
           "email": {
             "type": "string",
             "title": "Email",
-            "default": ""
-          },
-          "username": {
-            "type": "string",
-            "title": "Username",
             "default": ""
           },
           "password": {
