@@ -5,7 +5,7 @@ import pytest
 from alembic import command
 from alembic.config import Config
 from app.core.config import get_settings
-from app.models.tables import FOUNDATION_FORBIDDEN_TABLES, ONTRACK_TABLES
+from app.models.tables import FOUNDATION_FORBIDDEN_TABLES, MIGRATION_STASH_TABLES, ONTRACK_TABLES
 from sqlalchemy import inspect, text
 from sqlalchemy.engine import create_engine
 
@@ -62,5 +62,5 @@ def test_migrations_fresh_creates_ontrack_schema_only(fresh_postgres: str, monke
     engine.dispose()
 
     assert ONTRACK_TABLES <= tables
-    assert tables - ONTRACK_TABLES == {"alembic_version"}
+    assert tables - ONTRACK_TABLES - MIGRATION_STASH_TABLES == {"alembic_version"}
     assert tables.isdisjoint(FOUNDATION_FORBIDDEN_TABLES)

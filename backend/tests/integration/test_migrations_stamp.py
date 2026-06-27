@@ -16,7 +16,9 @@ from app.db.schema_validate import (
     collect_schema_diffs,
 )
 from app.models.tables import ONTRACK_INITIAL_HEAD_TABLES
+from app.scripts.restore_post_catalog_migration import restore_post_catalog_migration
 from sqlalchemy import create_engine, inspect, text
+from sqlalchemy.orm import sessionmaker
 
 BACKEND_ROOT = Path(__file__).resolve().parents[2]
 
@@ -104,5 +106,13 @@ def test_stamp_existing_schema_has_empty_diff(legacy_migrated_postgres: str, mon
     with engine.connect() as conn:
         after_upgrade = conn.execute(text("SELECT version_num FROM alembic_version")).scalar()
     assert after_upgrade == ONTRACK_ALEMBIC_CATALOG_HEAD
+
+    restore_session = sessionmaker(bind=create_engine(legacy_migrated_postgres))()
+    try:
+        restore_post_catalog_migration(restore_session)
+        restore_session.commit()
+    finally:
+        restore_session.close()
+
     assert_schema_parity(engine)
     engine.dispose()
