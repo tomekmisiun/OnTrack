@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import pytest
-
 from app.domain.package_math import (
     default_package_weight,
     package_line_costs,

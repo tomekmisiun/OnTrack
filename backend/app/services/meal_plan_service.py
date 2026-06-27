@@ -7,7 +7,6 @@ from app.domain.package_math import (
     package_line_costs,
     price_per_package,
 )
-
 from app.models.household_member import HouseholdMember
 from app.models.meal_plan import MealPlan
 from app.models.recipe import Recipe, RecipeIngredient
