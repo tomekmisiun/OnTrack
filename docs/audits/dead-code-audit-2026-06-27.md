@@ -242,7 +242,7 @@ OnTrack to dojrzała aplikacja FastAPI + Next.js z szerokim pokryciem testami ko
 | 6 Auth path config | `chore/refactor-auth-path-config` | #160 | ✅ merged |
 | 7 Legacy root `app/` | `chore/dead-code-legacy-app-tooling` | #161 | ✅ merged |
 | 8 Export script import | `chore/fix-export-user-catalog-import` | #162 | ✅ merged |
-| 9 `recipe_parse_logs` drop | — | — | backlog (schema) |
+| 9 `recipe_parse_logs` drop | `chore/drop-recipe-parse-logs` | — | in PR |
 | 10 Export summary parity | — | — | backlog (research) |
 
 ---

@@ -1,6 +1,6 @@
 # Current state
 
-**Last verified:** 2026-06-27 (code at `main`, Alembic head `c2d3e4f5a6b7`)
+**Last verified:** 2026-06-27 (code at `main`, Alembic head `d3e4f5a6b7c8`)
 
 OnTrack is a **meal planner and budget tracker** for households. Production runs on **Railway** with a **FastAPI** API and **Next.js 15** frontend against **PostgreSQL 15**.
 
@@ -62,7 +62,7 @@ API contract matrix: [`backend-migration/API_CONTRACT.md`](./backend-migration/A
 ## Database
 
 - **Engine:** PostgreSQL 15
-- **Alembic head:** `c2d3e4f5a6b7` (`backfill_user_product_normalized_name`)
+- **Alembic head:** `d3e4f5a6b7c8` (`drop_recipe_parse_logs`)
 - **Pre-deploy on Railway:** `run-migrations.sh` → Alembic upgrade → `import_catalog` → `restore_post_catalog_migration`
 
 Recent migration chain (simplified): initial schema → global catalog columns → UI locale/market → catalog market model → user product backfill.

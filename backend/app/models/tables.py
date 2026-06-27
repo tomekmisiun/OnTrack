@@ -9,7 +9,6 @@ ONTRACK_INITIAL_HEAD_TABLES = frozenset(
         "meal_plans",
         "products",
         "recipe_ingredients",
-        "recipe_parse_logs",
         "recipes",
         "users",
     }

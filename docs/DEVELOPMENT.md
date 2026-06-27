@@ -107,7 +107,7 @@ Railway-specific notes: [DEPLOYMENT.md](./DEPLOYMENT.md)
 ```bash
 cd backend
 uv run alembic upgrade head
-uv run alembic current   # should show c2d3e4f5a6b7 (head) at time of writing
+uv run alembic current   # should show d3e4f5a6b7c8 (head) at time of writing
 ```
 
 Create new migration after model changes:

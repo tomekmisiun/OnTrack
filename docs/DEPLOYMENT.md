@@ -92,7 +92,7 @@ Script steps (`backend/scripts/run-migrations.sh`):
 
 If pre-deploy exits non-zero, Railway aborts the deployment. Check **Pre-deploy** logs in the deployment view.
 
-Expected Alembic head at time of writing: **`c2d3e4f5a6b7`**
+Expected Alembic head at time of writing: **`d3e4f5a6b7c8`**
 
 ---
 
