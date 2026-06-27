@@ -47,6 +47,8 @@ Both deploy jobs checkout and deploy **`github.sha`** from the workflow run — 
 
 Configure under **Settings → Environments**. Production should have **Required reviewers**.
 
+**Railway tokens:** generate a **Project Token** per Railway environment (Project → select environment → Settings → Tokens). Put the staging token only in GitHub Environment `staging`, and the production token only in `production`. Do not pass `--environment` in CI — the token already scopes the target environment.
+
 ---
 
 ## Approve production
@@ -66,10 +68,10 @@ After merge to `main`:
 | Job | When | Purpose |
 |-----|------|---------|
 | `test`, `frontend-next`, e2e, docker, integration | PR + `main` | Quality gates |
-| `deploy-staging` | `main` push only | `railway up --environment staging` |
+| `deploy-staging` | `main` push only | `railway up` (staging token) |
 | `wait-staging-ready` | after staging deploy | Poll `/health/ready` |
 | `staging-smoke` | after readiness | Auth smoke on staging |
-| `deploy-production` | after staging smoke + approval | `railway up --environment production` |
+| `deploy-production` | after staging smoke + approval | `railway up` (production token) |
 | `production-smoke` | after production deploy | Readiness + auth smoke |
 
 Optional (not part of release gate): **Visual regression**, **Production auth smoke** (scheduled), **Staging auth smoke** (manual).
