@@ -55,7 +55,8 @@ API contract matrix: [`backend-migration/API_CONTRACT.md`](./backend-migration/A
 | Password reset UX | Login forgot/reset flow; SMTP required on backend for outbound mail |
 | BFF auth mode | Implemented in Next.js; **not enabled in production** (`NEXT_PUBLIC_BFF_ENABLED` unset) |
 | Visual regression | Playwright visual tests exist; not in required CI |
-| Staging environment | Documented historically; no dedicated staging service in repo config |
+| Staging environment | Runbook in DEPLOYMENT.md; manual Railway project; optional `staging-smoke.yml` |
+| Error tracking (Sentry) | Optional — `SENTRY_DSN` (API), `NEXT_PUBLIC_SENTRY_DSN` (frontend) |
 
 ---
 
