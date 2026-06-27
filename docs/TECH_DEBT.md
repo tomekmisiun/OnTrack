@@ -105,8 +105,8 @@ Concrete issues with code evidence. Priority: **P0** (production risk) → **P3*
 | **Problem** | External links and old README sections pointed at removed paths |
 | **Evidence** | Prior doc audit 2026-06-27 |
 | **Risk** | Wrong setup instructions |
-| **Suggested fix** | Completed in docs reset — monitor on future moves |
-| **Priority** | P3 |
+| **Suggested fix** | Completed in docs reset (#163) — monitor on future moves |
+| **Priority** | P3 — **Resolved** |
 
 ---
 
