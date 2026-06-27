@@ -24,8 +24,6 @@ export const PROTECTED_PATHS = [
   ...APP_NAV_ITEMS.map((item) => item.path),
 ] as const;
 
-export const PUBLIC_PATHS = ["/login"] as const;
-
 export function isProtectedPath(pathname: string): boolean {
   return PROTECTED_PATHS.some(
     (path) => pathname === path || pathname.startsWith(`${path}/`),

@@ -68,8 +68,8 @@ public/        — Static assets
 ## API client
 
 - Base URL from `NEXT_PUBLIC_API_URL` via `lib/config/env.ts`
-- `lib/api/client.ts` — `createApiClient()` with optional Bearer token hook (unused in foundation)
-- `lib/api/health.ts` — `GET /health` smoke test
+- `lib/api/client.ts` — `createApiClient()` with optional Bearer token hook
+- `lib/api/auth.ts` — login, register, session helpers
 
 OpenAPI-generated types: `npm run export:openapi` then `npm run generate:api` → `lib/api/generated/schema.ts`.
 
@@ -86,7 +86,7 @@ npm run generate:api
 - Committed snapshot: `openapi/openapi.json`
 - Generated types: `lib/api/generated/schema.ts` (do not edit by hand)
 - Helpers: `lib/api/openapi-helpers.ts` (`OperationResponse`, `ApiSchema`)
-- Example modules: `lib/api/health.ts`, `lib/api/auth.ts`
+- Example modules: `lib/api/auth.ts`
 
 ## Authentication
 
