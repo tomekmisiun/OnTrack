@@ -8,12 +8,12 @@ set -eu
 API_URL="${API_URL:?Set API_URL to the FastAPI base URL (no trailing slash)}"
 FRONTEND_ORIGIN="${FRONTEND_ORIGIN:-http://localhost:3000}"
 
-USER="verify_$(date +%s)_$$"
+EMAIL="verify_$(date +%s)_$$@example.com"
 PASS="VerifyPass123!"
 
 echo "=== OnTrack auth verify: $API_URL ==="
 echo "Origin header: $FRONTEND_ORIGIN"
-echo "Test user: $USER"
+echo "Test user: $EMAIL"
 
 fail() {
   echo "FAIL: $1"
@@ -41,7 +41,7 @@ register_code=$(curl -s -o "$register_body" -w '%{http_code}' \
   -X POST "$API_URL/api/auth/register" \
   -H 'Content-Type: application/json' \
   -H "Origin: $FRONTEND_ORIGIN" \
-  -d "{\"username\":\"$USER\",\"password\":\"$PASS\",\"lang\":\"pl\"}")
+  -d "{\"email\":\"$EMAIL\",\"password\":\"$PASS\",\"lang\":\"pl\"}")
 check_status "POST /api/auth/register" "201" "$register_code"
 grep -q '"token"' "$register_body" || fail "register response missing token"
 TOKEN=$(sed -n 's/.*"token"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' "$register_body" | head -1)
@@ -60,11 +60,11 @@ login_code=$(curl -s -o "$login_body" -w '%{http_code}' \
   -X POST "$API_URL/api/auth/login" \
   -H 'Content-Type: application/json' \
   -H "Origin: $FRONTEND_ORIGIN" \
-  -d "{\"username\":\"$USER\",\"password\":\"$PASS\"}")
+  -d "{\"email\":\"$EMAIL\",\"password\":\"$PASS\"}")
 check_status "POST /api/auth/login" "200" "$login_code"
 grep -q '"token"' "$login_body" || fail "login response missing token"
 
 rm -f "$register_body" "$me_body" "$login_body" /tmp/ontrack-verify-health.json
 
 echo "=== Auth verify passed ==="
-echo "Registered and authenticated user: $USER"
+echo "Registered and authenticated user: $EMAIL"

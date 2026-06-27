@@ -44,9 +44,9 @@ export type AuthContextValue = {
   deleteAccount: () => Promise<void>;
   updateUserLang: (lang: LangCode) => void;
   updateUserMarket: (marketCode: MarketCode) => void;
-  loginWithPassword: (username: string, password: string) => Promise<void>;
+  loginWithPassword: (email: string, password: string) => Promise<void>;
   registerAccount: (input: {
-    username: string;
+    email: string;
     password: string;
     lang: LangCode;
   }) => Promise<void>;
@@ -236,8 +236,8 @@ export function AuthProvider({ children, onLangChange }: AuthProviderProps) {
   }, [applyUser]);
 
   const loginWithPassword = useCallback(
-    async (username: string, password: string) => {
-      const { token } = await login(username, password);
+    async (email: string, password: string) => {
+      const { token } = await login(email, password);
       const pendingLang = getPendingLang();
       await finishAuth(token, pendingLang);
     },
@@ -245,9 +245,9 @@ export function AuthProvider({ children, onLangChange }: AuthProviderProps) {
   );
 
   const registerAccount = useCallback(
-    async (input: { username: string; password: string; lang: LangCode }) => {
+    async (input: { email: string; password: string; lang: LangCode }) => {
       const { token } = await register({
-        username: input.username,
+        email: input.email,
         password: input.password,
         lang: input.lang,
       });

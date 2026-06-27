@@ -7,7 +7,7 @@ import {
   logoutFromWelcome,
   registerUser,
   seedTokenInBrowser,
-  uniqueUsername,
+  uniqueEmail,
 } from "./helpers/auth-api";
 
 function todayIso(): string {
@@ -21,12 +21,12 @@ function todayIso(): string {
 test.describe("meal calendar persistence (real API)", () => {
   test("saved meal survives reload and re-login", async ({ page, request }) => {
     test.setTimeout(120_000);
-    const username = uniqueUsername();
+    const email = uniqueEmail();
     const password = "TestPass123!";
     const mealDate = todayIso();
 
-    await registerUser(request, username, password);
-    const token = await loginUser(request, username, password);
+    await registerUser(request, email, password);
+    const token = await loginUser(request, email, password);
     const memberId = await getPrimaryMemberId(request, token);
     const recipeId = await getFirstRecipeId(request, token);
 
@@ -62,7 +62,7 @@ test.describe("meal calendar persistence (real API)", () => {
     await logoutFromWelcome(page);
 
     await page.getByRole("button", { name: /log in|zaloguj/i }).click();
-    await page.locator("#login-username").fill(username);
+    await page.locator("#login-email").fill(email);
     await page.locator("#login-password").fill(password);
     await page
       .locator("form")

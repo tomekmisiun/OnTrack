@@ -2,12 +2,13 @@ from pydantic import BaseModel
 
 
 class LoginRequest(BaseModel):
-    username: str = ""
+    email: str = ""
+    username: str = ""  # legacy — username lookup for pre-email accounts
     password: str = ""
 
 
 class RegisterRequest(BaseModel):
-    username: str = ""
+    email: str = ""
     password: str = ""
     lang: str = "pl"
 
@@ -30,7 +31,8 @@ class PasswordChangeRequest(BaseModel):
 
 
 class ForgotPasswordRequest(BaseModel):
-    username: str = ""
+    email: str = ""
+    username: str = ""  # legacy — username lookup for pre-email accounts
 
 
 class ResetPasswordRequest(BaseModel):

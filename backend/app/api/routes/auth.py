@@ -54,7 +54,7 @@ def login(
 ) -> JSONResponse:
     check_rate_limit(request, scope="auth_login", max_requests=20, window_seconds=60)
     try:
-        token = auth_service.login(session, body.username, body.password)
+        token = auth_service.login(session, body.email, body.password, username=body.username)
     except auth_service.AuthServiceError as exc:
         return _service_error(exc)
     return JSONResponse(content={"token": token})
@@ -68,7 +68,7 @@ def register(
 ) -> JSONResponse:
     check_rate_limit(request, scope="auth_register", max_requests=10, window_seconds=60)
     try:
-        token = auth_service.register(session, body.username, body.password, body.lang)
+        token = auth_service.register(session, body.email, body.password, body.lang)
     except auth_service.AuthServiceError as exc:
         return _service_error(exc)
     return JSONResponse(status_code=201, content={"token": token})
@@ -137,7 +137,7 @@ def forgot_password(
     session: Session = Depends(get_db_session),
 ) -> JSONResponse:
     check_rate_limit(request, scope="auth_forgot", max_requests=10, window_seconds=60)
-    data = auth_service.forgot_password(session, body.username)
+    data = auth_service.forgot_password(session, body.email, username=body.username)
     return JSONResponse(content=data)
 
 

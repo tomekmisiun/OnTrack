@@ -43,7 +43,9 @@ from app.services.user_preferences import (
 from app.services.user_presenter import user_to_dict
 
 USERNAME_RE = re.compile(r"^[a-zA-Z0-9_]{3,80}$")
+EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 MIN_PASSWORD_LEN = 8
+SYNTHETIC_EMAIL_SUFFIX = "@users.ontrack.local"
 
 
 class AuthServiceError(Exception):
@@ -57,57 +59,81 @@ def _normalize_username(raw: str) -> str:
     return (raw or "").strip().lower()
 
 
-def _validate_username(username: str) -> str | None:
-    if not USERNAME_RE.match(username):
-        return "Username must be 3–80 characters (letters, numbers, underscore only)"
-    return None
-
-
 def _validate_password(password: str) -> str | None:
     if len(password or "") < MIN_PASSWORD_LEN:
         return f"Password must be at least {MIN_PASSWORD_LEN} characters"
     return None
 
 
-def _synthetic_email(username: str) -> str:
-    return f"{username}@users.ontrack.local"
+def _normalize_email(raw: str) -> str:
+    return (raw or "").strip().lower()
+
+
+def _validate_email(email: str) -> str | None:
+    if not EMAIL_RE.match(email):
+        return "Valid email address is required"
+    if email.endswith(SYNTHETIC_EMAIL_SUFFIX):
+        return "Valid email address is required"
+    return None
+
+
+def _optional_username_from_email(email: str) -> str | None:
+    local = email.split("@", 1)[0]
+    if USERNAME_RE.match(local):
+        return local
+    return None
+
+
+def _find_user_by_login_identifier(session: Session, raw: str) -> User | None:
+    identifier = (raw or "").strip()
+    if not identifier:
+        return None
+    if "@" in identifier:
+        email = _normalize_email(identifier)
+        return session.query(User).filter(User.email.ilike(email)).first()
+    username = _normalize_username(identifier)
+    return session.query(User).filter_by(username=username).first()
 
 
 def issue_token(user_id: int) -> str:
     return create_access_token(user_id)
 
 
-def login(session: Session, username: str, password: str) -> str:
-    username = _normalize_username(username)
-    if not username or not password:
-        raise AuthServiceError("Username and password are required", 400)
+def login(session: Session, email: str, password: str, *, username: str = "") -> str:
+    identifier = email or username
+    if not identifier.strip() or not password:
+        raise AuthServiceError("Email and password are required", 400)
 
     ensure_global_catalog_loaded(session)
 
-    user = session.query(User).filter_by(username=username).first()
+    user = _find_user_by_login_identifier(session, identifier)
     if not user or not verify_password(user.password_hash, password):
-        raise AuthServiceError("Invalid username or password", 401)
+        raise AuthServiceError("Invalid email or password", 401)
 
     sync_primary_member_name(session, user)
     return issue_token(user.id)
 
 
-def register(session: Session, username: str, password: str, lang: str) -> str:
-    username = _normalize_username(username)
+def register(session: Session, email: str, password: str, lang: str) -> str:
+    email = _normalize_email(email)
     ui_locale = lang if lang in UI_LOCALES else "pl"
 
-    err = _validate_username(username) or _validate_password(password)
+    err = _validate_email(email) or _validate_password(password)
     if err:
         raise AuthServiceError(err, 400)
 
-    if session.query(User).filter_by(username=username).first():
-        raise AuthServiceError("Username already taken", 409)
+    if session.query(User).filter(User.email.ilike(email)).first():
+        raise AuthServiceError("Email already registered", 409)
 
     ensure_global_catalog_loaded(session)
 
+    optional_username = _optional_username_from_email(email)
+    if optional_username and session.query(User).filter_by(username=optional_username).first():
+        optional_username = None
+
     user = User(
-        email=_synthetic_email(username),
-        username=username,
+        email=email,
+        username=optional_username,
         password_hash=hash_password(password),
     )
     init_user_preferences(
@@ -158,9 +184,8 @@ def change_password(
     session.commit()
 
 
-def forgot_password(session: Session, username: str) -> dict:
-    normalized = _normalize_username(username)
-    user = session.query(User).filter_by(username=normalized).first()
+def forgot_password(session: Session, email: str, *, username: str = "") -> dict:
+    user = _find_user_by_login_identifier(session, email or username)
     message = "If the account exists, a reset link has been sent."
     if not user:
         return {"message": message}

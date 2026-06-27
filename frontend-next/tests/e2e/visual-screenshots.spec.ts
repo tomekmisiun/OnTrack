@@ -31,7 +31,7 @@ for (const viewport of VIEWPORTS) {
     test("login", async ({ page }) => {
       await prepareVisualPage(page);
       await page.goto("/login");
-      await expect(page.locator("#login-username")).toBeVisible();
+      await expect(page.locator("#login-email")).toBeVisible();
       await stabilizeLoginMedia(page);
       await expect(page).toHaveScreenshot(`login-${viewport.name}.png`, {
         fullPage: true,

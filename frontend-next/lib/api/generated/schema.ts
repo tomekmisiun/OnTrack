@@ -852,6 +852,11 @@ export interface components {
         /** ForgotPasswordRequest */
         ForgotPasswordRequest: {
             /**
+             * Email
+             * @default
+             */
+            email: string;
+            /**
              * Username
              * @default
              */
@@ -872,6 +877,11 @@ export interface components {
         };
         /** LoginRequest */
         LoginRequest: {
+            /**
+             * Email
+             * @default
+             */
+            email: string;
             /**
              * Username
              * @default
@@ -1032,10 +1042,10 @@ export interface components {
         /** RegisterRequest */
         RegisterRequest: {
             /**
-             * Username
+             * Email
              * @default
              */
-            username: string;
+            email: string;
             /**
              * Password
              * @default

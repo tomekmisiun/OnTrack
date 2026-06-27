@@ -1,21 +1,17 @@
 import { expect, test } from "@playwright/test";
-import { logoutFromWelcome, waitForWelcomePage } from "./helpers/auth-api";
-
-function uniqueUsername(): string {
-  return `e2e_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
-}
+import { logoutFromWelcome, uniqueEmail, waitForWelcomePage } from "./helpers/auth-api";
 
 test.describe("auth full-stack (real API)", () => {
   test("register, login session, protected route, refresh, logout", async ({
     page,
   }) => {
     test.setTimeout(120_000);
-    const username = uniqueUsername();
+    const email = uniqueEmail();
     const password = "TestPass123!";
 
     await page.goto("/login");
     await page.getByRole("button", { name: /sign up|rejestracja/i }).click();
-    await page.locator("#login-username").fill(username);
+    await page.locator("#login-email").fill(email);
     await page.locator("#login-password").fill(password);
     await page
       .locator("form")

@@ -79,9 +79,9 @@
 
 | Field | Detail |
 |-------|--------|
-| Request body | `{ "username": string, "password": string }` |
+| Request body | `{ "email": string, "password": string }` — optional legacy `username` for pre-email accounts |
 | Success | `200`, `{ "token": string }` |
-| Errors | `400` `{ "error": "Username and password are required" }`; `401` `{ "error": "Invalid username or password" }` |
+| Errors | `400` `{ "error": "Email and password are required" }`; `401` `{ "error": "Invalid email or password" }` |
 | Frontend | Stores `res.data.token`, calls `/api/auth/me` via `finishAuth` |
 | Compatibility risk | **HIGH** — template returns `{ access_token, refresh_token }`; must return `{ token }` |
 
@@ -89,9 +89,9 @@
 
 | Field | Detail |
 |-------|--------|
-| Request body | `{ "username": string, "password": string, "lang": "pl" \| "en" }` |
+| Request body | `{ "email": string, "password": string, "lang": "pl" \| "en" }` |
 | Success | `201`, `{ "token": string }` |
-| Errors | `400` validation message in `{ "error" }`; `409` `{ "error": "Username already taken" }` |
+| Errors | `400` validation message in `{ "error" }`; `409` `{ "error": "Email already registered" }` |
 | Side effects | Creates user, primary member, seeds catalog (`auth.register`) |
 | Compatibility risk | **HIGH** — template registers by email, returns `UserRead`, no token |
 
@@ -162,9 +162,9 @@
 
 | Field | Detail |
 |-------|--------|
-| Request | `{ "username": string }` |
+| Request | `{ "email": string }` — optional legacy `username` for pre-email accounts |
 | Success | `200`, `{ "message": "..." }` |
-| Production limitation | When `SMTP_HOST` + `SMTP_FROM` are set, sends reset link to deliverable user email. **`reset_token` still returned only when `DEBUG` or `TESTING`**. Local username accounts use `@users.ontrack.local` and cannot receive mail — use Google OAuth or configure SMTP for OAuth-linked accounts. |
+| Production limitation | When `SMTP_HOST` + `SMTP_FROM` are set, sends reset link to the user's registered email. **`reset_token` still returned only when `DEBUG` or `TESTING`**. Legacy username-only accounts (`@users.ontrack.local`) can still request reset via `username` but cannot receive mail unless a real email is on file. |
 
 ### A11 — `POST /api/auth/reset-password`
 
