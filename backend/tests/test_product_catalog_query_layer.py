@@ -1,7 +1,6 @@
 from app.domain.product_normalize import normalize_product_name
 from app.models.product import Product
 from app.models.product_market_price import ProductMarketPrice
-from app.models.product_translation import ProductTranslation
 from app.scripts.import_catalog import import_catalog
 
 
@@ -38,7 +37,7 @@ def _add_user_product(db_session, user, name: str, *, market_code: str = "PL", p
 
 def test_list_includes_system_and_own_products(client, auth_headers, user, db_session):
     import_catalog(db_session)
-    own = _add_user_product(db_session, user, "Moj prywatny produkt")
+    _add_user_product(db_session, user, "Moj prywatny produkt")
 
     res = client.get(
         "/api/products/",

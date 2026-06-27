@@ -342,17 +342,33 @@ def update_product(session: Session, user_id: int, product_id: int, data: dict) 
             (row for row in product.market_prices if row.market_code == market_code),
             None,
         )
+        price = (
+            float(data["price"])
+            if "price" in data
+            else (existing_row.amount if existing_row else 0)
+        )
+        package_weight = (
+            float(data["package_weight"])
+            if "package_weight" in data
+            else (existing_row.package_weight if existing_row else 100)
+        )
+        unit = (
+            str(data["unit"])[:10]
+            if "unit" in data
+            else (existing_row.unit if existing_row else "g")
+        )
+        sold_by_weight = (
+            bool(data["sold_by_weight"])
+            if "sold_by_weight" in data
+            else (existing_row.sold_by_weight if existing_row else False)
+        )
         _upsert_user_market_price(
             product,
             market_code=market_code,
-            price=float(data["price"]) if "price" in data else (existing_row.amount if existing_row else 0),
-            package_weight=float(data["package_weight"])
-            if "package_weight" in data
-            else (existing_row.package_weight if existing_row else 100),
-            unit=str(data["unit"])[:10] if "unit" in data else (existing_row.unit if existing_row else "g"),
-            sold_by_weight=bool(data["sold_by_weight"])
-            if "sold_by_weight" in data
-            else (existing_row.sold_by_weight if existing_row else False),
+            price=price,
+            package_weight=package_weight,
+            unit=unit,
+            sold_by_weight=sold_by_weight,
         )
     for macro in ("kcal", "protein", "fat", "carbs"):
         if macro in data and data[macro] is not None:

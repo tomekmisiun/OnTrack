@@ -103,7 +103,6 @@ def test_product_list_shows_all_user_products_regardless_of_market(
 
     from app.models.product import Product
     from app.models.product_market_price import ProductMarketPrice
-    from app.domain.product_normalize import normalize_product_name
 
     pl_only = Product(
         user_id=user.id,

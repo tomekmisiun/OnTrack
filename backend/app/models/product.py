@@ -1,7 +1,15 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 from sqlalchemy import Float, ForeignKey, Integer, String, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
+
+if TYPE_CHECKING:
+    from app.models.product_market_price import ProductMarketPrice
+    from app.models.product_translation import ProductTranslation
 
 
 class Product(Base):
@@ -23,11 +31,11 @@ class Product(Base):
     carbs: Mapped[float] = mapped_column(Float, nullable=False)
     sort_index: Mapped[int | None] = mapped_column(Integer, nullable=True)
 
-    translations: Mapped[list["ProductTranslation"]] = relationship(
+    translations: Mapped[list[ProductTranslation]] = relationship(
         back_populates="product",
         cascade="all, delete-orphan",
     )
-    market_prices: Mapped[list["ProductMarketPrice"]] = relationship(
+    market_prices: Mapped[list[ProductMarketPrice]] = relationship(
         back_populates="product",
         cascade="all, delete-orphan",
     )

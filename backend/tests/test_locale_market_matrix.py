@@ -10,9 +10,7 @@ from app.domain.product_normalize import normalize_product_name
 from app.models.meal_plan import MealPlan
 from app.models.product import Product
 from app.models.product_market_price import ProductMarketPrice
-from app.models.product_translation import ProductTranslation
-from app.models.recipe import Recipe, RecipeIngredient
-from app.models.recipe_translation import RecipeTranslation
+from app.models.recipe import Recipe
 from app.scripts.import_catalog import import_catalog
 
 from tests.conftest import create_user

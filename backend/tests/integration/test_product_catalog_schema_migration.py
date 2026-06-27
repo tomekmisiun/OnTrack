@@ -61,7 +61,7 @@ def legacy_migrated_db(postgres_url: str, monkeypatch):
 
     cfg = Config(str(BACKEND_ROOT / "alembic.ini"))
     cfg.set_main_option("script_location", str(BACKEND_ROOT / "alembic"))
-    command.upgrade(cfg, "7966d120d748")
+    command.upgrade(cfg, "a2b3c4d5e6f7")
 
     Session = sessionmaker(bind=create_engine(postgres_url))
     session = Session()

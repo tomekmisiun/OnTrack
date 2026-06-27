@@ -6,10 +6,10 @@ from sqlalchemy.orm import Session, joinedload
 from app.models.household_member import HouseholdMember
 from app.models.meal_plan import MealPlan
 from app.models.recipe import Recipe, RecipeIngredient
+from app.services.catalog_resolver import resolve_product
 from app.services.meal_plan_presenter import meal_to_dict
 from app.services.recipe_service import RecipeServiceError as RecipeLookupError
 from app.services.recipe_service import load_visible_recipe
-from app.services.catalog_resolver import resolve_product
 from app.services.user_preferences import market_code_for_user, ui_locale_for_user
 
 
@@ -118,7 +118,12 @@ def get_day(
         .order_by(MealPlan.position)
         .all()
     )
-    return [meal_to_dict(m, locale=ui_locale_for_user(session, user_id), market_code=market_code_for_user(session, user_id), recipe_summary=True) for m in meals]
+    locale = ui_locale_for_user(session, user_id)
+    market_code = market_code_for_user(session, user_id)
+    return [
+        meal_to_dict(m, locale=locale, market_code=market_code, recipe_summary=True)
+        for m in meals
+    ]
 
 
 def get_range(

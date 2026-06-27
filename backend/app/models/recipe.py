@@ -1,14 +1,20 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 from sqlalchemy import Float, ForeignKey, Integer, String, Text, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db.base import Base
+from app.models.product import Product
+
+if TYPE_CHECKING:
+    from app.models.recipe_translation import RecipeTranslation
 
 
 class Recipe(Base):
     __tablename__ = "recipes"
-    __table_args__ = (
-        UniqueConstraint("catalog_key", name="uq_recipes_catalog_key"),
-    )
+    __table_args__ = (UniqueConstraint("catalog_key", name="uq_recipes_catalog_key"),)
 
     id: Mapped[int] = mapped_column(primary_key=True)
     user_id: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
@@ -26,11 +32,11 @@ class Recipe(Base):
     carbs_100g: Mapped[float] = mapped_column(Float, nullable=False, default=0)
     is_favorite: Mapped[bool] = mapped_column(default=False)
 
-    translations: Mapped[list["RecipeTranslation"]] = relationship(
+    translations: Mapped[list[RecipeTranslation]] = relationship(
         back_populates="recipe",
         cascade="all, delete-orphan",
     )
-    ingredients: Mapped[list["RecipeIngredient"]] = relationship(
+    ingredients: Mapped[list[RecipeIngredient]] = relationship(
         back_populates="recipe",
         cascade="all, delete-orphan",
     )
@@ -40,10 +46,12 @@ class RecipeIngredient(Base):
     __tablename__ = "recipe_ingredients"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    recipe_id: Mapped[int] = mapped_column(ForeignKey("recipes.id", ondelete="CASCADE"), nullable=False)
+    recipe_id: Mapped[int] = mapped_column(
+        ForeignKey("recipes.id", ondelete="CASCADE"), nullable=False
+    )
     product_id: Mapped[int] = mapped_column(ForeignKey("products.id"), nullable=False)
     weight: Mapped[float] = mapped_column(Float, nullable=False)
     unit: Mapped[str] = mapped_column(String(10), nullable=False, default="g")
 
-    recipe: Mapped["Recipe"] = relationship(back_populates="ingredients")
-    product: Mapped["Product"] = relationship()
+    recipe: Mapped[Recipe] = relationship(back_populates="ingredients")
+    product: Mapped[Product] = relationship()

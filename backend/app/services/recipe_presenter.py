@@ -41,7 +41,9 @@ def _total_weight(recipe: Recipe, *, locale: str, market_code: str) -> float:
     )
 
 
-def _calc_macros(recipe: Recipe, *, locale: str, market_code: str) -> tuple[int, float, float, float]:
+def _calc_macros(
+    recipe: Recipe, *, locale: str, market_code: str
+) -> tuple[int, float, float, float]:
     if recipe.kcal_100g is not None:
         total = _total_weight(recipe, locale=locale, market_code=market_code)
         factor = total / 100.0

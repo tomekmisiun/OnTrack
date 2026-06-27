@@ -3,8 +3,6 @@
 from __future__ import annotations
 
 from app.models.product import Product
-from app.models.product_market_price import ProductMarketPrice
-from app.models.product_translation import ProductTranslation
 from app.models.recipe import Recipe
 from app.scripts.import_catalog import import_catalog
 

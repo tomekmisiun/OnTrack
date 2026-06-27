@@ -26,7 +26,12 @@ def upgrade() -> None:
     op.create_table(
         "product_translations",
         sa.Column("id", sa.Integer(), nullable=False),
-        sa.Column("product_id", sa.Integer(), sa.ForeignKey("products.id", ondelete="CASCADE"), nullable=False),
+        sa.Column(
+            "product_id",
+            sa.Integer(),
+            sa.ForeignKey("products.id", ondelete="CASCADE"),
+            nullable=False,
+        ),
         sa.Column("locale", sa.String(length=5), nullable=False),
         sa.Column("name", sa.String(length=255), nullable=False),
         sa.PrimaryKeyConstraint("id"),
@@ -35,7 +40,12 @@ def upgrade() -> None:
     op.create_table(
         "product_market_prices",
         sa.Column("id", sa.Integer(), nullable=False),
-        sa.Column("product_id", sa.Integer(), sa.ForeignKey("products.id", ondelete="CASCADE"), nullable=False),
+        sa.Column(
+            "product_id",
+            sa.Integer(),
+            sa.ForeignKey("products.id", ondelete="CASCADE"),
+            nullable=False,
+        ),
         sa.Column("market_code", sa.String(length=10), nullable=False),
         sa.Column("amount", sa.Float(), nullable=False),
         sa.Column("currency", sa.String(length=3), nullable=False),
@@ -43,12 +53,19 @@ def upgrade() -> None:
         sa.Column("unit", sa.String(length=10), nullable=False, server_default="g"),
         sa.Column("sold_by_weight", sa.Boolean(), nullable=False, server_default=sa.text("false")),
         sa.PrimaryKeyConstraint("id"),
-        sa.UniqueConstraint("product_id", "market_code", name="uq_product_market_prices_product_market"),
+        sa.UniqueConstraint(
+            "product_id", "market_code", name="uq_product_market_prices_product_market"
+        ),
     )
     op.create_table(
         "recipe_translations",
         sa.Column("id", sa.Integer(), nullable=False),
-        sa.Column("recipe_id", sa.Integer(), sa.ForeignKey("recipes.id", ondelete="CASCADE"), nullable=False),
+        sa.Column(
+            "recipe_id",
+            sa.Integer(),
+            sa.ForeignKey("recipes.id", ondelete="CASCADE"),
+            nullable=False,
+        ),
         sa.Column("locale", sa.String(length=5), nullable=False),
         sa.Column("name", sa.String(length=255), nullable=False),
         sa.Column("notes", sa.Text(), nullable=True),
@@ -58,9 +75,8 @@ def upgrade() -> None:
 
     # --- user-owned rows: preserve name + market price before dropping columns ---
     op.add_column("products", sa.Column("user_name", sa.String(length=255), nullable=True))
-    op.execute(
-        sa.text("UPDATE products SET user_name = name WHERE user_id IS NOT NULL")
-    )
+    op.add_column("products", sa.Column("sort_index", sa.Integer(), nullable=True))
+    op.execute(sa.text("UPDATE products SET user_name = name WHERE user_id IS NOT NULL"))
     op.execute(
         sa.text(
             """
@@ -83,9 +99,7 @@ def upgrade() -> None:
     op.add_column("recipes", sa.Column("user_name", sa.String(length=255), nullable=True))
     # recipes.notes already exists on older schema — keep for user recipes
 
-    op.execute(
-        sa.text("UPDATE recipes SET user_name = name WHERE user_id IS NOT NULL")
-    )
+    op.execute(sa.text("UPDATE recipes SET user_name = name WHERE user_id IS NOT NULL"))
 
     # --- remove system catalog (re-seeded from canonical JSON) ---
     op.execute(
@@ -98,9 +112,7 @@ def upgrade() -> None:
             """
         )
     )
-    op.execute(
-        sa.text("DELETE FROM recipes WHERE source = 'system' AND user_id IS NULL")
-    )
+    op.execute(sa.text("DELETE FROM recipes WHERE source = 'system' AND user_id IS NULL"))
     op.execute(
         sa.text(
             """
@@ -111,9 +123,7 @@ def upgrade() -> None:
             """
         )
     )
-    op.execute(
-        sa.text("DELETE FROM products WHERE source = 'system' AND user_id IS NULL")
-    )
+    op.execute(sa.text("DELETE FROM products WHERE source = 'system' AND user_id IS NULL"))
 
     # --- drop old catalog indexes / constraints ---
     op.drop_index("uq_products_market_catalog_key_system", table_name="products")
