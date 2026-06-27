@@ -1,20 +1,23 @@
 # Testing guide
 
-How CI jobs map to local commands. The full backend suite is **~198 pytest tests**; CI runs subsets for speed.
+How CI jobs map to local commands. Prefer running the commands below rather than relying on fixed test counts — they change as the suite grows.
 
 ## Quick local checks
 
-| Target | Command | Approx. scope |
-|--------|---------|---------------|
-| Makefile default | `make test` | Contract subset + health + dish_compare (~subset) |
-| Full backend | `cd backend && uv run pytest -q` | All pytest tests |
-| Frontend unit | `cd frontend-next && npm run test` | Vitest (43 tests) |
+| Target | Command |
+|--------|---------|
+| Makefile default | `make test` |
+| Full backend | `cd backend && uv run pytest -q` |
+| Backend integration | `cd backend && TEST_DATABASE_URL=postgresql+psycopg://… uv run pytest tests/integration/ -v` |
+| Frontend unit | `cd frontend-next && npm run test` |
+| E2E smoke | `cd frontend-next && npm run test:e2e` |
+| E2E auth (full stack) | CI job `frontend-next-e2e-auth` — needs Postgres + backend running |
 
 ## CI job matrix
 
-| Job | Trigger | Working dir | Main commands | Test scope |
-|-----|---------|-------------|---------------|------------|
-| `test` | PR + `main` | `backend/` | ruff, build_catalog --check, validate_runtime_data, pytest subset, OpenAPI drift | `tests/contract/`, `test_health.py`, `test_dish_compare_data.py`, `test_catalog_pipeline.py`; cov ≥50% |
+| Job | Trigger | Working dir | Main commands | Scope |
+|-----|---------|-------------|---------------|-------|
+| `test` | PR + `main` | `backend/` | ruff, build_catalog --check, validate_runtime_data, pytest subset, OpenAPI drift | Contract tests, health, dish_compare, catalog pipeline; cov ≥50% |
 | `frontend-next` | PR + `main` | `frontend-next/` | generate:api, schema.ts drift, vitest, lint, typecheck, build | Frontend unit + build |
 | `frontend-next-e2e` | PR + `main` | `frontend-next/` | Playwright smoke | UI smoke (mocked API) |
 | `frontend-next-e2e-auth` | PR + `main` | both | FastAPI + Postgres + Playwright | Register/login full stack |
@@ -52,3 +55,9 @@ npm run test:e2e:visual
 ```
 
 Not part of required CI status checks.
+
+## Related
+
+- [DEVELOPMENT.md](./DEVELOPMENT.md) — local setup
+- [DEPLOYMENT.md](./DEPLOYMENT.md) — deploy after CI
+- `.github/DEPLOY.md` — operator quick reference

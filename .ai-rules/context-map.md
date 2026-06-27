@@ -26,7 +26,7 @@ Before editing, read the files listed for your **task type**. Start with
 | **API contract** | `docs/backend-migration/API_CONTRACT.md`, `frontend-next/openapi/openapi.json` | |
 | **Docker** | `docker-compose.yml`, `frontend-next/Dockerfile`, `backend/Dockerfile` | |
 | **CI** | `.github/workflows/ci.yml` | |
-| **Deploy** | `.github/DEPLOY.md` | Railway Wait for CI |
+| **Deploy** | `.github/DEPLOY.md`, `docs/DEPLOYMENT.md` | CI-gated Railway deploy (`deploy-production`) |
 
 ## Task type → read list
 
@@ -73,9 +73,10 @@ Before editing, read the files listed for your **task type**. Start with
 
 | File | Purpose |
 |------|---------|
-| `docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md` | Current state audit |
-| `docs/PROJECT_REMEDIATION_ROADMAP.md` | Remediation task backlog |
-| `docs/audits/archive/backend-migration-completed/MIGRATION_ROADMAP.md` | Historical MIG tasks (cutover complete) |
-| `.github/DEPLOY.md` | Production deploy workflow |
+| `docs/CURRENT_STATE.md` | Canonical project state |
+| `docs/ROADMAP.md` | Active plans |
+| `docs/TECH_DEBT.md` | Technical debt register |
+| `docs/audits/documentation-audit-2026-06-27.md` | Documentation reset audit |
+| `.github/DEPLOY.md` | CI deploy quick reference → `docs/DEPLOYMENT.md` |
 
 Do not invent roadmap or status files beyond what exists above.

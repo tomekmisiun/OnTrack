@@ -2,7 +2,7 @@
 
 Validate that FastAPI can attach to an **existing Flask-migrated** Postgres database using **`alembic stamp` only** — no `CREATE TABLE` on production data.
 
-**Prerequisite:** [RAILWAY_STAGING.md](./RAILWAY_STAGING.md) — FastAPI staging service deployed against a **clone** DB.
+**Prerequisite:** A FastAPI staging service deployed against a **clone** DB (operator-managed; see [DEPLOYMENT.md](../DEPLOYMENT.md) § Staging).
 
 ---
 
@@ -197,5 +197,5 @@ Production stamp uses the same commands with **production** `DATABASE_URL` durin
 ## Related docs
 
 - [DATABASE_COMPATIBILITY.md](./DATABASE_COMPATIBILITY.md) — table inventory, adoption strategy
-- [RAILWAY_STAGING.md](./RAILWAY_STAGING.md) — staging deploy
+- [DEPLOYMENT.md](../DEPLOYMENT.md) — staging and production deploy
 - [CUTOVER_AND_ROLLBACK.md](../audits/archive/backend-migration-completed/CUTOVER_AND_ROLLBACK.md) — historical cutover phases (Flask rollback not applicable)

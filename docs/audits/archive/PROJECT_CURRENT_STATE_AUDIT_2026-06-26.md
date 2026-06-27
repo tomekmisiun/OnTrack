@@ -1,5 +1,7 @@
 # OnTrack — Current State Audit
 
+> **Archived 2026-06-27.** Do not use for operations. See [`docs/CURRENT_STATE.md`](../../CURRENT_STATE.md).
+
 **Audit date:** 2026-06-26  
 **Baseline commit:** `88aa1b9f1736a0f439bfd1c3124288efd29aa52b` (`main`) — Merge PR #141 (nutrition data cleanup)  
 **Local branch at audit time:** `docs/nutrition-data-architecture` (aligned with `origin/main` at audit commit)  
@@ -261,7 +263,7 @@ Scraper archived: `archive/scraper-legacy/`. Legacy `backend/data/seeds/` remove
 
 | Document | Freshness | Problem | Action | Migrate content to | Links to fix |
 |----------|-----------|---------|--------|-------------------|--------------|
-| `docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md` | Current | — | **KEEP** (canonical) | — | README badge |
+| `docs/CURRENT_STATE.md` | Current | — | **KEEP** (canonical) | — | README badge |
 | `docs/audits/FULL_PROJECT_AUDIT.md` | Stale (May 26) | Superseded; some wrong post-fix | **ARCHIVE** | This audit | README, badges |
 | `docs/PROJECT_TECHNICAL_AUDIT.md` | Stale (CRA era) | Wrong frontend | **ARCHIVE** | This audit | README |
 | `docs/CRA_NEXT_*` (3 files) | Historical | Migration timeline | **ARCHIVE** | `docs/CRA_REFERENCE.md` | README migration badge |

@@ -1,4 +1,4 @@
-# ADR: UI locale vs market code
+# ADR 0003: UI locale vs market code
 
 ## Status
 
@@ -23,3 +23,8 @@ OnTrack previously derived catalog language from the user's market (`PL → pl`,
 - Changing language refreshes localized catalog data; changing market refreshes prices.
 - Meal plans keep stable `recipe_id` / `product_id`.
 - Canonical JSON (`backend/data/canonical/`) is the seed source of truth.
+
+## References
+
+- Migration chain: `e7f8a9b0c1d2`, `a2b3c4d5e6f7`, `b1c2d3e4f5a6`
+- Historical pre-implementation audit: [`docs/audits/archive/ui-locale-market-separation-audit.md`](../audits/archive/ui-locale-market-separation-audit.md)

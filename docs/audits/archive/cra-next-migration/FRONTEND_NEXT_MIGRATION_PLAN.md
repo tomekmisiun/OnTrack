@@ -1,4 +1,4 @@
-> **HISTORICAL DOCUMENT** — Archived FRONTEND_NEXT_MIGRATION_PLAN.md. For current state see [`docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md`](../PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md).
+> **HISTORICAL DOCUMENT** — Archived FRONTEND_NEXT_MIGRATION_PLAN.md. For current state see [`docs/CURRENT_STATE.md`](../../CURRENT_STATE.md).
 
 # Frontend Next.js migration plan
 
