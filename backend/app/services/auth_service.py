@@ -25,7 +25,6 @@ from app.models.import_log import ImportLog
 from app.models.meal_plan import MealPlan
 from app.models.product import Product
 from app.models.recipe import Recipe, RecipeIngredient
-from app.models.recipe_parse_log import RecipeParseLog
 from app.models.user import User
 from app.models.user_recipe_favorite import UserRecipeFavorite
 from app.scripts.import_catalog import ensure_global_catalog_loaded
@@ -227,7 +226,6 @@ def delete_account(session: Session, user_id: int) -> None:
     session.query(Recipe).filter_by(user_id=user_id).delete()
     session.query(Product).filter_by(user_id=user_id).delete()
     session.query(ImportLog).filter_by(user_id=user_id).delete()
-    session.query(RecipeParseLog).filter_by(user_id=user_id).delete()
     session.query(UserRecipeFavorite).filter_by(user_id=user_id).delete()
     session.delete(user)
     session.commit()
