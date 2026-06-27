@@ -273,10 +273,10 @@ jobs:
           echo "Deploying commit ${DEPLOY_SHA}"
 
       - name: Deploy backend to staging (ontrack-back)
-        run: railway up --environment staging --service ontrack-back --ci --detach
+        run: sh backend/scripts/railway-up-retry.sh --environment staging --service ontrack-back --ci --detach
 
       - name: Deploy frontend to staging (ontrackapp)
-        run: railway up --environment staging --service ontrackapp --ci --detach
+        run: sh backend/scripts/railway-up-retry.sh --environment staging --service ontrackapp --ci --detach
 
   wait-staging-ready:
     name: Wait for staging readiness
@@ -354,10 +354,10 @@ jobs:
           echo "Deploying commit ${DEPLOY_SHA}"
 
       - name: Deploy backend to production (ontrack-back)
-        run: railway up --environment production --service ontrack-back --ci --detach
+        run: sh backend/scripts/railway-up-retry.sh --environment production --service ontrack-back --ci --detach
 
       - name: Deploy frontend to production (ontrackapp)
-        run: railway up --environment production --service ontrackapp --ci --detach
+        run: sh backend/scripts/railway-up-retry.sh --environment production --service ontrackapp --ci --detach
 
   production-smoke:
     name: Production auth smoke (post-deploy)
