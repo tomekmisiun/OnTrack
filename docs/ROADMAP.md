@@ -40,7 +40,7 @@ Active plans only. Completed work is removed or marked done. For technical debt 
 
 | ID | Problem | Proposed solution | Priority | Dependencies | Done when | Status |
 |----|---------|-------------------|----------|--------------|-----------|--------|
-| R-030 | Dedicated staging environment | Second Railway project mirroring prod | P3 | Ops budget | Staging URL documented in DEPLOYMENT | **Done** ([DEPLOYMENT.md](./DEPLOYMENT.md) § Staging, `staging-smoke.yml`) |
+| R-030 | Dedicated staging environment | Second Railway project mirroring prod | P3 | Ops budget | Staging URL documented in DEPLOYMENT | **Done** (Railway env `staging` + CI gate in `ci.yml`) |
 | R-031 | Error tracking | Sentry or similar for frontend + API | P3 | Provider | Errors visible in dashboard | **Done** (optional `SENTRY_DSN` / `NEXT_PUBLIC_SENTRY_DSN`) |
 
 ---

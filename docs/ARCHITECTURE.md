@@ -130,7 +130,7 @@ No APM or error tracking service is configured in repo.
 | `ontrack-back` | `backend/` | `backend/Dockerfile` |
 | `ontrackapp` | `frontend-next/` | `Dockerfile.railway` |
 
-Deploy gate: GitHub Actions `deploy-production` on green CI.
+Deploy gate: CI on `main` → staging deploy + smoke → GitHub Environment `production` approval → production deploy + smoke. See [DEPLOYMENT.md](./DEPLOYMENT.md).
 
 Details: [DEPLOYMENT.md](./DEPLOYMENT.md)
 

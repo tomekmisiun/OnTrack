@@ -8,7 +8,7 @@ on:
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
-  # On main, let CI finish so Railway (or deploy-production) sees a green run.
+  # On main, let CI finish; deploy jobs use separate concurrency groups.
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
@@ -237,8 +237,8 @@ jobs:
           FLASK_SECRET_KEY: ci-test-flask-secret-key-0123456789abcdef
           JWT_SECRET_KEY: ci-test-jwt-secret-key-0123456789abcdef
 
-  deploy-production:
-    name: Deploy to Railway (production)
+  deploy-staging:
+    name: Deploy to Railway (staging)
     needs:
       - test
       - frontend-next
@@ -249,15 +249,131 @@ jobs:
       - backend-integration
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
+    environment: staging
+    concurrency:
+      group: deploy-staging-main
+      cancel-in-progress: true
     container: ghcr.io/railwayapp/cli:latest
     env:
       RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
     steps:
-      - name: Checkout kod
+      - name: Checkout commit
         uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
 
-      - name: Deploy backend (ontrack-back)
-        run: railway up --service=ontrack-back --ci --detach
+      - name: Record deploy SHA
+        run: |
+          echo "Deploying commit ${{ github.sha }}"
+          test "$(git rev-parse HEAD)" = "${{ github.sha }}"
 
-      - name: Deploy frontend (ontrackapp)
-        run: railway up --service=ontrackapp --ci --detach
+      - name: Deploy backend to staging (ontrack-back)
+        run: railway up --environment staging --service ontrack-back --ci --detach
+
+      - name: Deploy frontend to staging (ontrackapp)
+        run: railway up --environment staging --service ontrackapp --ci --detach
+
+  wait-staging-ready:
+    name: Wait for staging readiness
+    needs: deploy-staging
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment: staging
+    concurrency:
+      group: deploy-staging-main
+      cancel-in-progress: true
+    steps:
+      - name: Checkout commit
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Wait for staging API readiness
+        env:
+          STAGING_API_URL: ${{ secrets.STAGING_API_URL }}
+        run: |
+          chmod +x backend/scripts/wait-for-url.sh
+          API_URL="${STAGING_API_URL:?STAGING_API_URL is not set in the staging environment}"
+          backend/scripts/wait-for-url.sh "${API_URL%/}/health/ready" 30 10
+
+  staging-smoke:
+    name: Staging auth smoke
+    needs: wait-staging-ready
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment: staging
+    concurrency:
+      group: deploy-staging-main
+      cancel-in-progress: true
+    steps:
+      - name: Checkout commit
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Run staging auth smoke
+        env:
+          API_URL: ${{ secrets.STAGING_API_URL }}
+          FRONTEND_ORIGIN: ${{ secrets.STAGING_FRONTEND_ORIGIN }}
+          SMOKE_TARGET: staging
+        run: |
+          chmod +x backend/scripts/verify-production-auth.sh
+          ./backend/scripts/verify-production-auth.sh
+
+  deploy-production:
+    name: Deploy to Railway (production)
+    needs: staging-smoke
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment: production
+    concurrency:
+      group: deploy-production-main
+      cancel-in-progress: false
+    container: ghcr.io/railwayapp/cli:latest
+    env:
+      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+    steps:
+      - name: Checkout commit
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Record deploy SHA
+        run: |
+          echo "Deploying commit ${{ github.sha }}"
+          test "$(git rev-parse HEAD)" = "${{ github.sha }}"
+
+      - name: Deploy backend to production (ontrack-back)
+        run: railway up --environment production --service ontrack-back --ci --detach
+
+      - name: Deploy frontend to production (ontrackapp)
+        run: railway up --environment production --service ontrackapp --ci --detach
+
+  production-smoke:
+    name: Production auth smoke (post-deploy)
+    needs: deploy-production
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout commit
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+
+      - name: Wait for production API readiness
+        env:
+          PRODUCTION_API_URL: ${{ secrets.PRODUCTION_API_URL }}
+        run: |
+          chmod +x backend/scripts/wait-for-url.sh
+          API_URL="${PRODUCTION_API_URL:?PRODUCTION_API_URL is not set in the production environment}"
+          backend/scripts/wait-for-url.sh "${API_URL%/}/health/ready" 30 10
+
+      - name: Run production auth smoke
+        env:
+          API_URL: ${{ secrets.PRODUCTION_API_URL }}
+          FRONTEND_ORIGIN: ${{ secrets.PRODUCTION_FRONTEND_ORIGIN }}
+          SMOKE_TARGET: production
+        run: |
+          chmod +x backend/scripts/verify-production-auth.sh
+          ./backend/scripts/verify-production-auth.sh

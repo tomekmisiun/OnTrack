@@ -1,17 +1,19 @@
 #!/bin/sh
-# Production/staging auth smoke via HTTP (no browser).
+# Auth smoke via HTTP (staging or production — no browser).
 # Usage:
-#   API_URL=https://<ontrack-back-domain> ./scripts/verify-production-auth.sh
-#   API_URL=... FRONTEND_ORIGIN=https://<ontrackapp-domain> ./scripts/verify-production-auth.sh
+#   API_URL=https://<api-domain> ./scripts/verify-production-auth.sh
+#   API_URL=... FRONTEND_ORIGIN=https://<frontend-domain> ./scripts/verify-production-auth.sh
+# Optional: SMOKE_TARGET=staging|production (log label only)
 set -eu
 
 API_URL="${API_URL:?Set API_URL to the FastAPI base URL (no trailing slash)}"
 FRONTEND_ORIGIN="${FRONTEND_ORIGIN:-http://localhost:3000}"
+SMOKE_TARGET="${SMOKE_TARGET:-deployed environment}"
 
 EMAIL="verify_$(date +%s)_$$@example.com"
 PASS="VerifyPass123!"
 
-echo "=== OnTrack auth verify: $API_URL ==="
+echo "=== OnTrack auth verify (${SMOKE_TARGET}): ${API_URL} ==="
 echo "Origin header: $FRONTEND_ORIGIN"
 echo "Test user: $EMAIL"
 
