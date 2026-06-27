@@ -165,7 +165,22 @@ input.no-spin {
   border: none;
   cursor: pointer;
   text-align: left;
+  flex: 1;
+  min-width: 0;
+}
+
+.carousel-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   flex-shrink: 0;
+  margin-left: auto;
+}
+
+.carousel-header-help {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 11px;
 }
 
 .carousel-header-count {
@@ -175,7 +190,6 @@ input.no-spin {
 }
 
 .carousel-header-chevron {
-  margin-left: auto;
   padding: 5px 4px;
   background: none;
   border: none;
@@ -273,14 +287,6 @@ input.no-spin {
 
 .carousel-action-btn:hover {
   background: #0d948833;
-}
-
-.calendar-help-footer {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid #374151;
 }
 
 .calendar-help-modal-backdrop {
@@ -386,4 +392,159 @@ input.no-spin {
   .calendar-help-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Recipe carousel thumbnail — fixed vertical slots: name → kcal → macros → cost */
+.recipe-thumb {
+  flex-shrink: 0;
+  width: 128px;
+  height: 148px;
+  border-radius: 12px;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(135deg, #0d9488, #0f766e);
+}
+
+.recipe-thumb--dragging {
+  opacity: 0.3;
+}
+
+.recipe-thumb__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.recipe-thumb__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 12px;
+  pointer-events: none;
+}
+
+.recipe-thumb__header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 8px 8px 4px 11px;
+  position: relative;
+  z-index: 1;
+  min-height: 34px;
+}
+
+.recipe-thumb__name {
+  flex: 1;
+  min-width: 0;
+  font-weight: 700;
+  font-size: 11.5px;
+  line-height: 1.25;
+  color: #fff;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.recipe-thumb__favorite {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  font-size: 14px;
+}
+
+.recipe-thumb__favorite--active {
+  color: #facc15;
+}
+
+.recipe-thumb__favorite--inactive {
+  color: transparent;
+  -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.5);
+}
+
+.recipe-thumb__stats {
+  flex-shrink: 0;
+  padding: 0 8px 4px;
+  position: relative;
+  z-index: 1;
+  height: 54px;
+}
+
+.recipe-thumb__kcal {
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 3px;
+}
+
+.recipe-thumb__kcal-unit {
+  font-size: 9px;
+}
+
+.recipe-thumb__macros {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+}
+
+.recipe-thumb__macro {
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 5px;
+  padding: 3px 0;
+  text-align: center;
+}
+
+.recipe-thumb__macro-label {
+  font-size: 8px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.recipe-thumb__macro-value {
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.recipe-thumb__cost {
+  margin-top: auto;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  min-height: 26px;
+  padding: 4px 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.35);
+  position: relative;
+  z-index: 1;
+}
+
+.recipe-thumb__cost-label {
+  font-size: 8.5px;
+  color: rgba(255, 255, 255, 0.5);
+  white-space: nowrap;
+}
+
+.recipe-thumb__cost-value {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  white-space: nowrap;
 }
