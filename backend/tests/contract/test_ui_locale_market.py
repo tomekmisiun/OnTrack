@@ -20,10 +20,10 @@ def _product_items(response_json: dict | list) -> list:
 def test_register_sets_ui_locale_and_default_market(client, db_session):
     reg = client.post(
         "/api/auth/register",
-        json={"username": "locale1", "password": "secret123", "lang": "en"},
+        json={"email": "locale1@example.com", "password": "secret123", "lang": "en"},
     )
     assert reg.status_code == 201
-    user = db_session.query(User).filter_by(username="locale1").first()
+    user = db_session.query(User).filter(User.email.ilike("locale1@example.com")).first()
     assert user.ui_locale == "en"
     assert user.market_code == "GB"
 
@@ -31,10 +31,10 @@ def test_register_sets_ui_locale_and_default_market(client, db_session):
 def test_register_pl_defaults_to_pl_market(client, db_session):
     reg = client.post(
         "/api/auth/register",
-        json={"username": "locale2", "password": "secret123", "lang": "pl"},
+        json={"email": "locale2@example.com", "password": "secret123", "lang": "pl"},
     )
     assert reg.status_code == 201
-    user = db_session.query(User).filter_by(username="locale2").first()
+    user = db_session.query(User).filter(User.email.ilike("locale2@example.com")).first()
     assert user.ui_locale == "pl"
     assert user.market_code == "PL"
 
@@ -170,10 +170,10 @@ def test_product_list_shows_all_user_products_regardless_of_market(
 def test_register_does_not_copy_global_catalog(client, db_session, global_catalog):
     reg = client.post(
         "/api/auth/register",
-        json={"username": "noseed2", "password": "secret123", "lang": "pl"},
+        json={"email": "noseed2@example.com", "password": "secret123", "lang": "pl"},
     )
     assert reg.status_code == 201
-    user = db_session.query(User).filter_by(username="noseed2").first()
+    user = db_session.query(User).filter(User.email.ilike("noseed2@example.com")).first()
     assert db_session.query(Product).filter_by(user_id=user.id).count() == 0
     assert db_session.query(Recipe).filter_by(user_id=user.id).count() == 0
 
@@ -187,11 +187,11 @@ def test_register_does_not_copy_global_catalog(client, db_session, global_catalo
 
 def test_login_does_not_seed_recipes(client, db_session, global_catalog):
     create_user(db_session, "loginseed@example.com", lang="pl", username="loginseed")
-    user = db_session.query(User).filter_by(username="loginseed").first()
+    user = db_session.query(User).filter(User.email.ilike("loginseed@example.com")).first()
     assert db_session.query(Recipe).filter_by(user_id=user.id).count() == 0
     res = client.post(
         "/api/auth/login",
-        json={"username": "loginseed", "password": "test-password"},
+        json={"email": "loginseed@example.com", "password": "test-password"},
     )
     assert res.status_code == 200
     assert db_session.query(Recipe).filter_by(user_id=user.id).count() == 0
