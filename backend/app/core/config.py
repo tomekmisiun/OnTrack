@@ -31,6 +31,13 @@ class Settings(BaseSettings):
     frontend_url: str = Field(default="http://localhost:3000", validation_alias="FRONTEND_URL")
     auth_code_ttl_seconds: int = Field(default=120, validation_alias="AUTH_CODE_TTL_SECONDS")
 
+    smtp_host: str | None = Field(default=None, validation_alias="SMTP_HOST")
+    smtp_port: int = Field(default=587, validation_alias="SMTP_PORT")
+    smtp_user: str | None = Field(default=None, validation_alias="SMTP_USER")
+    smtp_password: str | None = Field(default=None, validation_alias="SMTP_PASSWORD")
+    smtp_from: str | None = Field(default=None, validation_alias="SMTP_FROM")
+    smtp_use_tls: bool = Field(default=True, validation_alias="SMTP_USE_TLS")
+
     pexels_api_key: str | None = Field(default=None, validation_alias="PEXELS_API_KEY")
     gemini_api_key: str | None = Field(default=None, validation_alias="GEMINI_API_KEY")
 
@@ -40,6 +47,10 @@ class Settings(BaseSettings):
     @property
     def google_oauth_configured(self) -> bool:
         return bool(self.google_client_id and self.google_client_secret)
+
+    @property
+    def smtp_configured(self) -> bool:
+        return bool(self.smtp_host and self.smtp_from)
 
 
 @lru_cache

@@ -22,7 +22,7 @@ Active plans only. Completed work is removed or marked done. For technical debt 
 |----|---------|-------------------|----------|--------------|-----------|--------|
 | R-010 | Scattered, stale Markdown | Minimal `docs/` set + audit trail | P1 | — | This audit merged; links valid | **Done** (#163) |
 | R-011 | No automated prod auth smoke in CI | Scheduled GitHub workflow + manual dispatch (`production-smoke.yml`) | P1 | Ops secrets | Register/login synthetic check outside PR CI | **Done** |
-| R-012 | Password reset without email | SMTP provider + templated email + rate limit | P1 | Provider choice | User receives reset link by email | **Planned** |
+| R-012 | Password reset without email | SMTP provider + templated email + rate limit | P1 | Provider choice | User receives reset link by email | **Done** |
 
 ---
 

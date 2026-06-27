@@ -113,7 +113,7 @@ archive/           Historical snapshots (not deployed)
 
 ## Limitations
 
-- Password reset API exists; **email delivery not implemented**
+- Password reset: configure SMTP on backend (`SMTP_HOST`, `SMTP_FROM`) for email delivery
 - JWT stored in `localStorage` by default (optional BFF cookie mode for local dev)
 - Production smoke tests are manual — see [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
 

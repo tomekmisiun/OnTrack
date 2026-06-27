@@ -18,6 +18,7 @@ import {
   logoutSession,
   refreshAccessToken,
   register,
+  resetPassword,
   setUnauthorizedHandler,
 } from "@/lib/api/auth";
 import { ApiError } from "@/lib/api/errors";
@@ -49,6 +50,7 @@ export type AuthContextValue = {
     password: string;
     lang: LangCode;
   }) => Promise<void>;
+  completePasswordReset: (token: string, newPassword: string) => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -254,6 +256,15 @@ export function AuthProvider({ children, onLangChange }: AuthProviderProps) {
     [finishAuth],
   );
 
+  const completePasswordReset = useCallback(
+    async (token: string, newPassword: string) => {
+      const { token: accessToken } = await resetPassword(token, newPassword);
+      const pendingLang = getPendingLang();
+      await finishAuth(accessToken, pendingLang);
+    },
+    [finishAuth],
+  );
+
   const deleteAccount = useCallback(async () => {
     await deleteAccountApi();
     logout();
@@ -281,6 +292,7 @@ export function AuthProvider({ children, onLangChange }: AuthProviderProps) {
       updateUserMarket,
       loginWithPassword,
       registerAccount,
+      completePasswordReset,
     }),
     [
       user,
@@ -291,6 +303,7 @@ export function AuthProvider({ children, onLangChange }: AuthProviderProps) {
       updateUserMarket,
       loginWithPassword,
       registerAccount,
+      completePasswordReset,
     ],
   );
 

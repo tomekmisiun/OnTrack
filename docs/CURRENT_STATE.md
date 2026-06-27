@@ -12,7 +12,7 @@ OnTrack is a **meal planner and budget tracker** for households. Production runs
 |------|--------|-------|
 | User auth (register, login, JWT) | Implemented | Bearer token in localStorage; optional BFF cookie mode for local dev |
 | Google OAuth | Implemented | Requires `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, redirect URI |
-| Password reset API | Implemented | Token returned in API response in testing/debug — **no email delivery** |
+| Password reset API | Implemented | SMTP email when configured; token in response only in debug/testing |
 | Household members | Implemented | CRUD via `/api/members` |
 | Products (user catalog) | Implemented | Per-user products + global catalog import |
 | Recipes | Implemented | User recipes + system/global recipes by market |
@@ -52,7 +52,7 @@ API contract matrix: [`backend-migration/API_CONTRACT.md`](./backend-migration/A
 
 | Area | Gap |
 |------|-----|
-| Password reset UX | API exists; no SMTP/email integration |
+| Password reset UX | Login forgot/reset flow; SMTP required on backend for outbound mail |
 | BFF auth mode | Implemented in Next.js; **not enabled in production** (`NEXT_PUBLIC_BFF_ENABLED` unset) |
 | Visual regression | Playwright visual tests exist; not in required CI |
 | Staging environment | Documented historically; no dedicated staging service in repo config |
