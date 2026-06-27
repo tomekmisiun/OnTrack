@@ -18,4 +18,4 @@ These documents were moved to [`docs/audits/archive/backend-migration-completed/
 - API: `backend/` (FastAPI)
 - Frontend: `frontend-next/` (Next.js)
 - Contract: `API_CONTRACT.md` + `frontend-next/openapi/openapi.json`
-- Current audit: [`docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md`](../audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md)
+- Current state: [`docs/CURRENT_STATE.md`](../CURRENT_STATE.md)

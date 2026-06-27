@@ -1,4 +1,4 @@
-> **HISTORICAL DOCUMENT** — Archived MIGRATION_ROADMAP.md. For current state see [`docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md`](../PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md).
+> **HISTORICAL DOCUMENT** — Archived MIGRATION_ROADMAP.md. For current state see [`docs/CURRENT_STATE.md`](../../CURRENT_STATE.md).
 
 # Migration roadmap
 

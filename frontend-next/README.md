@@ -28,7 +28,7 @@ cp .env.example .env.local
 | `NEXT_PUBLIC_API_URL` | FastAPI base URL (no trailing slash required) |
 | `NEXT_PUBLIC_BFF_ENABLED` | Set to `1` for HttpOnly cookie BFF mode (default off) |
 
-See `docs/FRONTEND_NEXT_BFF.md` for BFF threat model and rollout.
+See [`docs/SECURITY.md`](../docs/SECURITY.md) and [`docs/adr/0001-bff-production-mode.md`](../docs/adr/0001-bff-production-mode.md) for BFF notes.
 
 ## Scripts
 
@@ -92,7 +92,7 @@ npm run generate:api
 
 **Default:** JWT in `localStorage` (`lib/auth/storage.ts`) — CRA parity.
 
-**Optional BFF** (`NEXT_PUBLIC_BFF_ENABLED=1`): HttpOnly `ontrack_session` cookie; Route Handlers at `/api/bff/*` and `/api/auth/session`. See `docs/FRONTEND_NEXT_BFF.md`.
+**Optional BFF** (`NEXT_PUBLIC_BFF_ENABLED=1`): HttpOnly `ontrack_session` cookie; Route Handlers at `/api/bff/*` and `/api/auth/session`. See [`docs/SECURITY.md`](../docs/SECURITY.md).
 
 - `contexts/AuthContext.tsx` — bootstrap, `?code=` OAuth exchange, login/register/logout
 - `/login` — password + Google OAuth redirect to FastAPI `/api/auth/google`
@@ -139,7 +139,7 @@ npm run generate:api
 - `lib/api/daySchedule.ts`, `lib/schedule/**` — API, parse helpers, overlap detection
 - `npm run test:schedule` — unit check for `parseScheduleBlockText`
 
-## Remaining modules (task 12)
+## Welcome, macro, summary, export
 
 - `components/welcome/WelcomeScreen.tsx` — home tiles with insights (`useWelcomeStats`)
 - `components/macro/MacroScreen.tsx` — BMI/TDEE/macro calculator with profile save
@@ -149,7 +149,7 @@ npm run generate:api
 - `components/privacy/PrivacyPolicyModal.tsx` — login page privacy link
 - `components/dish-compare/DishCompare.tsx` — public marketing widget on login
 - `lib/api/fuel.ts`, `lib/api/public.ts`, `saveMemberProfile` in `lib/api/members.ts`
-- `npm run test:expense` — sanity check for expense item math
+- Routes: `/`, `/macro`, `/summary`, `/export` — see [docs/CURRENT_STATE.md](../docs/CURRENT_STATE.md)
 
 CI runs `generate:api`, `npm test` (Vitest unit tests), lint, typecheck, and build. A separate CI job runs Playwright smoke tests against a production build.
 
@@ -188,4 +188,4 @@ docker run --rm -p 3002:3000 ontrack-frontend-next
 
 ## Migration plan
 
-See [`docs/audits/archive/cra-next-migration/FRONTEND_NEXT_MIGRATION_PLAN.md`](../docs/audits/archive/cra-next-migration/FRONTEND_NEXT_MIGRATION_PLAN.md) (historical) and [`docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md`](../docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md) (current).
+See [`docs/CURRENT_STATE.md`](../docs/CURRENT_STATE.md) for routes and [`docs/audits/archive/cra-next-migration/FRONTEND_NEXT_MIGRATION_PLAN.md`](../docs/audits/archive/cra-next-migration/FRONTEND_NEXT_MIGRATION_PLAN.md) for historical migration notes.

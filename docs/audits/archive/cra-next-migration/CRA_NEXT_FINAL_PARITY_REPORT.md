@@ -1,4 +1,4 @@
-> **HISTORICAL DOCUMENT** — Archived CRA_NEXT_FINAL_PARITY_REPORT.md. For current state see [`docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md`](../PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md).
+> **HISTORICAL DOCUMENT** — Archived CRA_NEXT_FINAL_PARITY_REPORT.md. For current state see [`docs/CURRENT_STATE.md`](../../CURRENT_STATE.md).
 
 # CRA → Next.js: Final Parity Report
 

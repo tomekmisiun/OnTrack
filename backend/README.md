@@ -1,6 +1,6 @@
 # OnTrack FastAPI backend
 
-Production API for OnTrack. See [`backend/data/README.md`](data/README.md) and [`docs/deployment/RAILWAY_BACKEND_MIGRATION.md`](../docs/deployment/RAILWAY_BACKEND_MIGRATION.md).
+Production API for OnTrack. Full setup: [`docs/DEVELOPMENT.md`](../docs/DEVELOPMENT.md). Deploy: [`docs/DEPLOYMENT.md`](../docs/DEPLOYMENT.md). Catalog data: [`data/README.md`](data/README.md).
 
 ## Local development
 
@@ -8,11 +8,11 @@ Production API for OnTrack. See [`backend/data/README.md`](data/README.md) and [
 cd backend
 uv sync
 uv run pytest -q
-uv run uvicorn app.main:app --reload --port 8000
-curl -s http://localhost:8000/health
+uv run uvicorn app.main:app --reload --port 5001
+curl -s http://localhost:5001/health
 ```
 
-Runtime data lives in `data/` (demo dataset — see `data/manifest.json`).
+Runtime data lives in `data/` (see `data/manifest.json`).
 
 ```bash
 uv run python scripts/validate_runtime_data.py
@@ -28,10 +28,7 @@ uv run alembic current
 
 ## Docker
 
-Self-contained image (build context = `backend/`):
-
 ```bash
-docker build -t ontrack-api .
 docker compose -f ../docker-compose.yml up --build backend db
 curl -sf http://localhost:5001/health
 ```
@@ -41,18 +38,6 @@ curl -sf http://localhost:5001/health
 | Service | Root Directory | Config file path |
 |---------|----------------|------------------|
 | API (`ontrack-back`) | `backend` | `/backend/railway.toml` |
-
-Deploy guide: [`docs/deployment/RAILWAY_BACKEND_MIGRATION.md`](../docs/deployment/RAILWAY_BACKEND_MIGRATION.md)
-
-Background worker and Redis were removed — see [`docs/adr/0002-background-worker.md`](../docs/adr/0002-background-worker.md).
-
-### DB adoption rehearsal
-
-```bash
-export DATABASE_URL=postgresql+psycopg://...
-uv run python scripts/validate_schema.py
-./scripts/db_rehearsal_stamp.sh
-```
 
 ## Contract suite
 

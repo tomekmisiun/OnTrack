@@ -33,5 +33,5 @@
 ## References
 
 - `frontend-next/lib/bff/config.ts`
-- `docs/FRONTEND_NEXT_BFF.md`
-- Audit: `docs/audits/PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md` §3.1
+- [`docs/SECURITY.md`](../SECURITY.md) — auth and BFF notes
+- Audit: [`docs/CURRENT_STATE.md`](../CURRENT_STATE.md)
