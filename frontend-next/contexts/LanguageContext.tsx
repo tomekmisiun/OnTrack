@@ -9,7 +9,13 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { T, type LangCode, type TranslationKey, type TranslationValue } from "@/lib/i18n/translations";
+import {
+  DEFAULT_UI_LOCALE,
+  T,
+  type LangCode,
+  type TranslationKey,
+  type TranslationValue,
+} from "@/lib/i18n/translations";
 
 export type LanguageContextValue = {
   lang: LangCode;
@@ -20,9 +26,9 @@ export type LanguageContextValue = {
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 function readStoredLang(): LangCode {
-  if (typeof window === "undefined") return "en";
+  if (typeof window === "undefined") return DEFAULT_UI_LOCALE;
   const stored = localStorage.getItem("lang");
-  return stored === "pl" || stored === "en" ? stored : "en";
+  return stored === "pl" || stored === "en" ? stored : DEFAULT_UI_LOCALE;
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {

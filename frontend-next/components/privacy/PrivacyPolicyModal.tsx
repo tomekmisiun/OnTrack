@@ -1,6 +1,6 @@
 "use client";
 
-import type { LangCode } from "@/lib/i18n/translations";
+import { DEFAULT_UI_LOCALE, type LangCode } from "@/lib/i18n/translations";
 import "./privacy-modal.css";
 
 const CONTENT = {
@@ -130,7 +130,7 @@ type PrivacyPolicyProps = {
 };
 
 export function PrivacyPolicyModal({
-  lang = "en",
+  lang = DEFAULT_UI_LOCALE,
   onClose,
 }: PrivacyPolicyProps) {
   const c = CONTENT[lang] ?? CONTENT.en;

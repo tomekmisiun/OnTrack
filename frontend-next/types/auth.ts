@@ -1,4 +1,4 @@
-import type { LangCode } from "@/lib/i18n/translations";
+import { DEFAULT_UI_LOCALE, type LangCode } from "@/lib/i18n/translations";
 import type { MarketCode } from "@/lib/domain/market";
 import { defaultMarketForUiLocale } from "@/lib/domain/market";
 
@@ -22,7 +22,7 @@ export function parseAuthUser(data: unknown): AuthUser | null {
       ? row.ui_locale
       : row.lang === "pl" || row.lang === "en"
         ? row.lang
-        : "en";
+        : DEFAULT_UI_LOCALE;
 
   const marketCode: MarketCode =
     row.market_code === "PL" || row.market_code === "GB"
