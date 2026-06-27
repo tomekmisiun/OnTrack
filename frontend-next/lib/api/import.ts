@@ -1,20 +1,7 @@
 import { createAuthedApiClient } from "@/lib/api/auth";
+import { buildClientApiUrl } from "@/lib/api/build-api-url";
 import { ApiError, errorMessageFromBody } from "@/lib/api/errors";
 import { isBffEnabled } from "@/lib/bff/config";
-import { getApiBaseUrl } from "@/lib/config/env";
-
-function buildImportUrl(path: string): string {
-  const normalized = path.startsWith("/") ? path : `/${path}`;
-
-  if (isBffEnabled()) {
-    const apiPath = normalized.startsWith("/api/")
-      ? normalized.slice("/api/".length)
-      : normalized.slice(1);
-    return `/api/bff/${apiPath}`;
-  }
-
-  return `${getApiBaseUrl()}${normalized}`;
-}
 
 async function postFormData<T>(path: string, file: File): Promise<T> {
   const formData = new FormData();
@@ -29,7 +16,7 @@ async function postFormData<T>(path: string, file: File): Promise<T> {
     }
   }
 
-  const response = await fetch(buildImportUrl(path), {
+  const response = await fetch(buildClientApiUrl(path), {
     method: "POST",
     headers,
     credentials: isBffEnabled() ? "include" : undefined,
