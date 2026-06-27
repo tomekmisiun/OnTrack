@@ -1643,23 +1643,12 @@ export function RecipesScreen() {
 
           <button
             type="button"
+            className={`list-header-btn${selectionMode ? " list-header-btn--active" : ""}`}
             onClick={() =>
               selectionMode
                 ? exitSelection()
                 : (setSelectionMode(true), setExpanded(null))
             }
-            style={{
-              padding: "5px 11px",
-              background: selectionMode ? "#1e3a3a" : "transparent",
-              border: `1px solid ${selectionMode ? "#0d9488" : "#374151"}`,
-              borderRadius: 6,
-              cursor: "pointer",
-              fontSize: 12,
-              fontWeight: 600,
-              color: selectionMode ? "#2dd4bf" : "#6b7280",
-              transition: "all 0.15s",
-              whiteSpace: "nowrap",
-            }}
           >
             {selectionMode
               ? tString(t, "deselect_label")
@@ -1668,6 +1657,7 @@ export function RecipesScreen() {
 
           <button
             type="button"
+            className="list-header-btn list-header-btn--danger"
             onClick={() => {
               if (selectionMode && selectedIds.size > 0) {
                 handleDeleteSelected();
@@ -1676,37 +1666,6 @@ export function RecipesScreen() {
               }
             }}
             disabled={selectionMode && selectedIds.size === 0}
-            style={{
-              padding: "5px 11px",
-              background: "transparent",
-              border: "1px solid #374151",
-              borderRadius: 6,
-              cursor:
-                selectionMode && selectedIds.size === 0
-                  ? "default"
-                  : "pointer",
-              fontSize: 12,
-              color:
-                selectionMode && selectedIds.size === 0
-                  ? "#374151"
-                  : "#6b7280",
-              transition: "all 0.15s",
-              whiteSpace: "nowrap",
-              opacity: selectionMode && selectedIds.size === 0 ? 0.4 : 1,
-            }}
-            onMouseEnter={(e) => {
-              if (!(selectionMode && selectedIds.size === 0)) {
-                e.currentTarget.style.borderColor = "#ef4444";
-                e.currentTarget.style.color = "#ef4444";
-              }
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "#374151";
-              e.currentTarget.style.color =
-                selectionMode && selectedIds.size === 0
-                  ? "#374151"
-                  : "#6b7280";
-            }}
           >
             {selectionMode && selectedIds.size > 0
               ? tFormatN(t, "del_selected_recipes", selectedIds.size)
@@ -1715,15 +1674,8 @@ export function RecipesScreen() {
 
           <button
             type="button"
+            className="list-header-chevron"
             onClick={() => setListOpen((o) => !o)}
-            style={{
-              padding: "5px 4px",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-            }}
           >
             <Icon
               icon="heroicons:chevron-down"
@@ -1840,30 +1792,17 @@ export function RecipesScreen() {
                   {tFormat(t, "recipe_not_found", search)}
                 </p>
               )}
-            <div style={{ overflowX: "auto" }}>
-              <table
-                style={{
-                  borderCollapse: "separate",
-                  borderSpacing: "0 4px",
-                  width: "100%",
-                  minWidth: 600,
-                }}
-              >
+            <div className="table-scroll">
+              <table className="recipes-table">
                 <thead>
                   <tr>
                     <th colSpan={2} style={{ width: "40%" }}>
                       {tString(t, "recipe_col_name")}
                     </th>
-                    <th style={{ textAlign: "center" }}>
-                      {tString(t, "recipe_col_kcalmacro")}
-                    </th>
-                    <th style={{ textAlign: "center", width: 90 }}>
-                      {tString(t, "recipe_col_meal")}
-                    </th>
-                    <th style={{ textAlign: "right" }}>
-                      {tString(t, "recipe_col_price")}
-                    </th>
-                    <th style={{ textAlign: "center", width: 60 }} />
+                    <th>{tString(t, "recipe_col_kcalmacro")}</th>
+                    <th style={{ width: 90 }}>{tString(t, "recipe_col_meal")}</th>
+                    <th>{tString(t, "recipe_col_price")}</th>
+                    <th style={{ width: 60 }} />
                   </tr>
                 </thead>
                 <tbody>
@@ -1999,8 +1938,8 @@ export function RecipesScreen() {
                                   </button>
                                 </div>
                               ) : (
-                                <strong
-                                  style={{ cursor: "pointer" }}
+                                <span
+                                  className="recipe-name"
                                   title={tString(t, "click_to_edit")}
                                   onDoubleClick={(e) => {
                                     e.stopPropagation();
@@ -2008,40 +1947,32 @@ export function RecipesScreen() {
                                   }}
                                 >
                                   {r.name}
-                                </strong>
+                                </span>
                               )}
                             </div>
                           </td>
                           <td
                             style={{
                               whiteSpace: "nowrap",
-                              textAlign: "center",
                               ...(isExpanded ? expandedCellStyle : {}),
                             }}
                           >
                             {r.total_kcal > 0 ? (
-                              <span style={{ fontSize: 12, color: "#9ca3af" }}>
-                                <span
-                                  style={{ color: "#e2e8f0", fontWeight: 600 }}
-                                >
-                                  {r.total_kcal}
-                                </span>{" "}
-                                kcal · {tString(t, "macro_p")}
+                              <span className="recipe-kcal">
+                                <strong>{r.total_kcal}</strong> kcal ·{" "}
+                                {tString(t, "macro_p")}
                                 {r.total_protein} {tString(t, "macro_f")}
                                 {r.total_fat} {tString(t, "macro_c")}
                                 {r.total_carbs}
                               </span>
                             ) : (
-                              <span style={{ fontSize: 11, color: "#374151" }}>
+                              <span className="recipe-kcal recipe-kcal--empty">
                                 —
                               </span>
                             )}
                           </td>
                           <td
-                            style={{
-                              textAlign: "center",
-                              ...(isExpanded ? expandedCellStyle : {}),
-                            }}
+                            style={isExpanded ? expandedCellStyle : undefined}
                             onClick={(e) => {
                               e.stopPropagation();
                               setEditingCategory((ec) =>
@@ -2122,12 +2053,7 @@ export function RecipesScreen() {
                                   ))}
                                 </div>
                                 <span
-                                  style={{
-                                    fontSize: 11,
-                                    color: r.category ? "#2dd4bf" : "#374151",
-                                    fontWeight: 600,
-                                    cursor: "pointer",
-                                  }}
+                                  className={`recipe-category${r.category ? " recipe-category--set" : " recipe-category--empty"}`}
                                 >
                                   {r.category
                                     ? catMap[r.category]?.label
@@ -2136,12 +2062,7 @@ export function RecipesScreen() {
                               </div>
                             ) : (
                               <span
-                                style={{
-                                  fontSize: 11,
-                                  color: r.category ? "#2dd4bf" : "#374151",
-                                  fontWeight: r.category ? 600 : 400,
-                                  cursor: "pointer",
-                                }}
+                                className={`recipe-category${r.category ? " recipe-category--set" : " recipe-category--empty"}`}
                                 title={tString(t, "click_change_meal")}
                               >
                                 {r.category
@@ -2153,25 +2074,19 @@ export function RecipesScreen() {
                           <td
                             style={{
                               whiteSpace: "nowrap",
-                              textAlign: "right",
                               ...(isExpanded ? expandedCellStyle : {}),
                             }}
                           >
-                            <span style={{ color: "#0d9488", fontWeight: 600 }}>
+                            <span className="recipe-price">
                               {r.total_cost.toFixed(2)} {tString(t, "currency")}
                             </span>
                             {r.source_url && (
-                              <div style={{ marginTop: 2 }}>
+                              <div>
                                 <a
                                   href={r.source_url}
                                   target="_blank"
                                   rel="noreferrer"
-                                  style={{
-                                    fontSize: 11,
-                                    color: "#e2e8f0",
-                                    textDecoration: "none",
-                                    fontWeight: 600,
-                                  }}
+                                  className="recipe-source-link"
                                   onClick={(e) => e.stopPropagation()}
                                 >
                                   {tString(t, "see_recipe")}
@@ -2180,10 +2095,7 @@ export function RecipesScreen() {
                             )}
                           </td>
                           <td
-                            style={{
-                              textAlign: "right",
-                              ...(isExpanded ? expandedLastCell : {}),
-                            }}
+                            style={isExpanded ? expandedLastCell : undefined}
                             onClick={(e) => e.stopPropagation()}
                           >
                             <button

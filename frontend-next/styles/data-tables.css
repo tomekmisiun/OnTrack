@@ -1,0 +1,74 @@
+/* Shared data-table styles (from legacy App.css) */
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table thead th {
+  text-align: left;
+  padding: 10px 12px;
+  background: rgba(24, 30, 38, 0.65);
+  color: #6b7280;
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  border-bottom: 1px solid rgba(55, 65, 81, 0.45);
+  white-space: nowrap;
+}
+
+.data-table tbody td {
+  padding: 11px 12px;
+  border-bottom: 1px solid rgba(31, 41, 55, 0.65);
+  font-size: 14px;
+  color: #e2e8f0;
+  vertical-align: middle;
+}
+
+.list-header-btn {
+  padding: 5px 11px;
+  background: transparent;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.list-header-btn:hover:not(:disabled) {
+  border-color: #4b5563;
+  color: #9ca3af;
+}
+
+.list-header-btn:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.list-header-btn--active {
+  background: #1e3a3a;
+  border-color: #0d9488;
+  color: #2dd4bf;
+}
+
+.list-header-btn--danger:hover:not(:disabled) {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+.list-header-chevron {
+  padding: 5px 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.table-scroll {
+  overflow-x: auto;
+}

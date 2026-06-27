@@ -21,7 +21,7 @@ function MacroDisplay({ p }: { p: Product }) {
     return <span style={{ color: "#4b5563" }}>-</span>;
   }
   return (
-    <div style={{ fontSize: 13, color: "#9ca3af" }}>
+    <div style={{ fontSize: 13, color: "#9ca3af" }} className="macro-cell">
       {p.protein != null && (
         <span style={{ marginRight: 6 }}>
           {tString(t, "macro_p")}: {p.protein}g
@@ -665,23 +665,12 @@ export function ProductsScreen() {
 
           <button
             type="button"
+            className={`list-header-btn${selectionMode ? " list-header-btn--active" : ""}`}
             onClick={() =>
               selectionMode
                 ? exitSelection()
                 : (setSelectionMode(true), setEditId(null))
             }
-            style={{
-              padding: "5px 11px",
-              background: selectionMode ? "#1e3a3a" : "transparent",
-              border: `1px solid ${selectionMode ? "#0d9488" : "#374151"}`,
-              borderRadius: 6,
-              cursor: "pointer",
-              fontSize: 12,
-              fontWeight: 600,
-              color: selectionMode ? "#2dd4bf" : "#6b7280",
-              transition: "all 0.15s",
-              whiteSpace: "nowrap",
-            }}
           >
             {selectionMode
               ? tString(t, "deselect_label")
@@ -690,6 +679,7 @@ export function ProductsScreen() {
 
           <button
             type="button"
+            className="list-header-btn list-header-btn--danger"
             onClick={() => {
               if (selectionMode) {
                 if (selectedIds.size > 0) handleDeleteSelected();
@@ -698,37 +688,6 @@ export function ProductsScreen() {
               }
             }}
             disabled={selectionMode && selectedIds.size === 0}
-            style={{
-              padding: "5px 11px",
-              background: "transparent",
-              border: "1px solid #374151",
-              borderRadius: 6,
-              cursor:
-                selectionMode && selectedIds.size === 0
-                  ? "default"
-                  : "pointer",
-              fontSize: 12,
-              color:
-                selectionMode && selectedIds.size === 0
-                  ? "#374151"
-                  : "#6b7280",
-              transition: "all 0.15s",
-              whiteSpace: "nowrap",
-              opacity: selectionMode && selectedIds.size === 0 ? 0.4 : 1,
-            }}
-            onMouseEnter={(e) => {
-              if (!(selectionMode && selectedIds.size === 0)) {
-                e.currentTarget.style.borderColor = "#ef4444";
-                e.currentTarget.style.color = "#ef4444";
-              }
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "#374151";
-              e.currentTarget.style.color =
-                selectionMode && selectedIds.size === 0
-                  ? "#374151"
-                  : "#6b7280";
-            }}
           >
             {selectionMode && selectedIds.size > 0
               ? tFormatN(t, "del_selected_products", selectedIds.size)
@@ -737,15 +696,8 @@ export function ProductsScreen() {
 
           <button
             type="button"
+            className="list-header-chevron"
             onClick={() => setListOpen((o) => !o)}
-            style={{
-              padding: "5px 4px",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-            }}
           >
             <Icon
               icon="heroicons:chevron-down"
@@ -769,9 +721,8 @@ export function ProductsScreen() {
                 placeholder={tString(t, "search_product_ph")}
               />
             </div>
-            <table
-              style={{ borderCollapse: "separate", borderSpacing: "0 3px" }}
-            >
+            <div className="table-scroll">
+            <table className="products-table">
               <thead>
                 <tr>
                   <th>{tString(t, "col_name")}</th>
@@ -803,7 +754,7 @@ export function ProductsScreen() {
                           else startEdit(p);
                         }}
                       >
-                        <td style={{ fontSize: 13 }}>
+                        <td>
                           {selectionMode && p.is_editable && (
                             <span
                               style={{
@@ -837,62 +788,39 @@ export function ProductsScreen() {
                           )}
                           {p.name}
                           {p.is_system && (
-                            <span
-                              style={{
-                                marginLeft: 8,
-                                fontSize: 10,
-                                color: "#6b7280",
-                                textTransform: "uppercase",
-                              }}
-                            >
+                            <span className="catalog-badge">
                               {tString(t, "catalog_system_badge")}
                             </span>
                           )}
                         </td>
-                        <td
-                          style={{
-                            fontSize: 13,
-                            color: p.kcal ? "#9ca3af" : "#4b5563",
-                          }}
-                        >
+                        <td className={p.kcal ? "cell-muted" : "cell-empty"}>
                           {p.kcal != null ? `${p.kcal} kcal` : "-"}
                         </td>
                         <td>
                           <MacroDisplay p={p} />
                         </td>
-                        <td style={{ fontSize: 13, color: "#9ca3af" }}>
+                        <td className="cell-muted">
                           {p.sold_by_weight
                             ? tString(t, "weight_btn")
                             : p.package_weight
                               ? `${p.package_weight} ${p.unit || "g"}`
                               : "-"}
                         </td>
-                        <td
-                          style={{
-                            fontSize: 13,
-                            color: p.price > 0 ? "#9ca3af" : "#4b5563",
-                          }}
-                        >
+                        <td className={p.price > 0 ? "cell-muted" : "cell-empty"}>
                           {displayPrice(p, tString(t, "currency"))}
                         </td>
-                        <td
-                          style={{
-                            display: "flex",
-                            gap: 6,
-                            justifyContent: "flex-end",
-                          }}
-                          onClick={(e) => e.stopPropagation()}
-                        >
+                        <td onClick={(e) => e.stopPropagation()}>
+                          <div className="row-actions">
                           {p.is_editable && (
                             <button
                               type="button"
                               className="btn btn-danger"
-                              style={{ padding: "5px 12px", fontSize: 13 }}
                               onClick={() => handleDelete(p.id, p.name)}
                             >
                               {tString(t, "del_btn")}
                             </button>
                           )}
+                          </div>
                         </td>
                       </tr>
                       {isEditing && (
@@ -1261,6 +1189,7 @@ export function ProductsScreen() {
                 )}
               </tbody>
             </table>
+            </div>
           </div>
         )}
       </div>

@@ -1,0 +1,79 @@
+/* Global form controls (from legacy App.css — lost after Tailwind preflight) */
+
+:root {
+  --field-border: rgba(55, 65, 81, 0.85);
+  --field-bg: rgba(17, 24, 39, 0.65);
+  --field-focus-border: #2dd4bf;
+  --field-focus-ring: rgba(13, 148, 136, 0.22);
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="hidden"]),
+select,
+textarea {
+  padding: 9px 12px;
+  border: 1px solid var(--field-border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #f1f5f9;
+  background: var(--field-bg);
+  outline: none;
+  outline-offset: 0;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+  min-width: 0;
+  box-sizing: border-box;
+  accent-color: #0d9488;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #6b7280;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="hidden"]):focus,
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="color"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="hidden"]):focus-visible,
+select:focus,
+select:focus-visible,
+textarea:focus,
+textarea:focus-visible {
+  outline: none !important;
+  border-color: var(--field-focus-border);
+  background: rgba(17, 24, 39, 0.85);
+  box-shadow: 0 0 0 3px var(--field-focus-ring);
+}
+
+select option {
+  background: #1f2937;
+  color: #f1f5f9;
+}
+
+textarea {
+  min-height: 2.5rem;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* Compact table inputs */
+.compact-table input:not([type="checkbox"]):not([type="radio"]),
+.compact-table select {
+  flex: none;
+  min-width: 0;
+  padding: 2px 5px;
+  font-size: 12px;
+  border-radius: 4px;
+  border-width: 1px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button,
+input.no-spin::-webkit-outer-spin-button,
+input.no-spin::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"],
+input.no-spin {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
