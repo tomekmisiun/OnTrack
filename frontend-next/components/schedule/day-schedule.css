@@ -260,9 +260,11 @@
   outline: none;
 }
 
-.schedule-work-paste:focus {
+.schedule-work-paste:focus,
+.schedule-work-paste:focus-visible {
+  outline: none !important;
   border-color: transparent;
-  box-shadow: none;
+  box-shadow: none !important;
 }
 
 .schedule-work-paste::placeholder {
@@ -321,8 +323,10 @@
   font-weight: 500;
 }
 
-.schedule-work-time-input:focus {
-  box-shadow: none;
+.schedule-work-time-input:focus,
+.schedule-work-time-input:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
   background: rgba(13, 148, 136, 0.12);
   border-radius: 4px;
 }
@@ -341,25 +345,30 @@
 .schedule-work-label-inline {
   flex: 1;
   min-width: 120px;
-  padding: 5px 10px;
-  border: 1px solid transparent;
+  padding: 7px 10px;
+  border: 1px solid rgba(55, 65, 81, 0.85);
   border-radius: 8px;
-  background: transparent;
+  background: rgba(17, 24, 39, 0.65);
   color: #e2e8f0;
   font-size: 13px;
   font-weight: 500;
   outline: none;
-  transition: border-color 0.15s, background 0.15s;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
 }
 
 .schedule-work-label-inline:not(:placeholder-shown) {
   font-weight: 600;
 }
 
+/* Borderless paste field — wrapper provides the ring via :focus-within */
+
 .schedule-work-label-inline:hover,
-.schedule-work-label-inline:focus {
-  border-color: #374151;
-  background: rgba(31, 41, 55, 0.8);
+.schedule-work-label-inline:focus,
+.schedule-work-label-inline:focus-visible {
+  outline: none !important;
+  border-color: #2dd4bf;
+  background: rgba(17, 24, 39, 0.85);
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.22);
 }
 
 .schedule-work-label-inline::placeholder {
@@ -747,9 +756,18 @@
   outline: none;
 }
 
-.schedule-modal-time-input:focus {
-  border-color: rgba(13, 148, 136, 0.55);
-  box-shadow: none;
+.schedule-modal-time-input:focus,
+.schedule-modal-time-input:focus-visible {
+  outline: none !important;
+  border-color: #2dd4bf;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.22);
+}
+
+.schedule-modal input[type="text"]:not(.schedule-modal-time-input):focus,
+.schedule-modal input[type="text"]:not(.schedule-modal-time-input):focus-visible {
+  outline: none !important;
+  border-color: #2dd4bf;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.22);
 }
 
 .schedule-modal-time-arrow {

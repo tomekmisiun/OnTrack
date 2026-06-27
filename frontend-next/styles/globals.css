@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "./form-controls.css";
+@import "./data-tables.css";
 
 :root {
   --background: #0f1419;
@@ -54,6 +56,14 @@ body {
   font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color-scheme: dark;
+}
+
+/* Suppress browser default focus ring (often orange on Linux) — form-controls.css sets teal ring */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none !important;
 }
 
 code {

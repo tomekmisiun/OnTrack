@@ -14,8 +14,11 @@
   text-align: center;
 }
 
-.dp-input:focus {
-  border-color: #0d9488;
+.dp-input:focus,
+.dp-input:focus-visible {
+  outline: none !important;
+  border-color: #2dd4bf;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.22);
 }
 
 .react-datepicker {

@@ -391,6 +391,23 @@
   font-size: 14px;
 }
 
+.recipes-live-field input:focus,
+.recipes-live-field input:focus-visible,
+.recipes-live-servings:focus,
+.recipes-live-servings:focus-visible,
+.recipes-live-ing-weight:focus,
+.recipes-live-ing-weight:focus-visible,
+.recipes-live-ing-unit:focus,
+.recipes-live-ing-unit:focus-visible,
+.recipes-live-ing-product:focus,
+.recipes-live-ing-product:focus-visible,
+.recipes-live-quick-add-field input:focus,
+.recipes-live-quick-add-field input:focus-visible {
+  outline: none !important;
+  border-color: #2dd4bf;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.22);
+}
+
 .recipes-live-block {
   padding: 10px 12px;
   border-radius: 8px;
@@ -964,6 +981,118 @@
 
 .recipes-list-card thead th {
   background: rgba(22, 30, 40, 0.98);
+}
+
+.recipes-list-card .recipes-table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: separate;
+  border-spacing: 0 4px;
+}
+
+.recipes-list-card .recipes-table thead th {
+  text-align: left;
+  padding: 10px 12px;
+  background: rgba(22, 30, 40, 0.98);
+  color: #6b7280;
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  border-bottom: 1px solid rgba(55, 65, 81, 0.45);
+  white-space: nowrap;
+}
+
+.recipes-list-card .recipes-table tbody td {
+  padding: 11px 12px;
+  font-size: 14px;
+  color: #e2e8f0;
+  vertical-align: middle;
+}
+
+.recipes-list-card .recipes-table .recipe-name {
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.recipes-list-card .recipes-table .recipe-kcal--empty {
+  color: #374151;
+  font-size: 11px;
+}
+
+.recipes-list-card .recipes-table th:nth-child(3),
+.recipes-list-card .recipes-table td:nth-child(3),
+.recipes-list-card .recipes-table th:nth-child(4),
+.recipes-list-card .recipes-table td:nth-child(4) {
+  text-align: center;
+}
+
+.recipes-list-card .recipes-table th:nth-child(5),
+.recipes-list-card .recipes-table td:nth-child(5) {
+  text-align: right;
+}
+
+.recipes-list-card .recipes-table .recipe-kcal {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.recipes-list-card .recipes-table .recipe-kcal strong {
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+.recipes-list-card .recipes-table .recipe-category {
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.recipes-list-card .recipes-table .recipe-category--empty {
+  color: #374151;
+  font-weight: 400;
+}
+
+.recipes-list-card .recipes-table .recipe-category--set {
+  color: #2dd4bf;
+}
+
+.recipes-list-card .recipes-table .recipe-price {
+  color: #0d9488;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.recipes-list-card .recipes-table .recipe-source-link {
+  display: inline-block;
+  margin-top: 2px;
+  font-size: 11px;
+  color: #e2e8f0;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.recipes-list-card .btn-danger {
+  padding: 5px 12px;
+  font-size: 13px;
+}
+
+/* Inline ingredient edit inputs (expanded recipe detail) */
+.recipes-page table input:focus,
+.recipes-page table input:focus-visible,
+.recipes-page table select:focus,
+.recipes-page table select:focus-visible {
+  outline: none !important;
+  border-color: #2dd4bf !important;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.22);
+}
+
+.recipes-list-card .recipes-table th:last-child,
+.recipes-list-card .recipes-table td:last-child {
+  width: 72px;
+  min-width: 72px;
+  text-align: right;
 }
 
 /* Shared card/button styles (from calendar.css / App.css) */
