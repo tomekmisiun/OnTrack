@@ -17,7 +17,7 @@ import {
   hourToTimeInputValue,
   normalizeTimeInput,
 } from "@/lib/schedule/parseScheduleBlockText";
-import { toEU } from "@/lib/dates";
+import { toEU, dateToStr } from "@/lib/dates";
 import type { TranslationKey } from "@/lib/i18n/translations";
 import { tFormatN, tString } from "@/lib/i18n/translate";
 import { memberColor } from "@/lib/members/colors";
@@ -89,6 +89,7 @@ export function DayScheduleScreen() {
   } = page;
 
   const dayLabels = tArray(t, "day_short");
+  const todayStr = dateToStr(new Date());
 
   return (
     <div className="schedule-page">
@@ -387,14 +388,20 @@ export function DayScheduleScreen() {
           <div className="schedule-wrap">
             <div className="schedule-layout">
               <div className="schedule-corner" />
-              {DAYS.map((d) => (
-                <div key={`h-${d}`} className="schedule-day-head">
+              {DAYS.map((d) => {
+                const isToday = dayDates[d] === todayStr;
+                return (
+                <div
+                  key={`h-${d}`}
+                  className={`schedule-day-head${isToday ? " schedule-day-head--today" : ""}`}
+                >
                   <span className="schedule-day-name">{dayLabels[d]}</span>
                   <span className="schedule-day-date">
                     {toEU(dayDates[d] ?? "").slice(0, 5)}
                   </span>
                 </div>
-              ))}
+              );
+              })}
 
               <div className="schedule-body">
                 <div className="schedule-time-col">
@@ -408,8 +415,13 @@ export function DayScheduleScreen() {
                   ))}
                 </div>
 
-                {DAYS.map((day) => (
-                  <div key={day} className="schedule-day-col">
+                {DAYS.map((day) => {
+                  const isToday = dayDates[day] === todayStr;
+                  return (
+                  <div
+                    key={day}
+                    className={`schedule-day-col${isToday ? " schedule-day-col--today" : ""}`}
+                  >
                     <div
                       className="schedule-day-body"
                       style={{ height: HOURS.length * ROW_H }}
@@ -449,7 +461,8 @@ export function DayScheduleScreen() {
                         ))}
                     </div>
                   </div>
-                ))}
+                );
+                })}
               </div>
             </div>
           </div>
