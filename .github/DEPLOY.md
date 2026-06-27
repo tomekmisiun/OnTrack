@@ -49,6 +49,8 @@ Configure under **Settings → Environments**. Production should have **Required
 
 **Railway tokens:** generate a **Project Token** per Railway environment (Project → select environment → Settings → Tokens). Put the staging token only in GitHub Environment `staging`, and the production token only in `production`. Do not pass `--environment` in CI — the token already scopes the target environment.
 
+**Smoke URLs:** use the canonical **`https://`** API domain (no trailing slash). `wait-for-url.sh` follows redirects, but storing the final HTTPS URL avoids extra latency in CI.
+
 ---
 
 ## Approve production
