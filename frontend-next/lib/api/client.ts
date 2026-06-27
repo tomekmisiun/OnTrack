@@ -1,6 +1,6 @@
-import { getApiBaseUrl } from "@/lib/config/env";
 import { isBffEnabled } from "@/lib/bff/config";
 import { ApiError, errorMessageFromBody } from "@/lib/api/errors";
+import { buildClientApiUrl } from "@/lib/api/build-api-url";
 
 export type ApiClientOptions = {
   /** Optional Bearer token provider (e.g. localStorage in a later auth task). */
@@ -14,17 +14,7 @@ export type RequestOptions = Omit<RequestInit, "body"> & {
 };
 
 function buildUrl(path: string): string {
-  const normalized = path.startsWith("/") ? path : `/${path}`;
-
-  if (isBffEnabled()) {
-    const apiPath = normalized.startsWith("/api/")
-      ? normalized.slice("/api/".length)
-      : normalized.slice(1);
-    return `/api/bff/${apiPath}`;
-  }
-
-  const base = getApiBaseUrl();
-  return `${base}${normalized}`;
+  return buildClientApiUrl(path);
 }
 
 export function createApiClient(options: ApiClientOptions = {}) {

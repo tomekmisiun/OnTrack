@@ -1,17 +1,10 @@
 import { describe, expect, it } from "vitest";
+import { buildClientApiUrl } from "@/lib/api/build-api-url";
 import {
   buildUpstreamApiUrl,
   ProxyError,
   pickForwardRequestHeaders,
 } from "@/lib/bff/proxy";
-
-function buildImportUrl(path: string): string {
-  const normalized = path.startsWith("/") ? path : `/${path}`;
-  const apiPath = normalized.startsWith("/api/")
-    ? normalized.slice("/api/".length)
-    : normalized.slice(1);
-  return `/api/bff/${apiPath}`;
-}
 
 describe("bff proxy", () => {
   it("builds upstream URL from path segments", () => {
@@ -50,8 +43,20 @@ describe("bff proxy", () => {
 
 describe("bff import URLs", () => {
   it("routes import uploads through the BFF proxy path", () => {
-    expect(buildImportUrl("/api/import/parse")).toBe("/api/bff/import/parse");
-    expect(buildImportUrl("/api/import/parse-free")).toBe("/api/bff/import/parse-free");
+    const previous = process.env.NEXT_PUBLIC_BFF_ENABLED;
+    process.env.NEXT_PUBLIC_BFF_ENABLED = "1";
+    try {
+      expect(buildClientApiUrl("/api/import/parse")).toBe("/api/bff/import/parse");
+      expect(buildClientApiUrl("/api/import/parse-free")).toBe(
+        "/api/bff/import/parse-free",
+      );
+    } finally {
+      if (previous === undefined) {
+        delete process.env.NEXT_PUBLIC_BFF_ENABLED;
+      } else {
+        process.env.NEXT_PUBLIC_BFF_ENABLED = previous;
+      }
+    }
   });
 });
 
