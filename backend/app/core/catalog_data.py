@@ -12,9 +12,10 @@ from pathlib import Path
 from typing import Any
 
 from app.core.runtime_data import runtime_data_root
+from app.domain.market import MARKET_BY_UI_LOCALE_DEFAULT, MARKET_CODES
 
-MARKETS = ("PL", "GB")
-MARKET_LOCALE = {"PL": "pl", "GB": "en"}
+MARKETS = tuple(sorted(MARKET_CODES))
+MARKET_LOCALE = {market: locale for locale, market in MARKET_BY_UI_LOCALE_DEFAULT.items()}
 
 
 def catalog_root() -> Path:

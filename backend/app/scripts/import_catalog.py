@@ -18,16 +18,13 @@ from app.core.catalog_data import (
     load_json_list,
 )
 from app.domain.catalog_seed import slug_catalog_key
-from app.domain.market import currency_for_market
+from app.domain.market import MARKET_CODES, UI_LOCALES, currency_for_market
 from app.domain.product_normalize import normalize_product_name
 from app.models.product import Product
 from app.models.product_market_price import ProductMarketPrice
 from app.models.product_translation import ProductTranslation
 from app.models.recipe import Recipe, RecipeIngredient
 from app.models.recipe_translation import RecipeTranslation
-
-SUPPORTED_LOCALES = ("pl", "en")
-SUPPORTED_MARKETS = ("PL", "GB")
 
 
 @dataclass
@@ -160,13 +157,13 @@ def import_products_from_canonical(session: Session, report: CatalogImportReport
         macros = entry.get("macros") or {}
         markets = entry.get("markets") or {}
 
-        missing_locales = [loc for loc in SUPPORTED_LOCALES if not (names.get(loc) or "").strip()]
+        missing_locales = [loc for loc in UI_LOCALES if not (names.get(loc) or "").strip()]
         if missing_locales:
             report.warnings.append(
                 f"product {catalog_key!r}: missing names for {', '.join(missing_locales)}"
             )
 
-        missing_markets = [m for m in SUPPORTED_MARKETS if m not in markets]
+        missing_markets = [m for m in MARKET_CODES if m not in markets]
         if missing_markets:
             report.warnings.append(
                 f"product {catalog_key!r}: missing market prices for {', '.join(missing_markets)}"
@@ -202,7 +199,7 @@ def import_products_from_canonical(session: Session, report: CatalogImportReport
             system_by_key[catalog_key] = product
             report.products_created += 1
 
-        for locale in SUPPORTED_LOCALES:
+        for locale in UI_LOCALES:
             name = (names.get(locale) or "").strip()
             if not name:
                 continue
@@ -215,7 +212,7 @@ def import_products_from_canonical(session: Session, report: CatalogImportReport
                 parent_id=product.id,
             )
 
-        for market_code in SUPPORTED_MARKETS:
+        for market_code in MARKET_CODES:
             market = markets.get(market_code)
             if not market:
                 continue
@@ -256,7 +253,7 @@ def import_recipes_from_canonical(
         if not catalog_key:
             continue
 
-        missing_locales = [loc for loc in SUPPORTED_LOCALES if not (names.get(loc) or "").strip()]
+        missing_locales = [loc for loc in UI_LOCALES if not (names.get(loc) or "").strip()]
         if missing_locales:
             report.warnings.append(
                 f"recipe {catalog_key!r}: missing names for {', '.join(missing_locales)}"
@@ -296,7 +293,7 @@ def import_recipes_from_canonical(
             report.recipes_created += 1
 
         notes = entry.get("notes")
-        for locale in SUPPORTED_LOCALES:
+        for locale in UI_LOCALES:
             name = (names.get(locale) or "").strip()
             if not name:
                 continue
