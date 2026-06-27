@@ -10,6 +10,18 @@ API_URL="${API_URL:?Set API_URL to the FastAPI base URL (no trailing slash)}"
 FRONTEND_ORIGIN="${FRONTEND_ORIGIN:-http://localhost:3000}"
 SMOKE_TARGET="${SMOKE_TARGET:-deployed environment}"
 
+# Railway domains redirect http→https. Use HTTPS up front so POST bodies are not lost on redirect.
+case "$API_URL" in
+  http://localhost*|http://127.0.0.1*) ;;
+  http://*) API_URL="https://${API_URL#http://}" ;;
+esac
+case "$FRONTEND_ORIGIN" in
+  http://localhost*|http://127.0.0.1*) ;;
+  http://*) FRONTEND_ORIGIN="https://${FRONTEND_ORIGIN#http://}" ;;
+esac
+
+CURL_POST_FLAGS="-sL --max-redirs 5 --post301 --post302 --post303"
+
 EMAIL="verify_$(date +%s)_$$@example.com"
 PASS="VerifyPass123!"
 
@@ -26,7 +38,12 @@ check_status() {
   label="$1"
   expected="$2"
   actual="$3"
+  body_file="${4:-}"
   if [ "$actual" != "$expected" ]; then
+    if [ -n "$body_file" ] && [ -f "$body_file" ]; then
+      echo "Response body:"
+      cat "$body_file"
+    fi
     fail "$label expected HTTP $expected, got $actual"
   fi
   echo "OK  $label (HTTP $actual)"
@@ -39,12 +56,12 @@ grep -q '"status"[[:space:]]*:[[:space:]]*"ok"' /tmp/ontrack-verify-health.json 
   || fail "health body missing status ok"
 
 register_body=$(mktemp)
-register_code=$(curl -sL --max-redirs 5 -o "$register_body" -w '%{http_code}' \
+register_code=$(curl $CURL_POST_FLAGS -o "$register_body" -w '%{http_code}' \
   -X POST "$API_URL/api/auth/register" \
   -H 'Content-Type: application/json' \
   -H "Origin: $FRONTEND_ORIGIN" \
   -d "{\"email\":\"$EMAIL\",\"password\":\"$PASS\",\"lang\":\"pl\"}")
-check_status "POST /api/auth/register" "201" "$register_code"
+check_status "POST /api/auth/register" "201" "$register_code" "$register_body"
 grep -q '"token"' "$register_body" || fail "register response missing token"
 TOKEN=$(sed -n 's/.*"token"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' "$register_body" | head -1)
 [ -n "$TOKEN" ] || fail "could not parse token from register response"
@@ -54,16 +71,16 @@ me_code=$(curl -sL --max-redirs 5 -o "$me_body" -w '%{http_code}' \
   -H "Authorization: Bearer $TOKEN" \
   -H "Origin: $FRONTEND_ORIGIN" \
   "$API_URL/api/auth/me")
-check_status "GET /api/auth/me (after register)" "200" "$me_code"
+check_status "GET /api/auth/me (after register)" "200" "$me_code" "$me_body"
 grep -q '"ui_locale"' "$me_body" || fail "/me body missing ui_locale"
 
 login_body=$(mktemp)
-login_code=$(curl -sL --max-redirs 5 -o "$login_body" -w '%{http_code}' \
+login_code=$(curl $CURL_POST_FLAGS -o "$login_body" -w '%{http_code}' \
   -X POST "$API_URL/api/auth/login" \
   -H 'Content-Type: application/json' \
   -H "Origin: $FRONTEND_ORIGIN" \
   -d "{\"email\":\"$EMAIL\",\"password\":\"$PASS\"}")
-check_status "POST /api/auth/login" "200" "$login_code"
+check_status "POST /api/auth/login" "200" "$login_code" "$login_body"
 grep -q '"token"' "$login_body" || fail "login response missing token"
 
 rm -f "$register_body" "$me_body" "$login_body" /tmp/ontrack-verify-health.json

@@ -7,6 +7,12 @@ URL="${1:?Usage: wait-for-url.sh <url> [max_attempts] [interval_seconds]}"
 MAX_ATTEMPTS="${2:-30}"
 INTERVAL="${3:-10}"
 
+# Railway domains redirect http→https. Prefer canonical HTTPS URLs in secrets.
+case "$URL" in
+  http://localhost*|http://127.0.0.1*) ;;
+  http://*) URL="https://${URL#http://}" ;;
+esac
+
 attempt=1
 while [ "$attempt" -le "$MAX_ATTEMPTS" ]; do
   echo "Attempt ${attempt}/${MAX_ATTEMPTS}: GET ${URL}"
