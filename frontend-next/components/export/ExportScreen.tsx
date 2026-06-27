@@ -26,6 +26,7 @@ import type { TranslationKey } from "@/lib/i18n/translations";
 import { tArray, tFormat2, tFormatN, tString } from "@/lib/i18n/translate";
 import { currencyForMarket, currencyLabel } from "@/lib/format/currency";
 import { fuzzySearch } from "@/lib/recipes/search";
+import { packageLineCosts } from "@/lib/summary/package-math";
 import type { ScheduleBlock } from "@/types/daySchedule";
 import type { Meal, MealsByDate } from "@/types/mealPlan";
 import type { Recipe, RecipeSummary } from "@/types/recipe";
@@ -966,11 +967,20 @@ export function ExportScreen(props: ExportScreenProps = {}) {
           merged[item.product_id]!.total_weight += item.total_weight;
         }
       }
-      const mergedItems = Object.values(merged).map(item => {
-        const exact   = item.total_weight / item.package_weight;
-        const rounded = item.sold_by_weight ? exact : Math.ceil(exact);
-        const cost    = Math.round(rounded * item.price_per_package * 100) / 100;
-        return { ...item, packages_exact: exact, packages_rounded: rounded, total_cost: cost, actual_cost: Math.round(exact * item.price_per_package * 100) / 100 };
+      const mergedItems = Object.values(merged).map((item) => {
+        const costs = packageLineCosts({
+          totalWeight: item.total_weight,
+          packageWeight: item.package_weight,
+          pricePerPackage: item.price_per_package,
+          soldByWeight: item.sold_by_weight,
+        });
+        return {
+          ...item,
+          packages_exact: costs.packagesExact,
+          packages_rounded: costs.packagesRounded,
+          total_cost: costs.totalCost,
+          actual_cost: costs.actualCost,
+        };
       }).sort((a, b) => a.product_name.localeCompare(b.product_name, 'pl'));
       const total = mergedItems.reduce((s, i) => s + (i.total_cost ?? 0), 0);
       const html = generateShopListHTML({ items: mergedItems, total, selectedDays: days, memberLabel: shopMemberLabel, lang, marketCode });
