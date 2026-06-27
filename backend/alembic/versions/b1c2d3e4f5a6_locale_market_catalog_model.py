@@ -101,6 +101,77 @@ def upgrade() -> None:
 
     op.execute(sa.text("UPDATE recipes SET user_name = name WHERE user_id IS NOT NULL"))
 
+    # --- stash user FKs to system catalog (restored after import_catalog in preDeploy) ---
+    op.create_table(
+        "_ontrack_migration_meal_plan_stash",
+        sa.Column("user_id", sa.Integer(), nullable=False),
+        sa.Column("member_id", sa.Integer(), nullable=True),
+        sa.Column("date", sa.Date(), nullable=False),
+        sa.Column("position", sa.Integer(), nullable=False),
+        sa.Column("catalog_key", sa.String(length=120), nullable=False),
+    )
+    op.create_table(
+        "_ontrack_migration_favorite_stash",
+        sa.Column("user_id", sa.Integer(), nullable=False),
+        sa.Column("catalog_key", sa.String(length=120), nullable=False),
+        sa.PrimaryKeyConstraint("user_id", "catalog_key"),
+    )
+    op.create_table(
+        "_ontrack_migration_ingredient_product_stash",
+        sa.Column("ingredient_id", sa.Integer(), nullable=False),
+        sa.Column("recipe_id", sa.Integer(), nullable=False),
+        sa.Column("weight", sa.Float(), nullable=False),
+        sa.Column("product_catalog_key", sa.String(length=120), nullable=False),
+        sa.PrimaryKeyConstraint("ingredient_id"),
+    )
+    op.execute(
+        sa.text(
+            """
+            INSERT INTO _ontrack_migration_meal_plan_stash
+                (user_id, member_id, date, position, catalog_key)
+            SELECT mp.user_id, mp.member_id, mp.date, mp.position, r.catalog_key
+            FROM meal_plans mp
+            JOIN recipes r ON r.id = mp.recipe_id
+            WHERE r.source = 'system'
+              AND r.user_id IS NULL
+              AND r.catalog_key IS NOT NULL
+            """
+        )
+    )
+    op.execute(
+        sa.text(
+            """
+            DELETE FROM meal_plans
+            WHERE recipe_id IN (
+                SELECT id FROM recipes WHERE source = 'system' AND user_id IS NULL
+            )
+            """
+        )
+    )
+    op.execute(
+        sa.text(
+            """
+            INSERT INTO _ontrack_migration_favorite_stash (user_id, catalog_key)
+            SELECT urf.user_id, r.catalog_key
+            FROM user_recipe_favorites urf
+            JOIN recipes r ON r.id = urf.recipe_id
+            WHERE r.source = 'system'
+              AND r.user_id IS NULL
+              AND r.catalog_key IS NOT NULL
+            """
+        )
+    )
+    op.execute(
+        sa.text(
+            """
+            DELETE FROM user_recipe_favorites
+            WHERE recipe_id IN (
+                SELECT id FROM recipes WHERE source = 'system' AND user_id IS NULL
+            )
+            """
+        )
+    )
+
     # --- remove system catalog (re-seeded from canonical JSON) ---
     op.execute(
         sa.text(
@@ -116,8 +187,33 @@ def upgrade() -> None:
     op.execute(
         sa.text(
             """
+            INSERT INTO _ontrack_migration_ingredient_product_stash
+                (ingredient_id, recipe_id, weight, product_catalog_key)
+            SELECT ri.id, ri.recipe_id, ri.weight, p.catalog_key
+            FROM recipe_ingredients ri
+            JOIN products p ON p.id = ri.product_id
+            WHERE p.source = 'system'
+              AND p.user_id IS NULL
+              AND p.catalog_key IS NOT NULL
+            """
+        )
+    )
+    op.execute(
+        sa.text(
+            """
             DELETE FROM recipe_ingredients
             WHERE product_id IN (
+                SELECT id FROM products WHERE source = 'system' AND user_id IS NULL
+            )
+            """
+        )
+    )
+    op.execute(
+        sa.text(
+            """
+            UPDATE products
+            SET base_product_id = NULL
+            WHERE base_product_id IN (
                 SELECT id FROM products WHERE source = 'system' AND user_id IS NULL
             )
             """
