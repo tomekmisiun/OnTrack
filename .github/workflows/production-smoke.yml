@@ -1,0 +1,32 @@
+name: Production auth smoke
+
+# Synthetic register/login check against live production URLs.
+# Separate from PR CI — uses repository secrets, not test env vars.
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: production-smoke
+  cancel-in-progress: false
+
+jobs:
+  auth-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout kod
+        uses: actions/checkout@v6
+
+      - name: Run production auth smoke
+        env:
+          API_URL: ${{ secrets.PRODUCTION_API_URL }}
+          FRONTEND_ORIGIN: ${{ secrets.PRODUCTION_FRONTEND_ORIGIN }}
+        run: |
+          if [ -z "${API_URL:-}" ]; then
+            echo "PRODUCTION_API_URL secret is not configured — skipping smoke test."
+            exit 0
+          fi
+          chmod +x backend/scripts/verify-production-auth.sh
+          ./backend/scripts/verify-production-auth.sh
