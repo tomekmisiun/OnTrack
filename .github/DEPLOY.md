@@ -57,6 +57,8 @@ API_URL=https://<ontrack-back-domain> FRONTEND_ORIGIN=https://<ontrackapp-domain
 | `backend-docker` / `frontend-next-docker` | Docker image builds |
 | `backend-integration` | DB migration rehearsal |
 | `deploy-production` | **`main` only** — Railway deploy |
+| `visual-regression` | Manual dispatch — Playwright screenshot suite (optional) |
+| `production auth smoke` | Scheduled / manual — live register/login check |
 
 Full matrix: [`docs/TESTING.md`](../docs/TESTING.md)
 

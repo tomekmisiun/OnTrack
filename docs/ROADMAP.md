@@ -22,7 +22,7 @@ Active plans only. Completed work is removed or marked done. For technical debt 
 |----|---------|-------------------|----------|--------------|-----------|--------|
 | R-010 | Scattered, stale Markdown | Minimal `docs/` set + audit trail | P1 | — | This audit merged; links valid | **Done** (#163) |
 | R-011 | No automated prod auth smoke in CI | Scheduled GitHub workflow + manual dispatch (`production-smoke.yml`) | P1 | Ops secrets | Register/login synthetic check outside PR CI | **Done** |
-| R-012 | Password reset without email | SMTP provider + templated email + rate limit | P1 | Provider choice | User receives reset link by email | **Done** |
+| R-012 | Password reset without email | SMTP provider + templated email + rate limit | P1 | Provider choice | User receives reset link by email | **Done** (#168, #169 email register/login) |
 
 ---
 
@@ -31,8 +31,8 @@ Active plans only. Completed work is removed or marked done. For technical debt 
 | ID | Problem | Proposed solution | Priority | Dependencies | Done when | Status |
 |----|---------|-------------------|----------|--------------|-----------|--------|
 | R-020 | UI locale vs market separation was implicit | Separate `ui_locale` and `market_code` end-to-end | P2 | Catalog model | Users can pick UI language independently of product market | **Done** (#150, ADR 0003) |
-| R-021 | BFF auth not used in production | Evaluate HttpOnly cookie auth for XSS reduction | P2 | Security review | Decision recorded; enabled or explicitly rejected | **Planned** |
-| R-022 | Visual regression not gated | Add optional CI job or manual release checklist | P2 | Playwright visual suite | Documented process or CI job | **Planned** |
+| R-021 | BFF auth not used in production | Evaluate HttpOnly cookie auth for XSS reduction | P2 | Security review | Decision recorded; enabled or explicitly rejected | **Done** ([ADR 0001](./adr/0001-bff-production-mode.md)) |
+| R-022 | Visual regression not gated | Add optional CI job or manual release checklist | P2 | Playwright visual suite | Documented process or CI job | **Done** (`visual-regression.yml` + [DEPLOYMENT.md](./DEPLOYMENT.md)) |
 
 ---
 

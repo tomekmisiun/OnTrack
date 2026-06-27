@@ -54,7 +54,15 @@ cd frontend-next
 npm run test:e2e:visual
 ```
 
-Not part of required CI status checks.
+Update baselines after intentional UI changes:
+
+```bash
+npm run test:e2e:visual:update
+```
+
+**CI:** GitHub Actions workflow **Visual regression** (`visual-regression.yml`) — manual `workflow_dispatch` only. Not a required check for merge or deploy.
+
+**Before UI-heavy releases:** run locally or trigger the workflow; see [DEPLOYMENT.md](./DEPLOYMENT.md#ui-release-checklist).
 
 ## Related
 
