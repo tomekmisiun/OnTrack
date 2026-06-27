@@ -3,6 +3,8 @@ import { plMessages } from "@/lib/i18n/messages/pl";
 
 export type LangCode = "pl" | "en";
 
+export const DEFAULT_UI_LOCALE: LangCode = "pl";
+
 export const T = {
   pl: plMessages,
   en: enMessages,
