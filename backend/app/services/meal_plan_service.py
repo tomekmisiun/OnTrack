@@ -1,7 +1,12 @@
-import math
 from datetime import date, timedelta
 
 from sqlalchemy.orm import Session, joinedload
+
+from app.domain.package_math import (
+    default_package_weight,
+    package_line_costs,
+    price_per_package,
+)
 
 from app.models.household_member import HouseholdMember
 from app.models.meal_plan import MealPlan
@@ -327,25 +332,22 @@ def get_summary(
     total_cost = 0.0
     for pid, p in products.items():
         unit = p["unit"]
-        pkg = p["package_weight"] or (1 if unit == "szt" else 1000)
+        pkg = default_package_weight(p["package_weight"], unit)
         total = p["total_weight"]
         price_per_unit = p["price"]
         sold_by_weight = p.get("sold_by_weight", False)
-
-        if unit == "szt":
-            package_price = price_per_unit * pkg
-        else:
-            package_price = price_per_unit * pkg / 100
-
-        packages_exact = total / pkg
-        actual_cost = packages_exact * package_price
-        if sold_by_weight:
-            packages_rounded = packages_exact
-            cost = actual_cost
-        else:
-            packages_rounded = math.ceil(packages_exact)
-            cost = packages_rounded * package_price
-        total_cost += cost
+        package_price = price_per_package(
+            unit_price=price_per_unit,
+            package_weight=pkg,
+            unit=unit,
+        )
+        costs = package_line_costs(
+            total_weight=total,
+            package_weight=pkg,
+            price_per_package=package_price,
+            sold_by_weight=sold_by_weight,
+        )
+        total_cost += costs["total_cost"]
         result.append(
             {
                 "product_id": pid,
@@ -353,11 +355,11 @@ def get_summary(
                 "total_weight": round(total, 2),
                 "unit": unit,
                 "package_weight": pkg,
-                "packages_exact": round(packages_exact, 2),
-                "packages_rounded": round(packages_rounded, 2),
+                "packages_exact": costs["packages_exact"],
+                "packages_rounded": costs["packages_rounded"],
                 "price_per_package": round(package_price, 2),
-                "total_cost": round(cost, 2),
-                "actual_cost": round(actual_cost, 2),
+                "total_cost": costs["total_cost"],
+                "actual_cost": costs["actual_cost"],
                 "sold_by_weight": sold_by_weight,
             }
         )
