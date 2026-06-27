@@ -51,7 +51,6 @@ class RecipeIngredient(Base):
     )
     product_id: Mapped[int] = mapped_column(ForeignKey("products.id"), nullable=False)
     weight: Mapped[float] = mapped_column(Float, nullable=False)
-    unit: Mapped[str] = mapped_column(String(10), nullable=False, default="g")
 
     recipe: Mapped[Recipe] = relationship(back_populates="ingredients")
     product: Mapped[Product] = relationship()

@@ -68,8 +68,8 @@ def legacy_migrated_db(postgres_url: str, monkeypatch):
     user_id = session.execute(
         text(
             """
-            INSERT INTO users (email, username, password_hash, lang)
-            VALUES (:email, :username, :password_hash, :lang)
+            INSERT INTO users (email, username, password_hash, ui_locale, market_code)
+            VALUES (:email, :username, :password_hash, :ui_locale, :market_code)
             RETURNING id
             """
         ),
@@ -77,7 +77,8 @@ def legacy_migrated_db(postgres_url: str, monkeypatch):
             "email": "mig@example.com",
             "username": "miguser",
             "password_hash": hash_password("test-password"),
-            "lang": "pl",
+            "ui_locale": "pl",
+            "market_code": "PL",
         },
     ).scalar_one()
     session.add(HouseholdMember(user_id=user_id, name="Ja", is_primary=True))
