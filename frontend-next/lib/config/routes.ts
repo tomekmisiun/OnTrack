@@ -19,6 +19,8 @@ export type AppNavId = (typeof APP_NAV_ITEMS)[number]["id"];
 
 export const HOME_PATH = "/";
 
+export const LOGIN_PATH = "/login";
+
 export const PROTECTED_PATHS = [
   HOME_PATH,
   ...APP_NAV_ITEMS.map((item) => item.path),
@@ -27,6 +29,12 @@ export const PROTECTED_PATHS = [
 export function isProtectedPath(pathname: string): boolean {
   return PROTECTED_PATHS.some(
     (path) => pathname === path || pathname.startsWith(`${path}/`),
+  );
+}
+
+export function isPublicPath(pathname: string): boolean {
+  return (
+    pathname === LOGIN_PATH || pathname.startsWith(`${LOGIN_PATH}/`)
   );
 }
 
