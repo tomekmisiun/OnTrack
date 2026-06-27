@@ -2,8 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { AUTH_COOKIE_NAME } from "@/lib/bff/cookies";
 import { SESSION_COOKIE_NAME } from "@/lib/auth/session-cookie";
-
-const LOGIN_PATH = "/login";
+import { isPublicPath, LOGIN_PATH } from "@/lib/config/routes";
 
 export function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl;
@@ -19,7 +18,7 @@ export function middleware(request: NextRequest) {
   const hasSession =
     request.cookies.get(SESSION_COOKIE_NAME)?.value === "1" ||
     Boolean(request.cookies.get(AUTH_COOKIE_NAME)?.value);
-  const isLogin = pathname === LOGIN_PATH || pathname.startsWith(`${LOGIN_PATH}/`);
+  const isLogin = isPublicPath(pathname);
 
   if (searchParams.has("code") || searchParams.has("auth_error")) {
     return NextResponse.next();
