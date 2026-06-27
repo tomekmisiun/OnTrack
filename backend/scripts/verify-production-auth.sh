@@ -10,6 +10,9 @@ API_URL="${API_URL:?Set API_URL to the FastAPI base URL (no trailing slash)}"
 FRONTEND_ORIGIN="${FRONTEND_ORIGIN:-http://localhost:3000}"
 SMOKE_TARGET="${SMOKE_TARGET:-deployed environment}"
 
+API_URL="${API_URL%/}"
+FRONTEND_ORIGIN="${FRONTEND_ORIGIN%/}"
+
 # Railway domains redirect http→https. Use HTTPS up front so POST bodies are not lost on redirect.
 case "$API_URL" in
   http://localhost*|http://127.0.0.1*) ;;
@@ -20,7 +23,8 @@ case "$FRONTEND_ORIGIN" in
   http://*) FRONTEND_ORIGIN="https://${FRONTEND_ORIGIN#http://}" ;;
 esac
 
-CURL_POST_FLAGS="-sL --max-redirs 5 --post301 --post302 --post303"
+CURL_GET_FLAGS="-sL --max-redirs 5 --location-trusted"
+CURL_POST_FLAGS="-sL --max-redirs 5 --location-trusted --post301 --post302 --post303"
 
 EMAIL="verify_$(date +%s)_$$@example.com"
 PASS="VerifyPass123!"
@@ -50,7 +54,7 @@ check_status() {
 }
 
 echo -n "GET /health... "
-health_code=$(curl -sL --max-redirs 5 -o /tmp/ontrack-verify-health.json -w '%{http_code}' "$API_URL/health")
+health_code=$(curl $CURL_GET_FLAGS -o /tmp/ontrack-verify-health.json -w '%{http_code}' "$API_URL/health")
 check_status "GET /health" "200" "$health_code"
 grep -q '"status"[[:space:]]*:[[:space:]]*"ok"' /tmp/ontrack-verify-health.json \
   || fail "health body missing status ok"
@@ -62,13 +66,17 @@ register_code=$(curl $CURL_POST_FLAGS -o "$register_body" -w '%{http_code}' \
   -H "Origin: $FRONTEND_ORIGIN" \
   -d "{\"email\":\"$EMAIL\",\"password\":\"$PASS\",\"lang\":\"pl\"}")
 check_status "POST /api/auth/register" "201" "$register_code" "$register_body"
-grep -q '"token"' "$register_body" || fail "register response missing token"
-TOKEN=$(sed -n 's/.*"token"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' "$register_body" | head -1)
+if command -v jq >/dev/null 2>&1; then
+  TOKEN=$(jq -r '.token // empty' "$register_body")
+else
+  TOKEN=$(sed -n 's/.*"token"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' "$register_body" | head -1)
+fi
 [ -n "$TOKEN" ] || fail "could not parse token from register response"
+echo "Parsed bearer token (${#TOKEN} chars)"
 
 me_body=$(mktemp)
-me_code=$(curl -sL --max-redirs 5 -o "$me_body" -w '%{http_code}' \
-  -H "Authorization: Bearer $TOKEN" \
+me_code=$(curl $CURL_GET_FLAGS -o "$me_body" -w '%{http_code}' \
+  -H "Authorization: Bearer ${TOKEN}" \
   -H "Origin: $FRONTEND_ORIGIN" \
   "$API_URL/api/auth/me")
 check_status "GET /api/auth/me (after register)" "200" "$me_code" "$me_body"
