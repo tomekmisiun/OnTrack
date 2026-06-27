@@ -10,7 +10,7 @@ INTERVAL="${3:-10}"
 attempt=1
 while [ "$attempt" -le "$MAX_ATTEMPTS" ]; do
   echo "Attempt ${attempt}/${MAX_ATTEMPTS}: GET ${URL}"
-  code=$(curl -s -o /dev/null -w '%{http_code}' "$URL" || true)
+  code=$(curl -sL --max-redirs 5 -o /dev/null -w '%{http_code}' "$URL" || true)
   if [ "$code" = "200" ]; then
     echo "Ready: ${URL} (HTTP 200)"
     exit 0

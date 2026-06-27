@@ -33,13 +33,13 @@ check_status() {
 }
 
 echo -n "GET /health... "
-health_code=$(curl -s -o /tmp/ontrack-verify-health.json -w '%{http_code}' "$API_URL/health")
+health_code=$(curl -sL --max-redirs 5 -o /tmp/ontrack-verify-health.json -w '%{http_code}' "$API_URL/health")
 check_status "GET /health" "200" "$health_code"
 grep -q '"status"[[:space:]]*:[[:space:]]*"ok"' /tmp/ontrack-verify-health.json \
   || fail "health body missing status ok"
 
 register_body=$(mktemp)
-register_code=$(curl -s -o "$register_body" -w '%{http_code}' \
+register_code=$(curl -sL --max-redirs 5 -o "$register_body" -w '%{http_code}' \
   -X POST "$API_URL/api/auth/register" \
   -H 'Content-Type: application/json' \
   -H "Origin: $FRONTEND_ORIGIN" \
@@ -50,7 +50,7 @@ TOKEN=$(sed -n 's/.*"token"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' "$regist
 [ -n "$TOKEN" ] || fail "could not parse token from register response"
 
 me_body=$(mktemp)
-me_code=$(curl -s -o "$me_body" -w '%{http_code}' \
+me_code=$(curl -sL --max-redirs 5 -o "$me_body" -w '%{http_code}' \
   -H "Authorization: Bearer $TOKEN" \
   -H "Origin: $FRONTEND_ORIGIN" \
   "$API_URL/api/auth/me")
@@ -58,7 +58,7 @@ check_status "GET /api/auth/me (after register)" "200" "$me_code"
 grep -q '"ui_locale"' "$me_body" || fail "/me body missing ui_locale"
 
 login_body=$(mktemp)
-login_code=$(curl -s -o "$login_body" -w '%{http_code}' \
+login_code=$(curl -sL --max-redirs 5 -o "$login_body" -w '%{http_code}' \
   -X POST "$API_URL/api/auth/login" \
   -H 'Content-Type: application/json' \
   -H "Origin: $FRONTEND_ORIGIN" \
