@@ -1,0 +1,30 @@
+name: Staging auth smoke
+
+# Synthetic register/login check against a staging Railway deployment.
+# Operator-managed — configure secrets after creating a staging project.
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: staging-smoke
+  cancel-in-progress: false
+
+jobs:
+  auth-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout kod
+        uses: actions/checkout@v6
+
+      - name: Run staging auth smoke
+        env:
+          API_URL: ${{ secrets.STAGING_API_URL }}
+          FRONTEND_ORIGIN: ${{ secrets.STAGING_FRONTEND_ORIGIN }}
+        run: |
+          if [ -z "${API_URL:-}" ]; then
+            echo "STAGING_API_URL secret is not configured — skipping smoke test."
+            exit 0
+          fi
+          chmod +x backend/scripts/verify-production-auth.sh
+          ./backend/scripts/verify-production-auth.sh

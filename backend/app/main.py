@@ -21,12 +21,14 @@ from app.api.routes.public import router as public_router
 from app.api.routes.recipes import router as recipes_router
 from app.core.config import get_settings
 from app.core.cors import cors_allowed_origins
+from app.core.sentry import init_sentry
 
 _http_requests_total = 0
 
 
 def create_app() -> FastAPI:
     settings = get_settings()
+    init_sentry(settings)
 
     @asynccontextmanager
     async def lifespan(_app: FastAPI):

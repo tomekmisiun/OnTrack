@@ -38,6 +38,13 @@ class Settings(BaseSettings):
     smtp_from: str | None = Field(default=None, validation_alias="SMTP_FROM")
     smtp_use_tls: bool = Field(default=True, validation_alias="SMTP_USE_TLS")
 
+    sentry_dsn: str | None = Field(default=None, validation_alias="SENTRY_DSN")
+    sentry_environment: str | None = Field(default=None, validation_alias="SENTRY_ENVIRONMENT")
+    sentry_traces_sample_rate: float = Field(
+        default=0.0,
+        validation_alias="SENTRY_TRACES_SAMPLE_RATE",
+    )
+
     pexels_api_key: str | None = Field(default=None, validation_alias="PEXELS_API_KEY")
     gemini_api_key: str | None = Field(default=None, validation_alias="GEMINI_API_KEY")
 

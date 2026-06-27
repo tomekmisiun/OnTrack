@@ -60,6 +60,7 @@ For each service → **Settings → Source**:
 | `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` | Optional OAuth |
 | `GOOGLE_REDIRECT_URI` | `https://<ontrack-back>/api/auth/google/callback` |
 | `SMTP_HOST`, `SMTP_FROM`, `SMTP_USER`, `SMTP_PASSWORD` | Optional — password reset emails |
+| `SENTRY_DSN`, `SENTRY_ENVIRONMENT`, `SENTRY_TRACES_SAMPLE_RATE` | Optional — error tracking (see [SECURITY.md](./SECURITY.md)) |
 | API keys (Gemini, Pexels, DeepSeek) | Optional |
 
 Healthcheck: `/health` (120s timeout in `railway.toml`)
@@ -69,6 +70,8 @@ Healthcheck: `/health` (120s timeout in `railway.toml`)
 | Variable | Note |
 |----------|------|
 | `NEXT_PUBLIC_API_URL` | Public `ontrack-back` URL — **build-time** variable |
+| `NEXT_PUBLIC_SENTRY_DSN` | Optional — client error tracking |
+| `SENTRY_ENVIRONMENT` | Optional — e.g. `production` or `staging` |
 
 Healthcheck: `/login` (120s timeout)
 
@@ -208,7 +211,78 @@ Full CI matrix: [TESTING.md](./TESTING.md)
 
 ## Staging
 
-No dedicated staging Railway service is defined in this repository. Operators may clone production settings to a separate Railway project/environment manually. Historical notes lived in removed `RAILWAY_STAGING.md`; treat staging as operator-managed.
+Staging is a **separate Railway project** (not auto-deployed from this repo). Use it to rehearse migrations, OAuth, and UI changes before production.
+
+### Create the project
+
+1. Railway → **New Project** → deploy from the same GitHub repo (`tomekmisiun/OnTrack`).
+2. Add services mirroring production:
+
+| Staging service | Root Directory | Config |
+|-----------------|----------------|--------|
+| `ontrack-back-staging` (or similar) | `backend` | `/backend/railway.toml` |
+| `ontrackapp-staging` | `frontend-next` | `/frontend-next/railway.toml` |
+| Postgres plugin | — | dedicated staging DB (empty or prod clone) |
+
+3. **Auto deploy:** OFF on both services — deploy staging manually when needed (`railway up` against the staging project token).
+4. Record public URLs (example placeholders — replace with your Railway domains):
+
+| Role | Example URL |
+|------|-------------|
+| Staging API | `https://ontrack-back-staging.up.railway.app` |
+| Staging frontend | `https://ontrackapp-staging.up.railway.app` |
+
+### Staging variables
+
+Copy production values, then override URLs and secrets:
+
+**`ontrack-back-staging`**
+
+| Variable | Staging note |
+|----------|--------------|
+| `DATABASE_URL` | Staging Postgres only — never point at production |
+| `JWT_SECRET_KEY`, `FLASK_SECRET_KEY` | Unique values (not prod secrets) |
+| `FRONTEND_URL` | Exact staging frontend origin |
+| `GOOGLE_REDIRECT_URI` | `https://<staging-api>/api/auth/google/callback` |
+| `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` | Separate OAuth client recommended |
+| `SENTRY_DSN` / `SENTRY_ENVIRONMENT` | Optional — use `staging` environment tag |
+
+**`ontrackapp-staging`**
+
+| Variable | Staging note |
+|----------|--------------|
+| `NEXT_PUBLIC_API_URL` | Staging API URL (build-time) |
+| `NEXT_PUBLIC_SENTRY_DSN` | Optional — same Sentry project, `staging` environment |
+
+### Deploy staging manually
+
+```bash
+# Link CLI to the staging Railway project first
+railway up --service=ontrack-back-staging --detach
+railway up --service=ontrackapp-staging --detach
+```
+
+Pre-deploy migrations run via `backend/railway.toml` the same as production.
+
+### Verify staging
+
+```bash
+API_URL=https://<staging-api> FRONTEND_ORIGIN=https://<staging-frontend> \
+  ./backend/scripts/verify-production-auth.sh
+```
+
+DB migration rehearsal on a **clone** DB: [DB_REHEARSAL.md](./backend-migration/DB_REHEARSAL.md)
+
+### GitHub Actions smoke (optional)
+
+Workflow [`.github/workflows/staging-smoke.yml`](../.github/workflows/staging-smoke.yml) — manual dispatch only.
+
+| Secret | Purpose |
+|--------|---------|
+| `STAGING_API_URL` | Staging FastAPI base URL |
+| `STAGING_FRONTEND_ORIGIN` | Staging browser origin (CORS) |
+
+Without `STAGING_API_URL`, the workflow exits successfully with a skip message.
 
 ---
 

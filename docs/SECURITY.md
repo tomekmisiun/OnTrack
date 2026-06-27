@@ -115,6 +115,24 @@ Run `npm audit` / review Dependabot alerts as part of release hygiene.
 
 ---
 
+## Error tracking (optional)
+
+When configured, unhandled API and frontend errors are sent to [Sentry](https://sentry.io).
+
+| Service | Variable | Notes |
+|---------|----------|-------|
+| Backend | `SENTRY_DSN` | Server-side exceptions via `sentry-sdk` |
+| Backend | `SENTRY_ENVIRONMENT` | e.g. `production`, `staging` |
+| Backend | `SENTRY_TRACES_SAMPLE_RATE` | Default `0` (errors only) |
+| Frontend | `NEXT_PUBLIC_SENTRY_DSN` | Build-time; browser errors |
+| Frontend | `SENTRY_ENVIRONMENT` | Runtime on Node during SSR |
+
+When DSN variables are unset, Sentry code paths are no-ops — no outbound calls.
+
+Do not commit DSN values. Use Railway variables per environment.
+
+---
+
 ## Reporting vulnerabilities
 
 Use GitHub private security advisories for this repository or contact maintainers directly. Do not open public issues with exploit details.
