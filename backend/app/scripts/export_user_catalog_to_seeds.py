@@ -23,7 +23,7 @@ from sqlalchemy.orm import Session, joinedload
 
 from app.core.runtime_data import seeds_dir
 from app.db.session import get_session_factory
-from app.domain.market import catalog_lang_for_market
+from app.domain.market import normalize_ui_locale
 from app.models.product import Product
 from app.models.recipe import Recipe, RecipeIngredient
 from app.models.user import User
@@ -116,7 +116,7 @@ def export_user_catalog(
 
 def list_users(session: Session) -> None:
     for user in session.query(User).order_by(User.id):
-        lang = catalog_lang_for_market(user.market_code or "PL")
+        lang = normalize_ui_locale(user.ui_locale)
         own_p = session.query(Product).filter_by(user_id=user.id, lang=lang).count()
         sys_p = session.query(Product).filter(
             Product.user_id.is_(None), Product.source == "system", Product.lang == lang
