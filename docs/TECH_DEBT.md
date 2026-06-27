@@ -14,7 +14,7 @@ Concrete issues with code evidence. Priority: **P0** (production risk) → **P3*
 | **Problem** | Access token stored in `localStorage` — XSS can exfiltrate token |
 | **Evidence** | `frontend-next/lib/auth/storage.ts` (token persistence); BFF mode exists but production unset |
 | **Risk** | Session hijack if XSS introduced |
-| **Suggested fix** | Enable BFF HttpOnly cookie path in production after security review ([ROADMAP R-021](./ROADMAP.md)) |
+| **Suggested fix** | Accepted for now per [ADR 0001](./adr/0001-bff-production-mode.md) (BFF off in prod). Revisit if enabling HttpOnly cookie mode. |
 | **Priority** | P2 |
 
 ---
@@ -28,7 +28,7 @@ Concrete issues with code evidence. Priority: **P0** (production risk) → **P3*
 | **Evidence** | Password reset routes in `backend/app/api/routes/auth.py`; no SMTP integration |
 | **Risk** | Feature unusable in production UX |
 | **Suggested fix** | Generic SMTP env vars + reset email + login UI ([R-012](./ROADMAP.md)) |
-| **Priority** | P1 — **Resolved** (local username accounts still need Google OAuth or future email field) |
+| **Priority** | P1 — **Resolved** (#168 SMTP + #169 email register/login) |
 
 ---
 

@@ -170,6 +170,28 @@ Frontend rollback does not change API contract between adjacent releases.
 
 ---
 
+## UI release checklist
+
+Run when merging visible UI changes (login, navigation, module layouts):
+
+1. **Local visual suite** (mocked API, four viewports):
+
+   ```bash
+   cd frontend-next && npm run test:e2e:visual
+   ```
+
+2. **If diffs are intentional**, update baselines and commit snapshot files under `frontend-next/tests/e2e/visual-screenshots.spec.ts-snapshots/`:
+
+   ```bash
+   npm run test:e2e:visual:update
+   ```
+
+3. **Optional CI confirmation:** GitHub → Actions → **Visual regression** → Run workflow.
+
+Visual tests are **not** required for PR merge or production deploy. See [TESTING.md](./TESTING.md#visual-regression-optional).
+
+---
+
 ## Emergency backend rollback (archive)
 
 One-time migration moved build context from repo root to `backend/`. Rollback to pre-migration layout requires restoring old `railway.toml` and Dockerfile paths from git history — only for emergencies. Current production uses `backend/railway.toml` + `backend/Dockerfile`.
