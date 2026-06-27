@@ -14,7 +14,7 @@ jobs:
   auth-smoke:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout kod
+      - name: Checkout code
         uses: actions/checkout@v6
 
       - name: Run staging auth smoke
