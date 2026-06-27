@@ -20,6 +20,8 @@ export type DishCompareDish = {
 };
 
 export type DishCompareResponse = {
+  lang?: LangCode | string;
+  currency?: string;
   dishes: DishCompareDish[];
   default_delivery_price?: number;
   meal_prep?: {

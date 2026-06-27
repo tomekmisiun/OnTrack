@@ -11,7 +11,7 @@ import unicodedata
 
 from rapidfuzz import fuzz, process
 
-from app.core.catalog_data import generated_products_path, read_generated_items
+from app.core.catalog_data import canonical_products_path, load_json_list
 from app.core.runtime_data import macro_ai_cache_path
 
 _PL_TRANSLATE = str.maketrans("ąćęłńóśźż", "acelnoszz")
@@ -138,41 +138,37 @@ def _normalize_result(source: str, val: dict, name: str | None = None) -> dict |
     return out
 
 
-def _market_for_lang(lang: str) -> str:
-    return "GB" if lang == "en" else "PL"
-
-
-def _build_catalog_map(market_code: str) -> dict[str, dict]:
-    path = generated_products_path(market_code)
+def _build_catalog_map() -> dict[str, dict]:
+    path = canonical_products_path()
     if not path.is_file():
         return {}
-    _, items = read_generated_items(path)
+    items = load_json_list(path)
     result: dict[str, dict] = {}
     for item in items:
-        name = (item.get("name") or "").strip()
-        if not name:
-            continue
+        macros = item.get("macros") or {}
         val = {
-            "kcal": item.get("kcal"),
-            "protein": item.get("protein"),
-            "fat": item.get("fat"),
-            "carbs": item.get("carbs"),
+            "kcal": macros.get("kcal"),
+            "protein": macros.get("protein"),
+            "fat": macros.get("fat"),
+            "carbs": macros.get("carbs"),
         }
         if not validate_macros(val["kcal"], val["protein"], val["fat"], val["carbs"]):
             continue
-        result[name.lower()] = val
-        result[dedup_key(name)] = val
+        names = item.get("names") or {}
+        for locale in ("pl", "en"):
+            name = (names.get(locale) or "").strip()
+            if not name:
+                continue
+            result[name.lower()] = val
+            result[dedup_key(name)] = val
     return result
 
 
-def _get_catalog_map(lang: str) -> dict[str, dict]:
+def _get_catalog_map(_lang: str) -> dict[str, dict]:
     global _catalog_maps
     if _catalog_maps is None:
-        _catalog_maps = {}
-    market = _market_for_lang(lang)
-    if market not in _catalog_maps:
-        _catalog_maps[market] = _build_catalog_map(market)
-    return _catalog_maps[market]
+        _catalog_maps = {"all": _build_catalog_map()}
+    return _catalog_maps["all"]
 
 
 def _lookup_catalog(name: str, lang: str) -> dict | None:

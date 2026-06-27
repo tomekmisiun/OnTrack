@@ -13,6 +13,7 @@ from app.core.passwords import hash_password
 from app.domain.product_normalize import normalize_product_name
 from app.models.household_member import HouseholdMember
 from app.models.product import Product
+from app.models.product_market_price import ProductMarketPrice
 from app.models.recipe import Recipe, RecipeIngredient
 from app.models.user import User
 from app.services import product_service
@@ -85,16 +86,32 @@ def _create_user_with_product_and_recipe(session: Session) -> tuple[User, Produc
     product = Product(
         user_id=user.id,
         source="user",
+        user_name="Produkt FK",
         normalized_name=normalize_product_name("Produkt FK"),
-        name="Produkt FK",
-        package_weight=500,
-        price=2.5,
-        unit="g",
-        lang="pl",
+        kcal=0,
+        protein=0,
+        fat=0,
+        carbs=0,
+    )
+    product.market_prices.append(
+        ProductMarketPrice(
+            market_code="PL",
+            amount=2.5,
+            currency="PLN",
+            package_weight=500,
+            unit="g",
+            sold_by_weight=False,
+        )
     )
     session.add(product)
     session.flush()
-    recipe = Recipe(name="Test recipe", user_id=user.id, category="lunch", lang="pl", servings=1)
+    recipe = Recipe(
+        user_name="Test recipe",
+        user_id=user.id,
+        source="user",
+        category="lunch",
+        servings=1,
+    )
     session.add(recipe)
     session.flush()
     session.add(RecipeIngredient(recipe_id=recipe.id, product_id=product.id, weight=100))
@@ -125,7 +142,13 @@ def test_delete_product_referenced_by_recipe_returns_409_on_postgres(migrated_po
 
 def test_sqlite_delete_product_in_recipe_returns_409(db_session, user, product):
     """SQLite harness enforces the same 409 guard as PostgreSQL."""
-    recipe = Recipe(name="SQLite FK", user_id=user.id, category="lunch", lang="pl", servings=1)
+    recipe = Recipe(
+        user_name="SQLite FK",
+        user_id=user.id,
+        source="user",
+        category="lunch",
+        servings=1,
+    )
     db_session.add(recipe)
     db_session.flush()
     db_session.add(RecipeIngredient(recipe_id=recipe.id, product_id=product.id, weight=50))

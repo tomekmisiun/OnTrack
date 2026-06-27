@@ -7,6 +7,8 @@ import {
   type DishCompareResponse,
 } from "@/lib/api/public";
 import { loadDishCompareFallback } from "@/lib/data/dishCompareFallback";
+import { useMarketCurrency } from "@/hooks/useMarketCurrency";
+import { currencyLabel } from "@/lib/format/currency";
 import { tFormatArgs, tString } from "@/lib/i18n/translate";
 import "./dish-compare.css";
 
@@ -30,7 +32,7 @@ function formatMoney(value: number | string, currency: string): string {
 
 export function DishCompare() {
   const { lang, t } = useLanguage();
-  const currency = tString(t, "currency");
+  const { label: marketCurrencyLabel } = useMarketCurrency();
 
   const [data, setData] = useState<DishCompareResponse | null>(null);
   const [loading, setLoading] = useState(true);
@@ -46,6 +48,9 @@ export function DishCompare() {
   const dishes = data?.dishes || [];
   const mealPrep = data?.meal_prep || {};
   const activeDish = dishes[activeIndex] || null;
+  const currency = data?.currency
+    ? currencyLabel(data.currency)
+    : marketCurrencyLabel;
 
   showIngredientsRef.current = showIngredients;
 

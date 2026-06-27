@@ -66,19 +66,32 @@ def test_apply_prices_updates_product(client, auth_headers, product, db_session)
     assert res.status_code == 200
     assert "Updated 1" in res.json()["message"]
     db_session.refresh(product)
-    assert product.price == 4.25
+    pl_price = next(p for p in product.market_prices if p.market_code == "PL")
+    assert pl_price.amount == 4.25
 
 
 def test_apply_prices_ignores_other_users_product(client, auth_headers, other_user, db_session):
+    from app.models.product_market_price import ProductMarketPrice
+
     foreign = Product(
         user_id=other_user.id,
         source="user",
+        user_name="Cudzy produkt",
         normalized_name=normalize_product_name("Cudzy produkt"),
-        name="Cudzy produkt",
-        package_weight=500,
-        price=2.0,
-        unit="g",
-        lang="en",
+        kcal=0,
+        protein=0,
+        fat=0,
+        carbs=0,
+    )
+    foreign.market_prices.append(
+        ProductMarketPrice(
+            market_code="PL",
+            amount=2.0,
+            currency="PLN",
+            package_weight=500,
+            unit="g",
+            sold_by_weight=False,
+        )
     )
     db_session.add(foreign)
     db_session.commit()

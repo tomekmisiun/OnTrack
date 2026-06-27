@@ -4,6 +4,7 @@ import { Fragment, type CSSProperties } from "react";
 import { Icon } from "@iconify/react";
 import { RecipeHelpModal } from "@/components/recipes/RecipeHelpModal";
 import { useRecipesPage } from "@/hooks/useRecipesPage";
+import { useMarketCurrency } from "@/hooks/useMarketCurrency";
 import { canonicalDiffersFromRaw } from "@/lib/recipes/ingredientCanonical";
 import {
   ingredientMacroFactor,
@@ -98,6 +99,7 @@ function ExpandedRecipeDetail({
     confirmAddIng,
     showConfirm,
   } = page;
+  const { label: currencyLabel, format } = useMarketCurrency();
 
   const ings =
     expandedDetail?.id === recipe.id ? expandedDetail.ingredients : null;
@@ -491,7 +493,7 @@ function ExpandedRecipeDetail({
               )}
             </td>
             <td style={{ textAlign: "right", whiteSpace: "nowrap" }}>
-              {ing.cost.toFixed(2)} {tString(t, "currency")}
+              {format(ing.cost)}
             </td>
             <td style={{ textAlign: "center" }}>
               <button
@@ -591,7 +593,7 @@ function ExpandedRecipeDetail({
                                 product: p,
                                 showDrop: false,
                                 unit:
-                                  p.unit === "szt" ? "g" : p.unit,
+                                  p.unit === "szt" ? "g" : (p.unit ?? "g"),
                                 kcal: p.kcal != null ? String(p.kcal) : "",
                                 protein:
                                   p.protein != null ? String(p.protein) : "",
@@ -831,7 +833,7 @@ function ExpandedRecipeDetail({
                       }}
                     />
                     <span style={{ fontSize: 10, color: "#6b7280", flexShrink: 0 }}>
-                      {tString(t, "currency")}/{tString(t, "unit_pcs")}
+                      {currencyLabel}/{tString(t, "unit_pcs")}
                     </span>
                   </div>
                 ) : addingIng.soldByWeight ? (
@@ -867,7 +869,7 @@ function ExpandedRecipeDetail({
                       }}
                     />
                     <span style={{ fontSize: 10, color: "#6b7280", flexShrink: 0 }}>
-                      {tString(t, "currency")}/kg
+                      {currencyLabel}/kg
                     </span>
                   </div>
                 ) : (
@@ -903,7 +905,7 @@ function ExpandedRecipeDetail({
                       }}
                     />
                     <span style={{ fontSize: 10, color: "#6b7280", flexShrink: 0 }}>
-                      {tString(t, "currency")} /
+                      {currencyLabel} /
                     </span>
                     <input
                       placeholder={tString(t, "pkg_input_ph")}
@@ -1003,6 +1005,7 @@ function ExpandedRecipeDetail({
 
 export function RecipesScreen() {
   const page = useRecipesPage();
+  const { format } = useMarketCurrency();
   const {
     t,
     search,
@@ -2078,7 +2081,7 @@ export function RecipesScreen() {
                             }}
                           >
                             <span className="recipe-price">
-                              {r.total_cost.toFixed(2)} {tString(t, "currency")}
+                              {format(r.total_cost)}
                             </span>
                             {r.source_url && (
                               <div>

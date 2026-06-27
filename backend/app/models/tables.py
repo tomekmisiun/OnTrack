@@ -15,7 +15,13 @@ ONTRACK_INITIAL_HEAD_TABLES = frozenset(
     }
 )
 
-ONTRACK_TABLES = ONTRACK_INITIAL_HEAD_TABLES | {"markets", "user_recipe_favorites"}
+ONTRACK_TABLES = ONTRACK_INITIAL_HEAD_TABLES | {
+    "markets",
+    "user_recipe_favorites",
+    "product_translations",
+    "product_market_prices",
+    "recipe_translations",
+}
 
 # Tables from fastapi-production-foundation that must never appear in OnTrack DB.
 FOUNDATION_FORBIDDEN_TABLES = frozenset(

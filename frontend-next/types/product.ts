@@ -1,15 +1,17 @@
 export type Product = {
   id: number;
+  catalog_key: string | null;
   name: string;
-  package_weight: number;
-  price: number;
-  unit: string;
+  package_weight: number | null;
+  price: number | null;
+  currency: string | null;
+  has_price: boolean;
+  unit: string | null;
   kcal: number | null;
   protein: number | null;
   fat: number | null;
   carbs: number | null;
   sold_by_weight: boolean;
-  lang: string;
   source: string;
   is_system: boolean;
   is_editable: boolean;
@@ -61,10 +63,6 @@ export function parseProduct(data: unknown): Product | null {
   if (typeof data !== "object" || data === null) return null;
   const row = data as Record<string, unknown>;
   if (typeof row.id !== "number" || typeof row.name !== "string") return null;
-  if (typeof row.package_weight !== "number" || typeof row.price !== "number") {
-    return null;
-  }
-  if (typeof row.unit !== "string") return null;
   if (typeof row.sold_by_weight !== "boolean") return null;
   if (typeof row.is_system !== "boolean" || typeof row.is_editable !== "boolean") {
     return null;
@@ -73,18 +71,24 @@ export function parseProduct(data: unknown): Product | null {
   const numOrNull = (v: unknown): number | null =>
     typeof v === "number" ? v : null;
 
+  const price = numOrNull(row.price);
+  const packageWeight = numOrNull(row.package_weight);
+  const hasPrice = row.has_price === true || (row.has_price !== false && price != null);
+
   return {
     id: row.id,
+    catalog_key: typeof row.catalog_key === "string" ? row.catalog_key : null,
     name: row.name,
-    package_weight: row.package_weight,
-    price: row.price,
-    unit: row.unit,
+    package_weight: packageWeight,
+    price,
+    currency: typeof row.currency === "string" ? row.currency : null,
+    has_price: hasPrice,
+    unit: typeof row.unit === "string" ? row.unit : null,
     kcal: numOrNull(row.kcal),
     protein: numOrNull(row.protein),
     fat: numOrNull(row.fat),
     carbs: numOrNull(row.carbs),
     sold_by_weight: row.sold_by_weight,
-    lang: typeof row.lang === "string" ? row.lang : "pl",
     source: typeof row.source === "string" ? row.source : "user",
     is_system: row.is_system,
     is_editable: row.is_editable,

@@ -92,14 +92,17 @@ def fetch_pexels_image(search_term: str, api_key: str | None = None) -> str | No
     return None
 
 
-def resolve_recipe_image(recipe) -> str | None:
+def resolve_recipe_image(recipe, *, locale: str = "pl") -> str | None:
+    from app.services.catalog_resolver import resolve_recipe
+
+    resolved = resolve_recipe(recipe, locale=locale)
     term = pexels_search_term(
-        recipe.name,
-        lang=recipe.lang,
+        resolved.name,
+        lang=locale,
         source_url=recipe.source_url,
     )
-    if recipe.lang == "pl" and not english_name_for_recipe(
-        recipe.name, recipe.source_url, recipe.lang
+    if locale == "pl" and not english_name_for_recipe(
+        resolved.name, recipe.source_url, locale
     ):
         gemini_key = get_settings().gemini_api_key
         if gemini_key:
@@ -111,7 +114,7 @@ def resolve_recipe_image(recipe) -> str | None:
                     model="gemini-2.5-flash",
                     contents=(
                         f"Translate this Polish dish name to 1-4 English words suitable for "
-                        f"food photo search: '{recipe.name}'. Reply with English words only."
+                        f"food photo search: '{resolved.name}'. Reply with English words only."
                     ),
                 )
                 term = pexels_search_term(resp.text.strip(), lang="en")

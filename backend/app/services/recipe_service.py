@@ -2,12 +2,13 @@ from sqlalchemy import and_, or_
 from sqlalchemy.orm import Session, joinedload
 
 from app.models.meal_plan import MealPlan
+from app.models.product import Product
 from app.models.recipe import Recipe, RecipeIngredient
 from app.models.user_recipe_favorite import UserRecipeFavorite
 from app.services.product_service import resolve_visible_product
 from app.services.recipe_image_service import resolve_recipe_image
 from app.services.recipe_presenter import recipe_to_dict, recipe_to_summary
-from app.services.user_preferences import market_code_for_user
+from app.services.user_preferences import market_code_for_user, ui_locale_for_user
 
 
 class RecipeServiceError(Exception):
@@ -15,6 +16,18 @@ class RecipeServiceError(Exception):
         self.message = message
         self.status_code = status_code
         super().__init__(message)
+
+
+def _recipe_load_options():
+    return (
+        joinedload(Recipe.translations),
+        joinedload(Recipe.ingredients)
+        .joinedload(RecipeIngredient.product)
+        .joinedload(Product.translations),
+        joinedload(Recipe.ingredients)
+        .joinedload(RecipeIngredient.product)
+        .joinedload(Product.market_prices),
+    )
 
 
 def _favorite_recipe_ids(session: Session, user_id: int) -> set[int]:
@@ -32,32 +45,23 @@ def _is_favorite(session: Session, user_id: int, recipe: Recipe, favorites: set[
     return bool(recipe.is_favorite)
 
 
-def _visible_recipes_query(session: Session, user_id: int, market_code: str):
-    return session.query(Recipe).filter(
+def _visible_recipes_query(session: Session, user_id: int):
+    return session.query(Recipe).options(*_recipe_load_options()).filter(
         or_(
-            and_(
-                Recipe.source == "system",
-                Recipe.user_id.is_(None),
-                Recipe.market_code == market_code,
-            ),
+            and_(Recipe.source == "system", Recipe.user_id.is_(None)),
             and_(Recipe.user_id == user_id, Recipe.source != "system"),
         )
     )
 
 
 def _load_recipe(session: Session, user_id: int, recipe_id: int) -> Recipe:
-    market_code = market_code_for_user(session, user_id)
     recipe = (
         session.query(Recipe)
-        .options(joinedload(Recipe.ingredients).joinedload(RecipeIngredient.product))
+        .options(*_recipe_load_options())
         .filter(
             Recipe.id == recipe_id,
             or_(
-                and_(
-                    Recipe.source == "system",
-                    Recipe.user_id.is_(None),
-                    Recipe.market_code == market_code,
-                ),
+                and_(Recipe.source == "system", Recipe.user_id.is_(None)),
                 and_(Recipe.user_id == user_id, Recipe.source != "system"),
             ),
         )
@@ -69,48 +73,46 @@ def _load_recipe(session: Session, user_id: int, recipe_id: int) -> Recipe:
 
 
 def load_visible_recipe(session: Session, user_id: int, recipe_id: int) -> Recipe:
-    """Return a system-catalog or user-owned recipe row visible to the user."""
     return _load_recipe(session, user_id, recipe_id)
 
 
 def list_recipes(session: Session, user_id: int, *, own_only: bool = False) -> list[dict]:
+    locale = ui_locale_for_user(session, user_id)
     market_code = market_code_for_user(session, user_id)
     favorites = _favorite_recipe_ids(session, user_id)
     base_query = (
         session.query(Recipe)
-        .filter(
-            Recipe.user_id == user_id,
-            Recipe.market_code == market_code,
-            Recipe.source != "system",
-        )
+        .options(*_recipe_load_options())
+        .filter(Recipe.user_id == user_id, Recipe.source != "system")
         if own_only
-        else _visible_recipes_query(session, user_id, market_code)
+        else _visible_recipes_query(session, user_id)
     )
-    recipes = (
-        base_query.options(joinedload(Recipe.ingredients).joinedload(RecipeIngredient.product))
-        .order_by(Recipe.catalog_key.asc().nulls_last(), Recipe.name.asc())
-        .all()
-    )
+    recipes = base_query.order_by(Recipe.catalog_key.asc().nulls_last(), Recipe.id.asc()).all()
     return [
-        recipe_to_summary(r, is_favorite=_is_favorite(session, user_id, r, favorites))
+        recipe_to_summary(
+            r,
+            locale=locale,
+            market_code=market_code,
+            is_favorite=_is_favorite(session, user_id, r, favorites),
+        )
         for r in recipes
     ]
 
 
 def get_recipe(session: Session, user_id: int, recipe_id: int) -> dict:
     recipe = _load_recipe(session, user_id, recipe_id)
+    locale = ui_locale_for_user(session, user_id)
+    market_code = market_code_for_user(session, user_id)
     favorites = _favorite_recipe_ids(session, user_id)
     return recipe_to_dict(
         recipe,
+        locale=locale,
+        market_code=market_code,
         is_favorite=_is_favorite(session, user_id, recipe, favorites),
     )
 
 
 def create_recipe(session: Session, user_id: int, data: dict) -> dict:
-    market_code = market_code_for_user(session, user_id)
-    from app.services.user_preferences import catalog_lang_for_user
-
-    lang = catalog_lang_for_user(session, user_id)
     if not data or "name" not in data:
         raise RecipeServiceError("Required field: name", 400)
     if len(str(data["name"])) > 200:
@@ -128,7 +130,7 @@ def create_recipe(session: Session, user_id: int, data: dict) -> dict:
 
     existing = (
         session.query(Recipe)
-        .filter_by(name=data["name"], user_id=user_id, market_code=market_code)
+        .filter_by(user_name=data["name"], user_id=user_id)
         .first()
     )
     if existing:
@@ -136,14 +138,12 @@ def create_recipe(session: Session, user_id: int, data: dict) -> dict:
         session.flush()
 
     recipe = Recipe(
-        name=data["name"],
+        user_name=data["name"],
         user_id=user_id,
         source="user",
         notes=data.get("notes"),
         category=data.get("category") or None,
         servings=servings,
-        lang=lang,
-        market_code=market_code,
     )
     session.add(recipe)
     session.flush()
@@ -179,7 +179,7 @@ def update_recipe(session: Session, user_id: int, recipe_id: int, data: dict) ->
         raise RecipeServiceError("System catalog recipes cannot be modified", 403)
 
     if "name" in data:
-        recipe.name = data["name"]
+        recipe.user_name = data["name"]
     if "notes" in data:
         recipe.notes = data["notes"] or None
     if "category" in data:
@@ -242,7 +242,8 @@ def fetch_recipe_image(session: Session, user_id: int, recipe_id: int) -> dict:
     recipe = _load_recipe(session, user_id, recipe_id)
     if recipe.source == "system" and recipe.user_id is None:
         raise RecipeServiceError("System catalog recipes cannot be modified", 403)
-    image_url = resolve_recipe_image(recipe)
+    locale = ui_locale_for_user(session, user_id)
+    image_url = resolve_recipe_image(recipe, locale=locale)
     if image_url:
         recipe.image_url = image_url
         session.commit()
@@ -259,11 +260,10 @@ def delete_recipe(session: Session, user_id: int, recipe_id: int) -> None:
 
 
 def delete_all_recipes(session: Session, user_id: int) -> int:
-    market_code = market_code_for_user(session, user_id)
     recipe_ids = [
         r.id
         for r in session.query(Recipe)
-        .filter_by(user_id=user_id, market_code=market_code)
+        .filter_by(user_id=user_id)
         .filter(Recipe.source != "system")
         .all()
     ]
@@ -276,7 +276,7 @@ def delete_all_recipes(session: Session, user_id: int) -> int:
         ).delete(synchronize_session=False)
     count = (
         session.query(Recipe)
-        .filter_by(user_id=user_id, market_code=market_code)
+        .filter_by(user_id=user_id)
         .filter(Recipe.source != "system")
         .delete()
     )

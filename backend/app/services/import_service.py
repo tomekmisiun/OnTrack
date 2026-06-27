@@ -14,7 +14,7 @@ from app.models.product import Product
 from app.services.gemini_client import generate_with_gemini, is_gemini_overloaded
 from app.services.import_names import translate_product_name
 from app.services.product_presenter import product_to_dict
-from app.services.user_preferences import catalog_lang_for_user
+from app.services.user_preferences import market_code_for_user, ui_locale_for_user
 
 DAILY_LIMIT = 2
 MAX_FILE_SIZE = 5 * 1024 * 1024
@@ -169,7 +169,7 @@ def _match_product(name: str, db_products: list[Product]) -> Product | None:
     lower = name.lower()
     best, best_score = None, 0
     for product in db_products:
-        p_lower = product.name.lower()
+        p_lower = (product.user_name or product.normalized_name or "").lower()
         overlap = len(set(p_lower.split()) & set(lower.split())) * 2
         contained = int(p_lower in lower or lower in p_lower)
         score = overlap + contained
@@ -185,6 +185,8 @@ def _build_import_item(
     price,
     db_products: list[Product],
     lang: str,
+    *,
+    market_code: str,
 ) -> dict:
     localized = translate_product_name(name, lang)
     qty, unit = _normalize(qty, unit)
@@ -192,7 +194,10 @@ def _build_import_item(
 
     suggested = None
     if match and qty and price:
-        match_unit = match.unit or "g"
+        from app.services.catalog_resolver import resolve_product
+
+        view = resolve_product(match, locale=lang, market_code=market_code)
+        match_unit = view.unit or "g"
         if match_unit == "szt":
             suggested = round(price / qty, 2)
         else:
@@ -205,7 +210,9 @@ def _build_import_item(
         "receipt_quantity": qty,
         "receipt_unit": unit,
         "receipt_price": price,
-        "matched_product": product_to_dict(match) if match else None,
+        "matched_product": (
+            product_to_dict(match, locale=lang, market_code=market_code) if match else None
+        ),
         "suggested_price": suggested,
     }
 
@@ -244,7 +251,8 @@ def parse_receipt(
         )
 
     is_image = ext in ("png", "jpg", "jpeg", "webp")
-    lang = catalog_lang_for_user(session, user_id)
+    lang = ui_locale_for_user(session, user_id)
+    market_code = market_code_for_user(session, user_id)
 
     if is_image:
         if not _detect_image_mime(file_data):
@@ -295,7 +303,7 @@ def parse_receipt(
 
     _increment_log(session, user_id)
 
-    db_products = session.query(Product).filter_by(user_id=user_id, lang=lang).all()
+    db_products = session.query(Product).filter_by(user_id=user_id).all()
     results = [
         _build_import_item(
             item["name"],
@@ -304,6 +312,7 @@ def parse_receipt(
             item["price"],
             db_products,
             lang,
+            market_code=market_code,
         )
         for item in parsed["products"]
     ]
@@ -337,8 +346,9 @@ def parse_free(
     except Exception as exc:
         raise ImportServiceError("Could not read file", 400) from exc
 
-    lang = catalog_lang_for_user(session, user_id)
-    db_products = session.query(Product).filter_by(user_id=user_id, lang=lang).all()
+    lang = ui_locale_for_user(session, user_id)
+    market_code = market_code_for_user(session, user_id)
+    db_products = session.query(Product).filter_by(user_id=user_id).all()
     results = []
 
     for line in text.splitlines():
@@ -394,7 +404,9 @@ def parse_free(
             except (ValueError, IndexError):
                 pass
 
-        results.append(_build_import_item(name, qty, unit, price, db_products, lang))
+        results.append(
+            _build_import_item(name, qty, unit, price, db_products, lang, market_code=market_code)
+        )
 
     _increment_log(session, user_id)
     remaining = DAILY_LIMIT - today_count - 1
@@ -405,7 +417,9 @@ def apply_prices(session: Session, user_id: int, updates: list) -> dict:
     if not isinstance(updates, list) or len(updates) > 200:
         raise ImportServiceError("Invalid data", 400)
 
-    lang = catalog_lang_for_user(session, user_id)
+    from app.domain.market import currency_for_market
+
+    market_code = market_code_for_user(session, user_id)
     updated = 0
     for entry in updates:
         if not isinstance(entry, dict):
@@ -418,11 +432,32 @@ def apply_prices(session: Session, user_id: int, updates: list) -> dict:
             continue
         product = (
             session.query(Product)
-            .filter_by(id=pid, user_id=user_id, lang=lang)
+            .filter_by(id=pid, user_id=user_id)
             .first()
         )
         if product:
-            product.price = round(float(price), 2)
+            currency = currency_for_market(market_code)
+            found = False
+            for row in product.market_prices:
+                if row.market_code == market_code:
+                    row.amount = round(float(price), 2)
+                    row.currency = currency
+                    found = True
+                    break
+            if not found:
+                from app.models.product_market_price import ProductMarketPrice
+
+                product.market_prices.append(
+                    ProductMarketPrice(
+                        product=product,
+                        market_code=market_code,
+                        amount=round(float(price), 2),
+                        currency=currency,
+                        package_weight=100,
+                        unit="g",
+                        sold_by_weight=False,
+                    )
+                )
             updated += 1
 
     session.commit()

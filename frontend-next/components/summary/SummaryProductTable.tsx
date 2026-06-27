@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { updateProduct } from "@/lib/api/products";
+import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { formatCurrencyAmount } from "@/lib/format/currency";
 import type { TranslationKey } from "@/lib/i18n/translations";
 import { tString } from "@/lib/i18n/translate";
 
@@ -29,7 +31,10 @@ type SummaryProductTableProps = {
 
 export function SummaryProductTable({ items, onTotalChange }: SummaryProductTableProps) {
   const { t } = useLanguage();
+  const { user } = useAuth();
+  const marketCurrency = user?.market_code === "GB" ? "GBP" : "PLN";
   const txt = (key: TranslationKey) => tString(t, key);
+  const fmt = (amount: number) => formatCurrencyAmount(amount, marketCurrency);
   const displayUnit = (u: string) => (u === "szt" ? txt("unit_pcs") : u || "g");
   const [localItems, setLocalItems] = useState(items);
   const [editPkgId, setEditPkgId] = useState<number | null>(null);
@@ -325,7 +330,7 @@ export function SummaryProductTable({ items, onTotalChange }: SummaryProductTabl
                       if (e.key === "Escape") setEditPriceId(null);
                     }}
                   />
-                  <span style={{ fontSize: 11, color: "#6b7280" }}>{txt("currency")}</span>
+                  <span style={{ fontSize: 11, color: "#6b7280" }}>{marketCurrency}</span>
                   <button style={btn("#0d9488", "#1f2937")} onClick={() => void handleSavePrice(item)}>
                     ✓
                   </button>
@@ -335,7 +340,7 @@ export function SummaryProductTable({ items, onTotalChange }: SummaryProductTabl
                 </div>
               ) : (
                 <span style={{ fontSize: 13, color: "#9ca3af" }}>
-                  {item.price_per_package.toFixed(2)} {txt("currency")}
+                  {fmt(item.price_per_package)}
                 </span>
               )}
             </td>
@@ -436,7 +441,7 @@ export function SummaryProductTable({ items, onTotalChange }: SummaryProductTabl
                 return (
                   <div>
                     <span style={{ fontSize: 13, color: item.stockMode ? "#22c55e" : "#9ca3af" }}>
-                      {adj.toFixed(2)} {txt("currency")}
+                      {fmt(adj)}
                     </span>
                     {reduced && (
                       <div
@@ -446,7 +451,7 @@ export function SummaryProductTable({ items, onTotalChange }: SummaryProductTabl
                           textDecoration: "line-through",
                         }}
                       >
-                        {item.total_cost.toFixed(2)} {txt("currency")}
+                        {fmt(item.total_cost)}
                       </div>
                     )}
                   </div>
@@ -456,17 +461,16 @@ export function SummaryProductTable({ items, onTotalChange }: SummaryProductTabl
 
             <td style={{ fontSize: 13, color: "#9ca3af" }}>
               {(() => {
-                const cur = txt("currency");
-                if (item.stockMode === "all") return `0.00 ${cur}`;
+                if (item.stockMode === "all") return fmt(0);
                 if (item.stockMode === "part") {
                   const stock = parseFloat(item.stockAmt || "") || 0;
-                  if (stock <= 0) return `${item.actual_cost.toFixed(2)} ${cur}`;
+                  if (stock <= 0) return fmt(item.actual_cost);
                   const remaining = Math.max(0, item.total_weight - stock);
-                  if (remaining === 0) return `0.00 ${cur}`;
+                  if (remaining === 0) return fmt(0);
                   const adjActual = (remaining / item.total_weight) * item.actual_cost;
-                  return `${adjActual.toFixed(2)} ${cur}`;
+                  return fmt(adjActual);
                 }
-                return `${item.actual_cost.toFixed(2)} ${cur}`;
+                return fmt(item.actual_cost);
               })()}
             </td>
           </tr>

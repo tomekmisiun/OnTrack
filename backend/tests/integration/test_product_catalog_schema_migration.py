@@ -1,4 +1,4 @@
-"""Integration tests for global product catalog schema migration."""
+"""Integration tests for locale/market catalog schema migration."""
 
 from __future__ import annotations
 
@@ -13,6 +13,8 @@ from app.core.passwords import hash_password
 from app.domain.product_normalize import normalize_product_name
 from app.models.household_member import HouseholdMember
 from app.models.product import Product
+from app.models.product_market_price import ProductMarketPrice
+from app.models.product_translation import ProductTranslation
 from sqlalchemy import inspect, text
 from sqlalchemy.engine import create_engine
 from sqlalchemy.exc import IntegrityError
@@ -59,15 +61,15 @@ def legacy_migrated_db(postgres_url: str, monkeypatch):
 
     cfg = Config(str(BACKEND_ROOT / "alembic.ini"))
     cfg.set_main_option("script_location", str(BACKEND_ROOT / "alembic"))
-    command.upgrade(cfg, "7966d120d748")
+    command.upgrade(cfg, "a2b3c4d5e6f7")
 
     Session = sessionmaker(bind=create_engine(postgres_url))
     session = Session()
     user_id = session.execute(
         text(
             """
-            INSERT INTO users (email, username, password_hash, lang)
-            VALUES (:email, :username, :password_hash, :lang)
+            INSERT INTO users (email, username, password_hash, ui_locale, market_code)
+            VALUES (:email, :username, :password_hash, :ui_locale, :market_code)
             RETURNING id
             """
         ),
@@ -75,7 +77,8 @@ def legacy_migrated_db(postgres_url: str, monkeypatch):
             "email": "mig@example.com",
             "username": "miguser",
             "password_hash": hash_password("test-password"),
-            "lang": "pl",
+            "ui_locale": "pl",
+            "market_code": "PL",
         },
     ).scalar_one()
     session.add(HouseholdMember(user_id=user_id, name="Ja", is_primary=True))
@@ -84,9 +87,9 @@ def legacy_migrated_db(postgres_url: str, monkeypatch):
         text(
             """
             INSERT INTO products
-                (user_id, name, package_weight, price, unit, sold_by_weight, lang)
+                (user_id, name, package_weight, price, unit, sold_by_weight, lang, market_code, source)
             VALUES
-                (:user_id, 'Mleko', 1000, 3.0, 'ml', false, 'pl')
+                (:user_id, 'Mleko', 1000, 3.0, 'ml', false, 'pl', 'PL', 'user')
             """
         ),
         {"user_id": user_id},
@@ -104,9 +107,6 @@ def legacy_migrated_db(postgres_url: str, monkeypatch):
     cleanup.commit()
     cleanup.close()
 
-    command.downgrade(cfg, "7966d120d748")
-    command.downgrade(cfg, "base")
-
 
 def test_migration_backfills_legacy_product(legacy_migrated_db):
     postgres_url, legacy_id = legacy_migrated_db
@@ -115,9 +115,13 @@ def test_migration_backfills_legacy_product(legacy_migrated_db):
     product = session.get(Product, legacy_id)
     assert product is not None
     assert product.user_id is not None
-    assert product.source == "legacy"
+    assert product.user_name == "Mleko"
     assert product.normalized_name == normalize_product_name("Mleko")
     assert product.catalog_key is None
+    prices = session.query(ProductMarketPrice).filter_by(product_id=legacy_id).all()
+    assert len(prices) == 1
+    assert prices[0].market_code == "PL"
+    assert prices[0].amount == 3.0
     session.close()
 
 
@@ -126,61 +130,53 @@ def test_migration_system_product_constraints(legacy_migrated_db):
     Session = sessionmaker(bind=create_engine(postgres_url))
     session = Session()
 
-    session.add(
-        Product(
-            user_id=None,
-            source="system",
-            catalog_key="demo:milk",
-            normalized_name=normalize_product_name("Mleko"),
-            name="Mleko",
+    product = Product(
+        user_id=None,
+        source="system",
+        catalog_key="demo-milk",
+        normalized_name=normalize_product_name("Mleko"),
+        kcal=0,
+        protein=0,
+        fat=0,
+        carbs=0,
+    )
+    product.translations.append(ProductTranslation(locale="pl", name="Mleko"))
+    product.market_prices.append(
+        ProductMarketPrice(
+            market_code="PL",
+            amount=3.0,
+            currency="PLN",
             package_weight=1000,
-            price=3.0,
             unit="ml",
-            lang="pl",
+            sold_by_weight=False,
         )
     )
+    session.add(product)
     session.commit()
 
     dup = Product(
         user_id=None,
         source="system",
-        catalog_key="demo:milk",
+        catalog_key="demo-milk",
         normalized_name=normalize_product_name("Mleko 2"),
-        name="Mleko 2",
-        package_weight=500,
-        price=2.0,
-        unit="ml",
-        lang="pl",
+        kcal=0,
+        protein=0,
+        fat=0,
+        carbs=0,
     )
     session.add(dup)
-    with pytest.raises(IntegrityError):
-        session.commit()
-    session.rollback()
-
-    invalid = Product(
-        user_id=None,
-        source="system",
-        catalog_key=None,
-        normalized_name="x",
-        name="X",
-        package_weight=1,
-        price=1,
-        unit="g",
-        lang="pl",
-    )
-    session.add(invalid)
     with pytest.raises(IntegrityError):
         session.commit()
     session.rollback()
     session.close()
 
 
-def test_migration_indexes_exist(legacy_migrated_db):
+def test_migration_translation_tables_exist(legacy_migrated_db):
     postgres_url, _ = legacy_migrated_db
     engine = create_engine(postgres_url)
     with engine.connect() as conn:
-        indexes = {idx["name"] for idx in inspect(conn).get_indexes("products")}
+        tables = set(inspect(conn).get_table_names())
     engine.dispose()
-    assert "ix_products_user_id_lang" in indexes
-    assert "ix_products_lang_normalized_name" in indexes
-    assert "uq_products_lang_catalog_key_system" in indexes
+    assert "product_translations" in tables
+    assert "product_market_prices" in tables
+    assert "recipe_translations" in tables

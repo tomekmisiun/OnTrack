@@ -1,29 +1,33 @@
-"""Idempotent import of global product and recipe catalog into PostgreSQL.
-
-Reads generated market files only — never DB users, never raw snapshots.
+"""Idempotent import of global product and recipe catalog from canonical JSON.
 
 Usage:
   uv run python -m app.scripts.import_catalog
-  uv run python -m app.scripts.import_catalog --market PL
 """
 
 from __future__ import annotations
 
-import argparse
 import json
 from dataclasses import dataclass, field
+from typing import Any
 
 from sqlalchemy.orm import Session
 
 from app.core.catalog_data import (
-    MARKETS,
-    generated_products_path,
-    generated_recipes_path,
-    read_generated_items,
+    canonical_products_path,
+    canonical_recipes_path,
+    load_json_list,
 )
+from app.domain.catalog_seed import slug_catalog_key
+from app.domain.market import currency_for_market
 from app.domain.product_normalize import normalize_product_name
 from app.models.product import Product
+from app.models.product_market_price import ProductMarketPrice
+from app.models.product_translation import ProductTranslation
 from app.models.recipe import Recipe, RecipeIngredient
+from app.models.recipe_translation import RecipeTranslation
+
+SUPPORTED_LOCALES = ("pl", "en")
+SUPPORTED_MARKETS = ("PL", "GB")
 
 
 @dataclass
@@ -34,6 +38,7 @@ class CatalogImportReport:
     recipes_updated: int = 0
     recipe_ingredients_linked: int = 0
     recipe_ingredients_skipped: int = 0
+    warnings: list[str] = field(default_factory=list)
     rejected: list[str] = field(default_factory=list)
 
     def as_dict(self) -> dict:
@@ -44,74 +49,149 @@ class CatalogImportReport:
             "recipes_updated": self.recipes_updated,
             "recipe_ingredients_linked": self.recipe_ingredients_linked,
             "recipe_ingredients_skipped": self.recipe_ingredients_skipped,
+            "warnings": self.warnings,
             "rejected": self.rejected,
         }
 
 
-def catalog_key_for_product(market_code: str, sort_index: int, stable_key: str) -> str:
-    safe = (stable_key or "item").strip()[:80]
-    return f"catalog:{market_code.lower()}:{sort_index:05d}:{safe}"
+def _recipe_catalog_key(entry: dict[str, Any]) -> str:
+    source_url = (entry.get("source_url") or "").strip()
+    names = entry.get("names") or {}
+    fallback = (names.get("pl") or names.get("en") or "").strip()
+    return (entry.get("key") or slug_catalog_key(source_url or fallback)).strip()
 
 
-def catalog_key_for_recipe(market_code: str, sort_index: int, stable_key: str) -> str:
-    safe = (stable_key or "item").strip()[:80]
-    return f"recipe:{market_code.lower()}:{sort_index:05d}:{safe}"
-
-
-def _locale_for_market(market_code: str) -> str:
-    return "en" if market_code == "GB" else "pl"
-
-
-def import_products_for_market(session: Session, market_code: str, report: CatalogImportReport) -> None:
-    path = generated_products_path(market_code)
-    if not path.is_file():
-        report.rejected.append(f"missing generated products for {market_code}")
-        return
-    _, rows = read_generated_items(path)
-    locale = _locale_for_market(market_code)
-
-    system_by_key: dict[str, Product] = {
+def _load_system_products(session: Session) -> dict[str, Product]:
+    return {
         p.catalog_key: p
         for p in session.query(Product)
-        .filter_by(source="system", market_code=market_code)
+        .filter(Product.user_id.is_(None), Product.source == "system")
         .filter(Product.catalog_key.isnot(None))
         .all()
         if p.catalog_key
     }
 
-    for idx, row in enumerate(rows):
-        name = (row.get("name") or "").strip()
-        if not name:
-            report.rejected.append(f"{market_code} product[{idx}]: empty name")
+
+def _load_system_recipes(session: Session) -> dict[str, Recipe]:
+    return {
+        r.catalog_key: r
+        for r in session.query(Recipe)
+        .filter(Recipe.user_id.is_(None), Recipe.source == "system")
+        .filter(Recipe.catalog_key.isnot(None))
+        .all()
+        if r.catalog_key
+    }
+
+
+def _upsert_translation(
+    rows: list[ProductTranslation | RecipeTranslation],
+    *,
+    locale: str,
+    name: str,
+    notes: str | None = None,
+    model_cls: type,
+    parent_kw: str,
+    parent_id: int,
+) -> None:
+    for row in rows:
+        if row.locale == locale:
+            row.name = name
+            if isinstance(row, RecipeTranslation):
+                row.notes = notes
+            return
+    payload = {"locale": locale, "name": name, parent_kw: parent_id}
+    if model_cls is RecipeTranslation:
+        payload["notes"] = notes
+    rows.append(model_cls(**payload))
+
+
+def _upsert_market_price(
+    product: Product,
+    *,
+    market_code: str,
+    market: dict[str, Any],
+    report: CatalogImportReport,
+) -> None:
+    amount = float(market.get("price") or 0)
+    currency = currency_for_market(market_code)
+    package_weight = float(market.get("package_weight") or 100)
+    unit = (market.get("unit") or "g")[:10]
+    sold_by_weight = bool(market.get("sold_by_weight", False))
+
+    for row in product.market_prices:
+        if row.market_code == market_code:
+            row.amount = amount
+            row.currency = currency
+            row.package_weight = package_weight
+            row.unit = unit
+            row.sold_by_weight = sold_by_weight
+            return
+
+    product.market_prices.append(
+        ProductMarketPrice(
+            product=product,
+            market_code=market_code,
+            amount=amount,
+            currency=currency,
+            package_weight=package_weight,
+            unit=unit,
+            sold_by_weight=sold_by_weight,
+        )
+    )
+
+
+def import_products_from_canonical(session: Session, report: CatalogImportReport) -> dict[str, int]:
+    path = canonical_products_path()
+    if not path.is_file():
+        report.rejected.append(f"missing canonical products at {path}")
+        return {}
+
+    rows = load_json_list(path)
+    system_by_key = _load_system_products(session)
+    product_id_by_key: dict[str, int] = {}
+
+    for sort_index, entry in enumerate(rows):
+        catalog_key = (entry.get("key") or "").strip()
+        if not catalog_key:
+            report.rejected.append(f"product[{sort_index}]: missing key")
             continue
-        sort_index = int(row.get("sort_index", idx))
-        stable_key = (row.get("stable_key") or normalize_product_name(name).replace(" ", "-")).strip()
-        key = catalog_key_for_product(market_code, sort_index, stable_key)
+
+        names = entry.get("names") or {}
+        macros = entry.get("macros") or {}
+        markets = entry.get("markets") or {}
+
+        missing_locales = [loc for loc in SUPPORTED_LOCALES if not (names.get(loc) or "").strip()]
+        if missing_locales:
+            report.warnings.append(
+                f"product {catalog_key!r}: missing names for {', '.join(missing_locales)}"
+            )
+
+        missing_markets = [m for m in SUPPORTED_MARKETS if m not in markets]
+        if missing_markets:
+            report.warnings.append(
+                f"product {catalog_key!r}: missing market prices for {', '.join(missing_markets)}"
+            )
+
+        primary_name = (names.get("pl") or names.get("en") or catalog_key).strip()
         payload = {
-            "name": name[:255],
-            "normalized_name": normalize_product_name(name),
-            "price": float(row.get("price") or 0),
-            "package_weight": float(row.get("package_weight") or 100),
-            "unit": (row.get("unit") or "g")[:10],
-            "sold_by_weight": bool(row.get("sold_by_weight", False)),
-            "kcal": row.get("kcal"),
-            "protein": row.get("protein"),
-            "fat": row.get("fat"),
-            "carbs": row.get("carbs"),
-            "lang": locale,
-            "market_code": market_code,
             "user_id": None,
             "source": "system",
-            "catalog_key": key,
+            "catalog_key": catalog_key,
+            "normalized_name": normalize_product_name(primary_name),
+            "kcal": float(macros.get("kcal") or 0),
+            "protein": float(macros.get("protein") or 0),
+            "fat": float(macros.get("fat") or 0),
+            "carbs": float(macros.get("carbs") or 0),
+            "sort_index": sort_index,
         }
-        existing = system_by_key.get(key)
+
+        existing = system_by_key.get(catalog_key)
         if existing:
+            product = existing
             changed = False
             for field_name, value in payload.items():
-                if field_name in ("user_id", "source", "catalog_key"):
-                    continue
-                if getattr(existing, field_name) != value:
-                    setattr(existing, field_name, value)
+                if getattr(product, field_name) != value:
+                    setattr(product, field_name, value)
                     changed = True
             if changed:
                 report.products_updated += 1
@@ -119,128 +199,121 @@ def import_products_for_market(session: Session, market_code: str, report: Catal
             product = Product(**payload)
             session.add(product)
             session.flush()
-            system_by_key[key] = product
+            system_by_key[catalog_key] = product
             report.products_created += 1
 
-    _purge_orphan_system_products(session, market_code, set(system_by_key.keys()), report)
+        for locale in SUPPORTED_LOCALES:
+            name = (names.get(locale) or "").strip()
+            if not name:
+                continue
+            _upsert_translation(
+                product.translations,
+                locale=locale,
+                name=name[:255],
+                model_cls=ProductTranslation,
+                parent_kw="product_id",
+                parent_id=product.id,
+            )
+
+        for market_code in SUPPORTED_MARKETS:
+            market = markets.get(market_code)
+            if not market:
+                continue
+            _upsert_market_price(product, market_code=market_code, market=market, report=report)
+
+        product_id_by_key[catalog_key] = product.id
+
+    active_keys = set(system_by_key.keys())
+    for product in (
+        session.query(Product)
+        .filter(Product.user_id.is_(None), Product.source == "system")
+        .all()
+    ):
+        if product.catalog_key not in active_keys:
+            session.query(RecipeIngredient).filter_by(product_id=product.id).delete()
+            session.delete(product)
+            report.rejected.append(f"purged orphan product {product.catalog_key!r}")
+
+    return product_id_by_key
 
 
-def _relink_recipe_ingredients(session: Session, from_id: int, to_id: int) -> None:
-    for ing in session.query(RecipeIngredient).filter_by(product_id=from_id):
-        ing.product_id = to_id
-
-
-def _purge_orphan_system_products(
+def import_recipes_from_canonical(
     session: Session,
-    market_code: str,
-    active_keys: set[str],
+    product_id_by_key: dict[str, int],
     report: CatalogImportReport,
 ) -> None:
-    system_rows = (
-        session.query(Product)
-        .filter_by(source="system", market_code=market_code)
-        .filter(Product.user_id.is_(None))
-        .all()
-    )
-    canonical_by_name: dict[str, Product] = {}
-    for product in system_rows:
-        if product.catalog_key in active_keys:
-            canonical_by_name.setdefault(product.normalized_name, product)
-
-    for product in system_rows:
-        if product.catalog_key in active_keys:
-            continue
-        replacement = canonical_by_name.get(product.normalized_name)
-        if replacement and replacement.id != product.id:
-            _relink_recipe_ingredients(session, product.id, replacement.id)
-        refs = session.query(RecipeIngredient).filter_by(product_id=product.id).count()
-        if refs:
-            continue
-        session.delete(product)
-        report.rejected.append(f"purged orphan product {product.catalog_key!r}")
-
-
-def _product_name_map(session: Session, market_code: str) -> dict[str, int]:
-    locale = _locale_for_market(market_code)
-    out: dict[str, int] = {}
-    for product in session.query(Product).filter(
-        Product.market_code == market_code,
-        Product.lang == locale,
-    ):
-        if product.source == "system" and product.user_id is None:
-            out[product.name.lower()] = product.id
-        elif product.user_id is not None:
-            out[product.name.lower()] = product.id
-    return out
-
-
-def import_recipes_for_market(session: Session, market_code: str, report: CatalogImportReport) -> None:
-    path = generated_recipes_path(market_code)
+    path = canonical_recipes_path()
     if not path.is_file():
-        report.rejected.append(f"missing generated recipes for {market_code}")
+        report.rejected.append(f"missing canonical recipes at {path}")
         return
-    _, rows = read_generated_items(path)
-    locale = _locale_for_market(market_code)
-    product_map = _product_name_map(session, market_code)
 
-    system_by_key: dict[str, Recipe] = {
-        r.catalog_key: r
-        for r in session.query(Recipe)
-        .filter_by(source="system", market_code=market_code)
-        .filter(Recipe.catalog_key.isnot(None))
-        .all()
-        if r.catalog_key
-    }
+    rows = load_json_list(path)
+    system_by_key = _load_system_recipes(session)
 
-    for row in rows:
-        name = (row.get("name") or "").strip()
-        if not name:
+    for entry in rows:
+        catalog_key = _recipe_catalog_key(entry)
+        names = entry.get("names") or {}
+        if not catalog_key:
             continue
-        source_url = (row.get("source_url") or "").strip() or None
-        sort_index = int(row.get("sort_index", 0))
-        stable_key = (row.get("stable_key") or (source_url or name)).strip()
-        key = catalog_key_for_recipe(market_code, sort_index, stable_key)
-        raw_cat = row.get("category") or ""
-        category = {"snacks": "snack", "desserts": "dessert"}.get(raw_cat, raw_cat) or None
 
-        existing = system_by_key.get(key)
+        missing_locales = [loc for loc in SUPPORTED_LOCALES if not (names.get(loc) or "").strip()]
+        if missing_locales:
+            report.warnings.append(
+                f"recipe {catalog_key!r}: missing names for {', '.join(missing_locales)}"
+            )
+
+        source_url = (entry.get("source_url") or "").strip() or None
+        raw_cat = entry.get("category") or ""
+        category = {"snacks": "snack", "desserts": "dessert"}.get(raw_cat, raw_cat) or "other"
+
+        existing = system_by_key.get(catalog_key)
         if existing:
             recipe = existing
-            recipe.name = name
-            recipe.notes = row.get("notes")
-            recipe.image_url = row.get("image_url")
-            recipe.source_url = source_url
             recipe.category = category
-            recipe.lang = locale
-            recipe.market_code = market_code
+            recipe.image_url = entry.get("image_url")
+            recipe.source_url = source_url
+            for macro in ("kcal_100g", "protein_100g", "fat_100g", "carbs_100g"):
+                if entry.get(macro) is not None:
+                    setattr(recipe, macro, float(entry[macro]))
             session.query(RecipeIngredient).filter_by(recipe_id=recipe.id).delete()
             report.recipes_updated += 1
         else:
             recipe = Recipe(
                 user_id=None,
                 source="system",
-                catalog_key=key,
-                name=name,
-                notes=row.get("notes"),
-                image_url=row.get("image_url"),
-                source_url=source_url,
+                catalog_key=catalog_key,
                 category=category,
-                lang=locale,
-                market_code=market_code,
-                kcal_100g=row.get("kcal_100g"),
-                protein_100g=row.get("protein_100g"),
-                fat_100g=row.get("fat_100g"),
-                carbs_100g=row.get("carbs_100g"),
+                image_url=entry.get("image_url"),
+                source_url=source_url,
+                kcal_100g=float(entry.get("kcal_100g") or 0),
+                protein_100g=float(entry.get("protein_100g") or 0),
+                fat_100g=float(entry.get("fat_100g") or 0),
+                carbs_100g=float(entry.get("carbs_100g") or 0),
             )
             session.add(recipe)
             session.flush()
-            system_by_key[key] = recipe
+            system_by_key[catalog_key] = recipe
             report.recipes_created += 1
 
-        for ing in row.get("ingredients") or []:
-            pname = (ing.get("product_name") or "").strip().lower()
+        notes = entry.get("notes")
+        for locale in SUPPORTED_LOCALES:
+            name = (names.get(locale) or "").strip()
+            if not name:
+                continue
+            _upsert_translation(
+                recipe.translations,
+                locale=locale,
+                name=name[:255],
+                notes=str(notes) if notes is not None else None,
+                model_cls=RecipeTranslation,
+                parent_kw="recipe_id",
+                parent_id=recipe.id,
+            )
+
+        for ing in entry.get("ingredients") or []:
+            product_key = (ing.get("key") or "").strip()
             weight = float(ing.get("weight") or 0)
-            product_id = product_map.get(pname)
+            product_id = product_id_by_key.get(product_key)
             if not product_id or weight <= 0:
                 report.recipe_ingredients_skipped += 1
                 continue
@@ -249,25 +322,23 @@ def import_recipes_for_market(session: Session, market_code: str, report: Catalo
             )
             report.recipe_ingredients_linked += 1
 
-    active_recipe_keys = set(system_by_key.keys())
+    active_keys = set(system_by_key.keys())
     for recipe in (
         session.query(Recipe)
-        .filter_by(source="system", market_code=market_code)
-        .filter(Recipe.user_id.is_(None))
+        .filter(Recipe.user_id.is_(None), Recipe.source == "system")
         .all()
     ):
-        if recipe.catalog_key not in active_recipe_keys:
+        if recipe.catalog_key not in active_keys:
             session.query(RecipeIngredient).filter_by(recipe_id=recipe.id).delete()
             session.delete(recipe)
             report.rejected.append(f"purged orphan recipe {recipe.catalog_key!r}")
 
 
-def import_catalog(session: Session, markets: tuple[str, ...] = MARKETS) -> CatalogImportReport:
+def import_catalog(session: Session) -> CatalogImportReport:
     report = CatalogImportReport()
     try:
-        for market in markets:
-            import_products_for_market(session, market, report)
-            import_recipes_for_market(session, market, report)
+        product_id_by_key = import_products_from_canonical(session, report)
+        import_recipes_from_canonical(session, product_id_by_key, report)
         session.commit()
     except Exception:
         session.rollback()
@@ -276,26 +347,19 @@ def import_catalog(session: Session, markets: tuple[str, ...] = MARKETS) -> Cata
 
 
 def sync_global_catalog(session: Session) -> CatalogImportReport:
-    """Reconcile DB system catalog with generated JSON (idempotent, purges orphans)."""
     return import_catalog(session)
 
 
 def ensure_global_catalog_loaded(session: Session) -> CatalogImportReport | None:
-    """Import or refresh global catalog on API startup."""
     return sync_global_catalog(session)
 
 
 def main() -> None:
     from app.db.session import get_session_factory
 
-    parser = argparse.ArgumentParser(description="Import global catalog from generated JSON")
-    parser.add_argument("--market", choices=MARKETS, help="Import single market (default: all)")
-    args = parser.parse_args()
-    markets: tuple[str, ...] = (args.market,) if args.market else MARKETS
-
     session = get_session_factory()()
     try:
-        report = import_catalog(session, markets)
+        report = import_catalog(session)
         print(json.dumps(report.as_dict(), indent=2))
     finally:
         session.close()

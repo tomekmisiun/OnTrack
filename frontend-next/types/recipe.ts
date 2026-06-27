@@ -39,7 +39,6 @@ export type RecipeSummary = {
   source_url: string | null;
   category: string | null;
   servings: number;
-  lang: string;
 };
 
 export type Recipe = RecipeSummary & {
@@ -155,7 +154,6 @@ export function parseRecipeSummary(data: unknown): RecipeSummary | null {
     source_url: typeof row.source_url === "string" ? row.source_url : null,
     category: typeof row.category === "string" ? row.category : null,
     servings: typeof row.servings === "number" ? row.servings : 0,
-    lang: typeof row.lang === "string" ? row.lang : "pl",
   };
 }
 

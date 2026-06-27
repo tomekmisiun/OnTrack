@@ -232,7 +232,7 @@ export function unitFamily(unit: string): string {
 export function unitsCompatible(ingUnit: string, product: Product): boolean {
   const ingFam = unitFamily(ingUnit);
   if (product.sold_by_weight) return ingFam === "mass";
-  return ingFam === unitFamily(product.unit);
+  return ingFam === unitFamily(product.unit ?? "g");
 }
 
 export function ingredientMatchesProduct(

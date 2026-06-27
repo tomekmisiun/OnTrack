@@ -215,7 +215,7 @@ export function useProductsPage() {
 
   useEffect(() => {
     void loadProducts({ reset: true });
-  }, [user?.market_code]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [user?.market_code, user?.ui_locale]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (searchDebounceRef.current) clearTimeout(searchDebounceRef.current);
@@ -312,11 +312,11 @@ export function useProductsPage() {
     setEditIsSystem(!!p.is_system);
     setEditForm({
       name: p.name,
-      package_weight: String(p.package_weight),
+      package_weight: String(p.package_weight ?? ""),
       package_price: toPackagePrice(
-        p.price,
-        p.package_weight,
-        p.unit || "g",
+        p.price ?? 0,
+        p.package_weight ?? 100,
+        p.unit ?? "g",
       ).toFixed(2),
       unit: p.unit || "g",
       sold_by_weight: !!p.sold_by_weight,

@@ -25,6 +25,7 @@ from app.main import create_app  # noqa: E402
 from app.models.household_member import HouseholdMember  # noqa: E402
 from app.models.market import Market  # noqa: E402
 from app.models.product import Product  # noqa: E402
+from app.models.product_market_price import ProductMarketPrice  # noqa: E402
 from app.models.recipe import Recipe, RecipeIngredient  # noqa: E402
 from app.models.user import User  # noqa: E402
 from app.scripts.import_catalog import import_catalog  # noqa: E402
@@ -160,17 +161,22 @@ def product(db_session: Session, user: User) -> Product:
     p = Product(
         user_id=user.id,
         source="user",
+        user_name="Jogurt naturalny",
         normalized_name=normalize_product_name("Jogurt naturalny"),
-        name="Jogurt naturalny",
-        package_weight=400,
-        price=3.49,
-        unit="g",
         kcal=60,
         protein=4,
         fat=3,
         carbs=5,
-        lang="pl",
-        market_code="PL",
+    )
+    p.market_prices.append(
+        ProductMarketPrice(
+            market_code="PL",
+            amount=3.49,
+            currency="PLN",
+            package_weight=400,
+            unit="g",
+            sold_by_weight=False,
+        )
     )
     db_session.add(p)
     db_session.commit()
@@ -181,12 +187,10 @@ def product(db_session: Session, user: User) -> Product:
 @pytest.fixture
 def recipe(db_session: Session, user: User, product: Product) -> Recipe:
     r = Recipe(
-        name="Owsianka",
+        user_name="Owsianka",
         user_id=user.id,
         source="user",
         category="breakfast",
-        lang="pl",
-        market_code="PL",
         servings=1,
     )
     db_session.add(r)

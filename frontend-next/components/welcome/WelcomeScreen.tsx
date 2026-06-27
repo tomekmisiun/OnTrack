@@ -7,6 +7,7 @@ import { WelcomeMembers } from "@/components/welcome/WelcomeMembers";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useWelcomeStats } from "@/hooks/useWelcomeStats";
+import { useMarketCurrency } from "@/hooks/useMarketCurrency";
 import type { AppNavId } from "@/lib/config/routes";
 import { tFormatArgs, tFormatN, tString } from "@/lib/i18n/translate";
 import type { TranslationKey } from "@/lib/i18n/translations";
@@ -53,6 +54,7 @@ function getInsight(
   stats: WelcomeStats,
   loading: boolean,
   t: ReturnType<typeof useLanguage>["t"],
+  currencyLabel: string,
 ) {
   if (!insightType) return null;
   if (loading) {
@@ -156,7 +158,7 @@ function getInsight(
             t,
             "welcome_insight_expenses",
             stats.monthTotalCost ?? 0,
-            tString(t, "currency"),
+            currencyLabel,
           ),
           tone: "active" as const,
         };
@@ -173,6 +175,7 @@ export function WelcomeScreen() {
   const { logout } = useAuth();
   const { openProfile } = useProfileModal();
   const { stats, loading } = useWelcomeStats();
+  const { label: currencyLabel } = useMarketCurrency();
 
   const goToTab = (id: AppNavId) => {
     router.push(`/${id}`);
@@ -212,7 +215,7 @@ export function WelcomeScreen() {
 
         <div className="welcome-grid">
           {TILES.map(({ id, icon, descKey, insight }) => {
-            const insightData = getInsight(insight, stats, loading, t);
+            const insightData = getInsight(insight, stats, loading, t, currencyLabel);
             return (
               <button
                 key={id}

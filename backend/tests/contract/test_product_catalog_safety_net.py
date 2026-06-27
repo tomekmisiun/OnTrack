@@ -104,26 +104,39 @@ def test_product_list_excludes_other_users_products(
     assert all(p["id"] != product.id for p in _product_items(res.json()))
 
 
-def test_product_list_filters_by_user_market(client, auth_headers, user, db_session, global_catalog):
+def test_product_list_includes_user_products_from_any_market(
+    client, auth_headers, user, db_session, global_catalog
+):
+    from app.models.product_market_price import ProductMarketPrice
+
     foreign = Product(
         user_id=user.id,
         source="user",
+        user_name="English only item",
         normalized_name=normalize_product_name("English only item"),
-        name="English only item",
-        package_weight=100,
-        price=1.0,
-        unit="g",
-        lang="en",
-        market_code="GB",
+        kcal=0,
+        protein=0,
+        fat=0,
+        carbs=0,
+    )
+    foreign.market_prices.append(
+        ProductMarketPrice(
+            market_code="GB",
+            amount=1.0,
+            currency="GBP",
+            package_weight=100,
+            unit="g",
+            sold_by_weight=False,
+        )
     )
     db_session.add(foreign)
     db_session.commit()
     db_session.refresh(foreign)
 
-    res = client.get("/api/products/", headers=auth_headers)
+    res = client.get("/api/products/", headers=auth_headers, params={"q": "English only"})
     assert res.status_code == 200
     ids = {p["id"] for p in _product_items(res.json())}
-    assert foreign.id not in ids
+    assert foreign.id in ids
 
 
 def test_product_list_supports_pagination(client, auth_headers, product, global_catalog):

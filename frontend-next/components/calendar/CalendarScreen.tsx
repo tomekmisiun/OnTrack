@@ -26,6 +26,9 @@ import {
 import { CalendarHelpModal } from "@/components/calendar/CalendarHelpModal";
 import "@/components/calendar/calendar.css";
 import { useCalendarPage, pickRecipeMacros, toTplSlot } from "@/hooks/useCalendarPage";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { macroLabelsForLocale } from "@/lib/domain/market";
+import { useMarketCurrency } from "@/hooks/useMarketCurrency";
 import { getRecipe } from "@/lib/api/recipes";
 import { updateProduct } from "@/lib/api/products";
 import { getUpcomingMondays, toEU, dateToStr } from "@/lib/dates";
@@ -131,6 +134,7 @@ function RecipePreviewModal({
   t: TFn;
 }) {
   const { showError } = useToast();
+  const { format } = useMarketCurrency();
   const [fullRecipe, setFullRecipe] = useState<Recipe | null>(null);
   const [localIngredients, setLocalIngredients] = useState<RecipeIngredient[]>([]);
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
@@ -366,7 +370,7 @@ function RecipePreviewModal({
           <div style={{ marginTop: 12, fontSize: 12, color: "#6b7280" }}>
             {tString(t, "recipe_cost_lbl")}:{" "}
             <span style={{ color: "#0d9488", fontWeight: 700 }}>
-              {recipe.total_cost?.toFixed(2)} {tString(t, "currency")}
+              {format(recipe.total_cost ?? 0)}
             </span>
           </div>
         </div>
@@ -386,6 +390,8 @@ const DraggableRecipe = memo(function DraggableRecipe({
   onPreview: (recipe: RecipeSummary) => void;
   t: TFn;
 }) {
+  const { lang } = useLanguage();
+  const { format } = useMarketCurrency();
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: `recipe-${recipe.id}`,
     data: { type: "recipe", recipe } satisfies DragData,
@@ -398,10 +404,12 @@ const DraggableRecipe = memo(function DraggableRecipe({
   const isPer100g = recipe.total_kcal === 0 && recipe.kcal_100g != null;
   const hasKcal = displayKcal != null;
 
-  const macroLabels =
-    recipe.lang === "en"
-      ? [["P", displayProtein], ["F", displayFat], ["C", displayCarbs]]
-      : [["B", displayProtein], ["T", displayFat], ["W", displayCarbs]];
+  const [proteinLabel, fatLabel, carbsLabel] = macroLabelsForLocale(lang);
+  const macroLabels = [
+    [proteinLabel, displayProtein],
+    [fatLabel, displayFat],
+    [carbsLabel, displayCarbs],
+  ] as const;
 
   return (
     <div
@@ -474,8 +482,7 @@ const DraggableRecipe = memo(function DraggableRecipe({
       <div className="recipe-thumb__cost">
         <span className="recipe-thumb__cost-label">{tString(t, "est_cost")}</span>
         <span className="recipe-thumb__cost-value">
-          {tString(t, "currency")}
-          {recipe.total_cost.toFixed(2)}
+          {format(recipe.total_cost)}
         </span>
       </div>
     </div>
@@ -554,6 +561,7 @@ function DayMacroFooter({
   background?: string;
   t: TFn;
 }) {
+  const { format } = useMarketCurrency();
   const hasAnyMacro =
     totals.kcal > 0 || totals.protein > 0 || totals.fat > 0 || totals.carbs > 0;
   return (
@@ -576,7 +584,7 @@ function DayMacroFooter({
             {totals.cost > 0 && (
               <div style={{ flexShrink: 0, textAlign: "right" }}>
                 <div style={{ color: "#6b7280", fontSize: 8, fontWeight: 500, lineHeight: 1 }}>{tString(t, "est_cost")}</div>
-                <div style={{ color: "#0d9488", fontWeight: 700, fontSize: 11, lineHeight: 1.2 }}>{totals.cost.toFixed(2)} {tString(t, "currency")}</div>
+                <div style={{ color: "#0d9488", fontWeight: 700, fontSize: 11, lineHeight: 1.2 }}>{format(totals.cost)}</div>
               </div>
             )}
           </div>

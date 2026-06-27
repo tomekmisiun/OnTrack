@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo, useRef, type ReactNode, type CSSPropertie
 import { Icon } from "@iconify/react";
 import { getFuelPrices } from "@/lib/api/fuel";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useMarketCurrency } from "@/hooks/useMarketCurrency";
 import { expenseI18nKey, drinkI18nKey } from "@/lib/i18n/expenseKeys";
 import {
   OTHER_TYPES,
@@ -115,6 +116,7 @@ type DrinksCardProps = {
 
 function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pieCategories: _pieCategories = [] }: DrinksCardProps) {
   const { t, lang } = useLanguage();
+  const { label: cur } = useMarketCurrency();
   const eg = tString(t, 'eg_prefix');
   const _itemLabel = (name: string) => {
     const map: Record<string, string> = { 'Cukier': tString(t, 'dc_sugar'), 'Słodzik': tString(t, 'dc_sweetener'), 'Mleko': tString(t, 'dc_milk'), 'Śmietanka': tString(t, 'dc_cream') };
@@ -133,8 +135,8 @@ function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pi
 
   const cukierProduct = useMemo(() => productList.find(p => /cukier/i.test(p.name) && p.unit === 'g'), [productList]);
   const slodzikProduct = useMemo(() => productList.find(p => /słodzik/i.test(p.name) && p.unit === 'g'), [productList]);
-  const effCukierPrice = cukierPrice !== null ? cukierPrice : (cukierProduct ? cukierProduct.price * 10 : 3.5);
-  const effSlodzikPrice = slodzikPrice !== null ? slodzikPrice : (slodzikProduct ? slodzikProduct.price * 10 : 15);
+  const effCukierPrice = cukierPrice !== null ? cukierPrice : (cukierProduct ? (cukierProduct.price ?? 0) * 10 : 3.5);
+  const effSlodzikPrice = slodzikPrice !== null ? slodzikPrice : (slodzikProduct ? (slodzikProduct.price ?? 0) * 10 : 15);
 
   const upd = (key: DrinkKey, val: Record<string, unknown>) =>
     setDrinks((d) => ({ ...d, [key]: { ...(d[key] ?? {}), ...val } }));
@@ -367,7 +369,7 @@ function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pi
         )}
         <span style={{ fontSize:16, lineHeight:1, position:'relative', zIndex:1 }}>{emoji}</span>
         <span style={{ fontSize:9, fontWeight:700, color:'#fff', textAlign:'center', position:'relative', zIndex:1, textShadow:'0 1px 3px rgba(0,0,0,0.8)', padding:'0 3px', lineHeight:1.3 }}>{tString(t, expenseI18nKey(key) as TranslationKey)}</span>
-        {(() => { const pv = otherTilePreview(key); return pv>0 ? <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'rgba(0,0,0,0.6)', padding:'3px 4px', textAlign:'center', fontSize:10, fontWeight:800, color:'#2dd4bf', zIndex:2, opacity: enabled?1:0.7 }}>{pv.toFixed(2)} {tString(t, 'currency')}</div> : null; })()}
+        {(() => { const pv = otherTilePreview(key); return pv>0 ? <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'rgba(0,0,0,0.6)', padding:'3px 4px', textAlign:'center', fontSize:10, fontWeight:800, color:'#2dd4bf', zIndex:2, opacity: enabled?1:0.7 }}>{pv.toFixed(2)} {cur}</div> : null; })()}
       </div>
       {expanded && (() => {
         const o = otherExpenses[key] ?? (OTHER_DEFAULTS[key] as ConfigBucket);
@@ -375,7 +377,7 @@ function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pi
         const Summary = () => (
           <div style={{ borderTop:'1px solid #1a3a38', marginTop:6, paddingTop:5 }}>
             <div style={{ fontSize:9, color:'#6b7280' }}>{tFormatN(t, 'dc_days_label', days)}</div>
-            <div style={{ fontSize:13, fontWeight:800, color:'#0d9488' }}>{tot.toFixed(2)} {tString(t, 'currency')}</div>
+            <div style={{ fontSize:13, fontWeight:800, color:'#0d9488' }}>{tot.toFixed(2)} {cur}</div>
           </div>
         );
         const inp2 = { ...fi, width:'100%' };
@@ -394,11 +396,11 @@ function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pi
             <div style={{ borderTop:'1px solid #1a3a38', marginTop:6, paddingTop:5, display:'flex', flexDirection:'column', gap:2 }}>
               <div style={{ display:'flex', justifyContent:'space-between', fontSize:10 }}>
                 <span style={{ color:'#6b7280' }}>{tFormat(t, 'dc_rolls_used', rollsUsed.toFixed(1))}</span>
-                <span style={{ color:'#9ca3af', fontWeight:600 }}>{papierCost.toFixed(2)} {tString(t, 'currency')}</span>
+                <span style={{ color:'#9ca3af', fontWeight:600 }}>{papierCost.toFixed(2)} {cur}</span>
               </div>
               <div style={{ borderTop:'1px solid #1a3a38', paddingTop:4, marginTop:2, display:'flex', justifyContent:'space-between', fontSize:12, fontWeight:800 }}>
                 <span style={{ color:'#6b7280' }}>{tFormatN(t, 'dc_days_label', days)}</span>
-                <span style={{ color:'#0d9488' }}>{papierCost.toFixed(2)} {tString(t, 'currency')}</span>
+                <span style={{ color:'#0d9488' }}>{papierCost.toFixed(2)} {cur}</span>
               </div>
             </div>
           </div>
@@ -464,17 +466,17 @@ function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pi
             <div style={{ borderTop:'1px solid #1a3a38', marginTop:6, paddingTop:5, display:'flex', flexDirection:'column', gap:2 }}>
               <div style={{ display:'flex', justifyContent:'space-between', fontSize:10 }}>
                 <span style={{ color:'#6b7280' }}>{detLabel} ({Math.round(washesTotal)} washes)</span>
-                <span style={{ color:'#9ca3af', fontWeight:600 }}>{detCost.toFixed(2)} {tString(t, 'currency')}</span>
+                <span style={{ color:'#9ca3af', fontWeight:600 }}>{detCost.toFixed(2)} {cur}</span>
               </div>
               {o.plukanie && pluCost > 0 && (
                 <div style={{ display:'flex', justifyContent:'space-between', fontSize:10 }}>
                   <span style={{ color:'#6b7280' }}>{tString(t, 'dc_fabric_softener')}</span>
-                  <span style={{ color:'#9ca3af', fontWeight:600 }}>{pluCost.toFixed(2)} {tString(t, 'currency')}</span>
+                  <span style={{ color:'#9ca3af', fontWeight:600 }}>{pluCost.toFixed(2)} {cur}</span>
                 </div>
               )}
               <div style={{ borderTop:'1px solid #1a3a38', paddingTop:4, marginTop:2, display:'flex', justifyContent:'space-between', fontSize:12, fontWeight:800 }}>
                 <span style={{ color:'#6b7280' }}>{tFormatN(t, 'dc_days_label', days)}</span>
-                <span style={{ color:'#0d9488' }}>{(detCost + pluCost).toFixed(2)} {tString(t, 'currency')}</span>
+                <span style={{ color:'#0d9488' }}>{(detCost + pluCost).toFixed(2)} {cur}</span>
               </div>
             </div>
           </div>
@@ -567,14 +569,14 @@ function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pi
               </div>
             </InnerSec>
             <div style={{ borderTop:'1px solid #1a3a38', paddingTop:6 }}>
-              {zbCost>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_teeth_lbl')}</span><span style={{ color:'#9ca3af' }}>{zbCost.toFixed(2)} {tString(t, 'currency')}</span></div>}
-              {wlCost>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_hair_lbl')}</span><span style={{ color:'#9ca3af' }}>{wlCost.toFixed(2)} {tString(t, 'currency')}</span></div>}
-              {kapCost>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_bath_lbl')}</span><span style={{ color:'#9ca3af' }}>{kapCost.toFixed(2)} {tString(t, 'currency')}</span></div>}
-              {papierCostH>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_toilet_paper_short')}</span><span style={{ color:'#9ca3af' }}>{papierCostH.toFixed(2)} {tString(t, 'currency')}</span></div>}
-              {inneCost>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_other_lbl')}</span><span style={{ color:'#9ca3af' }}>{inneCost.toFixed(2)} {tString(t, 'currency')}</span></div>}
+              {zbCost>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_teeth_lbl')}</span><span style={{ color:'#9ca3af' }}>{zbCost.toFixed(2)} {cur}</span></div>}
+              {wlCost>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_hair_lbl')}</span><span style={{ color:'#9ca3af' }}>{wlCost.toFixed(2)} {cur}</span></div>}
+              {kapCost>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_bath_lbl')}</span><span style={{ color:'#9ca3af' }}>{kapCost.toFixed(2)} {cur}</span></div>}
+              {papierCostH>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_toilet_paper_short')}</span><span style={{ color:'#9ca3af' }}>{papierCostH.toFixed(2)} {cur}</span></div>}
+              {inneCost>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_other_lbl')}</span><span style={{ color:'#9ca3af' }}>{inneCost.toFixed(2)} {cur}</span></div>}
               <div style={{ display:'flex', justifyContent:'space-between', fontSize:12, fontWeight:800, borderTop:'1px solid #1a3a38', paddingTop:4, marginTop:2 }}>
                 <span style={{ color:'#6b7280' }}>{tFormatN(t, 'dc_days_label', days)}</span>
-                <span style={{ color:'#0d9488' }}>{totalH.toFixed(2)} {tString(t, 'currency')}</span>
+                <span style={{ color:'#0d9488' }}>{totalH.toFixed(2)} {cur}</span>
               </div>
             </div>
           </div>
@@ -616,11 +618,11 @@ function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pi
               </div>
             </InnerSec>
             <div style={{ borderTop:'1px solid #1a3a38', paddingTop:6 }}>
-              {bagCost > 0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_rubbish_bags_lbl')}</span><span style={{ color:'#9ca3af' }}>{bagCost.toFixed(2)} {tString(t, 'currency')}</span></div>}
-              {cleanCost > 0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_cleaning_fluids')}</span><span style={{ color:'#9ca3af' }}>{cleanCost.toFixed(2)} {tString(t, 'currency')}</span></div>}
+              {bagCost > 0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_rubbish_bags_lbl')}</span><span style={{ color:'#9ca3af' }}>{bagCost.toFixed(2)} {cur}</span></div>}
+              {cleanCost > 0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_cleaning_fluids')}</span><span style={{ color:'#9ca3af' }}>{cleanCost.toFixed(2)} {cur}</span></div>}
               <div style={{ display:'flex', justifyContent:'space-between', fontSize:12, fontWeight:800, borderTop:'1px solid #1a3a38', paddingTop:4, marginTop:2 }}>
                 <span style={{ color:'#6b7280' }}>{tFormatN(t, 'dc_days_label', days)}</span>
-                <span style={{ color:'#0d9488' }}>{(bagCost + cleanCost).toFixed(2)} {tString(t, 'currency')}</span>
+                <span style={{ color:'#0d9488' }}>{(bagCost + cleanCost).toFixed(2)} {cur}</span>
               </div>
             </div>
           </div>
@@ -667,11 +669,11 @@ function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pi
             </div>}
             {(o.useReczne || o.useZmywarka) && (
               <div style={{ borderTop:'1px solid #1a3a38', marginTop:8, paddingTop:6 }}>
-                {recznyCost > 0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_hand_wash')}</span><span style={{ color:'#9ca3af' }}>{recznyCost.toFixed(2)} {tString(t, 'currency')}</span></div>}
-                {zmywarkaCost > 0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_dishwasher')}</span><span style={{ color:'#9ca3af' }}>{zmywarkaCost.toFixed(2)} {tString(t, 'currency')}</span></div>}
+                {recznyCost > 0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_hand_wash')}</span><span style={{ color:'#9ca3af' }}>{recznyCost.toFixed(2)} {cur}</span></div>}
+                {zmywarkaCost > 0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_dishwasher')}</span><span style={{ color:'#9ca3af' }}>{zmywarkaCost.toFixed(2)} {cur}</span></div>}
                 <div style={{ display:'flex', justifyContent:'space-between', fontSize:12, fontWeight:800, borderTop:'1px solid #1a3a38', paddingTop:4, marginTop:2 }}>
                   <span style={{ color:'#6b7280' }}>{tFormatN(t, 'dc_days_label', days)}</span>
-                  <span style={{ color:'#0d9488' }}>{(recznyCost + zmywarkaCost).toFixed(2)} {tString(t, 'currency')}</span>
+                  <span style={{ color:'#0d9488' }}>{(recznyCost + zmywarkaCost).toFixed(2)} {cur}</span>
                 </div>
               </div>
             )}
@@ -761,13 +763,13 @@ function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pi
               </div>
             </InnerSec>
             <div style={{ borderTop:'1px solid #1a3a38', paddingTop:6 }}>
-              {totalFixed>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_fixed_lbl')}</span><span style={{ color:'#9ca3af' }}>{totalFixed.toFixed(2)} {tString(t, 'currency')}</span></div>}
-              {totalPieluchy>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_nappies_lbl')}</span><span style={{ color:'#9ca3af' }}>{totalPieluchy.toFixed(2)} {tString(t, 'currency')}</span></div>}
-              {totalMleko>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_formula_lbl')}</span><span style={{ color:'#9ca3af' }}>{totalMleko.toFixed(2)} {tString(t, 'currency')}</span></div>}
-              {totalExtra>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_other_lbl')}</span><span style={{ color:'#9ca3af' }}>{totalExtra.toFixed(2)} {tString(t, 'currency')}</span></div>}
+              {totalFixed>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_fixed_lbl')}</span><span style={{ color:'#9ca3af' }}>{totalFixed.toFixed(2)} {cur}</span></div>}
+              {totalPieluchy>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_nappies_lbl')}</span><span style={{ color:'#9ca3af' }}>{totalPieluchy.toFixed(2)} {cur}</span></div>}
+              {totalMleko>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_formula_lbl')}</span><span style={{ color:'#9ca3af' }}>{totalMleko.toFixed(2)} {cur}</span></div>}
+              {totalExtra>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_other_lbl')}</span><span style={{ color:'#9ca3af' }}>{totalExtra.toFixed(2)} {cur}</span></div>}
               <div style={{ display:'flex', justifyContent:'space-between', fontSize:12, fontWeight:800, borderTop:'1px solid #1a3a38', paddingTop:4, marginTop:2 }}>
                 <span style={{ color:'#6b7280' }}>{tFormatN(t, 'dc_days_label', days)}</span>
-                <span style={{ color:'#0d9488' }}>{totalAll.toFixed(2)} {tString(t, 'currency')}</span>
+                <span style={{ color:'#0d9488' }}>{totalAll.toFixed(2)} {cur}</span>
               </div>
             </div>
           </div>
@@ -853,14 +855,14 @@ function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pi
               </div>
             </InnerSec>
             <div style={{ borderTop:'1px solid #1a3a38', paddingTop:6, marginTop:4 }}>
-              {tSucha>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_dry_food')}</span><span style={{ color:'#9ca3af' }}>{tSucha.toFixed(2)} {tString(t, 'currency')}</span></div>}
-              {tMokra>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_wet_food')}</span><span style={{ color:'#9ca3af' }}>{tMokra.toFixed(2)} {tString(t, 'currency')}</span></div>}
-              {tZwierek>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_litter')}</span><span style={{ color:'#9ca3af' }}>{tZwierek.toFixed(2)} {tString(t, 'currency')}</span></div>}
-              {tMies>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_vet_short')}</span><span style={{ color:'#9ca3af' }}>{(tMies/30*days).toFixed(2)} {tString(t, 'currency')}</span></div>}
-              {tExtra>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_other_lbl')}</span><span style={{ color:'#9ca3af' }}>{tExtra.toFixed(2)} {tString(t, 'currency')}</span></div>}
+              {tSucha>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_dry_food')}</span><span style={{ color:'#9ca3af' }}>{tSucha.toFixed(2)} {cur}</span></div>}
+              {tMokra>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_wet_food')}</span><span style={{ color:'#9ca3af' }}>{tMokra.toFixed(2)} {cur}</span></div>}
+              {tZwierek>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_litter')}</span><span style={{ color:'#9ca3af' }}>{tZwierek.toFixed(2)} {cur}</span></div>}
+              {tMies>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_vet_short')}</span><span style={{ color:'#9ca3af' }}>{(tMies/30*days).toFixed(2)} {cur}</span></div>}
+              {tExtra>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_other_lbl')}</span><span style={{ color:'#9ca3af' }}>{tExtra.toFixed(2)} {cur}</span></div>}
               <div style={{ display:'flex', justifyContent:'space-between', fontSize:12, fontWeight:800, borderTop:'1px solid #1a3a38', paddingTop:4, marginTop:2 }}>
                 <span style={{ color:'#6b7280' }}>{tFormatN(t, 'dc_days_label', days)}</span>
-                <span style={{ color:'#0d9488' }}>{tAll.toFixed(2)} {tString(t, 'currency')}</span>
+                <span style={{ color:'#0d9488' }}>{tAll.toFixed(2)} {cur}</span>
               </div>
             </div>
           </div>
@@ -884,11 +886,11 @@ function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pi
               </FieldBox>
             </InnerSec>
             <div style={{ borderTop:'1px solid #1a3a38', marginTop:8, paddingTop:6 }}>
-              <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_doctors')}</span><span style={{ color:'#9ca3af' }}>{(nn(o.wizyty)/30*days).toFixed(2)} {tString(t, 'currency')}</span></div>
-              <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_medicine')}</span><span style={{ color:'#9ca3af' }}>{(nn(o.leki)/30*days).toFixed(2)} {tString(t, 'currency')}</span></div>
+              <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_doctors')}</span><span style={{ color:'#9ca3af' }}>{(nn(o.wizyty)/30*days).toFixed(2)} {cur}</span></div>
+              <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_medicine')}</span><span style={{ color:'#9ca3af' }}>{(nn(o.leki)/30*days).toFixed(2)} {cur}</span></div>
               <div style={{ display:'flex', justifyContent:'space-between', fontSize:12, fontWeight:800, borderTop:'1px solid #1a3a38', paddingTop:4, marginTop:2 }}>
                 <span style={{ color:'#6b7280' }}>{tFormatN(t, 'dc_days_label', days)}</span>
-                <span style={{ color:'#0d9488' }}>{total.toFixed(2)} {tString(t, 'currency')}</span>
+                <span style={{ color:'#0d9488' }}>{total.toFixed(2)} {cur}</span>
               </div>
             </div>
           </div>
@@ -950,11 +952,11 @@ function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pi
             </div>
             {(totalFixed > 0 || totalExtra > 0) && (
               <div style={{ borderTop:'1px solid #1a3a38', paddingTop:6 }}>
-                {totalFixed>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_supplies_lbl')}</span><span style={{ color:'#9ca3af' }}>{totalFixed.toFixed(2)} {tString(t, 'currency')}</span></div>}
-                {totalExtra>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_other_lbl')}</span><span style={{ color:'#9ca3af' }}>{totalExtra.toFixed(2)} {tString(t, 'currency')}</span></div>}
+                {totalFixed>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_supplies_lbl')}</span><span style={{ color:'#9ca3af' }}>{totalFixed.toFixed(2)} {cur}</span></div>}
+                {totalExtra>0 && <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>{tString(t, 'dc_other_lbl')}</span><span style={{ color:'#9ca3af' }}>{totalExtra.toFixed(2)} {cur}</span></div>}
                 <div style={{ display:'flex', justifyContent:'space-between', fontSize:12, fontWeight:800, borderTop:'1px solid #1a3a38', paddingTop:4, marginTop:2 }}>
                   <span style={{ color:'#6b7280' }}>{tFormatN(t, 'dc_days_label', days)}</span>
-                  <span style={{ color:'#0d9488' }}>{totalAll.toFixed(2)} {tString(t, 'currency')}</span>
+                  <span style={{ color:'#0d9488' }}>{totalAll.toFixed(2)} {cur}</span>
                 </div>
               </div>
             )}
@@ -1003,7 +1005,7 @@ function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pi
               {p.fetchedPrices && Object.keys(p.fetchedPrices).length > 0 && (
                 <div style={{ display:'flex', gap:8, fontSize:10, color:'#6b7280' }}>
                   {Object.entries(FUEL_LABELS).map(([k,lbl]) => p.fetchedPrices[k] &&
-                    <span key={k}>{lbl}: <span style={{ color:'#9ca3af' }}>{p.fetchedPrices[k]} {tString(t, 'currency')}</span></span>
+                    <span key={k}>{lbl}: <span style={{ color:'#9ca3af' }}>{p.fetchedPrices[k]} {cur}</span></span>
                   )}
                 </div>
               )}
@@ -1020,11 +1022,11 @@ function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pi
               <div style={{ borderTop:'1px solid #1a3a38', marginTop:8, paddingTop:6 }}>
                 <div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}>
                   <span style={{ color:'#6b7280' }}>{FUEL_LABELS[String(p.fuelType)] ?? ''} ({(nn(p.kmPerDay)*days).toFixed(0)} km)</span>
-                  <span style={{ color:'#9ca3af' }}>{dailyCost.toFixed(2)} {tString(t, 'currency')}</span>
+                  <span style={{ color:'#9ca3af' }}>{dailyCost.toFixed(2)} {cur}</span>
                 </div>
                 <div style={{ display:'flex', justifyContent:'space-between', fontSize:12, fontWeight:800, borderTop:'1px solid #1a3a38', paddingTop:4, marginTop:2 }}>
                   <span style={{ color:'#6b7280' }}>{tFormatN(t, 'dc_days_label', days)}</span>
-                  <span style={{ color:'#0d9488' }}>{dailyCost.toFixed(2)} {tString(t, 'currency')}</span>
+                  <span style={{ color:'#0d9488' }}>{dailyCost.toFixed(2)} {cur}</span>
                 </div>
               </div>
             )}
@@ -1055,12 +1057,12 @@ function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pi
             ))}
             {total > 0 && (
               <div style={{ borderTop:'1px solid #1a3a38', marginTop:4, paddingTop:6 }}>
-                {Boolean(m.internetE)&&nn(m.internet)>0&&<div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Internet</span><span style={{ color:'#9ca3af' }}>{(nn(m.internet)/30*days).toFixed(2)} {tString(t, 'currency')}</span></div>}
-                {Boolean(m.telefonE)&&nn(m.telefon)>0&&<div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Phone</span><span style={{ color:'#9ca3af' }}>{(nn(m.telefon)/30*days).toFixed(2)} {tString(t, 'currency')}</span></div>}
-                {Boolean(m.tvE)&&nn(m.tv)>0&&<div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>TV</span><span style={{ color:'#9ca3af' }}>{(nn(m.tv)/30*days).toFixed(2)} {tString(t, 'currency')}</span></div>}
+                {Boolean(m.internetE)&&nn(m.internet)>0&&<div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Internet</span><span style={{ color:'#9ca3af' }}>{(nn(m.internet)/30*days).toFixed(2)} {cur}</span></div>}
+                {Boolean(m.telefonE)&&nn(m.telefon)>0&&<div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>Phone</span><span style={{ color:'#9ca3af' }}>{(nn(m.telefon)/30*days).toFixed(2)} {cur}</span></div>}
+                {Boolean(m.tvE)&&nn(m.tv)>0&&<div style={{ display:'flex', justifyContent:'space-between', fontSize:10, marginBottom:2 }}><span style={{ color:'#6b7280' }}>TV</span><span style={{ color:'#9ca3af' }}>{(nn(m.tv)/30*days).toFixed(2)} {cur}</span></div>}
                 <div style={{ display:'flex', justifyContent:'space-between', fontSize:12, fontWeight:800, borderTop:'1px solid #1a3a38', paddingTop:4, marginTop:2 }}>
                   <span style={{ color:'#6b7280' }}>{tFormatN(t, 'dc_days_label', days)}</span>
-                  <span style={{ color:'#0d9488' }}>{total.toFixed(2)} {tString(t, 'currency')}</span>
+                  <span style={{ color:'#0d9488' }}>{total.toFixed(2)} {cur}</span>
                 </div>
               </div>
             )}
@@ -1117,7 +1119,7 @@ function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pi
                 <div style={{ position:'absolute', inset:0, background: enabled ? 'transparent' : 'rgba(0,0,0,0.2)' }} />
                 <span style={{ fontSize:24, lineHeight:1, position:'relative', zIndex:1 }}>{emoji}</span>
                 <span style={{ fontSize:11, fontWeight:700, color:'#fff', textAlign:'center', position:'relative', zIndex:1, textShadow:'0 1px 3px rgba(0,0,0,0.8)', padding:'0 4px' }}>{tString(t, drinkI18nKey(key) as TranslationKey)}</span>
-                {(() => { const pv = drinkTilePreview(key); return pv>0 ? <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'rgba(0,0,0,0.6)', padding:'4px 6px', textAlign:'center', fontSize:12, fontWeight:800, color:'#2dd4bf', zIndex:2, letterSpacing:'0.2px', opacity: enabled?1:0.7 }}>{pv.toFixed(2)} {tString(t, 'currency')}</div> : null; })()}
+                {(() => { const pv = drinkTilePreview(key); return pv>0 ? <div style={{ position:'absolute', bottom:0, left:0, right:0, background:'rgba(0,0,0,0.6)', padding:'4px 6px', textAlign:'center', fontSize:12, fontWeight:800, color:'#2dd4bf', zIndex:2, letterSpacing:'0.2px', opacity: enabled?1:0.7 }}>{pv.toFixed(2)} {cur}</div> : null; })()}
               </div>
 
               {/* Panel konfiguracji — szerokość tile'a */}
@@ -1162,8 +1164,8 @@ function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pi
                       </InnerSec>
                     <div style={{ borderTop:'1px solid #1a3a38', marginTop:8, paddingTop:6, display:'flex', flexDirection:'column', gap:3 }}>
                       {[tFormatN(t, 'dc_cups_summary', cfgNum(drinks.kawa.cupsPerDay)), tFormatN(t, 'dc_days_label', days), tFormatN(t, 'dc_cups_total', cfgNum(drinks.kawa.cupsPerDay)*days)].map((l,i)=><div key={i} style={{ fontSize:10, color:'#6b7280' }}>{l}</div>)}
-                      {[{label:tString(t, drinkI18nKey('kawa') as TranslationKey),val:items.filter(i=>i._dk==='kawa'&&i.name===tString(t, drinkI18nKey('kawa') as TranslationKey)).reduce((s,i)=>s+i.total,0)},...items.filter(i=>i._dk==='kawa'&&i.name!==tString(t, drinkI18nKey('kawa') as TranslationKey)).map(i=>({label:_itemLabel((i.name ?? '').replace(' (kawa)','')),val:i.total}))].filter(b=>b.val>0).map((b,i)=><div key={i} style={{ display:'flex', justifyContent:'space-between', fontSize:10 }}><span style={{ color:'#6b7280' }}>{b.label}</span><span style={{ color:'#9ca3af', fontWeight:600 }}>{b.val.toFixed(2)} {tString(t, 'currency')}</span></div>)}
-                      <div style={{ fontSize:13, fontWeight:800, color:'#0d9488', marginTop:2 }}>{tileTotal.toFixed(2)} {tString(t, 'currency')}</div>
+                      {[{label:tString(t, drinkI18nKey('kawa') as TranslationKey),val:items.filter(i=>i._dk==='kawa'&&i.name===tString(t, drinkI18nKey('kawa') as TranslationKey)).reduce((s,i)=>s+i.total,0)},...items.filter(i=>i._dk==='kawa'&&i.name!==tString(t, drinkI18nKey('kawa') as TranslationKey)).map(i=>({label:_itemLabel((i.name ?? '').replace(' (kawa)','')),val:i.total}))].filter(b=>b.val>0).map((b,i)=><div key={i} style={{ display:'flex', justifyContent:'space-between', fontSize:10 }}><span style={{ color:'#6b7280' }}>{b.label}</span><span style={{ color:'#9ca3af', fontWeight:600 }}>{b.val.toFixed(2)} {cur}</span></div>)}
+                      <div style={{ fontSize:13, fontWeight:800, color:'#0d9488', marginTop:2 }}>{tileTotal.toFixed(2)} {cur}</div>
                     </div>
                   </div>
                 );
@@ -1205,8 +1207,8 @@ function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pi
                       </InnerSec>
                     <div style={{ borderTop:'1px solid #1a3a38', marginTop:8, paddingTop:6, display:'flex', flexDirection:'column', gap:3 }}>
                       {[tFormatN(t, 'dc_cups_summary', cfgNum(drinks.herbata.cupsPerDay)), tFormatN(t, 'dc_days_label', days), tFormatN(t, 'dc_cups_total', cfgNum(drinks.herbata.cupsPerDay)*days)].map((l,i)=><div key={i} style={{ fontSize:10, color:'#6b7280' }}>{l}</div>)}
-                      {[{label:tString(t, drinkI18nKey('herbata') as TranslationKey),val:items.filter(i=>i._dk==='herbata'&&i.name===tString(t, drinkI18nKey('herbata') as TranslationKey)).reduce((s,i)=>s+i.total,0)},...items.filter(i=>i._dk==='herbata'&&i.name!==tString(t, drinkI18nKey('herbata') as TranslationKey)).map(i=>({label:_itemLabel((i.name ?? '').replace(' (herbata)','')),val:i.total}))].filter(b=>b.val>0).map((b,i)=><div key={i} style={{ display:'flex', justifyContent:'space-between', fontSize:10 }}><span style={{ color:'#6b7280' }}>{b.label}</span><span style={{ color:'#9ca3af', fontWeight:600 }}>{b.val.toFixed(2)} {tString(t, 'currency')}</span></div>)}
-                      <div style={{ fontSize:13, fontWeight:800, color:'#0d9488', marginTop:2 }}>{tileTotal.toFixed(2)} {tString(t, 'currency')}</div>
+                      {[{label:tString(t, drinkI18nKey('herbata') as TranslationKey),val:items.filter(i=>i._dk==='herbata'&&i.name===tString(t, drinkI18nKey('herbata') as TranslationKey)).reduce((s,i)=>s+i.total,0)},...items.filter(i=>i._dk==='herbata'&&i.name!==tString(t, drinkI18nKey('herbata') as TranslationKey)).map(i=>({label:_itemLabel((i.name ?? '').replace(' (herbata)','')),val:i.total}))].filter(b=>b.val>0).map((b,i)=><div key={i} style={{ display:'flex', justifyContent:'space-between', fontSize:10 }}><span style={{ color:'#6b7280' }}>{b.label}</span><span style={{ color:'#9ca3af', fontWeight:600 }}>{b.val.toFixed(2)} {cur}</span></div>)}
+                      <div style={{ fontSize:13, fontWeight:800, color:'#0d9488', marginTop:2 }}>{tileTotal.toFixed(2)} {cur}</div>
                     </div>
                   </div>
                 );
@@ -1219,7 +1221,7 @@ function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pi
                       </InnerSec>
                     <div style={{ borderTop:'1px solid #1a3a38', marginTop:8, paddingTop:6, display:'flex', flexDirection:'column', gap:3 }}>
                       {[tFormatN(t, 'dc_liters_summary', cfgNum(drinks.napoje.litersPerDay)), tFormatN(t, 'dc_days_label', days), tFormat(t, 'dc_liters_total', (cfgNum(drinks.napoje.litersPerDay)*days).toFixed(1))].map((l,i)=><div key={i} style={{ fontSize:10, color:'#6b7280' }}>{l}</div>)}
-                      <div style={{ fontSize:13, fontWeight:800, color:'#0d9488', marginTop:2 }}>{tileTotal.toFixed(2)} {tString(t, 'currency')}</div>
+                      <div style={{ fontSize:13, fontWeight:800, color:'#0d9488', marginTop:2 }}>{tileTotal.toFixed(2)} {cur}</div>
                     </div>
                   </div>
                 );
@@ -1232,7 +1234,7 @@ function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pi
                       </InnerSec>
                     <div style={{ borderTop:'1px solid #1a3a38', marginTop:8, paddingTop:6, display:'flex', flexDirection:'column', gap:3 }}>
                       {[tFormatN(t, 'dc_liters_summary', cfgNum(drinks.woda.litersPerDay)), tFormatN(t, 'dc_days_label', days), tFormat(t, 'dc_liters_total', (cfgNum(drinks.woda.litersPerDay)*days).toFixed(1))].map((l,i)=><div key={i} style={{ fontSize:10, color:'#6b7280' }}>{l}</div>)}
-                      <div style={{ fontSize:13, fontWeight:800, color:'#0d9488', marginTop:2 }}>{tileTotal.toFixed(2)} {tString(t, 'currency')}</div>
+                      <div style={{ fontSize:13, fontWeight:800, color:'#0d9488', marginTop:2 }}>{tileTotal.toFixed(2)} {cur}</div>
                     </div>
                   </div>
                 );
@@ -1263,7 +1265,7 @@ function DrinksCard({ days, periodLabel: _periodLabel, productList, onUpdate, pi
                       </InnerSec>
                     <div style={{ borderTop:'1px solid #1a3a38', marginTop:8, paddingTop:6, display:'flex', flexDirection:'column', gap:3 }}>
                       {[tFormatN(t, 'dc_liters_summary', cfgNum(drinks.sodaStream.litersPerDay)), tFormatN(t, 'dc_days_label', days), tFormat(t, 'dc_liters_total', (cfgNum(drinks.sodaStream.litersPerDay)*days).toFixed(1))].map((l,i)=><div key={i} style={{ fontSize:10, color:'#6b7280' }}>{l}</div>)}
-                      <div style={{ fontSize:13, fontWeight:800, color:'#0d9488', marginTop:2 }}>{tileTotal.toFixed(2)} {tString(t, 'currency')}</div>
+                      <div style={{ fontSize:13, fontWeight:800, color:'#0d9488', marginTop:2 }}>{tileTotal.toFixed(2)} {cur}</div>
                     </div>
                   </div>
                 );

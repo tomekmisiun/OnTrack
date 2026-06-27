@@ -16,7 +16,7 @@ def test_add_meal_and_get_day(client, auth_headers, recipe, member):
     assert day.status_code == 200
     meals = day.json()
     assert len(meals) == 1
-    assert meals[0]["recipe"]["name"] == recipe.name
+    assert meals[0]["recipe"]["name"] == recipe.user_name
 
     deleted = client.delete(f"/api/meal-plan/{meal_id}", headers=auth_headers)
     assert deleted.status_code == 200
@@ -59,7 +59,7 @@ def test_meal_plan_range(client, auth_headers, recipe, member):
     assert "2026-05-25" in data
     assert len(data["2026-05-25"]) == 1
     meal = data["2026-05-25"][0]
-    assert meal["recipe"]["name"] == recipe.name
+    assert meal["recipe"]["name"] == recipe.user_name
     assert meal["recipe"]["ingredients"] == []
 
 

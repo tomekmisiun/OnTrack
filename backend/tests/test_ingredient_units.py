@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from types import SimpleNamespace
-
 from app.domain.ingredient_units import ingredient_cost, resolve_ingredient_unit
+from app.models.product import Product
+from app.models.product_market_price import ProductMarketPrice
 from app.models.recipe import RecipeIngredient
 
 
@@ -15,15 +15,28 @@ def _ingredient(
     name: str = "test",
     price: float = 10.0,
 ) -> RecipeIngredient:
-    product = SimpleNamespace(
-        unit=product_unit,
-        name=name,
+    product = Product(
+        user_id=1,
+        source="user",
+        user_name=name,
         normalized_name=name,
-        price=price,
-        package_weight=1,
+        kcal=0,
+        protein=0,
+        fat=0,
+        carbs=0,
+    )
+    product.market_prices.append(
+        ProductMarketPrice(
+            market_code="PL",
+            amount=price,
+            currency="PLN",
+            package_weight=1,
+            unit=product_unit,
+            sold_by_weight=False,
+        )
     )
     ing = RecipeIngredient(recipe_id=1, product_id=1, weight=weight)
-    ing.product = product  # type: ignore[attr-defined]
+    ing.product = product
     return ing
 
 
@@ -54,7 +67,6 @@ def test_gram_product_unchanged():
 
 def test_avocado_cost_uses_fraction_of_piece():
     ing = _ingredient(weight=50, product_unit="szt", name="awokado", price=8.0)
-    # 50g of 200g piece → 0.25 * 8.0
     assert ingredient_cost(ing) == 2.0
 
 

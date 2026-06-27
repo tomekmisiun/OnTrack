@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useMarketCurrency } from "@/hooks/useMarketCurrency";
 import { tString } from "@/lib/i18n/translate";
 
 export type PieSlice = {
@@ -22,6 +23,7 @@ export function SummaryPieChart({
   interactive = false,
 }: SummaryPieChartProps) {
   const { t } = useLanguage();
+  const { format, label } = useMarketCurrency();
   const [hovered, setHovered] = useState<number | null>(null);
 
   if (!slices || slices.length === 0) return null;
@@ -48,7 +50,7 @@ export function SummaryPieChart({
             fill="#e2e8f0"
             fontWeight="700"
           >
-            {slices[0]!.value.toFixed(0)} {tString(t, "currency")}
+            {Math.round(slices[0]!.value)} {label}
           </text>
         )}
       </svg>
@@ -116,7 +118,7 @@ export function SummaryPieChart({
             fill="#e2e8f0"
             fontWeight="800"
           >
-            {(active ? active.value : total).toFixed(2)} {tString(t, "currency")}
+            {format(active ? active.value : total)}
           </text>
         </>
       )}

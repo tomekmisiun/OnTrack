@@ -1,16 +1,11 @@
-"""Resolve recipe ingredient display units and costs.
-
-RecipeIngredient.weight is stored in grams (or as a small piece count).
-Product.unit reflects how the item is sold (g, ml, szt). The presenter must
-not label 50 g of avocado as "50 szt" when the matched product is per-piece.
-"""
+"""Resolve recipe ingredient display units and costs."""
 
 from __future__ import annotations
 
 from app.domain.product_normalize import normalize_product_name
 from app.models.recipe import RecipeIngredient
+from app.services.catalog_resolver import resolve_product
 
-# Average piece weight (g) — aligned with scraper/pipeline/import_to_db.py
 PIECE_WEIGHTS_G: dict[str, float] = {
     "awokado": 200,
     "avocado": 200,
@@ -66,19 +61,24 @@ def piece_weight_grams(product_name: str | None) -> float:
     return 100.0
 
 
-def resolve_ingredient_unit(ingredient: RecipeIngredient) -> str:
+def resolve_ingredient_unit(
+    ingredient: RecipeIngredient,
+    *,
+    locale: str = "pl",
+    market_code: str = "PL",
+) -> str:
     product = ingredient.product
     if not product:
         return "g"
 
-    product_unit = (product.unit or "g").lower()
+    view = resolve_product(product, locale=locale, market_code=market_code)
+    product_unit = (view.unit or "g").lower()
     if product_unit != "szt":
-        return product.unit or "g"
+        return view.unit or "g"
 
     weight = float(ingredient.weight)
-    piece_g = piece_weight_grams(product.normalized_name or product.name)
+    piece_g = piece_weight_grams(view.name)
 
-    # Small whole numbers usually mean piece count (2 eggs, 1 avocado).
     if weight == int(weight) and 1 <= weight <= 12:
         if weight <= max(3.0, piece_g / 25.0):
             return "szt"
@@ -86,21 +86,30 @@ def resolve_ingredient_unit(ingredient: RecipeIngredient) -> str:
     return "g"
 
 
-def ingredient_cost(ingredient: RecipeIngredient) -> float:
+def ingredient_cost(
+    ingredient: RecipeIngredient,
+    *,
+    locale: str = "pl",
+    market_code: str = "PL",
+) -> float:
     product = ingredient.product
     if not product:
         return 0.0
 
-    price = float(product.price or 0)
+    view = resolve_product(product, locale=locale, market_code=market_code)
+    if not view.has_price or view.price is None:
+        return 0.0
+
+    price = float(view.price)
     weight = float(ingredient.weight)
-    display_unit = resolve_ingredient_unit(ingredient)
-    product_unit = (product.unit or "g").lower()
+    display_unit = resolve_ingredient_unit(ingredient, locale=locale, market_code=market_code)
+    product_unit = (view.unit or "g").lower()
 
     if display_unit == "szt":
         return round(weight * price, 2)
 
     if product_unit == "szt":
-        piece_g = piece_weight_grams(product.normalized_name or product.name)
+        piece_g = piece_weight_grams(view.name)
         if piece_g > 0:
             return round((weight / piece_g) * price, 2)
         return round(weight * price, 2)

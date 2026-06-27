@@ -1,9 +1,9 @@
-"""Canonical bilingual catalog → per-lang generated JSON.
+"""Canonical bilingual catalog → per-lang generated JSON (legacy build artifacts).
 
-Architecture (see backend/data/README.md):
-- ``ui_locale`` (pl/en) = UI language only
-- ``market_code`` (PL/GB) = product/recipe catalog (pl/en rows in DB)
-- Source of truth: ``backend/data/canonical/*.json``
+Architecture (see backend/data/README.md and docs/architecture/adr-ui-locale-market-separation.md):
+- ``ui_locale`` (pl/en) = UI + system catalog translations
+- ``market_code`` (PL/GB) = prices and currency only
+- Import reads ``backend/data/canonical/*.json`` directly into neutral DB rows.
 """
 
 from __future__ import annotations
