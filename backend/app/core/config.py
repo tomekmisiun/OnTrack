@@ -10,8 +10,6 @@ class Settings(BaseSettings):
     app_name: str = "OnTrack API"
     debug: bool = False
     testing: bool = False
-    host: str = "0.0.0.0"
-    port: int = 8000
     database_url: str = Field(
         default="postgresql+psycopg://user:change-me@localhost:5432/mealplanner",
         validation_alias="DATABASE_URL",
