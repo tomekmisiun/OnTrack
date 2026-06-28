@@ -162,7 +162,7 @@ npm run test:e2e          # Playwright smoke tests (builds + starts on port 3002
 npm run test:recipes      # single suite shortcut
 ```
 
-Unit tests live in `tests/unit/` and replace the legacy `scripts/check-*.mjs` guards. E2E tests in `tests/e2e/` cover login/auth middleware (`smoke.spec.ts`), logged-in module loads with mocked API (`modules-smoke.spec.ts`), and visual regression baselines at four viewports (`visual-screenshots.spec.ts`).
+Unit tests live in `tests/unit/` and replace the legacy `scripts/check-*.mjs` guards. E2E tests in `tests/e2e/` cover login/auth middleware (`smoke.spec.ts`) and logged-in module loads with mocked API (`modules-smoke.spec.ts`).
 
 ## Docker
 

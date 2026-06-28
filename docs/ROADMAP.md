@@ -32,7 +32,7 @@ Active plans only. Completed work is removed or marked done. For technical debt 
 |----|---------|-------------------|----------|--------------|-----------|--------|
 | R-020 | UI locale vs market separation was implicit | Separate `ui_locale` and `market_code` end-to-end | P2 | Catalog model | Users can pick UI language independently of product market | **Done** (#150, ADR 0003) |
 | R-021 | BFF auth not used in production | Evaluate HttpOnly cookie auth for XSS reduction | P2 | Security review | Decision recorded; enabled or explicitly rejected | **Done** ([ADR 0001](./adr/0001-bff-production-mode.md)) |
-| R-022 | Visual regression not gated | Add optional CI job or manual release checklist | P2 | Playwright visual suite | Documented process or CI job | **Done** (`visual-regression.yml` + [DEPLOYMENT.md](./DEPLOYMENT.md)) |
+| R-022 | Visual regression not gated | Add optional CI job or manual release checklist | P2 | Playwright visual suite | Documented process or CI job | **Cancelled** (screenshot suite removed — code-only e2e) |
 
 ---
 
@@ -51,6 +51,7 @@ Active plans only. Completed work is removed or marked done. For technical debt 
 |------|--------|
 | Separate background worker service | Removed — see [ADR 0002](./adr/0002-background-worker.md) |
 | Repo-root scraper service | Moved to `archive/scraper-legacy/` |
+| Playwright visual screenshot regression | Removed — flaky, not requested; keep functional e2e only |
 
 ---
 

@@ -51,23 +51,6 @@ npm run generate:api      # updates lib/api/generated/schema.ts
 
 CI checks drift on both files in the `test` and `frontend-next` jobs.
 
-## Visual regression (optional)
-
-```bash
-cd frontend-next
-npm run test:e2e:visual
-```
-
-Update baselines after intentional UI changes:
-
-```bash
-npm run test:e2e:visual:update
-```
-
-**CI:** GitHub Actions workflow **Visual regression** (`visual-regression.yml`) — manual `workflow_dispatch` only. Not a required check for merge or deploy.
-
-**Before UI-heavy releases:** run locally or trigger the workflow; see [DEPLOYMENT.md](./DEPLOYMENT.md#ui-release-checklist).
-
 ## Related
 
 - [DEVELOPMENT.md](./DEVELOPMENT.md) — local setup

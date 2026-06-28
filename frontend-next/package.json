@@ -15,8 +15,6 @@
     "test:unit": "vitest run",
     "test:e2e": "playwright test",
     "test:e2e:auth": "playwright test -c playwright.auth.config.ts",
-    "test:e2e:visual": "playwright test visual-screenshots",
-    "test:e2e:visual:update": "playwright test visual-screenshots --update-snapshots",
     "test:members": "vitest run tests/unit/member-targets.test.ts",
     "test:products": "vitest run tests/unit/product-page.test.ts",
     "test:recipes": "vitest run tests/unit/recipe-search.test.ts",
