@@ -4,7 +4,7 @@
 
 Production runs on **Railway**. Deploys are triggered by GitHub Actions after CI passes on **`main`** — not by direct pushes to Railway auto-deploy (recommended OFF).
 
-Quick reference for CI operators: [`.github/DEPLOY.md`](../.github/DEPLOY.md)
+Quick reference for CI operators: [`.github/DEPLOY.md`](../../.github/DEPLOY.md)
 
 ---
 
@@ -31,9 +31,9 @@ push to main
   → production-smoke        (readiness + verify-production-auth.sh)
 ```
 
-Defined in [`.github/workflows/ci.yml`](../.github/workflows/ci.yml). There is no deploy branch and no `git push` to promote between environments — both deploy jobs use **`github.sha`** from the same workflow run.
+Defined in [`.github/workflows/ci.yml`](../../.github/workflows/ci.yml). There is no deploy branch and no `git push` to promote between environments — both deploy jobs use **`github.sha`** from the same workflow run.
 
-Quick operator guide: [`.github/DEPLOY.md`](../.github/DEPLOY.md)
+Quick operator guide: [`.github/DEPLOY.md`](../../.github/DEPLOY.md)
 
 ### GitHub Environments
 
@@ -83,7 +83,7 @@ Deploy runs from the **repository root**; Railway service settings (Root Directo
 | `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` | Optional OAuth |
 | `GOOGLE_REDIRECT_URI` | `https://<ontrack-back>/api/auth/google/callback` |
 | `SMTP_HOST`, `SMTP_FROM`, `SMTP_USER`, `SMTP_PASSWORD` | Optional — password reset emails |
-| `SENTRY_DSN`, `SENTRY_ENVIRONMENT`, `SENTRY_TRACES_SAMPLE_RATE` | Optional — error tracking (see [SECURITY.md](./SECURITY.md)) |
+| `SENTRY_DSN`, `SENTRY_ENVIRONMENT`, `SENTRY_TRACES_SAMPLE_RATE` | Optional — error tracking (see [security/overview.md](../security/overview.md)) |
 | API keys (Gemini, Pexels, DeepSeek) | Optional |
 
 Healthcheck: `/health` (120s timeout in `railway.toml`)
@@ -147,7 +147,7 @@ Run after every production deploy or when changing `FRONTEND_URL` / JWT secrets.
 
 ### Scheduled GitHub smoke (optional)
 
-Workflow [`.github/workflows/production-smoke.yml`](../.github/workflows/production-smoke.yml) runs every 6 hours and on manual dispatch. Uses GitHub Environment **`production`** secrets (`PRODUCTION_API_URL`, `PRODUCTION_FRONTEND_ORIGIN`). Skips if URL is unset. This is **separate from** the mandatory **`production-smoke`** job in `ci.yml` (runs after each production deploy).
+Workflow [`.github/workflows/production-smoke.yml`](../../.github/workflows/production-smoke.yml) runs every 6 hours and on manual dispatch. Uses GitHub Environment **`production`** secrets (`PRODUCTION_API_URL`, `PRODUCTION_FRONTEND_ORIGIN`). Skips if URL is unset. This is **separate from** the mandatory **`production-smoke`** job in `ci.yml` (runs after each production deploy).
 
 ### Browser checks
 
@@ -203,7 +203,7 @@ One-time migration moved build context from repo root to `backend/`. Rollback to
 
 Recommended required checks on `main`: **`test`**, **`frontend-next`**
 
-Full CI matrix: [TESTING.md](./TESTING.md)
+Full CI matrix: [testing/README.md](../testing/README.md)
 
 ---
 
@@ -235,11 +235,11 @@ API_URL=https://<staging-api> FRONTEND_ORIGIN=https://<staging-frontend> \
   ./backend/scripts/verify-production-auth.sh
 ```
 
-DB migration rehearsal on a clone: [DB_REHEARSAL.md](./backend-migration/DB_REHEARSAL.md)
+DB migration rehearsal on a clone (historical): [DB_REHEARSAL.md](../archive/completed-migrations/backend-migration/DB_REHEARSAL.md)
 
 ### Supplementary workflow
 
-[`.github/workflows/staging-smoke.yml`](../.github/workflows/staging-smoke.yml) — manual dispatch only; the release gate is job **`staging-smoke`** in `ci.yml`.
+[`.github/workflows/staging-smoke.yml`](../../.github/workflows/staging-smoke.yml) — manual dispatch only; the release gate is job **`staging-smoke`** in `ci.yml`.
 
 ---
 

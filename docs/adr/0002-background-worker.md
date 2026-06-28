@@ -34,5 +34,5 @@ Reintroduce a queue only when a concrete async job is specified with acceptance 
 
 ## References
 
-- Audit: [`docs/CURRENT_STATE.md`](../CURRENT_STATE.md)
+- [`project/current-state.md`](../project/current-state.md)
 - Removed: `backend/app/worker/`, `backend/railway.worker*.toml`

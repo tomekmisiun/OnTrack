@@ -2,7 +2,7 @@
 
 **Last updated:** 2026-06-28
 
-Concrete issues with code evidence. Priority: **P0** (production risk) → **P3** (cosmetic). Resolved items are removed or marked resolved with evidence.
+Concrete issues with code evidence. Priority: **P0** (production risk) → **P3** (cosmetic). Resolved items: [archive/completed-plans/tech-debt-resolved.md](../archive/completed-plans/tech-debt-resolved.md).
 
 ---
 
@@ -14,7 +14,7 @@ Concrete issues with code evidence. Priority: **P0** (production risk) → **P3*
 | **Problem** | Access token stored in `localStorage` — XSS can exfiltrate token |
 | **Evidence** | `frontend-next/lib/auth/storage.ts`; BFF mode exists but production unset |
 | **Risk** | Session hijack if XSS introduced |
-| **Suggested fix** | Accepted for now per [ADR 0001](./adr/0001-bff-production-mode.md). Revisit if enabling HttpOnly cookie mode. |
+| **Suggested fix** | Accepted for now per [ADR 0001](../adr/0001-bff-production-mode.md). Revisit if enabling HttpOnly cookie mode. |
 | **Priority** | P2 |
 
 ---
@@ -32,7 +32,7 @@ Concrete issues with code evidence. Priority: **P0** (production risk) → **P3*
 
 ---
 
-## TD-005 — Legacy env var names
+## TD-005 — Legacy migration env var names
 
 | Field | Value |
 |-------|-------|
@@ -90,23 +90,13 @@ Concrete issues with code evidence. Priority: **P0** (production risk) → **P3*
 |-------|-------|
 | **Area** | Export / summary |
 | **Problem** | Frontend export package math may diverge from backend `get_summary()` totals |
-| **Evidence** | Dead-code audit DC-28; `components/export/` vs `meal_plan_service.get_summary()` |
+| **Evidence** | `components/export/` vs `meal_plan_service.get_summary()` |
 | **Risk** | User-visible cost discrepancies in shopping list export |
-| **Suggested fix** | Contract test comparing FE package math vs BE summary; align or document intentional differences |
+| **Suggested fix** | Contract test comparing FE package math vs BE summary |
 | **Priority** | P3 |
-
----
-
-## Resolved (removed from active list)
-
-| ID | Resolution |
-|----|------------|
-| TD-002 | Password reset email — SMTP + register/login UI (#168, #169) |
-| TD-004 | Production auth smoke — `staging-smoke` + `production-smoke` in `ci.yml`; scheduled `production-smoke.yml` |
-| TD-008 | Stale doc paths — docs reset (#163) |
 
 ---
 
 ## How to add entries
 
-Use format: ID, area, problem, evidence (file/path), risk, suggested fix, priority. Avoid vague items without proof.
+Use format: ID, area, problem, evidence (file/path), risk, suggested fix, priority.

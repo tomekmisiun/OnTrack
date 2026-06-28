@@ -1,18 +1,27 @@
 # OnTrack documentation
 
-Index of active project documentation. Start with [CURRENT_STATE.md](./CURRENT_STATE.md) for verified feature status, or the root [README.md](../README.md) for quick start.
+Short index of active documentation. For quick start see the root [README.md](../README.md).
 
 **Last verified:** 2026-06-28
 
 ---
 
-## Getting started
+## Start here
 
 | Document | Description |
 |----------|-------------|
-| [../README.md](../README.md) | Project entry — quick start, commands, links |
-| [DEVELOPMENT.md](./DEVELOPMENT.md) | Local setup, env vars, migrations |
-| [CURRENT_STATE.md](./CURRENT_STATE.md) | What works today — routes, CI, environments |
+| [project/current-state.md](./project/current-state.md) | Verified feature status, routes, CI, environments |
+| [development/README.md](./development/README.md) | Local setup and developer commands |
+
+---
+
+## Project state
+
+| Document | Description |
+|----------|-------------|
+| [project/current-state.md](./project/current-state.md) | What works today |
+| [project/roadmap.md](./project/roadmap.md) | Active future work |
+| [project/tech-debt.md](./project/tech-debt.md) | Open technical debt |
 
 ---
 
@@ -20,29 +29,48 @@ Index of active project documentation. Start with [CURRENT_STATE.md](./CURRENT_S
 
 | Document | Description |
 |----------|-------------|
-| [ARCHITECTURE.md](./ARCHITECTURE.md) | Components, request flow, deploy-time catalog |
+| [architecture/overview.md](./architecture/overview.md) | Components, data flow, observability |
 | [adr/](./adr/) | Architecture decision records |
-| [backend-migration/API_CONTRACT.md](./backend-migration/API_CONTRACT.md) | Binding frontend ↔ API contract |
 
 ---
 
-## Development and testing
+## Development
 
 | Document | Description |
 |----------|-------------|
-| [TESTING.md](./TESTING.md) | Test strategy, CI job matrix, commands |
-| [../frontend-next/README.md](../frontend-next/README.md) | Next.js frontend structure and scripts |
-| [../backend/README.md](../backend/README.md) | FastAPI backend quick reference |
+| [development/README.md](./development/README.md) | Prerequisites, Compose, env vars, migrations |
+| [../frontend-next/README.md](../frontend-next/README.md) | Next.js frontend |
+| [../backend/README.md](../backend/README.md) | FastAPI backend |
 
 ---
 
-## Deployment and operations
+## AI workflows and tools
 
 | Document | Description |
 |----------|-------------|
-| [DEPLOYMENT.md](./DEPLOYMENT.md) | Railway staging/production pipeline |
-| [../.github/DEPLOY.md](../.github/DEPLOY.md) | Operator quick reference (CI-gated deploy) |
-| [backend-migration/DB_REHEARSAL.md](./backend-migration/DB_REHEARSAL.md) | Legacy DB stamp rehearsal (historical procedure) |
+| [development/ai/workflows.md](./development/ai/workflows.md) | Builder/Reviewer, cross-provider review, validation |
+| [development/ai/claude-code.md](./development/ai/claude-code.md) | Claude Code entry and fallbacks |
+| [development/ai/codex-cli.md](./development/ai/codex-cli.md) | Codex CLI entry and fallbacks |
+| [development/ai/cursor.md](./development/ai/cursor.md) | Cursor rules and limitations |
+| [../AGENTS.md](../AGENTS.md) · [../CLAUDE.md](../CLAUDE.md) | Agent entry indexes |
+| [../.ai-rules/](../.ai-rules/) | Binding agent rules |
+
+---
+
+## Operations
+
+| Document | Description |
+|----------|-------------|
+| [operations/deployment.md](./operations/deployment.md) | Railway staging/production pipeline |
+| [../.github/DEPLOY.md](../.github/DEPLOY.md) | Operator quick reference |
+
+---
+
+## Testing
+
+| Document | Description |
+|----------|-------------|
+| [testing/README.md](./testing/README.md) | Test strategy, CI jobs, commands |
 
 ---
 
@@ -50,52 +78,27 @@ Index of active project documentation. Start with [CURRENT_STATE.md](./CURRENT_S
 
 | Document | Description |
 |----------|-------------|
-| [SECURITY.md](./SECURITY.md) | Auth, secrets, BFF mode, optional Sentry |
+| [security/overview.md](./security/overview.md) | Auth, secrets, BFF, optional Sentry |
 
 ---
 
-## Planning
+## ADR
 
 | Document | Description |
 |----------|-------------|
-| [ROADMAP.md](./ROADMAP.md) | Active future work |
-| [TECH_DEBT.md](./TECH_DEBT.md) | Confirmed open technical debt |
+| [adr/README.md](./adr/README.md) | Index of decision records |
 
 ---
 
-## Backend migration (reference)
-
-Migration from Flask/CRA is **complete**. These docs remain for contract and historical context:
+## Specifications
 
 | Document | Description |
 |----------|-------------|
-| [backend-migration/README.md](./backend-migration/README.md) | Index of migration docs |
-| [backend-migration/AUTH_COMPATIBILITY.md](./backend-migration/AUTH_COMPATIBILITY.md) | Auth parity notes |
-| [backend-migration/DATABASE_COMPATIBILITY.md](./backend-migration/DATABASE_COMPATIBILITY.md) | Schema strategy |
-| [backend-migration/ARCHIVED_CUTOVER_DOCS.md](./backend-migration/ARCHIVED_CUTOVER_DOCS.md) | Index of archived cutover docs |
-
----
-
-## Agent workflow
-
-| Document | Description |
-|----------|-------------|
-| [ai-workflows.md](./ai-workflows.md) | AI workflow index |
-| [two-agent-review-workflow.md](./two-agent-review-workflow.md) | Builder / Reviewer pattern |
-| [../AGENTS.md](../AGENTS.md) | Agent entry index |
-| [../.ai-rules/](../.ai-rules/) | Binding agent rules |
-
-Tool-specific: [CURSOR.md](./CURSOR.md) · [CLAUDE_CODE.md](./CLAUDE_CODE.md) · [CODEX_CLI.md](./CODEX_CLI.md) · [CROSS_PROVIDER_REVIEW.md](./CROSS_PROVIDER_REVIEW.md)
+| [specs/README.md](./specs/README.md) | Feature spec conventions |
+| [specs/api-contract.md](./specs/api-contract.md) | Binding frontend ↔ API contract |
 
 ---
 
 ## Archive
 
-Point-in-time audits and migration history — **not current operational docs**:
-
-| Location | Description |
-|----------|-------------|
-| [audits/archive/](./audits/archive/) | Historical audits (2026-05/06) |
-| [../archive/](../archive/) | Old frontend/scraper snapshots (not deployed) |
-
-See [audits/archive/README.md](./audits/archive/README.md) for the archive index.
+Historical audits, completed migrations, superseded docs: [archive/README.md](./archive/README.md)

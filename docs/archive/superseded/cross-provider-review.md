@@ -1,3 +1,7 @@
+> [!WARNING]
+> Dokument archiwalny. Nie stanowi aktualnego źródła prawdy.
+> Aktualna dokumentacja: [workflows.md](../../development/ai/workflows.md).
+
 # Cross-Provider Review
 
 Optional script: `scripts/ai/invoke-cross-reviewer.sh`

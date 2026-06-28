@@ -44,4 +44,4 @@ python run_pipeline.py
 Seed export (step 6) writes to `scraper/output/seeds/` — not `app/user_seeds/`
 or `backend/data/`.
 
-See also: `scraper/data/README.md`, [`docs/audits/archive/backend-migration-completed/DATA_DEPLOYMENT_ROADMAP.md`](../../docs/audits/archive/backend-migration-completed/DATA_DEPLOYMENT_ROADMAP.md) (historical).
+See also: `scraper/data/README.md`, [`docs/archive/audits/backend-migration-completed/DATA_DEPLOYMENT_ROADMAP.md`](../../docs/archive/audits/backend-migration-completed/DATA_DEPLOYMENT_ROADMAP.md) (historical).

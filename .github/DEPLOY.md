@@ -2,7 +2,7 @@
 
 Deploys run from [`.github/workflows/ci.yml`](workflows/ci.yml) after CI passes on **`main`**. Staging is automatic; production requires GitHub Environment approval.
 
-**Full runbook:** [`docs/DEPLOYMENT.md`](../docs/DEPLOYMENT.md)
+**Full runbook:** [`docs/operations/deployment.md`](../docs/operations/deployment.md)
 
 ---
 
@@ -78,7 +78,7 @@ After merge to `main`:
 
 Optional (not part of release gate): **Production auth smoke** (scheduled), **Staging auth smoke** (manual dispatch).
 
-Full matrix: [`docs/TESTING.md`](../docs/TESTING.md)
+Full matrix: [`docs/testing/README.md`](../docs/testing/README.md)
 
 ---
 

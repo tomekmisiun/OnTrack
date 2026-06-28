@@ -82,9 +82,9 @@ CORS: `FRONTEND_URL` on backend must list exact browser origins.
 | JWT | Signed with `JWT_SECRET_KEY`; sent as Bearer header |
 | Google OAuth | `/api/auth/google` → callback sets session cookie (`FLASK_SECRET_KEY`) then issues JWT |
 | Password reset | Request token via API; SMTP sends reset email when configured (`SMTP_*`) |
-| BFF (optional) | Next.js route handlers proxy auth; see [SECURITY.md](./SECURITY.md) |
+| BFF (optional) | Next.js route handlers proxy auth; see [security/overview.md](../security/overview.md) |
 
-Decision record: [ADR 0001 — BFF auth](./adr/0001-bff-production-mode.md)
+Decision record: [ADR 0001 — BFF auth](../adr/0001-bff-production-mode.md)
 
 ---
 
@@ -98,7 +98,7 @@ On each Railway deploy, `run-migrations.sh`:
 
 This design avoids FK violations when catalog recipes are replaced. See migration `b1c2d3e4f5a6` and script `restore_post_catalog_migration.py`.
 
-Locale/market model: [ADR 0003](./adr/0003-ui-locale-market-separation.md)
+Locale/market model: [ADR 0003](../adr/0003-ui-locale-market-separation.md)
 
 ---
 
@@ -116,7 +116,7 @@ Locale/market model: [ADR 0003](./adr/0003-ui-locale-market-separation.md)
 | `/metrics` | Prometheus exposition |
 | Prometheus + Grafana | Local Compose only |
 | Railway logs | Production |
-| Sentry (optional) | `SENTRY_DSN` (API), `NEXT_PUBLIC_SENTRY_DSN` (frontend) — see [SECURITY.md](./SECURITY.md) |
+| Sentry (optional) | `SENTRY_DSN` (API), `NEXT_PUBLIC_SENTRY_DSN` (frontend) — see [security/overview.md](../security/overview.md) |
 
 No APM beyond optional Sentry is required in repo configuration.
 
@@ -129,9 +129,7 @@ No APM beyond optional Sentry is required in repo configuration.
 | `ontrack-back` | `backend/` | `backend/Dockerfile` |
 | `ontrackapp` | `frontend-next/` | `Dockerfile.railway` |
 
-Deploy gate: CI on `main` → staging deploy + smoke → GitHub Environment `production` approval → production deploy + smoke. See [DEPLOYMENT.md](./DEPLOYMENT.md).
-
-Details: [DEPLOYMENT.md](./DEPLOYMENT.md)
+Deploy gate: CI on `main` → staging deploy + smoke → GitHub Environment `production` approval → production deploy + smoke. See [operations/deployment.md](../operations/deployment.md).
 
 ---
 

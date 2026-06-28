@@ -79,7 +79,7 @@ Copy `.env.example` → `.env`. Never commit `.env`.
 | `NEXT_PUBLIC_BFF_ENABLED` | Frontend | Set `1` to enable HttpOnly cookie BFF locally |
 | `TEST_DATABASE_URL` | Tests | Postgres for integration tests |
 
-Railway-specific notes: [DEPLOYMENT.md](./DEPLOYMENT.md)
+Railway-specific notes: [operations/deployment.md](../operations/deployment.md)
 
 ---
 
@@ -89,7 +89,7 @@ Railway-specific notes: [DEPLOYMENT.md](./DEPLOYMENT.md)
 |------|---------|
 | Backend CI subset | `make test` |
 | Backend without Postgres | `make test-backend` |
-| Backend integration (Postgres) | `make test-integration` — requires `TEST_DATABASE_URL`; see [TESTING.md](./TESTING.md) |
+| Backend integration (Postgres) | `make test-integration` — requires `TEST_DATABASE_URL`; see [testing/README.md](../testing/README.md) |
 | Frontend unit tests | `make test-frontend` or `cd frontend-next && npm run test` |
 | Lint frontend | `cd frontend-next && npm run lint` |
 | Typecheck | `cd frontend-next && npm run typecheck` |
@@ -115,7 +115,7 @@ Create new migration after model changes:
 uv run alembic revision --autogenerate -m "description"
 ```
 
-Rehearsal against disposable DB: [backend-migration/DB_REHEARSAL.md](./backend-migration/DB_REHEARSAL.md)
+Rehearsal against disposable DB (historical): [archive/completed-migrations/backend-migration/DB_REHEARSAL.md](../archive/completed-migrations/backend-migration/DB_REHEARSAL.md)
 
 ---
 
@@ -137,21 +137,6 @@ Component READMEs (`backend/README.md`, `frontend-next/README.md`) point here fo
 
 ---
 
-## Archive reference
+## AI agents
 
-| Path | Use |
-|------|-----|
-| `archive/frontend-cra-reference/` | Pre–Next.js UI snapshot — **not deployed** |
-| `archive/scraper-legacy/` | Old fuel scraper — superseded by backend services |
-
----
-
-## Agent / AI workflow
-
-For automated agents working in this repo:
-
-- Start with `.ai-rules/agent-orchestration.md` and `.ai-rules/context-map.md`
-- Entry indexes: `AGENTS.md`, `CLAUDE.md`
-- Workflow: [ai-workflows.md](./ai-workflows.md)
-
-Do not treat `archive/` or old audit files as current state — use [CURRENT_STATE.md](./CURRENT_STATE.md).
+See [development/ai/workflows.md](./ai/workflows.md). Do not treat [archive/](../archive/) as current state — use [project/current-state.md](../project/current-state.md).

@@ -49,12 +49,10 @@ done
 required_files=(
   AGENTS.md
   CLAUDE.md
-  docs/ai-workflows.md
-  docs/two-agent-review-workflow.md
-  docs/CURSOR.md
-  docs/CLAUDE_CODE.md
-  docs/CODEX_CLI.md
-  docs/CROSS_PROVIDER_REVIEW.md
+  docs/development/ai/workflows.md
+  docs/development/ai/cursor.md
+  docs/development/ai/claude-code.md
+  docs/development/ai/codex-cli.md
   .claude/agents/code-reviewer.md
   scripts/ai/invoke-cross-reviewer.sh
 )
@@ -147,7 +145,7 @@ done
 approve_gate_files=(
   .ai-rules/git.md
   .ai-rules/agent-orchestration.md
-  docs/two-agent-review-workflow.md
+  docs/development/ai/workflows.md
 )
 for file in "${approve_gate_files[@]}"; do
   if ! grep -Fi "approve" "$ROOT/$file" >/dev/null; then
@@ -177,7 +175,7 @@ for entry in "${cross_provider_refs[@]}"; do
   fi
 done
 
-two_agent_doc="$ROOT/docs/two-agent-review-workflow.md"
+two_agent_doc="$ROOT/docs/development/ai/workflows.md"
 if ! grep -F "invoke-cross-reviewer.sh claude" "$two_agent_doc" >/dev/null; then
   fail "two-agent-review-workflow.md missing Codex -> Claude path"
 fi
@@ -235,8 +233,7 @@ coupling_exclude_files=(
   docs/SOURCE_MANIFEST.md
   docs/ADAPTATION_CHECKLIST.md
   docs/VALIDATION_REPORT.md
-  docs/backend-migration
-  docs/audits/archive
+  docs/archive
   README.md
   CONTRIBUTING.md
   CHANGELOG.md
@@ -262,12 +259,12 @@ done
 if grep -R -F '/home/' "${scan_paths[@]/#/$ROOT/}" 2>/dev/null \
   | grep -v 'scripts/validate-ai-workflows.sh' \
   | grep -v 'docs/VALIDATION_REPORT.md' \
-  | grep -v 'docs/audits/archive/' \
+  | grep -v 'docs/archive/audits/' \
   | head -1 | grep -q .; then
   hit=$(grep -R -F -n '/home/' "${scan_paths[@]/#/$ROOT/}" 2>/dev/null \
     | grep -v 'scripts/validate-ai-workflows.sh' \
     | grep -v 'docs/VALIDATION_REPORT.md' \
-    | grep -v 'docs/audits/archive/' | head -1)
+    | grep -v 'docs/archive/audits/' | head -1)
   fail "forbidden absolute path: $hit"
 fi
 
@@ -306,7 +303,7 @@ while IFS= read -r md; do
 done < <(find "$ROOT" \
   \( -path "$ROOT/reference" \
      -o -path "$ROOT/archive" \
-     -o -path "$ROOT/docs/audits/archive" \
+     -o -path "$ROOT/docs/archive" \
      -o -path "*/node_modules/*" \) -prune -o \
   -name '*.md' -print)
 

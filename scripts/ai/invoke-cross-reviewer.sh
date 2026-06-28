@@ -104,7 +104,7 @@ resolve_review_model() {
   fi
   REVIEW_MODEL=""
   echo "No model override set (AI_REVIEW_TIER=$AI_REVIEW_TIER); using CLI default model." >&2
-  echo "Configure AI_REVIEW_MODEL or provider-specific overrides — see docs/CROSS_PROVIDER_REVIEW.md." >&2
+  echo "Configure AI_REVIEW_MODEL or provider-specific overrides — see docs/development/ai/workflows.md." >&2
 }
 
 resolve_review_model "$PROVIDER"

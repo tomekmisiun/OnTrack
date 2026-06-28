@@ -9,7 +9,7 @@ Meal planner & budgeter — **FastAPI** backend (`backend/`) + **Next.js** front
 
 ## Non-negotiable
 
-- **API contract:** `docs/backend-migration/API_CONTRACT.md`, `frontend-next/lib/api/*.ts`, OpenAPI snapshot in CI
+- **API contract:** `docs/specs/api-contract.md`, `frontend-next/lib/api/*.ts`, OpenAPI snapshot in CI
 - **Auth response:** `{ "token": "..." }` — not `{ access_token, refresh_token }` unless contract is updated
 - **Do not push to `main`** — use PR + green CI (`.github/DEPLOY.md`)
 - **Never commit** `.env` or secrets
@@ -27,4 +27,4 @@ Meal planner & budgeter — **FastAPI** backend (`backend/`) + **Next.js** front
 ## Legacy (reference only)
 
 - `archive/frontend-cra-reference/` — CRA snapshot for parity comparison; see `archive/frontend-cra-reference/README.md`
-- `docs/backend-migration/` — cutover history; FastAPI is production
+- `docs/archive/completed-migrations/backend-migration/` — cutover history; FastAPI is production

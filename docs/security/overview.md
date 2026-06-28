@@ -13,14 +13,14 @@ Operational security notes for OnTrack. Not a formal threat model.
 | Password hashing | bcrypt via passlib |
 | Session token | JWT signed with `JWT_SECRET_KEY` |
 | OAuth session | Signed cookie via `FLASK_SECRET_KEY` during Google flow |
-| Auth response shape | `{ "token": "…" }` — see [API_CONTRACT.md](./backend-migration/API_CONTRACT.md) |
+| Auth response shape | `{ "token": "…" }` — see [api-contract.md](../specs/api-contract.md) |
 
 ### Token storage (frontend)
 
 - **Default:** JWT in `localStorage`, sent as `Authorization: Bearer`
 - **Optional BFF:** When `NEXT_PUBLIC_BFF_ENABLED=1`, Next.js route handlers store token in HttpOnly cookie
 
-Production Railway config does **not** set BFF mode. Decision: [ADR 0001](./adr/0001-bff-production-mode.md)
+Production Railway config does **not** set BFF mode. Decision: [ADR 0001](../adr/0001-bff-production-mode.md)
 
 ### BFF threat model (condensed)
 
@@ -40,7 +40,7 @@ Production Railway config does **not** set BFF mode. Decision: [ADR 0001](./adr/
 
 Route handlers: `app/api/bff/[...path]/route.ts`, `app/api/auth/session/route.ts` — proxy only, no domain logic. See `lib/bff/proxy.ts`.
 
-Historical full write-up: [`docs/audits/archive/FRONTEND_NEXT_BFF.md`](./audits/archive/FRONTEND_NEXT_BFF.md) (archived from standalone doc).
+Historical full write-up: [FRONTEND_NEXT_BFF.md](../archive/audits/FRONTEND_NEXT_BFF.md) (archived).
 
 ---
 
@@ -141,7 +141,7 @@ Use GitHub private security advisories for this repository or contact maintainer
 
 ## Related documents
 
-- [ARCHITECTURE.md](./ARCHITECTURE.md) — auth flow diagram
-- [DEPLOYMENT.md](./DEPLOYMENT.md) — production verification
-- [ADR 0001 — BFF auth](./adr/0001-bff-production-mode.md)
+- [architecture/overview.md](../architecture/overview.md) — auth flow diagram
+- [operations/deployment.md](../operations/deployment.md) — production verification
+- [ADR 0001 — BFF auth](../adr/0001-bff-production-mode.md)
 - `.ai-rules/security.md` — agent binding rules

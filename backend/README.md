@@ -1,6 +1,6 @@
 # OnTrack FastAPI backend
 
-Production API for OnTrack. Full setup: [`docs/DEVELOPMENT.md`](../docs/DEVELOPMENT.md). Deploy: [`docs/DEPLOYMENT.md`](../docs/DEPLOYMENT.md). Catalog data: [`data/README.md`](data/README.md).
+Production API for OnTrack. Full setup: [`docs/development/README.md`](../docs/development/README.md). Deploy: [`docs/operations/deployment.md`](../docs/operations/deployment.md). Catalog data: [`data/README.md`](data/README.md).
 
 ## Local development
 

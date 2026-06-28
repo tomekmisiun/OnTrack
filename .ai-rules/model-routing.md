@@ -48,7 +48,7 @@ Configure reviewer models via:
 - `CODEX_REVIEW_MODEL` — Codex-specific override
 - `AI_REVIEW_TIER` — abstract tier hint (defaults to `strong_reviewer`)
 
-See `scripts/ai/invoke-cross-reviewer.sh` and `docs/CROSS_PROVIDER_REVIEW.md`.
+See `scripts/ai/invoke-cross-reviewer.sh` and `docs/development/ai/workflows.md`.
 
 ## 5. Escalation rules
 
@@ -88,5 +88,5 @@ Reviewers MUST:
 3. CLI default model (no `-m` / `--model` flag passed)
 
 Set `AI_REVIEW_TIER` to document intent; configure concrete model names through
-environment variables or local CLI defaults. Update `docs/CROSS_PROVIDER_REVIEW.md`
+environment variables or local CLI defaults. Update `docs/development/ai/workflows.md`
 when your team standardizes reviewer models.

@@ -2,6 +2,8 @@
 
 Store non-trivial feature specs as `docs/specs/<slug>.md`.
 
+Binding API contract (not a feature spec): [api-contract.md](./api-contract.md)
+
 ## Template sections
 
 1. Objective

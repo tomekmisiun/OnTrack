@@ -17,7 +17,7 @@ Distinguish:
 - **Project documentation** — README, architecture docs, backlog/tracking files
   defined by the target repository.
 - **AI workflow/rules** — `.ai-rules/`, `AGENTS.md`, `CLAUDE.md`,
-  `docs/ai-workflows.md`, `.commands/`, `agents/`.
+  `docs/development/ai/workflows.md`, `.commands/`, `agents/`.
 
 For product work, pick the next item from the **executable backlog** the target
 repository defines (not a high-level roadmap unless the user specifies otherwise).
@@ -39,7 +39,7 @@ repository defines (not a high-level roadmap unless the user specifies otherwise
 - Read `.ai-rules/context-map.md` and open the listed files for this task type.
 - Read binding rules that apply (architecture, testing, security, git, etc.).
 - Optional: use a persona from `agents/` for review-only work (see
-  `docs/ai-workflows.md`).
+  `docs/development/ai/workflows.md`).
 
 ## 3. Define scope
 
@@ -102,7 +102,7 @@ pasted handoff, local runner command, or separate CLI window.
 
 Prefer **cross-provider review**: a different AI provider/CLI than the
 Builder reviews the diff. See `.ai-rules/model-routing.md` §7 and
-`docs/two-agent-review-workflow.md`.
+`docs/development/ai/workflows.md`.
 
 **When running under Codex CLI (Builder = Codex):**
 
