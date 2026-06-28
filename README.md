@@ -1,105 +1,123 @@
 # OnTrack
 
-Meal planning, nutrition targets, and household food budgeting in one workspace.
+**Meal planning, nutrition targets, and household food budgeting** — one workspace for the whole household.
 
 [![CI](https://github.com/tomekmisiun/OnTrack/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/tomekmisiun/OnTrack/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/Python-3.14-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=next.js&logoColor=white)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![Railway](https://img.shields.io/badge/Deploy-Railway-0B0D0E?logo=railway&logoColor=white)](https://railway.com/)
 
-**Stack:** FastAPI · Next.js 15 · PostgreSQL 15 · Railway
+---
+
+### About
+
+**OnTrack** helps households plan meals, track nutrition, and control food spending without juggling spreadsheets and separate apps.
+
+- **Meal calendar** — plan meals with household members, drag-and-drop, favorites
+- **Products & recipes** — user catalog plus global system catalog by market
+- **Nutrition & schedule** — macro targets and day schedule per member
+- **Budget & export** — summary views and CSV export
+- **Auth** — register/login, optional Google OAuth, password reset (with SMTP)
+- **Locale vs market** — UI language (PL/EN) separate from product market (PL/GB)
+
+> [!TIP]
+> Verified feature list and routes: [docs/CURRENT_STATE.md](docs/CURRENT_STATE.md)
+
+---
+
+### Stack
+
+```
+Browser → Next.js (frontend-next) → FastAPI (backend) → PostgreSQL 15
+```
+
+| Layer | Technology |
+|-------|------------|
+| API | FastAPI, Alembic, pytest |
+| Frontend | Next.js 15, React 19, Vitest |
+| Database | PostgreSQL 15 |
+| Deploy | Railway (`staging` → smoke → `production`) |
+| CI | GitHub Actions — 5 PR jobs |
+
+Architecture details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 
 ---
 
 ## Table of contents
 
-- [What it does](#what-it-does)
-- [Architecture](#architecture)
 - [Requirements](#requirements)
-- [Quick start](#quick-start)
+- [How to — quick start](#how-to--quick-start)
 - [Configuration](#configuration)
 - [Development](#development)
 - [Testing](#testing)
-- [Validation and linting](#validation-and-linting)
+- [Validation](#validation)
 - [Deployment](#deployment)
-- [Security and limitations](#security-and-limitations)
-- [Documentation index](#documentation-index)
+- [Documentation](#documentation)
 - [Repository layout](#repository-layout)
-
----
-
-## What it does
-
-OnTrack helps households plan meals, track nutrition targets, and manage a food budget in one app.
-
-- Plan meals on a calendar with household members
-- Manage products and recipes (user catalog + global system catalog)
-- Set macro/nutrition targets and day schedules
-- Budget summary and CSV export
-- Register/login and optional Google OAuth
-- UI locale (PL/EN) separate from product market (PL/GB)
-
----
-
-## Architecture
-
-```
-Browser → Next.js (frontend-next) → FastAPI (backend) → PostgreSQL
-```
-
-Production runs on Railway with two environments: `staging` (automatic after CI on `main`) and `production` (manual GitHub Environment approval after staging smoke).
-
-Details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 
 ---
 
 ## Requirements
 
-| Tool | Version | Used for |
-|------|---------|----------|
-| Docker + Compose | recent | Recommended local stack |
-| Python | 3.14 | Backend (`uv`) |
-| Node.js | 24 | Frontend (matches CI) |
-| PostgreSQL | 15 | Database (Compose or local) |
+| Tool | Version | Purpose |
+|------|---------|---------|
+| **Docker + Compose** | recent | Recommended local stack |
+| **Python** | 3.14 | Backend ([uv](https://docs.astral.sh/uv/)) |
+| **Node.js** | 24 | Frontend (matches CI) |
+| **PostgreSQL** | 15 | Database |
+
+Without Docker: see [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
 
 ---
 
-## Quick start
+## How to — quick start
+
+Run following commands from the repository root.
+
+First, configure environment:
 
 ```bash
 cp .env.example .env
-# Set POSTGRES_*, FLASK_SECRET_KEY, JWT_SECRET_KEY
+# Edit .env — minimum: POSTGRES_*, FLASK_SECRET_KEY, JWT_SECRET_KEY
+```
 
+Then start the stack:
+
+```bash
 docker compose up --build
 ```
 
 | Service | URL |
 |---------|-----|
-| App | http://localhost:3000 |
-| API | http://localhost:5001 |
-| API docs | http://localhost:5001/docs |
-
-Without Docker: [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)
+| **App** | http://localhost:3000 |
+| **API** | http://localhost:5001 |
+| **API docs** | http://localhost:5001/docs |
 
 ---
 
 ## Configuration
 
-Copy `.env.example` → `.env`. Minimum for local run:
+Copy `.env.example` → `.env`. Never commit `.env`.
 
 | Variable | Purpose |
 |----------|---------|
-| `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB` | Database |
+| `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB` | Database credentials |
 | `FLASK_SECRET_KEY` | OAuth session cookie signing |
 | `JWT_SECRET_KEY` | JWT signing |
 | `NEXT_PUBLIC_API_URL` | Frontend → API URL (default `http://localhost:5001`) |
 
 Optional: `GOOGLE_*`, `GEMINI_API_KEY`, `PEXELS_API_KEY`, `DEEPSEEK_API_KEY`, `SMTP_*` (password reset email).
 
-Full list: [.env.example](.env.example) and [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
+Full reference: [.env.example](.env.example) · [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)
 
 ---
 
 ## Development
 
-### Backend (without Compose)
+### Backend
 
 ```bash
 cd backend
@@ -128,26 +146,26 @@ Open http://localhost:3000
 
 | Scope | Command |
 |-------|---------|
-| Fast backend subset (CI-equivalent) | `make test` |
-| Backend without Postgres | `make test-backend` |
-| Backend integration (Postgres) | `make test-integration` |
-| Frontend unit | `make test-frontend` |
-| AI workflow validation | `make validate` |
+| **Backend CI subset** | `make test` |
+| **Backend without Postgres** | `make test-backend` |
+| **Backend integration** | `make test-integration` *(requires `TEST_DATABASE_URL`)* |
+| **Frontend unit** | `make test-frontend` |
 
-Full strategy, CI mapping, and examples: [docs/TESTING.md](docs/TESTING.md)
+> [!IMPORTANT]
+> Playwright / browser E2E was removed. Strategy, CI mapping, and accepted gaps: [docs/TESTING.md](docs/TESTING.md)
 
 ---
 
-## Validation and linting
+## Validation
 
 ```bash
-make validate                                    # AI rules / workflow files
-cd backend && uv run ruff check .               # Python lint
-cd frontend-next && npm run lint && npm run typecheck
-cd frontend-next && npm run build               # production build check
+make validate                 # AI rules / workflow files
+make test && make test-frontend
+cd backend && uv run ruff check .
+cd frontend-next && npm run lint && npm run typecheck && npm run build
 ```
 
-OpenAPI drift is checked in CI — regenerate after backend schema changes:
+After backend schema changes, regenerate OpenAPI types:
 
 ```bash
 cd frontend-next && npm run export:openapi && npm run generate:api
@@ -160,40 +178,33 @@ cd frontend-next && npm run export:openapi && npm run generate:api
 Push to `main` after green CI:
 
 1. Deploy to Railway **staging**
-2. Staging readiness + auth smoke (`verify-production-auth.sh`)
-3. Manual approval for **production** (GitHub Environment)
+2. Staging readiness + auth smoke
+3. Manual GitHub Environment approval for **production**
 4. Production readiness + auth smoke
 
-Runbook: [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) · Operator quick reference: [.github/DEPLOY.md](.github/DEPLOY.md)
+Runbook: [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) · [`.github/DEPLOY.md`](.github/DEPLOY.md)
+
+> [!IMPORTANT]
+> JWT is stored in `localStorage` by default. Password reset needs SMTP. See [docs/SECURITY.md](docs/SECURITY.md) and [docs/TECH_DEBT.md](docs/TECH_DEBT.md).
 
 ---
 
-## Security and limitations
-
-- JWT stored in `localStorage` by default; optional BFF cookie mode for local dev ([docs/SECURITY.md](docs/SECURITY.md))
-- Password reset requires SMTP on backend (`SMTP_HOST`, `SMTP_FROM`) for email delivery
-- Catalog import runs on deploy — see [docs/TECH_DEBT.md](docs/TECH_DEBT.md) TD-003
-
-Current status: [docs/CURRENT_STATE.md](docs/CURRENT_STATE.md)
-
----
-
-## Documentation index
+## Documentation
 
 | Document | Contents |
 |----------|----------|
-| [docs/CURRENT_STATE.md](docs/CURRENT_STATE.md) | Verified feature status |
+| [docs/CURRENT_STATE.md](docs/CURRENT_STATE.md) | What works today |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Components and data flow |
-| [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) | Local setup and commands |
+| [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) | Local setup |
 | [docs/TESTING.md](docs/TESTING.md) | Test strategy and CI |
-| [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) | Railway deploy and smoke |
+| [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) | Railway deploy |
+| [docs/SECURITY.md](docs/SECURITY.md) | Auth and secrets |
 | [docs/ROADMAP.md](docs/ROADMAP.md) | Active plans |
 | [docs/TECH_DEBT.md](docs/TECH_DEBT.md) | Open technical debt |
-| [docs/SECURITY.md](docs/SECURITY.md) | Auth and secrets |
 | [docs/backend-migration/API_CONTRACT.md](docs/backend-migration/API_CONTRACT.md) | API contract (binding) |
-| [docs/adr/](docs/adr/) | Architecture decision records |
+| [docs/adr/](docs/adr/) | Architecture decisions |
 
-Agent workflow: [AGENTS.md](AGENTS.md), [.ai-rules/](.ai-rules/)
+Agent workflow: [AGENTS.md](AGENTS.md) · [.ai-rules/](.ai-rules/)
 
 ---
 
@@ -209,6 +220,6 @@ archive/           Historical snapshots (not deployed)
 
 ---
 
-## Author
+**OnTrack** — meal planner & budgeter for households.
 
 See [GitHub repository](https://github.com/tomekmisiun/OnTrack) for license and contribution policy.
