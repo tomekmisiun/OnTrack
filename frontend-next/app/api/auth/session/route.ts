@@ -186,13 +186,18 @@ export async function PATCH(request: NextRequest) {
   }
 
   const base = getApiBaseUrl();
-  const target =
+  const targetKey =
     typeof body === "object" &&
     body !== null &&
-    "target" in body &&
-    (body as { target?: string }).target === "market"
+    "target" in body
+      ? (body as { target?: string }).target
+      : undefined;
+  const target =
+    targetKey === "market"
       ? "/api/auth/market"
-      : "/api/auth/language";
+      : targetKey === "password"
+        ? "/api/auth/password"
+        : "/api/auth/language";
   const upstreamBody =
     typeof body === "object" && body !== null && "target" in body
       ? (() => {

@@ -115,3 +115,33 @@ def ingredient_cost(
         return round(weight * price, 2)
 
     return round((weight / 100.0) * price, 2)
+
+
+def ingredient_summary_quantity(
+    ingredient: RecipeIngredient,
+    *,
+    locale: str = "pl",
+    market_code: str = "PL",
+) -> float:
+    """Amount in the product catalog unit for meal-plan expense totals."""
+    product = ingredient.product
+    if not product:
+        return float(ingredient.weight)
+
+    view = resolve_product(product, locale=locale, market_code=market_code)
+    product_unit = (view.unit or "g").lower()
+    weight = float(ingredient.weight)
+
+    if product_unit != "szt":
+        return weight
+
+    display_unit = resolve_ingredient_unit(
+        ingredient, locale=locale, market_code=market_code
+    )
+    if display_unit == "szt":
+        return weight
+
+    piece_g = piece_weight_grams(view.name)
+    if piece_g > 0:
+        return weight / piece_g
+    return weight

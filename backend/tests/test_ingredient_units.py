@@ -2,7 +2,11 @@
 
 from __future__ import annotations
 
-from app.domain.ingredient_units import ingredient_cost, resolve_ingredient_unit
+from app.domain.ingredient_units import (
+    ingredient_cost,
+    ingredient_summary_quantity,
+    resolve_ingredient_unit,
+)
 from app.models.product import Product
 from app.models.product_market_price import ProductMarketPrice
 from app.models.recipe import RecipeIngredient
@@ -73,3 +77,23 @@ def test_avocado_cost_uses_fraction_of_piece():
 def test_piece_count_cost():
     ing = _ingredient(weight=2, product_unit="szt", name="jajka", price=1.0)
     assert ingredient_cost(ing) == 2.0
+
+
+def test_summary_quantity_avocado_grams_to_pieces():
+    ing = _ingredient(weight=200, product_unit="szt", name="awokado", price=6.99)
+    assert ingredient_summary_quantity(ing) == 1.0
+
+
+def test_summary_quantity_eggs_grams_to_pieces():
+    ing = _ingredient(weight=150, product_unit="szt", name="jajka", price=1.599)
+    assert ingredient_summary_quantity(ing) == 2.5
+
+
+def test_summary_quantity_eggs_as_count():
+    ing = _ingredient(weight=2, product_unit="szt", name="jajka", price=1.599)
+    assert ingredient_summary_quantity(ing) == 2.0
+
+
+def test_summary_quantity_gram_product_unchanged():
+    ing = _ingredient(weight=200, product_unit="g", name="mąka pszenna")
+    assert ingredient_summary_quantity(ing) == 200.0

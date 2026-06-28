@@ -12,6 +12,7 @@ type RegisterRequest = ApiSchema<"RegisterRequest">;
 type ExchangeRequest = ApiSchema<"ExchangeRequest">;
 type LanguageRequest = ApiSchema<"LanguageRequest">;
 type MarketRequest = { market_code: string };
+type PasswordChangeRequest = ApiSchema<"PasswordChangeRequest">;
 
 let unauthorizedHandler: (() => void) | undefined;
 
@@ -145,6 +146,27 @@ export function changeMarket(marketCode: string): Promise<unknown> {
     });
   }
   return createAuthedApiClient().patch<unknown>("/api/auth/market", body);
+}
+
+export function changePassword(
+  currentPassword: string,
+  newPassword: string,
+): Promise<{ message: string }> {
+  const body: PasswordChangeRequest = {
+    current_password: currentPassword,
+    new_password: newPassword,
+  };
+  if (isBffEnabled()) {
+    return sessionRequest<{ message: string }>("/api/auth/session", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...body, target: "password" }),
+    });
+  }
+  return createAuthedApiClient().patch<{ message: string }>(
+    "/api/auth/password",
+    body,
+  );
 }
 
 export function deleteAccountApi() {
