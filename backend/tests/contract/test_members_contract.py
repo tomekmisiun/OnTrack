@@ -66,3 +66,54 @@ def test_delete_secondary_member(client, auth_headers):
     deleted = client.delete(f"/api/members/{mid}", headers=auth_headers)
     assert deleted.status_code == 200
     assert deleted.json()["message"] == "Deleted"
+
+
+def test_delete_member_clears_meals_and_schedule(client, auth_headers, recipe, member):
+    created = client.post(
+        "/api/members/",
+        headers=auth_headers,
+        json={"name": "Partner"},
+    )
+    mid = created.json()["id"]
+
+    client.post(
+        "/api/meal-plan/",
+        headers=auth_headers,
+        json={
+            "date": "2026-06-01",
+            "position": 1,
+            "recipe_id": recipe.id,
+            "member_id": mid,
+        },
+    )
+    client.post(
+        "/api/day-schedule/",
+        headers=auth_headers,
+        json={
+            "member_id": mid,
+            "week_start": "2026-06-02",
+            "day": 0,
+            "start_hour": 9,
+            "end_hour": 10,
+            "label": "Praca",
+        },
+    )
+
+    deleted = client.delete(f"/api/members/{mid}", headers=auth_headers)
+    assert deleted.status_code == 200
+
+    day = client.get(
+        "/api/meal-plan/2026-06-01",
+        headers=auth_headers,
+        params={"member_id": mid},
+    )
+    assert day.status_code == 200
+    assert day.json() == []
+
+    schedule = client.get(
+        "/api/day-schedule/",
+        headers=auth_headers,
+        params={"member_id": mid, "week_start": "2026-06-02"},
+    )
+    assert schedule.status_code == 200
+    assert schedule.json() == []

@@ -628,6 +628,9 @@ export function useCalendarPage() {
   const handleDragEndMealMove = useCallback(
     async (meal: Meal, targetDate: string, targetPos: number) => {
       if (meal.date === targetDate && meal.position === targetPos) return;
+      const mids = requireTargetMembers();
+      if (!mids.length) return;
+
       const tempId = -Date.now();
       const optimistic: Meal = {
         ...meal,
@@ -642,25 +645,54 @@ export function useCalendarPage() {
         return upsertMealInState(next, optimistic);
       });
       try {
-        await deleteMeal(meal.id);
-        const res = await addMeal({
-          date: targetDate,
-          position: targetPos,
-          recipe_id: meal.recipe.id,
-          member_id: activeMember?.id ?? meal.member_id,
+        const sourceIds = await resolveMealIdsForAllMembers({
+          dateStr: meal.date,
+          position: meal.position,
+          memberIds: mids,
+          mealsByDate,
+          viewMemberId: activeMember?.id,
+          getDay,
         });
-        setMealsByDate((prev) => {
-          let next = removeMealFromState(prev, meal.id, meal.date);
-          next = removeMealFromState(next, tempId, targetDate);
-          return upsertMealInState(next, res);
-        });
+        await Promise.all(sourceIds.map((id) => deleteMeal(id)));
+        const results = await Promise.all(
+          mids.map((member_id) =>
+            addMeal({
+              date: targetDate,
+              position: targetPos,
+              recipe_id: meal.recipe.id,
+              member_id,
+            }),
+          ),
+        );
+        const displayMid = activeMember?.id;
+        const displayIdx =
+          displayMid != null ? mids.indexOf(displayMid) : -1;
+        const res = displayIdx >= 0 ? results[displayIdx] : results[0];
+        if (res) {
+          setMealsByDate((prev) => {
+            let next = removeMealFromState(prev, meal.id, meal.date);
+            next = removeMealFromState(next, tempId, targetDate);
+            return upsertMealInState(next, res);
+          });
+        } else {
+          await loadMonth(year, month);
+        }
       } catch {
         if (previous) setMealsByDate(previous);
         showError(String(t("err_move_meal")));
         void loadMonth(year, month);
       }
     },
-    [activeMember?.id, loadMonth, month, showError, t, year],
+    [
+      activeMember?.id,
+      loadMonth,
+      mealsByDate,
+      month,
+      requireTargetMembers,
+      showError,
+      t,
+      year,
+    ],
   );
 
   const handleDragEndDayCopy = useCallback(

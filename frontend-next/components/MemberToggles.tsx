@@ -53,6 +53,7 @@ export function MemberToggles({ variant = "sidebar" }: MemberTogglesProps) {
     toggleIncludedMember,
     reload,
     includeMember,
+    excludeMember,
   } = useMember();
 
   const [adding, setAdding] = useState(false);
@@ -143,6 +144,7 @@ export function MemberToggles({ variant = "sidebar" }: MemberTogglesProps) {
       onConfirm: async () => {
         try {
           await deleteMember(memberId);
+          excludeMember(memberId);
           await reload();
           showSuccess(tFormat(t, "member_deleted", memberName));
         } catch (err) {
