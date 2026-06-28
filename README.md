@@ -6,110 +6,125 @@
 [![Python](https://img.shields.io/badge/Python-3.14-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=next.js&logoColor=white)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Railway](https://img.shields.io/badge/Deploy-Railway-0B0D0E?logo=railway&logoColor=white)](https://railway.com/)
 
----
+OnTrack helps households plan meals, track nutrition, and control food spending without juggling spreadsheets and separate apps. The production stack is **FastAPI + Next.js 15 + PostgreSQL 15**, deployed to **Railway** via a gated CI pipeline.
 
-### About
-
-**OnTrack** helps households plan meals, track nutrition, and control food spending without juggling spreadsheets and separate apps.
-
-- **Meal calendar** — plan meals with household members, drag-and-drop, favorites
-- **Products & recipes** — user catalog plus global system catalog by market
-- **Nutrition & schedule** — macro targets and day schedule per member
-- **Budget & export** — summary views and CSV export
-- **Auth** — register/login, optional Google OAuth, password reset (with SMTP)
-- **Locale vs market** — UI language (PL/EN) separate from product market (PL/GB)
-
-> [!TIP]
-> Verified feature list and routes: [docs/project/current-state.md](docs/project/current-state.md)
-
----
-
-### Stack
-
-```
-Browser → Next.js (frontend-next) → FastAPI (backend) → PostgreSQL 15
-```
-
-| Layer | Technology |
-|-------|------------|
-| API | FastAPI, Alembic, pytest |
-| Frontend | Next.js 15, React 19, Vitest |
-| Database | PostgreSQL 15 |
-| Deploy | Railway (`staging` → smoke → `production`) |
-| CI | GitHub Actions — 5 PR jobs |
-
-Architecture details: [docs/architecture/overview.md](docs/architecture/overview.md)
+> Verified routes, CI jobs, and feature status: [docs/project/current-state.md](docs/project/current-state.md)
 
 ---
 
 ## Table of contents
 
-- [Requirements](#requirements)
-- [How to — quick start](#how-to--quick-start)
+- [Overview](#overview)
+- [Key features](#key-features)
+- [Architecture](#architecture)
+- [Technology stack](#technology-stack)
+- [Getting started](#getting-started)
 - [Configuration](#configuration)
 - [Development](#development)
 - [Testing](#testing)
-- [Validation](#validation)
 - [Deployment](#deployment)
 - [Documentation](#documentation)
+- [Security](#security)
 - [Repository layout](#repository-layout)
 
 ---
 
-## Requirements
+## Overview
 
-| Tool | Version | Purpose |
-|------|---------|---------|
-| **Docker + Compose** | recent | Recommended local stack |
-| **Python** | 3.14 | Backend ([uv](https://docs.astral.sh/uv/)) |
-| **Node.js** | 24 | Frontend (matches CI) |
-| **PostgreSQL** | 15 | Database |
+**Problem:** Household meal planning, nutrition tracking, and grocery budgeting often live in separate tools or spreadsheets.
 
-Without Docker: see [docs/development/README.md](docs/development/README.md).
+**Solution:** OnTrack combines a shared meal calendar, product and recipe catalogs, per-member nutrition targets, budget summaries, and export in a single web application.
+
+**Typical flow:** Register or log in → add household members → manage products and recipes → plan meals on the calendar → review summary and export a shopping list.
+
+**Scope:** Multi-user household app with global product/recipe catalog by market. Not a generic ERP, not multi-tenant SaaS.
 
 ---
 
-## How to — quick start
+## Key features
 
-Run following commands from the repository root.
+| Area | Capabilities |
+|------|----------------|
+| **Meal planning** | Calendar with drag-and-drop, favorites, day schedule, per-member toggles |
+| **Catalog** | User products/recipes plus imported global catalog (market-aware) |
+| **Nutrition** | Macro targets, BMI/TDEE calculator, optional fuel price lookup |
+| **Budget & export** | Summary views, CSV/HTML export |
+| **Auth** | Email register/login, JWT, optional Google OAuth, password reset (SMTP) |
+| **Locale vs market** | UI language (PL/EN) independent of product market (PL/GB) |
+| **Public widget** | Dish compare on login page (`/api/public/dish-compare`) |
 
-First, configure environment:
+**Optional / not enabled in production by default:** HttpOnly cookie BFF mode, Sentry, Grafana/Prometheus (local Compose only).
+
+---
+
+## Architecture
+
+```mermaid
+flowchart LR
+  Browser --> Next["frontend-next\nNext.js 15"]
+  Next -->|"Bearer JWT or BFF (dev)"| API["backend\nFastAPI"]
+  API --> DB[(PostgreSQL 15)]
+  Next -.->|"optional BFF routes"| API
+```
+
+**Deploy pipeline (on `main`):** GitHub Actions CI → Railway staging → auth smoke → manual production approval → production deploy → auth smoke.
+
+Component details, auth flow, and observability: [docs/architecture/overview.md](docs/architecture/overview.md)
+
+---
+
+## Technology stack
+
+| Area | Technology | Role |
+|------|------------|------|
+| API | FastAPI, Alembic, Pydantic | HTTP API, migrations, schemas |
+| Frontend | Next.js 15, React 19, TypeScript | App Router UI |
+| Database | PostgreSQL 15 | Persistent storage |
+| Tests | pytest, Vitest | Backend and frontend unit/contract tests |
+| CI/CD | GitHub Actions | 5 PR quality jobs; staged Railway deploy |
+| Hosting | Railway | `ontrack-back` + `ontrackapp` services |
+
+---
+
+## Getting started
+
+**Prerequisites:** Docker + Compose (recommended), or Python 3.14 + [uv](https://docs.astral.sh/uv/) + Node.js 24 + PostgreSQL 15.
+
+From the repository root:
 
 ```bash
 cp .env.example .env
 # Edit .env — minimum: POSTGRES_*, FLASK_SECRET_KEY, JWT_SECRET_KEY
-```
 
-Then start the stack:
-
-```bash
 docker compose up --build
 ```
 
 | Service | URL |
 |---------|-----|
-| **App** | http://localhost:3000 |
-| **API** | http://localhost:5001 |
-| **API docs** | http://localhost:5001/docs |
+| App | http://localhost:3000 |
+| API | http://localhost:5001 |
+| OpenAPI | http://localhost:5001/docs |
+
+Without Docker: [docs/development/README.md](docs/development/README.md)
 
 ---
 
 ## Configuration
 
-Copy `.env.example` → `.env`. Never commit `.env`.
+Copy `.env.example` → `.env`. Never commit secrets.
 
-| Variable | Purpose |
-|----------|---------|
-| `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB` | Database credentials |
-| `FLASK_SECRET_KEY` | OAuth session cookie signing |
-| `JWT_SECRET_KEY` | JWT signing |
-| `NEXT_PUBLIC_API_URL` | Frontend → API URL (default `http://localhost:5001`) |
-
-Optional: `GOOGLE_*`, `GEMINI_API_KEY`, `PEXELS_API_KEY`, `DEEPSEEK_API_KEY`, `SMTP_*` (password reset email).
+| Variable | Required | Purpose |
+|----------|----------|---------|
+| `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB` | Yes (Compose) | Database credentials |
+| `FLASK_SECRET_KEY` | Yes | OAuth session cookie signing |
+| `JWT_SECRET_KEY` | Yes | JWT signing |
+| `NEXT_PUBLIC_API_URL` | Yes | Frontend → API base URL |
+| `GOOGLE_*` | No | Google OAuth |
+| `SMTP_*` | No | Password reset email |
+| `GEMINI_API_KEY`, `PEXELS_API_KEY`, `DEEPSEEK_API_KEY` | No | Optional integrations |
 
 Full reference: [.env.example](.env.example) · [docs/development/README.md](docs/development/README.md)
 
@@ -117,28 +132,14 @@ Full reference: [.env.example](.env.example) · [docs/development/README.md](doc
 
 ## Development
 
-### Backend
+| Task | Command |
+|------|---------|
+| Backend (local) | `cd backend && uv sync --dev && uv run alembic upgrade head && uv run uvicorn app.main:app --reload --port 5001` |
+| Frontend (local) | `cd frontend-next && npm ci && npm run dev` |
+| Regenerate API types | `cd frontend-next && npm run export:openapi && npm run generate:api` |
+| Workflow validation | `make validate` |
 
-```bash
-cd backend
-uv sync --dev
-export DATABASE_URL=postgresql+psycopg://user:pass@localhost:5432/mealplanner
-export FLASK_SECRET_KEY=dev-secret JWT_SECRET_KEY=dev-jwt-secret
-export FRONTEND_URL=http://localhost:3000
-uv run alembic upgrade head
-uv run uvicorn app.main:app --reload --port 5001
-```
-
-### Frontend
-
-```bash
-cd frontend-next
-npm ci
-export NEXT_PUBLIC_API_URL=http://localhost:5001
-npm run dev
-```
-
-Open http://localhost:3000
+Component guides: [backend/README.md](backend/README.md) · [frontend-next/README.md](frontend-next/README.md)
 
 ---
 
@@ -146,46 +147,25 @@ Open http://localhost:3000
 
 | Scope | Command |
 |-------|---------|
-| **Backend CI subset** | `make test` |
-| **Backend without Postgres** | `make test-backend` |
-| **Backend integration** | `make test-integration` *(requires `TEST_DATABASE_URL`)* |
-| **Frontend unit** | `make test-frontend` |
+| Backend CI subset | `make test` |
+| Backend (no Postgres) | `make test-backend` |
+| Backend integration | `make test-integration` *(needs `TEST_DATABASE_URL`)* |
+| Frontend unit | `make test-frontend` |
 
-> [!IMPORTANT]
-> Playwright / browser E2E was removed. Strategy, CI mapping, and accepted gaps: [docs/testing/README.md](docs/testing/README.md)
-
----
-
-## Validation
-
-```bash
-make validate                 # AI rules / workflow files
-make test && make test-frontend
-cd backend && uv run ruff check .
-cd frontend-next && npm run lint && npm run typecheck && npm run build
-```
-
-After backend schema changes, regenerate OpenAPI types:
-
-```bash
-cd frontend-next && npm run export:openapi && npm run generate:api
-```
+Browser E2E (Playwright) is not used. Strategy and CI mapping: [docs/testing/README.md](docs/testing/README.md)
 
 ---
 
 ## Deployment
 
-Push to `main` after green CI:
+Changes merge to `main` only through PR with green CI. Deploy is automatic after merge:
 
-1. Deploy to Railway **staging**
-2. Staging readiness + auth smoke
-3. Manual GitHub Environment approval for **production**
-4. Production readiness + auth smoke
+1. Railway **staging** deploy + readiness check  
+2. Staging auth smoke  
+3. GitHub Environment approval for **production**  
+4. Production deploy + auth smoke  
 
 Runbook: [docs/operations/deployment.md](docs/operations/deployment.md) · [`.github/DEPLOY.md`](.github/DEPLOY.md)
-
-> [!IMPORTANT]
-> JWT is stored in `localStorage` by default. Password reset needs SMTP. See [docs/security/overview.md](docs/security/overview.md) and [docs/project/tech-debt.md](docs/project/tech-debt.md).
 
 ---
 
@@ -193,20 +173,29 @@ Runbook: [docs/operations/deployment.md](docs/operations/deployment.md) · [`.gi
 
 Full index: **[docs/README.md](docs/README.md)**
 
-| Document | Contents |
-|----------|----------|
-| [docs/project/current-state.md](docs/project/current-state.md) | What works today |
-| [docs/architecture/overview.md](docs/architecture/overview.md) | Components and data flow |
-| [docs/development/README.md](docs/development/README.md) | Local setup |
-| [docs/testing/README.md](docs/testing/README.md) | Test strategy and CI |
-| [docs/operations/deployment.md](docs/operations/deployment.md) | Railway deploy |
-| [docs/security/overview.md](docs/security/overview.md) | Auth and secrets |
-| [docs/project/roadmap.md](docs/project/roadmap.md) | Active plans |
-| [docs/project/tech-debt.md](docs/project/tech-debt.md) | Open technical debt |
-| [docs/specs/api-contract.md](docs/specs/api-contract.md) | API contract (binding) |
-| [docs/adr/](docs/adr/) | Architecture decisions |
+| Topic | Document |
+|-------|----------|
+| Current state | [docs/project/current-state.md](docs/project/current-state.md) |
+| Architecture | [docs/architecture/overview.md](docs/architecture/overview.md) |
+| Local setup | [docs/development/README.md](docs/development/README.md) |
+| Testing | [docs/testing/README.md](docs/testing/README.md) |
+| Deployment | [docs/operations/deployment.md](docs/operations/deployment.md) |
+| Security | [docs/security/overview.md](docs/security/overview.md) |
+| API contract | [docs/specs/api-contract.md](docs/specs/api-contract.md) |
+| Roadmap & debt | [docs/project/roadmap.md](docs/project/roadmap.md) · [docs/project/tech-debt.md](docs/project/tech-debt.md) |
+| ADRs | [docs/adr/](docs/adr/) |
 
-Agent workflow: [AGENTS.md](AGENTS.md) · [.ai-rules/](.ai-rules/)
+Agent workflow: [docs/development/ai/workflows.md](docs/development/ai/workflows.md) · [AGENTS.md](AGENTS.md)
+
+---
+
+## Security
+
+- JWT stored in `localStorage` by default; optional HttpOnly BFF mode for local dev ([ADR 0001](docs/adr/0001-bff-production-mode.md))
+- Password reset requires SMTP configuration
+- Never commit `.env` or production secrets
+
+Details: [docs/security/overview.md](docs/security/overview.md) · [docs/project/tech-debt.md](docs/project/tech-debt.md)
 
 ---
 
@@ -215,13 +204,11 @@ Agent workflow: [AGENTS.md](AGENTS.md) · [.ai-rules/](.ai-rules/)
 ```
 backend/           FastAPI API, Alembic, tests
 frontend-next/     Production Next.js frontend
-docs/              Documentation
-archive/           Historical snapshots (not deployed)
+docs/              Project documentation (themed subdirectories)
+archive/           Historical code snapshots (not deployed)
 .ai-rules/         Agent binding rules
 ```
 
 ---
 
-**OnTrack** — meal planner & budgeter for households.
-
-See [GitHub repository](https://github.com/tomekmisiun/OnTrack) for license and contribution policy.
+**OnTrack** — meal planner and budgeter for households.
