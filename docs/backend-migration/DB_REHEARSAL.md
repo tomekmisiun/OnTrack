@@ -1,5 +1,7 @@
 # Database adoption rehearsal (MIG-015)
 
+> **Historical procedure.** This rehearsal validates **legacy Flask→FastAPI cutover** using `alembic stamp` on a clone DB. The stamp target revision below (`7966d120d748`) is the FastAPI head **at cutover time**, not the current head on `main`. Current head: **`d3e4f5a6b7c8`** — verify with `uv run alembic current` in `backend/`.
+
 Validate that FastAPI can attach to an **existing Flask-migrated** Postgres database using **`alembic stamp` only** — no `CREATE TABLE` on production data.
 
 **Prerequisite:** A FastAPI staging service deployed against a **clone** DB (operator-managed; see [DEPLOYMENT.md](../DEPLOYMENT.md) § Staging).
@@ -11,7 +13,7 @@ Validate that FastAPI can attach to an **existing Flask-migrated** Postgres data
 | Check | Pass criteria |
 |-------|---------------|
 | Schema parity | Alembic autogenerate diff vs SQLAlchemy models is **empty** |
-| Stamp | `alembic_version` = `7966d120d748` (FastAPI head) |
+| Stamp | `alembic_version` = `7966d120d748` (cutover stamp target) |
 | No-op upgrade | `alembic upgrade head` applies zero DDL |
 | Data intact | Row counts unchanged; login + CRUD smoke pass |
 | Rollback | Flask still works against same DB after stamp (no schema change) |
@@ -22,8 +24,9 @@ Validate that FastAPI can attach to an **existing Flask-migrated** Postgres data
 
 | Name | Value |
 |------|-------|
-| FastAPI Alembic head | `7966d120d748` |
-| Flask migration head | `a1b2c3d4e5f6` (before stamp) |
+| Stamp target (cutover rehearsal) | `7966d120d748` |
+| Current Alembic head (`main`) | `d3e4f5a6b7c8` — see [CURRENT_STATE.md](../CURRENT_STATE.md) |
+| Flask migration head (pre-stamp) | `a1b2c3d4e5f6` |
 | OnTrack tables | 10 — see `backend/app/models/tables.py` |
 
 ---

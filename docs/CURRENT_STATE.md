@@ -1,6 +1,6 @@
 # Current state
 
-**Last verified:** 2026-06-27 (post Playwright removal audit)
+**Last verified:** 2026-06-28 (documentation audit)
 
 OnTrack is a **meal planner and budget tracker** for households. Production runs on **Railway** with a **FastAPI** API and **Next.js 15** frontend against **PostgreSQL 15**.
 
@@ -140,6 +140,4 @@ See [TECH_DEBT.md](./TECH_DEBT.md) and [ROADMAP.md](./ROADMAP.md).
 
 ## Historical snapshots
 
-- [audits/documentation-audit-2026-06-27.md](./audits/documentation-audit-2026-06-27.md) — documentation reset (#163)
-- [audits/dead-code-audit-2026-06-27.md](./audits/dead-code-audit-2026-06-27.md) — dead-code audit
-- [audits/archive/](./audits/archive/) — older point-in-time audits
+Archived point-in-time audits (June 2026): [audits/archive/](./audits/archive/) — see index for documentation reset (#163), dead-code audit, and test audit reports.

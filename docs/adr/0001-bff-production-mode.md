@@ -15,7 +15,7 @@
 | Option | Description |
 |--------|-------------|
 | **A. Keep BFF off (default)** | Continue Bearer JWT from browser to FastAPI. Document XSS risk and middleware hint-only behavior. |
-| **B. Enable BFF in production** | Set `NEXT_PUBLIC_BFF_ENABLED=1` on `ontrackapp`; requires full E2E auth validation on Railway. |
+| **B. Enable BFF in production** | Set `NEXT_PUBLIC_BFF_ENABLED=1` on `ontrackapp`; requires auth contract tests + staging/production HTTP smoke on Railway. |
 | **C. Remove BFF code** | Simplify codebase; lose HttpOnly path for future hardening. |
 | **D. Hybrid** | BFF for auth routes only; direct API for data routes. Higher complexity. |
 
@@ -25,7 +25,7 @@
 
 ## Consequences
 
-- **Positive:** No production behavior change; existing auth E2E and contract tests remain valid.
+- **Positive:** No production behavior change; auth contract tests and deploy HTTP smoke remain valid.
 - **Positive:** BFF code stays available for local experiments and future opt-in.
 - **Negative:** JWT remains in `localStorage`; XSS could exfiltrate tokens (mitigate via CSP and input hygiene).
 - **Negative:** Next.js middleware cannot cryptographically verify JWT — it only checks cookie presence for UX redirects.

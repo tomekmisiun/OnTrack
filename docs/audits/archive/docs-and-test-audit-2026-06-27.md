@@ -1,3 +1,7 @@
+> [!WARNING]
+> This document is archived and does not describe the current state of the project.
+> See the current documentation: [docs/README.md](../../README.md) and [TESTING.md](../../TESTING.md).
+
 # Documentation and test audit — 2026-06-27
 
 Audit of documentation accuracy, test pyramid simplification, and Playwright removal.

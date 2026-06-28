@@ -1,3 +1,7 @@
+> [!WARNING]
+> This document is archived and does not describe the current state of the project.
+> See the current documentation: [docs/TECH_DEBT.md](../../TECH_DEBT.md) and [docs/ROADMAP.md](../../ROADMAP.md).
+
 # Audyt martwego kodu i refaktoryzacji — 2026-06-27
 
 **Branch roboczy (docs):** `chore/docs-audit-and-reset`  
