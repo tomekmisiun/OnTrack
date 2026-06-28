@@ -721,14 +721,32 @@
   padding: 0;
   border: 0;
   background: none;
-  color: #93c5fd;
-  font-size: 12px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: #2dd4bf;
   cursor: pointer;
-  text-decoration: underline;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.login-forgot-link:hover:not(:disabled) {
+  color: #5eead4;
+}
+
+.login-forgot-link:focus-visible {
+  outline: 2px solid rgba(45, 212, 191, 0.4);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 .login-forgot-link--block {
-  margin-top: 8px;
+  align-self: stretch;
+  text-align: center;
+  margin-top: 12px;
+  padding: 8px 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .login-forgot-link:disabled {
