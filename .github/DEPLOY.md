@@ -24,7 +24,7 @@ Each environment has its own Postgres, domains, and variables. Migrations run vi
 
 ```text
 PR → CI → merge to main
-→ CI (7 jobs)
+→ CI (5 jobs)
 → deploy-staging (GitHub Environment: staging)
 → wait-staging-ready
 → staging-smoke
@@ -69,14 +69,14 @@ After merge to `main`:
 
 | Job | When | Purpose |
 |-----|------|---------|
-| `test`, `frontend-next`, e2e, docker, integration | PR + `main` | Quality gates |
+| `test`, `frontend-next`, docker, integration | PR + `main` | Quality gates |
 | `deploy-staging` | `main` push only | `railway up` (staging token) |
 | `wait-staging-ready` | after staging deploy | Poll `/health/ready` |
 | `staging-smoke` | after readiness | Auth smoke on staging |
 | `deploy-production` | after staging smoke + approval | `railway up` (production token) |
 | `production-smoke` | after production deploy | Readiness + auth smoke |
 
-Optional (not part of release gate): **Visual regression**, **Production auth smoke** (scheduled), **Staging auth smoke** (manual).
+Optional (not part of release gate): **Production auth smoke** (scheduled), **Staging auth smoke** (manual dispatch).
 
 Full matrix: [`docs/TESTING.md`](../docs/TESTING.md)
 

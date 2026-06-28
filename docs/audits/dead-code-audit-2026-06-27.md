@@ -145,7 +145,7 @@ OnTrack to dojrzała aplikacja FastAPI + Next.js z szerokim pokryciem testami ko
 | DC-14 | `config.host/port` | SAFE_TO_REFACTOR | `config.py` | Nieużywane | Niskie | Usuń pola | `pytest -q` |
 | DC-15 | Locale/market constant dup | SAFE_TO_REFACTOR | `import_catalog.py` | Duplikat `domain/market` | Średnie | Import z jednego modułu | catalog tests |
 | DC-16 | BFF URL helper extract | SAFE_TO_REFACTOR | `client.ts`, `import.ts` | Duplikacja | Średnie | Wspólny helper | `bff-proxy.test.ts` |
-| DC-17 | Middleware ↔ routes unification | SAFE_TO_REFACTOR | `middleware.ts`, `routes.ts` | Drift | Średnie | Jedno źródło path config | e2e smoke |
+| DC-17 | Middleware ↔ routes unification | SAFE_TO_REFACTOR | `middleware.ts`, `routes.ts` | Drift | Średnie | Jedno źródło path config | `routes.test.ts` |
 | DC-18 | `@types/react-datepicker` placement | SAFE_TO_REFACTOR | `package.json` | dev vs prod | Brak | Przenieś do devDeps | `npm ci && build` |
 | DC-19 | `docker-compose.recovery.yml` Redis comment | SAFE_TO_REFACTOR | compose | Stale | Brak | Fix comment | — |
 | DC-20 | `export_user_catalog_to_seeds.py` | NEEDS_VERIFICATION | `app/scripts/` | Broken import; migration-only | Średnie | Napraw import **lub** usuń | Manual smoke |
@@ -156,7 +156,7 @@ OnTrack to dojrzała aplikacja FastAPI + Next.js z szerokim pokryciem testami ko
 | DC-25 | `capture-ui-preview.mjs` + PNG | NEEDS_VERIFICATION | scripts, assets | Untracked artifacts | Niskie | Dodaj npm script **lub** usuń | — |
 | DC-26 | `verify-production-env.sh` | NEEDS_VERIFICATION | `backend/scripts/` | Słabe refs | Niskie | Merge do verify-auth **lub** usuń | manual |
 | DC-27 | Flask JWT compat test + dep | NEEDS_VERIFICATION | tests, dev deps | Świadomy guard | Średnie | KEEP do decyzji product | auth contract |
-| DC-28 | `ExportScreen` package math dup | NEEDS_VERIFICATION | frontend | Duplikuje backend | **Średnie-wysokie** | Contract test parity **lub** API merge | unit + e2e |
+| DC-28 | `ExportScreen` package math dup | NEEDS_VERIFICATION | frontend | Duplikuje backend | **Średnie-wysokie** | Contract test parity **lub** API merge | unit + contract |
 | DC-29 | `frontend-next/Dockerfile` runner | KEEP | Dockerfile | dev target używany | — | Opcjonalnie usuń runner stage później | docker build |
 | DC-30 | BFF routes (disabled prod) | KEEP | `app/api/bff/` | ADR 0001 opt-in | — | Nie usuwać | bff tests |
 | DC-31 | `archive/**` | KEEP | archive | Reference + rules | — | Nie usuwać bez decyzji | — |
@@ -199,12 +199,12 @@ OnTrack to dojrzała aplikacja FastAPI + Next.js z szerokim pokryciem testami ko
 ### Task 5 — `chore/refactor-bff-url-helper` (P2)
 
 **Zakres:** DC-16  
-**Akceptacja:** `tests/unit/bff-proxy.test.ts`, e2e smoke
+**Akceptacja:** `tests/unit/bff-proxy.test.ts`, `routes.test.ts`
 
 ### Task 6 — `chore/refactor-auth-path-config` (P2)
 
 **Zakres:** DC-17  
-**Akceptacja:** middleware + `routes.test.ts` + e2e auth
+**Akceptacja:** middleware + `routes.test.ts` + auth contract tests
 
 ### Task 7 — `chore/legacy-app-dish-compare-cleanup` (P2, NEEDS_VERIFICATION)
 

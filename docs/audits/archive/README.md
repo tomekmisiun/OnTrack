@@ -4,6 +4,12 @@ These files are **historical**. They describe migration milestones, audits, or p
 
 **Current state:** [`docs/CURRENT_STATE.md`](../../CURRENT_STATE.md)
 
+## Validation
+
+These files are **excluded from markdown link checks** in `scripts/validate-ai-workflows.sh`. They are point-in-time snapshots; links to removed paths or renamed docs are expected and must not block CI on active documentation.
+
+Active docs under `docs/` (outside this archive) remain fully validated.
+
 ## Archive layout
 
 | Path | Contents |

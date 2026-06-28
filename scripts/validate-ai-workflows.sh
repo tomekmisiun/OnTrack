@@ -236,6 +236,7 @@ coupling_exclude_files=(
   docs/ADAPTATION_CHECKLIST.md
   docs/VALIDATION_REPORT.md
   docs/backend-migration
+  docs/audits/archive
   README.md
   CONTRIBUTING.md
   CHANGELOG.md
@@ -257,14 +258,16 @@ for pattern in "${coupling_patterns[@]}"; do
   done
 done
 
-# Absolute home paths (exclude this validator's own path-literal check)
+# Absolute home paths (exclude archive snapshots and this validator's own path-literal check)
 if grep -R -F '/home/' "${scan_paths[@]/#/$ROOT/}" 2>/dev/null \
   | grep -v 'scripts/validate-ai-workflows.sh' \
   | grep -v 'docs/VALIDATION_REPORT.md' \
+  | grep -v 'docs/audits/archive/' \
   | head -1 | grep -q .; then
   hit=$(grep -R -F -n '/home/' "${scan_paths[@]/#/$ROOT/}" 2>/dev/null \
     | grep -v 'scripts/validate-ai-workflows.sh' \
-    | grep -v 'docs/VALIDATION_REPORT.md' | head -1)
+    | grep -v 'docs/VALIDATION_REPORT.md' \
+    | grep -v 'docs/audits/archive/' | head -1)
   fail "forbidden absolute path: $hit"
 fi
 
@@ -300,7 +303,12 @@ check_md_links() {
 
 while IFS= read -r md; do
   check_md_links "$md"
-done < <(find "$ROOT" -path "$ROOT/reference" -prune -o -name '*.md' -print)
+done < <(find "$ROOT" \
+  \( -path "$ROOT/reference" \
+     -o -path "$ROOT/archive" \
+     -o -path "$ROOT/docs/audits/archive" \
+     -o -path "*/node_modules/*" \) -prune -o \
+  -name '*.md' -print)
 
 # Application runtime exclusion (template-only repo — skip for consumer apps)
 if [[ ! -f "$ROOT/.ai-rules/consumer-repo" ]]; then

@@ -22,7 +22,7 @@ Before editing, read the files listed for your **task type**. Start with
 | **CRA reference** | `archive/frontend-cra-reference/` | Not deployed; archived parity reference |
 | **Migrations** | `backend/alembic/` | Single head; `scripts/ensure_alembic_head.py` for legacy stamp |
 | **Tests (backend)** | `backend/tests/` | Contract + integration |
-| **Tests (frontend)** | `frontend-next/tests/` | Vitest + Playwright |
+| **Tests (frontend)** | `frontend-next/tests/` | Vitest unit tests |
 | **API contract** | `docs/backend-migration/API_CONTRACT.md`, `frontend-next/openapi/openapi.json` | |
 | **Docker** | `docker-compose.yml`, `frontend-next/Dockerfile`, `backend/Dockerfile` | |
 | **CI** | `.github/workflows/ci.yml` | |

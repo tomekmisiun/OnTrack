@@ -23,7 +23,7 @@ Quick reference for CI operators: [`.github/DEPLOY.md`](../.github/DEPLOY.md)
 ```text
 feature branch → PR → CI (all jobs) → merge to main
 push to main
-  → CI (7 jobs)
+  → CI (5 jobs)
   → deploy-staging          (GitHub Environment: staging, Railway environment: staging)
   → wait-staging-ready      (poll STAGING_API_URL/health/ready)
   → staging-smoke           (verify-production-auth.sh)
