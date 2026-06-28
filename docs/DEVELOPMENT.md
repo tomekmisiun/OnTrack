@@ -87,14 +87,13 @@ Railway-specific notes: [DEPLOYMENT.md](./DEPLOYMENT.md)
 
 | Task | Command |
 |------|---------|
-| Default backend tests | `make test` |
-| Full backend tests | `cd backend && uv run pytest -q` |
-| Integration tests | `cd backend && TEST_DATABASE_URL=… uv run pytest tests/integration/ -v` |
-| Frontend unit tests | `cd frontend-next && npm run test` |
+| Backend CI subset | `make test` |
+| Backend without Postgres | `make test-backend` |
+| Backend integration (Postgres) | `make test-integration` — requires `TEST_DATABASE_URL`; see [TESTING.md](./TESTING.md) |
+| Frontend unit tests | `make test-frontend` or `cd frontend-next && npm run test` |
 | Lint frontend | `cd frontend-next && npm run lint` |
 | Typecheck | `cd frontend-next && npm run typecheck` |
-| E2E smoke | `cd frontend-next && npm run test:e2e` |
-| E2E auth (needs Postgres) | See [TESTING.md](./TESTING.md) |
+| Frontend build | `cd frontend-next && npm run build` |
 | Regenerate OpenAPI | `cd frontend-next && npm run export:openapi` |
 | Regenerate TS client | `cd frontend-next && npm run generate:api` |
 | Catalog build check | `cd backend && uv run python -m app.scripts.build_catalog --check` |

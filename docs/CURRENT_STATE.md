@@ -1,6 +1,6 @@
 # Current state
 
-**Last verified:** 2026-06-27 (code at `main`, Alembic head `d3e4f5a6b7c8`)
+**Last verified:** 2026-06-27 (post Playwright removal audit)
 
 OnTrack is a **meal planner and budget tracker** for households. Production runs on **Railway** with a **FastAPI** API and **Next.js 15** frontend against **PostgreSQL 15**.
 
@@ -12,7 +12,7 @@ OnTrack is a **meal planner and budget tracker** for households. Production runs
 |------|--------|-------|
 | User auth (register, login, JWT) | Implemented | Bearer token in localStorage; optional BFF cookie mode for local dev |
 | Google OAuth | Implemented | Requires `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, redirect URI |
-| Password reset API | Implemented | SMTP email when configured; register/login use email; token in response only in debug/testing |
+| Password reset | Implemented | SMTP email when configured; register/login use email |
 | Household members | Implemented | CRUD via `/api/members` |
 | Products (user catalog) | Implemented | Per-user products + global catalog import |
 | Recipes | Implemented | User recipes + system/global recipes by market |
@@ -21,9 +21,9 @@ OnTrack is a **meal planner and budget tracker** for households. Production runs
 | Macro / nutrition targets | Implemented | Member-level targets |
 | Fuel price lookup | Implemented | Scraped/cache data; optional DeepSeek for macro lookup |
 | Summary & export | Implemented | Aggregates and CSV export |
-| Dish compare (public) | Implemented | `/api/public/dish-compare` — no auth |
+| Dish compare (public) | Implemented | `/api/public/dish-compare` — no auth; Next.js fallback when API unreachable |
 | Locale / market separation | Implemented | UI locale vs product/recipe market (`ui_locale`, `market_code`) |
-| CI pipeline | Green on `main` | See [TESTING.md](./TESTING.md) |
+| CI pipeline | Green on `main` | 5 PR jobs — see [TESTING.md](./TESTING.md) |
 | Production deploy | Staged pipeline | CI → staging deploy → smoke → approval → production deploy → smoke |
 
 ### Frontend routes (`frontend-next/`)
@@ -48,15 +48,13 @@ API contract matrix: [`backend-migration/API_CONTRACT.md`](./backend-migration/A
 
 ---
 
-## Partially implemented
+## Partially implemented / optional
 
 | Area | Gap |
 |------|-----|
-| Password reset UX | Login forgot/reset flow; SMTP required on backend for outbound mail |
 | BFF auth mode | Implemented in Next.js; **not enabled in production** (`NEXT_PUBLIC_BFF_ENABLED` unset) |
-| Visual regression | Playwright visual tests exist; not in required CI |
-| Staging environment | Railway env `staging`; CI auto-deploy + smoke on `main` |
 | Error tracking (Sentry) | Optional — `SENTRY_DSN` (API), `NEXT_PUBLIC_SENTRY_DSN` (frontend) |
+| Grafana/Prometheus | Local Compose only — not wired for Railway production |
 
 ---
 
@@ -66,20 +64,16 @@ API contract matrix: [`backend-migration/API_CONTRACT.md`](./backend-migration/A
 - **Alembic head:** `d3e4f5a6b7c8` (`drop_recipe_parse_logs`)
 - **Pre-deploy on Railway:** `run-migrations.sh` → Alembic upgrade → `import_catalog` → `restore_post_catalog_migration`
 
-Recent migration chain (simplified): initial schema → global catalog columns → UI locale/market → catalog market model → user product backfill.
-
 ---
 
 ## Environments
 
 | Environment | How | Services |
 |-------------|-----|----------|
-| Local | `docker compose up` or backend + frontend separately | API `:5001`, Next `:3000`, Postgres `:5432`; optional Prometheus/Grafana |
-| CI | GitHub Actions | Ephemeral Postgres for integration/e2e-auth |
-| Production | Railway environment `production` | `ontrack-back`, `ontrackapp`, Postgres |
-| Staging | Railway environment `staging` | Same service names; separate DB and domains |
-
-Public URLs are operator-configured in Railway (not stored in repo).
+| Local | `docker compose up` or backend + frontend separately | API `:5001`, Next `:3000`, Postgres `:5432` |
+| CI | GitHub Actions | Ephemeral Postgres for integration tests |
+| Staging | Railway environment `staging` | Auto deploy + auth smoke on `main` push |
+| Production | Railway environment `production` | Deploy after staging smoke + GitHub approval |
 
 ---
 
@@ -87,13 +81,26 @@ Public URLs are operator-configured in Railway (not stored in repo).
 
 Workflow: `.github/workflows/ci.yml`
 
-Jobs on PR and `main`: `test`, `frontend-next`, `frontend-next-e2e`, `frontend-next-e2e-auth`, `backend-docker`, `frontend-next-docker`, `backend-integration`.
+**PR and `main` jobs:** `test`, `frontend-next`, `backend-docker`, `frontend-next-docker`, `backend-integration`.
 
-On **`main` push only** (after CI): `deploy-staging` → `wait-staging-ready` → `staging-smoke` → **`deploy-production`** (GitHub Environment approval) → `production-smoke`.
+**`main` push only:** `deploy-staging` → `wait-staging-ready` → `staging-smoke` → `deploy-production` (approval) → `production-smoke`.
 
-Both deploy jobs use **`github.sha`** from the workflow run. There is no direct production deploy without passing staging smoke.
+Both deploy jobs use **`github.sha`**. No direct production deploy without passing staging smoke.
 
 Details: [DEPLOYMENT.md](./DEPLOYMENT.md), [TESTING.md](./TESTING.md)
+
+---
+
+## Testing (summary)
+
+| Layer | Tool | CI |
+|-------|------|-----|
+| Backend contract + subset | pytest | `test` |
+| Backend integration | pytest + Postgres | `backend-integration` |
+| Frontend unit | Vitest | `frontend-next` (+ build) |
+| Deploy auth smoke | HTTP script | `staging-smoke`, `production-smoke` |
+
+Browser E2E (Playwright) removed — see [TESTING.md](./TESTING.md#playwright-decision).
 
 ---
 
@@ -105,6 +112,7 @@ Details: [DEPLOYMENT.md](./DEPLOYMENT.md), [TESTING.md](./TESTING.md)
 | Gemini API | Optional | AI-assisted features |
 | DeepSeek API | Optional | Macro lookup pipeline |
 | Pexels API | Optional | Recipe imagery |
+| SMTP | Optional | Password reset email |
 
 Features degrade gracefully when keys are missing.
 
@@ -126,12 +134,12 @@ Production stack: **`frontend-next/`** + **`backend/`** (FastAPI).
 See [TECH_DEBT.md](./TECH_DEBT.md) and [ROADMAP.md](./ROADMAP.md).
 
 - Catalog import during deploy mutates global recipe/product data — restore step required after re-import
-- JWT in localStorage (XSS surface) — mitigated by CSP and no third-party scripts in app shell; BFF optional
-- No automated production smoke in CI (secrets policy) — manual `verify-production-auth.sh`
+- JWT in localStorage (XSS surface) — mitigated by CSP; BFF optional per [ADR 0001](./adr/0001-bff-production-mode.md)
 
 ---
 
 ## Historical snapshots
 
-- [audits/documentation-audit-2026-06-27.md](./audits/documentation-audit-2026-06-27.md) — documentation reset audit
-- [audits/archive/](./audits/archive/) — older point-in-time audits (not current state)
+- [audits/documentation-audit-2026-06-27.md](./audits/documentation-audit-2026-06-27.md) — documentation reset (#163)
+- [audits/dead-code-audit-2026-06-27.md](./audits/dead-code-audit-2026-06-27.md) — dead-code audit
+- [audits/archive/](./audits/archive/) — older point-in-time audits

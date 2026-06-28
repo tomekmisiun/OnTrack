@@ -51,7 +51,8 @@ Active plans only. Completed work is removed or marked done. For technical debt 
 |------|--------|
 | Separate background worker service | Removed — see [ADR 0002](./adr/0002-background-worker.md) |
 | Repo-root scraper service | Moved to `archive/scraper-legacy/` |
-| Playwright visual screenshot regression | Removed — flaky, not requested; keep functional e2e only |
+| Playwright visual screenshot regression | Removed — flaky, not requested |
+| Playwright functional E2E | Removed — covered by contract tests, Vitest, CI build, deploy smoke |
 
 ---
 

@@ -151,18 +151,17 @@ npm run generate:api
 - `lib/api/fuel.ts`, `lib/api/public.ts`, `saveMemberProfile` in `lib/api/members.ts`
 - Routes: `/`, `/macro`, `/summary`, `/export` — see [docs/CURRENT_STATE.md](../docs/CURRENT_STATE.md)
 
-CI runs `generate:api`, `npm test` (Vitest unit tests), lint, typecheck, and build. A separate CI job runs Playwright smoke tests against a production build.
+CI runs `generate:api`, `npm test` (Vitest), lint, typecheck, and production build.
 
 ## Tests
 
 ```bash
-npm run test              # all Vitest unit tests (imports real TS modules)
+npm run test              # all Vitest unit tests
 npm run test:watch        # Vitest watch mode
-npm run test:e2e          # Playwright smoke tests (builds + starts on port 3002)
 npm run test:recipes      # single suite shortcut
 ```
 
-Unit tests live in `tests/unit/` and replace the legacy `scripts/check-*.mjs` guards. E2E tests in `tests/e2e/` cover login/auth middleware (`smoke.spec.ts`) and logged-in module loads with mocked API (`modules-smoke.spec.ts`).
+Unit tests live in `tests/unit/` — helpers, route handlers, BFF utilities, and domain logic. See [docs/TESTING.md](../docs/TESTING.md) for the full strategy.
 
 ## Docker
 

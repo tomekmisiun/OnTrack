@@ -2,7 +2,7 @@
 
 **Last updated:** 2026-06-27
 
-Concrete issues with code evidence. Priority: **P0** (production risk) → **P3** (cosmetic).
+Concrete issues with code evidence. Priority: **P0** (production risk) → **P3** (cosmetic). Resolved items are removed or marked resolved with evidence.
 
 ---
 
@@ -12,23 +12,10 @@ Concrete issues with code evidence. Priority: **P0** (production risk) → **P3*
 |-------|-------|
 | **Area** | Frontend auth |
 | **Problem** | Access token stored in `localStorage` — XSS can exfiltrate token |
-| **Evidence** | `frontend-next/lib/auth/storage.ts` (token persistence); BFF mode exists but production unset |
+| **Evidence** | `frontend-next/lib/auth/storage.ts`; BFF mode exists but production unset |
 | **Risk** | Session hijack if XSS introduced |
-| **Suggested fix** | Accepted for now per [ADR 0001](./adr/0001-bff-production-mode.md) (BFF off in prod). Revisit if enabling HttpOnly cookie mode. |
+| **Suggested fix** | Accepted for now per [ADR 0001](./adr/0001-bff-production-mode.md). Revisit if enabling HttpOnly cookie mode. |
 | **Priority** | P2 |
-
----
-
-## TD-002 — Password reset without email delivery
-
-| Field | Value |
-|-------|-------|
-| **Area** | Auth |
-| **Problem** | Reset token returned in API response (testing/debug paths) — not viable for end users |
-| **Evidence** | Password reset routes in `backend/app/api/routes/auth.py`; no SMTP integration |
-| **Risk** | Feature unusable in production UX |
-| **Suggested fix** | Generic SMTP env vars + reset email + login UI ([R-012](./ROADMAP.md)) |
-| **Priority** | P1 — **Resolved** (#168 SMTP + #169 email register/login) |
 
 ---
 
@@ -42,19 +29,6 @@ Concrete issues with code evidence. Priority: **P0** (production risk) → **P3*
 | **Risk** | Deploy failure or data inconsistency if restore step regresses |
 | **Suggested fix** | Idempotent catalog sync or import only when catalog version changes |
 | **Priority** | P2 |
-
----
-
-## TD-004 — No production smoke tests in CI
-
-| Field | Value |
-|-------|-------|
-| **Area** | CI/CD |
-| **Problem** | Auth verification script requires live URLs + secrets — not run in GitHub Actions |
-| **Evidence** | `backend/scripts/verify-production-auth.sh`; manual runbook in DEPLOYMENT.md |
-| **Risk** | Broken deploy reaches users before manual check |
-| **Suggested fix** | GitHub scheduled workflow `.github/workflows/production-smoke.yml` with `PRODUCTION_API_URL` secret |
-| **Priority** | P1 — **Mitigated** (requires operator to configure secrets) |
 
 ---
 
@@ -79,7 +53,7 @@ Concrete issues with code evidence. Priority: **P0** (production risk) → **P3*
 | **Problem** | Developers must run `export:openapi` + `generate:api` after backend schema changes |
 | **Evidence** | CI drift checks in `.github/workflows/ci.yml` |
 | **Risk** | PR failure until regenerated |
-| **Suggested fix** | Pre-commit hook or documented checklist in PR template (already caught by CI) |
+| **Suggested fix** | Pre-commit hook or PR template checklist (already caught by CI) |
 | **Priority** | P3 |
 
 ---
@@ -92,21 +66,8 @@ Concrete issues with code evidence. Priority: **P0** (production risk) → **P3*
 | **Problem** | `backend-integration` and local integration tests require Postgres `TEST_DATABASE_URL` |
 | **Evidence** | `tests/integration/`, CI service container |
 | **Risk** | Skipped locally → migration bugs found late |
-| **Suggested fix** | Document one-liner Compose profile or `make test-integration` |
+| **Suggested fix** | Document one-liner — see `make test-integration` in Makefile |
 | **Priority** | P2 |
-
----
-
-## TD-008 — Archive directories still referenced in old docs
-
-| Field | Value |
-|-------|-------|
-| **Area** | Documentation |
-| **Problem** | External links and old README sections pointed at removed paths |
-| **Evidence** | Prior doc audit 2026-06-27 |
-| **Risk** | Wrong setup instructions |
-| **Suggested fix** | Completed in docs reset (#163) — monitor on future moves |
-| **Priority** | P3 — **Resolved** |
 
 ---
 
@@ -123,6 +84,16 @@ Concrete issues with code evidence. Priority: **P0** (production risk) → **P3*
 
 ---
 
+## Resolved (removed from active list)
+
+| ID | Resolution |
+|----|------------|
+| TD-002 | Password reset email — SMTP + register/login UI (#168, #169) |
+| TD-004 | Production auth smoke — `staging-smoke` + `production-smoke` in `ci.yml`; scheduled `production-smoke.yml` |
+| TD-008 | Stale doc paths — docs reset (#163) |
+
+---
+
 ## How to add entries
 
-Use format: ID, area, problem, evidence (file/path), risk, suggested fix, priority. Avoid vague items ("improve tests") without proof.
+Use format: ID, area, problem, evidence (file/path), risk, suggested fix, priority. Avoid vague items without proof.

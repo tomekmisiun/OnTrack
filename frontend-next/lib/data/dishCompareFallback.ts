@@ -9,7 +9,7 @@ const FALLBACK: Record<LangCode, DishCompareResponse> = {
   en: en as DishCompareResponse,
 };
 
-/** Bundled dish-compare payload when upstream API is unreachable (e.g. e2e, cold start). */
+/** Bundled dish-compare payload when upstream API is unreachable (cold start, offline). */
 export function loadDishCompareFallback(
   lang: string,
 ): DishCompareResponse {

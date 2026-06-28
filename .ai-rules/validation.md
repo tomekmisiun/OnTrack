@@ -8,12 +8,21 @@ Agents MUST use these commands — not commands from other projects.
 |---------|---------|
 | Validate AI rules files | `make validate` or `bash scripts/validate-ai-workflows.sh` |
 
+## Fast checks (during development)
+
+| Purpose | Command |
+|---------|---------|
+| Backend CI subset | `make test` |
+| Backend without Postgres | `make test-backend` |
+| Frontend unit tests | `make test-frontend` or `cd frontend-next && npm run test` |
+
 ## FastAPI backend
 
 | Purpose | Command |
 |---------|---------|
-| Contract + health tests | `cd backend && uv sync --dev && uv run pytest tests/contract/ tests/test_health.py -q` |
-| Full backend suite | `cd backend && uv run pytest -q` |
+| CI-equivalent subset | `make test` |
+| All backend tests except integration | `make test-backend` (`--ignore=tests/integration`) |
+| Postgres integration only | `make test-integration` (requires `TEST_DATABASE_URL`) |
 | Lint | `cd backend && uv run ruff check .` |
 | CI-equivalent env | `TESTING=1`, `DATABASE_URL=sqlite://`, `FLASK_SECRET_KEY`, `JWT_SECRET_KEY` (see `.github/workflows/ci.yml`) |
 
@@ -29,8 +38,7 @@ Agents MUST use these commands — not commands from other projects.
 
 | Purpose | Command |
 |---------|---------|
-| Unit tests | `cd frontend-next && npm run test` |
-| E2E smoke | `cd frontend-next && npm run test:e2e` |
+| Unit tests | `make test-frontend` or `cd frontend-next && npm run test` |
 | Production build | `cd frontend-next && npm run build` |
 | Lint + typecheck | `cd frontend-next && npm run lint && npm run typecheck` |
 
@@ -41,7 +49,7 @@ Skip frontend validation unless the task touches `frontend-next/`.
 | Purpose | Rule |
 |---------|------|
 | Commits / push | Only after explicit user approval (`.ai-rules/git.md`) |
-| PR to `main` | Required for production; CI `test` must pass |
+| PR to `main` | Required for production; CI must pass |
 
 ## Stop conditions
 
