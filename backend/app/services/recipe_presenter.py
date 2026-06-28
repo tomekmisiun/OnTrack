@@ -41,10 +41,15 @@ def _total_weight(recipe: Recipe, *, locale: str, market_code: str) -> float:
     )
 
 
+def _uses_per_100g_macros(recipe: Recipe) -> bool:
+    """Catalog recipes store explicit kcal/100g; user recipes default to 0 and use ingredients."""
+    return (recipe.kcal_100g or 0) > 0
+
+
 def _calc_macros(
     recipe: Recipe, *, locale: str, market_code: str
 ) -> tuple[int, float, float, float]:
-    if recipe.kcal_100g is not None:
+    if _uses_per_100g_macros(recipe):
         total = _total_weight(recipe, locale=locale, market_code=market_code)
         factor = total / 100.0
         return (

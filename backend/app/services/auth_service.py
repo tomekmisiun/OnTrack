@@ -167,7 +167,7 @@ def change_password(
     if not user:
         raise AuthServiceError("User not found", 404)
     if not verify_password(user.password_hash, current_password):
-        raise AuthServiceError("Invalid current password", 401)
+        raise AuthServiceError("Invalid current password", 400)
     err = _validate_password(new_password)
     if err:
         raise AuthServiceError(err, 400)

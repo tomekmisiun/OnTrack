@@ -192,8 +192,13 @@ function RecipePreviewModal({
   if (!recipe) return null;
 
   const r = fullRecipe ?? recipe;
-  const kcal = r.total_kcal > 0 ? r.total_kcal : r.kcal_100g;
-  const per100 = r.total_kcal === 0 && r.kcal_100g != null;
+  const kcal =
+    r.total_kcal > 0
+      ? r.total_kcal
+      : r.kcal_100g != null && r.kcal_100g > 0
+        ? r.kcal_100g
+        : null;
+  const per100 = r.total_kcal === 0 && kcal != null;
 
   return (
     <div
@@ -397,12 +402,24 @@ const DraggableRecipe = memo(function DraggableRecipe({
     data: { type: "recipe", recipe } satisfies DragData,
   });
   const pointerStart = useRef<{ x: number; y: number } | null>(null);
-  const displayKcal = recipe.total_kcal > 0 ? recipe.total_kcal : recipe.kcal_100g;
-  const displayProtein = recipe.total_kcal > 0 ? recipe.total_protein : recipe.protein_100g;
-  const displayFat = recipe.total_kcal > 0 ? recipe.total_fat : recipe.fat_100g;
-  const displayCarbs = recipe.total_kcal > 0 ? recipe.total_carbs : recipe.carbs_100g;
-  const isPer100g = recipe.total_kcal === 0 && recipe.kcal_100g != null;
-  const hasKcal = displayKcal != null;
+  const displayKcal =
+    recipe.total_kcal > 0
+      ? recipe.total_kcal
+      : recipe.kcal_100g != null && recipe.kcal_100g > 0
+        ? recipe.kcal_100g
+        : null;
+  const displayProtein =
+    recipe.total_kcal > 0
+      ? recipe.total_protein
+      : displayKcal != null
+        ? recipe.protein_100g
+        : null;
+  const displayFat =
+    recipe.total_kcal > 0 ? recipe.total_fat : displayKcal != null ? recipe.fat_100g : null;
+  const displayCarbs =
+    recipe.total_kcal > 0 ? recipe.total_carbs : displayKcal != null ? recipe.carbs_100g : null;
+  const isPer100g = recipe.total_kcal === 0 && displayKcal != null;
+  const hasKcal = displayKcal != null && displayKcal > 0;
 
   const [proteinLabel, fatLabel, carbsLabel] = macroLabelsForLocale(lang);
   const macroLabels = [

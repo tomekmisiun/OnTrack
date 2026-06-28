@@ -2,6 +2,7 @@ from datetime import date, timedelta
 
 from sqlalchemy.orm import Session, joinedload
 
+from app.domain.ingredient_units import ingredient_summary_quantity
 from app.domain.package_math import (
     default_package_weight,
     package_line_costs,
@@ -325,7 +326,11 @@ def get_summary(
                     "sold_by_weight": bool(view.sold_by_weight),
                     "total_weight": 0,
                 }
-            products[pid]["total_weight"] += ingredient.weight
+            products[pid]["total_weight"] += ingredient_summary_quantity(
+                ingredient,
+                locale=locale,
+                market_code=market_code,
+            )
 
     result: list[dict] = []
     total_cost = 0.0

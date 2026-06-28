@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { changeLanguage, changeMarket } from "@/lib/api/auth";
+import { useState, type FormEvent } from "react";
+import { changeLanguage, changeMarket, changePassword } from "@/lib/api/auth";
+import { ApiError } from "@/lib/api/errors";
 import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import type { MarketCode } from "@/lib/domain/market";
@@ -25,6 +26,11 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
   const [showMarketWarning, setShowMarketWarning] = useState(false);
   const [pendingMarket, setPendingMarket] = useState<MarketCode | null>(null);
   const [changingMarket, setChangingMarket] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [changingPassword, setChangingPassword] = useState(false);
+  const [passwordSuccess, setPasswordSuccess] = useState(false);
 
   if (!user) return null;
 
@@ -48,6 +54,7 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
     if (newLang === activeLang || changingLang) return;
     setChangingLang(true);
     setError("");
+    setPasswordSuccess(false);
     try {
       await changeLanguage(newLang);
       updateUserLang(newLang);
@@ -69,6 +76,7 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
     if (!pendingMarket) return;
     setChangingMarket(true);
     setError("");
+    setPasswordSuccess(false);
     try {
       await changeMarket(pendingMarket);
       updateUserMarket(pendingMarket);
@@ -78,6 +86,49 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
       setError(e instanceof Error ? e.message : "Error");
     } finally {
       setChangingMarket(false);
+    }
+  };
+
+  const passwordErrorMessage = (err: unknown): string => {
+    if (err instanceof ApiError) {
+      const msg = err.message;
+      if (msg.includes("Invalid current password")) {
+        return tString(t, "profile_password_wrong");
+      }
+      if (msg.includes("at least 8")) {
+        return tString(t, "profile_password_too_short");
+      }
+    }
+    return err instanceof Error ? err.message : "Error";
+  };
+
+  const handlePasswordChange = async (event: FormEvent) => {
+    event.preventDefault();
+    if (changingPassword) return;
+
+    setError("");
+    setPasswordSuccess(false);
+
+    if (newPassword !== confirmPassword) {
+      setError(tString(t, "profile_password_mismatch"));
+      return;
+    }
+    if (newPassword.length < 8) {
+      setError(tString(t, "profile_password_too_short"));
+      return;
+    }
+
+    setChangingPassword(true);
+    try {
+      await changePassword(currentPassword, newPassword);
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+      setPasswordSuccess(true);
+    } catch (e) {
+      setError(passwordErrorMessage(e));
+    } finally {
+      setChangingPassword(false);
     }
   };
 
@@ -106,6 +157,11 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
         </div>
 
         {error && <div className="profile-modal-error">{error}</div>}
+        {passwordSuccess && (
+          <div className="profile-password-success">
+            {tString(t, "profile_password_success")}
+          </div>
+        )}
 
         <div className="profile-field">
           <div className="profile-field-label">
@@ -172,6 +228,69 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
             })()}
           </div>
         </div>
+
+        <form className="profile-field" onSubmit={(e) => void handlePasswordChange(e)}>
+          <div className="profile-field-label profile-field-label--lang">
+            {tString(t, "profile_password_section")}
+          </div>
+          <label className="profile-field-label" htmlFor="profile-current-password">
+            {tString(t, "profile_current_password")}
+          </label>
+          <input
+            id="profile-current-password"
+            type="password"
+            className="profile-password-input"
+            autoComplete="current-password"
+            value={currentPassword}
+            onChange={(e) => {
+              setCurrentPassword(e.target.value);
+              setPasswordSuccess(false);
+            }}
+            required
+          />
+          <label className="profile-field-label" htmlFor="profile-new-password">
+            {tString(t, "profile_new_password")}
+          </label>
+          <input
+            id="profile-new-password"
+            type="password"
+            className="profile-password-input"
+            autoComplete="new-password"
+            minLength={8}
+            placeholder={tString(t, "login_password_ph")}
+            value={newPassword}
+            onChange={(e) => {
+              setNewPassword(e.target.value);
+              setPasswordSuccess(false);
+            }}
+            required
+          />
+          <label className="profile-field-label" htmlFor="profile-confirm-password">
+            {tString(t, "profile_confirm_password")}
+          </label>
+          <input
+            id="profile-confirm-password"
+            type="password"
+            className="profile-password-input"
+            autoComplete="new-password"
+            minLength={8}
+            value={confirmPassword}
+            onChange={(e) => {
+              setConfirmPassword(e.target.value);
+              setPasswordSuccess(false);
+            }}
+            required
+          />
+          <button
+            type="submit"
+            disabled={changingPassword}
+            className="profile-btn profile-btn-password"
+          >
+            {changingPassword
+              ? tString(t, "profile_password_saving")
+              : tString(t, "profile_password_save")}
+          </button>
+        </form>
 
         <div className="profile-actions">
           <button

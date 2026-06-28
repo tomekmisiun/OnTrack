@@ -70,6 +70,18 @@ def test_change_password(client, db_session):
     assert login.status_code == 200
 
 
+def test_change_password_rejects_wrong_current(client, db_session):
+    user = create_user(db_session, "bob@example.com", lang="pl", username="bobuser")
+    headers = {"Authorization": f"Bearer {create_access_token(user.id)}"}
+    res = client.patch(
+        "/api/auth/password",
+        headers=headers,
+        json={"current_password": "wrong-password", "new_password": "NewPass123!"},
+    )
+    assert res.status_code == 400
+    assert res.json()["error"] == "Invalid current password"
+
+
 def test_forgot_password_returns_token_in_testing(client, db_session):
     create_user(db_session, "reset@example.com", lang="pl", username="resetuser")
     res = client.post("/api/auth/forgot-password", json={"email": "reset@example.com"})
