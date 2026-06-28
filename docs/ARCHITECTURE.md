@@ -1,6 +1,6 @@
 # Architecture
 
-**Last verified:** 2026-06-27
+**Last verified:** 2026-06-28
 
 ---
 
@@ -81,7 +81,7 @@ CORS: `FRONTEND_URL` on backend must list exact browser origins.
 | Register / login | Email + password → `{ "token": "…" }` |
 | JWT | Signed with `JWT_SECRET_KEY`; sent as Bearer header |
 | Google OAuth | `/api/auth/google` → callback sets session cookie (`FLASK_SECRET_KEY`) then issues JWT |
-| Password reset | Request token via API; reset with token — no outbound email |
+| Password reset | Request token via API; SMTP sends reset email when configured (`SMTP_*`) |
 | BFF (optional) | Next.js route handlers proxy auth; see [SECURITY.md](./SECURITY.md) |
 
 Decision record: [ADR 0001 — BFF auth](./adr/0001-bff-production-mode.md)
@@ -106,8 +106,6 @@ Locale/market model: [ADR 0003](./adr/0003-ui-locale-market-separation.md)
 
 **None.** Fuel scraping and catalog builds run synchronously in the API process or as CI/pre-deploy scripts.
 
-Fuel scraping and catalog builds run synchronously in API process or as CI/pre-deploy scripts.
-
 ---
 
 ## Observability
@@ -118,8 +116,9 @@ Fuel scraping and catalog builds run synchronously in API process or as CI/pre-d
 | `/metrics` | Prometheus exposition |
 | Prometheus + Grafana | Local Compose only |
 | Railway logs | Production |
+| Sentry (optional) | `SENTRY_DSN` (API), `NEXT_PUBLIC_SENTRY_DSN` (frontend) — see [SECURITY.md](./SECURITY.md) |
 
-No APM or error tracking service is configured in repo.
+No APM beyond optional Sentry is required in repo configuration.
 
 ---
 

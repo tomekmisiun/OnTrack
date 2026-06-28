@@ -10,10 +10,21 @@ These files are **excluded from markdown link checks** in `scripts/validate-ai-w
 
 Active docs under `docs/` (outside this archive) remain fully validated.
 
+## Archived documents (June 2026 audits)
+
+| Archived document | Reason | Current source of truth |
+|---|---|---|
+| `documentation-audit-2026-06-27.md` | Point-in-time inventory before docs reset (#163) | [`../../README.md`](../../README.md), [`../../CURRENT_STATE.md`](../../CURRENT_STATE.md) |
+| `docs-and-test-audit-2026-06-27.md` | Playwright removal + CI simplification snapshot | [`../../TESTING.md`](../../TESTING.md) |
+| `dead-code-audit-2026-06-27.md` | Dead-code inventory (Tasks 1–9 merged) | [`../../TECH_DEBT.md`](../../TECH_DEBT.md), [`../../ROADMAP.md`](../../ROADMAP.md) |
+
 ## Archive layout
 
 | Path | Contents |
 |------|----------|
+| `documentation-audit-2026-06-27.md` | June 2026 documentation reset audit (#163) |
+| `docs-and-test-audit-2026-06-27.md` | June 2026 docs + Playwright removal audit |
+| `dead-code-audit-2026-06-27.md` | June 2026 dead-code audit (Tasks 1–9 merged) |
 | `PROJECT_CURRENT_STATE_AUDIT_2026-06-26.md` | June 2026 point-in-time audit (superseded) |
 | `2026-05-26_FULL_PROJECT_AUDIT.md` | Consolidated audit (May 2026) |
 | `2026-05-26_PROJECT_TECHNICAL_AUDIT.md` | Technical audit (May 2026) |

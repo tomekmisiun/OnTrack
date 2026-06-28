@@ -28,6 +28,6 @@ Do **not** follow Flask rollback or CRA frontend contract instructions from arch
 
 ## Production stack (current)
 
-- **API:** `backend/` — FastAPI, Alembic head `c2d3e4f5a6b7` (verify with `alembic current`)
+- **API:** `backend/` — FastAPI, Alembic head `d3e4f5a6b7c8` (verify with `uv run alembic current`)
 - **Frontend:** `frontend-next/` — Next.js 15 App Router
 - **Deploy:** Railway `ontrack-back` + `ontrackapp` via GitHub Actions on green `main`

@@ -46,7 +46,7 @@ npm run start
 ```text
 app/           — App Router pages and layouts
 components/    — UI components
-contexts/      — React contexts (Language, Toast; auth/member in later tasks)
+contexts/      — React contexts (Language, Toast, Auth, Member)
 lib/i18n/      — Translation tables (ported from CRA)
 lib/api/       — HTTP client and API modules
 lib/config/    — Environment helpers
@@ -60,8 +60,8 @@ public/        — Static assets
 - **`strict: true`** plus **`noUncheckedIndexedAccess`** — array and record indexing may be `undefined`; narrow before use.
 - **Path alias** `@/*` maps to the package root (`baseUrl: "."` in `tsconfig.json`).
 - **Import style** — use `import type { … }` for type-only imports (enforced by ESLint).
-- **`types/`** — UI state shapes (`AsyncState`, `FetchState`), view models, and helpers. Do **not** hand-write Pydantic/API DTOs here; task 3 generates those from OpenAPI.
-- **`lib/api/`** — transport layer and thin endpoint wrappers until the typed OpenAPI client lands.
+- **`types/`** — UI state shapes (`AsyncState`, `FetchState`), view models, and helpers. API DTOs come from OpenAPI-generated types in `lib/api/generated/`.
+- **`lib/api/`** — HTTP client, OpenAPI helpers, and endpoint modules.
 - **No `any`** — ESLint error; prefer `unknown` and narrowing.
 - **Unused bindings** — prefix with `_` if intentionally unused.
 
@@ -102,7 +102,7 @@ npm run generate:api
 - Protected app routes under `app/(app)/` — `/`, `/macro`, `/calendar`, `/schedule`, `/recipes`, `/products`, `/summary`, `/export`
 - `middleware.ts` — session gate (`ontrack_has_token` or HttpOnly `ontrack_session`)
 - `components/layout/Sidebar.tsx` — CRA tab parity (sidebar hidden on home)
-- Module screens: products (task 8), recipes (task 9), calendar/meal plan (task 10), day schedule (task 11); summary, export, etc. are placeholders until task 12
+- Module screens: products, recipes, calendar/meal plan, day schedule, summary, export, macro, welcome — see [docs/CURRENT_STATE.md](../docs/CURRENT_STATE.md)
 
 ## Members
 

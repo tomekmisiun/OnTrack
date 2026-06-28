@@ -1,3 +1,7 @@
+> [!WARNING]
+> This document is archived and does not describe the current state of the project.
+> See the current documentation: [docs/README.md](../../README.md) and [CURRENT_STATE.md](../../CURRENT_STATE.md).
+
 # Documentation audit — 2026-06-27
 
 **Branch:** `chore/docs-audit-and-reset` (merged #163)  

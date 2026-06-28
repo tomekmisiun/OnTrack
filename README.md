@@ -191,6 +191,8 @@ Runbook: [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) · [`.github/DEPLOY.md`](.gith
 
 ## Documentation
 
+Full index: **[docs/README.md](docs/README.md)**
+
 | Document | Contents |
 |----------|----------|
 | [docs/CURRENT_STATE.md](docs/CURRENT_STATE.md) | What works today |

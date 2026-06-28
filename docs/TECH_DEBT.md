@@ -1,6 +1,6 @@
 # Technical debt
 
-**Last updated:** 2026-06-27
+**Last updated:** 2026-06-28
 
 Concrete issues with code evidence. Priority: **P0** (production risk) → **P3** (cosmetic). Resolved items are removed or marked resolved with evidence.
 
@@ -80,6 +80,19 @@ Concrete issues with code evidence. Priority: **P0** (production risk) → **P3*
 | **Evidence** | `docker-compose.yml` prometheus/grafana services; `/metrics` on API |
 | **Risk** | Limited production visibility |
 | **Suggested fix** | Railway metrics integration or external Prometheus |
+| **Priority** | P3 |
+
+---
+
+## TD-010 — Export summary package math parity
+
+| Field | Value |
+|-------|-------|
+| **Area** | Export / summary |
+| **Problem** | Frontend export package math may diverge from backend `get_summary()` totals |
+| **Evidence** | Dead-code audit DC-28; `components/export/` vs `meal_plan_service.get_summary()` |
+| **Risk** | User-visible cost discrepancies in shopping list export |
+| **Suggested fix** | Contract test comparing FE package math vs BE summary; align or document intentional differences |
 | **Priority** | P3 |
 
 ---

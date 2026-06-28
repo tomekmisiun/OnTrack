@@ -76,7 +76,7 @@ Before editing, read the files listed for your **task type**. Start with
 | `docs/CURRENT_STATE.md` | Canonical project state |
 | `docs/ROADMAP.md` | Active plans |
 | `docs/TECH_DEBT.md` | Technical debt register |
-| `docs/audits/documentation-audit-2026-06-27.md` | Documentation reset audit |
+| `docs/audits/archive/documentation-audit-2026-06-27.md` | Documentation reset audit (archived) |
 | `.github/DEPLOY.md` | CI deploy quick reference → `docs/DEPLOYMENT.md` |
 
 Do not invent roadmap or status files beyond what exists above.
