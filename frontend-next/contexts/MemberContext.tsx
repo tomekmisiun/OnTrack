@@ -41,6 +41,7 @@ export type MemberContextValue = {
   targetMemberIds: number[];
   toggleIncludedMember: (id: number) => void;
   includeMember: (id: number) => void;
+  excludeMember: (id: number) => void;
 };
 
 const MemberContext = createContext<MemberContextValue | null>(null);
@@ -137,6 +138,14 @@ export function MemberProvider({ children }: { children: ReactNode }) {
     setIncludedMemberIds((prev) => (prev.includes(id) ? prev : [...prev, id]));
   }, []);
 
+  const excludeMember = useCallback((id: number) => {
+    setIncludedMemberIds((prev) => {
+      const next = prev.filter((x) => x !== id);
+      if (next.length > 0) return next;
+      return prev;
+    });
+  }, []);
+
   const displayMembers = useMemo(
     () => withLocalizedNames(members, lang),
     [members, lang],
@@ -184,6 +193,7 @@ export function MemberProvider({ children }: { children: ReactNode }) {
       targetMemberIds,
       toggleIncludedMember,
       includeMember,
+      excludeMember,
     }),
     [
       displayMembers,
@@ -195,6 +205,7 @@ export function MemberProvider({ children }: { children: ReactNode }) {
       targetMemberIds,
       toggleIncludedMember,
       includeMember,
+      excludeMember,
     ],
   );
 

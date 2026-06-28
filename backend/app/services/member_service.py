@@ -1,6 +1,8 @@
 from sqlalchemy.orm import Session
 
+from app.models.day_schedule import DayScheduleBlock
 from app.models.household_member import HouseholdMember
+from app.models.meal_plan import MealPlan
 from app.services.member_presenter import member_to_dict
 
 MAX_MEMBERS = 10
@@ -110,6 +112,13 @@ def delete_member(session: Session, user_id: int, member_id: int) -> None:
     member = _get_own_member(session, user_id, member_id)
     if member.is_primary:
         raise MemberServiceError("Cannot delete the primary member", 403)
+
+    session.query(MealPlan).filter_by(user_id=user_id, member_id=member_id).delete(
+        synchronize_session=False
+    )
+    session.query(DayScheduleBlock).filter_by(
+        user_id=user_id, member_id=member_id
+    ).delete(synchronize_session=False)
     session.delete(member)
     session.commit()
 

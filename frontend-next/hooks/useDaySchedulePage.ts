@@ -309,15 +309,36 @@ export function useDaySchedulePage() {
         );
         showSuccess(tString(t, "schedule_updated"));
       } else {
-        const created = await apiCreate({
-          day: modal.day,
-          start_hour: modal.start_hour,
-          end_hour: modal.end_hour,
-          week_start: modal.week_start,
-          label,
-          member_id: activeMember.id,
-        });
-        setBlocks((prev) => sortScheduleBlocks([...prev, created]));
+        const targetIds = workTargetMemberIds.length
+          ? workTargetMemberIds
+          : [activeMember.id];
+        const allCreated: ScheduleBlock[] = [];
+        for (const memberId of targetIds) {
+          try {
+            const created = await apiCreate({
+              day: modal.day,
+              start_hour: modal.start_hour,
+              end_hour: modal.end_hour,
+              week_start: modal.week_start,
+              label,
+              member_id: memberId,
+            });
+            allCreated.push(created);
+          } catch (err) {
+            if (err instanceof ApiError && err.status === 409) continue;
+            throw err;
+          }
+        }
+        if (!allCreated.length) {
+          showError(tString(t, "schedule_overlap_err"));
+          return;
+        }
+        const forActive = allCreated.filter(
+          (b) => b.member_id === activeMember.id,
+        );
+        if (forActive.length) {
+          setBlocks((prev) => sortScheduleBlocks([...prev, ...forActive]));
+        }
         showSuccess(tString(t, "schedule_saved"));
       }
       setModal(null);
