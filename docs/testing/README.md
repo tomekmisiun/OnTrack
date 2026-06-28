@@ -275,6 +275,6 @@ This is a **conscious decision** after removing Playwright:
 
 ## Related
 
-- [DEVELOPMENT.md](./DEVELOPMENT.md) — local setup
-- [DEPLOYMENT.md](./DEPLOYMENT.md) — deploy after CI
+- [development/README.md](../development/README.md) — local setup
+- [operations/deployment.md](../operations/deployment.md) — deploy after CI
 - `.github/DEPLOY.md` — operator quick reference

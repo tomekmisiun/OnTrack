@@ -23,28 +23,28 @@ Before editing, read the files listed for your **task type**. Start with
 | **Migrations** | `backend/alembic/` | Single head; `scripts/ensure_alembic_head.py` for legacy stamp |
 | **Tests (backend)** | `backend/tests/` | Contract + integration |
 | **Tests (frontend)** | `frontend-next/tests/` | Vitest unit tests |
-| **API contract** | `docs/backend-migration/API_CONTRACT.md`, `frontend-next/openapi/openapi.json` | |
+| **API contract** | `docs/specs/api-contract.md`, `frontend-next/openapi/openapi.json` | |
 | **Docker** | `docker-compose.yml`, `frontend-next/Dockerfile`, `backend/Dockerfile` | |
 | **CI** | `.github/workflows/ci.yml` | |
-| **Deploy** | `.github/DEPLOY.md`, `docs/DEPLOYMENT.md` | CI-gated Railway deploy (`deploy-production`) |
+| **Deploy** | `.github/DEPLOY.md`, `docs/operations/deployment.md` | CI-gated Railway deploy (`deploy-production`) |
 
 ## Task type → read list
 
 ### API / HTTP change
 - `.ai-rules/api.md`, `.ai-rules/architecture.md`, `.ai-rules/testing.md`
-- `docs/backend-migration/API_CONTRACT.md`
+- `docs/specs/api-contract.md`
 - `backend/app/api/routes/`
 - `frontend-next/lib/api/`
 - `backend/tests/contract/` for affected endpoints
 
 ### Database / model change
 - `.ai-rules/database.md`, `.ai-rules/testing.md`
-- `docs/backend-migration/DATABASE_COMPATIBILITY.md`
+- `docs/archive/completed-migrations/backend-migration/DATABASE_COMPATIBILITY.md`
 - `backend/app/models/`, `backend/alembic/versions/`
 
 ### Security / auth change
 - `.ai-rules/security.md`, `.ai-rules/threat-modeling.md`, `.ai-rules/testing.md`
-- `docs/backend-migration/AUTH_COMPATIBILITY.md`
+- `docs/archive/completed-migrations/backend-migration/AUTH_COMPATIBILITY.md`
 - `backend/app/api/routes/auth.py`, `backend/app/core/config.py`, `.env.example`
 - `backend/tests/contract/test_auth_contract.py`
 
@@ -53,7 +53,7 @@ Before editing, read the files listed for your **task type**. Start with
 
 ### Frontend change (only when explicitly in scope)
 - `frontend-next/lib/i18n/messages/`
-- Coordinate with `docs/backend-migration/API_CONTRACT.md` for API changes
+- Coordinate with `docs/specs/api-contract.md` for API changes
 
 ### Docker / CI change
 - `.ai-rules/docker.md`, `.ai-rules/documentation.md`
@@ -62,10 +62,10 @@ Before editing, read the files listed for your **task type**. Start with
 
 ### Docs / migration planning
 - `.ai-rules/documentation.md`, `.ai-rules/review.md`
-- `README.md`, `docs/backend-migration/`, `docs/audits/`
+- `README.md`, `docs/archive/completed-migrations/backend-migration/`, `docs/audits/`
 
 ### AI rules / workflow change
-- `.ai-rules/documentation.md`, `docs/ai-workflows.md`
+- `.ai-rules/documentation.md`, `docs/development/ai/workflows.md`
 - `AGENTS.md`, `CLAUDE.md`, `.cursor/rules/ontrack.mdc`
 - `scripts/validate-ai-workflows.sh`
 
@@ -73,10 +73,10 @@ Before editing, read the files listed for your **task type**. Start with
 
 | File | Purpose |
 |------|---------|
-| `docs/CURRENT_STATE.md` | Canonical project state |
-| `docs/ROADMAP.md` | Active plans |
-| `docs/TECH_DEBT.md` | Technical debt register |
-| `docs/audits/archive/documentation-audit-2026-06-27.md` | Documentation reset audit (archived) |
-| `.github/DEPLOY.md` | CI deploy quick reference → `docs/DEPLOYMENT.md` |
+| `docs/project/current-state.md` | Canonical project state |
+| `docs/project/roadmap.md` | Active plans |
+| `docs/project/tech-debt.md` | Technical debt register |
+| `docs/archive/audits/documentation-audit-2026-06-27.md` | Documentation reset audit (archived) |
+| `.github/DEPLOY.md` | CI deploy quick reference → `docs/operations/deployment.md` |
 
 Do not invent roadmap or status files beyond what exists above.

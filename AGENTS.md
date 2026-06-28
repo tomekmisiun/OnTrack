@@ -3,8 +3,8 @@
 Binding project rules live in **`.ai-rules/`**. Read the relevant files before
 making changes. Do not duplicate rule bodies here.
 
-Workflow overview: **`docs/ai-workflows.md`** · Two-agent review:
-**`docs/two-agent-review-workflow.md`**
+Workflow overview: **`docs/development/ai/workflows.md`** · Two-agent review:
+**`docs/development/ai/workflows.md`**
 
 After every non-trivial file-changing task, Codex MUST run a read-only
 Reviewer before the final response: first try cross-provider review via
@@ -48,7 +48,7 @@ with an explicit reason. See `.ai-rules/agent-orchestration.md` §8 and
 
 - **`agents/`** — review personas (security, DevOps/CI, backend, database)
 - **`.commands/`** — prompt formats and procedures
-- **`docs/two-agent-review-workflow.md`** — Builder / Reviewer handoff pattern
+- **`docs/development/ai/workflows.md`** — Builder / Reviewer handoff pattern
 - **`docs/specs/`** — feature spec conventions
 
 ## Validation

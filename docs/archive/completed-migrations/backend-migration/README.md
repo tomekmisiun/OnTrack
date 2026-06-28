@@ -1,6 +1,10 @@
 # OnTrack backend migration documentation
 
-**Status:** Flask → FastAPI migration **complete**. Runtime data pipeline **complete**. Catalog + locale/market model **complete**.
+> [!WARNING]
+> Dokument archiwalny. Migracja Flask→FastAPI zakończona.
+> Aktualna dokumentacja: [project/current-state.md](../../../project/current-state.md), [specs/api-contract.md](../../../specs/api-contract.md).
+
+**Status:** Flask → FastAPI migration **complete**.
 
 **Current state:** [`docs/CURRENT_STATE.md`](../CURRENT_STATE.md)  
 **Roadmap:** [`docs/ROADMAP.md`](../ROADMAP.md) · **Debt:** [`docs/TECH_DEBT.md`](../TECH_DEBT.md)

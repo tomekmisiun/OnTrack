@@ -27,4 +27,4 @@ OnTrack previously derived catalog language from the user's market (`PL → pl`,
 ## References
 
 - Migration chain: `e7f8a9b0c1d2`, `a2b3c4d5e6f7`, `b1c2d3e4f5a6`
-- Historical pre-implementation audit: [`docs/audits/archive/ui-locale-market-separation-audit.md`](../audits/archive/ui-locale-market-separation-audit.md)
+- Historical pre-implementation audit: [`ui-locale-market-separation-audit.md`](../archive/audits/ui-locale-market-separation-audit.md)

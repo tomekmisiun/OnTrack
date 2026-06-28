@@ -33,5 +33,5 @@
 ## References
 
 - `frontend-next/lib/bff/config.ts`
-- [`docs/SECURITY.md`](../SECURITY.md) — auth and BFF notes
-- Audit: [`docs/CURRENT_STATE.md`](../CURRENT_STATE.md)
+- [`security/overview.md`](../security/overview.md) — auth and BFF notes
+- [`project/current-state.md`](../project/current-state.md)

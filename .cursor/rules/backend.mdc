@@ -21,6 +21,6 @@ Source of truth (read from `.ai-rules/`):
 
 OnTrack-specific:
 
-- `docs/backend-migration/API_CONTRACT.md` — frontend JSON contract
-- `docs/backend-migration/AUTH_COMPATIBILITY.md` — JWT and OAuth parity
+- `docs/specs/api-contract.md` — frontend JSON contract
+- `docs/archive/completed-migrations/backend-migration/AUTH_COMPATIBILITY.md` — JWT and OAuth parity
 - During migration: do not break Flask until FastAPI passes contract tests

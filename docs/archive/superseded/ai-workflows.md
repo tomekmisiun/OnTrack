@@ -1,3 +1,7 @@
+> [!WARNING]
+> Dokument archiwalny. Nie stanowi aktualnego źródła prawdy.
+> Aktualna dokumentacja: [workflows.md](../../development/ai/workflows.md).
+
 # AI Workflows
 
 Index of how agents work in this repository.

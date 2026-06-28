@@ -1,186 +1,1194 @@
 # Documentation Rules
 
-`.ai-rules/` governs agent behavior. User-facing documentation lives in
-`README.md`, `docs/`, and any tracking files the target repository defines.
+## Purpose
 
-**Style reference:** organizational patterns from [jaktestowac](https://github.com/jaktestowac)
-repos ([awesome-copilot-for-testers](https://github.com/jaktestowac/awesome-copilot-for-testers),
-[playwright-tools](https://github.com/jaktestowac/playwright-tools),
-[testcontainers-example](https://github.com/jaktestowac/testcontainers-example)).
-Adopt structure and clarity — do **not** copy their marketing text, contact
-footers, course links, or Playwright-specific content into OnTrack docs.
+Create and maintain professional, accurate, easy-to-navigate project documentation inspired by the presentation quality and usability patterns used in repositories from:
 
-## Core principle
+`https://github.com/jaktestowac`
 
-> Documentation MUST describe the verified state of the repository, not a
-> planned or assumed state of the system.
+Use that source only as a quality and structure reference. Do not copy its wording, branding, images, or project-specific content.
 
-Verify against code, tests, CI workflows, and configuration before writing or
-updating docs.
+The documentation must help a new developer or reviewer quickly understand:
 
-## Accuracy
+- what the project does,
 
-- MUST NOT invent features, endpoints, or completed work.
-- Document only behavior that exists in code and tests.
-- Before documenting APIs, verify routes in code or generated API docs.
-- Do not state fixed test counts — show commands instead (counts drift quickly).
-- Do not present roadmap items as shipped features.
-- Badges MUST link to real, working workflows or services.
+- why it exists,
 
-## jaktestowac-style layout (OnTrack adaptation)
+- how it is structured,
 
-Write for someone seeing the project for the first time. Prefer **practical,
-scannable docs** over long prose.
+- how to run it,
 
-### README structure (recommended order)
+- how to test it,
 
-1. **Title + one-line purpose** — what the project is and which problem it solves.
-2. **Badges row** — only real badges (CI, stack, license). Each badge links to
-   a working destination.
-3. **Horizontal rule** (`---`) before major sections when README is longer than
-   ~80 lines.
-4. **Table of contents** — anchor links for READMEs with 6+ sections.
-5. **About / What it does** — short bullet list of capabilities (not marketing
-   slogans).
-6. **Stack / Architecture** — one diagram or code block, then link to
-   `docs/ARCHITECTURE.md` for detail.
-7. **Requirements** — table or bullet list of tools and versions.
-8. **Quick start** — copy-paste commands in fenced blocks; match real npm/Make
-   scripts exactly.
-9. **Configuration** — env vars table with purpose column; link to
-   `.env.example`.
-10. **Development** — how to run backend and frontend separately.
-11. **Testing** — command table (`make test`, etc.); link to `docs/TESTING.md`.
-12. **Validation / linting** — exact commands.
-13. **Deployment** — short summary; link to `docs/DEPLOYMENT.md`.
-14. **Documentation index** — table: Document | Contents | path.
-15. **Limitations** — known gaps only (verified).
+- how to configure and deploy it,
 
-### Section patterns (from jaktestowac)
+- what is production-ready,
 
-| Pattern | When to use | Example |
-|---------|-------------|---------|
-| `## Requirements` | Prerequisites before first run | Node 24, Docker, Postgres 15 |
-| `## How to` / `## Quick start` | First successful run | `docker compose up --build` |
-| `## Features` or `## What it does` | Capability overview | Bullet list, bold lead term |
-| Command block + short intro | Runnable steps | “Run following commands.” then fenced block |
-| Resource table | Doc navigation | `\| Document \| Contents \|` |
-| `---` separator | Between major blocks | After badges, before TOC |
-| Callout (`> [!TIP]`) | Non-obvious but important note | Link to deeper doc instead of duplicating |
-| `> [!IMPORTANT]` | Safety, auth, or deploy gate | Staging before production |
-| Link-out | Deep detail | “See [TESTING.md](docs/TESTING.md)” |
+- what limitations or risks remain.
 
-Use callouts sparingly — one or two per doc, not on every section.
+Documentation is part of the product. Treat incorrect documentation as a defect.
 
-### Emojis and tone
+---
 
-jaktestowac uses emojis in section headers for scanability. For OnTrack:
+## Core principles
 
-- **Optional** in README section headers (`## Testing`, not required `## 🧪 Testing`).
-- **Avoid** emoji spam, decorative badges, and portfolio-style closings.
-- Tone: clear, technical, helpful — like a good workshop handout, not a landing page.
+1. **Accuracy over appearance**
 
-### What NOT to copy from jaktestowac
+   - Never document behavior that was not verified in the repository.
 
-- Contact / Discord / course promotion blocks (unless OnTrack adds its own support channel).
-- “Happy testing!” footers and team sign-offs.
-- Playwright learning-resource lists (OnTrack removed browser E2E).
-- Install-badge columns for VS Code extensions.
-- Marketing claims (“comprehensive”, “professional”) without code evidence.
+   - Never invent commands, environment variables, endpoints, workflows, features, badges, deployment targets, test counts, coverage values, or production-readiness claims.
 
-## README maintenance
+   - Verify facts against source code, configuration, tests, CI workflows, deployment files, and current application behavior.
 
-Update `README.md` when a change affects:
+2. **Useful before exhaustive**
 
-- setup, containers, environment variables, migrations, tests, or workflows
-- API overview, auth flow, roles, permissions, or rate limiting
-- known production gaps
+   - Optimize for a reader who sees the repository for the first time.
 
-Do not update `README.md` for refactors that do not change behavior, setup, API,
-configuration, migrations, or workflows.
+   - Put the most important information first.
 
-## Docs directory
+   - Keep the root `README.md` focused on orientation and onboarding.
 
-Preferred layout (create only when needed):
+   - Move detailed operational or architectural material into dedicated files under `docs/`.
 
-| File | Purpose |
-|------|---------|
-| `README.md` | Project entry point |
-| `docs/ARCHITECTURE.md` | Architecture when it needs a dedicated doc |
-| `docs/TESTING.md` | Complete test strategy and CI mapping |
-| `docs/DEPLOYMENT.md` | Real deployment process |
-| `docs/SECURITY.md` | Security mechanisms when non-trivial |
-| `docs/ROADMAP.md` | Active future work only |
-| `docs/TECH_DEBT.md` | Confirmed, still-open debt only |
-| `docs/adr/` | Permanent architecture decisions |
+3. **One source of truth**
 
-Long docs (`TESTING.md`, `DEPLOYMENT.md`, `ARCHITECTURE.md`) MUST have:
+   - Do not duplicate the same detailed instructions across multiple files.
 
-- Table of contents with anchor links at the top.
-- Command tables mapping task → exact command.
-- CI job matrix table when tests or deploy are described.
-- “Related” links at the bottom — not duplicated content from other docs.
+   - Keep one canonical document for each subject.
 
-- Auth, deploy, migration, worker, data isolation, or observability changes
-  MUST update the matching file under `docs/` when one exists.
-- Remove or merge duplicate docs; keep valuable decision history in ADRs.
-- Do not create files just to fill a template — add docs when they reduce confusion.
+   - Other documents should link to the canonical source instead of repeating it.
 
-## Project tracking files
+4. **Current repository state**
 
-Use only files defined by the target repository (for example backlog, status, or
-tech-debt registers). MUST NOT mark planned work as complete without code and
-tests. Remove resolved items from `TECH_DEBT.md` and mark completed roadmap items
-as Done with evidence.
+   - Documentation must describe the code that currently exists, not abandoned plans or historical assumptions.
 
-## Testing documentation
+   - Clearly separate:
 
-`docs/TESTING.md` MUST describe:
+     - implemented behavior,
 
-- Test strategy goal and pyramid levels
-- Directories and responsibility per level
-- Exact commands (fast, backend, frontend, full validation)
-- Required services (Postgres, etc.)
-- Test database setup
-- Running a single test
-- Coverage generation (if used)
-- CI job mapping
-- Rules for choosing the right test level when adding new tests
-- Accepted gaps (documented trade-offs, not hidden)
+     - partially implemented behavior,
 
-Include a change → test mapping table:
+     - planned work,
 
-| Change | Required test |
-|--------|---------------|
-| Service logic | Unit or service test |
-| API endpoint | API integration test |
-| DB migration | Migration or integration test |
-| UI component | Component test |
-| Critical browser-only flow | E2E only when lower levels are insufficient |
-| Purely visual change | Manual review or targeted component assertion — not full-page screenshots |
+     - known limitations.
 
-## Code blocks and commands
+5. **Reader-oriented structure**
 
-- Every command MUST match an existing script, Makefile target, or CI step.
-- Prefer full copy-paste blocks over inline fragments.
-- Show required env vars in a table or shell block before the command when non-obvious.
-- For multi-step flows, use numbered steps or a single fenced block per step.
+   - Use descriptive headings, short paragraphs, tables, lists, diagrams, and copy-ready commands.
 
-## AI rules and workflows
+   - Make documentation easy to scan.
 
-- Binding rules: `.ai-rules/` (see `AGENTS.md`, `docs/ai-workflows.md`).
-- Optional personas: `agents/`; optional prompts: `.commands/`.
-- Feature specs: `docs/specs/`; ADRs if the project uses them.
-- Do not duplicate binding rule bodies in `AGENTS.md`, `CLAUDE.md`, or
-  `.cursor/rules/` — index and point to `.ai-rules/` instead.
-- After changing workflow files, run the validation command defined by the
-  repository (`make validate` in this template).
+   - Avoid walls of text and unnecessary theory.
 
-## Writing style
+6. **Professional but restrained presentation**
 
-- Keep wording clear, technical, and concise.
-- Avoid hype, empty slogans, and portfolio-style generated descriptions.
-- Prefer commands, tables, and examples that match the target repository.
-- Link to focused docs instead of repeating their content in README.
-- Update docs whenever changes affect install, architecture, configuration,
-  tests, CI, or deployment.
+   - Use badges, icons, callouts, screenshots, and diagrams only when they improve comprehension.
+
+   - Do not turn documentation into decorative marketing material.
+
+   - Do not overload headings with emojis.
+
+---
+
+## Required repository audit before editing documentation
+
+Before creating or updating documentation, inspect the repository and establish the actual state of the project.
+
+At minimum, inspect relevant files from the following categories:
+
+- root directory structure,
+
+- application entry points,
+
+- dependency manifests,
+
+- lock files,
+
+- configuration modules,
+
+- `.env.example` files,
+
+- Dockerfiles and Compose files,
+
+- database models and migrations,
+
+- API routes or controllers,
+
+- frontend routes and key user flows,
+
+- test configuration and test directories,
+
+- CI/CD workflows,
+
+- deployment configuration,
+
+- observability configuration,
+
+- security-related configuration,
+
+- existing Markdown files,
+
+- roadmap, backlog, ADR, and technical-debt files.
+
+Do not rely only on the existing `README.md`. Existing documentation may be outdated.
+
+### Documentation inventory
+
+Create an internal inventory of all documentation files and classify each one as:
+
+- **KEEP** — accurate and useful,
+
+- **UPDATE** — useful but outdated or incomplete,
+
+- **MERGE** — duplicates another document,
+
+- **ARCHIVE** — historically useful but no longer current,
+
+- **DELETE** — obsolete, misleading, empty, or redundant.
+
+Prefer removing obsolete documentation over preserving misleading files.
+
+Do not delete historical ADRs merely because the implementation changed. Supersede them explicitly when appropriate.
+
+---
+
+## Documentation architecture
+
+Use the following structure only where it is relevant to the project:
+
+```text
+
+[README.md](http://README.md)
+
+docs/
+
+├── [README.md](http://README.md)
+
+├── [ARCHITECTURE.md](http://ARCHITECTURE.md)
+
+├── [API.md](http://API.md)
+
+├── [TESTING.md](http://TESTING.md)
+
+├── [DEPLOYMENT.md](http://DEPLOYMENT.md)
+
+├── [CONFIGURATION.md](http://CONFIGURATION.md)
+
+├── [SECURITY.md](http://SECURITY.md)
+
+├── [OPERATIONS.md](http://OPERATIONS.md)
+
+├── [TROUBLESHOOTING.md](http://TROUBLESHOOTING.md)
+
+├── [ROADMAP.md](http://ROADMAP.md)
+
+├── TECH_[DEBT.md](http://DEBT.md)
+
+└── adr/
+
+    ├── [README.md](http://README.md)
+
+    └── [0001-example-decision.md](http://0001-example-decision.md)
+
+```
+
+Do not create empty placeholder documents.
+
+Create a dedicated file only when the subject is large enough to justify it.
+
+### Root `README.md`
+
+The root README is the project's landing page. It should let a reader understand and start the project without reading the entire documentation set.
+
+### `docs/README.md`
+
+When the project contains several documentation files, create or maintain `docs/README.md` as a documentation index.
+
+Group links by purpose, for example:
+
+- Getting started
+
+- Architecture
+
+- Development
+
+- Testing
+
+- Deployment and operations
+
+- Security
+
+- Decisions
+
+- Planning
+
+Each link should include a one-sentence description.
+
+---
+
+## Required README structure
+
+Use the following order as a default. Remove sections that genuinely do not apply and add project-specific sections when needed.
+
+### 1. Project title and value proposition
+
+Start with:
+
+- project name,
+
+- concise one-sentence purpose,
+
+- target user or use case,
+
+- current lifecycle status when relevant.
+
+A new reader should understand the project within the first few lines.
+
+Avoid vague descriptions such as:
+
+- “modern application,”
+
+- “production-ready solution,”
+
+- “powerful platform,”
+
+- “scalable system,”
+
+unless the repository contains evidence supporting those claims.
+
+### 2. Status and badges
+
+Use a small, relevant badge group when verified, for example:
+
+- CI status,
+
+- test status,
+
+- coverage,
+
+- supported runtime version,
+
+- license,
+
+- deployment status,
+
+- code quality.
+
+Badge rules:
+
+- Every badge must resolve correctly.
+
+- Workflow badges must reference real workflow files and the correct branch.
+
+- Do not display hard-coded test counts or coverage percentages that will quickly become stale.
+
+- Do not use badges that communicate no useful project information.
+
+- Prefer no badge over a broken or misleading badge.
+
+- Keep the badge row visually restrained.
+
+### 3. Visual overview
+
+When useful and available, add one of:
+
+- product screenshot,
+
+- short demo GIF,
+
+- architecture diagram,
+
+- request-flow diagram.
+
+Rules:
+
+- Use repository-owned assets.
+
+- Store documentation assets in a consistent location such as `docs/assets/`.
+
+- Add meaningful alt text.
+
+- Do not add screenshots that expose credentials, personal data, internal URLs, tokens, or customer information.
+
+- Do not create decorative images unrelated to project understanding.
+
+### 4. Project overview
+
+Explain briefly:
+
+- the problem,
+
+- the solution,
+
+- the main workflow,
+
+- the repository's scope,
+
+- important boundaries or non-goals.
+
+Prefer concrete domain language over generic software terminology.
+
+### 5. Table of contents
+
+For a medium or large README, include a manually maintained table of contents with relative anchor links.
+
+The table of contents must match the actual heading structure.
+
+Do not include a table of contents in a very short README where it adds no value.
+
+### 6. Key features
+
+Describe implemented capabilities in grouped, reader-friendly categories.
+
+Good categories may include:
+
+- Core product flows
+
+- Authentication and authorization
+
+- API
+
+- Background processing
+
+- Integrations
+
+- Data and persistence
+
+- Testing and quality
+
+- Security
+
+- Observability
+
+- Deployment
+
+Do not list dependencies as product features.
+
+Mark incomplete capabilities explicitly.
+
+### 7. Architecture
+
+Provide a concise architecture overview covering the components that actually exist.
+
+Depending on the project, include:
+
+- frontend,
+
+- backend,
+
+- database,
+
+- cache,
+
+- queue or worker,
+
+- external integrations,
+
+- object storage,
+
+- CI/CD,
+
+- observability.
+
+Use a Mermaid diagram only when it makes the flow easier to understand.
+
+Diagram rules:
+
+- Match real component names.
+
+- Show meaningful relationships.
+
+- Avoid speculative services.
+
+- Avoid large decorative diagrams that cannot be maintained.
+
+- Keep detailed architectural reasoning in `docs/architecture/overview.md` or ADRs.
+
+### 8. Technology stack
+
+Use a compact table:
+
+| Area | Technology | Purpose |
+
+|---|---|---|
+
+| Backend | FastAPI | HTTP API and application services |
+
+| Database | PostgreSQL | Persistent relational storage |
+
+| Tests | pytest | Automated backend tests |
+
+Only list technologies used by the current repository.
+
+Do not create an oversized “skills cloud” or list every transitive dependency.
+
+### 9. Getting started
+
+The quick-start path must be copy-ready and ordered.
+
+Include, where relevant:
+
+1. prerequisites,
+
+2. cloning,
+
+3. environment setup,
+
+4. dependency installation,
+
+5. service startup,
+
+6. database migration,
+
+7. seed or demo data,
+
+8. application URLs,
+
+9. verification command.
+
+Every command must be valid from the stated working directory.
+
+Example format:
+
+```bash
+
+git clone <repository-url>
+
+cd <repository-directory>
+
+cp .env.example .env
+
+docker compose up --build
+
+```
+
+After commands, state the expected result, for example:
+
+- frontend URL,
+
+- API URL,
+
+- OpenAPI URL,
+
+- health endpoint,
+
+- default demo flow.
+
+Do not include real secrets or credentials.
+
+### 10. Configuration
+
+Document:
+
+- required environment variables,
+
+- optional environment variables,
+
+- defaults,
+
+- accepted formats,
+
+- where each value is used,
+
+- security implications when relevant.
+
+Prefer a table:
+
+| Variable | Required | Default | Description |
+
+|---|---:|---|---|
+
+| `DATABASE_URL` | Yes | — | PostgreSQL connection string |
+
+| `LOG_LEVEL` | No | `INFO` | Application log level |
+
+Use `.env.example` as the canonical machine-readable configuration template.
+
+The README or configuration guide must stay consistent with `.env.example` and configuration code.
+
+### 11. Development workflow
+
+Document the real developer workflow, including relevant commands for:
+
+- starting development services,
+
+- formatting,
+
+- linting,
+
+- type checking,
+
+- migrations,
+
+- tests,
+
+- local CI-equivalent validation.
+
+Use the commands already supported by the repository.
+
+Do not introduce undocumented wrapper commands merely to make the README look cleaner.
+
+### 12. Testing and quality
+
+Explain:
+
+- test layers that exist,
+
+- what each layer protects,
+
+- how to run targeted tests,
+
+- how to run the full suite,
+
+- coverage policy when enforced,
+
+- CI quality gates,
+
+- notable test limitations.
+
+Example:
+
+| Layer | Tool | Scope |
+
+|---|---|---|
+
+| Unit | pytest | Domain and service logic |
+
+| Integration | pytest + PostgreSQL | Persistence and API contracts |
+
+| Frontend | Vitest | Components and client logic |
+
+Do not claim that tests cover a behavior unless the test suite verifies it.
+
+Keep detailed testing strategy in `docs/testing/README.md`.
+
+### 13. Deployment and operations
+
+Document only real deployment paths.
+
+Include, where relevant:
+
+- target platform,
+
+- build process,
+
+- migration process,
+
+- required secrets,
+
+- health and readiness checks,
+
+- rollback approach,
+
+- smoke tests,
+
+- observability,
+
+- backup and restore.
+
+Do not expose secret values.
+
+Do not describe automatic deployment unless CI/CD actually performs it.
+
+Keep detailed procedures in `docs/operations/deployment.md` or `docs/OPERATIONS.md`.
+
+### 14. Documentation index
+
+Link to detailed documentation with one-sentence descriptions.
+
+Example:
+
+| Document | Purpose |
+
+|---|---|
+
+| `docs/architecture/overview.md`](docs/[ARCHITECTURE.md](http://ARCHITECTURE.md)) | Components, boundaries, and request flows |
+
+| `docs/testing/README.md`](docs/[TESTING.md](http://TESTING.md)) | Test strategy and commands |
+
+| `docs/operations/deployment.md`](docs/[DEPLOYMENT.md](http://DEPLOYMENT.md)) | Deployment and rollback procedures |
+
+Do not link to files that do not exist.
+
+### 15. Project status, limitations, and roadmap
+
+When relevant, state clearly:
+
+- current maturity,
+
+- supported use cases,
+
+- unsupported use cases,
+
+- known technical limitations,
+
+- production-readiness gaps,
+
+- near-term roadmap.
+
+Do not hide important limitations behind marketing language.
+
+Do not mix implemented features with planned features.
+
+If a separate roadmap exists, keep only a concise status summary in the README and link to the roadmap.
+
+### 16. Contributing, security, license, and contact
+
+Include only relevant sections:
+
+- contribution workflow,
+
+- issue reporting,
+
+- security disclosure process,
+
+- license,
+
+- maintainer or support contact.
+
+Link to `CONTRIBUTING.md`, `SECURITY.md`, or `LICENSE` when those files exist.
+
+---
+
+## Style guide
+
+### Language
+
+- Use the repository's established primary documentation language.
+
+- Do not mix Polish and English in the same document without a clear reason.
+
+- When bilingual documentation is intentionally maintained, use clearly named files such as:
+
+  - `README.md` and `README.pl.md`, or
+
+  - `README.md` and `README.eng.md`.
+
+- Keep language versions structurally equivalent.
+
+- Do not create a second language version unless requested or already established.
+
+### Tone
+
+Write in a:
+
+- direct,
+
+- professional,
+
+- concrete,
+
+- technically precise,
+
+- reader-friendly
+
+style.
+
+Avoid:
+
+- exaggerated marketing language,
+
+- AI-generated filler,
+
+- repeated conclusions,
+
+- unnecessary background theory,
+
+- vague claims,
+
+- informal jokes in operational instructions.
+
+### Headings
+
+- Use one `#` heading per document.
+
+- Maintain logical heading hierarchy.
+
+- Do not skip heading levels without a reason.
+
+- Use descriptive headings that make sense outside the local paragraph.
+
+- Keep heading naming consistent across related documents.
+
+### Paragraphs and lists
+
+- Keep paragraphs short.
+
+- Use lists for steps, requirements, options, and grouped facts.
+
+- Use numbered lists when order matters.
+
+- Use tables for structured comparisons and references.
+
+- Do not force narrative prose where a table would be clearer.
+
+### Callouts
+
+Use GitHub callouts sparingly:
+
+```md
+
+> [!NOTE]
+
+> Additional context that helps understanding.
+
+> [!TIP]
+
+> A practical recommendation.
+
+> [!IMPORTANT]
+
+> Information required for correct operation.
+
+> [!WARNING]
+
+> A risk that can cause data loss, security exposure, or production failure.
+
+```
+
+Do not use callouts for ordinary sentences.
+
+### Code blocks
+
+- Always specify the language when possible.
+
+- Commands must be copy-ready.
+
+- Keep comments inside command blocks minimal.
+
+- State the required working directory.
+
+- Separate alternative execution methods.
+
+- Never include real secrets.
+
+- Use placeholders that are visually explicit, such as `<your-domain>`.
+
+### Links
+
+- Prefer relative links for repository files.
+
+- Use descriptive link text.
+
+- Verify every internal link after restructuring documentation.
+
+- Do not leave links to deleted or renamed files.
+
+- Prefer authoritative external documentation.
+
+### Tables
+
+- Use tables when they improve scanning.
+
+- Keep cells concise.
+
+- Avoid very wide tables that are difficult to read on GitHub.
+
+- Do not use tables for long prose.
+
+### Emojis and icons
+
+- Use them only as light navigation aids.
+
+- Keep naming consistent.
+
+- Never depend on emojis to communicate technical meaning.
+
+- Prefer clear text over decorative symbols.
+
+---
+
+## Documentation correctness rules
+
+### Commands
+
+For every documented command:
+
+- verify that the referenced file, service, script, or target exists,
+
+- verify the package manager,
+
+- verify the working directory,
+
+- verify required prerequisites,
+
+- verify flags,
+
+- verify the expected result.
+
+Where execution is safe and available, run the command.
+
+When a command cannot be executed, state that it was statically verified but not run.
+
+### Environment variables
+
+Cross-check documentation against:
+
+- configuration code,
+
+- `.env.example`,
+
+- Compose files,
+
+- CI workflows,
+
+- deployment configuration.
+
+Document required variables consistently.
+
+Never document secrets using real production values.
+
+### API documentation
+
+Do not manually duplicate the complete API contract when generated OpenAPI documentation is available.
+
+Instead:
+
+- explain the API's purpose,
+
+- document authentication,
+
+- document important workflows,
+
+- link to OpenAPI or generated reference,
+
+- document non-obvious operational constraints.
+
+Manual endpoint examples must match current routes, methods, payloads, and status codes.
+
+### Test documentation
+
+Cross-check test instructions against:
+
+- test configuration,
+
+- package scripts,
+
+- Makefile or task runner,
+
+- CI workflows,
+
+- container service names.
+
+Do not state an exact test count unless explicitly requested and verified at the time of writing.
+
+### Deployment documentation
+
+Cross-check deployment instructions against:
+
+- CI/CD workflows,
+
+- platform configuration,
+
+- Dockerfiles,
+
+- Compose files,
+
+- migration commands,
+
+- readiness checks.
+
+Differentiate clearly between:
+
+- local development,
+
+- staging,
+
+- production.
+
+### Security documentation
+
+Do not expose:
+
+- access tokens,
+
+- passwords,
+
+- private keys,
+
+- webhook signing secrets,
+
+- internal credentials,
+
+- private customer data.
+
+Document safe placeholders and secret-management locations instead.
+
+---
+
+## Rules for updating documentation with code changes
+
+Update documentation in the same task when a change affects:
+
+- user-visible behavior,
+
+- API contracts,
+
+- configuration,
+
+- environment variables,
+
+- installation,
+
+- local development,
+
+- commands,
+
+- database migrations,
+
+- deployment,
+
+- security,
+
+- observability,
+
+- testing strategy,
+
+- architecture,
+
+- supported integrations,
+
+- known limitations.
+
+A code change is not complete when its relevant documentation is stale.
+
+Do not update documentation for internal refactors that do not change how users or developers interact with the system, unless architectural documentation becomes inaccurate.
+
+---
+
+## Documentation cleanup rules
+
+When reorganizing documentation:
+
+1. Identify the canonical document for each topic.
+
+2. Merge useful unique content into the canonical document.
+
+3. Update incoming links.
+
+4. Remove obsolete duplicates.
+
+5. Preserve relevant historical decisions in ADRs or an archive.
+
+6. Confirm no active workflow references deleted files.
+
+7. Confirm the README and documentation index reference only existing files.
+
+Do not keep files only because they already exist.
+
+Do not create files such as `FINAL_REPORT.md`, `AUDIT_FINAL_V2.md`, or timestamped status reports in the repository root unless explicitly required.
+
+Temporary audit reports should not become permanent project documentation by default.
+
+---
+
+## Roadmap and technical debt
+
+### Roadmap
+
+A roadmap should contain future work, not completed implementation history.
+
+Each roadmap item should include, where useful:
+
+- identifier,
+
+- objective,
+
+- scope,
+
+- acceptance criteria,
+
+- dependencies,
+
+- status.
+
+Move completed work to release notes, changelog, or project history when appropriate.
+
+### Technical debt
+
+Technical debt entries should be actionable.
+
+Each item should include:
+
+- problem,
+
+- evidence,
+
+- impact,
+
+- recommended resolution,
+
+- priority,
+
+- affected files or components,
+
+- validation criteria.
+
+Do not use `TECH_DEBT.md` as a generic list of ideas.
+
+---
+
+## Architecture Decision Records
+
+Use ADRs for significant decisions involving:
+
+- system boundaries,
+
+- persistence strategy,
+
+- authentication model,
+
+- integration strategy,
+
+- deployment architecture,
+
+- major dependency choices,
+
+- removal of a major subsystem,
+
+- long-term operational tradeoffs.
+
+Recommended ADR structure:
+
+```md
+
+# ADR-NNNN: Decision title
+
+- Status: Proposed | Accepted | Superseded | Rejected
+
+- Date: YYYY-MM-DD
+
+- Supersedes: ADR-NNNN, when applicable
+
+## Context
+
+## Decision
+
+## Consequences
+
+## Alternatives considered
+
+```
+
+Do not rewrite accepted ADR history to make it appear that the current decision was always obvious.
+
+---
+
+## Validation checklist
+
+Before finishing documentation work, verify:
+
+- [ ] The README describes the current project.
+
+- [ ] The first screen explains the project's purpose.
+
+- [ ] Claims are supported by code or configuration.
+
+- [ ] Commands use the correct package manager and working directory.
+
+- [ ] Quick-start instructions are complete.
+
+- [ ] Environment variables match code and `.env.example`.
+
+- [ ] Test commands match the current test setup.
+
+- [ ] Deployment instructions match actual automation.
+
+- [ ] Internal links resolve.
+
+- [ ] Referenced files exist.
+
+- [ ] Badges resolve and reference real workflows.
+
+- [ ] Diagrams match the implemented architecture.
+
+- [ ] Planned work is separated from completed work.
+
+- [ ] Known limitations are visible.
+
+- [ ] Duplicate or obsolete documentation was removed or archived.
+
+- [ ] No secrets or personal data were added.
+
+- [ ] Markdown formatting renders correctly on GitHub.
+
+- [ ] Documentation index is current.
+
+- [ ] Detailed content is not unnecessarily duplicated in the README.
+
+Run existing documentation checks, Markdown linting, link checking, or repository validation commands when available.
+
+---
+
+## Required final report
+
+After documentation work, provide a concise report containing:
+
+### Summary
+
+- what was audited,
+
+- what was updated,
+
+- the resulting documentation structure.
+
+### Files changed
+
+For each changed file, state its purpose and the important change.
+
+### Cleanup
+
+List:
+
+- merged documents,
+
+- archived documents,
+
+- deleted obsolete documents,
+
+- repaired links.
+
+### Verification
+
+State:
+
+- commands executed,
+
+- checks passed,
+
+- links or facts verified statically,
+
+- checks that could not be run.
+
+### Remaining gaps
+
+List only real unresolved issues, missing information, or documentation risks.
+
+Do not claim full verification when checks were not executed.
+
+---
+
+## Definition of done
+
+Documentation work is complete only when:
+
+1. A new reader can understand the project quickly.
+
+2. A developer can start the project using documented commands.
+
+3. Test and quality instructions match the repository.
+
+4. Configuration and deployment instructions match the implementation.
+
+5. Detailed documentation has a clear index.
+
+6. No active document knowingly contradicts the code.
+
+7. Obsolete and duplicate documentation has been removed, merged, or clearly archived.
+
+8. All material claims are verified.
+
+9. Documentation renders cleanly on GitHub.
+
+10. The final report distinguishes verified facts from assumptions.
+

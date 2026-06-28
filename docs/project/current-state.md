@@ -1,6 +1,6 @@
 # Current state
 
-**Last verified:** 2026-06-28 (documentation audit)
+**Last verified:** 2026-06-28
 
 OnTrack is a **meal planner and budget tracker** for households. Production runs on **Railway** with a **FastAPI** API and **Next.js 15** frontend against **PostgreSQL 15**.
 
@@ -23,7 +23,7 @@ OnTrack is a **meal planner and budget tracker** for households. Production runs
 | Summary & export | Implemented | Aggregates and CSV export |
 | Dish compare (public) | Implemented | `/api/public/dish-compare` — no auth; Next.js fallback when API unreachable |
 | Locale / market separation | Implemented | UI locale vs product/recipe market (`ui_locale`, `market_code`) |
-| CI pipeline | Green on `main` | 5 PR jobs — see [TESTING.md](./TESTING.md) |
+| CI pipeline | Green on `main` | 5 PR jobs — see [testing/README.md](../testing/README.md) |
 | Production deploy | Staged pipeline | CI → staging deploy → smoke → approval → production deploy → smoke |
 
 ### Frontend routes (`frontend-next/`)
@@ -44,7 +44,7 @@ OnTrack is a **meal planner and budget tracker** for households. Production runs
 
 `auth`, `members`, `products`, `recipes`, `meal_plan`, `day_schedule`, `nutrition`, `fuel`, `import`, `public`
 
-API contract matrix: [`backend-migration/API_CONTRACT.md`](./backend-migration/API_CONTRACT.md)
+API contract: [`specs/api-contract.md`](../specs/api-contract.md)
 
 ---
 
@@ -85,22 +85,7 @@ Workflow: `.github/workflows/ci.yml`
 
 **`main` push only:** `deploy-staging` → `wait-staging-ready` → `staging-smoke` → `deploy-production` (approval) → `production-smoke`.
 
-Both deploy jobs use **`github.sha`**. No direct production deploy without passing staging smoke.
-
-Details: [DEPLOYMENT.md](./DEPLOYMENT.md), [TESTING.md](./TESTING.md)
-
----
-
-## Testing (summary)
-
-| Layer | Tool | CI |
-|-------|------|-----|
-| Backend contract + subset | pytest | `test` |
-| Backend integration | pytest + Postgres | `backend-integration` |
-| Frontend unit | Vitest | `frontend-next` (+ build) |
-| Deploy auth smoke | HTTP script | `staging-smoke`, `production-smoke` |
-
-Browser E2E (Playwright) removed — see [TESTING.md](./TESTING.md#playwright-decision).
+Details: [operations/deployment.md](../operations/deployment.md), [testing/README.md](../testing/README.md)
 
 ---
 
@@ -118,26 +103,11 @@ Features degrade gracefully when keys are missing.
 
 ---
 
-## Archives (reference only)
-
-| Path | Contents |
-|------|----------|
-| `archive/` | Old frontend and scraper snapshots — **not deployed** |
-| `docs/audits/archive/` | Historical audits and migration notes |
-
-Production stack: **`frontend-next/`** + **`backend/`** (FastAPI).
-
----
-
 ## Known risks
 
-See [TECH_DEBT.md](./TECH_DEBT.md) and [ROADMAP.md](./ROADMAP.md).
+See [tech-debt.md](./tech-debt.md) and [roadmap.md](./roadmap.md).
 
 - Catalog import during deploy mutates global recipe/product data — restore step required after re-import
-- JWT in localStorage (XSS surface) — mitigated by CSP; BFF optional per [ADR 0001](./adr/0001-bff-production-mode.md)
+- JWT in localStorage (XSS surface) — mitigated by CSP; BFF optional per [ADR 0001](../adr/0001-bff-production-mode.md)
 
----
-
-## Historical snapshots
-
-Archived point-in-time audits (June 2026): [audits/archive/](./audits/archive/) — see index for documentation reset (#163), dead-code audit, and test audit reports.
+Production stack: **`frontend-next/`** + **`backend/`** (FastAPI). Code snapshots: [`archive/`](../../archive/) (not deployed).

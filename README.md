@@ -24,7 +24,7 @@
 - **Locale vs market** — UI language (PL/EN) separate from product market (PL/GB)
 
 > [!TIP]
-> Verified feature list and routes: [docs/CURRENT_STATE.md](docs/CURRENT_STATE.md)
+> Verified feature list and routes: [docs/project/current-state.md](docs/project/current-state.md)
 
 ---
 
@@ -42,7 +42,7 @@ Browser → Next.js (frontend-next) → FastAPI (backend) → PostgreSQL 15
 | Deploy | Railway (`staging` → smoke → `production`) |
 | CI | GitHub Actions — 5 PR jobs |
 
-Architecture details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+Architecture details: [docs/architecture/overview.md](docs/architecture/overview.md)
 
 ---
 
@@ -69,7 +69,7 @@ Architecture details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 | **Node.js** | 24 | Frontend (matches CI) |
 | **PostgreSQL** | 15 | Database |
 
-Without Docker: see [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
+Without Docker: see [docs/development/README.md](docs/development/README.md).
 
 ---
 
@@ -111,7 +111,7 @@ Copy `.env.example` → `.env`. Never commit `.env`.
 
 Optional: `GOOGLE_*`, `GEMINI_API_KEY`, `PEXELS_API_KEY`, `DEEPSEEK_API_KEY`, `SMTP_*` (password reset email).
 
-Full reference: [.env.example](.env.example) · [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)
+Full reference: [.env.example](.env.example) · [docs/development/README.md](docs/development/README.md)
 
 ---
 
@@ -152,7 +152,7 @@ Open http://localhost:3000
 | **Frontend unit** | `make test-frontend` |
 
 > [!IMPORTANT]
-> Playwright / browser E2E was removed. Strategy, CI mapping, and accepted gaps: [docs/TESTING.md](docs/TESTING.md)
+> Playwright / browser E2E was removed. Strategy, CI mapping, and accepted gaps: [docs/testing/README.md](docs/testing/README.md)
 
 ---
 
@@ -182,10 +182,10 @@ Push to `main` after green CI:
 3. Manual GitHub Environment approval for **production**
 4. Production readiness + auth smoke
 
-Runbook: [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) · [`.github/DEPLOY.md`](.github/DEPLOY.md)
+Runbook: [docs/operations/deployment.md](docs/operations/deployment.md) · [`.github/DEPLOY.md`](.github/DEPLOY.md)
 
 > [!IMPORTANT]
-> JWT is stored in `localStorage` by default. Password reset needs SMTP. See [docs/SECURITY.md](docs/SECURITY.md) and [docs/TECH_DEBT.md](docs/TECH_DEBT.md).
+> JWT is stored in `localStorage` by default. Password reset needs SMTP. See [docs/security/overview.md](docs/security/overview.md) and [docs/project/tech-debt.md](docs/project/tech-debt.md).
 
 ---
 
@@ -195,15 +195,15 @@ Full index: **[docs/README.md](docs/README.md)**
 
 | Document | Contents |
 |----------|----------|
-| [docs/CURRENT_STATE.md](docs/CURRENT_STATE.md) | What works today |
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Components and data flow |
-| [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) | Local setup |
-| [docs/TESTING.md](docs/TESTING.md) | Test strategy and CI |
-| [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) | Railway deploy |
-| [docs/SECURITY.md](docs/SECURITY.md) | Auth and secrets |
-| [docs/ROADMAP.md](docs/ROADMAP.md) | Active plans |
-| [docs/TECH_DEBT.md](docs/TECH_DEBT.md) | Open technical debt |
-| [docs/backend-migration/API_CONTRACT.md](docs/backend-migration/API_CONTRACT.md) | API contract (binding) |
+| [docs/project/current-state.md](docs/project/current-state.md) | What works today |
+| [docs/architecture/overview.md](docs/architecture/overview.md) | Components and data flow |
+| [docs/development/README.md](docs/development/README.md) | Local setup |
+| [docs/testing/README.md](docs/testing/README.md) | Test strategy and CI |
+| [docs/operations/deployment.md](docs/operations/deployment.md) | Railway deploy |
+| [docs/security/overview.md](docs/security/overview.md) | Auth and secrets |
+| [docs/project/roadmap.md](docs/project/roadmap.md) | Active plans |
+| [docs/project/tech-debt.md](docs/project/tech-debt.md) | Open technical debt |
+| [docs/specs/api-contract.md](docs/specs/api-contract.md) | API contract (binding) |
 | [docs/adr/](docs/adr/) | Architecture decisions |
 
 Agent workflow: [AGENTS.md](AGENTS.md) · [.ai-rules/](.ai-rules/)

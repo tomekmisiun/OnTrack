@@ -6,8 +6,8 @@
 
 This tree was moved from repo-root `frontend/` to **`archive/frontend-cra-reference/`** on 2026-05-26 (task #10). It remains a read-only CRA snapshot from commit **`dca8eb9`** for historical comparison.
 
-- [`docs/DEVELOPMENT.md`](../../docs/DEVELOPMENT.md) — archive section
-- [`docs/audits/archive/cra-next-migration/CRA_NEXT_VISUAL_AND_I18N_AUDIT.md`](../../docs/audits/archive/cra-next-migration/CRA_NEXT_VISUAL_AND_I18N_AUDIT.md) — parity audit
+- [`docs/development/README.md`](../../docs/development/README.md) — archive section
+- [`docs/archive/audits/cra-next-migration/CRA_NEXT_VISUAL_AND_I18N_AUDIT.md`](../../docs/archive/audits/cra-next-migration/CRA_NEXT_VISUAL_AND_I18N_AUDIT.md) — parity audit
 
 ## Do not
 

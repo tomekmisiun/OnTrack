@@ -28,7 +28,7 @@ cp .env.example .env.local
 | `NEXT_PUBLIC_API_URL` | FastAPI base URL (no trailing slash required) |
 | `NEXT_PUBLIC_BFF_ENABLED` | Set to `1` for HttpOnly cookie BFF mode (default off) |
 
-See [`docs/SECURITY.md`](../docs/SECURITY.md) and [`docs/adr/0001-bff-production-mode.md`](../docs/adr/0001-bff-production-mode.md) for BFF notes.
+See [`docs/security/overview.md`](../docs/security/overview.md) and [`docs/adr/0001-bff-production-mode.md`](../docs/adr/0001-bff-production-mode.md) for BFF notes.
 
 ## Scripts
 
@@ -92,7 +92,7 @@ npm run generate:api
 
 **Default:** JWT in `localStorage` (`lib/auth/storage.ts`) — CRA parity.
 
-**Optional BFF** (`NEXT_PUBLIC_BFF_ENABLED=1`): HttpOnly `ontrack_session` cookie; Route Handlers at `/api/bff/*` and `/api/auth/session`. See [`docs/SECURITY.md`](../docs/SECURITY.md).
+**Optional BFF** (`NEXT_PUBLIC_BFF_ENABLED=1`): HttpOnly `ontrack_session` cookie; Route Handlers at `/api/bff/*` and `/api/auth/session`. See [`docs/security/overview.md`](../docs/security/overview.md).
 
 - `contexts/AuthContext.tsx` — bootstrap, `?code=` OAuth exchange, login/register/logout
 - `/login` — password + Google OAuth redirect to FastAPI `/api/auth/google`
@@ -102,7 +102,7 @@ npm run generate:api
 - Protected app routes under `app/(app)/` — `/`, `/macro`, `/calendar`, `/schedule`, `/recipes`, `/products`, `/summary`, `/export`
 - `middleware.ts` — session gate (`ontrack_has_token` or HttpOnly `ontrack_session`)
 - `components/layout/Sidebar.tsx` — CRA tab parity (sidebar hidden on home)
-- Module screens: products, recipes, calendar/meal plan, day schedule, summary, export, macro, welcome — see [docs/CURRENT_STATE.md](../docs/CURRENT_STATE.md)
+- Module screens: products, recipes, calendar/meal plan, day schedule, summary, export, macro, welcome — see [docs/project/current-state.md](../docs/project/current-state.md)
 
 ## Members
 
@@ -149,7 +149,7 @@ npm run generate:api
 - `components/privacy/PrivacyPolicyModal.tsx` — login page privacy link
 - `components/dish-compare/DishCompare.tsx` — public marketing widget on login
 - `lib/api/fuel.ts`, `lib/api/public.ts`, `saveMemberProfile` in `lib/api/members.ts`
-- Routes: `/`, `/macro`, `/summary`, `/export` — see [docs/CURRENT_STATE.md](../docs/CURRENT_STATE.md)
+- Routes: `/`, `/macro`, `/summary`, `/export` — see [docs/project/current-state.md](../docs/project/current-state.md)
 
 CI runs `generate:api`, `npm test` (Vitest), lint, typecheck, and production build.
 
@@ -161,7 +161,7 @@ npm run test:watch        # Vitest watch mode
 npm run test:recipes      # single suite shortcut
 ```
 
-Unit tests live in `tests/unit/` — helpers, route handlers, BFF utilities, and domain logic. See [docs/TESTING.md](../docs/TESTING.md) for the full strategy.
+Unit tests live in `tests/unit/` — helpers, route handlers, BFF utilities, and domain logic. See [docs/testing/README.md](../docs/testing/README.md) for the full strategy.
 
 ## Docker
 
@@ -187,4 +187,4 @@ docker run --rm -p 3002:3000 ontrack-frontend-next
 
 ## Migration plan
 
-See [`docs/CURRENT_STATE.md`](../docs/CURRENT_STATE.md) for routes and [`docs/audits/archive/cra-next-migration/FRONTEND_NEXT_MIGRATION_PLAN.md`](../docs/audits/archive/cra-next-migration/FRONTEND_NEXT_MIGRATION_PLAN.md) for historical migration notes.
+See [`docs/project/current-state.md`](../docs/project/current-state.md) for routes and [`docs/archive/audits/cra-next-migration/FRONTEND_NEXT_MIGRATION_PLAN.md`](../docs/archive/audits/cra-next-migration/FRONTEND_NEXT_MIGRATION_PLAN.md) for historical migration notes.

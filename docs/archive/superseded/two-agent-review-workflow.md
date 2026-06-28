@@ -1,3 +1,7 @@
+> [!WARNING]
+> Dokument archiwalny. Nie stanowi aktualnego źródła prawdy.
+> Aktualna dokumentacja: [workflows.md](../../development/ai/workflows.md).
+
 # Two-Agent Review Workflow
 
 Builder implements; Reviewer inspects read-only before the Builder's final response.
