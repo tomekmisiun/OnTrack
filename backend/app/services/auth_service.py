@@ -333,9 +333,13 @@ def find_or_create_oauth_user(session: Session, email: str) -> tuple[User, bool]
     return user, True
 
 
+def _primary_frontend_url() -> str:
+    """First origin from FRONTEND_URL (comma-separated for CORS)."""
+    return get_settings().frontend_url.split(",")[0].strip().rstrip("/")
+
+
 def frontend_redirect_path(path_query: str) -> str:
-    settings = get_settings()
-    base = settings.frontend_url.rstrip("/")
+    base = _primary_frontend_url()
     return f"{base}/{path_query.lstrip('/')}"
 
 
@@ -351,7 +355,7 @@ AUTH_ERROR_CODES = frozenset(
 
 def auth_error_redirect(code: str) -> str:
     safe = code if code in AUTH_ERROR_CODES else "oauth_failed"
-    return frontend_redirect_path(f"?{urlencode({'auth_error': safe})}")
+    return frontend_redirect_path(f"login?{urlencode({'auth_error': safe})}")
 
 
 def oauth_success_redirect(code: str) -> str:

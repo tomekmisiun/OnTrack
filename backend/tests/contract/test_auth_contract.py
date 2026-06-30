@@ -243,8 +243,11 @@ def test_fastapi_jwt_decodes_with_same_sub(user):
 def test_google_login_stores_lang_cookie(client, monkeypatch):
     from app.api.routes import auth as auth_routes
 
+    captured: dict = {}
+
     class FakeGoogle:
-        async def authorize_redirect(self, _request, _uri):
+        async def authorize_redirect(self, _request, _uri, **kwargs):
+            captured.update(kwargs)
             from starlette.responses import RedirectResponse
 
             return RedirectResponse("https://accounts.google.com/o/oauth2/v2/auth")
@@ -258,6 +261,31 @@ def test_google_login_stores_lang_cookie(client, monkeypatch):
     assert res.status_code in (302, 307)
     assert "accounts.google.com" in res.headers["location"]
     assert "pending_lang=pl" in res.headers.get("set-cookie", "")
+    assert captured.get("prompt") == "select_account"
+
+
+def test_google_login_redirects_when_not_configured(client, monkeypatch):
+    from app.core.config import get_settings
+
+    settings = get_settings()
+    monkeypatch.setattr(
+        settings,
+        "google_client_id",
+        None,
+        raising=False,
+    )
+    monkeypatch.setattr(
+        settings,
+        "google_client_secret",
+        None,
+        raising=False,
+    )
+
+    res = client.get("/api/auth/google?lang=pl", follow_redirects=False)
+    assert res.status_code == 302
+    location = res.headers["location"]
+    assert "/login" in location
+    assert "auth_error=oauth_not_configured" in location
 
 
 def test_google_callback_redirects_with_exchange_code(client, db_session, monkeypatch):
@@ -304,6 +332,7 @@ def test_google_callback_missing_email_redirects_with_error(client, monkeypatch)
     res = client.get("/api/auth/google/callback", follow_redirects=False)
     assert res.status_code == 302
     assert "auth_error=oauth_no_email" in res.headers["location"]
+    assert "/login" in res.headers["location"]
 
 
 def test_delete_account(client, user, auth_headers, db_session):
@@ -356,5 +385,6 @@ def test_oauth_callback_redacts_internal_errors(client, monkeypatch):
     assert res.status_code == 302
     location = res.headers["location"]
     assert "auth_error=oauth_failed" in location
+    assert "/login" in location
     assert "RuntimeError" not in location
     assert "database" not in location.lower()

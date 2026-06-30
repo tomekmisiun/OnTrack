@@ -145,8 +145,8 @@
 
 | Field | Detail |
 |-------|--------|
-| Behavior | `302` redirect to Google OAuth; sets `pending_lang` cookie |
-| Errors | `503` `{ "error": "Google OAuth is not configured" }` |
+| Behavior | `302` redirect to Google OAuth (`prompt=select_account`); sets `pending_lang` cookie |
+| Errors | `302` to `{FRONTEND_URL}/login?auth_error=oauth_not_configured` when OAuth env vars are missing |
 | Frontend | `window.location.href` from `Login.js` |
 | Compatibility risk | **HIGH** — redirect/cookie/SameSite semantics |
 
@@ -154,7 +154,7 @@
 
 | Field | Detail |
 |-------|--------|
-| Behavior | `302` redirect to `{FRONTEND_URL}/?code=<auth_code>` or `?auth_error=...` |
+| Behavior | `302` redirect to `{FRONTEND_URL}/?code=<auth_code>` on success, or `{FRONTEND_URL}/login?auth_error=<code>` on failure |
 | Frontend | Reads `code` or `auth_error` from query string |
 | Compatibility risk | **HIGH** |
 
@@ -391,7 +391,7 @@
 
 ### H01 — `GET /health`
 
-| Success | `200`, `{ "status": "ok" }` |
+| Success | `200`, `{ "status": "ok", "google_oauth": boolean }` |
 
 ---
 
