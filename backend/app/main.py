@@ -79,8 +79,12 @@ def create_app() -> FastAPI:
         return JSONResponse(status_code=422, content={"error": "Validation error"})
 
     @app.get("/health")
-    def health() -> dict[str, str]:
-        return {"status": "ok"}
+    def health() -> dict[str, str | bool]:
+        settings = get_settings()
+        return {
+            "status": "ok",
+            "google_oauth": settings.google_oauth_configured,
+        }
 
     @app.get("/health/ready")
     def health_ready(session: Session = Depends(get_db_session)) -> JSONResponse:

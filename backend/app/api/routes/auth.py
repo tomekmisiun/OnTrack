@@ -201,9 +201,9 @@ def delete_me(
 async def google_login(request: Request) -> Response:
     settings = get_settings()
     if not settings.google_oauth_configured:
-        return JSONResponse(
-            status_code=503,
-            content={"error": "Google OAuth is not configured"},
+        return RedirectResponse(
+            auth_service.auth_error_redirect("oauth_not_configured"),
+            status_code=302,
         )
 
     oauth = get_oauth()
@@ -212,7 +212,11 @@ async def google_login(request: Request) -> Response:
         pending_lang = "pl"
 
     redirect_uri = settings.google_redirect_uri
-    response = await oauth.google.authorize_redirect(request, redirect_uri)
+    response = await oauth.google.authorize_redirect(
+        request,
+        redirect_uri,
+        prompt="select_account",
+    )
     secure = not settings.debug
     response.set_cookie(
         key="pending_lang",

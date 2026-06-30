@@ -1,4 +1,5 @@
 import { createApiClient } from "@/lib/api/client";
+import { getApiBaseUrl } from "@/lib/config/env";
 import { ApiError, errorMessageFromBody } from "@/lib/api/errors";
 import type {
   ApiSchema,
@@ -197,6 +198,21 @@ export function logoutSession(): Promise<void> {
 }
 
 export function googleAuthUrl(lang: string): string {
-  const base = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") ?? "http://localhost:5001";
+  const base = getApiBaseUrl();
   return `${base}/api/auth/google?lang=${encodeURIComponent(lang)}`;
+}
+
+export async function fetchGoogleOAuthEnabled(): Promise<boolean> {
+  try {
+    const base = getApiBaseUrl();
+    const res = await fetch(`${base}/health`);
+    if (!res.ok) return false;
+    const data = (await res.json()) as {
+      status?: string;
+      google_oauth?: boolean;
+    };
+    return data.google_oauth === true;
+  } catch {
+    return false;
+  }
 }

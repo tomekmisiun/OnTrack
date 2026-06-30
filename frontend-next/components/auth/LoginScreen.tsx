@@ -14,7 +14,7 @@ import { OntrackLogo } from "@/components/layout/nav-icons";
 import { PrivacyPolicyModal } from "@/components/privacy/PrivacyPolicyModal";
 import { isAuthApiError, useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { googleAuthUrl, forgotPassword } from "@/lib/api/auth";
+import { forgotPassword, fetchGoogleOAuthEnabled, googleAuthUrl } from "@/lib/api/auth";
 import { setPendingLang } from "@/lib/auth/storage";
 import { CATALOG_STATS } from "@/lib/data/catalogStats";
 import type { LangCode, TranslationKey } from "@/lib/i18n/translations";
@@ -215,6 +215,7 @@ type LoginPanelProps = {
   handleCredentials: (e: FormEvent) => void;
   setShowPrivacy: (open: boolean) => void;
   onForgotClick?: () => void;
+  googleOAuthEnabled: boolean;
 };
 
 function LoginPanel({
@@ -231,6 +232,7 @@ function LoginPanel({
   handleCredentials,
   setShowPrivacy,
   onForgotClick,
+  googleOAuthEnabled,
 }: LoginPanelProps) {
   const { t } = useLanguage();
 
@@ -337,23 +339,27 @@ function LoginPanel({
           </button>
         </form>
 
-        <div className="login-divider">
-          <div className="login-divider-line" />
-          <span className="login-divider-text">{tString(t, "login_or")}</span>
-          <div className="login-divider-line" />
-        </div>
+        {googleOAuthEnabled ? (
+          <>
+            <div className="login-divider">
+              <div className="login-divider-line" />
+              <span className="login-divider-text">{tString(t, "login_or")}</span>
+              <div className="login-divider-line" />
+            </div>
 
-        <button
-          type="button"
-          className="login-google"
-          onClick={() => {
-            setPendingLang(uiLang);
-            window.location.href = googleAuthUrl(uiLang);
-          }}
-        >
-          <GoogleIcon />
-          {tString(t, "google_btn")}
-        </button>
+            <button
+              type="button"
+              className="login-google"
+              onClick={() => {
+                setPendingLang(uiLang);
+                window.location.href = googleAuthUrl(uiLang);
+              }}
+            >
+              <GoogleIcon />
+              {tString(t, "google_btn")}
+            </button>
+          </>
+        ) : null}
 
         <p className="login-privacy">
           {tString(t, "login_privacy_prefix")}
@@ -453,6 +459,11 @@ export function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
+  const [googleOAuthEnabled, setGoogleOAuthEnabled] = useState(false);
+
+  useEffect(() => {
+    void fetchGoogleOAuthEnabled().then(setGoogleOAuthEnabled);
+  }, []);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -698,6 +709,7 @@ export function LoginScreen() {
                 setError("");
                 setInfo("");
               }}
+              googleOAuthEnabled={googleOAuthEnabled}
             />
           ) : flow === "forgot" ? (
             <AlternateAuthPanel
